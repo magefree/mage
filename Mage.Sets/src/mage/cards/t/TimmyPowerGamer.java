@@ -30,16 +30,16 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -48,7 +48,7 @@ import java.util.UUID;
 public class TimmyPowerGamer extends CardImpl {
 
     public TimmyPowerGamer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
 
@@ -60,7 +60,7 @@ public class TimmyPowerGamer extends CardImpl {
 
         // {4}: You may put a creature card from your hand onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutPermanentOnBattlefieldEffect(new FilterCreatureCard("a creature card")),
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A),
                 new ManaCostsImpl("{4}"));
         this.addAbility(ability);
     }

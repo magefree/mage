@@ -851,6 +851,9 @@ public class ContinuousEffects implements Serializable {
             if (rEffect != null) {
                 event.getAppliedEffects().add(rEffect.getId());
                 caught = rEffect.replaceEvent(event, rAbility, game);
+                if (Duration.OneUse.equals(rEffect.getDuration())) {
+                    rEffect.discard();
+                }
             }
             if (caught) { // Event was completely replaced -> stop applying effects to it
                 break;

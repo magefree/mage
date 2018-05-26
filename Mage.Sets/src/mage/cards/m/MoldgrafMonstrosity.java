@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,14 +38,15 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.RandomUtil;
 
 /**
  *
@@ -98,34 +98,21 @@ class MoldgrafMonstrosityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean returned = false;
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Set<Card> cards = player.getGraveyard().getCards(new FilterCreatureCard("creature cards"), game);
-
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards possibleCards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+            // Set<Card> cards = controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
+            Cards toBattlefield = new CardsImpl();
             for (int i = 0; i < 2; i++) {
-                Card card = getRandomCard(cards);
+                Card card = possibleCards.getRandom(game);
                 if (card != null) {
-                    returned |= card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-                    cards.remove(card);
+                    toBattlefield.add(card);
+                    possibleCards.remove(card);
                 }
             }
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
+            return true;
         }
-        return returned;
-    }
-
-    private Card getRandomCard(Set<Card> cards) {
-        if (cards == null || cards.size() < 1) {
-            return null;
-        }
-        int i = 0;
-        int pick = RandomUtil.nextInt(cards.size());
-        for (Card card : cards) {
-            if (i == pick) {
-                return card;
-            }
-            i = i + 1;
-        }
-        return null;
+        return false;
     }
 }

@@ -110,6 +110,7 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerB, "Gemstone Caverns", 1);
+        assertCounterCount("Gemstone Caverns", CounterType.LUCK, 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertExileCount("Silvercoat Lion", 1);
         assertTapped("Gemstone Caverns", true);

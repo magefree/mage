@@ -27,6 +27,8 @@
  */
 package mage.cards.f;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -50,8 +52,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -63,7 +65,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Flickerform extends CardImpl {
 
     public Flickerform(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -128,7 +130,7 @@ class FlickerformEffect extends OneShotEffect {
                     }
                 }
                 if (!(enchantedCreature instanceof Token)) {
-                // At the beginning of the next end step, return that card to the battlefield under its owner's control.
+                    // At the beginning of the next end step, return that card to the battlefield under its owner's control.
                     // If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                             new FlickerformReturnEffect(enchantedCreature.getId(), exileZoneId));
@@ -174,12 +176,17 @@ class FlickerformReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         Card enchantedCard = exileZone.get(enchantedCardId, game);
         if (enchantedCard != null) {
-            enchantedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), enchantedCard.getOwnerId());
+            controller.moveCards(enchantedCard, Zone.BATTLEFIELD, source, game);
             Permanent newPermanent = game.getPermanent(enchantedCardId);
             if (newPermanent != null) {
+                Set<Card> toBattlefieldAttached = new HashSet<Card>();
                 for (Card enchantment : exileZone.getCards(game)) {
                     if (filterAura.match(enchantment, game)) {
                         boolean canTarget = false;
@@ -196,9 +203,13 @@ class FlickerformReturnEffect extends OneShotEffect {
                         }
                         game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
                     }
-                    if (enchantment.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), enchantment.getOwnerId())) {
-                        if (filterAura.match(enchantment, game)) {
-                            newPermanent.addAttachment(enchantment.getId(), game);
+                    toBattlefieldAttached.add(enchantment);
+                }
+                if (!toBattlefieldAttached.isEmpty()) {
+                    controller.moveCards(toBattlefieldAttached, Zone.BATTLEFIELD, source, game);
+                    for (Card card : toBattlefieldAttached) {
+                        if (game.getState().getZone(card.getId()).equals(Zone.BATTLEFIELD)) {
+                            newPermanent.addAttachment(card.getId(), game);
                         }
                     }
                 }

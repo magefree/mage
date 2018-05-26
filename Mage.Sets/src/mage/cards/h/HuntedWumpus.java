@@ -31,18 +31,18 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
 public class HuntedWumpus extends CardImpl {
 
     public HuntedWumpus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(6);
@@ -92,20 +92,11 @@ class HuntedWumpusEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!playerId.equals(controller.getId())) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-                        if (target.canChoose(source.getSourceId(), playerId, game)
-                                && player.chooseUse(Outcome.Neutral, "Put a creature card from your hand onto the battlefield?", source, game)
-                                && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-                            Card card = game.getCard(target.getFirstTarget());
-                            if (card != null) {
-                                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
-                            }
-                        }
-                    }
+                    Effect effect = new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A, true);
+                    effect.setTargetPointer(new FixedTarget(playerId));
+                    effect.apply(game, source);
                 }
             }
             return true;

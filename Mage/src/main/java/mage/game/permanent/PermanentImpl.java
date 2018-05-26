@@ -152,7 +152,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.blocking = permanent.blocking;
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
-//        this.attachments.addAll(permanent.attachments);
+
         for (Map.Entry<String, List<UUID>> entry : permanent.connectedCards.entrySet()) {
             this.connectedCards.put(entry.getKey(), entry.getValue());
         }
@@ -696,7 +696,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
                 game.getContinuousEffects().setOrder(effect);
-                // It's important is to update timestamp of the copied effect in ContinuousEffects because it does the action
+                // It's important to update the timestamp of the copied effect in ContinuousEffects because it does the action
                 for (ContinuousEffect conEffect : game.getContinuousEffects().getLayeredEffects(game)) {
                     if (conEffect.getId().equals(effect.getId())) {
                         game.getContinuousEffects().setOrder(conEffect);

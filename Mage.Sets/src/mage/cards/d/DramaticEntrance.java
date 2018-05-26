@@ -29,7 +29,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -52,7 +52,7 @@ public class DramaticEntrance extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");
 
         // You may put a green creature card from your hand onto the battlefield.
-        this.getSpellAbility().addEffect(new PutPermanentOnBattlefieldEffect(filter));
+        this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(filter));
 
     }
 

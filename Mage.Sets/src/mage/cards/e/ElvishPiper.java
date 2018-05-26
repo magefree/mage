@@ -27,19 +27,18 @@
  */
 package mage.cards.e;
 
-
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -48,7 +47,7 @@ import mage.filter.common.FilterCreatureCard;
 public class ElvishPiper extends CardImpl {
 
     public ElvishPiper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
 
@@ -57,7 +56,7 @@ public class ElvishPiper extends CardImpl {
 
         // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutPermanentOnBattlefieldEffect(new FilterCreatureCard("a creature card")),
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A),
                 new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

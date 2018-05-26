@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -49,35 +50,35 @@ import mage.constants.TargetController;
 public class AtarkasCommand extends CardImpl {
 
     public AtarkasCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{G}");
 
-        // Choose two - 
+        // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
-        
-        // Your opponents can't gain life this turn; 
+
+        // Your opponents can't gain life this turn;
         this.getSpellAbility().addEffect(new CantGainLifeAllEffect(Duration.EndOfTurn, TargetController.OPPONENT));
-        
-        // or Atarka's Command deals 3 damage to each opponent; 
+
+        // or Atarka's Command deals 3 damage to each opponent;
         Mode mode = new Mode();
         mode.getEffects().add(new DamagePlayersEffect(3, TargetController.OPPONENT));
         this.getSpellAbility().addMode(mode);
-        
-        // or You may put a land card from your hand onto the battlefield; 
+
+        // or You may put a land card from your hand onto the battlefield;
         mode = new Mode();
-        mode.getEffects().add(new PutLandFromHandOntoBattlefieldEffect());
+        mode.getEffects().add(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
         this.getSpellAbility().addMode(mode);
 
         // or Creatures you control get +1/+1 and gain reach until the end of turn.
         mode = new Mode();
-        Effect effect = new BoostControlledEffect(1,1, Duration.EndOfTurn);
-        effect.setText("Creatures you control get +1/+1");        
+        Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("Creatures you control get +1/+1");
         mode.getEffects().add(effect);
         effect = new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gain reach until the end of turn");        
+        effect.setText("and gain reach until the end of turn");
         mode.getEffects().add(effect);
         this.getSpellAbility().addMode(mode);
-        
+
     }
 
     public AtarkasCommand(final AtarkasCommand card) {

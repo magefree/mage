@@ -40,7 +40,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -134,10 +133,7 @@ class NettlevineBlightEffect extends OneShotEffect {
                     if (chosenPermanent != null) {
                         Card nettlevineBlightCard = game.getCard(source.getSourceId());
                         if (nettlevineBlightCard != null) {
-                            Zone zone = game.getState().getZone(nettlevineBlightCard.getId());
-                            nettlevineBlightCard.putOntoBattlefield(game, zone, source.getSourceId(), newController.getId());
-                            game.getState().setValue("attachTo:" + nettlevineBlight.getId(), chosenPermanent);
-                            chosenPermanent.addAttachment(nettlevineBlight.getId(), game);
+                            nettlevineBlight.attachTo(chosenPermanent.getId(), game);
                             return true;
                         }
                     }

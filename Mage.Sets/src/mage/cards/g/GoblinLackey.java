@@ -30,7 +30,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -58,7 +58,7 @@ public class GoblinLackey extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Goblin Lackey deals damage to a player, you may put a Goblin permanent card from your hand onto the battlefield.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new PutPermanentOnBattlefieldEffect(filter), false));
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter), false));
     }
 
     public GoblinLackey(final GoblinLackey card) {

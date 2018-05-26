@@ -120,9 +120,13 @@ class NinjutsuEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 UUID defendingPlayerId = null;
@@ -133,7 +137,6 @@ class NinjutsuEffect extends OneShotEffect {
                 }
                 if (defendingPlayerId != null) {
                     game.getCombat().addAttackerToCombat(permanent.getId(), defendingPlayerId, game);
-                    permanent.setTapped(true);
                     return true;
                 }
             }

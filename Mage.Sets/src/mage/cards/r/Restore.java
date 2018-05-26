@@ -51,8 +51,7 @@ public class Restore extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard();
 
     public Restore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Put target land card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new RestoreEffect());
@@ -91,7 +90,8 @@ class RestoreEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card land = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (controller != null && game.getState().getZone(land.getId()) == Zone.GRAVEYARD) {
-            return land.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
+            controller.moveCards(land, Zone.BATTLEFIELD, source, game);
+            return true;
         }
         return false;
     }

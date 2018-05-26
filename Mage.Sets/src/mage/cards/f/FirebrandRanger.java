@@ -33,22 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -63,8 +54,9 @@ public class FirebrandRanger extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {G}, {tap}: You may put a basic land card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandOnBattlefieldEffect(), new ManaCostsImpl("{G}"));
+        // {G}, {T}: You may put a basic land card from your hand onto the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -76,48 +68,5 @@ public class FirebrandRanger extends CardImpl {
     @Override
     public FirebrandRanger copy() {
         return new FirebrandRanger(this);
-    }
-}
-
-class PutLandOnBattlefieldEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("basic land card");
-
-    static {
-        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate(SuperType.BASIC)));
-    }
-
-    private static final String choiceText = "Put a basic land card from your hand onto the battlefield?";
-
-    public PutLandOnBattlefieldEffect() {
-        super(Outcome.PutLandInPlay);
-        this.staticText = "you may put a basic land card from your hand onto the battlefield";
-    }
-
-    public PutLandOnBattlefieldEffect(final PutLandOnBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PutLandOnBattlefieldEffect copy() {
-        return new PutLandOnBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutLandInPlay, choiceText, source, game)) {
-            return false;
-        }
-
-        TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutLandInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                return true;
-            }
-        }
-        return false;
     }
 }

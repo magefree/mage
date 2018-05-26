@@ -58,7 +58,7 @@ import mage.target.Target;
 public class Retether extends CardImpl {
 
     public Retether(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
 
         // Return each Aura card from your graveyard to the battlefield. Only creatures can be enchanted this way.
         this.getSpellAbility().addEffect(new RetetherEffect());
@@ -108,7 +108,7 @@ class RetetherEffect extends OneShotEffect {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature to enchant (" + aura.getLogName() + ')');
                     filter.add(new CanBeEnchantedByPredicate(aura));
                     Target target = null;
-                                
+
                     auraLegalitySearch:
                     for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
@@ -135,6 +135,7 @@ class RetetherEffect extends OneShotEffect {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null && !permanent.cantBeAttachedBy(aura, game)) {
                                     auraMap.put(aura, permanent);
+                                    game.getState().setValue("attachTo:" + aura.getId(), permanent);
                                     continue auraCardsInGraveyard;
                                 }
                             }
@@ -143,17 +144,12 @@ class RetetherEffect extends OneShotEffect {
                     game.informPlayers("No valid creature targets for " + aura.getLogName());
                 }
             }
+            controller.moveCards(auraMap.keySet(), Zone.BATTLEFIELD, source, game);
             for (Entry<Card, Permanent> entry : auraMap.entrySet()) {
                 Card aura = entry.getKey();
                 Permanent permanent = entry.getValue();
-                if (aura != null) {
-                    if (permanent != null) {
-                        game.getState().setValue("attachTo:" + aura.getId(), permanent);
-                    }
-                    aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
-                    if (permanent != null) {
-                        permanent.addAttachment(aura.getId(), game);
-                    }
+                if (aura != null && permanent != null) {
+                    permanent.addAttachment(aura.getId(), game);
                 }
             }
             return true;

@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -72,7 +72,7 @@ public class GoblinWizard extends CardImpl {
 
         // {tap}: You may put a Goblin permanent card from your hand onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutPermanentOnBattlefieldEffect(filter),
+                new PutCardFromHandOntoBattlefieldEffect(filter),
                 new TapSourceCost()));
 
         // {R}: Target Goblin gains protection from white until end of turn.

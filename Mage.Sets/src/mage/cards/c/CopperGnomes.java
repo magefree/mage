@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -54,7 +54,7 @@ public class CopperGnomes extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {4}, Sacrifice Copper Gnomes: You may put an artifact card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(new FilterArtifactCard()), new ManaCostsImpl("{4}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(new FilterArtifactCard()), new ManaCostsImpl("{4}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

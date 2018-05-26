@@ -48,13 +48,13 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 /**
- * 
+ *
  * @author Rafbill
  */
 public class PreeminentCaptain extends CardImpl {
 
     public PreeminentCaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.KITHKIN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -96,20 +96,22 @@ class PreeminentCaptainEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (target.canChoose(player.getId(), game) && target.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
+        if (target.canChoose(controller.getId(), game) && target.choose(getOutcome(), controller.getId(), source.getSourceId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getFirstTarget();
-                Card card = player.getHand().get(cardId, game);
+                Card card = controller.getHand().get(cardId, game);
                 if (card != null) {
-                    if (card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId(), true)) {
+                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                         Permanent permanent = game.getPermanent(card.getId());
-                        game.getCombat().addAttackingCreature(permanent.getId(), game);
+                        if (permanent != null) {
+                            game.getCombat().addAttackingCreature(permanent.getId(), game);
+                        }
                     }
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

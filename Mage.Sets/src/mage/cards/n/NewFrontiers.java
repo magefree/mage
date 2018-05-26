@@ -29,7 +29,6 @@ package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,6 +40,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
+import mage.cards.CardsImpl;
 
 /**
  *
@@ -86,18 +86,12 @@ class NewFrontiersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int amount = source.getManaCostsToPay().getX();
-
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
+                if (player != null && player.chooseUse(outcome, "Search your library for up to " + amount + " basic lands?", source, game)) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_BASIC_LAND_CARD);
                     if (player.searchLibrary(target, game)) {
-                        for (UUID cardId : target.getTargets()) {
-                            Card card = player.getLibrary().getCard(cardId, game);
-                            if (card != null) {
-                                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId(), true);
-                            }
-                        }
+                        player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
                         player.shuffleLibrary(source, game);
                     }
 

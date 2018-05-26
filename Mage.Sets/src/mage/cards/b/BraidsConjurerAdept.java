@@ -30,7 +30,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -64,7 +64,7 @@ public class BraidsConjurerAdept extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each player's upkeep, that player may put an artifact, creature, or land card from their hand onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PutPermanentOnBattlefieldEffect(filter, true), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter, true), TargetController.ANY, false));
     }
 
     public BraidsConjurerAdept(final BraidsConjurerAdept card) {

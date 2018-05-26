@@ -27,6 +27,9 @@
  */
 package mage.cards.r;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -49,10 +52,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -60,7 +59,7 @@ import java.util.UUID;
 public class ReinsOfTheVinesteed extends CardImpl {
 
     public ReinsOfTheVinesteed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -127,7 +126,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                 if (!targetPermanent.cantBeAttachedBy(aura, game)) {
                     game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
-                    aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
+                    controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                     return targetPermanent.addAttachment(aura.getId(), game);
                 }
             }

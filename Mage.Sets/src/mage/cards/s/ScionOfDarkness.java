@@ -39,8 +39,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class ScionOfDarkness extends CardImpl {
 
     public ScionOfDarkness(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);
@@ -102,20 +102,22 @@ class ScionOfDarknessEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        Player you = game.getPlayer(source.getControllerId());
-        FilterCard filter = new FilterCard("creature in that player's graveyard");
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || damagedPlayer == null) {
+            return false;
+        }
+        FilterCard filter = new FilterCard("creature in " + damagedPlayer.getName() + "'s graveyard");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-        if (target.canChoose(source.getSourceId(), you.getId(), game)) {
-            if (you.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
+        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (controller.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), you.getId());
-                    return true;
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
         }
-        return false;
+        return true;
     }
 }

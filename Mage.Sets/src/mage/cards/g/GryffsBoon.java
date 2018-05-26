@@ -45,6 +45,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -55,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class GryffsBoon extends CardImpl {
 
     public GryffsBoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -102,12 +103,13 @@ class GryffsBoonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card aura = game.getCard(source.getSourceId());
-        if (aura != null
+        Player controller = game.getPlayer(source.getControllerId());
+        if (aura != null && controller != null
                 && game.getState().getZone(aura.getId()) == Zone.GRAVEYARD) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (!targetPermanent.cantBeAttachedBy(aura, game)) {
                 game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
-                aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+                controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                 return targetPermanent.addAttachment(aura.getId(), game);
             }
         }

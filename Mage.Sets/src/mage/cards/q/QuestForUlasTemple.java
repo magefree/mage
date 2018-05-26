@@ -31,7 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,7 +49,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -56,13 +57,19 @@ import mage.target.common.TargetCardInHand;
 public class QuestForUlasTemple extends CardImpl {
 
     public QuestForUlasTemple(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for Ula's Temple.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new QuestForUlasTempleEffect(), TargetController.YOU, true));
 
         // At the beginning of each end step, if there are three or more quest counters on Quest for Ula's Temple, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.
-        this.addAbility(new QuestForUlasTempleTriggeredAbility());
+        FilterCreatureCard filter = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card");
+        filter.add(Predicates.or(
+                new SubtypePredicate(SubType.KRAKEN),
+                new SubtypePredicate(SubType.LEVIATHAN),
+                new SubtypePredicate(SubType.OCTOPUS),
+                new SubtypePredicate(SubType.SERPENT)));
+        this.addAbility(new QuestForUlasTempleTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter)));
     }
 
     public QuestForUlasTemple(final QuestForUlasTemple card) {
@@ -116,8 +123,8 @@ class QuestForUlasTempleEffect extends OneShotEffect {
 
 class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
 
-    public QuestForUlasTempleTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new QuestForUlasTempleEffect2(), true);
+    public QuestForUlasTempleTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, true);
     }
 
     public QuestForUlasTempleTriggeredAbility(final QuestForUlasTempleTriggeredAbility ability) {
@@ -142,50 +149,6 @@ class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each end step, if there are three or more quest counters on {this}, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.";
-    }
-}
-
-class QuestForUlasTempleEffect2 extends OneShotEffect {
-
-    private static final String query = "Do you want to put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield?";
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card from your hand");
-
-    static {
-        filter.add(Predicates.or(
-                new SubtypePredicate(SubType.KRAKEN),
-                new SubtypePredicate(SubType.LEVIATHAN),
-                new SubtypePredicate(SubType.OCTOPUS),
-                new SubtypePredicate(SubType.SERPENT)));
-    }
-
-    QuestForUlasTempleEffect2() {
-        super(Outcome.PutCreatureInPlay);
-    }
-
-    QuestForUlasTempleEffect2(final QuestForUlasTempleEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetCardInHand target = new TargetCardInHand(filter);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && controller.chooseUse(Outcome.PutCreatureInPlay, query, source, game)) {
-                if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public QuestForUlasTempleEffect2 copy() {
-        return new QuestForUlasTempleEffect2(this);
+        return "At the beginning of each end step, if there are three or more quest counters on {this}, " + super.getRule();
     }
 }

@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -45,17 +45,18 @@ import mage.constants.Zone;
  */
 public class WalkingAtlas extends CardImpl {
 
-    public WalkingAtlas (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+    public WalkingAtlas(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {tap}: You may put a land card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A), new TapSourceCost()));
     }
 
-    public WalkingAtlas (final WalkingAtlas card) {
+    public WalkingAtlas(final WalkingAtlas card) {
         super(card);
     }
 

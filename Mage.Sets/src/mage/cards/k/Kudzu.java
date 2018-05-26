@@ -37,10 +37,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -120,22 +119,18 @@ class KudzuEffect extends OneShotEffect {
                                 Permanent landChosen = game.getPermanent(target.getFirstTarget());
                                 if (landChosen != null) {
                                     for (Target targetTest : kudzuCard.getSpellAbility().getTargets()) {
-                                        Filter filterTest = targetTest.getFilter();
-                                        if (filterTest.match(landChosen, game)) {
-                                            if (game.getBattlefield().containsPermanent(landChosen.getId())) { //verify that it is still on the battlefield
-                                                game.getState().setValue("attachTo:" + kudzuCard.getId(), landChosen);
-                                                Zone zone = game.getState().getZone(kudzuCard.getId());
-                                                kudzuCard.putOntoBattlefield(game, zone, source.getSourceId(), controller.getId());
-                                                return landChosen.addAttachment(kudzuCard.getId(), game);
-                                            }
+                                        if (targetTest.getFilter().match(landChosen, game)) {
+                                            landChosen.addAttachment(kudzu.getId(), game);
                                         }
                                     }
                                 }
                             }
                         }
                     }
+
                 }
             }
+            return true;
         }
         return false;
     }

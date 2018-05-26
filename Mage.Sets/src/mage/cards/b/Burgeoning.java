@@ -29,11 +29,12 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -45,7 +46,7 @@ import mage.game.permanent.Permanent;
 public class Burgeoning extends CardImpl {
 
     public Burgeoning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield.
         this.addAbility(new BurgeoningTriggeredAbility());
@@ -61,10 +62,10 @@ public class Burgeoning extends CardImpl {
     }
 }
 
-
 class BurgeoningTriggeredAbility extends TriggeredAbilityImpl {
+
     BurgeoningTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect());
+        super(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
     }
 
     BurgeoningTriggeredAbility(BurgeoningTriggeredAbility ability) {

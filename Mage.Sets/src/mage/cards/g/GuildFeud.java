@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -43,8 +44,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -52,7 +51,7 @@ import java.util.UUID;
 public class GuildFeud extends CardImpl {
 
     public GuildFeud(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
         // At the beginning of your upkeep, target opponent reveals the top three cards
         // of their library, may put a creature card from among them onto the battlefield,
@@ -95,9 +94,8 @@ class GuildFeudEffect extends OneShotEffect {
         if (opponent != null && controller != null && sourceObject != null) {
             for (int activePlayer = 0; activePlayer < 2; activePlayer++) {
                 Player player = (activePlayer == 0 ? opponent : controller);
-                Cards topThreeCards = new CardsImpl();
-                topThreeCards.addAll(player.getLibrary().getTopCards(game, 3));
-                player.revealCards(sourceObject.getIdName() + " - " + player.getName() + " top library cards", topThreeCards, game);
+                Cards topThreeCards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
+                player.revealCards(source, player.getName() + " top library cards", topThreeCards, game);
                 Card creatureToBattlefield;
                 if (!topThreeCards.isEmpty()) {
                     if (player.chooseUse(Outcome.PutCreatureInPlay, "Put a creature card among them to the battlefield?", source, game)) {
@@ -108,9 +106,7 @@ class GuildFeudEffect extends OneShotEffect {
                             creatureToBattlefield = topThreeCards.get(target.getFirstTarget(), game);
                             if (creatureToBattlefield != null) {
                                 topThreeCards.remove(creatureToBattlefield);
-                                if (creatureToBattlefield.putOntoBattlefield(game, Zone.LIBRARY,
-                                        source.getSourceId(), player.getId())) {
-                                    game.informPlayers("Guild Feud: " + player.getLogName() + " put " + creatureToBattlefield.getName() + " to the battlefield");
+                                if (player.moveCards(creatureToBattlefield, Zone.BATTLEFIELD, source, game)) {
                                     if (activePlayer == 0) {
                                         opponentCreature = game.getPermanent(creatureToBattlefield.getId());
                                     } else {

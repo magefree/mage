@@ -71,6 +71,13 @@ public final class StaticFilters {
     static {
         FILTER_CARD_CREATURE.setLockedFilter(true);
     }
+
+    public static final FilterCreatureCard FILTER_CARD_CREATURE_A = new FilterCreatureCard("a creature card");
+
+    static {
+        FILTER_CARD_CREATURE_A.setLockedFilter(true);
+    }
+
     public static final FilterCreatureCard FILTER_CARD_CREATURE_YOUR_GRAVEYARD = new FilterCreatureCard("creature card from your graveyard");
 
     static {
@@ -87,6 +94,12 @@ public final class StaticFilters {
 
     static {
         FILTER_CARD_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterLandCard FILTER_CARD_LAND_A = new FilterLandCard("a land card");
+
+    static {
+        FILTER_CARD_LAND_A.setLockedFilter(true);
     }
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();
 
@@ -290,6 +303,12 @@ public final class StaticFilters {
 
     static {
         FILTER_BASIC_LAND_CARD.setLockedFilter(true);
+    }
+
+    public static final FilterBasicLandCard FILTER_BASIC_LAND_CARD_A = new FilterBasicLandCard("a basic land card");
+
+    static {
+        FILTER_BASIC_LAND_CARD_A.setLockedFilter(true);
     }
 
     // Used for sacrifice targets that don't need the "you control" text

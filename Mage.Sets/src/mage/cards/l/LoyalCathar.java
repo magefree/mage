@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -40,11 +41,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.u.UnhallowedCathar;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -53,7 +55,7 @@ import mage.game.permanent.Permanent;
 public class LoyalCathar extends CardImpl {
 
     public LoyalCathar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -96,8 +98,11 @@ class LoyalCatharEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         //create delayed triggered ability
-        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnLoyalCatharEffect(source.getSourceId()));
-        game.addDelayedTriggeredAbility(delayedAbility, source);
+        if (Zone.GRAVEYARD == game.getState().getZone(source.getSourceId())) {
+            Effect effect = new ReturnLoyalCatharEffect();
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+        }
         return true;
     }
 
@@ -110,17 +115,13 @@ class LoyalCatharEffect extends OneShotEffect {
 
 class ReturnLoyalCatharEffect extends OneShotEffect {
 
-    private UUID cardId;
-
-    public ReturnLoyalCatharEffect(UUID cardId) {
+    public ReturnLoyalCatharEffect() {
         super(Outcome.PutCardInPlay);
-        this.cardId = cardId;
         this.staticText = "return it to the battlefield transformed under your control";
     }
 
     public ReturnLoyalCatharEffect(final ReturnLoyalCatharEffect effect) {
         super(effect);
-        this.cardId = effect.cardId;
     }
 
     @Override
@@ -130,16 +131,16 @@ class ReturnLoyalCatharEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(cardId);
-        if (card != null) {
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-            Permanent perm = game.getPermanent(cardId);
-            if (perm != null && perm.isTransformable()) {
-                perm.transform(game);
-                return true;
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (card != null) {
+            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        }
+        return true;
     }
 
 }

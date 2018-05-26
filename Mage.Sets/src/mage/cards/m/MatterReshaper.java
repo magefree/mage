@@ -29,7 +29,6 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,9 +37,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -54,7 +53,7 @@ import mage.players.Player;
 public class MatterReshaper extends CardImpl {
 
     public MatterReshaper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{C}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{C}");
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -89,22 +88,20 @@ class MatterReshaperEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
+        if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
-                return false;
-            }
-            controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
-            FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
-            if (filter.match(card, game)) {
-                if (controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield (otherwise put in hand)?", source, game)) {
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), false);
-                    return true;
+                controller.revealCards(source, new CardsImpl(card), game);
+                FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less");
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+                if (filter.match(card, game)) {
+                    if (controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield (otherwise put in hand)?", source, game)) {
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                        return true;
+                    }
                 }
+                controller.moveCards(card, Zone.HAND, source, game);
             }
-            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
             return true;
         }
         return false;

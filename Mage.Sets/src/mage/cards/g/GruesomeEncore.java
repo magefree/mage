@@ -48,6 +48,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -60,7 +62,7 @@ public class GruesomeEncore extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from an opponent's graveyard");
 
     public GruesomeEncore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste.
         this.getSpellAbility().addEffect(new GruesomeEncoreEffect());
@@ -97,19 +99,23 @@ class GruesomeEncoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-
-            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-            effect.setTargetPointer(new FixedTarget(card.getId()));
-            game.addEffect(effect, source);
-
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTarget(card.getId()));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+            Permanent permanent = game.getPermanent(card.getId());
+            if (permanent != null) {
+                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                effect.setTargetPointer(new FixedTarget(permanent, game));
+                game.addEffect(effect, source);
+                ExileTargetEffect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTarget(permanent, game));
+                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
+            }
             return true;
         }
 

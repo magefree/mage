@@ -51,7 +51,6 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -117,8 +116,8 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         int count = 1 + new CountersSourceCount(CounterType.LOYALTY).calculate(game, source, this);
@@ -126,15 +125,12 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.LAND)));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count));
-        Card card = player.getLibrary().getFromTop(game);
+        Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.lookAtCards("Nissa, Steward of Elements", cards, game);
+            controller.lookAtCards(source, null, new CardsImpl(card), game);
             if (filter.match(card, game)) {
-                String message = "Put " + card.getName() + " onto the battlefield?";
-                if (player.chooseUse(outcome, message, source, game)) {
-                    return card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), false);
+                if (controller.chooseUse(outcome, "Put " + card.getName() + " onto the battlefield?", source, game)) {
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
         }
@@ -153,6 +149,7 @@ class NissaStewardOfElementsToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
     }
+
     public NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
         super(token);
     }

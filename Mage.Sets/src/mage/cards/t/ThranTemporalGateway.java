@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -59,7 +59,7 @@ public class ThranTemporalGateway extends CardImpl {
 
         // {4}, {t}: You may put a historic permanent card from your hand onto the battlefield. (Artifacts, legendaries, and Sagas are historic.)
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutPermanentOnBattlefieldEffect(filter)
+                new PutCardFromHandOntoBattlefieldEffect(filter)
                         .setText("You may put a historic permanent card from your hand onto the battlefield. "
                                 + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
                 new ManaCostsImpl("{4}"));

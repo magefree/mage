@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -42,9 +43,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -53,12 +54,12 @@ import mage.target.common.TargetCreaturePermanent;
 public class GracefulReprieve extends CardImpl {
 
     public GracefulReprieve(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // When target creature dies this turn, return that card to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GracefulReprieveEffect());
-        
+
     }
 
     public GracefulReprieve(final GracefulReprieve card) {
@@ -89,7 +90,7 @@ class GracefulReprieveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = new GracefulReprieveDelayedTriggeredAbility(targetPointer.getFirst(game, source));
+        DelayedTriggeredAbility delayedAbility = new GracefulReprieveDelayedTriggeredAbility(new MageObjectReference(targetPointer.getFirst(game, source), game));
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
@@ -97,10 +98,10 @@ class GracefulReprieveEffect extends OneShotEffect {
 
 class GracefulReprieveDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID target;
+    private MageObjectReference target;
 
-    public GracefulReprieveDelayedTriggeredAbility(UUID target) {
-        super(new GracefulReprieveDelayedEffect(target), Duration.EndOfTurn);
+    public GracefulReprieveDelayedTriggeredAbility(MageObjectReference target) {
+        super(new GracefulReprieveDelayedEffect(), Duration.EndOfTurn);
         this.target = target;
     }
 
@@ -116,9 +117,10 @@ class GracefulReprieveDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(target)) {
+        if (target.refersTo(((ZoneChangeEvent) event).getTarget(), game)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+                getEffects().setTargetPointer(new FixedTarget(target.getSourceId()));
                 return true;
             }
         }
@@ -138,17 +140,13 @@ class GracefulReprieveDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class GracefulReprieveDelayedEffect extends OneShotEffect {
 
-    private final UUID target;
-
-    public GracefulReprieveDelayedEffect(UUID target) {
+    public GracefulReprieveDelayedEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.target = target;
         this.staticText = "return that card to the battlefield under its owner's control";
     }
 
     public GracefulReprieveDelayedEffect(final GracefulReprieveDelayedEffect effect) {
         super(effect);
-        this.target = effect.target;
     }
 
     @Override
@@ -159,17 +157,12 @@ class GracefulReprieveDelayedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = (Permanent) game.getLastKnownInformation(target, Zone.BATTLEFIELD);
-        if (controller != null
-                && permanent != null) {
-            Player player = game.getPlayer(permanent.getOwnerId());
-            if (player != null) {
-                Card card = game.getCard(target);
-                if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-                    return card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
-                }
-                return true;
+        if (controller != null) {
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
+            if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
+            return true;
         }
         return false;
     }

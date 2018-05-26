@@ -35,7 +35,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
-import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -44,10 +43,11 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.DokaiWeaverofLifeToken;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
+import mage.filter.StaticFilters;
 
 /**
  * @author Loki
@@ -64,7 +64,7 @@ public class BudokaGardener extends CardImpl {
         this.flipCardName = "Dokai, Weaver of Life";
 
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A), new TapSourceCost());
         ability.addEffect(new BudokaGardenerEffect());
         this.addAbility(ability);
     }
@@ -128,6 +128,7 @@ class DokaiWeaverofLife extends TokenImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
+
     public DokaiWeaverofLife(final DokaiWeaverofLife token) {
         super(token);
     }

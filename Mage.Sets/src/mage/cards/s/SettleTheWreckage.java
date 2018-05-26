@@ -27,13 +27,16 @@
  */
 package mage.cards.s;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -87,28 +90,27 @@ class SettleTheWreckageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            int attackers = 0;
-            Iterator<UUID> creatureIds = game.getCombat().getAttackers().iterator();
-            while (creatureIds.hasNext()) {
-                Permanent creature = game.getPermanent(creatureIds.next());
-                if (creature != null && creature.getControllerId().equals(player.getId())) {
-                    creature.moveToExile(null, null, source.getId(), game);
-                    attackers++;
-                }
-            }
-            TargetCardInLibrary target = new TargetCardInLibrary(0, attackers, StaticFilters.FILTER_BASIC_LAND_CARD);
-            if (player.chooseUse(Outcome.Benefit, "Search for up to " + attackers + " basic land" + ((attackers == 1) ? "" : "s") + "?", source, game) && player.searchLibrary(target, game)) {
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
-                    if (card != null) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId(), true);
-                    }
-                }
-                player.shuffleLibrary(source, game);
-            }
-            return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || player == null) {
+            return false;
         }
-        return false;
+        int attackers = 0;
+        Set<Card> toExile = new HashSet<>();
+        Iterator<UUID> creatureIds = game.getCombat().getAttackers().iterator();
+        while (creatureIds.hasNext()) {
+            Permanent creature = game.getPermanent(creatureIds.next());
+            if (creature != null && creature.getControllerId().equals(player.getId())) {
+                toExile.add(creature);
+                attackers++;
+            }
+        }
+        controller.moveCards(toExile, Zone.EXILED, source, game);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, attackers, StaticFilters.FILTER_BASIC_LAND_CARD);
+        if (player.chooseUse(Outcome.Benefit, "Search for up to " + attackers + " basic land" + ((attackers == 1) ? "" : "s") + "?", source, game) && player.searchLibrary(target, game)) {
+            player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+            player.shuffleLibrary(source, game);
+        }
+        return true;
+
     }
 }

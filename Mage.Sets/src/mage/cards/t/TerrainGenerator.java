@@ -32,13 +32,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -47,13 +47,14 @@ import mage.filter.common.FilterLandCard;
 public class TerrainGenerator extends CardImpl {
 
     public TerrainGenerator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        
-        // {2}, {tap}: You may put a basic land card from your hand onto the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(true, FilterLandCard.basicLandCard()), new ManaCostsImpl("{2}"));
+
+        // {2}, {T}: You may put a basic land card from your hand onto the battlefield tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A, false, true), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

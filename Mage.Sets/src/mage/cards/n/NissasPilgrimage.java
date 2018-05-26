@@ -40,10 +40,11 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -55,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
 public class NissasPilgrimage extends CardImpl {
 
     public NissasPilgrimage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library for up to two basic Forest cards, reveal those cards, and put one onto the battlefield tapped and the rest into your hand.  Then shuffle your library.
         // <i>Spell Mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.
@@ -74,9 +75,10 @@ public class NissasPilgrimage extends CardImpl {
 
 class NissasPilgrimageEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterBasicLandCard("basic Forest");
+    private static final FilterCard filter = new FilterCard("basic Forest card");
 
     static {
+        filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(new SubtypePredicate(SubType.FOREST));
     }
 

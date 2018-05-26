@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Reincarnation extends CardImpl {
 
     public Reincarnation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");
 
         // Choose target creature. When that creature dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.
         this.getSpellAbility().addEffect(new ReincarnationEffect());
@@ -141,7 +141,7 @@ class ReincarnationDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class ReincarnationDelayedEffect extends OneShotEffect {
 
-    private UUID target;
+    private final UUID target;
 
     public ReincarnationDelayedEffect(UUID target) {
         super(Outcome.Detriment);
@@ -166,14 +166,14 @@ class ReincarnationDelayedEffect extends OneShotEffect {
         if (permanent != null && controller != null) {
             Player player = game.getPlayer(permanent.getOwnerId());
             if (player != null) {
-                FilterCreatureCard filter = new FilterCreatureCard(new StringBuilder("a creature card from ").append(player.getLogName()).append("'s graveyard").toString());
+                FilterCreatureCard filter = new FilterCreatureCard("a creature card from " + player.getName() + "'s graveyard");
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Target targetCreature = new TargetCardInGraveyard(filter);
                 if (targetCreature.canChoose(source.getSourceId(), controller.getId(), game)
                         && controller.chooseTarget(outcome, targetCreature, source, game)) {
                     Card card = game.getCard(targetCreature.getFirstTarget());
                     if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-                        return card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
                     }
                 }
                 return true;
