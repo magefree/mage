@@ -32,6 +32,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeOpponentsEffect;
+import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,12 +41,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -53,11 +52,11 @@ import mage.target.common.TargetControlledPermanent;
 public class Malfegor extends CardImpl {
 
     public Malfegor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{R}{R}");
+
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.DRAGON);
-
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
@@ -93,31 +92,15 @@ class MalfegorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int sacrificeNumber = controller.getHand().size();
-            if (sacrificeNumber > 0) {
-                controller.discard(sacrificeNumber, source, game);
-                for (UUID opponentId : game.getOpponents(controller.getId())) {
-                    Player opponent = game.getPlayer(opponentId);
-                    if (opponent != null) {
-                        for (int i = 0; i < sacrificeNumber; i++) {
-                            Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
-                            if (target.canChoose(opponentId, game)) {
-                                if (opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
-                                    Permanent permanent = game.getPermanent(target.getFirstTarget());
-                                    if (permanent != null) {
-                                        permanent.sacrifice(source.getSourceId(), game);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if (controller == null) {
+            return false;
+        }
+        int sacrificeNumber = controller.getHand().size();
+        if (sacrificeNumber == 0) {
             return true;
         }
-        return false;
-
+        new DiscardHandControllerEffect().apply(game, source);
+        return new SacrificeOpponentsEffect(sacrificeNumber, StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
     }
 
     @Override
