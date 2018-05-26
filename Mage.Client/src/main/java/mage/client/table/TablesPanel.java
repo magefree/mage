@@ -60,7 +60,6 @@ import static mage.client.dialog.PreferencesDialog.KEY_TABLES_FILTER_SETTINGS;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3;
-import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
 import mage.client.util.ButtonColumn;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
@@ -427,15 +426,15 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     private void restoreDividers() {
-      Rectangle currentBounds = MageFrame.getDesktop().getBounds();
-      if (currentBounds != null) {
-        String firstDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_1, null);
-        String tableDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_2, null);
-        String chatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_3, null);
-        GuiDisplayUtil.restoreDividerLocations(currentBounds, firstDivider, jSplitPane1);
-        GuiDisplayUtil.restoreDividerLocations(currentBounds, tableDivider, jSplitPaneTables);
-        GuiDisplayUtil.restoreDividerLocations(currentBounds, chatDivider, chatPanelMain);
-      }
+        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
+        if (currentBounds != null) {
+            String firstDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_1, null);
+            String tableDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_2, null);
+            String chatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_3, null);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, firstDivider, jSplitPane1);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, tableDivider, jSplitPaneTables);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, chatDivider, chatPanelMain);
+        }
     }
 
     public Map<String, JComponent> getUIComponents() {
@@ -550,6 +549,7 @@ public class TablesPanel extends javax.swing.JPanel {
             this.jPanelBottom.setVisible(false);
         } else {
             this.jPanelBottom.setVisible(true);
+            URLHandler.RemoveMouseAdapter(jLabelFooterText);
             URLHandler.handleMessage(serverMessages.get(0), this.jLabelFooterText);
             this.jButtonFooterNext.setVisible(serverMessages.size() > 1);
         }
