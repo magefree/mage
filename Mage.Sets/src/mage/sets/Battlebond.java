@@ -59,6 +59,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Gift", 88, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Apocalypse Hydra", 217, Rarity.RARE, mage.cards.a.ApocalypseHydra.class));
         cards.add(new SetCardInfo("Archfiend of Despair", 44, Rarity.MYTHIC, mage.cards.a.ArchfiendOfDespair.class));
+        cards.add(new SetCardInfo("Archon of Valor's Reach", 74, Rarity.RARE, mage.cards.a.ArchonOfValorsReach.class));
         cards.add(new SetCardInfo("Arena Rector", 23, Rarity.MYTHIC, mage.cards.a.ArenaRector.class));
         cards.add(new SetCardInfo("Assassin's Strike", 138, Rarity.UNCOMMON, mage.cards.a.AssassinsStrike.class));
         cards.add(new SetCardInfo("Assassinate", 139, Rarity.COMMON, mage.cards.a.Assassinate.class));
