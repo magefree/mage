@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TheCrowdGoesWild extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature with a +1/+1 counter on it");
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
@@ -64,7 +64,7 @@ public class TheCrowdGoesWild extends CardImpl {
 
         // Support X (Put a +1/+1 counter on each of up to X target creatures.)
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                .setText("Support X <i>(Put a +1/+1 counter on each of up to X target creatures.)</i>")
+                .setText("Support X <i>(Put a +1/+1 counter on each of up to X target creatures.)</i><br>")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 

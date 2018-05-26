@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -60,6 +60,7 @@ public class LoreWeaver extends CardImpl {
         // {5}{U}{U}: Target player draws two cards.
         Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(2), new ManaCostsImpl("{5}{U}{U}"));
         ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     public LoreWeaver(final LoreWeaver card) {

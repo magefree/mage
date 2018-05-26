@@ -49,7 +49,7 @@ public class StunningReversal extends CardImpl {
     public StunningReversal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
-        // The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1. 
+        // The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1.
         this.getSpellAbility().addEffect(new StunningReversalEffect());
 
         // Exile Stunning Reversal.
@@ -70,7 +70,7 @@ class StunningReversalEffect extends ReplacementEffectImpl {
 
     public StunningReversalEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1. ";
+        staticText = "The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1";
     }
 
     public StunningReversalEffect(final StunningReversalEffect effect) {

@@ -34,12 +34,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.AssistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
@@ -63,6 +63,7 @@ public class FanFavorite extends CardImpl {
         ActivatedAbility ability = new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
+        this.addAbility(ability);
     }
 
     public FanFavorite(final FanFavorite card) {

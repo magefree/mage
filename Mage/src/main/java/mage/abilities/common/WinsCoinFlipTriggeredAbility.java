@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -65,6 +64,6 @@ public class WinsCoinFlipTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player wins a coin flip," + super.getRule();
+        return "Whenever a player wins a coin flip, " + super.getRule();
     }
 }

@@ -29,7 +29,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.LoseHalfLifeTargetEffect;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -61,7 +61,7 @@ public class VirtusTheVeiled extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Virtus the Veiled deals combat damage to a player, that player loses half their life, rounded up.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new LoseHalfLifeTargetEffect(), false, true, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseHalfLifeTargetEffect(), false, true));
     }
 
     public VirtusTheVeiled(final VirtusTheVeiled card) {

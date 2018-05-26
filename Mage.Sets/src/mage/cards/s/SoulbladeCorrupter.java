@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.CardImpl;
@@ -39,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -46,6 +46,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -93,7 +94,7 @@ class SoulbladeCorrupterTriggeredAbility extends AttacksAllTriggeredAbility {
         super(new GainAbilityTargetEffect(
                 DeathtouchAbility.getInstance(),
                 Duration.EndOfTurn
-        ), false, filter2, SetTargetPointer.PERMANENT, false);
+        ).setText("that creature gains deathtouch until end of turn"), false, filter2, SetTargetPointer.PERMANENT, false);
     }
 
     SoulbladeCorrupterTriggeredAbility(final SoulbladeCorrupterTriggeredAbility effect) {
@@ -106,10 +107,18 @@ class SoulbladeCorrupterTriggeredAbility extends AttacksAllTriggeredAbility {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getControllerId());
-                return player != null && player.hasOpponent(getControllerId(), game);
+                if (player != null && player.hasOpponent(getControllerId(), game)) {
+                    getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a creature with a +1/+1 counter on it attacks one of your opponents, that creature gains deathtouch until end of turn.";
     }
 
     @Override

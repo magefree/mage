@@ -42,13 +42,12 @@ import mage.target.TargetPlayer;
 public class KissOfTheAmesha extends CardImpl {
 
     public KissOfTheAmesha(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{U}");
 
         // Target player gains 7 life and draws two cards.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(7));
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(2).setText("and draws two cards"));
     }
 
     public KissOfTheAmesha(final KissOfTheAmesha card) {

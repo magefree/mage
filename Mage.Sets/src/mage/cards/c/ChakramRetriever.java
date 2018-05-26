@@ -35,10 +35,10 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -65,6 +65,7 @@ public class ChakramRetriever extends CardImpl {
                 "Whenever you cast a spell during your turn, untap target creature."
         );
         ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public ChakramRetriever(final ChakramRetriever card) {

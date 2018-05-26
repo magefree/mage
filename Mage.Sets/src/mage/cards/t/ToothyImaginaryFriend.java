@@ -35,11 +35,11 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 
 /**
@@ -63,7 +63,9 @@ public class ToothyImaginaryFriend extends CardImpl {
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
 
         // When Toothy leaves the battlefield, draw a card for each +1/+1 counter on it.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.P1P1)), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(
+                new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.P1P1))
+                        .setText("draw a card for each +1/+1 counter on it"), false));
     }
 
     public ToothyImaginaryFriend(final ToothyImaginaryFriend card) {

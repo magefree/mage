@@ -37,12 +37,12 @@ import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
 import mage.abilities.effects.common.FlipUntilLoseEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 
 /**
@@ -75,7 +75,7 @@ public class OkaunEyeOfChaos extends CardImpl {
                         sourceToughness,
                         Duration.EndOfTurn,
                         true
-                ).setText("double {this}'s power until end of turn")
+                ).setText("double {this}'s power and toughness until end of turn")
         ));
     }
 

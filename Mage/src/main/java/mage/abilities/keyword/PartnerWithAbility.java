@@ -117,7 +117,7 @@ class PartnersWithSearchEffect extends OneShotEffect {
     private final String partnerName;
 
     public PartnersWithSearchEffect(String partnerName) {
-        super(Outcome.Detriment);
+        super(Outcome.DrawCard);
         this.partnerName = partnerName;
         this.staticText = "";
     }

@@ -33,10 +33,10 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterPlaneswalkerCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -60,7 +60,7 @@ public class ArenaRector extends CardImpl {
                         new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterPlaneswalkerCard())),
                         new ExileSourceFromGraveCost(),
                         "Exile to search for a planeswalker?"
-                ), false
+                ).setText("you may exile it. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle your library"), false
         ));
     }
 

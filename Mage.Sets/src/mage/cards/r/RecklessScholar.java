@@ -32,8 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.effects.common.DrawDiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,15 +47,15 @@ import mage.target.TargetPlayer;
 public class RecklessScholar extends CardImpl {
 
     public RecklessScholar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new TapSourceCost());
-        ability.addEffect(new DiscardTargetEffect(1));
+        // {T}: Target player draws a card, then discards a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardTargetEffect(1, 1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

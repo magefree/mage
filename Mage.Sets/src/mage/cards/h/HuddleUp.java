@@ -48,7 +48,7 @@ public class HuddleUp extends CardImpl {
         this.addAbility(new AssistAbility());
 
         // Two target players each draw a card.
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(1).setText("Two target players each draw a card"));
         this.getSpellAbility().addTarget(new TargetPlayer(2));
     }
 
