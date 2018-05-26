@@ -65,6 +65,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Assassinate", 139, Rarity.COMMON, mage.cards.a.Assassinate.class));
         cards.add(new SetCardInfo("Auger Spree", 218, Rarity.COMMON, mage.cards.a.AugerSpree.class));
         cards.add(new SetCardInfo("Aurora Champion", 24, Rarity.COMMON, mage.cards.a.AuroraChampion.class));
+        cards.add(new SetCardInfo("Azra Bladeseeker", 55, Rarity.COMMON, mage.cards.a.AzraBladeseeker.class));
         cards.add(new SetCardInfo("Azra Oddsmaker", 75, Rarity.UNCOMMON, mage.cards.a.AzraOddsmaker.class));
         cards.add(new SetCardInfo("Bathe in Dragonfire", 164, Rarity.COMMON, mage.cards.b.BatheInDragonfire.class));
         cards.add(new SetCardInfo("Battle Mastery", 89, Rarity.UNCOMMON, mage.cards.b.BattleMastery.class));
