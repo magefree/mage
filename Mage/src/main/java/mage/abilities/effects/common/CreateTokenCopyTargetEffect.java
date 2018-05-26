@@ -81,19 +81,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     public CreateTokenCopyTargetEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.playerId = null;
-        this.additionalCardType = null;
-        this.addedTokenPermanents = new ArrayList<>();
-        this.number = 1;
-        this.additionalSubType = null;
-        this.onlySubType = null;
-        this.attackedPlayer = null;
-        this.tokenPower = Integer.MIN_VALUE;
-        this.tokenToughness = Integer.MIN_VALUE;
-        this.gainsFlying = false;
-        this.becomesArtifact = false;
-        this.color = null;
+        this((UUID) null);
     }
 
     public CreateTokenCopyTargetEffect(UUID playerId) {
