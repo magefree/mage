@@ -293,6 +293,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Will Kenrith", 1, Rarity.MYTHIC, mage.cards.w.WillKenrith.class));
         cards.add(new SetCardInfo("Wrap in Flames", 188, Rarity.COMMON, mage.cards.w.WrapInFlames.class));
         cards.add(new SetCardInfo("Yotian Soldier", 249, Rarity.COMMON, mage.cards.y.YotianSoldier.class));
+        cards.add(new SetCardInfo("Zndrsplt's Judgment", 43, Rarity.RARE, mage.cards.z.ZndrspltsJudgment.class));
         cards.add(new SetCardInfo("Zndrsplt, Eye of Wisdom", 5, Rarity.RARE, mage.cards.z.ZndrspltEyeOfWisdom.class));
     }
 }
