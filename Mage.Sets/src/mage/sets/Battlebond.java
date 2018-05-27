@@ -156,6 +156,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Wayfinder", 72, Rarity.COMMON, mage.cards.j.JungleWayfinder.class));
         cards.add(new SetCardInfo("Karametra's Favor", 203, Rarity.UNCOMMON, mage.cards.k.KarametrasFavor.class));
         cards.add(new SetCardInfo("Khorvath Brightflame", 9, Rarity.RARE, mage.cards.k.KhorvathBrightflame.class));
+        cards.add(new SetCardInfo("Khorvath's Fury", 59, Rarity.RARE, mage.cards.k.KhorvathsFury.class));
         cards.add(new SetCardInfo("Kiss of the Amesha", 225, Rarity.UNCOMMON, mage.cards.k.KissOfTheAmesha.class));
         cards.add(new SetCardInfo("Kitesail Corsair", 120, Rarity.COMMON, mage.cards.k.KitesailCorsair.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 93, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
