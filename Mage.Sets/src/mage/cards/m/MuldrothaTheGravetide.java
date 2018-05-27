@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -118,7 +119,8 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
             if (mageObject != null && watcher != null) {
                 for (CardType cardType : mageObject.getCardType()) {
                     if (cardType.isPermanentType()) {
-                        if (!watcher.permanentTypePlayedFromGraveyard(affectedControllerId, cardType)) {
+                        MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
+                        if (!watcher.permanentTypePlayedFromGraveyard(mor, cardType)) {
                             return true;
                         }
                     }
@@ -136,10 +138,12 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
  */
 class MuldrothaTheGravetideWatcher extends Watcher {
 
-    // final HashMap<MageObjectReference, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
-    final HashMap<UUID, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // player that played permanent types from graveyard
+    final HashMap<MageObjectReference, Set<CardType>> sourcePlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
+    // final HashMap<UUID, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // player that played permanent types from graveyard
     // 4/27/2018 If multiple effects allow you to play a card from your graveyard, such as those of Gisa and Geralf and Karador,
     // Ghost Chieftain, you must announce which permission you’re using as you begin to play the card.
+    // 4/27/2018: If you play a card from your graveyard and then have a new Muldrotha come under your control in the same turn,
+    // you may play another card of that type from your graveyard that turn.
     private Zone fromZone;
 
     public MuldrothaTheGravetideWatcher() {
@@ -148,7 +152,7 @@ class MuldrothaTheGravetideWatcher extends Watcher {
 
     public MuldrothaTheGravetideWatcher(final MuldrothaTheGravetideWatcher watcher) {
         super(watcher);
-        playerPlayedPermanentTypes.putAll(watcher.playerPlayedPermanentTypes);
+        sourcePlayedPermanentTypes.putAll(watcher.sourcePlayedPermanentTypes);
     }
 
     @Override
@@ -174,7 +178,7 @@ class MuldrothaTheGravetideWatcher extends Watcher {
     }
 
     private void addPermanentTypes(GameEvent event, Card mageObject, Game game) {
-        if (mageObject != null) {
+        if (mageObject != null && event.getAdditionalReference() != null) {
             UUID playerId = null;
             if (mageObject instanceof Spell) {
                 playerId = ((Spell) mageObject).getControllerId();
@@ -182,10 +186,10 @@ class MuldrothaTheGravetideWatcher extends Watcher {
                 playerId = ((Permanent) mageObject).getControllerId();
             }
             if (playerId != null) {
-                Set<CardType> permanentTypes = playerPlayedPermanentTypes.get(playerId);
+                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getAdditionalReference());
                 if (permanentTypes == null) {
                     permanentTypes = EnumSet.noneOf(CardType.class);
-                    playerPlayedPermanentTypes.put(playerId, permanentTypes);
+                    sourcePlayedPermanentTypes.put(event.getAdditionalReference(), permanentTypes);
                 }
                 Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
                 for (CardType cardType : mageObject.getCardType()) {
@@ -226,12 +230,12 @@ class MuldrothaTheGravetideWatcher extends Watcher {
 
     @Override
     public void reset() {
-        playerPlayedPermanentTypes.clear();
+        sourcePlayedPermanentTypes.clear();
         super.reset();
     }
 
-    public boolean permanentTypePlayedFromGraveyard(UUID playerId, CardType cardType) {
-        Set<CardType> permanentTypes = playerPlayedPermanentTypes.get(playerId);
+    public boolean permanentTypePlayedFromGraveyard(MageObjectReference sourceMor, CardType cardType) {
+        Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(sourceMor);
         if (permanentTypes != null) {
             return permanentTypes.contains(cardType);
         }
