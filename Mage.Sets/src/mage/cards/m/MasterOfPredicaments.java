@@ -29,6 +29,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -37,8 +38,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,7 +53,7 @@ import mage.target.common.TargetCardInHand;
 public class MasterOfPredicaments extends CardImpl {
 
     public MasterOfPredicaments(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(4);
@@ -125,7 +126,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                         // If the revealed card is a land, you can't cast it. So nothing happens
                     } else {
                         if (controller.chooseUse(outcome, "Cast " + cardFromHand.getName() + " without paying its mana cost?", source, game)) {
-                            controller.cast(cardFromHand.getSpellAbility(), game, true);
+                            controller.cast(cardFromHand.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         }
                     }
 

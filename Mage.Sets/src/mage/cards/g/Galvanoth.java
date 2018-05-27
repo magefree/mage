@@ -29,6 +29,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -86,7 +87,7 @@ class GalvanothEffect extends OneShotEffect {
                 controller.lookAtCards(source, null, new CardsImpl(card), game);
                 if (card.isInstant() || card.isSorcery()) {
                     if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
-                        controller.cast(card.getSpellAbility(), game, true);
+                        controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                     }
                 }
             }

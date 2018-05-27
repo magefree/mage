@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -50,7 +51,7 @@ import mage.target.common.TargetOpponent;
 public class BrilliantUltimatum extends CardImpl {
 
     public BrilliantUltimatum(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{W}{U}{U}{U}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{W}{U}{U}{U}{B}{B}");
 
         // Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs.
         this.getSpellAbility().addEffect(new BrilliantUltimatumEffect());
@@ -136,7 +137,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                 TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
                 if (controller.chooseTarget(Outcome.PlayForFree, selectedPile, targetExiledCard, source, game)) {
                     Card card = selectedPile.get(targetExiledCard.getFirstTarget(), game);
-                    if (controller.playCard(card, game, true, true)) {
+                    if (controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game))) {
                         selectedPileCards.remove(card);
                         selectedPile.remove(card);
                     }

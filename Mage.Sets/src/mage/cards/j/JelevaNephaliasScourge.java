@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,8 +42,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -155,7 +156,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
                     if (controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            return controller.cast(card.getSpellAbility(), game, true);
+                            return controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         }
                     }
                 }

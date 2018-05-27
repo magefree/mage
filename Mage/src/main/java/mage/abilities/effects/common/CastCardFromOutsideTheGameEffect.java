@@ -28,6 +28,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -88,7 +89,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
                 }
                 return false;
             }
-            
+
             Cards filteredCards = new CardsImpl();
             for (Card card : filtered) {
                 filteredCards.add(card.getId());
@@ -98,7 +99,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
             if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                 Card card = player.getSideboard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.cast(card.getSpellAbility(), game, true);
+                    player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
             }
         }

@@ -36,6 +36,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageItem;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -359,7 +360,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int drawCards(int num, Game game, List<UUID> appliedEffects);
 
-    boolean cast(SpellAbility ability, Game game, boolean noMana);
+    boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
 
     SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana);
 
@@ -399,7 +400,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * to be the turn of the player playing that card.
      * @return
      */
-    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming);
+    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference);
 
     /**
      *

@@ -55,6 +55,7 @@ import mage.target.TargetPlayer;
 public class AssistAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
     private static final FilterPlayer filter = new FilterPlayer("another player");
+
     static {
         filter.add(new PlayerPredicate(TargetController.NOT_YOU));
     }
@@ -85,7 +86,7 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
             specialAction.setSourceId(source.getSourceId());
             Target target = new TargetPlayer(1, 1, true, filter);
             specialAction.addTarget(target);
-            if (specialAction.canActivate(source.getControllerId(), game)) {
+            if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                 game.getState().getSpecialActions().add(specialAction);
             }
         }

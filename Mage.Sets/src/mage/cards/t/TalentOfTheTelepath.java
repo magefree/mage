@@ -30,6 +30,7 @@ package mage.cards.t;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -55,7 +56,7 @@ import mage.target.common.TargetOpponent;
 public class TalentOfTheTelepath extends CardImpl {
 
     public TalentOfTheTelepath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
         // Target opponent reveals the top seven cards of their library. You may cast an instant or sorcery card from among them without paying its mana cost. Then that player puts the rest into their graveyard.
         // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two revealed instant and/or sorcery cards instead of one.
@@ -127,7 +128,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                             && controller.choose(outcome, cardsToCast, target, game)) {
                         Card card = cardsToCast.get(target.getFirstTarget(), game);
                         if (card != null) {
-                            controller.cast(card.getSpellAbility(), game, true);
+                            controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                             numberOfSpells--;
                             cardsToCast.remove(card);
                             allCards.remove(card);

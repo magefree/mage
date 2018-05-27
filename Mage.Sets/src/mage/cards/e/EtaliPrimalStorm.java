@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -41,8 +42,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -127,7 +128,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
             cardsToCast.addAll(currentExiledCards);
             boolean alreadyCast = false;
             while (!cardsToCast.isEmpty()) {
-                if (!controller.chooseUse(Outcome.PlayForFree, "Cast a" + (alreadyCast ? "nother" : "" ) + " card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
+                if (!controller.chooseUse(Outcome.PlayForFree, "Cast a" + (alreadyCast ? "nother" : "") + " card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                     break;
                 }
                 TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("nonland card to cast for free"));
@@ -135,7 +136,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                     alreadyCast = true;
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
-                        if (controller.cast(card.getSpellAbility(), game, true)) {
+                        if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                             cardsToCast.remove(card);
                         } else {
                             game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");

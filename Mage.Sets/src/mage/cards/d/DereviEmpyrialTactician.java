@@ -41,8 +41,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -139,10 +139,10 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         Zone currentZone = game.getState().getZone(this.getSourceId());
         if (currentZone == null || currentZone != Zone.COMMAND) {
-            return false;
+            return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
     }

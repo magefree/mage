@@ -32,6 +32,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
@@ -506,36 +507,23 @@ public class ContinuousEffects implements Serializable {
      *
      * @param objectId
      * @param type
-     * @param controllerId
-     * @param game
-     * @return sourceId of the permitting effect if any exists otherwise returns
-     * null
-     */
-    public UUID asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
-        return asThough(objectId, type, null, controllerId, game);
-    }
-
-    /**
-     *
-     * @param objectId
-     * @param type
      * @param affectedAbility
      * @param controllerId
      * @param game
      * @return sourceId of the permitting effect if any exists otherwise returns
      * null
      */
-    public UUID asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    public MageObjectReference asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         for (AsThoughEffect effect : asThoughEffectsList) {
             Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (affectedAbility == null) {
                     if (effect.applies(objectId, ability, controllerId, game)) {
-                        return ability.getSourceId();
+                        return new MageObjectReference(ability.getSourceObject(game), game);
                     }
                 } else if (effect.applies(objectId, affectedAbility, ability, game)) {
-                    return ability.getSourceId();
+                    return new MageObjectReference(ability.getSourceObject(game), game);
                 }
             }
         }

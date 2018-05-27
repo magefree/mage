@@ -31,6 +31,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -42,9 +43,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.ExileZone;
@@ -69,7 +70,7 @@ public class SpellQueller extends CardImpl {
     }
 
     public SpellQueller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -160,13 +161,13 @@ class SpellQuellerLeavesEffect extends OneShotEffect {
             if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
                 Card card = null;
                 Set<Card> exiledCards = exile.getCards(game);
-                if (exiledCards != null && !exiledCards.isEmpty()) {                    
-                    card = exiledCards.iterator().next();                    
+                if (exiledCards != null && !exiledCards.isEmpty()) {
+                    card = exiledCards.iterator().next();
                     if (card != null) {
                         Player cardOwner = game.getPlayer(card.getOwnerId());
                         if (cardOwner != null) {
                             if (cardOwner.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
-                                cardOwner.cast(card.getSpellAbility(), game, true);
+                                cardOwner.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                             }
                         }
                     }

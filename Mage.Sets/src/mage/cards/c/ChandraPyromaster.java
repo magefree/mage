@@ -287,17 +287,18 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
             if (controller.chooseTarget(Outcome.PlayForFree, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
+                    MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 1 of " + card.getName(), source, game)) {
                         Card copy1 = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy1.getSpellAbility(), game, true);
+                        controller.cast(copy1.getSpellAbility(), game, true, mor);
                     }
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 2 of " + card.getName(), source, game)) {
                         Card copy2 = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy2.getSpellAbility(), game, true);
+                        controller.cast(copy2.getSpellAbility(), game, true, mor);
                     }
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 3 of " + card.getName(), source, game)) {
                         Card copy3 = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy3.getSpellAbility(), game, true);
+                        controller.cast(copy3.getSpellAbility(), game, true, mor);
                     }
                     return true;
                 }

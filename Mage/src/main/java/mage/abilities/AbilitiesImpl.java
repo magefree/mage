@@ -157,7 +157,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         return stream()
                 .filter(ability -> ability instanceof ActivatedManaAbilityImpl)
                 .filter(ability -> ability.getZone().match(zone))
-                .filter(ability -> (((ActivatedManaAbilityImpl) ability).canActivate(ability.getControllerId(), game)))
+                .filter(ability -> (((ActivatedManaAbilityImpl) ability).canActivate(ability.getControllerId(), game).canActivate()))
                 .map(ability -> (ActivatedManaAbilityImpl) ability)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
 

@@ -29,6 +29,7 @@ package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpellAbility;
@@ -52,7 +53,7 @@ import mage.players.Player;
 public class QasaliAmbusher extends CardImpl {
 
     public QasaliAmbusher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
 
@@ -102,18 +103,16 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (super.canActivate(playerId, game)) {
-            if (!game.getBattlefield().getActivePermanents(filterPlains, this.getControllerId(), this.getSourceId(), game).isEmpty()
-                    && !game.getBattlefield().getActivePermanents(filterForest, this.getControllerId(), this.getSourceId(), game).isEmpty()) {
-                for (CombatGroup group : game.getCombat().getGroups()) {
-                    if (getControllerId().equals(group.getDefenderId())) {
-                        return true;
-                    }
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        if (!game.getBattlefield().getActivePermanents(filterPlains, this.getControllerId(), this.getSourceId(), game).isEmpty()
+                && !game.getBattlefield().getActivePermanents(filterForest, this.getControllerId(), this.getSourceId(), game).isEmpty()) {
+            for (CombatGroup group : game.getCombat().getGroups()) {
+                if (getControllerId().equals(group.getDefenderId())) {
+                    return super.canActivate(playerId, game);
                 }
             }
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override
@@ -151,7 +150,7 @@ class QasaliAmbusherEffect extends OneShotEffect {
             if (controller != null) {
                 SpellAbility spellAbility = card.getSpellAbility();
                 spellAbility.clear();
-                return controller.cast(spellAbility, game, true);
+                return controller.cast(spellAbility, game, true, new MageObjectReference(source.getSourceObject(game), game));
             }
         }
         return false;

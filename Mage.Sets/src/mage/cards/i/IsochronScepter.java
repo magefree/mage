@@ -28,6 +28,7 @@
 package mage.cards.i;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -58,7 +59,7 @@ import org.apache.log4j.Logger;
 public class IsochronScepter extends CardImpl {
 
     public IsochronScepter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Imprint - When Isochron Scepter enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new IsochronScepterImprintEffect(), true, "<i>Imprint &mdash; </i>"));
@@ -162,7 +163,7 @@ class IsochronScepterCopyEffect extends OneShotEffect {
                             game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                             if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
-                                    controller.cast(copiedCard.getSpellAbility(), game, true);
+                                    controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                                 } else {
                                     Logger.getLogger(IsochronScepterCopyEffect.class).error("Isochron Scepter: spell ability == null " + copiedCard.getName());
                                 }

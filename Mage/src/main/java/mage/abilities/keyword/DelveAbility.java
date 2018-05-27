@@ -110,7 +110,7 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
                 }
                 specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
                         0, Math.min(controller.getGraveyard().size(), unpaidAmount), new FilterCard(), true)));
-                if (specialAction.canActivate(source.getControllerId(), game)) {
+                if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
                 }
             }

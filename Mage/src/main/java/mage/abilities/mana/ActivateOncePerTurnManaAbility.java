@@ -58,7 +58,7 @@ public class ActivateOncePerTurnManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public boolean activate(Game game, boolean noMana) {
-        if (canActivate(this.controllerId, game)) {
+        if (canActivate(this.controllerId, game).canActivate()) {
             return super.activate(game, noMana);
         }
         return false;

@@ -29,6 +29,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,8 +41,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,7 +58,7 @@ import mage.target.TargetCard;
 public class EliteArcanist extends CardImpl {
 
     public EliteArcanist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -79,7 +80,7 @@ public class EliteArcanist extends CardImpl {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        if(ability instanceof SimpleActivatedAbility){
+        if (ability instanceof SimpleActivatedAbility) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
             if (sourcePermanent != null && sourcePermanent.getImprinted() != null && !sourcePermanent.getImprinted().isEmpty()) {
                 Card imprintedInstant = game.getCard(sourcePermanent.getImprinted().get(0));
@@ -103,7 +104,8 @@ public class EliteArcanist extends CardImpl {
 class EliteArcanistImprintEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("instant card from your hand");
-    static  {
+
+    static {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
@@ -174,10 +176,10 @@ class EliteArcanistCopyEffect extends OneShotEffect {
                 if (controller != null) {
                     Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                     if (copiedCard != null) {
-                        game.getExile().add(source.getSourceId(), "",copiedCard);
+                        game.getExile().add(source.getSourceId(), "", copiedCard);
                         game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                         if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
-                            return controller.cast(copiedCard.getSpellAbility(), game, true);
+                            return controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         }
                     }
                 }

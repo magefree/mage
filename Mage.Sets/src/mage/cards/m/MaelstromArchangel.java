@@ -29,6 +29,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -37,8 +38,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -53,7 +54,7 @@ import mage.target.common.TargetCardInHand;
 public class MaelstromArchangel extends CardImpl {
 
     public MaelstromArchangel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
@@ -61,10 +62,10 @@ public class MaelstromArchangel extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever Maelstrom Archangel deals combat damage to a player, you may cast a nonland card from your hand without paying its mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MaelstromArchangelCastEffect(), false));
-        
+
     }
 
     public MaelstromArchangel(final MaelstromArchangel card) {
@@ -100,8 +101,8 @@ class MaelstromArchangelCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetCardInHand(filter);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
-              controller.chooseUse(outcome, "Cast a nonland card from your hand without paying its mana cost?", source, game)) {
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    && controller.chooseUse(outcome, "Cast a nonland card from your hand without paying its mana cost?", source, game)) {
                 Card cardToCast = null;
                 boolean cancel = false;
                 while (controller.canRespond() && !cancel) {
@@ -115,7 +116,7 @@ class MaelstromArchangelCastEffect extends OneShotEffect {
                     }
                 }
                 if (cardToCast != null) {
-                    controller.cast(cardToCast.getSpellAbility(), game, true);
+                    controller.cast(cardToCast.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
             }
             return true;

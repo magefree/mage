@@ -65,7 +65,7 @@ public class ManaCache extends CardImpl {
         // At the beginning of each player's end step, put a charge counter on Mana Cache for each untapped land that player controls.
         TriggeredAbility ability = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each player's end step", true, new ManaCacheEffect());
         this.addAbility(ability);
-        
+
         // Remove a charge counter from Mana Cache: Add {C}. Any player may activate this ability but only during their turn before the end step.
         this.addAbility(new ManaCacheManaAbility());
     }
@@ -83,6 +83,7 @@ public class ManaCache extends CardImpl {
 class ManaCacheEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterControlledLandPermanent();
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -114,7 +115,7 @@ class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
 
     public ManaCacheManaAbility() {
         super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(1)), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
-        this.netMana.add(new Mana(0,0,0,0,0,0,0,1));
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 1));
     }
 
     public ManaCacheManaAbility(final ManaCacheManaAbility ability) {
@@ -122,18 +123,18 @@ class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         if (!super.hasMoreActivationsThisTurn(game) || !(condition == null || condition.apply(game, this))) {
-            return false;
+            return ActivationStatus.getFalse();
         }
         Player player = game.getPlayer(playerId);
         if (player != null && playerId.equals(game.getActivePlayerId()) && game.getStep().getType().isBefore(PhaseStep.END_TURN)) {
             if (costs.canPay(this, sourceId, playerId, game)) {
                 this.setControllerId(playerId);
-                return true;
+                return ActivationStatus.getTrue();
             }
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override

@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -65,7 +66,7 @@ public class Spelltwine extends CardImpl {
     }
 
     public Spelltwine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}");
 
         // Exile target instant or sorcery card from your graveyard and target instant or sorcery card from an opponent's graveyard. Copy those cards. Cast the copies if able without paying their mana costs. Exile Spelltwine.
         this.getSpellAbility().addEffect(new SpelltwineEffect());
@@ -109,18 +110,19 @@ class SpelltwineEffect extends OneShotEffect {
                 controller.moveCards(cardTwo, Zone.EXILED, source, game);
             }
             boolean castCardOne = true;
+            MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
             if (cardOne != null && controller.chooseUse(Outcome.Neutral, "Cast the copy of " + cardOne.getName() + " first?", source, game)) {
                 Card copyOne = game.copyCard(cardOne, source, controller.getId());
-                controller.cast(copyOne.getSpellAbility(), game, true);
+                controller.cast(copyOne.getSpellAbility(), game, true, mor);
                 castCardOne = false;
             }
             if (cardTwo != null) {
                 Card copyTwo = game.copyCard(cardTwo, source, controller.getId());
-                controller.cast(copyTwo.getSpellAbility(), game, true);
+                controller.cast(copyTwo.getSpellAbility(), game, true, mor);
             }
             if (cardOne != null && castCardOne) {
                 Card copyOne = game.copyCard(cardOne, source, controller.getId());
-                controller.cast(copyOne.getSpellAbility(), game, true);
+                controller.cast(copyOne.getSpellAbility(), game, true, mor);
             }
             return true;
         }

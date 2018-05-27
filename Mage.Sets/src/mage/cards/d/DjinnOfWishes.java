@@ -30,6 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,8 +41,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class DjinnOfWishes extends CardImpl {
     private static final String ruleText = "{this} enters the battlefield with three wish counters on it";
 
     public DjinnOfWishes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.DJINN);
 
         this.color.setBlue(true);
@@ -103,8 +104,8 @@ class DjinnOfWishesEffect extends OneShotEffect {
             Cards cards = new CardsImpl(card);
             controller.revealCards(sourceObject.getIdName(), cards, game);
             if (!controller.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", source, game)
-                    || !controller.playCard(card, game, true, true)) {
-                card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
+                    || !controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                controller.moveCards(card, Zone.EXILED, source, game);
             }
             return true;
         }

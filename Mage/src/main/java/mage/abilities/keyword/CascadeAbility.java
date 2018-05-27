@@ -27,6 +27,7 @@
  */
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -124,7 +125,7 @@ class CascadeEffect extends OneShotEffect {
 
         if (card != null) {
             if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + '?', source, game)) {
-                controller.cast(card.getSpellAbility(), game, true);
+                controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
             }
         }
         // Move the remaining cards to the buttom of the library in a random order

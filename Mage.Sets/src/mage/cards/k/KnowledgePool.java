@@ -29,6 +29,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -58,7 +59,7 @@ import mage.util.CardUtil;
 public class KnowledgePool extends CardImpl {
 
     public KnowledgePool(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of their library
         this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false));
@@ -177,7 +178,7 @@ class KnowledgePoolEffect2 extends OneShotEffect {
                     while (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null && !card.getId().equals(spell.getSourceId())) {
-                            return player.cast(card.getSpellAbility(), game, true);
+                            return player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         }
                         target.clearChosen();
                     }

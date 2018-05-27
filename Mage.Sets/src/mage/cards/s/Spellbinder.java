@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,8 +39,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -60,12 +61,12 @@ import org.apache.log4j.Logger;
 public class Spellbinder extends CardImpl {
 
     public Spellbinder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Imprint - When Spellbinder enters the battlefield, you may exile an instant card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SpellbinderImprintEffect(), true, "<i>Imprint &mdash; </i>"));
-        
+
         // Whenever equipped creature deals combat damage to a player, you may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
         this.addAbility(new SpellbinderTriggeredAbility());
 
@@ -197,7 +198,7 @@ class SpellbinderCopyEffect extends OneShotEffect {
                             game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                             if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
-                                    controller.cast(copiedCard.getSpellAbility(), game, true);
+                                    controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                                 } else {
                                     Logger.getLogger(SpellbinderCopyEffect.class).error("Spellbinder: spell ability == null " + copiedCard.getName());
                                 }

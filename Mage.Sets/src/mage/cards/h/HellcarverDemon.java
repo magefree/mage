@@ -32,21 +32,21 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -110,14 +110,14 @@ class HellcarverDemonEffect extends OneShotEffect {
             Set<Card> currentExiledCards = new HashSet<>();
             currentExiledCards.addAll(controller.getLibrary().getTopCards(game, 6));
             controller.moveCardsToExile(currentExiledCards, source, game, true, source.getSourceId(), sourceObject.getIdName());
-            
+
             // cast the possible cards without paying the mana
             Cards cardsToCast = new CardsImpl();
             cardsToCast.addAll(currentExiledCards);
             boolean alreadyCast = false;
             while (!cardsToCast.isEmpty()
                     && controller.canRespond()) {
-                if (!controller.chooseUse(outcome, "Cast a" + (alreadyCast ? "nother" : "" ) + " card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
+                if (!controller.chooseUse(outcome, "Cast a" + (alreadyCast ? "nother" : "") + " card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                     break;
                 }
                 TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("nonland card to cast for free"));
@@ -125,7 +125,7 @@ class HellcarverDemonEffect extends OneShotEffect {
                     alreadyCast = true;
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
-                        if (controller.cast(card.getSpellAbility(), game, true)) {
+                        if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                             cardsToCast.remove(card);
                         } else {
                             game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");

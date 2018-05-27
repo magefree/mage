@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -157,7 +158,7 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     game.getExile().removeCard(card, game);
-                    return controller.cast(card.getSpellAbility(), game, true);
+                    return controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
             }
         }

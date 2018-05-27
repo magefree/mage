@@ -29,6 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -97,7 +98,7 @@ class TreasureKeeperEffect extends OneShotEffect {
             }
             controller.revealCards(source, toReveal, game);
             if (nonLandCard != null && controller.chooseUse(outcome, "Cast " + nonLandCard.getLogName() + "without paying its mana cost?", source, game)) {
-                controller.cast(nonLandCard.getSpellAbility(), game, true);
+                controller.cast(nonLandCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 toReveal.remove(nonLandCard);
             }
             controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);

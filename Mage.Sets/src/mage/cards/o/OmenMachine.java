@@ -28,6 +28,7 @@
 package mage.cards.o;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -126,7 +127,7 @@ class OmenMachineEffect2 extends OneShotEffect {
                 if (card.isLand()) {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
-                    player.cast(card.getSpellAbility(), game, true);
+                    player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
             }
             return true;

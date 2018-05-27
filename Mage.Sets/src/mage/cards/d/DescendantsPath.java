@@ -29,6 +29,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -47,12 +48,12 @@ import mage.players.Player;
 /**
  *
  * @author noxx
-
+ *
  */
 public class DescendantsPath extends CardImpl {
 
     public DescendantsPath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect(), TargetController.YOU, false);
@@ -99,7 +100,7 @@ class DescendantsPathEffect extends OneShotEffect {
                 if (card.isCreature()) {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                     boolean found = false;
-                    for (Permanent  permanent: game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
                         if (card.shareSubtypes(permanent, game)) {
                             found = true;
                             break;
@@ -108,7 +109,7 @@ class DescendantsPathEffect extends OneShotEffect {
                     if (found) {
                         game.informPlayers(sourceObject.getLogName() + ": Found a creature that shares a creature type with the revealed card.");
                         if (controller.chooseUse(Outcome.Benefit, "Cast the card?", source, game)) {
-                            controller.cast(card.getSpellAbility(), game, true);
+                            controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         } else {
                             game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " canceled casting the card.");
                             controller.getLibrary().putOnBottom(card, game);
@@ -128,4 +129,3 @@ class DescendantsPathEffect extends OneShotEffect {
         return false;
     }
 }
-

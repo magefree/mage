@@ -29,6 +29,7 @@ package mage.abilities;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -91,48 +92,49 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         if (null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || this.spellCanBeActivatedRegularlyNow(playerId, game)) {
             if (spellAbilityType == SpellAbilityType.SPLIT || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
-                return false;
+                return ActivationStatus.getFalse();
             }
             // fix for Gitaxian Probe and casting opponent's spells
-            if (null == game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
+            MageObjectReference permittingSource = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, playerId, game);
+            if (permittingSource == null) {
                 Card card = game.getCard(sourceId);
                 if (!(card != null && card.getOwnerId().equals(playerId))) {
-                    return false;
+                    return ActivationStatus.getFalse();
                 }
             }
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (this.isCheckPlayableMode()) {
                 if (game.getContinuousEffects().preventedByRuleModification(
                         GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this.getSourceId(), playerId), this, game, true)) {
-                    return false;
+                    return ActivationStatus.getFalse();
                 }
             }
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
-                    return false;
+                    return ActivationStatus.getFalse();
                 }
             }
             if (costs.canPay(this, sourceId, controllerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
-                        return (splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
-                                && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game));
+                        return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
+                                && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
                     }
-                    return false;
+                    return ActivationStatus.getFalse();
 
                 } else {
-                    return canChooseTarget(game);
+                    return new ActivationStatus(canChooseTarget(game), permittingSource);
                 }
             }
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override

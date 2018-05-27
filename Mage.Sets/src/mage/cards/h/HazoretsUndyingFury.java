@@ -29,6 +29,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
@@ -129,7 +130,7 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
                 if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
-                        if (controller.cast(card.getSpellAbility(), game, true)) {
+                        if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                             cardsToCast.remove(card);
                         } else {
                             game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");

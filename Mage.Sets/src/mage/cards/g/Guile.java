@@ -29,6 +29,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,9 +40,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,7 +58,7 @@ import mage.players.Player;
 public class Guile extends CardImpl {
 
     public Guile(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{U}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.INCARNATION);
         this.power = new MageInt(6);
@@ -113,7 +114,7 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
             if (!spell.isCopy()) {
                 Card spellCard = spell.getCard();
                 if (spellCard != null && controller.chooseUse(Outcome.PlayForFree, "Cast " + spellCard.getIdName() + " for free?", source, game)) {
-                    controller.playCard(spellCard, game, true, true);
+                    controller.playCard(spellCard, game, true, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
                 return true;
             }

@@ -30,6 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -37,8 +38,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -55,7 +56,7 @@ import mage.target.common.TargetOpponent;
 public class MindclawShaman extends CardImpl {
 
     public MindclawShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add(SubType.VIASHINO);
         this.subtype.add(SubType.SHAMAN);
 
@@ -81,13 +82,13 @@ public class MindclawShaman extends CardImpl {
 class MindclawShamanEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card");
-    
+
     static {
         filter.add(Predicates.or(
-        new CardTypePredicate(CardType.INSTANT),
-        new CardTypePredicate(CardType.SORCERY)));
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
-    
+
     public MindclawShamanEffect() {
         super(Outcome.Discard);
         this.staticText = "target opponent reveals their hand. You may cast an instant or sorcery card from it without paying its mana cost";
@@ -106,7 +107,7 @@ class MindclawShamanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = source.getSourceObject(game);
-        if (targetOpponent != null && sourceObject != null) {        
+        if (targetOpponent != null && sourceObject != null) {
             if (!targetOpponent.getHand().isEmpty()) {
                 targetOpponent.revealCards(sourceObject.getName(), targetOpponent.getHand(), game);
                 Player controller = game.getPlayer(source.getControllerId());
@@ -117,9 +118,9 @@ class MindclawShamanEffect extends OneShotEffect {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
                         if (chosenCard != null) {
                             if (controller.chooseUse(Outcome.Benefit, "Cast the chosen card?", source, game)) {
-                                controller.cast(chosenCard.getSpellAbility(), game, true);
+                                controller.cast(chosenCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                             } else {
-                                    game.informPlayers(sourceObject.getLogName() +": " + controller.getLogName() + " canceled casting the card.");
+                                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " canceled casting the card.");
                             }
                         }
                     }

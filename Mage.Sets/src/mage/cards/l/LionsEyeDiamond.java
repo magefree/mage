@@ -1,4 +1,4 @@
-    /*
+/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -49,7 +49,7 @@ import mage.players.Player;
 public class LionsEyeDiamond extends CardImpl {
 
     public LionsEyeDiamond(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // Sacrifice Lion's Eye Diamond, Discard your hand: Add three mana of any one color. Activate this ability only any time you could cast an instant.
         this.addAbility(new LionsEyeDiamondAbility());
@@ -65,18 +65,17 @@ public class LionsEyeDiamond extends CardImpl {
     }
 }
 
-
 class LionsEyeDiamondAbility extends ActivatedManaAbilityImpl {
 
     public LionsEyeDiamondAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new SacrificeSourceCost());
         this.addCost(new DiscardHandCost());
-        this.netMana.add(new Mana(0,0,0,0,0,0,3, 0));
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 3, 0));
     }
 
     public LionsEyeDiamondAbility(Zone zone, Mana mana, Cost cost) {
         super(zone, new BasicManaEffect(mana), cost);
-        
+
     }
 
     public LionsEyeDiamondAbility(final LionsEyeDiamondAbility ability) {
@@ -84,12 +83,12 @@ class LionsEyeDiamondAbility extends ActivatedManaAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
         if (player != null && !player.isInPayManaMode()) {
             return super.canActivate(playerId, game);
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override
@@ -102,4 +101,3 @@ class LionsEyeDiamondAbility extends ActivatedManaAbilityImpl {
         return super.getRule() + " Activate this ability only any time you could cast an instant.";
     }
 }
-

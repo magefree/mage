@@ -27,7 +27,11 @@
  */
 package mage.cards.c;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -45,10 +49,6 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
  * @author BetaSteward
@@ -56,8 +56,7 @@ import java.util.UUID;
 public class Counterlash extends CardImpl {
 
     public Counterlash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
 
         // Counter target spell. You may cast a nonland card in your hand that shares a card type with that spell without paying its mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -99,7 +98,7 @@ class CounterlashEffect extends OneShotEffect {
             if (player.chooseUse(Outcome.PutCardInPlay, "Cast a nonland card in your hand that shares a card type with that spell without paying its mana cost?", source, game)) {
                 FilterCard filter = new FilterCard();
                 List<Predicate<MageObject>> types = new ArrayList<>();
-                for (CardType type: stackObject.getCardType()) {
+                for (CardType type : stackObject.getCardType()) {
                     if (type != CardType.LAND) {
                         types.add(new CardTypePredicate(type));
                     }
@@ -109,7 +108,7 @@ class CounterlashEffect extends OneShotEffect {
                 if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        player.cast(card.getSpellAbility(), game, true);
+                        player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                     }
                 }
             }

@@ -29,6 +29,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,10 +40,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -58,22 +59,22 @@ import mage.target.targetpointer.FixedTarget;
  * @author fireshoes
  */
 public class GoblinDarkDwellers extends CardImpl {
-    
+
     private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost 3 or less");
-    
+
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public GoblinDarkDwellers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Menace
         this.addAbility(new MenaceAbility());
-        
+
         // When Goblin Dark-Dwellers enters the battlefield, you may cast target instant or sorcery card with converted mana cost 3 or less
         // from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GoblinDarkDwellersEffect());
@@ -115,7 +116,7 @@ class GoblinDarkDwellersEffect extends OneShotEffect {
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
             if (card != null) {
                 if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
-                    if (controller.cast(card.getSpellAbility(), game, true)) {
+                    if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                         ContinuousEffect effect = new GoblinDarkDwellersReplacementEffect(card.getId());
                         effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
                         game.addEffect(effect, source);

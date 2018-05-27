@@ -29,6 +29,7 @@ package mage.cards.c;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -41,8 +42,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -51,8 +52,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetDiscard;
 
 /**
@@ -62,7 +63,7 @@ import mage.target.common.TargetDiscard;
 public class ChandraAblaze extends CardImpl {
 
     public ChandraAblaze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
@@ -198,7 +199,7 @@ class ChandraAblazeEffect5 extends OneShotEffect {
                 if (player.choose(outcome, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        player.cast(card.getSpellAbility(), game, true);
+                        player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         player.getGraveyard().remove(card);
                         cards.remove(card);
                     }

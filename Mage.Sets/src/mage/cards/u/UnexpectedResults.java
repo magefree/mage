@@ -28,6 +28,7 @@
 package mage.cards.u;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -126,7 +127,7 @@ class UnexpectedResultEffect extends OneShotEffect {
                 }
             } else {
                 if (controller.chooseUse(outcome, new StringBuilder("Cast ").append(card.getName()).append(" without paying its mana cost?").toString(), source, game)) {
-                    return controller.cast(card.getSpellAbility(), game, true);
+                    return controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
             }
             return true;

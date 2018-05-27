@@ -28,6 +28,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
@@ -54,7 +55,7 @@ import org.apache.log4j.Logger;
 public class BringToLight extends CardImpl {
 
     public BringToLight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");
 
         // <i>Converge</i>-Search your library for a creature, instant, or sorcery card with converted mana
         // cost less than or equal to the number of colors of mana spent to cast Bring to Light, exile that card,
@@ -108,7 +109,7 @@ class BringToLightEffect extends OneShotEffect {
             if (card != null) {
                 if (controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
                     if (card.getSpellAbility() != null) {
-                        controller.cast(card.getSpellAbility(), game, true);
+                        controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                     } else {
                         Logger.getLogger(BringToLightEffect.class).error("Bring to Light: spellAbility == null " + card.getName());
                     }

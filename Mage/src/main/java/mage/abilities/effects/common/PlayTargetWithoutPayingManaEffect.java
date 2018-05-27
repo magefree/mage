@@ -24,16 +24,16 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -62,7 +62,7 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card target = (Card) game.getObject(source.getFirstTarget());
         if (controller != null && target != null) {
-            return controller.cast(target.getSpellAbility(), game, true);
+            return controller.cast(target.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
         }
         return false;
     }
@@ -74,8 +74,7 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
             Target target = mode.getTargets().get(0);
             if (mode.getTargets().get(0).getZone() == Zone.HAND) {
                 sb.append("you may put ").append(target.getTargetName()).append(" from your hand onto the battlefield");
-            }
-            else {
+            } else {
                 sb.append("you may cast target ").append(target.getTargetName()).append(" without paying its mana cost");
             }
         }

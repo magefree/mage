@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
@@ -228,16 +229,16 @@ public class SuspendAbility extends SpecialAction {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         if (game.getState().getZone(getSourceId()) != Zone.HAND) {
             // Supend can only be activated from hand
-            return false;
+            return ActivationStatus.getFalse();
         }
         MageObject object = game.getObject(sourceId);
-        return (object.isInstant()
+        return new ActivationStatus(object.isInstant()
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)
                 || null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
-                || game.canPlaySorcery(playerId));
+                || game.canPlaySorcery(playerId), null);
     }
 
     @Override
@@ -376,7 +377,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                 card.getAbilities().removeAll(abilitiesToRemove);
             }
             // cast the card for free
-            if (player.cast(card.getSpellAbility(), game, true)) {
+            if (player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                 if (card.isCreature()) {
                     ContinuousEffect effect = new GainHasteEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));

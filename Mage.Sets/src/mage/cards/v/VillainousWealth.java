@@ -29,6 +29,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -110,7 +111,7 @@ class VillainousWealthEffect extends OneShotEffect {
                         while (cardsToExile.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
-                                controller.cast(card.getSpellAbility(), game, true);
+                                controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                                 cardsToExile.remove(card);
                             } else {
                                 break OuterLoop;

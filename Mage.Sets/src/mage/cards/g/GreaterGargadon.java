@@ -53,10 +53,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class GreaterGargadon extends CardImpl {
 
-
-    
     public GreaterGargadon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{9}{R}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(9);
@@ -78,14 +76,14 @@ public class GreaterGargadon extends CardImpl {
     }
 }
 
-
 class GreaterGargadonAbility extends ActivatedAbilityImpl {
-   
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact, creature, or land");
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
-                
+
     public GreaterGargadonAbility() {
         super(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
     }
@@ -100,16 +98,14 @@ class GreaterGargadonAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         Card card = game.getCard(this.getSourceId());
-        if(super.canActivate(playerId, game) && card != null && card.getCounters(game).getCount(CounterType.TIME) > 0){
-            return true;
+        if (card == null || card.getCounters(game).getCount(CounterType.TIME) == 0) {
+            return ActivationStatus.getFalse();
         }
-        return false;
+        return super.canActivate(playerId, game);
     }
 
-    
-    
     @Override
     public String getRule() {
         return super.getRule() + " Activate this ability only if Greater Gargadon is suspended.";

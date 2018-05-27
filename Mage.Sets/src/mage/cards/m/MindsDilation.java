@@ -30,6 +30,7 @@ package mage.cards.m;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -55,7 +56,7 @@ import mage.watchers.common.SpellsCastWatcher;
 public class MindsDilation extends CardImpl {
 
     public MindsDilation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");
 
         // Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card,
         // you may cast it without paying its mana cost.
@@ -138,7 +139,7 @@ class MindsDilationEffect extends OneShotEffect {
                 if (card != null && opponent.moveCards(card, Zone.EXILED, source, game)) {
                     if (!card.isLand()) {
                         if (controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost from exile?", source, game)) {
-                            controller.cast(card.getSpellAbility(), game, true);
+                            controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         }
                     }
                 }

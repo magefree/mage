@@ -33,9 +33,9 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.AttachEffect;
@@ -53,13 +53,13 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- * 
+ *
  * @author L_J
  */
 public class Merseine extends CardImpl {
 
     public Merseine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -74,9 +74,9 @@ public class Merseine extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect));
 
         // Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(), 
-            new SourceHasCounterCondition(CounterType.NET)).setText("Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it")));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
+                new SourceHasCounterCondition(CounterType.NET)).setText("Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it")));
+
         // Pay enchanted creature's mana cost: Remove a net counter from Merseine. Any player may activate this ability, but only if he or she controls the enchanted creature.
         SimpleActivatedAbility ability = new MerseineActivatedAbility();
         ability.setMayActivate(TargetController.ANY);
@@ -94,7 +94,7 @@ public class Merseine extends CardImpl {
 }
 
 class MerseineActivatedAbility extends SimpleActivatedAbility {
-    
+
     public MerseineActivatedAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.NET.createInstance()), new MerseineCost());
     }
@@ -109,7 +109,7 @@ class MerseineActivatedAbility extends SimpleActivatedAbility {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         Permanent sourcePermanent = game.getBattlefield().getPermanent(this.getSourceId());
         if (sourcePermanent != null) {
             Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
@@ -117,7 +117,7 @@ class MerseineActivatedAbility extends SimpleActivatedAbility {
                 return super.canActivate(attachedTo.getControllerId(), game);
             }
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override

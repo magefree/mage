@@ -28,6 +28,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -55,7 +56,7 @@ import mage.watchers.common.CastFromHandWatcher;
 public class HarnessTheStorm extends CardImpl {
 
     public HarnessTheStorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard.
         this.addAbility(new HarnessTheStormTriggeredAbility(new HarnessTheStormEffect(),
@@ -132,7 +133,7 @@ class HarnessTheStormEffect extends OneShotEffect {
             Card card = controller.getGraveyard().get(getTargetPointer().getFirst(game, source), game);
             if (card != null) {
                 if (controller.chooseUse(outcome, "Cast " + card.getIdName() + " from your graveyard?", source, game)) {
-                    controller.cast(card.getSpellAbility(), game, false);
+                    controller.cast(card.getSpellAbility(), game, false, new MageObjectReference(source.getSourceObject(game), game));
                 }
             }
             return true;

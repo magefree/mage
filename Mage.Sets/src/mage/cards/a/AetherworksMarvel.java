@@ -29,6 +29,7 @@ package mage.cards.a;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -55,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
 public class AetherworksMarvel extends CardImpl {
 
     public AetherworksMarvel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         addSuperType(SuperType.LEGENDARY);
 
         // Whenever a permanent you control is put into a graveyard, you get {E}.
@@ -105,7 +106,7 @@ class AetherworksMarvelEffect extends OneShotEffect {
             TargetCard target = new TargetCardInLibrary(0, 1, new FilterNonlandCard("card to cast without paying its mana cost"));
             if (controller.choose(Outcome.PlayForFree, cards, target, game)) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                if (card != null && controller.cast(card.getSpellAbility(), game, true)) {
+                if (card != null && controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                     cards.remove(card);
                 }
             }

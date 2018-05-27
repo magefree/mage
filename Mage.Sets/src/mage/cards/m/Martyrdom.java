@@ -126,7 +126,7 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         if (playerId.equals(caster)) {
             Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
             if (permanent != null) {
@@ -135,7 +135,7 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
                 }
             }
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override

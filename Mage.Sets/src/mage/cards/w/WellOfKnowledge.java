@@ -89,14 +89,14 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         if (condition.apply(game, this)
                 && costs.canPay(this, sourceId, playerId, game)
                 && game.getActivePlayerId().equals(playerId)) {
             this.activatorId = playerId;
-            return true;
+            return ActivationStatus.getTrue();
         }
-        return false;
+        return ActivationStatus.getFalse();
 
     }
 

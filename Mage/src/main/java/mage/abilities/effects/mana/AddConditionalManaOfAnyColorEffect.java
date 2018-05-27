@@ -38,11 +38,14 @@ import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+import org.apache.log4j.Logger;
 
 /**
  * @author noxx
  */
 public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
+
+    private static final Logger logger = Logger.getLogger(AddConditionalManaOfAnyColorEffect.class);
 
     private final DynamicValue amount;
     private final ConditionalManaBuilder manaBuilder;
@@ -87,8 +90,13 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            controller.getManaPool().addMana(getMana(game, source), game, source);
+            Mana mana = getMana(game, source);
+            if (mana != null) {
+                checkToFirePossibleEvents(mana, game, source);
+                controller.getManaPool().addMana(mana, game, source);
+            } else {
+                logger.error("There was no mana created: " + source.getSourceObject(game).getName() + " - Ability: " + source.getRule());
+            }
             return true;
         }
         return false;

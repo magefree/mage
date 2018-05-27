@@ -30,6 +30,7 @@ package mage.cards.r;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -39,8 +40,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,7 +57,7 @@ import mage.watchers.common.SpellsCastWatcher;
 public class RashmiEternitiesCrafter extends CardImpl {
 
     public RashmiEternitiesCrafter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
@@ -146,7 +147,7 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
                         || card.isLand()
                         || card.getConvertedManaCost() >= (int) cmcObject
                         || !controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)
-                        || !controller.cast(card.getSpellAbility(), game, true)) {
+                        || !controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                     controller.moveCards(card, Zone.HAND, source, game);
                 }
             }

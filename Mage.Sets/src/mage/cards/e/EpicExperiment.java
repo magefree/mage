@@ -29,6 +29,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -51,7 +52,7 @@ import mage.target.TargetCard;
 public class EpicExperiment extends CardImpl {
 
     public EpicExperiment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{R}");
 
         // Exile the top X cards of your library. For each instant and sorcery card with
         // converted mana cost X or less among them, you may cast that card without paying
@@ -105,7 +106,7 @@ class EpicExperimentEffect extends OneShotEffect {
                 if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
-                        if (controller.cast(card.getSpellAbility(), game, true)) {
+                        if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                             cardsToCast.remove(card);
                         } else {
                             game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");

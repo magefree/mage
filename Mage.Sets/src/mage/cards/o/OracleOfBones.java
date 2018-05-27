@@ -29,6 +29,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,8 +42,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -57,7 +58,7 @@ import mage.target.common.TargetCardInHand;
 public class OracleOfBones extends CardImpl {
 
     public OracleOfBones(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.SHAMAN);
 
@@ -107,8 +108,8 @@ class OracleOfBonesCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetCardInHand(filter);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
-              controller.chooseUse(outcome, "Cast an instant or sorcery card from your hand without paying its mana cost?", source, game)) {
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    && controller.chooseUse(outcome, "Cast an instant or sorcery card from your hand without paying its mana cost?", source, game)) {
                 Card cardToCast = null;
                 boolean cancel = false;
                 while (controller.canRespond() && !cancel) {
@@ -122,7 +123,7 @@ class OracleOfBonesCastEffect extends OneShotEffect {
                     }
                 }
                 if (cardToCast != null) {
-                    controller.cast(cardToCast.getSpellAbility(), game, true);
+                    controller.cast(cardToCast.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
             }
             return true;

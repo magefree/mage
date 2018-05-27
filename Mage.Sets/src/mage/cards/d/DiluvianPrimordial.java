@@ -29,6 +29,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,9 +40,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -63,7 +64,7 @@ import mage.target.targetpointer.FixedTarget;
 public class DiluvianPrimordial extends CardImpl {
 
     public DiluvianPrimordial(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(5);
@@ -128,7 +129,7 @@ class DiluvianPrimordialEffect extends OneShotEffect {
                     Card targetCard = game.getCard(target.getFirstTarget());
                     if (targetCard != null) {
                         if (controller.chooseUse(outcome, "Cast " + targetCard.getLogName() + '?', source, game)) {
-                            if (controller.cast(targetCard.getSpellAbility(), game, true)) {
+                            if (controller.cast(targetCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                                 ContinuousEffect effect = new DiluvianPrimordialReplacementEffect();
                                 effect.setTargetPointer(new FixedTarget(targetCard.getId(), game.getState().getZoneChangeCounter(targetCard.getId())));
                                 game.addEffect(effect, source);

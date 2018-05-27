@@ -29,6 +29,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.KinshipAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -36,8 +37,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -48,7 +49,7 @@ import mage.players.Player;
 public class LeafCrownedElder extends CardImpl {
 
     public LeafCrownedElder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.SHAMAN);
 
@@ -88,7 +89,7 @@ class LeafCrownedElderPlayEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && card != null) {
             if (controller.chooseUse(Outcome.PlayForFree, "Play " + card.getIdName() + " without paying its mana cost?", source, game)) {
-                controller.playCard(card, game, true, true);
+                controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game));
             }
             return true;
         }

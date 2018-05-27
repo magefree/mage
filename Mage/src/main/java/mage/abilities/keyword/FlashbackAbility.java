@@ -83,13 +83,14 @@ public class FlashbackAbility extends SpellAbility {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (super.canActivate(playerId, game)) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        ActivationStatus activationStatus = super.canActivate(playerId, game);
+        if (activationStatus.canActivate()) {
             Card card = game.getCard(getSourceId());
             if (card != null) {
                 // Cards with no Mana Costs cant't be flashbacked (e.g. Ancestral Vision)
                 if (card.getManaCost().isEmpty()) {
-                    return false;
+                    return ActivationStatus.getFalse();
                 }
                 // Flashback can never cast a split card by Fuse, because Fuse only works from hand
                 if (card.isSplitCard()) {
@@ -102,7 +103,7 @@ public class FlashbackAbility extends SpellAbility {
                 return card.getSpellAbility().canActivate(playerId, game);
             }
         }
-        return false;
+        return activationStatus;
     }
 
     @Override

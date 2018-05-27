@@ -28,6 +28,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -49,6 +50,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
 public class MemoryPlunder extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from an opponent's graveyard");
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
@@ -56,8 +58,7 @@ public class MemoryPlunder extends CardImpl {
     }
 
     public MemoryPlunder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U/B}{U/B}{U/B}{U/B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U/B}{U/B}{U/B}{U/B}");
 
         // You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
         this.getSpellAbility().addEffect(new MemoryPlunderEffect());
@@ -96,8 +97,8 @@ class MemoryPlunderEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             Player player = game.getPlayer(source.getControllerId());
-            if (player != null && player.chooseUse(Outcome.Benefit, "Cast " + card.getName() +" without paying cost?", source, game)) {
-                player.cast(card.getSpellAbility(), game, true);
+            if (player != null && player.chooseUse(Outcome.Benefit, "Cast " + card.getName() + " without paying cost?", source, game)) {
+                player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
             }
         }
         return false;
