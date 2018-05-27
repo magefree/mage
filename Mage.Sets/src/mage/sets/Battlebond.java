@@ -139,6 +139,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Gold-Forged Sentinel", 236, Rarity.UNCOMMON, mage.cards.g.GoldForgedSentinel.class));
         cards.add(new SetCardInfo("Greater Good", 201, Rarity.RARE, mage.cards.g.GreaterGood.class));
         cards.add(new SetCardInfo("Grotesque Mutation", 145, Rarity.COMMON, mage.cards.g.GrotesqueMutation.class));
+        cards.add(new SetCardInfo("Grothama, All-Devouring", 71, Rarity.MYTHIC, mage.cards.g.GrothamaAllDevouring.class));
         cards.add(new SetCardInfo("Gwafa Hazid, Profiteer", 223, Rarity.RARE, mage.cards.g.GwafaHazidProfiteer.class));
         cards.add(new SetCardInfo("Hand of Silumgar", 146, Rarity.COMMON, mage.cards.h.HandOfSilumgar.class));
         cards.add(new SetCardInfo("Hexplate Golem", 237, Rarity.COMMON, mage.cards.h.HexplateGolem.class));
