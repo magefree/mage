@@ -223,6 +223,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Rebuke", 103, Rarity.COMMON, mage.cards.r.Rebuke.class));
         cards.add(new SetCardInfo("Reckless Reveler", 183, Rarity.COMMON, mage.cards.r.RecklessReveler.class));
         cards.add(new SetCardInfo("Reckless Scholar", 130, Rarity.UNCOMMON, mage.cards.r.RecklessScholar.class));
+        cards.add(new SetCardInfo("Regna's Sanction", 30, Rarity.RARE, mage.cards.r.RegnasSanction.class));
         cards.add(new SetCardInfo("Regna, the Redeemer", 3, Rarity.RARE, mage.cards.r.RegnaTheRedeemer.class));
         cards.add(new SetCardInfo("Relentless Hunter", 226, Rarity.UNCOMMON, mage.cards.r.RelentlessHunter.class));
         cards.add(new SetCardInfo("Return to the Earth", 210, Rarity.COMMON, mage.cards.r.ReturnToTheEarth.class));
