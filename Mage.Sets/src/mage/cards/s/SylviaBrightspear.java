@@ -39,11 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterTeamPermanent;
 
 /**
  *
@@ -51,11 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class SylviaBrightspear extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.DRAGON, "Dragons your team controls");
-
-    static {
-        filter.add(Predicates.not(new ControllerPredicate(TargetController.OPPONENT)));
-    }
+    private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.DRAGON, "Dragons your team controls");
 
     public SylviaBrightspear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

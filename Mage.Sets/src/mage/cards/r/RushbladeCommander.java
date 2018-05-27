@@ -37,12 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterTeamPermanent;
 
 /**
  *
@@ -50,14 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class RushbladeCommander extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Warrior creatures your team controls");
-
-    static {
-        filter.add(Predicates.not(
-                new ControllerPredicate(TargetController.OPPONENT)
-        ));
-        filter.add(new SubtypePredicate(SubType.WARRIOR));
-    }
+    private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "Warriors your team controls");
 
     public RushbladeCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");

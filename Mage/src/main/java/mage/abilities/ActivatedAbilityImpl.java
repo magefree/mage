@@ -185,13 +185,16 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         switch (mayActivate) {
             case ANY:
                 break;
-
             case NOT_YOU:
                 if (controlsAbility(playerId, game)) {
                     return false;
                 }
                 break;
-
+            case TEAM:
+                if (game.getPlayer(controllerId).hasOpponent(playerId, game)) {
+                    return false;
+                }
+                break;
             case OPPONENT:
                 if (!game.getPlayer(controllerId).hasOpponent(playerId, game)) {
                     return false;

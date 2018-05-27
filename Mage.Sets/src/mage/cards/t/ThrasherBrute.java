@@ -37,11 +37,8 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterTeamPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
@@ -86,11 +83,10 @@ public class ThrasherBrute extends CardImpl {
     }
 }
 
-class ThrasherBruteFilter extends FilterPermanent {
+class ThrasherBruteFilter extends FilterTeamPermanent {
 
     ThrasherBruteFilter() {
         super();
-        this.add(Predicates.not(new ControllerPredicate(TargetController.OPPONENT)));
     }
 
     ThrasherBruteFilter(final ThrasherBruteFilter effect) {

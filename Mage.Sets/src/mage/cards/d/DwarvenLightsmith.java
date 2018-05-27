@@ -37,10 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterTeamCreaturePermanent;
 
 /**
  *
@@ -48,11 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class DwarvenLightsmith extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your team controls");
-
-    static {
-        filter.add(Predicates.not(new ControllerPredicate(TargetController.OPPONENT)));
-    }
+    private static final FilterTeamCreaturePermanent filter = new FilterTeamCreaturePermanent("creatures your team controls");
 
     public DwarvenLightsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");

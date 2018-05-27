@@ -35,12 +35,9 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.common.FilterTeamPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -48,11 +45,10 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class DecoratedChampion extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.WARRIOR, "another Warrior");
+    private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "another Warrior");
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(Predicates.not(new ControllerPredicate(TargetController.OPPONENT)));
     }
 
     public DecoratedChampion(UUID ownerId, CardSetInfo setInfo) {

@@ -58,9 +58,14 @@ public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<C
                     return true;
                 }
                 break;
+            case TEAM:
+                if (!game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
+                    return true;
+                }
+                break;
             case OPPONENT:
-                if (!object.getControllerId().equals(playerId) &&
-                        game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
+                if (!object.getControllerId().equals(playerId)
+                        && game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
                     return true;
                 }
                 break;

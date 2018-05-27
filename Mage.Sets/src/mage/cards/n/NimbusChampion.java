@@ -40,10 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterTeamPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -83,11 +80,7 @@ public class NimbusChampion extends CardImpl {
 
 class NimbusChampionEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.WARRIOR, "Warriors your team controls");
-
-    static {
-        filter.add(Predicates.not(new ControllerPredicate(TargetController.OPPONENT)));
-    }
+    private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "Warriors your team controls");
 
     NimbusChampionEffect() {
         super(Outcome.Benefit);

@@ -38,11 +38,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.common.FilterTeamPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -50,10 +47,9 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class SickleDancer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "Warrior creature");
+    private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "Warrior creature");
 
     static {
-        filter.add(Predicates.not(new ControllerPredicate(TargetController.OPPONENT)));
         filter.add(new AnotherPredicate());
     }
 
