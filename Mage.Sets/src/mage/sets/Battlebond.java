@@ -264,6 +264,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Spire Garden", 85, Rarity.RARE, mage.cards.s.SpireGarden.class));
         cards.add(new SetCardInfo("Stadium Vendors", 63, Rarity.COMMON, mage.cards.s.StadiumVendors.class));
         cards.add(new SetCardInfo("Steppe Glider", 109, Rarity.UNCOMMON, mage.cards.s.SteppeGlider.class));
+        cards.add(new SetCardInfo("Stolen Strategy", 64, Rarity.RARE, mage.cards.s.StolenStrategy.class));
         cards.add(new SetCardInfo("Stone Golem", 247, Rarity.COMMON, mage.cards.s.StoneGolem.class));
         cards.add(new SetCardInfo("Stunning Reversal", 51, Rarity.MYTHIC, mage.cards.s.StunningReversal.class));
         cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
