@@ -274,6 +274,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Tenacious Dead", 163, Rarity.UNCOMMON, mage.cards.t.TenaciousDead.class));
         cards.add(new SetCardInfo("The Crowd Goes Wild", 68, Rarity.UNCOMMON, mage.cards.t.TheCrowdGoesWild.class));
         cards.add(new SetCardInfo("Thrasher Brute", 52, Rarity.UNCOMMON, mage.cards.t.ThrasherBrute.class));
+        cards.add(new SetCardInfo("Thrilling Encore", 53, Rarity.RARE, mage.cards.t.ThrillingEncore.class));
         cards.add(new SetCardInfo("Thunder Strike", 185, Rarity.COMMON, mage.cards.t.ThunderStrike.class));
         cards.add(new SetCardInfo("Tidespout Tyrant", 134, Rarity.RARE, mage.cards.t.TidespoutTyrant.class));
         cards.add(new SetCardInfo("Together Forever", 32, Rarity.RARE, mage.cards.t.TogetherForever.class));
