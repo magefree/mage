@@ -43,20 +43,27 @@ import mage.players.Player;
  */
 public class CopyTargetSpellEffect extends OneShotEffect {
 
-    private boolean useLKI = false;
+    private final boolean useController;
+    private final boolean useLKI;
 
     public CopyTargetSpellEffect() {
-        super(Outcome.Copy);
+        this(false);
     }
 
     public CopyTargetSpellEffect(boolean useLKI) {
+        this(false, useLKI);
+    }
+
+    public CopyTargetSpellEffect(boolean useController, boolean useLKI) {
         super(Outcome.Copy);
+        this.useController = useController;
         this.useLKI = useLKI;
     }
 
     public CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
         super(effect);
         this.useLKI = effect.useLKI;
+        this.useController = effect.useController;
     }
 
     @Override
@@ -71,7 +78,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
             spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         }
         if (spell != null) {
-            StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true);
+            StackObject newStackObject = spell.createCopyOnStack(game, source, useController ? spell.getControllerId() : source.getControllerId(), true);
             Player player = game.getPlayer(source.getControllerId());
             if (player != null && newStackObject != null && newStackObject instanceof Spell) {
                 String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);

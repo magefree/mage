@@ -102,7 +102,7 @@ public class TheMirariConjecture extends CardImpl {
 class TheMirariConjectureDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public TheMirariConjectureDelayedTriggeredAbility() {
-        super(new CopyTargetSpellEffect(), Duration.EndOfTurn, false);
+        super(new CopyTargetSpellEffect(true), Duration.EndOfTurn, false);
     }
 
     public TheMirariConjectureDelayedTriggeredAbility(final TheMirariConjectureDelayedTriggeredAbility ability) {

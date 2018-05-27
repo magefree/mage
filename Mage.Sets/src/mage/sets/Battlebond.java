@@ -79,6 +79,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Feud", 168, Rarity.UNCOMMON, mage.cards.b.BloodFeud.class));
         cards.add(new SetCardInfo("Bloodborn Scoundrels", 45, Rarity.COMMON, mage.cards.b.BloodbornScoundrels.class));
         cards.add(new SetCardInfo("Boldwyr Intimidator", 169, Rarity.UNCOMMON, mage.cards.b.BoldwyrIntimidator.class));
+        cards.add(new SetCardInfo("Bonus Round", 56, Rarity.RARE, mage.cards.b.BonusRound.class));
         cards.add(new SetCardInfo("Borderland Marauder", 170, Rarity.COMMON, mage.cards.b.BorderlandMarauder.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 81, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
         cards.add(new SetCardInfo("Bramble Sovereign", 65, Rarity.MYTHIC, mage.cards.b.BrambleSovereign.class));
