@@ -29,6 +29,7 @@ package mage.abilities.effects.common.cost;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -54,6 +55,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     private int amount;
     private final boolean upTo;
     private boolean onlyControlled;
+    private UUID controllerId;
 
     public SpellsCostReductionAllEffect(int amount) {
         this(new FilterCard("Spells"), amount);
@@ -74,6 +76,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
         this.upTo = upTo;
         this.onlyControlled = onlyControlled;
         this.staticText = filter.getMessage() + " cost " + (upTo ? "up to " : "") + '{' + amount + "} less to cast";
+        this.controllerId = null;
     }
 
     protected SpellsCostReductionAllEffect(final SpellsCostReductionAllEffect effect) {
@@ -82,6 +85,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
         this.amount = effect.amount;
         this.upTo = effect.upTo;
         this.onlyControlled = effect.onlyControlled;
+        this.controllerId = effect.controllerId;
     }
 
     @Override
@@ -145,6 +149,9 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
         if (onlyControlled && !abilityToModify.getControllerId().equals(source.getControllerId())) {
             return false;
         }
+        if (controllerId != null && !abilityToModify.getControllerId().equals(controllerId)) {
+            return false;
+        }
         if (abilityToModify instanceof SpellAbility) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
@@ -156,6 +163,10 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
             }
         }
         return false;
+    }
+
+    public void setControllerId(UUID controllerId) {
+        this.controllerId = controllerId;
     }
 
     @Override

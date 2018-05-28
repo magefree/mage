@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -51,7 +50,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.WillKenrithEmblem;
 import mage.target.TargetPlayer;
@@ -72,11 +70,11 @@ public class WillKenrith extends CardImpl {
 
         // +2: Until your next turn, up to two target creatures each have base power and toughness 0/3 and lose all abilities.
         Ability ability = new LoyaltyAbility(
-                new SetPowerToughnessTargetEffect(0, 3, Duration.EndOfTurn)
-                        .setText("until end of turn, up to two target creatures each have base power and toughness 0/3"),
+                new SetPowerToughnessTargetEffect(0, 3, Duration.UntilYourNextTurn)
+                        .setText("until your next turn, up to two target creatures each have base power and toughness 0/3"),
                 2
         );
-        ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
+        ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.UntilYourNextTurn)
                 .setText("and lose all abilities")
         );
         ability.addTarget(new TargetCreaturePermanent(0, 2));
@@ -144,10 +142,9 @@ class WillKenrithCostReductionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCard filter2 = filter.copy();
-        filter2.add(new ControllerIdPredicate(source.getFirstTarget()));
-        ContinuousEffect effect = new SpellsCostReductionAllEffect(filter2, 2);
+        SpellsCostReductionAllEffect effect = new SpellsCostReductionAllEffect(filter, 2);
         effect.setDuration(Duration.UntilYourNextTurn);
+        effect.setControllerId(source.getFirstTarget());
         game.addEffect(effect, source);
         return true;
     }
