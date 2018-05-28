@@ -91,17 +91,18 @@ class MatterReshaperEffect extends OneShotEffect {
         if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
-                controller.revealCards(source, new CardsImpl(card), game);
-                FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less");
-                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
-                if (filter.match(card, game)) {
-                    if (controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield (otherwise put in hand)?", source, game)) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        return true;
-                    }
-                }
-                controller.moveCards(card, Zone.HAND, source, game);
+                return false;
             }
+            controller.revealCards(source, new CardsImpl(card), game);
+            FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less");
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+            if (filter.match(card, game)) {
+                if (controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield (otherwise put in hand)?", source, game)) {
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                    return true;
+                }
+            }
+            controller.moveCards(card, Zone.HAND, source, game);
             return true;
         }
         return false;
