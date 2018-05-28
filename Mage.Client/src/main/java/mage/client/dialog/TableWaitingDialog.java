@@ -96,7 +96,6 @@ public class TableWaitingDialog extends MageDialog {
 
         setGUISize();
         jTableSeats.createDefaultColumnsFromModel();
-        jTableSeats.setAutoCreateColumnsFromModel(false);
         jTableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
         TableUtil.setColumnWidthAndOrder(jTableSeats, DEFAULT_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
         chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
@@ -332,7 +331,7 @@ public class TableWaitingDialog extends MageDialog {
 
 class TableWaitModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Seat", "Loc", "Player Name", "Constructed Rating", "Player Type", "History"};
+    private final String[] columnNames = new String[]{"Seat", "Loc", "Player Name", "Rating", "Player Type", "History"};
     private SeatView[] seats = new SeatView[0];
     private boolean limited;
 
@@ -340,8 +339,6 @@ class TableWaitModel extends AbstractTableModel {
         seats = table.getSeats().toArray(new SeatView[0]);
         if (limited != table.isLimited()) {
             limited = table.isLimited();
-            columnNames[3] = limited ? "Limited Rating" : "Constructed Rating";
-            this.fireTableStructureChanged();
         }
         this.fireTableDataChanged();
     }
