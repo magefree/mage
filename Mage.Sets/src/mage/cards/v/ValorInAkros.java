@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class ValorInAkros extends CardImpl {
+public final class ValorInAkros extends CardImpl {
 
     public ValorInAkros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

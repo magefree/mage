@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class GorillaChieftain extends CardImpl {
+public final class GorillaChieftain extends CardImpl {
 
     public GorillaChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

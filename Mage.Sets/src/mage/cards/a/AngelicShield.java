@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author michael.napoleon@gmail.com
 
  */
-public class AngelicShield extends CardImpl {
+public final class AngelicShield extends CardImpl {
 
     public AngelicShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}");

@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
  *
  * @author fireshoes
  */
-public class BorderlandBehemoth extends CardImpl {
+public final class BorderlandBehemoth extends CardImpl {
 
     public BorderlandBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

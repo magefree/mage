@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GerrardsIrregulars extends CardImpl {
+public final class GerrardsIrregulars extends CardImpl {
 
     public GerrardsIrregulars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

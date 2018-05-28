@@ -60,7 +60,7 @@ import mage.watchers.common.BlockedThisTurnWatcher;
  *
  * @author jeffwadsworth
  */
-public class VizierOfDeferment extends CardImpl {
+public final class VizierOfDeferment extends CardImpl {
 
     public VizierOfDeferment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

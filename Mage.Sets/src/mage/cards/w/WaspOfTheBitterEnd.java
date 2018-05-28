@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WaspOfTheBitterEnd extends CardImpl {
+public final class WaspOfTheBitterEnd extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Bolas planeswalker spell");
 

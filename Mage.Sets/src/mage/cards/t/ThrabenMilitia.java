@@ -38,7 +38,7 @@ import mage.constants.SubType;
 /**
  * @author nantuko
  */
-public class ThrabenMilitia extends CardImpl {
+public final class ThrabenMilitia extends CardImpl {
 
     public ThrabenMilitia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

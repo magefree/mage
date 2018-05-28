@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author MarcoMarin
  */
-public class Sindbad extends CardImpl {
+public final class Sindbad extends CardImpl {
 
     public Sindbad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

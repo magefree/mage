@@ -45,7 +45,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author fireshoes
  */
-public class PressIntoService extends CardImpl {
+public final class PressIntoService extends CardImpl {
 
     public PressIntoService(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");

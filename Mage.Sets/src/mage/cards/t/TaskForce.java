@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author Backfir3
  */
-public class TaskForce extends CardImpl {
+public final class TaskForce extends CardImpl {
 
     public TaskForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

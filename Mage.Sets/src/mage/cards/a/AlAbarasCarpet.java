@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class AlAbarasCarpet extends CardImpl {
+public final class AlAbarasCarpet extends CardImpl {
 
     public AlAbarasCarpet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

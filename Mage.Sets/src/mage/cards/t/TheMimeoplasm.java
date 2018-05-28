@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author emerald000
  */
-public class TheMimeoplasm extends CardImpl {
+public final class TheMimeoplasm extends CardImpl {
 
     public TheMimeoplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");

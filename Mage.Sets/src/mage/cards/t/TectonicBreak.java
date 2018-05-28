@@ -39,7 +39,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author LoneFox
  */
-public class TectonicBreak extends CardImpl {
+public final class TectonicBreak extends CardImpl {
 
     public TectonicBreak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");

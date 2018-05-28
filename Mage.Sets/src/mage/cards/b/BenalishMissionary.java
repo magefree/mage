@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class BenalishMissionary extends CardImpl {
+public final class BenalishMissionary extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocked creature");
 

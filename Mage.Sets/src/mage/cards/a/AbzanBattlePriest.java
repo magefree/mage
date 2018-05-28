@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author LevelX2
  */
-public class AbzanBattlePriest extends CardImpl {
+public final class AbzanBattlePriest extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

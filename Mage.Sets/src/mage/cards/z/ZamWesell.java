@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Styxo
  */
-public class ZamWesell extends CardImpl {
+public final class ZamWesell extends CardImpl {
 
     public ZamWesell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class CarryAway extends CardImpl {
+public final class CarryAway extends CardImpl {
 
     public CarryAway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");

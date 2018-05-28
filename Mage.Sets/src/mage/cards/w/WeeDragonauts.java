@@ -42,7 +42,7 @@ import mage.filter.common.FilterInstantOrSorcerySpell;
 /**
  * @author Loki
  */
-public class WeeDragonauts extends CardImpl {
+public final class WeeDragonauts extends CardImpl {
 
     public WeeDragonauts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");

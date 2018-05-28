@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class DarigaazsAttendant extends CardImpl {
+public final class DarigaazsAttendant extends CardImpl {
 
     public DarigaazsAttendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

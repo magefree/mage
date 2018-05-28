@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Dehydration extends CardImpl {
+public final class Dehydration extends CardImpl {
 
     public Dehydration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

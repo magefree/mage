@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class GreenWard extends CardImpl {
+public final class GreenWard extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("green");
 

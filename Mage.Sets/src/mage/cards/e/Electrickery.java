@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Electrickery extends CardImpl {
+public final class Electrickery extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

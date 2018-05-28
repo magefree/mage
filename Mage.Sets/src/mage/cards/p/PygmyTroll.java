@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class PygmyTroll extends CardImpl {
+public final class PygmyTroll extends CardImpl {
 
     public PygmyTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

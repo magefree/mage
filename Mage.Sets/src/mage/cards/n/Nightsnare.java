@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Nightsnare extends CardImpl {
+public final class Nightsnare extends CardImpl {
 
     public Nightsnare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

@@ -47,7 +47,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class Batterskull extends CardImpl {
+public final class Batterskull extends CardImpl {
 
     public Batterskull (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

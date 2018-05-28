@@ -52,7 +52,7 @@ import mage.util.SubTypeList;
  *
  * @author anonymous
  */
-public class Conspiracy extends CardImpl {
+public final class Conspiracy extends CardImpl {
 
     public Conspiracy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

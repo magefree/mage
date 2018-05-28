@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WhirlpoolDrake extends CardImpl {
+public final class WhirlpoolDrake extends CardImpl {
 
     public WhirlpoolDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

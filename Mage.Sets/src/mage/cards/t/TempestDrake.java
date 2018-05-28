@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TempestDrake extends CardImpl {
+public final class TempestDrake extends CardImpl {
 
     public TempestDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");

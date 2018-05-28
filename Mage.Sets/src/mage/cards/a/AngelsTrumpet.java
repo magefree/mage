@@ -49,7 +49,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author fireshoes
  */
-public class AngelsTrumpet extends CardImpl {
+public final class AngelsTrumpet extends CardImpl {
 
     public AngelsTrumpet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

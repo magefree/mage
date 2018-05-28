@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class InsidiousDreams extends CardImpl {
+public final class InsidiousDreams extends CardImpl {
 
     public InsidiousDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");

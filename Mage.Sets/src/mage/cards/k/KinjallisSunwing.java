@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class KinjallisSunwing extends CardImpl {
+public final class KinjallisSunwing extends CardImpl {
 
     public KinjallisSunwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

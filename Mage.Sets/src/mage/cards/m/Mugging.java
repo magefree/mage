@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Mugging extends CardImpl {
+public final class Mugging extends CardImpl {
 
     public Mugging(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

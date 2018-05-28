@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WardenOfGeometries extends CardImpl {
+public final class WardenOfGeometries extends CardImpl {
 
     public WardenOfGeometries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}");

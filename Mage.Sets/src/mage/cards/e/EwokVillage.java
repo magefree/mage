@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Styxo
  */
-public class EwokVillage extends CardImpl {
+public final class EwokVillage extends CardImpl {
 
     public EwokVillage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

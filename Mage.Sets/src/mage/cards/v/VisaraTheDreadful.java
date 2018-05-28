@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VisaraTheDreadful extends CardImpl {
+public final class VisaraTheDreadful extends CardImpl {
 
     public VisaraTheDreadful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");

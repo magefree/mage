@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author dustinconrad
  */
-public class Crash extends CardImpl {
+public final class Crash extends CardImpl {
 
     private static final FilterPermanent effectFilter = new FilterPermanent("artifact");
     private static final FilterControlledPermanent alternativeCostFilter = new FilterControlledLandPermanent("a Mountain");

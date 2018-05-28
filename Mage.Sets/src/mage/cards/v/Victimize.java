@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class Victimize extends CardImpl {
+public final class Victimize extends CardImpl {
 
     public Victimize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

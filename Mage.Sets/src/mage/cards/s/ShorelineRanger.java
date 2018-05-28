@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class ShorelineRanger extends CardImpl {
+public final class ShorelineRanger extends CardImpl {
 
     public ShorelineRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

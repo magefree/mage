@@ -45,7 +45,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author LevelX2
  */
-public class VenserShaperSavant extends CardImpl {
+public final class VenserShaperSavant extends CardImpl {
 
     public VenserShaperSavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

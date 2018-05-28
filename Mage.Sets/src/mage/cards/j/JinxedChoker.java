@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  * @author andyfries
  */
 
-public class JinxedChoker extends CardImpl {
+public final class JinxedChoker extends CardImpl {
 
     public JinxedChoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

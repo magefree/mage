@@ -55,7 +55,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author L_J
  */
-public class GeneralJarkeld extends CardImpl {
+public final class GeneralJarkeld extends CardImpl {
 
     public GeneralJarkeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

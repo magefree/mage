@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author noxx
  */
-public class RidersOfGavony extends CardImpl {
+public final class RidersOfGavony extends CardImpl {
 
     public RidersOfGavony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

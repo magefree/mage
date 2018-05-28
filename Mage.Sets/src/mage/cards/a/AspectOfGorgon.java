@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AspectOfGorgon extends CardImpl {
+public final class AspectOfGorgon extends CardImpl {
 
     public AspectOfGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

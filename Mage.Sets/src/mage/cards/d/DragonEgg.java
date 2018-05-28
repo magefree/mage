@@ -42,7 +42,7 @@ import mage.game.permanent.token.DragonEggDragonToken;
  *
  * @author jeffwadsworth
  */
-public class DragonEgg extends CardImpl {
+public final class DragonEgg extends CardImpl {
 
     public DragonEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

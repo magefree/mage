@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class StalkingStones extends CardImpl {
+public final class StalkingStones extends CardImpl {
 
     public StalkingStones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

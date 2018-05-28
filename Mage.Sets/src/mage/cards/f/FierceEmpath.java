@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FierceEmpath extends CardImpl {
+public final class FierceEmpath extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 6 or greater");
     static {

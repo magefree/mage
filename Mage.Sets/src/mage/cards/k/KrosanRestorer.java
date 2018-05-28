@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class KrosanRestorer extends CardImpl {
+public final class KrosanRestorer extends CardImpl {
 
     public KrosanRestorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

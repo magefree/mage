@@ -47,7 +47,7 @@ import mage.target.TargetSource;
  *
  * @author jeffwadsworth
  */
-public class Penance extends CardImpl {
+public final class Penance extends CardImpl {
 
     public Penance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

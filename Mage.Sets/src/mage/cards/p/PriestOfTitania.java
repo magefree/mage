@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com, North
  */
-public class PriestOfTitania extends CardImpl {
+public final class PriestOfTitania extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf on the battlefield");
 

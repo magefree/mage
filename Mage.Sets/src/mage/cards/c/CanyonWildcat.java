@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CanyonWildcat extends CardImpl {
+public final class CanyonWildcat extends CardImpl {
 
     public CanyonWildcat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

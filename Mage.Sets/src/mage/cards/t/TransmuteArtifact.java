@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class TransmuteArtifact extends CardImpl {
+public final class TransmuteArtifact extends CardImpl {
 
     public TransmuteArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");

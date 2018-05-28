@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class SpirebluffCanal extends CardImpl {
+public final class SpirebluffCanal extends CardImpl {
 
     public SpirebluffCanal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class ProtectiveSphere extends CardImpl {
+public final class ProtectiveSphere extends CardImpl {
 
     public ProtectiveSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

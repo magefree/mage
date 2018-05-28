@@ -56,7 +56,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DisruptingShoal extends CardImpl {
+public final class DisruptingShoal extends CardImpl {
 
     public DisruptingShoal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{U}");

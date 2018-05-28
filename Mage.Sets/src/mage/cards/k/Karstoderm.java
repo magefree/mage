@@ -45,7 +45,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author fireshoes
  */
-public class Karstoderm extends CardImpl {
+public final class Karstoderm extends CardImpl {
 
     public Karstoderm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

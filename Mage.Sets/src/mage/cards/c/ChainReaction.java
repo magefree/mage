@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class ChainReaction extends CardImpl {
+public final class ChainReaction extends CardImpl {
 
     public ChainReaction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

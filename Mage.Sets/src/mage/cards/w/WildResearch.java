@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class WildResearch extends CardImpl {
+public final class WildResearch extends CardImpl {
 
     private static final FilterCard filterEnchantment = new FilterCard("enchantment card");
     private static final FilterCard filterInstant = new FilterCard("instant card");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class Eviscerator extends CardImpl {
+public final class Eviscerator extends CardImpl {
 
     public Eviscerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

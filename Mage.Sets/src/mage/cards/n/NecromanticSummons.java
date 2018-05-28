@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class NecromanticSummons extends CardImpl {
+public final class NecromanticSummons extends CardImpl {
 
     public NecromanticSummons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");

@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class RushwoodGrove extends CardImpl {
+public final class RushwoodGrove extends CardImpl {
 
     public RushwoodGrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

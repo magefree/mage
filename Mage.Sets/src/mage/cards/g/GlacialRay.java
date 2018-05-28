@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GlacialRay extends CardImpl {
+public final class GlacialRay extends CardImpl {
 
     public GlacialRay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class DownhillCharge extends CardImpl {
+public final class DownhillCharge extends CardImpl {
 
      private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Mountain");
 

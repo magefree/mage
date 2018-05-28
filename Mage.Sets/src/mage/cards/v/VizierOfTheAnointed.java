@@ -58,7 +58,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class VizierOfTheAnointed extends CardImpl {
+public final class VizierOfTheAnointed extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature card with eternalize or embalm");
 

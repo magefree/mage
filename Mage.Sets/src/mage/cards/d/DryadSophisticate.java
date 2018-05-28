@@ -40,7 +40,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class DryadSophisticate extends CardImpl {
+public final class DryadSophisticate extends CardImpl {
 
     public DryadSophisticate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

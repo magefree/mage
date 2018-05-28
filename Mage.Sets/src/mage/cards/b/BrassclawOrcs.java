@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author dustinconrad
  */
-public class BrassclawOrcs extends CardImpl {
+public final class BrassclawOrcs extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
     static {

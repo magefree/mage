@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class VirulentSwipe extends CardImpl {
+public final class VirulentSwipe extends CardImpl {
 
     public VirulentSwipe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

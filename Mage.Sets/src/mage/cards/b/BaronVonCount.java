@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author L_J
  */
-public class BaronVonCount extends CardImpl {
+public final class BaronVonCount extends CardImpl {
 
     public BaronVonCount(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");

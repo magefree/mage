@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class KeldonArsonist extends CardImpl {
+public final class KeldonArsonist extends CardImpl {
 
     public KeldonArsonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

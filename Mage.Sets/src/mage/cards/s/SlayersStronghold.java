@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SlayersStronghold extends CardImpl {
+public final class SlayersStronghold extends CardImpl {
 
     public SlayersStronghold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

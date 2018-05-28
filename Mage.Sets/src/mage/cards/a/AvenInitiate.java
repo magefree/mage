@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class AvenInitiate extends CardImpl {
+public final class AvenInitiate extends CardImpl {
 
     public AvenInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

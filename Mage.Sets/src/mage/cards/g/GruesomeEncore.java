@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class GruesomeEncore extends CardImpl {
+public final class GruesomeEncore extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from an opponent's graveyard");
 

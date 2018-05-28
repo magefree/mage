@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HanweirBattlements extends CardImpl {
+public final class HanweirBattlements extends CardImpl {
 
     public HanweirBattlements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

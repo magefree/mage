@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author rscoates
  */
-public class GiftofGrowth extends CardImpl {
+public final class GiftofGrowth extends CardImpl {
 
     public GiftofGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

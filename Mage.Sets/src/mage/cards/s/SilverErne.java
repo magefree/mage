@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SilverErne extends CardImpl {
+public final class SilverErne extends CardImpl {
 
     public SilverErne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

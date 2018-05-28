@@ -40,7 +40,7 @@ import mage.constants.TimingRule;
  *
  * @author Loki
  */
-public class FaithlessLooting extends CardImpl {
+public final class FaithlessLooting extends CardImpl {
 
     public FaithlessLooting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

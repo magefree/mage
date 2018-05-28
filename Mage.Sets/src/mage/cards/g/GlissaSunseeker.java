@@ -51,7 +51,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class GlissaSunseeker extends CardImpl {
+public final class GlissaSunseeker extends CardImpl {
 
     public GlissaSunseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

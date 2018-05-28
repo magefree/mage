@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class LandGrant extends CardImpl {
+public final class LandGrant extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Forest card");
     

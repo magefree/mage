@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class WatcherOfTheRoost extends CardImpl {
+public final class WatcherOfTheRoost extends CardImpl {
     
     private final static FilterCard filter = new FilterCard("a white card in your hand");
     static {

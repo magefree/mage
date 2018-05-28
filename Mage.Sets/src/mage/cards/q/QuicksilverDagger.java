@@ -53,7 +53,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Plopman
  */
-public class QuicksilverDagger extends CardImpl {
+public final class QuicksilverDagger extends CardImpl {
 
     public QuicksilverDagger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{R}");

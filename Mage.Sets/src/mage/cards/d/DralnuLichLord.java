@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class DralnuLichLord extends CardImpl {
+public final class DralnuLichLord extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("instant or sorcery card in your graveyard");
     static {

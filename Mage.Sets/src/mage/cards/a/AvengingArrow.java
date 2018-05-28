@@ -45,7 +45,7 @@ import mage.watchers.common.SourceDidDamageWatcher;
  *
  * @author jeffwadsworth
  */
-public class AvengingArrow extends CardImpl {
+public final class AvengingArrow extends CardImpl {
 
     public AvengingArrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

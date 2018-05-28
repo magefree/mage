@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class BurningTreeShaman extends CardImpl {
+public final class BurningTreeShaman extends CardImpl {
 
     public BurningTreeShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");

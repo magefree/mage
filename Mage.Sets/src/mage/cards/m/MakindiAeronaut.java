@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class MakindiAeronaut extends CardImpl {
+public final class MakindiAeronaut extends CardImpl {
 
     public MakindiAeronaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

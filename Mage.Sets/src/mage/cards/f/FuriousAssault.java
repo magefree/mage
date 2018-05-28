@@ -41,7 +41,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Galatolol
  */
-public class FuriousAssault extends CardImpl {
+public final class FuriousAssault extends CardImpl {
 
     public FuriousAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

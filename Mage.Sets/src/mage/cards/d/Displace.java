@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Displace extends CardImpl {
+public final class Displace extends CardImpl {
 
     public Displace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

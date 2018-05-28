@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class WitchbaneOrb extends CardImpl {
+public final class WitchbaneOrb extends CardImpl {
 
     public WitchbaneOrb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

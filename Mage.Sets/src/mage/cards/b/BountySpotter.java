@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class BountySpotter extends CardImpl {
+public final class BountySpotter extends CardImpl {
 
     public BountySpotter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

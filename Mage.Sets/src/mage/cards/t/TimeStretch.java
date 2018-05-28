@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class TimeStretch extends CardImpl {
+public final class TimeStretch extends CardImpl {
 
     public TimeStretch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}");

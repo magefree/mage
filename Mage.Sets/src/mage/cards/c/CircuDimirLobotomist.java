@@ -61,7 +61,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class CircuDimirLobotomist extends CardImpl {
+public final class CircuDimirLobotomist extends CardImpl {
 
     private static final FilterSpell filterBlue = new FilterSpell("a blue spell");
     private static final FilterSpell filterBlack = new FilterSpell("a black spell");

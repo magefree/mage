@@ -47,7 +47,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class VodalianKnights extends CardImpl {
+public final class VodalianKnights extends CardImpl {
 
     public VodalianKnights(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author jonubuu
  */
-public class TalismanOfDominance extends CardImpl {
+public final class TalismanOfDominance extends CardImpl {
 
     public TalismanOfDominance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

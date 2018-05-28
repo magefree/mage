@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class NeurokStealthsuit extends CardImpl {
+public final class NeurokStealthsuit extends CardImpl {
 
     public NeurokStealthsuit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

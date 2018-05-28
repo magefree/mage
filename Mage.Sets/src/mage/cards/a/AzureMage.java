@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class AzureMage extends CardImpl {
+public final class AzureMage extends CardImpl {
 
     public AzureMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

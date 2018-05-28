@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class PrimalForcemage extends CardImpl {
+public final class PrimalForcemage extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

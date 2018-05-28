@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class PygmyKavu extends CardImpl {
+public final class PygmyKavu extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature your opponents control");
 

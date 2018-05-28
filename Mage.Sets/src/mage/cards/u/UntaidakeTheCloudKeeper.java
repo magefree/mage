@@ -51,7 +51,7 @@ import mage.game.Game;
  *
  * @author anonymous
  */
-public class UntaidakeTheCloudKeeper extends CardImpl {
+public final class UntaidakeTheCloudKeeper extends CardImpl {
 
     public UntaidakeTheCloudKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

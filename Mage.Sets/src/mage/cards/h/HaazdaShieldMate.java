@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class HaazdaShieldMate extends CardImpl {
+public final class HaazdaShieldMate extends CardImpl {
 
     public HaazdaShieldMate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Derpthemeus
  */
-public class RootingKavu extends CardImpl {
+public final class RootingKavu extends CardImpl {
 
     public RootingKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

@@ -40,7 +40,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class ManaFlare extends CardImpl {
+public final class ManaFlare extends CardImpl {
 
     public ManaFlare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

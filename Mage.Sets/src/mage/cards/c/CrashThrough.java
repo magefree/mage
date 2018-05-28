@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author ciaccona007
  */
-public class CrashThrough extends CardImpl {
+public final class CrashThrough extends CardImpl {
     
     public CrashThrough(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");

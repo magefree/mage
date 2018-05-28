@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class OdylicWraith extends CardImpl {
+public final class OdylicWraith extends CardImpl {
 
     public OdylicWraith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

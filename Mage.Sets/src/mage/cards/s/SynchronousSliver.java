@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author anonymous
  */
-public class SynchronousSliver extends CardImpl {
+public final class SynchronousSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures");
 

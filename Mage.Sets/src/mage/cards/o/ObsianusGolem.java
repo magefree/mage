@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ObsianusGolem extends CardImpl {
+public final class ObsianusGolem extends CardImpl {
 
     public ObsianusGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

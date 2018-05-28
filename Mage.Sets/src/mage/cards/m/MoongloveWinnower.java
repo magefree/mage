@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MoongloveWinnower extends CardImpl {
+public final class MoongloveWinnower extends CardImpl {
 
     public MoongloveWinnower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

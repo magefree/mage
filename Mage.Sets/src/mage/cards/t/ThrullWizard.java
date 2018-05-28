@@ -52,7 +52,7 @@ import mage.target.TargetSpell;
  *
  * @author L_J
  */
-public class ThrullWizard extends CardImpl {
+public final class ThrullWizard extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("black spell");
     static{
         filter.add(new ColorPredicate(ObjectColor.BLACK));

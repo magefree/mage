@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SkycloudEgg extends CardImpl {
+public final class SkycloudEgg extends CardImpl {
 
     public SkycloudEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

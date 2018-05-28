@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class MarshalingTheTroops extends CardImpl {
+public final class MarshalingTheTroops extends CardImpl {
 
     public MarshalingTheTroops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

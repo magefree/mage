@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class LoreseekersStone extends CardImpl {
+public final class LoreseekersStone extends CardImpl {
 
     public LoreseekersStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

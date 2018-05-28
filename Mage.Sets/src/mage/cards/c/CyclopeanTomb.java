@@ -66,7 +66,7 @@ import java.util.UUID;
  *
  * @author MTGfan
  */
-public class CyclopeanTomb extends CardImpl {
+public final class CyclopeanTomb extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author dustinconrad
  */
-public class ArcticFlats extends CardImpl {
+public final class ArcticFlats extends CardImpl {
 
     public ArcticFlats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

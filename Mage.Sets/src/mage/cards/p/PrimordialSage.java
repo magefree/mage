@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class PrimordialSage extends CardImpl {
+public final class PrimordialSage extends CardImpl {
 
     public PrimordialSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

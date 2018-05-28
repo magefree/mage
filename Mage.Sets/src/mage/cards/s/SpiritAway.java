@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author noxx
 
  */
-public class SpiritAway extends CardImpl {
+public final class SpiritAway extends CardImpl {
 
     public SpiritAway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}{U}");

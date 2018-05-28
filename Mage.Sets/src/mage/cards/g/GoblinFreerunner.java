@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class GoblinFreerunner extends CardImpl {
+public final class GoblinFreerunner extends CardImpl {
 
     public GoblinFreerunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class ForiysianBrigade extends CardImpl {
+public final class ForiysianBrigade extends CardImpl {
 
     public ForiysianBrigade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

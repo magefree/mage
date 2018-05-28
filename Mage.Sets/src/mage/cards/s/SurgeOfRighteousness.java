@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SurgeOfRighteousness extends CardImpl {
+public final class SurgeOfRighteousness extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterAttackingOrBlockingCreature("black or red creature that's attacking or blocking");
 

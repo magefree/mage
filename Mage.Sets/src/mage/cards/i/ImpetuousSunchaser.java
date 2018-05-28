@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ImpetuousSunchaser extends CardImpl {
+public final class ImpetuousSunchaser extends CardImpl {
 
     public ImpetuousSunchaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

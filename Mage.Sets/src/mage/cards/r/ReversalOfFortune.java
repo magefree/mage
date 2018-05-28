@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class ReversalOfFortune extends CardImpl {
+public final class ReversalOfFortune extends CardImpl {
 
     public ReversalOfFortune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

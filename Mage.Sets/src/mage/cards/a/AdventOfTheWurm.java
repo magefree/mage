@@ -41,7 +41,7 @@ import mage.game.permanent.token.WurmToken2;
  */
 
 
-public class AdventOfTheWurm extends CardImpl {
+public final class AdventOfTheWurm extends CardImpl {
 
     public AdventOfTheWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}{W}");

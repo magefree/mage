@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author BursegSardaukar
  */
-public class GoblinAssassin extends CardImpl {
+public final class GoblinAssassin extends CardImpl {
 
     public GoblinAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

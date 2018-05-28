@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MightyLeap extends CardImpl {
+public final class MightyLeap extends CardImpl {
 
     public MightyLeap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

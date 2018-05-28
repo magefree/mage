@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author JRHerlehy
  */
-public class ArcaneFlight extends CardImpl {
+public final class ArcaneFlight extends CardImpl {
 
     public ArcaneFlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class VesselOfMalignity extends CardImpl {
+public final class VesselOfMalignity extends CardImpl {
 
     public VesselOfMalignity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

@@ -46,7 +46,7 @@ import mage.game.stack.Spell;
  * @author KholdFuzion
 
  */
-public class WoodenSphere extends CardImpl {
+public final class WoodenSphere extends CardImpl {
 
     public WoodenSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

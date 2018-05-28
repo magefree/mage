@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author L_J
  */
-public class StaffOfTheAges extends CardImpl {
+public final class StaffOfTheAges extends CardImpl {
 
     public StaffOfTheAges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

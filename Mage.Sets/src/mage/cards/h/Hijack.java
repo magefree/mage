@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Hijack extends CardImpl {
+public final class Hijack extends CardImpl {
 
     public Hijack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");

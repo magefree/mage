@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class Skylasher extends CardImpl {
+public final class Skylasher extends CardImpl {
 
     public Skylasher (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

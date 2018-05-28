@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class ElusiveSpellfist extends CardImpl {
+public final class ElusiveSpellfist extends CardImpl {
     
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 

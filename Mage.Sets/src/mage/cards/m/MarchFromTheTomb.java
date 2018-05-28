@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MarchFromTheTomb extends CardImpl {
+public final class MarchFromTheTomb extends CardImpl {
 
     public MarchFromTheTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{B}");

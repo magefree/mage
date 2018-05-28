@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ArashinCleric extends CardImpl {
+public final class ArashinCleric extends CardImpl {
 
     public ArashinCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

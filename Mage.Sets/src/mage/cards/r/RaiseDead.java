@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class RaiseDead extends CardImpl {
+public final class RaiseDead extends CardImpl {
 
     public RaiseDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");

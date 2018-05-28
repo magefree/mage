@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Dilnu
  */
-public class BorosFuryShield extends CardImpl {
+public final class BorosFuryShield extends CardImpl {
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature();
 
     public BorosFuryShield(UUID ownerId, CardSetInfo setInfo) {

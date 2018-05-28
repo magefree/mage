@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class VineDryad extends CardImpl {
+public final class VineDryad extends CardImpl {
 
     public VineDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class Carrion extends CardImpl {
+public final class Carrion extends CardImpl {
 
     public Carrion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");

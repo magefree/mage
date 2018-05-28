@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class JediInstructor extends CardImpl {
+public final class JediInstructor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 

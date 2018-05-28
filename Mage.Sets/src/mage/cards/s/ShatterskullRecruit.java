@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ShatterskullRecruit extends CardImpl {
+public final class ShatterskullRecruit extends CardImpl {
 
     public ShatterskullRecruit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

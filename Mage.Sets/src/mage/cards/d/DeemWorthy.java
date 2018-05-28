@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Darkside-
  */
-public class DeemWorthy extends CardImpl {
+public final class DeemWorthy extends CardImpl {
 
     public DeemWorthy (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");

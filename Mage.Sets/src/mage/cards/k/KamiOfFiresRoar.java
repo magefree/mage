@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class KamiOfFiresRoar extends CardImpl {
+public final class KamiOfFiresRoar extends CardImpl {
 
     public KamiOfFiresRoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class UginsNexus extends CardImpl {
+public final class UginsNexus extends CardImpl {
 
     public UginsNexus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

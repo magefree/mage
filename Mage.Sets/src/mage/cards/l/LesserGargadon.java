@@ -41,7 +41,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author Plopman
  */
-public class LesserGargadon extends CardImpl {
+public final class LesserGargadon extends CardImpl {
 
     public LesserGargadon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

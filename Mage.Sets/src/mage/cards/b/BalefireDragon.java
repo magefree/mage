@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class BalefireDragon extends CardImpl {
+public final class BalefireDragon extends CardImpl {
 
     public BalefireDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

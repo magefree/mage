@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class JwarIsleAvenger extends CardImpl {
+public final class JwarIsleAvenger extends CardImpl {
 
     public JwarIsleAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

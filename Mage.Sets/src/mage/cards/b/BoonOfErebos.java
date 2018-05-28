@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BoonOfErebos extends CardImpl {
+public final class BoonOfErebos extends CardImpl {
 
     public BoonOfErebos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

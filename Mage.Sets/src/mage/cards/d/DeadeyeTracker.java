@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author TheElk801
  */
-public class DeadeyeTracker extends CardImpl {
+public final class DeadeyeTracker extends CardImpl {
 
     public DeadeyeTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author andyfries
  */
-public class MaralenOfTheMornsong extends CardImpl {
+public final class MaralenOfTheMornsong extends CardImpl {
 
     public MaralenOfTheMornsong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

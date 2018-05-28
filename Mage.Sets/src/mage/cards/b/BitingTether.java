@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class BitingTether extends CardImpl {
+public final class BitingTether extends CardImpl {
 
     public BitingTether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");

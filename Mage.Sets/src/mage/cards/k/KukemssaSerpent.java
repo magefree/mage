@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class KukemssaSerpent extends CardImpl {
+public final class KukemssaSerpent extends CardImpl {
 
     private static final FilterLandPermanent filterOpponentLand = new FilterLandPermanent("land an opponent controls");
     private static final FilterControlledLandPermanent filterControlledLand = new FilterControlledLandPermanent("an Island");

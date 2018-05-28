@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class UnseenWalker extends CardImpl {
+public final class UnseenWalker extends CardImpl {
 
     public UnseenWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

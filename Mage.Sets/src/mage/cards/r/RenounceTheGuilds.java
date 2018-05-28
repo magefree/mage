@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  */
 
 
-public class RenounceTheGuilds extends CardImpl {
+public final class RenounceTheGuilds extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("multicolored permanent");
     static {

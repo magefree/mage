@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  * @author LoneFox
 
  */
-public class EmbermawHellion extends CardImpl {
+public final class EmbermawHellion extends CardImpl {
 
     public EmbermawHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

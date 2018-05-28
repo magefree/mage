@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class PilgrimsEye extends CardImpl {
+public final class PilgrimsEye extends CardImpl {
     private static final FilterCard filter = new FilterCard("basic land card");
 
     static {

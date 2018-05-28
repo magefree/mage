@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class QuagmireLamprey extends CardImpl {
+public final class QuagmireLamprey extends CardImpl {
 
     public QuagmireLamprey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class WandOfDenial extends CardImpl {
+public final class WandOfDenial extends CardImpl {
 
     public WandOfDenial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

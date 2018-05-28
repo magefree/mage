@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Magmasaur extends CardImpl {
+public final class Magmasaur extends CardImpl {
 
     public Magmasaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

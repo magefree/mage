@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class KayaGhostAssassin extends CardImpl {
+public final class KayaGhostAssassin extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature to exile. Choose no targets to exile Kaya.");
 

@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class VastwoodZendikon extends CardImpl {
+public final class VastwoodZendikon extends CardImpl {
 
     public VastwoodZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");

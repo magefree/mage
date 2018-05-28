@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class TerritorialBaloth extends CardImpl {
+public final class TerritorialBaloth extends CardImpl {
 
     public TerritorialBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

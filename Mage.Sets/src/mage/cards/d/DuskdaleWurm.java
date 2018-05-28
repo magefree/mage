@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DuskdaleWurm extends CardImpl {
+public final class DuskdaleWurm extends CardImpl {
 
     public DuskdaleWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

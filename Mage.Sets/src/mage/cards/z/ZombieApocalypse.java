@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class ZombieApocalypse extends CardImpl {
+public final class ZombieApocalypse extends CardImpl {
 
     public ZombieApocalypse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}{B}");

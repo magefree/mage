@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CountrysideCrusher extends CardImpl {
+public final class CountrysideCrusher extends CardImpl {
 
     public CountrysideCrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

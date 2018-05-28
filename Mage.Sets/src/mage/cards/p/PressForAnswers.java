@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PressForAnswers extends CardImpl {
+public final class PressForAnswers extends CardImpl {
 
     public PressForAnswers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

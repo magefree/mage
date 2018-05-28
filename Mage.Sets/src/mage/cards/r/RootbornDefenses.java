@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevleX2
  */
-public class RootbornDefenses extends CardImpl {
+public final class RootbornDefenses extends CardImpl {
 
     public RootbornDefenses(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

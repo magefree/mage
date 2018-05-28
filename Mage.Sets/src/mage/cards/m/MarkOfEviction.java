@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MarkOfEviction extends CardImpl {
+public final class MarkOfEviction extends CardImpl {
 
     public MarkOfEviction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

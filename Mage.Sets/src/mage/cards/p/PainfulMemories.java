@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Quercitron
  */
-public class PainfulMemories extends CardImpl {
+public final class PainfulMemories extends CardImpl {
 
     public PainfulMemories(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

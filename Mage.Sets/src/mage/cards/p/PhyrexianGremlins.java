@@ -46,7 +46,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LoneFox
  */
-public class PhyrexianGremlins extends CardImpl {
+public final class PhyrexianGremlins extends CardImpl {
 
     public PhyrexianGremlins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

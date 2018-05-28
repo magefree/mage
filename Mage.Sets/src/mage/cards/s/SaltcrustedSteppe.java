@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class SaltcrustedSteppe extends CardImpl {
+public final class SaltcrustedSteppe extends CardImpl {
 
     public SaltcrustedSteppe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

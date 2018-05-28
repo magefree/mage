@@ -43,7 +43,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author LevelX2
  */
-public class EyelessWatcher extends CardImpl {
+public final class EyelessWatcher extends CardImpl {
 
     public EyelessWatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

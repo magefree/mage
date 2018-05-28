@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class EnlistmentOfficer extends CardImpl {
+public final class EnlistmentOfficer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Soldier cards");
 

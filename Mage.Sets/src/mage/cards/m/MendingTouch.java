@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class MendingTouch extends CardImpl {
+public final class MendingTouch extends CardImpl {
 
     public MendingTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

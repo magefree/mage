@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author noxx
  */
-public class SerraAvenger extends CardImpl {
+public final class SerraAvenger extends CardImpl {
 
     public SerraAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

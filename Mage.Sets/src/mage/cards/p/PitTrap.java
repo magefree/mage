@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author fireshoes
  */
-public class PitTrap extends CardImpl {
+public final class PitTrap extends CardImpl {
     
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
     

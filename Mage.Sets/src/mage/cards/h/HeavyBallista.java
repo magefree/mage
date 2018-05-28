@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Quercitron
  */
-public class HeavyBallista extends CardImpl {
+public final class HeavyBallista extends CardImpl {
 
     public HeavyBallista(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

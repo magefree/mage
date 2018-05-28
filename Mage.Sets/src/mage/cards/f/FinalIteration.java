@@ -52,7 +52,7 @@ import mage.game.permanent.token.HumanWizardToken;
  *
  * @author fireshoes
  */
-public class FinalIteration extends CardImpl {
+public final class FinalIteration extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizards");
     private static final FilterSpell filterSpell = new FilterSpell("an instant or sorcery spell");

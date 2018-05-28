@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class QasaliAmbusher extends CardImpl {
+public final class QasaliAmbusher extends CardImpl {
 
     public QasaliAmbusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

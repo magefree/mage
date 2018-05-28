@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class PartTheWaterveil extends CardImpl {
+public final class PartTheWaterveil extends CardImpl {
 
     public PartTheWaterveil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class HauntedCrossroads extends CardImpl {
+public final class HauntedCrossroads extends CardImpl {
 
     public HauntedCrossroads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

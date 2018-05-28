@@ -58,7 +58,7 @@ import mage.game.stack.StackObject;
  *
  * @author spjspj
  */
-public class GuardianBeast extends CardImpl {
+public final class GuardianBeast extends CardImpl {
 
     private static final FilterObject filterAura = new FilterStackObject("auras");
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("Noncreature artifacts");

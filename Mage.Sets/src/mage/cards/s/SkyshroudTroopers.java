@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SkyshroudTroopers extends CardImpl {
+public final class SkyshroudTroopers extends CardImpl {
 
     public SkyshroudTroopers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

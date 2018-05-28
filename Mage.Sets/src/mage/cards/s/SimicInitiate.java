@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author JotaPeRL
  */
-public class SimicInitiate extends CardImpl {
+public final class SimicInitiate extends CardImpl {
 
     public SimicInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ImposingVisage extends CardImpl {
+public final class ImposingVisage extends CardImpl {
 
     public ImposingVisage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");

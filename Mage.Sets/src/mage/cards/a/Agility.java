@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Agility extends CardImpl {
+public final class Agility extends CardImpl {
 
     public Agility(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

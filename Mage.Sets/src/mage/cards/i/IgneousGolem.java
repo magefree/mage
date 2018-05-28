@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class IgneousGolem extends CardImpl {
+public final class IgneousGolem extends CardImpl {
 
     public IgneousGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

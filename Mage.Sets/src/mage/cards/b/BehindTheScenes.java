@@ -45,7 +45,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author fireshoes
  */
-public class BehindTheScenes extends CardImpl {
+public final class BehindTheScenes extends CardImpl {
 
     public BehindTheScenes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

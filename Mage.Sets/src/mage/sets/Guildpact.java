@@ -34,7 +34,7 @@ import mage.constants.SetType;
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
  */
-public class Guildpact extends ExpansionSet {
+public final class Guildpact extends ExpansionSet {
 
     private static final Guildpact instance = new Guildpact();
 

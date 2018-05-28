@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class TimberShredder extends CardImpl {
+public final class TimberShredder extends CardImpl {
 
     public TimberShredder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

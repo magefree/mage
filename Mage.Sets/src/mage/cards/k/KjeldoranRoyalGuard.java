@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class KjeldoranRoyalGuard extends CardImpl {
+public final class KjeldoranRoyalGuard extends CardImpl {
 
     public KjeldoranRoyalGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LivingTotem extends CardImpl {
+public final class LivingTotem extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 

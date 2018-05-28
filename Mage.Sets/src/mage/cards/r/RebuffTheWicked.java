@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class RebuffTheWicked extends CardImpl {
+public final class RebuffTheWicked extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell that targets a permanent you control");
 

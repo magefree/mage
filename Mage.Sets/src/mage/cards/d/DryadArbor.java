@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DryadArbor extends CardImpl {
+public final class DryadArbor extends CardImpl {
 
     public DryadArbor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND,CardType.CREATURE},"");

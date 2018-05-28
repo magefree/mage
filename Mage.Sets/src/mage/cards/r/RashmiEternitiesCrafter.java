@@ -54,7 +54,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author emerald000
  */
-public class RashmiEternitiesCrafter extends CardImpl {
+public final class RashmiEternitiesCrafter extends CardImpl {
 
     public RashmiEternitiesCrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");

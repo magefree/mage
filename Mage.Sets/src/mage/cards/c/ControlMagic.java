@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author KholdFuzion
 
  */
-public class ControlMagic extends CardImpl {
+public final class ControlMagic extends CardImpl {
 
     public ControlMagic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ForkedBranchGarami extends CardImpl {
+public final class ForkedBranchGarami extends CardImpl {
 
     public ForkedBranchGarami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

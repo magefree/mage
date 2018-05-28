@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author L_J
  */
-public class MastermindsAcquisition extends CardImpl {
+public final class MastermindsAcquisition extends CardImpl {
 
     public MastermindsAcquisition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

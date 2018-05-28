@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class SoltariTrooper extends CardImpl {
+public final class SoltariTrooper extends CardImpl {
 
     public SoltariTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class WindwrightMage extends CardImpl {
+public final class WindwrightMage extends CardImpl {
 
     public WindwrightMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}{B}");

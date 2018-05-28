@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class WeatherseedFaeries extends CardImpl {
+public final class WeatherseedFaeries extends CardImpl {
 
     public WeatherseedFaeries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

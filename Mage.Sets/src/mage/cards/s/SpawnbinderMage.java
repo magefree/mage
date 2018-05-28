@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SpawnbinderMage extends CardImpl {
+public final class SpawnbinderMage extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
 

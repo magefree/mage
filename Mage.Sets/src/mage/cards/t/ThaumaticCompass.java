@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class ThaumaticCompass extends CardImpl {
+public final class ThaumaticCompass extends CardImpl {
 
     public ThaumaticCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class SlaveI extends CardImpl {
+public final class SlaveI extends CardImpl {
 
     public SlaveI(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{B}{R}{G}");

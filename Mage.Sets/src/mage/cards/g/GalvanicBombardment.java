@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class GalvanicBombardment extends CardImpl {
+public final class GalvanicBombardment extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("2 plus the number of cards named Galvanic Bombardment");
 

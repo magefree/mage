@@ -42,7 +42,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LoneFox
  */
-public class Stampede extends CardImpl {
+public final class Stampede extends CardImpl {
 
     public Stampede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");

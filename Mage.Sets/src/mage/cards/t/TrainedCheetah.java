@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class TrainedCheetah extends CardImpl {
+public final class TrainedCheetah extends CardImpl {
 
     public TrainedCheetah(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

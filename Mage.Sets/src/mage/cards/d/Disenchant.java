@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Disenchant extends CardImpl {
+public final class Disenchant extends CardImpl {
 
     public Disenchant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

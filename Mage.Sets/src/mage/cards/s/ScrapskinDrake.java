@@ -41,7 +41,7 @@ import mage.constants.SubType;
  * @author noxx
 
  */
-public class ScrapskinDrake extends CardImpl {
+public final class ScrapskinDrake extends CardImpl {
 
     public ScrapskinDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

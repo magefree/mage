@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class SlinkingSkirge extends CardImpl {
+public final class SlinkingSkirge extends CardImpl {
 
     public SlinkingSkirge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

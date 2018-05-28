@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class KytheonsTactics extends CardImpl {
+public final class KytheonsTactics extends CardImpl {
 
     public KytheonsTactics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");

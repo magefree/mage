@@ -38,7 +38,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class Armageddon extends CardImpl {
+public final class Armageddon extends CardImpl {
 
     public Armageddon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");

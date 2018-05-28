@@ -49,7 +49,7 @@ import mage.game.events.GameEvent;
  *
  * @author halljared
  */
-public class NeglectedHeirloom extends CardImpl {
+public final class NeglectedHeirloom extends CardImpl {
 
     public NeglectedHeirloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

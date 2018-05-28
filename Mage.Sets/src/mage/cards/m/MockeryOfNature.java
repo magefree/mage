@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class MockeryOfNature extends CardImpl {
+public final class MockeryOfNature extends CardImpl {
 
     public MockeryOfNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");

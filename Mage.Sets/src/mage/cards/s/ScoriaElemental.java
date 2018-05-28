@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ScoriaElemental extends CardImpl {
+public final class ScoriaElemental extends CardImpl {
 
     public ScoriaElemental (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

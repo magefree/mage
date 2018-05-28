@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class KefnetsLastWord extends CardImpl {
+public final class KefnetsLastWord extends CardImpl {
 
     public KefnetsLastWord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

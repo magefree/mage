@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GiantScorpion extends CardImpl {
+public final class GiantScorpion extends CardImpl {
 
     public GiantScorpion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

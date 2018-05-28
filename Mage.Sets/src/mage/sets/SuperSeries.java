@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class SuperSeries extends ExpansionSet {
+public final class SuperSeries extends ExpansionSet {
 
     private static final SuperSeries instance = new SuperSeries();
 

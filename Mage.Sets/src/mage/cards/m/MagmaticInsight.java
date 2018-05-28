@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class MagmaticInsight extends CardImpl {
+public final class MagmaticInsight extends CardImpl {
 
     public MagmaticInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author maurer.it_at_gmail.com
  */
-public class Staggershock extends CardImpl {
+public final class Staggershock extends CardImpl {
 
     public Staggershock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

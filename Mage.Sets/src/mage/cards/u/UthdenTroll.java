@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author dustinconrad
  */
-public class UthdenTroll extends CardImpl {
+public final class UthdenTroll extends CardImpl {
 
     public UthdenTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

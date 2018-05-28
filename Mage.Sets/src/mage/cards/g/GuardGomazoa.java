@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class GuardGomazoa extends CardImpl {
+public final class GuardGomazoa extends CardImpl {
 
     public GuardGomazoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

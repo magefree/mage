@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class NecraSanctuary extends CardImpl {
+public final class NecraSanctuary extends CardImpl {
 
     public NecraSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

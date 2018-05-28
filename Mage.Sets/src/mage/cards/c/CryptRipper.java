@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class CryptRipper extends CardImpl {
+public final class CryptRipper extends CardImpl {
 
     public CryptRipper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

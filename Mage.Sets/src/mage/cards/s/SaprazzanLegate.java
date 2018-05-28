@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class SaprazzanLegate extends CardImpl {
+public final class SaprazzanLegate extends CardImpl {
 
     private static final FilterPermanent filterMountain = new FilterPermanent();
     private static final FilterPermanent filterIsland = new FilterPermanent();

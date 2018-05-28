@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Convolute extends CardImpl {
+public final class Convolute extends CardImpl {
 
     public Convolute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class ToshiroUmezawa extends CardImpl {
+public final class ToshiroUmezawa extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
     private static final FilterCard filterInstant = new FilterCard("instant card from your graveyard");

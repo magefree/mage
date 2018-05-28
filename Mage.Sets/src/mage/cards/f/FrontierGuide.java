@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class FrontierGuide extends CardImpl {
+public final class FrontierGuide extends CardImpl {
 
     public FrontierGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

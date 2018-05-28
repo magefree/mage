@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author MarcoMarin
  */
-public class TitaniasSong extends CardImpl {
+public final class TitaniasSong extends CardImpl {
 
     public TitaniasSong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

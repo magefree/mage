@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author magenoxx_at_gmail.com
  */
-public class Telepathy extends CardImpl {
+public final class Telepathy extends CardImpl {
 
     public Telepathy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class GangOfElk extends CardImpl {
+public final class GangOfElk extends CardImpl {
 
     public GangOfElk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

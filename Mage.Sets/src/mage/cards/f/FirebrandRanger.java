@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class FirebrandRanger extends CardImpl {
+public final class FirebrandRanger extends CardImpl {
 
     public FirebrandRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

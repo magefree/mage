@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class SpoilsOfTheVault extends CardImpl {
+public final class SpoilsOfTheVault extends CardImpl {
 
     public SpoilsOfTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

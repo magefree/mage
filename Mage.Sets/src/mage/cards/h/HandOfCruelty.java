@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class HandOfCruelty extends CardImpl {
+public final class HandOfCruelty extends CardImpl {
 
     public HandOfCruelty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Suncrusher extends CardImpl {
+public final class Suncrusher extends CardImpl {
 
     public Suncrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{9}");

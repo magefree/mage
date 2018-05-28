@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class QuicksilverBehemoth extends CardImpl {
+public final class QuicksilverBehemoth extends CardImpl {
 
     public QuicksilverBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");

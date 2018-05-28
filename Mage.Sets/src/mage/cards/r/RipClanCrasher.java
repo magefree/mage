@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RipClanCrasher extends CardImpl {
+public final class RipClanCrasher extends CardImpl {
 
     public RipClanCrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

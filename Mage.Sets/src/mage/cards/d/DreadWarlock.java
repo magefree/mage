@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class DreadWarlock extends CardImpl {
+public final class DreadWarlock extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by black creatures");
 

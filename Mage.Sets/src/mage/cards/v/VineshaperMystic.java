@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class VineshaperMystic extends CardImpl {
+public final class VineshaperMystic extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Merfolk you control");
 

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInGraveyard;
 /**
  * @author noxx
  */
-public class CryptCreeper extends CardImpl {
+public final class CryptCreeper extends CardImpl {
 
     public CryptCreeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

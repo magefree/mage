@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LeadenMyr extends CardImpl {
+public final class LeadenMyr extends CardImpl {
 
     public LeadenMyr (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class GhostfireBlade extends CardImpl {
+public final class GhostfireBlade extends CardImpl {
 
     public GhostfireBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

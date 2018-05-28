@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class SharuumTheHegemon extends CardImpl {
+public final class SharuumTheHegemon extends CardImpl {
 
     public SharuumTheHegemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}{U}{B}");

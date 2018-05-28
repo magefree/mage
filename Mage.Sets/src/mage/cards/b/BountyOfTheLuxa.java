@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class BountyOfTheLuxa extends CardImpl {
+public final class BountyOfTheLuxa extends CardImpl {
 
     public BountyOfTheLuxa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{U}");

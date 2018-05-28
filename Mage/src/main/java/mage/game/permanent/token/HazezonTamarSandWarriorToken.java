@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HazezonTamarSandWarriorToken extends TokenImpl {
+public final class HazezonTamarSandWarriorToken extends TokenImpl {
 
     public HazezonTamarSandWarriorToken() {
         super("Sand Warrior", "1/1 Sand Warrior creature tokens that are red, green, and white");

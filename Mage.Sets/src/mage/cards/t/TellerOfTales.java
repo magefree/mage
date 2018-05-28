@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Ludwig
  */
 
-public class TellerOfTales extends CardImpl {
+public final class TellerOfTales extends CardImpl {
 
     // Outcome.Benefit, "tap or untap target creature"
 

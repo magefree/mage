@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class BronzeBombshell extends CardImpl {
+public final class BronzeBombshell extends CardImpl {
 
     public BronzeBombshell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

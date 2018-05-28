@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class KilnWalker extends CardImpl {
+public final class KilnWalker extends CardImpl {
 
     public KilnWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

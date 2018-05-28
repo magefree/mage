@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class Anathemancer extends CardImpl {
+public final class Anathemancer extends CardImpl {
 
     public Anathemancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");

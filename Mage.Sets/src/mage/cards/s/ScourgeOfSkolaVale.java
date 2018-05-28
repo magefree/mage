@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ScourgeOfSkolaVale extends CardImpl {
+public final class ScourgeOfSkolaVale extends CardImpl {
 
     public ScourgeOfSkolaVale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

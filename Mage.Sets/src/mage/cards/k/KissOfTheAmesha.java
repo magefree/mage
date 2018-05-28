@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class KissOfTheAmesha extends CardImpl {
+public final class KissOfTheAmesha extends CardImpl {
 
     public KissOfTheAmesha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{U}");

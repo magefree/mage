@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class DisruptionAura extends CardImpl {
+public final class DisruptionAura extends CardImpl {
 
     public DisruptionAura(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

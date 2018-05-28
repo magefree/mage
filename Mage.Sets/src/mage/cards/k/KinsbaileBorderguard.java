@@ -53,7 +53,7 @@ import mage.game.permanent.token.KithkinToken;
  *
  * @author LoneFox
  */
-public class KinsbaileBorderguard extends CardImpl {
+public final class KinsbaileBorderguard extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

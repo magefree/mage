@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Plopman
  */
-public class ResoundingSilence extends CardImpl {
+public final class ResoundingSilence extends CardImpl {
 
     public ResoundingSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

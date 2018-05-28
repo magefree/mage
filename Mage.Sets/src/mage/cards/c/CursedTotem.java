@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class CursedTotem extends CardImpl {
+public final class CursedTotem extends CardImpl {
 
     public CursedTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

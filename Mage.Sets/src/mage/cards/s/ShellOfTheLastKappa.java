@@ -62,7 +62,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ShellOfTheLastKappa extends CardImpl {
+public final class ShellOfTheLastKappa extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell that targets you");
 

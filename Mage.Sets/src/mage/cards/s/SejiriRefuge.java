@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SejiriRefuge extends CardImpl {
+public final class SejiriRefuge extends CardImpl {
 
     public SejiriRefuge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

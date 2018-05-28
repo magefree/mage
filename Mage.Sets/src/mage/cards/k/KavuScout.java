@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class KavuScout extends CardImpl {
+public final class KavuScout extends CardImpl {
 
     public KavuScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

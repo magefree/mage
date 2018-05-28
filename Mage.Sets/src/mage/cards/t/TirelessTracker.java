@@ -50,7 +50,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class TirelessTracker extends CardImpl {
+public final class TirelessTracker extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Clue");
 

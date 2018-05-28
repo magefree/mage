@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class DragonEggDragonToken extends TokenImpl {
+public final class DragonEggDragonToken extends TokenImpl {
 
     public DragonEggDragonToken() {
         super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");

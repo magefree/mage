@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class KarlovOfTheGhostCouncil extends CardImpl {
+public final class KarlovOfTheGhostCouncil extends CardImpl {
 
     public KarlovOfTheGhostCouncil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");

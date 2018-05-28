@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CultivatorDrone extends CardImpl {
+public final class CultivatorDrone extends CardImpl {
 
     public CultivatorDrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

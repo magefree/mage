@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class KitsunePalliator extends CardImpl {
+public final class KitsunePalliator extends CardImpl {
 
     public KitsunePalliator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

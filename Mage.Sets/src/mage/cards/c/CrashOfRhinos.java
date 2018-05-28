@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CrashOfRhinos extends CardImpl {
+public final class CrashOfRhinos extends CardImpl {
 
     public CrashOfRhinos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

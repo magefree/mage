@@ -45,7 +45,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author jeffwadsworth
  */
-public class BantSojourners extends CardImpl {
+public final class BantSojourners extends CardImpl {
 
     public BantSojourners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");

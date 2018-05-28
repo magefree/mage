@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class ForgeDevil extends CardImpl {
+public final class ForgeDevil extends CardImpl {
 
     public ForgeDevil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

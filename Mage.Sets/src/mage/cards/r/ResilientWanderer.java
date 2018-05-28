@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author cbt33, BetaSteward (GainProtectionFromColorTargetEffect)
  */
-public class ResilientWanderer extends CardImpl {
+public final class ResilientWanderer extends CardImpl {
 
     public ResilientWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

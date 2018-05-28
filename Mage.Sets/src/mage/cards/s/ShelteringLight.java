@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class ShelteringLight extends CardImpl {
+public final class ShelteringLight extends CardImpl {
 
     public ShelteringLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

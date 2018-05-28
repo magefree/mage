@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MagmaPhoenix extends CardImpl {
+public final class MagmaPhoenix extends CardImpl {
 
     public MagmaPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class FogElemental extends CardImpl {
+public final class FogElemental extends CardImpl {
 
     public FogElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

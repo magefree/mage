@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class CanopyClaws extends CardImpl {
+public final class CanopyClaws extends CardImpl {
 
     public CanopyClaws(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

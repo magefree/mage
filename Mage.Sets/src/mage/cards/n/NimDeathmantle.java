@@ -64,7 +64,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author nantuko
  */
-public class NimDeathmantle extends CardImpl {
+public final class NimDeathmantle extends CardImpl {
 
     public NimDeathmantle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

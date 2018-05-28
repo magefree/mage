@@ -43,7 +43,7 @@ import mage.filter.common.FilterArtifactSpell;
  *
  * @author LevelX2
  */
-public class ChiefEngineer extends CardImpl {
+public final class ChiefEngineer extends CardImpl {
 
     public ChiefEngineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

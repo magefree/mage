@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Loki
  */
-public class Levitation extends CardImpl {
+public final class Levitation extends CardImpl {
 
     public Levitation (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

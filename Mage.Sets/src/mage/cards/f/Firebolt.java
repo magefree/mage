@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author cbt33
  */
-public class Firebolt extends CardImpl {
+public final class Firebolt extends CardImpl {
 
     public Firebolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

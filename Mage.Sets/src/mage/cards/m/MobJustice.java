@@ -41,7 +41,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LoneFox
  */
-public class MobJustice extends CardImpl {
+public final class MobJustice extends CardImpl {
 
     public MobJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");

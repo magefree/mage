@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class RitualOfTheMachine extends CardImpl {
+public final class RitualOfTheMachine extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
 

@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class TeferisCurse extends CardImpl {
+public final class TeferisCurse extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
     

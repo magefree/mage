@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class NemesisMask extends CardImpl {
+public final class NemesisMask extends CardImpl {
 
     public NemesisMask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

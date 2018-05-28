@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class GisaAndGeralf extends CardImpl {
+public final class GisaAndGeralf extends CardImpl {
 
     public GisaAndGeralf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");

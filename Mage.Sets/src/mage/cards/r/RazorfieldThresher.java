@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl {
+public final class RazorfieldThresher extends CardImpl {
 
     public RazorfieldThresher (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

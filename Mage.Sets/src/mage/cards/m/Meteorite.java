@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class Meteorite extends CardImpl {
+public final class Meteorite extends CardImpl {
 
     public Meteorite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

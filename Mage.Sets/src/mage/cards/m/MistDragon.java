@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MistDragon extends CardImpl {
+public final class MistDragon extends CardImpl {
 
     public MistDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

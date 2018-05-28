@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Bioshift extends CardImpl {
+public final class Bioshift extends CardImpl {
 
     public Bioshift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/U}");

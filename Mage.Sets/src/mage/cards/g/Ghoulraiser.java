@@ -49,7 +49,7 @@ import mage.util.RandomUtil;
  *
  * @author North
  */
-public class Ghoulraiser extends CardImpl {
+public final class Ghoulraiser extends CardImpl {
 
     public Ghoulraiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

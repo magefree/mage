@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FemerefScouts extends CardImpl {
+public final class FemerefScouts extends CardImpl {
 
     public FemerefScouts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

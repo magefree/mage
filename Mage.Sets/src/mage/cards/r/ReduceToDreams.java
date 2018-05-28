@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ReduceToDreams extends CardImpl {
+public final class ReduceToDreams extends CardImpl {
 
     public ReduceToDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

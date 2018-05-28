@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class ToweringBaloth extends CardImpl {
+public final class ToweringBaloth extends CardImpl {
 
     public ToweringBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

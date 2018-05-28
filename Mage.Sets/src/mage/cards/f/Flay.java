@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class Flay extends CardImpl {
+public final class Flay extends CardImpl {
 
     public Flay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

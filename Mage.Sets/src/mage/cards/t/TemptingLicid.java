@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class TemptingLicid extends CardImpl {
+public final class TemptingLicid extends CardImpl {
 
     public TemptingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

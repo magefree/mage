@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class ReaperKing extends CardImpl {
+public final class ReaperKing extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Scarecrow creatures");
     private static final FilterCreaturePermanent filterTrigger = new FilterCreaturePermanent("another Scarecrow");

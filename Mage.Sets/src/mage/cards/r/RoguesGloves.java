@@ -42,7 +42,7 @@ import mage.constants.Outcome;
  *
  * @author emerald000
  */
-public class RoguesGloves extends CardImpl {
+public final class RoguesGloves extends CardImpl {
 
     public RoguesGloves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

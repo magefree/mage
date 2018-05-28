@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ConsumptiveGoo extends CardImpl {
+public final class ConsumptiveGoo extends CardImpl {
 
     public ConsumptiveGoo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

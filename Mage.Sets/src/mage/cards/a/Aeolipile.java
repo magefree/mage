@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class Aeolipile extends CardImpl {
+public final class Aeolipile extends CardImpl {
 
     public Aeolipile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

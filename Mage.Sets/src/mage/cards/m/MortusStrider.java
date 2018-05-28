@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class MortusStrider extends CardImpl {
+public final class MortusStrider extends CardImpl {
 
     public MortusStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");

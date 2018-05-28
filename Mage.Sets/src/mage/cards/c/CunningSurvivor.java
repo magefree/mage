@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author emerald000
  */
-public class CunningSurvivor extends CardImpl {
+public final class CunningSurvivor extends CardImpl {
 
     public CunningSurvivor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

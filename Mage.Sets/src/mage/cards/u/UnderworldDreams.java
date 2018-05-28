@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class UnderworldDreams extends CardImpl {
+public final class UnderworldDreams extends CardImpl {
 
     public UnderworldDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");

@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class WoodwraithCorrupter extends CardImpl {
+public final class WoodwraithCorrupter extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 

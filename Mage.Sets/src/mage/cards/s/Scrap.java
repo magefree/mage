@@ -40,7 +40,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Backfir3
  */
-public class Scrap extends CardImpl {
+public final class Scrap extends CardImpl {
 
     public Scrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

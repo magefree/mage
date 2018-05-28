@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.HistoricPredicate;
  *
  * @author TheElk801
  */
-public class ThranTemporalGateway extends CardImpl {
+public final class ThranTemporalGateway extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("a historic permanent card");
 

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class SquelchingLeeches extends CardImpl {
+public final class SquelchingLeeches extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamps you control");
 

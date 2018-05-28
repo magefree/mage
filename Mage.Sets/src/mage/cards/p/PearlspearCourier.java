@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class PearlspearCourier extends CardImpl {
+public final class PearlspearCourier extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creature");
 

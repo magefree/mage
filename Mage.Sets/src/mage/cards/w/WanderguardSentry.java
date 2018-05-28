@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author dustinconrad
  */
-public class WanderguardSentry extends CardImpl {
+public final class WanderguardSentry extends CardImpl {
 
     public WanderguardSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

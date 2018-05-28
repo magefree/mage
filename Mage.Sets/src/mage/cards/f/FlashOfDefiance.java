@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class FlashOfDefiance extends CardImpl {
+public final class FlashOfDefiance extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures and white creatures");
 

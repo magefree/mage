@@ -26,7 +26,7 @@ import mage.target.TargetCard;
 /**
  * @author JRHerlehy Created on 4/8/18.
  */
-public class KamahlsDruidicVow extends CardImpl {
+public final class KamahlsDruidicVow extends CardImpl {
 
     public KamahlsDruidicVow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");

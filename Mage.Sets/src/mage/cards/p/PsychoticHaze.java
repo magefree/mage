@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class PsychoticHaze extends CardImpl {
+public final class PsychoticHaze extends CardImpl {
 
     public PsychoticHaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");

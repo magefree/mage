@@ -41,7 +41,7 @@ import mage.filter.common.FilterLandCard;
 /**
  * @author Loki
  */
-public class HorizonDrake extends CardImpl {
+public final class HorizonDrake extends CardImpl {
 
     private static FilterLandCard filter = new FilterLandCard("lands");
 

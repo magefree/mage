@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class DrifterIlDal extends CardImpl {
+public final class DrifterIlDal extends CardImpl {
 
     public DrifterIlDal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

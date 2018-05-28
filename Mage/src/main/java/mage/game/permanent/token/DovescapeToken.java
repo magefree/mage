@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class DovescapeToken extends TokenImpl {
+public final class DovescapeToken extends TokenImpl {
 
     public DovescapeToken() {
         super("Bird", "1/1 white and blue Bird creature token with flying");

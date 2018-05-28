@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class CoaxFromTheBlindEternities extends CardImpl {
+public final class CoaxFromTheBlindEternities extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Eldrazi card");
 

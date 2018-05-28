@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class Terminus extends CardImpl {
+public final class Terminus extends CardImpl {
 
     public Terminus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");

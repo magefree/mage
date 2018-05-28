@@ -37,7 +37,7 @@ import mage.constants.SetType;
  *
  * @author Styxo
  */
-public class StarWars extends ExpansionSet {
+public final class StarWars extends ExpansionSet {
 
     private static final StarWars instance = new StarWars();
 

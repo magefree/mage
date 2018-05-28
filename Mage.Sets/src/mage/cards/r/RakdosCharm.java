@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class RakdosCharm extends CardImpl {
+public final class RakdosCharm extends CardImpl {
 
     public RakdosCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{R}");

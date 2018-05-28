@@ -42,7 +42,7 @@ import mage.filter.FilterSpell;
  *
  * @author emerald000
  */
-public class NetherVoid extends CardImpl {
+public final class NetherVoid extends CardImpl {
 
     public NetherVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

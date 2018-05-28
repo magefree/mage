@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EliminateTheCompetition extends CardImpl {
+public final class EliminateTheCompetition extends CardImpl {
 
     public EliminateTheCompetition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

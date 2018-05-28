@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class PhyrexianWarBeast extends CardImpl {
+public final class PhyrexianWarBeast extends CardImpl {
 
     public PhyrexianWarBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

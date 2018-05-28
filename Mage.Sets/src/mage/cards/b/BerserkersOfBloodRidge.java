@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BerserkersOfBloodRidge  extends CardImpl {
+public final class BerserkersOfBloodRidge  extends CardImpl {
 
     public BerserkersOfBloodRidge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

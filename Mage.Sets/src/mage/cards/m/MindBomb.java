@@ -50,7 +50,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author TheElk801
  */
-public class MindBomb extends CardImpl {
+public final class MindBomb extends CardImpl {
 
     public MindBomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");

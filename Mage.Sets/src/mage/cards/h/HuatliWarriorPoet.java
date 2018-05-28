@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class HuatliWarriorPoet extends CardImpl {
+public final class HuatliWarriorPoet extends CardImpl {
 
     public HuatliWarriorPoet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{W}");

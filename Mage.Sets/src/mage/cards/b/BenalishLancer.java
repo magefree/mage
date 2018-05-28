@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author FenrisulfrX
  */
-public class BenalishLancer extends CardImpl {
+public final class BenalishLancer extends CardImpl {
 
     public BenalishLancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

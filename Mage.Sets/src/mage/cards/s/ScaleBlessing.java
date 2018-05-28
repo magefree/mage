@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ScaleBlessing extends CardImpl {
+public final class ScaleBlessing extends CardImpl {
 
     public ScaleBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

@@ -46,7 +46,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author jeffwadsworth
  */
-public class RepelIntruders extends CardImpl {
+public final class RepelIntruders extends CardImpl {
 
     public RepelIntruders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W/U}");

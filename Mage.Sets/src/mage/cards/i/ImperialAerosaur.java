@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class ImperialAerosaur extends CardImpl {
+public final class ImperialAerosaur extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 

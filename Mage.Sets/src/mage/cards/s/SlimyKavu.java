@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class SlimyKavu extends CardImpl {
+public final class SlimyKavu extends CardImpl {
 
     public SlimyKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

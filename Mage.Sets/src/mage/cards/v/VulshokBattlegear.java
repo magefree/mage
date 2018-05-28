@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class VulshokBattlegear extends CardImpl {
+public final class VulshokBattlegear extends CardImpl {
 
     public VulshokBattlegear (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class TahCropElite extends CardImpl {
+public final class TahCropElite extends CardImpl {
 
     public TahCropElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

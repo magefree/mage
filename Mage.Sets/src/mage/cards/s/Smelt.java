@@ -38,7 +38,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class Smelt extends CardImpl {
+public final class Smelt extends CardImpl {
 
     public Smelt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

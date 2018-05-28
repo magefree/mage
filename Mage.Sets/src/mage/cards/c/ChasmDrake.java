@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class ChasmDrake extends CardImpl {
+public final class ChasmDrake extends CardImpl {
 
     public ChasmDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

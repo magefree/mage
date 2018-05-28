@@ -47,7 +47,7 @@ import mage.game.permanent.token.SquirrelToken;
  *
  * @author cbt33
  */
-public class NutCollector extends CardImpl {
+public final class NutCollector extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("squirrel");
 

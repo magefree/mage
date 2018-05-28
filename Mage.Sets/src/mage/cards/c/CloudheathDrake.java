@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CloudheathDrake extends CardImpl {
+public final class CloudheathDrake extends CardImpl {
 
     public CloudheathDrake (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}");

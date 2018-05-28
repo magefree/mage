@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class ScourgeDevil extends CardImpl {
+public final class ScourgeDevil extends CardImpl {
 
     public ScourgeDevil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

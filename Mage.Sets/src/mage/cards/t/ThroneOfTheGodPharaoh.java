@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author Styxo
  */
-public class ThroneOfTheGodPharaoh extends CardImpl {
+public final class ThroneOfTheGodPharaoh extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("tapped creature you control");
 

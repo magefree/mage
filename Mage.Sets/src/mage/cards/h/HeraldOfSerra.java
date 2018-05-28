@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class HeraldOfSerra extends CardImpl {
+public final class HeraldOfSerra extends CardImpl {
 
     public HeraldOfSerra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

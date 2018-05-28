@@ -48,7 +48,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author LevelX2
  */
-public class CrawlingSensation extends CardImpl {
+public final class CrawlingSensation extends CardImpl {
 
     public CrawlingSensation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

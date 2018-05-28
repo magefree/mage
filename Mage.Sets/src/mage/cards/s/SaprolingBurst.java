@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class SaprolingBurst extends CardImpl {
+public final class SaprolingBurst extends CardImpl {
 
     public SaprolingBurst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");

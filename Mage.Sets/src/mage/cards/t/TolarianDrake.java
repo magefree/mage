@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author noxx
  */
-public class TolarianDrake extends CardImpl {
+public final class TolarianDrake extends CardImpl {
 
     public TolarianDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

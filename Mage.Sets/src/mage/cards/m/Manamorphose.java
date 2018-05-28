@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class Manamorphose extends CardImpl {
+public final class Manamorphose extends CardImpl {
 
     public Manamorphose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R/G}");

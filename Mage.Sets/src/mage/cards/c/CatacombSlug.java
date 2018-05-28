@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CatacombSlug extends CardImpl {
+public final class CatacombSlug extends CardImpl {
 
     public CatacombSlug(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

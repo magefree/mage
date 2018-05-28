@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WailOfTheNim extends CardImpl {
+public final class WailOfTheNim extends CardImpl {
 
     public WailOfTheNim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class QuicksilverWall extends CardImpl {
+public final class QuicksilverWall extends CardImpl {
 
     public QuicksilverWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

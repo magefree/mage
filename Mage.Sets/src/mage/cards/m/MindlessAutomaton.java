@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author emerald000
  */
-public class MindlessAutomaton extends CardImpl {
+public final class MindlessAutomaton extends CardImpl {
 
     public MindlessAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

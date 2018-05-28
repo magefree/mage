@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FistOfSuns extends CardImpl {
+public final class FistOfSuns extends CardImpl {
 
     public FistOfSuns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class OasisRitualist extends CardImpl {
+public final class OasisRitualist extends CardImpl {
 
     public OasisRitualist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

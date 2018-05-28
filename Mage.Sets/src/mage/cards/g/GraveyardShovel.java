@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class GraveyardShovel extends CardImpl {
+public final class GraveyardShovel extends CardImpl {
 
     public GraveyardShovel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

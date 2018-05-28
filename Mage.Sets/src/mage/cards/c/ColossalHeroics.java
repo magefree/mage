@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ColossalHeroics extends CardImpl {
+public final class ColossalHeroics extends CardImpl {
 
     public ColossalHeroics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

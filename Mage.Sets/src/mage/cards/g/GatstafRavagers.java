@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class GatstafRavagers extends CardImpl {
+public final class GatstafRavagers extends CardImpl {
 
     public GatstafRavagers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

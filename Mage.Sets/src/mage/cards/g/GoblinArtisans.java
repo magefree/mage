@@ -59,7 +59,7 @@ import mage.target.TargetCard;
  *
  * @author MarcoMarin
  */
-public class GoblinArtisans extends CardImpl {
+public final class GoblinArtisans extends CardImpl {
 
     public GoblinArtisans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

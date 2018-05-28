@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class Reiterate extends CardImpl {
+public final class Reiterate extends CardImpl {
 
     public Reiterate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");

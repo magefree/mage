@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class WuLightCavalry extends CardImpl {
+public final class WuLightCavalry extends CardImpl {
 
     public WuLightCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

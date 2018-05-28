@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class FlickeringWard extends CardImpl {
+public final class FlickeringWard extends CardImpl {
 
     public FlickeringWard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

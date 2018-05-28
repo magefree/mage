@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl {
+public final class Bedlam extends CardImpl {
 
     public Bedlam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

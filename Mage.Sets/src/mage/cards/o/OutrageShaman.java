@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class OutrageShaman extends CardImpl {
+public final class OutrageShaman extends CardImpl {
 
     public OutrageShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

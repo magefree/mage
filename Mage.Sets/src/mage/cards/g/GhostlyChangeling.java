@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class GhostlyChangeling extends CardImpl {
+public final class GhostlyChangeling extends CardImpl {
 
     public GhostlyChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

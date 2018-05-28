@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MerfolkToken extends TokenImpl {
+public final class MerfolkToken extends TokenImpl {
 
     public MerfolkToken() {
         super("Merfolk", "1/1 blue Merfolk creature token");

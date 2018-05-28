@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SteadfastGuard extends CardImpl {
+public final class SteadfastGuard extends CardImpl {
 
     public SteadfastGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

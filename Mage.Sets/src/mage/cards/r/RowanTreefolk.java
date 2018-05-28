@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class RowanTreefolk extends CardImpl {
+public final class RowanTreefolk extends CardImpl {
 
     public RowanTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

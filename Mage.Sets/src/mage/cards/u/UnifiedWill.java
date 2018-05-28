@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UnifiedWill extends CardImpl {
+public final class UnifiedWill extends CardImpl {
 
     public UnifiedWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

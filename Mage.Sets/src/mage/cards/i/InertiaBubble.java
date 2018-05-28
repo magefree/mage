@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LoneFox
  */
-public class InertiaBubble extends CardImpl {
+public final class InertiaBubble extends CardImpl {
 
     public InertiaBubble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

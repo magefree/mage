@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Quercitron
  */
-public class SwirlingSandstorm extends CardImpl {
+public final class SwirlingSandstorm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

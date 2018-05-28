@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class Exploration extends CardImpl {
+public final class Exploration extends CardImpl {
 
     public Exploration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

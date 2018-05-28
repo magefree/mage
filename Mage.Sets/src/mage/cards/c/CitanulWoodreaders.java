@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class CitanulWoodreaders extends CardImpl {
+public final class CitanulWoodreaders extends CardImpl {
 
     public CitanulWoodreaders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

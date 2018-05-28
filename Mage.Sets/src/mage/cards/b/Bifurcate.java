@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author ciaccona007
  */
-public class Bifurcate extends CardImpl {
+public final class Bifurcate extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {

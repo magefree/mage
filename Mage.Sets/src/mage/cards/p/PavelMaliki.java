@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author nigelzor
  */
-public class PavelMaliki extends CardImpl {
+public final class PavelMaliki extends CardImpl {
 
     public PavelMaliki(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");

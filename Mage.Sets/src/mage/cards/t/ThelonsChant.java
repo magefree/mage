@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class ThelonsChant extends CardImpl {
+public final class ThelonsChant extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Swamp");
 

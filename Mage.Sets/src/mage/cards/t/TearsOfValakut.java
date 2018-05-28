@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class TearsOfValakut extends CardImpl {
+public final class TearsOfValakut extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

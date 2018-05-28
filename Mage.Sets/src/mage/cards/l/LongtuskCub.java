@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class LongtuskCub extends CardImpl {
+public final class LongtuskCub extends CardImpl {
 
     public LongtuskCub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

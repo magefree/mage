@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author LevelX2
  */
-public class PullFromEternity extends CardImpl {
+public final class PullFromEternity extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("face-up exiled card");
 

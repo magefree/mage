@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Saga
  */
-public class HeirloomBlade extends CardImpl {
+public final class HeirloomBlade extends CardImpl {
 
     public HeirloomBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

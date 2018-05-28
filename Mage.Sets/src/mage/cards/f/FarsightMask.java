@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author North
  */
-public class FarsightMask extends CardImpl {
+public final class FarsightMask extends CardImpl {
 
     public FarsightMask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

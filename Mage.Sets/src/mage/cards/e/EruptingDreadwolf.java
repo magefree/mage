@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class EruptingDreadwolf extends CardImpl {
+public final class EruptingDreadwolf extends CardImpl {
 
     public EruptingDreadwolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class HighSentinelsOfArashin extends CardImpl {
+public final class HighSentinelsOfArashin extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control with a +1/+1 counter on it");
     static {

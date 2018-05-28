@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class DromokasCommand extends CardImpl {
+public final class DromokasCommand extends CardImpl {
 
     private static final FilterEnchantmentPermanent filterEnchantment = new FilterEnchantmentPermanent("an enchantment");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to put a +1/+1 counter on it");

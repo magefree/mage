@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class Falter extends CardImpl {
+public final class Falter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
 

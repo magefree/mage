@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Derpthemeus
  */
-public class ElixirOfVitality extends CardImpl {
+public final class ElixirOfVitality extends CardImpl {
 
     public ElixirOfVitality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

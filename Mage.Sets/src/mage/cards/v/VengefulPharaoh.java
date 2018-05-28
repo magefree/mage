@@ -54,7 +54,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author North
  */
-public class VengefulPharaoh extends CardImpl {
+public final class VengefulPharaoh extends CardImpl {
 
     public VengefulPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{B}");

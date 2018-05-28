@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class GracefulReprieve extends CardImpl {
+public final class GracefulReprieve extends CardImpl {
 
     public GracefulReprieve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

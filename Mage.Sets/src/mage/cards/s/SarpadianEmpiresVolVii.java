@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class SarpadianEmpiresVolVii extends CardImpl {
+public final class SarpadianEmpiresVolVii extends CardImpl {
 
     public SarpadianEmpiresVolVii(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

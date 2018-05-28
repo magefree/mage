@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ScornfulAetherLich extends CardImpl {
+public final class ScornfulAetherLich extends CardImpl {
 
     public ScornfulAetherLich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}");

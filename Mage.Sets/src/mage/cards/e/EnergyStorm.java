@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author TheElk801
  */
-public class EnergyStorm extends CardImpl {
+public final class EnergyStorm extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying");
 

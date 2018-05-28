@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class Skitterskin extends CardImpl {
+public final class Skitterskin extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("you control another colorless creature");
 

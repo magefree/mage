@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class VividMarsh extends CardImpl {
+public final class VividMarsh extends CardImpl {
 
     public VividMarsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

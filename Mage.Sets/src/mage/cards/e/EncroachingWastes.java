@@ -45,7 +45,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author LevelX2
  */
-public class EncroachingWastes extends CardImpl {
+public final class EncroachingWastes extends CardImpl {
     public EncroachingWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 

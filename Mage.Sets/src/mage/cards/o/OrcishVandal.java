@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author themattfiles
  */
-public class OrcishVandal extends CardImpl {
+public final class OrcishVandal extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {

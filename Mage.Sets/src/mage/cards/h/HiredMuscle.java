@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class HiredMuscle extends CardImpl {
+public final class HiredMuscle extends CardImpl {
 
 
     public HiredMuscle(UUID ownerId, CardSetInfo setInfo) {

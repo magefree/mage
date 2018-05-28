@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class RiptideBiologist extends CardImpl {
+public final class RiptideBiologist extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Beasts");
 

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class BlisteringDieflyn extends CardImpl {
+public final class BlisteringDieflyn extends CardImpl {
 
     public BlisteringDieflyn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

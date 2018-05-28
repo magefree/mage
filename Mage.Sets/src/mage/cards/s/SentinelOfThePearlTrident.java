@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class SentinelOfThePearlTrident extends CardImpl {
+public final class SentinelOfThePearlTrident extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("historic permanent you control");
 

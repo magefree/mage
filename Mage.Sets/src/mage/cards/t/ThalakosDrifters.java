@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ThalakosDrifters extends CardImpl {
+public final class ThalakosDrifters extends CardImpl {
 
     public ThalakosDrifters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

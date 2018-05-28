@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GideonsDefeat extends CardImpl {
+public final class GideonsDefeat extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterAttackingOrBlockingCreature("white creature that's attacking or blocking");
 

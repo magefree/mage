@@ -49,7 +49,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author emerald000
  */
-public class WarNameAspirant extends CardImpl {
+public final class WarNameAspirant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 1 or less");
 

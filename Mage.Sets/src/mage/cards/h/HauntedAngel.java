@@ -47,7 +47,7 @@ import mage.game.permanent.token.HauntedAngelToken;
  * @author LoneFox
  *
  */
-public class HauntedAngel extends CardImpl {
+public final class HauntedAngel extends CardImpl {
 
     public HauntedAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

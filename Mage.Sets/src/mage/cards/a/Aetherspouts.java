@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Aetherspouts extends CardImpl {
+public final class Aetherspouts extends CardImpl {
 
     public Aetherspouts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");

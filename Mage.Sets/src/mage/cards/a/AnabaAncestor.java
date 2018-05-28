@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class AnabaAncestor extends CardImpl {
+public final class AnabaAncestor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Another target Minotaur creature");
 

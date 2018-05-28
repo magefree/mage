@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ShimmerscaleDrake extends CardImpl {
+public final class ShimmerscaleDrake extends CardImpl {
 
     public ShimmerscaleDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class Savannah extends CardImpl {
+public final class Savannah extends CardImpl {
 
     public Savannah(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

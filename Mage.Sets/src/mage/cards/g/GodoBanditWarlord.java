@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class GodoBanditWarlord extends CardImpl {
+public final class GodoBanditWarlord extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.SAMURAI);

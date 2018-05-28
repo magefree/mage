@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class LavaDart extends CardImpl {
+public final class LavaDart extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Mountain");
     

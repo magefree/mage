@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class TerrorOfTheFairgrounds extends CardImpl {
+public final class TerrorOfTheFairgrounds extends CardImpl {
 
     public TerrorOfTheFairgrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class LavafumeInvoker extends CardImpl {
+public final class LavafumeInvoker extends CardImpl {
 
     public LavafumeInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

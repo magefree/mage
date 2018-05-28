@@ -43,7 +43,7 @@ import mage.game.permanent.token.InexorableBlobOozeToken;
  *
  * @author fireshoes
  */
-public class InexorableBlob extends CardImpl {
+public final class InexorableBlob extends CardImpl {
 
     public InexorableBlob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

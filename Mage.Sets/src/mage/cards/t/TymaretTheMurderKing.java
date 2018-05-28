@@ -50,7 +50,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class TymaretTheMurderKing extends CardImpl {
+public final class TymaretTheMurderKing extends CardImpl {
 
     public TymaretTheMurderKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");

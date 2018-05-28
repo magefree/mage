@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author anonymous
  */
-public class HengeOfRamos extends CardImpl {
+public final class HengeOfRamos extends CardImpl {
 
     public HengeOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

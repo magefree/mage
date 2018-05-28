@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class GlacialChasm extends CardImpl {
+public final class GlacialChasm extends CardImpl {
 
     public GlacialChasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

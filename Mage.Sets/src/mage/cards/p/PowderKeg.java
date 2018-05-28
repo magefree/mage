@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class PowderKeg extends CardImpl {
+public final class PowderKeg extends CardImpl {
 
     public PowderKeg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

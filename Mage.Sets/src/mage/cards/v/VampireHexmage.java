@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki, nantuko
  */
-public class VampireHexmage extends CardImpl {
+public final class VampireHexmage extends CardImpl {
 
     public VampireHexmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");

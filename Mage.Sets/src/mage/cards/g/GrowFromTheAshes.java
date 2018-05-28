@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class GrowFromTheAshes extends CardImpl {
+public final class GrowFromTheAshes extends CardImpl {
 
     public GrowFromTheAshes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

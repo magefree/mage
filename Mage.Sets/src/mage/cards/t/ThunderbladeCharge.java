@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class ThunderbladeCharge extends CardImpl {
+public final class ThunderbladeCharge extends CardImpl {
 
     public ThunderbladeCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

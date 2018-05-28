@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Zeplar1_at_googlemail.com
  */
-public class GreenScarab extends CardImpl {
+public final class GreenScarab extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
     private static final FilterPermanent filter2 = new FilterPermanent("green permanent");

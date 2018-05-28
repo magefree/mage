@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author anonymous
  */
-public class HandOfHonor extends CardImpl {
+public final class HandOfHonor extends CardImpl {
 
     public HandOfHonor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

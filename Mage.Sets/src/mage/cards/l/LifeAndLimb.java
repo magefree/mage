@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author emerald000
  */
-public class LifeAndLimb extends CardImpl {
+public final class LifeAndLimb extends CardImpl {
 
     public LifeAndLimb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
-public class FleshBlood extends SplitCard {
+public final class FleshBlood extends SplitCard {
 
     public FleshBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{G}", "{R}{G}", SpellAbilityType.SPLIT_FUSED);

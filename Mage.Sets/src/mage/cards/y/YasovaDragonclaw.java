@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class YasovaDragonclaw extends CardImpl {
+public final class YasovaDragonclaw extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls with power less than Yasova Dragonclaw's power");
 

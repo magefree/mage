@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class ViolentImpact extends CardImpl {
+public final class ViolentImpact extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

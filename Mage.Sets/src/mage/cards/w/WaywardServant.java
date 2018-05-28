@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author jeffwadsworth
  */
-public class WaywardServant extends CardImpl {
+public final class WaywardServant extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Zombie");
 

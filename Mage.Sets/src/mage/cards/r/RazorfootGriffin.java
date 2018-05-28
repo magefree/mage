@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RazorfootGriffin extends CardImpl {
+public final class RazorfootGriffin extends CardImpl {
 
     public RazorfootGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

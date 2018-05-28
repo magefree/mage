@@ -44,7 +44,7 @@ import mage.filter.FilterCard;
  *
  * @author stravant
  */
-public class NagaOracle extends CardImpl {
+public final class NagaOracle extends CardImpl {
 
     public NagaOracle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class OakgnarlWarrior extends CardImpl {
+public final class OakgnarlWarrior extends CardImpl {
 
     public OakgnarlWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

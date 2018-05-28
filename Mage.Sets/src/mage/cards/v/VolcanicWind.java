@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author tcontis
  */
-public class VolcanicWind extends CardImpl {
+public final class VolcanicWind extends CardImpl {
     
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 

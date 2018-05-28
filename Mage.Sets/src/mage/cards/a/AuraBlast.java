@@ -40,7 +40,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  * @author LoneFox
 
  */
-public class AuraBlast extends CardImpl {
+public final class AuraBlast extends CardImpl {
 
     public AuraBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

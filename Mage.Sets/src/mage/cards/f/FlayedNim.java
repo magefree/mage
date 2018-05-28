@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class FlayedNim extends CardImpl {
+public final class FlayedNim extends CardImpl {
 
     public FlayedNim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

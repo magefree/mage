@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class RidgedKusite extends CardImpl {
+public final class RidgedKusite extends CardImpl {
 
     public RidgedKusite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

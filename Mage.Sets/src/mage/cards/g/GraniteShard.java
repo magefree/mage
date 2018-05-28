@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class GraniteShard extends CardImpl {
+public final class GraniteShard extends CardImpl {
 
     public GraniteShard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

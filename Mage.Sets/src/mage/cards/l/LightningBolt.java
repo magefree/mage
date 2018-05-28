@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LightningBolt extends CardImpl {
+public final class LightningBolt extends CardImpl {
 
     public LightningBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WakingNightmare extends CardImpl {
+public final class WakingNightmare extends CardImpl {
 
     public WakingNightmare (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

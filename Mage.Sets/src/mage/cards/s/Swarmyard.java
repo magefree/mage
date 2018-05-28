@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Swarmyard extends CardImpl {
+public final class Swarmyard extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Insect, Rat, Spider, or Squirrel");
 

@@ -55,7 +55,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko
  */
-public class PrototypePortal extends CardImpl {
+public final class PrototypePortal extends CardImpl {
 
     public PrototypePortal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

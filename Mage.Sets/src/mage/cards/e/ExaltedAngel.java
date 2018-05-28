@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ExaltedAngel extends CardImpl {
+public final class ExaltedAngel extends CardImpl {
 
     public ExaltedAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Seasinger extends CardImpl {
+public final class Seasinger extends CardImpl {
 
     private static final String rule = "Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped";
     private static final FilterPermanent islandYouControl = new FilterPermanent("Island");

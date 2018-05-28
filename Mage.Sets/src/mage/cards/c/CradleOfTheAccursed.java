@@ -46,7 +46,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author spjspj
  */
-public class CradleOfTheAccursed extends CardImpl {
+public final class CradleOfTheAccursed extends CardImpl {
 
     public CradleOfTheAccursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

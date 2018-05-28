@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class ThorncasterSliver extends CardImpl {
+public final class ThorncasterSliver extends CardImpl {
 
     public ThorncasterSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

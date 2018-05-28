@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SkirkDrillSergeant extends CardImpl {
+public final class SkirkDrillSergeant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("or another Goblin");
 

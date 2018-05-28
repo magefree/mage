@@ -48,7 +48,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author fireshoes
  */
-public class MirageMirror extends CardImpl {
+public final class MirageMirror extends CardImpl {
 
 
 

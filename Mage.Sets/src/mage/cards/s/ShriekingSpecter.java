@@ -42,7 +42,7 @@ import mage.constants.SetTargetPointer;
  *
  * @author fireshoes
  */
-public class ShriekingSpecter extends CardImpl {
+public final class ShriekingSpecter extends CardImpl {
 
     public ShriekingSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

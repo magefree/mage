@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class ThunderherdMigration extends CardImpl {
+public final class ThunderherdMigration extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Dinosaur card from your hand");
 

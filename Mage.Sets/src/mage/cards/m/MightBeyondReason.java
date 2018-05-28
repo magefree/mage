@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MightBeyondReason extends CardImpl {
+public final class MightBeyondReason extends CardImpl {
 
     public MightBeyondReason(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

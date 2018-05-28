@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Fling extends CardImpl {
+public final class Fling extends CardImpl {
 
     public Fling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

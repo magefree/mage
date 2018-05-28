@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BursegSardaukar
  */
-public class FirefrightMage extends CardImpl {
+public final class FirefrightMage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by artifact creatures and/or red creatures");
 

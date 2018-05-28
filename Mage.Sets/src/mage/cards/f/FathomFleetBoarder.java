@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class FathomFleetBoarder extends CardImpl {
+public final class FathomFleetBoarder extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control another Pirate");
 

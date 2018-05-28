@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class DimensionalBreach extends CardImpl {
+public final class DimensionalBreach extends CardImpl {
 
     public DimensionalBreach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");

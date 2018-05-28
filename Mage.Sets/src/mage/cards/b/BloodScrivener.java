@@ -46,7 +46,7 @@ import mage.players.Player;
  */
 
 
-public class BloodScrivener  extends CardImpl {
+public final class BloodScrivener  extends CardImpl {
 
     public BloodScrivener (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

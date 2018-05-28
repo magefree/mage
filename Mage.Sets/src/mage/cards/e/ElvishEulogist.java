@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class ElvishEulogist extends CardImpl {
+public final class ElvishEulogist extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Elf");
 

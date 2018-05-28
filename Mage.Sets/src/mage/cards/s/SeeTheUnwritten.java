@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class SeeTheUnwritten extends CardImpl {
+public final class SeeTheUnwritten extends CardImpl {
 
     public SeeTheUnwritten(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");

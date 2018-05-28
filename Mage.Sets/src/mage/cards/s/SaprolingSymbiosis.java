@@ -45,7 +45,7 @@ import mage.game.permanent.token.SaprolingToken;
  * @author LoneFox
  *
  */
-public class SaprolingSymbiosis extends CardImpl {
+public final class SaprolingSymbiosis extends CardImpl {
 
     public SaprolingSymbiosis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

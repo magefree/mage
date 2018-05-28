@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VowOfLightning extends CardImpl {
+public final class VowOfLightning extends CardImpl {
 
     public VowOfLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

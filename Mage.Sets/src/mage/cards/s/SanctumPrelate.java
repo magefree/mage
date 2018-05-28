@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author maxlebedev
  */
-public class SanctumPrelate extends CardImpl {
+public final class SanctumPrelate extends CardImpl {
 
     public SanctumPrelate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

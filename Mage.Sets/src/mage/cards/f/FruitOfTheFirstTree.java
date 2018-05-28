@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FruitOfTheFirstTree extends CardImpl {
+public final class FruitOfTheFirstTree extends CardImpl {
 
     public FruitOfTheFirstTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");

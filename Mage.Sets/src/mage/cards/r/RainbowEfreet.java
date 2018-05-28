@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class RainbowEfreet extends CardImpl {
+public final class RainbowEfreet extends CardImpl {
 
     public RainbowEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

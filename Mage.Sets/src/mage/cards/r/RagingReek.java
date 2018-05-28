@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class RagingReek extends CardImpl {
+public final class RagingReek extends CardImpl {
 
     public RagingReek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

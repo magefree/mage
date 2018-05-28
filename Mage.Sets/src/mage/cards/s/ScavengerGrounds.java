@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author spjspj
  */
-public class ScavengerGrounds extends CardImpl {
+public final class ScavengerGrounds extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Desert");
 

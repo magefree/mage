@@ -45,7 +45,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author LevelX2
  */
-public class SlyRequisitioner extends CardImpl {
+public final class SlyRequisitioner extends CardImpl {
 
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("a nontoken artifact you control");
 

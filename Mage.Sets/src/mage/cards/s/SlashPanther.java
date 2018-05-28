@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SlashPanther extends CardImpl {
+public final class SlashPanther extends CardImpl {
 
     public SlashPanther(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R/P}");

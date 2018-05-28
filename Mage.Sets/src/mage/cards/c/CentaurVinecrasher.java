@@ -52,7 +52,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author LevelX2
  */
-public class CentaurVinecrasher extends CardImpl {
+public final class CentaurVinecrasher extends CardImpl {
 
     public CentaurVinecrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class ShapersOfNature extends CardImpl {
+public final class ShapersOfNature extends CardImpl {
 
     public ShapersOfNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

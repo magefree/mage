@@ -59,7 +59,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Loki
  */
-public class SwordOfLightAndShadow extends CardImpl {
+public final class SwordOfLightAndShadow extends CardImpl {
 
     public SwordOfLightAndShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

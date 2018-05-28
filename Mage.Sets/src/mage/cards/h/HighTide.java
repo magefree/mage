@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class HighTide extends CardImpl {
+public final class HighTide extends CardImpl {
 
     public HighTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class LaboratoryBrute extends CardImpl {
+public final class LaboratoryBrute extends CardImpl {
 
     public LaboratoryBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

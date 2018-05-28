@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SageOfShailasClaim extends CardImpl {
+public final class SageOfShailasClaim extends CardImpl {
 
     public SageOfShailasClaim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J (based on code by dustinconrad)
  */
-public class Skullscorch extends CardImpl {
+public final class Skullscorch extends CardImpl {
 
     public Skullscorch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}");

@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author L_J
  */
-public class VeteranBrawlers extends CardImpl {
+public final class VeteranBrawlers extends CardImpl {
 
     static final private FilterLandPermanent filter = new FilterLandPermanent("an untapped land");
     static {

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class JediSentinel extends CardImpl {
+public final class JediSentinel extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("another target creature you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you don't control");

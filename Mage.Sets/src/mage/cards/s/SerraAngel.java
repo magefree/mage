@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SerraAngel extends CardImpl {
+public final class SerraAngel extends CardImpl {
 
     public SerraAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class WhiptongueFrog extends CardImpl {
+public final class WhiptongueFrog extends CardImpl {
 
     public WhiptongueFrog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

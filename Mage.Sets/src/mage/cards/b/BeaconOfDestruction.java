@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class BeaconOfDestruction extends CardImpl {
+public final class BeaconOfDestruction extends CardImpl {
 
     public BeaconOfDestruction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");

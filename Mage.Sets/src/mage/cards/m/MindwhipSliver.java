@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author anonymous
  */
-public class MindwhipSliver extends CardImpl {
+public final class MindwhipSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 

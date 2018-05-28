@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class SilverSeraph extends CardImpl {
+public final class SilverSeraph extends CardImpl {
 
     public SilverSeraph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");

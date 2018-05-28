@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class BorosCluestone extends CardImpl {
+public final class BorosCluestone extends CardImpl {
 
     public BorosCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

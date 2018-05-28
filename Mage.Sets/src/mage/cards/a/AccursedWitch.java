@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author halljared
  */
-public class AccursedWitch extends CardImpl {
+public final class AccursedWitch extends CardImpl {
 
     public AccursedWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

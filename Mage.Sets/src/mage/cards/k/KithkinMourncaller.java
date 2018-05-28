@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class KithkinMourncaller extends CardImpl {
+public final class KithkinMourncaller extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("an attacking Kithkin or Elf");
 

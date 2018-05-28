@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class AvenSquire extends CardImpl {
+public final class AvenSquire extends CardImpl {
 
     public AvenSquire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

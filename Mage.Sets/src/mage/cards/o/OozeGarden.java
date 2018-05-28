@@ -58,7 +58,7 @@ import mage.util.SubTypeList;
  *
  * @author Plopman
  */
-public class OozeGarden extends CardImpl {
+public final class OozeGarden extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ooze creature");
     static{

@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class GoblinTestPilot extends CardImpl {
+public final class GoblinTestPilot extends CardImpl {
 
     public GoblinTestPilot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");

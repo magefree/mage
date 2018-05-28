@@ -41,7 +41,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LoneFox
  */
-public class SkyshroudBlessing extends CardImpl {
+public final class SkyshroudBlessing extends CardImpl {
 
     public SkyshroudBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

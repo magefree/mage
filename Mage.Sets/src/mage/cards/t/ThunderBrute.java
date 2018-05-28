@@ -47,7 +47,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class ThunderBrute extends CardImpl {
+public final class ThunderBrute extends CardImpl {
 
     public ThunderBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

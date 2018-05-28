@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class ThirstForKnowledge extends CardImpl {
+public final class ThirstForKnowledge extends CardImpl {
 
     public ThirstForKnowledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

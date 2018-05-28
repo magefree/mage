@@ -46,7 +46,7 @@ import mage.game.permanent.token.SoldierTokenWithHaste;
  *
  * @author Plopman
  */
-public class SunhomeGuildmage extends CardImpl {
+public final class SunhomeGuildmage extends CardImpl {
 
     public SunhomeGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");

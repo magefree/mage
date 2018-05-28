@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author noxx
  */
-public class CorpseTraders extends CardImpl {
+public final class CorpseTraders extends CardImpl {
 
     public CorpseTraders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

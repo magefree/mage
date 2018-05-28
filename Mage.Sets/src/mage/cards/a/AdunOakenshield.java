@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author shieldal
  */
-public class AdunOakenshield extends CardImpl {
+public final class AdunOakenshield extends CardImpl {
 
     public AdunOakenshield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");

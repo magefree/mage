@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class ThievesFortune extends CardImpl {
+public final class ThievesFortune extends CardImpl {
 
     public ThievesFortune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");

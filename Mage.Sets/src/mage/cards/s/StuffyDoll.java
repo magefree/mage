@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class StuffyDoll extends CardImpl {
+public final class StuffyDoll extends CardImpl {
 
     public StuffyDoll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

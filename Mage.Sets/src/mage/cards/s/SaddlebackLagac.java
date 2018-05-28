@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SaddlebackLagac extends CardImpl {
+public final class SaddlebackLagac extends CardImpl {
 
     private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("target creatures");
 

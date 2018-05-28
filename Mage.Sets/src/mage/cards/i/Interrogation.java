@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class Interrogation extends CardImpl {
+public final class Interrogation extends CardImpl {
 
     public Interrogation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

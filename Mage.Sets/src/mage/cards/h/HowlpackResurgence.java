@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class HowlpackResurgence extends CardImpl {
+public final class HowlpackResurgence extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control that's a Wolf or a Werewolf");
 

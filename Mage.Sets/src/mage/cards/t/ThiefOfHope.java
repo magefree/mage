@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author Loki
  */
-public class ThiefOfHope extends CardImpl {
+public final class ThiefOfHope extends CardImpl {
 
     public ThiefOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

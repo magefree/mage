@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author Styxo
  */
-public class FerocityOfTheUnderworld extends CardImpl {
+public final class FerocityOfTheUnderworld extends CardImpl {
 
     private static final FilterNonlandPermanent filterMode1 = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
 

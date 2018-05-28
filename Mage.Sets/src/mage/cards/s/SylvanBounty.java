@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class SylvanBounty extends CardImpl {
+public final class SylvanBounty extends CardImpl {
 
     public SylvanBounty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{G}");

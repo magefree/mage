@@ -36,7 +36,7 @@ import mage.abilities.keyword.ChangelingAbility;
  *
  * @author spjspj
  */
-public class CribSwapShapeshifterWhiteToken extends TokenImpl {
+public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
 
     public CribSwapShapeshifterWhiteToken() {
         super("Shapeshifter", "1/1 colorless Shapeshifter creature token with changeling");

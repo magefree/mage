@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class PsychicTransfer extends CardImpl {
+public final class PsychicTransfer extends CardImpl {
 
     public PsychicTransfer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");

@@ -45,7 +45,7 @@ import mage.target.TargetSource;
  * 
  * @author L_J
  */
-public class EyeForAnEye extends CardImpl {
+public final class EyeForAnEye extends CardImpl {
 
     public EyeForAnEye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");

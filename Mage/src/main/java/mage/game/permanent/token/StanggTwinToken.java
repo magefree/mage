@@ -36,7 +36,7 @@ import mage.constants.SuperType;
  *
  * @author L_J
  */
-public class StanggTwinToken extends TokenImpl {
+public final class StanggTwinToken extends TokenImpl {
 
     public StanggTwinToken() {
         super("Stangg Twin", "legendary 3/4 red and green Human Warrior creature token named Stangg Twin");

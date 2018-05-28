@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author icetc
  */
-public class Okk extends CardImpl {
+public final class Okk extends CardImpl {
 
     public Okk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

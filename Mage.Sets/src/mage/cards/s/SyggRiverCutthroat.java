@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SyggRiverCutthroat extends CardImpl {
+public final class SyggRiverCutthroat extends CardImpl {
 
     public SyggRiverCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}");

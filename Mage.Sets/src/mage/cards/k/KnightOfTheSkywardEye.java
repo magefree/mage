@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Alvin
  */
-public class KnightOfTheSkywardEye extends CardImpl {
+public final class KnightOfTheSkywardEye extends CardImpl {
 
     public KnightOfTheSkywardEye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

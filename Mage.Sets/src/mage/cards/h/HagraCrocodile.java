@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class HagraCrocodile extends CardImpl {
+public final class HagraCrocodile extends CardImpl {
 
     public HagraCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

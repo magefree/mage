@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class ThranWeaponry extends CardImpl {
+public final class ThranWeaponry extends CardImpl {
 
     public ThranWeaponry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

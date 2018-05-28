@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class GildedLotus extends CardImpl {
+public final class GildedLotus extends CardImpl {
 
     public GildedLotus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

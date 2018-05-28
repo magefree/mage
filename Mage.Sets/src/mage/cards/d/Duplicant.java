@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Duplicant extends CardImpl {
+public final class Duplicant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 

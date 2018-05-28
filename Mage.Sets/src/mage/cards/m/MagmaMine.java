@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class MagmaMine extends CardImpl {
+public final class MagmaMine extends CardImpl {
 
     public MagmaMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

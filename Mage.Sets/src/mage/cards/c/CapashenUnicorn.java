@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author anonymous
  */
-public class CapashenUnicorn extends CardImpl {
+public final class CapashenUnicorn extends CardImpl {
 
     public CapashenUnicorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

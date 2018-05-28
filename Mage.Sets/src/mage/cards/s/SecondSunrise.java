@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SecondSunrise extends CardImpl {
+public final class SecondSunrise extends CardImpl {
 
     public SecondSunrise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");

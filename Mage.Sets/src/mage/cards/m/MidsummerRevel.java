@@ -48,7 +48,7 @@ import mage.game.permanent.token.BeastToken;
  *
  * @author LoneFox
  */
-public class MidsummerRevel extends CardImpl {
+public final class MidsummerRevel extends CardImpl {
 
     public MidsummerRevel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");

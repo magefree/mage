@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Loki
  */
-public class GlassdustHulk extends CardImpl {
+public final class GlassdustHulk extends CardImpl {
 
     private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
 

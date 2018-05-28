@@ -36,7 +36,7 @@ import mage.constants.SuperType;
  *
  * @author TheElk801
  */
-public class MowuToken extends TokenImpl {
+public final class MowuToken extends TokenImpl {
 
     public MowuToken() {
         super("Mowu", "legendary 3/3 green Hound creature token named Mowu");

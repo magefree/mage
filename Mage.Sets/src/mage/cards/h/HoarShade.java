@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author hanasu
  */
-public class HoarShade extends CardImpl {
+public final class HoarShade extends CardImpl {
 
     public HoarShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

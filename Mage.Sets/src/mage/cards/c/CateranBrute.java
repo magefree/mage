@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class CateranBrute extends CardImpl {
+public final class CateranBrute extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 2 or less");
 

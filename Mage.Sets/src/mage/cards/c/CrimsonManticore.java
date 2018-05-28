@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author jeffwadsworth
  */
-public class CrimsonManticore extends CardImpl {
+public final class CrimsonManticore extends CardImpl {
 
     public CrimsonManticore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

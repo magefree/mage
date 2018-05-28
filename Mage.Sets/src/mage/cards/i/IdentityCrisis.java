@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class IdentityCrisis extends CardImpl {
+public final class IdentityCrisis extends CardImpl {
 
     public IdentityCrisis (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}{B}{B}");

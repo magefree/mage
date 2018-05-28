@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class BarbarianGeneral extends CardImpl {
+public final class BarbarianGeneral extends CardImpl {
 
     public BarbarianGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

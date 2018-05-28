@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class RelentlessRaptor extends CardImpl {
+public final class RelentlessRaptor extends CardImpl {
 
     public RelentlessRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");

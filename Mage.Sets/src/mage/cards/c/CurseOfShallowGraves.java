@@ -56,7 +56,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CurseOfShallowGraves extends CardImpl {
+public final class CurseOfShallowGraves extends CardImpl {
 
     public CurseOfShallowGraves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

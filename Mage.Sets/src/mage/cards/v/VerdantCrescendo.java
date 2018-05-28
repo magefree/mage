@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class VerdantCrescendo extends CardImpl {
+public final class VerdantCrescendo extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Nissa, Nature's Artisan");
 

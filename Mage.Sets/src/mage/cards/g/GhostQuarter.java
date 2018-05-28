@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class GhostQuarter extends CardImpl {
+public final class GhostQuarter extends CardImpl {
 
     public GhostQuarter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

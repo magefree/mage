@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class DinOfTheFireherd extends CardImpl {
+public final class DinOfTheFireherd extends CardImpl {
 
     public DinOfTheFireherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B/R}{B/R}{B/R}");

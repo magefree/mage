@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author anonymous
  */
-public class MuragandaPetroglyphs extends CardImpl {
+public final class MuragandaPetroglyphs extends CardImpl {
 
     private static final FilterCreaturePermanent filterNoAbilities
             = new FilterCreaturePermanent("Creatures with no ability");

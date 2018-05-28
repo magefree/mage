@@ -55,7 +55,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author fireshoes
  */
-public class Gigantoplasm extends CardImpl {
+public final class Gigantoplasm extends CardImpl {
 
     public Gigantoplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class MtendaHerder extends CardImpl {
+public final class MtendaHerder extends CardImpl {
 
     public MtendaHerder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

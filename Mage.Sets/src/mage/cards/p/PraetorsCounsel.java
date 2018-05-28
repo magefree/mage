@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PraetorsCounsel extends CardImpl {
+public final class PraetorsCounsel extends CardImpl {
 
     public PraetorsCounsel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}{G}{G}");

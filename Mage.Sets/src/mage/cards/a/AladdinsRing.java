@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class AladdinsRing extends CardImpl {
+public final class AladdinsRing extends CardImpl {
 
     public AladdinsRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{8}");

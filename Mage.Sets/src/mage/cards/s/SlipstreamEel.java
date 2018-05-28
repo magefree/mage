@@ -44,7 +44,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class SlipstreamEel extends CardImpl {
+public final class SlipstreamEel extends CardImpl {
 
     public SlipstreamEel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class WindbornMuse extends CardImpl {
+public final class WindbornMuse extends CardImpl {
 
     public WindbornMuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

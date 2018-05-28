@@ -58,7 +58,7 @@ import mage.watchers.Watcher;
 /**
  * @author emerald000
  */
-public class RasputinDreamweaver extends CardImpl {
+public final class RasputinDreamweaver extends CardImpl {
 
     public RasputinDreamweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{U}");

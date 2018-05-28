@@ -45,7 +45,7 @@ import mage.game.stack.StackObject;
  *
  * @author TheElk801
  */
-public class JadedResponse extends CardImpl {
+public final class JadedResponse extends CardImpl {
 
     public JadedResponse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

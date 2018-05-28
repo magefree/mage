@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class MijaeDjinn extends CardImpl {
+public final class MijaeDjinn extends CardImpl {
 
     public MijaeDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");

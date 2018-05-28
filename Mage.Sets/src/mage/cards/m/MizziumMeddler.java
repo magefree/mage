@@ -43,7 +43,7 @@ import mage.target.TargetStackObject;
  *
  * @author fireshoes
  */
-public class MizziumMeddler extends CardImpl {
+public final class MizziumMeddler extends CardImpl {
 
     public MizziumMeddler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

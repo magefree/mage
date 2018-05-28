@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class AuspiciousAncestor extends CardImpl {
+public final class AuspiciousAncestor extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a white spell");
 

@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author emerald000
  */
-public class AncestralKnowledge extends CardImpl {
+public final class AncestralKnowledge extends CardImpl {
 
     public AncestralKnowledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

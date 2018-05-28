@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class WreathofGeists extends CardImpl {
+public final class WreathofGeists extends CardImpl {
 
     public WreathofGeists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

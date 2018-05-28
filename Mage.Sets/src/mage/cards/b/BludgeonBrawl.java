@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class BludgeonBrawl extends CardImpl {
+public final class BludgeonBrawl extends CardImpl {
 
     public BludgeonBrawl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

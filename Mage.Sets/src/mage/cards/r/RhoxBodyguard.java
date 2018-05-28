@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class RhoxBodyguard extends CardImpl {
+public final class RhoxBodyguard extends CardImpl {
 
     public RhoxBodyguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");

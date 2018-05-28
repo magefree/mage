@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class NightOfSoulsBetrayal extends CardImpl {
+public final class NightOfSoulsBetrayal extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures");
 
     public NightOfSoulsBetrayal (UUID ownerId, CardSetInfo setInfo) {

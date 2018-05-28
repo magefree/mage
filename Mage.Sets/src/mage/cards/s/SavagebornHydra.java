@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class SavagebornHydra extends CardImpl {
+public final class SavagebornHydra extends CardImpl {
 
     public SavagebornHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{R}{G}");

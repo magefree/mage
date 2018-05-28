@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class RitualOfRejuvenation extends CardImpl {
+public final class RitualOfRejuvenation extends CardImpl {
 
     public RitualOfRejuvenation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

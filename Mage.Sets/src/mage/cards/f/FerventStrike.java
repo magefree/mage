@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class FerventStrike extends CardImpl {
+public final class FerventStrike extends CardImpl {
 
     public FerventStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

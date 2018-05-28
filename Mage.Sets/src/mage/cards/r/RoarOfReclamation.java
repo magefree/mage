@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class RoarOfReclamation extends CardImpl {
+public final class RoarOfReclamation extends CardImpl {
 
     public RoarOfReclamation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");

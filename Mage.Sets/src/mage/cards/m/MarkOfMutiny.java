@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class MarkOfMutiny extends CardImpl {
+public final class MarkOfMutiny extends CardImpl {
 
     public MarkOfMutiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

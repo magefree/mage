@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class RiddleOfLightning extends CardImpl {
+public final class RiddleOfLightning extends CardImpl {
 
     public RiddleOfLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");

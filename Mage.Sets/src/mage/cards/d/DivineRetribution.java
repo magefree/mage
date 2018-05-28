@@ -40,7 +40,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author TheElk801
  */
-public class DivineRetribution extends CardImpl {
+public final class DivineRetribution extends CardImpl {
 
     public DivineRetribution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

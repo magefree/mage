@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author FenrisulfrX
  */
-public class HornetCannon extends CardImpl {
+public final class HornetCannon extends CardImpl {
 
     public HornetCannon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

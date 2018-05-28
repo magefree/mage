@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class SmolderInitiate extends CardImpl {
+public final class SmolderInitiate extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("black spell");
     

@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Derpthemeus
  */
-public class RushwoodElemental extends CardImpl {
+public final class RushwoodElemental extends CardImpl {
 
     public RushwoodElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{G}{G}");

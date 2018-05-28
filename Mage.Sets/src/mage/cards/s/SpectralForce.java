@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class SpectralForce extends CardImpl {
+public final class SpectralForce extends CardImpl {
 
     public SpectralForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

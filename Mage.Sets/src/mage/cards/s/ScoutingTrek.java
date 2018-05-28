@@ -38,7 +38,7 @@ import mage.filter.common.FilterBasicLandCard;
  *
  * @author LoneFox
  */
-public class ScoutingTrek extends CardImpl {
+public final class ScoutingTrek extends CardImpl {
 
     public ScoutingTrek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

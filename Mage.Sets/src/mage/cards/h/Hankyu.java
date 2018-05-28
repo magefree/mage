@@ -55,7 +55,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class Hankyu extends CardImpl {
+public final class Hankyu extends CardImpl {
 
     public Hankyu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

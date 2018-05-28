@@ -39,7 +39,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author North
  */
-public class TrumpetBlast extends CardImpl {
+public final class TrumpetBlast extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 

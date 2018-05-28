@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class GutturalResponse extends CardImpl {
+public final class GutturalResponse extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("blue instant spell");
 

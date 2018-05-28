@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class LuSuWuAdvisor extends CardImpl {
+public final class LuSuWuAdvisor extends CardImpl {
 
     public LuSuWuAdvisor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

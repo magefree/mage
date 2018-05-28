@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class KrenkosEnforcer extends CardImpl {
+public final class KrenkosEnforcer extends CardImpl {
 
     public KrenkosEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

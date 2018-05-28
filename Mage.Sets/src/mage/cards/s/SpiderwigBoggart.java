@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SpiderwigBoggart extends CardImpl {
+public final class SpiderwigBoggart extends CardImpl {
 
     public SpiderwigBoggart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

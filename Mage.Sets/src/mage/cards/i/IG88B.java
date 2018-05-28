@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class IG88B extends CardImpl {
+public final class IG88B extends CardImpl {
 
     public IG88B(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}{B}");

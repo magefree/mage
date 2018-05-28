@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class WingsOfHope extends CardImpl {
+public final class WingsOfHope extends CardImpl {
 
     public WingsOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}");

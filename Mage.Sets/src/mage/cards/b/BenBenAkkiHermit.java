@@ -51,7 +51,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class BenBenAkkiHermit extends CardImpl {
+public final class BenBenAkkiHermit extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("untapped Mountain you control");
 

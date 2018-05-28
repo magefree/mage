@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class HapatraVizierOfPoisons extends CardImpl {
+public final class HapatraVizierOfPoisons extends CardImpl {
 
     public HapatraVizierOfPoisons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");

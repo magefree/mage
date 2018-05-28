@@ -42,7 +42,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author shieldal
  */
-public class Decimate extends CardImpl {
+public final class Decimate extends CardImpl {
 
     public Decimate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{G}");

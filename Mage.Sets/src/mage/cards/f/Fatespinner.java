@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class Fatespinner extends CardImpl {
+public final class Fatespinner extends CardImpl {
 
     public Fatespinner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

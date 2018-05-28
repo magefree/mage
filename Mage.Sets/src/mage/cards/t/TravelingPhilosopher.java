@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class TravelingPhilosopher extends CardImpl {
+public final class TravelingPhilosopher extends CardImpl {
 
     public TravelingPhilosopher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

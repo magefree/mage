@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class MerrowCommerce extends CardImpl {
+public final class MerrowCommerce extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
 

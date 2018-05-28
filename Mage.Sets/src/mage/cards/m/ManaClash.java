@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ManaClash extends CardImpl {
+public final class ManaClash extends CardImpl {
 
     public ManaClash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

@@ -44,7 +44,7 @@ import mage.filter.FilterPermanent;
  *
  * @author Styxo
  */
-public class TrooperArmor extends CardImpl {
+public final class TrooperArmor extends CardImpl {
 
     public TrooperArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

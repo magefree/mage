@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author Styxo
  */
-public class ParallectricFeedback extends CardImpl {
+public final class ParallectricFeedback extends CardImpl {
 
     public ParallectricFeedback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");

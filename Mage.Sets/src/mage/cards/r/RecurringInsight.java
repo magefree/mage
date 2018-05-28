@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class RecurringInsight extends CardImpl {
+public final class RecurringInsight extends CardImpl {
 
     public RecurringInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");

@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class NessianDemolok extends CardImpl {
+public final class NessianDemolok extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 

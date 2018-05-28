@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HeliodGodOfTheSunToken extends TokenImpl {
+public final class HeliodGodOfTheSunToken extends TokenImpl {
 
     public HeliodGodOfTheSunToken() {
         super("Cleric", "2/1 white Cleric enchantment creature token");

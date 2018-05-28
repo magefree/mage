@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class SentinelTotem extends CardImpl {
+public final class SentinelTotem extends CardImpl {
 
     public SentinelTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class FountainOfCho extends CardImpl {
+public final class FountainOfCho extends CardImpl {
 
     public FountainOfCho(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

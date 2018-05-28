@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com & L_J
  */
-public class VexingArcanix extends CardImpl {
+public final class VexingArcanix extends CardImpl {
 
     public VexingArcanix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

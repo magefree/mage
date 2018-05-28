@@ -43,7 +43,7 @@ import mage.filter.common.FilterHistoricCard;
  *
  * @author LevelX2
  */
-public class JhoirasFamiliar extends CardImpl {
+public final class JhoirasFamiliar extends CardImpl {
 
     public JhoirasFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

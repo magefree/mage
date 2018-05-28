@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class LayBareTheHeart extends CardImpl {
+public final class LayBareTheHeart extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("nonlegendary, nonland card");
 

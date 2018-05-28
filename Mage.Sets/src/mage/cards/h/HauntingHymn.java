@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author nigelzor
  */
-public class HauntingHymn extends CardImpl {
+public final class HauntingHymn extends CardImpl {
 
     public HauntingHymn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterPlaneswalkerPermanent;
  *
  * @author LevelX2
  */
-public class MercilessEviction extends CardImpl {
+public final class MercilessEviction extends CardImpl {
 
     public MercilessEviction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{B}");

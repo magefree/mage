@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class HuntedPhantasm extends CardImpl {
+public final class HuntedPhantasm extends CardImpl {
 
     public HuntedPhantasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

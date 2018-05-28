@@ -59,7 +59,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class OpalPalace extends CardImpl {
+public final class OpalPalace extends CardImpl {
 
     public OpalPalace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

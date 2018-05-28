@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AggressiveUrge extends CardImpl {
+public final class AggressiveUrge extends CardImpl {
 
     public AggressiveUrge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author spjspj
  */
-public class WildfireEternal extends CardImpl {
+public final class WildfireEternal extends CardImpl {
 
     public WildfireEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

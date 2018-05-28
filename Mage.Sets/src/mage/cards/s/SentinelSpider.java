@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SentinelSpider extends CardImpl {
+public final class SentinelSpider extends CardImpl {
 
     public SentinelSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

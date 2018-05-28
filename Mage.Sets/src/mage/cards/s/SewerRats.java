@@ -46,7 +46,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class SewerRats extends CardImpl {
+public final class SewerRats extends CardImpl {
 
     public SewerRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

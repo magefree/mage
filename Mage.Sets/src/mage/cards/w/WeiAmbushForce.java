@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class WeiAmbushForce extends CardImpl {
+public final class WeiAmbushForce extends CardImpl {
 
     public WeiAmbushForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

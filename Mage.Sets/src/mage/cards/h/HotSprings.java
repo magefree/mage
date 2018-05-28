@@ -53,7 +53,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class HotSprings extends CardImpl {
+public final class HotSprings extends CardImpl {
 
     public HotSprings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

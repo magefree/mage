@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AetherAdept extends CardImpl {
+public final class AetherAdept extends CardImpl {
 
     public AetherAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

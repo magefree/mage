@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Alexsandr0x
  */
-public class Machinate extends CardImpl {
+public final class Machinate extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
 
     static {

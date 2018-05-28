@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class BlightedGorge extends CardImpl {
+public final class BlightedGorge extends CardImpl {
 
     public BlightedGorge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

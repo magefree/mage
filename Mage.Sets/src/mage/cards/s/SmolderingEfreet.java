@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class SmolderingEfreet extends CardImpl {
+public final class SmolderingEfreet extends CardImpl {
 
     public SmolderingEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class GutterSkulk extends CardImpl {
+public final class GutterSkulk extends CardImpl {
 
     public GutterSkulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

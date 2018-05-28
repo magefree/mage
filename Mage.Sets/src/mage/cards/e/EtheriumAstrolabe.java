@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class EtheriumAstrolabe extends CardImpl {
+public final class EtheriumAstrolabe extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
     static{

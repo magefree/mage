@@ -45,7 +45,7 @@ import mage.watchers.common.RevoltWatcher;
 /**
  * @author JRHerlehy
  */
-public class SilkweaverElite extends CardImpl {
+public final class SilkweaverElite extends CardImpl {
 
     public SilkweaverElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

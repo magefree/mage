@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class LatchkeyFaerie extends CardImpl {
+public final class LatchkeyFaerie extends CardImpl {
 
     public LatchkeyFaerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

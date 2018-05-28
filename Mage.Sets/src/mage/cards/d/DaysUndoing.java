@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class DaysUndoing extends CardImpl {
+public final class DaysUndoing extends CardImpl {
 
     public DaysUndoing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

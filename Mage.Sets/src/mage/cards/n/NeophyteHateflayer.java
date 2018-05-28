@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class NeophyteHateflayer extends CardImpl {
+public final class NeophyteHateflayer extends CardImpl {
 
     public NeophyteHateflayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

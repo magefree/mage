@@ -39,7 +39,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class Devastate extends CardImpl {
+public final class Devastate extends CardImpl {
 
     public Devastate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

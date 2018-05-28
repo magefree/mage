@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class IrrigationDitch extends CardImpl {
+public final class IrrigationDitch extends CardImpl {
 
     public IrrigationDitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

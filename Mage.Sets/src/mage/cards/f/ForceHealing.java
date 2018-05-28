@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Styxo
  */
-public class ForceHealing extends CardImpl {
+public final class ForceHealing extends CardImpl {
 
     public ForceHealing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

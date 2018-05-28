@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class MoldgrafMonstrosity extends CardImpl {
+public final class MoldgrafMonstrosity extends CardImpl {
 
     public MoldgrafMonstrosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");

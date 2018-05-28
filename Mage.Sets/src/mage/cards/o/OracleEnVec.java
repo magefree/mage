@@ -65,7 +65,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author emerald000
  */
-public class OracleEnVec extends CardImpl {
+public final class OracleEnVec extends CardImpl {
 
     public OracleEnVec(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

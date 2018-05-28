@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author fireshoes
  */
-public class DakkonBlackblade extends CardImpl {
+public final class DakkonBlackblade extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 

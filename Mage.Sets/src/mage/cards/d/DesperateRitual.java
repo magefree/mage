@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class DesperateRitual extends CardImpl {
+public final class DesperateRitual extends CardImpl {
 
     public DesperateRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

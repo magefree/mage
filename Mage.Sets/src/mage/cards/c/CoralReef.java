@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CoralReef extends CardImpl {
+public final class CoralReef extends CardImpl {
     
     private static final FilterControlledPermanent islandFilter = new FilterControlledPermanent("an Island");
     private static final FilterControlledCreaturePermanent untappedBlueCreatureFilter = new FilterControlledCreaturePermanent("an untapped blue creature you control");

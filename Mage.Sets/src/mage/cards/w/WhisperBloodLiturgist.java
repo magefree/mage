@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WhisperBloodLiturgist extends CardImpl {
+public final class WhisperBloodLiturgist extends CardImpl {
 
     public WhisperBloodLiturgist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

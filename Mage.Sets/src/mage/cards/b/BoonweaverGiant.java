@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class BoonweaverGiant extends CardImpl {
+public final class BoonweaverGiant extends CardImpl {
 
     public BoonweaverGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class AvenFisher extends CardImpl {
+public final class AvenFisher extends CardImpl {
 
     public AvenFisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

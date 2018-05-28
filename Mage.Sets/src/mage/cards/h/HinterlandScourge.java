@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward
  */
-public class HinterlandScourge extends CardImpl {
+public final class HinterlandScourge extends CardImpl {
 
     public HinterlandScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class AscendingAven extends CardImpl {
+public final class AscendingAven extends CardImpl {
 
     public AscendingAven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

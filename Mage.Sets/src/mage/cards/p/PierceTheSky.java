@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class PierceTheSky extends CardImpl {
+public final class PierceTheSky extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

@@ -39,7 +39,7 @@ import mage.filter.common.FilterBlockingCreature;
  *
  * @author LevelX
  */
-public class HoldTheLine extends CardImpl {
+public final class HoldTheLine extends CardImpl {
 
     private static final FilterBlockingCreature filter = new FilterBlockingCreature("Blocking creatures");
 

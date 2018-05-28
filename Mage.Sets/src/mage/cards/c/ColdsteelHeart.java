@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author Plopman
  */
-public class ColdsteelHeart extends CardImpl {
+public final class ColdsteelHeart extends CardImpl {
 
     public ColdsteelHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  * @author KholdFuzion
 
  */
-public class Braingeyser extends CardImpl {
+public final class Braingeyser extends CardImpl {
 
     public Braingeyser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");

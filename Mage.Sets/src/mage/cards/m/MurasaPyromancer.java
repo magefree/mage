@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MurasaPyromancer extends CardImpl {
+public final class MurasaPyromancer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Ally you control");
 

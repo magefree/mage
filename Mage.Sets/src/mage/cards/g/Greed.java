@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Greed extends CardImpl {
+public final class Greed extends CardImpl {
 
     public Greed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

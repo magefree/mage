@@ -43,7 +43,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author North
  */
-public class AgonyWarp extends CardImpl {
+public final class AgonyWarp extends CardImpl {
 
     public AgonyWarp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");

@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SelvalaExplorerReturned extends CardImpl {
+public final class SelvalaExplorerReturned extends CardImpl {
 
     public SelvalaExplorerReturned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

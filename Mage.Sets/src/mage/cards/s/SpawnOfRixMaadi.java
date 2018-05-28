@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SpawnOfRixMaadi extends CardImpl {
+public final class SpawnOfRixMaadi extends CardImpl {
  
     public SpawnOfRixMaadi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");

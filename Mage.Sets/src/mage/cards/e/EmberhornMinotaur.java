@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author Styxo
  */
-public class EmberhornMinotaur extends CardImpl {
+public final class EmberhornMinotaur extends CardImpl {
 
     public EmberhornMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

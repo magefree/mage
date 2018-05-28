@@ -61,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SimicManipulator extends CardImpl {
+public final class SimicManipulator extends CardImpl {
 
     private final UUID originalId;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("with power less than or equal to the number of +1/+1 counters removed this way");

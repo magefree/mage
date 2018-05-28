@@ -44,7 +44,7 @@ import mage.constants.*;
  *
  * @author fireshoes
  */
-public class AshmouthBlade extends CardImpl {
+public final class AshmouthBlade extends CardImpl {
 
     public AshmouthBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"");

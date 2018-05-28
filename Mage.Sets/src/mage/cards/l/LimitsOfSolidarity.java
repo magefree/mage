@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class LimitsOfSolidarity extends CardImpl {
+public final class LimitsOfSolidarity extends CardImpl {
 
     public LimitsOfSolidarity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

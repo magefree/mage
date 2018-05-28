@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class HuttCrimeLord extends CardImpl {
+public final class HuttCrimeLord extends CardImpl {
 
     public HuttCrimeLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

@@ -44,7 +44,7 @@ import mage.game.permanent.token.WurmToken2;
  *
  * @author Plopman
  */
-public class WorldspineWurm extends CardImpl {
+public final class WorldspineWurm extends CardImpl {
 
     public WorldspineWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{G}{G}{G}");

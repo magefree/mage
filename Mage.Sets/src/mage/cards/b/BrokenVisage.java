@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class BrokenVisage extends CardImpl {
+public final class BrokenVisage extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact attacking creature");
     static {

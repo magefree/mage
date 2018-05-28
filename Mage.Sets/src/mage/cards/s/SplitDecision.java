@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class SplitDecision extends CardImpl {
+public final class SplitDecision extends CardImpl {
 
     public SplitDecision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

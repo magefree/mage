@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class DriftOfTheDead extends CardImpl {
+public final class DriftOfTheDead extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("snow lands you control");
 

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class ElfhamePalace extends CardImpl {
+public final class ElfhamePalace extends CardImpl {
 
     public ElfhamePalace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

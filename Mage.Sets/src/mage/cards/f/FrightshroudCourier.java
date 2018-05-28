@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class FrightshroudCourier extends CardImpl {
+public final class FrightshroudCourier extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creature");
 

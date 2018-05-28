@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author emerald000
  */
-public class GoblinPyromancer extends CardImpl {
+public final class GoblinPyromancer extends CardImpl {
 
     private static final FilterPermanent filterPermanent = new FilterPermanent("Goblins");
 

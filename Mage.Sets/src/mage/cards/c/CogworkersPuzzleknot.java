@@ -44,7 +44,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author emerald000
  */
-public class CogworkersPuzzleknot extends CardImpl {
+public final class CogworkersPuzzleknot extends CardImpl {
 
     public CogworkersPuzzleknot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

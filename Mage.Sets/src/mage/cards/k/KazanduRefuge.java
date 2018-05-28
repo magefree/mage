@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class KazanduRefuge extends CardImpl {
+public final class KazanduRefuge extends CardImpl {
 
     public KazanduRefuge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

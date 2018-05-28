@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class NemesisOfReason extends CardImpl {
+public final class NemesisOfReason extends CardImpl {
 
     public NemesisOfReason (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");

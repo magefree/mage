@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class WingedShepherd extends CardImpl {
+public final class WingedShepherd extends CardImpl {
 
     public WingedShepherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");

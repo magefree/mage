@@ -42,7 +42,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class Morinfen extends CardImpl {
+public final class Morinfen extends CardImpl {
 
     public Morinfen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

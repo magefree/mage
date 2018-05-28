@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class ReinsOfTheVinesteed extends CardImpl {
+public final class ReinsOfTheVinesteed extends CardImpl {
 
     public ReinsOfTheVinesteed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

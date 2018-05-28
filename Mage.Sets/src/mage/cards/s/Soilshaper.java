@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author Loki
  */
-public class Soilshaper extends CardImpl {
+public final class Soilshaper extends CardImpl {
 
 
     public Soilshaper(UUID ownerId, CardSetInfo setInfo) {

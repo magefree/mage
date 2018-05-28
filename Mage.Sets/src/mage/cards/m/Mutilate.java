@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class Mutilate extends CardImpl {
+public final class Mutilate extends CardImpl {
 
     private static final String ruleText = "All creatures get -1/-1 until end of turn for each Swamp you control";
 

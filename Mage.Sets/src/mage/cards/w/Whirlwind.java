@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class Whirlwind extends CardImpl {
+public final class Whirlwind extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying");
 

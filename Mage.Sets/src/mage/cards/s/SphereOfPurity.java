@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class SphereOfPurity extends CardImpl {
+public final class SphereOfPurity extends CardImpl {
 
     public SphereOfPurity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

@@ -46,7 +46,7 @@ import mage.counters.CounterType;
 /**
  * @author Loki
  */
-public class SigilOfDistinction extends CardImpl {
+public final class SigilOfDistinction extends CardImpl {
 
     public SigilOfDistinction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}");

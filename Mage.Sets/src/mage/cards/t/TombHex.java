@@ -43,7 +43,7 @@ import mage.watchers.common.LandfallWatcher;
  *
  * @author jeffwadsworth
  */
-public class TombHex extends CardImpl {
+public final class TombHex extends CardImpl {
 
     public TombHex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");

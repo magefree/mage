@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author noxx and jeffwadsworth
  */
-public class RhoxFaithmender extends CardImpl {
+public final class RhoxFaithmender extends CardImpl {
 
     public RhoxFaithmender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class ScreechingBat extends CardImpl {
+public final class ScreechingBat extends CardImpl {
 
     public ScreechingBat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

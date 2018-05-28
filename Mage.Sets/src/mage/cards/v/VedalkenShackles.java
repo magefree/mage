@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VedalkenShackles extends CardImpl {
+public final class VedalkenShackles extends CardImpl {
 
     private static final FilterCreaturePermanent controllableCreatures = new FilterCreaturePermanent("creature with power less than or equal to the number of Islands you control");
     static {

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BoltwingMarauder extends CardImpl {
+public final class BoltwingMarauder extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature under your control");
 

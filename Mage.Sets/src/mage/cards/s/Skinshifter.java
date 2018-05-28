@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author North
  */
-public class Skinshifter extends CardImpl {
+public final class Skinshifter extends CardImpl {
 
     public Skinshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

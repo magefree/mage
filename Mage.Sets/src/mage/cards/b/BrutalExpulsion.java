@@ -48,7 +48,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-public class BrutalExpulsion extends CardImpl {
+public final class BrutalExpulsion extends CardImpl {
 
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature");
     static {

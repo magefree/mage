@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class DrakeHatchling extends CardImpl {
+public final class DrakeHatchling extends CardImpl {
 
     public DrakeHatchling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

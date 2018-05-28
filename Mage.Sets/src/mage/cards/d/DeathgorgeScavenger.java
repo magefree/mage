@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author TheElk801
  */
-public class DeathgorgeScavenger extends CardImpl {
+public final class DeathgorgeScavenger extends CardImpl {
 
     public DeathgorgeScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

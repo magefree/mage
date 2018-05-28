@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class MineMineMine extends CardImpl {
+public final class MineMineMine extends CardImpl {
 
     public MineMineMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");

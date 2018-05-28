@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author Will
  */
-public class WizardsRetort extends CardImpl {
+public final class WizardsRetort extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Wizard");
 

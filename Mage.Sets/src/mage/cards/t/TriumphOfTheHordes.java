@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
 /**
  * @author North
  */
-public class TriumphOfTheHordes extends CardImpl {
+public final class TriumphOfTheHordes extends CardImpl {
 
 
     public TriumphOfTheHordes(UUID ownerId, CardSetInfo setInfo) {

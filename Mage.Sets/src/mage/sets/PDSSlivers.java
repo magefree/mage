@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class PDSSlivers extends ExpansionSet {
+public final class PDSSlivers extends ExpansionSet {
 
     private static final PDSSlivers instance = new PDSSlivers();
 

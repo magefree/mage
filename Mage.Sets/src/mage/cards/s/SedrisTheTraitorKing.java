@@ -44,7 +44,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class SedrisTheTraitorKing extends CardImpl {
+public final class SedrisTheTraitorKing extends CardImpl {
 
     public SedrisTheTraitorKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}{R}");

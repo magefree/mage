@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class GarrukApexPredator extends CardImpl {
+public final class GarrukApexPredator extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another target planeswalker");
 

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author TheElk801
  */
-public class FreyalisesCharm extends CardImpl {
+public final class FreyalisesCharm extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("black spell");
 

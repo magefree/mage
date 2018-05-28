@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class HoverguardObserver extends CardImpl {
+public final class HoverguardObserver extends CardImpl {
 
     public HoverguardObserver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

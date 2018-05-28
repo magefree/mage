@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author Jesse Whyte
  */
-public class RetributionOfTheMeek extends CardImpl {
+public final class RetributionOfTheMeek extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or greater");
     

@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class InitiatesCompanion extends CardImpl {
+public final class InitiatesCompanion extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or land");
 

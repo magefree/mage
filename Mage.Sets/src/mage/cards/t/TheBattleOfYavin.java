@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Styxo
  */
-public class TheBattleOfYavin extends CardImpl {
+public final class TheBattleOfYavin extends CardImpl {
 
     public TheBattleOfYavin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");

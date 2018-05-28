@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author fireshoes
  */
-public class KasetoOrochiArchmage extends CardImpl {
+public final class KasetoOrochiArchmage extends CardImpl {
 
     public KasetoOrochiArchmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

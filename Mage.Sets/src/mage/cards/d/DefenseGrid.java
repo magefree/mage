@@ -42,7 +42,7 @@ import mage.game.Game;
  *
  * @author Plopman
  */
-public class DefenseGrid extends CardImpl {
+public final class DefenseGrid extends CardImpl {
 
     public DefenseGrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

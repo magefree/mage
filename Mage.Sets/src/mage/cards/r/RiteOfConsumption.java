@@ -47,7 +47,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class RiteOfConsumption extends CardImpl {
+public final class RiteOfConsumption extends CardImpl {
 
     public RiteOfConsumption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

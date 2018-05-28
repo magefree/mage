@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EldraziMonument extends CardImpl {
+public final class EldraziMonument extends CardImpl {
 
     public EldraziMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

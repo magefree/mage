@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AmbushCommander extends CardImpl {
+public final class AmbushCommander extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ELF, "an Elf");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Forests you control");

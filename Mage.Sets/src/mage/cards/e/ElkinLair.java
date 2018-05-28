@@ -57,7 +57,7 @@ import mage.util.RandomUtil;
  *
  * @author L_J
  */
-public class ElkinLair extends CardImpl {
+public final class ElkinLair extends CardImpl {
 
     public ElkinLair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ScaledWurm extends CardImpl {
+public final class ScaledWurm extends CardImpl {
 
     public ScaledWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}");

@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class ConvictedKiller extends CardImpl {
+public final class ConvictedKiller extends CardImpl {
 
     public ConvictedKiller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

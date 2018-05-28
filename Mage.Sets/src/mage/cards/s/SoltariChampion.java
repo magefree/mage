@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author KholdFuzion
  */
-public class SoltariChampion extends CardImpl {
+public final class SoltariChampion extends CardImpl {
 
     public SoltariChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

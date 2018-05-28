@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ArtisansSorrow extends CardImpl {
+public final class ArtisansSorrow extends CardImpl {
     public ArtisansSorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 

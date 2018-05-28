@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class StormbreathDragon extends CardImpl {
+public final class StormbreathDragon extends CardImpl {
 
     public StormbreathDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

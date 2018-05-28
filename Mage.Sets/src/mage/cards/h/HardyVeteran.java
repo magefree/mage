@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HardyVeteran extends CardImpl {
+public final class HardyVeteran extends CardImpl {
 
     public HardyVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

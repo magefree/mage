@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class Dreadbore extends CardImpl {
+public final class Dreadbore extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
 

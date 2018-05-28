@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class GhalmasWarden extends CardImpl {
+public final class GhalmasWarden extends CardImpl {
 
     private static final String text = "Metalcraft - Ghalma's Warden gets +2/+2 as long as you control three or more artifacts";
 

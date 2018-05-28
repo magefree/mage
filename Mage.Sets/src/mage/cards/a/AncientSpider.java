@@ -41,7 +41,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class AncientSpider extends CardImpl {
+public final class AncientSpider extends CardImpl {
 
     public AncientSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");

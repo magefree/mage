@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class SilverskinArmor extends CardImpl {
+public final class SilverskinArmor extends CardImpl {
 
     public SilverskinArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -52,7 +52,7 @@ import java.util.*;
  *
  * @author LevelX2
  */
-public class GhastlyConscription extends CardImpl {
+public final class GhastlyConscription extends CardImpl {
 
     public GhastlyConscription(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MagusOfTheLibrary extends CardImpl {
+public final class MagusOfTheLibrary extends CardImpl {
 
     public MagusOfTheLibrary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

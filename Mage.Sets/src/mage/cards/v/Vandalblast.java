@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class Vandalblast extends CardImpl {
+public final class Vandalblast extends CardImpl {
 
     private static final FilterArtifactPermanent FILTER = new FilterArtifactPermanent("artifact you don't control");
 

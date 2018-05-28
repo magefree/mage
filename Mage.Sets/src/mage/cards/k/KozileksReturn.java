@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class KozileksReturn extends CardImpl {
+public final class KozileksReturn extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("an Eldrazi creature spell with converted mana cost 7 or greater");
 

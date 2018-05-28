@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author anonymous
  */
-public class ForceSpike extends CardImpl {
+public final class ForceSpike extends CardImpl {
 
     public ForceSpike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

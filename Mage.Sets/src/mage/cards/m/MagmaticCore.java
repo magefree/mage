@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author TheElk801
  */
-public class MagmaticCore extends CardImpl {
+public final class MagmaticCore extends CardImpl {
 
     public MagmaticCore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class FertileGround extends CardImpl {
+public final class FertileGround extends CardImpl {
 
     public FertileGround(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

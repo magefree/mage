@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class DarksteelGargoyle extends CardImpl {
+public final class DarksteelGargoyle extends CardImpl {
 
     public DarksteelGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

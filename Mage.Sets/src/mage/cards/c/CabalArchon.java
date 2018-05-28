@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class CabalArchon extends CardImpl {
+public final class CabalArchon extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cleric");
 

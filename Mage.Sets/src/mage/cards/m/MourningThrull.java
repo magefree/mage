@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MourningThrull extends CardImpl {
+public final class MourningThrull extends CardImpl {
 
     public MourningThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/B}");

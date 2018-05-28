@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class FutureSight extends ExpansionSet {
+public final class FutureSight extends ExpansionSet {
 
     private static final FutureSight instance = new FutureSight();
 

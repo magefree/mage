@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author anonymous
  */
-public class SchoolOfTheUnseen extends CardImpl {
+public final class SchoolOfTheUnseen extends CardImpl {
 
     public SchoolOfTheUnseen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

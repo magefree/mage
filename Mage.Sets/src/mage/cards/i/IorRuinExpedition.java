@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class IorRuinExpedition extends CardImpl {
+public final class IorRuinExpedition extends CardImpl {
 
     public IorRuinExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

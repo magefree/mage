@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BidentOfThassa extends CardImpl {
+public final class BidentOfThassa extends CardImpl {
 
     public BidentOfThassa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.ARTIFACT},"{2}{U}{U}");

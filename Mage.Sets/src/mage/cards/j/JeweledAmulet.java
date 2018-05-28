@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class JeweledAmulet extends CardImpl {
+public final class JeweledAmulet extends CardImpl {
 
     private static final String rule = "{1}, {T}: Put a charge counter on {this}. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on {this}";
 

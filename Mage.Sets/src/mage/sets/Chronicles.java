@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class Chronicles extends ExpansionSet {
+public final class Chronicles extends ExpansionSet {
 
     private static final Chronicles instance = new Chronicles();
 

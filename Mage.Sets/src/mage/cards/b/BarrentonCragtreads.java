@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class BarrentonCragtreads extends CardImpl {
+public final class BarrentonCragtreads extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
 

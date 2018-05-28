@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class MagusOfTheAbyss extends CardImpl {
+public final class MagusOfTheAbyss extends CardImpl {
 
     public MagusOfTheAbyss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

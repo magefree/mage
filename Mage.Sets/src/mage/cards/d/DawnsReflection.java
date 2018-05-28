@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class DawnsReflection extends CardImpl {
+public final class DawnsReflection extends CardImpl {
 
     public DawnsReflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class AviaryMechanic extends CardImpl {
+public final class AviaryMechanic extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent you control");
 

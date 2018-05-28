@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class TidalWaveWallToken extends TokenImpl {
+public final class TidalWaveWallToken extends TokenImpl {
 
     public TidalWaveWallToken() {
         super("Wall", "5/5 blue Wall creature token with defender");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class DespoilerOfSouls extends CardImpl {
+public final class DespoilerOfSouls extends CardImpl {
     
     public DespoilerOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

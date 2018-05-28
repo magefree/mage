@@ -48,7 +48,7 @@ import mage.game.permanent.token.HumanToken;
  *
  * @author anonymous
  */
-public class ThrabenDoomsayer extends CardImpl {
+public final class ThrabenDoomsayer extends CardImpl {
 
     public ThrabenDoomsayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

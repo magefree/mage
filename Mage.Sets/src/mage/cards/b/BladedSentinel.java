@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class BladedSentinel extends CardImpl {
+public final class BladedSentinel extends CardImpl {
 
     public BladedSentinel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

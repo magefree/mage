@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class LightningReflexes extends CardImpl {
+public final class LightningReflexes extends CardImpl {
 
     public LightningReflexes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

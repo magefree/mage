@@ -16,7 +16,7 @@ import mage.players.Player;
 /**
  * @author JRHerlehy Created on 4/8/18.
  */
-public class PrimevalsGloriousRebirth extends CardImpl {
+public final class PrimevalsGloriousRebirth extends CardImpl {
 
     public PrimevalsGloriousRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{B}");

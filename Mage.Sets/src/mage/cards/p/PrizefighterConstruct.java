@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class PrizefighterConstruct extends CardImpl {
+public final class PrizefighterConstruct extends CardImpl {
 
     public PrizefighterConstruct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

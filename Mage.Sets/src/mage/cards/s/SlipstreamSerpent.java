@@ -47,7 +47,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class SlipstreamSerpent extends CardImpl {
+public final class SlipstreamSerpent extends CardImpl {
 
     public SlipstreamSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}");

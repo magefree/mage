@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HecklingFiends extends CardImpl {
+public final class HecklingFiends extends CardImpl {
 
     public HecklingFiends(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class HourOfNeedSphinxToken extends TokenImpl {
+public final class HourOfNeedSphinxToken extends TokenImpl {
 
     public HourOfNeedSphinxToken() {
         super("Sphinx", "4/4 blue Sphinx creature token with flying");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Archer262
  */
-public class DutifulServants extends CardImpl {
+public final class DutifulServants extends CardImpl {
 
     public DutifulServants(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

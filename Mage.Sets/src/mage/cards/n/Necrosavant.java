@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Quercitron
  */
-public class Necrosavant extends CardImpl {
+public final class Necrosavant extends CardImpl {
 
     public Necrosavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

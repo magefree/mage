@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class WinterBlast extends CardImpl {
+public final class WinterBlast extends CardImpl {
 
     public WinterBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");

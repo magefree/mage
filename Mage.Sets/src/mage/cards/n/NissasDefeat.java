@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class NissasDefeat extends CardImpl {
+public final class NissasDefeat extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("Forest, green enchantment, or green planeswalker");
 

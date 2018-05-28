@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class RetractionHelix extends CardImpl {
+public final class RetractionHelix extends CardImpl {
 
     public RetractionHelix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

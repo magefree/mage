@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class AlexisCloak extends CardImpl {
+public final class AlexisCloak extends CardImpl {
 
     public AlexisCloak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

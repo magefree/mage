@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes & L_J
  */
-public class Mossdog extends CardImpl {
+public final class Mossdog extends CardImpl {
 
     public Mossdog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

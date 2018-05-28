@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class NetherbornPhalanx extends CardImpl {
+public final class NetherbornPhalanx extends CardImpl {
 
     public NetherbornPhalanx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

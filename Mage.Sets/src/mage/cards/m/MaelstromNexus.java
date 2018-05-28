@@ -50,7 +50,7 @@ import mage.watchers.common.FirstSpellCastThisTurnWatcher;
  *
  * @author jeffwadsworth
  */
-public class MaelstromNexus extends CardImpl {
+public final class MaelstromNexus extends CardImpl {
 
     public MaelstromNexus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");

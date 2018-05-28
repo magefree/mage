@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  * @author LoneFox
 
  */
-public class Reprocess extends CardImpl {
+public final class Reprocess extends CardImpl {
 
     public Reprocess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

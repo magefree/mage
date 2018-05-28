@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class GunganCaptain extends CardImpl {
+public final class GunganCaptain extends CardImpl {
 
     public GunganCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

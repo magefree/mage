@@ -52,7 +52,7 @@ import java.util.UUID;
  * @author jeffwadsworth
  *
  */
-public class WardOfBones extends CardImpl {
+public final class WardOfBones extends CardImpl {
 
     public WardOfBones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

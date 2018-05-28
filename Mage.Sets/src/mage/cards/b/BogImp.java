@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BogImp extends CardImpl {
+public final class BogImp extends CardImpl {
 
     public BogImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

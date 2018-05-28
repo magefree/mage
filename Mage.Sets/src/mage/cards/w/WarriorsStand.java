@@ -44,7 +44,7 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  *
  * @author L_J
  */
-public class WarriorsStand extends CardImpl {
+public final class WarriorsStand extends CardImpl {
 
     public WarriorsStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

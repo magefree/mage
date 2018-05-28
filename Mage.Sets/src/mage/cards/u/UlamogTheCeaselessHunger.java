@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class UlamogTheCeaselessHunger extends CardImpl {
+public final class UlamogTheCeaselessHunger extends CardImpl {
 
     public UlamogTheCeaselessHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}");

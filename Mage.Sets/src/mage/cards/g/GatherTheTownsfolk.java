@@ -40,7 +40,7 @@ import mage.game.permanent.token.HumanToken;
  *
  * @author anonymous
  */
-public class GatherTheTownsfolk extends CardImpl {
+public final class GatherTheTownsfolk extends CardImpl {
 
     public GatherTheTownsfolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

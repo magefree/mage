@@ -25,7 +25,7 @@ import mage.players.Player;
  *
  * @author nickmyers
  */
-public class BlinkmothUrn extends CardImpl {
+public final class BlinkmothUrn extends CardImpl {
 
     public BlinkmothUrn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

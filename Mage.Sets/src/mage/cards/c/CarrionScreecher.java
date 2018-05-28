@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class CarrionScreecher extends CardImpl {
+public final class CarrionScreecher extends CardImpl {
 
     public CarrionScreecher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

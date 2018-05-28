@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class VengefulDreams extends CardImpl {
+public final class VengefulDreams extends CardImpl {
 
     public VengefulDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");

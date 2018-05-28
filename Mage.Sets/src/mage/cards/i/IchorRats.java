@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class IchorRats extends CardImpl {
+public final class IchorRats extends CardImpl {
 
     public IchorRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author EvilGeek
  */
-public class AmoeboidChangeling extends CardImpl {
+public final class AmoeboidChangeling extends CardImpl {
 
     public AmoeboidChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

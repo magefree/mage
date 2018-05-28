@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Duskworker extends CardImpl {
+public final class Duskworker extends CardImpl {
 
     public Duskworker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

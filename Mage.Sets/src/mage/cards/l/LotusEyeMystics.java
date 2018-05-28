@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class LotusEyeMystics extends CardImpl {
+public final class LotusEyeMystics extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
     

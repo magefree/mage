@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class Mindwarper extends CardImpl {
+public final class Mindwarper extends CardImpl {
 
     public Mindwarper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

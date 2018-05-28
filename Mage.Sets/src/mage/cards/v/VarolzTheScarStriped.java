@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class VarolzTheScarStriped extends CardImpl {
+public final class VarolzTheScarStriped extends CardImpl {
 
     public VarolzTheScarStriped(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

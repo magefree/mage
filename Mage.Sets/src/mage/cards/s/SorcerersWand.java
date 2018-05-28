@@ -51,7 +51,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author TheElk801
  */
-public class SorcerersWand extends CardImpl {
+public final class SorcerersWand extends CardImpl {
 
     public SorcerersWand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

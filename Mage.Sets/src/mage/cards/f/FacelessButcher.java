@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Temba21
  */
-public class FacelessButcher extends CardImpl {
+public final class FacelessButcher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class CosmicLarva extends CardImpl {
+public final class CosmicLarva extends CardImpl {
 
     public CosmicLarva(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class Batterhorn extends CardImpl {
+public final class Batterhorn extends CardImpl {
 
     public Batterhorn (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

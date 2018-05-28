@@ -41,7 +41,7 @@ import mage.game.permanent.token.AkroanSoldierToken;
  *
  * @author Plopman
  */
-public class AkroanCrusader extends CardImpl {
+public final class AkroanCrusader extends CardImpl {
 
     public AkroanCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

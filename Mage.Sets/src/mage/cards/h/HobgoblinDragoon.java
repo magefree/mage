@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HobgoblinDragoon extends CardImpl {
+public final class HobgoblinDragoon extends CardImpl {
 
     public HobgoblinDragoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}");

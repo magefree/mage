@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TitaniumGolem extends CardImpl {
+public final class TitaniumGolem extends CardImpl {
 
     public TitaniumGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

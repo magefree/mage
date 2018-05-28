@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class HuatlisSpurring extends CardImpl {
+public final class HuatlisSpurring extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Jace planeswalker");
 

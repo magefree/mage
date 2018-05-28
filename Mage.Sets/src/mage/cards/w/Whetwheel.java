@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class Whetwheel extends CardImpl {
+public final class Whetwheel extends CardImpl {
 
     public Whetwheel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

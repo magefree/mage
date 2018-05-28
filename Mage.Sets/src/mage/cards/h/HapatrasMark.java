@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class HapatrasMark extends CardImpl {
+public final class HapatrasMark extends CardImpl {
 
     public HapatrasMark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

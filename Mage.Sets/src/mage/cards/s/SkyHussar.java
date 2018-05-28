@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class SkyHussar extends CardImpl {
+public final class SkyHussar extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white and/or blue creatures you control");
     static {

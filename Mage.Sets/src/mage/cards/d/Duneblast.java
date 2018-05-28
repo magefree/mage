@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Duneblast extends CardImpl {
+public final class Duneblast extends CardImpl {
 
     public Duneblast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{B}{G}");

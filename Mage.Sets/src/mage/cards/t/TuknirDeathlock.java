@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class TuknirDeathlock extends CardImpl {
+public final class TuknirDeathlock extends CardImpl {
 
     public TuknirDeathlock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{G}{G}");

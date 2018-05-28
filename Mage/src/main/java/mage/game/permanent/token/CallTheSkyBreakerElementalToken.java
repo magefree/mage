@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class CallTheSkyBreakerElementalToken extends TokenImpl {
+public final class CallTheSkyBreakerElementalToken extends TokenImpl {
 
     public CallTheSkyBreakerElementalToken() {
         super("Elemental", "5/5 blue and red Elemental creature token with flying");

@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * spjspj
  */
-public class QuestForTheGravelordZombieToken extends TokenImpl {
+public final class QuestForTheGravelordZombieToken extends TokenImpl {
 
     public QuestForTheGravelordZombieToken() {
         super("Zombie Giant", "5/5 black Zombie Giant creature token");

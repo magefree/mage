@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SabretoothTiger extends CardImpl {
+public final class SabretoothTiger extends CardImpl {
 
     public SabretoothTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

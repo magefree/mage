@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class DromokasGift extends CardImpl {
+public final class DromokasGift extends CardImpl {
 
     public DromokasGift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}");

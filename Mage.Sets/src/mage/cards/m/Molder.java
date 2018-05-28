@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class Molder extends CardImpl {
+public final class Molder extends CardImpl {
 
     public Molder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}");

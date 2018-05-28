@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class StampedingWildebeests extends CardImpl {
+public final class StampedingWildebeests extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green creature you control");
 

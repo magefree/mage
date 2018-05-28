@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class GloriousAnthem extends CardImpl {
+public final class GloriousAnthem extends CardImpl {
 
     public GloriousAnthem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");

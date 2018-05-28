@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RubiniaSoulsinger extends CardImpl {
+public final class RubiniaSoulsinger extends CardImpl {
 
     public RubiniaSoulsinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{U}");

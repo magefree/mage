@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author Backfir3
  */
-public class MoltingHarpy extends CardImpl {
+public final class MoltingHarpy extends CardImpl {
 
     public MoltingHarpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

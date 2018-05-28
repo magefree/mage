@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class FoundryScreecher extends CardImpl {
+public final class FoundryScreecher extends CardImpl {
 
     public FoundryScreecher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

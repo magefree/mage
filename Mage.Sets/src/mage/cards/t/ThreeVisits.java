@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class ThreeVisits extends CardImpl {
+public final class ThreeVisits extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Forest");
     static {

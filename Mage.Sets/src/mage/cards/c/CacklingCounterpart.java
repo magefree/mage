@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author nantuko
  */
-public class CacklingCounterpart extends CardImpl {
+public final class CacklingCounterpart extends CardImpl {
 
     public CacklingCounterpart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

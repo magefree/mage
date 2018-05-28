@@ -45,7 +45,7 @@ import mage.filter.common.FilterBySubtypeCard;
  *
  * @author cg5
  */
-public class InfernalCaretaker extends CardImpl {
+public final class InfernalCaretaker extends CardImpl {
 
     private static FilterCard zombieCard = new FilterBySubtypeCard(SubType.ZOMBIE);
     

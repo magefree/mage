@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class BlessingOfBelzenlok extends CardImpl {
+public final class BlessingOfBelzenlok extends CardImpl {
 
     public BlessingOfBelzenlok(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

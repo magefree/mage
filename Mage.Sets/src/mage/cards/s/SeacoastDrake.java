@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SeacoastDrake extends CardImpl {
+public final class SeacoastDrake extends CardImpl {
 
     public SeacoastDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

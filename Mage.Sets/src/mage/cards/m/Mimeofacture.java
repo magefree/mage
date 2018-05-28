@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class Mimeofacture extends CardImpl {
+public final class Mimeofacture extends CardImpl {
 
     public Mimeofacture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

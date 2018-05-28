@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author markedagain
  */
-public class HarvestWurm extends CardImpl {
+public final class HarvestWurm extends CardImpl {
 
     public HarvestWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

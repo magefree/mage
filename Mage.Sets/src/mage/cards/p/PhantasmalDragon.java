@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PhantasmalDragon extends CardImpl {
+public final class PhantasmalDragon extends CardImpl {
 
     public PhantasmalDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

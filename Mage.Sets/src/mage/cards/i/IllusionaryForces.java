@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class IllusionaryForces extends CardImpl {
+public final class IllusionaryForces extends CardImpl {
 
     public IllusionaryForces(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

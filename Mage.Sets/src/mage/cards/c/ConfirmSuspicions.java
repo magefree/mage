@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class ConfirmSuspicions extends CardImpl {
+public final class ConfirmSuspicions extends CardImpl {
 
     public ConfirmSuspicions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");

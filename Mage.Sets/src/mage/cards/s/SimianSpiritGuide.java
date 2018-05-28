@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class SimianSpiritGuide extends CardImpl {
+public final class SimianSpiritGuide extends CardImpl {
 
     public SimianSpiritGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

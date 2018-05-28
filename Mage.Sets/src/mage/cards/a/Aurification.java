@@ -55,7 +55,7 @@ import mage.util.SubTypeList;
  * @author andyfries
  */
 
-public class Aurification extends CardImpl {
+public final class Aurification extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a gold counter on it");
 

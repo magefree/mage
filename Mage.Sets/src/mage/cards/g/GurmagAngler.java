@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class GurmagAngler extends CardImpl {
+public final class GurmagAngler extends CardImpl {
 
     public GurmagAngler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");

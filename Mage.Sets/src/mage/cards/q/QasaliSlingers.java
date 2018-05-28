@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class QasaliSlingers extends CardImpl {
+public final class QasaliSlingers extends CardImpl {
 
     public QasaliSlingers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

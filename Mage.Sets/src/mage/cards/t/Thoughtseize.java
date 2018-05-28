@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author jonubuu
  */
-public class Thoughtseize extends CardImpl {
+public final class Thoughtseize extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("nonland card");
 

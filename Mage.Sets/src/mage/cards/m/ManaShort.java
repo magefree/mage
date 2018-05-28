@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class ManaShort extends CardImpl {
+public final class ManaShort extends CardImpl {
 
     public ManaShort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

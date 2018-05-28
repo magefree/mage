@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LoneFox
  */
-public class DejaVu extends CardImpl {
+public final class DejaVu extends CardImpl {
 
     static final FilterCard filter = new FilterCard("sorcery card from your graveyard");
 

@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class NeedleSpires extends CardImpl {
+public final class NeedleSpires extends CardImpl {
 
     public NeedleSpires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

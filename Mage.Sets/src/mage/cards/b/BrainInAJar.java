@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class BrainInAJar extends CardImpl {
+public final class BrainInAJar extends CardImpl {
 
     public BrainInAJar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AmphinCutthroat extends CardImpl {
+public final class AmphinCutthroat extends CardImpl {
 
     public AmphinCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

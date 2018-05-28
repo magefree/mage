@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class GolgariCharm extends CardImpl {
+public final class GolgariCharm extends CardImpl {
 
     public GolgariCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{G}");

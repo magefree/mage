@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author maurer.it_at_gmail.com
  */
-public class VampireLacerator extends CardImpl {
+public final class VampireLacerator extends CardImpl {
 
     public VampireLacerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

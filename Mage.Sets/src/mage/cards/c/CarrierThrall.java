@@ -42,7 +42,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author LevelX2
  */
-public class CarrierThrall extends CardImpl {
+public final class CarrierThrall extends CardImpl {
 
     public CarrierThrall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

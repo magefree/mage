@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author spjspj
  */
-public class BontusLastReckoning extends CardImpl {
+public final class BontusLastReckoning extends CardImpl {
 
     public BontusLastReckoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

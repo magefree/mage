@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author jeffwadsworth
  */
-public class SurvivalOfTheFittest extends CardImpl {
+public final class SurvivalOfTheFittest extends CardImpl {
 
     public SurvivalOfTheFittest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

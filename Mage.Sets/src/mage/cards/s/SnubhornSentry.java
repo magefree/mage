@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SnubhornSentry extends CardImpl {
+public final class SnubhornSentry extends CardImpl {
 
     public SnubhornSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

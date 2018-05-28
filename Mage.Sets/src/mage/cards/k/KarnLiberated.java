@@ -64,7 +64,7 @@ import mage.util.CardUtil;
  *
  * @author bunchOfDevs
  */
-public class KarnLiberated extends CardImpl {
+public final class KarnLiberated extends CardImpl {
 
     public KarnLiberated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{7}");

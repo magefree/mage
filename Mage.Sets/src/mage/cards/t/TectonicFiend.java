@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class TectonicFiend extends CardImpl {
+public final class TectonicFiend extends CardImpl {
 
     public TectonicFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

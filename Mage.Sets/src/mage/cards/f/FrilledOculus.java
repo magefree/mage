@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class FrilledOculus extends CardImpl {
+public final class FrilledOculus extends CardImpl {
 
     public FrilledOculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

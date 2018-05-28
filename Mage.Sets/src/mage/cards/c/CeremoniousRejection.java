@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class CeremoniousRejection extends CardImpl {
+public final class CeremoniousRejection extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("colorless spell");
 

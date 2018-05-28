@@ -48,7 +48,7 @@ import mage.game.permanent.token.GoatToken;
  * @author jeffwadsworth
  *
  */
-public class SpringjackShepherd extends CardImpl {
+public final class SpringjackShepherd extends CardImpl {
 
     public SpringjackShepherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

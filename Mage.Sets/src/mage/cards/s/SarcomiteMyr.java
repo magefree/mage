@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SarcomiteMyr extends CardImpl {
+public final class SarcomiteMyr extends CardImpl {
 
     public SarcomiteMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class SandStrangler extends CardImpl {
+public final class SandStrangler extends CardImpl {
 
     private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
     private static final FilterCard filterDesertCard = new FilterCard("Desert card");

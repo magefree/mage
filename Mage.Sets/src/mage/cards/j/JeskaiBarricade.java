@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class JeskaiBarricade extends CardImpl {
+public final class JeskaiBarricade extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature you control");
     static {

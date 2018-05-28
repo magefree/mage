@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class PetrifiedPlating extends CardImpl {
+public final class PetrifiedPlating extends CardImpl {
 
     public PetrifiedPlating(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

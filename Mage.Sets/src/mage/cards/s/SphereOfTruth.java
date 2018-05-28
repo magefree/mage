@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class SphereOfTruth extends CardImpl {
+public final class SphereOfTruth extends CardImpl {
 
     public SphereOfTruth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

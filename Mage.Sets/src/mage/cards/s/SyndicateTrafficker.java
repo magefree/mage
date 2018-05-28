@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class SyndicateTrafficker extends CardImpl {
+public final class SyndicateTrafficker extends CardImpl {
 
     public SyndicateTrafficker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

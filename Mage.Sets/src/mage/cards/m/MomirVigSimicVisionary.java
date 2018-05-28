@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author jeffwadsworth
  *
  */
-public class MomirVigSimicVisionary extends CardImpl {
+public final class MomirVigSimicVisionary extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a green creature spell");
     private static final FilterSpell filter2 = new FilterSpell("a blue creature spell");

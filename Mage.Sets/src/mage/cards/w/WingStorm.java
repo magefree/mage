@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2 & L_J
  */
-public class WingStorm extends CardImpl {
+public final class WingStorm extends CardImpl {
 
     public WingStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

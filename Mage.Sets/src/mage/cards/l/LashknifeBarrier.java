@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  * @author LoneFox
 
  */
-public class LashknifeBarrier extends CardImpl {
+public final class LashknifeBarrier extends CardImpl {
 
     public LashknifeBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

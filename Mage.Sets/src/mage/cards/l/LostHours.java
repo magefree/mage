@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class LostHours extends CardImpl {
+public final class LostHours extends CardImpl {
 
     public LostHours(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

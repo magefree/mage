@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class MelokuTheCloudedMirrorToken extends TokenImpl {
+public final class MelokuTheCloudedMirrorToken extends TokenImpl {
 
     public MelokuTheCloudedMirrorToken() {
         super("Illusion", "1/1 blue Illusion creature token with flying");

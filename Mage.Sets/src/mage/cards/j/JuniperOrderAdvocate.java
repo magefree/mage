@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class JuniperOrderAdvocate extends CardImpl {
+public final class JuniperOrderAdvocate extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures you control");
 

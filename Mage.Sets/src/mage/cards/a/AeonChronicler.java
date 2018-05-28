@@ -52,7 +52,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class AeonChronicler extends CardImpl {
+public final class AeonChronicler extends CardImpl {
 
     public AeonChronicler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

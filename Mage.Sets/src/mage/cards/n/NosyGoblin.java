@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class NosyGoblin extends CardImpl {
+public final class NosyGoblin extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature");
 

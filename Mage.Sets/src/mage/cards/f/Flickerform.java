@@ -62,7 +62,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Flickerform extends CardImpl {
+public final class Flickerform extends CardImpl {
 
     public Flickerform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

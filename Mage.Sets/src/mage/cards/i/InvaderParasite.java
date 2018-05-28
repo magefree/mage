@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class InvaderParasite extends CardImpl {
+public final class InvaderParasite extends CardImpl {
 
     public InvaderParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

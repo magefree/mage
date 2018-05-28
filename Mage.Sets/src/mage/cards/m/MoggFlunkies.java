@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class MoggFlunkies extends CardImpl {
+public final class MoggFlunkies extends CardImpl {
 
     public MoggFlunkies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class AmbitionsCost extends CardImpl {
+public final class AmbitionsCost extends CardImpl {
 
     public AmbitionsCost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

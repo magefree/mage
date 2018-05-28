@@ -51,7 +51,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author LevelX2
  */
-public class EightAndAHalfTails extends CardImpl {
+public final class EightAndAHalfTails extends CardImpl {
 
     public EightAndAHalfTails(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

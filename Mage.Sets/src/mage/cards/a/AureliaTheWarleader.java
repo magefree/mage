@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class AureliaTheWarleader extends CardImpl {
+public final class AureliaTheWarleader extends CardImpl {
 
     public AureliaTheWarleader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{W}{W}");

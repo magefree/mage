@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTargets;
 /**
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class VanishIntoMemory extends CardImpl {
+public final class VanishIntoMemory extends CardImpl {
 
     public VanishIntoMemory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");

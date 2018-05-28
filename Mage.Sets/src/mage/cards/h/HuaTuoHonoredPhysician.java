@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class HuaTuoHonoredPhysician extends CardImpl {
+public final class HuaTuoHonoredPhysician extends CardImpl {
 
     public HuaTuoHonoredPhysician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

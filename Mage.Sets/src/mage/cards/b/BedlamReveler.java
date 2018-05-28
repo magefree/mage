@@ -46,7 +46,7 @@ import mage.filter.common.FilterInstantOrSorceryCard;
  *
  * @author fireshoes
  */
-public class BedlamReveler extends CardImpl {
+public final class BedlamReveler extends CardImpl {
 
     public BedlamReveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");

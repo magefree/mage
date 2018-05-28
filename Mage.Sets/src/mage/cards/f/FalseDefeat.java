@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author ilcartographer
  */
-public class FalseDefeat extends CardImpl {
+public final class FalseDefeat extends CardImpl {
 
     public FalseDefeat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

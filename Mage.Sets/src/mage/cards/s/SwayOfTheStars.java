@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SwayOfTheStars extends CardImpl {
+public final class SwayOfTheStars extends CardImpl {
 
     public SwayOfTheStars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}");

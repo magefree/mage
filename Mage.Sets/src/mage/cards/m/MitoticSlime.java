@@ -41,7 +41,7 @@ import mage.game.permanent.token.Ooze2Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MitoticSlime extends CardImpl {
+public final class MitoticSlime extends CardImpl {
 
     public MitoticSlime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

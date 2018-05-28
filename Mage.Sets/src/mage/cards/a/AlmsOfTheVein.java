@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class AlmsOfTheVein extends CardImpl {
+public final class AlmsOfTheVein extends CardImpl {
 
     public AlmsOfTheVein(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

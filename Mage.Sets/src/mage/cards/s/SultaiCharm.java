@@ -46,7 +46,7 @@ import java.util.UUID;
  * @author LevelX2
  */
 
-public class SultaiCharm extends CardImpl {
+public final class SultaiCharm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
 

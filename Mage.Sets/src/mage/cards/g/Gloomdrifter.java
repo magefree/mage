@@ -53,7 +53,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class Gloomdrifter extends CardImpl {
+public final class Gloomdrifter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creatures");
 

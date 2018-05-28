@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class FrostWalker extends CardImpl {
+public final class FrostWalker extends CardImpl {
 
     public FrostWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

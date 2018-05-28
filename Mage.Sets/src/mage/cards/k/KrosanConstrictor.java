@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class KrosanConstrictor extends CardImpl {
+public final class KrosanConstrictor extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
 

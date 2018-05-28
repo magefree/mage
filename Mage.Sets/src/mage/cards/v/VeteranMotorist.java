@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class VeteranMotorist extends CardImpl {
+public final class VeteranMotorist extends CardImpl {
 
     public VeteranMotorist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");

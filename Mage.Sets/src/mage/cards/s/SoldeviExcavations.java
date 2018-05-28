@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SoldeviExcavations extends CardImpl {
+public final class SoldeviExcavations extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Island");
 

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class RushwoodHerbalist extends CardImpl {
+public final class RushwoodHerbalist extends CardImpl {
 
     public RushwoodHerbalist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

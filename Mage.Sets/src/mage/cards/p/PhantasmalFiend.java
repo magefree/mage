@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class PhantasmalFiend extends CardImpl {
+public final class PhantasmalFiend extends CardImpl {
 
     public PhantasmalFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

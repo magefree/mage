@@ -40,7 +40,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author fireshoes
  */
-public class ParadoxEngine extends CardImpl {
+public final class ParadoxEngine extends CardImpl {
 
     public ParadoxEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

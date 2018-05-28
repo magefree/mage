@@ -45,7 +45,7 @@ import mage.constants.*;
  *
  * @author LevelX2
  */
-public class BlindingPowder extends CardImpl {
+public final class BlindingPowder extends CardImpl {
 
     public BlindingPowder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

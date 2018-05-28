@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class SilverpeltWerewolf extends CardImpl {
+public final class SilverpeltWerewolf extends CardImpl {
 
     public SilverpeltWerewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},null);

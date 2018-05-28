@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author Jgod
  */
-public class SearingFlesh extends CardImpl {
+public final class SearingFlesh extends CardImpl {
 
     public SearingFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{R}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  * @author LoneFox
 
  */
-public class HasranOgress extends CardImpl {
+public final class HasranOgress extends CardImpl {
 
     public HasranOgress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

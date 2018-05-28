@@ -47,7 +47,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class IslandFishJasconius extends CardImpl {
+public final class IslandFishJasconius extends CardImpl {
 
     public IslandFishJasconius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}{U}");

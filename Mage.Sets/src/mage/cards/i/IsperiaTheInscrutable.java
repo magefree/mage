@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author lunaskyrise
  */
-public class IsperiaTheInscrutable extends CardImpl {
+public final class IsperiaTheInscrutable extends CardImpl {
 
     public IsperiaTheInscrutable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{U}{U}");

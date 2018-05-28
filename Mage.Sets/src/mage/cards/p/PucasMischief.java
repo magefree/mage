@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class PucasMischief extends CardImpl {
+public final class PucasMischief extends CardImpl {
 
     private static final String rule = "you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost";
 

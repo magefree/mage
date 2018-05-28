@@ -44,7 +44,7 @@ import mage.constants.*;
  *
  * @author LevelX2
  */
-public class ChampionsHelm extends CardImpl {
+public final class ChampionsHelm extends CardImpl {
 
     private static final String staticText = "As long as equipped creature is legendary, it has hexproof";
     

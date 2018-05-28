@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author spjspj
  */
-public class Leeches extends CardImpl {
+public final class Leeches extends CardImpl {
 
     public Leeches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");

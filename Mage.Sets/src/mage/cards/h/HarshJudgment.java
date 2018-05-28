@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author brikr
  */
-public class HarshJudgment extends CardImpl {
+public final class HarshJudgment extends CardImpl {
 
     public HarshJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

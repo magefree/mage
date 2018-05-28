@@ -53,7 +53,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class KavuRunner extends CardImpl {
+public final class KavuRunner extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white or blue creature");
 

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author L_J
  */
-public class KamahlsSummons extends CardImpl {
+public final class KamahlsSummons extends CardImpl {
 
     public KamahlsSummons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class AjaniVsNicolBolas extends ExpansionSet {
+public final class AjaniVsNicolBolas extends ExpansionSet {
 
     private static final AjaniVsNicolBolas instance = new AjaniVsNicolBolas();
 

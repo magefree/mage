@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Sir-Speshkitty
  */
-public class AbbeyMatron extends CardImpl {
+public final class AbbeyMatron extends CardImpl {
 
     public AbbeyMatron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

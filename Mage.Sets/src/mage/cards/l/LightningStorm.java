@@ -54,7 +54,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class LightningStorm extends CardImpl {
+public final class LightningStorm extends CardImpl {
 
     public LightningStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");

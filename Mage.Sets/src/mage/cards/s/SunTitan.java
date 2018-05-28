@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SunTitan extends CardImpl {
+public final class SunTitan extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less from your graveyard");
 

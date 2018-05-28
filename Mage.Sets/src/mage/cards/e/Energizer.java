@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Energizer extends CardImpl {
+public final class Energizer extends CardImpl {
 
     public Energizer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

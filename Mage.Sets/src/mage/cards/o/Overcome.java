@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
-public class Overcome extends CardImpl {
+public final class Overcome extends CardImpl {
 
     public Overcome(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

@@ -54,7 +54,7 @@ import mage.watchers.common.ChooseBlockersRedundancyWatcher;
  *
  * @author LevelX2
  */
-public class BrutalHordechief extends CardImpl {
+public final class BrutalHordechief extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 

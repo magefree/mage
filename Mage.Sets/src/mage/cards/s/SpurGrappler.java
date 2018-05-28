@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LoneFox
  */
-public class SpurGrappler extends CardImpl {
+public final class SpurGrappler extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 

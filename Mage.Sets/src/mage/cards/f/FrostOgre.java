@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FrostOgre extends CardImpl {
+public final class FrostOgre extends CardImpl {
 
     public FrostOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

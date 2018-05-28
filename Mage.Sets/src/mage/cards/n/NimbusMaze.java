@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author dustinconrad
  */
-public class NimbusMaze extends CardImpl {
+public final class NimbusMaze extends CardImpl {
 
     private static final FilterControlledPermanent controlIsland = new FilterControlledPermanent("you control an Island");
     private static final FilterControlledPermanent controlPlains = new FilterControlledPermanent("you control a Plains");

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class OmnathLocusOfMana extends CardImpl {
+public final class OmnathLocusOfMana extends CardImpl {
 
     public OmnathLocusOfMana(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

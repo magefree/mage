@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class Meltdown extends CardImpl {
+public final class Meltdown extends CardImpl {
 
     public Meltdown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

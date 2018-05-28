@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  * @author LoneFox
 
  */
-public class NightscapeBattlemage extends CardImpl {
+public final class NightscapeBattlemage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("up to two nonblack creatures");
 

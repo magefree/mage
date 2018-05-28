@@ -42,7 +42,7 @@ import mage.game.permanent.token.BroodKeeperDragonToken;
  *
  * @author Quercitron
  */
-public class BroodKeeper extends CardImpl {
+public final class BroodKeeper extends CardImpl {
 
     public BroodKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

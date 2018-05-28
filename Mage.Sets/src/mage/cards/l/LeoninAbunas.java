@@ -43,7 +43,7 @@ import mage.filter.common.FilterArtifactPermanent;
 /**
  * @author Loki
  */
-public class LeoninAbunas extends CardImpl {
+public final class LeoninAbunas extends CardImpl {
 
     public LeoninAbunas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

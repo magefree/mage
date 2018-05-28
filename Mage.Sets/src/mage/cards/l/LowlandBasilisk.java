@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class LowlandBasilisk extends CardImpl {
+public final class LowlandBasilisk extends CardImpl {
 
     public LowlandBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

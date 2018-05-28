@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class CuriousHomunculus extends CardImpl {
+public final class CuriousHomunculus extends CardImpl {
 
     public CuriousHomunculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

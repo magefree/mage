@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class SarkhansRage extends CardImpl {
+public final class SarkhansRage extends CardImpl {
 
     public SarkhansRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");

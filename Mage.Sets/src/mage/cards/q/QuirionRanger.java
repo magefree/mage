@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author jonubuu
  */
-public class QuirionRanger extends CardImpl {
+public final class QuirionRanger extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 

@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class NantukoShrine extends CardImpl {
+public final class NantukoShrine extends CardImpl {
 
     public NantukoShrine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

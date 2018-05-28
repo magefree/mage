@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class Brontotherium extends CardImpl {
+public final class Brontotherium extends CardImpl {
 
     public Brontotherium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

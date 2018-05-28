@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class SavageOffensive extends CardImpl {
+public final class SavageOffensive extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 

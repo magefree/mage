@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class WallOfLava extends CardImpl {
+public final class WallOfLava extends CardImpl {
 
     public WallOfLava(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class WarmindInfantry extends CardImpl {
+public final class WarmindInfantry extends CardImpl {
 
     public WarmindInfantry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

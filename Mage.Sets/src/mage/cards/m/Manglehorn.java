@@ -51,7 +51,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class Manglehorn extends CardImpl {
+public final class Manglehorn extends CardImpl {
 
     public Manglehorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

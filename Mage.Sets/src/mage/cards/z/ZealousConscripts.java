@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class ZealousConscripts extends CardImpl {
+public final class ZealousConscripts extends CardImpl {
 
     public ZealousConscripts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class EmeraldDragonfly extends CardImpl {
+public final class EmeraldDragonfly extends CardImpl {
 
     public EmeraldDragonfly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

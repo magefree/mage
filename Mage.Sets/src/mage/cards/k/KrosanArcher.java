@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KrosanArcher extends CardImpl {
+public final class KrosanArcher extends CardImpl {
 
     public KrosanArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

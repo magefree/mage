@@ -58,7 +58,7 @@ import mage.cards.CardSetInfo;
  *
  * @author ciaccona007
  */
-public class FesteringWound extends CardImpl {
+public final class FesteringWound extends CardImpl {
 
     public FesteringWound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

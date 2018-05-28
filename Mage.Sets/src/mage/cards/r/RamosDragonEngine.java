@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class RamosDragonEngine extends CardImpl {
+public final class RamosDragonEngine extends CardImpl {
 
     public RamosDragonEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author MarcoMarin
  */
-public class UrzasChalice extends CardImpl {
+public final class UrzasChalice extends CardImpl {
 
     public UrzasChalice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

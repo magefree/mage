@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class LuminousGuardian extends CardImpl {
+public final class LuminousGuardian extends CardImpl {
 
     public LuminousGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

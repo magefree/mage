@@ -42,7 +42,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class FieryJustice extends CardImpl {
+public final class FieryJustice extends CardImpl {
 
     public FieryJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{G}{W}");

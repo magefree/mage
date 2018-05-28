@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class Watchdog extends CardImpl {
+public final class Watchdog extends CardImpl {
 
     public Watchdog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class Resuscitate extends CardImpl {
+public final class Resuscitate extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 

@@ -44,7 +44,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author LoneFox
  */
-public class SimianBrawler extends CardImpl {
+public final class SimianBrawler extends CardImpl {
 
     public SimianBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ArmoredSkaab extends CardImpl {
+public final class ArmoredSkaab extends CardImpl {
 
     public ArmoredSkaab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

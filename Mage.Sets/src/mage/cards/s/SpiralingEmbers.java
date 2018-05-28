@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class SpiralingEmbers extends CardImpl {
+public final class SpiralingEmbers extends CardImpl {
 
     public SpiralingEmbers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

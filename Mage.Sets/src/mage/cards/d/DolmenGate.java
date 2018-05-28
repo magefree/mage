@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author LevelX2
  */
-public class DolmenGate extends CardImpl {
+public final class DolmenGate extends CardImpl {
 
     private static final FilterControlledCreatureInPlay filter = new FilterControlledCreatureInPlay("attacking creatures you control");
 

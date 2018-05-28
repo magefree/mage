@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class AngelicVoices extends CardImpl {
+public final class AngelicVoices extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonartifact, nonwhite creatures");
 

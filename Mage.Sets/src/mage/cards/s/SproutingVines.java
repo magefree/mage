@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class SproutingVines extends CardImpl {
+public final class SproutingVines extends CardImpl {
 
     public SproutingVines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

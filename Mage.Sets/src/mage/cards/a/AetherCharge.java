@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class AetherCharge extends CardImpl {
+public final class AetherCharge extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Beast you control");
 

@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class GhastlyRemains extends CardImpl {
+public final class GhastlyRemains extends CardImpl {
 
     public GhastlyRemains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");

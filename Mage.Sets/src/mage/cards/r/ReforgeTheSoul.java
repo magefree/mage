@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class ReforgeTheSoul extends CardImpl {
+public final class ReforgeTheSoul extends CardImpl {
 
     public ReforgeTheSoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class AmuletOfUnmaking extends CardImpl {
+public final class AmuletOfUnmaking extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment");
 

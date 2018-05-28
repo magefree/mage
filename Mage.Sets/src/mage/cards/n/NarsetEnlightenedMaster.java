@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class NarsetEnlightenedMaster extends CardImpl {
+public final class NarsetEnlightenedMaster extends CardImpl {
 
     public NarsetEnlightenedMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{W}");

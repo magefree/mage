@@ -43,7 +43,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author TheElk801
  */
-public class VoltaicServant extends CardImpl {
+public final class VoltaicServant extends CardImpl {
 
     public VoltaicServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

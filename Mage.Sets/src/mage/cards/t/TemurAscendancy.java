@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author LevelX2
  */
-public class TemurAscendancy extends CardImpl {
+public final class TemurAscendancy extends CardImpl {
 
     final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
     static {

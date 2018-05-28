@@ -56,7 +56,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class HeavyArbalest extends CardImpl {
+public final class HeavyArbalest extends CardImpl {
 
     public HeavyArbalest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

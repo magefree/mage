@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author maxlebedev
  */
-public class DreamLeash extends CardImpl {
+public final class DreamLeash extends CardImpl {
 
     public DreamLeash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");

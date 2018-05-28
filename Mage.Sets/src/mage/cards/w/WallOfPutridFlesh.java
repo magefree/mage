@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Galatolol
  */
-public class WallOfPutridFlesh extends CardImpl {
+public final class WallOfPutridFlesh extends CardImpl {
 
     public WallOfPutridFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

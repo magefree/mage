@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Mirrodin extends ExpansionSet {
+public final class Mirrodin extends ExpansionSet {
 
     private static final Mirrodin instance = new Mirrodin();
 

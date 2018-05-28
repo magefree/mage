@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author jonubuu
  */
-public class HymnToTourach extends CardImpl {
+public final class HymnToTourach extends CardImpl {
 
     public HymnToTourach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");

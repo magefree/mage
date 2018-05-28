@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  * @author JRHerlehy
  *         Created on 4/7/18.
  */
-public class CabalStronghold extends CardImpl {
+public final class CabalStronghold extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("basic Swamp you control");
 

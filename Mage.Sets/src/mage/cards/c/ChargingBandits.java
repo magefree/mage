@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class ChargingBandits extends CardImpl {
+public final class ChargingBandits extends CardImpl {
 
     public ChargingBandits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

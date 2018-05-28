@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class LoxodonPeacekeeper extends CardImpl {
+public final class LoxodonPeacekeeper extends CardImpl {
 
     public LoxodonPeacekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

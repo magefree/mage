@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HavocSower extends CardImpl {
+public final class HavocSower extends CardImpl {
 
     public HavocSower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author ilcartographer
  */
-public class Onulet extends CardImpl {
+public final class Onulet extends CardImpl {
 
     public Onulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

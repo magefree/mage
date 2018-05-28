@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author North
  */
-public class TrailblazersBoots extends CardImpl {
+public final class TrailblazersBoots extends CardImpl {
 
     public TrailblazersBoots(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

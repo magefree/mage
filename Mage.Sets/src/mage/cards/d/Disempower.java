@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class Disempower extends CardImpl {
+public final class Disempower extends CardImpl {
 
     public Disempower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

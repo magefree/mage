@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class Sift extends CardImpl {
+public final class Sift extends CardImpl {
 
     public Sift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

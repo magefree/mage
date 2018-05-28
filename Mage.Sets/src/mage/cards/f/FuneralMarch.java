@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class FuneralMarch extends CardImpl {
+public final class FuneralMarch extends CardImpl {
 
     public FuneralMarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

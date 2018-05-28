@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class SithThoughtseeker extends CardImpl {
+public final class SithThoughtseeker extends CardImpl {
 
     public SithThoughtseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

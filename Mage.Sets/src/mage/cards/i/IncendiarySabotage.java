@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author cg5
  */
-public class IncendiarySabotage extends CardImpl {
+public final class IncendiarySabotage extends CardImpl {
 
     public IncendiarySabotage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");

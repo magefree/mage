@@ -43,7 +43,7 @@ import mage.constants.Duration;
  * @author LoneFox
 
  */
-public class PlanarDespair extends CardImpl {
+public final class PlanarDespair extends CardImpl {
 
     public PlanarDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

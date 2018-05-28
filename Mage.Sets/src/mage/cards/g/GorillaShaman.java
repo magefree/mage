@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class GorillaShaman extends CardImpl {
+public final class GorillaShaman extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature artifact with converted mana cost X");
 

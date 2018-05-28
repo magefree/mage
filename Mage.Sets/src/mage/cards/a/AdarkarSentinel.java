@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Sir-Speshkitty
  */
-public class AdarkarSentinel extends CardImpl {
+public final class AdarkarSentinel extends CardImpl {
 
     public AdarkarSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

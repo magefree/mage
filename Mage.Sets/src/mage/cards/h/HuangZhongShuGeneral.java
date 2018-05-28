@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class HuangZhongShuGeneral extends CardImpl {
+public final class HuangZhongShuGeneral extends CardImpl {
 
     public HuangZhongShuGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

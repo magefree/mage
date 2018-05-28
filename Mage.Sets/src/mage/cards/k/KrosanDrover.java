@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  *
  * @author Eirkei
  */
-public class KrosanDrover extends CardImpl {
+public final class KrosanDrover extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Creature spells with converted mana cost 6 or greater");
 

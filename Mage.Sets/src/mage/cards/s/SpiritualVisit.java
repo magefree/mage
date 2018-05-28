@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SpiritualVisit extends CardImpl {
+public final class SpiritualVisit extends CardImpl {
 
     public SpiritualVisit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

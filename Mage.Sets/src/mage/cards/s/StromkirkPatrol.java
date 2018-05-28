@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class StromkirkPatrol extends CardImpl {
+public final class StromkirkPatrol extends CardImpl {
 
     public StromkirkPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

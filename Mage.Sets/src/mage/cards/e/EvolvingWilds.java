@@ -45,7 +45,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EvolvingWilds extends CardImpl {
+public final class EvolvingWilds extends CardImpl {
 
     public EvolvingWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

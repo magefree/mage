@@ -50,7 +50,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author L_J
  */
-public class Landslide extends CardImpl {
+public final class Landslide extends CardImpl {
 
     public Landslide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");

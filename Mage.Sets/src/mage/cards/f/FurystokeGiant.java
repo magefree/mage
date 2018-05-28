@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class FurystokeGiant extends CardImpl {
+public final class FurystokeGiant extends CardImpl {
 
     public FurystokeGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

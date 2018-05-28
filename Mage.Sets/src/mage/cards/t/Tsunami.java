@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author emerald000
  */
-public class Tsunami extends CardImpl {
+public final class Tsunami extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Islands");
     static {

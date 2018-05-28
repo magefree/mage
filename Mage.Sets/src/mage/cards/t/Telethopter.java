@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class Telethopter extends CardImpl {
+public final class Telethopter extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 

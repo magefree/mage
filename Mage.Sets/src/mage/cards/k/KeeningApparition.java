@@ -43,7 +43,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 /**
  * @author LevelX2
  */
-public class KeeningApparition extends CardImpl {
+public final class KeeningApparition extends CardImpl {
 
     public KeeningApparition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

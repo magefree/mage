@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Kindle extends CardImpl {
+public final class Kindle extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("2 plus the number of cards named Kindle");
 

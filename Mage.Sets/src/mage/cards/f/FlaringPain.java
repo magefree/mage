@@ -41,7 +41,7 @@ import mage.constants.TimingRule;
  *
  * @author fireshoes
  */
-public class FlaringPain extends CardImpl {
+public final class FlaringPain extends CardImpl {
 
     public FlaringPain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

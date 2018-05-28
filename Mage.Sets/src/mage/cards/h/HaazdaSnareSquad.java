@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 
 
-public class HaazdaSnareSquad extends CardImpl {
+public final class HaazdaSnareSquad extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
     static {

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MetallicSliver extends CardImpl {
+public final class MetallicSliver extends CardImpl {
 
     public MetallicSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

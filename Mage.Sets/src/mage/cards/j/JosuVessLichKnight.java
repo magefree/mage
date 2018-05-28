@@ -44,7 +44,7 @@ import mage.game.permanent.token.ZombieKnightToken;
 
 import java.util.UUID;
 
-public class JosuVessLichKnight extends CardImpl {
+public final class JosuVessLichKnight extends CardImpl {
 
     public JosuVessLichKnight(UUID ownerID, CardSetInfo cardSetInfo){
         super(ownerID, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

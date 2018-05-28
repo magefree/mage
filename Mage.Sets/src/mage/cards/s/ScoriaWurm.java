@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class ScoriaWurm extends CardImpl {
+public final class ScoriaWurm extends CardImpl {
 
     public ScoriaWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

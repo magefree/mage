@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class MarshFlitter extends CardImpl {
+public final class MarshFlitter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
 

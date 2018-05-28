@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class MarhaultElsdragon extends CardImpl {
+public final class MarhaultElsdragon extends CardImpl {
 
     public MarhaultElsdragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{G}");

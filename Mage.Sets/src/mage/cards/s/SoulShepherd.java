@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LoneFox
  */
-public class SoulShepherd extends CardImpl {
+public final class SoulShepherd extends CardImpl {
 
     public SoulShepherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

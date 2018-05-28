@@ -46,7 +46,7 @@ import mage.watchers.common.ZuberasDiedWatcher;
  *
  * @author Loki
  */
-public class SilentChantZubera extends CardImpl {
+public final class SilentChantZubera extends CardImpl {
 
     public SilentChantZubera (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

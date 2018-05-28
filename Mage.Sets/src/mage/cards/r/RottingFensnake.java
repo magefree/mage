@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RottingFensnake extends CardImpl {
+public final class RottingFensnake extends CardImpl {
 
     public RottingFensnake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

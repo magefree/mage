@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class FleshReaver extends CardImpl {
+public final class FleshReaver extends CardImpl {
 
     public FleshReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

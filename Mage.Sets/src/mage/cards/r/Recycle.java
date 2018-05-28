@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author emerald000
  */
-public class Recycle extends CardImpl {
+public final class Recycle extends CardImpl {
 
     public Recycle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");

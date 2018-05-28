@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class DinOfTheFireherdToken extends TokenImpl {
+public final class DinOfTheFireherdToken extends TokenImpl {
 
     public DinOfTheFireherdToken() {
         super("Elemental", "5/5 black and red Elemental creature");

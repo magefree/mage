@@ -41,7 +41,7 @@ import mage.constants.TargetController;
 /**
  * @author noxx
  */
-public class TriumphOfFerocity extends CardImpl {
+public final class TriumphOfFerocity extends CardImpl {
 
     private static final String ruleText = "At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power";
 

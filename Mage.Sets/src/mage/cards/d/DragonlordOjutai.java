@@ -52,7 +52,7 @@ import mage.filter.FilterCard;
  *
  * @author fireshoes
  */
-public class DragonlordOjutai extends CardImpl {
+public final class DragonlordOjutai extends CardImpl {
 
     public DragonlordOjutai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");

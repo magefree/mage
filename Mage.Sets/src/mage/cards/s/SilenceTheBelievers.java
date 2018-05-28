@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SilenceTheBelievers extends CardImpl {
+public final class SilenceTheBelievers extends CardImpl {
 
     public SilenceTheBelievers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");

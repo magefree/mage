@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SlumReaper extends CardImpl {
+public final class SlumReaper extends CardImpl {
 
     public SlumReaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

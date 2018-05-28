@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class IdleThoughts extends CardImpl {
+public final class IdleThoughts extends CardImpl {
 
     public IdleThoughts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

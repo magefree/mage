@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class PhyrexianDelver extends CardImpl {
+public final class PhyrexianDelver extends CardImpl {
 
     public PhyrexianDelver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

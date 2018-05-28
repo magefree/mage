@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class DreamCoat extends CardImpl {
+public final class DreamCoat extends CardImpl {
 
     public DreamCoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

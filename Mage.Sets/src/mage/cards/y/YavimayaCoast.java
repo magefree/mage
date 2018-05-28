@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class YavimayaCoast extends CardImpl {
+public final class YavimayaCoast extends CardImpl {
 
     public YavimayaCoast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

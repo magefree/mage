@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class JacesMindseeker extends CardImpl {
+public final class JacesMindseeker extends CardImpl {
 
     public JacesMindseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

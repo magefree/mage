@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DivebomberGriffin extends CardImpl {
+public final class DivebomberGriffin extends CardImpl {
 
     public DivebomberGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

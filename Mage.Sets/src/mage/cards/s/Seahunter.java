@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class Seahunter extends CardImpl {
+public final class Seahunter extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Merfolk permanent card");
 

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OblivionRing extends CardImpl {
+public final class OblivionRing extends CardImpl {
 
     private static final FilterNonlandPermanent anotherNonlandPermanent = new FilterNonlandPermanent("another target nonland permanent");
 

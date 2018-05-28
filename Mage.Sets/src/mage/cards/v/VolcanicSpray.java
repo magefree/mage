@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author cbt33
  */
-public class VolcanicSpray extends CardImpl {
+public final class VolcanicSpray extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
     static {

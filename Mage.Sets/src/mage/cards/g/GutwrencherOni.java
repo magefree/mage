@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class GutwrencherOni extends CardImpl {
+public final class GutwrencherOni extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("Ogre");
 

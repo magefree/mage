@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author fireshoes
  */
-public class GoblinsOfTheFlarg extends CardImpl {
+public final class GoblinsOfTheFlarg extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Dwarf");
 

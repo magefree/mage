@@ -43,7 +43,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
 /**
  * @author JayDi85
  */
-public class SwaggeringCorsair extends CardImpl {
+public final class SwaggeringCorsair extends CardImpl {
 
     public SwaggeringCorsair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

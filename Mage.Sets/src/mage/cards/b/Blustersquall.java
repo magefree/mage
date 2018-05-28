@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Blustersquall extends CardImpl {
+public final class Blustersquall extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

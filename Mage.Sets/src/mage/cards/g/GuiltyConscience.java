@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author HanClinto
  */
-public class GuiltyConscience extends CardImpl {
+public final class GuiltyConscience extends CardImpl {
 
     public GuiltyConscience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

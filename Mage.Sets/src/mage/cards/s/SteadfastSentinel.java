@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class SteadfastSentinel extends CardImpl {
+public final class SteadfastSentinel extends CardImpl {
 
     public SteadfastSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

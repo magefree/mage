@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class Forcefield extends CardImpl {
+public final class Forcefield extends CardImpl {
 
     public Forcefield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

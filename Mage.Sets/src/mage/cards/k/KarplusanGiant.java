@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class KarplusanGiant extends CardImpl {
+public final class KarplusanGiant extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped snow land you control");
 

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Galatolol
  */
-public class MaggotTherapy extends CardImpl {
+public final class MaggotTherapy extends CardImpl {
 
     public MaggotTherapy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

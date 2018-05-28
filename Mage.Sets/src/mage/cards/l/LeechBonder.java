@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class LeechBonder extends CardImpl {
+public final class LeechBonder extends CardImpl {
 
     public LeechBonder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

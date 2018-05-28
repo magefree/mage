@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class LearnFromThePast extends CardImpl {
+public final class LearnFromThePast extends CardImpl {
 
     public LearnFromThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

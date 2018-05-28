@@ -48,7 +48,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth, MTGFan & L_J
  */
-public class ReversePolarity extends CardImpl {
+public final class ReversePolarity extends CardImpl {
 
     public ReversePolarity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{W}");

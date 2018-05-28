@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author emerald000
  */
-public class TornadoElemental extends CardImpl {
+public final class TornadoElemental extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

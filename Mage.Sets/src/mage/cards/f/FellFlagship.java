@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class FellFlagship extends CardImpl {
+public final class FellFlagship extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Pirates");
 

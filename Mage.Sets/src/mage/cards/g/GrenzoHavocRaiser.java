@@ -68,7 +68,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801, LevelX2
  */
-public class GrenzoHavocRaiser extends CardImpl {
+public final class GrenzoHavocRaiser extends CardImpl {
 
     public GrenzoHavocRaiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");

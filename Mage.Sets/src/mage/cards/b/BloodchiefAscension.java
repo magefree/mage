@@ -51,7 +51,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class BloodchiefAscension extends CardImpl {
+public final class BloodchiefAscension extends CardImpl {
 
     public BloodchiefAscension(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

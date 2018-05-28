@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HumanClericToken extends TokenImpl {
+public final class HumanClericToken extends TokenImpl {
 
     public HumanClericToken() {
         super("Human Cleric", "1/1 white and black Human Cleric creature token");

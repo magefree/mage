@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class YawgmothsAgenda extends CardImpl {
+public final class YawgmothsAgenda extends CardImpl {
 
     public YawgmothsAgenda(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

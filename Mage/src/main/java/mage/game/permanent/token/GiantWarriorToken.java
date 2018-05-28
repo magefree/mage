@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GiantWarriorToken extends TokenImpl {
+public final class GiantWarriorToken extends TokenImpl {
 
     public GiantWarriorToken() {
         super("Giant Warrior", "5/5 white Giant Warrior creature token");

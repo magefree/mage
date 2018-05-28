@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class WhipstitchedZombie extends CardImpl {
+public final class WhipstitchedZombie extends CardImpl {
 
     public WhipstitchedZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

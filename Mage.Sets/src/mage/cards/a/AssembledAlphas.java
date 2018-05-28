@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class AssembledAlphas extends CardImpl {
+public final class AssembledAlphas extends CardImpl {
 
     public AssembledAlphas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

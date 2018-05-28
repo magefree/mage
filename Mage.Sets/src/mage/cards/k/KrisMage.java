@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class KrisMage extends CardImpl {
+public final class KrisMage extends CardImpl {
 
     public KrisMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

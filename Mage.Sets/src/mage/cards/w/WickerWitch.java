@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WickerWitch extends CardImpl {
+public final class WickerWitch extends CardImpl {
 
     public WickerWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

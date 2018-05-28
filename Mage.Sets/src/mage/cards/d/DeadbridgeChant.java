@@ -49,7 +49,7 @@ import mage.players.Player;
  */
 
 
-public class DeadbridgeChant extends CardImpl {
+public final class DeadbridgeChant extends CardImpl {
 
     public DeadbridgeChant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{G}");

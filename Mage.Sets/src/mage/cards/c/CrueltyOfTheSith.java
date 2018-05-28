@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author Styxo
  */
-public class CrueltyOfTheSith extends CardImpl {
+public final class CrueltyOfTheSith extends CardImpl {
 
     private static final FilterSpell filterNoncreature = new FilterSpell("noncreature spell");
 

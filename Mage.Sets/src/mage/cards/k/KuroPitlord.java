@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class KuroPitlord extends CardImpl {
+public final class KuroPitlord extends CardImpl {
 
     public KuroPitlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");

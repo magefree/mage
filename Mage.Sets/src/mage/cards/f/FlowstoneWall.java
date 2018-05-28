@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class FlowstoneWall extends CardImpl {
+public final class FlowstoneWall extends CardImpl {
 
     public FlowstoneWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

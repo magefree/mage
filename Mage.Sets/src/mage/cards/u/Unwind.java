@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  * @author JRHerlehy
  *         Created on 4/7/18.
  */
-public class Unwind extends CardImpl {
+public final class Unwind extends CardImpl {
 
     public Unwind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

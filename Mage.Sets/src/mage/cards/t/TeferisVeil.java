@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class TeferisVeil extends CardImpl {
+public final class TeferisVeil extends CardImpl {
 
     public TeferisVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

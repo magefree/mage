@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CapturedByTheConsulate extends CardImpl {
+public final class CapturedByTheConsulate extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

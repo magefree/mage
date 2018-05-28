@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author spjspj
  */
-public class StonehoofChieftain extends CardImpl {
+public final class StonehoofChieftain extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 

@@ -52,7 +52,7 @@ import mage.game.permanent.token.MaritLageToken;
  *
  * @author Plopman
  */
-public class DarkDepths extends CardImpl {
+public final class DarkDepths extends CardImpl {
 
     public DarkDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

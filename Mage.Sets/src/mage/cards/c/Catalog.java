@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Backfir3
  */
-public class Catalog extends CardImpl {
+public final class Catalog extends CardImpl {
 
     public Catalog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

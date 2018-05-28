@@ -66,7 +66,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DireFleetDaredevil extends CardImpl {
+public final class DireFleetDaredevil extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from an opponent's graveyard");
 

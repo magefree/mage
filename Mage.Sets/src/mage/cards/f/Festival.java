@@ -42,7 +42,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Festival extends CardImpl {
+public final class Festival extends CardImpl {
 
     public Festival(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author North
  */
-public class DauntlessEscort extends CardImpl {
+public final class DauntlessEscort extends CardImpl {
 
     public DauntlessEscort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");

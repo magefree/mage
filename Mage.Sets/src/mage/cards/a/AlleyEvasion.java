@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class AlleyEvasion extends CardImpl {
+public final class AlleyEvasion extends CardImpl {
 
     public AlleyEvasion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

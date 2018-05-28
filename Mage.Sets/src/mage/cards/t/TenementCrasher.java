@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TenementCrasher extends CardImpl {
+public final class TenementCrasher extends CardImpl {
 
     public TenementCrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

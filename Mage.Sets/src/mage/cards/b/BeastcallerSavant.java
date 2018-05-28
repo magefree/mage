@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreatureSpell;
  *
  * @author fireshoes
  */
-public class BeastcallerSavant extends CardImpl {
+public final class BeastcallerSavant extends CardImpl {
 
     public BeastcallerSavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

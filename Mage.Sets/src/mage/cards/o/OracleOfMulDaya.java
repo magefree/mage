@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author nantuko, BetaSteward_at_googlemail.com
  */
-public class OracleOfMulDaya extends CardImpl {
+public final class OracleOfMulDaya extends CardImpl {
 
     public OracleOfMulDaya(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

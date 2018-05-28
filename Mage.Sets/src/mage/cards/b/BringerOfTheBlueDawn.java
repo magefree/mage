@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class BringerOfTheBlueDawn extends CardImpl {
+public final class BringerOfTheBlueDawn extends CardImpl {
 
     public BringerOfTheBlueDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}{U}");

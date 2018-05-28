@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Galatolol
  */
-public class BlanketOfNight extends CardImpl {
+public final class BlanketOfNight extends CardImpl {
 
     public BlanketOfNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");

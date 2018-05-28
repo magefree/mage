@@ -60,7 +60,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author North
  */
-public class ChandraAblaze extends CardImpl {
+public final class ChandraAblaze extends CardImpl {
 
     public ChandraAblaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");

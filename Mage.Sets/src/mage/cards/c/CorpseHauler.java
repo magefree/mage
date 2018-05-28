@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class CorpseHauler extends CardImpl {
+public final class CorpseHauler extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("another target creature card from your graveyard");
     static {

@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
 /**
  * @author Loki
  */
-public class KodamaOfTheSouthTree extends CardImpl {
+public final class KodamaOfTheSouthTree extends CardImpl {
 
     public KodamaOfTheSouthTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

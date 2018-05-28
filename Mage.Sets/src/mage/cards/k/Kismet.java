@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class Kismet extends CardImpl {
+public final class Kismet extends CardImpl {
 
     public Kismet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

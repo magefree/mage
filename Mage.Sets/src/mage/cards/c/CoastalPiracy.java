@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Xavierv3131
  */
-public class CoastalPiracy extends CardImpl {
+public final class CoastalPiracy extends CardImpl {
 
     public CoastalPiracy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

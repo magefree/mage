@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Cetavolver extends CardImpl {
+public final class Cetavolver extends CardImpl {
 
     public Cetavolver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

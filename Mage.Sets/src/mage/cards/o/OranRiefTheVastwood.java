@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OranRiefTheVastwood extends CardImpl {
+public final class OranRiefTheVastwood extends CardImpl {
 
     public OranRiefTheVastwood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

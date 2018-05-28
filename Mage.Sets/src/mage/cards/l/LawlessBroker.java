@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class LawlessBroker extends CardImpl {
+public final class LawlessBroker extends CardImpl {
 
     public LawlessBroker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

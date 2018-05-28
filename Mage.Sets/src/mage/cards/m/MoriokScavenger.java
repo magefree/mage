@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LoneFox
  */
-public class MoriokScavenger extends CardImpl {
+public final class MoriokScavenger extends CardImpl {
 
     final static FilterCreatureCard filter = new FilterCreatureCard("artifact creature card from your graveyard");
 

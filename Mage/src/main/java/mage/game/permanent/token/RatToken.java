@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RatToken extends TokenImpl {
+public final class RatToken extends TokenImpl {
 
     public RatToken() {
         this("GTC");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class SpringjackKnight extends CardImpl {
+public final class SpringjackKnight extends CardImpl {
 
     public SpringjackKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

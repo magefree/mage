@@ -49,7 +49,7 @@ import mage.players.Player;
  * @author tcontis
  */
 
-public class ZombieMob extends CardImpl {
+public final class ZombieMob extends CardImpl {
 
     public ZombieMob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class NaturalState extends CardImpl {
+public final class NaturalState extends CardImpl {
 
     private static final FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with converted mana cost 3 or less");
 

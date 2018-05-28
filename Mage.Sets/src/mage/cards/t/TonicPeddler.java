@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Derpthemeus
  */
-public class TonicPeddler extends CardImpl {
+public final class TonicPeddler extends CardImpl {
 
     public TonicPeddler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

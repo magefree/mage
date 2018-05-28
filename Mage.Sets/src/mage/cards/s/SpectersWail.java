@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
+public final class SpectersWail extends CardImpl {
 
     public SpectersWail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

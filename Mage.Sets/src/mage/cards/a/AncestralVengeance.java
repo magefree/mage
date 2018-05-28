@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AncestralVengeance extends CardImpl {
+public final class AncestralVengeance extends CardImpl {
 
     public AncestralVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}");

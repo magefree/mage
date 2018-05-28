@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class GlassesOfUrza extends CardImpl {
+public final class GlassesOfUrza extends CardImpl {
 
     public GlassesOfUrza(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

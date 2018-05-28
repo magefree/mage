@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33, North
  */
-public class EngulfingFlames extends CardImpl {
+public final class EngulfingFlames extends CardImpl {
 
     public EngulfingFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

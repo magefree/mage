@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class AshenmoorCohort extends CardImpl {
+public final class AshenmoorCohort extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class VampireNocturnus extends CardImpl {
+public final class VampireNocturnus extends CardImpl {
 
     public VampireNocturnus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}{B}");

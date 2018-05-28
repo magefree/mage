@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author Plopman
  */
-public class Fleshgrafter extends CardImpl {
+public final class Fleshgrafter extends CardImpl {
 
     public Fleshgrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

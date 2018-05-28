@@ -52,7 +52,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ColossusOfAkros extends CardImpl {
+public final class ColossusOfAkros extends CardImpl {
 
     public ColossusOfAkros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");

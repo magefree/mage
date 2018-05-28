@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author dustinconrad
  */
-public class MindSlash extends CardImpl {
+public final class MindSlash extends CardImpl {
 
     public MindSlash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");

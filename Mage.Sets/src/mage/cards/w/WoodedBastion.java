@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class WoodedBastion extends CardImpl {
+public final class WoodedBastion extends CardImpl {
 
     public WoodedBastion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

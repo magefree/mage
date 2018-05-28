@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class GoblinPatrol extends CardImpl {
+public final class GoblinPatrol extends CardImpl {
 
     public GoblinPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

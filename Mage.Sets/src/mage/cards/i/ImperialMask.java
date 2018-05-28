@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author TheElk801
  */
-public class ImperialMask extends CardImpl {
+public final class ImperialMask extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

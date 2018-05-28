@@ -39,7 +39,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author cbt33
  */
-public class SecondThoughts extends CardImpl {
+public final class SecondThoughts extends CardImpl {
 
     public SecondThoughts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");

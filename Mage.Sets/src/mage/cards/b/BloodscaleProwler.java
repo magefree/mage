@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class BloodscaleProwler extends CardImpl {
+public final class BloodscaleProwler extends CardImpl {
 
     public BloodscaleProwler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

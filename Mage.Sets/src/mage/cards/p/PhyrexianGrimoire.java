@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  * 
  * @author Plopman
  */
-public class PhyrexianGrimoire extends CardImpl {
+public final class PhyrexianGrimoire extends CardImpl {
 
     public PhyrexianGrimoire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

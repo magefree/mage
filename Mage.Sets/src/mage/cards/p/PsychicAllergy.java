@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author L_J
  */
-public class PsychicAllergy extends CardImpl {
+public final class PsychicAllergy extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
 

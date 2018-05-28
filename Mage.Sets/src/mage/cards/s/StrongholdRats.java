@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class StrongholdRats extends CardImpl {
+public final class StrongholdRats extends CardImpl {
 
     public StrongholdRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author JRHerlehy
  */
-public class MessengerJays extends CardImpl {
+public final class MessengerJays extends CardImpl {
 
     public MessengerJays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class InterventionPact extends CardImpl {
+public final class InterventionPact extends CardImpl {
 
     public InterventionPact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{0}");

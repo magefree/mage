@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class WarpathGhoul extends CardImpl {
+public final class WarpathGhoul extends CardImpl {
 
     public WarpathGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

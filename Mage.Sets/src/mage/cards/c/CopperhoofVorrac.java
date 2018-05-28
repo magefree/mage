@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LoneFox
  */
-public class CopperhoofVorrac extends CardImpl {
+public final class CopperhoofVorrac extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("untapped permanent your opponents control");
 

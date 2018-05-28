@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author emerald000
  */
-public class StonebrowKrosanHero extends CardImpl {
+public final class StonebrowKrosanHero extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with trample");
     static {

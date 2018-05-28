@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class MeditationPuzzle extends CardImpl {
+public final class MeditationPuzzle extends CardImpl {
 
     public MeditationPuzzle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");

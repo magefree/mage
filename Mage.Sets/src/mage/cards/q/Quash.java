@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Quash extends CardImpl {
+public final class Quash extends CardImpl {
     
     public Quash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

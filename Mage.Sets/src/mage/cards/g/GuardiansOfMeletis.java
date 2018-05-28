@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class GuardiansOfMeletis extends CardImpl {
+public final class GuardiansOfMeletis extends CardImpl {
 
     public GuardiansOfMeletis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

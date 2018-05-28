@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author ilcartographer
  */
-public class AcidRain extends CardImpl {
+public final class AcidRain extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Forests");
     static {

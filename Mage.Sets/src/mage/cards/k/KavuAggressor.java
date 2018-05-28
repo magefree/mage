@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  * @author LoneFox
 
  */
-public class KavuAggressor extends CardImpl {
+public final class KavuAggressor extends CardImpl {
 
     public KavuAggressor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

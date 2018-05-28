@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class SunastianFalconer extends CardImpl {
+public final class SunastianFalconer extends CardImpl {
 
     public SunastianFalconer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");

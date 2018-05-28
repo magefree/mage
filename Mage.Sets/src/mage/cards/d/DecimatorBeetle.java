@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class DecimatorBeetle extends CardImpl {
+public final class DecimatorBeetle extends CardImpl {
 
     private final UUID originalId;
 

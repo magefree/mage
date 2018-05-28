@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CurseOfInertia extends CardImpl {
+public final class CurseOfInertia extends CardImpl {
 
     public CurseOfInertia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

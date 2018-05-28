@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class SramSeniorEdificer extends CardImpl {
+public final class SramSeniorEdificer extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an Aura, Equipment, or Vehicle spell");
 

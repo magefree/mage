@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SkyRuinDrake extends CardImpl {
+public final class SkyRuinDrake extends CardImpl {
 
     public SkyRuinDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

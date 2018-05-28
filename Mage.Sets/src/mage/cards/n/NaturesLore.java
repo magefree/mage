@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NaturesLore extends CardImpl {
+public final class NaturesLore extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Forest card");
 

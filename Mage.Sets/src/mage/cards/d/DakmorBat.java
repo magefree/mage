@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class DakmorBat extends CardImpl {
+public final class DakmorBat extends CardImpl {
 
     public DakmorBat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

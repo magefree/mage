@@ -54,7 +54,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Banefire extends CardImpl {
+public final class Banefire extends CardImpl {
 
     public Banefire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

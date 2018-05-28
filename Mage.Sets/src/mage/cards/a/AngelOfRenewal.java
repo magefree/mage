@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AngelOfRenewal extends CardImpl {
+public final class AngelOfRenewal extends CardImpl {
 
     public AngelOfRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

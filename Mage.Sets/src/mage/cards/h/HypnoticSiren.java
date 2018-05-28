@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HypnoticSiren extends CardImpl {
+public final class HypnoticSiren extends CardImpl {
 
     public HypnoticSiren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{U}");

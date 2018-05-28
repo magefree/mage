@@ -48,7 +48,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward
  */
-public class AltarOfTheLost extends CardImpl {
+public final class AltarOfTheLost extends CardImpl {
 
     public AltarOfTheLost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

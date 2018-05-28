@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LoneFox
  */
-public class WaxWane extends SplitCard {
+public final class WaxWane extends SplitCard {
 
     public WaxWane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}", "{W}", SpellAbilityType.SPLIT);

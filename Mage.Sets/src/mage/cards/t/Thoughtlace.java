@@ -40,7 +40,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author AlumiuN
  */
-public class Thoughtlace extends CardImpl {
+public final class Thoughtlace extends CardImpl {
 
     public Thoughtlace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

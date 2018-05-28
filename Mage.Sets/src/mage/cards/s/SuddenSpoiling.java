@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class SuddenSpoiling extends CardImpl {
+public final class SuddenSpoiling extends CardImpl {
 
     public SuddenSpoiling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");

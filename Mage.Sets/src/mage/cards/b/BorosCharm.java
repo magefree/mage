@@ -47,7 +47,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Plopman
  */
-public class BorosCharm extends CardImpl {
+public final class BorosCharm extends CardImpl {
 
     public BorosCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}");

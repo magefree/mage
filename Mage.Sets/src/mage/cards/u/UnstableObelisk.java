@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class UnstableObelisk extends CardImpl {
+public final class UnstableObelisk extends CardImpl {
 
     public UnstableObelisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

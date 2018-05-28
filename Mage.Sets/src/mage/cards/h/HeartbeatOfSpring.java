@@ -40,7 +40,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author Loki
  */
-public class HeartbeatOfSpring extends CardImpl {
+public final class HeartbeatOfSpring extends CardImpl {
 
     public HeartbeatOfSpring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

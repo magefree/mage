@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class WaitingInTheWeeds extends CardImpl {
+public final class WaitingInTheWeeds extends CardImpl {
 
     public WaitingInTheWeeds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");

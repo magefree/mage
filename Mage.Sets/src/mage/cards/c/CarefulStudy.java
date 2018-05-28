@@ -36,7 +36,7 @@ import mage.constants.CardType;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class CarefulStudy extends CardImpl {
+public final class CarefulStudy extends CardImpl {
 
     public CarefulStudy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

@@ -42,7 +42,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author Loki
  */
-public class ElgaudInquisitor extends CardImpl {
+public final class ElgaudInquisitor extends CardImpl {
 
     public ElgaudInquisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

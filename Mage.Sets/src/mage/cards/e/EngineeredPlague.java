@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class EngineeredPlague extends CardImpl {
+public final class EngineeredPlague extends CardImpl {
 
     public EngineeredPlague(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

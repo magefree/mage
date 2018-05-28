@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author anonymous
  */
-public class StarCompass extends CardImpl {
+public final class StarCompass extends CardImpl {
 
     public StarCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

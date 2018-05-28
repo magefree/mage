@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class FavorOfTheMighty extends CardImpl {
+public final class FavorOfTheMighty extends CardImpl {
 
     public FavorOfTheMighty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");

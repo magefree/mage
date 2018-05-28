@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
 
 
 
-public class CarnageGladiator extends CardImpl {
+public final class CarnageGladiator extends CardImpl {
 
     public CarnageGladiator (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");

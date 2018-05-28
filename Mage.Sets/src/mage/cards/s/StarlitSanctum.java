@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author anonymous
  */
-public class StarlitSanctum extends CardImpl {
+public final class StarlitSanctum extends CardImpl {
 
     public StarlitSanctum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

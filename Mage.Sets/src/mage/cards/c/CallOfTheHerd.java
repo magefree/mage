@@ -41,7 +41,7 @@ import mage.game.permanent.token.ElephantToken;
  *
  * @author Loki
  */
-public class CallOfTheHerd extends CardImpl {
+public final class CallOfTheHerd extends CardImpl {
 
     public CallOfTheHerd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

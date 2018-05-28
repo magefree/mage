@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Luna Skyrise
  */
-public class ForsakenCity extends CardImpl {
+public final class ForsakenCity extends CardImpl {
     
      private static final FilterCard filter = new FilterCard("a card from your hand");
 

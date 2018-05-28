@@ -38,7 +38,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class ArmoredWarhorse extends CardImpl {
+public final class ArmoredWarhorse extends CardImpl {
 
     public ArmoredWarhorse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

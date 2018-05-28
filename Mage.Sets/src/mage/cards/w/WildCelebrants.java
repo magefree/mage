@@ -43,7 +43,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class WildCelebrants extends CardImpl {
+public final class WildCelebrants extends CardImpl {
 
     public WildCelebrants(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

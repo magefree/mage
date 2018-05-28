@@ -48,7 +48,7 @@ import mage.constants.Duration;
  *
  * @author emerald000
  */
-public class VoltaicBrawler extends CardImpl {
+public final class VoltaicBrawler extends CardImpl {
 
     public VoltaicBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

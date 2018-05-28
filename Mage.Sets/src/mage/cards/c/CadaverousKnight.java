@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class CadaverousKnight extends CardImpl {
+public final class CadaverousKnight extends CardImpl {
 
     public CadaverousKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

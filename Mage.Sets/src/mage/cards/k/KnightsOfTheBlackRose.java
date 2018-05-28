@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class KnightsOfTheBlackRose extends CardImpl {
+public final class KnightsOfTheBlackRose extends CardImpl {
 
     public KnightsOfTheBlackRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");

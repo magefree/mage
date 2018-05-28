@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class MoltenRavager extends CardImpl {
+public final class MoltenRavager extends CardImpl {
 
     public MoltenRavager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

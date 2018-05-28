@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class SliverHive extends CardImpl {
+public final class SliverHive extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Sliver");
     private static final FilterSpell filterSpell = new FilterSpell("a Sliver spell");

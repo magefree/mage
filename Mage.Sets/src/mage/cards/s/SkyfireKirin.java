@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author LevelX2
  */
-public class SkyfireKirin extends CardImpl {
+public final class SkyfireKirin extends CardImpl {
 
     private final UUID originalId;
 

@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class SqueesRevenge extends CardImpl {
+public final class SqueesRevenge extends CardImpl {
 
     public SqueesRevenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{R}");

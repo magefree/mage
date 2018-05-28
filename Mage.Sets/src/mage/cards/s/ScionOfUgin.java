@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ScionOfUgin extends CardImpl {
+public final class ScionOfUgin extends CardImpl {
 
     public ScionOfUgin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");

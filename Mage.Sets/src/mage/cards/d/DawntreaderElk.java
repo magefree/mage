@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class DawntreaderElk extends CardImpl {
+public final class DawntreaderElk extends CardImpl {
 
     public DawntreaderElk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

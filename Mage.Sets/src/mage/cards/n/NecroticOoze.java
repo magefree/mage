@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NecroticOoze extends CardImpl {
+public final class NecroticOoze extends CardImpl {
 
     public NecroticOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

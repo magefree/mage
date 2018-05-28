@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class DesperateCharge extends CardImpl {
+public final class DesperateCharge extends CardImpl {
 
     public DesperateCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

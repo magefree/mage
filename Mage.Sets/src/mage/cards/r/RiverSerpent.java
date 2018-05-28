@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author stravant
  */
-public class RiverSerpent extends CardImpl {
+public final class RiverSerpent extends CardImpl {
 
     public RiverSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class AkronLegionnaire extends CardImpl {
+public final class AkronLegionnaire extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     

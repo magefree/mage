@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author ilcartographer
  */
-public class Fertilid extends CardImpl {
+public final class Fertilid extends CardImpl {
 
     public Fertilid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

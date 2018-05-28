@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author TheElk801
  */
-public class MerfolkTrickster extends CardImpl {
+public final class MerfolkTrickster extends CardImpl {
 
     public MerfolkTrickster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");

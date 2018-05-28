@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class WallOfSouls extends CardImpl {
+public final class WallOfSouls extends CardImpl {
 
     public WallOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

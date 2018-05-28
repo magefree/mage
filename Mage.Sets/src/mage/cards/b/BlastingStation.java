@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class BlastingStation extends CardImpl {
+public final class BlastingStation extends CardImpl {
 
     public BlastingStation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

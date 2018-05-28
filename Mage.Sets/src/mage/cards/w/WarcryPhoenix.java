@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class WarcryPhoenix extends CardImpl {
+public final class WarcryPhoenix extends CardImpl {
 
     public WarcryPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

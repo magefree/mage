@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class HordeAmbusher extends CardImpl {
+public final class HordeAmbusher extends CardImpl {
     
     private final static FilterCard filter = new FilterCard("a red card in your hand");
     static {

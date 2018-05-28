@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class IllusionistsBracers extends CardImpl {
+public final class IllusionistsBracers extends CardImpl {
 
     public IllusionistsBracers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

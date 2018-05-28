@@ -58,7 +58,7 @@ import org.apache.log4j.Logger;
  *
  * @author fireshoes
  */
-public class TorrentialGearhulk extends CardImpl {
+public final class TorrentialGearhulk extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant card from your graveyard");
 

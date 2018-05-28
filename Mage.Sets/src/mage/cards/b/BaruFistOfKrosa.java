@@ -56,7 +56,7 @@ import mage.game.permanent.token.Token;
  *
  * @author emerald000
  */
-public class BaruFistOfKrosa extends CardImpl {
+public final class BaruFistOfKrosa extends CardImpl {
 
     private static final FilterLandPermanent forestFilter = new FilterLandPermanent("Forest");
     private static final FilterCreaturePermanent greenCreatureFilter = new FilterCreaturePermanent("green creatures you control");

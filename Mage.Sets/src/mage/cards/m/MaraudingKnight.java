@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author michael.napoleon@gmail.com
  */
-public class MaraudingKnight extends CardImpl {
+public final class MaraudingKnight extends CardImpl {
 
     private static final FilterLandPermanent plainsFilter = new FilterLandPermanent("Plains your opponent controls");
     static {

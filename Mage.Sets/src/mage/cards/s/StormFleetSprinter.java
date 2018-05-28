@@ -39,7 +39,7 @@ import mage.constants.*;
  *
  * @author JayDi85
  */
-public class StormFleetSprinter extends CardImpl {
+public final class StormFleetSprinter extends CardImpl {
 
     public StormFleetSprinter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");

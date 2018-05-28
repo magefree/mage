@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author fireshoes
  */
-public class MysticDecree extends CardImpl {
+public final class MysticDecree extends CardImpl {
 
     public MysticDecree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

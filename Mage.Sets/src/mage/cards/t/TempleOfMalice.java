@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class TempleOfMalice extends CardImpl {
+public final class TempleOfMalice extends CardImpl {
 
     public TempleOfMalice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

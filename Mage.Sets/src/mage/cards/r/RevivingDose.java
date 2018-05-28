@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class RevivingDose extends CardImpl {
+public final class RevivingDose extends CardImpl {
 
     public RevivingDose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

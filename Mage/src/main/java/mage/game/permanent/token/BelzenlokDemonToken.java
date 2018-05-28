@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LoneFox
  */
-public class BelzenlokDemonToken extends TokenImpl {
+public final class BelzenlokDemonToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {

@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class TidalFlats extends CardImpl {
+public final class TidalFlats extends CardImpl {
 
     public TidalFlats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

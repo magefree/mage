@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
 /**
  * @author LevelX2
  */
-public class Syncopate extends CardImpl {
+public final class Syncopate extends CardImpl {
 
     public Syncopate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class GuardianOfVituGhazi extends CardImpl {
+public final class GuardianOfVituGhazi extends CardImpl {
 
     public GuardianOfVituGhazi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{W}");

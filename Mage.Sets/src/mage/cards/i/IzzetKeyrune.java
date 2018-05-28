@@ -52,7 +52,7 @@ import mage.players.Player;
 /**
  * @author LevelX2
  */
-public class IzzetKeyrune extends CardImpl {
+public final class IzzetKeyrune extends CardImpl {
 
     public IzzetKeyrune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

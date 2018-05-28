@@ -47,7 +47,7 @@ import mage.watchers.common.SourceDidDamageWatcher;
  *
  * @author LevelX2
  */
-public class ExecutionersSwing extends CardImpl {
+public final class ExecutionersSwing extends CardImpl {
 
     public ExecutionersSwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{B}");

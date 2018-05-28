@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class KabutoMoth extends CardImpl {
+public final class KabutoMoth extends CardImpl {
 
     public KabutoMoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

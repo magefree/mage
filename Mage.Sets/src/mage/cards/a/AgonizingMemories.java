@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class AgonizingMemories extends CardImpl {
+public final class AgonizingMemories extends CardImpl {
 
     public AgonizingMemories(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

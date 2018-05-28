@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KeeneyeAven extends CardImpl {
+public final class KeeneyeAven extends CardImpl {
 
     public KeeneyeAven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class EmergeUnscathed extends CardImpl {
+public final class EmergeUnscathed extends CardImpl {
 
     public EmergeUnscathed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author LevelX
  */
-public class HisokaMinamoSensei extends CardImpl {
+public final class HisokaMinamoSensei extends CardImpl {
 
     public HisokaMinamoSensei(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

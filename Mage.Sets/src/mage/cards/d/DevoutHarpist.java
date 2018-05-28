@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class DevoutHarpist extends CardImpl {
+public final class DevoutHarpist extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura attached to a creature");
     static
     {

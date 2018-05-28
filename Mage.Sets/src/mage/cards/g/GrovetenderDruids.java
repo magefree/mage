@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class GrovetenderDruids extends CardImpl {
+public final class GrovetenderDruids extends CardImpl {
 
     public GrovetenderDruids(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");

@@ -53,7 +53,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author fireshoes
  */
-public class MindsDilation extends CardImpl {
+public final class MindsDilation extends CardImpl {
 
     public MindsDilation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");

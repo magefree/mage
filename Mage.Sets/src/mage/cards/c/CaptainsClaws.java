@@ -46,7 +46,7 @@ import mage.game.permanent.token.KorAllyToken;
  *
  * @author LevelX2
  */
-public class CaptainsClaws extends CardImpl {
+public final class CaptainsClaws extends CardImpl {
 
     public CaptainsClaws(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

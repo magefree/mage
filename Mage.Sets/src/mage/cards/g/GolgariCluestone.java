@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class GolgariCluestone extends CardImpl {
+public final class GolgariCluestone extends CardImpl {
 
     public GolgariCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

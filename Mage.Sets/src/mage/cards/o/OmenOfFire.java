@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class OmenOfFire extends CardImpl {
+public final class OmenOfFire extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Islands");
     static {

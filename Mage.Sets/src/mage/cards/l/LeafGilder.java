@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LeafGilder extends CardImpl {
+public final class LeafGilder extends CardImpl {
 
     public LeafGilder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

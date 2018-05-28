@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DimirInfiltrator extends CardImpl {
+public final class DimirInfiltrator extends CardImpl {
 
     public DimirInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");

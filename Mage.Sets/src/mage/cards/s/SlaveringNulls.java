@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SlaveringNulls extends CardImpl {
+public final class SlaveringNulls extends CardImpl {
 
     public SlaveringNulls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

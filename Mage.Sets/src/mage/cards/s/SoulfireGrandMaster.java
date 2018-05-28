@@ -65,7 +65,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SoulfireGrandMaster extends CardImpl {
+public final class SoulfireGrandMaster extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("instant and sorcery spells you control");
 

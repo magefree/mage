@@ -54,7 +54,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class AvacynGuardianAngel extends CardImpl {
+public final class AvacynGuardianAngel extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 

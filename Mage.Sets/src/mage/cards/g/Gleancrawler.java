@@ -51,7 +51,7 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  *
  * @author LevelX2
  */
-public class Gleancrawler extends CardImpl {
+public final class Gleancrawler extends CardImpl {
 
     public Gleancrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/G}{B/G}{B/G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class AngelicPage extends CardImpl {
+public final class AngelicPage extends CardImpl {
 
     public AngelicPage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

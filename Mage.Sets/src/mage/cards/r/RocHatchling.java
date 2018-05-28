@@ -53,7 +53,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class RocHatchling extends CardImpl {
+public final class RocHatchling extends CardImpl {
 
     public RocHatchling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

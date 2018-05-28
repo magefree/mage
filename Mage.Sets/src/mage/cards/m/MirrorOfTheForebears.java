@@ -54,7 +54,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author TheElk801
  */
-public class MirrorOfTheForebears extends CardImpl {
+public final class MirrorOfTheForebears extends CardImpl {
 
     public MirrorOfTheForebears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

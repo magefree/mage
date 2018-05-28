@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class KelpToken extends TokenImpl {
+public final class KelpToken extends TokenImpl {
 
     public KelpToken() {
         super("Kelp", "0/1 blue Plant Wall creature token with defender named Kelp");

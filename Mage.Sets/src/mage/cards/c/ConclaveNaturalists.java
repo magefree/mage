@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class ConclaveNaturalists extends CardImpl {
+public final class ConclaveNaturalists extends CardImpl {
 
     public ConclaveNaturalists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

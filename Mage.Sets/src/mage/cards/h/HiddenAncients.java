@@ -50,7 +50,7 @@ import java.util.UUID;
  * @author LoneFox
  *
  */
-public class HiddenAncients extends CardImpl {
+public final class HiddenAncients extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("enchantment spell");
 

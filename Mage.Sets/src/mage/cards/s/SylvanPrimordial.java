@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class SylvanPrimordial extends CardImpl {
+public final class SylvanPrimordial extends CardImpl {
 
     public SylvanPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

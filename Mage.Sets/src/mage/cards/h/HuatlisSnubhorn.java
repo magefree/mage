@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class HuatlisSnubhorn extends CardImpl {
+public final class HuatlisSnubhorn extends CardImpl {
 
     public HuatlisSnubhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

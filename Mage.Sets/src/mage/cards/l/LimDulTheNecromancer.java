@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class LimDulTheNecromancer extends CardImpl {
+public final class LimDulTheNecromancer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
     private static final FilterPermanent filter2 = new FilterPermanent("Zombie");

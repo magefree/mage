@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class SvyeluniteTemple extends CardImpl {
+public final class SvyeluniteTemple extends CardImpl {
 
     public SvyeluniteTemple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

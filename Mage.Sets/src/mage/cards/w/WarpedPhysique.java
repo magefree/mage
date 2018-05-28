@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class WarpedPhysique extends CardImpl {
+public final class WarpedPhysique extends CardImpl {
 
     public WarpedPhysique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");

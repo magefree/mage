@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class AdroitHateflayer extends CardImpl {
+public final class AdroitHateflayer extends CardImpl {
 
     public AdroitHateflayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");

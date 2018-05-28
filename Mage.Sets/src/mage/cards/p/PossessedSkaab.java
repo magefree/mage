@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class PossessedSkaab extends CardImpl {
+public final class PossessedSkaab extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant, sorcery, or creature card from your graveyard");
 

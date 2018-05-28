@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SoulBleed extends CardImpl {
+public final class SoulBleed extends CardImpl {
 
     public SoulBleed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

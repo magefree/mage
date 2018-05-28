@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class FlameKinWarScout extends CardImpl {
+public final class FlameKinWarScout extends CardImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

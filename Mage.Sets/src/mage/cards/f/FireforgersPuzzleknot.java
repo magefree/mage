@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class FireforgersPuzzleknot extends CardImpl {
+public final class FireforgersPuzzleknot extends CardImpl {
 
     public FireforgersPuzzleknot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jonubuu
  */
-public class WitheredWretch extends CardImpl {
+public final class WitheredWretch extends CardImpl {
 
     public WitheredWretch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

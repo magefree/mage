@@ -62,7 +62,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class DarigaazReincarnated extends CardImpl {
+public final class DarigaazReincarnated extends CardImpl {
 
     public DarigaazReincarnated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}{G}");

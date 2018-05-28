@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class GlintwingInvoker extends CardImpl {
+public final class GlintwingInvoker extends CardImpl {
 
     public GlintwingInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

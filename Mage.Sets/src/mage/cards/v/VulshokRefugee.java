@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class VulshokRefugee extends CardImpl {
+public final class VulshokRefugee extends CardImpl {
 
     public VulshokRefugee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

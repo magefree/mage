@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FieryConclusion extends CardImpl {
+public final class FieryConclusion extends CardImpl {
 
     public FieryConclusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

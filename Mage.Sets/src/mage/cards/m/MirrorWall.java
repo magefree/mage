@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MirrorWall extends CardImpl {
+public final class MirrorWall extends CardImpl {
 
     public MirrorWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

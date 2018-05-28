@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class OrderOfTheStars extends CardImpl {
+public final class OrderOfTheStars extends CardImpl {
 
     public OrderOfTheStars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

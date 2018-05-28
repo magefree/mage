@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ciaccona007
  */
-public class BlurOfBlades extends CardImpl {
+public final class BlurOfBlades extends CardImpl {
 
     public BlurOfBlades(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

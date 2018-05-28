@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RakdosRagemutt extends CardImpl {
+public final class RakdosRagemutt extends CardImpl {
 
     public RakdosRagemutt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");

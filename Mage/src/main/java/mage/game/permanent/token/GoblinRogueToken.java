@@ -37,7 +37,7 @@ import mage.MageInt;
  *
  * @author LoneFox
  */
-public class GoblinRogueToken extends TokenImpl {
+public final class GoblinRogueToken extends TokenImpl {
 
     public GoblinRogueToken() {
         super("Goblin Rogue", "1/1 black Goblin Rogue creature token");

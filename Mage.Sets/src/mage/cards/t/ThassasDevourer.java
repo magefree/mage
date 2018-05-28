@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class ThassasDevourer extends CardImpl {
+public final class ThassasDevourer extends CardImpl {
 
     public ThassasDevourer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{4}{U}");

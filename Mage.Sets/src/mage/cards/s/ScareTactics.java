@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author Ekkaia
  */
-public class ScareTactics extends CardImpl {
+public final class ScareTactics extends CardImpl {
 
     public ScareTactics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

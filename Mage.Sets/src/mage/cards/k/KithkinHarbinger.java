@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LoneFox
  */
-public class KithkinHarbinger extends CardImpl {
+public final class KithkinHarbinger extends CardImpl {
 
     static final FilterCard filter = new FilterCard("Kithkin card");
 

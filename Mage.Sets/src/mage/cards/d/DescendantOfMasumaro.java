@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class DescendantOfMasumaro extends CardImpl {
+public final class DescendantOfMasumaro extends CardImpl {
 
     public DescendantOfMasumaro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

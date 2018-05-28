@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class KitsuneDawnblade extends CardImpl {
+public final class KitsuneDawnblade extends CardImpl {
 
     public KitsuneDawnblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

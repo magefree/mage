@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class LashweedLurker extends CardImpl {
+public final class LashweedLurker extends CardImpl {
 
     public LashweedLurker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class IzzetVsGolgari extends ExpansionSet {
+public final class IzzetVsGolgari extends ExpansionSet {
 
     private static final IzzetVsGolgari instance = new IzzetVsGolgari();
 

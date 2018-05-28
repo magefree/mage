@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class BlindZealot extends CardImpl {
+public final class BlindZealot extends CardImpl {
 
     public BlindZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

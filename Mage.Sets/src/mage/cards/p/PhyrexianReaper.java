@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Galatolol
  */
-public class PhyrexianReaper extends CardImpl {
+public final class PhyrexianReaper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 

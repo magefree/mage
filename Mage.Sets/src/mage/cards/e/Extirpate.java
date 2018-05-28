@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jonubuu
  */
-public class Extirpate extends CardImpl {
+public final class Extirpate extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
 

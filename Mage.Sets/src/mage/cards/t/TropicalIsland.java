@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class TropicalIsland extends CardImpl {
+public final class TropicalIsland extends CardImpl {
 
     public TropicalIsland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

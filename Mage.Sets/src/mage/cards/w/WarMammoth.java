@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WarMammoth extends CardImpl {
+public final class WarMammoth extends CardImpl {
 
     public WarMammoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class SleekSchooner extends CardImpl {
+public final class SleekSchooner extends CardImpl {
 
     public SleekSchooner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

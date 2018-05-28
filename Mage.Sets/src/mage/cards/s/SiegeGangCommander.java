@@ -51,7 +51,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class SiegeGangCommander extends CardImpl {
+public final class SiegeGangCommander extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
 

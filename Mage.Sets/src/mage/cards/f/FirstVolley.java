@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FirstVolley extends CardImpl {
+public final class FirstVolley extends CardImpl {
 
     public FirstVolley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

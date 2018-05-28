@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TaintedRemedy extends CardImpl {
+public final class TaintedRemedy extends CardImpl {
 
     public TaintedRemedy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

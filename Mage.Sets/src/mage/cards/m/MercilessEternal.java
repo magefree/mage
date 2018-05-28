@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MercilessEternal extends CardImpl {
+public final class MercilessEternal extends CardImpl {
 
     public MercilessEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

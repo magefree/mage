@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author fireshoes
  */
-public class HeroicIntervention extends CardImpl {
+public final class HeroicIntervention extends CardImpl {
 
     public HeroicIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Backfir3
  */
-public class StrokeOfGenius extends CardImpl {
+public final class StrokeOfGenius extends CardImpl {
 
     public StrokeOfGenius (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{2}{U}");

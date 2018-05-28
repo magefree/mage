@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SungrassEgg extends CardImpl {
+public final class SungrassEgg extends CardImpl {
 
     public SungrassEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

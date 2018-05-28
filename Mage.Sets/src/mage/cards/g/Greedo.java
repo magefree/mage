@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Styxo
  */
-public class Greedo extends CardImpl {
+public final class Greedo extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("Hunter or Rogue card");
 

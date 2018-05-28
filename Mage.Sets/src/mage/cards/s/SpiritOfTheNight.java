@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class SpiritOfTheNight extends CardImpl {
+public final class SpiritOfTheNight extends CardImpl {
     
     public SpiritOfTheNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");

@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class CourtHomunculus extends CardImpl {
+public final class CourtHomunculus extends CardImpl {
 
     public CourtHomunculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}");

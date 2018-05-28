@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class CloneLegion extends CardImpl {
+public final class CloneLegion extends CardImpl {
 
     public CloneLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}");

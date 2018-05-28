@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AshenmoorLiege extends CardImpl {
+public final class AshenmoorLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filterBlackCreature = new FilterCreaturePermanent("black creatures");
     private static final FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creatures");

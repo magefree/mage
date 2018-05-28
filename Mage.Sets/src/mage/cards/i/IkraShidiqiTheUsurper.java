@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author spjspj
  */
-public class IkraShidiqiTheUsurper extends CardImpl {
+public final class IkraShidiqiTheUsurper extends CardImpl {
 
     public IkraShidiqiTheUsurper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");

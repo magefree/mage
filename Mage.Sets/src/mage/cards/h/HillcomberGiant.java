@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HillcomberGiant extends CardImpl {
+public final class HillcomberGiant extends CardImpl {
 
     public HillcomberGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author Quercitron
  */
-public class ActOnImpulse extends CardImpl {
+public final class ActOnImpulse extends CardImpl {
 
     public ActOnImpulse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

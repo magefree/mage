@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author North
  */
-public class MemorysJourney extends CardImpl {
+public final class MemorysJourney extends CardImpl {
 
     public MemorysJourney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

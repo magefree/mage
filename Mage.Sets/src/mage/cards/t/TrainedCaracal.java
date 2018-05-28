@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TrainedCaracal extends CardImpl {
+public final class TrainedCaracal extends CardImpl {
 
     public TrainedCaracal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

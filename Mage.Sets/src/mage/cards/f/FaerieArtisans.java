@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class FaerieArtisans extends CardImpl {
+public final class FaerieArtisans extends CardImpl {
 
     private static final FilterCreaturePermanent filterNontoken = new FilterCreaturePermanent("nontoken creature");
 

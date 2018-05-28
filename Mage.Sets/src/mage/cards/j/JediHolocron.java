@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class JediHolocron extends CardImpl {
+public final class JediHolocron extends CardImpl {
 
     public JediHolocron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

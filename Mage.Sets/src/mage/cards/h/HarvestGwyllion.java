@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HarvestGwyllion extends CardImpl {
+public final class HarvestGwyllion extends CardImpl {
 
     public HarvestGwyllion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/B}{W/B}");

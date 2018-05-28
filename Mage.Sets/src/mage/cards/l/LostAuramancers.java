@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Quercitron
  */
-public class LostAuramancers extends CardImpl {
+public final class LostAuramancers extends CardImpl {
 
     public LostAuramancers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author noxx
  */
-public class Weatherlight extends ExpansionSet {
+public final class Weatherlight extends ExpansionSet {
 
     private static final Weatherlight instance = new Weatherlight();
 

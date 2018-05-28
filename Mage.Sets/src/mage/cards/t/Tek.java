@@ -52,7 +52,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author LoneFox
 
  */
-public class Tek extends CardImpl {
+public final class Tek extends CardImpl {
 
     private static final FilterControlledPermanent filterPlains = new FilterControlledPermanent("Plains");
     private static final FilterControlledPermanent filterIsland = new FilterControlledPermanent("Island");

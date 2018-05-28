@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class VampireOutcasts extends CardImpl {
+public final class VampireOutcasts extends CardImpl {
 
     public VampireOutcasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author jeffwadsworth
  */
-public class CylianSunsinger extends CardImpl {
+public final class CylianSunsinger extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cylian Sunsinger and each other creature with the same name");
     

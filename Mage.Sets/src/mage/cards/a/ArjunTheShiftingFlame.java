@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class ArjunTheShiftingFlame extends CardImpl {
+public final class ArjunTheShiftingFlame extends CardImpl {
 
     public ArjunTheShiftingFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{R}");

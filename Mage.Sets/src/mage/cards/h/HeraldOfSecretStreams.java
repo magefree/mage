@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author TheElk801
  */
-public class HeraldOfSecretStreams extends CardImpl {
+public final class HeraldOfSecretStreams extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with +1/+1 counters on them");
 

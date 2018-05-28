@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author FenrisulfrX
  */
-public class FleetfootPanther extends CardImpl {
+public final class FleetfootPanther extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green or white creature you control");
 

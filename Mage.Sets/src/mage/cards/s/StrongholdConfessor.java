@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class StrongholdConfessor extends CardImpl {
+public final class StrongholdConfessor extends CardImpl {
 
     public StrongholdConfessor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

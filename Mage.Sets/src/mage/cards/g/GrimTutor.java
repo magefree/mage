@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class GrimTutor extends CardImpl {
+public final class GrimTutor extends CardImpl {
 
     public GrimTutor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

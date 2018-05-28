@@ -42,7 +42,7 @@ import mage.game.permanent.token.PenumbraWurmToken;
  *
  * @author Loki
  */
-public class PenumbraWurm extends CardImpl {
+public final class PenumbraWurm extends CardImpl {
 
     public PenumbraWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

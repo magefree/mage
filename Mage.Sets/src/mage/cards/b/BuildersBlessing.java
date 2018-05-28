@@ -40,7 +40,7 @@ import mage.filter.common.FilterUntappedCreature;
 /**
  * @author noxx
  */
-public class BuildersBlessing extends CardImpl {
+public final class BuildersBlessing extends CardImpl {
 
     public BuildersBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

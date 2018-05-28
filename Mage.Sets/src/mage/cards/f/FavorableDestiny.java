@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class FavorableDestiny extends CardImpl {
+public final class FavorableDestiny extends CardImpl {
 
     public FavorableDestiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

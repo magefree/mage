@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class ViridianJoiner extends CardImpl {
+public final class ViridianJoiner extends CardImpl {
 
     public ViridianJoiner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

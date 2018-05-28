@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class CeremonialGuard extends CardImpl {
+public final class CeremonialGuard extends CardImpl {
 
     public CeremonialGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

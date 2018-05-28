@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LoneFox
  */
-public class YavimayaDryad extends CardImpl {
+public final class YavimayaDryad extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("a Forest card");
 

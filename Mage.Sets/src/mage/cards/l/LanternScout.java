@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class LanternScout extends CardImpl {
+public final class LanternScout extends CardImpl {
 
     public LanternScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

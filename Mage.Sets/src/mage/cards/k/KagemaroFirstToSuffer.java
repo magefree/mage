@@ -52,7 +52,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class KagemaroFirstToSuffer extends CardImpl {
+public final class KagemaroFirstToSuffer extends CardImpl {
 
     public KagemaroFirstToSuffer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

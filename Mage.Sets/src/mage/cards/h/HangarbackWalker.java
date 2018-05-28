@@ -51,7 +51,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author fireshoes
  */
-public class HangarbackWalker extends CardImpl {
+public final class HangarbackWalker extends CardImpl {
 
     public HangarbackWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{X}{X}");

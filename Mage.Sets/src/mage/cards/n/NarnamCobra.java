@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NarnamCobra extends CardImpl {
+public final class NarnamCobra extends CardImpl {
 
     public NarnamCobra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

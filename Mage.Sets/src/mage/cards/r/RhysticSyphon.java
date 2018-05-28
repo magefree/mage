@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class RhysticSyphon extends CardImpl {
+public final class RhysticSyphon extends CardImpl {
 
     public RhysticSyphon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class HowlpackWolf extends CardImpl {
+public final class HowlpackWolf extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Wolf or Werewolf");
 

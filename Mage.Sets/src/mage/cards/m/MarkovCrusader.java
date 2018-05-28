@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class MarkovCrusader extends CardImpl {
+public final class MarkovCrusader extends CardImpl {
 
     private static final String rule = "{this} has haste as long as you control another Vampire";
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Vampire");

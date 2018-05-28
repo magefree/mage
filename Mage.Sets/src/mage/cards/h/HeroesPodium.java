@@ -52,7 +52,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class HeroesPodium extends CardImpl {
+public final class HeroesPodium extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each legendary creature you control");
 

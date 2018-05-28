@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ProtectorOfTheCrown extends CardImpl {
+public final class ProtectorOfTheCrown extends CardImpl {
 
     public ProtectorOfTheCrown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");

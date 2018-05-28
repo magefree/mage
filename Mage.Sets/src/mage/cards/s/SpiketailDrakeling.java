@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  * @author LoneFox
 
  */
-public class SpiketailDrakeling extends CardImpl {
+public final class SpiketailDrakeling extends CardImpl {
 
     public SpiketailDrakeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

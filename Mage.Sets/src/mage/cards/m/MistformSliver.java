@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author cbt33, Plopman (Engineered Plague)
  */
-public class MistformSliver extends CardImpl {
+public final class MistformSliver extends CardImpl {
 
     public MistformSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

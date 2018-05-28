@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class Gloomhunter extends CardImpl {
+public final class Gloomhunter extends CardImpl {
 
     public Gloomhunter (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

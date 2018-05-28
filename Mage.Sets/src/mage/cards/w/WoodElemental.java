@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author L_J
  */
-public class WoodElemental extends CardImpl {
+public final class WoodElemental extends CardImpl {
 
     public WoodElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

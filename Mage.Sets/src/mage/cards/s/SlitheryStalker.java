@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class SlitheryStalker extends CardImpl {
+public final class SlitheryStalker extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a green or white creature an opponent controls");
 

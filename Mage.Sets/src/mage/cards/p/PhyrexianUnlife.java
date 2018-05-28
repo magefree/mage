@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class PhyrexianUnlife extends CardImpl {
+public final class PhyrexianUnlife extends CardImpl {
 
     public PhyrexianUnlife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

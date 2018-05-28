@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class BenalishHeralds extends CardImpl {
+public final class BenalishHeralds extends CardImpl {
 
     public BenalishHeralds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

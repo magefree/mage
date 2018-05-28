@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SkyhunterSkirmisher extends CardImpl {
+public final class SkyhunterSkirmisher extends CardImpl {
 
     public SkyhunterSkirmisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

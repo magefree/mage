@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class WizardReplica extends CardImpl {
+public final class WizardReplica extends CardImpl {
 
     public WizardReplica(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class UnlicensedDisintegration extends CardImpl {
+public final class UnlicensedDisintegration extends CardImpl {
 
     public UnlicensedDisintegration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");

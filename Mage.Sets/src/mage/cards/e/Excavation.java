@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class Excavation extends CardImpl {
+public final class Excavation extends CardImpl {
 
     public Excavation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

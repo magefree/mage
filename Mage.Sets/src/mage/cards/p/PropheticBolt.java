@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class PropheticBolt extends CardImpl {
+public final class PropheticBolt extends CardImpl {
 
     public PropheticBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{R}");

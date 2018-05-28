@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX
  */
-public class CommuneWithNature extends CardImpl {
+public final class CommuneWithNature extends CardImpl {
 
     public CommuneWithNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");

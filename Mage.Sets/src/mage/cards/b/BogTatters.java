@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class BogTatters extends CardImpl {
+public final class BogTatters extends CardImpl {
 
     public BogTatters (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

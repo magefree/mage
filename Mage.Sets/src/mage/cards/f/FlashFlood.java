@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class FlashFlood extends CardImpl {
+public final class FlashFlood extends CardImpl {
 
     private static final FilterPermanent filter1 = new FilterPermanent("red permanent");
     private static final FilterPermanent filter2 = new FilterPermanent("Mountain");

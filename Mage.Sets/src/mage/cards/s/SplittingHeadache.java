@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class SplittingHeadache extends CardImpl {
+public final class SplittingHeadache extends CardImpl {
 
     public SplittingHeadache(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

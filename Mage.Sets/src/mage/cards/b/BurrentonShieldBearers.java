@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BurrentonShieldBearers extends CardImpl {
+public final class BurrentonShieldBearers extends CardImpl {
 
     public BurrentonShieldBearers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

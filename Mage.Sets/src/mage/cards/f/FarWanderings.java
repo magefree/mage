@@ -44,7 +44,7 @@ import java.util.UUID;
  * @author fireshoes
  */
 
-public class FarWanderings extends CardImpl {
+public final class FarWanderings extends CardImpl {
 
     public FarWanderings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

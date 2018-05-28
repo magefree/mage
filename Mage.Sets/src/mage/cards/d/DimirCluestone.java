@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class DimirCluestone extends CardImpl {
+public final class DimirCluestone extends CardImpl {
 
     public DimirCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

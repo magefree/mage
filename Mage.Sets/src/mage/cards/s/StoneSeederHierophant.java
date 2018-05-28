@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Wehk
  */
-public class StoneSeederHierophant extends CardImpl {
+public final class StoneSeederHierophant extends CardImpl {
 
     public StoneSeederHierophant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

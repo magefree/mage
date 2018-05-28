@@ -44,7 +44,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author TheElk801
  */
-public class SergeantAtArms extends CardImpl {
+public final class SergeantAtArms extends CardImpl {
 
     public SergeantAtArms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

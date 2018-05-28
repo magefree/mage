@@ -53,7 +53,7 @@ import mage.game.stack.Spell;
  *
  * @author spjspj
  */
-public class VanquishersBanner extends CardImpl {
+public final class VanquishersBanner extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 

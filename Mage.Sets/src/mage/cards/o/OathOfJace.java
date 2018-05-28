@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class OathOfJace extends CardImpl {
+public final class OathOfJace extends CardImpl {
 
     public OathOfJace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

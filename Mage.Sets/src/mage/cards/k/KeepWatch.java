@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author jeffwadsworth
  */
-public class KeepWatch extends CardImpl {
+public final class KeepWatch extends CardImpl {
 
     public KeepWatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

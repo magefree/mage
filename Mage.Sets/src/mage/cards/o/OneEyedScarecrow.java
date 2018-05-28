@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class OneEyedScarecrow extends CardImpl {
+public final class OneEyedScarecrow extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with flying your opponents control");
 

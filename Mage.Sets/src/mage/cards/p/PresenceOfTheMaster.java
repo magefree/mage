@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class PresenceOfTheMaster extends CardImpl {
+public final class PresenceOfTheMaster extends CardImpl {
 
     public PresenceOfTheMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

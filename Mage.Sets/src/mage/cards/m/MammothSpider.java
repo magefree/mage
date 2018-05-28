@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class MammothSpider extends CardImpl {
+public final class MammothSpider extends CardImpl {
 
     public MammothSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

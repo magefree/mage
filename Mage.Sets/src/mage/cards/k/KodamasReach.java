@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class KodamasReach extends CardImpl {
+public final class KodamasReach extends CardImpl {
 
     public KodamasReach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LevelX2
  */
-public class AzoriusCharm extends CardImpl {
+public final class AzoriusCharm extends CardImpl {
 
     public AzoriusCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}");

@@ -43,7 +43,7 @@ import mage.game.permanent.token.DeathpactAngelToken;
  *
  * @author Plopman
  */
-public class DeathpactAngel extends CardImpl {
+public final class DeathpactAngel extends CardImpl {
 
     public DeathpactAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}{B}");

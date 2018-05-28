@@ -40,7 +40,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author AlumiuN
  */
-public class Deathlace extends CardImpl {
+public final class Deathlace extends CardImpl {
 
     public Deathlace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

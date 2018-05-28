@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class DecreeOfSavagery extends CardImpl {
+public final class DecreeOfSavagery extends CardImpl {
 
     public DecreeOfSavagery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{7}{G}{G}");

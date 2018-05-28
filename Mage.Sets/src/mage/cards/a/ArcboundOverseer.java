@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  *
  * @author jonubuu
  */
-public class ArcboundOverseer extends CardImpl {
+public final class ArcboundOverseer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter;
 

@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class Truce extends CardImpl {
+public final class Truce extends CardImpl {
 
     public Truce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

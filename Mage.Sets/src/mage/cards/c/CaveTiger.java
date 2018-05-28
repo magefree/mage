@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Backfir3
  */
-public class CaveTiger extends CardImpl {
+public final class CaveTiger extends CardImpl {
 
     public CaveTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

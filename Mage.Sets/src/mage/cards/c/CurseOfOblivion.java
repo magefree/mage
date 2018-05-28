@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class CurseOfOblivion extends CardImpl {
+public final class CurseOfOblivion extends CardImpl {
 
     public CurseOfOblivion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

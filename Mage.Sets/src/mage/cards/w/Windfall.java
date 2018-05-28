@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class Windfall extends CardImpl {
+public final class Windfall extends CardImpl {
 
     public Windfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

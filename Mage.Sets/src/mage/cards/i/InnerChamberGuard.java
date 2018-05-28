@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class InnerChamberGuard extends CardImpl {
+public final class InnerChamberGuard extends CardImpl {
 
     public InnerChamberGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

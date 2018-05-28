@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class OozeToken extends TokenImpl {
+public final class OozeToken extends TokenImpl {
 
     public OozeToken(int power, int toughness) {
         super("Ooze", power + "/" + toughness + " green ooze creature token");

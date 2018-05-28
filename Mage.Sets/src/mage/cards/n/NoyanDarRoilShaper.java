@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class NoyanDarRoilShaper extends CardImpl {
+public final class NoyanDarRoilShaper extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 

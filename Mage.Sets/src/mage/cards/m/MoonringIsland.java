@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class MoonringIsland extends CardImpl {
+public final class MoonringIsland extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("if you control two or more blue permanents");
 

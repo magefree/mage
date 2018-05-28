@@ -54,7 +54,7 @@ import mage.target.common.TargetActivatedOrTriggeredAbility;
  *
  * @author TheElk801
  */
-public class OupheVandals extends CardImpl {
+public final class OupheVandals extends CardImpl {
 
     private final static FilterStackObject filter = new FilterStackObject("ability from an artifact source");
 

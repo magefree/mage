@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class HornOfGreed extends CardImpl {
+public final class HornOfGreed extends CardImpl {
 
     public HornOfGreed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

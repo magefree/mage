@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponentsChoicePermanent;
  *
  * @author LevelX2
  */
-public class VolcanicOffering extends CardImpl {
+public final class VolcanicOffering extends CardImpl {
 
     private static final FilterLandPermanent filterLand = new FilterLandPermanent("nonbasic land you don't control");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature you don't control");

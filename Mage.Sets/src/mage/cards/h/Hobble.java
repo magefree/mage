@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class Hobble extends CardImpl {
+public final class Hobble extends CardImpl {
 
     public Hobble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

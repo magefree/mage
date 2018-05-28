@@ -36,7 +36,7 @@ import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
 
-public class ProtectServe extends SplitCard {
+public final class ProtectServe extends SplitCard {
 
     public ProtectServe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}", "{1}{U}", SpellAbilityType.SPLIT_FUSED);

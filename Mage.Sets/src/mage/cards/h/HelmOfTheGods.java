@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class HelmOfTheGods extends CardImpl {
+public final class HelmOfTheGods extends CardImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment you control");
 

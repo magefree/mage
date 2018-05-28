@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MageSlayer extends CardImpl {
+public final class MageSlayer extends CardImpl {
 
     public MageSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");

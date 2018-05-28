@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class Glowrider extends CardImpl {
+public final class Glowrider extends CardImpl {
 
     public Glowrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

@@ -55,7 +55,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author noxx
  */
-public class SoulOfShandalar extends CardImpl {
+public final class SoulOfShandalar extends CardImpl {
 
     public SoulOfShandalar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class MindGames extends CardImpl {
+public final class MindGames extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
     

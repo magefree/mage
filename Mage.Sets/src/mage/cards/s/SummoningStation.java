@@ -44,7 +44,7 @@ import mage.game.permanent.token.PincherToken;
  *
  * @author Plopman
  */
-public class SummoningStation extends CardImpl {
+public final class SummoningStation extends CardImpl {
 
     public SummoningStation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");

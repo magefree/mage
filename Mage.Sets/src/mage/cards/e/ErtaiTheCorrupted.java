@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class ErtaiTheCorrupted extends CardImpl {
+public final class ErtaiTheCorrupted extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
     

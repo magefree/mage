@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX
  */
-public class MarrowGnawer extends CardImpl {
+public final class MarrowGnawer extends CardImpl {
 
     private static final FilterCreaturePermanent filterFear = new FilterCreaturePermanent("Rat creatures");
     private static final FilterControlledCreaturePermanent filterSacrifice = new FilterControlledCreaturePermanent("a Rat");

@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class IroasGodOfVictory extends CardImpl {
+public final class IroasGodOfVictory extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
     private static final FilterControlledCreatureInPlay filterAttacking = new FilterControlledCreatureInPlay("attacking creatures you control");

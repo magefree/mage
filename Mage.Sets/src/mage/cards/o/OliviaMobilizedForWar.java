@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
 /**
  * @author fireshoes
  */
-public class OliviaMobilizedForWar extends CardImpl {
+public final class OliviaMobilizedForWar extends CardImpl {
 
     public OliviaMobilizedForWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

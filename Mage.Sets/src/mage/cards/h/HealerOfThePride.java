@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class HealerOfThePride extends CardImpl {
+public final class HealerOfThePride extends CardImpl {
 
     public HealerOfThePride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

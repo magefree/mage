@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class AlleyGrifters extends CardImpl {
+public final class AlleyGrifters extends CardImpl {
 
     public AlleyGrifters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

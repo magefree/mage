@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  *
  * @author MarcoMarin
  */
-public class RocketLauncher extends CardImpl {
+public final class RocketLauncher extends CardImpl {
 
     public RocketLauncher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

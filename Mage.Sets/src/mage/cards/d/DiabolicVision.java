@@ -39,7 +39,7 @@ import mage.filter.FilterCard;
  *
  * @author TheElk801
  */
-public class DiabolicVision extends CardImpl {
+public final class DiabolicVision extends CardImpl {
 
     public DiabolicVision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}");

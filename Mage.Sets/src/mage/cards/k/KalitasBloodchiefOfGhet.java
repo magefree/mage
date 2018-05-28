@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class KalitasBloodchiefOfGhet extends CardImpl {
+public final class KalitasBloodchiefOfGhet extends CardImpl {
 
     public KalitasBloodchiefOfGhet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author L_J
  */
-public class EverdawnChampion extends CardImpl {
+public final class EverdawnChampion extends CardImpl {
 
     public EverdawnChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class Mirari extends CardImpl {
+public final class Mirari extends CardImpl {
 
     public Mirari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

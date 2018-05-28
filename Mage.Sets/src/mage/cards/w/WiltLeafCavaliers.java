@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WiltLeafCavaliers extends CardImpl {
+public final class WiltLeafCavaliers extends CardImpl {
 
     public WiltLeafCavaliers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}{G/W}{G/W}");

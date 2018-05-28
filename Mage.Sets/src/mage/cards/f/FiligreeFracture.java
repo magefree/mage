@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class FiligreeFracture extends CardImpl {
+public final class FiligreeFracture extends CardImpl {
 
     public FiligreeFracture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

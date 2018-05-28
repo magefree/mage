@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class SunkenField extends CardImpl {
+public final class SunkenField extends CardImpl {
 
     public SunkenField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

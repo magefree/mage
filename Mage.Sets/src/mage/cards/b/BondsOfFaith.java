@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class BondsOfFaith extends CardImpl {
+public final class BondsOfFaith extends CardImpl {
 
     private static final String rule = "Enchanted creature gets +2/+2 as long as it's a Human";
 

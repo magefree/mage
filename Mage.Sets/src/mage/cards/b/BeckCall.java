@@ -44,7 +44,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BirdToken;
 
-public class BeckCall extends SplitCard {
+public final class BeckCall extends SplitCard {
 
     public BeckCall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{U}", "{4}{W}{U}", SpellAbilityType.SPLIT_FUSED);

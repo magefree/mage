@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TetzimocPrimalDeath extends CardImpl {
+public final class TetzimocPrimalDeath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control with a prey counter on it");
 

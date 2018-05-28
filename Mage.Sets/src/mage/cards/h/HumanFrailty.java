@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
 /**
  * @author noxx
  */
-public class HumanFrailty extends CardImpl {
+public final class HumanFrailty extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature");
 

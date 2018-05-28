@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class BlackSunsZenith extends CardImpl {
+public final class BlackSunsZenith extends CardImpl {
 
     public BlackSunsZenith (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");

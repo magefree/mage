@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class NahirisWrath extends CardImpl {
+public final class NahirisWrath extends CardImpl {
 
     public NahirisWrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class KrosanReclamation extends CardImpl {
+public final class KrosanReclamation extends CardImpl {
 
     public KrosanReclamation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

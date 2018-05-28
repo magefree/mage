@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class PowerOfFire extends CardImpl {
+public final class PowerOfFire extends CardImpl {
 
     public PowerOfFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

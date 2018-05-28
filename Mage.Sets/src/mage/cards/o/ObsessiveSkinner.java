@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ObsessiveSkinner extends CardImpl {
+public final class ObsessiveSkinner extends CardImpl {
 
     public ObsessiveSkinner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

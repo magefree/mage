@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class AcademyResearchers extends CardImpl {
+public final class AcademyResearchers extends CardImpl {
 
     public AcademyResearchers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

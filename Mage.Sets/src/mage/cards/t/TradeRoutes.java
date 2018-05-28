@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author dustinconrad
  */
-public class TradeRoutes extends CardImpl {
+public final class TradeRoutes extends CardImpl {
 
     public TradeRoutes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

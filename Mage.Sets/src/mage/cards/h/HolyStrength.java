@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HolyStrength extends CardImpl {
+public final class HolyStrength extends CardImpl {
 
     public HolyStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

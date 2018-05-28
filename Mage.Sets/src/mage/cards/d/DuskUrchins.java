@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class DuskUrchins extends CardImpl {
+public final class DuskUrchins extends CardImpl {
 
     public DuskUrchins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

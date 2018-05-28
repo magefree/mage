@@ -39,7 +39,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class SorinsVengeance extends CardImpl {
+public final class SorinsVengeance extends CardImpl {
 
     public SorinsVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");

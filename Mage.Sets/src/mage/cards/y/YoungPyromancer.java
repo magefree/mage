@@ -42,7 +42,7 @@ import mage.game.permanent.token.YoungPyromancerElementalToken;
  *
  * @author jeffwadsworth
  */
-public class YoungPyromancer extends CardImpl {
+public final class YoungPyromancer extends CardImpl {
 
     public YoungPyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

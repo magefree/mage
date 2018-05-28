@@ -59,7 +59,7 @@ import mage.util.CardUtil;
  *
  * @author L_J
  */
-public class DauntlessBodyguard extends CardImpl {
+public final class DauntlessBodyguard extends CardImpl {
 
     public DauntlessBodyguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

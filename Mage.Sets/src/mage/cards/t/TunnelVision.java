@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class TunnelVision extends CardImpl {
+public final class TunnelVision extends CardImpl {
 
     public TunnelVision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}");

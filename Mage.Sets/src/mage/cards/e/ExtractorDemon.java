@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
  *
  */
-public class ExtractorDemon extends CardImpl {
+public final class ExtractorDemon extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

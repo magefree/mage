@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ElixirOfImmortality extends CardImpl {
+public final class ElixirOfImmortality extends CardImpl {
 
     public ElixirOfImmortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

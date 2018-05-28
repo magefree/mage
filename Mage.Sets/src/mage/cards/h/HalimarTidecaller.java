@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class HalimarTidecaller extends CardImpl {
+public final class HalimarTidecaller extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Land creatures");
     private static final FilterCard filterCard = new FilterCard("card with awaken from your graveyard");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RockBadger extends CardImpl {
+public final class RockBadger extends CardImpl {
 
     public RockBadger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class JadeGuardian extends CardImpl {
+public final class JadeGuardian extends CardImpl {
 
     public JadeGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

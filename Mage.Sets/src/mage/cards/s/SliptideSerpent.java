@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class SliptideSerpent extends CardImpl {
+public final class SliptideSerpent extends CardImpl {
 
     public SliptideSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

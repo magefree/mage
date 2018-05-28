@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class TangleAsp extends CardImpl {
+public final class TangleAsp extends CardImpl {
 
     public TangleAsp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

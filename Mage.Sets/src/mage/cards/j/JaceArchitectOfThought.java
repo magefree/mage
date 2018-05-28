@@ -69,7 +69,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class JaceArchitectOfThought extends CardImpl {
+public final class JaceArchitectOfThought extends CardImpl {
 
     public JaceArchitectOfThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");

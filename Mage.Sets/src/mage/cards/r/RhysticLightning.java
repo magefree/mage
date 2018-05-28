@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author L_J
  */
-public class RhysticLightning extends CardImpl {
+public final class RhysticLightning extends CardImpl {
 
     public RhysticLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

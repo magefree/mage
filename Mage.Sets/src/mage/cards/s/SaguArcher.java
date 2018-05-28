@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SaguArcher extends CardImpl {
+public final class SaguArcher extends CardImpl {
 
     public SaguArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

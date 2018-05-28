@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class UrborgSkeleton extends CardImpl {
+public final class UrborgSkeleton extends CardImpl {
 
     private static final String staticText = "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.";
 

@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX
  */
-public class HorobiDeathsWail extends CardImpl {
+public final class HorobiDeathsWail extends CardImpl {
 
     public HorobiDeathsWail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

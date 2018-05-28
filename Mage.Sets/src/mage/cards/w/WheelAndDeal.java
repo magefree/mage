@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class WheelAndDeal extends CardImpl {
+public final class WheelAndDeal extends CardImpl {
     
     private static final FilterPlayer filter = new FilterPlayer("opponent");
     

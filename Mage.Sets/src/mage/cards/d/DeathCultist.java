@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class DeathCultist extends CardImpl {
+public final class DeathCultist extends CardImpl {
 
     public DeathCultist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

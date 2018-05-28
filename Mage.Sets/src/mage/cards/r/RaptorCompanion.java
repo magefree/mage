@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class RaptorCompanion extends CardImpl {
+public final class RaptorCompanion extends CardImpl {
 
     public RaptorCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

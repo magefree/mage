@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class Dominaria extends ExpansionSet {
+public final class Dominaria extends ExpansionSet {
 
     private static final Dominaria instance = new Dominaria();
 

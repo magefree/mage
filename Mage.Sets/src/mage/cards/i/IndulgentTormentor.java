@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class IndulgentTormentor extends CardImpl {
+public final class IndulgentTormentor extends CardImpl {
 
     public IndulgentTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author L_J
  */
-public class DesperateGambit extends CardImpl {
+public final class DesperateGambit extends CardImpl {
 
     public DesperateGambit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

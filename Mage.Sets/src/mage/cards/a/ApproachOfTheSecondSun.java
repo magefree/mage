@@ -19,7 +19,7 @@ import mage.watchers.Watcher;
 /**
  * @author stravant
  */
-public class ApproachOfTheSecondSun extends CardImpl {
+public final class ApproachOfTheSecondSun extends CardImpl {
 
     public ApproachOfTheSecondSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}");

@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth & L_J
  */
-public class MishrasWarMachine extends CardImpl {
+public final class MishrasWarMachine extends CardImpl {
     
     public MishrasWarMachine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");        

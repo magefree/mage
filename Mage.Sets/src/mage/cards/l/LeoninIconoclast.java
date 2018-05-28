@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class LeoninIconoclast extends CardImpl {
+public final class LeoninIconoclast extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment creature an opponent controls");
 

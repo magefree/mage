@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author North, Eugen
  */
-public class TitanicUltimatum extends CardImpl {
+public final class TitanicUltimatum extends CardImpl {
 
     public TitanicUltimatum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}{G}{G}{G}{W}{W}");

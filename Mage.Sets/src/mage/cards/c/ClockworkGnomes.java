@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author hanasu
  */
-public class ClockworkGnomes extends CardImpl {
+public final class ClockworkGnomes extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 

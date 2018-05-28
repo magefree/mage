@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author BursegSardaukar
  */
-public class QuillSlingerBoggart extends CardImpl {
+public final class QuillSlingerBoggart extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Kithkin spell");
 

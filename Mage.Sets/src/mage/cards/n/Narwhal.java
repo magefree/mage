@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class Narwhal extends CardImpl {
+public final class Narwhal extends CardImpl {
 
     public Narwhal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

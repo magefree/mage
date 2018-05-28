@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class LilianasDefeat extends CardImpl {
+public final class LilianasDefeat extends CardImpl {
 
     public LilianasDefeat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");

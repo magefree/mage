@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DrippingDead extends CardImpl {
+public final class DrippingDead extends CardImpl {
 
     public DrippingDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

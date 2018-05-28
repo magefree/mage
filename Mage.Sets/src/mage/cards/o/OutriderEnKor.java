@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class OutriderEnKor extends CardImpl {
+public final class OutriderEnKor extends CardImpl {
 
     public OutriderEnKor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

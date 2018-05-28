@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class OrzhovGuildgate extends CardImpl {
+public final class OrzhovGuildgate extends CardImpl {
 
     public OrzhovGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

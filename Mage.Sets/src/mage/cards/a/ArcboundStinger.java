@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class ArcboundStinger extends CardImpl {
+public final class ArcboundStinger extends CardImpl {
 
     public ArcboundStinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

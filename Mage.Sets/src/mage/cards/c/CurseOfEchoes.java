@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class CurseOfEchoes extends CardImpl {
+public final class CurseOfEchoes extends CardImpl {
 
     public CurseOfEchoes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

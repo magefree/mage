@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
 /**
  * @author Loki
  */
-public class EmrakulTheAeonsTorn extends CardImpl {
+public final class EmrakulTheAeonsTorn extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("colored spells");
 

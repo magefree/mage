@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class PitfallTrap extends CardImpl {
+public final class PitfallTrap extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
 

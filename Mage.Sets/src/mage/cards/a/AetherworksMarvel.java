@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class AetherworksMarvel extends CardImpl {
+public final class AetherworksMarvel extends CardImpl {
 
     public AetherworksMarvel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

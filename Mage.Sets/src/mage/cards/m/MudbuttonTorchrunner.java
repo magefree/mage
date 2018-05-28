@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class MudbuttonTorchrunner extends CardImpl {
+public final class MudbuttonTorchrunner extends CardImpl {
 
     public MudbuttonTorchrunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

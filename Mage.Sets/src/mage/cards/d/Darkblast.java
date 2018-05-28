@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Darkblast extends CardImpl {
+public final class Darkblast extends CardImpl {
 
     public Darkblast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

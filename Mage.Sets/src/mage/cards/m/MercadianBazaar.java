@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class MercadianBazaar extends CardImpl {
+public final class MercadianBazaar extends CardImpl {
 
     public MercadianBazaar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

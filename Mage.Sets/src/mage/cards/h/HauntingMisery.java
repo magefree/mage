@@ -41,7 +41,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author markedagain
  */
-public class HauntingMisery extends CardImpl {
+public final class HauntingMisery extends CardImpl {
 
     public HauntingMisery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

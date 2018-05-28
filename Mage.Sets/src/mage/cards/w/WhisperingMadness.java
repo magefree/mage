@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WhisperingMadness extends CardImpl {
+public final class WhisperingMadness extends CardImpl {
 
     public WhisperingMadness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");

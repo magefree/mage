@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class PainfulTruths extends CardImpl {
+public final class PainfulTruths extends CardImpl {
 
     public PainfulTruths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

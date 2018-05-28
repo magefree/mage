@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class KithkinZealot extends CardImpl {
+public final class KithkinZealot extends CardImpl {
 
     public KithkinZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

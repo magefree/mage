@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author FenrisulfrX
  */
-public class DarigaazTheIgniter extends CardImpl {
+public final class DarigaazTheIgniter extends CardImpl {
 
     public DarigaazTheIgniter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");

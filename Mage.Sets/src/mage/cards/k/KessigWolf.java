@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class KessigWolf extends CardImpl {
+public final class KessigWolf extends CardImpl {
 
     public KessigWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

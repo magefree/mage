@@ -43,7 +43,7 @@ import mage.game.permanent.token.SnakeToken;
  *
  * @author LoneFox
  */
-public class SnakePit extends CardImpl {
+public final class SnakePit extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("a blue or black spell");
 

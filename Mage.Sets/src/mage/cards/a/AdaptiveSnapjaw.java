@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class AdaptiveSnapjaw extends CardImpl {
+public final class AdaptiveSnapjaw extends CardImpl {
 
     public AdaptiveSnapjaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

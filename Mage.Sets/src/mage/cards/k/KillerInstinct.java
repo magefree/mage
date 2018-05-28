@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class KillerInstinct extends CardImpl {
+public final class KillerInstinct extends CardImpl {
 
     public KillerInstinct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{G}");

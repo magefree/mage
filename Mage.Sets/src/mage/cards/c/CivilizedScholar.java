@@ -52,7 +52,7 @@ import mage.watchers.Watcher;
 /**
  * @author nantuko
  */
-public class CivilizedScholar extends CardImpl {
+public final class CivilizedScholar extends CardImpl {
 
     public CivilizedScholar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

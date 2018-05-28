@@ -42,7 +42,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class FateReforged extends ExpansionSet {
+public final class FateReforged extends ExpansionSet {
 
     private static final FateReforged instance = new FateReforged();
 

@@ -51,7 +51,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class TishanaVoiceOfThunder extends CardImpl {
+public final class TishanaVoiceOfThunder extends CardImpl {
 
     public TishanaVoiceOfThunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{U}");

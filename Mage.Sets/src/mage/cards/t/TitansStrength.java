@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TitansStrength extends CardImpl {
+public final class TitansStrength extends CardImpl {
 
     public TitansStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

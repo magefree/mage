@@ -46,7 +46,7 @@ import mage.game.permanent.token.custom.CreatureToken;
  *
  * @author TheElk801
  */
-public class SylvanAwakening extends CardImpl {
+public final class SylvanAwakening extends CardImpl {
 
     public SylvanAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

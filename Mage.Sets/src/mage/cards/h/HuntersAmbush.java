@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class HuntersAmbush extends CardImpl {
+public final class HuntersAmbush extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nongreen creatures");
     

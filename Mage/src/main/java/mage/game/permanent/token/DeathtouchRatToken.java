@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Saga
  */
-public class DeathtouchRatToken extends TokenImpl {
+public final class DeathtouchRatToken extends TokenImpl {
     
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {

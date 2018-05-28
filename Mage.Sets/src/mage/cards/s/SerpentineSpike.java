@@ -49,7 +49,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-public class SerpentineSpike extends CardImpl {
+public final class SerpentineSpike extends CardImpl {
 
     public SerpentineSpike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");

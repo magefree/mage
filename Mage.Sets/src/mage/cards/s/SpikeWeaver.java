@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class SpikeWeaver extends CardImpl {
+public final class SpikeWeaver extends CardImpl {
 
     public SpikeWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

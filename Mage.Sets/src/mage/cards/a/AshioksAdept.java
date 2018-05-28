@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class AshioksAdept extends CardImpl {
+public final class AshioksAdept extends CardImpl {
 
     public AshioksAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

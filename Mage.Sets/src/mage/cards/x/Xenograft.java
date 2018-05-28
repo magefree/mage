@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class Xenograft extends CardImpl {
+public final class Xenograft extends CardImpl {
 
     public Xenograft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

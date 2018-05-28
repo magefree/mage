@@ -58,7 +58,7 @@ import mage.target.TargetCard;
  *
  * @author ciaccona007
  */
-public class HazoretsUndyingFury extends CardImpl {
+public final class HazoretsUndyingFury extends CardImpl {
 
     public HazoretsUndyingFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

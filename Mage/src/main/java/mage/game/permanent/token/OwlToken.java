@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class OwlToken extends TokenImpl {
+public final class OwlToken extends TokenImpl {
 
     public OwlToken() {
         super("Bird", "1/1 blue Bird creature token with flying");

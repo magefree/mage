@@ -42,7 +42,7 @@ import mage.game.permanent.token.SquirrelToken;
  *
  * @author LevelX2
  */
-public class AcornHarvest extends CardImpl {
+public final class AcornHarvest extends CardImpl {
 
     public AcornHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

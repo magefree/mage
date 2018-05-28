@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StirringWildwood extends CardImpl {
+public final class StirringWildwood extends CardImpl {
 
     public StirringWildwood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

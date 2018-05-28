@@ -44,7 +44,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class GiantsIre extends CardImpl {
+public final class GiantsIre extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Giant");
 

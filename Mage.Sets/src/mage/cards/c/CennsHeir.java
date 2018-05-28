@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LoneFox
  */
-public class CennsHeir extends CardImpl {
+public final class CennsHeir extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Kithkin");
 

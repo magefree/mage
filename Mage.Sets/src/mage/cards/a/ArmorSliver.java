@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class ArmorSliver extends CardImpl {
+public final class ArmorSliver extends CardImpl {
 
     public ArmorSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

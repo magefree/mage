@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author LevelX
  */
-public class SosukeSonOfSeshiro extends CardImpl {
+public final class SosukeSonOfSeshiro extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snake creatures");
 

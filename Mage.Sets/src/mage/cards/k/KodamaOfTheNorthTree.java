@@ -42,7 +42,7 @@ import mage.constants.SuperType;
  *
  * @author Loki
  */
-public class KodamaOfTheNorthTree extends CardImpl {
+public final class KodamaOfTheNorthTree extends CardImpl {
 
     public KodamaOfTheNorthTree (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");

@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class KnacksawClique extends CardImpl {
+public final class KnacksawClique extends CardImpl {
 
     public KnacksawClique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

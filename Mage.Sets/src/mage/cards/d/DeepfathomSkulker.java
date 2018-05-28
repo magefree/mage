@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DeepfathomSkulker extends CardImpl {
+public final class DeepfathomSkulker extends CardImpl {
 
     public DeepfathomSkulker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

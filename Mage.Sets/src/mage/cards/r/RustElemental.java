@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author rollergo11
  */
-public class RustElemental extends CardImpl {
+public final class RustElemental extends CardImpl {
 
     public RustElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

@@ -45,7 +45,7 @@ import mage.game.permanent.token.custom.CreatureToken;
  * @author KholdFuzion
  *
  */
-public class KormusBell extends CardImpl {
+public final class KormusBell extends CardImpl {
 
     public KormusBell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

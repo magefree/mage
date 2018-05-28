@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class ArgothianWurm extends CardImpl {
+public final class ArgothianWurm extends CardImpl {
 
     public ArgothianWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

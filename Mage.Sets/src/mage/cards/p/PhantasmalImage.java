@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class PhantasmalImage extends CardImpl {
+public final class PhantasmalImage extends CardImpl {
 
     private static final String effectText = "a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
 

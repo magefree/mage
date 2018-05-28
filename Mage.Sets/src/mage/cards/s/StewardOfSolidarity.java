@@ -46,7 +46,7 @@ import mage.game.permanent.token.WarriorVigilantToken;
  *
  * @author spjspj
  */
-public class StewardOfSolidarity extends CardImpl {
+public final class StewardOfSolidarity extends CardImpl {
 
     public StewardOfSolidarity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

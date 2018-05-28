@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class GempalmStrider extends CardImpl {
+public final class GempalmStrider extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 

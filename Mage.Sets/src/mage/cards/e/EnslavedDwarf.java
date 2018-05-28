@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author tomd1990
  */
-public class EnslavedDwarf extends CardImpl {
+public final class EnslavedDwarf extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
     

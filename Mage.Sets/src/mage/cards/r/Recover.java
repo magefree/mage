@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author dustinconrad
  */
-public class Recover extends CardImpl {
+public final class Recover extends CardImpl {
 
     public Recover(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class CrimsonMuckwader extends CardImpl {
+public final class CrimsonMuckwader extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Swamp");
 

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SkirsdagSupplicant extends CardImpl {
+public final class SkirsdagSupplicant extends CardImpl {
 
     public SkirsdagSupplicant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

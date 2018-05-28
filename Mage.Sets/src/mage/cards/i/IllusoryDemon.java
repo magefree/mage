@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class IllusoryDemon extends CardImpl {
+public final class IllusoryDemon extends CardImpl {
 
     public IllusoryDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");

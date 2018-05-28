@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WarCadence extends CardImpl {
+public final class WarCadence extends CardImpl {
 
     public WarCadence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

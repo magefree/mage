@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SurvivorToken extends TokenImpl {
+public final class SurvivorToken extends TokenImpl {
 
     public SurvivorToken() {
         super("Survivor", "1/1 red Survivor creature token");

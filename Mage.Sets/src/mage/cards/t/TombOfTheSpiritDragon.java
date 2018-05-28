@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  *
  * @author LevelX2
  */
-public class TombOfTheSpiritDragon extends CardImpl {
+public final class TombOfTheSpiritDragon extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("colorless creature you control");
 

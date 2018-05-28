@@ -57,7 +57,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class CurseOfMisfortunes extends CardImpl {
+public final class CurseOfMisfortunes extends CardImpl {
 
     public CurseOfMisfortunes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");

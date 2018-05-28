@@ -50,7 +50,7 @@ import mage.watchers.common.BlockedAttackerWatcher;
  *
  * @author LevelX2
  */
-public class GazeOfTheGorgon extends CardImpl {
+public final class GazeOfTheGorgon extends CardImpl {
 
     public GazeOfTheGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B/G}");

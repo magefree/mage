@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class RuneOfProtectionArtifacts extends CardImpl {
+public final class RuneOfProtectionArtifacts extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("artifact source");
     static {

@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class SlaughterGames extends CardImpl {
+public final class SlaughterGames extends CardImpl {
 
     public SlaughterGames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{R}");

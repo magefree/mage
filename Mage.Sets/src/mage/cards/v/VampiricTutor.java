@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Quercitron
  */
-public class VampiricTutor extends CardImpl {
+public final class VampiricTutor extends CardImpl {
 
     public VampiricTutor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

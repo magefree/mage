@@ -48,7 +48,7 @@ import mage.game.command.emblems.GarrukCallerOfBeastsEmblem;
  *
  * @author LevelX2 import mage.game.command.emblems.GarrukCallerOfBeastsEmblem;
  */
-public class GarrukCallerOfBeasts extends CardImpl {
+public final class GarrukCallerOfBeasts extends CardImpl {
 
     private static final FilterCreatureCard filterGreenCreature = new FilterCreatureCard("a green creature card");
 

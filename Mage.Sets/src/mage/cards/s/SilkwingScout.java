@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class SilkwingScout extends CardImpl {
+public final class SilkwingScout extends CardImpl {
 
     public SilkwingScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author Styxo & L_J
  */
-public class UrzasAvenger extends CardImpl {
+public final class UrzasAvenger extends CardImpl {
 
     public UrzasAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{6}");

@@ -47,7 +47,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author North
  */
-public class RapaciousOne extends CardImpl {
+public final class RapaciousOne extends CardImpl {
 
     public RapaciousOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

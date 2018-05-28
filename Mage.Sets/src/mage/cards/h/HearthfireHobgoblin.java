@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HearthfireHobgoblin extends CardImpl {
+public final class HearthfireHobgoblin extends CardImpl {
 
     public HearthfireHobgoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}{R/W}{R/W}");

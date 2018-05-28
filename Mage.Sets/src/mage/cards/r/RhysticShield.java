@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author L_J
  */
-public class RhysticShield extends CardImpl {
+public final class RhysticShield extends CardImpl {
 
     public RhysticShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

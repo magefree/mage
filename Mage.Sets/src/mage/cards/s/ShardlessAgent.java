@@ -39,7 +39,7 @@ import mage.constants.SubType;
 *
 * @author LevelX2
 */
-public class ShardlessAgent extends CardImpl {
+public final class ShardlessAgent extends CardImpl {
 
     public ShardlessAgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{G}{U}");

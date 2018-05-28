@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CurtainOfLight extends CardImpl {
+public final class CurtainOfLight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked attacking creature");
 

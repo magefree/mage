@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author L_J
  */
-public class FalseMemories extends CardImpl {
+public final class FalseMemories extends CardImpl {
 
     public FalseMemories(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author L_J
  */
-public class Renounce extends CardImpl {
+public final class Renounce extends CardImpl {
 
     public Renounce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class VengefulFirebrand extends CardImpl {
+public final class VengefulFirebrand extends CardImpl {
 
     public VengefulFirebrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

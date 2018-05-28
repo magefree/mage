@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TurnToMist extends CardImpl {
+public final class TurnToMist extends CardImpl {
 
     public TurnToMist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/U}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GrixisCharm extends CardImpl {
+public final class GrixisCharm extends CardImpl {
 
     public GrixisCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}{R}");

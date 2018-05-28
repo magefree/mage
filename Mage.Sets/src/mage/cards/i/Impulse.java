@@ -40,7 +40,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class Impulse extends CardImpl {
+public final class Impulse extends CardImpl {
 
     public Impulse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

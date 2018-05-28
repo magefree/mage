@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BroodhunterWurm extends CardImpl {
+public final class BroodhunterWurm extends CardImpl {
 
     public BroodhunterWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

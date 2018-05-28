@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class LightningRunner extends CardImpl {
+public final class LightningRunner extends CardImpl {
 
     public LightningRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

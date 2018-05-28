@@ -49,7 +49,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class TheloniteHermit extends CardImpl {
+public final class TheloniteHermit extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Saproling creatures");
 

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Wehk
  */
-public class SkullmeadCauldron extends CardImpl {
+public final class SkullmeadCauldron extends CardImpl {
 
     public SkullmeadCauldron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

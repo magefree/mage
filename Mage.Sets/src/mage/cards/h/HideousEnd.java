@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class HideousEnd extends CardImpl {
+public final class HideousEnd extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

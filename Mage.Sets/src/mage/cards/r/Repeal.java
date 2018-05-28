@@ -46,7 +46,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class Repeal extends CardImpl {
+public final class Repeal extends CardImpl {
 
     public Repeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");

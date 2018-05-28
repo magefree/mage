@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author KholdFuzion
  */
-public class BrassMan extends CardImpl {
+public final class BrassMan extends CardImpl {
 
     public BrassMan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class ThaliasLancers extends CardImpl {
+public final class ThaliasLancers extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("legendary card");
 

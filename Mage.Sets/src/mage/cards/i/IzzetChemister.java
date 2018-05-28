@@ -61,7 +61,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author TheElk801
  */
-public class IzzetChemister extends CardImpl {
+public final class IzzetChemister extends CardImpl {
 
     private static final FilterCard filter = new FilterOwnedCard("instant or sorcery card from your graveyard");
 

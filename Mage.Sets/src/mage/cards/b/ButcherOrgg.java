@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class ButcherOrgg extends CardImpl {
+public final class ButcherOrgg extends CardImpl {
 
     public ButcherOrgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{R}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author TheElk801
  */
-public class RighteousWar extends CardImpl {
+public final class RighteousWar extends CardImpl {
 
     private static final FilterCreaturePermanent whiteFilter = new FilterCreaturePermanent("white creatures you control");
     private static final FilterCreaturePermanent blackFilter = new FilterCreaturePermanent("black creatures you control");

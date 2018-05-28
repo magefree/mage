@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class TwoHeadedGiantOfForiys extends CardImpl {
+public final class TwoHeadedGiantOfForiys extends CardImpl {
 
     public TwoHeadedGiantOfForiys(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

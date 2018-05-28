@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class LightningSurge extends CardImpl {
+public final class LightningSurge extends CardImpl {
 
     public LightningSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class LostVale extends CardImpl {
+public final class LostVale extends CardImpl {
 
     public LostVale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

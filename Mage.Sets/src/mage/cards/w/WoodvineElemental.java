@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class WoodvineElemental extends CardImpl {
+public final class WoodvineElemental extends CardImpl {
     
     static final private String rule = "<i>Parley &mdash; </i> Whenever {this} attacks, each player reveals the top card of their library. "
                         + "For each nonland card revealed this way, attacking creatures you control get +1/+1 until end of turn. Then each player draws a card.";

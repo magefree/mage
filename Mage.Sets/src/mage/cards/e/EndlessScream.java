@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class EndlessScream extends CardImpl {
+public final class EndlessScream extends CardImpl {
 
     public EndlessScream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{X}{B}");

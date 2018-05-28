@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class SidisiUndeadVizier extends CardImpl {
+public final class SidisiUndeadVizier extends CardImpl {
 
     public SidisiUndeadVizier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

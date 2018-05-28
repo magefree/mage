@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class CryptGhast extends CardImpl {
+public final class CryptGhast extends CardImpl {
 
     public CryptGhast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

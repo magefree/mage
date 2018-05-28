@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class BenefactorsDraught extends CardImpl {
+public final class BenefactorsDraught extends CardImpl {
 
     public BenefactorsDraught(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class SkeletonShard extends CardImpl {
+public final class SkeletonShard extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("artifact creature card from your graveyard");
     

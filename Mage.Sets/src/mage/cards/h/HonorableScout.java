@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LoneFox
  */
-public class HonorableScout extends CardImpl {
+public final class HonorableScout extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black and/or red creature");
 

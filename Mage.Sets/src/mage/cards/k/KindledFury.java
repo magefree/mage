@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class KindledFury extends CardImpl {
+public final class KindledFury extends CardImpl {
 
     public KindledFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

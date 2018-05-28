@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Wehk
  */
-public class FadeFromMemory extends CardImpl {
+public final class FadeFromMemory extends CardImpl {
 
     public FadeFromMemory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

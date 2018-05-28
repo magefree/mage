@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class VorinclexVoiceOfHunger extends CardImpl {
+public final class VorinclexVoiceOfHunger extends CardImpl {
 
     public VorinclexVoiceOfHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

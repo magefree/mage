@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Griptide extends CardImpl {
+public final class Griptide extends CardImpl {
 
     public Griptide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

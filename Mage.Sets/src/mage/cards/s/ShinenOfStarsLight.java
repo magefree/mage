@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ShinenOfStarsLight extends CardImpl {
+public final class ShinenOfStarsLight extends CardImpl {
 
     public ShinenOfStarsLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX2
  */
-public class ShadowsOfThePast extends CardImpl {
+public final class ShadowsOfThePast extends CardImpl {
 
     public ShadowsOfThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class ArgivianFind extends CardImpl {
+public final class ArgivianFind extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("artifact or enchantment card");
     static {

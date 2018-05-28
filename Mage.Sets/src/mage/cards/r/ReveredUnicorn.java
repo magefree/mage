@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class ReveredUnicorn extends CardImpl {
+public final class ReveredUnicorn extends CardImpl {
 
     public ReveredUnicorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

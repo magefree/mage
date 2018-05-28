@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class AvenSoulgazer extends CardImpl {
+public final class AvenSoulgazer extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature");
 

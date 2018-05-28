@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Oust extends CardImpl {
+public final class Oust extends CardImpl {
 
     public Oust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");

@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class WildHolocron extends CardImpl {
+public final class WildHolocron extends CardImpl {
 
     public WildHolocron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

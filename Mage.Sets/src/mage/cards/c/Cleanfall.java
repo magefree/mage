@@ -39,7 +39,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
 /**
  * @author Loki
  */
-public class Cleanfall extends CardImpl {
+public final class Cleanfall extends CardImpl {
 
     public Cleanfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

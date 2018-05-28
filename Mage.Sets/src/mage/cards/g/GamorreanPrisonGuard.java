@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class GamorreanPrisonGuard extends CardImpl {
+public final class GamorreanPrisonGuard extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
 

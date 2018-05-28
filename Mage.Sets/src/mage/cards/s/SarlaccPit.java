@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Styxo
  */
-public class SarlaccPit extends CardImpl {
+public final class SarlaccPit extends CardImpl {
 
     public SarlaccPit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

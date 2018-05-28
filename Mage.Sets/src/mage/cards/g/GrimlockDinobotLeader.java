@@ -53,7 +53,7 @@ import mage.filter.predicate.permanent.TransformedPredicate;
  *
  * @author Saga
  */
-public class GrimlockDinobotLeader extends CardImpl{
+public final class GrimlockDinobotLeader extends CardImpl{
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaurs and Vehicles");
     static {

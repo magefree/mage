@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class DeadDrop extends CardImpl {
+public final class DeadDrop extends CardImpl {
 
     public DeadDrop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{9}{B}");

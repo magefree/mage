@@ -54,7 +54,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author LevelX2
  */
-public class RikuOfTwoReflections extends CardImpl {
+public final class RikuOfTwoReflections extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
     private static final FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("another nontoken creature");

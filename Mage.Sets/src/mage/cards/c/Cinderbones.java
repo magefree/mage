@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class Cinderbones extends CardImpl {
+public final class Cinderbones extends CardImpl {
 
     public Cinderbones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

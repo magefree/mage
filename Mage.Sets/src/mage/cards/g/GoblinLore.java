@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author jonubuu
  */
-public class GoblinLore extends CardImpl {
+public final class GoblinLore extends CardImpl {
 
     public GoblinLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

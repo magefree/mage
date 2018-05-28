@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Guru extends ExpansionSet {
+public final class Guru extends ExpansionSet {
 
     private static final Guru instance = new Guru();
 

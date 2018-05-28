@@ -50,7 +50,7 @@ import mage.filter.common.FilterCreatureCard;
 /**
  * @author fireshoes
  */
-public class DuskwatchRecruiter extends CardImpl {
+public final class DuskwatchRecruiter extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card");
 

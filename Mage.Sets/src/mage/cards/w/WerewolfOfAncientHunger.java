@@ -54,7 +54,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class WerewolfOfAncientHunger extends CardImpl {
+public final class WerewolfOfAncientHunger extends CardImpl {
 
     public WerewolfOfAncientHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

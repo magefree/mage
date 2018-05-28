@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class PillagingHorde extends CardImpl {
+public final class PillagingHorde extends CardImpl {
 
     public PillagingHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

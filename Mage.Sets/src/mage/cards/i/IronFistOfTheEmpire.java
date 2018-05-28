@@ -46,7 +46,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  *
  * @author Styxo
  */
-public class IronFistOfTheEmpire extends CardImpl {
+public final class IronFistOfTheEmpire extends CardImpl {
 
     public IronFistOfTheEmpire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");

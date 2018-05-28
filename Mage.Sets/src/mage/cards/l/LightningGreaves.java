@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class LightningGreaves extends CardImpl {
+public final class LightningGreaves extends CardImpl {
 
     public LightningGreaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

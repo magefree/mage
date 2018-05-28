@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GuardianIdolGolemToken extends TokenImpl {
+public final class GuardianIdolGolemToken extends TokenImpl {
 
     public GuardianIdolGolemToken() {
         super("Golem", "2/2 Golem artifact creature token");

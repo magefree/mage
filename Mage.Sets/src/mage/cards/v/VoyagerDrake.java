@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class VoyagerDrake extends CardImpl {
+public final class VoyagerDrake extends CardImpl {
 
     private final UUID originalId;
 

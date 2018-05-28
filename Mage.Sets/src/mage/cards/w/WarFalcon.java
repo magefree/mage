@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class WarFalcon extends CardImpl {
+public final class WarFalcon extends CardImpl {
 
     public WarFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

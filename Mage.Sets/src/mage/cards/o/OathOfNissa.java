@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class OathOfNissa extends CardImpl {
+public final class OathOfNissa extends CardImpl {
 
     public OathOfNissa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");

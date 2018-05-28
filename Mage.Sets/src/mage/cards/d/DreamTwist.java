@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
 /**
  * @author nantuko
  */
-public class DreamTwist extends CardImpl {
+public final class DreamTwist extends CardImpl {
 
     public DreamTwist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class PriestOfYawgmoth extends CardImpl {
+public final class PriestOfYawgmoth extends CardImpl {
 
     public PriestOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

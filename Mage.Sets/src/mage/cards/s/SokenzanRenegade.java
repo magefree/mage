@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SokenzanRenegade extends CardImpl {
+public final class SokenzanRenegade extends CardImpl {
 
     public SokenzanRenegade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class InsatiableGorgers extends CardImpl {
+public final class InsatiableGorgers extends CardImpl {
 
     public InsatiableGorgers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

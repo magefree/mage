@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class FloodedStrand extends CardImpl {
+public final class FloodedStrand extends CardImpl {
 
     public FloodedStrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

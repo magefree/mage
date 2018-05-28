@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class ViashinoOutrider extends CardImpl {
+public final class ViashinoOutrider extends CardImpl {
 
     public ViashinoOutrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

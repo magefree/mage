@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class SpiritOfTheHunt extends CardImpl {
+public final class SpiritOfTheHunt extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature you control that's a Wolf or Werewolf");
 

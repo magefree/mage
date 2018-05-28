@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class CharRumbler extends CardImpl {
+public final class CharRumbler extends CardImpl {
 
     public CharRumbler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

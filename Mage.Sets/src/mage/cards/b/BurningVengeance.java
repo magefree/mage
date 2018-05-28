@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author nantuko
  */
-public class BurningVengeance extends CardImpl {
+public final class BurningVengeance extends CardImpl {
 
     public BurningVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

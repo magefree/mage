@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author vereena42
  */
-public class MistformUltimus extends CardImpl {
+public final class MistformUltimus extends CardImpl {
 
     public MistformUltimus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

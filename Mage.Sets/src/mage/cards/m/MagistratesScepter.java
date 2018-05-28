@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class MagistratesScepter extends CardImpl {
+public final class MagistratesScepter extends CardImpl {
 
     public MagistratesScepter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

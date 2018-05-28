@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author TheElk801
  */
-public class LeeringGargoyle extends CardImpl {
+public final class LeeringGargoyle extends CardImpl {
 
     public LeeringGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");

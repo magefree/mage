@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MercyKillingToken extends TokenImpl {
+public final class MercyKillingToken extends TokenImpl {
 
     public MercyKillingToken() {
         super("Elf Warrior", "1/1 green and white Elf Warrior creature token");

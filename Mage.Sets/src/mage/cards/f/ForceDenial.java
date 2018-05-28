@@ -45,7 +45,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  *
  * @author Styxo
  */
-public class ForceDenial extends CardImpl {
+public final class ForceDenial extends CardImpl {
 
     public ForceDenial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

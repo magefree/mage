@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SageEyeAvengers extends CardImpl {
+public final class SageEyeAvengers extends CardImpl {
 
     public SageEyeAvengers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

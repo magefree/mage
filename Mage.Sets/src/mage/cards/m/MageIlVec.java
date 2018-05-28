@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class MageIlVec extends CardImpl {
+public final class MageIlVec extends CardImpl {
 
     public MageIlVec(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

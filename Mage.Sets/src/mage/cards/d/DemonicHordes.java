@@ -59,7 +59,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class DemonicHordes extends CardImpl {
+public final class DemonicHordes extends CardImpl {
 
     public DemonicHordes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

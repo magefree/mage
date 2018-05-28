@@ -43,7 +43,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author LevelX2
  */
-public class EvangelOfHeliod extends CardImpl {
+public final class EvangelOfHeliod extends CardImpl {
 
     public EvangelOfHeliod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

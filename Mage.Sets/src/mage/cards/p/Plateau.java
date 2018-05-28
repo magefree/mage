@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class Plateau extends CardImpl {
+public final class Plateau extends CardImpl {
 
     public Plateau(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

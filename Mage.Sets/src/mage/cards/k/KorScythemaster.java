@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class KorScythemaster extends CardImpl {
+public final class KorScythemaster extends CardImpl {
 
     public KorScythemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

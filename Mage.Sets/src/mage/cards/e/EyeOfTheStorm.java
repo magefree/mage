@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author spjspj
  */
-public class EyeOfTheStorm extends CardImpl {
+public final class EyeOfTheStorm extends CardImpl {
 
     public EyeOfTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");

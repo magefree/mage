@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author jeff
  */
-public class TimeStop extends CardImpl {
+public final class TimeStop extends CardImpl {
 
     public TimeStop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");

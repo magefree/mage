@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class StrandsOfNight extends CardImpl {
+public final class StrandsOfNight extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
 

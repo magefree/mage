@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WallOfWood extends CardImpl {
+public final class WallOfWood extends CardImpl {
 
     public WallOfWood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class MothriderSamurai extends CardImpl {
+public final class MothriderSamurai extends CardImpl {
 
     public MothriderSamurai (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

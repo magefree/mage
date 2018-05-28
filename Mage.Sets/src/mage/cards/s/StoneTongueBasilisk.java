@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class StoneTongueBasilisk extends CardImpl {
+public final class StoneTongueBasilisk extends CardImpl {
 
     public StoneTongueBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");

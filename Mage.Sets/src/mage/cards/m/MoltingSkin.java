@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MoltingSkin extends CardImpl {
+public final class MoltingSkin extends CardImpl {
 
     public MoltingSkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

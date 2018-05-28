@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class KrondTheDawnClad extends CardImpl {
+public final class KrondTheDawnClad extends CardImpl {
 
     public KrondTheDawnClad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{W}{W}{W}");

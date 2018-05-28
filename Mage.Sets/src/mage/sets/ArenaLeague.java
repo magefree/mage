@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class ArenaLeague extends ExpansionSet {
+public final class ArenaLeague extends ExpansionSet {
 
     private static final ArenaLeague instance = new ArenaLeague();
 

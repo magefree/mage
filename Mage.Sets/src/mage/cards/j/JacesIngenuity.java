@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JacesIngenuity extends CardImpl {
+public final class JacesIngenuity extends CardImpl {
 
     public JacesIngenuity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");

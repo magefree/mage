@@ -61,7 +61,7 @@ import org.apache.log4j.Logger;
  *
  * @author LevelX2
  */
-public class SpellQueller extends CardImpl {
+public final class SpellQueller extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 

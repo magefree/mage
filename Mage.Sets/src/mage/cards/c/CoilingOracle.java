@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author mluds
  */
-public class CoilingOracle extends CardImpl {
+public final class CoilingOracle extends CardImpl {
 
     public CoilingOracle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");

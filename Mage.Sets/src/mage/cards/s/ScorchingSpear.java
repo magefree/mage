@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ScorchingSpear extends CardImpl {
+public final class ScorchingSpear extends CardImpl {
 
     public ScorchingSpear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

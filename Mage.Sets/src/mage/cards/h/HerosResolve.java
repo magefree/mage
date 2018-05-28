@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HerosResolve extends CardImpl {
+public final class HerosResolve extends CardImpl {
 
     public HerosResolve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

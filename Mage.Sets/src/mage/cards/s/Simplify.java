@@ -38,7 +38,7 @@ import mage.filter.common.FilterControlledEnchantmentPermanent;
  *
  * @author icetc
  */
-public class Simplify extends CardImpl {
+public final class Simplify extends CardImpl {
 
     public Simplify(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

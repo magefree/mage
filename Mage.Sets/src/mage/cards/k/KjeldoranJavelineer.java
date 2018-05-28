@@ -48,7 +48,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author TheElk801
  */
-public class KjeldoranJavelineer extends CardImpl {
+public final class KjeldoranJavelineer extends CardImpl {
 
     public KjeldoranJavelineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

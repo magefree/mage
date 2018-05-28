@@ -47,7 +47,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  * @author LoneFox
 
  */
-public class TolarianEmissary extends CardImpl {
+public final class TolarianEmissary extends CardImpl {
 
     public TolarianEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

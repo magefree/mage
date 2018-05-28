@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author Backfir3
  */
-public class PouncingWurm extends CardImpl {
+public final class PouncingWurm extends CardImpl {
 
     public PouncingWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

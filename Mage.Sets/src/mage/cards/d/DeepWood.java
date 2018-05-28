@@ -49,7 +49,7 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  *
  * @author L_J
  */
-public class DeepWood extends CardImpl {
+public final class DeepWood extends CardImpl {
 
     public DeepWood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

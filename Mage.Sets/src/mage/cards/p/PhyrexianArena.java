@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class PhyrexianArena extends CardImpl {
+public final class PhyrexianArena extends CardImpl {
 
     public PhyrexianArena(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

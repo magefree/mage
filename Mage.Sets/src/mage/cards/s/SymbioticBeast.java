@@ -41,7 +41,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author Temba21
  */
-public class SymbioticBeast extends CardImpl {
+public final class SymbioticBeast extends CardImpl {
 
     public SymbioticBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

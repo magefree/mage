@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class CometStorm extends CardImpl {
+public final class CometStorm extends CardImpl {
 
     public CometStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");

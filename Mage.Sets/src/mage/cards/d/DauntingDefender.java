@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class DauntingDefender extends CardImpl {
+public final class DauntingDefender extends CardImpl {
 
     public DauntingDefender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

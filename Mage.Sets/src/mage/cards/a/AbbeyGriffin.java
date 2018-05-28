@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AbbeyGriffin extends CardImpl {
+public final class AbbeyGriffin extends CardImpl {
 
     public AbbeyGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

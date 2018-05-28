@@ -45,7 +45,7 @@ import mage.game.permanent.token.KithkinToken;
  *
  * @author jeffwadsworth
  */
-public class PatrolSignaler extends CardImpl {
+public final class PatrolSignaler extends CardImpl {
 
     public PatrolSignaler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

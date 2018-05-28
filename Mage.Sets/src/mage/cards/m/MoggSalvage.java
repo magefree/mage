@@ -46,7 +46,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class MoggSalvage extends CardImpl {
+public final class MoggSalvage extends CardImpl {
 
     private static final FilterPermanent filterMountain = new FilterPermanent();
     private static final FilterPermanent filterIsland = new FilterPermanent();

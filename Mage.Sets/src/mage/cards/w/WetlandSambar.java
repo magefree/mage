@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WetlandSambar extends CardImpl {
+public final class WetlandSambar extends CardImpl {
 
     public WetlandSambar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

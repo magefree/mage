@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author dustinconrad
  */
-public class GuerrillaTactics extends CardImpl {
+public final class GuerrillaTactics extends CardImpl {
 
     public GuerrillaTactics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

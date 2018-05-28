@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class WizardsSchool extends CardImpl {
+public final class WizardsSchool extends CardImpl {
 
     public WizardsSchool(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

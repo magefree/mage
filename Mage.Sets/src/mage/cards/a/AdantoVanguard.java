@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class AdantoVanguard extends CardImpl {
+public final class AdantoVanguard extends CardImpl {
 
     public AdantoVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

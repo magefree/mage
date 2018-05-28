@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class SoulOfInnistrad extends CardImpl {
+public final class SoulOfInnistrad extends CardImpl {
 
     public SoulOfInnistrad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

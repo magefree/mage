@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author TheElk801
  */
-public class LlanowarScout extends CardImpl {
+public final class LlanowarScout extends CardImpl {
 
     public LlanowarScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

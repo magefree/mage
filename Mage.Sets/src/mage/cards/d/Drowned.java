@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class Drowned extends CardImpl {
+public final class Drowned extends CardImpl {
 
     public Drowned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

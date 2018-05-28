@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class MagisterOfWorth extends CardImpl {
+public final class MagisterOfWorth extends CardImpl {
 
     public MagisterOfWorth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{B}");

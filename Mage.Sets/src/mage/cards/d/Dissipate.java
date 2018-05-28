@@ -38,7 +38,7 @@ import mage.target.TargetSpell;
 /**
  * @author nantuko
  */
-public class Dissipate extends CardImpl {
+public final class Dissipate extends CardImpl {
 
     public Dissipate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

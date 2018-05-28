@@ -41,7 +41,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class ShowerOfSparks extends CardImpl {
+public final class ShowerOfSparks extends CardImpl {
 
     public ShowerOfSparks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

@@ -15,7 +15,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author JRHerlehy Created on 4/8/18.
  */
-public class JayasImmolatingInferno extends CardImpl {
+public final class JayasImmolatingInferno extends CardImpl {
 
     public JayasImmolatingInferno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");

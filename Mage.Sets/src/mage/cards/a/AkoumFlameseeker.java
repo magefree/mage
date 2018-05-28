@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class AkoumFlameseeker extends CardImpl {
+public final class AkoumFlameseeker extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
 

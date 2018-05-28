@@ -39,7 +39,7 @@ import mage.game.permanent.token.RiseOfEaglesBirdToken;
  *
  * @author LevelX2
  */
-public class RiseOfEagles extends CardImpl {
+public final class RiseOfEagles extends CardImpl {
 
     public RiseOfEagles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

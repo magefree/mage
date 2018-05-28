@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Reincarnation extends CardImpl {
+public final class Reincarnation extends CardImpl {
 
     public Reincarnation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");

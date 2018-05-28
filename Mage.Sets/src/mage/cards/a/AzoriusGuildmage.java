@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class AzoriusGuildmage extends CardImpl {
+public final class AzoriusGuildmage extends CardImpl {
 
     public AzoriusGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}{W/U}");

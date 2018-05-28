@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class DjeruWithEyesOpen extends CardImpl {
+public final class DjeruWithEyesOpen extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("planeswalker card");
 

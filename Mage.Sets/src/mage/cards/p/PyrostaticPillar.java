@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author dustinconrad
  */
-public class PyrostaticPillar extends CardImpl {
+public final class PyrostaticPillar extends CardImpl {
 
     public PyrostaticPillar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SlayersCleaver extends CardImpl {
+public final class SlayersCleaver extends CardImpl {
 
     public SlayersCleaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

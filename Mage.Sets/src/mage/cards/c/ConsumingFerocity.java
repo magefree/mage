@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class ConsumingFerocity extends CardImpl {
+public final class ConsumingFerocity extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature");
 

@@ -52,7 +52,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author jeffwadsworth
  */
-public class Moonhold extends CardImpl {
+public final class Moonhold extends CardImpl {
 
     public Moonhold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R/W}");

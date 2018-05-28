@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RiotDevils extends CardImpl {
+public final class RiotDevils extends CardImpl {
 
     public RiotDevils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

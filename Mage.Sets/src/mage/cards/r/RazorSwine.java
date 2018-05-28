@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RazorSwine extends CardImpl {
+public final class RazorSwine extends CardImpl {
 
     public RazorSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

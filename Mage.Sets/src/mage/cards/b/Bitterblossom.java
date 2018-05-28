@@ -43,7 +43,7 @@ import mage.game.permanent.token.FaerieRogueToken;
  *
  * @author Loki
  */
-public class Bitterblossom extends CardImpl {
+public final class Bitterblossom extends CardImpl {
 
     public Bitterblossom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{B}");

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
 /**
  * @author duncant
  */
-public class MagusOfTheCandelabra extends CardImpl {
+public final class MagusOfTheCandelabra extends CardImpl {
 
     public MagusOfTheCandelabra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

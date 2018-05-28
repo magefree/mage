@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BurningFistMinotaur extends CardImpl {
+public final class BurningFistMinotaur extends CardImpl {
 
     public BurningFistMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

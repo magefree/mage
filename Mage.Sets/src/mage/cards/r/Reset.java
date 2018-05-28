@@ -40,7 +40,7 @@ import mage.constants.CardType;
 /**
  * @author LevelX2
  */
-public class Reset extends CardImpl {
+public final class Reset extends CardImpl {
 
     public Reset(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");

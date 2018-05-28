@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class FiddleheadKami extends CardImpl {
+public final class FiddleheadKami extends CardImpl {
 
     public FiddleheadKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

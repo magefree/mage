@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class MinionOfTeveshSzat extends CardImpl {
+public final class MinionOfTeveshSzat extends CardImpl {
 
     public MinionOfTeveshSzat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CandlesGlow extends CardImpl {
+public final class CandlesGlow extends CardImpl {
 
     public CandlesGlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

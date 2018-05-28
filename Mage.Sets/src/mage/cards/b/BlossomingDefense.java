@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BlossomingDefense extends CardImpl {
+public final class BlossomingDefense extends CardImpl {
 
     public BlossomingDefense(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KapshoKitefins extends CardImpl {
+public final class KapshoKitefins extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another creature");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");

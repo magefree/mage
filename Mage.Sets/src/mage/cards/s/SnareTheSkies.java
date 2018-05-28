@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SnareTheSkies extends CardImpl {
+public final class SnareTheSkies extends CardImpl {
 
     public SnareTheSkies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

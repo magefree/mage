@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ElvishSoultiller extends CardImpl {
+public final class ElvishSoultiller extends CardImpl {
 
     public ElvishSoultiller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

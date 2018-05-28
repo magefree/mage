@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class MakindiGriffin extends CardImpl {
+public final class MakindiGriffin extends CardImpl {
 
     public MakindiGriffin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

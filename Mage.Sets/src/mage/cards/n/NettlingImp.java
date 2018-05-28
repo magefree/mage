@@ -57,7 +57,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author MTGfan
  */
-public class NettlingImp extends CardImpl {
+public final class NettlingImp extends CardImpl {
 
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall");
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Odyssey extends ExpansionSet {
+public final class Odyssey extends ExpansionSet {
 
     private static final Odyssey instance = new Odyssey();
 

@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author MarcoMarin
  */
-public class Tetravus extends CardImpl {
+public final class Tetravus extends CardImpl {
 
     public Tetravus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

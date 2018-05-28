@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BorderlandMinotaur extends CardImpl {
+public final class BorderlandMinotaur extends CardImpl {
 
     public BorderlandMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

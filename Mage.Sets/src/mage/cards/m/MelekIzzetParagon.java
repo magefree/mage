@@ -55,7 +55,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class MelekIzzetParagon extends CardImpl {
+public final class MelekIzzetParagon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card");
 

@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class TheGitrogMonster extends CardImpl {
+public final class TheGitrogMonster extends CardImpl {
 
     public TheGitrogMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");

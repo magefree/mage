@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SylvanCaryatid extends CardImpl {
+public final class SylvanCaryatid extends CardImpl {
 
     public SylvanCaryatid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

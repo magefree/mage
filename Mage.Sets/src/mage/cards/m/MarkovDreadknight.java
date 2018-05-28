@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class MarkovDreadknight extends CardImpl {
+public final class MarkovDreadknight extends CardImpl {
 
     public MarkovDreadknight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

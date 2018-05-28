@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SlithStrider extends CardImpl {
+public final class SlithStrider extends CardImpl {
 
     public SlithStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

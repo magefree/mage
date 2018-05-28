@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class WalkingAtlas extends CardImpl {
+public final class WalkingAtlas extends CardImpl {
 
     public WalkingAtlas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class HarshMentor extends CardImpl {
+public final class HarshMentor extends CardImpl {
 
     public HarshMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

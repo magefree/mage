@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class VerdantHaven extends CardImpl {
+public final class VerdantHaven extends CardImpl {
 
     public VerdantHaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

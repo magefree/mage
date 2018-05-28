@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SerpentsGift extends CardImpl {
+public final class SerpentsGift extends CardImpl {
 
     public SerpentsGift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

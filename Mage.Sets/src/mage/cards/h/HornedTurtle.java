@@ -38,7 +38,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class HornedTurtle extends CardImpl {
+public final class HornedTurtle extends CardImpl {
 
     public HornedTurtle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -55,7 +55,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author LevelX2
  */
-public class ShamanOfTheGreatHunt extends CardImpl {
+public final class ShamanOfTheGreatHunt extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with power 4 or greater");
 

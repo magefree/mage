@@ -50,7 +50,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class GoblinBarrage extends CardImpl {
+public final class GoblinBarrage extends CardImpl {
 
     public GoblinBarrage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

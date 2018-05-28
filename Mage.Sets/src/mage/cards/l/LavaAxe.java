@@ -38,7 +38,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LavaAxe extends CardImpl {
+public final class LavaAxe extends CardImpl {
 
     public LavaAxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");

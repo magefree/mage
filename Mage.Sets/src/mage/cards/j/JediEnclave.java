@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class JediEnclave extends CardImpl {
+public final class JediEnclave extends CardImpl {
 
     public JediEnclave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -43,7 +43,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class DawnToDusk extends CardImpl {
+public final class DawnToDusk extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("enchantment card from your graveyard");
     static {

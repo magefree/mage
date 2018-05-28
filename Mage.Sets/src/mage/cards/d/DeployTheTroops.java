@@ -38,7 +38,7 @@ import mage.game.permanent.token.TrooperToken;
  *
  * @author Styxo
  */
-public class DeployTheTroops extends CardImpl {
+public final class DeployTheTroops extends CardImpl {
 
     public DeployTheTroops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");

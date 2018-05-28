@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class OonasGatewarden extends CardImpl {
+public final class OonasGatewarden extends CardImpl {
 
     public OonasGatewarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}");

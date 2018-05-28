@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class FreneticEfreet extends CardImpl {
+public final class FreneticEfreet extends CardImpl {
 
     public FreneticEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");

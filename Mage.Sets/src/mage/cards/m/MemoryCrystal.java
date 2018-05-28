@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author spjspj
  */
-public class MemoryCrystal extends CardImpl {
+public final class MemoryCrystal extends CardImpl {
 
     public MemoryCrystal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

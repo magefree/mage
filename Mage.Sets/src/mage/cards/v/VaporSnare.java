@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class VaporSnare extends CardImpl {
+public final class VaporSnare extends CardImpl {
 
     public VaporSnare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");

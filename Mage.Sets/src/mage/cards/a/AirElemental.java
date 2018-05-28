@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AirElemental extends CardImpl {
+public final class AirElemental extends CardImpl {
 
     public AirElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

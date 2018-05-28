@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33, Cloudthresher (LevelX2), Cranial Extraction (BetaSteward)
  */
-public class Tombfire extends CardImpl {
+public final class Tombfire extends CardImpl {
 
     public Tombfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

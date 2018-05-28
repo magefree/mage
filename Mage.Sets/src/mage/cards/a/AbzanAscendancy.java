@@ -48,7 +48,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author LevelX2
  */
-public class AbzanAscendancy extends CardImpl {
+public final class AbzanAscendancy extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
 

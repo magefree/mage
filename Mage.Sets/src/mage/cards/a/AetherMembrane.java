@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author klayhamn
  */
-public class AetherMembrane extends CardImpl {
+public final class AetherMembrane extends CardImpl {
 
     public AetherMembrane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

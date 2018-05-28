@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  * @author LoneFox
 
  */
-public class CuombajjWitches extends CardImpl {
+public final class CuombajjWitches extends CardImpl {
 
     private final UUID originalId;
 

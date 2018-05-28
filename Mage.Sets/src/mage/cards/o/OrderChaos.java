@@ -39,7 +39,7 @@ import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetAttackingCreature;
 
-public class OrderChaos extends SplitCard {
+public final class OrderChaos extends SplitCard {
 
     public OrderChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}", "{2}{R}", SpellAbilityType.SPLIT);

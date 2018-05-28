@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class KoskunFalls extends CardImpl {
+public final class KoskunFalls extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");
     

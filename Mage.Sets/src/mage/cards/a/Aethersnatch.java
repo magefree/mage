@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class Aethersnatch extends CardImpl {
+public final class Aethersnatch extends CardImpl {
 
     public Aethersnatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");

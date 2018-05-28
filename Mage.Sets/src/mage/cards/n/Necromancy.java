@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Necromancy extends CardImpl {
+public final class Necromancy extends CardImpl {
 
     public Necromancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

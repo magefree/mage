@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class IntoTheWilds extends CardImpl {
+public final class IntoTheWilds extends CardImpl {
 
     public IntoTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

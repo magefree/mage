@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class FaithUnbroken extends CardImpl {
+public final class FaithUnbroken extends CardImpl {
 
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
 

@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class InnerFlameIgniter extends CardImpl {
+public final class InnerFlameIgniter extends CardImpl {
 
     public InnerFlameIgniter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

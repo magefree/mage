@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class UndeadMinotaur extends CardImpl {
+public final class UndeadMinotaur extends CardImpl {
 
     public UndeadMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

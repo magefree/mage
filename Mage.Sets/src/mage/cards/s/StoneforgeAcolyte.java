@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class StoneforgeAcolyte extends CardImpl {
+public final class StoneforgeAcolyte extends CardImpl {
 
     private static final FilterControlledPermanent filterAlly = new FilterControlledPermanent("an untapped Ally you control");
     private static final FilterCard filterEquipment = new FilterCard("an Equipment card");

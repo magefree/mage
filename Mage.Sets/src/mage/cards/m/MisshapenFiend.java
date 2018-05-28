@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MisshapenFiend extends CardImpl {
+public final class MisshapenFiend extends CardImpl {
 
     public MisshapenFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

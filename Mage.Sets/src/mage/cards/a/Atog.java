@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class Atog extends CardImpl {
+public final class Atog extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 

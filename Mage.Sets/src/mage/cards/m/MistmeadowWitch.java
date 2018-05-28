@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MistmeadowWitch extends CardImpl {
+public final class MistmeadowWitch extends CardImpl {
 
     public MistmeadowWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/U}");

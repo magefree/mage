@@ -49,7 +49,7 @@ import mage.game.permanent.token.ZektarShrineElementalToken;
  *
  * @author North
  */
-public class ZektarShrineExpedition extends CardImpl {
+public final class ZektarShrineExpedition extends CardImpl {
 
     public ZektarShrineExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

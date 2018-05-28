@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class StalkingAssassin extends CardImpl {
+public final class StalkingAssassin extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

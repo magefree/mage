@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class OrcishCaptain extends CardImpl {
+public final class OrcishCaptain extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Orc creature");
 

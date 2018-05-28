@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NyleasPresence extends CardImpl {
+public final class NyleasPresence extends CardImpl {
 
     public NyleasPresence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

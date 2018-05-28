@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class SunstrikeLegionnaire extends CardImpl {
+public final class SunstrikeLegionnaire extends CardImpl {
 
     private static final FilterCreaturePermanent untapFilter = new FilterCreaturePermanent("another creature");
     private static final FilterCreaturePermanent tapFilter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");

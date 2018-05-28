@@ -48,7 +48,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author fireshoes
  */
-public class CatacombSifter extends CardImpl {
+public final class CatacombSifter extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
     static {

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class CommandBeacon extends CardImpl {
+public final class CommandBeacon extends CardImpl {
 
     public CommandBeacon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

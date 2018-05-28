@@ -44,7 +44,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author North
  */
-public class TurntimberRanger extends CardImpl {
+public final class TurntimberRanger extends CardImpl {
 
     public TurntimberRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

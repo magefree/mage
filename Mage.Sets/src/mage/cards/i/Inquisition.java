@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth & L_J
  */
-public class Inquisition extends CardImpl {
+public final class Inquisition extends CardImpl {
 
     public Inquisition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

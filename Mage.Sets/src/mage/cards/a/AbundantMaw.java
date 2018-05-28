@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class AbundantMaw extends CardImpl {
+public final class AbundantMaw extends CardImpl {
 
     public AbundantMaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");

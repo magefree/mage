@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class DuskborneSkymarcher extends CardImpl {
+public final class DuskborneSkymarcher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.VAMPIRE, "attacking Vampire");
 

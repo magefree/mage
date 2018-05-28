@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TempleBell extends CardImpl {
+public final class TempleBell extends CardImpl {
 
     public TempleBell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -44,7 +44,7 @@ import mage.filter.common.FilterLandPermanent;
 /**
  * @author KholdFuzion
  */
-public class Dandan extends CardImpl {
+public final class Dandan extends CardImpl {
 
     public Dandan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");

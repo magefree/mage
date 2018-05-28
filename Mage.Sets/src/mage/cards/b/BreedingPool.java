@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BreedingPool extends CardImpl {
+public final class BreedingPool extends CardImpl {
 
     public BreedingPool(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

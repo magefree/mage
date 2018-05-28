@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class WalkingSponge extends CardImpl {
+public final class WalkingSponge extends CardImpl {
 
     public WalkingSponge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

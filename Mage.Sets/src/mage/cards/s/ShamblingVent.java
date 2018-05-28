@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class ShamblingVent extends CardImpl {
+public final class ShamblingVent extends CardImpl {
 
     public ShamblingVent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

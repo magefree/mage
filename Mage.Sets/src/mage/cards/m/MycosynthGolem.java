@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author jeffwadsworth
  */
-public class MycosynthGolem extends CardImpl {
+public final class MycosynthGolem extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Artifact creature spells");
 

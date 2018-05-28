@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author TheElk801
  */
-public class CustomsDepot extends CardImpl {
+public final class CustomsDepot extends CardImpl {
 
     public CustomsDepot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

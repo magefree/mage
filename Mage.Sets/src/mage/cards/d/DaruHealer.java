@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class DaruHealer extends CardImpl {
+public final class DaruHealer extends CardImpl {
 
     public DaruHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

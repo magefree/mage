@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class AnvilwroughtRaptor extends CardImpl {
+public final class AnvilwroughtRaptor extends CardImpl {
 
     public AnvilwroughtRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

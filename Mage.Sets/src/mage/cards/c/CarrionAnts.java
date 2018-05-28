@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class CarrionAnts extends CardImpl {
+public final class CarrionAnts extends CardImpl {
 
     public CarrionAnts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

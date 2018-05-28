@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class BriselaVoiceOfNightmares extends MeldCard {
+public final class BriselaVoiceOfNightmares extends MeldCard {
     public BriselaVoiceOfNightmares(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         addSuperType(SuperType.LEGENDARY);

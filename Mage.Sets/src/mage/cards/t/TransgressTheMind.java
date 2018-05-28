@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class TransgressTheMind extends CardImpl {
+public final class TransgressTheMind extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a card from it with converted mana cost 3 or greater");
 

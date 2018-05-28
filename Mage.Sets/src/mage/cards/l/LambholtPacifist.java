@@ -55,7 +55,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class LambholtPacifist extends CardImpl {
+public final class LambholtPacifist extends CardImpl {
 
     public LambholtPacifist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

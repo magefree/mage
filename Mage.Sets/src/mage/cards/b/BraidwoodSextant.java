@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class BraidwoodSextant extends CardImpl {
+public final class BraidwoodSextant extends CardImpl {
 
     public BraidwoodSextant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

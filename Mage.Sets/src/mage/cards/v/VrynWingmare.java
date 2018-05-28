@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class VrynWingmare extends CardImpl {
+public final class VrynWingmare extends CardImpl {
 
     public VrynWingmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

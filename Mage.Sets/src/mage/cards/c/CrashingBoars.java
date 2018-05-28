@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class CrashingBoars extends CardImpl {
+public final class CrashingBoars extends CardImpl {
 
     public CrashingBoars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  * @author jeffwadsworth
  *
  */
-public class SpittingImage extends CardImpl {
+public final class SpittingImage extends CardImpl {
 
     public SpittingImage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G/U}{G/U}");

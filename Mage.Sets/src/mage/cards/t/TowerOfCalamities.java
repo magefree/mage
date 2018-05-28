@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TowerOfCalamities extends CardImpl {
+public final class TowerOfCalamities extends CardImpl {
 
     public TowerOfCalamities (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

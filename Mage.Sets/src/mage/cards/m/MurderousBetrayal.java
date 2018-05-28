@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author choiseul11
  */
-public class MurderousBetrayal extends CardImpl {
+public final class MurderousBetrayal extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

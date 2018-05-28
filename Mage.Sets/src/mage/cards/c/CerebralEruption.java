@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CerebralEruption extends CardImpl {
+public final class CerebralEruption extends CardImpl {
 
     public CerebralEruption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

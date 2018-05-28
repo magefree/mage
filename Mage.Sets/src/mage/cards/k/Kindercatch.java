@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Kindercatch extends CardImpl {
+public final class Kindercatch extends CardImpl {
 
     public Kindercatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");

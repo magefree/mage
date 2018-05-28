@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class ZoeticCavern extends CardImpl {
+public final class ZoeticCavern extends CardImpl {
 
     public ZoeticCavern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

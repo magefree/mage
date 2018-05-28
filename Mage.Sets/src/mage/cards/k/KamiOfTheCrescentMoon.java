@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class KamiOfTheCrescentMoon extends CardImpl {
+public final class KamiOfTheCrescentMoon extends CardImpl {
 
     public KamiOfTheCrescentMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");

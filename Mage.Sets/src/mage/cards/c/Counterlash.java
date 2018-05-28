@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author BetaSteward
  */
-public class Counterlash extends CardImpl {
+public final class Counterlash extends CardImpl {
 
     public Counterlash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");

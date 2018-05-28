@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EnterTheUnknown extends CardImpl {
+public final class EnterTheUnknown extends CardImpl {
 
     public EnterTheUnknown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");

@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class LivingDeath extends CardImpl {
+public final class LivingDeath extends CardImpl {
 
     public LivingDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

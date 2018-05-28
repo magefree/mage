@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author LoneFox
 
  */
-public class MerrowHarbinger extends CardImpl {
+public final class MerrowHarbinger extends CardImpl {
 
     static final FilterCard filter = new FilterCard("Merfolk card");
 

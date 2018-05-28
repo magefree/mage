@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class AvenSunstriker extends CardImpl {
+public final class AvenSunstriker extends CardImpl {
 
     public AvenSunstriker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

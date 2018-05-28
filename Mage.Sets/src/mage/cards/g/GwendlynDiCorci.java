@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class GwendlynDiCorci extends CardImpl {
+public final class GwendlynDiCorci extends CardImpl {
 
     public GwendlynDiCorci(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{B}{R}");

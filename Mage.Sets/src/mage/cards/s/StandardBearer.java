@@ -42,7 +42,7 @@ import mage.filter.FilterPermanent;
  *
  * @author LevelX2
  */
-public class StandardBearer extends CardImpl {
+public final class StandardBearer extends CardImpl {
 
     public StandardBearer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

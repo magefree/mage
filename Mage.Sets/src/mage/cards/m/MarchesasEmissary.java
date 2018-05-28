@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class MarchesasEmissary extends CardImpl {
+public final class MarchesasEmissary extends CardImpl {
 
     public MarchesasEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

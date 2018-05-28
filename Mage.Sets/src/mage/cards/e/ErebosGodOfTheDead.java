@@ -48,7 +48,7 @@ import mage.constants.*;
  *
  * @author LevelX2
  */
-public class ErebosGodOfTheDead extends CardImpl {
+public final class ErebosGodOfTheDead extends CardImpl {
 
     public ErebosGodOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");

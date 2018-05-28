@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class HeirToTheNight extends CardImpl {
+public final class HeirToTheNight extends CardImpl {
 
     public HeirToTheNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

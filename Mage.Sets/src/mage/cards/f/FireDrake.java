@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class FireDrake extends CardImpl {
+public final class FireDrake extends CardImpl {
 
     public FireDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

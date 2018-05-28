@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class TurbulentDreams extends CardImpl {
+public final class TurbulentDreams extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("nonland permanents");
     

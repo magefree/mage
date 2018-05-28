@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class GoblinSpymaster extends CardImpl {
+public final class GoblinSpymaster extends CardImpl {
 
     public GoblinSpymaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

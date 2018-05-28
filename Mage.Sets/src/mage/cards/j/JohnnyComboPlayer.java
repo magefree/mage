@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author L_J
  */
-public class JohnnyComboPlayer extends CardImpl {
+public final class JohnnyComboPlayer extends CardImpl {
 
     public JohnnyComboPlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

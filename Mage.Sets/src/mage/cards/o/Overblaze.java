@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Overblaze extends CardImpl {
+public final class Overblaze extends CardImpl {
 
     public Overblaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");

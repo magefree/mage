@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SwayOfIllusion extends CardImpl {
+public final class SwayOfIllusion extends CardImpl {
 
     public SwayOfIllusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

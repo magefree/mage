@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class ArcumDagsson extends CardImpl {
+public final class ArcumDagsson extends CardImpl {
 
     private static final FilterPermanent filter = new FilterArtifactPermanent("artifact creature");
 

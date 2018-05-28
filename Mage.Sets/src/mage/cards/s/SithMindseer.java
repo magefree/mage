@@ -46,7 +46,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  *
  * @author Styxo
  */
-public class SithMindseer extends CardImpl {
+public final class SithMindseer extends CardImpl {
 
     public SithMindseer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");

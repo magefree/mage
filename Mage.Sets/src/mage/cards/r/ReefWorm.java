@@ -41,7 +41,7 @@ import mage.game.permanent.token.ReefWormFishToken;
  *
  * @author LevelX2
  */
-public class ReefWorm extends CardImpl {
+public final class ReefWorm extends CardImpl {
 
     public ReefWorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

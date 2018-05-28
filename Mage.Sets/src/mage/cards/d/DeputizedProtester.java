@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class DeputizedProtester extends CardImpl {
+public final class DeputizedProtester extends CardImpl {
 
     public DeputizedProtester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

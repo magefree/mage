@@ -40,7 +40,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LoneFox
  */
-public class BrushWithDeath extends CardImpl {
+public final class BrushWithDeath extends CardImpl {
 
     public BrushWithDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

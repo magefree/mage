@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author LevelX2
  */
-public class SalivatingGremlins extends CardImpl {
+public final class SalivatingGremlins extends CardImpl {
 
     public SalivatingGremlins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

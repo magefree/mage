@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class ValleyRannet extends CardImpl {
+public final class ValleyRannet extends CardImpl {
 
     public ValleyRannet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");

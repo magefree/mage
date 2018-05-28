@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ParagonOfGatheringMists extends CardImpl {
+public final class ParagonOfGatheringMists extends CardImpl {
 
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creatures you control");
     private static final FilterControlledCreaturePermanent filterBlue2 = new FilterControlledCreaturePermanent("another target blue creature you control");

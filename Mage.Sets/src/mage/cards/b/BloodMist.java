@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BloodMist extends CardImpl {
+public final class BloodMist extends CardImpl {
 
     public BloodMist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

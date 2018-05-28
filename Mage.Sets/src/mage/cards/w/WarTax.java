@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author HCrescent & L_J
  */
-public class WarTax extends CardImpl {
+public final class WarTax extends CardImpl {
 
     public WarTax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

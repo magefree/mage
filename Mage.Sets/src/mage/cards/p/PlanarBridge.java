@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author anonymous
  */
-public class PlanarBridge extends CardImpl {
+public final class PlanarBridge extends CardImpl {
 
     public PlanarBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

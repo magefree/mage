@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class KumenasAwakening extends CardImpl {
+public final class KumenasAwakening extends CardImpl {
 
     public KumenasAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

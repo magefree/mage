@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AstralCornucopia extends CardImpl {
+public final class AstralCornucopia extends CardImpl {
 
     public AstralCornucopia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}{X}{X}");

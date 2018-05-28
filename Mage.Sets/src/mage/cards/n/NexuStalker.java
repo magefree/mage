@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class NexuStalker extends CardImpl {
+public final class NexuStalker extends CardImpl {
 
     public NexuStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

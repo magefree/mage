@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author emerald000
  */
-public class Legerdemain extends CardImpl {
+public final class Legerdemain extends CardImpl {
     
     private static final FilterPermanent firstFilter = new FilterPermanent("artifact or creature");
     private static final FilterPermanent secondFilter = new FilterPermanent("another permanent that shares the type of artifact or creature");

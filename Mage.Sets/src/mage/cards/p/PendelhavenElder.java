@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class PendelhavenElder extends CardImpl {
+public final class PendelhavenElder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each 1/1 creature you control");
 

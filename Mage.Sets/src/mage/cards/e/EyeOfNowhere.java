@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class EyeOfNowhere extends CardImpl {
+public final class EyeOfNowhere extends CardImpl {
 
     public EyeOfNowhere (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");

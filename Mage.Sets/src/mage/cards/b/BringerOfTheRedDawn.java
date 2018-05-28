@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class BringerOfTheRedDawn extends CardImpl {
+public final class BringerOfTheRedDawn extends CardImpl {
 
     public BringerOfTheRedDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}{R}");

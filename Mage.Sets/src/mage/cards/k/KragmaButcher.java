@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class KragmaButcher extends CardImpl {
+public final class KragmaButcher extends CardImpl {
 
     public KragmaButcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class Toymaker extends CardImpl {
+public final class Toymaker extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature artifact");
 

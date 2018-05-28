@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author ayratn
  */
-public class ShapeAnew extends CardImpl {
+public final class ShapeAnew extends CardImpl {
 
     public ShapeAnew(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

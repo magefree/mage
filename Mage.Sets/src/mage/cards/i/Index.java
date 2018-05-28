@@ -37,7 +37,7 @@ import mage.constants.CardType;
 /**
  * @author LevelX
  */
-public class Index extends CardImpl {
+public final class Index extends CardImpl {
 
     public Index(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

@@ -43,7 +43,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class AccordersShield extends CardImpl {
+public final class AccordersShield extends CardImpl {
 
     public AccordersShield (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

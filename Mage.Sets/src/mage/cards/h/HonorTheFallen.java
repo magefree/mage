@@ -45,7 +45,7 @@ import mage.players.Player;
  * @author L_J
  */
 
-public class HonorTheFallen extends CardImpl {
+public final class HonorTheFallen extends CardImpl {
 
     public HonorTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

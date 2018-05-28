@@ -41,7 +41,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author fireshoes
  */
-public class GhirapurGearcrafter extends CardImpl {
+public final class GhirapurGearcrafter extends CardImpl {
 
     public GhirapurGearcrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

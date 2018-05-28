@@ -45,7 +45,7 @@ import mage.constants.*;
  *
  * @author fireshoes
  */
-public class ScroungedScythe extends CardImpl {
+public final class ScroungedScythe extends CardImpl {
 
     private static final String staticText = "As long as equipped creature is a Human, it has menace";
 

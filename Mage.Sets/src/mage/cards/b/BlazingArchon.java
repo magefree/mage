@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BlazingArchon extends CardImpl {
+public final class BlazingArchon extends CardImpl {
 
     public BlazingArchon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}{W}");

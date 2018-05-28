@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class Vigor extends CardImpl {
+public final class Vigor extends CardImpl {
 
     public Vigor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");

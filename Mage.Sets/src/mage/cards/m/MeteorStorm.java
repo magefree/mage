@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class MeteorStorm extends CardImpl {
+public final class MeteorStorm extends CardImpl {
 
     public MeteorStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{G}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class EbonPraetor extends CardImpl {
+public final class EbonPraetor extends CardImpl {
 
     public EbonPraetor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

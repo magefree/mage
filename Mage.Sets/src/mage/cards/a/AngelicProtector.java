@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AngelicProtector extends CardImpl {
+public final class AngelicProtector extends CardImpl {
 
     public AngelicProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

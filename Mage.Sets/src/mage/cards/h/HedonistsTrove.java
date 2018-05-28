@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class HedonistsTrove extends CardImpl {
+public final class HedonistsTrove extends CardImpl {
 
     public HedonistsTrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");

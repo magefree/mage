@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class SabertoothOutrider extends CardImpl {
+public final class SabertoothOutrider extends CardImpl {
 
     public SabertoothOutrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class SchoolOfPiranha extends CardImpl {
+public final class SchoolOfPiranha extends CardImpl {
 
     public SchoolOfPiranha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

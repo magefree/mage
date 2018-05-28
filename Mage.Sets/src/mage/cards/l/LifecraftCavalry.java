@@ -44,7 +44,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author fireshoes
  */
-public class LifecraftCavalry extends CardImpl {
+public final class LifecraftCavalry extends CardImpl {
 
     public LifecraftCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

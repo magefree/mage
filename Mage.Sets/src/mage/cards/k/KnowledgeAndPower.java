@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class KnowledgeAndPower extends CardImpl {
+public final class KnowledgeAndPower extends CardImpl {
 
     public KnowledgeAndPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");

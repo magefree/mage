@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class Trailblazer extends CardImpl {
+public final class Trailblazer extends CardImpl {
 
     public Trailblazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");

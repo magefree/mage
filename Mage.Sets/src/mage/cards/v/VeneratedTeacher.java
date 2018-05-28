@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class VeneratedTeacher extends CardImpl {
+public final class VeneratedTeacher extends CardImpl {
 
     public VeneratedTeacher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

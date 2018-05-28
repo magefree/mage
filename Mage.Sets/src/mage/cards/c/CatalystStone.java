@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class CatalystStone extends CardImpl {
+public final class CatalystStone extends CardImpl {
 
     public CatalystStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

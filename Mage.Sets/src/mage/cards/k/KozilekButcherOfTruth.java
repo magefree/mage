@@ -44,7 +44,7 @@ import mage.constants.SuperType;
  *
  * @author Loki
  */
-public class KozilekButcherOfTruth extends CardImpl {
+public final class KozilekButcherOfTruth extends CardImpl {
 
     public KozilekButcherOfTruth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");

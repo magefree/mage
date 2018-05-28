@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class FortressCyclops extends CardImpl {
+public final class FortressCyclops extends CardImpl {
 
     public FortressCyclops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");

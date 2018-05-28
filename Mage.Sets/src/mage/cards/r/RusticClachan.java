@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class RusticClachan extends CardImpl {
+public final class RusticClachan extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Kithkin card from your hand");
 

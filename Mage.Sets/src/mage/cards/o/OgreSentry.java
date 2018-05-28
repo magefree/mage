@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class OgreSentry extends CardImpl {
+public final class OgreSentry extends CardImpl {
 
     public OgreSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

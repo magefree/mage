@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class LightningRigCrew extends CardImpl {
+public final class LightningRigCrew extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Pirate spell");
 

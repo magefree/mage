@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class MoltenSlagheap extends CardImpl {
+public final class MoltenSlagheap extends CardImpl {
 
     public MoltenSlagheap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

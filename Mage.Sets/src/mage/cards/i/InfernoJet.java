@@ -40,7 +40,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class InfernoJet extends CardImpl {
+public final class InfernoJet extends CardImpl {
 
     public InfernoJet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}");

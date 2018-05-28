@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class FlameJavelin extends CardImpl {
+public final class FlameJavelin extends CardImpl {
 
     public FlameJavelin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2/R}{2/R}{2/R}");

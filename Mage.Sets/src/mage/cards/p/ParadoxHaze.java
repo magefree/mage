@@ -54,7 +54,7 @@ import mage.watchers.common.FirstTimeStepWatcher;
  *
  * @author emerald000
  */
-public class ParadoxHaze extends CardImpl {
+public final class ParadoxHaze extends CardImpl {
 
     public ParadoxHaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

@@ -10,7 +10,7 @@ import mage.constants.SetType;
  *
  * @author magenoxx
  */
-public class Unhinged extends ExpansionSet {
+public final class Unhinged extends ExpansionSet {
 
     private static final Unhinged instance = new Unhinged();
 

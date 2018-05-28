@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Jgod
  */
-public class SkullOfRamos extends CardImpl {
+public final class SkullOfRamos extends CardImpl {
 
     public SkullOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class LaceWithMoonglove extends CardImpl {
+public final class LaceWithMoonglove extends CardImpl {
 
     public LaceWithMoonglove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

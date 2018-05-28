@@ -48,7 +48,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class SaplingOfColfenor extends CardImpl {
+public final class SaplingOfColfenor extends CardImpl {
 
     public SaplingOfColfenor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/G}{B/G}");

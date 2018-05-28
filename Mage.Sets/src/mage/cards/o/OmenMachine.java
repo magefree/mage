@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class OmenMachine extends CardImpl {
+public final class OmenMachine extends CardImpl {
 
     public OmenMachine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

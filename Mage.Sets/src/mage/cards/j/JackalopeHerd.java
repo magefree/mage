@@ -41,7 +41,7 @@ import mage.filter.FilterSpell;
  *
  * @author LoneFox
  */
-public class JackalopeHerd extends CardImpl {
+public final class JackalopeHerd extends CardImpl {
 
     public JackalopeHerd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

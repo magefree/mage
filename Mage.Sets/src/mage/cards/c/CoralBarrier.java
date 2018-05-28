@@ -42,7 +42,7 @@ import mage.game.permanent.token.CoralBarrierSquidToken;
  *
  * @author LevelX2
  */
-public class CoralBarrier extends CardImpl {
+public final class CoralBarrier extends CardImpl {
 
     public CoralBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

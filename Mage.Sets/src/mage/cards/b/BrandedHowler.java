@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class BrandedHowler extends CardImpl {
+public final class BrandedHowler extends CardImpl {
 
     public BrandedHowler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

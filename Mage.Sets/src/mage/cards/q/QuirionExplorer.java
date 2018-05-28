@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class QuirionExplorer extends CardImpl {
+public final class QuirionExplorer extends CardImpl {
 
     public QuirionExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

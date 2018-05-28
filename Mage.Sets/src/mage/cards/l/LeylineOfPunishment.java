@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfPunishment extends CardImpl {
+public final class LeylineOfPunishment extends CardImpl {
 
     public LeylineOfPunishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");

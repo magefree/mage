@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BlindPhantasm extends CardImpl {
+public final class BlindPhantasm extends CardImpl {
 
     public BlindPhantasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

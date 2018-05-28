@@ -58,7 +58,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class HeartPiercerManticore extends CardImpl {
+public final class HeartPiercerManticore extends CardImpl {
 
     public HeartPiercerManticore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

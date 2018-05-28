@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class MammothHarness extends CardImpl {
+public final class MammothHarness extends CardImpl {
 
     public MammothHarness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");

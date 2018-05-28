@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class EnsouledScimitar extends CardImpl {
+public final class EnsouledScimitar extends CardImpl {
 
     public EnsouledScimitar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

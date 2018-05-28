@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author Loki
  */
-public class HarabazDruid extends CardImpl {
+public final class HarabazDruid extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
 

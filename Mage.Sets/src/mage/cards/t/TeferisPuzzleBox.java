@@ -44,7 +44,7 @@ import mage.players.Player;
  * @author noxx
  *
  */
-public class TeferisPuzzleBox extends CardImpl {
+public final class TeferisPuzzleBox extends CardImpl {
 
     public TeferisPuzzleBox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

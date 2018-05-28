@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class SkizzikSurger extends CardImpl {
+public final class SkizzikSurger extends CardImpl {
 
     public SkizzikSurger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

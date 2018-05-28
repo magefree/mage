@@ -54,7 +54,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Quercitron
  */
-public class RakdosTheDefiler extends CardImpl {
+public final class RakdosTheDefiler extends CardImpl {
 
     private static final FilterPermanent attackTriggerFilter = new FilterControlledPermanent("the non-Demon permanents you control");
     private static final FilterPermanent damageToPlayerTriggerFilter = new FilterPermanent("the non-Demon permanents you control");

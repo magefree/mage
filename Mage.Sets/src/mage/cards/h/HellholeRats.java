@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class HellholeRats extends CardImpl {
+public final class HellholeRats extends CardImpl {
 
     public HellholeRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");

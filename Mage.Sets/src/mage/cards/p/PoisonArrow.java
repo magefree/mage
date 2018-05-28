@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class PoisonArrow extends CardImpl {
+public final class PoisonArrow extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

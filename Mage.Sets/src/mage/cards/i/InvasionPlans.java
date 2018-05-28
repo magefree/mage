@@ -44,7 +44,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author L_J
  */
-public class InvasionPlans extends CardImpl {
+public final class InvasionPlans extends CardImpl {
 
     public InvasionPlans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

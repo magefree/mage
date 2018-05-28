@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class StarkeOfRath extends CardImpl {
+public final class StarkeOfRath extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

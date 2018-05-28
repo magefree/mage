@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class RecklessScholar extends CardImpl {
+public final class RecklessScholar extends CardImpl {
 
     public RecklessScholar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

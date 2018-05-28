@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class MirriTheCursed extends CardImpl {
+public final class MirriTheCursed extends CardImpl {
 
     public MirriTheCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author MTGfan
  */
-public class PersonalIncarnation extends CardImpl {
+public final class PersonalIncarnation extends CardImpl {
 
     public PersonalIncarnation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");

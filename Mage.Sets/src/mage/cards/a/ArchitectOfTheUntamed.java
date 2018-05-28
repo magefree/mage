@@ -46,7 +46,7 @@ import mage.game.permanent.token.ArchitectOfTheUntamedBeastToken;
  *
  * @author LevelX2
  */
-public class ArchitectOfTheUntamed extends CardImpl {
+public final class ArchitectOfTheUntamed extends CardImpl {
 
     public ArchitectOfTheUntamed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

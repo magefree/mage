@@ -52,7 +52,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author LoneFox
  */
-public class IthHighArcanist extends CardImpl {
+public final class IthHighArcanist extends CardImpl {
 
     public IthHighArcanist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{U}");

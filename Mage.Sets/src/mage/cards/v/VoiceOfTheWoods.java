@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class VoiceOfTheWoods extends CardImpl {
+public final class VoiceOfTheWoods extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Elves you control");
 

@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class ThievesAuction extends CardImpl {
+public final class ThievesAuction extends CardImpl {
 
     public ThievesAuction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}{R}");

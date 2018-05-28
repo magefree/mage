@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author Styxo
  */
-public class Spellshift extends CardImpl {
+public final class Spellshift extends CardImpl {
 
     public Spellshift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

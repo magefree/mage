@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSovereign extends CardImpl {
+public final class MerfolkSovereign extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Merfolk creatures");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Merfolk creature");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class MurderousCut extends CardImpl {
+public final class MurderousCut extends CardImpl {
 
     public MurderousCut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");

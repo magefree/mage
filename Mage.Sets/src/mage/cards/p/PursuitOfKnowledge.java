@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class PursuitOfKnowledge extends CardImpl {
+public final class PursuitOfKnowledge extends CardImpl {
 
     public PursuitOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

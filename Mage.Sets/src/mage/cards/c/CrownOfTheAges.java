@@ -56,7 +56,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class CrownOfTheAges extends CardImpl {
+public final class CrownOfTheAges extends CardImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura attached to a creature");
 

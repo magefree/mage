@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SwirlingSpriggan extends CardImpl {
+public final class SwirlingSpriggan extends CardImpl {
     
     public SwirlingSpriggan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class CentaurArcher extends CardImpl {
+public final class CentaurArcher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

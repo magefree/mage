@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author nantuko
  */
-public class BrinkOfDisaster extends CardImpl {
+public final class BrinkOfDisaster extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or land");
 

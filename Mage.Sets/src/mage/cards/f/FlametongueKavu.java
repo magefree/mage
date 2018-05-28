@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FlametongueKavu extends CardImpl {
+public final class FlametongueKavu extends CardImpl {
 
     public FlametongueKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

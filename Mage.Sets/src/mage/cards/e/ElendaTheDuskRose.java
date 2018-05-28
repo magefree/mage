@@ -47,7 +47,7 @@ import mage.game.permanent.token.IxalanVampireToken;
  *
  * @author L_J
  */
-public class ElendaTheDuskRose extends CardImpl {
+public final class ElendaTheDuskRose extends CardImpl {
 
     public ElendaTheDuskRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");

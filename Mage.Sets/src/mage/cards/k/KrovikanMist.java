@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class KrovikanMist extends CardImpl {
+public final class KrovikanMist extends CardImpl {
 
     private static final FilterPermanent illusionsFilter = new FilterPermanent("Illusions on the battlefield");
 

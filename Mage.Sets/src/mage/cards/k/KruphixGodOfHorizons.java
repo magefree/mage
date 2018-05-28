@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class KruphixGodOfHorizons extends CardImpl {
+public final class KruphixGodOfHorizons extends CardImpl {
 
     public KruphixGodOfHorizons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}{U}");

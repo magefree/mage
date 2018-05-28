@@ -46,7 +46,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author jeffwadsworth
  */
-public class FerventPaincaster extends CardImpl {
+public final class FerventPaincaster extends CardImpl {
 
     public FerventPaincaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class RixMaadiDungeonPalace extends CardImpl {
+public final class RixMaadiDungeonPalace extends CardImpl {
 
     public RixMaadiDungeonPalace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author ilcartographer
  */
-public class Decompose extends CardImpl {
+public final class Decompose extends CardImpl {
 
     public Decompose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

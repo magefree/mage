@@ -46,7 +46,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author FenrisulfrX
  */
-public class SteamcoreWeird extends CardImpl {
+public final class SteamcoreWeird extends CardImpl {
 
     public SteamcoreWeird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

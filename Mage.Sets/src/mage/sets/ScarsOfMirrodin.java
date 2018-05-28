@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author nantuko84
  */
-public class ScarsOfMirrodin extends ExpansionSet {
+public final class ScarsOfMirrodin extends ExpansionSet {
 
     private static final ScarsOfMirrodin instance = new ScarsOfMirrodin();
 

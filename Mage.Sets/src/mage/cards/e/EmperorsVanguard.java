@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class EmperorsVanguard extends CardImpl {
+public final class EmperorsVanguard extends CardImpl {
 
     public EmperorsVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

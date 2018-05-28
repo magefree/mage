@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author noxx
 
  */
-public class GoldnightRedeemer extends CardImpl {
+public final class GoldnightRedeemer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 

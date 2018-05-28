@@ -44,7 +44,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class GiantCrab extends CardImpl {
+public final class GiantCrab extends CardImpl {
 
     public GiantCrab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

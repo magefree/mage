@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class DakmorSorceress extends CardImpl {
+public final class DakmorSorceress extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamps you control");
 

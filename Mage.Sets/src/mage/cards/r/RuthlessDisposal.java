@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RuthlessDisposal extends CardImpl {
+public final class RuthlessDisposal extends CardImpl {
 
     public RuthlessDisposal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author cbt33
  */
-public class ThinkTank extends CardImpl {
+public final class ThinkTank extends CardImpl {
 
     public ThinkTank(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

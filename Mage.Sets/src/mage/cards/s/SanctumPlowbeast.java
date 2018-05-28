@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class SanctumPlowbeast extends CardImpl {
+public final class SanctumPlowbeast extends CardImpl {
 
     public SanctumPlowbeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}{U}");

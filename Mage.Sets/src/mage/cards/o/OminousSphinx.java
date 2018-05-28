@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class OminousSphinx extends CardImpl {
+public final class OminousSphinx extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

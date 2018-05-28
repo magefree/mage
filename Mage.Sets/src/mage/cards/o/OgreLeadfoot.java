@@ -41,7 +41,7 @@ import mage.filter.common.FilterArtifactCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OgreLeadfoot extends CardImpl {
+public final class OgreLeadfoot extends CardImpl {
 
     public OgreLeadfoot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

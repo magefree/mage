@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nigelzor
  */
-public class SymbolOfUnsummoning extends CardImpl {
+public final class SymbolOfUnsummoning extends CardImpl {
 
     public SymbolOfUnsummoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

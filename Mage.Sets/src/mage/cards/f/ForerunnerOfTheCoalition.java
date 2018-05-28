@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author JayDi85
  */
-public class ForerunnerOfTheCoalition extends CardImpl {
+public final class ForerunnerOfTheCoalition extends CardImpl {
 
     private static final FilterPermanent filterAnotherPirate = new FilterPermanent(SubType.PIRATE, "another " + SubType.PIRATE.toString());
 

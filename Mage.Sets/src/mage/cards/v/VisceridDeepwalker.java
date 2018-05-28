@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class VisceridDeepwalker extends CardImpl {
+public final class VisceridDeepwalker extends CardImpl {
 
     public VisceridDeepwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

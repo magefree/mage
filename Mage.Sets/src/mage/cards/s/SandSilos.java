@@ -54,7 +54,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class SandSilos extends CardImpl {
+public final class SandSilos extends CardImpl {
 
     public SandSilos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

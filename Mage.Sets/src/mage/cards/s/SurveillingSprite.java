@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SurveillingSprite extends CardImpl {
+public final class SurveillingSprite extends CardImpl {
 
     public SurveillingSprite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

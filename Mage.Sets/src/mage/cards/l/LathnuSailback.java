@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class LathnuSailback extends CardImpl {
+public final class LathnuSailback extends CardImpl {
 
     public LathnuSailback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

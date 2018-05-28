@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SquadronHawk extends CardImpl {
+public final class SquadronHawk extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards named Squadron Hawk");
 

@@ -56,7 +56,7 @@ import org.apache.log4j.Logger;
  *
  * @author LevelX2
  */
-public class IsochronScepter extends CardImpl {
+public final class IsochronScepter extends CardImpl {
 
     public IsochronScepter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

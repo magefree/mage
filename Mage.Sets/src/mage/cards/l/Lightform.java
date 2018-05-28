@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Lightform extends CardImpl {
+public final class Lightform extends CardImpl {
 
     public Lightform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class LanternSpirit extends CardImpl {
+public final class LanternSpirit extends CardImpl {
 
     public LanternSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

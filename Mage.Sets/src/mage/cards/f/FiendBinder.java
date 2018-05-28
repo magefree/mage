@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FiendBinder extends CardImpl {
+public final class FiendBinder extends CardImpl {
 
     private final UUID originalId;
 

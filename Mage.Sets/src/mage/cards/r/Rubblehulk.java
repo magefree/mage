@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class Rubblehulk extends CardImpl {
+public final class Rubblehulk extends CardImpl {
 
     public Rubblehulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

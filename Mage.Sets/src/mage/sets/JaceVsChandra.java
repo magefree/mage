@@ -13,7 +13,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class JaceVsChandra extends ExpansionSet {
+public final class JaceVsChandra extends ExpansionSet {
 
     private static final JaceVsChandra instance = new JaceVsChandra();
 

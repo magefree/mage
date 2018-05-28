@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author philvt101
  */
-public class Scuttlemutt extends CardImpl {
+public final class Scuttlemutt extends CardImpl {
 
     public Scuttlemutt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class GhoulcallersChant extends CardImpl {
+public final class GhoulcallersChant extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
 

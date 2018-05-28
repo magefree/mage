@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class GeyserfieldStalker extends CardImpl {
+public final class GeyserfieldStalker extends CardImpl {
 
     public GeyserfieldStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

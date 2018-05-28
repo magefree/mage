@@ -24,7 +24,7 @@ import mage.util.CardUtil;
 /**
  * @author Stravant
  */
-public class InsultInjury extends SplitCard {
+public final class InsultInjury extends SplitCard {
 
     public InsultInjury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{2}{R}", "{2}{R}", SpellAbilityType.SPLIT_AFTERMATH);

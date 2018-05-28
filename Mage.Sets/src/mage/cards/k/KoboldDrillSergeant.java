@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author ilcartographer
  */
-public class KoboldDrillSergeant extends CardImpl {
+public final class KoboldDrillSergeant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kobold creatures");
 

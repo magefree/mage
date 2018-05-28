@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class RollingSpoil extends CardImpl {
+public final class RollingSpoil extends CardImpl {
 
     public RollingSpoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");

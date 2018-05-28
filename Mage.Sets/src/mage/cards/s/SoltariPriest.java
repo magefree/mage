@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SoltariPriest extends CardImpl {
+public final class SoltariPriest extends CardImpl {
 
     public SoltariPriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

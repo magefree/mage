@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class QuestForTheGoblinLord extends CardImpl {
+public final class QuestForTheGoblinLord extends CardImpl {
 
     private static final String rule = "As long as {this} has five or more quest counters on it, creatures you control get +2/+0";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();

@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author MarcoMarin
  */
-public class InitiatesOfTheEbonHand extends CardImpl {
+public final class InitiatesOfTheEbonHand extends CardImpl {
 
     public InitiatesOfTheEbonHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

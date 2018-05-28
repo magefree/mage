@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class GrowthSpasm extends CardImpl {
+public final class GrowthSpasm extends CardImpl {
 
     public GrowthSpasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

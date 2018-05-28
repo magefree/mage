@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class OrcishCannoneers extends CardImpl {
+public final class OrcishCannoneers extends CardImpl {
 
     public OrcishCannoneers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

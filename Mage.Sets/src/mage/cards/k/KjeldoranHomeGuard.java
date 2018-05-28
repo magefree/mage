@@ -47,7 +47,7 @@ import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
  *
  * @author TheElk801
  */
-public class KjeldoranHomeGuard extends CardImpl {
+public final class KjeldoranHomeGuard extends CardImpl {
 
     public KjeldoranHomeGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

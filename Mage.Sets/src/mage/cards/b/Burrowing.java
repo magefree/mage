@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author KholdFuzion
 
  */
-public class Burrowing extends CardImpl {
+public final class Burrowing extends CardImpl {
 
     public Burrowing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");

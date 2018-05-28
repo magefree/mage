@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class LlawanCephalidEmpress extends CardImpl {
+public final class LlawanCephalidEmpress extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures your opponents control");
 

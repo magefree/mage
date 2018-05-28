@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GiantCockroach extends CardImpl {
+public final class GiantCockroach extends CardImpl {
 
     public GiantCockroach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

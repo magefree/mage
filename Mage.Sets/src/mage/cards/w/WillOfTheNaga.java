@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WillOfTheNaga extends CardImpl {
+public final class WillOfTheNaga extends CardImpl {
 
     public WillOfTheNaga(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");

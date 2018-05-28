@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Valleymaker extends CardImpl {
+public final class Valleymaker extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Mountain");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("a Forest");

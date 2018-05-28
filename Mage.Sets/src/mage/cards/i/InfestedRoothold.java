@@ -46,7 +46,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author TheElk801
  */
-public class InfestedRoothold extends CardImpl {
+public final class InfestedRoothold extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("an artifact spell");
 

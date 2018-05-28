@@ -43,7 +43,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Styxo
  */
-public class JediInquirer extends CardImpl {
+public final class JediInquirer extends CardImpl {
 
     public JediInquirer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

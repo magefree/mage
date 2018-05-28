@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class IvyDancer extends CardImpl {
+public final class IvyDancer extends CardImpl {
 
     public IvyDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

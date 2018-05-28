@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class TowerOfTheMagistrate extends CardImpl {
+public final class TowerOfTheMagistrate extends CardImpl {
 
     public TowerOfTheMagistrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

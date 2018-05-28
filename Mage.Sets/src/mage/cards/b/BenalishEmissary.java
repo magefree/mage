@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  * @author LoneFox
 
  */
-public class BenalishEmissary extends CardImpl {
+public final class BenalishEmissary extends CardImpl {
 
     public BenalishEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class GoldenUrn extends CardImpl {
+public final class GoldenUrn extends CardImpl {
 
     public GoldenUrn (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

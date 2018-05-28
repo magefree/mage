@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Glimmerpost extends CardImpl {
+public final class Glimmerpost extends CardImpl {
 
     public Glimmerpost (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

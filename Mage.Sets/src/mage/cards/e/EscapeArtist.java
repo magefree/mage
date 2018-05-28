@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class EscapeArtist extends CardImpl {
+public final class EscapeArtist extends CardImpl {
 
     public EscapeArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Martin Sagastume msr986@gmail.com
  */
-public class AbunaAcolyte extends CardImpl {
+public final class AbunaAcolyte extends CardImpl {
 
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 

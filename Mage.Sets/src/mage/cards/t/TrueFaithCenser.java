@@ -46,7 +46,7 @@ import mage.constants.*;
  *
  * @author fireshoes
  */
-public class TrueFaithCenser extends CardImpl {
+public final class TrueFaithCenser extends CardImpl {
 
     private static final String staticText = "As long as equipped creature is a Human, it gets an addtional +1/+0";
 

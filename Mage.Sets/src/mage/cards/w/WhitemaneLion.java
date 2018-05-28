@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WhitemaneLion extends CardImpl {
+public final class WhitemaneLion extends CardImpl {
 
     public WhitemaneLion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

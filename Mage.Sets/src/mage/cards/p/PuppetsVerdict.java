@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class PuppetsVerdict extends CardImpl {
+public final class PuppetsVerdict extends CardImpl {
 
     public PuppetsVerdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");

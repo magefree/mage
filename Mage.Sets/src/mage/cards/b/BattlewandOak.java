@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author emerald000
  */
-public class BattlewandOak extends CardImpl {
+public final class BattlewandOak extends CardImpl {
     
     private static final FilterPermanent filterForest = new FilterPermanent("a Forest");
     private static final FilterSpell filterTreefolk = new FilterSpell("a Treefolk spell");

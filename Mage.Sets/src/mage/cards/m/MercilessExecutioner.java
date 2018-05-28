@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class MercilessExecutioner extends CardImpl {
+public final class MercilessExecutioner extends CardImpl {
 
     public MercilessExecutioner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

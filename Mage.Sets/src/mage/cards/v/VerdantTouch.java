@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class VerdantTouch extends CardImpl {
+public final class VerdantTouch extends CardImpl {
     
     public VerdantTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

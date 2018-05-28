@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class CatWarriorToken extends TokenImpl {
+public final class CatWarriorToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

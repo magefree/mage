@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class ArcboundFiend extends CardImpl {
+public final class ArcboundFiend extends CardImpl {
 
     public ArcboundFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

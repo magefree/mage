@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author TheElk801
  */
-public class Steamclaw extends CardImpl {
+public final class Steamclaw extends CardImpl {
 
     public Steamclaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

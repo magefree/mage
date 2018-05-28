@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author emerald000
  */
-public class MummyParamount extends CardImpl {
+public final class MummyParamount extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Zombie");
     static {

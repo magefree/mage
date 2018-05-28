@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class KrosanWayfarer extends CardImpl {
+public final class KrosanWayfarer extends CardImpl {
 
     public KrosanWayfarer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

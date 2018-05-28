@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ExplosiveApparatus extends CardImpl {
+public final class ExplosiveApparatus extends CardImpl {
 
     public ExplosiveApparatus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

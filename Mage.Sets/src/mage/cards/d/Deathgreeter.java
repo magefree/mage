@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Deathgreeter extends CardImpl {
+public final class Deathgreeter extends CardImpl {
 
     public Deathgreeter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

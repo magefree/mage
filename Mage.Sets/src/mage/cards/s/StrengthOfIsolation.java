@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class StrengthOfIsolation extends CardImpl {
+public final class StrengthOfIsolation extends CardImpl {
 
     public StrengthOfIsolation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

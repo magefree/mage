@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ImiStatue extends CardImpl {
+public final class ImiStatue extends CardImpl {
 
     public ImiStatue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

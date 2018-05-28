@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author LoneFox
  */
-public class FallowWurm extends CardImpl {
+public final class FallowWurm extends CardImpl {
 
     public FallowWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

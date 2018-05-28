@@ -38,7 +38,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class Recollect extends CardImpl {
+public final class Recollect extends CardImpl {
 
     public Recollect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

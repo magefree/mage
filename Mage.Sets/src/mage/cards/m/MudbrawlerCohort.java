@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MudbrawlerCohort extends CardImpl {
+public final class MudbrawlerCohort extends CardImpl {
 
     private static final String rule = "{this} gets +1/+1 as long as you control another red creature";
 

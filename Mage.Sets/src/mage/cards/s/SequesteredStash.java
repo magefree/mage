@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class SequesteredStash extends CardImpl {
+public final class SequesteredStash extends CardImpl {
 
     public SequesteredStash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

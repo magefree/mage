@@ -39,7 +39,7 @@ import mage.filter.common.FilterAttackingCreature;
  * 
  * @author Rafbill
  */
-public class HarmlessAssault extends CardImpl {
+public final class HarmlessAssault extends CardImpl {
 
     public HarmlessAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");

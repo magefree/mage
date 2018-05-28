@@ -39,7 +39,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class SublimeExhalation extends CardImpl {
+public final class SublimeExhalation extends CardImpl {
 
     public SublimeExhalation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}");

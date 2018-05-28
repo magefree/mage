@@ -61,7 +61,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class CallToArms extends CardImpl {
+public final class CallToArms extends CardImpl {
 
     public CallToArms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

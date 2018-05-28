@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class Cloudthresher extends CardImpl {
+public final class Cloudthresher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
     static {

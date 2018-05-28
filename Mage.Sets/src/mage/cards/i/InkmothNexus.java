@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class InkmothNexus extends CardImpl {
+public final class InkmothNexus extends CardImpl {
 
     public InkmothNexus (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

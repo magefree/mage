@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class MagusOfTheCoffers extends CardImpl {
+public final class MagusOfTheCoffers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 

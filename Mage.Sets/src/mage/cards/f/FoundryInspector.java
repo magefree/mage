@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class FoundryInspector extends CardImpl {
+public final class FoundryInspector extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Artifact spells");
 

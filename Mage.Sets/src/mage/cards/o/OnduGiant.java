@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class OnduGiant extends CardImpl {
+public final class OnduGiant extends CardImpl {
 
 
     public OnduGiant(UUID ownerId, CardSetInfo setInfo) {

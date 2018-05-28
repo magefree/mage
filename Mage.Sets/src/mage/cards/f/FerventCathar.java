@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class FerventCathar extends CardImpl {
+public final class FerventCathar extends CardImpl {
 
     public FerventCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

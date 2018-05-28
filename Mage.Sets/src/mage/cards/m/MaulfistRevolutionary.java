@@ -51,7 +51,7 @@ import mage.target.common.TargetPermanentOrPlayer;
  *
  * @author fireshoes
  */
-public class MaulfistRevolutionary extends CardImpl {
+public final class MaulfistRevolutionary extends CardImpl {
 
     public MaulfistRevolutionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author fireshoes
  */
-public class SkirkVolcanist extends CardImpl {
+public final class SkirkVolcanist extends CardImpl {
     
     private static final FilterControlledLandPermanent filterSacrifice = new FilterControlledLandPermanent("two Mountains");
 

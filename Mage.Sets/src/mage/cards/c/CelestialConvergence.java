@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CelestialConvergence extends CardImpl {
+public final class CelestialConvergence extends CardImpl {
 
     public CelestialConvergence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

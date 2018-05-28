@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class SyndicateEnforcerSWS extends CardImpl {
+public final class SyndicateEnforcerSWS extends CardImpl {
 
     public SyndicateEnforcerSWS(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

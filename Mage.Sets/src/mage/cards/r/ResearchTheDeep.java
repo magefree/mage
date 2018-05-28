@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author LoneFox
  */
-public class ResearchTheDeep extends CardImpl {
+public final class ResearchTheDeep extends CardImpl {
 
     public ResearchTheDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

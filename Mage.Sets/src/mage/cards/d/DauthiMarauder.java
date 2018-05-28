@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DauthiMarauder extends CardImpl {
+public final class DauthiMarauder extends CardImpl {
 
     public DauthiMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

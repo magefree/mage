@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class PhyrexianProwler extends CardImpl {
+public final class PhyrexianProwler extends CardImpl {
 
     public PhyrexianProwler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

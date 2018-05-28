@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author noxx
  */
-public class JetMedallion extends CardImpl {
+public final class JetMedallion extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Black spells");
 

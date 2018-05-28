@@ -48,7 +48,7 @@ import mage.game.permanent.token.ElephantToken;
 /**
  * @author North, noxx
  */
-public class KazanduTuskcaller extends LevelerCard {
+public final class KazanduTuskcaller extends LevelerCard {
 
     public KazanduTuskcaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

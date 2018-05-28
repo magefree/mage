@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MirrorGallery extends CardImpl {
+public final class MirrorGallery extends CardImpl {
 
     public MirrorGallery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

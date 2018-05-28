@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class ErrandOfDutyKnightToken extends TokenImpl {
+public final class ErrandOfDutyKnightToken extends TokenImpl {
 
     public ErrandOfDutyKnightToken() {
         super("Knight", "1/1 white Knight creature token with banding");

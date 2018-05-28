@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TaigamsStrike extends CardImpl {
+public final class TaigamsStrike extends CardImpl {
 
     public TaigamsStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

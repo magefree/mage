@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeff
  */
-public class SnakeUmbra extends CardImpl {
+public final class SnakeUmbra extends CardImpl {
 
     public SnakeUmbra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class QuicksilverAmulet extends CardImpl {
+public final class QuicksilverAmulet extends CardImpl {
 
     public QuicksilverAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

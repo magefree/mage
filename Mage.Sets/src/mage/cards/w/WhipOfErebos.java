@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class WhipOfErebos extends CardImpl {
+public final class WhipOfErebos extends CardImpl {
 
     public WhipOfErebos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{2}{B}{B}");

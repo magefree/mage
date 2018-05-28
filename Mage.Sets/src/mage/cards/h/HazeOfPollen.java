@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class HazeOfPollen extends CardImpl {
+public final class HazeOfPollen extends CardImpl {
 
     public HazeOfPollen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

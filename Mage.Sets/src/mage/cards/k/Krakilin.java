@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class Krakilin extends CardImpl {
+public final class Krakilin extends CardImpl {
 
     public Krakilin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{G}");

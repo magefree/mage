@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class BurningTreeBloodscale extends CardImpl {
+public final class BurningTreeBloodscale extends CardImpl {
 
     public BurningTreeBloodscale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");

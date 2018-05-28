@@ -43,7 +43,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class FiremantleMage extends CardImpl {
+public final class FiremantleMage extends CardImpl {
 
     public FiremantleMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

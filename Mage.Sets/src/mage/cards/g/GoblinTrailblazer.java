@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class GoblinTrailblazer extends CardImpl {
+public final class GoblinTrailblazer extends CardImpl {
 
     public GoblinTrailblazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

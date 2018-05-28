@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class LifeDeath extends SplitCard {
+public final class LifeDeath extends SplitCard {
 
     public LifeDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}", "{1}{B}", SpellAbilityType.SPLIT);

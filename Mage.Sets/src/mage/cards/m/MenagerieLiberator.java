@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class MenagerieLiberator extends CardImpl {
+public final class MenagerieLiberator extends CardImpl {
 
     public MenagerieLiberator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

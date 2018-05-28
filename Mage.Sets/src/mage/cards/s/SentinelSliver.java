@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class SentinelSliver extends CardImpl {
+public final class SentinelSliver extends CardImpl {
 
     public SentinelSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

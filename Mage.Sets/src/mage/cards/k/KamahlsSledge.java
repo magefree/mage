@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class KamahlsSledge extends CardImpl {
+public final class KamahlsSledge extends CardImpl {
 
     public KamahlsSledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");

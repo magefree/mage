@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author spjspj
  */
-public class ParadoxicalOutcome extends CardImpl {
+public final class ParadoxicalOutcome extends CardImpl {
 
     private static FilterControlledPermanent filter = new FilterControlledPermanent(new StringBuilder("any number of of target nonland, nontoken permanents you control").toString());
 

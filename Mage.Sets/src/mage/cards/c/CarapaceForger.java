@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CarapaceForger extends CardImpl {
+public final class CarapaceForger extends CardImpl {
     private static final String text = "Metalcraft - Carapace Forger gets +2/+2 as long as you control three or more artifacts";
 
     public CarapaceForger (UUID ownerId, CardSetInfo setInfo) {

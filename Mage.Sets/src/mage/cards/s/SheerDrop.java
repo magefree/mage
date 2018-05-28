@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SheerDrop extends CardImpl {
+public final class SheerDrop extends CardImpl {
     
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
     

@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class SoulFoundry extends CardImpl {
+public final class SoulFoundry extends CardImpl {
 
     public SoulFoundry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

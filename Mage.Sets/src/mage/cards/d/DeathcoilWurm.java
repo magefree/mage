@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author nigelzor
  */
-public class DeathcoilWurm extends CardImpl {
+public final class DeathcoilWurm extends CardImpl {
 
     public DeathcoilWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

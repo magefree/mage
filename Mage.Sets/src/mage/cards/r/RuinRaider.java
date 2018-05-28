@@ -52,7 +52,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author TheElk801
  */
-public class RuinRaider extends CardImpl {
+public final class RuinRaider extends CardImpl {
 
     public RuinRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

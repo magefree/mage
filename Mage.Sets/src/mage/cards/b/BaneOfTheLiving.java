@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BaneOfTheLiving extends CardImpl {
+public final class BaneOfTheLiving extends CardImpl {
 
     public BaneOfTheLiving(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

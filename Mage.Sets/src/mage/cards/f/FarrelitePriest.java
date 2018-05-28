@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author MarcoMarin
  */
-public class FarrelitePriest extends CardImpl {
+public final class FarrelitePriest extends CardImpl {
 
     public FarrelitePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

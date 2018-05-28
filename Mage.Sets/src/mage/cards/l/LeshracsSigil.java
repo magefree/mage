@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author TheElk801 & L_J
  */
-public class LeshracsSigil extends CardImpl {
+public final class LeshracsSigil extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a green spell");
 

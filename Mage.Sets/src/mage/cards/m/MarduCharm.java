@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class MarduCharm extends CardImpl {
+public final class MarduCharm extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
 

@@ -57,7 +57,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class MidnightOil extends CardImpl {
+public final class MidnightOil extends CardImpl {
 
     public MidnightOil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class TrialOfZeal extends CardImpl {
+public final class TrialOfZeal extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 

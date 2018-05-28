@@ -45,7 +45,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class BloodfireColossus extends CardImpl {
+public final class BloodfireColossus extends CardImpl {
 
     public BloodfireColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");

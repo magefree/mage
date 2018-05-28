@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class GustcloakCavalier extends CardImpl {
+public final class GustcloakCavalier extends CardImpl {
 
     public GustcloakCavalier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

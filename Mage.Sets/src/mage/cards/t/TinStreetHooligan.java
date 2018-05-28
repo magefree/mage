@@ -46,7 +46,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author LevelX2
  */
-public class TinStreetHooligan extends CardImpl {
+public final class TinStreetHooligan extends CardImpl {
 
     public TinStreetHooligan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

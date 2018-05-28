@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class CouncilOfAdvisors extends CardImpl {
+public final class CouncilOfAdvisors extends CardImpl {
 
     public CouncilOfAdvisors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class MesmericFiend extends CardImpl {
+public final class MesmericFiend extends CardImpl {
 
     public MesmericFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

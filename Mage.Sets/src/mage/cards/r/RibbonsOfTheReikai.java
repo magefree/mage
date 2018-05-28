@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author anonymous
  */
-public class RibbonsOfTheReikai extends CardImpl {
+public final class RibbonsOfTheReikai extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Spirit you control");
 

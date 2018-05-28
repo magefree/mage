@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ElvishScout extends CardImpl {
+public final class ElvishScout extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature you control");
 

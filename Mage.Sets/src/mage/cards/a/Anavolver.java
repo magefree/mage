@@ -51,7 +51,7 @@ import mage.counters.CounterType;
 /**
  * @author Loki
  */
-public class Anavolver extends CardImpl {
+public final class Anavolver extends CardImpl {
 
     public Anavolver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

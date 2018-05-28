@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  * @author jeffwadsworth
 
  */
-public class DuergarAssailant extends CardImpl {
+public final class DuergarAssailant extends CardImpl {
 
     public DuergarAssailant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}");

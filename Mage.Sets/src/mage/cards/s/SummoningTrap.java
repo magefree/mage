@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Rafbill
  */
-public class SummoningTrap extends CardImpl {
+public final class SummoningTrap extends CardImpl {
 
     public SummoningTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");

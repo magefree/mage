@@ -40,7 +40,7 @@ import mage.constants.CardType;
 /**
  * @author LevelX2
  */
-public class TransguildPromenade extends CardImpl {
+public final class TransguildPromenade extends CardImpl {
 
     public TransguildPromenade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

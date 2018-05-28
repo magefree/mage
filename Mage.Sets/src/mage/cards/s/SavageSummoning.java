@@ -54,7 +54,7 @@ import java.util.Map.Entry;
  *
  * @author LevelX2
  */
-public class SavageSummoning extends CardImpl {
+public final class SavageSummoning extends CardImpl {
 
     public SavageSummoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

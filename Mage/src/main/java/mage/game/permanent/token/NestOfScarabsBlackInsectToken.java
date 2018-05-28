@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class NestOfScarabsBlackInsectToken extends TokenImpl {
+public final class NestOfScarabsBlackInsectToken extends TokenImpl {
 
     public NestOfScarabsBlackInsectToken() {
         super("Insect", "1/1 black Insect creature token");

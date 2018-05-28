@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author EvilGeek
  */
-public class Imagecrafter extends CardImpl {
+public final class Imagecrafter extends CardImpl {
 
     public Imagecrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

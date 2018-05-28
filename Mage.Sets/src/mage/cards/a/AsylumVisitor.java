@@ -49,7 +49,7 @@ import mage.constants.TargetController;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class AsylumVisitor extends CardImpl {
+public final class AsylumVisitor extends CardImpl {
 
     public AsylumVisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

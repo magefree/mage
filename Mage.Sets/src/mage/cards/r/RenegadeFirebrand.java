@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class RenegadeFirebrand extends CardImpl {
+public final class RenegadeFirebrand extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final String rule = "As long as you control a Chandra planeswalker, {this} gets +1/+0";

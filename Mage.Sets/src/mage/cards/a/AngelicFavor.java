@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class AngelicFavor extends CardImpl {
+public final class AngelicFavor extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("If you control a Plains");
 

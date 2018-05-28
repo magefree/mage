@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BlightsoilDruid extends CardImpl {
+public final class BlightsoilDruid extends CardImpl {
 
     public BlightsoilDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

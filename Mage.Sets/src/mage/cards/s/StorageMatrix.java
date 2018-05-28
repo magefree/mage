@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class StorageMatrix extends CardImpl {
+public final class StorageMatrix extends CardImpl {
 
     public StorageMatrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

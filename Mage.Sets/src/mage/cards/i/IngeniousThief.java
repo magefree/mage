@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class IngeniousThief extends CardImpl {
+public final class IngeniousThief extends CardImpl {
 
     public IngeniousThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author BetaSteward
  */
-public class AfflictedDeserter extends CardImpl {
+public final class AfflictedDeserter extends CardImpl {
 
     public AfflictedDeserter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

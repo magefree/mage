@@ -42,7 +42,7 @@ import mage.game.permanent.token.ElfToken;
  *
  * @author Loki
  */
-public class ElvishPromenade extends CardImpl {
+public final class ElvishPromenade extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
 

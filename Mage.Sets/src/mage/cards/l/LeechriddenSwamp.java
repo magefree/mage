@@ -55,7 +55,7 @@ import mage.players.Players;
  *
  * @author jeffwadsworth
  */
-public class LeechriddenSwamp extends CardImpl {
+public final class LeechriddenSwamp extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control two or more black permanents");
 

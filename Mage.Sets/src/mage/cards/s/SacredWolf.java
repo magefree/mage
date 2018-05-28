@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacredWolf extends CardImpl {
+public final class SacredWolf extends CardImpl {
     public SacredWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add(SubType.WOLF);

@@ -54,7 +54,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class TeferiHeroOfDominaria extends CardImpl {
+public final class TeferiHeroOfDominaria extends CardImpl {
 
     public TeferiHeroOfDominaria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");

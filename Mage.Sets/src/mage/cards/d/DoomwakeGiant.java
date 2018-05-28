@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class DoomwakeGiant extends CardImpl {
+public final class DoomwakeGiant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
     

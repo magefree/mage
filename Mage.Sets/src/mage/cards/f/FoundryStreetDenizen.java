@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class FoundryStreetDenizen extends CardImpl {
+public final class FoundryStreetDenizen extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another red creature");
     static {

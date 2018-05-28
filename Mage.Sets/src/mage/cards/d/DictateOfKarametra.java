@@ -41,7 +41,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class DictateOfKarametra extends CardImpl {
+public final class DictateOfKarametra extends CardImpl {
 
     public DictateOfKarametra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");

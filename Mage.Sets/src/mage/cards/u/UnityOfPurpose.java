@@ -41,7 +41,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author fireshoes
  */
-public class UnityOfPurpose extends CardImpl {
+public final class UnityOfPurpose extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control with a +1/+1 counter on it");
 

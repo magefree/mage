@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author maurer.it_at_gmail.com
  */
-public class PulseTracker extends CardImpl {
+public final class PulseTracker extends CardImpl {
 
     public PulseTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

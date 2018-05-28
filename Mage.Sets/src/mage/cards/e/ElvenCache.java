@@ -38,7 +38,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Backfir3
  */
-public class ElvenCache extends CardImpl {
+public final class ElvenCache extends CardImpl {
 
     public ElvenCache(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");

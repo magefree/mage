@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class HeraldOfThePantheon extends CardImpl {
+public final class HeraldOfThePantheon extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Enchantment spells");
     private static final FilterSpell filter2 = new FilterSpell("an enchantment spell");

@@ -46,7 +46,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author Derpthemeus
  */
-public class NovaCleric extends CardImpl {
+public final class NovaCleric extends CardImpl {
 
     public NovaCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

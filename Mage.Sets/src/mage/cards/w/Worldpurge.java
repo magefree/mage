@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class Worldpurge extends CardImpl {
+public final class Worldpurge extends CardImpl {
 
     public Worldpurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W/U}{W/U}{W/U}{W/U}");

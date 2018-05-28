@@ -43,7 +43,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class OnduChampion extends CardImpl {
+public final class OnduChampion extends CardImpl {
 
     public OnduChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

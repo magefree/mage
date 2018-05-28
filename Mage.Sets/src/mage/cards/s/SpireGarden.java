@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class SpireGarden extends CardImpl {
+public final class SpireGarden extends CardImpl {
 
     public SpireGarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

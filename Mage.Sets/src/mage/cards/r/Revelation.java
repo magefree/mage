@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class Revelation extends CardImpl {
+public final class Revelation extends CardImpl {
 
     public Revelation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

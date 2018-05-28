@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author tcontis
  */
-public class WoollySpider extends CardImpl {
+public final class WoollySpider extends CardImpl {
 
     public WoollySpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

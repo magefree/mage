@@ -44,7 +44,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author emerald000
  */
-public class Oblation extends CardImpl {
+public final class Oblation extends CardImpl {
 
     public Oblation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

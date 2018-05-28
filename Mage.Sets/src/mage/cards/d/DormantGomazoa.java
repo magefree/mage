@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class DormantGomazoa extends CardImpl {
+public final class DormantGomazoa extends CardImpl {
 
     public DormantGomazoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

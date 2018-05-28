@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class MagisterSphinx extends CardImpl {
+public final class MagisterSphinx extends CardImpl {
 
     public MagisterSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}{U}{B}");

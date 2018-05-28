@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class PromiseOfPowerDemonToken extends TokenImpl {
+public final class PromiseOfPowerDemonToken extends TokenImpl {
 
     public PromiseOfPowerDemonToken() {
         this(1);

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class SkullCollector extends CardImpl {
+public final class SkullCollector extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature you control");
 

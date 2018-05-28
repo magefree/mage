@@ -44,7 +44,7 @@ import mage.game.permanent.token.BearToken;
  *
  * @author LevelX2
  */
-public class GrizzlyFate extends CardImpl {
+public final class GrizzlyFate extends CardImpl {
 
     public GrizzlyFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");

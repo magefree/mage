@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class MurmuringBosk extends CardImpl {
+public final class MurmuringBosk extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Treefolk card from your hand");
 

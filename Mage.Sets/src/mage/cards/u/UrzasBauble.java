@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class UrzasBauble extends CardImpl {
+public final class UrzasBauble extends CardImpl {
 
     public UrzasBauble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

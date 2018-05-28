@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class SkirkAlarmist extends CardImpl {
+public final class SkirkAlarmist extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature you control");
 

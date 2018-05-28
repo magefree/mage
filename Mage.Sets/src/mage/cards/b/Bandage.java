@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class Bandage extends CardImpl {
+public final class Bandage extends CardImpl {
 
     public Bandage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

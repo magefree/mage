@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class WorldlyCounsel extends CardImpl {
+public final class WorldlyCounsel extends CardImpl {
 
     public WorldlyCounsel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

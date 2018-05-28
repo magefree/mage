@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NightshadeAssassin extends CardImpl {
+public final class NightshadeAssassin extends CardImpl {
 
     public NightshadeAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

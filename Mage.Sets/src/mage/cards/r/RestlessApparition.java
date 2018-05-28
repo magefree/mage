@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class RestlessApparition extends CardImpl {
+public final class RestlessApparition extends CardImpl {
 
     public RestlessApparition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/B}{W/B}{W/B}");

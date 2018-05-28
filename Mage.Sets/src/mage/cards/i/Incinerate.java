@@ -46,7 +46,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author North
  */
-public class Incinerate extends CardImpl {
+public final class Incinerate extends CardImpl {
 
     public Incinerate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

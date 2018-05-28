@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class FatalFumes extends CardImpl {
+public final class FatalFumes extends CardImpl {
 
     public FatalFumes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");

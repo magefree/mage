@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class KahoMinamoHistorian extends CardImpl {
+public final class KahoMinamoHistorian extends CardImpl {
 
     public KahoMinamoHistorian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

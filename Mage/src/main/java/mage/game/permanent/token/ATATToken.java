@@ -37,7 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
  *
  * @author spjspj
  */
-public class ATATToken extends TokenImpl {
+public final class ATATToken extends TokenImpl {
 
     public ATATToken() {
         super("AT-AT", "5/5 white artifact AT-AT creature tokens with \"When this creature dies, create two 1/1 white Trooper creature tokens.\"", 5, 5);

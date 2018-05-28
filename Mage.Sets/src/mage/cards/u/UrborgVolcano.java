@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class UrborgVolcano extends CardImpl {
+public final class UrborgVolcano extends CardImpl {
 
     public UrborgVolcano(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

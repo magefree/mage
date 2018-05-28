@@ -41,7 +41,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class VintageMasters extends ExpansionSet {
+public final class VintageMasters extends ExpansionSet {
 
     private static final VintageMasters instance = new VintageMasters();
 

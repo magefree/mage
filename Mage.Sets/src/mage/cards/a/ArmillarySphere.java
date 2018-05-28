@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ArmillarySphere extends CardImpl {
+public final class ArmillarySphere extends CardImpl {
 
     public ArmillarySphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

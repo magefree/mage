@@ -44,7 +44,7 @@ import mage.game.permanent.token.HellionToken;
  *
  * @author North
  */
-public class HellionEruption extends CardImpl {
+public final class HellionEruption extends CardImpl {
 
     public HellionEruption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}");

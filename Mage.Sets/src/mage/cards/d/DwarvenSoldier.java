@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class DwarvenSoldier extends CardImpl {
+public final class DwarvenSoldier extends CardImpl {
 
     public DwarvenSoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

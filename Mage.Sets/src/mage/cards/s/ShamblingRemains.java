@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ShamblingRemains extends CardImpl {
+public final class ShamblingRemains extends CardImpl {
 
     public ShamblingRemains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");

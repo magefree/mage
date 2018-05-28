@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class FrogTongue extends CardImpl {
+public final class FrogTongue extends CardImpl {
 
     public FrogTongue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

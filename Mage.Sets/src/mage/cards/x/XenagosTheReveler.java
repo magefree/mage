@@ -60,7 +60,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class XenagosTheReveler extends CardImpl {
+public final class XenagosTheReveler extends CardImpl {
 
     public XenagosTheReveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");

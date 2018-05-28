@@ -41,7 +41,7 @@ import mage.game.permanent.token.DragonToken2;
  *
  * @author Loki
  */
-public class DragonRoost extends CardImpl {
+public final class DragonRoost extends CardImpl {
 
     public DragonRoost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}");

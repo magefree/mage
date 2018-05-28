@@ -46,7 +46,7 @@ import mage.game.stack.Spell;
  * @author KholdFuzion
 
  */
-public class ThroneOfBone extends CardImpl {
+public final class ThroneOfBone extends CardImpl {
 
     public ThroneOfBone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

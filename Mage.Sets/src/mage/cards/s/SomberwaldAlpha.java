@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SomberwaldAlpha extends CardImpl {
+public final class SomberwaldAlpha extends CardImpl {
     
     final static private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 

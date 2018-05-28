@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class SandalsOfAbdallah extends CardImpl {
+public final class SandalsOfAbdallah extends CardImpl {
 
     public SandalsOfAbdallah(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

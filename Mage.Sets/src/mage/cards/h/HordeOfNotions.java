@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class HordeOfNotions extends CardImpl {
+public final class HordeOfNotions extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Elemental card from your graveyard");
 

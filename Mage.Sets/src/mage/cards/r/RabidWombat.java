@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class RabidWombat extends CardImpl {
+public final class RabidWombat extends CardImpl {
 
     public RabidWombat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

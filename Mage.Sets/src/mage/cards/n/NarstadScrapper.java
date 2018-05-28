@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class NarstadScrapper extends CardImpl {
+public final class NarstadScrapper extends CardImpl {
 
     public NarstadScrapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

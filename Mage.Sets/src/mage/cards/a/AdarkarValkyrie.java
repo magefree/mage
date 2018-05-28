@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AdarkarValkyrie extends CardImpl {
+public final class AdarkarValkyrie extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class BorosRecruit extends CardImpl {
+public final class BorosRecruit extends CardImpl {
 
     public BorosRecruit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}");

@@ -56,7 +56,7 @@ import mage.watchers.common.CastFromHandWatcher;
 /**
  * @author Loki
  */
-public class MyojinOfCleansingFire extends CardImpl {
+public final class MyojinOfCleansingFire extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {

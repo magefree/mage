@@ -38,7 +38,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class ZombieGoliath extends CardImpl {
+public final class ZombieGoliath extends CardImpl {
 
     public ZombieGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

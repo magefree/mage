@@ -38,7 +38,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LoneFox
  */
-public class Sprout extends CardImpl {
+public final class Sprout extends CardImpl {
 
     public Sprout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

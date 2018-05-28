@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class KaronaFalseGod extends CardImpl {
+public final class KaronaFalseGod extends CardImpl {
 
     public KaronaFalseGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");

@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class DreamscapeArtist extends CardImpl {
+public final class DreamscapeArtist extends CardImpl {
 
     public DreamscapeArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

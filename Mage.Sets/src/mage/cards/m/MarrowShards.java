@@ -38,7 +38,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author North
  */
-public class MarrowShards extends CardImpl {
+public final class MarrowShards extends CardImpl {
 
     public MarrowShards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W/P}");

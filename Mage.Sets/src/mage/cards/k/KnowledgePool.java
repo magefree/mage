@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KnowledgePool extends CardImpl {
+public final class KnowledgePool extends CardImpl {
 
     public KnowledgePool(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

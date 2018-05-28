@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Excavator extends CardImpl {
+public final class Excavator extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("basic land");
     static

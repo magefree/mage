@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class PerilousForays extends CardImpl {
+public final class PerilousForays extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("land card with a basic land type");
 

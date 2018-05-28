@@ -49,7 +49,7 @@ import java.util.*;
  *
  * @author LevelX2
  */
-public class IndomitableCreativity extends CardImpl {
+public final class IndomitableCreativity extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts and/or creatures");
 

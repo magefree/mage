@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WhiteKnight extends CardImpl {
+public final class WhiteKnight extends CardImpl {
 
     public WhiteKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

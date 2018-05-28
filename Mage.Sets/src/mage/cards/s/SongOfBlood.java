@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class SongOfBlood extends CardImpl {
+public final class SongOfBlood extends CardImpl {
 
     public SongOfBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");

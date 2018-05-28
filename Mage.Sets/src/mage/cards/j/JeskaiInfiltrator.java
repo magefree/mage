@@ -60,7 +60,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class JeskaiInfiltrator extends CardImpl {
+public final class JeskaiInfiltrator extends CardImpl {
 
     public JeskaiInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

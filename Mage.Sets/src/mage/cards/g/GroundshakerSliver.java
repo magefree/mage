@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class GroundshakerSliver extends CardImpl {
+public final class GroundshakerSliver extends CardImpl {
 
     public GroundshakerSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}");

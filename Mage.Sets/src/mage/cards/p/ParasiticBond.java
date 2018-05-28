@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ParasiticBond extends CardImpl {
+public final class ParasiticBond extends CardImpl {
 
     public ParasiticBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

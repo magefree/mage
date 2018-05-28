@@ -55,7 +55,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author fireshoes
  */
-public class Instigator extends CardImpl {
+public final class Instigator extends CardImpl {
 
     public Instigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

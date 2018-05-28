@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class StitcherGeralf extends CardImpl {
+public final class StitcherGeralf extends CardImpl {
 
     public StitcherGeralf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

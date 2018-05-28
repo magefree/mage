@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
  *
  */
-public class GrabTheReins extends CardImpl {
+public final class GrabTheReins extends CardImpl {
 
     public GrabTheReins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");

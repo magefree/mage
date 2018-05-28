@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author jeffwadsworth
  */
-public class DemonspineWhip extends CardImpl {
+public final class DemonspineWhip extends CardImpl {
 
     public DemonspineWhip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}{R}");

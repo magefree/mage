@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class TrainingDrone extends CardImpl {
+public final class TrainingDrone extends CardImpl {
 
     public TrainingDrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

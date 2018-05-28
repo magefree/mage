@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class SoldeviSage extends CardImpl {
+public final class SoldeviSage extends CardImpl {
 
     public SoldeviSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

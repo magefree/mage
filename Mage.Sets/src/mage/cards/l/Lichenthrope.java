@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class Lichenthrope extends CardImpl {
+public final class Lichenthrope extends CardImpl {
 
     public Lichenthrope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

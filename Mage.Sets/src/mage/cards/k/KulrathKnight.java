@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class KulrathKnight extends CardImpl {
+public final class KulrathKnight extends CardImpl {
 
     public KulrathKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/R}{B/R}");

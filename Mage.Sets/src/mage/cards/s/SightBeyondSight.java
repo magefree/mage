@@ -41,7 +41,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class SightBeyondSight extends CardImpl {
+public final class SightBeyondSight extends CardImpl {
 
     public SightBeyondSight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

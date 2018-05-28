@@ -54,7 +54,7 @@ import mage.game.permanent.token.custom.CreatureToken;
  * @author LoneFox
  *
  */
-public class NaturalEmergence extends CardImpl {
+public final class NaturalEmergence extends CardImpl {
 
     static final private FilterControlledEnchantmentPermanent filter = new FilterControlledEnchantmentPermanent("red or green creature you control");
 

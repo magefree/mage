@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class DragonsOfTarkir extends ExpansionSet {
+public final class DragonsOfTarkir extends ExpansionSet {
 
     private static final DragonsOfTarkir instance = new DragonsOfTarkir();
 

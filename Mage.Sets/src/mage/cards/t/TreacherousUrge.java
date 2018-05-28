@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class TreacherousUrge extends CardImpl {
+public final class TreacherousUrge extends CardImpl {
 
     public TreacherousUrge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");

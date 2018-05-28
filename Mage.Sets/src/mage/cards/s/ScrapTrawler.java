@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class ScrapTrawler extends CardImpl {
+public final class ScrapTrawler extends CardImpl {
 
     public ScrapTrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

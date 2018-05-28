@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author escplan9 - Derek Monturo
  */
-public class PhyrexianPurge extends CardImpl {
+public final class PhyrexianPurge extends CardImpl {
 
     public PhyrexianPurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");

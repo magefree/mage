@@ -40,7 +40,7 @@ import mage.filter.FilterCard;
  *
  * @author Plopman
  */
-public class DeathWish extends CardImpl {
+public final class DeathWish extends CardImpl {
 
     public DeathWish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

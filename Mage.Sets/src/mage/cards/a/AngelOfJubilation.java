@@ -53,7 +53,7 @@ import mage.players.Player;
 /**
  * @author noxx
  */
-public class AngelOfJubilation extends CardImpl {
+public final class AngelOfJubilation extends CardImpl {
 
     private static final FilterCreaturePermanent filterNonBlack = new FilterCreaturePermanent("nonblack creatures");
 

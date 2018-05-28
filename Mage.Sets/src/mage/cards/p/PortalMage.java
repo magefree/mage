@@ -56,7 +56,7 @@ import mage.target.common.TargetDefender;
  *
  * @author LevelX2
  */
-public class PortalMage extends CardImpl {
+public final class PortalMage extends CardImpl {
 
     public PortalMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

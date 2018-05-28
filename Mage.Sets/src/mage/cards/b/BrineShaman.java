@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class BrineShaman extends CardImpl {
+public final class BrineShaman extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 

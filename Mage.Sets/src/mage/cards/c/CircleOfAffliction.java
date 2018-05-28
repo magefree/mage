@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class CircleOfAffliction extends CardImpl {
+public final class CircleOfAffliction extends CardImpl {
 
     public CircleOfAffliction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

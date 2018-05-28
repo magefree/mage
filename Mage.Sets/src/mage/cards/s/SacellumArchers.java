@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Loki
  */
-public class SacellumArchers extends CardImpl {
+public final class SacellumArchers extends CardImpl {
 
     public SacellumArchers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

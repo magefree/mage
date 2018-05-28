@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ConduitOfStorms extends CardImpl {
+public final class ConduitOfStorms extends CardImpl {
 
     public ConduitOfStorms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

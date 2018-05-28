@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class Flusterstorm extends CardImpl {
+public final class Flusterstorm extends CardImpl {
 
     public Flusterstorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

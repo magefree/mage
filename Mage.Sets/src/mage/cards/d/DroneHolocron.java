@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class DroneHolocron extends CardImpl {
+public final class DroneHolocron extends CardImpl {
 
     public DroneHolocron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

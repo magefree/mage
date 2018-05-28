@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class BeastToken3 extends TokenImpl {
+public final class BeastToken3 extends TokenImpl {
 
     public BeastToken3() {
         this(null, 0);

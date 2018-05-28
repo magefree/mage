@@ -38,7 +38,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author jonubuu
  */
-public class Shatterstorm extends CardImpl {
+public final class Shatterstorm extends CardImpl {
 
     public Shatterstorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

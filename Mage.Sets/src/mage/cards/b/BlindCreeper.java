@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Loki
  */
-public class BlindCreeper extends CardImpl {
+public final class BlindCreeper extends CardImpl {
 
     public BlindCreeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

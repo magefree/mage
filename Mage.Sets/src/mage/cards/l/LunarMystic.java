@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author noxx
  */
-public class LunarMystic extends CardImpl {
+public final class LunarMystic extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant spell");
 

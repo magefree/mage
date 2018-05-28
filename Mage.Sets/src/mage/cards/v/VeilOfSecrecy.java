@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class VeilOfSecrecy extends CardImpl {
+public final class VeilOfSecrecy extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a blue creature");
 

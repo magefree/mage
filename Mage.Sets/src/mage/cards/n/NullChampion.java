@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author Loki, noxx
  */
-public class NullChampion extends LevelerCard {
+public final class NullChampion extends LevelerCard {
 
     public NullChampion (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

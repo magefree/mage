@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author cbt33
  */
-public class Mindslicer extends CardImpl {
+public final class Mindslicer extends CardImpl {
 
     public Mindslicer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

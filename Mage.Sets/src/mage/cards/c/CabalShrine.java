@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class CabalShrine extends CardImpl {
+public final class CabalShrine extends CardImpl {
 
     public CabalShrine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");

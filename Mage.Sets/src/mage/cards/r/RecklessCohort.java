@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class RecklessCohort extends CardImpl {
+public final class RecklessCohort extends CardImpl {
 
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Ally");
 

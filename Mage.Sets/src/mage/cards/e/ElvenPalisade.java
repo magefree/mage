@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class ElvenPalisade extends CardImpl {
+public final class ElvenPalisade extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class ThornElemental extends CardImpl {
+public final class ThornElemental extends CardImpl {
 
     public ThornElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

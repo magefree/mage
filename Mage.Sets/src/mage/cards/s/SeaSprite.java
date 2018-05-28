@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SeaSprite extends CardImpl {
+public final class SeaSprite extends CardImpl {
 
     public SeaSprite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

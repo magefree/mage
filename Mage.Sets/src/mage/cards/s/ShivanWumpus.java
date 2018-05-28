@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ShivanWumpus extends CardImpl {
+public final class ShivanWumpus extends CardImpl {
 
     public ShivanWumpus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Mirage extends ExpansionSet {
+public final class Mirage extends ExpansionSet {
 
     private static final Mirage instance = new Mirage();
 

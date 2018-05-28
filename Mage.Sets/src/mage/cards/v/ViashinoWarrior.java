@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ViashinoWarrior extends CardImpl {
+public final class ViashinoWarrior extends CardImpl {
 
     public ViashinoWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class AkoumHellkite extends CardImpl {
+public final class AkoumHellkite extends CardImpl {
 
     public AkoumHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

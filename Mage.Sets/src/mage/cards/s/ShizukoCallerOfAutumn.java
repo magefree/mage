@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ShizukoCallerOfAutumn extends CardImpl {
+public final class ShizukoCallerOfAutumn extends CardImpl {
 
     public ShizukoCallerOfAutumn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class EbonyRhino extends CardImpl {
+public final class EbonyRhino extends CardImpl {
 
     public EbonyRhino(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

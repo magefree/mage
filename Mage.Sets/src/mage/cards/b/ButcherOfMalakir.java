@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class ButcherOfMalakir extends CardImpl {
+public final class ButcherOfMalakir extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
     static {

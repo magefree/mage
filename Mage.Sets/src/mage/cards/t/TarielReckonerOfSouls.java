@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class TarielReckonerOfSouls extends CardImpl {
+public final class TarielReckonerOfSouls extends CardImpl {
 
     public TarielReckonerOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{B}");

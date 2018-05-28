@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class LifebloodHydra extends CardImpl {
+public final class LifebloodHydra extends CardImpl {
 
     public LifebloodHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{G}{G}");

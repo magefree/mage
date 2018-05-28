@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class StormcragElemental extends CardImpl {
+public final class StormcragElemental extends CardImpl {
 
     public StormcragElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

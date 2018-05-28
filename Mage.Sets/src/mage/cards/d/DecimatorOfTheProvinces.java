@@ -49,7 +49,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DecimatorOfTheProvinces extends CardImpl {
+public final class DecimatorOfTheProvinces extends CardImpl {
 
     public DecimatorOfTheProvinces(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");

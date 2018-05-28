@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class Urborg extends CardImpl {
+public final class Urborg extends CardImpl {
 
     public Urborg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

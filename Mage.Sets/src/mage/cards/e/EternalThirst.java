@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class EternalThirst extends CardImpl {
+public final class EternalThirst extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
     static {

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jonubuu
  */
-public class LordOfAtlantis extends CardImpl {
+public final class LordOfAtlantis extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creatures");
 

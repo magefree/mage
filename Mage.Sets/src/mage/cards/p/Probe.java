@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class Probe extends CardImpl {
+public final class Probe extends CardImpl {
 
     public Probe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

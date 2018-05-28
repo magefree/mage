@@ -51,7 +51,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author L_J
  */
-public class LandsEdge extends CardImpl {
+public final class LandsEdge extends CardImpl {
 
     public LandsEdge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");

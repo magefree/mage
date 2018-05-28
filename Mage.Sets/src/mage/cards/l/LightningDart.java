@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Derpthemeus
  */
-public class LightningDart extends CardImpl {
+public final class LightningDart extends CardImpl {
 
     public LightningDart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

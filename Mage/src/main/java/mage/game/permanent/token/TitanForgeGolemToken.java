@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class TitanForgeGolemToken extends TokenImpl {
+public final class TitanForgeGolemToken extends TokenImpl {
 
     public TitanForgeGolemToken() {
         super("Golem", "9/9 colorless Golem artifact creature token");

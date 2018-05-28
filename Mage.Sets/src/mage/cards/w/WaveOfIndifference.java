@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class WaveOfIndifference extends CardImpl {
+public final class WaveOfIndifference extends CardImpl {
 
     public WaveOfIndifference(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");

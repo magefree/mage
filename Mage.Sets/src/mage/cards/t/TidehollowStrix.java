@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TidehollowStrix extends CardImpl {
+public final class TidehollowStrix extends CardImpl {
 
     public TidehollowStrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{U}{B}");

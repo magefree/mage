@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class Rackling extends CardImpl {
+public final class Rackling extends CardImpl {
 
     public Rackling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

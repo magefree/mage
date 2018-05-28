@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author emerald000
  */
-public class WindingCanyons extends CardImpl {
+public final class WindingCanyons extends CardImpl {
 
     public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

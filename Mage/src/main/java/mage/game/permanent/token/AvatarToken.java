@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class AvatarToken extends TokenImpl {
+public final class AvatarToken extends TokenImpl {
 
     public AvatarToken() {
         super("Avatar", "white Avatar creature token with \"This creature's power and toughness are each equal to your life total.\"");

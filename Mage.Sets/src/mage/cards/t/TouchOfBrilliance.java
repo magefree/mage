@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LoneFox
  */
-public class TouchOfBrilliance extends CardImpl {
+public final class TouchOfBrilliance extends CardImpl {
 
     public TouchOfBrilliance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class WeiEliteCompanions extends CardImpl {
+public final class WeiEliteCompanions extends CardImpl {
 
     public WeiEliteCompanions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

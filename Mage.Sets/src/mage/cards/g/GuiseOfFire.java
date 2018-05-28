@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class GuiseOfFire extends CardImpl {
+public final class GuiseOfFire extends CardImpl {
 
     public GuiseOfFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");

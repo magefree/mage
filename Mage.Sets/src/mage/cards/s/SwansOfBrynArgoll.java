@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class SwansOfBrynArgoll extends CardImpl {
+public final class SwansOfBrynArgoll extends CardImpl {
 
     public SwansOfBrynArgoll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/U}{W/U}");

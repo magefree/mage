@@ -40,7 +40,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author fireshoes
  */
-public class EfficientConstruction extends CardImpl {
+public final class EfficientConstruction extends CardImpl {
 
     public EfficientConstruction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

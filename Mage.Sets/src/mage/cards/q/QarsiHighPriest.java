@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class QarsiHighPriest extends CardImpl {
+public final class QarsiHighPriest extends CardImpl {
 
     public QarsiHighPriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

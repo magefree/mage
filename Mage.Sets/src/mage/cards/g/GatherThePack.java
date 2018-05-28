@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class GatherThePack extends CardImpl {
+public final class GatherThePack extends CardImpl {
 
     public GatherThePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

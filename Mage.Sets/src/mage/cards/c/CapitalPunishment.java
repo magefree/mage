@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author JRHerlehy
  */
-public class CapitalPunishment extends CardImpl {
+public final class CapitalPunishment extends CardImpl {
 
     public CapitalPunishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

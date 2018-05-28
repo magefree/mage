@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class RenewingTouch extends CardImpl {
+public final class RenewingTouch extends CardImpl {
 
     public RenewingTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");

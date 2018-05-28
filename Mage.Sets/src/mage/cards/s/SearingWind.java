@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class SearingWind extends CardImpl {
+public final class SearingWind extends CardImpl {
 
     public SearingWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{8}{R}");

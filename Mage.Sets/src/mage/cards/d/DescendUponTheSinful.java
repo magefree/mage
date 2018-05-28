@@ -43,7 +43,7 @@ import mage.game.permanent.token.AngelToken;
  *
  * @author fireshoes
  */
-public class DescendUponTheSinful extends CardImpl {
+public final class DescendUponTheSinful extends CardImpl {
 
     public DescendUponTheSinful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");

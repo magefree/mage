@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author fireshoes
  */
-public class OrcishVeteran extends CardImpl {
+public final class OrcishVeteran extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures with power 2 or greater");
     

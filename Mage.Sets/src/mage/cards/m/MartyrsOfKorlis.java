@@ -48,7 +48,7 @@ import mage.game.events.GameEvent;
  *
  * @author MarcoMarin
  */
-public class MartyrsOfKorlis extends CardImpl {
+public final class MartyrsOfKorlis extends CardImpl {
 
     public MartyrsOfKorlis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

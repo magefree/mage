@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author North
  */
-public class GhituEncampment extends CardImpl {
+public final class GhituEncampment extends CardImpl {
 
     public GhituEncampment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

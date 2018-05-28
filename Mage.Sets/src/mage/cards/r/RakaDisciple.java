@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class RakaDisciple extends CardImpl {
+public final class RakaDisciple extends CardImpl {
 
     public RakaDisciple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

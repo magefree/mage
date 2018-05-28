@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class DromokaMonument extends CardImpl {
+public final class DromokaMonument extends CardImpl {
 
     public DromokaMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -48,7 +48,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ChanceEncounter extends CardImpl {
+public final class ChanceEncounter extends CardImpl {
 
     public ChanceEncounter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");

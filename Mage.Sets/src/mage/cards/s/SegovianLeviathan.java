@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SegovianLeviathan extends CardImpl {
+public final class SegovianLeviathan extends CardImpl {
 
     public SegovianLeviathan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

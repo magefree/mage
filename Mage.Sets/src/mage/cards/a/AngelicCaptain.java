@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class AngelicCaptain extends CardImpl {
+public final class AngelicCaptain extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Ally");
 

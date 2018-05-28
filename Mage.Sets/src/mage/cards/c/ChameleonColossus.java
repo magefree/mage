@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ChameleonColossus extends CardImpl {
+public final class ChameleonColossus extends CardImpl {
 
     public ChameleonColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

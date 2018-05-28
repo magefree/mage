@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author anonymous
  */
-public class NoRestForTheWicked extends CardImpl {
+public final class NoRestForTheWicked extends CardImpl {
 
     public NoRestForTheWicked(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

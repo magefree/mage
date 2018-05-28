@@ -46,7 +46,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author North
  */
-public class ElvishHexhunter extends CardImpl {
+public final class ElvishHexhunter extends CardImpl {
 
     public ElvishHexhunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}");

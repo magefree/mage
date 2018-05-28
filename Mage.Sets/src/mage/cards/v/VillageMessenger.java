@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class VillageMessenger extends CardImpl {
+public final class VillageMessenger extends CardImpl {
 
     public VillageMessenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

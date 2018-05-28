@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author spjspj
  */
-public class GideonsIntervention extends CardImpl {
+public final class GideonsIntervention extends CardImpl {
 
     public GideonsIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

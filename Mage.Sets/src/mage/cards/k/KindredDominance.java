@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author caldover
  */
-public class KindredDominance extends CardImpl {
+public final class KindredDominance extends CardImpl {
 
     public KindredDominance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");

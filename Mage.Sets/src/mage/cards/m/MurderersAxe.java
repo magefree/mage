@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MurderersAxe extends CardImpl {
+public final class MurderersAxe extends CardImpl {
 
     public MurderersAxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

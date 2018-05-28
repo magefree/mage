@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Hundroog extends CardImpl {
+public final class Hundroog extends CardImpl {
 
     public Hundroog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");

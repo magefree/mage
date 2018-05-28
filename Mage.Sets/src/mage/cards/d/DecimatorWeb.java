@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki, nantuko
  */
-public class DecimatorWeb extends CardImpl {
+public final class DecimatorWeb extends CardImpl {
 
     public DecimatorWeb (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

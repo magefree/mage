@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class SilentAttendant extends CardImpl {
+public final class SilentAttendant extends CardImpl {
 
     public SilentAttendant (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

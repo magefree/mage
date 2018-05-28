@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class ThunderTotem extends CardImpl {
+public final class ThunderTotem extends CardImpl {
 
     public ThunderTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

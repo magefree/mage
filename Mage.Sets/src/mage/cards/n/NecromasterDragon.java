@@ -47,7 +47,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author fireshoes
  */
-public class NecromasterDragon extends CardImpl {
+public final class NecromasterDragon extends CardImpl {
 
     public NecromasterDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");

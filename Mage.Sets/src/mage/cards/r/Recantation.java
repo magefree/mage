@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class Recantation extends CardImpl {
+public final class Recantation extends CardImpl {
 
     public Recantation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

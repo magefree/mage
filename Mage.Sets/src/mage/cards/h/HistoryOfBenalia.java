@@ -44,7 +44,7 @@ import mage.game.permanent.token.KnightToken;
  *
  * @author LevelX2
  */
-public class HistoryOfBenalia extends CardImpl {
+public final class HistoryOfBenalia extends CardImpl {
 
     public HistoryOfBenalia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");

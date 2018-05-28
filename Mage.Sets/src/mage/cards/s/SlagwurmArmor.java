@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class SlagwurmArmor extends CardImpl {
+public final class SlagwurmArmor extends CardImpl {
 
     public SlagwurmArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

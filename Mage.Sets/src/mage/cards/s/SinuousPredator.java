@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SinuousPredator extends CardImpl {
+public final class SinuousPredator extends CardImpl {
 
     public SinuousPredator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

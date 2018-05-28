@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class MarkovBlademaster extends CardImpl {
+public final class MarkovBlademaster extends CardImpl {
 
     public MarkovBlademaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

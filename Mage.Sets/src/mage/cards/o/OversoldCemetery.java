@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class OversoldCemetery extends CardImpl {
+public final class OversoldCemetery extends CardImpl {
 
     public OversoldCemetery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Will
  */
-public class HelmOfTheHost extends CardImpl {
+public final class HelmOfTheHost extends CardImpl {
 
     public HelmOfTheHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

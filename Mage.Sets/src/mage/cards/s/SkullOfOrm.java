@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class SkullOfOrm extends CardImpl {
+public final class SkullOfOrm extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
     

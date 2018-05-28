@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class AkroanSoldierToken extends TokenImpl {
+public final class AkroanSoldierToken extends TokenImpl {
 
     public AkroanSoldierToken() {
         super("Soldier", "1/1 red Soldier creature token with haste");

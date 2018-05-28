@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class GluttonousSlime extends CardImpl {
+public final class GluttonousSlime extends CardImpl {
 
     public GluttonousSlime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

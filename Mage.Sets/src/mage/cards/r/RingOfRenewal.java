@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class RingOfRenewal extends CardImpl {
+public final class RingOfRenewal extends CardImpl {
 
     public RingOfRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

@@ -48,7 +48,7 @@ import mage.game.permanent.token.IxalanVampireToken;
  *
  * @author TheElk801
  */
-public class LegionsLanding extends CardImpl {
+public final class LegionsLanding extends CardImpl {
 
     public LegionsLanding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

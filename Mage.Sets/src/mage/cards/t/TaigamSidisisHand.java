@@ -65,7 +65,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class TaigamSidisisHand extends CardImpl {
+public final class TaigamSidisisHand extends CardImpl {
 
     public TaigamSidisisHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");

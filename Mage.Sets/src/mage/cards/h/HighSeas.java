@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class HighSeas extends CardImpl {
+public final class HighSeas extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("Red creature spells and green creature spells");
     static {

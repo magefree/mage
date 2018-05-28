@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class InnerCalmOuterStrength extends CardImpl {
+public final class InnerCalmOuterStrength extends CardImpl {
 
     public InnerCalmOuterStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

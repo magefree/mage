@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class RefuseCooperate extends SplitCard {
+public final class RefuseCooperate extends SplitCard {
 
     public RefuseCooperate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.INSTANT}, "{3}{R}", "{2}{U}", SpellAbilityType.SPLIT_AFTERMATH);

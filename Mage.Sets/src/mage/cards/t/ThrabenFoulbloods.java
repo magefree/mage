@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ThrabenFoulbloods extends CardImpl {
+public final class ThrabenFoulbloods extends CardImpl {
 
     public ThrabenFoulbloods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

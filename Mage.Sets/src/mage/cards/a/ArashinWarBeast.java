@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class ArashinWarBeast extends CardImpl {
+public final class ArashinWarBeast extends CardImpl {
 
     public ArashinWarBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

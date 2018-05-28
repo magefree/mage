@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class FuelForTheCause extends CardImpl {
+public final class FuelForTheCause extends CardImpl {
 
     public FuelForTheCause (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class SummonersEgg extends CardImpl {
+public final class SummonersEgg extends CardImpl {
 
     public SummonersEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

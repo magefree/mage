@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class UlvenwaldCaptive extends CardImpl {
+public final class UlvenwaldCaptive extends CardImpl {
 
     public UlvenwaldCaptive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class YodaJediMaster extends CardImpl {
+public final class YodaJediMaster extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another target permanent you own");
 

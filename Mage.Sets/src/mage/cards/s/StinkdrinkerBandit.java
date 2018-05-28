@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BursegSardaukar
  */
-public class StinkdrinkerBandit extends CardImpl {
+public final class StinkdrinkerBandit extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rogue");
 

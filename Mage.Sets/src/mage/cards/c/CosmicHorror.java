@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class CosmicHorror extends CardImpl {
+public final class CosmicHorror extends CardImpl {
 
     public CosmicHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

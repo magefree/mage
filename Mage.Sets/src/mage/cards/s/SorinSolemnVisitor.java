@@ -50,7 +50,7 @@ import mage.game.permanent.token.SorinSolemnVisitorVampireToken;
  *
  * @author LevelX2
  */
-public class SorinSolemnVisitor extends CardImpl {
+public final class SorinSolemnVisitor extends CardImpl {
 
     public SorinSolemnVisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");

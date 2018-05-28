@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class IndestructibleAura extends CardImpl {
+public final class IndestructibleAura extends CardImpl {
 
     public IndestructibleAura(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

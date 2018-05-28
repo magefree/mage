@@ -52,7 +52,7 @@ import mage.filter.StaticFilters;
 /**
  * @author Loki
  */
-public class BudokaGardener extends CardImpl {
+public final class BudokaGardener extends CardImpl {
 
     public BudokaGardener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

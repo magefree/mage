@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class FeverCharm extends CardImpl {
+public final class FeverCharm extends CardImpl {
 
    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizard creature");
 

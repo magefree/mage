@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class DiscipleOfBolas extends CardImpl {
+public final class DiscipleOfBolas extends CardImpl {
 
     public DiscipleOfBolas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

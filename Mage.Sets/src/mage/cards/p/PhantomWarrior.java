@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class PhantomWarrior extends CardImpl {
+public final class PhantomWarrior extends CardImpl {
 
     public PhantomWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

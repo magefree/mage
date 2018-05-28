@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Malfunction extends CardImpl {
+public final class Malfunction extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

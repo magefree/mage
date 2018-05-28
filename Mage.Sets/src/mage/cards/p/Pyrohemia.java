@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author fireshoes
  */
-public class Pyrohemia extends CardImpl {
+public final class Pyrohemia extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
 

@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class MistOfStagnation extends CardImpl {
+public final class MistOfStagnation extends CardImpl {
 
     public MistOfStagnation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

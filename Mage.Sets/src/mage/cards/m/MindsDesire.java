@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class MindsDesire extends CardImpl {
+public final class MindsDesire extends CardImpl {
 
     public MindsDesire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

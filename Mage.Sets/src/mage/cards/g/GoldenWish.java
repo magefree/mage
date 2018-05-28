@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class GoldenWish extends CardImpl {
+public final class GoldenWish extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact or enchantment card");
 

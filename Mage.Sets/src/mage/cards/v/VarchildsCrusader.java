@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author L_J
  */
-public class VarchildsCrusader extends CardImpl {
+public final class VarchildsCrusader extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
     static {

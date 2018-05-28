@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class KithkinShielddare extends CardImpl {
+public final class KithkinShielddare extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 

@@ -41,7 +41,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class MeltTerrain extends CardImpl {
+public final class MeltTerrain extends CardImpl {
 
     public MeltTerrain (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

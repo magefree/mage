@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class MinionToken2 extends TokenImpl {
+public final class MinionToken2 extends TokenImpl {
 
     public MinionToken2() {
         this("PCY");

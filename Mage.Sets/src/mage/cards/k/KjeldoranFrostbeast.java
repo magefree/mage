@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
  *
  * @author TheElk801
  */
-public class KjeldoranFrostbeast extends CardImpl {
+public final class KjeldoranFrostbeast extends CardImpl {
 
     public KjeldoranFrostbeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PenumbraKavuToken extends TokenImpl {
+public final class PenumbraKavuToken extends TokenImpl {
 
     public PenumbraKavuToken() {
         super("Kavu", "3/3 black Kavu creature token");

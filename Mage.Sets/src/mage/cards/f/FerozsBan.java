@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreatureCard;
  * @author LoneFox
 
  */
-public class FerozsBan extends CardImpl {
+public final class FerozsBan extends CardImpl {
 
     public FerozsBan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

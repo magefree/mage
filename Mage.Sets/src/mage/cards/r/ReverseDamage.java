@@ -45,7 +45,7 @@ import mage.target.TargetSource;
  *
  * @author Quercitron
  */
-public class ReverseDamage extends CardImpl {
+public final class ReverseDamage extends CardImpl {
 
     public ReverseDamage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");

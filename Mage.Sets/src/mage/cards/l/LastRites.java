@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class LastRites extends CardImpl {
+public final class LastRites extends CardImpl {
 
     public LastRites(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

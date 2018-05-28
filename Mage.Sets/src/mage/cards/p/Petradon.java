@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class Petradon extends CardImpl {
+public final class Petradon extends CardImpl {
 
     public Petradon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ShelteredThicket extends CardImpl {
+public final class ShelteredThicket extends CardImpl {
 
     public ShelteredThicket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

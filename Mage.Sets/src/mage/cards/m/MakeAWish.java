@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class MakeAWish extends CardImpl {
+public final class MakeAWish extends CardImpl {
 
     public MakeAWish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class MephiticOoze extends CardImpl {
+public final class MephiticOoze extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 

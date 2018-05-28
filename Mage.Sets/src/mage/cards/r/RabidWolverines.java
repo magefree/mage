@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class RabidWolverines extends CardImpl {
+public final class RabidWolverines extends CardImpl {
 
     public RabidWolverines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

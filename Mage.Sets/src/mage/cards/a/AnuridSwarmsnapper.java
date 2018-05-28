@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class AnuridSwarmsnapper extends CardImpl {
+public final class AnuridSwarmsnapper extends CardImpl {
 
     public AnuridSwarmsnapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoeS
  */
-public class Commander2016 extends ExpansionSet {
+public final class Commander2016 extends ExpansionSet {
 
     private static final Commander2016 instance = new Commander2016();
 

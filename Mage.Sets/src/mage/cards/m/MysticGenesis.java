@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class MysticGenesis extends CardImpl {
+public final class MysticGenesis extends CardImpl {
 
     public MysticGenesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{U}{U}");

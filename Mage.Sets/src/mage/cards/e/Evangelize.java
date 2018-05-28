@@ -41,7 +41,7 @@ import mage.target.common.TargetOpponentsChoicePermanent;
  *
  * @author spjspj
  */
-public class Evangelize extends CardImpl {
+public final class Evangelize extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

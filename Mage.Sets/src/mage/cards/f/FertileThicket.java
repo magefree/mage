@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FertileThicket extends CardImpl {
+public final class FertileThicket extends CardImpl {
 
     public FertileThicket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

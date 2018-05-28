@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class MesaUnicorn extends CardImpl {
+public final class MesaUnicorn extends CardImpl {
 
     public MesaUnicorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

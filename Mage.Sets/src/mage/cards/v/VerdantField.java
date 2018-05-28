@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Backfir3
  */
-public class VerdantField extends CardImpl {
+public final class VerdantField extends CardImpl {
 
     public VerdantField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

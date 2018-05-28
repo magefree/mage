@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class CatharsCrusade extends CardImpl {
+public final class CatharsCrusade extends CardImpl {
 
     public CatharsCrusade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");

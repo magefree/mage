@@ -42,7 +42,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SproutingThrinax extends CardImpl {
+public final class SproutingThrinax extends CardImpl {
 
     private static SaprolingToken saprolingToken = new SaprolingToken();
 

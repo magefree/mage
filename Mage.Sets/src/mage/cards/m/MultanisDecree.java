@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Backfir3
  */
-public class MultanisDecree extends CardImpl {
+public final class MultanisDecree extends CardImpl {
 
     public MultanisDecree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

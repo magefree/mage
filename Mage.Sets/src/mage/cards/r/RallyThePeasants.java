@@ -40,7 +40,7 @@ import mage.constants.TimingRule;
 /**
  * @author nantuko
  */
-public class RallyThePeasants extends CardImpl {
+public final class RallyThePeasants extends CardImpl {
 
     public RallyThePeasants(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

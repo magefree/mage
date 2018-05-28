@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class Gelectrode extends CardImpl {
+public final class Gelectrode extends CardImpl {
 
     public Gelectrode(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");

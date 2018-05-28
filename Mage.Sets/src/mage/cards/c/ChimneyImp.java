@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author djbrez
  */
-public class ChimneyImp extends CardImpl {
+public final class ChimneyImp extends CardImpl {
 
     public ChimneyImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

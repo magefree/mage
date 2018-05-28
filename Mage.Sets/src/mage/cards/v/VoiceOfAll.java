@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class VoiceOfAll extends CardImpl {
+public final class VoiceOfAll extends CardImpl {
 
     public VoiceOfAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

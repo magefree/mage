@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class TalentOfTheTelepath extends CardImpl {
+public final class TalentOfTheTelepath extends CardImpl {
 
     public TalentOfTheTelepath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

@@ -59,7 +59,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author emerald000
  */
-public class MagusOfTheUnseen extends CardImpl {
+public final class MagusOfTheUnseen extends CardImpl {
     
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact an opponent controls");
     static {

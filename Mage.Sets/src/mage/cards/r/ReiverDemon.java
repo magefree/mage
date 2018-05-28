@@ -49,7 +49,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author daagar
  */
-public class ReiverDemon extends CardImpl {
+public final class ReiverDemon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creatures");
 

@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DrownedRusalka extends CardImpl {
+public final class DrownedRusalka extends CardImpl {
 
     public DrownedRusalka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");

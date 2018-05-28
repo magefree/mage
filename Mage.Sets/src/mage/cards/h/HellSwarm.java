@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author TheElk801
  */
-public class HellSwarm extends CardImpl {
+public final class HellSwarm extends CardImpl {
 
     public HellSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

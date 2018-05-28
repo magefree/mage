@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ErhnamDjinn extends CardImpl {
+public final class ErhnamDjinn extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature an opponent controls");
 

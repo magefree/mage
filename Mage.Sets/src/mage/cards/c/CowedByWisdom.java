@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CowedByWisdom extends CardImpl {
+public final class CowedByWisdom extends CardImpl {
 
     public CowedByWisdom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

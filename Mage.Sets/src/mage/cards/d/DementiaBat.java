@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class DementiaBat extends CardImpl {
+public final class DementiaBat extends CardImpl {
 
     public DementiaBat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

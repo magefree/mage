@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MistveilPlains extends CardImpl {
+public final class MistveilPlains extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control two or more white permanents");
     static {

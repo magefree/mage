@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class VertigoSpawn extends CardImpl {
+public final class VertigoSpawn extends CardImpl {
 
     public VertigoSpawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

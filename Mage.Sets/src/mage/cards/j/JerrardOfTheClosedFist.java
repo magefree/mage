@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class JerrardOfTheClosedFist extends CardImpl {
+public final class JerrardOfTheClosedFist extends CardImpl {
 
     public JerrardOfTheClosedFist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{G}");

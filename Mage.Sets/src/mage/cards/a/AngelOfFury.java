@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class AngelOfFury extends CardImpl {
+public final class AngelOfFury extends CardImpl {
 
     public AngelOfFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

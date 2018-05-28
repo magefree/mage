@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author fireshoes
  */
-public class GideonsResolve extends CardImpl {
+public final class GideonsResolve extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Gideon, Martial Paragon");
 

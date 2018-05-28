@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ChromeshellCrab extends CardImpl {
+public final class ChromeshellCrab extends CardImpl {
     
     private static final String rule = "you may exchange control of target creature you control and target creature an opponent controls";
     

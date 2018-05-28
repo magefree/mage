@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PressTheAdvantage extends CardImpl {
+public final class PressTheAdvantage extends CardImpl {
 
     public PressTheAdvantage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}");

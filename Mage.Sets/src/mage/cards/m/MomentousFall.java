@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MomentousFall extends CardImpl {
+public final class MomentousFall extends CardImpl {
 
     public MomentousFall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");

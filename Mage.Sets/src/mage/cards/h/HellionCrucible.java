@@ -48,7 +48,7 @@ import mage.game.permanent.token.HellionHasteToken;
  *
  * @author jeffwadsworth
  */
-public class HellionCrucible extends CardImpl {
+public final class HellionCrucible extends CardImpl {
 
     public HellionCrucible(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

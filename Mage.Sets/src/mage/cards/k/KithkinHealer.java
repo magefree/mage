@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class KithkinHealer extends CardImpl {
+public final class KithkinHealer extends CardImpl {
 
     public KithkinHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

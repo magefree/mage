@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class HyenaPack extends CardImpl {
+public final class HyenaPack extends CardImpl {
 
     public HyenaPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RhoxWarMonk extends CardImpl {
+public final class RhoxWarMonk extends CardImpl {
 
     public RhoxWarMonk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");

@@ -61,7 +61,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CharmedPendant extends CardImpl {
+public final class CharmedPendant extends CardImpl {
 
     public CharmedPendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

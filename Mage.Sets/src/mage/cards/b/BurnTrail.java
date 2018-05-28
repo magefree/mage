@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class BurnTrail extends CardImpl {
+public final class BurnTrail extends CardImpl {
 
     public BurnTrail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class FesteringMarch extends CardImpl {
+public final class FesteringMarch extends CardImpl {
 
     public FesteringMarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

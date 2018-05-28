@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class InvasiveSpecies extends CardImpl {
+public final class InvasiveSpecies extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent you control");
     

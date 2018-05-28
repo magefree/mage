@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class EngineeredExplosives extends CardImpl {
+public final class EngineeredExplosives extends CardImpl {
 
 
     public EngineeredExplosives(UUID ownerId, CardSetInfo setInfo) {

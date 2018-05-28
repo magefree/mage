@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class RiverHoopoe extends CardImpl {
+public final class RiverHoopoe extends CardImpl {
 
     public RiverHoopoe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");

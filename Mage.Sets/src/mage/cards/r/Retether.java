@@ -55,7 +55,7 @@ import mage.target.Target;
  *
  * @author L_J
  */
-public class Retether extends CardImpl {
+public final class Retether extends CardImpl {
 
     public Retether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class Pulverize extends CardImpl {
+public final class Pulverize extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
     static {

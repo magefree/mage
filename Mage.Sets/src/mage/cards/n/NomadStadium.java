@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NomadStadium extends CardImpl {
+public final class NomadStadium extends CardImpl {
 
     public NomadStadium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

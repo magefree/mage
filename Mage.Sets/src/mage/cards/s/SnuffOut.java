@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SnuffOut extends CardImpl {
+public final class SnuffOut extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
     private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");

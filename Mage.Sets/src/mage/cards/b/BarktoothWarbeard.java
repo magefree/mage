@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class BarktoothWarbeard extends CardImpl {
+public final class BarktoothWarbeard extends CardImpl {
 
     public BarktoothWarbeard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}{R}");

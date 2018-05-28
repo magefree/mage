@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class Amnesia extends CardImpl {
+public final class Amnesia extends CardImpl {
 
     public Amnesia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}{U}");

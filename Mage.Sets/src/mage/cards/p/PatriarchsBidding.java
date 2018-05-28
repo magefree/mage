@@ -49,7 +49,7 @@ import mage.players.Player;
 /**
  * @author duncant
  */
-public class PatriarchsBidding extends CardImpl {
+public final class PatriarchsBidding extends CardImpl {
 
     public PatriarchsBidding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

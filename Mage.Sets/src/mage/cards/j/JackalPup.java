@@ -46,7 +46,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class JackalPup extends CardImpl {
+public final class JackalPup extends CardImpl {
 
     public JackalPup(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

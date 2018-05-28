@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class CatharticReunion extends CardImpl {
+public final class CatharticReunion extends CardImpl {
 
     public CatharticReunion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

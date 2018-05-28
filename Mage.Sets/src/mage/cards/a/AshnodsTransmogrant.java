@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class AshnodsTransmogrant extends CardImpl {
+public final class AshnodsTransmogrant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 

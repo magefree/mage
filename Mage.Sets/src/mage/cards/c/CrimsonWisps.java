@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class CrimsonWisps extends CardImpl {
+public final class CrimsonWisps extends CardImpl {
 
     public CrimsonWisps (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

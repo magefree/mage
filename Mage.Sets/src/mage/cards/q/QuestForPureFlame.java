@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class QuestForPureFlame extends CardImpl {
+public final class QuestForPureFlame extends CardImpl {
 
     public QuestForPureFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");

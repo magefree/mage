@@ -49,7 +49,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  *
  * @author Styxo
  */
-public class DarthMaul extends CardImpl {
+public final class DarthMaul extends CardImpl {
 
     public DarthMaul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

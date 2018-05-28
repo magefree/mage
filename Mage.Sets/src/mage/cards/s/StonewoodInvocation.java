@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class StonewoodInvocation extends CardImpl {
+public final class StonewoodInvocation extends CardImpl {
 
     public StonewoodInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

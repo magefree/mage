@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DuskmantleSeer extends CardImpl {
+public final class DuskmantleSeer extends CardImpl {
 
     public DuskmantleSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");

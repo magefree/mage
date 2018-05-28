@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class GreaterWerewolf extends CardImpl {
+public final class GreaterWerewolf extends CardImpl {
 
     public GreaterWerewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

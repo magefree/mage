@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class TheBattleOfEndor extends CardImpl {
+public final class TheBattleOfEndor extends CardImpl {
 
     public TheBattleOfEndor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}{G}{G}");

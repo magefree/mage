@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class HumbleBudoka extends CardImpl {
+public final class HumbleBudoka extends CardImpl {
 
     public HumbleBudoka (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

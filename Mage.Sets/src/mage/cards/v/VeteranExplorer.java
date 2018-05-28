@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class VeteranExplorer extends CardImpl {
+public final class VeteranExplorer extends CardImpl {
 
     public VeteranExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

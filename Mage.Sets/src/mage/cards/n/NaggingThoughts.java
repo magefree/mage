@@ -42,7 +42,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class NaggingThoughts extends CardImpl {
+public final class NaggingThoughts extends CardImpl {
 
     public NaggingThoughts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author KholdFuzion
  */
-public class Resurrection extends CardImpl {
+public final class Resurrection extends CardImpl {
 
     public Resurrection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

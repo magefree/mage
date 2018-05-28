@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class ArcaneLighthouse extends CardImpl {
+public final class ArcaneLighthouse extends CardImpl {
 
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");

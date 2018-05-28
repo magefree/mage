@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class OliviasBloodsworn extends CardImpl {
+public final class OliviasBloodsworn extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire");
     

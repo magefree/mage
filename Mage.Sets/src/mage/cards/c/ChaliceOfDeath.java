@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author intimidatingant
  */
-public class ChaliceOfDeath extends CardImpl {
+public final class ChaliceOfDeath extends CardImpl {
 
     public ChaliceOfDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"");

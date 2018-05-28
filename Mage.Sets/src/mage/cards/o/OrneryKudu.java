@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class OrneryKudu extends CardImpl {
+public final class OrneryKudu extends CardImpl {
 
     public OrneryKudu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

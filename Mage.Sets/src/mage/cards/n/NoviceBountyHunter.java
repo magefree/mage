@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class NoviceBountyHunter extends CardImpl {
+public final class NoviceBountyHunter extends CardImpl {
 
     public NoviceBountyHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

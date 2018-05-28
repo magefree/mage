@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class NecrogenCenser extends CardImpl {
+public final class NecrogenCenser extends CardImpl {
 
     public NecrogenCenser (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

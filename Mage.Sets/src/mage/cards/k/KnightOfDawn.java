@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class KnightOfDawn extends CardImpl {
+public final class KnightOfDawn extends CardImpl {
 
     public KnightOfDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

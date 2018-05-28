@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class Sporogenesis extends CardImpl {
+public final class Sporogenesis extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 

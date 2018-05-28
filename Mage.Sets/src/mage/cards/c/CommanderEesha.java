@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author daagar
  */
-public class CommanderEesha extends CardImpl {
+public final class CommanderEesha extends CardImpl {
     
     static final FilterCard filter = new FilterCard("creatures");
 

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AcceptableLosses extends CardImpl {
+public final class AcceptableLosses extends CardImpl {
 
     public AcceptableLosses(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

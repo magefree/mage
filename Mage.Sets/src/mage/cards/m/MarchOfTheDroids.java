@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class MarchOfTheDroids extends CardImpl {
+public final class MarchOfTheDroids extends CardImpl {
 
     public MarchOfTheDroids(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{U}{B}");

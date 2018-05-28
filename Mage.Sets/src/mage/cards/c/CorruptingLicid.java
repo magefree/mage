@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class CorruptingLicid extends CardImpl {
+public final class CorruptingLicid extends CardImpl {
 
     public CorruptingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SilkenfistFighter extends CardImpl {
+public final class SilkenfistFighter extends CardImpl {
 
     public SilkenfistFighter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

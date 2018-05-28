@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class FoldIntoAether extends CardImpl {
+public final class FoldIntoAether extends CardImpl {
 
     public FoldIntoAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

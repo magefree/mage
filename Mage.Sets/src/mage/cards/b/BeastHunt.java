@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author North
  */
-public class BeastHunt extends CardImpl {
+public final class BeastHunt extends CardImpl {
 
     public BeastHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

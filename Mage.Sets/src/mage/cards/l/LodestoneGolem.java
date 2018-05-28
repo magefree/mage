@@ -49,7 +49,7 @@ import mage.game.Game;
  *
  * @author jeffwadsworth
  */
-public class LodestoneGolem extends CardImpl {
+public final class LodestoneGolem extends CardImpl {
 
     public LodestoneGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

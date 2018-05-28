@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class VibratingSphere extends CardImpl {
+public final class VibratingSphere extends CardImpl {
 
     public VibratingSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

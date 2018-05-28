@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class Ghoulflesh extends CardImpl {
+public final class Ghoulflesh extends CardImpl {
 
     public Ghoulflesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");

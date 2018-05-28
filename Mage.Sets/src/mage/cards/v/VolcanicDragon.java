@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class VolcanicDragon extends CardImpl {
+public final class VolcanicDragon extends CardImpl {
 
     public VolcanicDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

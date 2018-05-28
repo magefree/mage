@@ -50,7 +50,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author jeffwadsworth
  */
-public class TuktukScrapper extends CardImpl {
+public final class TuktukScrapper extends CardImpl {
 
     public TuktukScrapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

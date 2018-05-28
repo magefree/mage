@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33, Loki (Ashling the Extinguisher)
  */
-public class SparkMage extends CardImpl {
+public final class SparkMage extends CardImpl {
 
     public SparkMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

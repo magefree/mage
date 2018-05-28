@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class EndlessOne extends CardImpl {
+public final class EndlessOne extends CardImpl {
 
     public EndlessOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}");

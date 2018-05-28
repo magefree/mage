@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class Blessing extends CardImpl {
+public final class Blessing extends CardImpl {
 
     public Blessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class DeadbridgeShaman extends CardImpl {
+public final class DeadbridgeShaman extends CardImpl {
 
     public DeadbridgeShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

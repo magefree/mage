@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class WreckingOgre extends CardImpl {
+public final class WreckingOgre extends CardImpl {
 
     public WreckingOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

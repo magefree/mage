@@ -48,7 +48,7 @@ import mage.watchers.common.CastFromHandWatcher;
 /**
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class DreadCacodemon extends CardImpl {
+public final class DreadCacodemon extends CardImpl {
     
     private static final FilterCreaturePermanent opponentsCreatures = new FilterCreaturePermanent("creatures your opponents control");
     static {

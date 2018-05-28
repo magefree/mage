@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class VigilanteJustice extends CardImpl {
+public final class VigilanteJustice extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human");
 

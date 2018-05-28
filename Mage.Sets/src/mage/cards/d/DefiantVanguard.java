@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author bunchOfDevs
  */
-public class DefiantVanguard extends CardImpl {
+public final class DefiantVanguard extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 4 or less");
 

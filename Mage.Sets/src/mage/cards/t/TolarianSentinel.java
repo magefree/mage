@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Galatolol
  */
-public class TolarianSentinel extends CardImpl {
+public final class TolarianSentinel extends CardImpl {
 
     public TolarianSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

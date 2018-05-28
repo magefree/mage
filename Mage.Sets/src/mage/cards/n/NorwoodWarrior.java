@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class NorwoodWarrior extends CardImpl {
+public final class NorwoodWarrior extends CardImpl {
 
     public NorwoodWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

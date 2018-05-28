@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Styxo
  */
-public class SnowTrooper extends CardImpl {
+public final class SnowTrooper extends CardImpl {
 
     public SnowTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

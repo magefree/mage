@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class NissasEncouragement extends CardImpl {
+public final class NissasEncouragement extends CardImpl {
 
     public NissasEncouragement(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");

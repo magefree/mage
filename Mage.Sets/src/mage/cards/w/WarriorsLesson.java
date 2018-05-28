@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WarriorsLesson extends CardImpl {
+public final class WarriorsLesson extends CardImpl {
 
     public WarriorsLesson(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class CataclysmicGearhulk extends CardImpl {
+public final class CataclysmicGearhulk extends CardImpl {
 
     public CataclysmicGearhulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}{W}");

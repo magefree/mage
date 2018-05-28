@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class KjeldoranGargoyle extends CardImpl {
+public final class KjeldoranGargoyle extends CardImpl {
 
     public KjeldoranGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

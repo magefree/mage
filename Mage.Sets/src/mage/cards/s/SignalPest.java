@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author North
  */
-public class SignalPest extends CardImpl {
+public final class SignalPest extends CardImpl {
 
     private final static FilterCreaturePermanent notFlyingorReachCreatures = new FilterCreaturePermanent("except by creatures with flying or reach");
 

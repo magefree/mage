@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class LavaHounds extends CardImpl {
+public final class LavaHounds extends CardImpl {
 
     public LavaHounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

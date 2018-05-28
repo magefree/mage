@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class DeadlyDesigns extends CardImpl {
+public final class DeadlyDesigns extends CardImpl {
 
     public DeadlyDesigns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

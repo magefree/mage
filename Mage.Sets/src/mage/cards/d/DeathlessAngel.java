@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DeathlessAngel extends CardImpl {
+public final class DeathlessAngel extends CardImpl {
 
     public DeathlessAngel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

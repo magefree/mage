@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class SilvergladeElemental extends CardImpl {
+public final class SilvergladeElemental extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Forest card");
 

@@ -54,7 +54,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class TribalGolem extends CardImpl {
+public final class TribalGolem extends CardImpl {
 
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("a Beast");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("a Goblin");

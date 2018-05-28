@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  * @author jeffwadsworth
  *
  */
-public class CankerAbomination extends CardImpl {
+public final class CankerAbomination extends CardImpl {
 
     public CankerAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B/G}{B/G}");

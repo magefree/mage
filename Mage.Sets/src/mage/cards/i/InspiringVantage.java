@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
 /**
  * @author fireshoes
  */
-public class InspiringVantage extends CardImpl {
+public final class InspiringVantage extends CardImpl {
 
     public InspiringVantage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

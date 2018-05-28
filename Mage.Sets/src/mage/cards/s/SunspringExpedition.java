@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SunspringExpedition extends CardImpl {
+public final class SunspringExpedition extends CardImpl {
 
     public SunspringExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

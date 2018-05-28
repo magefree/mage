@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class SkeletalKathari extends CardImpl {
+public final class SkeletalKathari extends CardImpl {
 
     public SkeletalKathari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

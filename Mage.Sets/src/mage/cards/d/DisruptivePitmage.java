@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class DisruptivePitmage extends CardImpl {
+public final class DisruptivePitmage extends CardImpl {
 
     public DisruptivePitmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

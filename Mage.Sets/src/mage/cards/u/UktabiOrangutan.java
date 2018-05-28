@@ -42,7 +42,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author jeffwadsworth
  */
-public class UktabiOrangutan extends CardImpl {
+public final class UktabiOrangutan extends CardImpl {
 
     public UktabiOrangutan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

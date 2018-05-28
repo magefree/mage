@@ -52,7 +52,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class DragonWhelp extends CardImpl {
+public final class DragonWhelp extends CardImpl {
 
     public DragonWhelp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

@@ -45,7 +45,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author fireshoes
  */
-public class PackGuardian extends CardImpl {
+public final class PackGuardian extends CardImpl {
 
     public PackGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

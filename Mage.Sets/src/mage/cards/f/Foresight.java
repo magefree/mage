@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class Foresight extends CardImpl {
+public final class Foresight extends CardImpl {
 
     public Foresight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");

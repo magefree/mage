@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LumengridGargoyle extends CardImpl {
+public final class LumengridGargoyle extends CardImpl {
 
     public LumengridGargoyle (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

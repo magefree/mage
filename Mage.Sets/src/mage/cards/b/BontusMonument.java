@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class BontusMonument extends CardImpl {
+public final class BontusMonument extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("black creature spells");
 

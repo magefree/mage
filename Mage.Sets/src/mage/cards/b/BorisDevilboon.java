@@ -46,7 +46,7 @@ import mage.game.permanent.token.MinorDemonToken;
  *
  * @author LoneFox
  */
-public class BorisDevilboon extends CardImpl {
+public final class BorisDevilboon extends CardImpl {
 
     public BorisDevilboon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

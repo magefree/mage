@@ -53,7 +53,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class SwarmbornGiant extends CardImpl {
+public final class SwarmbornGiant extends CardImpl {
 
     public SwarmbornGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

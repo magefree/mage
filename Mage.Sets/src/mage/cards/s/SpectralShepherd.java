@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class SpectralShepherd extends CardImpl {
+public final class SpectralShepherd extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Spirit");
 

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class AjanisComrade extends CardImpl {
+public final class AjanisComrade extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class SunspearShikari extends CardImpl {
+public final class SunspearShikari extends CardImpl {
 
     public SunspearShikari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

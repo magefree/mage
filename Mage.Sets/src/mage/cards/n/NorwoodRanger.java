@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class NorwoodRanger extends CardImpl {
+public final class NorwoodRanger extends CardImpl {
 
     public NorwoodRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

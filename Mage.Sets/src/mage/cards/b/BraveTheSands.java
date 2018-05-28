@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class BraveTheSands extends CardImpl {
+public final class BraveTheSands extends CardImpl {
 
     public BraveTheSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class NefCropEntangler extends CardImpl {
+public final class NefCropEntangler extends CardImpl {
 
     public NefCropEntangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

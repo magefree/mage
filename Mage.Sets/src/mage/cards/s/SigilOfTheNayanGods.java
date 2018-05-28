@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SigilOfTheNayanGods extends CardImpl {
+public final class SigilOfTheNayanGods extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

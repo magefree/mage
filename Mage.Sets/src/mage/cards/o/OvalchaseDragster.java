@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class OvalchaseDragster extends CardImpl {
+public final class OvalchaseDragster extends CardImpl {
 
     public OvalchaseDragster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

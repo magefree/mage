@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HearthcageGiant extends CardImpl {
+public final class HearthcageGiant extends CardImpl {
 
     private static final FilterControlledPermanent filterElemental = new FilterControlledPermanent("Elemental");
     private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");

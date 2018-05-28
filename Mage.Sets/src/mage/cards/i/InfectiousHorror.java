@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class InfectiousHorror extends CardImpl {
+public final class InfectiousHorror extends CardImpl {
 
     public InfectiousHorror (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

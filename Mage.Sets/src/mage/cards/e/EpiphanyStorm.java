@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class EpiphanyStorm extends CardImpl {
+public final class EpiphanyStorm extends CardImpl {
 
     public EpiphanyStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");

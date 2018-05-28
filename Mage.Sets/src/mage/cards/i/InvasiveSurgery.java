@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class InvasiveSurgery extends CardImpl {
+public final class InvasiveSurgery extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("sorcery spell");
 

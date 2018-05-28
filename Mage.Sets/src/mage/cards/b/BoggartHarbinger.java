@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author dustinconrad
  */
-public class BoggartHarbinger extends CardImpl {
+public final class BoggartHarbinger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Goblin card");
 

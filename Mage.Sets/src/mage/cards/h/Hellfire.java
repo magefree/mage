@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class Hellfire extends CardImpl {
+public final class Hellfire extends CardImpl {
 
     public Hellfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}{B}");

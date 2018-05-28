@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class LivingWish extends CardImpl {
+public final class LivingWish extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature or land card");
 

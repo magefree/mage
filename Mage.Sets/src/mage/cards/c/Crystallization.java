@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Crystallization extends CardImpl {
+public final class Crystallization extends CardImpl {
 
     public Crystallization(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G/U}{W}");

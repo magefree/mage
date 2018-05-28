@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class RukhEggBirdToken extends TokenImpl {
+public final class RukhEggBirdToken extends TokenImpl {
 
     public RukhEggBirdToken() {
         this("ARN"); //there is no such token in either ARN, 8ED or 9ED

@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class OranRiefHydra extends CardImpl {
+public final class OranRiefHydra extends CardImpl {
 
     public OranRiefHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

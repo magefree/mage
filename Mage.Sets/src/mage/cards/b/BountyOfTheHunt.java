@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LoneFox
  */
-public class BountyOfTheHunt extends CardImpl {
+public final class BountyOfTheHunt extends CardImpl {
 
     public BountyOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");

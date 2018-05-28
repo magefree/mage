@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author nantuko
  */
-public class ThroneOfEmpires extends CardImpl {
+public final class ThroneOfEmpires extends CardImpl {
 
     public ThroneOfEmpires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

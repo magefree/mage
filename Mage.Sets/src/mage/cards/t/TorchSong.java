@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class TorchSong extends CardImpl {
+public final class TorchSong extends CardImpl {
 
     public TorchSong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

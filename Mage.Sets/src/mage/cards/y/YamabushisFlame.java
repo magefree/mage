@@ -43,7 +43,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX
  */
-public class YamabushisFlame extends CardImpl {
+public final class YamabushisFlame extends CardImpl {
 
     public YamabushisFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

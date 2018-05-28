@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DragonsClaw extends CardImpl {
+public final class DragonsClaw extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("a red spell");
 

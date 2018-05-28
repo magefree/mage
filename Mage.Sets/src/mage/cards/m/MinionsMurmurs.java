@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author Derpthemeus
  */
-public class MinionsMurmurs extends CardImpl {
+public final class MinionsMurmurs extends CardImpl {
 
     public MinionsMurmurs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

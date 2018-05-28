@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class ForgebornOreads extends CardImpl {
+public final class ForgebornOreads extends CardImpl {
 
     public ForgebornOreads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{R}{R}");

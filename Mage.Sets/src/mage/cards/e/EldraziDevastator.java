@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class EldraziDevastator extends CardImpl {
+public final class EldraziDevastator extends CardImpl {
 
     public EldraziDevastator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Styxo
  */
-public class TrophyMage extends CardImpl {
+public final class TrophyMage extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 3");
 

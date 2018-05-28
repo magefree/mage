@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class VampireHounds extends CardImpl {
+public final class VampireHounds extends CardImpl {
 
     public VampireHounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

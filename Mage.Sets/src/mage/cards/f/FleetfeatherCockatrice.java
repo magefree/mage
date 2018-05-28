@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class FleetfeatherCockatrice extends CardImpl {
+public final class FleetfeatherCockatrice extends CardImpl {
 
     public FleetfeatherCockatrice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");

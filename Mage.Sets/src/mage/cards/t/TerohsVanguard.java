@@ -52,7 +52,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LoneFox
  */
-public class TerohsVanguard extends CardImpl {
+public final class TerohsVanguard extends CardImpl {
 
     public TerohsVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AlignedHedronNetwork extends CardImpl {
+public final class AlignedHedronNetwork extends CardImpl {
 
     public AlignedHedronNetwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class Blistergrub extends CardImpl {
+public final class Blistergrub extends CardImpl {
 
     public Blistergrub (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -48,7 +48,7 @@ import mage.game.permanent.token.EldraziHorrorToken;
  *
  * @author LevelX2
  */
-public class DesperateSentry extends CardImpl {
+public final class DesperateSentry extends CardImpl {
 
     public DesperateSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

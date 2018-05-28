@@ -49,7 +49,7 @@ import mage.game.permanent.token.GolemToken;
  *
  * @author North
  */
-public class SensorSplicer extends CardImpl {
+public final class SensorSplicer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
 

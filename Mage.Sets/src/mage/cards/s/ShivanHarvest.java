@@ -45,7 +45,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author fireshoes
  */
-public class ShivanHarvest extends CardImpl {
+public final class ShivanHarvest extends CardImpl {
 
     public ShivanHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

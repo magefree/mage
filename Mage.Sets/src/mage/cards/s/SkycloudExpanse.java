@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class SkycloudExpanse extends CardImpl {
+public final class SkycloudExpanse extends CardImpl {
 
     public SkycloudExpanse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

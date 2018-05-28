@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Skullcage extends CardImpl {
+public final class Skullcage extends CardImpl {
 
     public Skullcage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

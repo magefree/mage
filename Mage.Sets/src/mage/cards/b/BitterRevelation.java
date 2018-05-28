@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author emerald000
  */
-public class BitterRevelation extends CardImpl {
+public final class BitterRevelation extends CardImpl {
 
     public BitterRevelation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");

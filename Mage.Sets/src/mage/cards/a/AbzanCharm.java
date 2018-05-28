@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class AbzanCharm extends CardImpl {
+public final class AbzanCharm extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature with power 3 or greater");
 

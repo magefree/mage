@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class Devastation extends CardImpl {
+public final class Devastation extends CardImpl {
 
     
     private static final FilterPermanent filter = new FilterPermanent("creatures and lands");

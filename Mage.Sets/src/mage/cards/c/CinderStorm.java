@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author nigelzor
  */
-public class CinderStorm extends CardImpl {
+public final class CinderStorm extends CardImpl {
 
     public CinderStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}");

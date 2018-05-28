@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class StoneRain extends CardImpl {
+public final class StoneRain extends CardImpl {
 
     public StoneRain (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

@@ -52,7 +52,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class TendershootDryad extends CardImpl {
+public final class TendershootDryad extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Saprolings you control");
 

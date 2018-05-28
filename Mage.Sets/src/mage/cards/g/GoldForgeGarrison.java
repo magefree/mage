@@ -47,7 +47,7 @@ import mage.game.permanent.token.GoldForgeGarrisonGolemToken;
  *
  * @author LevelX2
  */
-public class GoldForgeGarrison extends CardImpl {
+public final class GoldForgeGarrison extends CardImpl {
 
     public GoldForgeGarrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

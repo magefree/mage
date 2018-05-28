@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class SporeFlower extends CardImpl {
+public final class SporeFlower extends CardImpl {
 
     public SporeFlower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

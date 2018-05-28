@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class GleefulSabotage extends CardImpl {
+public final class GleefulSabotage extends CardImpl {
 
     public GleefulSabotage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

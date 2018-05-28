@@ -53,7 +53,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class ChorusOfTheConclave extends CardImpl {
+public final class ChorusOfTheConclave extends CardImpl {
 
     public ChorusOfTheConclave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{W}{W}");

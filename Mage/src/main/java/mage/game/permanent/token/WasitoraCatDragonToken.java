@@ -39,7 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class WasitoraCatDragonToken extends TokenImpl {
+public final class WasitoraCatDragonToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

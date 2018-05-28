@@ -40,7 +40,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class ShatteredDreams extends CardImpl {
+public final class ShatteredDreams extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card from it");
     static {

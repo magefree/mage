@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class ArkOfBlight extends CardImpl {
+public final class ArkOfBlight extends CardImpl {
 
     public ArkOfBlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

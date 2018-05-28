@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class CulturalExchange extends CardImpl {
+public final class CulturalExchange extends CardImpl {
 
     public CulturalExchange(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

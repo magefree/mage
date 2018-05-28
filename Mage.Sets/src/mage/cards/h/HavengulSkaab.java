@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author noxx
  */
-public class HavengulSkaab extends CardImpl {
+public final class HavengulSkaab extends CardImpl {
 
     public HavengulSkaab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

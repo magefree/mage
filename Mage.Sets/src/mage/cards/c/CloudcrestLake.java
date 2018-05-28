@@ -40,7 +40,7 @@ import mage.constants.CardType;
 /**
  * @author Loki
  */
-public class CloudcrestLake extends CardImpl {
+public final class CloudcrestLake extends CardImpl {
 
     public CloudcrestLake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

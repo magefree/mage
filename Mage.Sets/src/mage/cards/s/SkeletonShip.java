@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SkeletonShip extends CardImpl {
+public final class SkeletonShip extends CardImpl {
 
     public SkeletonShip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");

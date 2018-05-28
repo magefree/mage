@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class VisceraDragger extends CardImpl {
+public final class VisceraDragger extends CardImpl {
 
     public VisceraDragger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

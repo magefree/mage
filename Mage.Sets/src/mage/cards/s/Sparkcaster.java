@@ -48,7 +48,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  * @author LoneFox
  *
  */
-public class Sparkcaster extends CardImpl {
+public final class Sparkcaster extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red or green creature you control");
 

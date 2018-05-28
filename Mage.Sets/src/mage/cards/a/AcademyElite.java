@@ -49,7 +49,7 @@ import mage.filter.common.FilterInstantOrSorceryCard;
  *
  * @author andyfries
  */
-public class AcademyElite extends CardImpl {
+public final class AcademyElite extends CardImpl {
 
     public AcademyElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

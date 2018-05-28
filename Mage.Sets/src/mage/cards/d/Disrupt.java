@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  * @author LoneFox
 
  */
-public class Disrupt extends CardImpl {
+public final class Disrupt extends CardImpl {
 
     public Disrupt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

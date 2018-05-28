@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class AirdropCondor extends CardImpl {
+public final class AirdropCondor extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin creature");
 

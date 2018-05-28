@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class AbzanBanner extends CardImpl {
+public final class AbzanBanner extends CardImpl {
 
     public AbzanBanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

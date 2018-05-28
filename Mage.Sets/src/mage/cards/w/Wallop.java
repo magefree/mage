@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class Wallop extends CardImpl {
+public final class Wallop extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue or black creature with flying");
 

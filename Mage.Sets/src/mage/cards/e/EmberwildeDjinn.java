@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class EmberwildeDjinn extends CardImpl {
+public final class EmberwildeDjinn extends CardImpl {
 
     public EmberwildeDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

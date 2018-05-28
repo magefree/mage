@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class NantukoTracer extends CardImpl {
+public final class NantukoTracer extends CardImpl {
 
     public NantukoTracer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

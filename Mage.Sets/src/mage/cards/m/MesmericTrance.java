@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class MesmericTrance extends CardImpl {
+public final class MesmericTrance extends CardImpl {
 
     public MesmericTrance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");

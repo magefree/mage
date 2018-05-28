@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class ArcboundReclaimer extends CardImpl {
+public final class ArcboundReclaimer extends CardImpl {
 
     public ArcboundReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

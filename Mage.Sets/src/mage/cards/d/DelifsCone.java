@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class DelifsCone extends CardImpl {
+public final class DelifsCone extends CardImpl {
 
     public DelifsCone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

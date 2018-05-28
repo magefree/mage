@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TrapjawTyrant extends CardImpl {
+public final class TrapjawTyrant extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

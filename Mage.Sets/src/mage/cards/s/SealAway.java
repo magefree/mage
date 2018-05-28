@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  * @author JRHerlehy
  *         Created on 4/4/18.
  */
-public class SealAway extends CardImpl {
+public final class SealAway extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

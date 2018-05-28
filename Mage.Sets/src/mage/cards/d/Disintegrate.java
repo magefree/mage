@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author dustinconrad
  */
-public class Disintegrate extends CardImpl {
+public final class Disintegrate extends CardImpl {
 
     public Disintegrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");

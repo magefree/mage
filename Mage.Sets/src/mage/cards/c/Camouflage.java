@@ -59,7 +59,7 @@ import mage.util.RandomUtil;
  *
  * @author L_J
  */
-public class Camouflage extends CardImpl {
+public final class Camouflage extends CardImpl {
 
     public Camouflage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

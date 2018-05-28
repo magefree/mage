@@ -40,7 +40,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author LevelX2
  */
-public class CallTheScions extends CardImpl {
+public final class CallTheScions extends CardImpl {
 
     public CallTheScions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class PetrifiedField extends CardImpl {
+public final class PetrifiedField extends CardImpl {
 
     public PetrifiedField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class ImperialEdict extends CardImpl {
+public final class ImperialEdict extends CardImpl {
 
     public ImperialEdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

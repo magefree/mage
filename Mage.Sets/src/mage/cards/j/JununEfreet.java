@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class JununEfreet extends CardImpl {
+public final class JununEfreet extends CardImpl {
 
     public JununEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

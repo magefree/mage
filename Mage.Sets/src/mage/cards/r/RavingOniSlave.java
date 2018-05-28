@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RavingOniSlave extends CardImpl {
+public final class RavingOniSlave extends CardImpl {
 
     public RavingOniSlave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

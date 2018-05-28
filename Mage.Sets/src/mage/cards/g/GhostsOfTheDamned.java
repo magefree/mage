@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author hanasu
  */
-public class GhostsOfTheDamned extends CardImpl {
+public final class GhostsOfTheDamned extends CardImpl {
 
     public GhostsOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

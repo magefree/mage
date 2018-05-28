@@ -41,7 +41,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author ciaccona007
  */
-public class DunesOfTheDead extends CardImpl {
+public final class DunesOfTheDead extends CardImpl {
 
     public DunesOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

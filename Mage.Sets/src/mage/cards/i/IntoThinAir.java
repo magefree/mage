@@ -39,7 +39,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Plopman
  */
-public class IntoThinAir extends CardImpl {
+public final class IntoThinAir extends CardImpl {
 
     public IntoThinAir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GrizzlyBears extends CardImpl {
+public final class GrizzlyBears extends CardImpl {
 
     public GrizzlyBears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

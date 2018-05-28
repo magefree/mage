@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BursegSardaukar
  */
-public class SkirkCommando extends CardImpl {
+public final class SkirkCommando extends CardImpl {
 
     public SkirkCommando(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

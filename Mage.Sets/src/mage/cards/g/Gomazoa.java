@@ -54,7 +54,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class Gomazoa extends CardImpl {
+public final class Gomazoa extends CardImpl {
 
     public Gomazoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

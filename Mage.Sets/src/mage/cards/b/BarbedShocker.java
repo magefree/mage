@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author markedagain
  */
-public class BarbedShocker extends CardImpl {
+public final class BarbedShocker extends CardImpl {
 
     public BarbedShocker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

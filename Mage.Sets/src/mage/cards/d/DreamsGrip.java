@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author michael.napoleon@gmail.com
  */
-public class DreamsGrip extends CardImpl {
+public final class DreamsGrip extends CardImpl {
 
     public DreamsGrip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

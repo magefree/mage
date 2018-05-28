@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class HuntToExtinction extends CardImpl {
+public final class HuntToExtinction extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a bounty counter on it");
 

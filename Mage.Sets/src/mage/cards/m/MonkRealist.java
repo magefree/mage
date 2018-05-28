@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author fireshoes
  */
-public class MonkRealist extends CardImpl {
+public final class MonkRealist extends CardImpl {
 
     public MonkRealist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

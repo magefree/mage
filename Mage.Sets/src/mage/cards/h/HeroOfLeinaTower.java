@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HeroOfLeinaTower extends CardImpl {
+public final class HeroOfLeinaTower extends CardImpl {
 
     public HeroOfLeinaTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

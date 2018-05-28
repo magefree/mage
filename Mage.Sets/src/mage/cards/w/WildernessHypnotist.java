@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class WildernessHypnotist extends CardImpl {
+public final class WildernessHypnotist extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
 

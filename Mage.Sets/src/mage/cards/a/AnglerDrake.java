@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class AnglerDrake extends CardImpl {
+public final class AnglerDrake extends CardImpl {
 
     public AnglerDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

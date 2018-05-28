@@ -38,7 +38,7 @@ import mage.target.TargetPermanent;
  *
  * @author Backfir3
  */
-public class DesertTwister extends CardImpl {
+public final class DesertTwister extends CardImpl {
 
     public DesertTwister(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");

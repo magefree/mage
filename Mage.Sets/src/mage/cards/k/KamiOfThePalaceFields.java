@@ -41,7 +41,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class KamiOfThePalaceFields extends CardImpl {
+public final class KamiOfThePalaceFields extends CardImpl {
 
     public KamiOfThePalaceFields(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class BullCerodon extends CardImpl {
+public final class BullCerodon extends CardImpl {
 
     public BullCerodon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{W}");

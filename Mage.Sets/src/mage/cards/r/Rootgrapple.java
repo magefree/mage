@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Wehk
  */
-public class Rootgrapple extends CardImpl {
+public final class Rootgrapple extends CardImpl {
     
     private static final FilterPermanent filterNoncreature = new FilterPermanent("noncreature permanent");
     private static final FilterPermanent filterTreefolk = new FilterPermanent("If you control a Treefolk,");

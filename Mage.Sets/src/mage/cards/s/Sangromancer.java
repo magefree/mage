@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class Sangromancer extends CardImpl {
+public final class Sangromancer extends CardImpl {
 
     public Sangromancer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

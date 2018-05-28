@@ -38,7 +38,7 @@ import mage.game.permanent.token.SoundTheCallToken;
  *
  * @author TheElk801
  */
-public class SoundTheCall extends CardImpl {
+public final class SoundTheCall extends CardImpl {
 
     public SoundTheCall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

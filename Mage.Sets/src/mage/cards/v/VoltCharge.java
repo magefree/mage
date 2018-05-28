@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class VoltCharge extends CardImpl {
+public final class VoltCharge extends CardImpl {
 
     public VoltCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

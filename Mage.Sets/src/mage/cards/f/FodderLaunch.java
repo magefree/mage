@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author BursegSardaukar
  */
-public class FodderLaunch extends CardImpl {
+public final class FodderLaunch extends CardImpl {
 
     public FodderLaunch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{B}");

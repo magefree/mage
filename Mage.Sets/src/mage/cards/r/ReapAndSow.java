@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class ReapAndSow extends CardImpl {
+public final class ReapAndSow extends CardImpl {
 
     public ReapAndSow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

@@ -45,7 +45,7 @@ import mage.counters.CounterType;
 /**
  * @author fireshoes
  */
-public class PhantomNishoba extends CardImpl {
+public final class PhantomNishoba extends CardImpl {
 
     public PhantomNishoba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");

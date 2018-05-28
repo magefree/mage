@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Archer262
  */
-public class AvenOfEnduringHope extends CardImpl {
+public final class AvenOfEnduringHope extends CardImpl {
 
     public AvenOfEnduringHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

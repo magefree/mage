@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class RiptideLaboratory extends CardImpl {
+public final class RiptideLaboratory extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Wizard you control");
 

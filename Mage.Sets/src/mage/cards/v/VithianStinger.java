@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class VithianStinger extends CardImpl {
+public final class VithianStinger extends CardImpl {
 
     public VithianStinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

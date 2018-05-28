@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LoneFox
  */
-public class ReviveTheFallen extends CardImpl {
+public final class ReviveTheFallen extends CardImpl {
 
     public ReviveTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

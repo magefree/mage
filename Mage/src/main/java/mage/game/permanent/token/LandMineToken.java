@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class LandMineToken extends TokenImpl {
+public final class LandMineToken extends TokenImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
 

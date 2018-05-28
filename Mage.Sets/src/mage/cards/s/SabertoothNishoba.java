@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SabertoothNishoba extends CardImpl {
+public final class SabertoothNishoba extends CardImpl {
 
     public SabertoothNishoba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");

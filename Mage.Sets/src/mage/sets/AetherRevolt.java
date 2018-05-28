@@ -40,7 +40,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class AetherRevolt extends ExpansionSet {
+public final class AetherRevolt extends ExpansionSet {
 
     private static final AetherRevolt instance = new AetherRevolt();
 

@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class HitRun extends SplitCard {
+public final class HitRun extends SplitCard {
 
     public HitRun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}", "{3}{R}{G}", SpellAbilityType.SPLIT);

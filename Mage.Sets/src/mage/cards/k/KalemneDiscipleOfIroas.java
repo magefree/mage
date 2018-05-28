@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class KalemneDiscipleOfIroas extends CardImpl {
+public final class KalemneDiscipleOfIroas extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with converted mana cost 5 or greater");
 

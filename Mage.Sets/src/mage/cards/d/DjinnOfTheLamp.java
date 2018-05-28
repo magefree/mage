@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class DjinnOfTheLamp extends CardImpl {
+public final class DjinnOfTheLamp extends CardImpl {
 
     public DjinnOfTheLamp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

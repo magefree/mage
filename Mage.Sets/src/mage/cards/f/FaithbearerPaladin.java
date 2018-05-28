@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class FaithbearerPaladin extends CardImpl {
+public final class FaithbearerPaladin extends CardImpl {
 
     public FaithbearerPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

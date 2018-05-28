@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class PalladiumMyr extends CardImpl {
+public final class PalladiumMyr extends CardImpl {
 
     public PalladiumMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class CorpseConnoisseur extends CardImpl {
+public final class CorpseConnoisseur extends CardImpl {
 
     public CorpseConnoisseur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

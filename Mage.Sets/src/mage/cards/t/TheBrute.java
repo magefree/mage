@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Derpthemeus
  */
-public class TheBrute extends CardImpl {
+public final class TheBrute extends CardImpl {
 
     public TheBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class MorgueBurst extends CardImpl {
+public final class MorgueBurst extends CardImpl {
 
     public MorgueBurst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");

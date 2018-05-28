@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class MyrAdapter extends CardImpl {
+public final class MyrAdapter extends CardImpl {
 
     public MyrAdapter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

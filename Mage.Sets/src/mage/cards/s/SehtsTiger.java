@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SehtsTiger extends CardImpl {
+public final class SehtsTiger extends CardImpl {
 
     public SehtsTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

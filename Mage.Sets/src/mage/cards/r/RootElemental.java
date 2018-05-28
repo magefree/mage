@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author LoneFox
  */
-public class RootElemental extends CardImpl {
+public final class RootElemental extends CardImpl {
 
     public RootElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

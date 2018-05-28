@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class FontOfReturn extends CardImpl {
+public final class FontOfReturn extends CardImpl {
 
     public FontOfReturn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

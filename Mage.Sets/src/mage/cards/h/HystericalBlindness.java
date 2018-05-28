@@ -41,7 +41,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class HystericalBlindness extends CardImpl {
+public final class HystericalBlindness extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 

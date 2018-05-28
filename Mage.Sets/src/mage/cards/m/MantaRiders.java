@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class MantaRiders extends CardImpl {
+public final class MantaRiders extends CardImpl {
 
     public MantaRiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

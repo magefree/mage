@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class RangersGuile extends CardImpl {
+public final class RangersGuile extends CardImpl {
 
     public RangersGuile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

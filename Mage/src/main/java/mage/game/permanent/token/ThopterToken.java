@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class ThopterToken extends TokenImpl {
+public final class ThopterToken extends TokenImpl {
 
     public ThopterToken() {
         super("Thopter", "1/1 blue Thopter artifact creature tokens with flying");

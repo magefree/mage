@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author noxx
  *
  */
-public class AlchemistsRefuge extends CardImpl {
+public final class AlchemistsRefuge extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("spells");
 

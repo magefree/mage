@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class FallingTimber extends CardImpl {
+public final class FallingTimber extends CardImpl {
 
     private final UUID originalId;
 

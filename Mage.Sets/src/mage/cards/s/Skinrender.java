@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class Skinrender extends CardImpl {
+public final class Skinrender extends CardImpl {
 
     public Skinrender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class CoreProwler extends CardImpl {
+public final class CoreProwler extends CardImpl {
 
     public CoreProwler (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class GlacialCrasher extends CardImpl {
+public final class GlacialCrasher extends CardImpl {
 
     public GlacialCrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

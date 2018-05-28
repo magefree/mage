@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class CommuneWithLava extends CardImpl {
+public final class CommuneWithLava extends CardImpl {
 
     public CommuneWithLava(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");

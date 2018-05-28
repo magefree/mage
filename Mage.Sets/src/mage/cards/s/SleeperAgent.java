@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TGower
  */
-public class SleeperAgent extends CardImpl {
+public final class SleeperAgent extends CardImpl {
 
     public SleeperAgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

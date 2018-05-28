@@ -42,7 +42,7 @@ import mage.game.permanent.token.SkeletonToken;
  *
  * @author Loki
  */
-public class SpawningPool extends CardImpl {
+public final class SpawningPool extends CardImpl {
 
     public SpawningPool(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

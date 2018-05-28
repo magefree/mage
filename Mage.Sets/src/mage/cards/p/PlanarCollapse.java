@@ -46,7 +46,7 @@ import mage.game.Game;
  *
  * @author Plopman
  */
-public class PlanarCollapse extends CardImpl {
+public final class PlanarCollapse extends CardImpl {
 
     public PlanarCollapse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

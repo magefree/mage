@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class SpiresideInfiltrator extends CardImpl {
+public final class SpiresideInfiltrator extends CardImpl {
 
     public SpiresideInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -41,7 +41,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author TheElk801
  */
-public class WilyGoblin extends CardImpl {
+public final class WilyGoblin extends CardImpl {
 
     public WilyGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");

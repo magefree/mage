@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class MoltenPrimordial extends CardImpl {
+public final class MoltenPrimordial extends CardImpl {
 
     public MoltenPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ArashiTheSkyAsunder extends CardImpl {
+public final class ArashiTheSkyAsunder extends CardImpl {
 
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

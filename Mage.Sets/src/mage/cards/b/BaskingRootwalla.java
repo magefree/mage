@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author magenoxx_at_gmail.com
  */
-public class BaskingRootwalla extends CardImpl {
+public final class BaskingRootwalla extends CardImpl {
 
     public BaskingRootwalla(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

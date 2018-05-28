@@ -50,7 +50,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author Loki
  */
-public class GruulGuildmage extends CardImpl {
+public final class GruulGuildmage extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

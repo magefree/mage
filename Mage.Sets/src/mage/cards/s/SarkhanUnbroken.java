@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author JRHerlehy
  */
-public class SarkhanUnbroken extends CardImpl {
+public final class SarkhanUnbroken extends CardImpl {
 
     private static final FilterCard dragonFilter = new FilterCard("Dragon creature cards");
 

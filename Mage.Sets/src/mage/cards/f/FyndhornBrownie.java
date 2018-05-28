@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class FyndhornBrownie extends CardImpl {
+public final class FyndhornBrownie extends CardImpl {
 
     public FyndhornBrownie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

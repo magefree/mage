@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GoblinHeelcutter extends CardImpl {
+public final class GoblinHeelcutter extends CardImpl {
 
     public GoblinHeelcutter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class SunscourgeChampion extends CardImpl {
+public final class SunscourgeChampion extends CardImpl {
     
     private static String rule = "Eternalize - {2}{W}{W}, Discard a card <i>({2}{W}{W}, Discard a card, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie";
 

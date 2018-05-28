@@ -62,7 +62,7 @@ import mage.watchers.common.ChooseBlockersRedundancyWatcher;
  *
  * @author L_J
  */
-public class MasterWarcraft extends CardImpl {
+public final class MasterWarcraft extends CardImpl {
 
     public MasterWarcraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R/W}{R/W}");

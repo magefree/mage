@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCardInLibrary;
 
-public class RazakethsRite extends CardImpl {
+public final class RazakethsRite extends CardImpl {
 
     public RazakethsRite(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

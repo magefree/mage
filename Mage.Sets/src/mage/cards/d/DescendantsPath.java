@@ -50,7 +50,7 @@ import mage.players.Player;
  * @author noxx
  *
  */
-public class DescendantsPath extends CardImpl {
+public final class DescendantsPath extends CardImpl {
 
     public DescendantsPath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

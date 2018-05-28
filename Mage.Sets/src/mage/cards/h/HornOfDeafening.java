@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ilcartographer
  */
-public class HornOfDeafening extends CardImpl {
+public final class HornOfDeafening extends CardImpl {
 
     public HornOfDeafening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

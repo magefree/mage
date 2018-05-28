@@ -39,7 +39,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class GlissasScorn extends CardImpl {
+public final class GlissasScorn extends CardImpl {
 
     public GlissasScorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

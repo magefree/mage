@@ -44,7 +44,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author fireshoes
  */
-public class VesselOfEphemera extends CardImpl {
+public final class VesselOfEphemera extends CardImpl {
 
     public VesselOfEphemera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

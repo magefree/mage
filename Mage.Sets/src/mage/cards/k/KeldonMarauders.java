@@ -47,7 +47,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author jonubuu
  */
-public class KeldonMarauders extends CardImpl {
+public final class KeldonMarauders extends CardImpl {
 
     public KeldonMarauders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -11,7 +11,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterHistoricSpell;
 
-public class JhoiraWeatherlightCaptain extends CardImpl {
+public final class JhoiraWeatherlightCaptain extends CardImpl {
 
     public JhoiraWeatherlightCaptain(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");

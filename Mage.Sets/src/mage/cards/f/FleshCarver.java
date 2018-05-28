@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class FleshCarver extends CardImpl {
+public final class FleshCarver extends CardImpl {
 
     public FleshCarver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

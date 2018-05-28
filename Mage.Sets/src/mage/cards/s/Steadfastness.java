@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class Steadfastness extends CardImpl {
+public final class Steadfastness extends CardImpl {
 
     public Steadfastness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

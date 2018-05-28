@@ -46,7 +46,7 @@ import mage.filter.common.FilterHistoricCard;
  *
  * @author keelahnkhan
  */
-public class SanctumSpirit extends CardImpl {
+public final class SanctumSpirit extends CardImpl {
 
     public SanctumSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -48,7 +48,7 @@ import mage.watchers.common.BlockedThisTurnWatcher;
  *
  * @author Quercitron
  */
-public class DuelingGrounds extends CardImpl {
+public final class DuelingGrounds extends CardImpl {
 
     public DuelingGrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");

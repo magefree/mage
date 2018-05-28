@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class IndrikStomphowler extends CardImpl {
+public final class IndrikStomphowler extends CardImpl {
 
     public IndrikStomphowler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

@@ -44,7 +44,7 @@ import mage.filter.common.FilterPlaneswalkerCard;
 /**
  * @author JRHerlehy
  */
-public class OathOfAjani extends CardImpl {
+public final class OathOfAjani extends CardImpl {
 
     public OathOfAjani(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{W}");

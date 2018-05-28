@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GrazingGladehart extends CardImpl {
+public final class GrazingGladehart extends CardImpl {
 
     public GrazingGladehart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2 & L_J
  */
-public class Seeker extends CardImpl {
+public final class Seeker extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by artifact creatures and/or white creatures");
 

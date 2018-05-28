@@ -39,7 +39,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 /**
  * @author Loki
  */
-public class NeedleStorm extends CardImpl {
+public final class NeedleStorm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

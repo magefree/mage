@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class ErtaiWizardAdept extends CardImpl {
+public final class ErtaiWizardAdept extends CardImpl {
 
     public ErtaiWizardAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

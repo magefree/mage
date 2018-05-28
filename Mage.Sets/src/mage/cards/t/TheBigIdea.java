@@ -59,7 +59,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class TheBigIdea extends CardImpl {
+public final class TheBigIdea extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.BRAINIAC, "Brainiac creatures");
 

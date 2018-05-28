@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NaturesWay extends CardImpl {
+public final class NaturesWay extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

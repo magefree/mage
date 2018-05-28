@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author Quercitron
  */
-public class GrinningTotem extends CardImpl {
+public final class GrinningTotem extends CardImpl {
 
     public GrinningTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

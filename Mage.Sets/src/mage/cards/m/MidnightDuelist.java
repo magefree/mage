@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author noxx
 
  */
-public class MidnightDuelist extends CardImpl {
+public final class MidnightDuelist extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("Vampires");
 

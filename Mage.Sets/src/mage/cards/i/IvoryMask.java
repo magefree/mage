@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class IvoryMask extends CardImpl {
+public final class IvoryMask extends CardImpl {
 
     public IvoryMask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");

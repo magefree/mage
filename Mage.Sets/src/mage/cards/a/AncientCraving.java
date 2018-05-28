@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author ilcartographer
  */
-public class AncientCraving extends CardImpl {
+public final class AncientCraving extends CardImpl {
 
     public AncientCraving(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

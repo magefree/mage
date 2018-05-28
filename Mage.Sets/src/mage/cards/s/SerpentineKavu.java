@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class SerpentineKavu extends CardImpl {
+public final class SerpentineKavu extends CardImpl {
 
     public SerpentineKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

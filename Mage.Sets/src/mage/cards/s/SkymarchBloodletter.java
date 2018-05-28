@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class SkymarchBloodletter extends CardImpl {
+public final class SkymarchBloodletter extends CardImpl {
 
     public SkymarchBloodletter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

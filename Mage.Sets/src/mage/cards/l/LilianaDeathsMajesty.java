@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author JRHerlehy
  */
-public class LilianaDeathsMajesty extends CardImpl {
+public final class LilianaDeathsMajesty extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creatures");
 

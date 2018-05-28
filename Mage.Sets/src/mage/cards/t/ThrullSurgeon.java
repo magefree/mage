@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
  *
  */
-public class ThrullSurgeon extends CardImpl {
+public final class ThrullSurgeon extends CardImpl {
 
     public ThrullSurgeon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author jerekwilson
  */
-public class DeadIronSledge extends CardImpl {
+public final class DeadIronSledge extends CardImpl {
 
     public DeadIronSledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

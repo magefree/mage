@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class FenHauler extends CardImpl {
+public final class FenHauler extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
 

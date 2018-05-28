@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author noxx
  */
-public class SoulcageFiend extends CardImpl {
+public final class SoulcageFiend extends CardImpl {
 
     public SoulcageFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

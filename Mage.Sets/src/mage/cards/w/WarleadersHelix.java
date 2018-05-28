@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class WarleadersHelix extends CardImpl {
+public final class WarleadersHelix extends CardImpl {
 
     public WarleadersHelix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{W}");

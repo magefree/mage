@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class ChaosMoon extends CardImpl {
+public final class ChaosMoon extends CardImpl {
 
     public ChaosMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

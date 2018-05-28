@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class GrandArbiterAugustinIV extends CardImpl {
+public final class GrandArbiterAugustinIV extends CardImpl {
 
     private static final FilterCard filterWhite = new FilterCard("White spells");
     private static final FilterCard filterBlue = new FilterCard("Blue spells");

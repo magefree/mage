@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class WallOfJunk extends CardImpl {
+public final class WallOfJunk extends CardImpl {
 
     public WallOfJunk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

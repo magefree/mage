@@ -38,7 +38,7 @@ import mage.constants.TargetController;
  *
  * @author Plopman
  */
-public class FellwarStone extends CardImpl {
+public final class FellwarStone extends CardImpl {
 
     public FellwarStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

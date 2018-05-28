@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class FranticSearch extends CardImpl {
+public final class FranticSearch extends CardImpl {
 
     public FranticSearch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

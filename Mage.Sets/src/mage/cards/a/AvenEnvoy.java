@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AvenEnvoy extends CardImpl {
+public final class AvenEnvoy extends CardImpl {
 
     public AvenEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

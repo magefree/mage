@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author fireshoes
  */
-public class Blockbuster extends CardImpl {
+public final class Blockbuster extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

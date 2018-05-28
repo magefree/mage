@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LoneFox
  */
-public class StrongholdOverseer extends CardImpl {
+public final class StrongholdOverseer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with shadow");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without shadow");

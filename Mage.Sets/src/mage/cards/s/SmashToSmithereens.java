@@ -40,7 +40,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author jonubuu
  */
-public class SmashToSmithereens extends CardImpl {
+public final class SmashToSmithereens extends CardImpl {
 
     public SmashToSmithereens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

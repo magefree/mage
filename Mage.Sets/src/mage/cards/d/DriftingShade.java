@@ -45,7 +45,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class DriftingShade extends CardImpl {
+public final class DriftingShade extends CardImpl {
 
     public DriftingShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

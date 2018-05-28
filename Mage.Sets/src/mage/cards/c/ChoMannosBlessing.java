@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ChoMannosBlessing extends CardImpl {
+public final class ChoMannosBlessing extends CardImpl {
 
     public ChoMannosBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");

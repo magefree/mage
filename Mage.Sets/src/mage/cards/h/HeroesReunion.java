@@ -37,7 +37,7 @@ import mage.target.TargetPlayer;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class HeroesReunion extends CardImpl {
+public final class HeroesReunion extends CardImpl {
 
     public HeroesReunion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");

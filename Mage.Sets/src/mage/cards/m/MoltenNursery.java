@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class MoltenNursery extends CardImpl {
+public final class MoltenNursery extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a colorless spell");
 

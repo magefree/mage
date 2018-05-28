@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class MerfolkThaumaturgist extends CardImpl {
+public final class MerfolkThaumaturgist extends CardImpl {
 
     public MerfolkThaumaturgist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

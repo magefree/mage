@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.BlockingPredicate;
 /**
  * @author dustinroepsch
  */
-public class HeatStroke extends CardImpl {
+public final class HeatStroke extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 

@@ -61,7 +61,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class UginTheSpiritDragon extends CardImpl {
+public final class UginTheSpiritDragon extends CardImpl {
 
     public UginTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{8}");

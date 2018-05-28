@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Styxo
  */
-public class SacredGuide extends CardImpl {
+public final class SacredGuide extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("white card");
 

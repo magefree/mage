@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author KholdFuzion
  */
-public class AliFromCairo extends CardImpl {
+public final class AliFromCairo extends CardImpl {
 
     public AliFromCairo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

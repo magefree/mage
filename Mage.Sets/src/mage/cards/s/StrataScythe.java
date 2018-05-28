@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class StrataScythe extends CardImpl {
+public final class StrataScythe extends CardImpl {
 
     public StrataScythe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

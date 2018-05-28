@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class BileBlight extends CardImpl {
+public final class BileBlight extends CardImpl {
 
     public BileBlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");

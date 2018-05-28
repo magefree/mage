@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class LingeringDeath extends CardImpl {
+public final class LingeringDeath extends CardImpl {
 
     public LingeringDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

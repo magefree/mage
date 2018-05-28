@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class TalruumChampion extends CardImpl {
+public final class TalruumChampion extends CardImpl {
 
     public TalruumChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

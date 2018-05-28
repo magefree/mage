@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class AvacynianPriest extends CardImpl {
+public final class AvacynianPriest extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creature");
 

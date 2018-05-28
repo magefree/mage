@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class SunbirdsInvocation extends CardImpl {
+public final class SunbirdsInvocation extends CardImpl {
 
     public SunbirdsInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");

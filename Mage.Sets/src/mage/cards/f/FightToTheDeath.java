@@ -41,7 +41,7 @@ import mage.filter.predicate.permanent.BlockingPredicate;
  *
  * @author jeffwadsworth
  */
-public class FightToTheDeath extends CardImpl {
+public final class FightToTheDeath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all blocking creatures and all blocked creatures");
 

@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class Flux extends CardImpl {
+public final class Flux extends CardImpl {
 
     public Flux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

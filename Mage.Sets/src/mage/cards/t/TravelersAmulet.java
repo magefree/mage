@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class TravelersAmulet extends CardImpl {
+public final class TravelersAmulet extends CardImpl {
 
     public TravelersAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

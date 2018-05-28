@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class StructuralCollapse extends CardImpl {
+public final class StructuralCollapse extends CardImpl {
 
     public StructuralCollapse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");

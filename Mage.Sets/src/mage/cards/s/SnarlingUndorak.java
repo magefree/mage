@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class SnarlingUndorak extends CardImpl {
+public final class SnarlingUndorak extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creature");
 

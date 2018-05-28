@@ -40,7 +40,7 @@ import mage.constants.CardType;
  */
 
 
-public class WakeTheReflections extends CardImpl {
+public final class WakeTheReflections extends CardImpl {
 
     public WakeTheReflections(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class CursedMonstrosity extends CardImpl {
+public final class CursedMonstrosity extends CardImpl {
 
     public CursedMonstrosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

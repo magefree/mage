@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author EvilGeek
  */
-public class MindPeel extends CardImpl {
+public final class MindPeel extends CardImpl {
 
     public MindPeel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

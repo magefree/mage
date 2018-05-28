@@ -38,7 +38,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Loki
  */
-public class Erase extends CardImpl {
+public final class Erase extends CardImpl {
 
     public Erase(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

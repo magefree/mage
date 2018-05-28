@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class NehebTheWorthy extends CardImpl {
+public final class NehebTheWorthy extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaurs");
 

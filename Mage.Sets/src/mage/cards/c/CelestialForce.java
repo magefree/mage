@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class CelestialForce extends CardImpl {
+public final class CelestialForce extends CardImpl {
 
     public CelestialForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");

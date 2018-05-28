@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Backfir3
  */
-public class StrongarmThug extends CardImpl {
+public final class StrongarmThug extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary card");
 

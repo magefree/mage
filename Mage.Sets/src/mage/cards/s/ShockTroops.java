@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class ShockTroops extends CardImpl {
+public final class ShockTroops extends CardImpl {
 
     public ShockTroops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

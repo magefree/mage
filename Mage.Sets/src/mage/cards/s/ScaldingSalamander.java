@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
  *
  * @author TheElk801
  */
-public class ScaldingSalamander extends CardImpl {
+public final class ScaldingSalamander extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature without flying defending player controls");
 

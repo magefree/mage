@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author noxx
  */
-public class DriverOfTheDead extends CardImpl {
+public final class DriverOfTheDead extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard to the battlefield");
 

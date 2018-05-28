@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author michael.napoleon@gmail.com
  */
-public class Duskwalker extends CardImpl {
+public final class Duskwalker extends CardImpl {
 
     public Duskwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

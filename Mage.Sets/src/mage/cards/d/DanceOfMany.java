@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class DanceOfMany extends CardImpl {
+public final class DanceOfMany extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 

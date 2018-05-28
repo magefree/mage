@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class HinderingTouch extends CardImpl {
+public final class HinderingTouch extends CardImpl {
 
     public HinderingTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

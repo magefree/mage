@@ -64,7 +64,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class JestersScepter extends CardImpl {
+public final class JestersScepter extends CardImpl {
 
     public JestersScepter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

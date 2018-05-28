@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Styxo
  */
-public class EarthSurge extends CardImpl {
+public final class EarthSurge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("land creatures");
 

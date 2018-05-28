@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author noxx
  */
-public class DreadSlaver extends CardImpl {
+public final class DreadSlaver extends CardImpl {
 
     public DreadSlaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

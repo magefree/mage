@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class HarborGuardian extends CardImpl {
+public final class HarborGuardian extends CardImpl {
 
     public HarborGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

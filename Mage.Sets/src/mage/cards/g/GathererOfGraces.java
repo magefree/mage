@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author igoudt
  */
-public class GathererOfGraces extends CardImpl {
+public final class GathererOfGraces extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Aura");
 

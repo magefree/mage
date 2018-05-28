@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class NehebTheEternal extends CardImpl {
+public final class NehebTheEternal extends CardImpl {
 
     public NehebTheEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

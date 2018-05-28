@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class FamiliarsRuse extends CardImpl {
+public final class FamiliarsRuse extends CardImpl {
 
     public FamiliarsRuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");

@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class HorizonChimera extends CardImpl {
+public final class HorizonChimera extends CardImpl {
 
     public HorizonChimera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");

@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class GempalmPolluter extends CardImpl {
+public final class GempalmPolluter extends CardImpl {
 
     static final private FilterPermanent filter = new FilterPermanent("Zombie");
 

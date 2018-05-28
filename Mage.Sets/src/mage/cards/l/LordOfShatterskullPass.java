@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class LordOfShatterskullPass extends LevelerCard {
+public final class LordOfShatterskullPass extends LevelerCard {
 
     public LordOfShatterskullPass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

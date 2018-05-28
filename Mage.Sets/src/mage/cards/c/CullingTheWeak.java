@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class CullingTheWeak extends CardImpl {
+public final class CullingTheWeak extends CardImpl {
 
     public CullingTheWeak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

@@ -34,7 +34,7 @@ import mage.constants.SetType;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Innistrad extends ExpansionSet {
+public final class Innistrad extends ExpansionSet {
 
     private static final Innistrad instance = new Innistrad();
 

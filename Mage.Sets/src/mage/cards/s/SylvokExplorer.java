@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author Plopman
  */
-public class SylvokExplorer extends CardImpl {
+public final class SylvokExplorer extends CardImpl {
 
     public SylvokExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

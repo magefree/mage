@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class LivingDestiny extends CardImpl {
+public final class LivingDestiny extends CardImpl {
 
     public LivingDestiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

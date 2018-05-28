@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FesteringNewt extends CardImpl {
+public final class FesteringNewt extends CardImpl {
 
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature an opponent controls");
     private static final FilterCreaturePermanent filterBogbrewWitch = new FilterCreaturePermanent();

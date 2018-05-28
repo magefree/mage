@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LoxodonConvert extends CardImpl {
+public final class LoxodonConvert extends CardImpl {
 
     public LoxodonConvert(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

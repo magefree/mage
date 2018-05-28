@@ -48,7 +48,7 @@ import java.util.*;
  *
  * @author LevelX2
  */
-public class UbaMask extends CardImpl {
+public final class UbaMask extends CardImpl {
 
     public UbaMask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -52,7 +52,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class SporolothAncient extends CardImpl {
+public final class SporolothAncient extends CardImpl {
 
     public SporolothAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

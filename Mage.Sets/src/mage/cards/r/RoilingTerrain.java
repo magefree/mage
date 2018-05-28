@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class RoilingTerrain extends CardImpl {
+public final class RoilingTerrain extends CardImpl {
 
     public RoilingTerrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

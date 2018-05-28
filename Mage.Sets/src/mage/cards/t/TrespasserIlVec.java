@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class TrespasserIlVec extends CardImpl {
+public final class TrespasserIlVec extends CardImpl {
 
     public TrespasserIlVec(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

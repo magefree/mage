@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AethermagesTouch extends CardImpl {
+public final class AethermagesTouch extends CardImpl {
 
     public AethermagesTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");

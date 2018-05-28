@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-public class BloodBaronOfVizkopa extends CardImpl {
+public final class BloodBaronOfVizkopa extends CardImpl {
 
     public BloodBaronOfVizkopa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}");

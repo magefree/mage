@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author LoneFox
  */
-public class Ramroller extends CardImpl {
+public final class Ramroller extends CardImpl {
 
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent();
 

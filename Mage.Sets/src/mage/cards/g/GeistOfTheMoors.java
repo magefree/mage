@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class GeistOfTheMoors extends CardImpl {
+public final class GeistOfTheMoors extends CardImpl {
 
     public GeistOfTheMoors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

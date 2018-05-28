@@ -38,7 +38,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LoneFox
  */
-public class DesertSandstorm extends CardImpl {
+public final class DesertSandstorm extends CardImpl {
 
     public DesertSandstorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

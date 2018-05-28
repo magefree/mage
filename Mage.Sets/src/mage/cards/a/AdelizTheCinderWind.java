@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author JRHerlehy
  */
-public class AdelizTheCinderWind extends CardImpl {
+public final class AdelizTheCinderWind extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizards");
 

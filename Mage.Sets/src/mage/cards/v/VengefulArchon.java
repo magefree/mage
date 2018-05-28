@@ -50,7 +50,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VengefulArchon extends CardImpl {
+public final class VengefulArchon extends CardImpl {
 
     public VengefulArchon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");

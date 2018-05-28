@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class WildWurm extends CardImpl {
+public final class WildWurm extends CardImpl {
 
     public WildWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class DesertsHold extends CardImpl {
+public final class DesertsHold extends CardImpl {
 
     private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
     private static final FilterCard filterDesertCard = new FilterCard("Desert card");

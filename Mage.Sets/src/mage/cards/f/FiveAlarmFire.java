@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class FiveAlarmFire extends CardImpl {
+public final class FiveAlarmFire extends CardImpl {
 
     public FiveAlarmFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");

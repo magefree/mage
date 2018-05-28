@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class MapTheWastes extends CardImpl {
+public final class MapTheWastes extends CardImpl {
 
     public MapTheWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

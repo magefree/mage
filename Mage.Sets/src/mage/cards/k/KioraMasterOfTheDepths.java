@@ -63,7 +63,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class KioraMasterOfTheDepths extends CardImpl {
+public final class KioraMasterOfTheDepths extends CardImpl {
 
     public KioraMasterOfTheDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");

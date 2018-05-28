@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SilhanaLedgewalker extends CardImpl {
+public final class SilhanaLedgewalker extends CardImpl {
 
     public SilhanaLedgewalker (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

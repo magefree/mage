@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class GracefulCat extends CardImpl {
+public final class GracefulCat extends CardImpl {
 
     public GracefulCat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

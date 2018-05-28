@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MossMonster extends CardImpl {
+public final class MossMonster extends CardImpl {
 
     public MossMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

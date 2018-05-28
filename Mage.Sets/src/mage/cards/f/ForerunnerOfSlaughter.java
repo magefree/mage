@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ForerunnerOfSlaughter extends CardImpl {
+public final class ForerunnerOfSlaughter extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature");
 

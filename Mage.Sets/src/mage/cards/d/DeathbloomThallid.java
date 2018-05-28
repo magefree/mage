@@ -41,7 +41,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author TheElk801
  */
-public class DeathbloomThallid extends CardImpl {
+public final class DeathbloomThallid extends CardImpl {
 
     public DeathbloomThallid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

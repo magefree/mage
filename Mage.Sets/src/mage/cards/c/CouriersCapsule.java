@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CouriersCapsule extends CardImpl {
+public final class CouriersCapsule extends CardImpl {
 
     public CouriersCapsule (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{U}");

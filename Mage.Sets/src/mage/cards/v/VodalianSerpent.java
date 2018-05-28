@@ -48,7 +48,7 @@ import mage.filter.common.FilterLandPermanent;
  * @author LoneFox
 
  */
-public class VodalianSerpent extends CardImpl {
+public final class VodalianSerpent extends CardImpl {
 
     public VodalianSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -54,7 +54,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class OathOfChandra extends CardImpl {
+public final class OathOfChandra extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

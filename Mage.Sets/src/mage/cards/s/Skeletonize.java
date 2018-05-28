@@ -50,7 +50,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author North
  */
-public class Skeletonize extends CardImpl {
+public final class Skeletonize extends CardImpl {
 
     public Skeletonize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");

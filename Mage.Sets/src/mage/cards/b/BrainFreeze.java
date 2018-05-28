@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class BrainFreeze extends CardImpl {
+public final class BrainFreeze extends CardImpl {
 
     public BrainFreeze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

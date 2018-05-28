@@ -46,7 +46,7 @@ import mage.players.Player;
  * @author noxx & L_J
 
  */
-public class LonghornFirebeast extends CardImpl {
+public final class LonghornFirebeast extends CardImpl {
 
     public LonghornFirebeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

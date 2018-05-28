@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
  *
  */
-public class RiverfallMimic extends CardImpl {
+public final class RiverfallMimic extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell that's both blue and red");
 

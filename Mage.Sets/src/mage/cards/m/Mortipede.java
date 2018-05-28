@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class Mortipede extends CardImpl {
+public final class Mortipede extends CardImpl {
 
     public Mortipede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

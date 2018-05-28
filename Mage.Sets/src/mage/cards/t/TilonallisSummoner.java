@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author LevelX2
  */
-public class TilonallisSummoner extends CardImpl {
+public final class TilonallisSummoner extends CardImpl {
 
     public TilonallisSummoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author michael.napoleon@gmail.com
  */
-public class NightscapeMaster extends CardImpl {
+public final class NightscapeMaster extends CardImpl {
 
     public NightscapeMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

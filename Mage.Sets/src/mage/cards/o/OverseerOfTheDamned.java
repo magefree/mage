@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OverseerOfTheDamned extends CardImpl {
+public final class OverseerOfTheDamned extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature an opponent controls");
 

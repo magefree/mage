@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class BlisterstickShaman extends CardImpl {
+public final class BlisterstickShaman extends CardImpl {
 
     public BlisterstickShaman (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

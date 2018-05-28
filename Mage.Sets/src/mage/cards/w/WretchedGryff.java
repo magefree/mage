@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class WretchedGryff extends CardImpl {
+public final class WretchedGryff extends CardImpl {
 
     public WretchedGryff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}");

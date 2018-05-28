@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author emerald000
  */
-public class Compost extends CardImpl {
+public final class Compost extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a black card");
 

@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author emerald000
  */
-public class DrafnasRestoration extends CardImpl {
+public final class DrafnasRestoration extends CardImpl {
 
     public DrafnasRestoration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");

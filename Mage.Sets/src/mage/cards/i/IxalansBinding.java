@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class IxalansBinding extends CardImpl {
+public final class IxalansBinding extends CardImpl {
 
     private final static FilterNonlandPermanent filter = new FilterNonlandPermanent();
 

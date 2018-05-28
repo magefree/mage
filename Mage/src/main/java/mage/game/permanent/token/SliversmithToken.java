@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SliversmithToken extends TokenImpl {
+public final class SliversmithToken extends TokenImpl {
 
     public SliversmithToken() {
         super("Metallic Sliver", "1/1 colorless Sliver creature token named Metallic Sliver");

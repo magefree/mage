@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author psykad
  */
-public class CairnWanderer extends CardImpl {
+public final class CairnWanderer extends CardImpl {
 
     public CairnWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

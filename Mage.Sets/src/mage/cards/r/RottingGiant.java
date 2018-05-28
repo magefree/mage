@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class RottingGiant extends CardImpl {
+public final class RottingGiant extends CardImpl {
 
     public RottingGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

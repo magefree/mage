@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class DragonTyrant extends CardImpl {
+public final class DragonTyrant extends CardImpl {
 
     public DragonTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{R}{R}");

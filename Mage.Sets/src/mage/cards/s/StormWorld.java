@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class StormWorld extends CardImpl {
+public final class StormWorld extends CardImpl {
 
     public StormWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");

@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
 /**
  * @author Loki
  */
-public class SireOfTheStorm extends CardImpl {
+public final class SireOfTheStorm extends CardImpl {
 
     public SireOfTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

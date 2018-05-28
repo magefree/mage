@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class CrumblingVestige extends CardImpl {
+public final class CrumblingVestige extends CardImpl {
 
     public CrumblingVestige(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class SubmergedBoneyard extends CardImpl {
+public final class SubmergedBoneyard extends CardImpl {
 
     public SubmergedBoneyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

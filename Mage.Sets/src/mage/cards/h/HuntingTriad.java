@@ -41,7 +41,7 @@ import mage.game.permanent.token.ElfToken;
  *
  * @author Loki
  */
-public class HuntingTriad extends CardImpl {
+public final class HuntingTriad extends CardImpl {
 
     public HuntingTriad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{G}");

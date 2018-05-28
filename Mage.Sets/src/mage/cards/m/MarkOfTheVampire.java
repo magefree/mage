@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MarkOfTheVampire extends CardImpl {
+public final class MarkOfTheVampire extends CardImpl {
 
     public MarkOfTheVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

@@ -48,7 +48,7 @@ import mage.watchers.common.AttackedLastTurnWatcher;
  *
  * @author L_J
  */
-public class HallsOfMist extends CardImpl {
+public final class HallsOfMist extends CardImpl {
 
     public HallsOfMist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

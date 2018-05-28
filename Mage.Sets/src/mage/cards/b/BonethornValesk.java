@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class BonethornValesk extends CardImpl {
+public final class BonethornValesk extends CardImpl {
 
     public BonethornValesk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

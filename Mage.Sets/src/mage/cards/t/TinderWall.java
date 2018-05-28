@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  *
  * @author Plopman
  */
-public class TinderWall extends CardImpl {
+public final class TinderWall extends CardImpl {
 
     public TinderWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

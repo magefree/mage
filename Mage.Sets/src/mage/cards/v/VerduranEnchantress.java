@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class VerduranEnchantress extends CardImpl {
+public final class VerduranEnchantress extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 

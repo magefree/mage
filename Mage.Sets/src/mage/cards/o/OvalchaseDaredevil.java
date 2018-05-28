@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class OvalchaseDaredevil extends CardImpl {
+public final class OvalchaseDaredevil extends CardImpl {
 
     private static final FilterPermanent filter = new FilterArtifactPermanent("an artifact");
 

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class JwarIsleRefuge extends CardImpl {
+public final class JwarIsleRefuge extends CardImpl {
 
     public JwarIsleRefuge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

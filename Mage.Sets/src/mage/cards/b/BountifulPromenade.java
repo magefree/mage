@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class BountifulPromenade extends CardImpl {
+public final class BountifulPromenade extends CardImpl {
 
     public BountifulPromenade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

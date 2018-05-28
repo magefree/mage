@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author TheElk801
  */
-public class PredatoryHunger extends CardImpl {
+public final class PredatoryHunger extends CardImpl {
 
     public PredatoryHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");

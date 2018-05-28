@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Styxo
  */
-public class HarvestSeason extends CardImpl {
+public final class HarvestSeason extends CardImpl {
 
     public HarvestSeason(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

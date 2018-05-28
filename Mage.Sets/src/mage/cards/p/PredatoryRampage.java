@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class PredatoryRampage extends CardImpl {
+public final class PredatoryRampage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature your opponents control");
 

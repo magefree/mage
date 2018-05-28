@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class TeremkoGriffin extends CardImpl {
+public final class TeremkoGriffin extends CardImpl {
 
     public TeremkoGriffin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

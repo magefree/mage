@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author djbrez
  */
-public class WuSpy extends CardImpl {
+public final class WuSpy extends CardImpl {
 
     public WuSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class MetallicRebuke extends CardImpl {
+public final class MetallicRebuke extends CardImpl {
 
     public MetallicRebuke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

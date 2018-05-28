@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class ParallaxTide extends CardImpl {
+public final class ParallaxTide extends CardImpl {
 
     public ParallaxTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

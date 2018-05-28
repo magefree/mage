@@ -49,7 +49,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko
  */
-public class CloneShell extends CardImpl {
+public final class CloneShell extends CardImpl {
 
     public CloneShell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

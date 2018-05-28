@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class FoothillGuide extends CardImpl {
+public final class FoothillGuide extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Goblins");
 

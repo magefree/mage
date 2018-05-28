@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author TheElk801
  */
-public class Waylay extends CardImpl {
+public final class Waylay extends CardImpl {
 
     public Waylay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

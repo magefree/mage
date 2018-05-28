@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RecklessBrute extends CardImpl {
+public final class RecklessBrute extends CardImpl {
 
     public RecklessBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class ValakutFireboar extends CardImpl {
+public final class ValakutFireboar extends CardImpl {
 
     public ValakutFireboar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

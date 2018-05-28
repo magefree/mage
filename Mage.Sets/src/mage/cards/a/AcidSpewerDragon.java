@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class AcidSpewerDragon extends CardImpl {
+public final class AcidSpewerDragon extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Dragon creature you control");
 

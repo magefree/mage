@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Derpthemeus
  */
-public class DefilingTears extends CardImpl {
+public final class DefilingTears extends CardImpl {
 
     public DefilingTears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");

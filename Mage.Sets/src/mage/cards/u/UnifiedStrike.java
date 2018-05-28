@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author TheElk801
  */
-public class UnifiedStrike extends CardImpl {
+public final class UnifiedStrike extends CardImpl {
 
     public UnifiedStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

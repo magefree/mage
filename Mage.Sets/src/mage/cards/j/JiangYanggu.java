@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class JiangYanggu extends CardImpl {
+public final class JiangYanggu extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature name Mowu");
 

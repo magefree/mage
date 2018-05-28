@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class WortBoggartAuntie extends CardImpl {
+public final class WortBoggartAuntie extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Goblin card from your graveyard");
 

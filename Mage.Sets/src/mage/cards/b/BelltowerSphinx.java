@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class BelltowerSphinx extends CardImpl {
+public final class BelltowerSphinx extends CardImpl {
 
     public BelltowerSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

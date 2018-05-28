@@ -45,7 +45,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author TheElk801
  */
-public class DeadeyeTormentor extends CardImpl {
+public final class DeadeyeTormentor extends CardImpl {
 
     public DeadeyeTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

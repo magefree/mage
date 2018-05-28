@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class ElvenWarhounds extends CardImpl {
+public final class ElvenWarhounds extends CardImpl {
 
     public ElvenWarhounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

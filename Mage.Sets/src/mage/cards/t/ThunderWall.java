@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author icetc
  */
-public class ThunderWall extends CardImpl {
+public final class ThunderWall extends CardImpl {
 
     public ThunderWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

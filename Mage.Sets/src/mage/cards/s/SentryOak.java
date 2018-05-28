@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author Styxo
  */
-public class SentryOak extends CardImpl {
+public final class SentryOak extends CardImpl {
 
     public SentryOak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

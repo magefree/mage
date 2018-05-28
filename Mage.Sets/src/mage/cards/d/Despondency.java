@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author hanasu
  */
-public class Despondency extends CardImpl {
+public final class Despondency extends CardImpl {
 
     public Despondency(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

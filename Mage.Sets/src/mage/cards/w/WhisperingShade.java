@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class WhisperingShade extends CardImpl {
+public final class WhisperingShade extends CardImpl {
 
     public WhisperingShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

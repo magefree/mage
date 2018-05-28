@@ -49,7 +49,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author emerald000
  */
-public class WingmateRoc extends CardImpl {
+public final class WingmateRoc extends CardImpl {
 
     public WingmateRoc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

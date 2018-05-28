@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class CosisTrickster extends CardImpl {
+public final class CosisTrickster extends CardImpl {
 
     public CosisTrickster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

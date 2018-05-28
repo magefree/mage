@@ -43,7 +43,7 @@ import mage.game.permanent.token.DragonToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BroodmateDragon extends CardImpl {
+public final class BroodmateDragon extends CardImpl {
 
     private static DragonToken dragonToken = new DragonToken();
 

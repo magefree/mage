@@ -45,7 +45,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author michael.napoleon@gmail.com
  */
-public class TrenchWurm extends CardImpl {
+public final class TrenchWurm extends CardImpl {
 
     public TrenchWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

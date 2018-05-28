@@ -47,7 +47,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author LevelX2
  */
-public class NullstoneGargoyle extends CardImpl {
+public final class NullstoneGargoyle extends CardImpl {
 
     public NullstoneGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{9}");

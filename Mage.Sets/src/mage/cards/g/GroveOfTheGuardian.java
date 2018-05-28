@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class GroveOfTheGuardian extends CardImpl {
+public final class GroveOfTheGuardian extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 

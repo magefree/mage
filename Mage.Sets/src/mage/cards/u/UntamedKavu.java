@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author tcontis
  */
-public class UntamedKavu extends CardImpl {
+public final class UntamedKavu extends CardImpl {
 
     public UntamedKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

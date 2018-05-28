@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DiluvianPrimordial extends CardImpl {
+public final class DiluvianPrimordial extends CardImpl {
 
     public DiluvianPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

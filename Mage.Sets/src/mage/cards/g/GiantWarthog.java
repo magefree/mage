@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GiantWarthog extends CardImpl {
+public final class GiantWarthog extends CardImpl {
 
     public GiantWarthog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

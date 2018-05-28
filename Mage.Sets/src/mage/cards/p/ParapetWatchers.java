@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class ParapetWatchers extends CardImpl {
+public final class ParapetWatchers extends CardImpl {
 
     public ParapetWatchers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

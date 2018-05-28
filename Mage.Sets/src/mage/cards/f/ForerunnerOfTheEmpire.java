@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author JayDi85
  */
-public class ForerunnerOfTheEmpire extends CardImpl {
+public final class ForerunnerOfTheEmpire extends CardImpl {
 
     private static final FilterCreaturePermanent filterAnyDinosaur = new FilterCreaturePermanent(SubType.DINOSAUR, SubType.DINOSAUR.toString());
 

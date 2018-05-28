@@ -46,7 +46,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author fireshoes
  */
-public class AetherInspector extends CardImpl {
+public final class AetherInspector extends CardImpl {
 
     public AetherInspector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

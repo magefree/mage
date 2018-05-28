@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RiverBoa extends CardImpl {
+public final class RiverBoa extends CardImpl {
 
     public RiverBoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

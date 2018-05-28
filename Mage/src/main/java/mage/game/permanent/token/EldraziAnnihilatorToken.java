@@ -36,7 +36,7 @@ import mage.abilities.keyword.AnnihilatorAbility;
  *
  * @author spjspj
  */
-public class EldraziAnnihilatorToken extends TokenImpl {
+public final class EldraziAnnihilatorToken extends TokenImpl {
 
     public EldraziAnnihilatorToken() {
         super("Eldrazi", "7/7 colorless Eldrazi creature token");

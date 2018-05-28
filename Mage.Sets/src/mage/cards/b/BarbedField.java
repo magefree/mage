@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class BarbedField extends CardImpl {
+public final class BarbedField extends CardImpl {
 
     public BarbedField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");

@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Styxo
  */
-public class HuttPalace extends CardImpl {
+public final class HuttPalace extends CardImpl {
 
     public HuttPalace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

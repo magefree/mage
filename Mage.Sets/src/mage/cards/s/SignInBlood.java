@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SignInBlood extends CardImpl {
+public final class SignInBlood extends CardImpl {
 
     public SignInBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");

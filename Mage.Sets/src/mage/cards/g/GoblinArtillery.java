@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class GoblinArtillery extends CardImpl {
+public final class GoblinArtillery extends CardImpl {
 
     public GoblinArtillery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

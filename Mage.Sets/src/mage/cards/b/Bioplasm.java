@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class Bioplasm extends CardImpl {
+public final class Bioplasm extends CardImpl {
 
     public Bioplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

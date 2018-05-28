@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author maurer.it_at_gmail.com
  */
-public class TrainingGrounds extends CardImpl {
+public final class TrainingGrounds extends CardImpl {
 
     public TrainingGrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

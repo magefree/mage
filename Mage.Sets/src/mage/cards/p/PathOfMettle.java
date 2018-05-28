@@ -53,7 +53,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class PathOfMettle extends CardImpl {
+public final class PathOfMettle extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that doesn't have first strike, double strike, vigilance, or haste");
 

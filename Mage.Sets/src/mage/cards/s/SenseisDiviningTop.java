@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX
  */
-public class SenseisDiviningTop extends CardImpl {
+public final class SenseisDiviningTop extends CardImpl {
 
     public SenseisDiviningTop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.HistoricPredicate;
  *
  * @author TheElk801
  */
-public class LingeringPhantom extends CardImpl {
+public final class LingeringPhantom extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 

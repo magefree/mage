@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class GeneralsRegalia extends CardImpl {
+public final class GeneralsRegalia extends CardImpl {
 
     public GeneralsRegalia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

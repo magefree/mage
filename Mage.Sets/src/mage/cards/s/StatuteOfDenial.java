@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class StatuteOfDenial extends CardImpl {
+public final class StatuteOfDenial extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creature");
 

@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class CrownOfEmpires extends CardImpl {
+public final class CrownOfEmpires extends CardImpl {
 
     public CrownOfEmpires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

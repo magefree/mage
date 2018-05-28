@@ -47,7 +47,7 @@ import mage.game.permanent.token.custom.CreatureToken;
  *
  * @author Plopman
  */
-public class NaturalAffinity extends CardImpl {
+public final class NaturalAffinity extends CardImpl {
 
     public NaturalAffinity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

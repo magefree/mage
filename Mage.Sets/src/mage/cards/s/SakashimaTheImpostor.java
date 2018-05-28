@@ -53,7 +53,7 @@ import mage.util.functions.ApplyToPermanent;
 /**
  * @author LevelX2
  */
-public class SakashimaTheImpostor extends CardImpl {
+public final class SakashimaTheImpostor extends CardImpl {
 
     public SakashimaTheImpostor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author nigelzor
  */
-public class ManaSkimmer extends CardImpl {
+public final class ManaSkimmer extends CardImpl {
 
     public ManaSkimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

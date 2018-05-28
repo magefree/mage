@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class EchoesOfTheKinTree extends CardImpl {
+public final class EchoesOfTheKinTree extends CardImpl {
 
     public EchoesOfTheKinTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

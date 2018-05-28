@@ -55,7 +55,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author TheElk801
  */
-public class Kookus extends CardImpl {
+public final class Kookus extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

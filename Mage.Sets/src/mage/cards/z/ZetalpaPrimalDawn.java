@@ -44,7 +44,7 @@ import mage.constants.SuperType;
  *
  * @author L_J
  */
-public class ZetalpaPrimalDawn extends CardImpl {
+public final class ZetalpaPrimalDawn extends CardImpl {
 
     public ZetalpaPrimalDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}");

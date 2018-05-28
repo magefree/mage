@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PyxisOfPandemonium extends CardImpl {
+public final class PyxisOfPandemonium extends CardImpl {
 
     public PyxisOfPandemonium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

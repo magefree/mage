@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class GraveRobbers extends CardImpl {
+public final class GraveRobbers extends CardImpl {
 
     public GraveRobbers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

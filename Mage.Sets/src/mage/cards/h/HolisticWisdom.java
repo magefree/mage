@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class HolisticWisdom extends CardImpl {
+public final class HolisticWisdom extends CardImpl {
 
     public HolisticWisdom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");

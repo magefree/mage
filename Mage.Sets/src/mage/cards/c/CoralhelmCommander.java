@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class CoralhelmCommander extends LevelerCard {
+public final class CoralhelmCommander extends LevelerCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creatures");
 

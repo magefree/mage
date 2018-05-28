@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author anonymous
  */
-public class ElephantGraveyard extends CardImpl {
+public final class ElephantGraveyard extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent(SubType.ELEPHANT, "Elephant");
 

@@ -37,7 +37,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class SpiritToken extends TokenImpl {
+public final class SpiritToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

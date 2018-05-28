@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class CapturedSunlight extends CardImpl {
+public final class CapturedSunlight extends CardImpl {
 
     public CapturedSunlight (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{W}");

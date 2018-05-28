@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class RecruiterOfTheGuard extends CardImpl {
+public final class RecruiterOfTheGuard extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with toughness 2 or less");
     static {

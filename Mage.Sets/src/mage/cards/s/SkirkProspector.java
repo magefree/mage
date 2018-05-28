@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class SkirkProspector extends CardImpl {
+public final class SkirkProspector extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
 

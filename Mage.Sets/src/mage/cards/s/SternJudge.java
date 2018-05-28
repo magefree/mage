@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class SternJudge extends CardImpl {
+public final class SternJudge extends CardImpl {
 
     public SternJudge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Loki
  */
-public class ElfReplica extends CardImpl {
+public final class ElfReplica extends CardImpl {
 
     public ElfReplica(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

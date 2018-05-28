@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RingwardenOwl extends CardImpl {
+public final class RingwardenOwl extends CardImpl {
 
     public RingwardenOwl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

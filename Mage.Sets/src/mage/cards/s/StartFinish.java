@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class StartFinish extends SplitCard {
+public final class StartFinish extends SplitCard {
 
     public StartFinish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{2}{W}", "{2}{B}", SpellAbilityType.SPLIT_AFTERMATH);

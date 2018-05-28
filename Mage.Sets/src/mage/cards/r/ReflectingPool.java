@@ -38,7 +38,7 @@ import mage.constants.TargetController;
  *
  * @author jeffwadsworth
  */
-public class ReflectingPool extends CardImpl {
+public final class ReflectingPool extends CardImpl {
 
     public ReflectingPool(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

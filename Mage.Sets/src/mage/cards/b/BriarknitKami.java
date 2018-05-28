@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BriarknitKami extends CardImpl {
+public final class BriarknitKami extends CardImpl {
 
     public BriarknitKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

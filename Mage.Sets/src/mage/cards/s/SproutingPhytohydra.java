@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author markedagain
  */
-public class SproutingPhytohydra extends CardImpl {
+public final class SproutingPhytohydra extends CardImpl {
 
     public SproutingPhytohydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

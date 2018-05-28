@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author fireshoes
  */
-public class OathOfTheGatewatch extends ExpansionSet {
+public final class OathOfTheGatewatch extends ExpansionSet {
 
     private static final OathOfTheGatewatch instance = new OathOfTheGatewatch();
 

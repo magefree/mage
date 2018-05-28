@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class MasterOfTheFeast extends CardImpl {
+public final class MasterOfTheFeast extends CardImpl {
 
     public MasterOfTheFeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}{B}");

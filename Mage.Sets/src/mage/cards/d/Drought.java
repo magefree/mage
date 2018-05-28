@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author L_J
  */
-public class Drought extends CardImpl {
+public final class Drought extends CardImpl {
 
     public Drought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

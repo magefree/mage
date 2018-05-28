@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 /**
  * @author Loki
  */
-public class LeaveNoTrace extends CardImpl {
+public final class LeaveNoTrace extends CardImpl {
     static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {

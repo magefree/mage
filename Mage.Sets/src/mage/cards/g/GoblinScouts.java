@@ -38,7 +38,7 @@ import mage.game.permanent.token.GoblinScoutsToken;
  *
  * @author fireshoes
  */
-public class GoblinScouts extends CardImpl {
+public final class GoblinScouts extends CardImpl {
 
     public GoblinScouts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

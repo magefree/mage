@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SpitefulMotives extends CardImpl {
+public final class SpitefulMotives extends CardImpl {
 
     public SpitefulMotives(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

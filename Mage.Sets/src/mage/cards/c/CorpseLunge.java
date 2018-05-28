@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CorpseLunge extends CardImpl {
+public final class CorpseLunge extends CardImpl {
 
     public CorpseLunge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");

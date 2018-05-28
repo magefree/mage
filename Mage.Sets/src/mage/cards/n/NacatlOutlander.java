@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class NacatlOutlander extends CardImpl {
+public final class NacatlOutlander extends CardImpl {
 
     public NacatlOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

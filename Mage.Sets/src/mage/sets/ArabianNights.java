@@ -42,7 +42,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class ArabianNights extends ExpansionSet {
+public final class ArabianNights extends ExpansionSet {
 
     private static final ArabianNights instance = new ArabianNights();
 

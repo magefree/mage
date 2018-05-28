@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class ForsakenSanctuary extends CardImpl {
+public final class ForsakenSanctuary extends CardImpl {
 
     public ForsakenSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class FutureSight extends CardImpl {
+public final class FutureSight extends CardImpl {
 
     public FutureSight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}{U}");

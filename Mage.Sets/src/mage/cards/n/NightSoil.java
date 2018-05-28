@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author LevelX2
  */
-public class NightSoil extends CardImpl {
+public final class NightSoil extends CardImpl {
 
     public NightSoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");

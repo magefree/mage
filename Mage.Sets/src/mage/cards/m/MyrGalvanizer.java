@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class MyrGalvanizer extends CardImpl {
+public final class MyrGalvanizer extends CardImpl {
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr creatures");
 
     static {

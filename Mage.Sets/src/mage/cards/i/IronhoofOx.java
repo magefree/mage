@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author ilcartographer
  */
-public class IronhoofOx extends CardImpl {
+public final class IronhoofOx extends CardImpl {
 
     public IronhoofOx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

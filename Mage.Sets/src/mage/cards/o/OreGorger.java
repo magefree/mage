@@ -43,7 +43,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
 /**
  * @author Loki
  */
-public class OreGorger extends CardImpl {
+public final class OreGorger extends CardImpl {
 
     public OreGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

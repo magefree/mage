@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author LevelX2
  */
-public class UlamogsDespoiler extends CardImpl {
+public final class UlamogsDespoiler extends CardImpl {
 
     public UlamogsDespoiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");

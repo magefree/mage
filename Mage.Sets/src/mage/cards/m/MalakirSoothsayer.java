@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MalakirSoothsayer extends CardImpl {
+public final class MalakirSoothsayer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Ally you control");
 

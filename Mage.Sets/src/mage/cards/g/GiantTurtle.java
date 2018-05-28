@@ -48,7 +48,7 @@ import mage.watchers.common.AttackedLastTurnWatcher;
  *
  * @author TheElk801
  */
-public class GiantTurtle extends CardImpl {
+public final class GiantTurtle extends CardImpl {
 
     public GiantTurtle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class DimirKeyrune extends CardImpl {
+public final class DimirKeyrune extends CardImpl {
 
     public DimirKeyrune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

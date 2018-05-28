@@ -39,7 +39,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class WarriorsHonor extends CardImpl {
+public final class WarriorsHonor extends CardImpl {
 
     public WarriorsHonor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

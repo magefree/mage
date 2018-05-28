@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class DewdropSpy extends CardImpl {
+public final class DewdropSpy extends CardImpl {
 
     public DewdropSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

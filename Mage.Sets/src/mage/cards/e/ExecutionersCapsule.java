@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ExecutionersCapsule extends CardImpl {
+public final class ExecutionersCapsule extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

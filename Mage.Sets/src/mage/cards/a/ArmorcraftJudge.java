@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author LevelX2
  */
-public class ArmorcraftJudge extends CardImpl {
+public final class ArmorcraftJudge extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
 

@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BursegSardaukar
  */
-public class LastDitchEffort extends CardImpl {
+public final class LastDitchEffort extends CardImpl {
 
     public LastDitchEffort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class SaltRoadAmbushers extends CardImpl {
+public final class SaltRoadAmbushers extends CardImpl {
 
     public SaltRoadAmbushers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

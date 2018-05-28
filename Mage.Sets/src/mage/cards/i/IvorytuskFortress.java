@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author LevelX2
  */
-public class IvorytuskFortress extends CardImpl {
+public final class IvorytuskFortress extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control with a +1/+1 counter on it");
 

@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class ShivanHellkite extends CardImpl {
+public final class ShivanHellkite extends CardImpl {
 
     public ShivanHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

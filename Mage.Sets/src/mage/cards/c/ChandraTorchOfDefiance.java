@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author fireshoes
  */
-public class ChandraTorchOfDefiance extends CardImpl {
+public final class ChandraTorchOfDefiance extends CardImpl {
 
     public ChandraTorchOfDefiance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");

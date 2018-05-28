@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class ChiefOfTheEdge extends CardImpl {
+public final class ChiefOfTheEdge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Warrior creatures");
 

@@ -38,7 +38,7 @@ import mage.target.TargetStackObject;
 /**
  * @author JRHerlehy
  */
-public class Disallow extends CardImpl {
+public final class Disallow extends CardImpl {
 
     public Disallow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

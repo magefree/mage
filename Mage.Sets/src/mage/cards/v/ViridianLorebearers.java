@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ViridianLorebearers extends CardImpl {
+public final class ViridianLorebearers extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts your opponents control");
 

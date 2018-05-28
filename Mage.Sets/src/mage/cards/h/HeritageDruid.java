@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class HeritageDruid extends CardImpl {
+public final class HeritageDruid extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Elves you control");
 

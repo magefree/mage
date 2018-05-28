@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class UbulSarGatekeepers extends CardImpl {
+public final class UbulSarGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("creature an opponent controls");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Backfir3
  */
-public class SmolderingCrater extends CardImpl {
+public final class SmolderingCrater extends CardImpl {
 
     public SmolderingCrater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class HearthCharm extends CardImpl {
+public final class HearthCharm extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("artifact creature");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("attacking creatures");

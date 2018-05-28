@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GravelgillAxeshark extends CardImpl {
+public final class GravelgillAxeshark extends CardImpl {
 
     public GravelgillAxeshark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U/B}");

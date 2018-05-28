@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class Dragonstorm extends CardImpl {
+public final class Dragonstorm extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Dragon permanent card");
 

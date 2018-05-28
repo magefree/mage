@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class GraniteGargoyle extends CardImpl {
+public final class GraniteGargoyle extends CardImpl {
 
     public GraniteGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

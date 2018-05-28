@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class OraclesAttendants extends CardImpl {
+public final class OraclesAttendants extends CardImpl {
 
     public OraclesAttendants(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class Stenchskipper extends CardImpl {
+public final class Stenchskipper extends CardImpl {
 
     public Stenchskipper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

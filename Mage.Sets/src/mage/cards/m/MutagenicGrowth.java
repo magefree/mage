@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class MutagenicGrowth extends CardImpl {
+public final class MutagenicGrowth extends CardImpl {
 
     public MutagenicGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G/P}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class SelvalasEnforcer extends CardImpl {
+public final class SelvalasEnforcer extends CardImpl {
 
     public SelvalasEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

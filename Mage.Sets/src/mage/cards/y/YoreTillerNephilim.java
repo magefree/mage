@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class YoreTillerNephilim extends CardImpl {
+public final class YoreTillerNephilim extends CardImpl {
 
     public YoreTillerNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}");

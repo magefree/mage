@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jonubuu
  */
-public class FlamekinHarbinger extends CardImpl {
+public final class FlamekinHarbinger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Elemental card");
 

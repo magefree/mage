@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class DearlyDeparted extends CardImpl {
+public final class DearlyDeparted extends CardImpl {
 
     public DearlyDeparted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

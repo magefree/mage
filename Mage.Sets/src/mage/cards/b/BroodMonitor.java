@@ -43,7 +43,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author LevelX2
  */
-public class BroodMonitor extends CardImpl {
+public final class BroodMonitor extends CardImpl {
 
     public BroodMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

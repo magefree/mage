@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LightningHounds extends CardImpl {
+public final class LightningHounds extends CardImpl {
 
     public LightningHounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

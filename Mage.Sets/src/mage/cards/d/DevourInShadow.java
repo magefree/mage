@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class DevourInShadow extends CardImpl {
+public final class DevourInShadow extends CardImpl {
 
     public DevourInShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");

@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class HorriblyAwry extends CardImpl {
+public final class HorriblyAwry extends CardImpl {
 
     private static final FilterCreatureSpell filter = new FilterCreatureSpell("creature spell with converted mana cost 4 or less");
 

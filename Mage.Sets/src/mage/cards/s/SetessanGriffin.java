@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SetessanGriffin extends CardImpl {
+public final class SetessanGriffin extends CardImpl {
 
     public SetessanGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class FallenAngel extends CardImpl {
+public final class FallenAngel extends CardImpl {
 
     public FallenAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

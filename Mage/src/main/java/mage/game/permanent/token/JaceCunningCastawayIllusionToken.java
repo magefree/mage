@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class JaceCunningCastawayIllusionToken extends TokenImpl {
+public final class JaceCunningCastawayIllusionToken extends TokenImpl {
 
     public JaceCunningCastawayIllusionToken() {
         super("Illusion", "2/2 blue Illusion creature token with \"When this creature becomes the target of a spell, sacrifice it.\"");

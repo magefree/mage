@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class SpellRupture extends CardImpl {
+public final class SpellRupture extends CardImpl {
 
     public SpellRupture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

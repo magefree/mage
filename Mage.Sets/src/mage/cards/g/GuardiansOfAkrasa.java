@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GuardiansOfAkrasa extends CardImpl {
+public final class GuardiansOfAkrasa extends CardImpl {
 
     public GuardiansOfAkrasa (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

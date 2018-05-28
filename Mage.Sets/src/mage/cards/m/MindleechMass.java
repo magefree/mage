@@ -52,7 +52,7 @@ import mage.target.TargetCard;
  *
  * @author jeffwadsworth
  */
-public class MindleechMass extends CardImpl {
+public final class MindleechMass extends CardImpl {
 
     public MindleechMass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{B}{B}");

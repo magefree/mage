@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RhoxMaulers extends CardImpl {
+public final class RhoxMaulers extends CardImpl {
 
     public RhoxMaulers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BowOfNylea extends CardImpl {
+public final class BowOfNylea extends CardImpl {
 
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     static {

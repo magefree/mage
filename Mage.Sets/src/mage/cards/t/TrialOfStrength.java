@@ -44,7 +44,7 @@ import mage.game.permanent.token.BeastToken3;
  *
  * @author fireshoes
  */
-public class TrialOfStrength extends CardImpl {
+public final class TrialOfStrength extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 

@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class OblivionSower extends CardImpl {
+public final class OblivionSower extends CardImpl {
 
     public OblivionSower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}");

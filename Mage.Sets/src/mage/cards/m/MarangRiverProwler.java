@@ -54,7 +54,7 @@ import mage.game.Game;
  *
  * @author emerald000
  */
-public class MarangRiverProwler extends CardImpl {
+public final class MarangRiverProwler extends CardImpl {
 
     public MarangRiverProwler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

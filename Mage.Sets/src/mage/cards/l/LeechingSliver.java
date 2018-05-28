@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 /**
  * @author noxx
  */
-public class LeechingSliver extends CardImpl {
+public final class LeechingSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver you control");
 

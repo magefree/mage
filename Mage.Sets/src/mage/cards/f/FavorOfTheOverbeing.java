@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class FavorOfTheOverbeing extends CardImpl {
+public final class FavorOfTheOverbeing extends CardImpl {
 
     public FavorOfTheOverbeing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G/U}");

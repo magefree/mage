@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LoneFox
  */
-public class ReturnToBattle extends CardImpl {
+public final class ReturnToBattle extends CardImpl {
 
     public ReturnToBattle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class LastStand extends CardImpl {
+public final class LastStand extends CardImpl {
 
     public LastStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{U}{B}{R}{G}");

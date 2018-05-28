@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class ElvishHandservant extends CardImpl {
+public final class ElvishHandservant extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Giant");
 

@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class LatullaKeldonOverseer extends CardImpl {
+public final class LatullaKeldonOverseer extends CardImpl {
 
     public LatullaKeldonOverseer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

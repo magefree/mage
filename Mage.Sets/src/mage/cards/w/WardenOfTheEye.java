@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class WardenOfTheEye extends CardImpl {
+public final class WardenOfTheEye extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("noncreature, nonland card from your graveyard");
 

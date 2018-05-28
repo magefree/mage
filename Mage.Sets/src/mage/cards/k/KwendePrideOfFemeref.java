@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author TheElk801
  */
-public class KwendePrideOfFemeref extends CardImpl {
+public final class KwendePrideOfFemeref extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with first strike");
 

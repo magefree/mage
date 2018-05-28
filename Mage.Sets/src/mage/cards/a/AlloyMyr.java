@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North, Loki
  */
-public class AlloyMyr extends CardImpl {
+public final class AlloyMyr extends CardImpl {
 
     public AlloyMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
 /**
  * @author jeffwadsworth
  */
-public class DreamSalvage extends CardImpl {
+public final class DreamSalvage extends CardImpl {
 
     public DreamSalvage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U/B}");

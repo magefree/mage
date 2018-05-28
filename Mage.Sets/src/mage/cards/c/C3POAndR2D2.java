@@ -45,7 +45,7 @@ import mage.constants.SuperType;
  *
  * @author Styxo
  */
-public class C3POAndR2D2 extends CardImpl {
+public final class C3POAndR2D2 extends CardImpl {
 
     public C3POAndR2D2(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}{U}");

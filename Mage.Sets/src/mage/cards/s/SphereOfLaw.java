@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class SphereOfLaw extends CardImpl {
+public final class SphereOfLaw extends CardImpl {
 
     public SphereOfLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

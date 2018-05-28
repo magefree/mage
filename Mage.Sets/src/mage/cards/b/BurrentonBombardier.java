@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class BurrentonBombardier extends CardImpl {
+public final class BurrentonBombardier extends CardImpl {
 
     public BurrentonBombardier (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

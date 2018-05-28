@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DarkTutelage extends CardImpl {
+public final class DarkTutelage extends CardImpl {
 
     public DarkTutelage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

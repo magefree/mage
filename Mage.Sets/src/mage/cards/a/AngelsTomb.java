@@ -45,7 +45,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author Loki
  */
-public class AngelsTomb extends CardImpl {
+public final class AngelsTomb extends CardImpl {
 
     public AngelsTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HundredHandedOne extends CardImpl {
+public final class HundredHandedOne extends CardImpl {
 
     public HundredHandedOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

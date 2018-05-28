@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class HopeCharm extends CardImpl {
+public final class HopeCharm extends CardImpl {
 
    private static final FilterPermanent filter = new FilterPermanent("Aura");
 

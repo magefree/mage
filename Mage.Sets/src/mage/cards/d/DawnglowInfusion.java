@@ -44,7 +44,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author LevelX2
  */
-public class DawnglowInfusion extends CardImpl {
+public final class DawnglowInfusion extends CardImpl {
 
     public DawnglowInfusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G/W}");

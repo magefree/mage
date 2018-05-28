@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Backfir3
  */
-public class ArgothianEnchantress extends CardImpl {
+public final class ArgothianEnchantress extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
 

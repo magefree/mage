@@ -50,7 +50,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
  *
  * @author L_J
  */
-public class ShivanSandMage extends CardImpl {
+public final class ShivanSandMage extends CardImpl {
 
     public ShivanSandMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

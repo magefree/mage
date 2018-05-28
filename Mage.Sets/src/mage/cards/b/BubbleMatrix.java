@@ -41,7 +41,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LoneFox
  */
-public class BubbleMatrix extends CardImpl {
+public final class BubbleMatrix extends CardImpl {
 
     public BubbleMatrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

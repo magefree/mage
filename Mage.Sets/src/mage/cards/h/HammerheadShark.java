@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class HammerheadShark extends CardImpl {
+public final class HammerheadShark extends CardImpl {
 
     public HammerheadShark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

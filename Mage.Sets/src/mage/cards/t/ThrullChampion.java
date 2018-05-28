@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author MarcoMarin
  */
-public class ThrullChampion extends CardImpl {
+public final class ThrullChampion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Thrull creatures");
 

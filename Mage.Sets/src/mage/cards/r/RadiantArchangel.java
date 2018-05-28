@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author Plopman
  */
-public class RadiantArchangel extends CardImpl {
+public final class RadiantArchangel extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature with flying on the battlefield");
 

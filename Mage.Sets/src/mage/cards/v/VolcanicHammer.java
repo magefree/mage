@@ -37,7 +37,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class VolcanicHammer extends CardImpl {
+public final class VolcanicHammer extends CardImpl {
 
     public VolcanicHammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

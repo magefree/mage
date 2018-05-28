@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author noxx
  */
-public class CripplingChill extends CardImpl {
+public final class CripplingChill extends CardImpl {
 
     public CripplingChill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

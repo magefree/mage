@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class CuratorOfMysteries extends CardImpl {
+public final class CuratorOfMysteries extends CardImpl {
 
     public CuratorOfMysteries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

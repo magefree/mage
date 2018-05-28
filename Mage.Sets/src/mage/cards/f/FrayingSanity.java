@@ -53,7 +53,7 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  *
  * @author jeffwadsworth
  */
-public class FrayingSanity extends CardImpl {
+public final class FrayingSanity extends CardImpl {
 
     public FrayingSanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

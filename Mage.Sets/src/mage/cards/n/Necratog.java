@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class Necratog extends CardImpl {
+public final class Necratog extends CardImpl {
 
     public Necratog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

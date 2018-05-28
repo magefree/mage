@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 /**
  * @author Loki
  */
-public class NikkoOnna extends CardImpl {
+public final class NikkoOnna extends CardImpl {
 
     public NikkoOnna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

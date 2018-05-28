@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author fireshoes
  */
-public class SmolderingMarsh extends CardImpl {
+public final class SmolderingMarsh extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     

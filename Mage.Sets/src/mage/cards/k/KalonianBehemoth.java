@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KalonianBehemoth extends CardImpl {
+public final class KalonianBehemoth extends CardImpl {
 
     public KalonianBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

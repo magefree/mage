@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CaravanEscort extends LevelerCard {
+public final class CaravanEscort extends LevelerCard {
 
     public CaravanEscort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

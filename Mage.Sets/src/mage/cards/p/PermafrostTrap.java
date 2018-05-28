@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class PermafrostTrap extends CardImpl {
+public final class PermafrostTrap extends CardImpl {
 
     public PermafrostTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

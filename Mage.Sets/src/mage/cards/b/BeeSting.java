@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author ilcartographer
  */
-public class BeeSting extends CardImpl {
+public final class BeeSting extends CardImpl {
 
     public BeeSting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

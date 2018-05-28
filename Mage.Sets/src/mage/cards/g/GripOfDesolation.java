@@ -42,7 +42,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class GripOfDesolation extends CardImpl {
+public final class GripOfDesolation extends CardImpl {
 
     public GripOfDesolation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");

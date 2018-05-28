@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CruelEntertainment extends CardImpl {
+public final class CruelEntertainment extends CardImpl {
 
     public CruelEntertainment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}");

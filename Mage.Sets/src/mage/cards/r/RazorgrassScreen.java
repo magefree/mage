@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class RazorgrassScreen extends CardImpl {
+public final class RazorgrassScreen extends CardImpl {
 
     public RazorgrassScreen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

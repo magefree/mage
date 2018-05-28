@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class KyrenArchive extends CardImpl {
+public final class KyrenArchive extends CardImpl {
 
     public KyrenArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

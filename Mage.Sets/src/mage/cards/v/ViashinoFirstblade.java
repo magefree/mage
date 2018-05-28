@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author jeffwadsworth
  */
-public class ViashinoFirstblade extends CardImpl {
+public final class ViashinoFirstblade extends CardImpl {
 
     public ViashinoFirstblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}");

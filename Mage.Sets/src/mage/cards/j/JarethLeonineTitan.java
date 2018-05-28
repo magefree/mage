@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class JarethLeonineTitan extends CardImpl {
+public final class JarethLeonineTitan extends CardImpl {
 
     public JarethLeonineTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{W}");

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RiseOfTheEldrazi extends ExpansionSet {
+public final class RiseOfTheEldrazi extends ExpansionSet {
 
     private static final RiseOfTheEldrazi instance = new RiseOfTheEldrazi();
 

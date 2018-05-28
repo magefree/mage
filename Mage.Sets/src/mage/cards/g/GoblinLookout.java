@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class GoblinLookout extends CardImpl {
+public final class GoblinLookout extends CardImpl {
 
     private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("a Goblin");
 

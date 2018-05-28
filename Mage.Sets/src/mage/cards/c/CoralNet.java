@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CoralNet extends CardImpl {
+public final class CoralNet extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
 

@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class SteadfastCathar extends CardImpl {
+public final class SteadfastCathar extends CardImpl {
 
     public SteadfastCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class KingpinsPet extends CardImpl {
+public final class KingpinsPet extends CardImpl {
 
     public KingpinsPet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");

@@ -39,7 +39,7 @@ import mage.constants.CardType;
 /**
  * @author magenoxx
  */
-public class BondOfAgony extends CardImpl {
+public final class BondOfAgony extends CardImpl {
 
     public BondOfAgony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");

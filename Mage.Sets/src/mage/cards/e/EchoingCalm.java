@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 /**
  * @author Loki
  */
-public class EchoingCalm extends CardImpl {
+public final class EchoingCalm extends CardImpl {
 
     public EchoingCalm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

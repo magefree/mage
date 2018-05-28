@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author emerald000 & L_J
  */
-public class MoggToady extends CardImpl {
+public final class MoggToady extends CardImpl {
 
     public MoggToady(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

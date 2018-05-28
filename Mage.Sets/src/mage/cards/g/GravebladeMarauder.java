@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class GravebladeMarauder extends CardImpl {
+public final class GravebladeMarauder extends CardImpl {
 
     public GravebladeMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author LevelX2
  */
-public class ArcboundWorker extends CardImpl {
+public final class ArcboundWorker extends CardImpl {
 
     public ArcboundWorker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ItThatRidesAsOne extends CardImpl {
+public final class ItThatRidesAsOne extends CardImpl {
 
     public ItThatRidesAsOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

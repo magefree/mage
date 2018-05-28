@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author michael.napoleon@gmail.com
  */
-public class Backlash extends CardImpl {
+public final class Backlash extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
     static {

@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author LokiX
  */
-public class Naturalize extends CardImpl {
+public final class Naturalize extends CardImpl {
 
     public Naturalize(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class LanternLitGraveyard extends CardImpl {
+public final class LanternLitGraveyard extends CardImpl {
 
     public LanternLitGraveyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

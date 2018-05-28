@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Styxo
  */
-public class FelidarGuardian extends CardImpl {
+public final class FelidarGuardian extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
 

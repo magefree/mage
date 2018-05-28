@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author North
  */
-public class MondronenShaman extends CardImpl {
+public final class MondronenShaman extends CardImpl {
 
     public MondronenShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

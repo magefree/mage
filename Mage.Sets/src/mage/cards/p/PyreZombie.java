@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class PyreZombie extends CardImpl {
+public final class PyreZombie extends CardImpl {
 
     public PyreZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

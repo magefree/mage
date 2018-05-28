@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TaintedStrike extends CardImpl {
+public final class TaintedStrike extends CardImpl {
 
     public TaintedStrike (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

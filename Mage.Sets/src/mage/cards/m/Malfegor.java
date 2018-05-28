@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Malfegor extends CardImpl {
+public final class Malfegor extends CardImpl {
 
     public Malfegor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{R}{R}");

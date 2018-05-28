@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OgreGeargrabber extends CardImpl {
+public final class OgreGeargrabber extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Equipment an opponent controls");
 

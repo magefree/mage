@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  * @author JRHerlehy
  *         Created on 4/5/18.
  */
-public class KaroxBladewingDragonToken extends TokenImpl {
+public final class KaroxBladewingDragonToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {

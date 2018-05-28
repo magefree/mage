@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class SanctumGuardian extends CardImpl {
+public final class SanctumGuardian extends CardImpl {
 
     public SanctumGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

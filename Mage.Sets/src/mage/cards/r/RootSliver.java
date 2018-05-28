@@ -52,7 +52,7 @@ import mage.game.stack.StackObject;
  *
  * @author cbt33, BetaSteward (Autumn's Veil, Combust)
  */
-public class RootSliver extends CardImpl {
+public final class RootSliver extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Sliver spells");
 

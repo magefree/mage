@@ -44,7 +44,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class MarduWarshrieker extends CardImpl {
+public final class MarduWarshrieker extends CardImpl {
 
     public MarduWarshrieker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

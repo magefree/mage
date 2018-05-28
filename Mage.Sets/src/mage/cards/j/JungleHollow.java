@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class JungleHollow extends CardImpl {
+public final class JungleHollow extends CardImpl {
 
     public JungleHollow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

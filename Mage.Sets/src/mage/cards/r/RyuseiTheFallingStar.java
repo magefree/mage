@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 /**
  * @author Loki
  */
-public class RyuseiTheFallingStar extends CardImpl {
+public final class RyuseiTheFallingStar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

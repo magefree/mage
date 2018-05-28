@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class AllIsDust extends CardImpl {
+public final class AllIsDust extends CardImpl {
 
     public AllIsDust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{7}");

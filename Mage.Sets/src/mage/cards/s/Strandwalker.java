@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class Strandwalker extends CardImpl {
+public final class Strandwalker extends CardImpl {
 
     public Strandwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class Leveler extends CardImpl {
+public final class Leveler extends CardImpl {
 
     public Leveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

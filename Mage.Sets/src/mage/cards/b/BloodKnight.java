@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class BloodKnight extends CardImpl {
+public final class BloodKnight extends CardImpl {
 
     public BloodKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");

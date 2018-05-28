@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author nantuko
  */
-public class Cystbearer extends CardImpl {
+public final class Cystbearer extends CardImpl {
 
     public Cystbearer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

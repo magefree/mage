@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author cbt33
  */
-public class VolleyOfBoulders extends CardImpl {
+public final class VolleyOfBoulders extends CardImpl {
 
     public VolleyOfBoulders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}");

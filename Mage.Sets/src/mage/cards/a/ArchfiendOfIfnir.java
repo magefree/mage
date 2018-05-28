@@ -45,7 +45,7 @@ import mage.filter.common.FilterOpponentsCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ArchfiendOfIfnir extends CardImpl {
+public final class ArchfiendOfIfnir extends CardImpl {
 
     public ArchfiendOfIfnir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

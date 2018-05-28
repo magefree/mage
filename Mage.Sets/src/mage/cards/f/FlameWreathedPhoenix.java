@@ -50,7 +50,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class FlameWreathedPhoenix extends CardImpl {
+public final class FlameWreathedPhoenix extends CardImpl {
 
     public FlameWreathedPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author dustinconrad
  */
-public class FootstepsOfTheGoryo extends CardImpl {
+public final class FootstepsOfTheGoryo extends CardImpl {
 
     public FootstepsOfTheGoryo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

@@ -53,7 +53,7 @@ import mage.target.TargetCard;
  *
  * @author fireshoes
  */
-public class VesselOfNascency extends CardImpl {
+public final class VesselOfNascency extends CardImpl {
 
     public VesselOfNascency(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");

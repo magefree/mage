@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class Acridian extends CardImpl {
+public final class Acridian extends CardImpl {
 
     public Acridian (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

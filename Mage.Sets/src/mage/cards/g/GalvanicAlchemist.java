@@ -45,7 +45,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class GalvanicAlchemist extends CardImpl {
+public final class GalvanicAlchemist extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{2}{U}: Untap this creature.\"";
 

@@ -42,7 +42,7 @@ import mage.constants.Duration;
  * @author LoneFox
 
  */
-public class MoggSentry extends CardImpl {
+public final class MoggSentry extends CardImpl {
 
     public MoggSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

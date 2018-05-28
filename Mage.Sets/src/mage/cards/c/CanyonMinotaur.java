@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CanyonMinotaur extends CardImpl {
+public final class CanyonMinotaur extends CardImpl {
 
     public CanyonMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

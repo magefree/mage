@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class SithEvoker extends CardImpl {
+public final class SithEvoker extends CardImpl {
 
     public SithEvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

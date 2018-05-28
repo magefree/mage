@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class GiantBadger extends CardImpl {
+public final class GiantBadger extends CardImpl {
 
     public GiantBadger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

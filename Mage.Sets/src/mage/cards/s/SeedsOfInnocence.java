@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class SeedsOfInnocence extends CardImpl {
+public final class SeedsOfInnocence extends CardImpl {
 
     public SeedsOfInnocence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");

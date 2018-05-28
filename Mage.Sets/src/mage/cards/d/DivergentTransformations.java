@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DivergentTransformations extends CardImpl {
+public final class DivergentTransformations extends CardImpl {
 
     public DivergentTransformations(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{6}{R}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PantherWarriors extends CardImpl {
+public final class PantherWarriors extends CardImpl {
 
     public PantherWarriors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

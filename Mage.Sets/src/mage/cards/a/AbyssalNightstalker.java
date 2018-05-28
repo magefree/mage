@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class AbyssalNightstalker extends CardImpl {
+public final class AbyssalNightstalker extends CardImpl {
 
     public AbyssalNightstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

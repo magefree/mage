@@ -43,7 +43,7 @@ import mage.constants.CardType;
  * @author cbt33
  */
 
-public class AbandonedOutpost extends CardImpl {
+public final class AbandonedOutpost extends CardImpl {
 
     public AbandonedOutpost(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

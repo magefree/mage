@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class LaquatussCreativity extends CardImpl {
+public final class LaquatussCreativity extends CardImpl {
 
     public LaquatussCreativity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");

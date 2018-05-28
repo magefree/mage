@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class ThrivingIbex extends CardImpl {
+public final class ThrivingIbex extends CardImpl {
 
     public ThrivingIbex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

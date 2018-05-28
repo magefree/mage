@@ -38,7 +38,7 @@ import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
-public class FarAway extends SplitCard {
+public final class FarAway extends SplitCard {
 
     public FarAway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}", "{2}{B}", SpellAbilityType.SPLIT_FUSED);

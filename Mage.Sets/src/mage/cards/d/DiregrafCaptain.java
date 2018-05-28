@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class DiregrafCaptain extends CardImpl {
+public final class DiregrafCaptain extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 

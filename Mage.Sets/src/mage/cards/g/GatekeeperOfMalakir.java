@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author maurer.it_at_gmail.com
  */
-public class GatekeeperOfMalakir extends CardImpl {
+public final class GatekeeperOfMalakir extends CardImpl {
 
     private static final FilterControlledPermanent filter;
 

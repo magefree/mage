@@ -55,7 +55,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author TheElk801
  */
-public class MineLayer extends CardImpl {
+public final class MineLayer extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land with a mine counter on it");
 

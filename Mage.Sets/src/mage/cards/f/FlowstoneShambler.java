@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class FlowstoneShambler extends CardImpl {
+public final class FlowstoneShambler extends CardImpl {
 
     public FlowstoneShambler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

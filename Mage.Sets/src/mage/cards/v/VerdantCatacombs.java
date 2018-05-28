@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VerdantCatacombs extends CardImpl {
+public final class VerdantCatacombs extends CardImpl {
 
     public VerdantCatacombs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class ZanamDjinn extends CardImpl {
+public final class ZanamDjinn extends CardImpl {
 
     public ZanamDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");

@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class UnnaturalSpeed extends CardImpl {
+public final class UnnaturalSpeed extends CardImpl {
 
     public UnnaturalSpeed (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

@@ -47,7 +47,7 @@ import mage.target.TargetStackObject;
  *
  * @author AlumiuN
  */
-public class TeferisResponse extends CardImpl {
+public final class TeferisResponse extends CardImpl {
 
     private final static FilterStackObject filter = new FilterStackObject("spell or ability an opponent controls that targets a land you control");
 

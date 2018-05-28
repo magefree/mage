@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class ArchitectsOfWill extends CardImpl {
+public final class ArchitectsOfWill extends CardImpl {
 
     public ArchitectsOfWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}{B}");

@@ -41,7 +41,7 @@ import mage.game.permanent.token.CatToken;
  *
  * @author Loki
  */
-public class WhiteSunsZenith extends CardImpl {
+public final class WhiteSunsZenith extends CardImpl {
     public WhiteSunsZenith (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{W}{W}");
 

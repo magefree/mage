@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ImplementsOfSacrifice extends CardImpl {
+public final class ImplementsOfSacrifice extends CardImpl {
 
     public ImplementsOfSacrifice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

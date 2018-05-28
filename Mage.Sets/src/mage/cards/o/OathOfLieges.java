@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class OathOfLieges extends CardImpl {
+public final class OathOfLieges extends CardImpl {
 
     private final UUID originalId;
     private static final FilterPlayer FILTER = new FilterPlayer("player who controls more lands than you do and is your opponent");

@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author Plopman
  */
-public class ElvishPioneer extends CardImpl {
+public final class ElvishPioneer extends CardImpl {
 
     public ElvishPioneer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

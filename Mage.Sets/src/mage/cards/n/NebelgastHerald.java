@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NebelgastHerald extends CardImpl {
+public final class NebelgastHerald extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Spirit");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");

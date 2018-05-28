@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class JeditsDragoons extends CardImpl {
+public final class JeditsDragoons extends CardImpl {
 
     public JeditsDragoons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

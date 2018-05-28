@@ -49,7 +49,7 @@ import mage.filter.FilterPermanent;
  *
  * @author BursegSardaukar
  */
-public class BoggartSpriteChaser extends CardImpl {
+public final class BoggartSpriteChaser extends CardImpl {
 
     public BoggartSpriteChaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

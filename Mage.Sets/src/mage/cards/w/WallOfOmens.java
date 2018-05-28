@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WallOfOmens extends CardImpl {
+public final class WallOfOmens extends CardImpl {
 
     public WallOfOmens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

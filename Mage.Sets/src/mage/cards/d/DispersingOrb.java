@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Derpthemeus
  */
-public class DispersingOrb extends CardImpl {
+public final class DispersingOrb extends CardImpl {
 
     public DispersingOrb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");

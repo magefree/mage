@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class SurgingFlame extends CardImpl {
+public final class SurgingFlame extends CardImpl {
 
     public SurgingFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class GarrukRelentless extends CardImpl {
+public final class GarrukRelentless extends CardImpl {
 
     public GarrukRelentless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}");

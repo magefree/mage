@@ -41,7 +41,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author TheElk801
  */
-public class ProsperousPirates extends CardImpl {
+public final class ProsperousPirates extends CardImpl {
 
     public ProsperousPirates(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class OgreToken extends TokenImpl {
+public final class OgreToken extends TokenImpl {
 
     public OgreToken() {
         super("Ogre", "3/3 red Ogre creature");

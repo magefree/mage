@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class SecretsOfTheGoldenCity extends CardImpl {
+public final class SecretsOfTheGoldenCity extends CardImpl {
 
     public SecretsOfTheGoldenCity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");

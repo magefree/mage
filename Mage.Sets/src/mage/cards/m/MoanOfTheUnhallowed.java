@@ -41,7 +41,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author nantuko
  */
-public class MoanOfTheUnhallowed extends CardImpl {
+public final class MoanOfTheUnhallowed extends CardImpl {
 
     public MoanOfTheUnhallowed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

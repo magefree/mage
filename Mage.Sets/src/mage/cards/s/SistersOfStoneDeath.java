@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class SistersOfStoneDeath extends CardImpl {
+public final class SistersOfStoneDeath extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 

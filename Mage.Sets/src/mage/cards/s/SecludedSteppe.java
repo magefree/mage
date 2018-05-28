@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class SecludedSteppe extends CardImpl {
+public final class SecludedSteppe extends CardImpl {
 
     public SecludedSteppe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

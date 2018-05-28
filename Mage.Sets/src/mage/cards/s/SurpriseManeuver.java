@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class SurpriseManeuver extends CardImpl {
+public final class SurpriseManeuver extends CardImpl {
 
     public SurpriseManeuver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

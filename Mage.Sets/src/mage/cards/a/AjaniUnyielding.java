@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author JRHerlehy
  */
-public class AjaniUnyielding extends CardImpl {
+public final class AjaniUnyielding extends CardImpl {
 
     private static final FilterPermanentCard nonlandPermanentFilter = new FilterPermanentCard("nonland permanent cards");
     private static final FilterPlaneswalkerPermanent planeswalkerFilter = new FilterPlaneswalkerPermanent("other planeswalker you control");

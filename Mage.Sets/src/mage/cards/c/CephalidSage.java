@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class CephalidSage extends CardImpl {
+public final class CephalidSage extends CardImpl {
 
     public CephalidSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

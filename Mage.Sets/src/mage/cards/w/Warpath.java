@@ -41,7 +41,7 @@ import mage.filter.predicate.permanent.BlockingPredicate;
  *
  * @author L_J
  */
-public class Warpath extends CardImpl {
+public final class Warpath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature and each blocked creature");
 

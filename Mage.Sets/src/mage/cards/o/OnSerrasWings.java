@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class OnSerrasWings extends CardImpl {
+public final class OnSerrasWings extends CardImpl {
 
     public OnSerrasWings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

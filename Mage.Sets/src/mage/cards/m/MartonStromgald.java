@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author Eirkei
  */
-public class MartonStromgald extends CardImpl {
+public final class MartonStromgald extends CardImpl {
 
     private static final FilterAttackingCreature attackingFilter = new FilterAttackingCreature("attacking creature other than {this}");
     private static final FilterBlockingCreature blockingFilter = new FilterBlockingCreature("blocking creature other than {this}");

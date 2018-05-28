@@ -39,7 +39,7 @@ import mage.filter.common.FilterBlockingCreature;
  *
  * @author LoneFox
  */
-public class Rally extends CardImpl {
+public final class Rally extends CardImpl {
 
     public Rally(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");

@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class SingeMindOgre extends CardImpl {
+public final class SingeMindOgre extends CardImpl {
 
     public SingeMindOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class TraitorsRoar extends CardImpl {
+public final class TraitorsRoar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
 

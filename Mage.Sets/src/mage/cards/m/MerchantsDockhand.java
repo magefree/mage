@@ -60,7 +60,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class MerchantsDockhand extends CardImpl {
+public final class MerchantsDockhand extends CardImpl {
 
     public MerchantsDockhand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

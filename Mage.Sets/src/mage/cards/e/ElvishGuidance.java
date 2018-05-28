@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Eirkei
  */
-public class ElvishGuidance extends CardImpl {
+public final class ElvishGuidance extends CardImpl {
 
     public ElvishGuidance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

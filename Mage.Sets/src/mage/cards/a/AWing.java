@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class AWing extends CardImpl {
+public final class AWing extends CardImpl {
 
     public AWing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{R}");

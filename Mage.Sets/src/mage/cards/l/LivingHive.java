@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author ilcartographer
  */
-public class LivingHive extends CardImpl {
+public final class LivingHive extends CardImpl {
 
     public LivingHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

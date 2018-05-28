@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class PresenceOfTheWise extends CardImpl {
+public final class PresenceOfTheWise extends CardImpl {
 
     public PresenceOfTheWise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");

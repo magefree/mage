@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class SupernaturalStamina extends CardImpl {
+public final class SupernaturalStamina extends CardImpl {
 
     public SupernaturalStamina(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

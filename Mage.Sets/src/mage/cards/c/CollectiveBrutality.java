@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CollectiveBrutality extends CardImpl {
+public final class CollectiveBrutality extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card");
     private static final FilterPlayer filterDiscard = new FilterPlayer("opponent to discard");

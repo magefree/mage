@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EliteVanguard extends CardImpl {
+public final class EliteVanguard extends CardImpl {
 
     public EliteVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

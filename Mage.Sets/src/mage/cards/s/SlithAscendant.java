@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SlithAscendant extends CardImpl {
+public final class SlithAscendant extends CardImpl {
 
     public SlithAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

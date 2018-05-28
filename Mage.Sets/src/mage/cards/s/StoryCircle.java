@@ -50,7 +50,7 @@ import mage.game.Game;
  * @author LoneFox
 
  */
-public class StoryCircle extends CardImpl {
+public final class StoryCircle extends CardImpl {
 
     public StoryCircle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");

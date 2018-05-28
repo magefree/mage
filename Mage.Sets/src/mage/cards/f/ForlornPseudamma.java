@@ -44,7 +44,7 @@ import mage.game.permanent.token.ForlornPseudammaZombieToken;
  *
  * @author LevelX2
  */
-public class ForlornPseudamma extends CardImpl {
+public final class ForlornPseudamma extends CardImpl {
 
     public ForlornPseudamma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class MentalNote extends CardImpl {
+public final class MentalNote extends CardImpl {
 
     public MentalNote(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

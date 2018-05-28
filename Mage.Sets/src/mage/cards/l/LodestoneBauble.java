@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author ThomasLerner, LevelX2 & L_J
  */
-public class LodestoneBauble extends CardImpl {
+public final class LodestoneBauble extends CardImpl {
 
     public LodestoneBauble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");

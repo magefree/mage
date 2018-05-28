@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jonubuu
  */
-public class LifeFromTheLoam extends CardImpl {
+public final class LifeFromTheLoam extends CardImpl {
 
     public LifeFromTheLoam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

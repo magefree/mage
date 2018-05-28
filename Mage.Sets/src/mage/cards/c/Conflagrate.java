@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author LevelX2
  */
-public class Conflagrate extends CardImpl {
+public final class Conflagrate extends CardImpl {
 
     public Conflagrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");

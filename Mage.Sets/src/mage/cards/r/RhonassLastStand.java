@@ -42,7 +42,7 @@ import mage.game.permanent.token.RhonassLastStandToken;
  *
  * @author spjspj
  */
-public class RhonassLastStand extends CardImpl {
+public final class RhonassLastStand extends CardImpl {
 
     public RhonassLastStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}");

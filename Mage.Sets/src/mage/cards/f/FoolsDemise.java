@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FoolsDemise extends CardImpl {
+public final class FoolsDemise extends CardImpl {
 
     public FoolsDemise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");

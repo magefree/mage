@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Magic2010 extends ExpansionSet {
+public final class Magic2010 extends ExpansionSet {
 
     private static final Magic2010 instance = new Magic2010();
 

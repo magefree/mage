@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SidarKondoOfJamuraa extends CardImpl {
+public final class SidarKondoOfJamuraa extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 

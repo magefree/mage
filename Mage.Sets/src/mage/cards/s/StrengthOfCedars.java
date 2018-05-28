@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class StrengthOfCedars extends CardImpl {
+public final class StrengthOfCedars extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("the number of lands you control");
 
     public StrengthOfCedars (UUID ownerId, CardSetInfo setInfo) {

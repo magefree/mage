@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class UnwillingRecruit extends CardImpl {
+public final class UnwillingRecruit extends CardImpl {
 
     public UnwillingRecruit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}{R}");

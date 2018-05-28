@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author JRHerlehy
  */
-public class HeartOfKiran extends CardImpl {
+public final class HeartOfKiran extends CardImpl {
 
     public HeartOfKiran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

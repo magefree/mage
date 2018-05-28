@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class SeraphOfTheSword extends CardImpl {
+public final class SeraphOfTheSword extends CardImpl {
 
     public SeraphOfTheSword(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

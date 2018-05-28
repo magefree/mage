@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Jason E. Wall
 
  */
-public class TreetopBracers extends CardImpl {
+public final class TreetopBracers extends CardImpl {
 
     public TreetopBracers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

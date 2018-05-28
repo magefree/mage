@@ -50,7 +50,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LoneFox
  */
-public class CloudchaserKestrel extends CardImpl {
+public final class CloudchaserKestrel extends CardImpl {
 
     public CloudchaserKestrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class AnHavvaTownship extends CardImpl {
+public final class AnHavvaTownship extends CardImpl {
 
     public AnHavvaTownship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ThawingGlaciers extends CardImpl {
+public final class ThawingGlaciers extends CardImpl {
 
     public ThawingGlaciers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

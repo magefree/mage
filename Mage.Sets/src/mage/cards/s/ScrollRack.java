@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class ScrollRack extends CardImpl {
+public final class ScrollRack extends CardImpl {
 
     public ScrollRack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

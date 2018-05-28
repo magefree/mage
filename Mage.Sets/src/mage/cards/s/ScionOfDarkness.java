@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class ScionOfDarkness extends CardImpl {
+public final class ScionOfDarkness extends CardImpl {
 
     public ScionOfDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");

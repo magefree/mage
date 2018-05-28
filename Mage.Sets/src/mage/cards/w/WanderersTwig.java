@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WanderersTwig extends CardImpl {
+public final class WanderersTwig extends CardImpl {
 
     public WanderersTwig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

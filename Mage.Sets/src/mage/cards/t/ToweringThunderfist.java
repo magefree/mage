@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class ToweringThunderfist extends CardImpl {
+public final class ToweringThunderfist extends CardImpl {
 
     public ToweringThunderfist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

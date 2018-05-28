@@ -47,7 +47,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author spjspj & L_J
  */
-public class KeldonTwilight extends CardImpl {
+public final class KeldonTwilight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you controlled since the beginning of the turn");
 

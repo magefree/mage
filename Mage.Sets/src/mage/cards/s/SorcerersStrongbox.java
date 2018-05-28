@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SorcerersStrongbox extends CardImpl {
+public final class SorcerersStrongbox extends CardImpl {
 
     public SorcerersStrongbox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

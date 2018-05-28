@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author caldover
  */
-public class AnointedDeacon extends CardImpl {
+public final class AnointedDeacon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire");
 

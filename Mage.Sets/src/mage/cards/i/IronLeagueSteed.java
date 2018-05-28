@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class IronLeagueSteed extends CardImpl {
+public final class IronLeagueSteed extends CardImpl {
 
     public IronLeagueSteed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

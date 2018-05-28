@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class WandOfTheElementsSecondToken extends TokenImpl {
+public final class WandOfTheElementsSecondToken extends TokenImpl {
 
     public WandOfTheElementsSecondToken() {
         super("Elemental", "3/3 red Elemental creature token");

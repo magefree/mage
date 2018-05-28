@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class VodalianSoldiers extends CardImpl {
+public final class VodalianSoldiers extends CardImpl {
 
     public VodalianSoldiers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

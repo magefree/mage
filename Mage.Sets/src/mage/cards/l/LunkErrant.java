@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class LunkErrant extends CardImpl {
+public final class LunkErrant extends CardImpl {
 
     public LunkErrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

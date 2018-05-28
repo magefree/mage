@@ -49,7 +49,7 @@ import mage.game.stack.Spell;
  *
  * @author emerald000
  */
-public class Dovescape extends CardImpl {
+public final class Dovescape extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

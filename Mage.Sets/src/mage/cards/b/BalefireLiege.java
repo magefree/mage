@@ -50,7 +50,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author Loki
  */
-public class BalefireLiege extends CardImpl {
+public final class BalefireLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creatures");
     private static final FilterCreaturePermanent filterWhiteCreature = new FilterCreaturePermanent("white creatures");

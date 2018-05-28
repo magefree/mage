@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class RoughTumble extends SplitCard {
+public final class RoughTumble extends SplitCard {
 
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     private static final FilterCreaturePermanent filterWithoutFlying = new FilterCreaturePermanent("creature without flying");

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class Thunderstaff extends CardImpl {
+public final class Thunderstaff extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Attacking creatures");
     static {

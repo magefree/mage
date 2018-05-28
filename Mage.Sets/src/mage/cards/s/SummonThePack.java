@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class SummonThePack extends CardImpl {
+public final class SummonThePack extends CardImpl {
 
     public SummonThePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{B}");

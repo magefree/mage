@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
-public class DuskDawn extends SplitCard {
+public final class DuskDawn extends SplitCard {
 
     private static final FilterCreaturePermanent filterCreatures3orGreater = new FilterCreaturePermanent("creatures with power greater than or equal to 3");
 

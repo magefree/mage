@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class Incoming extends CardImpl {
+public final class Incoming extends CardImpl {
 
     public Incoming(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}{G}{G}");

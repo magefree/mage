@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class ThaliaHereticCathar extends CardImpl {
+public final class ThaliaHereticCathar extends CardImpl {
 
     public ThaliaHereticCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

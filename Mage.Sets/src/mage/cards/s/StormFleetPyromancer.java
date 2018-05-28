@@ -45,7 +45,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class StormFleetPyromancer extends CardImpl {
+public final class StormFleetPyromancer extends CardImpl {
 
     public StormFleetPyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

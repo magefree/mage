@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author KyleCartmell
  */
-public class WallOfOpposition extends CardImpl {
+public final class WallOfOpposition extends CardImpl {
 
     public WallOfOpposition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

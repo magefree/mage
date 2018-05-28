@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author Plopman
  */
-public class RainOfFilth extends CardImpl {
+public final class RainOfFilth extends CardImpl {
 
     public RainOfFilth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

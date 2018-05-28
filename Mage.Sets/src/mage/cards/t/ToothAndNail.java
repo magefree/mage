@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class ToothAndNail extends CardImpl {
+public final class ToothAndNail extends CardImpl {
 
     public ToothAndNail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}");

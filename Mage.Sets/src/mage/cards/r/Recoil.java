@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Recoil extends CardImpl {
+public final class Recoil extends CardImpl {
 
     public Recoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{B}");

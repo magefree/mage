@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class SkinbrandGoblin extends CardImpl {
+public final class SkinbrandGoblin extends CardImpl {
 
     public SkinbrandGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

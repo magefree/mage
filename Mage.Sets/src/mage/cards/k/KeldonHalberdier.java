@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class KeldonHalberdier extends CardImpl {
+public final class KeldonHalberdier extends CardImpl {
 
     public KeldonHalberdier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

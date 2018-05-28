@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class TowerOfMurmurs extends CardImpl {
+public final class TowerOfMurmurs extends CardImpl {
 
     public TowerOfMurmurs (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

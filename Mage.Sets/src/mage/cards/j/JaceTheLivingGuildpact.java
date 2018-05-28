@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class JaceTheLivingGuildpact extends CardImpl {
+public final class JaceTheLivingGuildpact extends CardImpl {
 
     private static final FilterPermanent filter = new FilterNonlandPermanent("another target nonland permanent");
 

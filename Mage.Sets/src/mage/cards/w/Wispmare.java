@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class Wispmare extends CardImpl {
+public final class Wispmare extends CardImpl {
 
     public Wispmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

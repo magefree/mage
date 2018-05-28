@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ShadowOfDoubt extends CardImpl {
+public final class ShadowOfDoubt extends CardImpl {
 
     public ShadowOfDoubt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U/B}{U/B}");

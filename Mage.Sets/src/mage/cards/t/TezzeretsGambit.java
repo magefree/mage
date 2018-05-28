@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class TezzeretsGambit extends CardImpl {
+public final class TezzeretsGambit extends CardImpl {
 
     public TezzeretsGambit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U/P}");

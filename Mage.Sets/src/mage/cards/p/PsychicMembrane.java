@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class PsychicMembrane extends CardImpl {
+public final class PsychicMembrane extends CardImpl {
 
     public PsychicMembrane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class ZofShade extends CardImpl {
+public final class ZofShade extends CardImpl {
 
     public ZofShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

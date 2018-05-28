@@ -46,7 +46,7 @@ import mage.game.permanent.token.FesteringGoblinToken;
  *
  * @author LoneFox
  */
-public class SkirkRidgeExhumer extends CardImpl {
+public final class SkirkRidgeExhumer extends CardImpl {
 
     public SkirkRidgeExhumer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

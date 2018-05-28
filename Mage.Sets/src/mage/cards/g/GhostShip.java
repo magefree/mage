@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author shieldal
  */
-public class GhostShip extends CardImpl {
+public final class GhostShip extends CardImpl {
 
     public GhostShip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

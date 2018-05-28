@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class AzoriusCluestone extends CardImpl {
+public final class AzoriusCluestone extends CardImpl {
 
     public AzoriusCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

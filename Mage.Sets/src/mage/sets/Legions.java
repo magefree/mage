@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Legions extends ExpansionSet {
+public final class Legions extends ExpansionSet {
 
     private static final Legions instance = new Legions();
 

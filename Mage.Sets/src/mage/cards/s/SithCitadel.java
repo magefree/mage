@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Styxo
  */
-public class SithCitadel extends CardImpl {
+public final class SithCitadel extends CardImpl {
 
     public SithCitadel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

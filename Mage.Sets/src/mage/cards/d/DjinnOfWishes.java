@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author nantuko
  */
-public class DjinnOfWishes extends CardImpl {
+public final class DjinnOfWishes extends CardImpl {
 
     private static final String ruleText = "{this} enters the battlefield with three wish counters on it";
 

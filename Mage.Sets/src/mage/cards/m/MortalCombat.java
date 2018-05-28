@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author daagar
  */
-public class MortalCombat extends CardImpl {
+public final class MortalCombat extends CardImpl {
 
     public MortalCombat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");

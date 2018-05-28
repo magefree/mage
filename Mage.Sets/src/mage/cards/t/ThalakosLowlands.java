@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class ThalakosLowlands extends CardImpl {
+public final class ThalakosLowlands extends CardImpl {
 
     public ThalakosLowlands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

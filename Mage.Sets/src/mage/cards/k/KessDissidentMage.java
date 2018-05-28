@@ -66,7 +66,7 @@ import mage.watchers.Watcher;
  *
  * @author spjspj
  */
-public class KessDissidentMage extends CardImpl {
+public final class KessDissidentMage extends CardImpl {
 
     public KessDissidentMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");

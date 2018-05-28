@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TiborAndLumia extends CardImpl {
+public final class TiborAndLumia extends CardImpl {
 
     private static final FilterSpell filterBlue = new FilterSpell("a blue spell");
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");

@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author emerald000
  */
-public class WallOfLimbs extends CardImpl {
+public final class WallOfLimbs extends CardImpl {
 
     public WallOfLimbs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class ErdwalIlluminator extends CardImpl {
+public final class ErdwalIlluminator extends CardImpl {
 
     public ErdwalIlluminator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

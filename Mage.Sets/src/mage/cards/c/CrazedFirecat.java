@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class CrazedFirecat extends CardImpl {
+public final class CrazedFirecat extends CardImpl {
 
     public CrazedFirecat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

@@ -62,7 +62,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class AbandonedSarcophagus extends CardImpl {
+public final class AbandonedSarcophagus extends CardImpl {
 
     public AbandonedSarcophagus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

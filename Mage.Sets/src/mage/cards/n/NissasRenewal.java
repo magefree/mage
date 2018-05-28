@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class NissasRenewal extends CardImpl {
+public final class NissasRenewal extends CardImpl {
 
     public NissasRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}");

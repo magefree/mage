@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class Solidarity extends CardImpl {
+public final class Solidarity extends CardImpl {
 
     public Solidarity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

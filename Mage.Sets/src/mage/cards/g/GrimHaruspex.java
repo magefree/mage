@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author emerald000
  */
-public class GrimHaruspex extends CardImpl {
+public final class GrimHaruspex extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature you control");
     static {

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class BuccaneersBravado extends CardImpl {
+public final class BuccaneersBravado extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Pirate");
 

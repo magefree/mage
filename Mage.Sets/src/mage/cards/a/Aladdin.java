@@ -48,7 +48,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author nigelzor
  */
-public class Aladdin extends CardImpl {
+public final class Aladdin extends CardImpl {
 
     public Aladdin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

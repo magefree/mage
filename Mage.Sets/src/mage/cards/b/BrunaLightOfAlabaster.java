@@ -58,7 +58,7 @@ import mage.target.TargetPermanent;
 /**
  * @author noxx
  */
-public class BrunaLightOfAlabaster extends CardImpl {
+public final class BrunaLightOfAlabaster extends CardImpl {
 
     public BrunaLightOfAlabaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}");

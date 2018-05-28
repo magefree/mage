@@ -20,7 +20,7 @@ import mage.target.common.TargetNonlandPermanent;
 /**
  * @author JRHerlehy Created on 4/8/18.
  */
-public class KarnsTemporalSundering extends CardImpl {
+public final class KarnsTemporalSundering extends CardImpl {
 
     public KarnsTemporalSundering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

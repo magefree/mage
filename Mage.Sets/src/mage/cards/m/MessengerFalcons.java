@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class MessengerFalcons extends CardImpl {
+public final class MessengerFalcons extends CardImpl {
 
     public MessengerFalcons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/U}{W}");

@@ -39,7 +39,7 @@ import mage.constants.SpellAbilityType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTargetAmount;
 
-public class FireIce extends SplitCard {
+public final class FireIce extends SplitCard {
 
     public FireIce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}", "{1}{U}", SpellAbilityType.SPLIT);

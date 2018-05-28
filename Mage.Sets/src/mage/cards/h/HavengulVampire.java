@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class HavengulVampire extends CardImpl {
+public final class HavengulVampire extends CardImpl {
 
     public HavengulVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

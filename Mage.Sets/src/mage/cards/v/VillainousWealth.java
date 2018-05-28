@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class VillainousWealth extends CardImpl {
+public final class VillainousWealth extends CardImpl {
 
     public VillainousWealth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{G}{U}");

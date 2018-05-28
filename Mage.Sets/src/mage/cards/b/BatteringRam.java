@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author L_J
  */
-public class BatteringRam extends CardImpl {
+public final class BatteringRam extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall");
 

@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class LordMagnus extends CardImpl {
+public final class LordMagnus extends CardImpl {
 
     public LordMagnus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{W}");

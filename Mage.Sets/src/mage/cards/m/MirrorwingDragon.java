@@ -53,7 +53,7 @@ import mage.util.TargetAddress;
  *
  * @author LevelX2
  */
-public class MirrorwingDragon extends CardImpl {
+public final class MirrorwingDragon extends CardImpl {
 
     public MirrorwingDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

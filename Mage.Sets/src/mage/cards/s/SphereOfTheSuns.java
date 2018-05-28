@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author North, Loki, noxx
  */
-public class SphereOfTheSuns extends CardImpl {
+public final class SphereOfTheSuns extends CardImpl {
 
     private static final String ruleText = "{this} enters the battlefield tapped and with three charge counters on it.";
 

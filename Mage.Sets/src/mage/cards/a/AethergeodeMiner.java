@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class AethergeodeMiner extends CardImpl {
+public final class AethergeodeMiner extends CardImpl {
 
     public AethergeodeMiner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

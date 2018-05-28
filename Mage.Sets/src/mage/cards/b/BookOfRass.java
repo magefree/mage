@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author nigelzor
  */
-public class BookOfRass extends CardImpl {
+public final class BookOfRass extends CardImpl {
 
     public BookOfRass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

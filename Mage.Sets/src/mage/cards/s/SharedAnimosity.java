@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class SharedAnimosity extends CardImpl {
+public final class SharedAnimosity extends CardImpl {
 
     public SharedAnimosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Galatolol
  */
-public class GhostHounds extends CardImpl {
+public final class GhostHounds extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
 

@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GatecreeperVine extends CardImpl {
+public final class GatecreeperVine extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("basic land card or a Gate card");
     static {

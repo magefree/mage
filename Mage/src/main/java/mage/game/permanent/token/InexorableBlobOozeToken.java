@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class InexorableBlobOozeToken extends TokenImpl {
+public final class InexorableBlobOozeToken extends TokenImpl {
 
     public InexorableBlobOozeToken() {
         super("Ooze", "3/3 green Ooze creature token");

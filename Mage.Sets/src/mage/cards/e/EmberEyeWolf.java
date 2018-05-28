@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class EmberEyeWolf extends CardImpl {
+public final class EmberEyeWolf extends CardImpl {
 
     public EmberEyeWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

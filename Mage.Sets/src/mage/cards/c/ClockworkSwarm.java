@@ -63,7 +63,7 @@ import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
  *
  * @author TheElk801
  */
-public class ClockworkSwarm extends CardImpl {
+public final class ClockworkSwarm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
 

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class EtheriumSculptor extends CardImpl {
+public final class EtheriumSculptor extends CardImpl {
     private static final FilterCard filter = new FilterCard("Artifact spells");
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

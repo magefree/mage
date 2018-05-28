@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class JeeringHomunculus extends CardImpl {
+public final class JeeringHomunculus extends CardImpl {
 
     public JeeringHomunculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class ArtificersIntuition extends CardImpl {
+public final class ArtificersIntuition extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost 1 or less");
     static {

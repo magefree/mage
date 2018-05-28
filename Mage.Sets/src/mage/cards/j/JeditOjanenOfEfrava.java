@@ -43,7 +43,7 @@ import mage.game.permanent.token.CatWarriorToken;
  *
  * @author fireshoes
  */
-public class JeditOjanenOfEfrava extends CardImpl {
+public final class JeditOjanenOfEfrava extends CardImpl {
 
     public JeditOjanenOfEfrava(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");

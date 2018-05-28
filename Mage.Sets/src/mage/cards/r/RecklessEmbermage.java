@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Quercitron
  */
-public class RecklessEmbermage extends CardImpl {
+public final class RecklessEmbermage extends CardImpl {
 
     public RecklessEmbermage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class StoicAngel extends CardImpl {
+public final class StoicAngel extends CardImpl {
 
     public StoicAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");

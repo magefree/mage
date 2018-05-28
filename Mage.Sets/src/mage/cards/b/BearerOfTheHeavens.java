@@ -45,7 +45,7 @@ import mage.filter.FilterPermanent;
  *
  * @author LevelX2
  */
-public class BearerOfTheHeavens extends CardImpl {
+public final class BearerOfTheHeavens extends CardImpl {
 
     public BearerOfTheHeavens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}");

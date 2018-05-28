@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class SeersVision extends CardImpl {
+public final class SeersVision extends CardImpl {
 
     public SeersVision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");

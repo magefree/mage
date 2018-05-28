@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author KholdFuzion
  *
  */
-public class SeaSerpent extends CardImpl {
+public final class SeaSerpent extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
 

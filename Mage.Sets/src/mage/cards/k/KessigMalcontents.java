@@ -44,7 +44,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author noxx
  */
-public class KessigMalcontents extends CardImpl {
+public final class KessigMalcontents extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans you control");
 

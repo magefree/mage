@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class ScatterToTheWinds extends CardImpl {
+public final class ScatterToTheWinds extends CardImpl {
 
     public ScatterToTheWinds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

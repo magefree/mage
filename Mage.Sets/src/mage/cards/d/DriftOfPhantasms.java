@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DriftOfPhantasms extends CardImpl {
+public final class DriftOfPhantasms extends CardImpl {
 
     public DriftOfPhantasms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

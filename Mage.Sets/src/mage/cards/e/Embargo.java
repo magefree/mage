@@ -45,7 +45,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author fireshoes
  */
-public class Embargo extends CardImpl {
+public final class Embargo extends CardImpl {
     
     private static final FilterPermanent filter = new FilterNonlandPermanent();
 

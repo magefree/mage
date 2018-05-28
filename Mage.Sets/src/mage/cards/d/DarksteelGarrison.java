@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class DarksteelGarrison extends CardImpl {
+public final class DarksteelGarrison extends CardImpl {
 
     public DarksteelGarrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

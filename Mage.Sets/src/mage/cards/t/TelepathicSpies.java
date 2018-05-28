@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  * @author LoneFox
 
  */
-public class TelepathicSpies extends CardImpl {
+public final class TelepathicSpies extends CardImpl {
 
     public TelepathicSpies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

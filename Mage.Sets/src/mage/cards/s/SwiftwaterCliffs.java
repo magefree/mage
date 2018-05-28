@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class SwiftwaterCliffs extends CardImpl {
+public final class SwiftwaterCliffs extends CardImpl {
 
     public SwiftwaterCliffs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

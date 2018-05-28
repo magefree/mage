@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class AuraOfSilence extends CardImpl {
+public final class AuraOfSilence extends CardImpl {
     public AuraOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 

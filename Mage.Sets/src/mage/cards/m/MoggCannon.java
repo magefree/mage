@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class MoggCannon extends CardImpl {
+public final class MoggCannon extends CardImpl {
 
     public MoggCannon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

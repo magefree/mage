@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class EidolonOfBlossoms extends CardImpl {
+public final class EidolonOfBlossoms extends CardImpl {
 
     public EidolonOfBlossoms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{G}{G}");

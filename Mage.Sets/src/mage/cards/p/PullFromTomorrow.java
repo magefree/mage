@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class PullFromTomorrow extends CardImpl {
+public final class PullFromTomorrow extends CardImpl {
 
     public PullFromTomorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");

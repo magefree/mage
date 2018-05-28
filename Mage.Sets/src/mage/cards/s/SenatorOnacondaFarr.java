@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class SenatorOnacondaFarr extends CardImpl {
+public final class SenatorOnacondaFarr extends CardImpl {
 
     public SenatorOnacondaFarr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class PrimitiveEtchings extends CardImpl {
+public final class PrimitiveEtchings extends CardImpl {
 
     public PrimitiveEtchings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");

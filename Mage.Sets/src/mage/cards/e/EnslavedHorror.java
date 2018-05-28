@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author TheElk801
  */
-public class EnslavedHorror extends CardImpl {
+public final class EnslavedHorror extends CardImpl {
 
     public EnslavedHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

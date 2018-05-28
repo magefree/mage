@@ -41,7 +41,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author North
  */
-public class HissingIguanar extends CardImpl {
+public final class HissingIguanar extends CardImpl {
 
     public HissingIguanar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

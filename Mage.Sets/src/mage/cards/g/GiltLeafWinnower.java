@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GiltLeafWinnower extends CardImpl {
+public final class GiltLeafWinnower extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Elf creature whose power and toughness aren't equal");
 

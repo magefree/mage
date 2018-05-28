@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class FeastOfTheUnicorn extends CardImpl {
+public final class FeastOfTheUnicorn extends CardImpl {
 
     public FeastOfTheUnicorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

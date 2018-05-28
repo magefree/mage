@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Vindicate extends CardImpl {
+public final class Vindicate extends CardImpl {
 
     public Vindicate (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{B}");

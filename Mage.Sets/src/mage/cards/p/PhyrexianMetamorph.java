@@ -51,7 +51,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author Loki
  */
-public class PhyrexianMetamorph extends CardImpl {
+public final class PhyrexianMetamorph extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

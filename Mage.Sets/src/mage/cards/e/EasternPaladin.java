@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class EasternPaladin extends CardImpl {
+public final class EasternPaladin extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 

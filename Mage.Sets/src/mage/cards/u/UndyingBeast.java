@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class UndyingBeast extends CardImpl {
+public final class UndyingBeast extends CardImpl {
 
     public UndyingBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

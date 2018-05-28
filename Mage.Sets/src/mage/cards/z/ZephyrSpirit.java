@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ZephyrSpirit extends CardImpl {
+public final class ZephyrSpirit extends CardImpl {
 
     public ZephyrSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");

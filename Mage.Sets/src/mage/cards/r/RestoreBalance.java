@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class RestoreBalance extends CardImpl {
+public final class RestoreBalance extends CardImpl {
 
     public RestoreBalance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"");

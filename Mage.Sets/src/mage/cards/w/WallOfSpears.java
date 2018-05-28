@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WallOfSpears extends CardImpl {
+public final class WallOfSpears extends CardImpl {
 
     public WallOfSpears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ClockworkHydra extends CardImpl {
+public final class ClockworkHydra extends CardImpl {
 
     public ClockworkHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

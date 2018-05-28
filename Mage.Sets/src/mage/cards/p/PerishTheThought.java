@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class PerishTheThought extends CardImpl {
+public final class PerishTheThought extends CardImpl {
 
     public PerishTheThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

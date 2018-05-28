@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SylvanRanger extends CardImpl {
+public final class SylvanRanger extends CardImpl {
 
     public SylvanRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

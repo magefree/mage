@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class MantisRider extends CardImpl {
+public final class MantisRider extends CardImpl {
 
     public MantisRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}{W}");

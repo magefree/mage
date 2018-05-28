@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class UndeadWarchief extends CardImpl {
+public final class UndeadWarchief extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Zombie spells");
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Zombie creatures");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LoneFox
  */
-public class HibernationsEnd extends CardImpl {
+public final class HibernationsEnd extends CardImpl {
 
     public HibernationsEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");

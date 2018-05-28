@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class BloodrageBrawler extends CardImpl {
+public final class BloodrageBrawler extends CardImpl {
 
     public BloodrageBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class FeldonsCane extends CardImpl {
+public final class FeldonsCane extends CardImpl {
 
     public FeldonsCane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

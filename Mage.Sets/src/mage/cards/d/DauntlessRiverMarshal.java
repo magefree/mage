@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DauntlessRiverMarshal extends CardImpl {
+public final class DauntlessRiverMarshal extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("an Island");
 

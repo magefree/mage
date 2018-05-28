@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  * @author LoneFox
 
  */
-public class DragonArch extends CardImpl {
+public final class DragonArch extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a multicolored creature card");
 

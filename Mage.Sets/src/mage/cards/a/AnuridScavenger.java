@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000 & L_J
  */
-public class AnuridScavenger extends CardImpl {
+public final class AnuridScavenger extends CardImpl {
 
     public AnuridScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

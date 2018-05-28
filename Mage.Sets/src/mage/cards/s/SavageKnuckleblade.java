@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SavageKnuckleblade extends CardImpl {
+public final class SavageKnuckleblade extends CardImpl {
 
     public SavageKnuckleblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}{R}");

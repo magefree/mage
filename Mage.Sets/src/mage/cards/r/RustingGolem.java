@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class RustingGolem extends CardImpl {
+public final class RustingGolem extends CardImpl {
 
     public RustingGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

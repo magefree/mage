@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class EnterTheInfinite extends CardImpl {
+public final class EnterTheInfinite extends CardImpl {
 
     public EnterTheInfinite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}{U}{U}");

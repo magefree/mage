@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class Harmonize extends CardImpl {
+public final class Harmonize extends CardImpl {
 
     public Harmonize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");

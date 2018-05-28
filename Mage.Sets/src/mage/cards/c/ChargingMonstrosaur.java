@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class ChargingMonstrosaur extends CardImpl {
+public final class ChargingMonstrosaur extends CardImpl {
 
     public ChargingMonstrosaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

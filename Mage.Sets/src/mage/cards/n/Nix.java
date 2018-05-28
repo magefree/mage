@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class Nix extends CardImpl {
+public final class Nix extends CardImpl {
 
     public Nix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

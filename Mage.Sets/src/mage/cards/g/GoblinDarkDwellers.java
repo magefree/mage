@@ -58,9 +58,9 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class GoblinDarkDwellers extends CardImpl {
+public final class GoblinDarkDwellers extends CardImpl {
 
-    private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost 3 or less");
+  private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost 3 or less");
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));

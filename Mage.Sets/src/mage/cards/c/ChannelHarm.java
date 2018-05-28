@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class ChannelHarm extends CardImpl {
+public final class ChannelHarm extends CardImpl {
 
     public ChannelHarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{W}");

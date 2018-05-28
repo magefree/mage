@@ -52,7 +52,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author fireshoes
  */
-public class BorderlandExplorer extends CardImpl {
+public final class BorderlandExplorer extends CardImpl {
 
     public BorderlandExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

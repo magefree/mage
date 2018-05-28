@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class LoamingShaman extends CardImpl {
+public final class LoamingShaman extends CardImpl {
 
     public LoamingShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

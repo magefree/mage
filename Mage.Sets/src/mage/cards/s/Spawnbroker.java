@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth & L_J
  */
-public class Spawnbroker extends CardImpl {
+public final class Spawnbroker extends CardImpl {
 
     private static final String rule = "you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls";
 

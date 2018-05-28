@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class IgnorantBliss extends CardImpl {
+public final class IgnorantBliss extends CardImpl {
 
     public IgnorantBliss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

@@ -43,7 +43,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class RiverHeraldsBoon extends CardImpl {
+public final class RiverHeraldsBoon extends CardImpl {
 
     public RiverHeraldsBoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

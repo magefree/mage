@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class HixusPrisonWarden extends CardImpl {
+public final class HixusPrisonWarden extends CardImpl {
 
     public HixusPrisonWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class OonasBlackguard extends CardImpl {
+public final class OonasBlackguard extends CardImpl {
 
     public OonasBlackguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

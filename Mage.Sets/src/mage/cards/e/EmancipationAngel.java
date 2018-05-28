@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class EmancipationAngel extends CardImpl {
+public final class EmancipationAngel extends CardImpl {
 
     public EmancipationAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

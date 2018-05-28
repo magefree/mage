@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class MoonwingMoth extends CardImpl {
+public final class MoonwingMoth extends CardImpl {
 
     public MoonwingMoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

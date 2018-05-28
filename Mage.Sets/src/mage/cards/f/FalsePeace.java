@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class FalsePeace extends CardImpl {
+public final class FalsePeace extends CardImpl {
 
     public FalsePeace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");

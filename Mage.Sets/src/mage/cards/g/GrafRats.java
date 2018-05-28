@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author emerald000
  */
-public class GrafRats extends CardImpl {
+public final class GrafRats extends CardImpl {
 
     public GrafRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

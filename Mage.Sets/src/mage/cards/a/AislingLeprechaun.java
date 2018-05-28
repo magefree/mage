@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author djbrez
  */
-public class AislingLeprechaun extends CardImpl {
+public final class AislingLeprechaun extends CardImpl {
 
     public AislingLeprechaun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

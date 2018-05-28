@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author maurer.it_at_gmail.com, dustinconrad
  */
-public class LeoninArbiter extends CardImpl {
+public final class LeoninArbiter extends CardImpl {
 
     private static final String KEY_STRING = "_ignoreEffectForTurn";
 

@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author emerald000
  */
-public class SquirrelNest extends CardImpl {
+public final class SquirrelNest extends CardImpl {
 
     public SquirrelNest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");

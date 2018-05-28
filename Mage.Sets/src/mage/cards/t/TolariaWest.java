@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author jonubuu
  */
-public class TolariaWest extends CardImpl {
+public final class TolariaWest extends CardImpl {
 
     public TolariaWest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

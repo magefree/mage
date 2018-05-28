@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class FightingChance extends CardImpl {
+public final class FightingChance extends CardImpl {
 
     private static final FilterBlockingCreature filter = new FilterBlockingCreature("Blocking creatures");
 

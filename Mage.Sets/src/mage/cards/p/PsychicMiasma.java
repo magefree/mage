@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PsychicMiasma extends CardImpl {
+public final class PsychicMiasma extends CardImpl {
 
     public PsychicMiasma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

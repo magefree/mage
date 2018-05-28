@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ShorecrasherElemental extends CardImpl {
+public final class ShorecrasherElemental extends CardImpl {
 
     public ShorecrasherElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{U}");

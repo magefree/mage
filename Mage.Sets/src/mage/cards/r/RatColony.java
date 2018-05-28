@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author L_J
  */
-public class RatColony extends CardImpl {
+public final class RatColony extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rat you control");
 

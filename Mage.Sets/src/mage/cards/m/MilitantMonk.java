@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class MilitantMonk extends CardImpl {
+public final class MilitantMonk extends CardImpl {
 
     public MilitantMonk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

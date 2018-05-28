@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class RummagingGoblin extends CardImpl {
+public final class RummagingGoblin extends CardImpl {
 
     public RummagingGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

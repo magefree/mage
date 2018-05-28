@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class DarksteelCitadel extends CardImpl {
+public final class DarksteelCitadel extends CardImpl {
 
     public DarksteelCitadel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.LAND},null);

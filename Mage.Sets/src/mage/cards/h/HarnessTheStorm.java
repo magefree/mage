@@ -53,7 +53,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author LevelX2
  */
-public class HarnessTheStorm extends CardImpl {
+public final class HarnessTheStorm extends CardImpl {
 
     public HarnessTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

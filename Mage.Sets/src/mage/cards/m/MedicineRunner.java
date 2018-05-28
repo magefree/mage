@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class MedicineRunner extends CardImpl {
+public final class MedicineRunner extends CardImpl {
 
     public MedicineRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/W}");

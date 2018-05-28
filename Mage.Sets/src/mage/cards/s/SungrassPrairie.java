@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class SungrassPrairie extends CardImpl {
+public final class SungrassPrairie extends CardImpl {
 
     public SungrassPrairie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

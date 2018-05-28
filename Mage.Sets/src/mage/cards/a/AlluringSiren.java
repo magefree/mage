@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AlluringSiren extends CardImpl {
+public final class AlluringSiren extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

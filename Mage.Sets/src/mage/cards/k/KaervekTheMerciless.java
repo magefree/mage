@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  * @author jeffwadsworth
  *
  */
-public class KaervekTheMerciless extends CardImpl {
+public final class KaervekTheMerciless extends CardImpl {
 
     public KaervekTheMerciless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");

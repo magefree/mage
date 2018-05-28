@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class SuppressionBonds extends CardImpl {
+public final class SuppressionBonds extends CardImpl {
 
     public SuppressionBonds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

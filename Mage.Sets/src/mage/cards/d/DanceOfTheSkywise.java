@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DanceOfTheSkywise extends CardImpl {
+public final class DanceOfTheSkywise extends CardImpl {
 
     public DanceOfTheSkywise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class DiscipleOfTheVault extends CardImpl {
+public final class DiscipleOfTheVault extends CardImpl {
 
     public DiscipleOfTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

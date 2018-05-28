@@ -54,7 +54,7 @@ import mage.util.SubTypeList;
  *
  * @author TheElk801
  */
-public class ShadesBreath extends CardImpl {
+public final class ShadesBreath extends CardImpl {
 
     public ShadesBreath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

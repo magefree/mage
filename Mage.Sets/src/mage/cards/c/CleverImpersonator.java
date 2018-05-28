@@ -41,7 +41,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author emerald000
  */
-public class CleverImpersonator extends CardImpl {
+public final class CleverImpersonator extends CardImpl {
 
     public CleverImpersonator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

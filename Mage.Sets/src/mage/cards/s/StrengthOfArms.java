@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class StrengthOfArms extends CardImpl {
+public final class StrengthOfArms extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("If you control an Equipment,");
     static {

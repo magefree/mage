@@ -45,7 +45,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class SoldeviSimulacrum extends CardImpl {
+public final class SoldeviSimulacrum extends CardImpl {
 
     public SoldeviSimulacrum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

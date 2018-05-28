@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class GuardianOfTazeem extends CardImpl {
+public final class GuardianOfTazeem extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

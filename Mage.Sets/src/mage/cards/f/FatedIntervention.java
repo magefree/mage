@@ -41,7 +41,7 @@ import mage.game.permanent.token.CentaurEnchantmentCreatureToken;
  *
  * @author LevelX2
  */
-public class FatedIntervention extends CardImpl {
+public final class FatedIntervention extends CardImpl {
 
     public FatedIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}{G}");

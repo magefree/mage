@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class ApprenticeNecromancer extends CardImpl {
+public final class ApprenticeNecromancer extends CardImpl {
 
     public ApprenticeNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

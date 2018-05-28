@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class BallyrushBanneret extends CardImpl {
+public final class BallyrushBanneret extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Kithkin spells and Soldier spells");
 

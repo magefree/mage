@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class Portent extends CardImpl {
+public final class Portent extends CardImpl {
 
     public Portent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");

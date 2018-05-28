@@ -46,7 +46,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author LevelX2
  */
-public class PadeemConsulOfInnovation extends CardImpl {
+public final class PadeemConsulOfInnovation extends CardImpl {
 
     public PadeemConsulOfInnovation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

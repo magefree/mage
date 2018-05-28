@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class GloomwidowsFeast extends CardImpl {
+public final class GloomwidowsFeast extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature with flying");
 

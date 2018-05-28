@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class PhyrexianLens extends CardImpl {
+public final class PhyrexianLens extends CardImpl {
 
     public PhyrexianLens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

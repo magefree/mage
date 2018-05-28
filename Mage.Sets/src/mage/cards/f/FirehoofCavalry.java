@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class FirehoofCavalry extends CardImpl {
+public final class FirehoofCavalry extends CardImpl {
 
     public FirehoofCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

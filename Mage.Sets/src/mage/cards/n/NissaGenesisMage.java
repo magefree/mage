@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class NissaGenesisMage extends CardImpl {
+public final class NissaGenesisMage extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("any number of creature and/or land cards");
 

@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 /**
  * @author nantuko
  */
-public class VampiricFury extends CardImpl {
+public final class VampiricFury extends CardImpl {
 
     private static final FilterCreaturePermanent vampires = new FilterCreaturePermanent("Vampire creatures");
 

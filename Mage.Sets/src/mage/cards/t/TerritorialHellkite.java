@@ -61,7 +61,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class TerritorialHellkite extends CardImpl {
+public final class TerritorialHellkite extends CardImpl {
 
     public TerritorialHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

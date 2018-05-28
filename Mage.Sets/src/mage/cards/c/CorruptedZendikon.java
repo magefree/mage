@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class CorruptedZendikon extends CardImpl {
+public final class CorruptedZendikon extends CardImpl {
 
     public CorruptedZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

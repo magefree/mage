@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SwiftReckoning extends CardImpl {
+public final class SwiftReckoning extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

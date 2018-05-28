@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SphinxsDisciple extends CardImpl {
+public final class SphinxsDisciple extends CardImpl {
 
     public SphinxsDisciple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

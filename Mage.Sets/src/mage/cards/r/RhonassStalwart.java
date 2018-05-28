@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author spjspj
  */
-public class RhonassStalwart extends CardImpl {
+public final class RhonassStalwart extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 

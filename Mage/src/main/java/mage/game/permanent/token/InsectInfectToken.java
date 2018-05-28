@@ -37,7 +37,7 @@ import mage.abilities.keyword.InfectAbility;
  *
  * @author nantuko
  */
-public class InsectInfectToken extends TokenImpl {
+public final class InsectInfectToken extends TokenImpl {
 
     public InsectInfectToken() {
         super("Insect", "1/1 green Insect creature token with infect");

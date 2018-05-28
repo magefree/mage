@@ -42,7 +42,7 @@ import mage.game.permanent.token.BelzenlokDemonToken;
  *
  * @author TheElk801
  */
-public class RiteOfBelzenlok extends CardImpl {
+public final class RiteOfBelzenlok extends CardImpl {
 
     public RiteOfBelzenlok(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

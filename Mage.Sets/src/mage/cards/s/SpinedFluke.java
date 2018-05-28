@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class SpinedFluke extends CardImpl {
+public final class SpinedFluke extends CardImpl {
 
     public SpinedFluke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class GremlinInfestation extends CardImpl {
+public final class GremlinInfestation extends CardImpl {
 
     public GremlinInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

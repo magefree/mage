@@ -49,7 +49,7 @@ import mage.util.CardUtil;
 /**
  * @author JotaPeRL
  */
-public class AnthemOfRakdos extends CardImpl {
+public final class AnthemOfRakdos extends CardImpl {
 
     public AnthemOfRakdos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{R}{R}");

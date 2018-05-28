@@ -44,7 +44,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  *
  * @author LoneFox
  */
-public class KhabalGhoul extends CardImpl {
+public final class KhabalGhoul extends CardImpl {
 
     public KhabalGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

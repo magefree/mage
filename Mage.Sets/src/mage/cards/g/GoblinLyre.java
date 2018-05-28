@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author L_J
  */
-public class GoblinLyre extends CardImpl {
+public final class GoblinLyre extends CardImpl {
 
     public GoblinLyre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

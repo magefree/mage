@@ -40,7 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class ValdukElementalToken extends TokenImpl {
+public final class ValdukElementalToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {

@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class OrcishCannonade extends CardImpl {
+public final class OrcishCannonade extends CardImpl {
 
     public OrcishCannonade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");

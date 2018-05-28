@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BarbaryApes extends CardImpl {
+public final class BarbaryApes extends CardImpl {
 
     public BarbaryApes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

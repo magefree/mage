@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class TemporalCascade extends CardImpl {
+public final class TemporalCascade extends CardImpl {
 
     public TemporalCascade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class HamletCaptain extends CardImpl {
+public final class HamletCaptain extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Humans");
 

@@ -61,7 +61,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MythRealized extends CardImpl {
+public final class MythRealized extends CardImpl {
     
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 

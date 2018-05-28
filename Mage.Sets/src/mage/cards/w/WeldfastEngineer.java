@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class WeldfastEngineer extends CardImpl {
+public final class WeldfastEngineer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("artifact creature you control");
 

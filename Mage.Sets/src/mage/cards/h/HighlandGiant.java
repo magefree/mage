@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class HighlandGiant extends CardImpl {
+public final class HighlandGiant extends CardImpl {
 
     public HighlandGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

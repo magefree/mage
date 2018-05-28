@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class FieldOfDreams extends CardImpl {
+public final class FieldOfDreams extends CardImpl {
 
     public FieldOfDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

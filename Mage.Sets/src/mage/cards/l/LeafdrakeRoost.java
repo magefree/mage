@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class LeafdrakeRoost extends CardImpl {
+public final class LeafdrakeRoost extends CardImpl {
 
     public LeafdrakeRoost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}");

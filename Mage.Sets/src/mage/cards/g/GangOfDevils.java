@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTargetAmount;
  * @author noxx
 
  */
-public class GangOfDevils extends CardImpl {
+public final class GangOfDevils extends CardImpl {
 
     public GangOfDevils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

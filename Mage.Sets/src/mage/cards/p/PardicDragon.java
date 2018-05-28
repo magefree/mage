@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PardicDragon extends CardImpl {
+public final class PardicDragon extends CardImpl {
 
     public PardicDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

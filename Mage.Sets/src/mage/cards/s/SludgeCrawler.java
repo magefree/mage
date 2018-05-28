@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SludgeCrawler extends CardImpl {
+public final class SludgeCrawler extends CardImpl {
 
     public SludgeCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

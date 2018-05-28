@@ -43,7 +43,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class CleansingRay extends CardImpl {
+public final class CleansingRay extends CardImpl {
 
     public CleansingRay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");

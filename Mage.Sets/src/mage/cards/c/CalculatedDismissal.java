@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class CalculatedDismissal extends CardImpl {
+public final class CalculatedDismissal extends CardImpl {
 
     public CalculatedDismissal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

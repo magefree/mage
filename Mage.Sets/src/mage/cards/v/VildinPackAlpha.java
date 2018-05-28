@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class VildinPackAlpha extends CardImpl {
+public final class VildinPackAlpha extends CardImpl {
 
     public VildinPackAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author dustinconrad
  */
-public class Paralyze extends CardImpl {
+public final class Paralyze extends CardImpl {
 
     public Paralyze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class GhostTown extends CardImpl {
+public final class GhostTown extends CardImpl {
 
     public GhostTown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

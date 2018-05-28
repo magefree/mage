@@ -50,7 +50,7 @@ import mage.filter.FilterCard;
  *
  * @author fireshoes
  */
-public class GrimFlayer extends CardImpl {
+public final class GrimFlayer extends CardImpl {
 
     public GrimFlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");

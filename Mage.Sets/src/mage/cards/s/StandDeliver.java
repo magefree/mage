@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class StandDeliver extends SplitCard {
+public final class StandDeliver extends SplitCard {
 
     public StandDeliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}", "{2}{U}", SpellAbilityType.SPLIT);

@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author L_J
  */
-public class RishadanPawnshop extends CardImpl {
+public final class RishadanPawnshop extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanent you control");
     

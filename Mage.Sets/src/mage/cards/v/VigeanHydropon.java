@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author JotaPeRL
  */
-public class VigeanHydropon extends CardImpl {
+public final class VigeanHydropon extends CardImpl {
 
     public VigeanHydropon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");

@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class DarkMaze extends CardImpl {
+public final class DarkMaze extends CardImpl {
 
     public DarkMaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

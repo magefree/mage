@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author TheElk801
  */
-public class ChandraBoldPyromancer extends CardImpl {
+public final class ChandraBoldPyromancer extends CardImpl {
 
     public ChandraBoldPyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");

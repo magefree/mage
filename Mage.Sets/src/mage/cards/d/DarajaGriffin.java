@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class DarajaGriffin extends CardImpl {
+public final class DarajaGriffin extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
 

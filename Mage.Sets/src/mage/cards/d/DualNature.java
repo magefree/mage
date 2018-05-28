@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class DualNature extends CardImpl {
+public final class DualNature extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 

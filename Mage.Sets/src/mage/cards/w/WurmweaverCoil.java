@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class WurmweaverCoil extends CardImpl {
+public final class WurmweaverCoil extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 

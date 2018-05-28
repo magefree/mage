@@ -52,7 +52,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author North
  */
-public class NicolBolasPlaneswalker extends CardImpl {
+public final class NicolBolasPlaneswalker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 

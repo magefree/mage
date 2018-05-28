@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class DeathGrasp extends CardImpl {
+public final class DeathGrasp extends CardImpl {
 
     public DeathGrasp (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W}{B}");

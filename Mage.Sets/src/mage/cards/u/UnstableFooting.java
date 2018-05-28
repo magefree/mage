@@ -49,7 +49,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class UnstableFooting extends CardImpl {
+public final class UnstableFooting extends CardImpl {
 
     public UnstableFooting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

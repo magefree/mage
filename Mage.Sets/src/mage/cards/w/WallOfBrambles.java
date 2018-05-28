@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Jgod
  */
-public class WallOfBrambles extends CardImpl {
+public final class WallOfBrambles extends CardImpl {
 
     public WallOfBrambles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

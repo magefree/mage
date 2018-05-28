@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SultaiRunemark extends CardImpl {
+public final class SultaiRunemark extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("as long as you control a green or blue permanent");
 

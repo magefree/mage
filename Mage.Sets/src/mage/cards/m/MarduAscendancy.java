@@ -50,7 +50,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author LevelX2
  */
-public class MarduAscendancy extends CardImpl {
+public final class MarduAscendancy extends CardImpl {
 
     private static final FilterControlledCreaturePermanent attackFilter = new FilterControlledCreaturePermanent("nontoken creature you control");
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");

@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class ZephyrScribe extends CardImpl {
+public final class ZephyrScribe extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
     

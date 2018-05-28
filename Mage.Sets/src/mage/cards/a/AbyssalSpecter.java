@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class AbyssalSpecter extends CardImpl {
+public final class AbyssalSpecter extends CardImpl {
 
     public AbyssalSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

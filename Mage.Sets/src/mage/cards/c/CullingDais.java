@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class CullingDais extends CardImpl {
+public final class CullingDais extends CardImpl {
 
     public CullingDais(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

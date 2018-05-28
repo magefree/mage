@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BurstLightning extends CardImpl {
+public final class BurstLightning extends CardImpl {
 
     public BurstLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

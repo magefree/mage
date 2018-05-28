@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class DarklitGargoyle extends CardImpl {
+public final class DarklitGargoyle extends CardImpl {
 
     public DarklitGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W}");

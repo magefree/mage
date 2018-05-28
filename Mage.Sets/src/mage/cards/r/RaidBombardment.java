@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class RaidBombardment extends CardImpl {
+public final class RaidBombardment extends CardImpl {
 
     public RaidBombardment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

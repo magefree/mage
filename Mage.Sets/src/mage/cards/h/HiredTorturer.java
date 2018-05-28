@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  */
 
 
-public class HiredTorturer extends CardImpl {
+public final class HiredTorturer extends CardImpl {
 
     public HiredTorturer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

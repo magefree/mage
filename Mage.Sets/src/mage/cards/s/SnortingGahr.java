@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class SnortingGahr extends CardImpl {
+public final class SnortingGahr extends CardImpl {
 
     public SnortingGahr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

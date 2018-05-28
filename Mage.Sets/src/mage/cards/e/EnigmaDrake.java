@@ -45,7 +45,7 @@ import mage.filter.common.FilterInstantOrSorceryCard;
  *
  * @author Darkside-
  */
-public class EnigmaDrake extends CardImpl {
+public final class EnigmaDrake extends CardImpl {
 
     public EnigmaDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");

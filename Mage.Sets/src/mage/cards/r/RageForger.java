@@ -56,7 +56,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class RageForger extends CardImpl {
+public final class RageForger extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other Shaman creature you control");
     private static final FilterControlledCreaturePermanent filterAttack = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");

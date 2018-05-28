@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LoneFox
  */
-public class HymnOfRebirth extends CardImpl {
+public final class HymnOfRebirth extends CardImpl {
 
     public HymnOfRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{W}");

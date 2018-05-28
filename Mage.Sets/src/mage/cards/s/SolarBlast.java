@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class SolarBlast extends CardImpl {
+public final class SolarBlast extends CardImpl {
 
     public SolarBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");

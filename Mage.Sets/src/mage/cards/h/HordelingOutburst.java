@@ -38,7 +38,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author LevelX2
  */
-public class HordelingOutburst extends CardImpl {
+public final class HordelingOutburst extends CardImpl {
 
     public HordelingOutburst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

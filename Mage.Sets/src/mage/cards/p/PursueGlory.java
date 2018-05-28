@@ -41,7 +41,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author stravant
  */
-public class PursueGlory extends CardImpl {
+public final class PursueGlory extends CardImpl {
 
     public PursueGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");

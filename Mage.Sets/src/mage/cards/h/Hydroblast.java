@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class Hydroblast extends CardImpl {
+public final class Hydroblast extends CardImpl {
 
     public Hydroblast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

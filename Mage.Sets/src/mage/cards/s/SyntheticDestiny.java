@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SyntheticDestiny extends CardImpl {
+public final class SyntheticDestiny extends CardImpl {
 
     public SyntheticDestiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");

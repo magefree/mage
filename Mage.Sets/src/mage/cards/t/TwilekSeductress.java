@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class TwilekSeductress extends CardImpl {
+public final class TwilekSeductress extends CardImpl {
 
     public TwilekSeductress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

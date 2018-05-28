@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author nigelzor
  */
-public class RewardTheFaithful extends CardImpl {
+public final class RewardTheFaithful extends CardImpl {
 
     public RewardTheFaithful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

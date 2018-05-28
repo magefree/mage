@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class SongOfSerenity extends CardImpl {
+public final class SongOfSerenity extends CardImpl {
 
     public SongOfSerenity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

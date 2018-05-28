@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class Lightsaber extends CardImpl {
+public final class Lightsaber extends CardImpl {
 
     public Lightsaber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

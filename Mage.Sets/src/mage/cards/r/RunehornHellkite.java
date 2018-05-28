@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class RunehornHellkite extends CardImpl {
+public final class RunehornHellkite extends CardImpl {
 
     public RunehornHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

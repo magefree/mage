@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class ZombieCutthroat extends CardImpl {
+public final class ZombieCutthroat extends CardImpl {
 
     public ZombieCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

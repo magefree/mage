@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PhyrexianHydra extends CardImpl {
+public final class PhyrexianHydra extends CardImpl {
 
     public PhyrexianHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

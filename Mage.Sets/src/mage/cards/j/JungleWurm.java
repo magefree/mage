@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class JungleWurm extends CardImpl {
+public final class JungleWurm extends CardImpl {
 
     public JungleWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

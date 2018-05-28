@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class CurseOfMaritLage extends CardImpl {
+public final class CurseOfMaritLage extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Islands");
     

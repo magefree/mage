@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class Scapegoat extends CardImpl {
+public final class Scapegoat extends CardImpl {
 
     public Scapegoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

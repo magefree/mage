@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class CandlesOfLeng extends CardImpl {
+public final class CandlesOfLeng extends CardImpl {
 
     public CandlesOfLeng(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

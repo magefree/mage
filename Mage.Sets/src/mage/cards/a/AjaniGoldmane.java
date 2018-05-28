@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AjaniGoldmane extends CardImpl {
+public final class AjaniGoldmane extends CardImpl {
 
     public AjaniGoldmane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");

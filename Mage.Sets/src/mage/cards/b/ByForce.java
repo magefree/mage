@@ -41,7 +41,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author spjspj
  */
-public class ByForce extends CardImpl {
+public final class ByForce extends CardImpl {
 
     public ByForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");

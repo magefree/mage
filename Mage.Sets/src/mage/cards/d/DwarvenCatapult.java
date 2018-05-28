@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author MarcoMarin
  */
-public class DwarvenCatapult extends CardImpl {
+public final class DwarvenCatapult extends CardImpl {
 
     public DwarvenCatapult(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");

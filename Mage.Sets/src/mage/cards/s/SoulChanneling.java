@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Galatolol
  */
-public class SoulChanneling extends CardImpl {
+public final class SoulChanneling extends CardImpl {
 
     public SoulChanneling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

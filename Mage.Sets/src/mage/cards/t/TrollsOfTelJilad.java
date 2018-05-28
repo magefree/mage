@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TrollsOfTelJilad extends CardImpl {
+public final class TrollsOfTelJilad extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 

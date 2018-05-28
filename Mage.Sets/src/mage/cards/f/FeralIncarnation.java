@@ -39,7 +39,7 @@ import mage.game.permanent.token.BeastToken;
  *
  * @author LevelX2
  */
-public class FeralIncarnation extends CardImpl {
+public final class FeralIncarnation extends CardImpl {
 
     public FeralIncarnation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{G}");

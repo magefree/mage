@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author ayratn
  */
-public class KuldothaRingleader extends CardImpl {
+public final class KuldothaRingleader extends CardImpl {
 
     public KuldothaRingleader (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

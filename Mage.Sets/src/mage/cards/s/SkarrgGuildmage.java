@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class SkarrgGuildmage extends CardImpl {
+public final class SkarrgGuildmage extends CardImpl {
 
     public SkarrgGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

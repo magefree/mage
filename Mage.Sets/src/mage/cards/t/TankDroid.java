@@ -44,7 +44,7 @@ import mage.game.permanent.token.DroidToken;
  *
  * @author Styxo
  */
-public class TankDroid extends CardImpl {
+public final class TankDroid extends CardImpl {
 
     public TankDroid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}{U}{B}");

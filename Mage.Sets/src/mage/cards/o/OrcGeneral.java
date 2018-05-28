@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class OrcGeneral extends CardImpl {
+public final class OrcGeneral extends CardImpl {
     
     private static final FilterControlledPermanent filterOrcOrGoblin = new FilterControlledPermanent("another Orc or Goblin");
     private static final FilterCreaturePermanent filterOrc = new FilterCreaturePermanent("Other Orc creatures");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BoldImpaler extends CardImpl {
+public final class BoldImpaler extends CardImpl {
 
     public BoldImpaler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -48,7 +48,7 @@ import mage.game.events.GameEvent;
  *
  * @author TheElk801
  */
-public class VeilingOddity extends CardImpl {
+public final class VeilingOddity extends CardImpl {
 
     public VeilingOddity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

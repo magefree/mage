@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class FencerClique extends CardImpl {
+public final class FencerClique extends CardImpl {
 
     public FencerClique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

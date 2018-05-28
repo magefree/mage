@@ -44,7 +44,7 @@ import mage.game.permanent.token.EldraziHorrorToken;
  *
  * @author LevelX2
  */
-public class HowlingChorus extends CardImpl {
+public final class HowlingChorus extends CardImpl {
 
     public HowlingChorus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

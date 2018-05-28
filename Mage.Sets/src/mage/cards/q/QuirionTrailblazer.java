@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class QuirionTrailblazer extends CardImpl {
+public final class QuirionTrailblazer extends CardImpl {
 
     public QuirionTrailblazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

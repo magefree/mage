@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class VaporousDjinn extends CardImpl {
+public final class VaporousDjinn extends CardImpl {
 
     public VaporousDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

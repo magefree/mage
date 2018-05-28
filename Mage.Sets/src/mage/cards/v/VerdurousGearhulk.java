@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author fireshoes
  */
-public class VerdurousGearhulk extends CardImpl {
+public final class VerdurousGearhulk extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki, North
  */
-public class Painsmith extends CardImpl {
+public final class Painsmith extends CardImpl {
     public Painsmith (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add(SubType.HUMAN);

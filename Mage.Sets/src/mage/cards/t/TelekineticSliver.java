@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author anonymous
  */
-public class TelekineticSliver extends CardImpl {
+public final class TelekineticSliver extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 

@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class NykthosShrineToNyx extends CardImpl {
+public final class NykthosShrineToNyx extends CardImpl {
 
     public NykthosShrineToNyx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

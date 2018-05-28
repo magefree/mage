@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class PlagueStinger extends CardImpl {
+public final class PlagueStinger extends CardImpl {
 
     public PlagueStinger (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class FrostwindInvoker extends CardImpl {
+public final class FrostwindInvoker extends CardImpl {
 
     public FrostwindInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

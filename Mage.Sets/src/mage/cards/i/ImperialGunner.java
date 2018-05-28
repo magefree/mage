@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Styxo
  */
-public class ImperialGunner extends CardImpl {
+public final class ImperialGunner extends CardImpl {
 
     private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("target player, planeswalker or Starship creature");
 

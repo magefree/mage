@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class UninvitedGeist extends CardImpl {
+public final class UninvitedGeist extends CardImpl {
 
     public UninvitedGeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

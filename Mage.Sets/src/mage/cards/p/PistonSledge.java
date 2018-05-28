@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Viserion, North
  */
-public class PistonSledge extends CardImpl {
+public final class PistonSledge extends CardImpl {
 
     private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 

@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author cbt33
  */
-public class IvyElemental extends CardImpl {
+public final class IvyElemental extends CardImpl {
 
     public IvyElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");

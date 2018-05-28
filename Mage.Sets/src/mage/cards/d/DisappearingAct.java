@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class DisappearingAct extends CardImpl {
+public final class DisappearingAct extends CardImpl {
 
     public DisappearingAct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

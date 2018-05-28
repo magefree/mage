@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class InBolassClutches extends CardImpl {
+public final class InBolassClutches extends CardImpl {
 
     public InBolassClutches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");

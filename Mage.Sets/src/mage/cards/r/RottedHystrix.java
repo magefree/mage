@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RottedHystrix extends CardImpl {
+public final class RottedHystrix extends CardImpl {
 
     public RottedHystrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

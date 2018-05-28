@@ -49,7 +49,7 @@ import mage.players.Player;
 /**
  * @author duncant
  */
-public class MycosynthLattice extends CardImpl {
+public final class MycosynthLattice extends CardImpl {
 
     public MycosynthLattice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

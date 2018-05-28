@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author jeffwadsworth
  *
  */
-public class PuppeteerClique extends CardImpl {
+public final class PuppeteerClique extends CardImpl {
 
     public PuppeteerClique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

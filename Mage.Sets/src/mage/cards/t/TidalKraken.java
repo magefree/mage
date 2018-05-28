@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class TidalKraken extends CardImpl {
+public final class TidalKraken extends CardImpl {
 
     public TidalKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");

@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  * @author LoneFox
 
  */
-public class GoblinFlectomancer extends CardImpl {
+public final class GoblinFlectomancer extends CardImpl {
 
     public GoblinFlectomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}{R}");

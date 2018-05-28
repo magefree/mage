@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ValiantGuard extends CardImpl {
+public final class ValiantGuard extends CardImpl {
 
     public ValiantGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

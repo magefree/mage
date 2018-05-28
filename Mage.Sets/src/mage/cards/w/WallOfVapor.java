@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class WallOfVapor extends CardImpl {
+public final class WallOfVapor extends CardImpl {
 
     public WallOfVapor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

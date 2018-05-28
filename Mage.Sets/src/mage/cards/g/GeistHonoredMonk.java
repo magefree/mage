@@ -47,7 +47,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
 /**
  * @author nantuko
  */
-public class GeistHonoredMonk extends CardImpl {
+public final class GeistHonoredMonk extends CardImpl {
 
     public GeistHonoredMonk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

@@ -48,7 +48,7 @@ import mage.game.permanent.token.HumanClericToken;
  *
  * @author fireshoes
  */
-public class WestvaleCultLeader extends CardImpl {
+public final class WestvaleCultLeader extends CardImpl {
 
     final private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 

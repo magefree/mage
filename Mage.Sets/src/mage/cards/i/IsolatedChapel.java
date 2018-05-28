@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class IsolatedChapel extends CardImpl {
+public final class IsolatedChapel extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

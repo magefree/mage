@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LokiX
  */
-public class Overrun extends CardImpl {
+public final class Overrun extends CardImpl {
 
     public Overrun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}{G}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author Styxo
  */
-public class DeftDismissal extends CardImpl {
+public final class DeftDismissal extends CardImpl {
 
     public DeftDismissal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

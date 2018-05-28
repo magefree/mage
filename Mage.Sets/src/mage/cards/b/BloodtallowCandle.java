@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Rystan
  */
-public class BloodtallowCandle extends CardImpl {
+public final class BloodtallowCandle extends CardImpl {
 
     public BloodtallowCandle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

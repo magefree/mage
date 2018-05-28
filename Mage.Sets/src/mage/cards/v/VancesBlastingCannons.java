@@ -58,7 +58,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author TheElk801
  */
-public class VancesBlastingCannons extends CardImpl {
+public final class VancesBlastingCannons extends CardImpl {
 
     public VancesBlastingCannons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

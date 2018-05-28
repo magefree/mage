@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TGower
  */
-public class RootwaterDiver extends CardImpl {
+public final class RootwaterDiver extends CardImpl {
 
     public RootwaterDiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

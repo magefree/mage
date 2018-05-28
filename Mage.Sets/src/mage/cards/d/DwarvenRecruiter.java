@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class DwarvenRecruiter extends CardImpl {
+public final class DwarvenRecruiter extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Dwarf cards");
 

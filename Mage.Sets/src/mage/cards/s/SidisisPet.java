@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class SidisisPet extends CardImpl {
+public final class SidisisPet extends CardImpl {
 
     public SidisisPet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SearchTheCity extends CardImpl {
+public final class SearchTheCity extends CardImpl {
 
     public SearchTheCity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

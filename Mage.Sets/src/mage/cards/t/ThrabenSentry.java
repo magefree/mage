@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 /**
  * @author nantuko
  */
-public class ThrabenSentry extends CardImpl {
+public final class ThrabenSentry extends CardImpl {
 
     public ThrabenSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

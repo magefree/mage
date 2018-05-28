@@ -40,7 +40,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class ViashinoSlasher extends CardImpl {
+public final class ViashinoSlasher extends CardImpl {
 
     public ViashinoSlasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

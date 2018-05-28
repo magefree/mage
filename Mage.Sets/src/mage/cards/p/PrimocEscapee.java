@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PrimocEscapee extends CardImpl {
+public final class PrimocEscapee extends CardImpl {
 
     public PrimocEscapee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");

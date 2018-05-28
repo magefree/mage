@@ -47,7 +47,7 @@ import mage.filter.predicate.other.FaceDownPredicate;
  *
  * @author LoneFox
  */
-public class PrimalWhisperer extends CardImpl {
+public final class PrimalWhisperer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature");
 

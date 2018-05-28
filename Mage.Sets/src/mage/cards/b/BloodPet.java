@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class BloodPet extends CardImpl {
+public final class BloodPet extends CardImpl {
 
     public BloodPet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

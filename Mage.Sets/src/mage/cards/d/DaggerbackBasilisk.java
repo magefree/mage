@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DaggerbackBasilisk extends CardImpl {
+public final class DaggerbackBasilisk extends CardImpl {
 
     public DaggerbackBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

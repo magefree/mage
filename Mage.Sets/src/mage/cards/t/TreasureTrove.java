@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class TreasureTrove extends CardImpl {
+public final class TreasureTrove extends CardImpl {
 
     public TreasureTrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

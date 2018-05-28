@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author spjspj
  */
-public class FountainWatch extends CardImpl {
+public final class FountainWatch extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Artifacts and Enchantments");
 

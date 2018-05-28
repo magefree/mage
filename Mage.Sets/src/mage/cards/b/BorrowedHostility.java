@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BorrowedHostility extends CardImpl {
+public final class BorrowedHostility extends CardImpl {
 
     private static final FilterCreaturePermanent filterBoost = new FilterCreaturePermanent("creature to get +3/+0");
     private static final FilterCreaturePermanent filterFirstStrike = new FilterCreaturePermanent("creature to gain first strike");

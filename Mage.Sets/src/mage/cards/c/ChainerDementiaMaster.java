@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class ChainerDementiaMaster extends CardImpl {
+public final class ChainerDementiaMaster extends CardImpl {
     
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Nightmare creatures");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Nightmares");

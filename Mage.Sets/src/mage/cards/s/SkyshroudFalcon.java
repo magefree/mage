@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SkyshroudFalcon extends CardImpl {
+public final class SkyshroudFalcon extends CardImpl {
 
     public SkyshroudFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

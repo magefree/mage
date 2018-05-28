@@ -38,7 +38,7 @@ import mage.MageInt;
  *
  * @author LoneFox
  */
-public class KorSoldierToken extends TokenImpl {
+public final class KorSoldierToken extends TokenImpl {
 
     public KorSoldierToken() {
         super("Kor Soldier", "1/1 white Kor Soldier creature token");

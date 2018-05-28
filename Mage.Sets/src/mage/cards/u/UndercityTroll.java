@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class UndercityTroll extends CardImpl {
+public final class UndercityTroll extends CardImpl {
 
     public UndercityTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

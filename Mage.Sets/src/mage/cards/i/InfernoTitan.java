@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class InfernoTitan extends CardImpl {
+public final class InfernoTitan extends CardImpl {
 
     public InfernoTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

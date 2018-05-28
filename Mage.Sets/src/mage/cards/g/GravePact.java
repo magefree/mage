@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class GravePact extends CardImpl {
+public final class GravePact extends CardImpl {
 
     public GravePact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}{B}");

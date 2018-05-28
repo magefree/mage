@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Jgod
  */
-public class ThundersongTrumpeter extends CardImpl {
+public final class ThundersongTrumpeter extends CardImpl {
 
     public ThundersongTrumpeter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");

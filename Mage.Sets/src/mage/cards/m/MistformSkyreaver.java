@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class MistformSkyreaver extends CardImpl {
+public final class MistformSkyreaver extends CardImpl {
 
     public MistformSkyreaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

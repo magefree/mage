@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class GraveDefiler extends CardImpl {
+public final class GraveDefiler extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Zombie cards");
 

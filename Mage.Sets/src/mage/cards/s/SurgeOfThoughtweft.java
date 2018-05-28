@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class SurgeOfThoughtweft extends CardImpl {
+public final class SurgeOfThoughtweft extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Kithkin");
 

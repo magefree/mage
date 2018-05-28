@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author markedagain
  */
-public class Cloudskate extends CardImpl {
+public final class Cloudskate extends CardImpl {
 
     public Cloudskate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

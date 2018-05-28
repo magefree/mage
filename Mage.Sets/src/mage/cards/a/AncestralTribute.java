@@ -43,7 +43,7 @@ import mage.filter.FilterCard;
  * @author cbt33
  */
  
-public class AncestralTribute extends CardImpl {
+public final class AncestralTribute extends CardImpl {
 
     public AncestralTribute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");

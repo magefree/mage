@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ThalakosDreamsower extends CardImpl {
+public final class ThalakosDreamsower extends CardImpl {
 
     public ThalakosDreamsower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

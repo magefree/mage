@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class LysAlanaScarblade extends CardImpl {
+public final class LysAlanaScarblade extends CardImpl {
 
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent();
     private static final FilterCard filter2 = new FilterCard("an Elf card");

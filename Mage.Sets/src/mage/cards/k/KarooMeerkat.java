@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class KarooMeerkat extends CardImpl {
+public final class KarooMeerkat extends CardImpl {
 
     public KarooMeerkat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

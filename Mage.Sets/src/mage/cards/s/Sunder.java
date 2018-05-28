@@ -38,7 +38,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class Sunder extends CardImpl {
+public final class Sunder extends CardImpl {
 
     public Sunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");

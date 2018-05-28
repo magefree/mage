@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class TilonallisKnight extends CardImpl {
+public final class TilonallisKnight extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

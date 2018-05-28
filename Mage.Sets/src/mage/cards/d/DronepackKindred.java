@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class DronepackKindred extends CardImpl {
+public final class DronepackKindred extends CardImpl {
 
     public DronepackKindred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

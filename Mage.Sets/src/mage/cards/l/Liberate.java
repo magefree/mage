@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LoneFox
  *
  */
-public class Liberate extends CardImpl {
+public final class Liberate extends CardImpl {
 
     public Liberate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

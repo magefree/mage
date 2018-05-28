@@ -38,7 +38,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author North
  */
-public class SpectralProcession extends CardImpl {
+public final class SpectralProcession extends CardImpl {
 
     public SpectralProcession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/W}{2/W}{2/W}");

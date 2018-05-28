@@ -43,7 +43,7 @@ import mage.game.permanent.token.DinosaurToken;
  *
  * @author TheElk801
  */
-public class RaptorHatchling extends CardImpl {
+public final class RaptorHatchling extends CardImpl {
 
     public RaptorHatchling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

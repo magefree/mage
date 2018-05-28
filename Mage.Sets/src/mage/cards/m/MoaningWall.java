@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class MoaningWall extends CardImpl {
+public final class MoaningWall extends CardImpl {
 
     public MoaningWall(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

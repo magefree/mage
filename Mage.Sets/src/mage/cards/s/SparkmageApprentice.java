@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class SparkmageApprentice extends CardImpl {
+public final class SparkmageApprentice extends CardImpl {
 
     public SparkmageApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

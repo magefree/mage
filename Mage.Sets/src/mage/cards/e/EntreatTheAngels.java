@@ -42,7 +42,7 @@ import mage.game.permanent.token.AngelToken;
  * @author noxx
  *
  */
-public class EntreatTheAngels extends CardImpl {
+public final class EntreatTheAngels extends CardImpl {
 
     public EntreatTheAngels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");

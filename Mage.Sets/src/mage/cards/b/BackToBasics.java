@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class BackToBasics extends CardImpl {
+public final class BackToBasics extends CardImpl {
 
     public BackToBasics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

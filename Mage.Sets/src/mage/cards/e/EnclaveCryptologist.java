@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com, noxx
  */
-public class EnclaveCryptologist extends LevelerCard {
+public final class EnclaveCryptologist extends LevelerCard {
 
     public EnclaveCryptologist (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

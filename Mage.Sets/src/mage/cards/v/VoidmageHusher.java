@@ -45,7 +45,7 @@ import mage.target.common.TargetActivatedAbility;
  *
  * @author andyfries
  */
-public class VoidmageHusher extends CardImpl {
+public final class VoidmageHusher extends CardImpl {
 
     public VoidmageHusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

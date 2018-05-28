@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class AvenFleetwing extends CardImpl {
+public final class AvenFleetwing extends CardImpl {
 
     public AvenFleetwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

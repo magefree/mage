@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class SpinalGraft extends CardImpl {
+public final class SpinalGraft extends CardImpl {
 
     public SpinalGraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

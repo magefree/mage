@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class JaceTelepathUnbound extends CardImpl {
+public final class JaceTelepathUnbound extends CardImpl {
 
     public JaceTelepathUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");

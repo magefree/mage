@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cancel extends CardImpl {
+public final class Cancel extends CardImpl {
 
     public Cancel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

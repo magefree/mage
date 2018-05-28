@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EddytrailHawk extends CardImpl {
+public final class EddytrailHawk extends CardImpl {
 
     private final static FilterAttackingCreature filter = new FilterAttackingCreature();
 

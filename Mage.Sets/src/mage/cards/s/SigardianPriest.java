@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SigardianPriest extends CardImpl {
+public final class SigardianPriest extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creature");
 

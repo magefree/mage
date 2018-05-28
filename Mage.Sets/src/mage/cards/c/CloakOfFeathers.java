@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CloakOfFeathers extends CardImpl {
+public final class CloakOfFeathers extends CardImpl {
 
     public CloakOfFeathers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

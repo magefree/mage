@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class SupplyCaravan extends CardImpl {
+public final class SupplyCaravan extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a tapped creature");
 

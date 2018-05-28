@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ApprenticeSorcerer extends CardImpl {
+public final class ApprenticeSorcerer extends CardImpl {
 
     public ApprenticeSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

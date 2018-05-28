@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author KholdFuzion
 
  */
-public class Regrowth extends CardImpl {
+public final class Regrowth extends CardImpl {
 
     public Regrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

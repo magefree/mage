@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author anonymous
  */
-public class EnduringRenewal extends CardImpl {
+public final class EnduringRenewal extends CardImpl {
     
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
 

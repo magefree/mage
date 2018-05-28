@@ -51,7 +51,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class FoulEmissary extends CardImpl {
+public final class FoulEmissary extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature card");
 

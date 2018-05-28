@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class VoraciousDragon extends CardImpl {
+public final class VoraciousDragon extends CardImpl {
 
     public VoraciousDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SiegeBehemoth extends CardImpl {
+public final class SiegeBehemoth extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control");
 

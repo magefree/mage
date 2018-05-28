@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ChromeSteed extends CardImpl {
+public final class ChromeSteed extends CardImpl {
     private static final String text = "Metalcraft - Chrome Steed gets +2/+2 as long as you control three or more artifacts";
 
     public ChromeSteed (UUID ownerId, CardSetInfo setInfo) {

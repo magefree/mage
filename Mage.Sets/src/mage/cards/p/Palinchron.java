@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class Palinchron extends CardImpl {
+public final class Palinchron extends CardImpl {
 
     public Palinchron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

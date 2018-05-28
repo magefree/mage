@@ -55,7 +55,7 @@ import mage.target.TargetSpell;
  * @author JRHerlehy
  *         Created on 4/5/18.
  */
-public class NaruMehaMasterWizard extends CardImpl {
+public final class NaruMehaMasterWizard extends CardImpl {
 
     private static final FilterSpell spellFilter = new FilterSpell("instant or sorcery spell you control");
     private static final FilterCreaturePermanent wizardFilter = new FilterCreaturePermanent(SubType.WIZARD, "Wizards");

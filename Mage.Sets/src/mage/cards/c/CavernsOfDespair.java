@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class CavernsOfDespair extends CardImpl {
+public final class CavernsOfDespair extends CardImpl {
 
     public CavernsOfDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

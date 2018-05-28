@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class StrawSoldiers extends CardImpl {
+public final class StrawSoldiers extends CardImpl {
 
     public StrawSoldiers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2 & L_J
  */
-public class FacesOfThePast extends CardImpl {
+public final class FacesOfThePast extends CardImpl {
 
     public FacesOfThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

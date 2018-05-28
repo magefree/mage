@@ -49,7 +49,7 @@ import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
  *
  * @author jeffwadsworth & emerald000 & L_J
  */
-public class TotalWar extends CardImpl {
+public final class TotalWar extends CardImpl {
 
     public TotalWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

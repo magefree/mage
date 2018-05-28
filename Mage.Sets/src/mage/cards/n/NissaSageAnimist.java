@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class NissaSageAnimist extends CardImpl {
+public final class NissaSageAnimist extends CardImpl {
 
     public NissaSageAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");

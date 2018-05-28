@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DeadlyRecluse extends CardImpl {
+public final class DeadlyRecluse extends CardImpl {
 
     public DeadlyRecluse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

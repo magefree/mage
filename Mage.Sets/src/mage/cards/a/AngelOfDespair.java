@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class AngelOfDespair extends CardImpl {
+public final class AngelOfDespair extends CardImpl {
 
     public AngelOfDespair (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{B}{B}");

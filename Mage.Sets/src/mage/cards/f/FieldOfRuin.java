@@ -58,7 +58,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author TheElk801
  */
-public class FieldOfRuin extends CardImpl {
+public final class FieldOfRuin extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land an opponent controls");
 

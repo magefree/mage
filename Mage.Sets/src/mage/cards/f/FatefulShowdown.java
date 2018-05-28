@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class FatefulShowdown extends CardImpl {
+public final class FatefulShowdown extends CardImpl {
 
     public FatefulShowdown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");

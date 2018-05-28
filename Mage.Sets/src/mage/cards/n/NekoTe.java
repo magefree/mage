@@ -50,7 +50,7 @@ import mage.constants.Outcome;
  *
  * @author LevelX2
  */
-public class NekoTe extends CardImpl {
+public final class NekoTe extends CardImpl {
 
     public NekoTe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

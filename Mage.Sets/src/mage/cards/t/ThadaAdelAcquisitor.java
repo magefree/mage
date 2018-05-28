@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class ThadaAdelAcquisitor extends CardImpl {
+public final class ThadaAdelAcquisitor extends CardImpl {
 
     public ThadaAdelAcquisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

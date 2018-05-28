@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class Inviolability extends CardImpl {
+public final class Inviolability extends CardImpl {
 
     public Inviolability(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

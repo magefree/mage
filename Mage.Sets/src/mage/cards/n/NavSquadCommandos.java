@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class NavSquadCommandos extends CardImpl {
+public final class NavSquadCommandos extends CardImpl {
 
     public NavSquadCommandos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

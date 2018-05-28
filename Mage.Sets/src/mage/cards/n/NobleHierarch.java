@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NobleHierarch extends CardImpl {
+public final class NobleHierarch extends CardImpl {
 
     public NobleHierarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class CastOut extends CardImpl {
+public final class CastOut extends CardImpl {
 
     private final static FilterNonlandPermanent filter = new FilterNonlandPermanent();
 

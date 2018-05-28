@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class RavenousRats extends CardImpl {
+public final class RavenousRats extends CardImpl {
 
     public RavenousRats (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

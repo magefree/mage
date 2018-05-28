@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class AkkiAvalanchers extends CardImpl {
+public final class AkkiAvalanchers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

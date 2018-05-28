@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class StoneIdolTrap extends CardImpl {
+public final class StoneIdolTrap extends CardImpl {
 
     public StoneIdolTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{R}");

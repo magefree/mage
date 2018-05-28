@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanentSameController;
  *
  * @author jeffwadsworth
  */
-public class BarrinsSpite extends CardImpl {
+public final class BarrinsSpite extends CardImpl {
 
     public BarrinsSpite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");

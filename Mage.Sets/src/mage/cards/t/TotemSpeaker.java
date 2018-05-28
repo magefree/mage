@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Wehk
  */
-public class TotemSpeaker extends CardImpl {
+public final class TotemSpeaker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Beast");
 

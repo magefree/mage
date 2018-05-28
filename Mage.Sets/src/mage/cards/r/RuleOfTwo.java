@@ -50,7 +50,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Styxo
  */
-public class RuleOfTwo extends CardImpl {
+public final class RuleOfTwo extends CardImpl {
 
     public RuleOfTwo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

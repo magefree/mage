@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class CephalidAristocrat extends CardImpl {
+public final class CephalidAristocrat extends CardImpl {
 
     public CephalidAristocrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

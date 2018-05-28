@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class EvilEyeOfUrborg extends CardImpl {
+public final class EvilEyeOfUrborg extends CardImpl {
     
     private static final FilterCreaturePermanent cantAttackFilter = new FilterCreaturePermanent("Non-Eye creatures you control");
 

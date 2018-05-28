@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class FeralHydra extends CardImpl {
+public final class FeralHydra extends CardImpl {
 
     public FeralHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");

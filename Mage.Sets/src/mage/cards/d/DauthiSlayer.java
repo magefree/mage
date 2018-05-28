@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DauthiSlayer extends CardImpl {
+public final class DauthiSlayer extends CardImpl {
 
     public DauthiSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

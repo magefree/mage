@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ThallidOmnivore extends CardImpl {
+public final class ThallidOmnivore extends CardImpl {
 
     public ThallidOmnivore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

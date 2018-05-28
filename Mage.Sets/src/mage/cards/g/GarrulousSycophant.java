@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GarrulousSycophant extends CardImpl {
+public final class GarrulousSycophant extends CardImpl {
 
     public GarrulousSycophant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

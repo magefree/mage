@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class StompingGround extends CardImpl {
+public final class StompingGround extends CardImpl {
 
     public StompingGround(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
 /**
  * @author LevelX2
  */
-public class BlistercoilWeird extends CardImpl {
+public final class BlistercoilWeird extends CardImpl {
     
     public BlistercoilWeird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}");

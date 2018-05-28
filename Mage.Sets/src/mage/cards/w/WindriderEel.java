@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class WindriderEel extends CardImpl {
+public final class WindriderEel extends CardImpl {
 
     public WindriderEel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

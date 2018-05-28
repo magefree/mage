@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author emerald000
  */
-public class ElderDeepFiend extends CardImpl {
+public final class ElderDeepFiend extends CardImpl {
 
     public ElderDeepFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");

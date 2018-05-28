@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class Balance extends CardImpl {
+public final class Balance extends CardImpl {
 
     public Balance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

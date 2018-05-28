@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author Pete Rossi
  */
-public class HumOfTheRadix extends CardImpl {
+public final class HumOfTheRadix extends CardImpl {
 
     public HumOfTheRadix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

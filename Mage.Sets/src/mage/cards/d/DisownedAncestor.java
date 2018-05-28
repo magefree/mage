@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class DisownedAncestor extends CardImpl {
+public final class DisownedAncestor extends CardImpl {
 
     public DisownedAncestor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

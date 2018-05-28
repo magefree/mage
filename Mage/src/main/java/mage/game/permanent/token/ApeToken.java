@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ApeToken extends TokenImpl {
+public final class ApeToken extends TokenImpl {
 
     public ApeToken() {
         super("Ape", "2/2 green Ape creature token");

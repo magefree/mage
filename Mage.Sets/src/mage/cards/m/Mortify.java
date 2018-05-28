@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class Mortify extends CardImpl {
+public final class Mortify extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
 

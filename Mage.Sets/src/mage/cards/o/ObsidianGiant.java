@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class ObsidianGiant extends CardImpl {
+public final class ObsidianGiant extends CardImpl {
 
     public ObsidianGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

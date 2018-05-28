@@ -43,7 +43,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  * @author LoneFox
  *
  */
-public class Rout extends CardImpl {
+public final class Rout extends CardImpl {
 
     public Rout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

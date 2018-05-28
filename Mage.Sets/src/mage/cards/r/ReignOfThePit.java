@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class ReignOfThePit extends CardImpl {
+public final class ReignOfThePit extends CardImpl {
 
     public ReignOfThePit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

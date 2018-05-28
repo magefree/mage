@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class UnnaturalPredation extends CardImpl {
+public final class UnnaturalPredation extends CardImpl {
 
     public UnnaturalPredation (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

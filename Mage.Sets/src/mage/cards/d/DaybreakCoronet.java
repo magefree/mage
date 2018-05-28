@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class DaybreakCoronet extends CardImpl {
+public final class DaybreakCoronet extends CardImpl {
     
     public DaybreakCoronet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class OtepecHuntmaster extends CardImpl {
+public final class OtepecHuntmaster extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Dinosaur spells");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Dinosaur");

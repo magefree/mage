@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class MaulfistSquad extends CardImpl {
+public final class MaulfistSquad extends CardImpl {
 
     public MaulfistSquad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

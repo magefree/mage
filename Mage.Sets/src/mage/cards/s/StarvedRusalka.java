@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class StarvedRusalka extends CardImpl {
+public final class StarvedRusalka extends CardImpl {
 
     public StarvedRusalka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

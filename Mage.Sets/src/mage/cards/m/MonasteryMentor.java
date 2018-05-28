@@ -45,7 +45,7 @@ import mage.game.permanent.token.MonasteryMentorToken;
  *
  * @author fireshoes
  */
-public class MonasteryMentor extends CardImpl {
+public final class MonasteryMentor extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

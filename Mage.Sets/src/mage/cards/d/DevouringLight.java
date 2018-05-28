@@ -39,7 +39,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LevelX2
  */
-public class DevouringLight extends CardImpl {
+public final class DevouringLight extends CardImpl {
 
     public DevouringLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");

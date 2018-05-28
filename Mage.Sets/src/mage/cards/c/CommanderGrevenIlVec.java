@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class CommanderGrevenIlVec extends CardImpl {
+public final class CommanderGrevenIlVec extends CardImpl {
 
     public CommanderGrevenIlVec(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

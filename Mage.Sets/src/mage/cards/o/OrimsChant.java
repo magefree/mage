@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class OrimsChant extends CardImpl {
+public final class OrimsChant extends CardImpl {
 
     public OrimsChant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

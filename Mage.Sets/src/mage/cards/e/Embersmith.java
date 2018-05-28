@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author Loki, North
  */
-public class Embersmith extends CardImpl {
+public final class Embersmith extends CardImpl {
     public Embersmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add(SubType.HUMAN);

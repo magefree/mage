@@ -64,7 +64,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VizkopaGuildmage extends CardImpl {
+public final class VizkopaGuildmage extends CardImpl {
 
     public VizkopaGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");

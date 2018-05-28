@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author Styxo
  */
-public class HorrorOfTheBrokenLands extends CardImpl {
+public final class HorrorOfTheBrokenLands extends CardImpl {
 
     public HorrorOfTheBrokenLands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

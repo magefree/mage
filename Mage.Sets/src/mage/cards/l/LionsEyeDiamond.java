@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class LionsEyeDiamond extends CardImpl {
+public final class LionsEyeDiamond extends CardImpl {
 
     public LionsEyeDiamond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");

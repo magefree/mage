@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  * @author anonymous
  * @see mage.sets.seventhedition.RecklessEmbermage
  */
-public class PsionicSliver extends CardImpl {
+public final class PsionicSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures");
 

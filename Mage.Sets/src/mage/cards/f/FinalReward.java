@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class FinalReward extends CardImpl {
+public final class FinalReward extends CardImpl {
 
     public FinalReward(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");

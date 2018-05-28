@@ -49,7 +49,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author fireshoes
  */
-public class DrogskolCavalry extends CardImpl {
+public final class DrogskolCavalry extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another Spirit");
 

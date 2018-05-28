@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Regress extends CardImpl {
+public final class Regress extends CardImpl {
 
     public Regress (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

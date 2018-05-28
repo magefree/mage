@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class Carnassid extends CardImpl {
+public final class Carnassid extends CardImpl {
 
     public Carnassid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

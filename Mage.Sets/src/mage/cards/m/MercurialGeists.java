@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class MercurialGeists extends CardImpl {
+public final class MercurialGeists extends CardImpl {
 
     public MercurialGeists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");

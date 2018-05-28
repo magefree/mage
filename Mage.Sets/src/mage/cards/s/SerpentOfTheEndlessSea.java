@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class SerpentOfTheEndlessSea extends CardImpl {
+public final class SerpentOfTheEndlessSea extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands you control");
 

@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MizzixsMastery extends CardImpl {
+public final class MizzixsMastery extends CardImpl {
 
     public MizzixsMastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

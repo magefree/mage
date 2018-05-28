@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author FenrisulfrX
  */
-public class PhyrexianProcessor extends CardImpl {
+public final class PhyrexianProcessor extends CardImpl {
 
     public PhyrexianProcessor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author cbt33, Loki (Heartbeat of Spring)
  */
-public class PriceOfGlory extends CardImpl {
+public final class PriceOfGlory extends CardImpl {
 
     public PriceOfGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

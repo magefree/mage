@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class HellfireMongrel extends CardImpl {
+public final class HellfireMongrel extends CardImpl {
 
     public HellfireMongrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

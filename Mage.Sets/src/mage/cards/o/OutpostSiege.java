@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class OutpostSiege extends CardImpl {
+public final class OutpostSiege extends CardImpl {
 
     private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.";
     private final static String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature you control leaves the battlefield, {this} deals 1 damage to any target.";

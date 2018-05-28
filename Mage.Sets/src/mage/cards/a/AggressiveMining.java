@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class AggressiveMining extends CardImpl {
+public final class AggressiveMining extends CardImpl {
 
     public AggressiveMining(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

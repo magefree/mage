@@ -41,7 +41,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class WolfirSilverheart extends CardImpl {
+public final class WolfirSilverheart extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +4/+4";
 

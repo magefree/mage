@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class InspiredCharge extends CardImpl {
+public final class InspiredCharge extends CardImpl {
 
     public InspiredCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author TheElk801
  */
-public class StalkingYeti extends CardImpl {
+public final class StalkingYeti extends CardImpl {
 
     public StalkingYeti(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class GemstoneMine extends CardImpl {
+public final class GemstoneMine extends CardImpl {
 
     public GemstoneMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

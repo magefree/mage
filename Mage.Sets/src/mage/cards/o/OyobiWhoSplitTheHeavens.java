@@ -43,7 +43,7 @@ import mage.game.permanent.token.AnotherSpiritToken;
 /**
  * @author Loki
  */
-public class OyobiWhoSplitTheHeavens extends CardImpl {
+public final class OyobiWhoSplitTheHeavens extends CardImpl {
 
     public OyobiWhoSplitTheHeavens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{W}");

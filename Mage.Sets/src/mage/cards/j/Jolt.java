@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class Jolt extends CardImpl {
+public final class Jolt extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 

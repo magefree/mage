@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class WeatheredWayfarer extends CardImpl {
+public final class WeatheredWayfarer extends CardImpl {
 
     public WeatheredWayfarer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

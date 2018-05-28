@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class RenegadeFreighter extends CardImpl {
+public final class RenegadeFreighter extends CardImpl {
 
     public RenegadeFreighter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

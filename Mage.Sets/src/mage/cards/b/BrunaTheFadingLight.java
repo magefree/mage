@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class BrunaTheFadingLight extends CardImpl {
+public final class BrunaTheFadingLight extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Angel or Human creature card");
 

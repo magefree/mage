@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class LakeOfTheDead extends CardImpl {
+public final class LakeOfTheDead extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
 

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class JourneyersKite extends CardImpl {
+public final class JourneyersKite extends CardImpl {
 
 
         public JourneyersKite (UUID ownerId, CardSetInfo setInfo) {

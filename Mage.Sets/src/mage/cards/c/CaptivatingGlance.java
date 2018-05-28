@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class CaptivatingGlance extends CardImpl {
+public final class CaptivatingGlance extends CardImpl {
 
     public CaptivatingGlance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

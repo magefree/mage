@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class Guiltfeeder extends CardImpl {
+public final class Guiltfeeder extends CardImpl {
 
     public Guiltfeeder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

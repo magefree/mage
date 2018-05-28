@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Gloom extends CardImpl {
+public final class Gloom extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("White spells");
     static {

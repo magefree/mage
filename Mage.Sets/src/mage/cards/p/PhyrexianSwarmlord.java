@@ -44,7 +44,7 @@ import mage.game.permanent.token.InsectInfectToken;
  *
  * @author North
  */
-public class PhyrexianSwarmlord extends CardImpl {
+public final class PhyrexianSwarmlord extends CardImpl {
 
     public PhyrexianSwarmlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

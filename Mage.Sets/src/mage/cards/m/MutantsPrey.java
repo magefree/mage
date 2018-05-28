@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class MutantsPrey extends CardImpl {
+public final class MutantsPrey extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature you control with a +1/+1 counter on it");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");

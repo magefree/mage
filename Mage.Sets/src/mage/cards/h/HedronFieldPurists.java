@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class HedronFieldPurists extends LevelerCard {
+public final class HedronFieldPurists extends LevelerCard {
 
     public HedronFieldPurists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

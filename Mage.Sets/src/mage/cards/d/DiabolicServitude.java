@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DiabolicServitude extends CardImpl {
+public final class DiabolicServitude extends CardImpl {
 
     public DiabolicServitude(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class Mudslide extends CardImpl {
+public final class Mudslide extends CardImpl {
 
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures without flying");
 

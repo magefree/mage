@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class WoodlandStream extends CardImpl {
+public final class WoodlandStream extends CardImpl {
 
     public WoodlandStream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

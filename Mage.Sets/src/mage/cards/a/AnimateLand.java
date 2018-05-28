@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class AnimateLand extends CardImpl {
+public final class AnimateLand extends CardImpl {
 
     public AnimateLand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

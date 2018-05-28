@@ -50,7 +50,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  * @author LoneFox
  *
  */
-public class ErgRaiders extends CardImpl {
+public final class ErgRaiders extends CardImpl {
 
     public ErgRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

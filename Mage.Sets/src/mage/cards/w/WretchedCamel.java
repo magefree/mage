@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author spjspj
  */
-public class WretchedCamel extends CardImpl {
+public final class WretchedCamel extends CardImpl {
 
     private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
     private static final FilterCard filterDesertCard = new FilterCard("Desert card");

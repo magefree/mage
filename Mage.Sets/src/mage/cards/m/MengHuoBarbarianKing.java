@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class MengHuoBarbarianKing extends CardImpl {
+public final class MengHuoBarbarianKing extends CardImpl {
     
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures you control");
 

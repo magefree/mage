@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AppealAuthority extends SplitCard {
+public final class AppealAuthority extends SplitCard {
 
     public AppealAuthority(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{G}", "{1}{W}", SpellAbilityType.SPLIT_AFTERMATH);

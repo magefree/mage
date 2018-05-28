@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class PureIntentions extends CardImpl {
+public final class PureIntentions extends CardImpl {
 
     public PureIntentions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class AbyssalNocturnus extends CardImpl {
+public final class AbyssalNocturnus extends CardImpl {
 
     public AbyssalNocturnus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

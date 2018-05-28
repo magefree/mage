@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author hanasu
  */
-public class GrandmotherSengir extends CardImpl {
+public final class GrandmotherSengir extends CardImpl {
 
     public GrandmotherSengir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

@@ -56,7 +56,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class NemesisTrap extends CardImpl {
+public final class NemesisTrap extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("If a white creature is attacking");
 

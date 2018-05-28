@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class DeclarationOfNaught extends CardImpl {
+public final class DeclarationOfNaught extends CardImpl {
 
     static final private FilterSpell filter = new FilterSpell("spell with the chosen name");
 

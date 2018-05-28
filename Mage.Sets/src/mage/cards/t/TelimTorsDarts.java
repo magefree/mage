@@ -43,7 +43,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author nigelzor
  */
-public class TelimTorsDarts extends CardImpl {
+public final class TelimTorsDarts extends CardImpl {
 
     public TelimTorsDarts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

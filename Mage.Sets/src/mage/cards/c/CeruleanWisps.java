@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class CeruleanWisps extends CardImpl {
+public final class CeruleanWisps extends CardImpl {
 
     public CeruleanWisps (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author fireshoes
  */
-public class RollingThunder extends CardImpl {
+public final class RollingThunder extends CardImpl {
 
     public RollingThunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");

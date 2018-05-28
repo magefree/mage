@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author jonubuu
  */
-public class GolgariGraveTroll extends CardImpl {
+public final class GolgariGraveTroll extends CardImpl {
 
     public GolgariGraveTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

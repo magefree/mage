@@ -43,7 +43,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class Providence extends CardImpl {
+public final class Providence extends CardImpl {
 
     private static String abilityText = "at the beginning of the first upkeep, your life total becomes 26";
 

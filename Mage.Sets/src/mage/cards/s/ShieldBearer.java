@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class ShieldBearer extends CardImpl {
+public final class ShieldBearer extends CardImpl {
 
     public ShieldBearer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

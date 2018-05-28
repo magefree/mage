@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KozileksShrieker extends CardImpl {
+public final class KozileksShrieker extends CardImpl {
 
     public KozileksShrieker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

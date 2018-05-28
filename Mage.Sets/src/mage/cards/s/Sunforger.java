@@ -65,7 +65,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class Sunforger extends CardImpl {
+public final class Sunforger extends CardImpl {
 
     public Sunforger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

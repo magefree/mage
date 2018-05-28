@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class CultistsStaff extends CardImpl {
+public final class CultistsStaff extends CardImpl {
 
     public CultistsStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

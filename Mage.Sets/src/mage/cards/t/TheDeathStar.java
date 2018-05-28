@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class TheDeathStar extends CardImpl {
+public final class TheDeathStar extends CardImpl {
 
     public TheDeathStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

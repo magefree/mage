@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class OnceMoreWithFeeling extends CardImpl {
+public final class OnceMoreWithFeeling extends CardImpl {
 
     public OnceMoreWithFeeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{W}{W}{W}");

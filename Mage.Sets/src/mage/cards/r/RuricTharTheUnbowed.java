@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class RuricTharTheUnbowed extends CardImpl {
+public final class RuricTharTheUnbowed extends CardImpl {
 
     public RuricTharTheUnbowed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");

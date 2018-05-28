@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author fireshoes
  */
-public class IfhBiffEfreet extends CardImpl {
+public final class IfhBiffEfreet extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
     

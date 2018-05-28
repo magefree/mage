@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class BotanicalSanctum extends CardImpl {
+public final class BotanicalSanctum extends CardImpl {
 
     public BotanicalSanctum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

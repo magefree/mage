@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class UrborgStalker extends CardImpl {
+public final class UrborgStalker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

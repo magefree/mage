@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author Backfir3
  */
-public class ArcLightning extends CardImpl {
+public final class ArcLightning extends CardImpl {
 
     public ArcLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

@@ -50,7 +50,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author LevelX2
  */
-public class PolymorphousRush extends CardImpl {
+public final class PolymorphousRush extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 

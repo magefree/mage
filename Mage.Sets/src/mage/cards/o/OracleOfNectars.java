@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class OracleOfNectars extends CardImpl {
+public final class OracleOfNectars extends CardImpl {
 
     public OracleOfNectars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/W}");

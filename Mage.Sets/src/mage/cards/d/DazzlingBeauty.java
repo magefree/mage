@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2 & L_J
  */
-public class DazzlingBeauty extends CardImpl {
+public final class DazzlingBeauty extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked attacking creature");
 

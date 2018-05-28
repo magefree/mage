@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
 /**
  * @author Loki
  */
-public class GoldnightCommander extends CardImpl {
+public final class GoldnightCommander extends CardImpl {
 
     public GoldnightCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

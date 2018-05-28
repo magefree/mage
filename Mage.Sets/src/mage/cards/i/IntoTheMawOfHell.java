@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class IntoTheMawOfHell extends CardImpl {
+public final class IntoTheMawOfHell extends CardImpl {
 
     public IntoTheMawOfHell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");

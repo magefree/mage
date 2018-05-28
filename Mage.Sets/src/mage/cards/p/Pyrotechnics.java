@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author Quercitron
  */
-public class Pyrotechnics extends CardImpl {
+public final class Pyrotechnics extends CardImpl {
 
     public Pyrotechnics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class LongbowArcher extends CardImpl {
+public final class LongbowArcher extends CardImpl {
 
     public LongbowArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

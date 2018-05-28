@@ -38,7 +38,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class NaturalObsolescence extends CardImpl {
+public final class NaturalObsolescence extends CardImpl {
 
     public NaturalObsolescence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

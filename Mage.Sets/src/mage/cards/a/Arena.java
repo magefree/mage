@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponentsChoicePermanent;
  *
  * @author emerald000
  */
-public class Arena extends CardImpl {
+public final class Arena extends CardImpl {
 
     public Arena(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

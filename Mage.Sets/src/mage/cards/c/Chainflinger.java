@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Chainflinger extends CardImpl {
+public final class Chainflinger extends CardImpl {
 
     public Chainflinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

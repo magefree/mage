@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class GarzaZolPlagueQueen extends CardImpl {
+public final class GarzaZolPlagueQueen extends CardImpl {
 
     public GarzaZolPlagueQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}{R}");

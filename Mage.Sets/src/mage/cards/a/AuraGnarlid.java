@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class AuraGnarlid extends CardImpl {
+public final class AuraGnarlid extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Aura on the battlefield");
 

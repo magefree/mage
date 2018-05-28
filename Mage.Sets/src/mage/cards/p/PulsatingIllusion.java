@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class PulsatingIllusion extends CardImpl {
+public final class PulsatingIllusion extends CardImpl {
 
     public PulsatingIllusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

@@ -55,7 +55,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class EliteArcanist extends CardImpl {
+public final class EliteArcanist extends CardImpl {
 
     public EliteArcanist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

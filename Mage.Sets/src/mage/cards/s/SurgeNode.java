@@ -48,7 +48,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class SurgeNode extends CardImpl {
+public final class SurgeNode extends CardImpl {
 
     public SurgeNode (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

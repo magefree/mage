@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  *
  * @author fireshoes
  */
-public class HeraldOfKozilek extends CardImpl {
+public final class HeraldOfKozilek extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Colorless spells");
 

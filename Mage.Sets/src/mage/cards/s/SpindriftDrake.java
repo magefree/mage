@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class SpindriftDrake extends CardImpl {
+public final class SpindriftDrake extends CardImpl {
 
     public SpindriftDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

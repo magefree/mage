@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class ThievingMagpie extends CardImpl {
+public final class ThievingMagpie extends CardImpl {
 
     public ThievingMagpie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

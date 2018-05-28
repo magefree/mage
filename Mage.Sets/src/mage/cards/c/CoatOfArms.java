@@ -45,7 +45,7 @@ import mage.util.SubTypeList;
  *
  * @author North
  */
-public class CoatOfArms extends CardImpl {
+public final class CoatOfArms extends CardImpl {
 
     public CoatOfArms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

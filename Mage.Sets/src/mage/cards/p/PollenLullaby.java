@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author LevelX2
  */
-public class PollenLullaby extends CardImpl {
+public final class PollenLullaby extends CardImpl {
 
     public PollenLullaby(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author cbt33, LevelX2 (Quash)
  */
-public class MoltenInfluence extends CardImpl {
+public final class MoltenInfluence extends CardImpl {
 
     public MoltenInfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

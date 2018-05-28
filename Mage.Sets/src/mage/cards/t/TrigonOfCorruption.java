@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class TrigonOfCorruption extends CardImpl {
+public final class TrigonOfCorruption extends CardImpl {
 
     public TrigonOfCorruption (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

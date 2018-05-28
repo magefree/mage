@@ -46,7 +46,7 @@ import mage.game.stack.Spell;
  * @author KholdFuzion
 
  */
-public class IvoryCup extends CardImpl {
+public final class IvoryCup extends CardImpl {
 
     public IvoryCup(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

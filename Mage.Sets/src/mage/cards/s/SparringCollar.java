@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class SparringCollar extends CardImpl {
+public final class SparringCollar extends CardImpl {
 
     public SparringCollar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

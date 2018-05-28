@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SultaiScavenger extends CardImpl {
+public final class SultaiScavenger extends CardImpl {
 
     public SultaiScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

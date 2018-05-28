@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class CalmingVerse extends CardImpl {
+public final class CalmingVerse extends CardImpl {
 
     public CalmingVerse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ColossodonYearling extends CardImpl {
+public final class ColossodonYearling extends CardImpl {
 
     public ColossodonYearling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class BrightstoneRitual extends CardImpl {
+public final class BrightstoneRitual extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Goblin on the battlefield");
 

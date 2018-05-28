@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author anonymous
  */
-public class MarshGas extends CardImpl {
+public final class MarshGas extends CardImpl {
 
     public MarshGas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

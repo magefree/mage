@@ -43,7 +43,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author fireshoes
  */
-public class RotlungReanimator extends CardImpl {
+public final class RotlungReanimator extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Cleric");
     

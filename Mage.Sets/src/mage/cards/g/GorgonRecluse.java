@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author nigelzor
  */
-public class GorgonRecluse extends CardImpl {
+public final class GorgonRecluse extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

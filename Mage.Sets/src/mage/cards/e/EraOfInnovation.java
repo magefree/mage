@@ -52,7 +52,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class EraOfInnovation extends CardImpl {
+public final class EraOfInnovation extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or Artificer");
 

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BalefulStrix extends CardImpl {
+public final class BalefulStrix extends CardImpl {
 
     public BalefulStrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{U}{B}");

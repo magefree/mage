@@ -37,7 +37,7 @@ import mage.target.common.TargetArtifactPermanent;
 /**
  * @author Loki
  */
-public class Oxidize extends CardImpl {
+public final class Oxidize extends CardImpl {
 
     public Oxidize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

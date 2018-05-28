@@ -68,7 +68,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class NahiriTheHarbinger extends CardImpl {
+public final class NahiriTheHarbinger extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment, tapped artifact, or tapped creature");
 

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MirenTheMoaningWell extends CardImpl {
+public final class MirenTheMoaningWell extends CardImpl {
 
     public MirenTheMoaningWell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class MinamosMeddling extends CardImpl {
+public final class MinamosMeddling extends CardImpl {
 
     public MinamosMeddling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

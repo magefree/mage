@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class MoldAdder extends CardImpl {
+public final class MoldAdder extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("blue or black spell");
     static {

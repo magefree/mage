@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author TheElk801
  */
-public class PowerstoneShard extends CardImpl {
+public final class PowerstoneShard extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control named Powerstone Shard");
 

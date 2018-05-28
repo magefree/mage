@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class SkyshroudClaim extends CardImpl {
+public final class SkyshroudClaim extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Forest");
     static {

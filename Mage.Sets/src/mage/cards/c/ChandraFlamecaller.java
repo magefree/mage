@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class ChandraFlamecaller extends CardImpl {
+public final class ChandraFlamecaller extends CardImpl {
 
     public ChandraFlamecaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{R}{R}");

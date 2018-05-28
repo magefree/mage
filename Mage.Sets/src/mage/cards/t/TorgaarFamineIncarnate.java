@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class TorgaarFamineIncarnate extends CardImpl {
+public final class TorgaarFamineIncarnate extends CardImpl {
 
     public TorgaarFamineIncarnate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");

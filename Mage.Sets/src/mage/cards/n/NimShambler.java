@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class NimShambler extends CardImpl {
+public final class NimShambler extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author Loki
  */
-public class SachiDaughterOfSeshiro extends CardImpl {
+public final class SachiDaughterOfSeshiro extends CardImpl {
 
     private static final FilterCreaturePermanent snakeFilter = new FilterCreaturePermanent("Snakes");
     private static final FilterPermanent shamanFilter = new FilterPermanent("Shamans");

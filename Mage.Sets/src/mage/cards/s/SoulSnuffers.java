@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class SoulSnuffers extends CardImpl {
+public final class SoulSnuffers extends CardImpl {
 
     public SoulSnuffers (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

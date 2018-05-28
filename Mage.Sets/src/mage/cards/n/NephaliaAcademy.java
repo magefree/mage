@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class NephaliaAcademy extends CardImpl {
+public final class NephaliaAcademy extends CardImpl {
 
     public NephaliaAcademy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

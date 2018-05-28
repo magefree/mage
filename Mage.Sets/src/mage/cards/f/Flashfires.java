@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class Flashfires extends CardImpl {
+public final class Flashfires extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
     

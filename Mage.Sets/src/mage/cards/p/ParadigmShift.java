@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class ParadigmShift extends CardImpl {
+public final class ParadigmShift extends CardImpl {
 
     public ParadigmShift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

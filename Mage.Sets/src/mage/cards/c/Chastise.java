@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Plopman
  */
-public class Chastise extends CardImpl {
+public final class Chastise extends CardImpl {
 
     public Chastise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

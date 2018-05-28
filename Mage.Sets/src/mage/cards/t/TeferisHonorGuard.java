@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class TeferisHonorGuard extends CardImpl {
+public final class TeferisHonorGuard extends CardImpl {
 
     public TeferisHonorGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

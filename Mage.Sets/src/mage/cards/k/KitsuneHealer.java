@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class KitsuneHealer extends CardImpl {
+public final class KitsuneHealer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 

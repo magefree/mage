@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class HungryMist extends CardImpl {
+public final class HungryMist extends CardImpl {
 
     public HungryMist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

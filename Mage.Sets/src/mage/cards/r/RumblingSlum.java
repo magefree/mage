@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class RumblingSlum extends CardImpl {
+public final class RumblingSlum extends CardImpl {
 
     public RumblingSlum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}{G}");

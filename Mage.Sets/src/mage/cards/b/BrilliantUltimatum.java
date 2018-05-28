@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class BrilliantUltimatum extends CardImpl {
+public final class BrilliantUltimatum extends CardImpl {
 
     public BrilliantUltimatum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{W}{U}{U}{U}{B}{B}");

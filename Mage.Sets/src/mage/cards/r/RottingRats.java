@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class RottingRats extends CardImpl {
+public final class RottingRats extends CardImpl {
 
     public RottingRats (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

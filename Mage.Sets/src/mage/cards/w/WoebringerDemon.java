@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WoebringerDemon extends CardImpl {
+public final class WoebringerDemon extends CardImpl {
 
     public WoebringerDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

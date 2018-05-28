@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class FolkOfAnHavva extends CardImpl {
+public final class FolkOfAnHavva extends CardImpl {
 
     public FolkOfAnHavva(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

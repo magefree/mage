@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class DroidFactory extends CardImpl {
+public final class DroidFactory extends CardImpl {
 
     public DroidFactory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
@@ -74,7 +74,7 @@ public class DroidFactory extends CardImpl {
         return new DroidFactory(this);
     }
 
-    public class DroidFactoryAbility extends ActivatedAbilityImpl {
+    public final class DroidFactoryAbility extends ActivatedAbilityImpl {
 
         public DroidFactoryAbility(DroidFactoryAbility ability) {
             super(ability);

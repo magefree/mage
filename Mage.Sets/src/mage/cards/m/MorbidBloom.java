@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class MorbidBloom extends CardImpl {
+public final class MorbidBloom extends CardImpl {
 
     public MorbidBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{G}");

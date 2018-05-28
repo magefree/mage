@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Styxo
  */
-public class ShockTrooper extends CardImpl {
+public final class ShockTrooper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Trooper creatures");
 

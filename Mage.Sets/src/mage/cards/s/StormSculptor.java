@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class StormSculptor extends CardImpl {
+public final class StormSculptor extends CardImpl {
 
     public StormSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

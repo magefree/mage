@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class MarkovsServant extends CardImpl {
+public final class MarkovsServant extends CardImpl {
 
     public MarkovsServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},null);

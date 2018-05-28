@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author anonymous
  */
-public class CauterySliver extends CardImpl {
+public final class CauterySliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 

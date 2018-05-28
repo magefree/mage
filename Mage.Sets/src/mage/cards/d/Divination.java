@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class Divination extends CardImpl {
+public final class Divination extends CardImpl {
 
     public Divination (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

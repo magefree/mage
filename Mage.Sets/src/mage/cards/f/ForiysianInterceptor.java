@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class ForiysianInterceptor extends CardImpl {
+public final class ForiysianInterceptor extends CardImpl {
 
     public ForiysianInterceptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

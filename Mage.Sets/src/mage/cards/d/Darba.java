@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class Darba extends CardImpl {
+public final class Darba extends CardImpl {
 
     public Darba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

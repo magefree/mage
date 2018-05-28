@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HowlingBanshee extends CardImpl {
+public final class HowlingBanshee extends CardImpl {
 
     public HowlingBanshee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

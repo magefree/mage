@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class DominusOfFealty extends CardImpl {
+public final class DominusOfFealty extends CardImpl {
 
     public DominusOfFealty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U/R}{U/R}{U/R}{U/R}{U/R}");

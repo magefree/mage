@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author nigelzor
  */
-public class BeastsOfBogardan extends CardImpl {
+public final class BeastsOfBogardan extends CardImpl {
 
     private static final FilterPermanent controlFilter = new FilterPermanent("nontoken white permanent");
 

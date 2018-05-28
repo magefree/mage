@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Exclude extends CardImpl {
+public final class Exclude extends CardImpl {
 
     public Exclude(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

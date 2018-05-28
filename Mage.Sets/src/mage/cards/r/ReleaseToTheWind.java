@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ReleaseToTheWind extends CardImpl {
+public final class ReleaseToTheWind extends CardImpl {
 
     public ReleaseToTheWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

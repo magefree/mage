@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class NavigatorsCompass extends CardImpl {
+public final class NavigatorsCompass extends CardImpl {
 
     public NavigatorsCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author hanasu
  */
-public class Crosswinds extends CardImpl {
+public final class Crosswinds extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Creatures with flying");
     

@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author JRHerlehy
  */
-public class GideonOfTheTrials extends CardImpl {
+public final class GideonOfTheTrials extends CardImpl {
 
     public GideonOfTheTrials(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");

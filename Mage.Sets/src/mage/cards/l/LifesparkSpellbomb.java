@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class LifesparkSpellbomb extends CardImpl {
+public final class LifesparkSpellbomb extends CardImpl {
 
     public LifesparkSpellbomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

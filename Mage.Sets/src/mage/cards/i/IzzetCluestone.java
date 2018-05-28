@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class IzzetCluestone extends CardImpl {
+public final class IzzetCluestone extends CardImpl {
 
     public IzzetCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

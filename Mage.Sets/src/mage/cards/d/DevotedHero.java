@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class DevotedHero extends CardImpl {
+public final class DevotedHero extends CardImpl {
 
     public DevotedHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

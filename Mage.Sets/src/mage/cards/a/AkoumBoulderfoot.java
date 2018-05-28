@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class AkoumBoulderfoot extends CardImpl {
+public final class AkoumBoulderfoot extends CardImpl {
 
     public AkoumBoulderfoot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

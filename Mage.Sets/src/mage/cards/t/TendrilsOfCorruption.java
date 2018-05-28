@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TendrilsOfCorruption extends CardImpl {
+public final class TendrilsOfCorruption extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 

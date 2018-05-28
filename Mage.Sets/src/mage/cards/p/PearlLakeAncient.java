@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class PearlLakeAncient extends CardImpl {
+public final class PearlLakeAncient extends CardImpl {
 
     public PearlLakeAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

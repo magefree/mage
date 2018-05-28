@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class RoyalTrooper extends CardImpl {
+public final class RoyalTrooper extends CardImpl {
 
     public RoyalTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

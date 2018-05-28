@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Torment extends ExpansionSet {
+public final class Torment extends ExpansionSet {
 
     private static final Torment instance = new Torment();
 

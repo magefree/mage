@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class PlagueFiend extends CardImpl {
+public final class PlagueFiend extends CardImpl {
 
     public PlagueFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

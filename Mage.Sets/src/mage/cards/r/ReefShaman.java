@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class ReefShaman extends CardImpl {
+public final class ReefShaman extends CardImpl {
 
     public ReefShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

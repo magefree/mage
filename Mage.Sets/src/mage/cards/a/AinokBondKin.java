@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author LevelX2
  */
-public class AinokBondKin extends CardImpl {
+public final class AinokBondKin extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

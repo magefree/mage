@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jonubuu
  */
-public class DreadReturn extends CardImpl {
+public final class DreadReturn extends CardImpl {
 
     public DreadReturn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

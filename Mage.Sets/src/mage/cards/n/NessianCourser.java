@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class NessianCourser extends CardImpl {
+public final class NessianCourser extends CardImpl {
 
     public NessianCourser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

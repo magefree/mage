@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class BoneToAsh extends CardImpl {
+public final class BoneToAsh extends CardImpl {
 
     public BoneToAsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class DampenThought extends CardImpl {
+public final class DampenThought extends CardImpl {
 
     public DampenThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

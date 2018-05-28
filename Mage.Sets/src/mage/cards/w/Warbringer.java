@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Warbringer extends CardImpl {
+public final class Warbringer extends CardImpl {
 
     public Warbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

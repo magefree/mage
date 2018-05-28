@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class MistformWakecaster extends CardImpl {
+public final class MistformWakecaster extends CardImpl {
 
     public MistformWakecaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

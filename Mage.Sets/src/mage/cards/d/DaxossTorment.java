@@ -46,7 +46,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author fireshoes
  */
-public class DaxossTorment extends CardImpl {
+public final class DaxossTorment extends CardImpl {
 
     public DaxossTorment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

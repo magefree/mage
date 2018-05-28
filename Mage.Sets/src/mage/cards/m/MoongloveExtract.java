@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class MoongloveExtract extends CardImpl {
+public final class MoongloveExtract extends CardImpl {
 
     public MoongloveExtract(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

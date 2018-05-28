@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AngelicSkirmisher extends CardImpl {
+public final class AngelicSkirmisher extends CardImpl {
 
     public AngelicSkirmisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

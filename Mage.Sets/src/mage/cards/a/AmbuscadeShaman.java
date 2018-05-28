@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AmbuscadeShaman extends CardImpl {
+public final class AmbuscadeShaman extends CardImpl {
 
     public AmbuscadeShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

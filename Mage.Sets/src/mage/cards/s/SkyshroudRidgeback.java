@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SkyshroudRidgeback extends CardImpl {
+public final class SkyshroudRidgeback extends CardImpl {
 
     public SkyshroudRidgeback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

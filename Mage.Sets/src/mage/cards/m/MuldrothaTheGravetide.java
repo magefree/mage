@@ -61,7 +61,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class MuldrothaTheGravetide extends CardImpl {
+public final class MuldrothaTheGravetide extends CardImpl {
 
     public MuldrothaTheGravetide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");

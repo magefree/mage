@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class WipeAway extends CardImpl {
+public final class WipeAway extends CardImpl {
 
     public WipeAway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

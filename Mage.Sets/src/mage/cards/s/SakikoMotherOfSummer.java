@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SakikoMotherOfSummer extends CardImpl {
+public final class SakikoMotherOfSummer extends CardImpl {
 
     public SakikoMotherOfSummer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

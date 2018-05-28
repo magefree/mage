@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class RidgescaleTusker extends CardImpl {
+public final class RidgescaleTusker extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 

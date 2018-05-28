@@ -40,7 +40,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author fireshoes
  */
-public class Unsubstantiate extends CardImpl {
+public final class Unsubstantiate extends CardImpl {
 
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature");
 

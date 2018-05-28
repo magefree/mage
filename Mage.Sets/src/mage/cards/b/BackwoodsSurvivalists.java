@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BackwoodsSurvivalists extends CardImpl {
+public final class BackwoodsSurvivalists extends CardImpl {
 
     public BackwoodsSurvivalists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class EmbodimentOfSpring extends CardImpl {
+public final class EmbodimentOfSpring extends CardImpl {
 
     public EmbodimentOfSpring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

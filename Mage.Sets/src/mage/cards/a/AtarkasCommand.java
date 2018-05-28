@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class AtarkasCommand extends CardImpl {
+public final class AtarkasCommand extends CardImpl {
 
     public AtarkasCommand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{G}");

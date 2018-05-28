@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class Demoralize extends CardImpl {
+public final class Demoralize extends CardImpl {
 
     public Demoralize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

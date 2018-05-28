@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author jeffwadsworth
  */
-public class SapphireDrake extends CardImpl {
+public final class SapphireDrake extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent();
     

@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author noxx
  */
-public class ConjurersCloset extends CardImpl {
+public final class ConjurersCloset extends CardImpl {
 
     public ConjurersCloset(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

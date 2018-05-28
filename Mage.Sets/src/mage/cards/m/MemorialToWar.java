@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author Rystan
  */
-public class MemorialToWar extends CardImpl {
+public final class MemorialToWar extends CardImpl {
 
     public MemorialToWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

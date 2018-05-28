@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author Eirkei
  */
-public class Tangleroot extends CardImpl {
+public final class Tangleroot extends CardImpl {
 
     public Tangleroot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

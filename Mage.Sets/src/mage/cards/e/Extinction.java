@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class Extinction extends CardImpl {
+public final class Extinction extends CardImpl {
 
     public Extinction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");

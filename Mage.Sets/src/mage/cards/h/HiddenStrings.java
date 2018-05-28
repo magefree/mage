@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  */
 
 
-public class HiddenStrings extends CardImpl {
+public final class HiddenStrings extends CardImpl {
 
     public HiddenStrings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

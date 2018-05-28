@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ConsulsShieldguard extends CardImpl {
+public final class ConsulsShieldguard extends CardImpl {
 
     private final static FilterAttackingCreature filter = new FilterAttackingCreature();
 

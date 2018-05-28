@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author michael.napoleon@gmail.com
  */
-public class SunscapeMaster extends CardImpl {
+public final class SunscapeMaster extends CardImpl {
 
     public SunscapeMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

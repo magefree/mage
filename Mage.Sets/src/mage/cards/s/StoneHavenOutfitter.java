@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.EquippedPredicate;
  *
  * @author LevelX2
  */
-public class StoneHavenOutfitter extends CardImpl {
+public final class StoneHavenOutfitter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("equipped creatures you control");
 

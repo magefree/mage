@@ -44,7 +44,7 @@ import mage.watchers.common.PlayLandWatcher;
  *
  * @author LevelX2
  */
-public class RiverOfTears extends CardImpl {
+public final class RiverOfTears extends CardImpl {
 
     public RiverOfTears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

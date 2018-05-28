@@ -46,7 +46,7 @@ import mage.constants.SubType;
  *
  * @author North, noxx
  */
-public class HadaSpyPatrol extends LevelerCard {
+public final class HadaSpyPatrol extends LevelerCard {
 
     public HadaSpyPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

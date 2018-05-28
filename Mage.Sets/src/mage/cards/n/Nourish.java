@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class Nourish extends CardImpl {
+public final class Nourish extends CardImpl {
 
     public Nourish (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{G}");

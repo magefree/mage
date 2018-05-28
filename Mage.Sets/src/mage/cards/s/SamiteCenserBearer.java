@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class SamiteCenserBearer extends CardImpl {
+public final class SamiteCenserBearer extends CardImpl {
 
     public SamiteCenserBearer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

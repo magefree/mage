@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class StrikingSliver extends CardImpl {
+public final class StrikingSliver extends CardImpl {
 
     public StrikingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

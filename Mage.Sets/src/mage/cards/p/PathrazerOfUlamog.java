@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class PathrazerOfUlamog extends CardImpl {
+public final class PathrazerOfUlamog extends CardImpl {
 
     public PathrazerOfUlamog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{11}");

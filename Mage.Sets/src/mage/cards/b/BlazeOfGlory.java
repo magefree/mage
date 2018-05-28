@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class BlazeOfGlory extends CardImpl {
+public final class BlazeOfGlory extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 

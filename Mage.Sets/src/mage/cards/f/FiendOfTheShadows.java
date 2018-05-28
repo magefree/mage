@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class FiendOfTheShadows extends CardImpl {
+public final class FiendOfTheShadows extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 

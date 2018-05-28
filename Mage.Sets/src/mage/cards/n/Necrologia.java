@@ -42,7 +42,7 @@ import mage.constants.PhaseStep;
  *
  * @author LevelX2
  */
-public class Necrologia extends CardImpl {
+public final class Necrologia extends CardImpl {
 
     public Necrologia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");

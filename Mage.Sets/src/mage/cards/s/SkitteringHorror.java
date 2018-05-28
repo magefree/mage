@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author nigelzor
  */
-public class SkitteringHorror extends CardImpl {
+public final class SkitteringHorror extends CardImpl {
 
     public SkitteringHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

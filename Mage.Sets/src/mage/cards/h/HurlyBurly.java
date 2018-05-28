@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Loki
  */
-public class HurlyBurly extends CardImpl {
+public final class HurlyBurly extends CardImpl {
 
     private static final FilterCreaturePermanent filterWithoutFlying = new FilterCreaturePermanent("creature without flying");
     private static final FilterCreaturePermanent filterWithFlying = new FilterCreaturePermanent("creature with flying");

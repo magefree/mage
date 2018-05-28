@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MycosynthWellspring extends CardImpl {
+public final class MycosynthWellspring extends CardImpl {
 
     public MycosynthWellspring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

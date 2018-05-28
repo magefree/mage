@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GoblinDeathraiders extends CardImpl {
+public final class GoblinDeathraiders extends CardImpl {
 
     public GoblinDeathraiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");

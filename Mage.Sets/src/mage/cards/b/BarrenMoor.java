@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class BarrenMoor extends CardImpl {
+public final class BarrenMoor extends CardImpl {
 
     public BarrenMoor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class InvincibleHymn extends CardImpl {
+public final class InvincibleHymn extends CardImpl {
 
     public InvincibleHymn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}{W}");

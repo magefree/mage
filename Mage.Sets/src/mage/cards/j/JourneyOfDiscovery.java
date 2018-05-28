@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class JourneyOfDiscovery extends CardImpl {
+public final class JourneyOfDiscovery extends CardImpl {
 
     public JourneyOfDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

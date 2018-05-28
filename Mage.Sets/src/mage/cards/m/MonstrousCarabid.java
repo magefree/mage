@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class MonstrousCarabid extends CardImpl {
+public final class MonstrousCarabid extends CardImpl {
 
     public MonstrousCarabid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");

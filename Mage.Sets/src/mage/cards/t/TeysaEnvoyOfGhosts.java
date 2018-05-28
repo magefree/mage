@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class TeysaEnvoyOfGhosts extends CardImpl {
+public final class TeysaEnvoyOfGhosts extends CardImpl {
 
     public TeysaEnvoyOfGhosts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}");

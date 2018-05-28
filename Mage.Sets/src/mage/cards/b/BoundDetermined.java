@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class BoundDetermined extends SplitCard {
+public final class BoundDetermined extends SplitCard {
 
     public BoundDetermined(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{G}", "{G}{U}", SpellAbilityType.SPLIT);

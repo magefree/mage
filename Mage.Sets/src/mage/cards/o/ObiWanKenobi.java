@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo import mage.game.command.emblems.ObiWanKenobiEmblem;
  */
-public class ObiWanKenobi extends CardImpl {
+public final class ObiWanKenobi extends CardImpl {
 
     public ObiWanKenobi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");

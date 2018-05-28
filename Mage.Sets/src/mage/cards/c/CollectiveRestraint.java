@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author Simown
  */
-public class CollectiveRestraint extends CardImpl {
+public final class CollectiveRestraint extends CardImpl {
 
     public CollectiveRestraint(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

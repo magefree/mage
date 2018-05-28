@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class StillmoonCavalier extends CardImpl {
+public final class StillmoonCavalier extends CardImpl {
 
     public StillmoonCavalier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/B}{W/B}");

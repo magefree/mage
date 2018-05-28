@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author TheElk801
  */
-public class GhituJourneymage extends CardImpl {
+public final class GhituJourneymage extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Wizard");
 

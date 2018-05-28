@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class ShimianSpecter extends CardImpl {
+public final class ShimianSpecter extends CardImpl {
 
     public ShimianSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

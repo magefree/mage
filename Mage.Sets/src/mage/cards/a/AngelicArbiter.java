@@ -48,7 +48,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AngelicArbiter extends CardImpl {
+public final class AngelicArbiter extends CardImpl {
 
     public AngelicArbiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

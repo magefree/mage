@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class Lithophage extends CardImpl {
+public final class Lithophage extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Mountain");
     

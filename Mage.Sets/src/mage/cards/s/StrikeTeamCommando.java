@@ -46,7 +46,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Styxo
  */
-public class StrikeTeamCommando extends CardImpl {
+public final class StrikeTeamCommando extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact without spaceflight");
 

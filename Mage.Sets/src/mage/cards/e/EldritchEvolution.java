@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class EldritchEvolution extends CardImpl {
+public final class EldritchEvolution extends CardImpl {
 
     public EldritchEvolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");

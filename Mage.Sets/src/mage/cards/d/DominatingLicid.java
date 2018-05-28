@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class DominatingLicid extends CardImpl {
+public final class DominatingLicid extends CardImpl {
 
     public DominatingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

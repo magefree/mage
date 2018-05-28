@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class MysticSpeculation extends CardImpl {
+public final class MysticSpeculation extends CardImpl {
 
     public MysticSpeculation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

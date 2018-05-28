@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class DrudgeReavers extends CardImpl {
+public final class DrudgeReavers extends CardImpl {
 
     public DrudgeReavers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

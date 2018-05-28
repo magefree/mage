@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class LlanowarDruid extends CardImpl {
+public final class LlanowarDruid extends CardImpl {
 
     public LlanowarDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

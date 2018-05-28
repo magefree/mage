@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class WordsOfWar extends CardImpl {
+public final class WordsOfWar extends CardImpl {
 
     public WordsOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

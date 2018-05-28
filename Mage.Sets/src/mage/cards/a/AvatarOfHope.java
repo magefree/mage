@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class AvatarOfHope extends CardImpl {
+public final class AvatarOfHope extends CardImpl {
 
     public AvatarOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{W}{W}");

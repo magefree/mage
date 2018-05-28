@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JacesErasure extends CardImpl {
+public final class JacesErasure extends CardImpl {
 
     public JacesErasure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

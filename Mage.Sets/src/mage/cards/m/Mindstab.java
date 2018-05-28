@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Mindstab extends CardImpl {
+public final class Mindstab extends CardImpl {
 
     public Mindstab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");

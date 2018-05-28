@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class SeekTheWilds extends CardImpl {
+public final class SeekTheWilds extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature or land card");
 

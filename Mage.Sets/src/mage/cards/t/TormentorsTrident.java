@@ -49,7 +49,7 @@ import mage.constants.Zone;
  * @author noxx
 
  */
-public class TormentorsTrident extends CardImpl {
+public final class TormentorsTrident extends CardImpl {
 
     public TormentorsTrident(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Styxo
  */
-public class JediTemple extends CardImpl {
+public final class JediTemple extends CardImpl {
 
     public JediTemple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

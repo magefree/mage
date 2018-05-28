@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class PaleRecluse extends CardImpl {
+public final class PaleRecluse extends CardImpl {
 
     public PaleRecluse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Pete Rossi
  */
-public class SanguinePraetor extends CardImpl {
+public final class SanguinePraetor extends CardImpl {
 
     public SanguinePraetor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");

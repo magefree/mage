@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author nantuko
  */
-public class RazorHippogriff extends CardImpl {
+public final class RazorHippogriff extends CardImpl {
 
     public RazorHippogriff (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
@@ -80,7 +80,7 @@ public class RazorHippogriff extends CardImpl {
         return new RazorHippogriff(this);
     }
 
-    public class RazorHippogriffGainLifeEffect extends OneShotEffect {
+    public final class RazorHippogriffGainLifeEffect extends OneShotEffect {
 
         public RazorHippogriffGainLifeEffect() {
             super(Outcome.GainLife);

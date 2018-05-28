@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class SaprazzanBailiff extends CardImpl {
+public final class SaprazzanBailiff extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("artifact and enchantment cards");
     

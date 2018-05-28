@@ -43,7 +43,7 @@ import mage.constants.*;
  *
  * @author LevelX2
  */
-public class BalefulEidolon extends CardImpl {
+public final class BalefulEidolon extends CardImpl {
 
     public BalefulEidolon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}");

@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Dilnu
  */
-public class LightOfSanction extends CardImpl {
+public final class LightOfSanction extends CardImpl {
 
     public LightOfSanction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");

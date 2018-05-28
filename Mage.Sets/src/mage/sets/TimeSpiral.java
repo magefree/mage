@@ -8,7 +8,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class TimeSpiral extends ExpansionSet {
+public final class TimeSpiral extends ExpansionSet {
 
     private static final TimeSpiral instance = new TimeSpiral();
 

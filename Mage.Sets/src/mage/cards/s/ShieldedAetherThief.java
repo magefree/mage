@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ShieldedAetherThief extends CardImpl {
+public final class ShieldedAetherThief extends CardImpl {
 
     public ShieldedAetherThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

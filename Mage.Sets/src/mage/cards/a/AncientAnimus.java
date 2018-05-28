@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author TheElk801
  */
-public class AncientAnimus extends CardImpl {
+public final class AncientAnimus extends CardImpl {
 
     public AncientAnimus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

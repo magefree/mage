@@ -44,7 +44,7 @@ import mage.game.permanent.token.SliverToken;
  *
  * @author cbt33
  */
-public class SliverQueen extends CardImpl {
+public final class SliverQueen extends CardImpl {
 
     public SliverQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");

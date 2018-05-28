@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  * @author jeffwadsworth
  *
  */
-public class Fireblast extends CardImpl {
+public final class Fireblast extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
 

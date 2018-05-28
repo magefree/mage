@@ -40,7 +40,7 @@ import mage.game.permanent.token.BirdSoldierToken;
  *
  * @author North
  */
-public class FlurryOfWings extends CardImpl {
+public final class FlurryOfWings extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("the number of attacking creatures");
 

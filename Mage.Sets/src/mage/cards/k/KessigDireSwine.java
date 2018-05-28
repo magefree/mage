@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KessigDireSwine extends CardImpl {
+public final class KessigDireSwine extends CardImpl {
 
     public KessigDireSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SpoilsOfBloodHorrorToken extends TokenImpl {
+public final class SpoilsOfBloodHorrorToken extends TokenImpl {
 
     public SpoilsOfBloodHorrorToken() {
         this(1);

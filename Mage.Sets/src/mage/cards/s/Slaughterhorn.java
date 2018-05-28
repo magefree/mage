@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class Slaughterhorn extends CardImpl {
+public final class Slaughterhorn extends CardImpl {
 
     public Slaughterhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

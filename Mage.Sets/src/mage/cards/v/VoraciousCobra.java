@@ -42,7 +42,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class VoraciousCobra extends CardImpl {
+public final class VoraciousCobra extends CardImpl {
 
     public VoraciousCobra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");

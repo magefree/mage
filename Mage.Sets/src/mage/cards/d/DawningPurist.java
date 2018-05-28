@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author djbrez
  */
-public class DawningPurist extends CardImpl {
+public final class DawningPurist extends CardImpl {
 
     public DawningPurist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

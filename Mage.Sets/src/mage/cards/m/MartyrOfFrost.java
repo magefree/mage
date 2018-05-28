@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class MartyrOfFrost extends CardImpl {
+public final class MartyrOfFrost extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("X blue cards from your hand");
     static {

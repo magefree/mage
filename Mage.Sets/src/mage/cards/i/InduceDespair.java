@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class InduceDespair extends CardImpl {
+public final class InduceDespair extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your hand");
 

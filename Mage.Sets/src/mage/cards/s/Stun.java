@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class Stun extends CardImpl {
+public final class Stun extends CardImpl {
 
     public Stun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

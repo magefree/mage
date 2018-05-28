@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class WarReport extends CardImpl {
+public final class WarReport extends CardImpl {
 
     public WarReport(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

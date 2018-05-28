@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class DromarTheBanisher extends CardImpl {
+public final class DromarTheBanisher extends CardImpl {
 
     public DromarTheBanisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");

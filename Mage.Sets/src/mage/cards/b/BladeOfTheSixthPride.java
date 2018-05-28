@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BladeOfTheSixthPride extends CardImpl {
+public final class BladeOfTheSixthPride extends CardImpl {
 
     public BladeOfTheSixthPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

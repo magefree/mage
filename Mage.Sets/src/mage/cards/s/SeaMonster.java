@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author Plopman
  */
-    public class SeaMonster extends CardImpl {
+    public final class SeaMonster extends CardImpl {
     
     public SeaMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

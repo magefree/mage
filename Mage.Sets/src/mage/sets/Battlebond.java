@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author TheElk801
  */
-public class Battlebond extends ExpansionSet {
+public final class Battlebond extends ExpansionSet {
 
     private static final Battlebond instance = new Battlebond();
 
@@ -303,3 +303,4 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Zndrsplt, Eye of Wisdom", 5, Rarity.RARE, mage.cards.z.ZndrspltEyeOfWisdom.class));
     }
 }
+

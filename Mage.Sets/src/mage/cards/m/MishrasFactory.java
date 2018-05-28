@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MishrasFactory extends CardImpl {
+public final class MishrasFactory extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Assembly-Worker creature");
 

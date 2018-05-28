@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author noxx
  */
-public class FloweringLumberknot extends CardImpl {
+public final class FloweringLumberknot extends CardImpl {
 
     public FloweringLumberknot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

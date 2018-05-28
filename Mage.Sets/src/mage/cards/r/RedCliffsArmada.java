@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class RedCliffsArmada extends CardImpl {
+public final class RedCliffsArmada extends CardImpl {
 
     public RedCliffsArmada(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

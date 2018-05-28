@@ -58,7 +58,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class NissaStewardOfElements extends CardImpl {
+public final class NissaStewardOfElements extends CardImpl {
 
     public NissaStewardOfElements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{X}{G}{U}");

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Peppersmoke extends CardImpl {
+public final class Peppersmoke extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("If you control a Faerie,");
     static {

@@ -50,7 +50,7 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  *
  * @author L_J
  */
-public class KongmingsContraptions extends CardImpl {
+public final class KongmingsContraptions extends CardImpl {
 
     public KongmingsContraptions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

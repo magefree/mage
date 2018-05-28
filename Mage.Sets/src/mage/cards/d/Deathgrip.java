@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author markedagain
  */
-public class Deathgrip extends CardImpl {
+public final class Deathgrip extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("green spell");
     static{
         filter.add(new ColorPredicate(ObjectColor.GREEN));

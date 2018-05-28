@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
 /**
  * @author LevelX2
  */
-public class PatronOfTheAkki extends CardImpl {
+public final class PatronOfTheAkki extends CardImpl {
 
     public PatronOfTheAkki(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

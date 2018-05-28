@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class ShivanEmissary extends CardImpl {
+public final class ShivanEmissary extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
 

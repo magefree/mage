@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class ArchetypeOfImagination extends CardImpl {
+public final class ArchetypeOfImagination extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
     static {

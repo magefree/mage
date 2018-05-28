@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Rafbill
  */
-public class PreeminentCaptain extends CardImpl {
+public final class PreeminentCaptain extends CardImpl {
 
     public PreeminentCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

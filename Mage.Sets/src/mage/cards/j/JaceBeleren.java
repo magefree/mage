@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JaceBeleren extends CardImpl {
+public final class JaceBeleren extends CardImpl {
 
     public JaceBeleren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{U}");

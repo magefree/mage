@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author Styxo/spjspj
  */
-public class GrandMoffTarkin extends CardImpl {
+public final class GrandMoffTarkin extends CardImpl {
 
     public GrandMoffTarkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

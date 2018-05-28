@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AetherstormRoc extends CardImpl {
+public final class AetherstormRoc extends CardImpl {
 
     private final UUID originalId;
 

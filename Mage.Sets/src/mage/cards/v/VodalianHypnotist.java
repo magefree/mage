@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class VodalianHypnotist extends CardImpl {
+public final class VodalianHypnotist extends CardImpl {
 
     public VodalianHypnotist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

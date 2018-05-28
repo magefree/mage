@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class DaxosOfMeletis extends CardImpl {
+public final class DaxosOfMeletis extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 3 or greater");
 

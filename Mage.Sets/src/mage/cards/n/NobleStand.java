@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Galatolol
  */
-public class NobleStand extends CardImpl {
+public final class NobleStand extends CardImpl {
 
     public NobleStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");

@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class EbonyOwlNetsuke extends CardImpl {
+public final class EbonyOwlNetsuke extends CardImpl {
 
     public EbonyOwlNetsuke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

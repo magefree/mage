@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GaeasSkyfolk extends CardImpl {
+public final class GaeasSkyfolk extends CardImpl {
 
     public GaeasSkyfolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");

@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class SpitfireHandler extends CardImpl {
+public final class SpitfireHandler extends CardImpl {
 
     public SpitfireHandler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheAnnex extends CardImpl {
+public final class ChancellorOfTheAnnex extends CardImpl {
 
     public ChancellorOfTheAnnex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{W}");

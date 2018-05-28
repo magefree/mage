@@ -64,7 +64,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class TheScorpionGod extends CardImpl {
+public final class TheScorpionGod extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 

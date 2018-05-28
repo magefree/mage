@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class IpnuRivulet extends CardImpl {
+public final class IpnuRivulet extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Desert");
 

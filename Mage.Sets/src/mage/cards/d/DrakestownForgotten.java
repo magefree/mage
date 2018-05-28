@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class DrakestownForgotten extends CardImpl {
+public final class DrakestownForgotten extends CardImpl {
 
     public DrakestownForgotten(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

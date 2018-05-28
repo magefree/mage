@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Derpthemeus
  */
-public class RunWild extends CardImpl {
+public final class RunWild extends CardImpl {
 
     public RunWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

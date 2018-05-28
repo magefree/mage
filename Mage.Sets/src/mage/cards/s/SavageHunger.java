@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SavageHunger extends CardImpl {
+public final class SavageHunger extends CardImpl {
 
     public SavageHunger (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes & L_J
  */
-public class Nebuchadnezzar extends CardImpl {
+public final class Nebuchadnezzar extends CardImpl {
 
     public Nebuchadnezzar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");

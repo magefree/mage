@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class SoulConduit extends CardImpl {
+public final class SoulConduit extends CardImpl {
 
     public SoulConduit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

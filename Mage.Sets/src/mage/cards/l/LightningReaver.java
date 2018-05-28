@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class LightningReaver extends CardImpl {
+public final class LightningReaver extends CardImpl {
 
     public LightningReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");

@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class PathOfAncestry extends CardImpl {
+public final class PathOfAncestry extends CardImpl {
 
     public PathOfAncestry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

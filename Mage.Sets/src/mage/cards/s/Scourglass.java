@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class Scourglass extends CardImpl {
+public final class Scourglass extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanents except for artifacts and lands");
 

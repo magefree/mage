@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class SwiftManeuver extends CardImpl {
+public final class SwiftManeuver extends CardImpl {
 
     public SwiftManeuver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

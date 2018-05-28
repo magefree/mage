@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author loki
  */
-public class BattleMadRonin extends CardImpl {
+public final class BattleMadRonin extends CardImpl {
 
     public BattleMadRonin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

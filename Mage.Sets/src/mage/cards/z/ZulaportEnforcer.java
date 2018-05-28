@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North, noxx
  */
-public class ZulaportEnforcer extends LevelerCard {
+public final class ZulaportEnforcer extends LevelerCard {
 
     private final static FilterCreaturePermanent notBlackCreatures = new FilterCreaturePermanent("except by black creatures");
 

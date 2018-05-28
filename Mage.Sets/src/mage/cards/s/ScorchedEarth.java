@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class ScorchedEarth extends CardImpl {
+public final class ScorchedEarth extends CardImpl {
 
     public ScorchedEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

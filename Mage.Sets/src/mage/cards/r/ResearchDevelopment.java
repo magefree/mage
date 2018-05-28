@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author magenoxx
  */
-public class ResearchDevelopment extends SplitCard {
+public final class ResearchDevelopment extends SplitCard {
 
     public ResearchDevelopment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{U}", "{3}{U}{R}", SpellAbilityType.SPLIT);

@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class AngrathsMarauders extends CardImpl {
+public final class AngrathsMarauders extends CardImpl {
 
     public AngrathsMarauders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

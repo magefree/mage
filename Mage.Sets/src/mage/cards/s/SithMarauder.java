@@ -45,7 +45,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  *
  * @author Styxo
  */
-public class SithMarauder extends CardImpl {
+public final class SithMarauder extends CardImpl {
 
     public SithMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

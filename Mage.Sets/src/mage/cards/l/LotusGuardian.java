@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class LotusGuardian extends CardImpl {
+public final class LotusGuardian extends CardImpl {
 
     public LotusGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

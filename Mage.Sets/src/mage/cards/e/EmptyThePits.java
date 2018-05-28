@@ -40,7 +40,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author emerald000
  */
-public class EmptyThePits extends CardImpl {
+public final class EmptyThePits extends CardImpl {
 
     public EmptyThePits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{X}{B}{B}{B}{B}");

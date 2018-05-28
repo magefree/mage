@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author maxlebedev
  */
-public class SeaKingsBlessing extends CardImpl {
+public final class SeaKingsBlessing extends CardImpl {
 
     public SeaKingsBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

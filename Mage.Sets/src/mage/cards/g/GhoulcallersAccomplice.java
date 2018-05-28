@@ -45,7 +45,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author fireshoes
  */
-public class GhoulcallersAccomplice extends CardImpl {
+public final class GhoulcallersAccomplice extends CardImpl {
 
     public GhoulcallersAccomplice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

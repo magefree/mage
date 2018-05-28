@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author Derpthemeus
  */
-public class HurloonShaman extends CardImpl {
+public final class HurloonShaman extends CardImpl {
 
     public HurloonShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

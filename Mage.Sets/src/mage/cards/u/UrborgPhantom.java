@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class UrborgPhantom extends CardImpl {
+public final class UrborgPhantom extends CardImpl {
 
     public UrborgPhantom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

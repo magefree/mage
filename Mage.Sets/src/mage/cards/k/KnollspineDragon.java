@@ -48,7 +48,7 @@ import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
  *
  * @author jeffwadsworth
  */
-public class KnollspineDragon extends CardImpl {
+public final class KnollspineDragon extends CardImpl {
 
     public KnollspineDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

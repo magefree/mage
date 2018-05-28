@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class AlexiZephyrMage extends CardImpl {
+public final class AlexiZephyrMage extends CardImpl {
 
     public AlexiZephyrMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

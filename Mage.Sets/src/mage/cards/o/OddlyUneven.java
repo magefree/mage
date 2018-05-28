@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class OddlyUneven extends CardImpl {
+public final class OddlyUneven extends CardImpl {
 
     public OddlyUneven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

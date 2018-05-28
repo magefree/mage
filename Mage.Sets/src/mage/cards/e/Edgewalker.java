@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class Edgewalker extends CardImpl {
+public final class Edgewalker extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Cleric spells");
     static {

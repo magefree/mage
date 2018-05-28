@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class UyoSilentProphet extends CardImpl {
+public final class UyoSilentProphet extends CardImpl {
 
     public UyoSilentProphet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

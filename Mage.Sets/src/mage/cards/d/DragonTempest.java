@@ -51,7 +51,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class DragonTempest extends CardImpl {
+public final class DragonTempest extends CardImpl {
 
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("a creature with flying");
 

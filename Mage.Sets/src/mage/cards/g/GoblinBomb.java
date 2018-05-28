@@ -53,7 +53,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class GoblinBomb extends CardImpl {
+public final class GoblinBomb extends CardImpl {
 
     public GoblinBomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

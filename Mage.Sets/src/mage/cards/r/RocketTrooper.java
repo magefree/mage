@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class RocketTrooper extends CardImpl {
+public final class RocketTrooper extends CardImpl {
 
     public RocketTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

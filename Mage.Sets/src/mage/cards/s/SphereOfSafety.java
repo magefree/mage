@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SphereOfSafety extends CardImpl {
+public final class SphereOfSafety extends CardImpl {
 
     public SphereOfSafety(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");

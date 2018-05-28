@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WindgraceAcolyte extends CardImpl {
+public final class WindgraceAcolyte extends CardImpl {
 
     public WindgraceAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

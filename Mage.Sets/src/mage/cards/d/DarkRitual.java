@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class DarkRitual extends CardImpl {
+public final class DarkRitual extends CardImpl {
 
     public DarkRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

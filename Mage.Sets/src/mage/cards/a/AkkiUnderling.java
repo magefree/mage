@@ -45,7 +45,7 @@ import mage.constants.*;
  *
  * @author LevelX2
  */
-public class AkkiUnderling extends CardImpl {
+public final class AkkiUnderling extends CardImpl {
 
     public AkkiUnderling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

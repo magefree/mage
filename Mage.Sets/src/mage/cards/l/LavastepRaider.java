@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class LavastepRaider extends CardImpl {
+public final class LavastepRaider extends CardImpl {
 
     public LavastepRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ciaccona007
  */
-public class Ambuscade extends CardImpl {
+public final class Ambuscade extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

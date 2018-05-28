@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class AcademyRaider extends CardImpl {
+public final class AcademyRaider extends CardImpl {
 
     public AcademyRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

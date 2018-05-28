@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ZealousInquisitor extends CardImpl {
+public final class ZealousInquisitor extends CardImpl {
 
     public ZealousInquisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

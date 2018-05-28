@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HypnoticSpecter extends CardImpl {
+public final class HypnoticSpecter extends CardImpl {
 
     public HypnoticSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

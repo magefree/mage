@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class PuresightMerrow extends CardImpl {
+public final class PuresightMerrow extends CardImpl {
 
     public PuresightMerrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}{W/U}");

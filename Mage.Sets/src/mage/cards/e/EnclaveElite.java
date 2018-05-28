@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class EnclaveElite extends CardImpl {
+public final class EnclaveElite extends CardImpl {
 
     public EnclaveElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

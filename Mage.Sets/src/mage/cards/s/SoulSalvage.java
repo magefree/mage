@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class SoulSalvage extends CardImpl {
+public final class SoulSalvage extends CardImpl {
 
     public SoulSalvage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

@@ -47,7 +47,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author BetaSteward
  */
-public class GrafdiggersCage extends CardImpl {
+public final class GrafdiggersCage extends CardImpl {
 
     public GrafdiggersCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

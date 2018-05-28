@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BiomassMutation extends CardImpl {
+public final class BiomassMutation extends CardImpl {
 
     public BiomassMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G/U}{G/U}");

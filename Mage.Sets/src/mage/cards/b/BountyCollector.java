@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Styxo
  */
-public class BountyCollector extends CardImpl {
+public final class BountyCollector extends CardImpl {
 
     public BountyCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

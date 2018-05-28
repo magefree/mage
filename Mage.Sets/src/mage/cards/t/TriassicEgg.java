@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class TriassicEgg extends CardImpl {
+public final class TriassicEgg extends CardImpl {
 
     public TriassicEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -43,7 +43,7 @@ import mage.game.permanent.token.OphiomancerSnakeToken;
  *
  * @author LevelX2
  */
-public class Ophiomancer extends CardImpl {
+public final class Ophiomancer extends CardImpl {
 
     public Ophiomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

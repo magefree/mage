@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author Styxo
  */
-public class QuarryHauler extends CardImpl {
+public final class QuarryHauler extends CardImpl {
 
     public QuarryHauler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

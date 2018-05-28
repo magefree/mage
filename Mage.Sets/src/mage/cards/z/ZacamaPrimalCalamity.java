@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ZacamaPrimalCalamity extends CardImpl {
+public final class ZacamaPrimalCalamity extends CardImpl {
 
     public ZacamaPrimalCalamity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{G}{W}");

@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class Remand extends CardImpl {
+public final class Remand extends CardImpl {
 
     public Remand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

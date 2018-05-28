@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class MinaAndDennWildborn extends CardImpl {
+public final class MinaAndDennWildborn extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a land");
     

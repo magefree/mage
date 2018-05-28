@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class WhiteElementalToken extends TokenImpl {
+public final class WhiteElementalToken extends TokenImpl {
 
     public WhiteElementalToken() {
         super("Elemental", "4/4 white Elemental creature token with flying");

@@ -56,7 +56,7 @@ import mage.game.permanent.token.Token;
  *
  * @author HanClinto
  */
-public class RiptideReplicator extends CardImpl {
+public final class RiptideReplicator extends CardImpl {
 
     public RiptideReplicator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}{4}");

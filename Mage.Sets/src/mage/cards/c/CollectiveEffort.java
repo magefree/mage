@@ -62,7 +62,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author fireshoes
  */
-public class CollectiveEffort extends CardImpl {
+public final class CollectiveEffort extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creature you control");
     private static final FilterCreaturePermanent filterDestroyCreature = new FilterCreaturePermanent("creature with power 4 or greater");

@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author ayratn
  */
-public class ScreechingSilcaw extends CardImpl {
+public final class ScreechingSilcaw extends CardImpl {
 
     private static final String text = "Metalcraft - Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.";
 

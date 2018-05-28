@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class WarriorsCharge extends CardImpl {
+public final class WarriorsCharge extends CardImpl {
 
     public WarriorsCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

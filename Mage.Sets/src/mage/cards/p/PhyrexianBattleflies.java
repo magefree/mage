@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author FenrisulfrX
  */
-public class PhyrexianBattleflies extends CardImpl {
+public final class PhyrexianBattleflies extends CardImpl {
 
     public PhyrexianBattleflies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

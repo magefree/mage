@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class SkyshroudPoacher extends CardImpl {
+public final class SkyshroudPoacher extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Elf permanent card");
     

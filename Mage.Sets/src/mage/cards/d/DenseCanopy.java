@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class DenseCanopy extends CardImpl {
+public final class DenseCanopy extends CardImpl {
 
     public DenseCanopy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

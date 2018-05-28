@@ -43,7 +43,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author fireshoes
  */
-public class Vermiculos extends CardImpl {
+public final class Vermiculos extends CardImpl {
 
     public Vermiculos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

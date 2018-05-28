@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class MoltenSentry extends CardImpl {
+public final class MoltenSentry extends CardImpl {
 
     private final static String rule = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
             + "5/2 creature with haste. If it comes up tails, {this} enters the battlefield as a 2/5 creature with defender.";

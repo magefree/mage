@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class SlinkingGiant extends CardImpl {
+public final class SlinkingGiant extends CardImpl {
 
     public SlinkingGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
  * @author LoneFox
  *
  */
-public class QuestingPhelddagrif extends CardImpl {
+public final class QuestingPhelddagrif extends CardImpl {
 
     public QuestingPhelddagrif(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");

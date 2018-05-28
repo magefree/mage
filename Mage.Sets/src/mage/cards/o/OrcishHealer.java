@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class OrcishHealer extends CardImpl {
+public final class OrcishHealer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black or green creature");
 

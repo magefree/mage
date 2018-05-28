@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Styxo
  */
-public class DeathTrooper extends CardImpl {
+public final class DeathTrooper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Trooper creatures");
 

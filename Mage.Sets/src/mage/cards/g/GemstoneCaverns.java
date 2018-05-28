@@ -62,7 +62,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class GemstoneCaverns extends CardImpl {
+public final class GemstoneCaverns extends CardImpl {
 
     public GemstoneCaverns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

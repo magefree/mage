@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class EssenceOfTheWild extends CardImpl {
+public final class EssenceOfTheWild extends CardImpl {
 
     public EssenceOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");

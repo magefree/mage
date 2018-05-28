@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class ReinsOfPower extends CardImpl {
+public final class ReinsOfPower extends CardImpl {
 
     public ReinsOfPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DuskImp extends CardImpl {
+public final class DuskImp extends CardImpl {
 
     public DuskImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

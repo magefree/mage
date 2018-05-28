@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class CrusherZendikon extends CardImpl {
+public final class CrusherZendikon extends CardImpl {
 
     public CrusherZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

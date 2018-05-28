@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class LocketOfYesterdays extends CardImpl {
+public final class LocketOfYesterdays extends CardImpl {
 
     public LocketOfYesterdays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

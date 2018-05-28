@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class PorphyryNodes extends CardImpl {
+public final class PorphyryNodes extends CardImpl {
     
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     

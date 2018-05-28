@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class ForbiddenAlchemy extends CardImpl {
+public final class ForbiddenAlchemy extends CardImpl {
 
     public ForbiddenAlchemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

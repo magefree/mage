@@ -52,7 +52,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ChimericMass extends CardImpl {
+public final class ChimericMass extends CardImpl {
 
     public ChimericMass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}");

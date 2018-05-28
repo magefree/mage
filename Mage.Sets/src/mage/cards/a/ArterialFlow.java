@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author L_J
  */
-public class ArterialFlow extends CardImpl {
+public final class ArterialFlow extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("If you control a Vampire,");
     static {

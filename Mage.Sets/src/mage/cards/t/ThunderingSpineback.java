@@ -48,7 +48,7 @@ import mage.game.permanent.token.DinosaurToken;
  *
  * @author TheElk801
  */
-public class ThunderingSpineback extends CardImpl {
+public final class ThunderingSpineback extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaurs");
 

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class VineKami extends CardImpl {
+public final class VineKami extends CardImpl {
 
     public VineKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");

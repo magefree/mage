@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class MalachOfTheDawn extends CardImpl {
+public final class MalachOfTheDawn extends CardImpl {
 
     public MalachOfTheDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

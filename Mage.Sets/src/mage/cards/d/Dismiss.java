@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Dismiss extends CardImpl {
+public final class Dismiss extends CardImpl {
 
     public Dismiss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

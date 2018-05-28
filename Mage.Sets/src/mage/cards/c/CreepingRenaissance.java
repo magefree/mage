@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author nantuko
  */
-public class CreepingRenaissance extends CardImpl {
+public final class CreepingRenaissance extends CardImpl {
 
     public CreepingRenaissance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

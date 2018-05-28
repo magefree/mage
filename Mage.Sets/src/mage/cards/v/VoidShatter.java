@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class VoidShatter extends CardImpl {
+public final class VoidShatter extends CardImpl {
 
     public VoidShatter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author fireshoes
  */
-public class RiteOfUndoing extends CardImpl {
+public final class RiteOfUndoing extends CardImpl {
     
     private static final FilterNonlandPermanent filterControlled = new FilterNonlandPermanent("nonland permanent you control");
     private static final FilterNonlandPermanent filterNotControlled = new FilterNonlandPermanent("nonland permanent you don't control");

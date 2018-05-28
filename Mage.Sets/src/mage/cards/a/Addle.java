@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class Addle extends CardImpl {
+public final class Addle extends CardImpl {
 
     public Addle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

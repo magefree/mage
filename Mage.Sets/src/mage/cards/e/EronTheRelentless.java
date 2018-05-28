@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author shieldal
  */
-public class EronTheRelentless extends CardImpl {
+public final class EronTheRelentless extends CardImpl {
 
     public EronTheRelentless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

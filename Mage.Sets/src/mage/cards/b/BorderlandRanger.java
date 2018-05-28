@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BorderlandRanger extends CardImpl {
+public final class BorderlandRanger extends CardImpl {
 
     public BorderlandRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

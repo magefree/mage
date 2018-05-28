@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class PestilentSouleater extends CardImpl {
+public final class PestilentSouleater extends CardImpl {
 
     public PestilentSouleater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

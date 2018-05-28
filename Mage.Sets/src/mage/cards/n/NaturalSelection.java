@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  * @author KholdFuzion
  *
  */
-public class NaturalSelection extends CardImpl {
+public final class NaturalSelection extends CardImpl {
 
     public NaturalSelection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

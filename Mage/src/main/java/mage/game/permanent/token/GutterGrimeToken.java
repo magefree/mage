@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author spjspj
  */
-public class GutterGrimeToken extends TokenImpl {
+public final class GutterGrimeToken extends TokenImpl {
 
     public GutterGrimeToken() {
         this ((UUID)null);

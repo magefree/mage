@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class MagmaticForce extends CardImpl {
+public final class MagmaticForce extends CardImpl {
 
     public MagmaticForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}{R}");

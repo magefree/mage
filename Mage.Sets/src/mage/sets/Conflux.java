@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Conflux extends ExpansionSet {
+public final class Conflux extends ExpansionSet {
 
     private static final Conflux instance = new Conflux();
 

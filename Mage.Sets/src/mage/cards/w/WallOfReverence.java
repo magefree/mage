@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class WallOfReverence extends CardImpl {
+public final class WallOfReverence extends CardImpl {
 
     public WallOfReverence (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

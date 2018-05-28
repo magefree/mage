@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class KnightOfObligation extends CardImpl {
+public final class KnightOfObligation extends CardImpl {
 
     public KnightOfObligation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

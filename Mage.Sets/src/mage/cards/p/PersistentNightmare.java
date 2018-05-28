@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class PersistentNightmare extends CardImpl {
+public final class PersistentNightmare extends CardImpl {
 
     public PersistentNightmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class LandoCalrissian extends CardImpl {
+public final class LandoCalrissian extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship you control");
 

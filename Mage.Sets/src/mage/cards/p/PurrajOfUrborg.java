@@ -53,7 +53,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author TheElk801
  */
-public class PurrajOfUrborg extends CardImpl {
+public final class PurrajOfUrborg extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a black spell");
 

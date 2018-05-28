@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class LivingLore extends CardImpl {
+public final class LivingLore extends CardImpl {
 
     public LivingLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 
  * @author LevelX2
  */
-public class FallOfTheHammer extends CardImpl {
+public final class FallOfTheHammer extends CardImpl {
 
     public FallOfTheHammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

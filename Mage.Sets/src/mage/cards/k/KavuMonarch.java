@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LoneFox
  */
-public class KavuMonarch extends CardImpl {
+public final class KavuMonarch extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Kavu creatures");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another Kavu");

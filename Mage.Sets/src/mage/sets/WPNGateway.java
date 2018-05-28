@@ -14,7 +14,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class WPNGateway extends ExpansionSet {
+public final class WPNGateway extends ExpansionSet {
 
     private static final WPNGateway instance = new WPNGateway();
 

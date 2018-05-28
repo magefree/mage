@@ -48,7 +48,7 @@ import mage.players.Player;
 /**
  * @author nantuko
  */
-public class GrandAbolisher extends CardImpl {
+public final class GrandAbolisher extends CardImpl {
 
     public GrandAbolisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

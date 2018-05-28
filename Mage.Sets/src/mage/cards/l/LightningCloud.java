@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class LightningCloud extends CardImpl {
+public final class LightningCloud extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("a red spell");
 

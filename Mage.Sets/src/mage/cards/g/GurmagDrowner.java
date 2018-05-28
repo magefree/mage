@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class GurmagDrowner extends CardImpl {
+public final class GurmagDrowner extends CardImpl {
 
     public GurmagDrowner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

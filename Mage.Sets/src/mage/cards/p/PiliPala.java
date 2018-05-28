@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class PiliPala extends CardImpl {
+public final class PiliPala extends CardImpl {
 
     public PiliPala(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

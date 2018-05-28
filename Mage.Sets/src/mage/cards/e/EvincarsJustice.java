@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class EvincarsJustice extends CardImpl {
+public final class EvincarsJustice extends CardImpl {
 
     public EvincarsJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

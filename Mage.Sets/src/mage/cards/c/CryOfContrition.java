@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CryOfContrition extends CardImpl {
+public final class CryOfContrition extends CardImpl {
 
     public CryOfContrition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

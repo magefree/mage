@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author anonymous
  */
-public class AmuletOfKroog extends CardImpl {
+public final class AmuletOfKroog extends CardImpl {
 
     public AmuletOfKroog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author jeffwadsworth
  */
-public class NearDeathExperience extends CardImpl {
+public final class NearDeathExperience extends CardImpl {
 
     public NearDeathExperience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}{W}");

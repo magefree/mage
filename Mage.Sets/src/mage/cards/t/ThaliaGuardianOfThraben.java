@@ -45,7 +45,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward
  */
-public class ThaliaGuardianOfThraben extends CardImpl {
+public final class ThaliaGuardianOfThraben extends CardImpl {
 
     public ThaliaGuardianOfThraben(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

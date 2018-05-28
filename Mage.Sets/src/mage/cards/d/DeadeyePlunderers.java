@@ -51,7 +51,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author TheElk801
  */
-public class DeadeyePlunderers extends CardImpl {
+public final class DeadeyePlunderers extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact you control");
 

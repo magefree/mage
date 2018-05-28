@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class VulturousAven extends CardImpl {
+public final class VulturousAven extends CardImpl {
 
     public VulturousAven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

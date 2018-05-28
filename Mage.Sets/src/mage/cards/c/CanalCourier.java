@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CanalCourier extends CardImpl {
+public final class CanalCourier extends CardImpl {
 
     public CanalCourier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");

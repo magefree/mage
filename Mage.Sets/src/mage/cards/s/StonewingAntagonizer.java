@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class StonewingAntagonizer extends CardImpl {
+public final class StonewingAntagonizer extends CardImpl {
 
     public StonewingAntagonizer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"");

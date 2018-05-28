@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Dracoplasm extends CardImpl {
+public final class Dracoplasm extends CardImpl {
 
     public Dracoplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");

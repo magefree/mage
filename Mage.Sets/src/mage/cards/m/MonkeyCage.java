@@ -48,7 +48,7 @@ import mage.game.permanent.token.ApeToken;
  *
  * @author LoneFox
  */
-public class MonkeyCage extends CardImpl {
+public final class MonkeyCage extends CardImpl {
 
     public MonkeyCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

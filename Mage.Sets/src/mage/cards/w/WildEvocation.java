@@ -50,7 +50,7 @@ import mage.util.GameLog;
  *
  * @author BetaSteward_at_googlemail.com and jeff
  */
-public class WildEvocation extends CardImpl {
+public final class WildEvocation extends CardImpl {
 
     public WildEvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");

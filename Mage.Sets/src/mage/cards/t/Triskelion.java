@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Triskelion extends CardImpl {
+public final class Triskelion extends CardImpl {
 
     public Triskelion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

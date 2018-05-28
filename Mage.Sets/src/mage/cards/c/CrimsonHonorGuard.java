@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class CrimsonHonorGuard extends CardImpl {
+public final class CrimsonHonorGuard extends CardImpl {
 
     public CrimsonHonorGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

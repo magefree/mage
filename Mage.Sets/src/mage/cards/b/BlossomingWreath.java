@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author Derpthemeus
  */
-public class BlossomingWreath extends CardImpl {
+public final class BlossomingWreath extends CardImpl {
 
     public BlossomingWreath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

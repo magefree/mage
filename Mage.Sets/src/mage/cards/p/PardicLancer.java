@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author tomd1990
  */
-public class PardicLancer extends CardImpl {
+public final class PardicLancer extends CardImpl {
 
     public PardicLancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

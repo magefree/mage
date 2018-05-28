@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class Replenish extends CardImpl {
+public final class Replenish extends CardImpl {
 
     public Replenish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");

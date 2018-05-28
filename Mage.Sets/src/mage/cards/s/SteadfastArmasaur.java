@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class SteadfastArmasaur extends CardImpl {
+public final class SteadfastArmasaur extends CardImpl {
 
     public SteadfastArmasaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

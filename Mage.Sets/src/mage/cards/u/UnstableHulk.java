@@ -48,7 +48,7 @@ import mage.constants.Duration;
  *
  * @author BursegSardaukar
  */
-public class UnstableHulk extends CardImpl {
+public final class UnstableHulk extends CardImpl {
 
     public UnstableHulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

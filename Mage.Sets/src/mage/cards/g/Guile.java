@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class Guile extends CardImpl {
+public final class Guile extends CardImpl {
 
     public Guile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{U}");

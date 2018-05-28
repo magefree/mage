@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ShardOfBrokenGlass extends CardImpl {
+public final class ShardOfBrokenGlass extends CardImpl {
 
     public ShardOfBrokenGlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

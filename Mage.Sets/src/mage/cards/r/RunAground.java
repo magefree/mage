@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class RunAground extends CardImpl {
+public final class RunAground extends CardImpl {
 
     public RunAground(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

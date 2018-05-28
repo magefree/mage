@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  */
 
 
-public class MazeRusher extends CardImpl {
+public final class MazeRusher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Multicolored creatures you control");
     static {

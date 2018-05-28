@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DuneBeetle extends CardImpl {
+public final class DuneBeetle extends CardImpl {
 
     public DuneBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

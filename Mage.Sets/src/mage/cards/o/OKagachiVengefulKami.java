@@ -58,7 +58,7 @@ import mage.watchers.common.PlayersAttackedLastTurnWatcher;
  *
  * @author spjspj
  */
-public class OKagachiVengefulKami extends CardImpl {
+public final class OKagachiVengefulKami extends CardImpl {
 
     public OKagachiVengefulKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");

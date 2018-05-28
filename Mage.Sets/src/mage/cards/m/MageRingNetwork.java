@@ -50,7 +50,7 @@ import mage.counters.CounterType;
  * @author LoneFox
  *
  */
-public class MageRingNetwork extends CardImpl {
+public final class MageRingNetwork extends CardImpl {
 
     public MageRingNetwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

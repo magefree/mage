@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class HazoretsMonument extends CardImpl {
+public final class HazoretsMonument extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red creature spells");
     private static final FilterSpell filter2 = new FilterSpell("a creature spell");

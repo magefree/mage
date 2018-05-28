@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class SalvageScuttler extends CardImpl {
+public final class SalvageScuttler extends CardImpl {
 
     public SalvageScuttler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

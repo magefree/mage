@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class BileUrchin extends CardImpl {
+public final class BileUrchin extends CardImpl {
 
     public BileUrchin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

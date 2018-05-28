@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Quercitron
  */
-public class LightOfDay extends CardImpl {
+public final class LightOfDay extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Black creatures");
 

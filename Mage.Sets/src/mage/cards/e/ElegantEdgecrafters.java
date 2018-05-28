@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author LevelX2
  */
-public class ElegantEdgecrafters extends CardImpl {
+public final class ElegantEdgecrafters extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 

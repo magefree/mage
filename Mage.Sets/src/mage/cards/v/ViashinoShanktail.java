@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class ViashinoShanktail extends CardImpl {
+public final class ViashinoShanktail extends CardImpl {
 
     public ViashinoShanktail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class Bossk extends CardImpl {
+public final class Bossk extends CardImpl {
 
     public Bossk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

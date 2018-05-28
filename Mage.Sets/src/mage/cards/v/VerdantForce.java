@@ -42,7 +42,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author Loki
  */
-public class VerdantForce extends CardImpl {
+public final class VerdantForce extends CardImpl {
 
     public VerdantForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}{G}");

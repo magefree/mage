@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class MisguidedRage extends CardImpl {
+public final class MisguidedRage extends CardImpl {
 
     public MisguidedRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

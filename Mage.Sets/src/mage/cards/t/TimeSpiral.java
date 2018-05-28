@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class TimeSpiral extends CardImpl {
+public final class TimeSpiral extends CardImpl {
 
     public TimeSpiral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");

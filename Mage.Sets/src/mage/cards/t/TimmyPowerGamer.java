@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author ciaccona007
  */
-public class TimmyPowerGamer extends CardImpl {
+public final class TimmyPowerGamer extends CardImpl {
 
     public TimmyPowerGamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

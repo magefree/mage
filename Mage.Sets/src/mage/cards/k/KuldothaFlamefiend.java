@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author North
  */
-public class KuldothaFlamefiend extends CardImpl {
+public final class KuldothaFlamefiend extends CardImpl {
 
     public KuldothaFlamefiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

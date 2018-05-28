@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author rscoates
  */
-public class RadiatingLightning extends CardImpl {
+public final class RadiatingLightning extends CardImpl {
 
     public RadiatingLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");

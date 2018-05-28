@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class Iceberg extends CardImpl {
+public final class Iceberg extends CardImpl {
 
     public Iceberg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{U}{U}");

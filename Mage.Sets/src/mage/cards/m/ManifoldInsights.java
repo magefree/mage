@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class ManifoldInsights extends CardImpl {
+public final class ManifoldInsights extends CardImpl {
 
     public ManifoldInsights(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PrimalVisitation extends CardImpl {
+public final class PrimalVisitation extends CardImpl {
 
     public PrimalVisitation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{G}");

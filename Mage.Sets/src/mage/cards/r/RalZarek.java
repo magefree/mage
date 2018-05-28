@@ -55,7 +55,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class RalZarek extends CardImpl {
+public final class RalZarek extends CardImpl {
 
     private static final FilterPermanent secondFilter = new FilterPermanent("another target permanent");
 

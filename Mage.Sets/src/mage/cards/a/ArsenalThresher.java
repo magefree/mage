@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class ArsenalThresher extends CardImpl {
+public final class ArsenalThresher extends CardImpl {
 
     public ArsenalThresher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W/B}{U}");

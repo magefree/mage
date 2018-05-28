@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class ChokingSands extends CardImpl {
+public final class ChokingSands extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("non-Swamp land");
     

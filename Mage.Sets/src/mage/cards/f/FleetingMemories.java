@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class FleetingMemories extends CardImpl {
+public final class FleetingMemories extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Clue");
 

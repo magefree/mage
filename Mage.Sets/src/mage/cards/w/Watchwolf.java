@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki, nantuko
  */
-public class Watchwolf extends CardImpl {
+public final class Watchwolf extends CardImpl {
 
     public Watchwolf (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

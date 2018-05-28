@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Laxika
  */
-public class UrborgUprising extends CardImpl {
+public final class UrborgUprising extends CardImpl {
 
     public UrborgUprising(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

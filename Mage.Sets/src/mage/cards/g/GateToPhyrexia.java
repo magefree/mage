@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class GateToPhyrexia extends CardImpl {
+public final class GateToPhyrexia extends CardImpl {
 
     public GateToPhyrexia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");

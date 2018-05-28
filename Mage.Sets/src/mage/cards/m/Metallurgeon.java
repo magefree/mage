@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class Metallurgeon extends CardImpl {
+public final class Metallurgeon extends CardImpl {
 
     public Metallurgeon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W}");

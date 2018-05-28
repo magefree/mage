@@ -47,7 +47,7 @@ import mage.game.permanent.token.AkoumStonewakerElementalToken;
  *
  * @author LevelX2
  */
-public class AkoumStonewaker extends CardImpl {
+public final class AkoumStonewaker extends CardImpl {
 
     public AkoumStonewaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

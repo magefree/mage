@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class EntrapmentManeuver extends CardImpl {
+public final class EntrapmentManeuver extends CardImpl {
 
     public EntrapmentManeuver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

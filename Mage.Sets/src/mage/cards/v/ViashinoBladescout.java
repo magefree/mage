@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ViashinoBladescout extends CardImpl {
+public final class ViashinoBladescout extends CardImpl {
 
     public ViashinoBladescout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

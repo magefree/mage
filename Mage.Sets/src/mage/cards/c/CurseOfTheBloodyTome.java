@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Alvin
  */
-public class CurseOfTheBloodyTome extends CardImpl {
+public final class CurseOfTheBloodyTome extends CardImpl {
 
     public CurseOfTheBloodyTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

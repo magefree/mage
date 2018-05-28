@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class BorderlandMarauder extends CardImpl {
+public final class BorderlandMarauder extends CardImpl {
 
     public BorderlandMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward
  */
-public class HereticsPunishment extends CardImpl {
+public final class HereticsPunishment extends CardImpl {
 
     public HereticsPunishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

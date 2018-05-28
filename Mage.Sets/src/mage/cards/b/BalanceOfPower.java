@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class BalanceOfPower extends CardImpl {
+public final class BalanceOfPower extends CardImpl {
 
     public BalanceOfPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class Kudzu extends CardImpl {
+public final class Kudzu extends CardImpl {
 
     public Kudzu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

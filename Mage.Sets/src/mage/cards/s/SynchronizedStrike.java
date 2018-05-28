@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author stravant
  */
-public class SynchronizedStrike extends CardImpl {
+public final class SynchronizedStrike extends CardImpl {
 
     public SynchronizedStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

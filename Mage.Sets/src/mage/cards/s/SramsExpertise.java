@@ -39,7 +39,7 @@ import mage.game.permanent.token.ServoToken;
 /**
  * @author fireshoes
  */
-public class SramsExpertise extends CardImpl {
+public final class SramsExpertise extends CardImpl {
 
     public SramsExpertise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

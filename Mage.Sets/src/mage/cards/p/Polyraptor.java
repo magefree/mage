@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author JayDi85
  */
-public class Polyraptor extends CardImpl {
+public final class Polyraptor extends CardImpl {
 
     public Polyraptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

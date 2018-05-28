@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KongmingSleepingDragon extends CardImpl {
+public final class KongmingSleepingDragon extends CardImpl {
 
     public KongmingSleepingDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

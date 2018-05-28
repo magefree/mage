@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class VerdantAutomaton extends CardImpl {
+public final class VerdantAutomaton extends CardImpl {
 
     public VerdantAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

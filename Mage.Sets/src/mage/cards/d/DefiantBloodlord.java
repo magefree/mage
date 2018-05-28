@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class DefiantBloodlord extends CardImpl {
+public final class DefiantBloodlord extends CardImpl {
 
     public DefiantBloodlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");

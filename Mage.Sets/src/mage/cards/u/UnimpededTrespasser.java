@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class UnimpededTrespasser extends CardImpl {
+public final class UnimpededTrespasser extends CardImpl {
 
     public UnimpededTrespasser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

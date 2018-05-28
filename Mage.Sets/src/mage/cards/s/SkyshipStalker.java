@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SkyshipStalker extends CardImpl {
+public final class SkyshipStalker extends CardImpl {
 
     public SkyshipStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

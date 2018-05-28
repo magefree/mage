@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KnightOfInfamy extends CardImpl {
+public final class KnightOfInfamy extends CardImpl {
 
     public KnightOfInfamy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

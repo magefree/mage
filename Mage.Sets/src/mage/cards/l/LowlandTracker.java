@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Temba21
  */
-public class LowlandTracker extends CardImpl {
+public final class LowlandTracker extends CardImpl {
 
     public LowlandTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

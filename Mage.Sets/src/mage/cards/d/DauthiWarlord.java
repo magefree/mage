@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author fireshoes
  */
-public class DauthiWarlord extends CardImpl {
+public final class DauthiWarlord extends CardImpl {
     
     private static final FilterPermanent filter = new FilterCreaturePermanent("creatures with shadow");
 

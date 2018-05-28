@@ -38,7 +38,7 @@ import mage.game.permanent.token.CentaurToken;
  *
  * @author LevelX2
  */
-public class CallOfTheConclave extends CardImpl {
+public final class CallOfTheConclave extends CardImpl {
 
     public CallOfTheConclave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{W}");

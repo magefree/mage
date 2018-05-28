@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TowerOfEons extends CardImpl {
+public final class TowerOfEons extends CardImpl {
 
     public TowerOfEons (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

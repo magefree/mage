@@ -45,7 +45,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author L_J
  */
-public class FireAndBrimstone extends CardImpl {
+public final class FireAndBrimstone extends CardImpl {
 
      private static final FilterPlayer filter = new FilterPlayer("player who attacked this turn");
 

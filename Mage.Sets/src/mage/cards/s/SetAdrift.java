@@ -39,7 +39,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class SetAdrift extends CardImpl {
+public final class SetAdrift extends CardImpl {
 
     public SetAdrift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");

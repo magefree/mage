@@ -51,7 +51,7 @@ import mage.counters.CounterType;
  *
  * @author Luna Skyrise
  */
-public class RiverDelta extends CardImpl {
+public final class RiverDelta extends CardImpl {
 
     public RiverDelta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

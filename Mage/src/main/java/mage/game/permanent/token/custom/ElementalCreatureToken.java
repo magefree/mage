@@ -11,7 +11,7 @@ import mage.util.SubTypeList;
  *
  * @author JayDi85
  */
-public class ElementalCreatureToken extends TokenImpl {
+public final class ElementalCreatureToken extends TokenImpl {
 
     public ElementalCreatureToken() {
         this(0, 0);

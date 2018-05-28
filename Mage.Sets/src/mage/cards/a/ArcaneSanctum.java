@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class ArcaneSanctum extends CardImpl {
+public final class ArcaneSanctum extends CardImpl {
 
     public ArcaneSanctum (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

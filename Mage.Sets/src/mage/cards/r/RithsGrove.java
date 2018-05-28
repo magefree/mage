@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class RithsGrove extends CardImpl {
+public final class RithsGrove extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("non-Lair land");
     static{

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BellowsLizard extends CardImpl {
+public final class BellowsLizard extends CardImpl {
 
     public BellowsLizard (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class AkoumFirebird extends CardImpl {
+public final class AkoumFirebird extends CardImpl {
 
     public AkoumFirebird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

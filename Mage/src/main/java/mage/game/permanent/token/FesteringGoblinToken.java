@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class FesteringGoblinToken extends TokenImpl {
+public final class FesteringGoblinToken extends TokenImpl {
 
     public FesteringGoblinToken() {
         super("Festering Goblin", "1/1 black Zombie Goblin creature token named Festering Goblin with \"When Festering Goblin dies, target creature gets -1/-1 until end of turn.\"");

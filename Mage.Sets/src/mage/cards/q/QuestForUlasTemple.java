@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class QuestForUlasTemple extends CardImpl {
+public final class QuestForUlasTemple extends CardImpl {
 
     public QuestForUlasTemple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

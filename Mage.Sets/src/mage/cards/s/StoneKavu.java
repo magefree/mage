@@ -44,7 +44,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class StoneKavu extends CardImpl {
+public final class StoneKavu extends CardImpl {
 
     public StoneKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

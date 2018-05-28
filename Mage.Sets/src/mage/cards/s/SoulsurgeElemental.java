@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class SoulsurgeElemental extends CardImpl {
+public final class SoulsurgeElemental extends CardImpl {
 
     public SoulsurgeElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

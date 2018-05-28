@@ -58,7 +58,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class IgnitionTeam extends CardImpl {
+public final class IgnitionTeam extends CardImpl {
     
     public IgnitionTeam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

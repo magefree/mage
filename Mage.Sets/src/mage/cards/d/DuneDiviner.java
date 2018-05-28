@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author ciaccona007
  */
-public class DuneDiviner extends CardImpl {
+public final class DuneDiviner extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Desert you control");
 

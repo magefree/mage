@@ -38,7 +38,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author Plopman
  */
-public class TotallyLost extends CardImpl {
+public final class TotallyLost extends CardImpl {
 
     public TotallyLost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");

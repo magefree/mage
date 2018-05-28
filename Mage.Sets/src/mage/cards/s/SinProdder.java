@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class SinProdder extends CardImpl {
+public final class SinProdder extends CardImpl {
 
     public SinProdder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

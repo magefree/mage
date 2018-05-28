@@ -38,7 +38,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author Viserion
  */
-public class CreepingCorrosion extends CardImpl {
+public final class CreepingCorrosion extends CardImpl {
 
     public CreepingCorrosion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");

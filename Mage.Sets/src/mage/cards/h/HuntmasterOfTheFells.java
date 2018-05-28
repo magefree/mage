@@ -51,7 +51,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author BetaSteward
  */
-public class HuntmasterOfTheFells extends CardImpl {
+public final class HuntmasterOfTheFells extends CardImpl {
 
     public HuntmasterOfTheFells(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");

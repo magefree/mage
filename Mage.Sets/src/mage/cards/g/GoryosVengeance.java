@@ -55,7 +55,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GoryosVengeance extends CardImpl {
+public final class GoryosVengeance extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("legendary creature card");
 

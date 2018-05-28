@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class ElvishAberration extends CardImpl {
+public final class ElvishAberration extends CardImpl {
 
     public ElvishAberration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

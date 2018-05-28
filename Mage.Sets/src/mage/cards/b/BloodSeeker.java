@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class BloodSeeker extends CardImpl {
+public final class BloodSeeker extends CardImpl {
 
     public BloodSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

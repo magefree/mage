@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class MasterOfPredicaments extends CardImpl {
+public final class MasterOfPredicaments extends CardImpl {
 
     public MasterOfPredicaments(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

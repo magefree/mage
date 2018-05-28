@@ -47,7 +47,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author LevelX2
  */
-public class ChildrenOfKorlis extends CardImpl {
+public final class ChildrenOfKorlis extends CardImpl {
 
     public ChildrenOfKorlis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class IndigoFaerie extends CardImpl {
+public final class IndigoFaerie extends CardImpl {
 
     public IndigoFaerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

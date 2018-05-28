@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class AbzanBeastmaster extends CardImpl {
+public final class AbzanBeastmaster extends CardImpl {
 
     public AbzanBeastmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

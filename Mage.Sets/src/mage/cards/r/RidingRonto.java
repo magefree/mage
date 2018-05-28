@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class RidingRonto extends CardImpl {
+public final class RidingRonto extends CardImpl {
 
     public RidingRonto(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

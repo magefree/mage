@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DieYoung extends CardImpl {
+public final class DieYoung extends CardImpl {
 
     public DieYoung(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

@@ -27,7 +27,7 @@ import mage.util.CardUtil;
  *
  * @author nick.myers
  */
-public class CloudKey extends CardImpl {
+public final class CloudKey extends CardImpl {
 
     public CloudKey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

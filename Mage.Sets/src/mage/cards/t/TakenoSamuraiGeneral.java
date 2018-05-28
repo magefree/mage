@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class TakenoSamuraiGeneral extends CardImpl {
+public final class TakenoSamuraiGeneral extends CardImpl {
 
     public TakenoSamuraiGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class Sacrifice extends CardImpl {
+public final class Sacrifice extends CardImpl {
 
     public Sacrifice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class GreatHornKrushok extends CardImpl {
+public final class GreatHornKrushok extends CardImpl {
 
     public GreatHornKrushok(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author spjspj
  */
-public class GaeasTouch extends CardImpl {
+public final class GaeasTouch extends CardImpl {
 
     public GaeasTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");

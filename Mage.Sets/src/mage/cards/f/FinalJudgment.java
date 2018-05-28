@@ -38,7 +38,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class FinalJudgment extends CardImpl {
+public final class FinalJudgment extends CardImpl {
 
     public FinalJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");

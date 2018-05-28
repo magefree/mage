@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class GlyphOfDestruction extends CardImpl {
+public final class GlyphOfDestruction extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blocking Wall you control");
 

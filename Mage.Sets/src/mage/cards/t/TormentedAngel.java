@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TormentedAngel extends CardImpl {
+public final class TormentedAngel extends CardImpl {
 
     public TormentedAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

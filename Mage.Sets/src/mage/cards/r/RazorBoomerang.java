@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class RazorBoomerang extends CardImpl {
+public final class RazorBoomerang extends CardImpl {
 
     public RazorBoomerang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

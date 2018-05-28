@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class EndlessCockroaches extends CardImpl {
+public final class EndlessCockroaches extends CardImpl {
 
     public EndlessCockroaches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

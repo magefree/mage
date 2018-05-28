@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class SealOfTheGuildpact extends CardImpl {
+public final class SealOfTheGuildpact extends CardImpl {
 
     public SealOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

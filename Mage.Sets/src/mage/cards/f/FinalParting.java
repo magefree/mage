@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class FinalParting extends CardImpl {
+public final class FinalParting extends CardImpl {
 
     public FinalParting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

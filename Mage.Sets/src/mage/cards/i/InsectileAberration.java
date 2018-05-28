@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Alvin
  */
-public class InsectileAberration extends CardImpl {
+public final class InsectileAberration extends CardImpl {
 
     public InsectileAberration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

@@ -55,7 +55,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class GlacialPlating extends CardImpl {
+public final class GlacialPlating extends CardImpl {
 
     public GlacialPlating(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

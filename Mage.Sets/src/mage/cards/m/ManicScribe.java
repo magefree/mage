@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ManicScribe extends CardImpl {
+public final class ManicScribe extends CardImpl {
 
     public ManicScribe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

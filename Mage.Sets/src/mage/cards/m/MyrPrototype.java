@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000 & L_J
  */
-public class MyrPrototype extends CardImpl {
+public final class MyrPrototype extends CardImpl {
 
     public MyrPrototype(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

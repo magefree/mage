@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ShivanReef extends CardImpl {
+public final class ShivanReef extends CardImpl {
 
     public ShivanReef(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

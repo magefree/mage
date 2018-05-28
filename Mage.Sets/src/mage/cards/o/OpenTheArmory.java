@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class OpenTheArmory extends CardImpl {
+public final class OpenTheArmory extends CardImpl {
 
     public OpenTheArmory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

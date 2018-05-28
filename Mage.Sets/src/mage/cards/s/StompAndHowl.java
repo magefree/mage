@@ -38,7 +38,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author vereena42
  */
-public class StompAndHowl extends CardImpl {
+public final class StompAndHowl extends CardImpl {
 
     public StompAndHowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class ChildOfGaea extends CardImpl {
+public final class ChildOfGaea extends CardImpl {
 
     public ChildOfGaea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");

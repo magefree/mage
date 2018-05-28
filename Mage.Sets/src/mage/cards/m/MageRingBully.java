@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Wehk
  */
-public class MageRingBully extends CardImpl {
+public final class MageRingBully extends CardImpl {
 
     public MageRingBully(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author North
  */
-public class MayaelTheAnima extends CardImpl {
+public final class MayaelTheAnima extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with power 5 or greater");
     static {

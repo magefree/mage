@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author Quercitron
  */
-public class Perplex extends CardImpl {
+public final class Perplex extends CardImpl {
 
     public Perplex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{B}");

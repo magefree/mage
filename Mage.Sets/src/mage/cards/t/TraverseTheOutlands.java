@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class TraverseTheOutlands extends CardImpl {
+public final class TraverseTheOutlands extends CardImpl {
 
     public TraverseTheOutlands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");

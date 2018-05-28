@@ -49,7 +49,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author emerald000
  */
-public class WrensRunPackmaster extends CardImpl {
+public final class WrensRunPackmaster extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Wolf");
     static {

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class AlabornTrooper extends CardImpl {
+public final class AlabornTrooper extends CardImpl {
 
     public AlabornTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

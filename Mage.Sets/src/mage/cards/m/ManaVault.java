@@ -51,7 +51,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ManaVault extends CardImpl {
+public final class ManaVault extends CardImpl {
 
     public ManaVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

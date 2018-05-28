@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class QuirionElves extends CardImpl {
+public final class QuirionElves extends CardImpl {
 
     public QuirionElves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

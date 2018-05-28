@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class PolymorphistsJest extends CardImpl {
+public final class PolymorphistsJest extends CardImpl {
 
     public PolymorphistsJest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

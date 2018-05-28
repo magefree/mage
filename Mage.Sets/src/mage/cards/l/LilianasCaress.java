@@ -39,7 +39,7 @@ import mage.constants.SetTargetPointer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LilianasCaress extends CardImpl {
+public final class LilianasCaress extends CardImpl {
 
     public LilianasCaress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

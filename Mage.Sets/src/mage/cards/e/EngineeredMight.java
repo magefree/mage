@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EngineeredMight extends CardImpl {
+public final class EngineeredMight extends CardImpl {
 
     public EngineeredMight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{W}");

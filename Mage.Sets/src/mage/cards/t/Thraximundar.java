@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Thraximundar extends CardImpl {
+public final class Thraximundar extends CardImpl {
 
     public Thraximundar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}{R}");

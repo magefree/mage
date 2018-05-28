@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author rscoates
  */
-public class RunAmok extends CardImpl {
+public final class RunAmok extends CardImpl {
 
     public RunAmok(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

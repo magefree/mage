@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class CrystalQuarry extends CardImpl {
+public final class CrystalQuarry extends CardImpl {
 
     public CrystalQuarry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

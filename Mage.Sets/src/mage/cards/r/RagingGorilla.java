@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class RagingGorilla extends CardImpl {
+public final class RagingGorilla extends CardImpl {
 
     public RagingGorilla(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

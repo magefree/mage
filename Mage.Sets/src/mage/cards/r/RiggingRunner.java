@@ -44,7 +44,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class RiggingRunner extends CardImpl {
+public final class RiggingRunner extends CardImpl {
 
     public RiggingRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

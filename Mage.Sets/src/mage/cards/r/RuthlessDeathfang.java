@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class RuthlessDeathfang extends CardImpl {
+public final class RuthlessDeathfang extends CardImpl {
 
     public RuthlessDeathfang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");

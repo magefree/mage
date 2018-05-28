@@ -56,7 +56,7 @@ import mage.watchers.common.AttackedLastTurnWatcher;
  *
  * @author L_J
  */
-public class GoblinRockSled extends CardImpl {
+public final class GoblinRockSled extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
 

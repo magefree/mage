@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author Temba21
  */
-public class HauntedCadaver extends CardImpl {
+public final class HauntedCadaver extends CardImpl {
 
     public HauntedCadaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -42,7 +42,7 @@ import mage.game.permanent.token.WurmCallingWurmToken;
  *
  * @author LoneFox
  */
-public class Wurmcalling extends CardImpl {
+public final class Wurmcalling extends CardImpl {
 
     public Wurmcalling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");

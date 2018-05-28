@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class Faultgrinder extends CardImpl {
+public final class Faultgrinder extends CardImpl {
 
     public Faultgrinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");

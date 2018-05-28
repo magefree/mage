@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
  *
  */
-public class SoulSnare extends CardImpl {
+public final class SoulSnare extends CardImpl {
 
     public SoulSnare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

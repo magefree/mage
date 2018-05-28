@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author TheElk801
  */
-public class Embolden extends CardImpl {
+public final class Embolden extends CardImpl {
 
     public Embolden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

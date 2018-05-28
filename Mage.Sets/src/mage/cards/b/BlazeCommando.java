@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 
 
-public class BlazeCommando extends CardImpl {
+public final class BlazeCommando extends CardImpl {
 
     public BlazeCommando (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");

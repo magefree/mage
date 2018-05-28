@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class RiverSneak extends CardImpl {
+public final class RiverSneak extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another Merfolk");
 

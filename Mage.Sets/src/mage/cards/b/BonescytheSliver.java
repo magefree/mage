@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author jeffwadsworth
  */
-public class BonescytheSliver extends CardImpl {
+public final class BonescytheSliver extends CardImpl {
 
     public BonescytheSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

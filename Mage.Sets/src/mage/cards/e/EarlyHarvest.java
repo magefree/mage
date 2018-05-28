@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class EarlyHarvest extends CardImpl {
+public final class EarlyHarvest extends CardImpl {
 
     public EarlyHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class LeafCrownedElder extends CardImpl {
+public final class LeafCrownedElder extends CardImpl {
 
     public LeafCrownedElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

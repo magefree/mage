@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BalduvianBears extends CardImpl {
+public final class BalduvianBears extends CardImpl {
 
     public BalduvianBears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

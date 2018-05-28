@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author magenoxx_at_gmail.com
  */
-public class FieryTemper extends CardImpl {
+public final class FieryTemper extends CardImpl {
 
     public FieryTemper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");

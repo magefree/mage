@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author emerald000
  */
-public class MarduWoeReaper extends CardImpl {
+public final class MarduWoeReaper extends CardImpl {
 
     public MarduWoeReaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

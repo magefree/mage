@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WhirlerRogue extends CardImpl {
+public final class WhirlerRogue extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts");
 

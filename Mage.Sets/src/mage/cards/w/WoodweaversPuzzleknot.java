@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class WoodweaversPuzzleknot extends CardImpl {
+public final class WoodweaversPuzzleknot extends CardImpl {
 
     public WoodweaversPuzzleknot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

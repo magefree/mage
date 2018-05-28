@@ -47,7 +47,7 @@ import mage.constants.SpellAbilityType;
  *
  * @author LevelX2
  */
-public class DrivenDespair extends SplitCard {
+public final class DrivenDespair extends SplitCard {
 
     public DrivenDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{1}{G}", "{1}{B}", SpellAbilityType.SPLIT_AFTERMATH);

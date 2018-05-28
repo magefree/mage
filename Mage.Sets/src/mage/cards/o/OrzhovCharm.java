@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OrzhovCharm extends CardImpl {
+public final class OrzhovCharm extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 1 or less from your graveyard");
     static {

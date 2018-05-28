@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class DeeptreadMerrow extends CardImpl {
+public final class DeeptreadMerrow extends CardImpl {
 
     public DeeptreadMerrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

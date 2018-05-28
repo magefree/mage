@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class GiftOfImmortality extends CardImpl {
+public final class GiftOfImmortality extends CardImpl {
 
     public GiftOfImmortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

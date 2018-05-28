@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Loki
  */
-public class NoxiousRevival extends CardImpl {
+public final class NoxiousRevival extends CardImpl {
 
     public NoxiousRevival (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/P}");

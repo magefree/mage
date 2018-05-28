@@ -50,7 +50,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author TheElk801
  */
-public class RelicRunner extends CardImpl {
+public final class RelicRunner extends CardImpl {
 
     public RelicRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

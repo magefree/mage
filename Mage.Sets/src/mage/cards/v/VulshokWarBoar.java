@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class VulshokWarBoar extends CardImpl {
+public final class VulshokWarBoar extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("an artifact");
 

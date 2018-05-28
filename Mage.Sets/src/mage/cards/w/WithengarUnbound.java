@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward
  */
-public class WithengarUnbound extends CardImpl {
+public final class WithengarUnbound extends CardImpl {
 
     public WithengarUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

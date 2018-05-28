@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ParadiseMantle extends CardImpl {
+public final class ParadiseMantle extends CardImpl {
 
     public ParadiseMantle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

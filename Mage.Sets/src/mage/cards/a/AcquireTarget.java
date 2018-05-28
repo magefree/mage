@@ -44,7 +44,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author Styxo
  */
-public class AcquireTarget extends CardImpl {
+public final class AcquireTarget extends CardImpl {
 
     public AcquireTarget(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

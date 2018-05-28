@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class Archenemy extends ExpansionSet {
+public final class Archenemy extends ExpansionSet {
 
     private static final Archenemy instance = new Archenemy();
 

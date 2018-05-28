@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class EternalOfHarshTruths extends CardImpl {
+public final class EternalOfHarshTruths extends CardImpl {
 
     public EternalOfHarshTruths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

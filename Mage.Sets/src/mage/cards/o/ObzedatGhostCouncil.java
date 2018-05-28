@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class ObzedatGhostCouncil extends CardImpl {
+public final class ObzedatGhostCouncil extends CardImpl {
 
     public ObzedatGhostCouncil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{B}{B}");

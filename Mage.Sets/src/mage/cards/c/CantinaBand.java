@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class CantinaBand extends CardImpl {
+public final class CantinaBand extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 

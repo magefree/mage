@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class RepelTheAbominable extends CardImpl {
+public final class RepelTheAbominable extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("non-Human sources");
 

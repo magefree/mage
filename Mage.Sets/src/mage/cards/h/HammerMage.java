@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LoneFox
  */
-public class HammerMage extends CardImpl {
+public final class HammerMage extends CardImpl {
 
    public HammerMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

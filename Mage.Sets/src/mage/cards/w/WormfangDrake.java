@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author Temba21
  */
-public class WormfangDrake extends CardImpl {
+public final class WormfangDrake extends CardImpl {
 
     public WormfangDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

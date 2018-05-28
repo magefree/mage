@@ -47,7 +47,7 @@ import java.util.UUID;
  * @author LoneFox
 
  */
-public class TidalWarrior extends CardImpl {
+public final class TidalWarrior extends CardImpl {
 
     public TidalWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

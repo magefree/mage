@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class GoblinBushwhacker extends CardImpl {
+public final class GoblinBushwhacker extends CardImpl {
 
     public GoblinBushwhacker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

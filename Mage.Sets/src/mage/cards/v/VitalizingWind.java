@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author TheElk801
  */
-public class VitalizingWind extends CardImpl {
+public final class VitalizingWind extends CardImpl {
 
     public VitalizingWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{8}{G}");

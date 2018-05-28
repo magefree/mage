@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BloodfrayGiant extends CardImpl {
+public final class BloodfrayGiant extends CardImpl {
  
     public BloodfrayGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

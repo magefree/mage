@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class AngelOfMercy extends CardImpl {
+public final class AngelOfMercy extends CardImpl {
 
     public AngelOfMercy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

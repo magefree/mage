@@ -46,7 +46,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class EmberwildeAugur extends CardImpl {
+public final class EmberwildeAugur extends CardImpl {
 
     public EmberwildeAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

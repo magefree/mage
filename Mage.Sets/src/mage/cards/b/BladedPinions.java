@@ -43,7 +43,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class BladedPinions extends CardImpl {
+public final class BladedPinions extends CardImpl {
 
     public BladedPinions (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

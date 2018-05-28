@@ -42,7 +42,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LevelX2
  */
-public class BerserkersOnslaught extends CardImpl {
+public final class BerserkersOnslaught extends CardImpl {
 
     public BerserkersOnslaught(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");

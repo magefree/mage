@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author TheElk801
  */
-public class KumenasSpeaker extends CardImpl {
+public final class KumenasSpeaker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another Merfolk or an Island");
 

@@ -49,7 +49,7 @@ import java.util.UUID;
  * @author LoneFox
  *
  */
-public class OpalCaryatid extends CardImpl {
+public final class OpalCaryatid extends CardImpl {
 
     public OpalCaryatid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

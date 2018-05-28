@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Quercitron
  */
-public class ElderDruid extends CardImpl {
+public final class ElderDruid extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 

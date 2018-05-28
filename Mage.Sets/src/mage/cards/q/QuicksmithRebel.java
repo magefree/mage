@@ -51,7 +51,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Styxo
  */
-public class QuicksmithRebel extends CardImpl {
+public final class QuicksmithRebel extends CardImpl {
 
     public QuicksmithRebel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

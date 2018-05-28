@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class MomentOfHeroism extends CardImpl {
+public final class MomentOfHeroism extends CardImpl {
 
     public MomentOfHeroism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

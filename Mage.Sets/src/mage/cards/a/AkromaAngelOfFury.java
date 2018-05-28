@@ -46,7 +46,7 @@ import mage.constants.*;
  *
  * @author LevelX2
  */
-public class AkromaAngelOfFury extends CardImpl {
+public final class AkromaAngelOfFury extends CardImpl {
 
     public AkromaAngelOfFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}{R}");

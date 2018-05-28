@@ -43,7 +43,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class SultaiAscendancy extends CardImpl {
+public final class SultaiAscendancy extends CardImpl {
 
     public SultaiAscendancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}{U}");

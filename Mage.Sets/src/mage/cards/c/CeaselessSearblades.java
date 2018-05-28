@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author Will
  */
-public class CeaselessSearblades extends CardImpl {
+public final class CeaselessSearblades extends CardImpl {
    
     public CeaselessSearblades(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

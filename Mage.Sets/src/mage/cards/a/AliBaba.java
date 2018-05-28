@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class AliBaba extends CardImpl {
+public final class AliBaba extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Wall");
 

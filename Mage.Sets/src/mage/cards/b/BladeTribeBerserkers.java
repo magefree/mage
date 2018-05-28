@@ -46,7 +46,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BladeTribeBerserkers extends CardImpl {
+public final class BladeTribeBerserkers extends CardImpl {
 
     private static final String effectText = "Metalcraft - When Blade-Tribe Berserkers enters the battlefield, if you control three or more artifacts, Blade-Tribe Berserkers gets +3/+3 and gains haste until end of turn.";
 

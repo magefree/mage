@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class PDSGraveborn extends ExpansionSet {
+public final class PDSGraveborn extends ExpansionSet {
 
     private static final PDSGraveborn instance = new PDSGraveborn();
 

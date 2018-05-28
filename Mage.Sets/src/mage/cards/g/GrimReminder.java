@@ -60,7 +60,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class GrimReminder extends CardImpl {
+public final class GrimReminder extends CardImpl {
 
     public GrimReminder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");

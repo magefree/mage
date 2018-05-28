@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ProsshKoboldToken extends TokenImpl {
+public final class ProsshKoboldToken extends TokenImpl {
 
     public ProsshKoboldToken() {
         super("Kobolds of Kher Keep", "0/1 red Kobold creature tokens");

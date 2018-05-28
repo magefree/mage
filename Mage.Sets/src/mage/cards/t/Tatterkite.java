@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class Tatterkite extends CardImpl {
+public final class Tatterkite extends CardImpl {
 
     public Tatterkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

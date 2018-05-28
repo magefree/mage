@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author michael.napoleon@gmail.com
  */
-public class CloudSpirit extends CardImpl {
+public final class CloudSpirit extends CardImpl {
 
     public CloudSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

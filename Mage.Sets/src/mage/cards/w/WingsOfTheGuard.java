@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class WingsOfTheGuard extends CardImpl {
+public final class WingsOfTheGuard extends CardImpl {
 
     public WingsOfTheGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

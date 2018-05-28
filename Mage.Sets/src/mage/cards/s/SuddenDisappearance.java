@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author BetaSteward
  */
-public class SuddenDisappearance extends CardImpl {
+public final class SuddenDisappearance extends CardImpl {
 
     public SuddenDisappearance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}");

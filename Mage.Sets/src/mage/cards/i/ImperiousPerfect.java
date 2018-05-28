@@ -47,7 +47,7 @@ import mage.game.permanent.token.ElfToken;
  *
  * @author Loki
  */
-public class ImperiousPerfect extends CardImpl {
+public final class ImperiousPerfect extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 

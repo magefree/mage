@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class GazeOfAdamaro extends CardImpl {
+public final class GazeOfAdamaro extends CardImpl {
 
     public GazeOfAdamaro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");

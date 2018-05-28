@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class HiddenDragonslayer extends CardImpl {
+public final class HiddenDragonslayer extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater an opponent controls");
     

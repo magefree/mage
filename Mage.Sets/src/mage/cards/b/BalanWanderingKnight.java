@@ -55,7 +55,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Saga
  */
-public class BalanWanderingKnight extends CardImpl {
+public final class BalanWanderingKnight extends CardImpl {
     
     private static final String rule = "{this} has double strike as long as two or more Equipment are attached to it.";
 

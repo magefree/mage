@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class LoyalRetainers extends CardImpl {
+public final class LoyalRetainers extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("legendary creature card from your graveyard");
 

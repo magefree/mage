@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class WeaponsTrainer extends CardImpl {
+public final class WeaponsTrainer extends CardImpl {
 
     private static final String rule = "Other creatures you control get +1/+0 as long as you control an Equipment.";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Equipment");

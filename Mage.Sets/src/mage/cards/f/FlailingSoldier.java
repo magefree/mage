@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class FlailingSoldier extends CardImpl {
+public final class FlailingSoldier extends CardImpl {
 
     public FlailingSoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

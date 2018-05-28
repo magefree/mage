@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class ArmyAnts extends CardImpl {
+public final class ArmyAnts extends CardImpl {
 
     public ArmyAnts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");

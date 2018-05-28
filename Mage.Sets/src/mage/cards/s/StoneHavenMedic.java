@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class StoneHavenMedic extends CardImpl {
+public final class StoneHavenMedic extends CardImpl {
 
     public StoneHavenMedic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

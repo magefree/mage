@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class Mindmelter extends CardImpl {
+public final class Mindmelter extends CardImpl {
 
     public Mindmelter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");

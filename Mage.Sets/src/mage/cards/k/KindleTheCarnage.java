@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class KindleTheCarnage extends CardImpl {
+public final class KindleTheCarnage extends CardImpl {
 
     public KindleTheCarnage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

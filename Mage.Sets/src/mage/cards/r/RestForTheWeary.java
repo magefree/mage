@@ -41,7 +41,7 @@ import mage.watchers.common.LandfallWatcher;
  *
  * @author Loki
  */
-public class RestForTheWeary extends CardImpl {
+public final class RestForTheWeary extends CardImpl {
 
     public RestForTheWeary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

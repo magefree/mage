@@ -45,7 +45,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author fireshoes
  */
-public class SolemnRecruit extends CardImpl {
+public final class SolemnRecruit extends CardImpl {
 
     public SolemnRecruit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

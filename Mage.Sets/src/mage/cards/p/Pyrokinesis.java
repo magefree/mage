@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author Plopman
  */
-public class Pyrokinesis extends CardImpl {
+public final class Pyrokinesis extends CardImpl {
 
     public Pyrokinesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}{R}");

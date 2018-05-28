@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Loki
  */
-public class CreakwoodGhoul extends CardImpl {
+public final class CreakwoodGhoul extends CardImpl {
 
     public CreakwoodGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

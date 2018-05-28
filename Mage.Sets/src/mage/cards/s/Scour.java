@@ -38,7 +38,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class Scour extends CardImpl {
+public final class Scour extends CardImpl {
 
     public Scour(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");

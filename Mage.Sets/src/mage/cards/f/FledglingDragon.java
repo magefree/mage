@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class FledglingDragon extends CardImpl {
+public final class FledglingDragon extends CardImpl {
 
     public FledglingDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

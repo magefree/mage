@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class RavagedHighlands extends CardImpl {
+public final class RavagedHighlands extends CardImpl {
 
     public RavagedHighlands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

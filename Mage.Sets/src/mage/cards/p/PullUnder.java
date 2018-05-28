@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class PullUnder extends CardImpl {
+public final class PullUnder extends CardImpl {
 
     public PullUnder (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}");

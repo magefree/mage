@@ -48,7 +48,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class AetherwindBasker extends CardImpl {
+public final class AetherwindBasker extends CardImpl {
 
     public AetherwindBasker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");

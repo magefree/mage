@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class BubblingMuck extends CardImpl {
+public final class BubblingMuck extends CardImpl {
 
     public BubblingMuck(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

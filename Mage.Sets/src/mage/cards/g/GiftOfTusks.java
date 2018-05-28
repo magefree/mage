@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class GiftOfTusks extends CardImpl {
+public final class GiftOfTusks extends CardImpl {
 
     public GiftOfTusks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

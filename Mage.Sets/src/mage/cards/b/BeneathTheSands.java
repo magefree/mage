@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Archer262
  */
-public class BeneathTheSands extends CardImpl {
+public final class BeneathTheSands extends CardImpl {
 
     public BeneathTheSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

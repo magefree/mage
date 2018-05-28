@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WildInstincts extends CardImpl {
+public final class WildInstincts extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

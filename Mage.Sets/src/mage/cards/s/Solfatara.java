@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class Solfatara extends CardImpl {
+public final class Solfatara extends CardImpl {
 
     public Solfatara(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

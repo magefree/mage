@@ -58,7 +58,7 @@ import org.apache.log4j.Logger;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Spellbinder extends CardImpl {
+public final class Spellbinder extends CardImpl {
 
     public Spellbinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

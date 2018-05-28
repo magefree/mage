@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author JRHerlehy
  */
-public class RimescaleDragon extends CardImpl {
+public final class RimescaleDragon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with ice counters");
 

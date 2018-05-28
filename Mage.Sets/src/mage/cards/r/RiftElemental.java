@@ -59,7 +59,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
  *
  * @author LevelX2
  */
-public class RiftElemental extends CardImpl {
+public final class RiftElemental extends CardImpl {
 
     public RiftElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

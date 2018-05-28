@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LoneFox
  */
-public class HuntingCheetah extends CardImpl {
+public final class HuntingCheetah extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Forest card");
 

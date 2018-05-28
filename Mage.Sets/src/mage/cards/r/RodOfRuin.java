@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class RodOfRuin extends CardImpl {
+public final class RodOfRuin extends CardImpl {
 
     public RodOfRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

@@ -47,7 +47,7 @@ import mage.game.permanent.token.ButterflyToken;
  *
  * @author LoneFox
  */
-public class GiantCaterpillar extends CardImpl {
+public final class GiantCaterpillar extends CardImpl {
 
     public GiantCaterpillar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

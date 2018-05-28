@@ -39,7 +39,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author nantuko
  */
-public class Disperse extends CardImpl {
+public final class Disperse extends CardImpl {
 
     public Disperse (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

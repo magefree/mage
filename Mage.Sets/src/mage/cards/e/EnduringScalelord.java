@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class EnduringScalelord extends CardImpl {
+public final class EnduringScalelord extends CardImpl {
 
     public EnduringScalelord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");

@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class SabaccGame extends CardImpl {
+public final class SabaccGame extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
 

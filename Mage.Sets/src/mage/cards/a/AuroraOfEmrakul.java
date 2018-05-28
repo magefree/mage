@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class AuroraOfEmrakul extends CardImpl {
+public final class AuroraOfEmrakul extends CardImpl {
 
     public AuroraOfEmrakul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KrakenHatchling extends CardImpl {
+public final class KrakenHatchling extends CardImpl {
 
     public KrakenHatchling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

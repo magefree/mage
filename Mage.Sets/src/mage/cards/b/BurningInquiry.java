@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class BurningInquiry extends CardImpl {
+public final class BurningInquiry extends CardImpl {
 
     public BurningInquiry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class ShiftyDoppelganger extends CardImpl {
+public final class ShiftyDoppelganger extends CardImpl {
 
     public ShiftyDoppelganger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -43,7 +43,7 @@ import mage.constants.*;
 /**
  * @author nantuko
  */
-public class MaskOfAvacyn extends CardImpl {
+public final class MaskOfAvacyn extends CardImpl {
 
     public MaskOfAvacyn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

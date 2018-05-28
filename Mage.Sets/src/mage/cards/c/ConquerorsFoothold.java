@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class ConquerorsFoothold extends CardImpl {
+public final class ConquerorsFoothold extends CardImpl {
 
     public ConquerorsFoothold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

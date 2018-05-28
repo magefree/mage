@@ -38,7 +38,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author wetterlicht
  */
-public class RebukingCeremony extends CardImpl {
+public final class RebukingCeremony extends CardImpl {
 
     public RebukingCeremony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");

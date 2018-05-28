@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author emerald000
  */
-public class KorHaven extends CardImpl {
+public final class KorHaven extends CardImpl {
 
     public KorHaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

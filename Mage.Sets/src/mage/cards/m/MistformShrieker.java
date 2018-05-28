@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class MistformShrieker extends CardImpl {
+public final class MistformShrieker extends CardImpl {
 
     public MistformShrieker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

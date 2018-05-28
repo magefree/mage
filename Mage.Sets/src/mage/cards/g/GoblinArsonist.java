@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class GoblinArsonist extends CardImpl {
+public final class GoblinArsonist extends CardImpl {
 
     public GoblinArsonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

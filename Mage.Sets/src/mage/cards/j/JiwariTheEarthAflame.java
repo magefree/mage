@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class JiwariTheEarthAflame extends CardImpl {
+public final class JiwariTheEarthAflame extends CardImpl {
 
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

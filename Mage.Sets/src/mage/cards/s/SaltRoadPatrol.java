@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SaltRoadPatrol extends CardImpl {
+public final class SaltRoadPatrol extends CardImpl {
 
     public SaltRoadPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

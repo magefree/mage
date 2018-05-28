@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class CapashenTemplar extends CardImpl {
+public final class CapashenTemplar extends CardImpl {
 
     public CapashenTemplar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FrontlineSage extends CardImpl {
+public final class FrontlineSage extends CardImpl {
 
     public FrontlineSage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

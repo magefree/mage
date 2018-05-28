@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class RuthlessCullblade extends CardImpl {
+public final class RuthlessCullblade extends CardImpl {
 
     public RuthlessCullblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

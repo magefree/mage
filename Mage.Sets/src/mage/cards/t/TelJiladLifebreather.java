@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class TelJiladLifebreather extends CardImpl {
+public final class TelJiladLifebreather extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Forest");
     static {

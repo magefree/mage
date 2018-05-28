@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author TheElk801
  */
-public class MeteorShower extends CardImpl {
+public final class MeteorShower extends CardImpl {
 
     public MeteorShower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");

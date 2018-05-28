@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ThalakosSeer extends CardImpl {
+public final class ThalakosSeer extends CardImpl {
 
     public ThalakosSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");

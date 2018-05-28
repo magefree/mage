@@ -50,7 +50,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko
  */
-public class SemblanceAnvil extends CardImpl {
+public final class SemblanceAnvil extends CardImpl {
 
     public SemblanceAnvil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

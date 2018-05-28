@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class EscapedNull extends CardImpl {
+public final class EscapedNull extends CardImpl {
 
     public EscapedNull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

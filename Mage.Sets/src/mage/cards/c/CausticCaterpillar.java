@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CausticCaterpillar extends CardImpl {
+public final class CausticCaterpillar extends CardImpl {
 
     public CausticCaterpillar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

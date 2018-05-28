@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class LiftedByClouds extends CardImpl {
+public final class LiftedByClouds extends CardImpl {
 
     public LiftedByClouds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

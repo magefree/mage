@@ -43,7 +43,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class ViridianCorrupter extends CardImpl {
+public final class ViridianCorrupter extends CardImpl {
 
     public ViridianCorrupter (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

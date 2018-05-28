@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class CartoucheOfKnowledge extends CardImpl {
+public final class CartoucheOfKnowledge extends CardImpl {
 
     public CartoucheOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

@@ -38,7 +38,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author Loki
  */
-public class PlanarCleansing extends CardImpl {
+public final class PlanarCleansing extends CardImpl {
 
     public PlanarCleansing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}{W}");

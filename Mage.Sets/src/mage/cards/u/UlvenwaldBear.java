@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class UlvenwaldBear extends CardImpl {
+public final class UlvenwaldBear extends CardImpl {
 
     public UlvenwaldBear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

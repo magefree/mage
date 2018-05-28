@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class CommandTower extends CardImpl {
+public final class CommandTower extends CardImpl {
 
     public CommandTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

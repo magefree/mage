@@ -48,7 +48,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author magenoxx_at_gmail.com
  */
-public class AetherBurst extends CardImpl {
+public final class AetherBurst extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards named Aether Burst");
 

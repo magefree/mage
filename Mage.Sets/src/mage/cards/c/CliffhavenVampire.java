@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class CliffhavenVampire extends CardImpl {
+public final class CliffhavenVampire extends CardImpl {
 
     public CliffhavenVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{B}");

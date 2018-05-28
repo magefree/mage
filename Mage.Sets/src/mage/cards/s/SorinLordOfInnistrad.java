@@ -58,7 +58,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward
  */
-public class SorinLordOfInnistrad extends CardImpl {
+public final class SorinLordOfInnistrad extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
 

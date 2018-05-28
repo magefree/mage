@@ -43,7 +43,7 @@ import mage.constants.SubType;
  */
 
 
-public class RiotPiker extends CardImpl {
+public final class RiotPiker extends CardImpl {
 
     public RiotPiker (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

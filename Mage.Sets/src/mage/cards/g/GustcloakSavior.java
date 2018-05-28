@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class GustcloakSavior extends CardImpl {
+public final class GustcloakSavior extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 

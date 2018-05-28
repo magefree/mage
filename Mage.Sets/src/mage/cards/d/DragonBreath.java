@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class DragonBreath extends CardImpl {
+public final class DragonBreath extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with converted mana cost 6 or greater");
     static {

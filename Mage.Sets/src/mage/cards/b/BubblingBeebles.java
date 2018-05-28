@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Backfir3
  */
-public class BubblingBeebles extends CardImpl {
+public final class BubblingBeebles extends CardImpl {
 
     public BubblingBeebles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

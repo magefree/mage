@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SerraAvatar extends CardImpl {
+public final class SerraAvatar extends CardImpl {
 
     public SerraAvatar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{W}");

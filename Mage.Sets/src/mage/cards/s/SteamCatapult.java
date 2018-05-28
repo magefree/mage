@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SteamCatapult extends CardImpl {
+public final class SteamCatapult extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

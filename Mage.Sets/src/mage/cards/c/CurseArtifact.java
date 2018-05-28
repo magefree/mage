@@ -50,7 +50,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LoneFox & L_J
  */
-public class CurseArtifact extends CardImpl {
+public final class CurseArtifact extends CardImpl {
 
     public CurseArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JinxedIdol extends CardImpl {
+public final class JinxedIdol extends CardImpl {
 
     public JinxedIdol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

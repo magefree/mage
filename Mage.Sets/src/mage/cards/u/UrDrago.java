@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class UrDrago extends CardImpl {
+public final class UrDrago extends CardImpl {
 
     public UrDrago(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}{B}");

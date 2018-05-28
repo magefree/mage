@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author L_J
  */
-public class WormsOfTheEarth extends CardImpl {
+public final class WormsOfTheEarth extends CardImpl {
 
     public WormsOfTheEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}{B}");

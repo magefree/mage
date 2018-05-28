@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author Styxo
  */
-public class ColfenorsUrn extends CardImpl {
+public final class ColfenorsUrn extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with toughness 4 or greater");
 

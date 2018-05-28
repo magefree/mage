@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class JaggedScarArchers extends CardImpl {
+public final class JaggedScarArchers extends CardImpl {
 
     private static final FilterCreaturePermanent flyingCreatureFilter = new FilterCreaturePermanent("creature with flying");
     private static final FilterControlledPermanent controlledElvesFilter = new FilterControlledPermanent("Elves you control");

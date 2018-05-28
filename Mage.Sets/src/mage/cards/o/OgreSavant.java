@@ -46,7 +46,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author FenrisulfrX
  */
-public class OgreSavant extends CardImpl {
+public final class OgreSavant extends CardImpl {
 
     public OgreSavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

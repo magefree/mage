@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class DurkwoodBaloth extends CardImpl {
+public final class DurkwoodBaloth extends CardImpl {
 
     public DurkwoodBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class Morselhoarder extends CardImpl {
+public final class Morselhoarder extends CardImpl {
 
     public Morselhoarder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R/G}{R/G}");

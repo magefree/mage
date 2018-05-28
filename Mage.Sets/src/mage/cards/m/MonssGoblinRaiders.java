@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MonssGoblinRaiders extends CardImpl {
+public final class MonssGoblinRaiders extends CardImpl {
 
     public MonssGoblinRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

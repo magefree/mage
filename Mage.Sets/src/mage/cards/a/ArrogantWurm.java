@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class ArrogantWurm extends CardImpl {
+public final class ArrogantWurm extends CardImpl {
 
     public ArrogantWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

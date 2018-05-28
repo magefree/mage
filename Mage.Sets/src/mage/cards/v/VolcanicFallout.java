@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class VolcanicFallout extends CardImpl {
+public final class VolcanicFallout extends CardImpl {
 
     public VolcanicFallout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");

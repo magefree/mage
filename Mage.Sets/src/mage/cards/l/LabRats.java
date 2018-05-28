@@ -39,7 +39,7 @@ import mage.game.permanent.token.RatToken;
  *
  * @author North
  */
-public class LabRats extends CardImpl {
+public final class LabRats extends CardImpl {
 
     public LabRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

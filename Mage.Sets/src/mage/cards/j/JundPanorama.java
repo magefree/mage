@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JundPanorama extends CardImpl {
+public final class JundPanorama extends CardImpl {
 
      private static final FilterCard filter = new FilterCard("a basic Swamp, Mountain, or Forest card");
 

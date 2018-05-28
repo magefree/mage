@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class KorOutfitter extends CardImpl {
+public final class KorOutfitter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 

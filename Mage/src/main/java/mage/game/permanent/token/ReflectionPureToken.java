@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author SpikesCafe-google
  */
-public class ReflectionPureToken extends TokenImpl {
+public final class ReflectionPureToken extends TokenImpl {
     
     public ReflectionPureToken() {
        this(1);

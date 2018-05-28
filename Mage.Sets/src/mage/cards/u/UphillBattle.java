@@ -48,7 +48,7 @@ import mage.watchers.common.CreatureWasCastWatcher;
  *
  * @author chrvanorle
  */
-public class UphillBattle extends CardImpl {
+public final class UphillBattle extends CardImpl {
 
     public UphillBattle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
 /**
  * @author tcontis
  */
-public class WormfangTurtle extends CardImpl {
+public final class WormfangTurtle extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {

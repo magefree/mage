@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  * @author LoneFox
 
  */
-public class Thoughtleech extends CardImpl {
+public final class Thoughtleech extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("an Island an opponent controls");
 

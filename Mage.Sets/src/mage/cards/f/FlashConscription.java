@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FlashConscription extends CardImpl {
+public final class FlashConscription extends CardImpl {
 
     public FlashConscription(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{R}");

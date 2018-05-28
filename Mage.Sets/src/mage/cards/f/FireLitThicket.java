@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class FireLitThicket extends CardImpl {
+public final class FireLitThicket extends CardImpl {
 
     public FireLitThicket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

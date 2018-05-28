@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author BursegSardaukar
  */
-public class GoblinWizard extends CardImpl {
+public final class GoblinWizard extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin");
     private static final FilterPermanent goblinPermanent = new FilterPermanent("Goblin");

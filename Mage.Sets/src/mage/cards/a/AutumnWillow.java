@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class AutumnWillow extends CardImpl {
+public final class AutumnWillow extends CardImpl {
 
     public AutumnWillow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

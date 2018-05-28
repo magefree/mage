@@ -13,7 +13,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class TIEFighterToken extends TokenImpl {
+public final class TIEFighterToken extends TokenImpl {
 
     public TIEFighterToken() {
         super("TIE Fighter", "1/1 black Starship artifact creature tokens with Spaceflight named TIE Fighter", 1, 1);

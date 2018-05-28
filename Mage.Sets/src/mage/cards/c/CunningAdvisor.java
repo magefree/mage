@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class CunningAdvisor extends CardImpl {
+public final class CunningAdvisor extends CardImpl {
 
     public CunningAdvisor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class CorruptOfficial extends CardImpl {
+public final class CorruptOfficial extends CardImpl {
 
     public CorruptOfficial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

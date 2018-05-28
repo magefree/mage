@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class TrialOfAmbition extends CardImpl {
+public final class TrialOfAmbition extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 

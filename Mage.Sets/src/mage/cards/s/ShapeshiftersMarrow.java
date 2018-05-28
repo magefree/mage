@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * author HCrescent
  */
-public class ShapeshiftersMarrow extends CardImpl {
+public final class ShapeshiftersMarrow extends CardImpl {
 
     public ShapeshiftersMarrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

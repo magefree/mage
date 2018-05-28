@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BlightedSteppe extends CardImpl {
+public final class BlightedSteppe extends CardImpl {
 
     public BlightedSteppe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

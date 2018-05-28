@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class SavaenElves extends CardImpl {
+public final class SavaenElves extends CardImpl {
     
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to a land");
     

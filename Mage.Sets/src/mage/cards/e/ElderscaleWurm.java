@@ -49,7 +49,7 @@ import mage.players.Player;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class ElderscaleWurm extends CardImpl {
+public final class ElderscaleWurm extends CardImpl {
 
     public ElderscaleWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");

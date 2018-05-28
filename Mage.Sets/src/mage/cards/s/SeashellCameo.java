@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class SeashellCameo extends CardImpl {
+public final class SeashellCameo extends CardImpl {
 
     public SeashellCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Goatnapper extends CardImpl {
+public final class Goatnapper extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Goat");
 

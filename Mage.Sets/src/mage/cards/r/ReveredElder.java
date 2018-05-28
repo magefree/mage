@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author L_J
  */
-public class ReveredElder extends CardImpl {
+public final class ReveredElder extends CardImpl {
 
     public ReveredElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

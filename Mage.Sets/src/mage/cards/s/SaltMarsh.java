@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class SaltMarsh extends CardImpl {
+public final class SaltMarsh extends CardImpl {
 
     public SaltMarsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

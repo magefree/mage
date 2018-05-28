@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class WildWanderer extends CardImpl {
+public final class WildWanderer extends CardImpl {
 
     public WildWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

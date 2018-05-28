@@ -61,7 +61,7 @@ import mage.util.CardUtil;
  * 
  * @author L_J
  */
-public class Purgatory extends CardImpl {
+public final class Purgatory extends CardImpl {
 
     public Purgatory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{B}");

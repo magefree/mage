@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class BattlefieldPercher extends CardImpl {
+public final class BattlefieldPercher extends CardImpl {
 
     public BattlefieldPercher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

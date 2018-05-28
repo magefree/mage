@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class Thunderclap extends CardImpl {
+public final class Thunderclap extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Mountain");
 

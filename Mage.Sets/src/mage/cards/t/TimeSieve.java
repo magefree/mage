@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class TimeSieve extends CardImpl {
+public final class TimeSieve extends CardImpl {
 
     public TimeSieve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JayDi85
  */
-public class JadecraftArtisan extends CardImpl {
+public final class JadecraftArtisan extends CardImpl {
 
     public JadecraftArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

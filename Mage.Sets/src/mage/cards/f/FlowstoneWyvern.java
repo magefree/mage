@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FlowstoneWyvern extends CardImpl {
+public final class FlowstoneWyvern extends CardImpl {
 
     public FlowstoneWyvern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

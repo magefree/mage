@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class SinisterStrength extends CardImpl {
+public final class SinisterStrength extends CardImpl {
 
     public SinisterStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

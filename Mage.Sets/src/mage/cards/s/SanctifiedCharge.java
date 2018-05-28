@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class SanctifiedCharge extends CardImpl {
+public final class SanctifiedCharge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 

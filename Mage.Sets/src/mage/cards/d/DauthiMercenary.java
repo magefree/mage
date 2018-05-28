@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class DauthiMercenary extends CardImpl {
+public final class DauthiMercenary extends CardImpl {
 
     public DauthiMercenary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

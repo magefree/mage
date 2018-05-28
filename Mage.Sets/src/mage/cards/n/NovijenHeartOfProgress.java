@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author someoneseth@gmail.com
  */
-public class NovijenHeartOfProgress extends CardImpl {
+public final class NovijenHeartOfProgress extends CardImpl {
 
     public NovijenHeartOfProgress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

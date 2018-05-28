@@ -45,7 +45,7 @@ import mage.game.permanent.token.GoblinRogueToken;
  *
  * @author fireshoes
  */
-public class BoggartMob extends CardImpl {
+public final class BoggartMob extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin you control");
 

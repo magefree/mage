@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class PeaceOfMind extends CardImpl {
+public final class PeaceOfMind extends CardImpl {
 
     public PeaceOfMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

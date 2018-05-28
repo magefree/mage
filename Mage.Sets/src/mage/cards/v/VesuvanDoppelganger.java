@@ -54,7 +54,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author jeffwadsworth
  */
-public class VesuvanDoppelganger extends CardImpl {
+public final class VesuvanDoppelganger extends CardImpl {
 
     private static final String rule = "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it gains \"At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.\"";
 

@@ -38,7 +38,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class Verdigris extends CardImpl {
+public final class Verdigris extends CardImpl {
 
     public Verdigris(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

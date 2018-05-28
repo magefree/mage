@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author fireshoes
  */
-public class AjanisAid extends CardImpl {
+public final class AjanisAid extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Ajani, Valiant Protector");
 

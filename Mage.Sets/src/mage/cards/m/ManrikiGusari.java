@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class ManrikiGusari extends CardImpl {
+public final class ManrikiGusari extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 

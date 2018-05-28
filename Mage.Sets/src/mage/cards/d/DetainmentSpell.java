@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class DetainmentSpell extends CardImpl {
+public final class DetainmentSpell extends CardImpl {
 
     public DetainmentSpell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

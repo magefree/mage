@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author intimidatingant
  */
-public class ChaliceOfLife extends CardImpl {
+public final class ChaliceOfLife extends CardImpl {
 
     public ChaliceOfLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

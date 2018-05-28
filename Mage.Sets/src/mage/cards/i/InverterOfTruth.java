@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class InverterOfTruth extends CardImpl {
+public final class InverterOfTruth extends CardImpl {
 
     public InverterOfTruth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

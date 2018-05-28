@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author FenrisulfrX
  */
-public class SunscapeBattlemage extends CardImpl {
+public final class SunscapeBattlemage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
     static {

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ResoluteArchangel extends CardImpl {
+public final class ResoluteArchangel extends CardImpl {
 
     public ResoluteArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

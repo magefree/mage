@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class Predict extends CardImpl {
+public final class Predict extends CardImpl {
 
     public Predict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

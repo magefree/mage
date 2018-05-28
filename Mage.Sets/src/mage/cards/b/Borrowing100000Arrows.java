@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Borrowing100000Arrows extends CardImpl {
+public final class Borrowing100000Arrows extends CardImpl {
 
     public Borrowing100000Arrows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class ImpactResonance extends CardImpl {
+public final class ImpactResonance extends CardImpl {
 
     public ImpactResonance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

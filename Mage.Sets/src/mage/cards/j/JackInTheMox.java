@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class JackInTheMox extends CardImpl {
+public final class JackInTheMox extends CardImpl {
 
     public JackInTheMox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");

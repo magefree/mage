@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TwilightProphet extends CardImpl {
+public final class TwilightProphet extends CardImpl {
 
     public TwilightProphet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

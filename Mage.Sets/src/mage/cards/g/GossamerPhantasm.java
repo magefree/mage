@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class GossamerPhantasm extends CardImpl {
+public final class GossamerPhantasm extends CardImpl {
 
     public GossamerPhantasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

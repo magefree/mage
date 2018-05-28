@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class PerilousVoyage extends CardImpl {
+public final class PerilousVoyage extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent you don't control");
 

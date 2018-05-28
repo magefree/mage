@@ -50,7 +50,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author TheElk801
  */
-public class CaptainLanneryStorm extends CardImpl {
+public final class CaptainLanneryStorm extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Treasure");
 

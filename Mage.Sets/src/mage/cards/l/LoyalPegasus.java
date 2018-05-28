@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class LoyalPegasus extends CardImpl {
+public final class LoyalPegasus extends CardImpl {
 
     public LoyalPegasus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

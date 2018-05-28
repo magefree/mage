@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author jonubuu
  */
-public class NewBenalia extends CardImpl {
+public final class NewBenalia extends CardImpl {
 
     public NewBenalia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

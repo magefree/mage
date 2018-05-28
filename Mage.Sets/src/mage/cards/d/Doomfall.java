@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Doomfall extends CardImpl {
+public final class Doomfall extends CardImpl {
 
     public Doomfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

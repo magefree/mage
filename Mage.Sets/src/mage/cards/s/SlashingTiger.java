@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class SlashingTiger extends CardImpl {
+public final class SlashingTiger extends CardImpl {
 
     public SlashingTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class Halfdane extends CardImpl {
+public final class Halfdane extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature other than Halfdane");
 

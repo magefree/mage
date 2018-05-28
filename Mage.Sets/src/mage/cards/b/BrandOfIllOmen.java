@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author ciaccona007
  */
-public class BrandOfIllOmen extends CardImpl {
+public final class BrandOfIllOmen extends CardImpl {
 
     public BrandOfIllOmen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

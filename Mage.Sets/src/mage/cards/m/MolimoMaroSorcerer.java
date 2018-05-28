@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class MolimoMaroSorcerer extends CardImpl {
+public final class MolimoMaroSorcerer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 

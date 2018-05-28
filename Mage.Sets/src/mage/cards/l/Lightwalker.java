@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class Lightwalker extends CardImpl {
+public final class Lightwalker extends CardImpl {
 
     public Lightwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

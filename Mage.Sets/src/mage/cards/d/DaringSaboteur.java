@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class DaringSaboteur extends CardImpl {
+public final class DaringSaboteur extends CardImpl {
 
     public DaringSaboteur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

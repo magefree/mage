@@ -44,7 +44,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Silence extends CardImpl {
+public final class Silence extends CardImpl {
 
     public Silence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

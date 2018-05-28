@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class Trinisphere extends CardImpl {
+public final class Trinisphere extends CardImpl {
 
     public Trinisphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

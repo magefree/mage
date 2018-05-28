@@ -45,7 +45,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author emerald000
  */
-public class LeylineOfLightning extends CardImpl {
+public final class LeylineOfLightning extends CardImpl {
 
     public LeylineOfLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

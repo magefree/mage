@@ -58,7 +58,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NissaWorldwaker extends CardImpl {
+public final class NissaWorldwaker extends CardImpl {
 
     private static final FilterPermanent filterForest = new FilterPermanent(SubType.FOREST, "Forest");
 

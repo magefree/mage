@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class BlinkmothNexus extends CardImpl {
+public final class BlinkmothNexus extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Blinkmoth");
 

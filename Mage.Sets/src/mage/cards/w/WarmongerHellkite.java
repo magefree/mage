@@ -49,7 +49,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LevelX2
  */
-public class WarmongerHellkite extends CardImpl {
+public final class WarmongerHellkite extends CardImpl {
 
     public WarmongerHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

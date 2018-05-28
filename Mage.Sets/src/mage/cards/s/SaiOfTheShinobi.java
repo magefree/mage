@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class SaiOfTheShinobi extends CardImpl {
+public final class SaiOfTheShinobi extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
     static {

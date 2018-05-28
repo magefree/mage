@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class RavenousBloodseeker extends CardImpl {
+public final class RavenousBloodseeker extends CardImpl {
 
     public RavenousBloodseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

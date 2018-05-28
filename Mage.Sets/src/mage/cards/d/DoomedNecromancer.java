@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class DoomedNecromancer extends CardImpl {
+public final class DoomedNecromancer extends CardImpl {
 
     public DoomedNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

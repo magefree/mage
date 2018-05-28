@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class WingedTempleOfOrazca extends CardImpl {
+public final class WingedTempleOfOrazca extends CardImpl {
 
     public WingedTempleOfOrazca(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

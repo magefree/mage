@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class LayOfTheLand extends CardImpl {
+public final class LayOfTheLand extends CardImpl {
 
 
     public LayOfTheLand(UUID ownerId, CardSetInfo setInfo) {

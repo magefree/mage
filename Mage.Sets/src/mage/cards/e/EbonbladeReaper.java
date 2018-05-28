@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author BijanT
  */
-public class EbonbladeReaper extends CardImpl {
+public final class EbonbladeReaper extends CardImpl {
 
     public EbonbladeReaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

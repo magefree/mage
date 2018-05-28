@@ -47,7 +47,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LoneFox
  */
-public class Feedback extends CardImpl {
+public final class Feedback extends CardImpl {
 
     public Feedback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

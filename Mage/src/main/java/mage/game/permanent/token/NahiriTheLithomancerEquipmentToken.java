@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class NahiriTheLithomancerEquipmentToken extends TokenImpl {
+public final class NahiriTheLithomancerEquipmentToken extends TokenImpl {
 
     public NahiriTheLithomancerEquipmentToken() {
         super("Stoneforged Blade", "colorless Equipment artifact token named Stoneforged Blade with indestructible, \"Equipped creature gets +5/+5 and has double strike,\" and equip {0}");

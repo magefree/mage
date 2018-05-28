@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FlayingTendrils extends CardImpl {
+public final class FlayingTendrils extends CardImpl {
 
     public FlayingTendrils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

@@ -6,7 +6,7 @@ import mage.cards.r.RukhEgg;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class NinthEdition extends ExpansionSet {
+public final class NinthEdition extends ExpansionSet {
 
     private static final NinthEdition instance = new NinthEdition();
 

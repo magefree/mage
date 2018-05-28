@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class PossibilityStorm extends CardImpl {
+public final class PossibilityStorm extends CardImpl {
 
     public PossibilityStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class PlaneswalkersFury extends CardImpl {
+public final class PlaneswalkersFury extends CardImpl {
 
     public PlaneswalkersFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class InspiringCleric extends CardImpl {
+public final class InspiringCleric extends CardImpl {
 
     public InspiringCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

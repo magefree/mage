@@ -38,7 +38,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class MaritLageToken extends TokenImpl {
+public final class MaritLageToken extends TokenImpl {
 
     public MaritLageToken() {
         super("Marit Lage", "legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage");

@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class NetcasterSpider extends CardImpl {
+public final class NetcasterSpider extends CardImpl {
 
     public NetcasterSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

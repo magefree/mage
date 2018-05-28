@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Wehk
  */
-public class RibbonsOfNight extends CardImpl {
+public final class RibbonsOfNight extends CardImpl {
 
     public RibbonsOfNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

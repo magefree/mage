@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Styxo
  */
-public class RestorationSpecialist extends CardImpl {
+public final class RestorationSpecialist extends CardImpl {
 
     public RestorationSpecialist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

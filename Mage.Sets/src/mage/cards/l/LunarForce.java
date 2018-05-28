@@ -44,7 +44,7 @@ import mage.filter.FilterSpell;
  *
  * @author LevelX2
  */
-public class LunarForce extends CardImpl {
+public final class LunarForce extends CardImpl {
 
     public LunarForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

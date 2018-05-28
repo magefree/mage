@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class BurningSands extends CardImpl {
+public final class BurningSands extends CardImpl {
 
     private final UUID originalId;
 

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class LongFinnedSkywhale extends CardImpl {
+public final class LongFinnedSkywhale extends CardImpl {
 
     public LongFinnedSkywhale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class WindsweptHeath extends CardImpl {
+public final class WindsweptHeath extends CardImpl {
 
     public WindsweptHeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

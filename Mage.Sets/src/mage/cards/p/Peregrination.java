@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Peregrination extends CardImpl {
+public final class Peregrination extends CardImpl {
 
     public Peregrination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

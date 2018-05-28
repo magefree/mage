@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ValorousStance extends CardImpl {
+public final class ValorousStance extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 4 or greater");
 

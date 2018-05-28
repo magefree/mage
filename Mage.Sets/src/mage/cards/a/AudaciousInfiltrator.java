@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author Styxo
  */
-public class AudaciousInfiltrator extends CardImpl {
+public final class AudaciousInfiltrator extends CardImpl {
 
     public AudaciousInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

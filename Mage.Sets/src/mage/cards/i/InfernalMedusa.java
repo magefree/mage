@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author L_J
  */
-public class InfernalMedusa extends CardImpl {
+public final class InfernalMedusa extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature");
 

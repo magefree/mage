@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Derpthemeus
  */
-public class ScarredPuma extends CardImpl {
+public final class ScarredPuma extends CardImpl {
 
     public ScarredPuma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

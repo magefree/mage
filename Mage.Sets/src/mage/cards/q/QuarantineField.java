@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class QuarantineField extends CardImpl {
+public final class QuarantineField extends CardImpl {
 
     public QuarantineField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{X}{W}{W}");

@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author LevelX
  */
-public class JunkyoBell extends CardImpl {
+public final class JunkyoBell extends CardImpl {
 
     public JunkyoBell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

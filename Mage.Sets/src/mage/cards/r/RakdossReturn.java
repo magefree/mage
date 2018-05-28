@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class RakdossReturn extends CardImpl {
+public final class RakdossReturn extends CardImpl {
 
     public RakdossReturn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");

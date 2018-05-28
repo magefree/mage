@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class BlessedSpirits extends CardImpl {
+public final class BlessedSpirits extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
     static {

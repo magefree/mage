@@ -39,7 +39,7 @@ import mage.filter.StaticFilters;
  *
  * @author noxx
  */
-public class PillarOfTheParuns extends CardImpl {
+public final class PillarOfTheParuns extends CardImpl {
 
     public PillarOfTheParuns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

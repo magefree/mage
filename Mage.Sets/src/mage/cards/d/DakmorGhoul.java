@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class DakmorGhoul extends CardImpl {
+public final class DakmorGhoul extends CardImpl {
 
     public DakmorGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

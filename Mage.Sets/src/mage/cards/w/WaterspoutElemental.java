@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LoneFox
  */
-public class WaterspoutElemental extends CardImpl {
+public final class WaterspoutElemental extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 

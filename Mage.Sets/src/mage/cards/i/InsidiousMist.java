@@ -52,7 +52,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class InsidiousMist extends CardImpl {
+public final class InsidiousMist extends CardImpl {
 
     public InsidiousMist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

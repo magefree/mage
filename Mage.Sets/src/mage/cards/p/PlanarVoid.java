@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class PlanarVoid extends CardImpl {
+public final class PlanarVoid extends CardImpl {
 
     public PlanarVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

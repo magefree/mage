@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class WayfarersBauble extends CardImpl {
+public final class WayfarersBauble extends CardImpl {
 
     public WayfarersBauble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

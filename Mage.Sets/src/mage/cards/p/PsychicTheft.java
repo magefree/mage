@@ -60,7 +60,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author L_J (significantly based on code by jeffwadsworth and Styxo)
  */
-public class PsychicTheft extends CardImpl {
+public final class PsychicTheft extends CardImpl {
 
     public PsychicTheft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");

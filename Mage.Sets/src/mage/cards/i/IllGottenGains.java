@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class IllGottenGains extends CardImpl {
+public final class IllGottenGains extends CardImpl {
 
     public IllGottenGains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

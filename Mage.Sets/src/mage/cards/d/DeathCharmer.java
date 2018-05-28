@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class DeathCharmer extends CardImpl {
+public final class DeathCharmer extends CardImpl {
 
     public DeathCharmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author MajorLazar
  */
-public class ApocalypseDemon extends CardImpl {
+public final class ApocalypseDemon extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 

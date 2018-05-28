@@ -53,7 +53,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author jeffwadsworth
  */
-public class DimirDoppelganger extends CardImpl {
+public final class DimirDoppelganger extends CardImpl {
 
     public DimirDoppelganger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

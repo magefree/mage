@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class VolcanicUpheaval extends CardImpl {
+public final class VolcanicUpheaval extends CardImpl {
 
     public VolcanicUpheaval(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");

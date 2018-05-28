@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class FyndhornElves extends CardImpl {
+public final class FyndhornElves extends CardImpl {
 
     public FyndhornElves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

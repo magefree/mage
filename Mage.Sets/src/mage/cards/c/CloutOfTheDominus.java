@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class CloutOfTheDominus extends CardImpl {
+public final class CloutOfTheDominus extends CardImpl {
 
     public CloutOfTheDominus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U/R}");

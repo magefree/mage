@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class MoonriseIntruder extends CardImpl {
+public final class MoonriseIntruder extends CardImpl {
 
     public MoonriseIntruder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

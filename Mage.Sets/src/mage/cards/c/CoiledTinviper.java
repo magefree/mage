@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CoiledTinviper extends CardImpl {
+public final class CoiledTinviper extends CardImpl {
 
     public CoiledTinviper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

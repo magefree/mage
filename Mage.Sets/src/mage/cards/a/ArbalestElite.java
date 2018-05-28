@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author nantuko
  */
-public class ArbalestElite extends CardImpl {
+public final class ArbalestElite extends CardImpl {
 
     public ArbalestElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

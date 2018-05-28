@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author noxx
 
  */
-public class Necrobite extends CardImpl {
+public final class Necrobite extends CardImpl {
 
     public Necrobite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");

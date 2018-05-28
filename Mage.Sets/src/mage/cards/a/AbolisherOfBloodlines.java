@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class AbolisherOfBloodlines extends CardImpl {
+public final class AbolisherOfBloodlines extends CardImpl {
 
     public AbolisherOfBloodlines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");

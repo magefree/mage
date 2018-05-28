@@ -54,7 +54,7 @@ import mage.watchers.Watcher;
  *
  * @author Quercitron
  */
-public class GeneratorServant extends CardImpl {
+public final class GeneratorServant extends CardImpl {
 
     public GeneratorServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

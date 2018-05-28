@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class MaelstromArchangel extends CardImpl {
+public final class MaelstromArchangel extends CardImpl {
 
     public MaelstromArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");

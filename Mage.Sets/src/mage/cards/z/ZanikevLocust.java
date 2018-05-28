@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ZanikevLocust extends CardImpl {
+public final class ZanikevLocust extends CardImpl {
 
     public ZanikevLocust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

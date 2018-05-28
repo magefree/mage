@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ForkInTheRoad extends CardImpl {
+public final class ForkInTheRoad extends CardImpl {
 
     public ForkInTheRoad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

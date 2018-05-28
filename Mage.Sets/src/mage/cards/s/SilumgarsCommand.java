@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SilumgarsCommand extends CardImpl {
+public final class SilumgarsCommand extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
     private static final FilterPermanent filter2 = new FilterPermanent("planeswalker");

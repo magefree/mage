@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class MineExcavation extends CardImpl {
+public final class MineExcavation extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact or enchantment card in a graveyard");
 

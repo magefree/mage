@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class FieryIntervention extends CardImpl {
+public final class FieryIntervention extends CardImpl {
 
     public FieryIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class WindDancer extends CardImpl {
+public final class WindDancer extends CardImpl {
 
     public WindDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

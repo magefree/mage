@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author cbt33
  */
-public class SavageFirecat extends CardImpl {
+public final class SavageFirecat extends CardImpl {
 
     public SavageFirecat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

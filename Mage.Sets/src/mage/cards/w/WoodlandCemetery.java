@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class WoodlandCemetery extends CardImpl {
+public final class WoodlandCemetery extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

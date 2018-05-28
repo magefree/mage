@@ -39,7 +39,7 @@ import mage.game.permanent.token.KnightToken;
  *
  * @author JRHerlehy
  */
-public class CallTheCavalry extends CardImpl {
+public final class CallTheCavalry extends CardImpl {
 
     public CallTheCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class ExhumerThrull extends CardImpl {
+public final class ExhumerThrull extends CardImpl {
 
     public ExhumerThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

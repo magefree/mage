@@ -47,7 +47,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class HyperionBlacksmith extends CardImpl {
+public final class HyperionBlacksmith extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact an opponent controls");
 

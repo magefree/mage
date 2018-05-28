@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author fireshoes
  */
-public class HollowSpecter extends CardImpl {
+public final class HollowSpecter extends CardImpl {
 
     public HollowSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

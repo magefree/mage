@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class PhyrexianMonitor extends CardImpl {
+public final class PhyrexianMonitor extends CardImpl {
 
     public PhyrexianMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

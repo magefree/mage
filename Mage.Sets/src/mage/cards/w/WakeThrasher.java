@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class WakeThrasher extends CardImpl {
+public final class WakeThrasher extends CardImpl {
 
     public WakeThrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

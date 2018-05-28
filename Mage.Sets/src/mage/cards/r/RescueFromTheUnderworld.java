@@ -79,7 +79,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RescueFromTheUnderworld extends CardImpl {
+public final class RescueFromTheUnderworld extends CardImpl {
 
     public RescueFromTheUnderworld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");

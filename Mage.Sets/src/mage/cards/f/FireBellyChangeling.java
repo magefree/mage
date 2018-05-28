@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author FenrisulfrX
  */
-public class FireBellyChangeling extends CardImpl {
+public final class FireBellyChangeling extends CardImpl {
 
     public FireBellyChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

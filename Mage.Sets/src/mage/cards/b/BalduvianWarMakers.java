@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class BalduvianWarMakers extends CardImpl {
+public final class BalduvianWarMakers extends CardImpl {
 
     public BalduvianWarMakers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

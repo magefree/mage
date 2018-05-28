@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author nantuko
  */
-public class UnburialRites extends CardImpl {
+public final class UnburialRites extends CardImpl {
 
     public UnburialRites(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");

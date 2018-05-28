@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class TalusPaladin extends CardImpl {
+public final class TalusPaladin extends CardImpl {
     
     public TalusPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

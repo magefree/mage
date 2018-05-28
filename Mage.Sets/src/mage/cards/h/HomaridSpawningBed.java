@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class HomaridSpawningBed extends CardImpl {
+public final class HomaridSpawningBed extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a blue creature");
 

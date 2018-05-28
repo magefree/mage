@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AzorsGateway extends CardImpl {
+public final class AzorsGateway extends CardImpl {
 
     public AzorsGateway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author FenrisulfrX
  */
-public class SawtoothLoon extends CardImpl {
+public final class SawtoothLoon extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white or blue creature you control");
 

@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class TombOfTheDuskRose extends CardImpl {
+public final class TombOfTheDuskRose extends CardImpl {
 
     public TombOfTheDuskRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

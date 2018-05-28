@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author emerald000
  */
-public class PerilousVault extends CardImpl {
+public final class PerilousVault extends CardImpl {
 
     public PerilousVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class BarbarianOutcast extends CardImpl {
+public final class BarbarianOutcast extends CardImpl {
     
     private static final FilterControlledLandPermanent filterControlledLand = new FilterControlledLandPermanent("a Swamp");
 

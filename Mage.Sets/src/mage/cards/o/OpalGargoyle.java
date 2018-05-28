@@ -51,7 +51,7 @@ import java.util.UUID;
  * @author LoneFox
  *
  */
-public class OpalGargoyle extends CardImpl {
+public final class OpalGargoyle extends CardImpl {
 
     public OpalGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

@@ -52,7 +52,7 @@ import java.util.UUID;
  * @author LoneFox
  *
  */
-public class OpalArchangel extends CardImpl {
+public final class OpalArchangel extends CardImpl {
 
     public OpalArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");

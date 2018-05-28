@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author Derpthemeus
  */
-public class SoothingBalm extends CardImpl {
+public final class SoothingBalm extends CardImpl {
 
     public SoothingBalm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

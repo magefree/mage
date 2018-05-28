@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PrizedUnicorn extends CardImpl {
+public final class PrizedUnicorn extends CardImpl {
 
     public PrizedUnicorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

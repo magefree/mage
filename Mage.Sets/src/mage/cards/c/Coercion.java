@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class Coercion extends CardImpl {
+public final class Coercion extends CardImpl {
 
     public Coercion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class FallenFerromancer extends CardImpl {
+public final class FallenFerromancer extends CardImpl {
 
     public FallenFerromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

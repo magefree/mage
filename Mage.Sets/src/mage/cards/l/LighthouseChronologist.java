@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com, noxx
  */
-public class LighthouseChronologist extends LevelerCard {
+public final class LighthouseChronologist extends LevelerCard {
 
     public LighthouseChronologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

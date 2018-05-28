@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class GeralfsMasterpiece extends CardImpl {
+public final class GeralfsMasterpiece extends CardImpl {
 
     public GeralfsMasterpiece(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

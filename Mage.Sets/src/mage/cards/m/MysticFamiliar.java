@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class MysticFamiliar extends CardImpl {
+public final class MysticFamiliar extends CardImpl {
 
     public MysticFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

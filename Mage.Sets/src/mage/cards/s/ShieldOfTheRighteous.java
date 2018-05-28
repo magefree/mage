@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class ShieldOfTheRighteous extends CardImpl {
+public final class ShieldOfTheRighteous extends CardImpl {
 
     public ShieldOfTheRighteous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W}{U}");

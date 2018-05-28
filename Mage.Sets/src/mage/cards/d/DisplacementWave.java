@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  * @author fireshoes
  */
 
-public class DisplacementWave extends CardImpl {
+public final class DisplacementWave extends CardImpl {
 
     public DisplacementWave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");

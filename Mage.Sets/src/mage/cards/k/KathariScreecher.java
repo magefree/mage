@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class KathariScreecher extends CardImpl {
+public final class KathariScreecher extends CardImpl {
 
     public KathariScreecher (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

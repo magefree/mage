@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class ConsulateDreadnought extends CardImpl {
+public final class ConsulateDreadnought extends CardImpl {
 
     public ConsulateDreadnought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

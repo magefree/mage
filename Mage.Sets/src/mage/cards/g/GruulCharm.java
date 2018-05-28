@@ -48,7 +48,7 @@ import mage.filter.predicate.other.OwnerPredicate;
  *
  * @author jeffwadsworth
  */
-public class GruulCharm extends CardImpl {
+public final class GruulCharm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
     private static final FilterPermanent filter2 = new FilterPermanent("all permanents you own");

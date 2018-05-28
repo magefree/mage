@@ -39,7 +39,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author Quercitron
  */
-public class RelentlessAssault extends CardImpl {
+public final class RelentlessAssault extends CardImpl {
 
     public RelentlessAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

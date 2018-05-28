@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class GrandPrix extends ExpansionSet {
+public final class GrandPrix extends ExpansionSet {
 
     private static final GrandPrix instance = new GrandPrix();
 

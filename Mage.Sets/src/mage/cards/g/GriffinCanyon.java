@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author anonymous
  */
-public class GriffinCanyon extends CardImpl {
+public final class GriffinCanyon extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent(SubType.GRIFFIN, "target Griffin");
             

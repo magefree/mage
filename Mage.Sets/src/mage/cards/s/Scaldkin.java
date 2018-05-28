@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Scaldkin extends CardImpl {
+public final class Scaldkin extends CardImpl {
 
     public Scaldkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RiteOfTheSerpent extends CardImpl {
+public final class RiteOfTheSerpent extends CardImpl {
 
     public RiteOfTheSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");

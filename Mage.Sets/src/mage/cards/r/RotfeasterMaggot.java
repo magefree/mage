@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class RotfeasterMaggot extends CardImpl {
+public final class RotfeasterMaggot extends CardImpl {
 
     public RotfeasterMaggot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

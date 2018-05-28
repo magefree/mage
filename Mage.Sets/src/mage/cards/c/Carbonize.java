@@ -42,7 +42,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author markedagain
  */
-public class Carbonize extends CardImpl {
+public final class Carbonize extends CardImpl {
 
     public Carbonize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

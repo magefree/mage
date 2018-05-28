@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author LevelX2
  */
-public class Grasslands extends CardImpl {
+public final class Grasslands extends CardImpl {
 
     public Grasslands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

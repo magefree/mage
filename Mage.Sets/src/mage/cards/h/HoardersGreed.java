@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HoardersGreed extends CardImpl {
+public final class HoardersGreed extends CardImpl {
 
     public HoardersGreed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

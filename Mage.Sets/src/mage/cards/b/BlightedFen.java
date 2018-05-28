@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class BlightedFen extends CardImpl {
+public final class BlightedFen extends CardImpl {
 
     public BlightedFen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

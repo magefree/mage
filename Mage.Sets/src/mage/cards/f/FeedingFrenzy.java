@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author openSrcCoder
  */
-public class FeedingFrenzy extends CardImpl {
+public final class FeedingFrenzy extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

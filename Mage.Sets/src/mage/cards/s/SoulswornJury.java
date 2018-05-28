@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author Wehk
  */
-public class SoulswornJury extends CardImpl {
+public final class SoulswornJury extends CardImpl {
 
     public SoulswornJury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

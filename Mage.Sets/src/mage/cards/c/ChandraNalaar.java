@@ -53,7 +53,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author BetaSteward_at_googlemail.com, nantuko
  */
-public class ChandraNalaar extends CardImpl {
+public final class ChandraNalaar extends CardImpl {
 
     public ChandraNalaar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");

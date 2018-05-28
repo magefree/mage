@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class Overgrowth extends CardImpl {
+public final class Overgrowth extends CardImpl {
 
     public Overgrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

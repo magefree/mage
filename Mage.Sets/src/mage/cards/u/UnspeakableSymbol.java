@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class UnspeakableSymbol extends CardImpl {
+public final class UnspeakableSymbol extends CardImpl {
 
     public UnspeakableSymbol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  *
  * @author fireshoes
  */
-public class BygoneBishop extends CardImpl {
+public final class BygoneBishop extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with converted mana cost 3 or less");
 

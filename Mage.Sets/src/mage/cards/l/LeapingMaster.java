@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class LeapingMaster extends CardImpl {
+public final class LeapingMaster extends CardImpl {
 
     public LeapingMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

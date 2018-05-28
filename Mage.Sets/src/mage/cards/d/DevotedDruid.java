@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class DevotedDruid extends CardImpl {
+public final class DevotedDruid extends CardImpl {
 
     public DevotedDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

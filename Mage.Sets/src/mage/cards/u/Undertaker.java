@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author shieldal
  */
-public class Undertaker extends CardImpl {
+public final class Undertaker extends CardImpl {
 
     public Undertaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

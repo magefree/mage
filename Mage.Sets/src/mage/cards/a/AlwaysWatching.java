@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author fireshoes
  */
-public class AlwaysWatching extends CardImpl {
+public final class AlwaysWatching extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 

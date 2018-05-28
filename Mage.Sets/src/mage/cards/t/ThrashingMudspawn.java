@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class ThrashingMudspawn extends CardImpl {
+public final class ThrashingMudspawn extends CardImpl {
 
     public ThrashingMudspawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

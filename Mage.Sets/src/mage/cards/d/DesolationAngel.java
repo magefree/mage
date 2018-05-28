@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 /**
  * @author Loki
  */
-public class DesolationAngel extends CardImpl {
+public final class DesolationAngel extends CardImpl {
 
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("lands you control");
 

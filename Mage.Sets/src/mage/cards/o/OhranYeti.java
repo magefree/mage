@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class OhranYeti extends CardImpl {
+public final class OhranYeti extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("snow creature");
 

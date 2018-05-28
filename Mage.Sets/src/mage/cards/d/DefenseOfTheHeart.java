@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class DefenseOfTheHeart extends CardImpl {
+public final class DefenseOfTheHeart extends CardImpl {
 
     public DefenseOfTheHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

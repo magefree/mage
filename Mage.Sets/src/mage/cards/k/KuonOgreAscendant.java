@@ -52,7 +52,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  *
  * @author LevelX2
  */
-public class KuonOgreAscendant extends CardImpl {
+public final class KuonOgreAscendant extends CardImpl {
 
     public KuonOgreAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");

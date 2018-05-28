@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class GreaterGargadon extends CardImpl {
+public final class GreaterGargadon extends CardImpl {
 
     public GreaterGargadon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{9}{R}");

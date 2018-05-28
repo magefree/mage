@@ -39,7 +39,7 @@ import mage.game.permanent.token.BeastToken2;
  *
  * @author Plopman
  */
-public class HuntingPack extends CardImpl {
+public final class HuntingPack extends CardImpl {
 
     public HuntingPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{G}{G}");

@@ -53,7 +53,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class WoollyRazorback extends CardImpl {
+public final class WoollyRazorback extends CardImpl {
 
     public WoollyRazorback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class DestructorDragon extends CardImpl {
+public final class DestructorDragon extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
     static {

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author L_J
  */
-public class EndbringersRevel extends CardImpl {
+public final class EndbringersRevel extends CardImpl {
 
     public EndbringersRevel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

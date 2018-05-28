@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class ViashinoGrappler extends CardImpl {
+public final class ViashinoGrappler extends CardImpl {
 
     public ViashinoGrappler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

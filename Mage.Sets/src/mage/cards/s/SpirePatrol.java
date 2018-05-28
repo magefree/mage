@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class SpirePatrol extends CardImpl {
+public final class SpirePatrol extends CardImpl {
 
     public SpirePatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

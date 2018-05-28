@@ -38,7 +38,7 @@ import mage.constants.SetType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Zendikar extends ExpansionSet {
+public final class Zendikar extends ExpansionSet {
 
     private static final Zendikar instance = new Zendikar();
 

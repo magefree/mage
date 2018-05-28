@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Galatolol
  */
-public class Heartseeker extends CardImpl {
+public final class Heartseeker extends CardImpl {
 
     public Heartseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

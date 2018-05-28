@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class DemonicConsultation extends CardImpl {
+public final class DemonicConsultation extends CardImpl {
 
     public DemonicConsultation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

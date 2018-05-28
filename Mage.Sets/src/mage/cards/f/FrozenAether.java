@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class FrozenAether extends CardImpl {
+public final class FrozenAether extends CardImpl {
 
     public FrozenAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

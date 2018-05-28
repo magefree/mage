@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class TreeOfRedemption extends CardImpl {
+public final class TreeOfRedemption extends CardImpl {
 
     public TreeOfRedemption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class Statecraft extends CardImpl {
+public final class Statecraft extends CardImpl {
 
     public Statecraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author jeffwadsworth
  */
-public class ForkedBolt extends CardImpl {
+public final class ForkedBolt extends CardImpl {
 
     public ForkedBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

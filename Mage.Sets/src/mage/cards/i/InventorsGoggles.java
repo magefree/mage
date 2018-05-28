@@ -43,7 +43,7 @@ import mage.filter.FilterPermanent;
  *
  * @author emerald000
  */
-public class InventorsGoggles extends CardImpl {
+public final class InventorsGoggles extends CardImpl {
 
     public InventorsGoggles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

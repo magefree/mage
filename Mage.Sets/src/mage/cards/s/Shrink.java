@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author choiseul11
  */
-public class Shrink extends CardImpl {
+public final class Shrink extends CardImpl {
 
     public Shrink(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Simown
  */
-public class SamitePilgrim extends CardImpl {
+public final class SamitePilgrim extends CardImpl {
 
     public SamitePilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

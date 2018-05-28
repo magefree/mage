@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author spjspj
  */
-public class RaziasPurification extends CardImpl {
+public final class RaziasPurification extends CardImpl {
 
     public RaziasPurification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{W}");

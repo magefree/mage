@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SatyrFiredancer extends CardImpl {
+public final class SatyrFiredancer extends CardImpl {
 
     public SatyrFiredancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{R}");

@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class Burnout extends CardImpl {
+public final class Burnout extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant spell");
 

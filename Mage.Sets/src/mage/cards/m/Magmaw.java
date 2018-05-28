@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class Magmaw extends CardImpl {
+public final class Magmaw extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
 

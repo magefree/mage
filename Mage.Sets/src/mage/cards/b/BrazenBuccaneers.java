@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class BrazenBuccaneers extends CardImpl {
+public final class BrazenBuccaneers extends CardImpl {
 
     public BrazenBuccaneers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

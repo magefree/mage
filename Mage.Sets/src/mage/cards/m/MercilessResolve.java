@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class MercilessResolve extends CardImpl {
+public final class MercilessResolve extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or land");
 

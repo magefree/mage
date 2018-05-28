@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class TraumaticVisions extends CardImpl {
+public final class TraumaticVisions extends CardImpl {
 
     public TraumaticVisions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");

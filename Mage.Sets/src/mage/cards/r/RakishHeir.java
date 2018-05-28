@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class RakishHeir extends CardImpl {
+public final class RakishHeir extends CardImpl {
 
     public RakishHeir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

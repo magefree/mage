@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AlmsCollector extends CardImpl {
+public final class AlmsCollector extends CardImpl {
 
     public AlmsCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

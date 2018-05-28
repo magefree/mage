@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class GiantBaitingGiantWarriorToken extends TokenImpl {
+public final class GiantBaitingGiantWarriorToken extends TokenImpl {
 
     public GiantBaitingGiantWarriorToken() {
         super("Giant Warrior", "4/4 red and green Giant Warrior creature token with haste");

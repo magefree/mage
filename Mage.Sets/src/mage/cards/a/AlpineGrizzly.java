@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class AlpineGrizzly extends CardImpl {
+public final class AlpineGrizzly extends CardImpl {
 
     public AlpineGrizzly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

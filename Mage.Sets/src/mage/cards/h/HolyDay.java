@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class HolyDay extends CardImpl {
+public final class HolyDay extends CardImpl {
 
     public HolyDay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

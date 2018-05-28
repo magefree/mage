@@ -44,7 +44,7 @@ import mage.target.TargetCard;
  *
  * @author fireshoes
  */
-public class DeployTheGatewatch extends CardImpl {
+public final class DeployTheGatewatch extends CardImpl {
 
     public DeployTheGatewatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");

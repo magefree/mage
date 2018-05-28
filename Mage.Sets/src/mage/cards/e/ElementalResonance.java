@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class ElementalResonance extends CardImpl {
+public final class ElementalResonance extends CardImpl {
 
     public ElementalResonance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

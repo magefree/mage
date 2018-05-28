@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author LoneFox
  */
-public class Gravegouger extends CardImpl {
+public final class Gravegouger extends CardImpl {
 
     public Gravegouger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

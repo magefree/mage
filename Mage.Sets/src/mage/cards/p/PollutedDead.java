@@ -42,7 +42,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author noxx
  */
-public class PollutedDead extends CardImpl {
+public final class PollutedDead extends CardImpl {
 
     public PollutedDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

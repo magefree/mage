@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class AttuneWithAether extends CardImpl {
+public final class AttuneWithAether extends CardImpl {
 
     public AttuneWithAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

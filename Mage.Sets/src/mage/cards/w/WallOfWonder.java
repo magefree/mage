@@ -47,7 +47,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class WallOfWonder extends CardImpl {
+public final class WallOfWonder extends CardImpl {
 
     public WallOfWonder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

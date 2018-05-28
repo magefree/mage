@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class GhostsOfTheInnocent extends CardImpl {
+public final class GhostsOfTheInnocent extends CardImpl {
 
     public GhostsOfTheInnocent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

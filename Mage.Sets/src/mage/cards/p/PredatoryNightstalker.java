@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class PredatoryNightstalker extends CardImpl {
+public final class PredatoryNightstalker extends CardImpl {
 
     public PredatoryNightstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

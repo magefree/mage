@@ -54,7 +54,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author LevelX2
  */
-public class BenalishCommander extends CardImpl {
+public final class BenalishCommander extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Soldiers you control");
 

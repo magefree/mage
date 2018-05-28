@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class Censor extends CardImpl {
+public final class Censor extends CardImpl {
 
     public Censor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ColossalWhale extends CardImpl {
+public final class ColossalWhale extends CardImpl {
 
     public ColossalWhale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

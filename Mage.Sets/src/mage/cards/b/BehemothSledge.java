@@ -44,7 +44,7 @@ import mage.constants.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BehemothSledge extends CardImpl {
+public final class BehemothSledge extends CardImpl {
 
     public BehemothSledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");

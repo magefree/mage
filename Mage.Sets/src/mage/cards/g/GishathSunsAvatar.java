@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author TheElk801
  */
-public class GishathSunsAvatar extends CardImpl {
+public final class GishathSunsAvatar extends CardImpl {
 
     public GishathSunsAvatar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}{W}");

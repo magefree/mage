@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class NemaSiltlurker extends CardImpl {
+public final class NemaSiltlurker extends CardImpl {
 
     public NemaSiltlurker (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

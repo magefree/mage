@@ -39,7 +39,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author LevelX2
  */
-public class CoastalBreach extends CardImpl {
+public final class CoastalBreach extends CardImpl {
 
     public CoastalBreach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{U}");

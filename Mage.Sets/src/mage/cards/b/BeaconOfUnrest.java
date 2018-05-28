@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Loki
  */
-public class BeaconOfUnrest extends CardImpl {
+public final class BeaconOfUnrest extends CardImpl {
     private static final FilterCard filter = new FilterCard("artifact or creature card from a graveyard");
 
     static {

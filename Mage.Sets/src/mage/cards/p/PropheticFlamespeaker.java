@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PropheticFlamespeaker extends CardImpl {
+public final class PropheticFlamespeaker extends CardImpl {
 
     public PropheticFlamespeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

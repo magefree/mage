@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class ThresherBeast extends CardImpl {
+public final class ThresherBeast extends CardImpl {
 
     public ThresherBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

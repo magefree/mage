@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author L_J
  */
-public class SulfuricVapors extends CardImpl {
+public final class SulfuricVapors extends CardImpl {
 
     public SulfuricVapors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

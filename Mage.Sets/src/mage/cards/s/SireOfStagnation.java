@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class SireOfStagnation extends CardImpl {
+public final class SireOfStagnation extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     private static final String rule = "Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.";

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class PhyrexianJuggernaut extends CardImpl {
+public final class PhyrexianJuggernaut extends CardImpl {
 
     public PhyrexianJuggernaut (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

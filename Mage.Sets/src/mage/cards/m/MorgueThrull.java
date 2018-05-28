@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MorgueThrull extends CardImpl {
+public final class MorgueThrull extends CardImpl {
 
     public MorgueThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

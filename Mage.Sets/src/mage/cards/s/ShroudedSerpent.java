@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author L_J
  */
-public class ShroudedSerpent extends CardImpl {
+public final class ShroudedSerpent extends CardImpl {
 
     public ShroudedSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}{U}");

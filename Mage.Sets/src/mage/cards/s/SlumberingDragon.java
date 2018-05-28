@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class SlumberingDragon extends CardImpl {
+public final class SlumberingDragon extends CardImpl {
 
     public SlumberingDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

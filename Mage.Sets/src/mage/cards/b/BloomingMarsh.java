@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class BloomingMarsh extends CardImpl {
+public final class BloomingMarsh extends CardImpl {
 
     public BloomingMarsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

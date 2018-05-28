@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class MalakirFamiliar extends CardImpl {
+public final class MalakirFamiliar extends CardImpl {
 
     public MalakirFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

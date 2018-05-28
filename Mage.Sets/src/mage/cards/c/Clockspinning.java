@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class Clockspinning extends CardImpl {
+public final class Clockspinning extends CardImpl {
 
     public Clockspinning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class Stratozeppelid extends CardImpl {
+public final class Stratozeppelid extends CardImpl {
 
     public Stratozeppelid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

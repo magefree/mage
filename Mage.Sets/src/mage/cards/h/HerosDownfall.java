@@ -38,7 +38,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class HerosDownfall extends CardImpl {
+public final class HerosDownfall extends CardImpl {
 
     public HerosDownfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");

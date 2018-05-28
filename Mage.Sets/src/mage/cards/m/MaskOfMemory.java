@@ -45,7 +45,7 @@ import mage.constants.Outcome;
  *
  * @author Quercitron
  */
-public class MaskOfMemory extends CardImpl {
+public final class MaskOfMemory extends CardImpl {
 
     public MaskOfMemory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

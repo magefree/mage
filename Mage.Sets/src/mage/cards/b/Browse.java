@@ -45,7 +45,7 @@ import mage.target.TargetCard;
  *
  * @author Quercitron
  */
-public class Browse extends CardImpl {
+public final class Browse extends CardImpl {
 
     public Browse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

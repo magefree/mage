@@ -69,7 +69,7 @@ import mage.watchers.Watcher;
  *
  * @author L_J
  */
-public class VodalianWarMachine extends CardImpl {
+public final class VodalianWarMachine extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolk you control");
 

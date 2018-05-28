@@ -43,7 +43,7 @@ import mage.filter.predicate.other.OwnerPredicate;
  *
  * @author fenhl
  */
-public class Brand extends CardImpl {
+public final class Brand extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("all permanents you own");
 

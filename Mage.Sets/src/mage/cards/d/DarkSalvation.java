@@ -53,7 +53,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class DarkSalvation extends CardImpl {
+public final class DarkSalvation extends CardImpl {
 
     public DarkSalvation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{B}");

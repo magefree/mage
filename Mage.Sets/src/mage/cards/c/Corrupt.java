@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Corrupt extends CardImpl {
+public final class Corrupt extends CardImpl {
 
     public Corrupt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");

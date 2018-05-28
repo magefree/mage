@@ -40,7 +40,7 @@ import mage.constants.CardType;
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public final class GerrardsWisdom extends CardImpl {
 
     public GerrardsWisdom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");

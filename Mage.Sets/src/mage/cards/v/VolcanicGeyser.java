@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class VolcanicGeyser extends CardImpl {
+public final class VolcanicGeyser extends CardImpl {
 
     public VolcanicGeyser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");

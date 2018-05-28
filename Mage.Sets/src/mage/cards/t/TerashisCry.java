@@ -44,7 +44,7 @@ import java.util.UUID;
  * @author LevelX
  */
 
-public class TerashisCry extends CardImpl {
+public final class TerashisCry extends CardImpl {
 
     public TerashisCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

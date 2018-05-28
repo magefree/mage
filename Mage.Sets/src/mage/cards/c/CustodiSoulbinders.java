@@ -51,7 +51,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author emerald000
  */
-public class CustodiSoulbinders extends CardImpl {
+public final class CustodiSoulbinders extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
     static {

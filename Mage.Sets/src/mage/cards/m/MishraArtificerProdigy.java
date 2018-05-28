@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class MishraArtificerProdigy extends CardImpl {
+public final class MishraArtificerProdigy extends CardImpl {
 
     public MishraArtificerProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");

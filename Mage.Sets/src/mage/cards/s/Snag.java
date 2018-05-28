@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author TheElk801
  */
-public class Snag extends CardImpl {
+public final class Snag extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Forest card");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("unblocked creatures");

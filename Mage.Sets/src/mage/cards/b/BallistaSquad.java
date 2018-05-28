@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Backfir3
  */
-public class BallistaSquad extends CardImpl {
+public final class BallistaSquad extends CardImpl {
 
     public BallistaSquad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

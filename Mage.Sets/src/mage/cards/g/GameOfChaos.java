@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class GameOfChaos extends CardImpl {
+public final class GameOfChaos extends CardImpl {
 
     public GameOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}{R}");

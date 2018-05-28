@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class VanquishTheWeak extends CardImpl {
+public final class VanquishTheWeak extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
 

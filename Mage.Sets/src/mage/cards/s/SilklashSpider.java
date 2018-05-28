@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author North
  */
-public class SilklashSpider extends CardImpl {
+public final class SilklashSpider extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

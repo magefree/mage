@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class AphettoExterminator extends CardImpl {
+public final class AphettoExterminator extends CardImpl {
 
     public AphettoExterminator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

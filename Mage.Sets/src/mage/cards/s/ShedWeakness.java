@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author stravant
  */
-public class ShedWeakness extends CardImpl {
+public final class ShedWeakness extends CardImpl {
 
     public ShedWeakness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

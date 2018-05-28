@@ -55,7 +55,7 @@ import mage.game.permanent.token.EdgarMarkovToken;
  *
  * @author TheElk801
  */
-public class EdgarMarkov extends CardImpl {
+public final class EdgarMarkov extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Vampire you control");
     private static final FilterSpell filter2 = new FilterSpell("another Vampire spell");//"another" is just there for templating, doesn't affect the card itself

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class ChoArrimBruiser extends CardImpl {
+public final class ChoArrimBruiser extends CardImpl {
 
     public ChoArrimBruiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

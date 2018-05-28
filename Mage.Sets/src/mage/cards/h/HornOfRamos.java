@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Jgod
  */
-public class HornOfRamos extends CardImpl {
+public final class HornOfRamos extends CardImpl {
 
     public HornOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

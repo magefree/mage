@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CoalitionFlag extends CardImpl {
+public final class CoalitionFlag extends CardImpl {
 
     public CoalitionFlag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

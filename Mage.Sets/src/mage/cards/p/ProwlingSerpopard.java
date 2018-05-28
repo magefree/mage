@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class ProwlingSerpopard extends CardImpl {
+public final class ProwlingSerpopard extends CardImpl {
 
     private static final FilterSpell filterTarget = new FilterSpell("Creature spells you control");
 

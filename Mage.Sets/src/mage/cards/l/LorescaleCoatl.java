@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class LorescaleCoatl extends CardImpl {
+public final class LorescaleCoatl extends CardImpl {
 
     public LorescaleCoatl (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");

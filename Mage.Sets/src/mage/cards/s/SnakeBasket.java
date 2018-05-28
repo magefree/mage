@@ -45,7 +45,7 @@ import mage.game.permanent.token.SnakeToken;
  *
  * @author Quercitron
  */
-public class SnakeBasket extends CardImpl {
+public final class SnakeBasket extends CardImpl {
 
     public SnakeBasket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

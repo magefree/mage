@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Preordain extends CardImpl {
+public final class Preordain extends CardImpl {
 
     public Preordain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");

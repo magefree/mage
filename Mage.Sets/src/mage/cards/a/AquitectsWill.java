@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author ilcartographer
  */
-public class AquitectsWill extends CardImpl {
+public final class AquitectsWill extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
 

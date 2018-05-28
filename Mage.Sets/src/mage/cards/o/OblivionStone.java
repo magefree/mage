@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class OblivionStone extends CardImpl {
+public final class OblivionStone extends CardImpl {
 
     public OblivionStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

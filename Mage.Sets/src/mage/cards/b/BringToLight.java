@@ -52,7 +52,7 @@ import org.apache.log4j.Logger;
  *
  * @author LevelX2
  */
-public class BringToLight extends CardImpl {
+public final class BringToLight extends CardImpl {
 
     public BringToLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");

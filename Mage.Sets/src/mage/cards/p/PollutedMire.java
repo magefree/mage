@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Backfir3
  */
-public class PollutedMire extends CardImpl {
+public final class PollutedMire extends CardImpl {
 
     public PollutedMire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

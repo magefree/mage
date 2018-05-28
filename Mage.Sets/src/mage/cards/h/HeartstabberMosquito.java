@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class HeartstabberMosquito extends CardImpl {
+public final class HeartstabberMosquito extends CardImpl {
 
     public HeartstabberMosquito(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

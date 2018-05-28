@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author nantuko
  */
-public class RunechantersPike extends CardImpl {
+public final class RunechantersPike extends CardImpl {
 
     protected static final FilterCard filterCard = new FilterCard();
 

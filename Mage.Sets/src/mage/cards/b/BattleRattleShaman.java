@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class BattleRattleShaman extends CardImpl {
+public final class BattleRattleShaman extends CardImpl {
 
     public BattleRattleShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

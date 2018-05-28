@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SilverclawGriffin extends CardImpl {
+public final class SilverclawGriffin extends CardImpl {
 
     public SilverclawGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

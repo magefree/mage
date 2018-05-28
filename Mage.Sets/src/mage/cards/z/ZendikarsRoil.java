@@ -41,7 +41,7 @@ import mage.game.permanent.token.ZendikarsRoilElementalToken;
  *
  * @author LevelX2
  */
-public class ZendikarsRoil extends CardImpl {
+public final class ZendikarsRoil extends CardImpl {
 
     public ZendikarsRoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");

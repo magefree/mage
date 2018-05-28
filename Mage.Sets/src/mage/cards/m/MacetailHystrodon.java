@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MacetailHystrodon extends CardImpl {
+public final class MacetailHystrodon extends CardImpl {
 
     public MacetailHystrodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");

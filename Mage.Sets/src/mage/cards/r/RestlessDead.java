@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class RestlessDead extends CardImpl {
+public final class RestlessDead extends CardImpl {
 
     public RestlessDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

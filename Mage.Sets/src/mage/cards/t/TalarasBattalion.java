@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class TalarasBattalion extends CardImpl {
+public final class TalarasBattalion extends CardImpl {
 
     public TalarasBattalion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

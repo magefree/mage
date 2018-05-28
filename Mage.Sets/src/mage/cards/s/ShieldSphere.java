@@ -42,7 +42,7 @@ import mage.counters.BoostCounter;
  *
  * @author dustinconrad
  */
-public class ShieldSphere extends CardImpl {
+public final class ShieldSphere extends CardImpl {
 
     public ShieldSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{0}");

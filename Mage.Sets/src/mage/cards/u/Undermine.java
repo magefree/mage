@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Undermine extends CardImpl {
+public final class Undermine extends CardImpl {
 
     public Undermine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}{B}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author ayratn
  */
-public class DivineOffering extends CardImpl {
+public final class DivineOffering extends CardImpl {
 
     public DivineOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

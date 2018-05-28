@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class ShaleskinPlower extends CardImpl {
+public final class ShaleskinPlower extends CardImpl {
 
     public ShaleskinPlower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

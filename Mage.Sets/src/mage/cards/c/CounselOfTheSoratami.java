@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class CounselOfTheSoratami extends CardImpl {
+public final class CounselOfTheSoratami extends CardImpl {
 
     public CounselOfTheSoratami (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

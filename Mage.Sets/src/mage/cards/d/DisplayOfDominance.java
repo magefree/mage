@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class DisplayOfDominance extends CardImpl {
+public final class DisplayOfDominance extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("blue or black noncreature permanent");
 

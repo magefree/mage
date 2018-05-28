@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class GiftOfEstates extends CardImpl {
+public final class GiftOfEstates extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Plains cards");
     

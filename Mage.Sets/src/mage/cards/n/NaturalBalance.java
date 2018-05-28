@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author Rene - bugisemail at gmail dot com
  */
-public class NaturalBalance extends CardImpl {
+public final class NaturalBalance extends CardImpl {
 
     public NaturalBalance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");

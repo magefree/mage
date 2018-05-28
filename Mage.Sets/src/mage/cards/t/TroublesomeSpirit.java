@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author LoneFox
  */
-public class TroublesomeSpirit extends CardImpl {
+public final class TroublesomeSpirit extends CardImpl {
 
     public TroublesomeSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
  *
  * @author spjspj
  */
-public class KillSwitch extends CardImpl {
+public final class KillSwitch extends CardImpl {
 
     
     //static {

@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class StensiaBanquet extends CardImpl {
+public final class StensiaBanquet extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Vampires you control");
 

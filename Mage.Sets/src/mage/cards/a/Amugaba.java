@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class Amugaba extends CardImpl {
+public final class Amugaba extends CardImpl {
 
     public Amugaba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

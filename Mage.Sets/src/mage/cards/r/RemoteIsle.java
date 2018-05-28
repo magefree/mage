@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Backfir3
  */
-public class RemoteIsle extends CardImpl {
+public final class RemoteIsle extends CardImpl {
 
     public RemoteIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

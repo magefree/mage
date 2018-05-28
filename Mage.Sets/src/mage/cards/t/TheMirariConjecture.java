@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class TheMirariConjecture extends CardImpl {
+public final class TheMirariConjecture extends CardImpl {
 
     private static final FilterCard filterInstantCard = new FilterCard("instant card from your graveyard");
     private static final FilterCard filterSorceryCard = new FilterCard("sorcery card from your graveyard");

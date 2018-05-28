@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class SightOfTheScalelords extends CardImpl {
+public final class SightOfTheScalelords extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control with toughness 4 or greater");
 

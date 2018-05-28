@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class PrimalSurge extends CardImpl {
+public final class PrimalSurge extends CardImpl {
 
     public PrimalSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{G}{G}");

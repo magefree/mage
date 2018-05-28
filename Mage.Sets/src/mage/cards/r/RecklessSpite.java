@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RecklessSpite extends CardImpl {
+public final class RecklessSpite extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creatures");
 

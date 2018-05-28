@@ -41,7 +41,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class IhsansShade extends CardImpl {
+public final class IhsansShade extends CardImpl {
 
     public IhsansShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");

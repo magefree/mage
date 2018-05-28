@@ -40,7 +40,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class PunishTheEnemy extends CardImpl {
+public final class PunishTheEnemy extends CardImpl {
 
     public PunishTheEnemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");

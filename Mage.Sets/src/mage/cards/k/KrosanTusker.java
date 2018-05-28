@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class KrosanTusker extends CardImpl {
+public final class KrosanTusker extends CardImpl {
 
     public KrosanTusker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

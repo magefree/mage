@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class OrcishSquatters extends CardImpl {
+public final class OrcishSquatters extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land defending player controls");
 

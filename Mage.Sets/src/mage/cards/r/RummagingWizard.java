@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Wehk
  */
-public class RummagingWizard extends CardImpl {
+public final class RummagingWizard extends CardImpl {
 
     public RummagingWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class ChandrasRevolution extends CardImpl {
+public final class ChandrasRevolution extends CardImpl {
 
     public ChandrasRevolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

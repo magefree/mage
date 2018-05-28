@@ -55,7 +55,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jerekwilson
  */
-public class TalonOfPain extends CardImpl {
+public final class TalonOfPain extends CardImpl {
 
     public TalonOfPain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

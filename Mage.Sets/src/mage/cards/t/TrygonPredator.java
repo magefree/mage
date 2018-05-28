@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TrygonPredator extends CardImpl {
+public final class TrygonPredator extends CardImpl {
 
     public TrygonPredator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");

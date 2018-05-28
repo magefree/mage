@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ZhugeJinWuStrategist extends CardImpl {
+public final class ZhugeJinWuStrategist extends CardImpl {
 
     public ZhugeJinWuStrategist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

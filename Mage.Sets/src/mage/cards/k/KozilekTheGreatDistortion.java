@@ -64,7 +64,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class KozilekTheGreatDistortion extends CardImpl {
+public final class KozilekTheGreatDistortion extends CardImpl {
 
     public KozilekTheGreatDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{C}{C}");

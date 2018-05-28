@@ -54,7 +54,7 @@ import mage.util.GameLog;
  *
  * @author LevelX2
  */
-public class SteamAugury extends CardImpl {
+public final class SteamAugury extends CardImpl {
 
     public SteamAugury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");

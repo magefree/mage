@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WretchedConfluence extends CardImpl {
+public final class WretchedConfluence extends CardImpl {
 
     public WretchedConfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");

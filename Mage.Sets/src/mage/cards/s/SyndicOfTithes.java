@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SyndicOfTithes extends CardImpl {
+public final class SyndicOfTithes extends CardImpl {
 
     public SyndicOfTithes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

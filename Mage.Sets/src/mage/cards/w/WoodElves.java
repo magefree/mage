@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class WoodElves extends CardImpl {
+public final class WoodElves extends CardImpl {
     
     private static final FilterLandCard filter = new FilterLandCard("Forest card");
     static{

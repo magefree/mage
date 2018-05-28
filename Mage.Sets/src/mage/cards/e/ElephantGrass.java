@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Plopman
  */
-public class ElephantGrass extends CardImpl {
+public final class ElephantGrass extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonblack creatures");
     private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("Black creatures");

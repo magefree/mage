@@ -46,7 +46,7 @@ import mage.game.permanent.token.KelpToken;
  *
  * @author fireshoes
  */
-public class WallOfKelp extends CardImpl {
+public final class WallOfKelp extends CardImpl {
 
     public WallOfKelp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");

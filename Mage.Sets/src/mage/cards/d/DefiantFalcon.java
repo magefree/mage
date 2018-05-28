@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class DefiantFalcon extends CardImpl {
+public final class DefiantFalcon extends CardImpl {
     
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 3 or less");
     

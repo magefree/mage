@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SkithiryxTheBlightDragon extends CardImpl {
+public final class SkithiryxTheBlightDragon extends CardImpl {
 
     public SkithiryxTheBlightDragon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

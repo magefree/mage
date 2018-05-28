@@ -51,7 +51,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class SpurnmageAdvocate extends CardImpl {
+public final class SpurnmageAdvocate extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("two target cards from an opponent's graveyard");
 

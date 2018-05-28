@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class Deadapult extends CardImpl {
+public final class Deadapult extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Zombie");
 

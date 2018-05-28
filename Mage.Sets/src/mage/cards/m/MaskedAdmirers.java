@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class MaskedAdmirers extends CardImpl {
+public final class MaskedAdmirers extends CardImpl {
 
     public MaskedAdmirers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

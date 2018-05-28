@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class LochKorrigan extends CardImpl {
+public final class LochKorrigan extends CardImpl {
 
     public LochKorrigan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

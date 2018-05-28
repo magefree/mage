@@ -48,7 +48,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author jeffwadsworth
  */
-public class DreamThief extends CardImpl {
+public final class DreamThief extends CardImpl {
 
     private static final String rule = "draw a card if you've cast another blue spell this turn";
 

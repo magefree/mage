@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class BorosReckoner extends CardImpl {
+public final class BorosReckoner extends CardImpl {
 
     public BorosReckoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}");

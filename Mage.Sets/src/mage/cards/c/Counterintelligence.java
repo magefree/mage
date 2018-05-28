@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Counterintelligence extends CardImpl {
+public final class Counterintelligence extends CardImpl {
 
     public Counterintelligence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");

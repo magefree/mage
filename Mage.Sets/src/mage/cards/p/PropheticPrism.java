@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class PropheticPrism extends CardImpl {
+public final class PropheticPrism extends CardImpl {
 
     public PropheticPrism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

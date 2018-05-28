@@ -42,7 +42,7 @@ import mage.filter.FilterPermanent;
  *
  * @author Loki
  */
-public class AkkiUnderminer extends CardImpl {
+public final class AkkiUnderminer extends CardImpl {
 
     public AkkiUnderminer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author caldover
  */
-public class AncientBrontodon extends CardImpl {
+public final class AncientBrontodon extends CardImpl {
 
     public AncientBrontodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

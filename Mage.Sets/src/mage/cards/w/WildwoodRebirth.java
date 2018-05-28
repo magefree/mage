@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Plopman
  */
-public class WildwoodRebirth extends CardImpl {
+public final class WildwoodRebirth extends CardImpl {
 
     public WildwoodRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

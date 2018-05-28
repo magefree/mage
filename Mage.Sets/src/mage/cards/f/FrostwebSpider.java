@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class FrostwebSpider extends CardImpl {
+public final class FrostwebSpider extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

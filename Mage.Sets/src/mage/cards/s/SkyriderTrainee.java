@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class SkyriderTrainee extends CardImpl {
+public final class SkyriderTrainee extends CardImpl {
 
     public SkyriderTrainee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

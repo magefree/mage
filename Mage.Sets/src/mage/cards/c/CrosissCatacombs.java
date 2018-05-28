@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class CrosissCatacombs extends CardImpl {
+public final class CrosissCatacombs extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("non-Lair land");
     static{

@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class ElvishBard extends CardImpl {
+public final class ElvishBard extends CardImpl {
 
     public ElvishBard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

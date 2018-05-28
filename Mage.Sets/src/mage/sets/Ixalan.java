@@ -13,7 +13,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class Ixalan extends ExpansionSet {
+public final class Ixalan extends ExpansionSet {
 
     private static final Ixalan instance = new Ixalan();
 

@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author noxx
  */
-public class AbundantGrowth extends CardImpl {
+public final class AbundantGrowth extends CardImpl {
 
     public AbundantGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

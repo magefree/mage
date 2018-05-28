@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class GurmagSwiftwing extends CardImpl {
+public final class GurmagSwiftwing extends CardImpl {
 
     public GurmagSwiftwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class Attunement extends CardImpl {
+public final class Attunement extends CardImpl {
 
     public Attunement(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

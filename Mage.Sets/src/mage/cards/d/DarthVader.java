@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class DarthVader extends CardImpl {
+public final class DarthVader extends CardImpl {
 
     public DarthVader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");

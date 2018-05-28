@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author North
  */
-public class ScattershotArcher extends CardImpl {
+public final class ScattershotArcher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

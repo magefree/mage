@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class BubblingCauldron extends CardImpl {
+public final class BubblingCauldron extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature named Festering Newt");
 

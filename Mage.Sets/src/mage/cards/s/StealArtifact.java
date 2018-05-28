@@ -46,7 +46,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Plopman
  */
-public class StealArtifact extends CardImpl {
+public final class StealArtifact extends CardImpl {
 
     public StealArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class AlleyStrangler extends CardImpl {
+public final class AlleyStrangler extends CardImpl {
 
     public AlleyStrangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

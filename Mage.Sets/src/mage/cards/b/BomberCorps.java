@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class BomberCorps extends CardImpl {
+public final class BomberCorps extends CardImpl {
 
     public BomberCorps(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class MysticCrusader extends CardImpl {
+public final class MysticCrusader extends CardImpl {
 
     public MysticCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

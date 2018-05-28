@@ -57,7 +57,7 @@ import mage.target.TargetPlayer;
  *
  * @author spjspj
  */
-public class FruitcakeElemental extends CardImpl {
+public final class FruitcakeElemental extends CardImpl {
 
     public FruitcakeElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

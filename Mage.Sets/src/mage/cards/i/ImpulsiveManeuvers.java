@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author L_J
  */
-public class ImpulsiveManeuvers extends CardImpl {
+public final class ImpulsiveManeuvers extends CardImpl {
 
     public ImpulsiveManeuvers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");

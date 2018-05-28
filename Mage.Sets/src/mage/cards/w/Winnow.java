@@ -45,7 +45,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LoneFox
  */
-public class Winnow extends CardImpl {
+public final class Winnow extends CardImpl {
 
     public Winnow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

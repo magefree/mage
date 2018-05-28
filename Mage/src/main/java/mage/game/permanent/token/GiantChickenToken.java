@@ -36,7 +36,7 @@ import mage.constants.SubType;
  * @author ciaccona007
  */
 
-public class GiantChickenToken extends TokenImpl {
+public final class GiantChickenToken extends TokenImpl {
 
     public GiantChickenToken() {
         super("Giant Chicken", "4/4 red Giant Chicken creature token");

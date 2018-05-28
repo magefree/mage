@@ -53,7 +53,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author LevelX2
  */
-public class WhisperwoodElemental extends CardImpl {
+public final class WhisperwoodElemental extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-up, nontoken creatures you control");
 

@@ -44,7 +44,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author LevelX2
  */
-public class EldraziSkyspawner extends CardImpl {
+public final class EldraziSkyspawner extends CardImpl {
 
     public EldraziSkyspawner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

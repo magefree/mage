@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class TajuruWarcaller extends CardImpl {
+public final class TajuruWarcaller extends CardImpl {
 
     public TajuruWarcaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

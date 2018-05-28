@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class SpyNetwork extends CardImpl {
+public final class SpyNetwork extends CardImpl {
 
     public SpyNetwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

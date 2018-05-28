@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class MaskOfLawAndGrace extends CardImpl {
+public final class MaskOfLawAndGrace extends CardImpl {
 
     public MaskOfLawAndGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

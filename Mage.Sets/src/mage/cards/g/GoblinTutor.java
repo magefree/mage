@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class GoblinTutor extends CardImpl {
+public final class GoblinTutor extends CardImpl {
 
     public GoblinTutor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

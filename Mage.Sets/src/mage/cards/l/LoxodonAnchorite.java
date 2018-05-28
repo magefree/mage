@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class LoxodonAnchorite extends CardImpl {
+public final class LoxodonAnchorite extends CardImpl {
 
     public LoxodonAnchorite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

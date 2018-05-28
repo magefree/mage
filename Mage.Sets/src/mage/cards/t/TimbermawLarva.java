@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class TimbermawLarva extends CardImpl {
+public final class TimbermawLarva extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class KariZevSkyshipRaider extends CardImpl {
+public final class KariZevSkyshipRaider extends CardImpl {
 
     public KariZevSkyshipRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

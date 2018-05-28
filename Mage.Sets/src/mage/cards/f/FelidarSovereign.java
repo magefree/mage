@@ -48,7 +48,7 @@ import mage.game.Game;
  *
  * @author Rafbill
  */
-public class FelidarSovereign extends CardImpl {
+public final class FelidarSovereign extends CardImpl {
 
     public FelidarSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

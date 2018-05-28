@@ -44,7 +44,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class FlamesOfTheBloodHand extends CardImpl {
+public final class FlamesOfTheBloodHand extends CardImpl {
 
     public FlamesOfTheBloodHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

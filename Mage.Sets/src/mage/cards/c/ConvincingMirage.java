@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class ConvincingMirage extends CardImpl {
+public final class ConvincingMirage extends CardImpl {
 
     public ConvincingMirage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

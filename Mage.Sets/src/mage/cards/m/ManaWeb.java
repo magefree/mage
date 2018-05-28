@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author spjspj
  */
-public class ManaWeb extends CardImpl {
+public final class ManaWeb extends CardImpl {
 
     public ManaWeb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

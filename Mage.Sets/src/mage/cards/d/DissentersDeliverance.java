@@ -40,7 +40,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class DissentersDeliverance extends CardImpl {
+public final class DissentersDeliverance extends CardImpl {
 
     public DissentersDeliverance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

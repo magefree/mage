@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class IntrepidProvisioner extends CardImpl {
+public final class IntrepidProvisioner extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.HUMAN, "another target Human you control");
 

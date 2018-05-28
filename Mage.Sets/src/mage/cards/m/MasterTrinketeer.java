@@ -49,7 +49,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author fireshoes
  */
-public class MasterTrinketeer extends CardImpl {
+public final class MasterTrinketeer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Servo and Thopter creatures");
 

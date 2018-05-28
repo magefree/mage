@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class Havoc extends CardImpl {
+public final class Havoc extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("a white spell");
 

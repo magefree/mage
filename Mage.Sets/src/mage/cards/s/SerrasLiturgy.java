@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class SerrasLiturgy extends CardImpl {
+public final class SerrasLiturgy extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("up to X target artifacts and/or enchantments, where X is the number of verse counters on {this}");
 

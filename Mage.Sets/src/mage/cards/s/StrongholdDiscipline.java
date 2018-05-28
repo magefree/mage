@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class StrongholdDiscipline extends CardImpl {
+public final class StrongholdDiscipline extends CardImpl {
 
     public StrongholdDiscipline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

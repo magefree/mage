@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WildslayerElves extends CardImpl {
+public final class WildslayerElves extends CardImpl {
 
     public WildslayerElves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

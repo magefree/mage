@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author TheElk801
  */
-public class DireFleetCaptain extends CardImpl {
+public final class DireFleetCaptain extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Pirate");
 

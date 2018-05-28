@@ -55,7 +55,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class SphinxOfUthuun extends CardImpl {
+public final class SphinxOfUthuun extends CardImpl {
 
     public SphinxOfUthuun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

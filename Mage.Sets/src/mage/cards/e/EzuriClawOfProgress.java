@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class EzuriClawOfProgress extends CardImpl {
+public final class EzuriClawOfProgress extends CardImpl {
 
     final private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     final private static FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent();

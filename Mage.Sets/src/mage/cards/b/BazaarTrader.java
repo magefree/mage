@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class BazaarTrader extends CardImpl {
+public final class BazaarTrader extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact, creature, or land you control");
 

@@ -37,7 +37,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class MasterpieceSeries extends ExpansionSet {
+public final class MasterpieceSeries extends ExpansionSet {
 
     private static final MasterpieceSeries instance = new MasterpieceSeries();
 

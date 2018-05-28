@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Topplegeist extends CardImpl {
+public final class Topplegeist extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
 

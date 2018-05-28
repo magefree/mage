@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Styxo
  */
-public class WompRat extends CardImpl {
+public final class WompRat extends CardImpl {
 
     public WompRat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

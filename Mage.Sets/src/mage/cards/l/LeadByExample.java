@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class LeadByExample extends CardImpl {
+public final class LeadByExample extends CardImpl {
 
     public LeadByExample(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

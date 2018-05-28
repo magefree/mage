@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author markedagain
  */
-public class WitheringBoon extends CardImpl {
+public final class WitheringBoon extends CardImpl {
 
     public WitheringBoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

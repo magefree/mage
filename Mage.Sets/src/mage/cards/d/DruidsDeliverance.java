@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author LevleX2
  */
-public class DruidsDeliverance extends CardImpl {
+public final class DruidsDeliverance extends CardImpl {
 
     public DruidsDeliverance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

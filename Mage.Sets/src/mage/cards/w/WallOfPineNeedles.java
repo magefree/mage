@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class WallOfPineNeedles extends CardImpl {
+public final class WallOfPineNeedles extends CardImpl {
 
     public WallOfPineNeedles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

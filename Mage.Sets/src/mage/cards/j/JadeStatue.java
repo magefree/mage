@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author anonymous
  */
-public class JadeStatue extends CardImpl {
+public final class JadeStatue extends CardImpl {
 
     public JadeStatue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

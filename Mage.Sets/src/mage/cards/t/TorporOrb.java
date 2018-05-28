@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class TorporOrb extends CardImpl {
+public final class TorporOrb extends CardImpl {
 
     public TorporOrb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

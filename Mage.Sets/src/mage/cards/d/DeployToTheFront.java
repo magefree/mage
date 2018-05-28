@@ -41,7 +41,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author LevelX2
  */
-public class DeployToTheFront extends CardImpl {
+public final class DeployToTheFront extends CardImpl {
 
     public DeployToTheFront(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");

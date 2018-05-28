@@ -44,7 +44,7 @@ import mage.game.permanent.token.SkywiseTeachingsToken;
  *
  * @author LevelX2
  */
-public class SkywiseTeachings extends CardImpl {
+public final class SkywiseTeachings extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

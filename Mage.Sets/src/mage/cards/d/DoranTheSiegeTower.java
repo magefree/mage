@@ -51,7 +51,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class DoranTheSiegeTower extends CardImpl {
+public final class DoranTheSiegeTower extends CardImpl {
 
     public DoranTheSiegeTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}{G}");

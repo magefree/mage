@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class EtheriumAbomination extends CardImpl {
+public final class EtheriumAbomination extends CardImpl {
 
     public EtheriumAbomination (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}{B}");

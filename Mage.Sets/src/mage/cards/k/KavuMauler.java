@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LoneFox
  */
-public class KavuMauler extends CardImpl {
+public final class KavuMauler extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Kavu");
 

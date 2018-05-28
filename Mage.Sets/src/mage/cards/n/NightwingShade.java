@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NightwingShade extends CardImpl {
+public final class NightwingShade extends CardImpl {
 
     public NightwingShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class Drumhunter extends CardImpl {
+public final class Drumhunter extends CardImpl {
 
     public Drumhunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

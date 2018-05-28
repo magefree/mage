@@ -51,7 +51,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  * A relatively straightforward merge between GemhideSliver.java and
  * CrossbowInfantry.java
  */
-public class QuilledSliver extends CardImpl {
+public final class QuilledSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 

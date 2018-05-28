@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class EscapeRoutes extends CardImpl {
+public final class EscapeRoutes extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white or black creature you control");
 

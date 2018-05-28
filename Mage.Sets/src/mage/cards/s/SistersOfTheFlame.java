@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SistersOfTheFlame extends CardImpl {
+public final class SistersOfTheFlame extends CardImpl {
 
     public SistersOfTheFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

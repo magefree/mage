@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class SilverfurPartisan extends CardImpl {
+public final class SilverfurPartisan extends CardImpl {
 
     public SilverfurPartisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

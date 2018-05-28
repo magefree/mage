@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class KorSkyfisher extends CardImpl {
+public final class KorSkyfisher extends CardImpl {
 
     public KorSkyfisher (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

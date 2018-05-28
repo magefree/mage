@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class ArcBlade extends CardImpl {
+public final class ArcBlade extends CardImpl {
 
     public ArcBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

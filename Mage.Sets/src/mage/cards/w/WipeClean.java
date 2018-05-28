@@ -40,7 +40,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author markedagain
  */
-public class WipeClean extends CardImpl {
+public final class WipeClean extends CardImpl {
 
     public WipeClean(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

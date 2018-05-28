@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class BlackcleaveGoblin extends CardImpl {
+public final class BlackcleaveGoblin extends CardImpl {
 
     public BlackcleaveGoblin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

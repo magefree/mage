@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author nantuko
  */
-public class PurifyTheGrave extends CardImpl {
+public final class PurifyTheGrave extends CardImpl {
 
     public PurifyTheGrave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

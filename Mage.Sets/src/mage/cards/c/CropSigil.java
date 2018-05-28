@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class CropSigil extends CardImpl {
+public final class CropSigil extends CardImpl {
 
     private static final FilterCard filterCreature = new FilterCard("creature card in a graveyard");
     private static final FilterCard filterLand = new FilterCard("land card in a graveyard");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class Bayou extends CardImpl {
+public final class Bayou extends CardImpl {
 
     public Bayou(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

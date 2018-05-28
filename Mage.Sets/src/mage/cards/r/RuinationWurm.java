@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class RuinationWurm extends CardImpl {
+public final class RuinationWurm extends CardImpl {
 
     public RuinationWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");

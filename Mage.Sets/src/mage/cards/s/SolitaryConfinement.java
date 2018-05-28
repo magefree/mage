@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class SolitaryConfinement extends CardImpl {
+public final class SolitaryConfinement extends CardImpl {
 
     public SolitaryConfinement(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

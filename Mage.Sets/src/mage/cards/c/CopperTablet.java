@@ -41,7 +41,7 @@ import mage.constants.Zone;
  * @author KholdFuzion
 
  */
-public class CopperTablet extends CardImpl {
+public final class CopperTablet extends CardImpl {
 
     public CopperTablet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

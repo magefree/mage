@@ -52,7 +52,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author JRHerlehy
  */
-public class GrowingRitesOfItlimoc extends CardImpl {
+public final class GrowingRitesOfItlimoc extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature card");
 

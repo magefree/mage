@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class BloodsporeThrinax extends CardImpl {
+public final class BloodsporeThrinax extends CardImpl {
 
     public BloodsporeThrinax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

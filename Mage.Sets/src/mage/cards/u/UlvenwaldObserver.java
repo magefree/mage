@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class UlvenwaldObserver extends CardImpl {
+public final class UlvenwaldObserver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control with toughness 4 or greater");
 

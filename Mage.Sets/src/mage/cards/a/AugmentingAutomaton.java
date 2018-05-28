@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class AugmentingAutomaton extends CardImpl {
+public final class AugmentingAutomaton extends CardImpl {
 
     public AugmentingAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

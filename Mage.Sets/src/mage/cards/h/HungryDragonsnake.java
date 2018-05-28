@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Styxo
  */
-public class HungryDragonsnake extends CardImpl {
+public final class HungryDragonsnake extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("under an opponents's control");
 

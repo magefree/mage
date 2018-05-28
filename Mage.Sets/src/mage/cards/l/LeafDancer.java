@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LeafDancer extends CardImpl {
+public final class LeafDancer extends CardImpl {
 
     public LeafDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

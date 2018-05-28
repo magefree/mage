@@ -46,7 +46,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author North
  */
-public class NobleVestige extends CardImpl {
+public final class NobleVestige extends CardImpl {
 
     public NobleVestige(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

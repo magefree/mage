@@ -44,7 +44,7 @@ import mage.players.Player;
 /**
  * @author North
  */
-public class Galvanoth extends CardImpl {
+public final class Galvanoth extends CardImpl {
 
     public Galvanoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

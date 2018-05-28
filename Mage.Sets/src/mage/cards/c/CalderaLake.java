@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class CalderaLake extends CardImpl {
+public final class CalderaLake extends CardImpl {
 
     public CalderaLake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

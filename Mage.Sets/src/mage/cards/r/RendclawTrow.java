@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class RendclawTrow extends CardImpl {
+public final class RendclawTrow extends CardImpl {
 
     public RendclawTrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B/G}");

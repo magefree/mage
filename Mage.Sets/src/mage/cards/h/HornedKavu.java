@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author LoneFox
 
  */
-public class HornedKavu extends CardImpl {
+public final class HornedKavu extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red or green creature you control");
 

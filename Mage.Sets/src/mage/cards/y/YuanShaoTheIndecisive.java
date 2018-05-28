@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class YuanShaoTheIndecisive extends CardImpl {
+public final class YuanShaoTheIndecisive extends CardImpl {
 
     public YuanShaoTheIndecisive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

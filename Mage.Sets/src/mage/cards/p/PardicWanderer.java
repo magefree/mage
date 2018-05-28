@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class PardicWanderer extends CardImpl {
+public final class PardicWanderer extends CardImpl {
 
     public PardicWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

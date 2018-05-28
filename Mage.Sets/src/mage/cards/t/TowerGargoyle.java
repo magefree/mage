@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TowerGargoyle extends CardImpl {
+public final class TowerGargoyle extends CardImpl {
 
     public TowerGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W}{U}{B}");

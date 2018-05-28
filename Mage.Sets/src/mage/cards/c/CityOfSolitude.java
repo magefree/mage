@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author emerald000
  */
-public class CityOfSolitude extends CardImpl {
+public final class CityOfSolitude extends CardImpl {
 
     public CityOfSolitude(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ForceOfNature extends CardImpl {
+public final class ForceOfNature extends CardImpl {
 
     public ForceOfNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}{G}");

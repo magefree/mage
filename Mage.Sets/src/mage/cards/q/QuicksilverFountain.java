@@ -56,7 +56,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class QuicksilverFountain extends CardImpl {
+public final class QuicksilverFountain extends CardImpl {
 
     public final UUID originalId;
 

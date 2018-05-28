@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ZameckGuildmage extends CardImpl {
+public final class ZameckGuildmage extends CardImpl {
 
     public ZameckGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");

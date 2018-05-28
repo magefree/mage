@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author Styxo
  */
-public class Luminesce extends CardImpl {
+public final class Luminesce extends CardImpl {
 
     public Luminesce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

@@ -56,7 +56,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author jeffwadsworth
  */
-public class TwinningGlass extends CardImpl {
+public final class TwinningGlass extends CardImpl {
 
     public TwinningGlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

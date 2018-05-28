@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class RhoxCharger extends CardImpl {
+public final class RhoxCharger extends CardImpl {
 
     public RhoxCharger (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

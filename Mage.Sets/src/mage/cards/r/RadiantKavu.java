@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class RadiantKavu extends CardImpl {
+public final class RadiantKavu extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures and black creatures");
     static {

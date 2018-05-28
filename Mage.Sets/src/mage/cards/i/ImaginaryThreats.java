@@ -51,7 +51,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author LevelX2
  */
-public class ImaginaryThreats extends CardImpl {
+public final class ImaginaryThreats extends CardImpl {
 
     public ImaginaryThreats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

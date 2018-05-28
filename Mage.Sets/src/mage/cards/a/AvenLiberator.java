@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class AvenLiberator extends CardImpl {
+public final class AvenLiberator extends CardImpl {
 
     public AvenLiberator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

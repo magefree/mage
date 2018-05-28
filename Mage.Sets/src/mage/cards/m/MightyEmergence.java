@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author Plopman
  */
-public class MightyEmergence extends CardImpl {
+public final class MightyEmergence extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with power 5 or greater");
 

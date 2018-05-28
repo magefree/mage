@@ -46,7 +46,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author Loki
  */
-public class AerieMystics extends CardImpl {
+public final class AerieMystics extends CardImpl {
 
     public AerieMystics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

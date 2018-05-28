@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class DireUndercurrents extends CardImpl {
+public final class DireUndercurrents extends CardImpl {
 
     private final static String rule1 = "Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.";
     private final static String rule2 = "Whenever a black creature enters the battlefield under your control, you may have target player discard a card.";

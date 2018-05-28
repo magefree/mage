@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class MerenOfClanNelToth extends CardImpl {
+public final class MerenOfClanNelToth extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 

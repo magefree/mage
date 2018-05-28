@@ -50,7 +50,7 @@ import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
  *
  * @author LoneFox
  */
-public class NotoriousThrong extends CardImpl {
+public final class NotoriousThrong extends CardImpl {
 
     public NotoriousThrong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{U}");

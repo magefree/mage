@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class PhyrexianSoulgorger extends CardImpl {
+public final class PhyrexianSoulgorger extends CardImpl {
 
     public PhyrexianSoulgorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author duncant
  */
-public class VeilstoneAmulet extends CardImpl {
+public final class VeilstoneAmulet extends CardImpl {
 
     public VeilstoneAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

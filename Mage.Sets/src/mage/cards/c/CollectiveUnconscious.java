@@ -39,7 +39,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class CollectiveUnconscious extends CardImpl {
+public final class CollectiveUnconscious extends CardImpl {
 
     public CollectiveUnconscious(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");

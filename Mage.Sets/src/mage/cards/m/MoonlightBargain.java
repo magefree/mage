@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MoonlightBargain extends CardImpl {
+public final class MoonlightBargain extends CardImpl {
 
     public MoonlightBargain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");

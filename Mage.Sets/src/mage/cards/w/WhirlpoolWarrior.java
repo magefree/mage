@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WhirlpoolWarrior extends CardImpl {
+public final class WhirlpoolWarrior extends CardImpl {
 
     public WhirlpoolWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

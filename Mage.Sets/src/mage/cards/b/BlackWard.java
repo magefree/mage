@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class BlackWard extends CardImpl {
+public final class BlackWard extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("black");
 

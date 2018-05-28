@@ -53,7 +53,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author jeffwadsworth
  */
-public class CemeteryPuca extends CardImpl {
+public final class CemeteryPuca extends CardImpl {
 
     public CemeteryPuca(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/B}{U/B}");

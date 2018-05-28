@@ -43,7 +43,7 @@ import mage.constants.SuperType;
  *
  * @author fireshoes
  */
-public class OrmendahlProfanePrince extends CardImpl {
+public final class OrmendahlProfanePrince extends CardImpl {
 
     public OrmendahlProfanePrince(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

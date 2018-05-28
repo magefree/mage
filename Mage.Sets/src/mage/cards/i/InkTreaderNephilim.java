@@ -52,7 +52,7 @@ import mage.util.TargetAddress;
 /**
  * @author duncant
  */
-public class InkTreaderNephilim extends CardImpl {
+public final class InkTreaderNephilim extends CardImpl {
 
     public InkTreaderNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}{U}");

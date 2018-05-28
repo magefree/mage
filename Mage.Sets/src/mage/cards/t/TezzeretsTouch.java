@@ -53,7 +53,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class TezzeretsTouch extends CardImpl {
+public final class TezzeretsTouch extends CardImpl {
 
     public TezzeretsTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{B}");

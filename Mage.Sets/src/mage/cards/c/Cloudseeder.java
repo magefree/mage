@@ -47,7 +47,7 @@ import mage.game.permanent.token.CloudSpriteToken;
  *
  * @author LoneFox
  */
-public class Cloudseeder extends CardImpl {
+public final class Cloudseeder extends CardImpl {
 
     public Cloudseeder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author nantuko
  */
-public class StensiaBloodhall extends CardImpl {
+public final class StensiaBloodhall extends CardImpl {
 
     public StensiaBloodhall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

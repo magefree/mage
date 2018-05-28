@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class LadyZhurongWarriorQueen extends CardImpl {
+public final class LadyZhurongWarriorQueen extends CardImpl {
 
     public LadyZhurongWarriorQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LoneFox
  */
-public class TorWauki extends CardImpl {
+public final class TorWauki extends CardImpl {
 
     public TorWauki(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{R}");

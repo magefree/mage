@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author MarcoMarin
  */
-public class Orgg extends CardImpl {
+public final class Orgg extends CardImpl {
 
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature with power 3 or greater");
     static final private FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");

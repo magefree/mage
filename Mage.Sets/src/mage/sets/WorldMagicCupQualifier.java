@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class WorldMagicCupQualifier extends ExpansionSet {
+public final class WorldMagicCupQualifier extends ExpansionSet {
 
     private static final WorldMagicCupQualifier instance = new WorldMagicCupQualifier();
 

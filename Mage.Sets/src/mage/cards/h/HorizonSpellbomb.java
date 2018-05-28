@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HorizonSpellbomb extends CardImpl {
+public final class HorizonSpellbomb extends CardImpl {
 
     public HorizonSpellbomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

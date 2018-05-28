@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class UnyaroBeeSting extends CardImpl {
+public final class UnyaroBeeSting extends CardImpl {
 
     public UnyaroBeeSting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

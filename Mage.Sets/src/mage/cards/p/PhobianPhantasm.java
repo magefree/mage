@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class PhobianPhantasm extends CardImpl {
+public final class PhobianPhantasm extends CardImpl {
 
     public PhobianPhantasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

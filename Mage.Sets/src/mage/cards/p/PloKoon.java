@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class PloKoon extends CardImpl {
+public final class PloKoon extends CardImpl {
 
     public PloKoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class FungalBloom extends CardImpl {
+public final class FungalBloom extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Fungus");
 

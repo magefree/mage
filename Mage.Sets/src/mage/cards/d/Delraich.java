@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class Delraich extends CardImpl {
+public final class Delraich extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
 

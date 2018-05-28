@@ -53,7 +53,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author fenhl
  */
-public class WildPair extends CardImpl {
+public final class WildPair extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 

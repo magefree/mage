@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author LevelX2
  */
-public class Riftsweeper extends CardImpl {
+public final class Riftsweeper extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("face-up exiled card");
     static {

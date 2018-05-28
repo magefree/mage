@@ -61,7 +61,7 @@ import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
  *
  * @author L_J
  */
-public class FalseOrders extends CardImpl {
+public final class FalseOrders extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature defending player controls");
 

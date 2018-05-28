@@ -41,7 +41,7 @@ import mage.filter.common.FilterBlockingCreature;
  *
  * @author MarcoMarin
  */
-public class Piety extends CardImpl {
+public final class Piety extends CardImpl {
 
     static final FilterBlockingCreature filter = new FilterBlockingCreature();
     

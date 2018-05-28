@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class JoinerAdept extends CardImpl {
+public final class JoinerAdept extends CardImpl {
 
     public JoinerAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

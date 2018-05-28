@@ -46,7 +46,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author LevelX2
  */
-public class AngelOfTheDireHour extends CardImpl {
+public final class AngelOfTheDireHour extends CardImpl {
 
     public AngelOfTheDireHour(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TruefirePaladin extends CardImpl {
+public final class TruefirePaladin extends CardImpl {
 
     public TruefirePaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");

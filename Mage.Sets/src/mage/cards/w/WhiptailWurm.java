@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class WhiptailWurm extends CardImpl {
+public final class WhiptailWurm extends CardImpl {
 
     public WhiptailWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");

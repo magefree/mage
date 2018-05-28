@@ -46,7 +46,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author TheElk801
  */
-public class WakeningSunsAvatar extends CardImpl {
+public final class WakeningSunsAvatar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Dinosaur creatures");
 

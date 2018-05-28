@@ -47,7 +47,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author spjspj
  */
-public class LudevicNecroAlchemist extends CardImpl {
+public final class LudevicNecroAlchemist extends CardImpl {
 
     public LudevicNecroAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");

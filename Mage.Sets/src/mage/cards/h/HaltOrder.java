@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class HaltOrder extends CardImpl {
+public final class HaltOrder extends CardImpl {
     public HaltOrder (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ScrybRanger extends CardImpl {
+public final class ScrybRanger extends CardImpl {
 
     private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent("a Forest");
 

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class Nightspider extends CardImpl {
+public final class Nightspider extends CardImpl {
 
     public Nightspider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

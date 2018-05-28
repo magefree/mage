@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class Deception extends CardImpl {
+public final class Deception extends CardImpl {
 
     public Deception(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

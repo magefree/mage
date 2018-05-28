@@ -54,7 +54,7 @@ import mage.game.stack.StackObject;
  *
  * @author TheElk801
  */
-public class ShannaSisaysLegacy extends CardImpl {
+public final class ShannaSisaysLegacy extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 

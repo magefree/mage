@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author LevelX2
  */
-public class QuicksmithGenius extends CardImpl {
+public final class QuicksmithGenius extends CardImpl {
 
     public QuicksmithGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

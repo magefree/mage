@@ -45,7 +45,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class RoyalHerbalist extends CardImpl {
+public final class RoyalHerbalist extends CardImpl {
 
     public RoyalHerbalist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

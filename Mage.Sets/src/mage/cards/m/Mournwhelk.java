@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Mournwhelk extends CardImpl {
+public final class Mournwhelk extends CardImpl {
 
     public Mournwhelk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");

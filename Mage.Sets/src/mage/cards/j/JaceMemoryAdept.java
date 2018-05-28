@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
 /**
  * @author nantuko
  */
-public class JaceMemoryAdept extends CardImpl {
+public final class JaceMemoryAdept extends CardImpl {
 
     public JaceMemoryAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");

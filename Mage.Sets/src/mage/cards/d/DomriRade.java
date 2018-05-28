@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DomriRade extends CardImpl {
+public final class DomriRade extends CardImpl {
 
     public DomriRade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TangleclawWerewolf extends CardImpl {
+public final class TangleclawWerewolf extends CardImpl {
 
     public TangleclawWerewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

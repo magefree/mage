@@ -40,7 +40,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class FestivalOfTheGuildpact extends CardImpl {
+public final class FestivalOfTheGuildpact extends CardImpl {
 
     public FestivalOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");

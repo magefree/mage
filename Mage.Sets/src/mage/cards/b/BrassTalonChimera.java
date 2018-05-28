@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class BrassTalonChimera extends CardImpl {
+public final class BrassTalonChimera extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature");
 

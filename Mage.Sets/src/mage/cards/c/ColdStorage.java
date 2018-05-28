@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class ColdStorage extends CardImpl {
+public final class ColdStorage extends CardImpl {
 
     public ColdStorage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

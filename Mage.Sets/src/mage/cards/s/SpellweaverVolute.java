@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class SpellweaverVolute extends CardImpl {
+public final class SpellweaverVolute extends CardImpl {
 
     public SpellweaverVolute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

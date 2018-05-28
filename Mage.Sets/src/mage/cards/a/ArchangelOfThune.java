@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Plopman
  */
-public class ArchangelOfThune extends CardImpl {
+public final class ArchangelOfThune extends CardImpl {
 
     public ArchangelOfThune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

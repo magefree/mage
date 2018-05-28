@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CorruptedConscience extends CardImpl {
+public final class CorruptedConscience extends CardImpl {
 
     public CorruptedConscience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");

@@ -39,7 +39,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BackToNature extends CardImpl {
+public final class BackToNature extends CardImpl {
 
     public BackToNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class NiblisOfFrost extends CardImpl {
+public final class NiblisOfFrost extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature an opponent controls");
 
     static {

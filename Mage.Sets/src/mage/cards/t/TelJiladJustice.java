@@ -39,7 +39,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Plopman
  */
-public class TelJiladJustice extends CardImpl {
+public final class TelJiladJustice extends CardImpl {
 
     public TelJiladJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class PyroclastConsul extends CardImpl {
+public final class PyroclastConsul extends CardImpl {
 
     public PyroclastConsul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

@@ -45,7 +45,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class Ironfang extends CardImpl {
+public final class Ironfang extends CardImpl {
 
     public Ironfang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

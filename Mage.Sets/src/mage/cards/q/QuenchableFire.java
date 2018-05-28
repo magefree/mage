@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class QuenchableFire extends CardImpl {
+public final class QuenchableFire extends CardImpl {
 
     public QuenchableFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

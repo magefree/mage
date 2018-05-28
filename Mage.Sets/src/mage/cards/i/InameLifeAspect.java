@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class InameLifeAspect extends CardImpl {
+public final class InameLifeAspect extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Spirit cards from your graveyard");
 

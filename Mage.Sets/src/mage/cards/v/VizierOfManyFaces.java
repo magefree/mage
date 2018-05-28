@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class VizierOfManyFaces extends CardImpl {
+public final class VizierOfManyFaces extends CardImpl {
 
     public VizierOfManyFaces(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

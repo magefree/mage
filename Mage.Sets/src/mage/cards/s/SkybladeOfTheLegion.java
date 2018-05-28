@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class SkybladeOfTheLegion extends CardImpl {
+public final class SkybladeOfTheLegion extends CardImpl {
 
     public SkybladeOfTheLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

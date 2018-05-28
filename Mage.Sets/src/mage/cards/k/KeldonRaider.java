@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class KeldonRaider extends CardImpl {
+public final class KeldonRaider extends CardImpl {
 
     public KeldonRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

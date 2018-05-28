@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class EladamrisVineyard extends CardImpl {
+public final class EladamrisVineyard extends CardImpl {
 
     public EladamrisVineyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

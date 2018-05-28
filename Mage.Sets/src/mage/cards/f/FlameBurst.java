@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class FlameBurst extends CardImpl {
+public final class FlameBurst extends CardImpl {
 
     private static final FilterCard filter = new FilterCard();
 

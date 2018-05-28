@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class MalakirBloodwitch extends CardImpl {
+public final class MalakirBloodwitch extends CardImpl {
 
     public MalakirBloodwitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

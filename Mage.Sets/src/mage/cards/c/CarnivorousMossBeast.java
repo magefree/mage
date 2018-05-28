@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class CarnivorousMossBeast extends CardImpl {
+public final class CarnivorousMossBeast extends CardImpl {
 
     public CarnivorousMossBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

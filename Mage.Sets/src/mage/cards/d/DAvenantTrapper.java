@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author TheElk801
  */
-public class DAvenantTrapper extends CardImpl {
+public final class DAvenantTrapper extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 

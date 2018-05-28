@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class CinderMarsh extends CardImpl {
+public final class CinderMarsh extends CardImpl {
 
     public CinderMarsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

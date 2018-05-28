@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ReclamationSage extends CardImpl {
+public final class ReclamationSage extends CardImpl {
 
     public ReclamationSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

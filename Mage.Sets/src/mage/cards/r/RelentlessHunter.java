@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class RelentlessHunter extends CardImpl {
+public final class RelentlessHunter extends CardImpl {
 
     public RelentlessHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");

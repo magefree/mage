@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FaerieInvaders extends CardImpl {
+public final class FaerieInvaders extends CardImpl {
 
     public FaerieInvaders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

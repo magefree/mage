@@ -57,7 +57,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Saga
  */
-public class HungryLynx extends CardImpl {
+public final class HungryLynx extends CardImpl {
     
     private final static FilterControlledCreaturePermanent filterCat = new FilterControlledCreaturePermanent("Cats");
     static {

@@ -48,7 +48,7 @@ import java.util.stream.Stream;
  *
  * @author Plopman
  */
-public class SignalTheClans extends CardImpl {
+public final class SignalTheClans extends CardImpl {
 
     public SignalTheClans (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");

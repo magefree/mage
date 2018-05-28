@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class ImprisonedInTheMoon extends CardImpl {
+public final class ImprisonedInTheMoon extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature, land, or planeswalker");
 

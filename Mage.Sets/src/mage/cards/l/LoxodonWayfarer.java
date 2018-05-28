@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LoxodonWayfarer extends CardImpl {
+public final class LoxodonWayfarer extends CardImpl {
 
     public LoxodonWayfarer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

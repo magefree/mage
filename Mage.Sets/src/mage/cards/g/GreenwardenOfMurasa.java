@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class GreenwardenOfMurasa extends CardImpl {
+public final class GreenwardenOfMurasa extends CardImpl {
 
     public GreenwardenOfMurasa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

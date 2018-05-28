@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class RootSpider extends CardImpl {
+public final class RootSpider extends CardImpl {
 
     public RootSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

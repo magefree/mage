@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author spjspj
  */
-public class NacatlWarPride extends CardImpl {
+public final class NacatlWarPride extends CardImpl {
 
     public NacatlWarPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");

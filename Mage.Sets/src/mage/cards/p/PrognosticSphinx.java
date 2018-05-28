@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class PrognosticSphinx extends CardImpl {
+public final class PrognosticSphinx extends CardImpl {
 
     public PrognosticSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

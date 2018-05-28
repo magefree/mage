@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class ArchonOfRedemption extends CardImpl {
+public final class ArchonOfRedemption extends CardImpl {
 
     public ArchonOfRedemption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

@@ -48,7 +48,7 @@ import mage.filter.common.FilterControlledEnchantmentPermanent;
  *
  * @author fireshoes
  */
-public class BloodCursedKnight extends CardImpl {
+public final class BloodCursedKnight extends CardImpl {
 
     final static private String rule1 = "As long as you control an enchantment, {this} gets +1/+1";
     final static private String rule2 = "and has lifelink";

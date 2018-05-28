@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Equipoise extends CardImpl {
+public final class Equipoise extends CardImpl {
 
     public Equipoise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class NightwindGlider extends CardImpl {
+public final class NightwindGlider extends CardImpl {
 
     public NightwindGlider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

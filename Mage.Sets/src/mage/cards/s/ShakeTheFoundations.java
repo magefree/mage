@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author L_J
  */
-public class ShakeTheFoundations extends CardImpl {
+public final class ShakeTheFoundations extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

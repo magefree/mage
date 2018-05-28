@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class FacelessDevourer extends CardImpl {
+public final class FacelessDevourer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

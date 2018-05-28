@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Sir-Speshkitty
  */
-public class AbbeyGargoyles extends CardImpl {
+public final class AbbeyGargoyles extends CardImpl {
 
     public AbbeyGargoyles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{W}");

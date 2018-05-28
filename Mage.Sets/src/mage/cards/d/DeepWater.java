@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class DeepWater extends CardImpl {
+public final class DeepWater extends CardImpl {
 
     public DeepWater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");

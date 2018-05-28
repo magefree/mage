@@ -51,7 +51,7 @@ import mage.target.TargetStackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FrostTitan extends CardImpl {
+public final class FrostTitan extends CardImpl {
 
     public FrostTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

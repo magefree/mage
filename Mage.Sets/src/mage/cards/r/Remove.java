@@ -44,7 +44,7 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  *
  * @author TheElk801
  */
-public class Remove extends CardImpl {
+public final class Remove extends CardImpl {
 
     public Remove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

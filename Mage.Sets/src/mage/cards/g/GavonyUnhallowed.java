@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class GavonyUnhallowed extends CardImpl {
+public final class GavonyUnhallowed extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 

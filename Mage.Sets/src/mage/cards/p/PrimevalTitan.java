@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PrimevalTitan extends CardImpl {
+public final class PrimevalTitan extends CardImpl {
 
     public PrimevalTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

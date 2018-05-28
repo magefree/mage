@@ -57,7 +57,7 @@ import mage.target.TargetCard;
  *
  * @author ciaccona007 & L_J
  */
-public class EtaliPrimalStorm extends CardImpl {
+public final class EtaliPrimalStorm extends CardImpl {
 
     public EtaliPrimalStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

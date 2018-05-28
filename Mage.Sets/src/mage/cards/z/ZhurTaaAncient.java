@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class ZhurTaaAncient extends CardImpl {
+public final class ZhurTaaAncient extends CardImpl {
 
     public ZhurTaaAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");

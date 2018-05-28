@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DaggerclawImp extends CardImpl {
+public final class DaggerclawImp extends CardImpl {
 
     public DaggerclawImp (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

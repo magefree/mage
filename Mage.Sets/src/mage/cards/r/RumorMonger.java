@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class RumorMonger extends CardImpl {
+public final class RumorMonger extends CardImpl {
 
     public RumorMonger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}{G}");

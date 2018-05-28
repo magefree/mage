@@ -51,7 +51,7 @@ import mage.target.targetpointer.FirstTargetPointer;
  *
  * @author LevelX2
  */
-public class SigilOfSleep extends CardImpl {
+public final class SigilOfSleep extends CardImpl {
 
     private final UUID originalId;
 

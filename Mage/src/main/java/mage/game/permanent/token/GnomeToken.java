@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GnomeToken extends TokenImpl {
+public final class GnomeToken extends TokenImpl {
 
     public GnomeToken() {
         super("Gnome", "1/1 colorless Gnome artifact creature token");

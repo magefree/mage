@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author KholdFuzion
  */
-public class AcidicSliver extends CardImpl {
+public final class AcidicSliver extends CardImpl {
 
     public AcidicSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");

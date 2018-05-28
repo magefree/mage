@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class BranchsnapLorian extends CardImpl {
+public final class BranchsnapLorian extends CardImpl {
 
     public BranchsnapLorian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

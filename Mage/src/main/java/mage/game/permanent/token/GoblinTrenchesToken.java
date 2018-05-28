@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GoblinTrenchesToken extends TokenImpl {
+public final class GoblinTrenchesToken extends TokenImpl {
 
     public GoblinTrenchesToken() {
         super("Goblin Soldier", "1/1 red and white Goblin Soldier creature tokens");

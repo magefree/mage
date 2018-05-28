@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ImpalerShrike extends CardImpl {
+public final class ImpalerShrike extends CardImpl {
 
     public ImpalerShrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

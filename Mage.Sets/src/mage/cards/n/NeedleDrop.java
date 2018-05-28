@@ -47,7 +47,7 @@ import mage.watchers.common.DamageDoneWatcher;
  *
  * @author Quercitron
  */
-public class NeedleDrop extends CardImpl {
+public final class NeedleDrop extends CardImpl {
 
     private static final FilterCreaturePlayerOrPlaneswalker FILTER = new FilterCreaturePlayerOrPlaneswalker();
 

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class CorellianCorvette extends CardImpl {
+public final class CorellianCorvette extends CardImpl {
 
     public CorellianCorvette(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{G}");

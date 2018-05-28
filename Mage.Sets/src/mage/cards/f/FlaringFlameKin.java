@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class FlaringFlameKin extends CardImpl {
+public final class FlaringFlameKin extends CardImpl {
 
     public FlaringFlameKin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -38,7 +38,7 @@ import mage.game.permanent.token.ErrandOfDutyKnightToken;
  *
  * @author L_J
  */
-public class ErrandOfDuty extends CardImpl {
+public final class ErrandOfDuty extends CardImpl {
 
     public ErrandOfDuty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

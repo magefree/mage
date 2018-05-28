@@ -49,7 +49,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author anonymous
  */
-public class SedgeSliver extends CardImpl {
+public final class SedgeSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures");
 

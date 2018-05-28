@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class AmuletOfVigor extends CardImpl {
+public final class AmuletOfVigor extends CardImpl {
 
     public AmuletOfVigor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

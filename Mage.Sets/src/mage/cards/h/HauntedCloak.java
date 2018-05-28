@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class HauntedCloak extends CardImpl {
+public final class HauntedCloak extends CardImpl {
 
     public HauntedCloak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

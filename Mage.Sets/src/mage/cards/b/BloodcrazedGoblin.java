@@ -48,7 +48,7 @@ import mage.watchers.common.BloodthirstWatcher;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class BloodcrazedGoblin extends CardImpl {
+public final class BloodcrazedGoblin extends CardImpl {
 
     public BloodcrazedGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

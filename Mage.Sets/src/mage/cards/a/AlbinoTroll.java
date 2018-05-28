@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class AlbinoTroll extends CardImpl {
+public final class AlbinoTroll extends CardImpl {
 
     public AlbinoTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

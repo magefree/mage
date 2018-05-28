@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ImmortalServitude extends CardImpl {
+public final class ImmortalServitude extends CardImpl {
 
     public ImmortalServitude(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W/B}{W/B}{W/B}");

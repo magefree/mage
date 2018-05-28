@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class EssenceHarvest extends CardImpl {
+public final class EssenceHarvest extends CardImpl {
 
     public EssenceHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

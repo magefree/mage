@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class OonaQueenOfTheFae extends CardImpl {
+public final class OonaQueenOfTheFae extends CardImpl {
 
     public OonaQueenOfTheFae(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U/B}{U/B}{U/B}");

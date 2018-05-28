@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class HungerOfTheNim extends CardImpl {
+public final class HungerOfTheNim extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 

@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class Enervate extends CardImpl {
+public final class Enervate extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
     

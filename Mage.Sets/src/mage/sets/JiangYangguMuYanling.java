@@ -13,7 +13,7 @@ import mage.constants.SetType;
  *
  * @author TheElk801
  */
-public class JiangYangguMuYanling extends ExpansionSet {
+public final class JiangYangguMuYanling extends ExpansionSet {
 
     private static final JiangYangguMuYanling instance = new JiangYangguMuYanling();
 

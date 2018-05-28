@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class XWing extends CardImpl {
+public final class XWing extends CardImpl {
 
     public XWing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}");

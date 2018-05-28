@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class MysticMelting extends CardImpl {
+public final class MysticMelting extends CardImpl {
 
     public MysticMelting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

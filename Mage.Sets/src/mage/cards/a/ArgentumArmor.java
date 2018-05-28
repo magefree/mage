@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class ArgentumArmor extends CardImpl {
+public final class ArgentumArmor extends CardImpl {
 
     public ArgentumArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

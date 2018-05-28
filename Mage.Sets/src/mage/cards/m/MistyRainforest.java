@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MistyRainforest extends CardImpl {
+public final class MistyRainforest extends CardImpl {
 
     public MistyRainforest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

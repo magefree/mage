@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BloodMoon extends CardImpl {
+public final class BloodMoon extends CardImpl {
 
     public BloodMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

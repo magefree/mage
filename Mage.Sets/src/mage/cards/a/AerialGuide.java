@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author ciaccona007
  */
-public class AerialGuide extends CardImpl {
+public final class AerialGuide extends CardImpl {
 
     static final FilterAttackingCreature filter = new FilterAttackingCreature("another target attacking creature");
 

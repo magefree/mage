@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX2
  */
 
-public class ThassaGodOfTheSea extends CardImpl {
+public final class ThassaGodOfTheSea extends CardImpl {
 
     public ThassaGodOfTheSea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{U}");

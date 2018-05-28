@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RavagingBlaze extends CardImpl {
+public final class RavagingBlaze extends CardImpl {
 
     public RavagingBlaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");

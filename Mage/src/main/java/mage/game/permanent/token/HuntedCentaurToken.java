@@ -40,7 +40,7 @@ import mage.abilities.keyword.ProtectionAbility;
  *
  * @author LevelX2
  */
-public class HuntedCentaurToken extends TokenImpl {
+public final class HuntedCentaurToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

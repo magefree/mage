@@ -40,7 +40,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author LevelX2
  */
-public class SpectralReserves extends CardImpl {
+public final class SpectralReserves extends CardImpl {
 
     public SpectralReserves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");

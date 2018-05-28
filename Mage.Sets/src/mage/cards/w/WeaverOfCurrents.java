@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class WeaverOfCurrents extends CardImpl {
+public final class WeaverOfCurrents extends CardImpl {
 
     public WeaverOfCurrents(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

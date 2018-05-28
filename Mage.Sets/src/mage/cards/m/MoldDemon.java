@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class MoldDemon extends CardImpl {
+public final class MoldDemon extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two Swamps");
     

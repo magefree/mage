@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class MtendaGriffin extends CardImpl {
+public final class MtendaGriffin extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Griffin card from your graveyard");
 

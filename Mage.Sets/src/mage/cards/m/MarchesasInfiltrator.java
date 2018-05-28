@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class MarchesasInfiltrator extends CardImpl {
+public final class MarchesasInfiltrator extends CardImpl {
 
     public MarchesasInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -47,7 +47,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Homelands extends ExpansionSet {
+public final class Homelands extends ExpansionSet {
 
     private static final Homelands instance = new Homelands();
 

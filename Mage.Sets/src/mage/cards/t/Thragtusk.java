@@ -43,7 +43,7 @@ import mage.game.permanent.token.BeastToken;
  *
  * @author North
  */
-public class Thragtusk extends CardImpl {
+public final class Thragtusk extends CardImpl {
 
     public Thragtusk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

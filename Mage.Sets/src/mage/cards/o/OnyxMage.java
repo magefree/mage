@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class OnyxMage extends CardImpl {
+public final class OnyxMage extends CardImpl {
 
     public OnyxMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

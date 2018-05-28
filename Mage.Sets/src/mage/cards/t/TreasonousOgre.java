@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TreasonousOgre extends CardImpl {
+public final class TreasonousOgre extends CardImpl {
 
     public TreasonousOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class FlashOfInsight extends CardImpl {
+public final class FlashOfInsight extends CardImpl {
 
     public FlashOfInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{1}{U}");

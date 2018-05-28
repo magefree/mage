@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class BolaWarrior extends CardImpl {
+public final class BolaWarrior extends CardImpl {
 
     public BolaWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

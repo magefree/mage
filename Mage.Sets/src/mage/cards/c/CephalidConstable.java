@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author emerald000
  */
-public class CephalidConstable extends CardImpl {
+public final class CephalidConstable extends CardImpl {
 
     public CephalidConstable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

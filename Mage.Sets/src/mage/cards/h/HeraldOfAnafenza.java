@@ -47,7 +47,7 @@ import mage.game.stack.StackAbility;
  *
  * @author LevelX2
  */
-public class HeraldOfAnafenza extends CardImpl {
+public final class HeraldOfAnafenza extends CardImpl {
 
     public HeraldOfAnafenza(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

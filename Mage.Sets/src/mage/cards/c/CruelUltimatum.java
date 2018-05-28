@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class CruelUltimatum extends CardImpl {
+public final class CruelUltimatum extends CardImpl {
 
     public CruelUltimatum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}{B}{B}{B}{R}{R}");

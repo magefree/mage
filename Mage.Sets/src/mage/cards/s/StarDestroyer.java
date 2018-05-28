@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class StarDestroyer extends CardImpl {
+public final class StarDestroyer extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("artifact creature");
     private static final FilterCreatureOrPlayer filter3 = new FilterCreatureOrPlayer("non-Starship creature or player");

@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author FenrisulfrX
  */
-public class EdgeOfAutumn extends CardImpl {
+public final class EdgeOfAutumn extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

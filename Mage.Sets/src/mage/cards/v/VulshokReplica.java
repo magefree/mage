@@ -45,7 +45,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class VulshokReplica extends CardImpl {
+public final class VulshokReplica extends CardImpl {
 
     public VulshokReplica(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

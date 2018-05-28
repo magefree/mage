@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class HungeringYeti extends CardImpl {
+public final class HungeringYeti extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("as long as you control a green or blue permanent");
 

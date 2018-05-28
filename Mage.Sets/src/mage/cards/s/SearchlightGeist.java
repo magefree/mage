@@ -44,7 +44,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class SearchlightGeist extends CardImpl {
+public final class SearchlightGeist extends CardImpl {
 
     public SearchlightGeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

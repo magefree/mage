@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BalefulAmmit extends CardImpl {
+public final class BalefulAmmit extends CardImpl {
 
     public BalefulAmmit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

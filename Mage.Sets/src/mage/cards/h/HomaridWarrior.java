@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class HomaridWarrior extends CardImpl {
+public final class HomaridWarrior extends CardImpl {
 
     public HomaridWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

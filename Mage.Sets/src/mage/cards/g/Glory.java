@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class Glory extends CardImpl {
+public final class Glory extends CardImpl {
 
     public Glory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

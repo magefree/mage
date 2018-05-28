@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class LabyrinthMinotaur extends CardImpl {
+public final class LabyrinthMinotaur extends CardImpl {
 
     public LabyrinthMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

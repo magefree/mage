@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class HanweirMilitiaCaptain extends CardImpl {
+public final class HanweirMilitiaCaptain extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control four or more creatures");
 

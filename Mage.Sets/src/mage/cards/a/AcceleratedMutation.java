@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nigelzor
  */
-public class AcceleratedMutation extends CardImpl {
+public final class AcceleratedMutation extends CardImpl {
 
     public AcceleratedMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");

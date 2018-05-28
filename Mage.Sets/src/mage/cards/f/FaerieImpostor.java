@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class FaerieImpostor extends CardImpl {
+public final class FaerieImpostor extends CardImpl {
 
     public FaerieImpostor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class Thoughtcast extends CardImpl {
+public final class Thoughtcast extends CardImpl {
 
     public Thoughtcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");

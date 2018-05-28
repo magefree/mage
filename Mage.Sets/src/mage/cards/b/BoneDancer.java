@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class BoneDancer extends CardImpl {
+public final class BoneDancer extends CardImpl {
 
     public BoneDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

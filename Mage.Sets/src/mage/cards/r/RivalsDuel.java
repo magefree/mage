@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanentWithDifferentTypes;
  *
  * @author LevelX2
  */
-public class RivalsDuel extends CardImpl {
+public final class RivalsDuel extends CardImpl {
 
     public RivalsDuel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Darksteel extends ExpansionSet {
+public final class Darksteel extends ExpansionSet {
 
     private static final Darksteel instance = new Darksteel();
 

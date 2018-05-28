@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class GoblinCadets extends CardImpl {
+public final class GoblinCadets extends CardImpl {
 
     public GoblinCadets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class AbzanRunemark extends CardImpl {
+public final class AbzanRunemark extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("as long as you control a black or green permanent");
 

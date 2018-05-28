@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class RibbonSnake extends CardImpl {
+public final class RibbonSnake extends CardImpl {
 
     public RibbonSnake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

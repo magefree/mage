@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author MarcoMarin
  */
-public class DesertNomads extends CardImpl {
+public final class DesertNomads extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("desert");
 

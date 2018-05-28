@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class GoblinPsychopath extends CardImpl {
+public final class GoblinPsychopath extends CardImpl {
 
     public GoblinPsychopath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

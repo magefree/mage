@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class BishopsSoldier extends CardImpl {
+public final class BishopsSoldier extends CardImpl {
 
     public BishopsSoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

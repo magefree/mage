@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class HinterlandHarbor extends CardImpl {
+public final class HinterlandHarbor extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

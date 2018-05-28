@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class DwellOnThePast extends CardImpl {
+public final class DwellOnThePast extends CardImpl {
 
     public DwellOnThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

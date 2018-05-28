@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class StreamOfConsciousness extends CardImpl {
+public final class StreamOfConsciousness extends CardImpl {
 
     public StreamOfConsciousness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

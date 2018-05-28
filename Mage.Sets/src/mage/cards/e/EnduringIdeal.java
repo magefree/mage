@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author jeffwadsworth
  *
  */
-public class EnduringIdeal extends CardImpl {
+public final class EnduringIdeal extends CardImpl {
 
     public EnduringIdeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class SearingTouch extends CardImpl {
+public final class SearingTouch extends CardImpl {
 
     public SearingTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

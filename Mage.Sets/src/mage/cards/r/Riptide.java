@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class Riptide extends CardImpl {
+public final class Riptide extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures");
 

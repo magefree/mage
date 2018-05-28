@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpinedWurm extends CardImpl {
+public final class SpinedWurm extends CardImpl {
 
     public SpinedWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

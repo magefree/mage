@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class RockslideElemental extends CardImpl {
+public final class RockslideElemental extends CardImpl {
 
     public RockslideElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

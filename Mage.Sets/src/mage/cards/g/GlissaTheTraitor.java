@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class GlissaTheTraitor extends CardImpl {
+public final class GlissaTheTraitor extends CardImpl {
     public GlissaTheTraitor (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
