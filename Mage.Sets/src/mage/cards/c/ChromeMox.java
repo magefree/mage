@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
@@ -160,6 +161,13 @@ class ChromeMoxManaEffect extends ManaEffect {
         return false;
     }
 
+    private List<Mana> netManas = new ArrayList<>(); //workaround for variable types of mana
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source){
+        produceMana(true, game, source);
+        return netManas;
+    }
+
     @Override
     public Mana produceMana(boolean netMana, Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
@@ -169,10 +177,33 @@ class ChromeMoxManaEffect extends ManaEffect {
             if (!imprinted.isEmpty()) {
                 Card imprintedCard = game.getCard(imprinted.get(0));
                 if (imprintedCard != null) {
+                    Mana mana = new Mana();
+                    ObjectColor color = imprintedCard.getColor(game);
+                    if(netMana){
+                        netManas = new ArrayList<>();
+                        if (color == null){
+                            return mana;
+                        }
+                        if (color.isBlack()) {
+                            netManas.add(Mana.BlackMana(1));
+                        }
+                        if (color.isRed()) {
+                            netManas.add(Mana.RedMana(1));
+                        }
+                        if (color.isBlue()) {
+                            netManas.add(Mana.BlueMana(1));
+                        }
+                        if (color.isGreen()) {
+                            netManas.add(Mana.GreenMana(1));
+                        }
+                        if (color.isWhite()) {
+                            netManas.add(Mana.WhiteMana(1));
+                        }
+                        return mana;
+                    }
                     Choice choice = new ChoiceColor(true);
                     choice.getChoices().clear();
                     choice.setMessage("Pick a mana color");
-                    ObjectColor color = imprintedCard.getColor(game);
                     if (color.isBlack()) {
                         choice.getChoices().add("Black");
                     }
@@ -188,7 +219,6 @@ class ChromeMoxManaEffect extends ManaEffect {
                     if (color.isWhite()) {
                         choice.getChoices().add("White");
                     }
-                    Mana mana = new Mana();
                     if (!choice.getChoices().isEmpty()) {
 
                         if (choice.getChoices().size() == 1) {
@@ -200,22 +230,22 @@ class ChromeMoxManaEffect extends ManaEffect {
                         }
                         switch (choice.getChoice()) {
                             case "Black":
-                                player.getManaPool().addMana(Mana.BlackMana(1), game, source);
+                                mana = Mana.BlackMana(1);//player.getManaPool().addMana(Mana.BlackMana(1), game, source);
                                 break;
                             case "Blue":
-                                player.getManaPool().addMana(Mana.BlueMana(1), game, source);
+                                mana = Mana.BlueMana(1);//player.getManaPool().addMana(Mana.BlueMana(1), game, source);
                                 break;
                             case "Red":
-                                player.getManaPool().addMana(Mana.RedMana(1), game, source);
+                                mana = Mana.RedMana(1);//player.getManaPool().addMana(Mana.RedMana(1), game, source);
                                 break;
                             case "Green":
-                                player.getManaPool().addMana(Mana.GreenMana(1), game, source);
+                                mana = Mana.GreenMana(1);//player.getManaPool().addMana(Mana.GreenMana(1), game, source);
                                 break;
                             case "White":
-                                player.getManaPool().addMana(Mana.WhiteMana(1), game, source);
+                                mana = Mana.WhiteMana(1);//player.getManaPool().addMana(Mana.WhiteMana(1), game, source);
                                 break;
                             case "Colorless":
-                                player.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
+                                mana = Mana.ColorlessMana(1);//player.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
                                 break;
                             default:
                                 break;
