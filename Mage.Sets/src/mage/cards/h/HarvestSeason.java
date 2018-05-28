@@ -98,7 +98,7 @@ class HarvestSeasonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(0, new PermanentsOnBattlefieldCount(filter).calculate(game, source, this), StaticFilters.FILTER_BASIC_LAND_CARD);
+            TargetCardInLibrary target = new TargetCardInLibrary(0, new PermanentsOnBattlefieldCount(filter).calculate(game, source, this), StaticFilters.FILTER_CARD_BASIC_LAND);
             if (controller.searchLibrary(target, game)) {
                 controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
             }

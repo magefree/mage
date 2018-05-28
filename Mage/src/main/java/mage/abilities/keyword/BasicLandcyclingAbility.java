@@ -39,7 +39,7 @@ public class BasicLandcyclingAbility extends CyclingAbility{
     private static final String text = "Basic landcycling";
 
     public BasicLandcyclingAbility(ManaCosts costs) {
-        super(costs, StaticFilters.FILTER_BASIC_LAND_CARD, text);
+        super(costs, StaticFilters.FILTER_CARD_BASIC_LAND, text);
     }
 
     public BasicLandcyclingAbility(final BasicLandcyclingAbility ability) {

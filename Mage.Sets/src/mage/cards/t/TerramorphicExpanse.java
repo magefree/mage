@@ -52,7 +52,7 @@ public class TerramorphicExpanse extends CardImpl {
 
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

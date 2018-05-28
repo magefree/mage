@@ -96,7 +96,7 @@ class JungleWayfinderEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD);
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (player.chooseUse(Outcome.Benefit, "Search your library for a card to put into your hand?", source, game)) {
                         player.searchLibrary(target, game);
                         for (UUID cardId : target.getTargets()) {

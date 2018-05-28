@@ -53,7 +53,7 @@ public class FontOfFertility extends CardImpl {
 
 
         // {1}{G}, Sacrifice Font of Fertility: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

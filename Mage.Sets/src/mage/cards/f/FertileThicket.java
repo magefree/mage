@@ -100,7 +100,7 @@ class FertileThicketEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             cards.addAll(controller.getLibrary().getTopCards(game, 5));
             controller.lookAtCards(sourceObject.getIdName(), cards, game);
-            TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_BASIC_LAND_CARD);
+            TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD_BASIC_LAND);
             controller.chooseTarget(outcome, cards, target, source, game);
             Cards cardsRevealed = new CardsImpl(target.getTargets());
             if (!cardsRevealed.isEmpty()) {

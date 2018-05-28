@@ -86,7 +86,7 @@ class HauntingEchoesEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
             for (Card card : targetPlayer.getGraveyard().getCards(game)) {
-                if (!StaticFilters.FILTER_BASIC_LAND_CARD.match(card, game)) {
+                if (!StaticFilters.FILTER_CARD_BASIC_LAND.match(card, game)) {
                     card.moveToExile(null, "", source.getSourceId(), game);
 
                     FilterCard filterCard = new FilterCard("cards named " + card.getName());

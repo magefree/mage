@@ -52,8 +52,11 @@ public class WalkingAtlas extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: You may put a land card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A),
+                new TapSourceCost()
+        ));
     }
 
     public WalkingAtlas(final WalkingAtlas card) {

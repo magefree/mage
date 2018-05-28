@@ -101,6 +101,19 @@ public final class StaticFilters {
     static {
         FILTER_CARD_LAND_A.setLockedFilter(true);
     }
+
+    public static final FilterBasicLandCard FILTER_CARD_BASIC_LAND = new FilterBasicLandCard();
+
+    static {
+        FILTER_CARD_BASIC_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterBasicLandCard FILTER_CARD_BASIC_LAND_A = new FilterBasicLandCard("a basic land card");
+
+    static {
+        FILTER_CARD_BASIC_LAND_A.setLockedFilter(true);
+    }
+
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();
 
     static {
@@ -297,18 +310,6 @@ public final class StaticFilters {
 
     static {
         FILTER_LANDS_NONBASIC.setLockedFilter(true);
-    }
-
-    public static final FilterBasicLandCard FILTER_BASIC_LAND_CARD = new FilterBasicLandCard();
-
-    static {
-        FILTER_BASIC_LAND_CARD.setLockedFilter(true);
-    }
-
-    public static final FilterBasicLandCard FILTER_BASIC_LAND_CARD_A = new FilterBasicLandCard("a basic land card");
-
-    static {
-        FILTER_BASIC_LAND_CARD_A.setLockedFilter(true);
     }
 
     // Used for sacrifice targets that don't need the "you control" text

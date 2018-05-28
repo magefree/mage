@@ -53,8 +53,11 @@ public class SkyshroudRanger extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: You may put a land card from your hand onto the battlefield. Activate this ability only any time you could cast a sorcery.
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD,
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A), new TapSourceCost()));
+        this.addAbility(new ActivateAsSorceryActivatedAbility(
+                Zone.BATTLEFIELD,
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), 
+                new TapSourceCost()
+        ));
 
     }
 

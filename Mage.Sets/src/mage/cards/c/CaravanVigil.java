@@ -88,7 +88,7 @@ class CaravanVigilEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+            TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
             if (controller.searchLibrary(target, game)) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {

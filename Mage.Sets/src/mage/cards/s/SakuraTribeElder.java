@@ -55,7 +55,7 @@ public class SakuraTribeElder extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new SacrificeSourceCost()));
     }
 

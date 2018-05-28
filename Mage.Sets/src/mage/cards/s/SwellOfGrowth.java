@@ -49,7 +49,7 @@ public class SwellOfGrowth extends CardImpl {
         // Target creature gets +2/+2 until end of turn. You may put a land card from your hand onto the battlefield.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A));
+        this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
     }
 
     public SwellOfGrowth(final SwellOfGrowth card) {

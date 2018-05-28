@@ -115,7 +115,7 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_BASIC_LAND);
         if (controller.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
                 for (UUID cardId : target.getTargets()) {

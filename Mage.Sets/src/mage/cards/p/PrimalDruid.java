@@ -54,7 +54,7 @@ public class PrimalDruid extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Primal Druid dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true);
+        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true);
         effect.setText("you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library");
         this.addAbility(new DiesTriggeredAbility(effect, true));
 

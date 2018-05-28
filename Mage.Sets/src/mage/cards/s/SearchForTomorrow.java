@@ -50,7 +50,7 @@ public class SearchForTomorrow extends CardImpl {
 
 
         // Search your library for a basic land card and put it onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
         
         // Suspend 2-{G}

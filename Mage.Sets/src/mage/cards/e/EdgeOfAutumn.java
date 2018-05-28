@@ -57,7 +57,7 @@ public class EdgeOfAutumn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 5),
                 "If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library."));
 

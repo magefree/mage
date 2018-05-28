@@ -52,7 +52,7 @@ public class ElvishPioneer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Elvish Pioneer enters the battlefield, you may put a basic land card from your hand onto the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A, false, true), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_BASIC_LAND_A, false, true), false));
     }
 
     public ElvishPioneer(final ElvishPioneer card) {

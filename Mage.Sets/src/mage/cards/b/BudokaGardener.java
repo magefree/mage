@@ -64,7 +64,7 @@ public class BudokaGardener extends CardImpl {
         this.flipCardName = "Dokai, Weaver of Life";
 
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_BASIC_LAND_CARD_A), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new TapSourceCost());
         ability.addEffect(new BudokaGardenerEffect());
         this.addAbility(ability);
     }

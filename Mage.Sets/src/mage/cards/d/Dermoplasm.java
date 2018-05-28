@@ -103,7 +103,7 @@ class DermoplasmEffect extends OneShotEffect {
         Permanent thisCreature = game.getPermanent(source.getId());
         FilterCreatureCard filter = new FilterCreatureCard("a creature card with a morph ability");
         filter.add(new AbilityPredicate(MorphAbility.class));
-        Effect effect = new PutCardFromHandOntoBattlefieldEffect(new FilterCreatureCard(filter));
+        Effect effect = new PutCardFromHandOntoBattlefieldEffect(filter);
         if (effect.apply(game, source)) {
             if (thisCreature != null) {
                 effect = new ReturnToHandTargetEffect();

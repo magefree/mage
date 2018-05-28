@@ -57,7 +57,7 @@ public class YavimayaGranger extends CardImpl {
         this.addAbility(new EchoAbility("{2}{G}"));
         //When Yavimaya Granger enters the battlefield, you may search your library for a basic land card,
         //put that card onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true), true));
     }
 
     public YavimayaGranger(final YavimayaGranger card) {
