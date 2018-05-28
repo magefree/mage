@@ -103,7 +103,7 @@ class AngelOfGlorysRiseEffect extends OneShotEffect {
             controller.moveCards(toExile, Zone.EXILED, source, game);
             FilterCreatureCard filterHuman = new FilterCreatureCard();
             filterHuman.add(new SubtypePredicate(SubType.HUMAN));
-            controller.moveCards(controller.getGraveyard().getCards(filterHuman, game), Zone.GRAVEYARD, source, game);
+            controller.moveCards(controller.getGraveyard().getCards(filterHuman, game), Zone.BATTLEFIELD, source, game);
         }
         return true;
     }
