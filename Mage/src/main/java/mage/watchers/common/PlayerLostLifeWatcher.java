@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 /*
@@ -81,8 +82,9 @@ public class PlayerLostLifeWatcher extends Watcher {
     public int getAllOppLifeLost(UUID playerId, Game game) {
         int amount = 0;
         for (UUID opponentId : this.amountOfLifeLostThisTurn.keySet()) {
-            if (game.getOpponents(playerId).contains(opponentId)) {
-                amount += this.amountOfLifeLostThisTurn.get(playerId);
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && opponent.hasOpponent(playerId, game)) {
+                amount += this.amountOfLifeLostThisTurn.getOrDefault(opponentId, 0);
             }
         }
         return amount;
