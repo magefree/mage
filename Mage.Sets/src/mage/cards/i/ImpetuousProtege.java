@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class ImpetuousProtege extends CardImpl {
+public final class ImpetuousProtege extends CardImpl {
 
     public ImpetuousProtege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

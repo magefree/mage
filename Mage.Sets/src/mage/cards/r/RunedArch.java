@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class RunedArch extends CardImpl {
+public final class RunedArch extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creatures with power 2 or less");
 

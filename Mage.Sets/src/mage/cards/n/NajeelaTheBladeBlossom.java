@@ -59,7 +59,7 @@ import mage.game.permanent.token.WarriorToken;
  *
  * @author TheElk801
  */
-public class NajeelaTheBladeBlossom extends CardImpl {
+public final class NajeelaTheBladeBlossom extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "a Warrior");
 

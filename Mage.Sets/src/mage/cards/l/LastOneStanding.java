@@ -48,7 +48,7 @@ import mage.util.RandomUtil;
  *
  * @author TheElk801
  */
-public class LastOneStanding extends CardImpl {
+public final class LastOneStanding extends CardImpl {
 
     public LastOneStanding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");

@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class KravTheUnredeemed extends CardImpl {
+public final class KravTheUnredeemed extends CardImpl {
 
     public KravTheUnredeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

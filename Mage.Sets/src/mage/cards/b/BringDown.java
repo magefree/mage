@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class BringDown extends CardImpl {
+public final class BringDown extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 

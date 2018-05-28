@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class RegnasSanction extends CardImpl {
+public final class RegnasSanction extends CardImpl {
 
     public RegnasSanction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

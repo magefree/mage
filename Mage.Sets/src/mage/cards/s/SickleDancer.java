@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author TheElk801
  */
-public class SickleDancer extends CardImpl {
+public final class SickleDancer extends CardImpl {
 
     private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "Warrior creature");
 

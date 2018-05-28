@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class JungleWayfinder extends CardImpl {
+public final class JungleWayfinder extends CardImpl {
 
     public JungleWayfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

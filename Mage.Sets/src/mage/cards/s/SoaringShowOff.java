@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class SoaringShowOff extends CardImpl {
+public final class SoaringShowOff extends CardImpl {
 
     public SoaringShowOff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

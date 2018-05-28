@@ -52,7 +52,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  *
  * @author TheElk801
  */
-public class RegnaTheRedeemer extends CardImpl {
+public final class RegnaTheRedeemer extends CardImpl {
 
     public RegnaTheRedeemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");

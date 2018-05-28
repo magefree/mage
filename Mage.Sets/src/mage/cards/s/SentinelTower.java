@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class SentinelTower extends CardImpl {
+public final class SentinelTower extends CardImpl {
 
     public SentinelTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class Skystreamer extends CardImpl {
+public final class Skystreamer extends CardImpl {
 
     public Skystreamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

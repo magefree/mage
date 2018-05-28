@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class BonusRound extends CardImpl {
+public final class BonusRound extends CardImpl {
 
     public BonusRound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

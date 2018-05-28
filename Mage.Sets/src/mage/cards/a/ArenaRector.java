@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class ArenaRector extends CardImpl {
+public final class ArenaRector extends CardImpl {
 
     public ArenaRector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

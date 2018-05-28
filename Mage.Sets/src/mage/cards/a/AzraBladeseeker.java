@@ -49,7 +49,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author TheElk801
  */
-public class AzraBladeseeker extends CardImpl {
+public final class AzraBladeseeker extends CardImpl {
 
     public AzraBladeseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

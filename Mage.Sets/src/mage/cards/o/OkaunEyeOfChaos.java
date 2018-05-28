@@ -49,7 +49,7 @@ import mage.constants.TargetController;
  *
  * @author TheElk801
  */
-public class OkaunEyeOfChaos extends CardImpl {
+public final class OkaunEyeOfChaos extends CardImpl {
 
     public OkaunEyeOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

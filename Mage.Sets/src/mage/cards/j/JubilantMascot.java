@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class JubilantMascot extends CardImpl {
+public final class JubilantMascot extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other target creatures");
 

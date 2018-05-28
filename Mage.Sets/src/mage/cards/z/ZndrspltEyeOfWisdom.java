@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author TheElk801
  */
-public class ZndrspltEyeOfWisdom extends CardImpl {
+public final class ZndrspltEyeOfWisdom extends CardImpl {
 
     public ZndrspltEyeOfWisdom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class BrambleSovereign extends CardImpl {
+public final class BrambleSovereign extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 

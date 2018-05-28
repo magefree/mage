@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class GenerousPatron extends CardImpl {
+public final class GenerousPatron extends CardImpl {
 
     public GenerousPatron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author TheElk801
  */
-public class LeyWeaver extends CardImpl {
+public final class LeyWeaver extends CardImpl {
 
     public LeyWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

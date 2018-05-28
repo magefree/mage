@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class ThrasherBrute extends CardImpl {
+public final class ThrasherBrute extends CardImpl {
 
     private static final ThrasherBruteFilter filter = new ThrasherBruteFilter();
 

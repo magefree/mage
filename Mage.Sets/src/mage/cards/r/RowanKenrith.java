@@ -59,7 +59,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class RowanKenrith extends CardImpl {
+public final class RowanKenrith extends CardImpl {
 
     public RowanKenrith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");

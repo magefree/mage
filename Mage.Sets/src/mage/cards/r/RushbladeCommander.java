@@ -44,7 +44,7 @@ import mage.filter.common.FilterTeamPermanent;
  *
  * @author TheElk801
  */
-public class RushbladeCommander extends CardImpl {
+public final class RushbladeCommander extends CardImpl {
 
     private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "Warriors your team controls");
 

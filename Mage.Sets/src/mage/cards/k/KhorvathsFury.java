@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class KhorvathsFury extends CardImpl {
+public final class KhorvathsFury extends CardImpl {
 
     public KhorvathsFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");

@@ -43,7 +43,7 @@ import mage.filter.common.FilterTeamCreaturePermanent;
  *
  * @author TheElk801
  */
-public class DwarvenLightsmith extends CardImpl {
+public final class DwarvenLightsmith extends CardImpl {
 
     private static final FilterTeamCreaturePermanent filter = new FilterTeamCreaturePermanent("creatures your team controls");
 

@@ -43,7 +43,7 @@ import mage.game.permanent.token.WarriorToken;
  *
  * @author TheElk801
  */
-public class BlaringRecruiter extends CardImpl {
+public final class BlaringRecruiter extends CardImpl {
 
     public BlaringRecruiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

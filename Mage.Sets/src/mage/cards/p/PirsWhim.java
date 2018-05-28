@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class PirsWhim extends CardImpl {
+public final class PirsWhim extends CardImpl {
 
     public PirsWhim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

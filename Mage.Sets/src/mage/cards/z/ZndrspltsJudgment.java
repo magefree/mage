@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class ZndrspltsJudgment extends CardImpl {
+public final class ZndrspltsJudgment extends CardImpl {
 
     public ZndrspltsJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");

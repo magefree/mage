@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class Brightling extends CardImpl {
+public final class Brightling extends CardImpl {
 
     public Brightling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

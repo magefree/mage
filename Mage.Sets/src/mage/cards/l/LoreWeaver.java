@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class LoreWeaver extends CardImpl {
+public final class LoreWeaver extends CardImpl {
 
     public LoreWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

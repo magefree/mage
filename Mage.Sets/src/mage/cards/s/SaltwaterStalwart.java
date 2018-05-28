@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class SaltwaterStalwart extends CardImpl {
+public final class SaltwaterStalwart extends CardImpl {
 
     public SaltwaterStalwart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

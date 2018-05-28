@@ -46,7 +46,7 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  *
  * @author L_J
  */
-public class ThrillingEncore extends CardImpl {
+public final class ThrillingEncore extends CardImpl {
 
     public ThrillingEncore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");

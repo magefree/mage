@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author TheElk801
  */
-public class BlaringCaptain extends CardImpl {
+public final class BlaringCaptain extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "attacking Warriors");
 

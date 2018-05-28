@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class BloodbornScoundrels extends CardImpl {
+public final class BloodbornScoundrels extends CardImpl {
 
     public BloodbornScoundrels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

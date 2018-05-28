@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class HuddleUp extends CardImpl {
+public final class HuddleUp extends CardImpl {
 
     public HuddleUp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

@@ -59,7 +59,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class GrothamaAllDevouring extends CardImpl {
+public final class GrothamaAllDevouring extends CardImpl {
 
     public GrothamaAllDevouring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

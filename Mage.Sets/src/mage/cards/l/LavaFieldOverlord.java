@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class LavaFieldOverlord extends CardImpl {
+public final class LavaFieldOverlord extends CardImpl {
 
     public LavaFieldOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{R}{R}");

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class StunningReversal extends CardImpl {
+public final class StunningReversal extends CardImpl {
 
     public StunningReversal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");

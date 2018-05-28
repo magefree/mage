@@ -39,7 +39,7 @@ import mage.filter.StaticFilters;
  *
  * @author TheElk801
  */
-public class PlayOfTheGame extends CardImpl {
+public final class PlayOfTheGame extends CardImpl {
 
     public PlayOfTheGame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");

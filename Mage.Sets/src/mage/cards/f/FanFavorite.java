@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author TheElk801
  */
-public class FanFavorite extends CardImpl {
+public final class FanFavorite extends CardImpl {
 
     public FanFavorite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

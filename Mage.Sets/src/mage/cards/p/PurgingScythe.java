@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class PurgingScythe extends CardImpl {
+public final class PurgingScythe extends CardImpl {
 
     public PurgingScythe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

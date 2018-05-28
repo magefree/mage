@@ -51,7 +51,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author TheElk801
  */
-public class ArchfiendOfDespair extends CardImpl {
+public final class ArchfiendOfDespair extends CardImpl {
 
     public ArchfiendOfDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");

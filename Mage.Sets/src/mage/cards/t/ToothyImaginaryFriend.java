@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class ToothyImaginaryFriend extends CardImpl {
+public final class ToothyImaginaryFriend extends CardImpl {
 
     public ToothyImaginaryFriend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

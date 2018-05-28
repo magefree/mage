@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author TheElk801
  */
-public class OutOfBounds extends CardImpl {
+public final class OutOfBounds extends CardImpl {
 
     public OutOfBounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

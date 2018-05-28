@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class StadiumVendors extends CardImpl {
+public final class StadiumVendors extends CardImpl {
 
     public StadiumVendors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

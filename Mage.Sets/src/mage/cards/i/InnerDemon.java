@@ -57,7 +57,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class InnerDemon extends CardImpl {
+public final class InnerDemon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all non-Demon creatures");
 

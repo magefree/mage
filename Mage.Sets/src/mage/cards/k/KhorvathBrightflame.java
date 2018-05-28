@@ -48,7 +48,7 @@ import mage.filter.common.FilterTeamPermanent;
  *
  * @author TheElk801
  */
-public class KhorvathBrightflame extends CardImpl {
+public final class KhorvathBrightflame extends CardImpl {
 
     private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.KNIGHT, "Knights your team controls");
 

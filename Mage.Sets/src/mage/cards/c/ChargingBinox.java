@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class ChargingBinox extends CardImpl {
+public final class ChargingBinox extends CardImpl {
 
     public ChargingBinox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{G}");

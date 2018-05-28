@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author TheElk801
  */
-public class VampireCharmseeker extends CardImpl {
+public final class VampireCharmseeker extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant, sorcery, or creature card from a graveyard");
 

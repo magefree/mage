@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author TheElk801
  */
-public class CheeringFanatic extends CardImpl {
+public final class CheeringFanatic extends CardImpl {
 
     public CheeringFanatic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

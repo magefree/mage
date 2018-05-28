@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801, jeffwadsworth
  */
-public class TogetherForever extends CardImpl {
+public final class TogetherForever extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("");
 

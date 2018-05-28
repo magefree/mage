@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class StolenStrategy extends CardImpl {
+public final class StolenStrategy extends CardImpl {
 
     public StolenStrategy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

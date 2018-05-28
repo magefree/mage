@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class SoulbladeCorrupter extends CardImpl {
+public final class SoulbladeCorrupter extends CardImpl {
 
     public SoulbladeCorrupter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

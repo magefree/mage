@@ -46,7 +46,7 @@ import mage.filter.common.FilterTeamPermanent;
  *
  * @author TheElk801
  */
-public class SylviaBrightspear extends CardImpl {
+public final class SylviaBrightspear extends CardImpl {
 
     private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.DRAGON, "Dragons your team controls");
 

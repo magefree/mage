@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class Spellseeker extends CardImpl {
+public final class Spellseeker extends CardImpl {
 
     private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("an instant or sorcery card with converted mana cost 2 or less");
 
