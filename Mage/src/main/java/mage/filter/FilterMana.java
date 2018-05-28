@@ -104,7 +104,7 @@ public class FilterMana implements Serializable {
     }
 
     public boolean isColorless() {
-        return colorless;
+        return !(white || blue || black || red || green) || colorless;
     }
 
     public void setColorless(boolean colorless) {

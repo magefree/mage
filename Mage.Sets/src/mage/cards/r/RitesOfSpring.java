@@ -100,7 +100,7 @@ class RitesOfSpringEffect extends OneShotEffect {
             }
             game.applyEffects();
             return new SearchLibraryPutInHandEffect(
-                    new TargetCardInLibrary(0, numDiscarded, StaticFilters.FILTER_BASIC_LAND_CARD), true, true)
+                    new TargetCardInLibrary(0, numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND), true, true)
                     .apply(game, source);
         }
         return false;

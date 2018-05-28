@@ -56,7 +56,7 @@ public final class RangingRaptors extends CardImpl {
         // Enrage - Whenever Ranging Raptors is dealt damage, you may search your library for a basic land card, put it onto the battlefield, then shuffle your library.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 true,
                 true);
         this.addAbility(ability);

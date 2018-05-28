@@ -115,7 +115,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
             } else {
                 target = mode.getTargets().get(0);
             }
-            sb.append("Target ").append(target.getTargetName());
+            sb.append("target ").append(target.getTargetName());
         } else {
             sb.append("that player");
         }

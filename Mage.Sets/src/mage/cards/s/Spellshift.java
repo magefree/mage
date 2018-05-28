@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -103,7 +104,7 @@ class SpellshiftEffect extends OneShotEffect {
             }
             spellController.revealCards(source, cardsToReveal, game);
             if (toCast != null && spellController.chooseUse(outcome, "Cast " + toCast.getLogName() + " without paying its mana cost?", source, game)) {
-                spellController.cast(toCast.getSpellAbility(), game, true);
+                spellController.cast(toCast.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
             }
             spellController.shuffleLibrary(source, game);
             return true;

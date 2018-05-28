@@ -37,7 +37,10 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalManaEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ConditionalManaAbility;
@@ -45,6 +48,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -143,14 +147,16 @@ class GemstoneCavernsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                if (card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId())) {
+                ContinuousEffect effect = new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.LUCK.createInstance()), "");
+                effect.setDuration(Duration.OneUse);
+                game.addEffect(effect, source);
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
-                        permanent.addCounters(CounterType.LUCK.createInstance(), source, game);
                         Cost cost = new ExileFromHandCost(new TargetCardInHand());
                         if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
                             cost.pay(source, game, source.getSourceId(), source.getControllerId(), true, null);

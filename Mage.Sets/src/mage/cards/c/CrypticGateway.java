@@ -33,7 +33,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -223,7 +223,7 @@ class CrypticGatewayEffect extends OneShotEffect {
                 }
 
                 if (commonSubType) {
-                    PutPermanentOnBattlefieldEffect putIntoPlay = new PutPermanentOnBattlefieldEffect(filter);
+                    PutCardFromHandOntoBattlefieldEffect putIntoPlay = new PutCardFromHandOntoBattlefieldEffect(filter);
                     putIntoPlay.apply(game, source);
                 }
             }

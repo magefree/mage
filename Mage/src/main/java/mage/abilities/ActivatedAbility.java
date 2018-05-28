@@ -28,6 +28,7 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -38,9 +39,36 @@ import mage.game.Game;
  */
 public interface ActivatedAbility extends Ability {
 
-    boolean canActivate(UUID playerId, Game game);
+    final public class ActivationStatus {
 
-    public void setMayActivate(TargetController mayActivate);
+        private final boolean canActivate;
+        private final MageObjectReference permittingObject;
+
+        public ActivationStatus(boolean canActivate, MageObjectReference permittingObject) {
+            this.canActivate = canActivate;
+            this.permittingObject = permittingObject;
+        }
+
+        public boolean canActivate() {
+            return canActivate;
+        }
+
+        public MageObjectReference getPermittingObject() {
+            return permittingObject;
+        }
+
+        public static ActivationStatus getFalse() {
+            return new ActivationStatus(false, null);
+        }
+
+        public static ActivationStatus getTrue() {
+            return new ActivationStatus(true, null);
+        }
+    }
+
+    ActivationStatus canActivate(UUID playerId, Game game); // has to return a reference to the permitting ability/source
+
+    void setMayActivate(TargetController mayActivate);
 
     /**
      * Returns the minimal possible cost for what the ability can be activated

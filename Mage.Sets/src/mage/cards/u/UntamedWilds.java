@@ -47,7 +47,7 @@ public final class UntamedWilds extends CardImpl {
 
 
         // Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD)));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND)));
     }
 
     public UntamedWilds(final UntamedWilds card) {

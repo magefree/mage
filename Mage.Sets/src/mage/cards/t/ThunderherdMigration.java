@@ -64,7 +64,7 @@ public final class ThunderherdMigration extends CardImpl {
                 "reveal a Dinosaur card from your hand or pay {1}"));
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
     }
 
     public ThunderherdMigration(final ThunderherdMigration card) {

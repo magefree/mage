@@ -30,6 +30,7 @@ package mage.cards.j;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
@@ -43,9 +44,9 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -290,7 +291,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         while (jaceExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, jaceExileZone, target, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                if (controller.cast(card.getSpellAbility(), game, true)) {
+                if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                     game.getExile().removeCard(card, game);
                 }
             }

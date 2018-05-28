@@ -30,7 +30,6 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -79,7 +78,7 @@ class ReturnOfTheNightstalkersEffect extends OneShotEffect {
 
     public ReturnOfTheNightstalkersEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control.";
+        staticText = "Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control";
     }
 
     public ReturnOfTheNightstalkersEffect(final ReturnOfTheNightstalkersEffect effect) {
@@ -93,15 +92,14 @@ class ReturnOfTheNightstalkersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Card card : player.getGraveyard().getCards(filter1, game)) {
-                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.moveCards(controller.getGraveyard().getCards(filter1, game), Zone.BATTLEFIELD, source, game);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter2, source.getControllerId(), source.getSourceId(), game)) {
                 permanent.destroy(source.getSourceId(), game, false);
             }
+            return true;
         }
-        return true;
+        return false;
     }
 }

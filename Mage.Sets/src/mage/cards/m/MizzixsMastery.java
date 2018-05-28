@@ -29,6 +29,7 @@ package mage.cards.m;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -106,7 +107,7 @@ class MizzixsMasteryEffect extends OneShotEffect {
                     Card cardCopy = game.copyCard(card, source, source.getControllerId());
                     if (cardCopy.getSpellAbility().canChooseTarget(game)
                             && controller.chooseUse(outcome, "Cast copy of " + card.getName() + " without paying its mana cost?", source, game)) {
-                        controller.cast(cardCopy.getSpellAbility(), game, true);
+                        controller.cast(cardCopy.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                     }
                 }
             }
@@ -150,7 +151,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                         if (controller.choose(outcome, copiedCards, targetCard, game)) {
                             Card selectedCard = game.getCard(targetCard.getFirstTarget());
                             if (selectedCard != null && selectedCard.getSpellAbility().canChooseTarget(game)) {
-                                if (controller.cast(selectedCard.getSpellAbility(), game, true)) {
+                                if (controller.cast(selectedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                                     copiedCards.remove(selectedCard);
                                 }
                             }

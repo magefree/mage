@@ -15,34 +15,41 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
+public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
 
     private final FilterCard filter;
     private final boolean useTargetController;
+    private final boolean tapped;
 
-    public PutPermanentOnBattlefieldEffect() {
+    public PutCardFromHandOntoBattlefieldEffect() {
         this(new FilterPermanentCard("a permanent card"), false);
     }
 
-    public PutPermanentOnBattlefieldEffect(FilterCard filter) {
+    public PutCardFromHandOntoBattlefieldEffect(FilterCard filter) {
         this(filter, false);
     }
 
-    public PutPermanentOnBattlefieldEffect(FilterCard filter, boolean useTargetController) {
+    public PutCardFromHandOntoBattlefieldEffect(FilterCard filter, boolean useTargetController) {
+        this(filter, useTargetController, false);
+    }
+
+    public PutCardFromHandOntoBattlefieldEffect(FilterCard filter, boolean useTargetController, boolean tapped) {
         super(Outcome.PutCardInPlay);
         this.filter = filter;
         this.useTargetController = useTargetController;
+        this.tapped = tapped;
     }
 
-    public PutPermanentOnBattlefieldEffect(final PutPermanentOnBattlefieldEffect effect) {
+    public PutCardFromHandOntoBattlefieldEffect(final PutCardFromHandOntoBattlefieldEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.useTargetController = effect.useTargetController;
+        this.tapped = effect.tapped;
     }
 
     @Override
-    public PutPermanentOnBattlefieldEffect copy() {
-        return new PutPermanentOnBattlefieldEffect(this);
+    public PutCardFromHandOntoBattlefieldEffect copy() {
+        return new PutCardFromHandOntoBattlefieldEffect(this);
     }
 
     @Override
@@ -58,10 +65,10 @@ public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
         }
         if (player.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    return player.moveCards(card, Zone.BATTLEFIELD, source, game);
+                    return player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
                 }
             }
         }

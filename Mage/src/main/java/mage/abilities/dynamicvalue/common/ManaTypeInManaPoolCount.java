@@ -45,7 +45,7 @@ public class ManaTypeInManaPoolCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("unspent ");
         switch (manaType) {
             case BLACK:
                 sb.append("black");
@@ -66,7 +66,7 @@ public class ManaTypeInManaPoolCount implements DynamicValue {
                 sb.append("colorless");
                 break;
         }
-        sb.append(" mana in your mana pool");
+        sb.append(" mana you have");
         return sb.toString();
     }
 }

@@ -30,9 +30,9 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -101,13 +101,7 @@ class IncomingEffect extends OneShotEffect {
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
                     if (player.searchLibrary(target, game)) {
-                        for (UUID cardId : target.getTargets()) {
-                            Card card = player.getLibrary().getCard(cardId, game);
-                            if (card != null) {
-                                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId(), true);
-                            }
-
-                        }
+                        player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                         player.shuffleLibrary(source, game);
                     }
                 }

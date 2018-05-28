@@ -30,6 +30,7 @@ package org.mage.test.stub;
 import java.io.Serializable;
 import java.util.*;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -564,7 +565,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana) {
+    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference) {
         return false;
     }
 
@@ -619,7 +620,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming) {
+    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming, MageObjectReference reference) {
         return false;
     }
 

@@ -50,7 +50,7 @@ public final class SpringMind extends SplitCard {
 
         // Spring
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        getLeftHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        getLeftHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
 
         // Mind
         // Aftermath

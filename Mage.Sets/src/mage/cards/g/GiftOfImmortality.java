@@ -39,8 +39,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -142,7 +142,7 @@ class GiftOfImmortalityReturnEnchantmentEffect extends OneShotEffect {
             Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (controller != null && creature != null) {
                 game.getState().setValue("attachTo:" + aura.getId(), creature);
-                aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
+                controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                 return creature.addAttachment(aura.getId(), game);
             }
         }

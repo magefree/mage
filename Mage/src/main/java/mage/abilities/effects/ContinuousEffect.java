@@ -51,6 +51,8 @@ public interface ContinuousEffect extends Effect {
 
     void discard();
 
+    void setDuration(Duration duration);
+
     Duration getDuration();
 
     long getOrder();

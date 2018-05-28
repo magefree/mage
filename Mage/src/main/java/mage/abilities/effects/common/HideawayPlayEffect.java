@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -35,8 +37,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -82,7 +82,7 @@ public class HideawayPlayEffect extends OneShotEffect {
                     }
                 }
 
-                if (!controller.playCard(card, game, true, true)) {
+                if (!controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game))) {
                     if (card.getZoneChangeCounter(game) == zcc) {
                         card.setFaceDown(true, game);
                     }

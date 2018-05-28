@@ -97,7 +97,7 @@ public class EldraziTempleTest extends CardTestPlayerBase {
         // {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
         addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Temple", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        // {T}: Add {W}, {B}, or {G} to your mana pool.
+        // {T}: Add {W}, {B}, or {G}.
         // {W}{B}{G}, {T}, Sacrifice Abzan Banner: Draw a card.
         addCard(Zone.HAND, playerA, "Abzan Banner", 1); // Artifact {3}
 

@@ -28,6 +28,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -96,7 +97,7 @@ class ThunderbladeChargeCastEffect extends OneShotEffect {
         if (controller != null
                 && sourceCard != null
                 && Zone.GRAVEYARD == game.getState().getZone(sourceCard.getId())) {
-            controller.cast(sourceCard.getSpellAbility(), game, true);
+            controller.cast(sourceCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
             return true;
         }
         return false;

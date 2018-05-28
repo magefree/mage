@@ -82,9 +82,9 @@ public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         if (!condition.apply(game, this)) {
-            return false;
+            return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
     }

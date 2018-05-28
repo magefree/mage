@@ -257,6 +257,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         supportedSets.add("UST");
         supportedSets.add("RIX");
         supportedSets.add("DOM");
+        supportedSets.add("BBD");
 
         sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();

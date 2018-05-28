@@ -61,7 +61,7 @@ class BlockTappedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return !input.isTapped() || null != game.getState().getContinuousEffects().asThough(input.getId(), AsThoughEffectType.BLOCK_TAPPED, input.getControllerId(), game);
+        return !input.isTapped() || null != game.getState().getContinuousEffects().asThough(input.getId(), AsThoughEffectType.BLOCK_TAPPED, null, input.getControllerId(), game);
     }
 
     @Override

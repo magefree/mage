@@ -34,6 +34,7 @@
 package mage.client.dialog;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,22 +44,26 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
+import org.apache.log4j.Logger;
+
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
-import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
-import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.players.PlayerType;
 import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
-import org.apache.log4j.Logger;
+
+import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_4;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -66,7 +71,7 @@ import org.apache.log4j.Logger;
 public class TableWaitingDialog extends MageDialog {
 
     private static final Logger LOGGER = Logger.getLogger(TableWaitingDialog.class);
-    private static final int[] DEFAULT_COLUMS_WIDTH = {20, 50, 100, 100, 100};
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 50, 100, 100, 100, 100};
 
     private UUID tableId;
     private UUID roomId;
@@ -89,12 +94,12 @@ public class TableWaitingDialog extends MageDialog {
             this.setSize(prefWidth, prefHeight);
         }
 
-        chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
-        tableSeats.createDefaultColumnsFromModel();
-        TableUtil.setColumnWidthAndOrder(tableSeats, DEFAULT_COLUMS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
-        tableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
         setGUISize();
-
+        jTableSeats.createDefaultColumnsFromModel();
+        jTableSeats.setAutoCreateColumnsFromModel(false);
+        jTableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
+        TableUtil.setColumnWidthAndOrder(jTableSeats, DEFAULT_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+        chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
@@ -104,9 +109,9 @@ public class TableWaitingDialog extends MageDialog {
     }
 
     private void setGUISize() {
-        tableSeats.getTableHeader().setFont(GUISizeHelper.tableFont);
-        tableSeats.setFont(GUISizeHelper.tableFont);
-        tableSeats.setRowHeight(GUISizeHelper.getTableRowHeight());
+        jTableSeats.getTableHeader().setFont(GUISizeHelper.tableFont);
+        jTableSeats.setFont(GUISizeHelper.tableFont);
+        jTableSeats.setRowHeight(GUISizeHelper.getTableRowHeight());
 
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
@@ -131,14 +136,14 @@ public class TableWaitingDialog extends MageDialog {
                         closeDialog();
                         return;
                 }
-                int row = this.tableSeats.getSelectedRow();
+                int row = this.jTableSeats.getSelectedRow();
                 if (getTitle().equals("Waiting for players")) {
                     this.title = getTitle() + " - " + table.getDeckType() + " / " + table.getGameType();
                     this.repaint();
                 }
                 tableWaitModel.loadData(table);
-                this.tableSeats.repaint();
-                this.tableSeats.getSelectionModel().setSelectionInterval(row, row);
+                this.jTableSeats.repaint();
+                this.jTableSeats.getSelectionModel().setSelectionInterval(row, row);
             } else {
                 closeDialog();
             }
@@ -148,10 +153,15 @@ public class TableWaitingDialog extends MageDialog {
     }
 
     public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
+        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
+        Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
+        String tournamentChatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_4, null);
+        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+
         if (SessionHandler.isTableOwner(roomId, tableId)) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
@@ -161,13 +171,15 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveDown.setVisible(false);
             this.btnMoveUp.setVisible(false);
         }
-        Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
+
         if (chatId.isPresent()) {
             this.chatPanel.connect(chatId.get());
             updateTask.execute();
             this.setModal(false);
             this.setLocation(100, 100);
             this.setVisible(true);
+
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, tournamentChatDivider, jSplitPane1);
         } else {
             closeDialog();
         }
@@ -177,12 +189,13 @@ public class TableWaitingDialog extends MageDialog {
         if (updateTask != null) {
             updateTask.cancel(true);
         }
+
         this.chatPanel.disconnect();
         MageFrame.getUI().removeButton(MageComponents.TABLE_WAITING_START_BUTTON);
         this.removeDialog();
-        TableUtil.saveColumnWidthAndOrderToPrefs(tableSeats, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLE_WAITING_WIDTH, Integer.toString(getWidth()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLE_WAITING_HEIGHT, Integer.toString(getHeight()));
+        TableUtil.saveColumnWidthAndOrderToPrefs(jTableSeats, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+        GuiDisplayUtil.saveCurrentBoundsToPrefs();
+        GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_4, this.jSplitPane1.getDividerLocation());
     }
 
     /**
@@ -200,7 +213,7 @@ public class TableWaitingDialog extends MageDialog {
         btnStart = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableSeats = new javax.swing.JTable();
+        jTableSeats = new javax.swing.JTable();
         chatPanel = new mage.client.chat.ChatPanelBasic();
 
         setResizable(true);
@@ -226,9 +239,9 @@ public class TableWaitingDialog extends MageDialog {
         jSplitPane1.setResizeWeight(1.0);
         jSplitPane1.setToolTipText("");
 
-        tableSeats.setModel(tableWaitModel);
-        tableSeats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tableSeats);
+        jTableSeats.setModel(tableWaitModel);
+        jTableSeats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jTableSeats);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
         jSplitPane1.setRightComponent(chatPanel);
@@ -288,19 +301,19 @@ public class TableWaitingDialog extends MageDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
-        int row = this.tableSeats.getSelectedRow();
-        if (row < this.tableSeats.getRowCount() - 1) {
+        int row = this.jTableSeats.getSelectedRow();
+        if (row < this.jTableSeats.getRowCount() - 1) {
             SessionHandler.swapSeats(roomId, tableId, row, row + 1);
-            this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
+            this.jTableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
         }
 
     }//GEN-LAST:event_btnMoveDownActionPerformed
 
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
-        int row = this.tableSeats.getSelectedRow();
+        int row = this.jTableSeats.getSelectedRow();
         if (row > 0) {
             SessionHandler.swapSeats(roomId, tableId, row, row - 1);
-            this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
+            this.jTableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed
 
@@ -312,7 +325,7 @@ public class TableWaitingDialog extends MageDialog {
     private mage.client.chat.ChatPanelBasic chatPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable tableSeats;
+    private javax.swing.JTable jTableSeats;
     // End of variables declaration//GEN-END:variables
 
 }

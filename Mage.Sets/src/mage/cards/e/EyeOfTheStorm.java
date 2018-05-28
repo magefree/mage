@@ -28,6 +28,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -180,7 +181,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                     if (cardToCopy != null) {
                         Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
                         if (spellController.chooseUse(outcome, "Cast " + copy.getIdName() + " without paying mana cost?", source, game)) {
-                            spellController.cast(copy.getSpellAbility(), game, true);
+                            spellController.cast(copy.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         }
                     }
                 }

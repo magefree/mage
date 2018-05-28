@@ -9,10 +9,10 @@ import java.awt.Desktop;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.net.URL;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import javax.swing.JLabel;
 
 /**
@@ -47,6 +47,7 @@ public class URLHandler {
 
     private static MouseAdapter createMouseAdapter(String url) {
         currentMouseAdapter = new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() > 0) {
                     if (Desktop.isDesktopSupported()) {
@@ -57,7 +58,7 @@ public class URLHandler {
                         } catch (IOException | URISyntaxException ex) {
                             // do nothing
                         }
-                    } 
+                    }
                 }
             }
         };

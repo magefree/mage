@@ -29,68 +29,40 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
+public class FlipUntilLoseEffect extends OneShotEffect {
 
-    private FilterCard filter;
-    private boolean tapped;
-
-    public PutLandFromHandOntoBattlefieldEffect() {
-        this(false);
+    public FlipUntilLoseEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "flip a coin until you lose a flip";
     }
 
-    public PutLandFromHandOntoBattlefieldEffect(boolean tapped) {
-        this(tapped, new FilterLandCard());
-    }
-
-    public PutLandFromHandOntoBattlefieldEffect(boolean tapped, FilterCard filter) {
-        super(Outcome.PutLandInPlay);
-        this.tapped = tapped;
-        this.filter = filter;
-        staticText = "you may put a " + filter.getMessage() + " from your hand onto the battlefield" + (tapped ? " tapped" : "");
-    }
-
-    public PutLandFromHandOntoBattlefieldEffect(final PutLandFromHandOntoBattlefieldEffect effect) {
+    public FlipUntilLoseEffect(final FlipUntilLoseEffect effect) {
         super(effect);
-        this.tapped = effect.tapped;
-        this.filter = effect.filter;
+    }
+
+    @Override
+    public FlipUntilLoseEffect copy() {
+        return new FlipUntilLoseEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInHand(filter);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.chooseUse(outcome, "Put land onto battlefield?", source, game)
-                    && controller.choose(outcome, target, source.getSourceId(), game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
-                }
-            }
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return false;
-
+        while (true) {
+            if (!player.flipCoin(game)) {
+                return true;
+            }
+        }
     }
-
-    @Override
-    public PutLandFromHandOntoBattlefieldEffect copy() {
-        return new PutLandFromHandOntoBattlefieldEffect(this);
-    }
-
 }

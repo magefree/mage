@@ -98,12 +98,12 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
         if (player != null && !player.isInPayManaMode()) { // while paying the costs of a spell you cant activate this
             return super.canActivate(playerId, game);
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override

@@ -28,20 +28,15 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.EndTurnEffect;
+import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -50,10 +45,10 @@ import mage.players.Player;
 public final class DaysUndoing extends CardImpl {
 
     public DaysUndoing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Each player shuffles their hand and graveyard into their library, then draws seven cards. If it's your turn, end the turn.
-        this.getSpellAbility().addEffect(new DaysUndoingEffect());
+        this.getSpellAbility().addEffect(new ShuffleHandGraveyardAllEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
@@ -68,37 +63,4 @@ public final class DaysUndoing extends CardImpl {
     public DaysUndoing copy() {
         return new DaysUndoing(this);
     }
-}
-
-class DaysUndoingEffect extends OneShotEffect {
-
-    public DaysUndoingEffect() {
-        super(Outcome.Neutral);
-        staticText = "Each player shuffles their hand and graveyard into their library";
-    }
-
-    public DaysUndoingEffect(final DaysUndoingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
-                player.moveCards(player.getGraveyard(), Zone.LIBRARY, source, game);
-                player.shuffleLibrary(source, game);
-
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public DaysUndoingEffect copy() {
-        return new DaysUndoingEffect(this);
-    }
-
 }

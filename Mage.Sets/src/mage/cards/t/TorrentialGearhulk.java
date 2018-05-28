@@ -29,6 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,9 +40,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -115,7 +116,7 @@ class TorrentialGearhulkEffect extends OneShotEffect {
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
             if (card != null && card.getSpellAbility() != null) {
                 if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
-                    if (controller.cast(card.getSpellAbility(), game, true)) {
+                    if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                         ContinuousEffect effect = new TorrentialGearhulkReplacementEffect(card.getId());
                         effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
                         game.addEffect(effect, source);

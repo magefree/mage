@@ -34,12 +34,13 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -51,6 +52,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -69,10 +71,10 @@ public final class ObzedatGhostCouncil extends CardImpl {
 
         //When Obzedat, Ghost Council enters the battlefield, target opponent loses 2 life and you gain 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(2));
-        ability.addEffect(new GainLifeEffect(2));
+        ability.addEffect(new GainLifeEffect(2).setText("and you gain 2 life"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste.
+        //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under its owner's control at the beginning of your next upkeep. It gains haste.
         Ability ability2 = new BeginningOfYourEndStepTriggeredAbility(new ObzedatGhostCouncilExileSourceEffect(), true);
         ability2.addEffect(new CreateDelayedTriggeredAbilityEffect(new BeginningOfYourUpkeepdelayTriggeredAbility()));
         this.addAbility(ability2);
@@ -92,7 +94,7 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
 
     public ObzedatGhostCouncilExileSourceEffect() {
         super(Outcome.Exile);
-        staticText = "Exile {this}";
+        staticText = "exile {this}";
     }
 
     public ObzedatGhostCouncilExileSourceEffect(final ObzedatGhostCouncilExileSourceEffect effect) {
@@ -119,7 +121,6 @@ class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility
 
     public BeginningOfYourUpkeepdelayTriggeredAbility() {
         this(new ObzedatGhostCouncilReturnEffect(), TargetController.YOU);
-        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom));
     }
 
     public BeginningOfYourUpkeepdelayTriggeredAbility(Effect effect, TargetController targetController) {
@@ -147,7 +148,7 @@ class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility
 
     @Override
     public String getRule() {
-        return "If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste";
+        return "If you do, return it to the battlefield under its owner's control at the beginning of your next upkeep. It gains haste";
     }
 }
 
@@ -174,8 +175,11 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
             // return it from every public zone - http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513186-obzedat-gc-as-edh-commander
             if (zone != Zone.BATTLEFIELD && zone != Zone.LIBRARY && zone != Zone.HAND) {
                 Player owner = game.getPlayer(card.getOwnerId());
-                if (owner != null) {
-                    owner.moveCards(card, Zone.BATTLEFIELD, source, game);
+                if (owner != null && owner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                    Permanent permanent = game.getPermanent(card.getId());
+                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    game.addEffect(effect, source);
                 }
             }
             return true;
