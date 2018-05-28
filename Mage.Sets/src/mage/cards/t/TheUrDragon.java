@@ -44,7 +44,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -207,7 +206,7 @@ class TheUrDragonEffect extends OneShotEffect {
                 if (attackingDragons > 0) {
                     controller.drawCards(attackingDragons, game);
                 }
-                return new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A).apply(game, source);
+                return new PutCardFromHandOntoBattlefieldEffect().apply(game, source);
             }
         }
         return false;
