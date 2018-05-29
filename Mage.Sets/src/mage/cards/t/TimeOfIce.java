@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -45,7 +44,7 @@ import mage.constants.PhaseStep;
 import mage.constants.SagaChapter;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -81,7 +80,7 @@ public final class TimeOfIce extends CardImpl {
         effects.add(new TimeOfIceEffect());
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, effects,
-                new TargetCreaturePermanent(FILTER_OPPONENTS_PERMANENT_CREATURE)
+                new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE)
         );
 
         // III — Return all tapped creatures to their owners' hands.
@@ -125,8 +124,8 @@ class TimeOfIceEffect extends ContinuousRuleModifyingEffectImpl {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (!(sourceObject instanceof Permanent) || !((Permanent) sourceObject).getControllerId().equals(source.getControllerId())) {
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null || sourceObject.getZoneChangeCounter(game) > source.getSourceObjectZoneChangeCounter() + 1) {
             discard();
             return false;
         }

@@ -93,10 +93,14 @@ public class SagaAbility extends SimpleStaticAbility {
         for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
             ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter);
             for (Effect effect : effects) {
-                ability.addEffect(effect);
+                if (effect != null) {
+                    ability.addEffect(effect.copy());
+                }
             }
             for (Target target : targets) {
-                ability.addTarget(target);
+                if (target != null) {
+                    ability.addTarget(target.copy());
+                }
             }
             if (i > fromChapter.getNumber()) {
                 ability.setRuleVisible(false);
@@ -136,7 +140,7 @@ public class SagaAbility extends SimpleStaticAbility {
 
 class ChapterTriggeredAbility extends TriggeredAbilityImpl {
 
-    SagaChapter chapterFrom, chapterTo;
+    private SagaChapter chapterFrom, chapterTo;
 
     public ChapterTriggeredAbility(Effect effect, SagaChapter chapterFrom, SagaChapter chapterTo) {
         super(Zone.ALL, effect, false);
@@ -161,7 +165,10 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
             int amountAdded = event.getAmount();
             int loreCounters = amountAdded;
             Permanent sourceSaga = game.getPermanentOrLKIBattlefield(getSourceId());
-            if (sourceSaga != null) { // If it's entering the battlefield, it won't be found so we assume it had no counters
+            if (sourceSaga == null) {
+                sourceSaga = game.getPermanentEntering(getSourceId());
+            }
+            if (sourceSaga != null) {
                 loreCounters = sourceSaga.getCounters(game).getCount(CounterType.LORE);
             }
             return loreCounters - amountAdded < chapterFrom.getNumber()
@@ -204,40 +211,3 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
         return sb.toString();
     }
 }
-
-//class SagaAddCounterAbility extends TriggeredAbilityImpl {
-//
-//    SagaChapter maxChapter;
-//
-//    SagaAddCounterAbility(SagaChapter maxChapter) {
-//        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.LORE.createInstance()), false);
-//        this.usesStack = false;
-//        this.maxChapter = maxChapter;
-//    }
-//
-//    SagaAddCounterAbility(final SagaAddCounterAbility ability) {
-//        super(ability);
-//        this.maxChapter = ability.maxChapter;
-//    }
-//
-//    @Override
-//    public SagaAddCounterAbility copy() {
-//        return new SagaAddCounterAbility(this);
-//    }
-//
-//    @Override
-//    public boolean checkEventType(GameEvent event, Game game) {
-//        return event.getType() == EventType.PRECOMBAT_MAIN_PHASE_PRE;
-//    }
-//
-//    @Override
-//    public boolean checkTrigger(GameEvent event, Game game) {
-//        return event.getPlayerId().equals(this.controllerId);
-//    }
-//
-//    @Override
-//    public String getRule() {
-//        return "<i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after " + maxChapter.toString() + ".)</i> ";
-//    }
-//
-//}
