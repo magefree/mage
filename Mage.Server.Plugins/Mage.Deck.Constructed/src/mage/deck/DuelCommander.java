@@ -100,6 +100,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Tasigur, the Golden Fang");
         bannedCommander.add("Vial Smasher the Fierce");
         bannedCommander.add("Zur the Enchanter");
+        bannedCommander.add("Zurgo Bellstriker");
     }
 
 }
