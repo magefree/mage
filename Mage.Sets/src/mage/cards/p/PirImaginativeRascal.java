@@ -110,10 +110,8 @@ class PirImaginativeRascalEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
-        if (permanent != null && player != null && !player.hasOpponent(permanent.getControllerId(), game)) {
-            return true;
-        }
-        return false;
+        return permanent != null && player != null
+                && !player.hasOpponent(permanent.getControllerId(), game);
     }
 
     @Override
