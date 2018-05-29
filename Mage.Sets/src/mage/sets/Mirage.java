@@ -156,7 +156,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Gibbering Hyenas", 219, Rarity.COMMON, mage.cards.g.GibberingHyenas.class));
         cards.add(new SetCardInfo("Goblin Elite Infantry", 177, Rarity.COMMON, mage.cards.g.GoblinEliteInfantry.class));
         cards.add(new SetCardInfo("Goblin Scouts", 178, Rarity.UNCOMMON, mage.cards.g.GoblinScouts.class));
-        cards.add(new SetCardInfo("Goblin Soothsayer", 179, Rarity.COMMON, mage.cards.g.GoblinSoothsayer.class));
+        cards.add(new SetCardInfo("Goblin Soothsayer", 179, Rarity.UNCOMMON, mage.cards.g.GoblinSoothsayer.class));
         cards.add(new SetCardInfo("Goblin Tinkerer", 180, Rarity.COMMON, mage.cards.g.GoblinTinkerer.class));
         cards.add(new SetCardInfo("Granger Guildmage", 220, Rarity.COMMON, mage.cards.g.GrangerGuildmage.class));
         cards.add(new SetCardInfo("Grasslands", 327, Rarity.UNCOMMON, mage.cards.g.Grasslands.class));
@@ -330,7 +330,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Waiting in the Weeds", 252, Rarity.RARE, mage.cards.w.WaitingInTheWeeds.class));
         cards.add(new SetCardInfo("Wall of Roots", 253, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
         cards.add(new SetCardInfo("Ward of Lights", 47, Rarity.COMMON, mage.cards.w.WardOfLights.class));
-        cards.add(new SetCardInfo("Warping Wurm", 347, Rarity.RARE, mage.cards.w.WarpingWurm.class));
+        cards.add(new SetCardInfo("Warping Wurm", 287, Rarity.RARE, mage.cards.w.WarpingWurm.class));
         cards.add(new SetCardInfo("Wave Elemental", 102, Rarity.UNCOMMON, mage.cards.w.WaveElemental.class));
         cards.add(new SetCardInfo("Wild Elephant", 254, Rarity.COMMON, mage.cards.w.WildElephant.class));
         cards.add(new SetCardInfo("Wildfire Emissary", 203, Rarity.UNCOMMON, mage.cards.w.WildfireEmissary.class));
