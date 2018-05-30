@@ -292,6 +292,7 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Urborg Drake", 231, Rarity.COMMON, mage.cards.u.UrborgDrake.class));
         cards.add(new SetCardInfo("Vampire Charmseeker", 78, Rarity.UNCOMMON, mage.cards.v.VampireCharmseeker.class));
         cards.add(new SetCardInfo("Veteran Explorer", 214, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
+        cards.add(new SetCardInfo("Victory Chimes", 80, Rarity.RARE, mage.cards.v.VictoryChimes.class));
         cards.add(new SetCardInfo("Vigor", 215, Rarity.RARE, mage.cards.v.Vigor.class));
         cards.add(new SetCardInfo("Virtus the Veiled", 7, Rarity.RARE, mage.cards.v.VirtusTheVeiled.class));
         cards.add(new SetCardInfo("Wandering Wolf", 216, Rarity.COMMON, mage.cards.w.WanderingWolf.class));
