@@ -33,7 +33,7 @@ import mage.constants.SetType;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
 public final class CoreSet2019 extends ExpansionSet {
 

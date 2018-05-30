@@ -29,7 +29,7 @@ Commander Anthology|CommanderAnthology|
 Commander's Arsenal|CommandersArsenal|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
-Core 2019|Core2019|
+Core Set 2019|CoreSet2019|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
