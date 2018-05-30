@@ -145,8 +145,8 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED) {
-                // started in graveyard going to battlefield so current zone change counter has to be +1
-                return source.getSourceObjectZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(source.getSourceId());
+                // Only move it to exile if it was this instance that was moved to battlefield with unearth
+                return source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId());
             }
         }
         return false;
