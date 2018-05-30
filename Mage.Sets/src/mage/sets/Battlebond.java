@@ -125,7 +125,7 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Fan Favorite", 46, Rarity.COMMON, mage.cards.f.FanFavorite.class));
         cards.add(new SetCardInfo("Feral Hydra", 197, Rarity.UNCOMMON, mage.cards.f.FeralHydra.class));
         cards.add(new SetCardInfo("Fertile Ground", 198, Rarity.COMMON, mage.cards.f.FertileGround.class));
-        cards.add(new SetCardInfo("Fertilid", 199, Rarity.COMMON, mage.cards.f.Fertilid.class));
+        cards.add(new SetCardInfo("Fertilid", 199, Rarity.UNCOMMON, mage.cards.f.Fertilid.class));
         cards.add(new SetCardInfo("Fill with Fright", 144, Rarity.COMMON, mage.cards.f.FillWithFright.class));
         cards.add(new SetCardInfo("Flamewave Invoker", 178, Rarity.UNCOMMON, mage.cards.f.FlamewaveInvoker.class));
         cards.add(new SetCardInfo("Fog Bank", 117, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
@@ -285,7 +285,7 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Toothy, Imaginary Friend", 12, Rarity.RARE, mage.cards.t.ToothyImaginaryFriend.class));
         cards.add(new SetCardInfo("Totally Lost", 135, Rarity.COMMON, mage.cards.t.TotallyLost.class));
         cards.add(new SetCardInfo("True-Name Nemesis", 136, Rarity.MYTHIC, mage.cards.t.TrueNameNemesis.class));
-        cards.add(new SetCardInfo("Trumpet Blast", 186, Rarity.COMMON, mage.cards.t.TrumpetBlast.class));
+        cards.add(new SetCardInfo("Trumpet Blast", 186, Rarity.UNCOMMON, mage.cards.t.TrumpetBlast.class));
         cards.add(new SetCardInfo("Tyrant's Machine", 248, Rarity.COMMON, mage.cards.t.TyrantsMachine.class));
         cards.add(new SetCardInfo("Unflinching Courage", 230, Rarity.UNCOMMON, mage.cards.u.UnflinchingCourage.class));
         cards.add(new SetCardInfo("Urborg Drake", 231, Rarity.COMMON, mage.cards.u.UrborgDrake.class));
@@ -303,4 +303,3 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Zndrsplt, Eye of Wisdom", 5, Rarity.RARE, mage.cards.z.ZndrspltEyeOfWisdom.class));
     }
 }
-
