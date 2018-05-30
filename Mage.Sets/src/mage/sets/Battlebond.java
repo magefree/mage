@@ -98,6 +98,7 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Charging Rhino", 192, Rarity.COMMON, mage.cards.c.ChargingRhino.class));
         cards.add(new SetCardInfo("Cheering Fanatic", 58, Rarity.UNCOMMON, mage.cards.c.CheeringFanatic.class));
         cards.add(new SetCardInfo("Claustrophobia", 115, Rarity.COMMON, mage.cards.c.Claustrophobia.class));
+        cards.add(new SetCardInfo("Combo Attack", 67, Rarity.COMMON, mage.cards.c.ComboAttack.class));
         cards.add(new SetCardInfo("Consulate Skygate", 232, Rarity.COMMON, mage.cards.c.ConsulateSkygate.class));
         cards.add(new SetCardInfo("Coralhelm Guide", 116, Rarity.COMMON, mage.cards.c.CoralhelmGuide.class));
         cards.add(new SetCardInfo("Cowl Prowler", 193, Rarity.COMMON, mage.cards.c.CowlProwler.class));
