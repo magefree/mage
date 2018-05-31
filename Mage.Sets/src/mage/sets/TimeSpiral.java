@@ -83,6 +83,7 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Drifter il-Dal", 59, Rarity.COMMON, mage.cards.d.DrifterIlDal.class));
         cards.add(new SetCardInfo("Drudge Reavers", 105, Rarity.COMMON, mage.cards.d.DrudgeReavers.class));
         cards.add(new SetCardInfo("Durkwood Baloth", 193, Rarity.COMMON, mage.cards.d.DurkwoodBaloth.class));
+        cards.add(new SetCardInfo("Durkwood Tracker", 194, Rarity.UNCOMMON, mage.cards.d.DurkwoodTracker.class));
         cards.add(new SetCardInfo("Duskrider Peregrine", 14, Rarity.UNCOMMON, mage.cards.d.DuskriderPeregrine.class));
         cards.add(new SetCardInfo("Empty the Warrens", 152, Rarity.COMMON, mage.cards.e.EmptyTheWarrens.class));
         cards.add(new SetCardInfo("Endrek Sahr, Master Breeder", 106, Rarity.RARE, mage.cards.e.EndrekSahrMasterBreeder.class));
