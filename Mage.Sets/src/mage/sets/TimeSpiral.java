@@ -54,6 +54,7 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Raptors", 5, Rarity.COMMON, mage.cards.c.CastleRaptors.class));
         cards.add(new SetCardInfo("Cavalry Master", 6, Rarity.UNCOMMON, mage.cards.c.CavalryMaster.class));
         cards.add(new SetCardInfo("Celestial Crusader", 7, Rarity.UNCOMMON, mage.cards.c.CelestialCrusader.class));
+        cards.add(new SetCardInfo("Chameleon Blur", 192, Rarity.COMMON, mage.cards.c.ChameleonBlur.class));
         cards.add(new SetCardInfo("Children of Korlis", 8, Rarity.COMMON, mage.cards.c.ChildrenOfKorlis.class));
         cards.add(new SetCardInfo("Chromatic Star", 251, Rarity.COMMON, mage.cards.c.ChromaticStar.class));
         cards.add(new SetCardInfo("Chronatog Totem", 252, Rarity.UNCOMMON, mage.cards.c.ChronatogTotem.class));
