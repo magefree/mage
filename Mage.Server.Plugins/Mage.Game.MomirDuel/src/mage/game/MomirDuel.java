@@ -27,8 +27,6 @@
  */
 package mage.game;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -81,22 +79,6 @@ public class MomirDuel extends GameImpl {
         getState().addAbility(ability, null);
         super.init(choosingPlayerId);
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
-    }
-
-    @Override
-    public Set<UUID> getOpponents(UUID playerId) {
-        Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId : this.getPlayer(playerId).getInRange()) {
-            if (!opponentId.equals(playerId)) {
-                opponents.add(opponentId);
-            }
-        }
-        return opponents;
-    }
-
-    @Override
-    public boolean isOpponent(Player player, UUID playerToCheck) {
-        return !player.getId().equals(playerToCheck);
     }
 
     @Override

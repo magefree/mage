@@ -27,13 +27,12 @@
  */
 package mage.game;
 
+import java.util.*;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-
-import java.util.*;
 
 public abstract class GameCanadianHighlanderImpl extends GameImpl {
 
@@ -160,19 +159,4 @@ public abstract class GameCanadianHighlanderImpl extends GameImpl {
         super.endMulligan(playerId);
     }
 
-    @Override
-    public Set<UUID> getOpponents(UUID playerId) {
-        Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId : getState().getPlayersInRange(playerId, this)) {
-            if (!opponentId.equals(playerId)) {
-                opponents.add(opponentId);
-            }
-        }
-        return opponents;
-    }
-
-    @Override
-    public boolean isOpponent(Player player, UUID playerToCheck) {
-        return !player.getId().equals(playerToCheck);
-    }
 }
