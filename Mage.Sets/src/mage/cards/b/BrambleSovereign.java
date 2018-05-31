@@ -44,6 +44,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,6 +59,7 @@ public final class BrambleSovereign extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(new AnotherPredicate());
     }
 
     public BrambleSovereign(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +74,7 @@ public final class BrambleSovereign extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(new BrambleSovereignEffect(), new ManaCostsImpl("{1}{G}")),
                 filter, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature enters the battlefield, you may pay {1}{G}. "
+                "Whenever another nontoken creature enters the battlefield, you may pay {1}{G}. "
                 + "If you do, that creature's controller creates a token that's a copy of that creature."
         ));
     }
