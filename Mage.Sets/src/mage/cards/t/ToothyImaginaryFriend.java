@@ -60,7 +60,7 @@ public final class ToothyImaginaryFriend extends CardImpl {
         this.addAbility(new PartnerWithAbility("Pir, Imaginative Rascal", true));
 
         // Whenever you draw a card, put a +1/+1 counter on Toothy, Imaginary Friend.
-        this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
+        this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 
         // When Toothy leaves the battlefield, draw a card for each +1/+1 counter on it.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(
