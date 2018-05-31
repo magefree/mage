@@ -40,13 +40,13 @@ import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -71,9 +71,7 @@ public final class WillKenrith extends CardImpl {
         // +2: Until your next turn, up to two target creatures each have base power and toughness 0/3 and lose all abilities.
         Ability ability = new LoyaltyAbility(
                 new SetPowerToughnessTargetEffect(0, 3, Duration.UntilYourNextTurn)
-                        .setText("until your next turn, up to two target creatures each have base power and toughness 0/3"),
-                2
-        );
+                        .setText("until your next turn, up to two target creatures each have base power and toughness 0/3"), 2);
         ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.UntilYourNextTurn)
                 .setText("and lose all abilities")
         );
