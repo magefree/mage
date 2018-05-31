@@ -34,13 +34,12 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -52,7 +51,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -121,6 +119,7 @@ class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility
 
     public BeginningOfYourUpkeepdelayTriggeredAbility() {
         this(new ObzedatGhostCouncilReturnEffect(), TargetController.YOU);
+        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom));
     }
 
     public BeginningOfYourUpkeepdelayTriggeredAbility(Effect effect, TargetController targetController) {
@@ -175,11 +174,8 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
             // return it from every public zone - http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513186-obzedat-gc-as-edh-commander
             if (zone != Zone.BATTLEFIELD && zone != Zone.LIBRARY && zone != Zone.HAND) {
                 Player owner = game.getPlayer(card.getOwnerId());
-                if (owner != null && owner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    Permanent permanent = game.getPermanent(card.getId());
-                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
-                    game.addEffect(effect, source);
+                if (owner != null) {
+                    owner.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;
