@@ -795,6 +795,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param withName
      * @return
      */
+    @Deprecated
     boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName);
 
     /**

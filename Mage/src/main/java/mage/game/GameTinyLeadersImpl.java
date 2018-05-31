@@ -132,22 +132,6 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
         return commander;
     }
 
-    @Override
-    public Set<UUID> getOpponents(UUID playerId) {
-        Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId : getState().getPlayersInRange(playerId, this)) {
-            if (!opponentId.equals(playerId)) {
-                opponents.add(opponentId);
-            }
-        }
-        return opponents;
-    }
-
-    @Override
-    public boolean isOpponent(Player player, UUID playerToCheck) {
-        return !player.getId().equals(playerToCheck);
-    }
-
     public void setAlsoHand(boolean alsoHand) {
         this.alsoHand = alsoHand;
     }

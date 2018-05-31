@@ -27,8 +27,6 @@
  */
 package mage.game;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,13 +42,12 @@ import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 
-
 /**
  *
  * @author nigelzor
  */
 public class MomirGame extends GameImpl {
-    
+
     private int numPlayers;
 
     public MomirGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
@@ -59,8 +56,8 @@ public class MomirGame extends GameImpl {
 
     public MomirGame(final MomirGame game) {
         super(game);
-    }     
-    
+    }
+
     @Override
     public MatchType getGameType() {
         return new MomirFreeForAllType();
@@ -84,22 +81,6 @@ public class MomirGame extends GameImpl {
         getState().addAbility(ability, null);
         super.init(choosingPlayerId);
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
-    }
-
-    @Override
-    public Set<UUID> getOpponents(UUID playerId) {
-        Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId : this.getPlayer(playerId).getInRange()) {
-            if (!opponentId.equals(playerId)) {
-                opponents.add(opponentId);
-            }
-        }
-        return opponents;
-    }
-    
-    @Override
-    public boolean isOpponent(Player player, UUID playerToCheck) {
-        return !player.getId().equals(playerToCheck) && player.getInRange().contains(playerToCheck);
     }
 
     @Override

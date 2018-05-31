@@ -139,21 +139,37 @@ public interface Game extends MageItem, Serializable {
     PlayerList getPlayerList();
 
     /**
-     * Returns a Set of opponents in range for the given playerId
+     * Returns a Set of opponents in range for the given playerId This return
+     * also a player, that has dies this turn.
      *
      * @param playerId
      * @return
      */
-    Set<UUID> getOpponents(UUID playerId);
+    default public Set<UUID> getOpponents(UUID playerId) {
+        Set<UUID> opponents = new HashSet<>();
+        Player player = getPlayer(playerId);
+        for (UUID opponentId : player.getInRange()) {
+            if (!opponentId.equals(playerId)) {
+                opponents.add(opponentId);
+            }
+        }
+        return opponents;
+    }
 
     /**
-     * Checks if the given playerToCheckId is an opponent of player
+     * Checks if the given playerToCheckId is an opponent of player As long as
+     * no team formats are implemented, this method returns always true for each
+     * playerId not equal to the player it is checked for. Also if this player
+     * is out of range. This method can't handle that only players in range are
+     * processed because it can only return TRUE or FALSE.
      *
      * @param player
      * @param playerToCheckId
      * @return
      */
-    boolean isOpponent(Player player, UUID playerToCheckId);
+    default public boolean isOpponent(Player player, UUID playerToCheckId) {
+        return !player.getId().equals(playerToCheckId);
+    }
 
     Turn getTurn();
 

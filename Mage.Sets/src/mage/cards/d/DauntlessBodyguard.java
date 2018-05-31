@@ -42,9 +42,9 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -68,7 +68,7 @@ public final class DauntlessBodyguard extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // As Dauntless Bodyguard enters the battlefield, choose another creature you control. 
+        // As Dauntless Bodyguard enters the battlefield, choose another creature you control.
         this.addAbility(new AsEntersBattlefieldAbility(new DauntlessBodyguardChooseCreatureEffect()));
 
         // Sacrifice Dauntless Bodyguard: The chosen creature gains indestructible until end of turn.
@@ -147,12 +147,14 @@ class DauntlessBodyguardGainAbilityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObjectReference mor;
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent == null) {
             return false;
         }
-        mor = (MageObjectReference) game.getState().getValue(sourcePermanent.getId() + "_chosenCreature");
+        MageObjectReference mor = (MageObjectReference) game.getState().getValue(sourcePermanent.getId() + "_chosenCreature");
+        if (mor == null) {
+            return false;
+        }
         Permanent chosenPermanent = mor.getPermanent(game);
         if (chosenPermanent != null) {
             ContinuousEffect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
