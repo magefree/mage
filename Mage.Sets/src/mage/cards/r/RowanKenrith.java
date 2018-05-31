@@ -176,7 +176,7 @@ class RowanKenrithDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new TappedPredicate());
-        filter.add(new ControllerIdPredicate(source.getControllerId()));
+        filter.add(new ControllerIdPredicate(source.getFirstTarget()));
         return new DamageAllEffect(3, filter).apply(game, source);
     }
 }
