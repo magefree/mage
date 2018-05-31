@@ -105,7 +105,7 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
         if (damager == null) {
             return false;
         }
-        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
                 && event.getFlag()
                 && controller.hasOpponent(event.getTargetId(), game)
                 && damager.hasSubtype(SubType.WARRIOR, game)
