@@ -133,6 +133,7 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Fog Bank", 117, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
         cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frost Lynx", 118, Rarity.COMMON, mage.cards.f.FrostLynx.class));
+        cards.add(new SetCardInfo("Fumble", 34, Rarity.UNCOMMON, mage.cards.f.Fumble.class));
         cards.add(new SetCardInfo("Game Plan", 35, Rarity.RARE, mage.cards.g.GamePlan.class));
         cards.add(new SetCardInfo("Gang Up", 47, Rarity.UNCOMMON, mage.cards.g.GangUp.class));
         cards.add(new SetCardInfo("Generous Patron", 70, Rarity.RARE, mage.cards.g.GenerousPatron.class));
