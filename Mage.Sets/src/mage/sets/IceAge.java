@@ -245,6 +245,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 376, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 377, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 378, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain Titan", 377, Rarity.RARE, mage.cards.m.MountainTitan.class));
         cards.add(new SetCardInfo("Mudslide", 203, Rarity.RARE, mage.cards.m.Mudslide.class));
         cards.add(new SetCardInfo("Mystic Might", 86, Rarity.RARE, mage.cards.m.MysticMight.class));
         cards.add(new SetCardInfo("Mystic Remora", 87, Rarity.COMMON, mage.cards.m.MysticRemora.class));
