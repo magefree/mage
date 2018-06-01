@@ -316,6 +316,7 @@ public final class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Will-o'-the-Wisp", 136, Rarity.RARE, mage.cards.w.WillOTheWisp.class));
         cards.add(new SetCardInfo("Winter Orb", 276, Rarity.RARE, mage.cards.w.WinterOrb.class));
         cards.add(new SetCardInfo("Wooden Sphere", 277, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));
+        cards.add(new SetCardInfo("Word of Command", 137, Rarity.RARE, mage.cards.w.WordOfCommand.class));
         cards.add(new SetCardInfo("Wrath of God", 46, Rarity.RARE, mage.cards.w.WrathOfGod.class));
         cards.add(new SetCardInfo("Zombie Master", 138, Rarity.RARE, mage.cards.z.ZombieMaster.class));
     }

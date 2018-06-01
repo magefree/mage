@@ -324,6 +324,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Griffin", 35, Rarity.COMMON, mage.cards.w.WildGriffin.class));
         cards.add(new SetCardInfo("Wild Ox", 174, Rarity.UNCOMMON, mage.cards.w.WildOx.class));
         cards.add(new SetCardInfo("Wood Elemental", 175, Rarity.RARE, mage.cards.w.WoodElemental.class));
+        cards.add(new SetCardInfo("Word of Command", 103, Rarity.RARE, mage.cards.w.WordOfCommand.class));
         cards.add(new SetCardInfo("Xenic Poltergeist", 104, Rarity.UNCOMMON, mage.cards.x.XenicPoltergeist.class));
         cards.add(new SetCardInfo("Yotian Soldier", 240, Rarity.COMMON, mage.cards.y.YotianSoldier.class));
         cards.add(new SetCardInfo("Zombie Master", 105, Rarity.UNCOMMON, mage.cards.z.ZombieMaster.class));

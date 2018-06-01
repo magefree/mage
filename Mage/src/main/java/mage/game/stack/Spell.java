@@ -93,6 +93,7 @@ public class Spell extends StackObjImpl implements Card {
     private boolean faceDown;
     private boolean countered;
     private boolean resolving = false;
+    private UUID commandedBy = null; // for Word of Command
 
     private boolean doneActivatingManaAbilities; // if this is true, the player is no longer allowed to pay the spell costs with activating of mana abilies
 
@@ -147,6 +148,7 @@ public class Spell extends StackObjImpl implements Card {
         this.faceDown = spell.faceDown;
         this.countered = spell.countered;
         this.resolving = spell.resolving;
+        this.commandedBy = spell.commandedBy;
 
         this.doneActivatingManaAbilities = spell.doneActivatingManaAbilities;
         this.targetChanged = spell.targetChanged;
@@ -205,6 +207,12 @@ public class Spell extends StackObjImpl implements Card {
             return false;
         }
         this.resolving = true;
+        if (commandedBy != null && !commandedBy.equals(getControllerId())) {
+            Player turnController = game.getPlayer(commandedBy);
+            if (turnController != null) {
+                turnController.controlPlayersTurn(game, controller.getId());
+            }
+        }
         if (this.isInstant() || this.isSorcery()) {
             int index = 0;
             result = false;
@@ -1048,6 +1056,10 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean removeAttachment(UUID permanentId, Game game) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setCommandedBy(UUID playerId) {
+        this.commandedBy = playerId;
     }
 
 }
