@@ -114,6 +114,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Wolves", 230, Rarity.COMMON, mage.cards.d.DireWolves.class));
         cards.add(new SetCardInfo("Disenchant", 20, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Drift of the Dead", 123, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
+        cards.add(new SetCardInfo("Dreams of the Dead", 66, Rarity.UNCOMMON, mage.cards.d.DreamsOfTheDead.class));
         cards.add(new SetCardInfo("Drought", 21, Rarity.UNCOMMON, mage.cards.d.Drought.class));
         cards.add(new SetCardInfo("Dwarven Armory", 182, Rarity.RARE, mage.cards.d.DwarvenArmory.class));
         cards.add(new SetCardInfo("Earthlink", 285, Rarity.RARE, mage.cards.e.Earthlink.class));
