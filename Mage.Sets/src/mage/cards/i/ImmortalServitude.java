@@ -48,12 +48,10 @@ import mage.players.Player;
 public final class ImmortalServitude extends CardImpl {
 
     public ImmortalServitude(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W/B}{W/B}{W/B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{W/B}{W/B}{W/B}");
 
         // Return each creature card with converted mana cost X from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ImmortalServitudeEffect());
-        
     }
 
     public ImmortalServitude(final ImmortalServitude card) {
@@ -88,8 +86,7 @@ class ImmortalServitudeEffect extends OneShotEffect {
         int count = source.getManaCostsToPay().getX();
         Set<Card> cards = you.getGraveyard().getCards(new FilterCreatureCard(), game);
         for (Card card : cards) {
-            if (card.getConvertedManaCost() == count
-                    && card != null) {
+            if (card != null && card.getConvertedManaCost() == count) {
                 card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
             }
         }

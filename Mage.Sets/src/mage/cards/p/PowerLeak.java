@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class PowerLeak extends CardImpl {
 
     public PowerLeak(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant enchantment
@@ -103,31 +103,31 @@ class PowerLeakEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && permanent != null) {
-            ManaCosts<ManaCost> cost = new ManaCostsImpl<>("{X}");
-            String message = "Pay {X} to prevent X damage from " + permanent.getLogName() + "?";
-            int xValue = 0;
-            if (player != null && player.chooseUse(Outcome.Neutral, message, source, game)) {
-                xValue = player.announceXMana(0, Integer.MAX_VALUE, "Choose the amount of mana to pay", game, source);
-                cost.add(new GenericManaCost(xValue));
-                if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                    game.informPlayers(player.getLogName() + " paid {" + xValue + "} for " + permanent.getLogName());
-                } else {
-                    game.informPlayers(player.getLogName() + " didn't pay {X} for " + permanent.getLogName());
-                }
+        if (player == null || permanent == null) {
+            return false;
+        }
+        ManaCosts<ManaCost> cost = new ManaCostsImpl<>("{X}");
+        String message = "Pay {X} to prevent X damage from " + permanent.getLogName() + "?";
+        int xValue = 0;
+        if (player.chooseUse(Outcome.Neutral, message, source, game)) {
+            xValue = player.announceXMana(0, Integer.MAX_VALUE, "Choose the amount of mana to pay", game, source);
+            cost.add(new GenericManaCost(xValue));
+            if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                game.informPlayers(player.getLogName() + " paid {" + xValue + "} for " + permanent.getLogName());
             } else {
                 game.informPlayers(player.getLogName() + " didn't pay {X} for " + permanent.getLogName());
             }
-
-            PreventDamageByTargetEffect effect = new PreventDamageByTargetEffect(Duration.OneUse, xValue, false);
-            if (xValue != 0 && cost.isPaid()) {
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                game.addEffect(effect, source);
-            }
-            player.damage(2, source.getSourceId(), game, false, true);
-            effect.discard();
-            return true;
+        } else {
+            game.informPlayers(player.getLogName() + " didn't pay {X} for " + permanent.getLogName());
         }
-        return false;
+
+        PreventDamageByTargetEffect effect = new PreventDamageByTargetEffect(Duration.OneUse, xValue, false);
+        if (xValue != 0 && cost.isPaid()) {
+            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            game.addEffect(effect, source);
+        }
+        player.damage(2, source.getSourceId(), game, false, true);
+        effect.discard();
+        return true;
     }
 }

@@ -112,7 +112,7 @@ class DrainPowerEffect extends OneShotEffect {
                         for (Ability ability : permanent.getAbilities()) {
                             if (ability instanceof ActivatedAbility && ability.getAbilityType() == AbilityType.MANA) {
                                 ActivatedManaAbilityImpl manaAbility = (ActivatedManaAbilityImpl) ability;
-                                if (manaAbility != null && manaAbility.canActivate(targetPlayer.getId(), game).canActivate()) {
+                                if (manaAbility.canActivate(targetPlayer.getId(), game).canActivate()) {
                                     // canActivate can't check for mana abilities that require a mana cost, if the payment isn't possible (Cabal Coffers etc)
                                     // so it's necessary to filter them out manually - might be buggy in some fringe cases
                                     for (ManaCost manaCost : manaAbility.getManaCosts()) {

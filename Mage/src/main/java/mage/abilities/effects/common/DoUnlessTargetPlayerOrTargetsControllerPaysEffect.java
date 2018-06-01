@@ -103,7 +103,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
         }
         if (targetController != null) {
             MageObject sourceObject = game.getObject(source.getSourceId());
-            if (targetController != null && sourceObject != null) {
+            if (sourceObject != null) {
                 Cost costToPay;
                 if (cost != null) {
                     costToPay = cost.copy();
@@ -120,7 +120,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
                 message = CardUtil.replaceSourceName(message, sourceObject.getName());
                 boolean result = true;
                 boolean doEffect = true;
-                
+
                 // check if targetController is willing to pay
                 if (costToPay.canPay(source, source.getSourceId(), targetController.getId(), game) && targetController.chooseUse(Outcome.Detriment, message, source, game)) {
                     costToPay.clearPaid();
@@ -128,10 +128,10 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
                         if (!game.isSimulation()) {
                             game.informPlayers(targetController.getLogName() + " pays the cost to prevent the effect");
                         }
-                        doEffect = false;                    
+                        doEffect = false;
                     }
                 }
-    
+
                 // do the effects if not paid
                 if (doEffect) {
                     for (Effect effect : executingEffects) {

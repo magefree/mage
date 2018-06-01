@@ -86,10 +86,12 @@ class NumberOfCapitalsInTextOfTargetCreatureCount implements DynamicValue {
             if (cards != null) {
                 for (CardInfo cardInfo : cards) {
                     Card dummy = cardInfo != null ? cardInfo.getCard() : null;
-                    for (String line : dummy.getRules()) {
-                        line = line.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-                        line = line.replaceAll("\\{this\\}", permanent.getName());
-                        capitals += line.length() - line.replaceAll("[A-Z]", "").length();
+                    if (dummy != null) {
+                        for (String line : dummy.getRules()) {
+                            line = line.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+                            line = line.replaceAll("\\{this\\}", permanent.getName());
+                            capitals += line.length() - line.replaceAll("[A-Z]", "").length();
+                        }
                     }
                     return -1 * capitals;
                 }

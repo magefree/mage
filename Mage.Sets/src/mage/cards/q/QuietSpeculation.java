@@ -58,7 +58,7 @@ public final class QuietSpeculation extends CardImpl {
     }
 
     public QuietSpeculation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles their library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filterCard);
@@ -96,7 +96,10 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         UUID targetPlayerID = source.getFirstTarget();
-        if (controller != null && targetPlayerID != null && controller.searchLibrary(target, game, targetPlayerID)) {
+        if (controller == null) {
+            return false;
+        }
+        if (targetPlayerID != null && controller.searchLibrary(target, game, targetPlayerID)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl(target.getTargets());
                 controller.revealCards("Quiet Speculation", cards, game);
@@ -108,5 +111,4 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
         controller.shuffleLibrary(source, game);
         return false;
     }
-
 }

@@ -112,8 +112,8 @@ class SummonThePackEffect extends OneShotEffect {
                     StringBuilder message = new StringBuilder(controller.getLogName()).append(" opened: ");
 
                     for (Card c : boosterPack) {
-                        message.append(c.getName()).append(" ");
                         if (c != null && c.isCreature()) {
+                            message.append(c.getName()).append(" ");
                             message.append(" (creature card) ");
                             ContinuousEffect effect2 = new BecomesBlackZombieAdditionEffect(false);
                             effect2.setTargetPointer(new FixedTarget(c.getId()));
@@ -124,7 +124,7 @@ class SummonThePackEffect extends OneShotEffect {
                     }
 
                     if (creatureCards.size() > 0) {
-                        Set<Card> ccs = new HashSet<Card>(creatureCards);
+                        Set<Card> ccs = new HashSet<>(creatureCards);
                         game.loadCards(ccs, controller.getId());
                         controller.moveCards(ccs, Zone.BATTLEFIELD, source, game);
                     }

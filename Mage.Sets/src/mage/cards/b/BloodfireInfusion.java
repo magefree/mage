@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public final class BloodfireInfusion extends CardImpl {
 
     public BloodfireInfusion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature you control
@@ -65,14 +65,14 @@ public final class BloodfireInfusion extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // {R}, Sacrifice enchanted creature: Bloodfire Infusion deals damage equal to the sacrificed creature's power to each creature.
         Effect effect = new DamageAllEffect(new AttachedPermanentPowerCount(), new FilterCreaturePermanent());
         effect.setText("{this} deals damage equal to the sacrificed creature's power to each creature");
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}"));
         ability2.addCost(new SacrificeAttachedCost());
         this.addAbility(ability2);
-        
+
     }
 
     public BloodfireInfusion(final BloodfireInfusion card) {
@@ -90,10 +90,11 @@ class AttachedPermanentPowerCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent attachment = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
+        if (attachment == null) {
+            return 0;
+        }
         Permanent permanent = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
-        if (attachment != null
-                && permanent != null
-                && (permanent.getPower().getValue() >= 0)) {
+        if (permanent != null && (permanent.getPower().getValue() >= 0)) {
             return permanent.getPower().getValue();
         }
         return 0;

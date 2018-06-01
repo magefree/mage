@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class LastRites extends CardImpl {
 
     public LastRites(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Discard any number of cards. Target player reveals their hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
         this.getSpellAbility().addEffect(new LastRitesEffect());
@@ -107,16 +107,12 @@ class LastRitesEffect extends OneShotEffect {
                         controller.discard(card, source, game);
                     }
                 }
-                if (targetPlayer != null) {
-                    FilterCard filter = new FilterCard((discardCount > 1 ? "" : "a") + " nonland card" + (discardCount > 1 ? "s" : ""));
-                    filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-                    StaticValue discardValue = new StaticValue(discardCount);
-                    Effect effect = new DiscardCardYouChooseTargetEffect(discardValue, filter, TargetController.ANY);
-                    effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
-                    effect.apply(game, source);
-                } else {
-                    return false;
-                }
+                FilterCard filter = new FilterCard((discardCount > 1 ? "" : "a") + " nonland card" + (discardCount > 1 ? "s" : ""));
+                filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+                StaticValue discardValue = new StaticValue(discardCount);
+                Effect effect = new DiscardCardYouChooseTargetEffect(discardValue, filter, TargetController.ANY);
+                effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
+                effect.apply(game, source);
             }
             return true;
         }

@@ -61,15 +61,16 @@ import mage.target.targetpointer.FixedTarget;
 public final class Heroism extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a white creature");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public Heroism(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+
         // Sacrifice a white creature: For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays {2}{R}.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HeroismEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HeroismEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }
 
     public Heroism(final Heroism card) {
@@ -83,8 +84,9 @@ public final class Heroism extends CardImpl {
 }
 
 class HeroismEffect extends OneShotEffect {
-    
+
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking red creature");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
@@ -111,7 +113,7 @@ class HeroismEffect extends OneShotEffect {
             Player player = game.getPlayer(game.getActivePlayerId());
             Cost cost = new ManaCostsImpl("{2}{R}");
             List<Permanent> permanentsToPrevent = new ArrayList<>();
-            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game)) {
                 cost.clearPaid();
                 String message = "Pay " + cost.getText() + "? If you don't, " + permanent.getLogName() + "'s combat damage will be prevented this turn.";
                 if (player != null && player.chooseUse(Outcome.Neutral, message, source, game)) {

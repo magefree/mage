@@ -127,7 +127,7 @@ class ShadesBreathSetSubtypeEffect extends ContinuousEffectImpl {
         for (Permanent permanent : permanents) {
             if (permanent != null) {
                 SubTypeList subtype = permanent.getSubtype(game);
-                if (subtype != null && subtype.size() != 1 || !subtype.contains(SubType.SHADE)) {
+                if (subtype != null && (subtype.size() != 1 || !subtype.contains(SubType.SHADE))) {
                     subtype.removeAll(SubType.getCreatureTypes(false));
                     subtype.add(SubType.SHADE);
                 }

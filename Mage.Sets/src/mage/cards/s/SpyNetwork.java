@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class SpyNetwork extends CardImpl {
 
     public SpyNetwork(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Look at target player's hand, the top card of that player's library, and any face-down creatures he or she controls. Look at the top four cards of your library, then put them back in any order.
         this.getSpellAbility().addEffect(new SpyNetworkLookAtTargetPlayerHandEffect());
@@ -133,7 +133,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                while (player != null && controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
+                while (controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
                     target.clearChosen();
                     while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
                         controller.chooseTarget(outcome, target, source, game);
@@ -145,9 +145,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
                         Cards cards = new CardsImpl();
                         cards.add(copyFaceDown);
                         controller.lookAtCards("face down card - " + mageObject.getName(), cards, game);
-                        if (player != null) {
-                            game.informPlayers(controller.getLogName() + " looks at a face down creature controlled by " + player.getLogName());
-                        }
+                        game.informPlayers(controller.getLogName() + " looks at a face down creature controlled by " + player.getLogName());
                     }
                 }
             }

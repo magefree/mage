@@ -71,7 +71,7 @@ public final class CrypticGateway extends CardImpl {
     TargetControlledPermanent target;
 
     public CrypticGateway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Tap two untapped creatures you control: You may put a creature card from your hand that shares a creature type with each creature tapped this way onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrypticGatewayEffect(), new CrypticGatewayCost(new TargetControlledPermanent(filter))));
@@ -173,7 +173,7 @@ class CrypticGatewayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (source == null || source.getCosts() == null) {
+        if (source.getCosts() == null) {
             return false;
         }
 

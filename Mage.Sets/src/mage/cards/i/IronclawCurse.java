@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -55,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class IronclawCurse extends CardImpl {
 
     public IronclawCurse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -67,7 +66,7 @@ public final class IronclawCurse extends CardImpl {
 
         // Enchanted creature gets 0/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, -1, Duration.WhileOnBattlefield)));
-        
+
         // Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IronclawCurseEffect()));
     }
@@ -101,8 +100,11 @@ class IronclawCurseEffect extends CantBlockAttachedEffect {
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (enchantment == null) {
+            return false;
+        }
         Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
+        if (enchantment.getAttachedTo() != null) {
             return !(attacker.getPower().getValue() >= enchantedCreature.getToughness().getValue());
         }
         return true;

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
 public final class Recoil extends CardImpl {
 
     public Recoil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
 
         // Return target permanent to its owner's hand. Then that player discards a card.
         this.getSpellAbility().addEffect(new RecoilEffect());
@@ -84,8 +84,11 @@ class RecoilEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
+        if (target == null) {
+            return false;
+        }
         Player controller = game.getPlayer(target.getControllerId());
-        if (target != null && controller != null) {
+        if (controller != null) {
             controller.moveCards(target, Zone.HAND, source, game);
             controller.discard(1, false, source, game);
             return true;

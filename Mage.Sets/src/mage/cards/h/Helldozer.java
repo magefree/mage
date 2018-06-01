@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
 public final class Helldozer extends CardImpl {
 
     public Helldozer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.GIANT);
 
@@ -96,13 +96,12 @@ class HelldozerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent helldozer = game.getPermanent(source.getSourceId());
         Permanent landTarget = game.getPermanent(source.getFirstTarget());
-        if (landTarget != null) {
-            landTarget.destroy(id, game, false);
+        if (landTarget == null) {
+            return false;
         }
-        Permanent landPermanent = (Permanent) game.getLastKnownInformation(landTarget.getId(), Zone.BATTLEFIELD);
-        if (landPermanent != null
-                && !landPermanent.isBasic()
-                && helldozer != null) {
+        boolean wasNonBasic = !landTarget.isBasic();
+        landTarget.destroy(id, game, false);
+        if (wasNonBasic && helldozer != null) {
             return helldozer.untap(game);
         }
         return false;

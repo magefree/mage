@@ -98,44 +98,47 @@ class BecomesColorOrColorsEnchantedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (enchantment == null) {
+            return false;
+        }
         Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
         StringBuilder sb = new StringBuilder();
 
-        if (controller != null && enchantment != null && permanent != null) {
-            for (int i = 0; i < 5; i++) {
-                if (i > 0) {
-                    if (!controller.chooseUse(Outcome.Neutral, "Do you wish to choose another color?", source, game)) {
-                        break;
-                    }
-                }
-                ChoiceColor choiceColor = new ChoiceColor();
-                if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                    return false;
-                }
-                if (!game.isSimulation()) {
-                    game.informPlayers(permanent.getName() + ": " + controller.getLogName() + " has chosen " + choiceColor.getChoice());
-                }
-                if (choiceColor.getColor().isBlack()) {
-                    sb.append('B');
-                } else if (choiceColor.getColor().isBlue()) {
-                    sb.append('U');
-                } else if (choiceColor.getColor().isRed()) {
-                    sb.append('R');
-                } else if (choiceColor.getColor().isGreen()) {
-                    sb.append('G');
-                } else if (choiceColor.getColor().isWhite()) {
-                    sb.append('W');
+        if (controller == null || permanent == null) {
+            return false;
+        }
+        for (int i = 0; i < 5; i++) {
+            if (i > 0) {
+                if (!controller.chooseUse(Outcome.Neutral, "Do you wish to choose another color?", source, game)) {
+                    break;
                 }
             }
-            String colors = new String(sb);
-            ObjectColor chosenColors = new ObjectColor(colors);
-            ContinuousEffect effect = new BecomesColorTargetEffect(chosenColors, Duration.Custom);
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
-            game.addEffect(effect, source);
-
-            return true;
+            ChoiceColor choiceColor = new ChoiceColor();
+            if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
+                return false;
+            }
+            if (!game.isSimulation()) {
+                game.informPlayers(permanent.getName() + ": " + controller.getLogName() + " has chosen " + choiceColor.getChoice());
+            }
+            if (choiceColor.getColor().isBlack()) {
+                sb.append('B');
+            } else if (choiceColor.getColor().isBlue()) {
+                sb.append('U');
+            } else if (choiceColor.getColor().isRed()) {
+                sb.append('R');
+            } else if (choiceColor.getColor().isGreen()) {
+                sb.append('G');
+            } else if (choiceColor.getColor().isWhite()) {
+                sb.append('W');
+            }
         }
-        return false;
+        String colors = new String(sb);
+        ObjectColor chosenColors = new ObjectColor(colors);
+        ContinuousEffect effect = new BecomesColorTargetEffect(chosenColors, Duration.Custom);
+        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+        game.addEffect(effect, source);
+
+        return true;
     }
 
     @Override

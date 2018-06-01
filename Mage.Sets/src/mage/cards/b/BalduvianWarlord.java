@@ -132,7 +132,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                 // according to the following mail response from MTG Rules Management about False Orders:
                 // "if Player A attacks Players B and C, Player B's creatures cannot block creatures attacking Player C"
                 // therefore we need to single out creatures attacking the target blocker's controller (disappointing, I know)
-                
+
                 List<Permanent> list = new ArrayList<>();
                 for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                     if (combatGroup.getDefendingPlayerId().equals(permanent.getControllerId())) {
@@ -155,7 +155,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                         return true;
                     }
                     Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
-                    if (chosenPermanent != null && permanent != null && chosenPermanent.isCreature() && controller != null) {
+                    if (chosenPermanent != null && chosenPermanent.isCreature()) {
                         CombatGroup chosenGroup = game.getCombat().findGroup(chosenPermanent.getId());
                         if (chosenGroup != null) {
                             // Relevant ruling for Balduvian Warlord:

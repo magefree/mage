@@ -92,7 +92,7 @@ class CloneShellEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));

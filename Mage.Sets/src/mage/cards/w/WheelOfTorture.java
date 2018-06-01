@@ -47,7 +47,7 @@ import mage.players.Player;
 public final class WheelOfTorture extends CardImpl {
 
     public WheelOfTorture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of each opponent's upkeep, Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in their hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new WheelOfTortureEffect(), TargetController.OPPONENT, false);
@@ -64,7 +64,6 @@ public final class WheelOfTorture extends CardImpl {
     }
 }
 
-
 class WheelOfTortureEffect extends OneShotEffect {
 
     private WheelOfTortureEffect(final WheelOfTortureEffect effect) {
@@ -78,16 +77,11 @@ class WheelOfTortureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if(player != null)
-        {
+        if (player != null) {
             int amount = 3 - player.getHand().size();
-            if(amount > 0)
-            {
-                if (player != null) {
-                    player.damage(amount, source.getSourceId(), game, false, true);
-                    return true;
-                }
-
+            if (amount > 0) {
+                player.damage(amount, source.getSourceId(), game, false, true);
+                return true;
             }
         }
         return false;
@@ -102,6 +96,5 @@ class WheelOfTortureEffect extends OneShotEffect {
     public String getText(Mode mode) {
         return "Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
-
 
 }

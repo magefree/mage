@@ -1,6 +1,5 @@
 package mage.verify;
 
-import javassist.bytecode.SignatureAttribute;
 import mage.ObjectColor;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
@@ -352,9 +351,7 @@ public class VerifyCardDataTest {
             //Assert.assertNotNull("Can't create token by default constructor", token);
             if (token == null) {
                 Assert.fail("Can't create token by default constructor: " + className);
-            }
-
-            if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
+            } else if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
                 errorsList.add("error, can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }

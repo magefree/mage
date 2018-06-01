@@ -56,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
 public final class SlowMotion extends CardImpl {
 
     public SlowMotion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -68,7 +67,7 @@ public final class SlowMotion extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless he or she pays {2}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEquipedUnlessPaysEffect(new GenericManaCost(2)), TargetController.CONTROLLER_ATTACHED_TO, false ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEquipedUnlessPaysEffect(new GenericManaCost(2)), TargetController.CONTROLLER_ATTACHED_TO, false));
 
         // When Slow Motion is put into a graveyard from the battlefield, return Slow Motion to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
@@ -85,13 +84,14 @@ public final class SlowMotion extends CardImpl {
 }
 
 class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
+
     protected Cost cost;
 
     public SacrificeEquipedUnlessPaysEffect(Cost cost) {
         super(Outcome.Sacrifice);
         this.cost = cost;
         staticText = "that player sacrifices that creature unless he or she pays {2}";
-     }
+    }
 
     public SacrificeEquipedUnlessPaysEffect(final SacrificeEquipedUnlessPaysEffect effect) {
         super(effect);
@@ -101,25 +101,29 @@ class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            Player player = game.getPlayer(equipped.getControllerId());
-            if (player != null && equipped != null) {
-                if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? (Or " + equipped.getName() + " will be sacrificed.)", source, game)) {
-                    cost.clearPaid();
-                    if (cost.pay(source, game, source.getSourceId(), equipped.getControllerId(), false, null)) {
-                        return true;
-                    }
-                }
-                equipped.sacrifice(source.getSourceId(), game);
+        if (equipment == null) {
+            return false;
+        }
+        Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+        if (equipped == null) {
+            return false;
+        }
+        Player player = game.getPlayer(equipped.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? (Or " + equipped.getName() + " will be sacrificed.)", source, game)) {
+            cost.clearPaid();
+            if (cost.pay(source, game, source.getSourceId(), equipped.getControllerId(), false, null)) {
                 return true;
             }
         }
-        return false;
+        equipped.sacrifice(source.getSourceId(), game);
+        return true;
     }
 
     @Override
     public SacrificeEquipedUnlessPaysEffect copy() {
         return new SacrificeEquipedUnlessPaysEffect(this);
     }
- }
+}

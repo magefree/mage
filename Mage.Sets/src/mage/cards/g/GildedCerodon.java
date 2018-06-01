@@ -51,14 +51,14 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  */
 public final class GildedCerodon extends CardImpl {
-    
+
     private static final String rule = "Whenever {this} attacks, if you control a Desert or there is a Desert card in your graveyard, target creature can't block this turn.";
 
     public GildedCerodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        
+
         this.subtype.add(SubType.BEAST);
-        
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -66,7 +66,7 @@ public final class GildedCerodon extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), false), new GildedCerodonCondition(), rule);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
     }
 
     public GildedCerodon(final GildedCerodon card) {
@@ -80,10 +80,10 @@ public final class GildedCerodon extends CardImpl {
 }
 
 class GildedCerodonCondition implements Condition {
-    
+
     private static final FilterPermanent filter = new FilterPermanent();
     private static final FilterCard filter2 = new FilterCard();
-    
+
     static {
         filter.add(new SubtypePredicate(SubType.DESERT));
         filter2.add(new SubtypePredicate(SubType.DESERT));
@@ -93,8 +93,8 @@ class GildedCerodonCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
-                && !game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game).isEmpty()
-                || controller.getGraveyard().count(filter2, game) > 0) {
+                && (!game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game).isEmpty()
+                || controller.getGraveyard().count(filter2, game) > 0)) {
             return true;
         }
         return false;

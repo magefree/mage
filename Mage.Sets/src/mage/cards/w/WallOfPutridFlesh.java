@@ -55,7 +55,7 @@ public final class WallOfPutridFlesh extends CardImpl {
 
     public WallOfPutridFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        
+
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -83,7 +83,7 @@ public final class WallOfPutridFlesh extends CardImpl {
 
 class PreventDamageToSourceByEnchantedCreatures extends PreventAllDamageToSourceEffect {
 
-    public PreventDamageToSourceByEnchantedCreatures(){
+    public PreventDamageToSourceByEnchantedCreatures() {
         super(Duration.WhileOnBattlefield);
     }
 
@@ -100,10 +100,10 @@ class PreventDamageToSourceByEnchantedCreatures extends PreventAllDamageToSource
     }
 
     public boolean isEnchantedCreature(MageObject input, Game game) {
-        if (input != null && !input.isCreature()) {
+        if (input == null || input.isCreature()) {
             return false;
         }
-        for (UUID attachmentId : ((Permanent)input).getAttachments()) {
+        for (UUID attachmentId : ((Permanent) input).getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
             if (attachment != null && attachment.isEnchantment()) {
                 return true;

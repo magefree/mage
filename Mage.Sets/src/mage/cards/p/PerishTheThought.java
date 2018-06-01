@@ -97,10 +97,8 @@ class PerishTheThoughtEffect extends OneShotEffect {
                     if (you.choose(Outcome.Neutral, targetOpponent.getHand(), target, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
                         if (chosenCard != null) {
-                            if (targetOpponent != null) {
-                                chosenCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                                targetOpponent.shuffleLibrary(source, game);
-                            }
+                            chosenCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                            targetOpponent.shuffleLibrary(source, game);
                         }
                     }
                     return true;

@@ -59,7 +59,7 @@ import mage.util.CardUtil;
 public final class BaronVonCount extends CardImpl {
 
     public BaronVonCount(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.VILLAIN);
@@ -152,22 +152,23 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
             MageObject mageObject = game.getObject(getSourceId());
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (game.getState().getValue(mageObject.getId() + "_doom") == null) {
+            if (spell == null || sourcePermanent == null || mageObject == null) {
                 return false;
             }
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
-            if (spell != null && sourcePermanent != null && mageObject != null && doomNumber > 0) {
-                if (!spell.isFaceDown(game)) {
-                    String doomString = doomNumber.toString();
-                    if (spell.getCard().getManaCost().getText().contains(doomString) 
-                            || String.valueOf(spell.getPower().getBaseValue()).contains(doomString) 
-                            || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
-                        return true;
-                    } else {
-                        for (String string : spell.getCard().getRules()) {
-                            if (string.contains(doomString)) {
-                                return true;
-                            }
+            if (doomNumber == null || doomNumber == 0) {
+                return false;
+            }
+            if (!spell.isFaceDown(game)) {
+                String doomString = doomNumber.toString();
+                if (spell.getCard().getManaCost().getText().contains(doomString)
+                        || String.valueOf(spell.getPower().getBaseValue()).contains(doomString)
+                        || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
+                    return true;
+                } else {
+                    for (String string : spell.getCard().getRules()) {
+                        if (string.contains(doomString)) {
+                            return true;
                         }
                     }
                 }

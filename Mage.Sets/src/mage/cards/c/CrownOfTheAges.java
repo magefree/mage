@@ -103,46 +103,47 @@ class CrownOfTheAgesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID auraId = getTargetPointer().getFirst(game, source);
-        Permanent aura = game.getPermanent(auraId);
+        Permanent aura = game.getPermanent(source.getFirstTarget());
+        if (aura == null) {
+            return false;
+        }
         Permanent fromPermanent = game.getPermanent(aura.getAttachedTo());
         Player controller = game.getPlayer(source.getControllerId());
-        if (fromPermanent != null && controller != null) {
-            boolean passed = true;
-            FilterCreaturePermanent filterChoice = new FilterCreaturePermanent("another creature");
-            filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
+        if (fromPermanent == null || controller == null) {
+            return false;
+        }
+        boolean passed = true;
+        FilterCreaturePermanent filterChoice = new FilterCreaturePermanent("another creature");
+        filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
 
-            Target chosenCreatureToAttachAura = new TargetPermanent(filterChoice);
-            chosenCreatureToAttachAura.setNotTarget(true);
+        Target chosenCreatureToAttachAura = new TargetPermanent(filterChoice);
+        chosenCreatureToAttachAura.setNotTarget(true);
 
-            if (chosenCreatureToAttachAura.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.choose(Outcome.Neutral, chosenCreatureToAttachAura, source.getSourceId(), game)) {
-                Permanent creatureToAttachAura = game.getPermanent(chosenCreatureToAttachAura.getFirstTarget());
-                if (creatureToAttachAura != null) {
-                    if (aura != null && passed) {
-                        // Check the target filter
-                        Target target = aura.getSpellAbility().getTargets().get(0);
-                        if (target instanceof TargetPermanent) {
-                            if (!target.getFilter().match(creatureToAttachAura, game)) {
-                                passed = false;
-                            }
-                        }
-                        // Check for protection
-                        MageObject auraObject = game.getObject(auraId);
-                        if (creatureToAttachAura.cantBeAttachedBy(auraObject, game)) {
+        if (chosenCreatureToAttachAura.canChoose(source.getSourceId(), source.getControllerId(), game)
+                && controller.choose(Outcome.Neutral, chosenCreatureToAttachAura, source.getSourceId(), game)) {
+            Permanent creatureToAttachAura = game.getPermanent(chosenCreatureToAttachAura.getFirstTarget());
+            if (creatureToAttachAura != null) {
+                if (passed) {
+                    // Check the target filter
+                    Target target = aura.getSpellAbility().getTargets().get(0);
+                    if (target instanceof TargetPermanent) {
+                        if (!target.getFilter().match(creatureToAttachAura, game)) {
                             passed = false;
                         }
                     }
-                    if (passed) {
-                        fromPermanent.removeAttachment(aura.getId(), game);
-                        creatureToAttachAura.addAttachment(aura.getId(), game);
-                        return true;
+                    // Check for protection
+                    MageObject auraObject = game.getObject(aura.getId());
+                    if (creatureToAttachAura.cantBeAttachedBy(auraObject, game)) {
+                        passed = false;
                     }
                 }
+                if (passed) {
+                    fromPermanent.removeAttachment(aura.getId(), game);
+                    creatureToAttachAura.addAttachment(aura.getId(), game);
+                    return true;
+                }
             }
-            return true;
         }
-
-        return false;
+        return true;
     }
 }

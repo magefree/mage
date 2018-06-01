@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class MammothHarness extends CardImpl {
 
     public MammothHarness(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -69,7 +69,7 @@ public final class MammothHarness extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature loses flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
 
@@ -103,20 +103,18 @@ class MammothHarnessTriggeredAbility extends BlocksOrBecomesBlockedTriggeredAbil
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(this.getSourceId());
         if (sourcePermanent != null) {
             Permanent attachedTo = game.getPermanentOrLKIBattlefield(sourcePermanent.getAttachedTo());
-            if (sourcePermanent != null) {
-                if (event.getSourceId().equals(attachedTo.getId())) {
-                    Permanent blocked = game.getPermanent(event.getTargetId());
-                    if (blocked != null && filter.match(blocked, game)) {
-                        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
-                        return true;
-                    }
+            if (event.getSourceId().equals(attachedTo.getId())) {
+                Permanent blocked = game.getPermanent(event.getTargetId());
+                if (blocked != null && filter.match(blocked, game)) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+                    return true;
                 }
-                if (event.getTargetId().equals(attachedTo.getId())) {
-                    Permanent blocker = game.getPermanent(event.getSourceId());
-                    if (blocker != null) {
-                        this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
-                        return true;
-                    }
+            }
+            if (event.getTargetId().equals(attachedTo.getId())) {
+                Permanent blocker = game.getPermanent(event.getSourceId());
+                if (blocker != null) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
+                    return true;
                 }
             }
         }

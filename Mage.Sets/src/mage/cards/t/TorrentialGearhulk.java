@@ -122,7 +122,7 @@ class TorrentialGearhulkEffect extends OneShotEffect {
                         game.addEffect(effect, source);
                     }
                 }
-            } else {
+            } else if (card != null) {
                 Logger.getLogger(TorrentialGearhulkEffect.class).error("Torrential Gearhulk - Instant card without spellAbility : " + card.getName());
                 return false;
             }

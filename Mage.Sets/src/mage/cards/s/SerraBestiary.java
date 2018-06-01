@@ -121,18 +121,22 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (enchantment == null) {
+            return false;
+        }
         Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            MageObject object = game.getObject(event.getSourceId());
-            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability.isPresent()
-                    && object != null
-                    && object.isCreature()
-                    && object.getId().equals(enchantedCreature.getId())
-                    && game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId())) {
-                if (ability.get().getCosts().stream().anyMatch((cost) -> (cost instanceof TapSourceCost))) {
-                    return true;
-                }
+        if (enchantedCreature == null) {
+            return false;
+        }
+        MageObject object = game.getObject(event.getSourceId());
+        Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+        if (ability.isPresent()
+                && object != null
+                && object.isCreature()
+                && object.getId().equals(enchantedCreature.getId())
+                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId())) {
+            if (ability.get().getCosts().stream().anyMatch((cost) -> (cost instanceof TapSourceCost))) {
+                return true;
             }
         }
         return false;

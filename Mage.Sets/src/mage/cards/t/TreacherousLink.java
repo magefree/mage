@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class TreacherousLink extends CardImpl {
 
     public TreacherousLink(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -109,12 +109,15 @@ class TreacherousLinkEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent) event;
         Permanent enchantedCreature = game.getPermanentOrLKIBattlefield(damageEvent.getTargetId());
-        Player controller = game.getPlayer(enchantedCreature.getControllerId());
-        if (enchantedCreature != null && controller != null) {
-            controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
-            return true;
+        if (enchantedCreature == null) {
+            return false;
         }
-        return false;
+        Player controller = game.getPlayer(enchantedCreature.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
+        return true;
     }
 
     @Override
