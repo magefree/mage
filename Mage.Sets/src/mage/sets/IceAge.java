@@ -360,6 +360,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Shields", 347, Rarity.UNCOMMON, mage.cards.w.WallOfShields.class));
         cards.add(new SetCardInfo("War Chariot", 348, Rarity.UNCOMMON, mage.cards.w.WarChariot.class));
         cards.add(new SetCardInfo("Warning", 55, Rarity.COMMON, mage.cards.w.Warning.class));
+        cards.add(new SetCardInfo("Whalebone Glider", 324, Rarity.UNCOMMON, mage.cards.w.WhaleboneGlider.class));
         cards.add(new SetCardInfo("White Scarab", 56, Rarity.UNCOMMON, mage.cards.w.WhiteScarab.class));
         cards.add(new SetCardInfo("Whiteout", 275, Rarity.UNCOMMON, mage.cards.w.Whiteout.class));
         cards.add(new SetCardInfo("Wild Growth", 277, Rarity.COMMON, mage.cards.w.WildGrowth.class));
