@@ -70,6 +70,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Balduvian Hydra", 173, Rarity.RARE, mage.cards.b.BalduvianHydra.class));
         cards.add(new SetCardInfo("Barbed Sextant", 312, Rarity.COMMON, mage.cards.b.BarbedSextant.class));
         cards.add(new SetCardInfo("Baton of Morale", 313, Rarity.UNCOMMON, mage.cards.b.BatonOfMorale.class));
+        cards.add(new SetCardInfo("Battle Cry", 229, Rarity.UNCOMMON, mage.cards.b.BattleCry.class));
         cards.add(new SetCardInfo("Battle Frenzy", 175, Rarity.COMMON, mage.cards.b.BattleFrenzy.class));
         cards.add(new SetCardInfo("Binding Grasp", 60, Rarity.UNCOMMON, mage.cards.b.BindingGrasp.class));
         cards.add(new SetCardInfo("Black Scarab", 6, Rarity.UNCOMMON, mage.cards.b.BlackScarab.class));
