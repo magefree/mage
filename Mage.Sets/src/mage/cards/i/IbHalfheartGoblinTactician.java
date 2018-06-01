@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class IbHalfheartGoblinTactician extends CardImpl {
+public final class IbHalfheartGoblinTactician extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
     private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent("another Goblin you control");

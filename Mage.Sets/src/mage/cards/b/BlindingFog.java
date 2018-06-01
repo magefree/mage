@@ -42,7 +42,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class BlindingFog extends CardImpl {
+public final class BlindingFog extends CardImpl {
 
     public BlindingFog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanentSameController;
  *
  * @author LevelX2
  */
-public class Cannibalize extends CardImpl {
+public final class Cannibalize extends CardImpl {
 
     public Cannibalize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

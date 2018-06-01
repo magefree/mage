@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class CrovaxAscendantHero extends CardImpl {
+public final class CrovaxAscendantHero extends CardImpl {
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("white creatures");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Nonwhite creatures");
 

@@ -42,7 +42,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
 /**
  * @author JayDi85
  */
-public class ProteanRaider extends CardImpl {
+public final class ProteanRaider extends CardImpl {
 
     public ProteanRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");

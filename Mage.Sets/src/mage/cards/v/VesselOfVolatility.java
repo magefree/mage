@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class VesselOfVolatility extends CardImpl {
+public final class VesselOfVolatility extends CardImpl {
 
     public VesselOfVolatility(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

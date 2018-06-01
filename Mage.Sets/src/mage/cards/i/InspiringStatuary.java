@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Styxo
  */
-public class InspiringStatuary extends CardImpl {
+public final class InspiringStatuary extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("non-artifact spells you cast");
 

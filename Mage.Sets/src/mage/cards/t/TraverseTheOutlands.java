@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class TraverseTheOutlands extends CardImpl {
+public final class TraverseTheOutlands extends CardImpl {
 
     public TraverseTheOutlands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
@@ -103,7 +103,7 @@ class TraverseTheOutlandsEffect extends OneShotEffect {
             }
         }
 
-        TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_CARD_BASIC_LAND);
         if (controller.searchLibrary(target, game)) {
             controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
         }

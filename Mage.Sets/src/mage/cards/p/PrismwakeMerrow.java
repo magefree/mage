@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class PrismwakeMerrow extends CardImpl {
+public final class PrismwakeMerrow extends CardImpl {
 
     public PrismwakeMerrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class SinkIntoTakenuma extends CardImpl {
+public final class SinkIntoTakenuma extends CardImpl {
 
     public SinkIntoTakenuma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");

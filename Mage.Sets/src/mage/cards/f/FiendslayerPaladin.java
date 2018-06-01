@@ -51,7 +51,7 @@ import mage.game.stack.StackObject;
  *
  * @author jeffwadsworth
  */
-public class FiendslayerPaladin extends CardImpl {
+public final class FiendslayerPaladin extends CardImpl {
 
     public FiendslayerPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BorrowedMalevolence extends CardImpl {
+public final class BorrowedMalevolence extends CardImpl {
 
     private static final FilterCreaturePermanent filterCreaturePlus = new FilterCreaturePermanent("creature to get +1/+1");
     private static final FilterCreaturePermanent filterCreatureMinus = new FilterCreaturePermanent("creature to get -1/-1");

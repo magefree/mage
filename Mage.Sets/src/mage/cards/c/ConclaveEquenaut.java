@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class ConclaveEquenaut extends CardImpl {
+public final class ConclaveEquenaut extends CardImpl {
 
     public ConclaveEquenaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

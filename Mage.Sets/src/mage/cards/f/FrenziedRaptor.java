@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class FrenziedRaptor extends CardImpl {
+public final class FrenziedRaptor extends CardImpl {
 
     public FrenziedRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class IcatianLieutenant extends CardImpl {
+public final class IcatianLieutenant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creature");
 

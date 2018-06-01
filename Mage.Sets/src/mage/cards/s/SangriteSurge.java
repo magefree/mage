@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SangriteSurge extends CardImpl {
+public final class SangriteSurge extends CardImpl {
 
     public SangriteSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{G}");

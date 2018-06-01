@@ -41,7 +41,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author TheElk801
  */
-public class DireFleetHoarder extends CardImpl {
+public final class DireFleetHoarder extends CardImpl {
 
     public DireFleetHoarder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

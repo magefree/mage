@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class KalemnesCaptain extends CardImpl {
+public final class KalemnesCaptain extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifacts and enchantments");
 

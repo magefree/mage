@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SolemnOffering extends CardImpl {
+public final class SolemnOffering extends CardImpl {
 
     public SolemnOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

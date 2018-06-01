@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GiantOctopus extends CardImpl {
+public final class GiantOctopus extends CardImpl {
 
     public GiantOctopus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

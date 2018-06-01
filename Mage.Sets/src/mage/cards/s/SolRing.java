@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class SolRing extends CardImpl {
+public final class SolRing extends CardImpl {
 
     public SolRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

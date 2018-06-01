@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Geistblast extends CardImpl {
+public final class Geistblast extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell you control");
 

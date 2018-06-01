@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author noxx
  */
-public class GryffVanguard extends CardImpl {
+public final class GryffVanguard extends CardImpl {
 
     public GryffVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

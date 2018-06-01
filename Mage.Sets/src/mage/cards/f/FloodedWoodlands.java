@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class FloodedWoodlands extends CardImpl {
+public final class FloodedWoodlands extends CardImpl {
 
     public FloodedWoodlands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");

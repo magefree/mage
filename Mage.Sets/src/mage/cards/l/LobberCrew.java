@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class LobberCrew extends CardImpl {
+public final class LobberCrew extends CardImpl {
 
     public LobberCrew(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

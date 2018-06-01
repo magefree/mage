@@ -46,7 +46,7 @@ import mage.players.Player;
  * @author KholdFuzion
 
  */
-public class Smoke extends CardImpl {
+public final class Smoke extends CardImpl {
 
     public Smoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{R}");

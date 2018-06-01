@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CorruptedZendikonOozeToken extends TokenImpl {
+public final class CorruptedZendikonOozeToken extends TokenImpl {
 
     public CorruptedZendikonOozeToken() {
         super("Ooze", "3/3 black Ooze creature");

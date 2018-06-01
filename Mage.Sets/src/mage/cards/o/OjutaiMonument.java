@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class OjutaiMonument extends CardImpl {
+public final class OjutaiMonument extends CardImpl {
 
     public OjutaiMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

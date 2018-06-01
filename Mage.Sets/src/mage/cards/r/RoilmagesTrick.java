@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class RoilmagesTrick extends CardImpl {
+public final class RoilmagesTrick extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 

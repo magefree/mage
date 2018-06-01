@@ -45,7 +45,7 @@ import mage.constants.Zone;
 /**
  * @author Rystan
  */
-public class MemorialToGenius extends CardImpl {
+public final class MemorialToGenius extends CardImpl {
 
     public MemorialToGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

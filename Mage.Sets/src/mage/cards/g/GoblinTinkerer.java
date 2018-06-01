@@ -50,7 +50,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class GoblinTinkerer extends CardImpl {
+public final class GoblinTinkerer extends CardImpl {
 
     public GoblinTinkerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

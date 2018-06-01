@@ -36,7 +36,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Shadowmoor extends ExpansionSet {
+public final class Shadowmoor extends ExpansionSet {
 
     private static final Shadowmoor instance = new Shadowmoor();
 

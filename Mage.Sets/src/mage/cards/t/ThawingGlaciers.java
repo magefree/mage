@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ThawingGlaciers extends CardImpl {
+public final class ThawingGlaciers extends CardImpl {
 
     public ThawingGlaciers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
@@ -59,7 +59,7 @@ public class ThawingGlaciers extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {1}, {tap}: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library. Return Thawing Glaciers to its owner's hand at the beginning of the next cleanup step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, Outcome.PutLandInPlay), new GenericManaCost(1));
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, Outcome.PutLandInPlay), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new ReturnToHandSourceEffect(true))));
 

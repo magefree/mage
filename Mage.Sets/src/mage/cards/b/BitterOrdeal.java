@@ -47,7 +47,7 @@ import mage.watchers.common.GravestormWatcher;
  *
  * @author emerald000
  */
-public class BitterOrdeal extends CardImpl {
+public final class BitterOrdeal extends CardImpl {
 
     public BitterOrdeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

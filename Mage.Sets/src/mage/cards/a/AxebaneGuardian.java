@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Plopman
  */
-public class AxebaneGuardian extends CardImpl {
+public final class AxebaneGuardian extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
 

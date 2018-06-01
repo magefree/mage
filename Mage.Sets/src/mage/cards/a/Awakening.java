@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class Awakening extends CardImpl {
+public final class Awakening extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creatures and lands");
 

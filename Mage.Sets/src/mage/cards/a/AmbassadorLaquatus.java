@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class AmbassadorLaquatus extends CardImpl {
+public final class AmbassadorLaquatus extends CardImpl {
 
     public AmbassadorLaquatus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

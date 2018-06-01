@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class AnaSanctuary extends CardImpl {
+public final class AnaSanctuary extends CardImpl {
 
     public AnaSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

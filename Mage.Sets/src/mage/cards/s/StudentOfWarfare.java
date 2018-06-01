@@ -47,7 +47,7 @@ import mage.constants.SubType;
  *
  * @author Loki, noxx
  */
-public class StudentOfWarfare extends LevelerCard {
+public final class StudentOfWarfare extends LevelerCard {
 
     public StudentOfWarfare (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

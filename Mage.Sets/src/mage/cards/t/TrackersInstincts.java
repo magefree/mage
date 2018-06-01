@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class TrackersInstincts extends CardImpl {
+public final class TrackersInstincts extends CardImpl {
 
     public TrackersInstincts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author Backfir3
  */
-public class UrzasArmor extends CardImpl {
+public final class UrzasArmor extends CardImpl {
 
     public UrzasArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

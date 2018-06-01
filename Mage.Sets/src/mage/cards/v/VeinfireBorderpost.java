@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class VeinfireBorderpost extends CardImpl {
+public final class VeinfireBorderpost extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a basic land");
 

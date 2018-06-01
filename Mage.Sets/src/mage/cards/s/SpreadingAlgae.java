@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class SpreadingAlgae extends CardImpl {
+public final class SpreadingAlgae extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Swamp");
 

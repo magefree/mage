@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SilvosRogueElemental extends CardImpl {
+public final class SilvosRogueElemental extends CardImpl {
 
     public SilvosRogueElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");

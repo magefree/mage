@@ -52,7 +52,7 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
-public class CatchRelease extends SplitCard {
+public final class CatchRelease extends SplitCard {
 
     public CatchRelease(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{R}", "{4}{R}{W}", SpellAbilityType.SPLIT_FUSED);

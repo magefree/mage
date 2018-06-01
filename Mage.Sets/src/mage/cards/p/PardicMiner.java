@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class PardicMiner extends CardImpl {
+public final class PardicMiner extends CardImpl {
 
     public PardicMiner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SeedcradleWitch extends CardImpl {
+public final class SeedcradleWitch extends CardImpl {
 
     public SeedcradleWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}");

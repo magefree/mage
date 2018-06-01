@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class IwamoriOfTheOpenFist extends CardImpl {
+public final class IwamoriOfTheOpenFist extends CardImpl {
 
     public IwamoriOfTheOpenFist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

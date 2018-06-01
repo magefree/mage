@@ -48,7 +48,7 @@ import mage.util.RandomUtil;
  *
  * @author jeffwadsworth
  */
-public class WildSwing extends CardImpl {
+public final class WildSwing extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("target nonenchantment permanents");
 

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SubterraneanTremorsLizardToken extends TokenImpl {
+public final class SubterraneanTremorsLizardToken extends TokenImpl {
 
     public SubterraneanTremorsLizardToken() {
         super("Lizard", "an 8/8 red Lizard creature token");

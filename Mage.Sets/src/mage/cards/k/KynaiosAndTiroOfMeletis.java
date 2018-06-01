@@ -51,7 +51,7 @@ import java.util.UUID;
 /**
  * @author spjspj
  */
-public class KynaiosAndTiroOfMeletis extends CardImpl {
+public final class KynaiosAndTiroOfMeletis extends CardImpl {
 
     public KynaiosAndTiroOfMeletis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}{U}");

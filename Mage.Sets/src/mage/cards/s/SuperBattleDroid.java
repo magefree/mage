@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class SuperBattleDroid extends CardImpl {
+public final class SuperBattleDroid extends CardImpl {
 
     public SuperBattleDroid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}{U}");

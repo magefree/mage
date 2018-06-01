@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class WaningWurm extends CardImpl {
+public final class WaningWurm extends CardImpl {
 
     public WaningWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

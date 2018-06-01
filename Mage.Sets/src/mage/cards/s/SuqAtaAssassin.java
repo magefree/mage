@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SuqAtaAssassin extends CardImpl {
+public final class SuqAtaAssassin extends CardImpl {
 
     public SuqAtaAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

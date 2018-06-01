@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LlanowarDead extends CardImpl {
+public final class LlanowarDead extends CardImpl {
 
     public LlanowarDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");

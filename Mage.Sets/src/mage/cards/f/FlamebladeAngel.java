@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class FlamebladeAngel extends CardImpl {
+public final class FlamebladeAngel extends CardImpl {
 
     public FlamebladeAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

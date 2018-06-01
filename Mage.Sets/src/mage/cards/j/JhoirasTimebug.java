@@ -54,7 +54,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
  *
  * @author emerald000
  */
-public class JhoirasTimebug extends CardImpl {
+public final class JhoirasTimebug extends CardImpl {
 
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("permanent you control or suspended card you own");
     static {

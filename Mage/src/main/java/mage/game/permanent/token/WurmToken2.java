@@ -40,7 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author LoneFox
  */
-public class WurmToken2 extends TokenImpl {
+public final class WurmToken2 extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

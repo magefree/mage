@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class ShireiShizosCaretaker extends CardImpl {
+public final class ShireiShizosCaretaker extends CardImpl {
 
     public ShireiShizosCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

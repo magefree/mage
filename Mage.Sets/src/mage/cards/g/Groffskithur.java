@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class Groffskithur extends CardImpl {
+public final class Groffskithur extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("card named Groffskithur from your graveyard");
     

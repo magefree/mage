@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SophicCentaur extends CardImpl {
+public final class SophicCentaur extends CardImpl {
 
     public SophicCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

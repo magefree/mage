@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OverwhelmingStampede extends CardImpl {
+public final class OverwhelmingStampede extends CardImpl {
 
     public OverwhelmingStampede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

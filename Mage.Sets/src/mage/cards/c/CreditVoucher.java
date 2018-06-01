@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author TheElk801
  */
-public class CreditVoucher extends CardImpl {
+public final class CreditVoucher extends CardImpl {
 
     public CreditVoucher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

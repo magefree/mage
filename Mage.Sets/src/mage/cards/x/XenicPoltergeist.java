@@ -54,7 +54,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author MarcoMarin
  */
-public class XenicPoltergeist extends CardImpl {
+public final class XenicPoltergeist extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
 

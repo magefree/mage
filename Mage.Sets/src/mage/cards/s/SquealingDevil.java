@@ -58,7 +58,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author TheElk801
  */
-public class SquealingDevil extends CardImpl {
+public final class SquealingDevil extends CardImpl {
 
     public SquealingDevil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

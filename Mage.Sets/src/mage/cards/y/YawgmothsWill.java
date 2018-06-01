@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class YawgmothsWill extends CardImpl {
+public final class YawgmothsWill extends CardImpl {
 
     public YawgmothsWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

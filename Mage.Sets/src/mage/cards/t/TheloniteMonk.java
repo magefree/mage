@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class TheloniteMonk extends CardImpl {
+public final class TheloniteMonk extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green creature");
     

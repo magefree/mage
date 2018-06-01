@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class InkfathomInfiltrator extends CardImpl {
+public final class InkfathomInfiltrator extends CardImpl {
 
     public InkfathomInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}");

@@ -59,7 +59,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author tre3qwerty
  */
-public class VisionCharm extends CardImpl {
+public final class VisionCharm extends CardImpl {
 
     public VisionCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

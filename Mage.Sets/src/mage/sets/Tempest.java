@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Tempest extends ExpansionSet {
+public final class Tempest extends ExpansionSet {
 
     private static final Tempest instance = new Tempest();
 

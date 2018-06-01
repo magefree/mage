@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class ManaMatrix extends CardImpl {
+public final class ManaMatrix extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Instant and enchantment spells");
     

@@ -41,7 +41,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class Kaladesh extends ExpansionSet {
+public final class Kaladesh extends ExpansionSet {
 
     private static final Kaladesh instance = new Kaladesh();
 

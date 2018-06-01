@@ -38,7 +38,7 @@ import mage.game.permanent.token.RevelOfTheFallenGodSatyrToken;
  *
  * @author LevelX2
  */
-public class RevelOfTheFallenGod extends CardImpl {
+public final class RevelOfTheFallenGod extends CardImpl {
 
     public RevelOfTheFallenGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{G}{G}");

@@ -40,13 +40,13 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NaturalConnection extends CardImpl {
+public final class NaturalConnection extends CardImpl {
 
     public NaturalConnection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
 
     }

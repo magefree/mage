@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class ScytheLeopard extends CardImpl {
+public final class ScytheLeopard extends CardImpl {
 
     public ScytheLeopard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

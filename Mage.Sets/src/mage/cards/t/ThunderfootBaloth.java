@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class ThunderfootBaloth extends CardImpl {
+public final class ThunderfootBaloth extends CardImpl {
 
     public ThunderfootBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

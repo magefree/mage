@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SavageSilhouette extends CardImpl {
+public final class SavageSilhouette extends CardImpl {
 
     public SavageSilhouette(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

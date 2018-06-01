@@ -46,7 +46,7 @@ import mage.game.permanent.token.custom.CreatureToken;
  *
  * @author LevelX2
  */
-public class RudeAwakening extends CardImpl {
+public final class RudeAwakening extends CardImpl {
 
     public RudeAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");

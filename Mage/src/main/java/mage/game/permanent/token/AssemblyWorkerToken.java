@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class AssemblyWorkerToken extends TokenImpl {
+public final class AssemblyWorkerToken extends TokenImpl {
 
     public AssemblyWorkerToken() {
         super("Assembly-Worker", "2/2 Assembly-Worker artifact creature");

@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class NettletoothDjinn extends CardImpl {
+public final class NettletoothDjinn extends CardImpl {
 
     public NettletoothDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

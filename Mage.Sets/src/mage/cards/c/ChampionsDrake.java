@@ -48,7 +48,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class ChampionsDrake extends CardImpl {
+public final class ChampionsDrake extends CardImpl {
 
     private static final String rule = "{this} gets +3/+3 as long as you control a creature with three or more level counters on it.";
 

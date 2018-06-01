@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class EndlessHorizons extends CardImpl {
+public final class EndlessHorizons extends CardImpl {
 
     public EndlessHorizons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

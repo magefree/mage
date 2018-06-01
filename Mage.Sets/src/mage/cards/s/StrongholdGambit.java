@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class StrongholdGambit extends CardImpl {
+public final class StrongholdGambit extends CardImpl {
 
     public StrongholdGambit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

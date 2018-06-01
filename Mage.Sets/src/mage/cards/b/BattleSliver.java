@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author jeffwadsworth
  */
-public class BattleSliver extends CardImpl {
+public final class BattleSliver extends CardImpl {
 
     public BattleSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

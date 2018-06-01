@@ -51,7 +51,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class CastThroughTime extends CardImpl {
+public final class CastThroughTime extends CardImpl {
 
     protected static final FilterCard filter = new FilterCard("Instant and sorcery spells you control");
 

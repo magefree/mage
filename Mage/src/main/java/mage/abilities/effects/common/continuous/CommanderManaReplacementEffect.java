@@ -50,6 +50,7 @@ import mage.game.events.ManaEvent;
  * Commander rule #4 was removed Jan. 18, 2016 
  *
  */
+@Deprecated
 public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
 
     private final UUID playerId;

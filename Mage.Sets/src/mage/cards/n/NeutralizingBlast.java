@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class NeutralizingBlast extends CardImpl {
+public final class NeutralizingBlast extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("multicolored spell");
     static {

@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class JunkGolem extends CardImpl {
+public final class JunkGolem extends CardImpl {
 
     public JunkGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

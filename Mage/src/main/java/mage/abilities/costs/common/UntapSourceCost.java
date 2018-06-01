@@ -62,7 +62,7 @@ public class UntapSourceCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            return permanent.isTapped() && (permanent.canTap() || null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_HASTE, controllerId, game));
+            return permanent.isTapped() && (permanent.canTap() || null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_HASTE, ability, controllerId, game));
         }
         return false;
     }

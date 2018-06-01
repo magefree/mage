@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class EmptyTheCatacombs extends CardImpl {
+public final class EmptyTheCatacombs extends CardImpl {
 
     public EmptyTheCatacombs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

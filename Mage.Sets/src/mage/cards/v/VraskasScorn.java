@@ -41,7 +41,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class VraskasScorn extends CardImpl {
+public final class VraskasScorn extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Vraska, Scheming Gorgon");
 

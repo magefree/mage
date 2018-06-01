@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class BannersRaised extends CardImpl {
+public final class BannersRaised extends CardImpl {
 
     public BannersRaised(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

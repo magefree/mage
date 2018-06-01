@@ -14,7 +14,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
-public class GavonyTownship extends CardImpl {
+public final class GavonyTownship extends CardImpl {
 
     public GavonyTownship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

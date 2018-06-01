@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class FogBank extends CardImpl {
+public final class FogBank extends CardImpl {
 
     public FogBank(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

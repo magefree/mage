@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author cbt33, Nantuko (Nim Deathmantle)
  */
-public class DecayingSoil extends CardImpl {
+public final class DecayingSoil extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
     static{

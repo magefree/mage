@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Will
  */
-public class DaringBuccaneer extends CardImpl {
+public final class DaringBuccaneer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Pirate card from your hand");
     static {

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class AncientOfTheEquinox extends CardImpl {
+public final class AncientOfTheEquinox extends CardImpl {
 
     public AncientOfTheEquinox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

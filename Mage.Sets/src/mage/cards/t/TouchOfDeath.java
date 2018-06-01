@@ -42,7 +42,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class TouchOfDeath extends CardImpl {
+public final class TouchOfDeath extends CardImpl {
 
     public TouchOfDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

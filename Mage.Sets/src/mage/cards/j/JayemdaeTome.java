@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class JayemdaeTome extends CardImpl {
+public final class JayemdaeTome extends CardImpl {
 
     public JayemdaeTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

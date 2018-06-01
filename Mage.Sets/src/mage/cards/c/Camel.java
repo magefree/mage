@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class Camel extends CardImpl {
+public final class Camel extends CardImpl {
 
     public Camel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

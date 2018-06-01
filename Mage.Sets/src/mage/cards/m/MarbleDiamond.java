@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class MarbleDiamond extends CardImpl {
+public final class MarbleDiamond extends CardImpl {
 
     public MarbleDiamond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author ciaccona007
  */
-public class HarrierNaga extends CardImpl {
+public final class HarrierNaga extends CardImpl {
 
     public HarrierNaga(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

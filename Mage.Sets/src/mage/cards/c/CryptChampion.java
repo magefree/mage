@@ -58,7 +58,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author emerald000
  */
-public class CryptChampion extends CardImpl {
+public final class CryptChampion extends CardImpl {
 
     public CryptChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

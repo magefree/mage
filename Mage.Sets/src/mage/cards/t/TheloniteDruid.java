@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class TheloniteDruid extends CardImpl {
+public final class TheloniteDruid extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Forests you control");
 

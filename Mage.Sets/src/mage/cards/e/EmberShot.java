@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class EmberShot extends CardImpl {
+public final class EmberShot extends CardImpl {
 
     public EmberShot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{R}");

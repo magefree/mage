@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author TheElk801
  */
-public class OathOfGhouls extends CardImpl {
+public final class OathOfGhouls extends CardImpl {
 
     private final UUID originalId;
     private static final FilterPlayer filter = new FilterPlayer();

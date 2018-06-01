@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class RhoxMeditant extends CardImpl {
+public final class RhoxMeditant extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("green permanent");
     

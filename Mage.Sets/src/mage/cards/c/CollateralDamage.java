@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class CollateralDamage extends CardImpl {
+public final class CollateralDamage extends CardImpl {
 
     public CollateralDamage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

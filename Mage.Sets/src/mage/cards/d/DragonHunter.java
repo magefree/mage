@@ -43,7 +43,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class DragonHunter extends CardImpl {
+public final class DragonHunter extends CardImpl {
 
     public DragonHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

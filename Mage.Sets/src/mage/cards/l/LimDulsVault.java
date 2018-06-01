@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class LimDulsVault extends CardImpl {
+public final class LimDulsVault extends CardImpl {
 
     public LimDulsVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}");

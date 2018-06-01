@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class DauthiHorror extends CardImpl {
+public final class DauthiHorror extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
     static {

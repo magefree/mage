@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class OneOfThePack extends CardImpl {
+public final class OneOfThePack extends CardImpl {
 
     public OneOfThePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

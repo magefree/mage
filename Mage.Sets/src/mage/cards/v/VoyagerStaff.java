@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class VoyagerStaff extends CardImpl {
+public final class VoyagerStaff extends CardImpl {
 
     public VoyagerStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

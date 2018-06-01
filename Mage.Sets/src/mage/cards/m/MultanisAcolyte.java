@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class MultanisAcolyte extends CardImpl {
+public final class MultanisAcolyte extends CardImpl {
 
     public MultanisAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

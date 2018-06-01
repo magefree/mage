@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerCastCreatureWatcher;
  *
  * @author LevelX2
  */
-public class GoblinCohort extends CardImpl {
+public final class GoblinCohort extends CardImpl {
 
     public GoblinCohort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

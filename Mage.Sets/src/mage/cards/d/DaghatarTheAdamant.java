@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DaghatarTheAdamant extends CardImpl {
+public final class DaghatarTheAdamant extends CardImpl {
 
     public DaghatarTheAdamant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -41,7 +41,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class DictateOfKarametra extends CardImpl {
+public final class DictateOfKarametra extends CardImpl {
 
     public DictateOfKarametra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
@@ -49,7 +49,7 @@ public class DictateOfKarametra extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        // Whenever a player taps a land for mana, that player adds one mana to their mana pool of any type that land produced.
+        // Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaOfAnyTypeProducedEffect(),
                 new FilterLandPermanent("a player taps a land"),

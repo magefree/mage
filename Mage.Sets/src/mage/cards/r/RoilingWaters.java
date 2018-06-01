@@ -45,7 +45,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class RoilingWaters extends CardImpl {
+public final class RoilingWaters extends CardImpl {
 
     private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures your opponents control");
 

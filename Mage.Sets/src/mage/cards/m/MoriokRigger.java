@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author Plopman
  */
-public class MoriokRigger extends CardImpl {
+public final class MoriokRigger extends CardImpl {
 
     public MoriokRigger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class BansheesBlade extends CardImpl {
+public final class BansheesBlade extends CardImpl {
 
     public BansheesBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

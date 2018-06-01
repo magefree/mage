@@ -44,7 +44,7 @@ import mage.counters.CounterType;
 /**
  * @author nantuko, BetaSteward_at_googlemail.com
  */
-public class AetherFigment extends CardImpl {
+public final class AetherFigment extends CardImpl {
 
     public AetherFigment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

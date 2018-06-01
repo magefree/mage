@@ -52,7 +52,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CaptainsHook extends CardImpl {
+public final class CaptainsHook extends CardImpl {
 
     public CaptainsHook(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

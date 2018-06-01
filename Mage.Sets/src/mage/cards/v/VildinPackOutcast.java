@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class VildinPackOutcast extends CardImpl {
+public final class VildinPackOutcast extends CardImpl {
 
     public VildinPackOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

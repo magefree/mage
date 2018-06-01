@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class Fervor extends CardImpl {
+public final class Fervor extends CardImpl {
 
     public Fervor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

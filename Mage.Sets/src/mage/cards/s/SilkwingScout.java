@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class SilkwingScout extends CardImpl {
+public final class SilkwingScout extends CardImpl {
 
     public SilkwingScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -62,7 +62,7 @@ public class SilkwingScout extends CardImpl {
         
         // {G}, Sacrifice Silkwing Scout: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
                 new ManaCostsImpl("{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

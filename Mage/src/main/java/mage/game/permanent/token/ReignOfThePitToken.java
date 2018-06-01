@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class ReignOfThePitToken extends TokenImpl {
+public final class ReignOfThePitToken extends TokenImpl {
 
     public ReignOfThePitToken() {
         this(1);

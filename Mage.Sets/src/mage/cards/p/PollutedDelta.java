@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class PollutedDelta extends CardImpl {
+public final class PollutedDelta extends CardImpl {
 
     public PollutedDelta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class WhiplashTrap extends CardImpl {
+public final class WhiplashTrap extends CardImpl {
 
     public WhiplashTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

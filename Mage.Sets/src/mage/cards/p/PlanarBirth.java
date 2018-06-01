@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class PlanarBirth extends CardImpl {
+public final class PlanarBirth extends CardImpl {
 
     public PlanarBirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
@@ -89,7 +89,7 @@ class PlanarBirthEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    toBattlefield.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_BASIC_LAND_CARD, source.getSourceId(), controller.getId(), game));
+                    toBattlefield.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_BASIC_LAND, source.getSourceId(), controller.getId(), game));
                 }
             }
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);

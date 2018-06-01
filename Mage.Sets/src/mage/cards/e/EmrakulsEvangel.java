@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class EmrakulsEvangel extends CardImpl {
+public final class EmrakulsEvangel extends CardImpl {
 
     public EmrakulsEvangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

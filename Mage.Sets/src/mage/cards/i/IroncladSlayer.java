@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class IroncladSlayer extends CardImpl {
+public final class IroncladSlayer extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Aura or Equipment card from your graveyard");
 

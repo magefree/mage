@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author nantuko
  */
-public class StormbloodBerserker extends CardImpl {
+public final class StormbloodBerserker extends CardImpl {
 
     public StormbloodBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

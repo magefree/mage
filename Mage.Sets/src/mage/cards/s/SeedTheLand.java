@@ -42,7 +42,7 @@ import mage.game.permanent.token.SnakeToken;
  *
  * @author LevelX2
  */
-public class SeedTheLand extends CardImpl {
+public final class SeedTheLand extends CardImpl {
 
     public SeedTheLand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class LaccolithTitan extends CardImpl {
+public final class LaccolithTitan extends CardImpl {
 
     public LaccolithTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

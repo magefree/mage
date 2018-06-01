@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class WirewoodGuardian extends CardImpl {
+public final class WirewoodGuardian extends CardImpl {
 
     public WirewoodGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

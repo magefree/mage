@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class GlintHawk extends CardImpl {
+public final class GlintHawk extends CardImpl {
 
     public GlintHawk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

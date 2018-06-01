@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class RainOfTears extends CardImpl {
+public final class RainOfTears extends CardImpl {
 
     public RainOfTears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

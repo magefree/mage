@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class BringerOfTheBlackDawn extends CardImpl {
+public final class BringerOfTheBlackDawn extends CardImpl {
 
     public BringerOfTheBlackDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{B}{B}");

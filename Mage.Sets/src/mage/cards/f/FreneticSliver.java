@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author anonymous
  */
-public class FreneticSliver extends CardImpl {
+public final class FreneticSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 

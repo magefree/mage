@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class DeathPitsOfRath extends CardImpl {
+public final class DeathPitsOfRath extends CardImpl {
 
     public DeathPitsOfRath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class VesselOfParamnesia extends CardImpl {
+public final class VesselOfParamnesia extends CardImpl {
 
     public VesselOfParamnesia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

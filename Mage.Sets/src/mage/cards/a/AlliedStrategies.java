@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author FenrisulfrX
  */
-public class AlliedStrategies extends CardImpl {
+public final class AlliedStrategies extends CardImpl {
 
     public AlliedStrategies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");

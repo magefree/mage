@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Invasion extends ExpansionSet {
+public final class Invasion extends ExpansionSet {
 
     private static final Invasion instance = new Invasion();
 

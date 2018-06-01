@@ -36,7 +36,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class MetallurgicSummoningsConstructToken extends TokenImpl {
+public final class MetallurgicSummoningsConstructToken extends TokenImpl {
 
     public MetallurgicSummoningsConstructToken() {
         this (1);

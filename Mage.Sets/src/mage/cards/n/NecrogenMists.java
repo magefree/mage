@@ -39,7 +39,7 @@ import mage.constants.TargetController;
  *
  * @author dustinconrad
  */
-public class NecrogenMists extends CardImpl {
+public final class NecrogenMists extends CardImpl {
 
     public NecrogenMists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

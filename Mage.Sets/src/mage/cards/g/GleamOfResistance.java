@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class GleamOfResistance extends CardImpl {
+public final class GleamOfResistance extends CardImpl {
 
     public GleamOfResistance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");

@@ -48,7 +48,7 @@ import mage.target.TargetSource;
  *
  * @author LevelX2
  */
-public class DeflectingPalm extends CardImpl {
+public final class DeflectingPalm extends CardImpl {
 
     public DeflectingPalm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}");

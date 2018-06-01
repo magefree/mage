@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Plopman
  */
-public class BeastOfBurden extends CardImpl {
+public final class BeastOfBurden extends CardImpl {
 
     public BeastOfBurden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author magenoxx
  */
-public class Hatred extends CardImpl {
+public final class Hatred extends CardImpl {
 
     public Hatred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");

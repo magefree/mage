@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author North
  */
-public class VaultOfTheArchangel extends CardImpl {
+public final class VaultOfTheArchangel extends CardImpl {
 
     public VaultOfTheArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

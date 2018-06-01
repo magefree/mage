@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author MarcoMarin
  */
-public class ArtifactPossession extends CardImpl {
+public final class ArtifactPossession extends CardImpl {
 
     public ArtifactPossession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

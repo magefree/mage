@@ -41,7 +41,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -59,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class LivingLore extends CardImpl {
+public final class LivingLore extends CardImpl {
 
     public LivingLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -207,7 +206,7 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
                         }
                         if (exiledCard != null) {
                             if (exiledCard.getSpellAbility().canChooseTarget(game)) {
-                                controller.cast(exiledCard.getSpellAbility(), game, true);
+                                controller.cast(exiledCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                             }
                         }
                     }

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class MeanderingRiver extends CardImpl {
+public final class MeanderingRiver extends CardImpl {
 
     public MeanderingRiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

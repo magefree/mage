@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class ConcealedCourtyard extends CardImpl {
+public final class ConcealedCourtyard extends CardImpl {
 
     public ConcealedCourtyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

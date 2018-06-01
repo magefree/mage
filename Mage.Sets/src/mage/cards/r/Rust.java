@@ -40,7 +40,7 @@ import mage.target.common.TargetActivatedAbility;
  *
  * @author TheElk801
  */
-public class Rust extends CardImpl {
+public final class Rust extends CardImpl {
 
     private final static FilterAbility filter = new FilterAbility("activated ability from an artifact source");
 

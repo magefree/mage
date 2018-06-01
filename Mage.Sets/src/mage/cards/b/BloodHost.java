@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class BloodHost extends CardImpl {
+public final class BloodHost extends CardImpl {
 
     public BloodHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

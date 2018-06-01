@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author LoneFox
 
  */
-public class SilverDrake extends CardImpl {
+public final class SilverDrake extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white or blue creature you control");
 

@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  */
 
 
-public class SinCollector extends CardImpl {
+public final class SinCollector extends CardImpl {
 
     public SinCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");

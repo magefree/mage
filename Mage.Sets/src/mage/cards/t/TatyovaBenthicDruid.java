@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author L_J
  */
-public class TatyovaBenthicDruid extends CardImpl {
+public final class TatyovaBenthicDruid extends CardImpl {
 
     public TatyovaBenthicDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");

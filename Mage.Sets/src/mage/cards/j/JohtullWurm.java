@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class JohtullWurm extends CardImpl {
+public final class JohtullWurm extends CardImpl {
 
     public JohtullWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

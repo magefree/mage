@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Morningtide extends ExpansionSet {
+public final class Morningtide extends ExpansionSet {
 
     private static final Morningtide instance = new Morningtide();
 

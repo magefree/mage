@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author chrisasanford
  */
-public class FlowstoneSlide extends CardImpl {
+public final class FlowstoneSlide extends CardImpl {
 
     public FlowstoneSlide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{R}{R}");

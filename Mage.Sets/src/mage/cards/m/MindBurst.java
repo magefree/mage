@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class MindBurst extends CardImpl {
+public final class MindBurst extends CardImpl {
     
     private static final FilterCard filter = new FilterCard();
     

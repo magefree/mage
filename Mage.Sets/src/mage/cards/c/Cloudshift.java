@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author noxx
  */
-public class Cloudshift extends CardImpl {
+public final class Cloudshift extends CardImpl {
 
     public Cloudshift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

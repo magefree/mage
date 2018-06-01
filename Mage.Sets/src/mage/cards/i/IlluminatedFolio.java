@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class IlluminatedFolio extends CardImpl {
+public final class IlluminatedFolio extends CardImpl {
 
     public IlluminatedFolio(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

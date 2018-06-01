@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ScrollOfTheMasters extends CardImpl {
+public final class ScrollOfTheMasters extends CardImpl {
 
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 

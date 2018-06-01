@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author noxx
  */
-public class MaraxusOfKeld extends CardImpl {
+public final class MaraxusOfKeld extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts, creatures, and lands you control");
 

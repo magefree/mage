@@ -46,7 +46,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author fireshoes
  */
-public class Deadshot extends CardImpl {
+public final class Deadshot extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 

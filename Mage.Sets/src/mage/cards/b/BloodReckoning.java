@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author jeffwadsworth
  */
-public class BloodReckoning extends CardImpl {
+public final class BloodReckoning extends CardImpl {
 
     public BloodReckoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

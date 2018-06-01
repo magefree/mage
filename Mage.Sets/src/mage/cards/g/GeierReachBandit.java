@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class GeierReachBandit extends CardImpl {
+public final class GeierReachBandit extends CardImpl {
 
     public GeierReachBandit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

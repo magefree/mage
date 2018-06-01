@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class GarbageElementalC extends CardImpl {
+public final class GarbageElementalC extends CardImpl {
 
     public GarbageElementalC(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

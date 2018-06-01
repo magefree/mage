@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BalthorTheStout extends CardImpl {
+public final class BalthorTheStout extends CardImpl {
     
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Barbarian creatures");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target Barbarian");

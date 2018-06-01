@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author nigelzor
  */
-public class WakeOfVultures extends CardImpl {
+public final class WakeOfVultures extends CardImpl {
 
     public WakeOfVultures(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

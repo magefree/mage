@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class FeastOrFamine extends CardImpl {
+public final class FeastOrFamine extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
 

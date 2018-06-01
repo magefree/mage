@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ciaccona007
  */
-public class CinderCloud extends CardImpl {
+public final class CinderCloud extends CardImpl {
 
     public CinderCloud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");

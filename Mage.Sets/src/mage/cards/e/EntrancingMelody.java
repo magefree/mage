@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class EntrancingMelody extends CardImpl {
+public final class EntrancingMelody extends CardImpl {
 
     public EntrancingMelody(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");

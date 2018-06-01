@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class Tamanoa extends CardImpl {
+public final class Tamanoa extends CardImpl {
 
     public Tamanoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");

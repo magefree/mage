@@ -38,7 +38,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class RavagesOfWar extends CardImpl {
+public final class RavagesOfWar extends CardImpl {
 
     public RavagesOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");

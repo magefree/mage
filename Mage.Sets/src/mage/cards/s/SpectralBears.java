@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class SpectralBears extends CardImpl {
+public final class SpectralBears extends CardImpl {
 
     public SpectralBears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

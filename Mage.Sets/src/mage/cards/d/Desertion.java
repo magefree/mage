@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author Quercitron
  */
-public class Desertion extends CardImpl {
+public final class Desertion extends CardImpl {
 
     public Desertion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

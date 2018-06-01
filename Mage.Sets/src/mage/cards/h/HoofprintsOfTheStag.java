@@ -48,7 +48,7 @@ import mage.game.permanent.token.WhiteElementalToken;
  *
  * @author Loki
  */
-public class HoofprintsOfTheStag extends CardImpl {
+public final class HoofprintsOfTheStag extends CardImpl {
 
     public HoofprintsOfTheStag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");

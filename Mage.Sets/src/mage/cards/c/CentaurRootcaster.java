@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class CentaurRootcaster extends CardImpl {
+public final class CentaurRootcaster extends CardImpl {
 
     public CentaurRootcaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
@@ -54,7 +54,7 @@ public class CentaurRootcaster extends CardImpl {
 
         // Whenever Centaur Rootcaster deals combat damage to a player, you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
                 true));
     }
 

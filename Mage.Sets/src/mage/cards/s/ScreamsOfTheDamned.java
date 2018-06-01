@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class ScreamsOfTheDamned extends CardImpl {
+public final class ScreamsOfTheDamned extends CardImpl {
 
     public ScreamsOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

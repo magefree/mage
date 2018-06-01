@@ -39,7 +39,7 @@ import mage.constants.CardType;
  * @author Loki
  */
 
-public class DarksteelIngot extends CardImpl {
+public final class DarksteelIngot extends CardImpl {
 
     public DarksteelIngot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

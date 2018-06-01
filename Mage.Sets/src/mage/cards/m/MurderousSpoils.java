@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author wetterlicht
  */
-public class MurderousSpoils extends CardImpl {
+public final class MurderousSpoils extends CardImpl {
     
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("nonblack creature");
 

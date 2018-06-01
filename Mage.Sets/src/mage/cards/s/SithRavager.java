@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author Styxo
  */
-public class SithRavager extends CardImpl {
+public final class SithRavager extends CardImpl {
 
     public SithRavager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class OverflowingInsight extends CardImpl {
+public final class OverflowingInsight extends CardImpl {
 
     public OverflowingInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}{U}");

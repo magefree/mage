@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class BloodTyrant extends CardImpl {
+public final class BloodTyrant extends CardImpl {
 
     public BloodTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}{R}");

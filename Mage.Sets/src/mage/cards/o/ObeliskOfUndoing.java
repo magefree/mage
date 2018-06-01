@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author MarcoMarin
  */
-public class ObeliskOfUndoing extends CardImpl {
+public final class ObeliskOfUndoing extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
         

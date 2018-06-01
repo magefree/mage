@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class BojukaBog extends CardImpl {
+public final class BojukaBog extends CardImpl {
 
     public BojukaBog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

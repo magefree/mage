@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class SphinxOfTheFinalWord extends CardImpl {
+public final class SphinxOfTheFinalWord extends CardImpl {
     
     private static final FilterSpell filterTarget = new FilterSpell("Instant and sorcery spells you control");
 

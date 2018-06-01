@@ -42,7 +42,7 @@ public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect {
 
     public LoseControlOnOtherPlayersControllerEffect(String controllingPlayerName, String controlledPlayerName) {
         super(Outcome.Detriment);
-        staticText = controlledPlayerName + " lost control over " + controlledPlayerName;
+        staticText = controllingPlayerName + " lost control over " + controlledPlayerName;
     }
 
     public LoseControlOnOtherPlayersControllerEffect(final LoseControlOnOtherPlayersControllerEffect effect) {

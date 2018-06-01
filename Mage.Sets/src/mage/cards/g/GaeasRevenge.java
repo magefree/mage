@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GaeasRevenge extends CardImpl {
+public final class GaeasRevenge extends CardImpl {
 
     private static final FilterObject filter = new FilterStackObject("nongreen spells or abilities from nongreen sources");
 

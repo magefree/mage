@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
  *
  */
-public class Ovinize extends CardImpl {
+public final class Ovinize extends CardImpl {
 
     public Ovinize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

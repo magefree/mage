@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class ThoughtPrison extends CardImpl {
+public final class ThoughtPrison extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell cast");
 
@@ -67,7 +67,7 @@ public class ThoughtPrison extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Imprint - When Thought Prison enters the battlefield, you may have target player reveal their hand. If you do, choose a nonland card from it and exile that card.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ThoughtPrisonImprintEffect(), true, "<i>Imprint - </i>");
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ThoughtPrisonImprintEffect(), true, "<i>Imprint</i> &mdash; ");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

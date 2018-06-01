@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author dustinconrad
  */
-public class Pongify extends CardImpl {
+public final class Pongify extends CardImpl {
 
     public Pongify(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

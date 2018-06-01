@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class RushOfKnowledge extends CardImpl {
+public final class RushOfKnowledge extends CardImpl {
 
     public RushOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");

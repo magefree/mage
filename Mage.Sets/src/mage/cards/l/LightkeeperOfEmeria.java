@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LightkeeperOfEmeria extends CardImpl {
+public final class LightkeeperOfEmeria extends CardImpl {
 
     public LightkeeperOfEmeria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

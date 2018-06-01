@@ -42,7 +42,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class RoaringPrimadox extends CardImpl {
+public final class RoaringPrimadox extends CardImpl {
 
     public RoaringPrimadox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

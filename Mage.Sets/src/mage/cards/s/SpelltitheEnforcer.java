@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SpelltitheEnforcer extends CardImpl {
+public final class SpelltitheEnforcer extends CardImpl {
 
     public SpelltitheEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

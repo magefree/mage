@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class MagusOfTheWill extends CardImpl {
+public final class MagusOfTheWill extends CardImpl {
 
     public MagusOfTheWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

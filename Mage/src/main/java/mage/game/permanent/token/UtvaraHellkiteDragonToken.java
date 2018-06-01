@@ -39,7 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class UtvaraHellkiteDragonToken extends TokenImpl {
+public final class UtvaraHellkiteDragonToken extends TokenImpl {
     
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {

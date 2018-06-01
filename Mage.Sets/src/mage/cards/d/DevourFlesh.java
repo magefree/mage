@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class DevourFlesh extends CardImpl {
+public final class DevourFlesh extends CardImpl {
 
     public DevourFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class RiteOfReplication extends CardImpl {
+public final class RiteOfReplication extends CardImpl {
 
     public RiteOfReplication(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");

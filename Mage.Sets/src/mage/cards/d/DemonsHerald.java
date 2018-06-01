@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class DemonsHerald extends CardImpl {
+public final class DemonsHerald extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card named Prince of Thralls");
     private static final FilterControlledCreaturePermanent filterBlue = new FilterControlledCreaturePermanent("a blue creature");

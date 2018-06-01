@@ -45,7 +45,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class RainbowCrow extends CardImpl {
+public final class RainbowCrow extends CardImpl {
 
     public RainbowCrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

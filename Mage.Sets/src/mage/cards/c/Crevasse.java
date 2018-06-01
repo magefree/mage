@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author L_J
  */
-public class Crevasse extends CardImpl {
+public final class Crevasse extends CardImpl {
 
     public Crevasse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

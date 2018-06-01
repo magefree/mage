@@ -53,7 +53,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class PutridImp extends CardImpl {
+public final class PutridImp extends CardImpl {
 
     public PutridImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

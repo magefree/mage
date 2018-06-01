@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class MarchesaTheBlackRose extends CardImpl {
+public final class MarchesaTheBlackRose extends CardImpl {
 
     public MarchesaTheBlackRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");

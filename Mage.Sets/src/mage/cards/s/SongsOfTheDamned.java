@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author fireshoes
  */
-public class SongsOfTheDamned extends CardImpl {
+public final class SongsOfTheDamned extends CardImpl {
 
     public SongsOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

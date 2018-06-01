@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
  *
  */
-public class NightskyMimic extends CardImpl {
+public final class NightskyMimic extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell that's both black and green");
 

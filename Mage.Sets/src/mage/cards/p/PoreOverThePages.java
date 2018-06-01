@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class PoreOverThePages extends CardImpl {
+public final class PoreOverThePages extends CardImpl {
 
     public PoreOverThePages(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

@@ -44,7 +44,7 @@ import mage.filter.FilterPermanent;
  *
  * @author Plopman
  */
-public class CrystallineSliver extends CardImpl {
+public final class CrystallineSliver extends CardImpl {
 
     public CrystallineSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");

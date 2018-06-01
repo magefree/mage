@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author emerald000
  */
-public class SkysovereignConsulFlagship extends CardImpl {
+public final class SkysovereignConsulFlagship extends CardImpl {
 
     private static final FilterCreatureOrPlaneswalkerPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker an opponent controls");
 

@@ -40,7 +40,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class StoneCalendar extends CardImpl {
+public final class StoneCalendar extends CardImpl {
 
     public StoneCalendar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author LevelX2
  */
-public class SereneRemembrance extends CardImpl {
+public final class SereneRemembrance extends CardImpl {
 
     public SereneRemembrance (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

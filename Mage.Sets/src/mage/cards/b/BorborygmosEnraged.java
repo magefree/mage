@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class BorborygmosEnraged extends CardImpl {
+public final class BorborygmosEnraged extends CardImpl {
 
     public BorborygmosEnraged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{G}{G}");

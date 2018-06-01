@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author L_J
  */
-public class EntrailsFeaster extends CardImpl {
+public final class EntrailsFeaster extends CardImpl {
 
     public EntrailsFeaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

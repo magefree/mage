@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SpringsageRitual extends CardImpl {
+public final class SpringsageRitual extends CardImpl {
 
     public SpringsageRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

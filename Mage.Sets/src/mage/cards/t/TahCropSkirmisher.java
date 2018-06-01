@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class TahCropSkirmisher extends CardImpl {
+public final class TahCropSkirmisher extends CardImpl {
 
     public TahCropSkirmisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

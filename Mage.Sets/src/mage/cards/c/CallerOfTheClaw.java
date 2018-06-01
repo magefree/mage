@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  *
  * @author Plopman
  */
-public class CallerOfTheClaw extends CardImpl {
+public final class CallerOfTheClaw extends CardImpl {
 
     public CallerOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

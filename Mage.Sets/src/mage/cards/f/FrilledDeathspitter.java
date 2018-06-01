@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author TheElk801 & L_J
  */
-public class FrilledDeathspitter extends CardImpl {
+public final class FrilledDeathspitter extends CardImpl {
 
     public FrilledDeathspitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

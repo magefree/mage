@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SimicGuildgate extends CardImpl {
+public final class SimicGuildgate extends CardImpl {
 
     public SimicGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

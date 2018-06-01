@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author Wehk
  */
-public class GoldmeadowDodger extends CardImpl {
+public final class GoldmeadowDodger extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures with power 4 or greater");
 

@@ -25,72 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.j;
 
+import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
+import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
+public final class JadedResponse extends CardImpl {
 
-    private FilterCard filter;
-    private boolean tapped;
+    public JadedResponse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-    public PutLandFromHandOntoBattlefieldEffect() {
-        this(false);
+        // Counter target spell if it shares a color with a creature you control.
+        this.getSpellAbility().addEffect(new JadedResponseEffect());
     }
 
-    public PutLandFromHandOntoBattlefieldEffect(boolean tapped) {
-        this(tapped, new FilterLandCard());
+    public JadedResponse(final JadedResponse card) {
+        super(card);
     }
 
-    public PutLandFromHandOntoBattlefieldEffect(boolean tapped, FilterCard filter) {
-        super(Outcome.PutLandInPlay);
-        this.tapped = tapped;
-        this.filter = filter;
-        staticText = "you may put a " + filter.getMessage() + " from your hand onto the battlefield" + (tapped ? " tapped" : "");
+    @Override
+    public JadedResponse copy() {
+        return new JadedResponse(this);
+    }
+}
+
+class JadedResponseEffect extends OneShotEffect {
+
+    JadedResponseEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Counter target spell if it shares a color with a creature you control";
     }
 
-    public PutLandFromHandOntoBattlefieldEffect(final PutLandFromHandOntoBattlefieldEffect effect) {
+    JadedResponseEffect(final JadedResponseEffect effect) {
         super(effect);
-        this.tapped = effect.tapped;
-        this.filter = effect.filter;
+    }
+
+    @Override
+    public JadedResponseEffect copy() {
+        return new JadedResponseEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInHand(filter);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.chooseUse(outcome, "Put land onto battlefield?", source, game)
-                    && controller.choose(outcome, target, source.getSourceId(), game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
-                }
+        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
+        if (stackObject == null) {
+            return false;
+        }
+        ObjectColor creatureColors = new ObjectColor();
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), game)) {
+            creatureColors = creatureColors.union(creature.getColor(game));
+            if (!creatureColors.intersection(stackObject.getColor(game)).isColorless()) {
+                return new CounterTargetEffect().apply(game, source);
             }
-            return true;
         }
         return false;
-
     }
-
-    @Override
-    public PutLandFromHandOntoBattlefieldEffect copy() {
-        return new PutLandFromHandOntoBattlefieldEffect(this);
-    }
-
 }

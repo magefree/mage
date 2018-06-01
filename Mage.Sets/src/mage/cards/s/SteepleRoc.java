@@ -43,7 +43,7 @@ import mage.constants.SubType;
  */
 
 
-public class SteepleRoc extends CardImpl {
+public final class SteepleRoc extends CardImpl {
 
     public SteepleRoc (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

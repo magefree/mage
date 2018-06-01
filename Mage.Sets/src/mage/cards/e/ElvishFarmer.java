@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class ElvishFarmer extends CardImpl {
+public final class ElvishFarmer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Saproling");
 

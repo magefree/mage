@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class ClockworkDragon extends CardImpl {
+public final class ClockworkDragon extends CardImpl {
 
     public ClockworkDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

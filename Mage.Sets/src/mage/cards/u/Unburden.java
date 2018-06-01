@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class Unburden extends CardImpl {
+public final class Unburden extends CardImpl {
 
     public Unburden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

@@ -47,7 +47,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LoneFox
  */
-public class MerchantShip extends CardImpl {
+public final class MerchantShip extends CardImpl {
 
     public MerchantShip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

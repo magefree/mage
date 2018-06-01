@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class RakdosShredFreak extends CardImpl {
+public final class RakdosShredFreak extends CardImpl {
 
     public RakdosShredFreak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}{B/R}");

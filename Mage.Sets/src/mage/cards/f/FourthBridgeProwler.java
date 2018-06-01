@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FourthBridgeProwler extends CardImpl {
+public final class FourthBridgeProwler extends CardImpl {
 
     public FourthBridgeProwler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

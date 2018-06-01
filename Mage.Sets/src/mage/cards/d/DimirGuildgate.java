@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DimirGuildgate extends CardImpl {
+public final class DimirGuildgate extends CardImpl {
 
     public DimirGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

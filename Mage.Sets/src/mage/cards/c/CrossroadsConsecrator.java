@@ -48,7 +48,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author LevelX2
  */
-public class CrossroadsConsecrator extends CardImpl {
+public final class CrossroadsConsecrator extends CardImpl {
 
     private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking Human");
 

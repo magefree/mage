@@ -47,7 +47,7 @@ import mage.util.RandomUtil;
  *
  * @author North
  */
-public class SurrealMemoir extends CardImpl {
+public final class SurrealMemoir extends CardImpl {
 
     public SurrealMemoir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

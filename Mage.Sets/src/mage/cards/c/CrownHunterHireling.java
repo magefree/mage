@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CrownHunterHireling extends CardImpl {
+public final class CrownHunterHireling extends CardImpl {
 
     public CrownHunterHireling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

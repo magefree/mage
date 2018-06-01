@@ -58,7 +58,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class AngrathMinotaurPirate extends CardImpl {
+public final class AngrathMinotaurPirate extends CardImpl {
 
     public AngrathMinotaurPirate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{R}");

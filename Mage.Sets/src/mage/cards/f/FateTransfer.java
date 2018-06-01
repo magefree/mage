@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class FateTransfer extends CardImpl {
+public final class FateTransfer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature to move all counters from");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target creature to move all counters to");

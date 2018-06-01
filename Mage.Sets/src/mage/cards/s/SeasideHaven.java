@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author anonymous
  */
-public class SeasideHaven extends CardImpl {
+public final class SeasideHaven extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Bird");
 

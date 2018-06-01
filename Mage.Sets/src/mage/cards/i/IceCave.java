@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author ThomasLerner
  */
-public class IceCave extends CardImpl {
+public final class IceCave extends CardImpl {
 
     public IceCave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class BurnFromWithin extends CardImpl {
+public final class BurnFromWithin extends CardImpl {
 
     public BurnFromWithin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");

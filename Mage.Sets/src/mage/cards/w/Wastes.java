@@ -38,7 +38,7 @@ import mage.constants.SuperType;
  *
  * @author fireshoes
  */
-public class Wastes extends CardImpl {
+public final class Wastes extends CardImpl {
 
     public Wastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

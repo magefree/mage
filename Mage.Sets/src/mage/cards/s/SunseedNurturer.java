@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class SunseedNurturer extends CardImpl {
+public final class SunseedNurturer extends CardImpl {
 
     public SunseedNurturer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

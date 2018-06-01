@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX
  */
-public class ZoZuThePunisher extends CardImpl {
+public final class ZoZuThePunisher extends CardImpl {
 
     public ZoZuThePunisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

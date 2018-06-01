@@ -46,7 +46,7 @@ import mage.game.permanent.token.BirdToken;
  *
  * @author LevelX2
  */
-public class Ornitharch extends CardImpl {
+public final class Ornitharch extends CardImpl {
 
     public Ornitharch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

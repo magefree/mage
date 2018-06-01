@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Eirkei
  */
-public class RishadanCutpurse extends CardImpl {
+public final class RishadanCutpurse extends CardImpl {
 
     public RishadanCutpurse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

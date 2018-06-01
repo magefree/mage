@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class UnwaveringInitiate extends CardImpl {
+public final class UnwaveringInitiate extends CardImpl {
 
     public UnwaveringInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

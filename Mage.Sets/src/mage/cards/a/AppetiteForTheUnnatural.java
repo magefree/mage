@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author spjspj
  */
-public class AppetiteForTheUnnatural extends CardImpl {
+public final class AppetiteForTheUnnatural extends CardImpl {
 
     public AppetiteForTheUnnatural(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

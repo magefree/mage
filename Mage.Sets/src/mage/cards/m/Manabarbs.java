@@ -40,7 +40,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author nantuko
  */
-public class Manabarbs extends CardImpl {
+public final class Manabarbs extends CardImpl {
 
     public Manabarbs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

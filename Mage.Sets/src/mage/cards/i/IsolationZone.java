@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class IsolationZone extends CardImpl {
+public final class IsolationZone extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("creature or enchantment an opponent controls");
 

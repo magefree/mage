@@ -55,7 +55,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author Pete Rossi
  */
-public class ChimericEgg extends CardImpl {
+public final class ChimericEgg extends CardImpl {
 
     private final static FilterSpell nonArtifactFilter = new FilterSpell("a nonartifact spell");
 

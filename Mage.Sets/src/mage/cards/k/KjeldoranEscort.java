@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class KjeldoranEscort extends CardImpl {
+public final class KjeldoranEscort extends CardImpl {
 
     public KjeldoranEscort (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

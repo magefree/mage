@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Rafbill
  */
-public class TempestOwl extends CardImpl {
+public final class TempestOwl extends CardImpl {
 
     public TempestOwl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author maxlebedev
  */
-public class DiviningWitch extends CardImpl {
+public final class DiviningWitch extends CardImpl {
 
     public DiviningWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

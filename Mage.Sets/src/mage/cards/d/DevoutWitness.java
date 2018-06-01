@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DevoutWitness extends CardImpl {
+public final class DevoutWitness extends CardImpl {
 
     public DevoutWitness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

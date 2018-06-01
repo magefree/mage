@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author spjspj
  */
-public class KydeleChosenOfKruphix extends CardImpl {
+public final class KydeleChosenOfKruphix extends CardImpl {
 
     public KydeleChosenOfKruphix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");

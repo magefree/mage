@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Loki
  */
-public class HiddenHorror extends CardImpl {
+public final class HiddenHorror extends CardImpl {
 
     public HiddenHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class PrimevalForce extends CardImpl {
+public final class PrimevalForce extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("three Forests");
     static{

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class SeasonedTactician extends CardImpl {
+public final class SeasonedTactician extends CardImpl {
 
     public SeasonedTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ScholarOfAthreos extends CardImpl {
+public final class ScholarOfAthreos extends CardImpl {
 
     public ScholarOfAthreos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

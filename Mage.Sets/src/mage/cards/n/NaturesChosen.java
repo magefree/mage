@@ -60,7 +60,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class NaturesChosen extends CardImpl {
+public final class NaturesChosen extends CardImpl {
 
     private static final FilterPermanent filterPermanent = new FilterPermanent("artifact, creature or land");
 

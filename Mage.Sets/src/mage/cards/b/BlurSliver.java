@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class BlurSliver extends CardImpl {
+public final class BlurSliver extends CardImpl {
 
     public BlurSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

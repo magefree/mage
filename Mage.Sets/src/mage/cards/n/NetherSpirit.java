@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class NetherSpirit extends CardImpl {
+public final class NetherSpirit extends CardImpl {
 
     public NetherSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

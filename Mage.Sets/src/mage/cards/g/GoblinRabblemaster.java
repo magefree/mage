@@ -45,14 +45,14 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.permanent.token.GoblinTokenWithHaste;
+import mage.game.permanent.token.GoblinToken;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
  * @author Quercitron
  */
-public class GoblinRabblemaster extends CardImpl {
+public final class GoblinRabblemaster extends CardImpl {
 
     private static final FilterCreaturePermanent otherGoblinFilter = new FilterCreaturePermanent(SubType.GOBLIN, "Other Goblin creatures you control");
     private static final FilterCreaturePermanent attackingFilter = new FilterCreaturePermanent(SubType.GOBLIN, "other attacking Goblin");
@@ -66,7 +66,7 @@ public class GoblinRabblemaster extends CardImpl {
     }
 
     public GoblinRabblemaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -78,7 +78,7 @@ public class GoblinRabblemaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new AttackedThisTurnWatcher());
 
         // At the beginning of combat on your turn, create a 1/1 red Goblin creature token with haste.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new GoblinToken(true)), TargetController.YOU, false));
 
         // When Goblin Rabblemaster attacks, it gets +1/+0 until end of turn for each other attacking Goblin.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(attackingFilter), new StaticValue(0), Duration.EndOfTurn, true), false));

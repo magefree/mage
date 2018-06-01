@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class GloryBoundInitiate extends CardImpl {
+public final class GloryBoundInitiate extends CardImpl {
 
     public GloryBoundInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

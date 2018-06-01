@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Alvin
  */
-public class SkaabRuinator extends CardImpl {
+public final class SkaabRuinator extends CardImpl {
 
     public SkaabRuinator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

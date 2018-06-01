@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class ScryingSheets extends CardImpl {
+public final class ScryingSheets extends CardImpl {
 
     public ScryingSheets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

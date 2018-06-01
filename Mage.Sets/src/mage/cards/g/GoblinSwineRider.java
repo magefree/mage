@@ -41,7 +41,7 @@ import mage.filter.common.FilterAttackingOrBlockingCreature;
  *
  * @author LoneFox
  */
-public class GoblinSwineRider extends CardImpl {
+public final class GoblinSwineRider extends CardImpl {
 
     public GoblinSwineRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

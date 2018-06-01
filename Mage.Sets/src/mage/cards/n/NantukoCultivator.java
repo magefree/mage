@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  * @author LoneFox
 
  */
-public class NantukoCultivator extends CardImpl {
+public final class NantukoCultivator extends CardImpl {
 
     public NantukoCultivator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

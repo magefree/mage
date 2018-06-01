@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class StreetbreakerWurm extends CardImpl {
+public final class StreetbreakerWurm extends CardImpl {
 
     public StreetbreakerWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CloudcrownOak extends CardImpl {
+public final class CloudcrownOak extends CardImpl {
 
     public CloudcrownOak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

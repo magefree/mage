@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author stravant
  */
-public class SacredExcavation extends CardImpl {
+public final class SacredExcavation extends CardImpl {
 
     private static final FilterCard cardsWithCycling = new FilterCard("cards with cycling from your graveyard");
 

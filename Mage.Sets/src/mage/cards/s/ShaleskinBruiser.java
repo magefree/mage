@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author Eirkei
  */
-public class ShaleskinBruiser extends CardImpl {
+public final class ShaleskinBruiser extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Beast");
     

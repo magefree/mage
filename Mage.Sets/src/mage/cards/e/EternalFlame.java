@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author L_J
  */
-public class EternalFlame extends CardImpl {
+public final class EternalFlame extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 

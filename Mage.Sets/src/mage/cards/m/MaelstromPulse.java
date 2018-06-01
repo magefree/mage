@@ -39,7 +39,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MaelstromPulse extends CardImpl {
+public final class MaelstromPulse extends CardImpl {
 
     public MaelstromPulse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{G}");

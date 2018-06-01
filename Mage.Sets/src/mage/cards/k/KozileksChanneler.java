@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class KozileksChanneler extends CardImpl {
+public final class KozileksChanneler extends CardImpl {
 
     public KozileksChanneler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class HarmlessOffering extends CardImpl {
+public final class HarmlessOffering extends CardImpl {
 
     public HarmlessOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

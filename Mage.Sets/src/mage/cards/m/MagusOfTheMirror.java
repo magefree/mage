@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class MagusOfTheMirror extends CardImpl {
+public final class MagusOfTheMirror extends CardImpl {
 
     public MagusOfTheMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

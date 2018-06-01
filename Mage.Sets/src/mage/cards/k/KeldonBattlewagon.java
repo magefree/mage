@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth & L_J
  */
-public class KeldonBattlewagon extends CardImpl {
+public final class KeldonBattlewagon extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped creature you control");
     static {

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class PillarfieldOx extends CardImpl {
+public final class PillarfieldOx extends CardImpl {
 
     public PillarfieldOx (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

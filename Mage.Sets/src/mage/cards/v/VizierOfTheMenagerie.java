@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class VizierOfTheMenagerie extends CardImpl {
+public final class VizierOfTheMenagerie extends CardImpl {
 
     public VizierOfTheMenagerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

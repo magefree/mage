@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SpawningPitToken extends TokenImpl {
+public final class SpawningPitToken extends TokenImpl {
 
     public SpawningPitToken() {
         super("Spawn", "2/2 colorless Spawn artifact creature token");

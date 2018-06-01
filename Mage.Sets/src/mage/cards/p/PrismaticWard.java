@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class PrismaticWard extends CardImpl {
+public final class PrismaticWard extends CardImpl {
 
     public PrismaticWard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class Helionaut extends CardImpl {
+public final class Helionaut extends CardImpl {
 
     public Helionaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

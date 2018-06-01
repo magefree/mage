@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class GideonAllyOfZendikar extends CardImpl {
+public final class GideonAllyOfZendikar extends CardImpl {
 
     public GideonAllyOfZendikar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");

@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class BoundlessRealms extends CardImpl {
+public final class BoundlessRealms extends CardImpl {
 
     public BoundlessRealms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}");
@@ -95,7 +95,7 @@ class BoundlessRealmsEffect extends OneShotEffect {
         filter.add(new ControllerPredicate(TargetController.YOU));
 
         int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
-        TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_CARD_BASIC_LAND);
         if (controller.searchLibrary(target, game)) {
             controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
         }

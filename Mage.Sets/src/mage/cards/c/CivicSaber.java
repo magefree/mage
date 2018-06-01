@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CivicSaber extends CardImpl {
+public final class CivicSaber extends CardImpl {
  
     public CivicSaber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

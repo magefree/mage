@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class YokeOfTheDamned extends CardImpl {
+public final class YokeOfTheDamned extends CardImpl {
 
 
     public YokeOfTheDamned(UUID ownerId, CardSetInfo setInfo) {

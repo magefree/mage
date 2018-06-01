@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author ilcartographer
  */
-public class PhantasmalForces extends CardImpl {
+public final class PhantasmalForces extends CardImpl {
 
     public PhantasmalForces(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

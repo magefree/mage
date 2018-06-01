@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class Cloudblazer extends CardImpl {
+public final class Cloudblazer extends CardImpl {
 
     public Cloudblazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");

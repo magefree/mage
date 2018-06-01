@@ -44,7 +44,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class TempleOfTheFalseGod extends CardImpl {
+public final class TempleOfTheFalseGod extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("you control five or more lands");
 

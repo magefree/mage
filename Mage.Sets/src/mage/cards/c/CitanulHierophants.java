@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Backfir3
  */
-public class CitanulHierophants extends CardImpl {
+public final class CitanulHierophants extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creatures");
 

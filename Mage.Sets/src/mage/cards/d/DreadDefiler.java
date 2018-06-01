@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class DreadDefiler extends CardImpl {
+public final class DreadDefiler extends CardImpl {
 
     public DreadDefiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}");

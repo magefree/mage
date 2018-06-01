@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class ObNixilisReignited extends CardImpl {
+public final class ObNixilisReignited extends CardImpl {
 
     public ObNixilisReignited(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author markedagain
  */
-public class MoggAlarm extends CardImpl {
+public final class MoggAlarm extends CardImpl {
 
      private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
     static {

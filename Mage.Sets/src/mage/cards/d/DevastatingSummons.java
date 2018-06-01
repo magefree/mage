@@ -44,7 +44,7 @@ import mage.game.permanent.token.DevastatingSummonsElementalToken;
  *
  * @author jeffwadsworth
  */
-public class DevastatingSummons extends CardImpl {
+public final class DevastatingSummons extends CardImpl {
 
     public DevastatingSummons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");

@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class MindTwist extends CardImpl {
+public final class MindTwist extends CardImpl {
 
     public MindTwist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");

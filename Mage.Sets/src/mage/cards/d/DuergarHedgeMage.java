@@ -48,7 +48,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author jeffwadsworth
  */
-public class DuergarHedgeMage extends CardImpl {
+public final class DuergarHedgeMage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("a Plains");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author nantuko
  */
-public class BattlegroundGeist extends CardImpl {
+public final class BattlegroundGeist extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
 

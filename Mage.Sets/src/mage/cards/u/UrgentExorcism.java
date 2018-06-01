@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author nantuko
  */
-public class UrgentExorcism extends CardImpl {
+public final class UrgentExorcism extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Spirit or enchantment");
 

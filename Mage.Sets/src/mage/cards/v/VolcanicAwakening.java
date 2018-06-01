@@ -39,7 +39,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class VolcanicAwakening extends CardImpl {
+public final class VolcanicAwakening extends CardImpl {
 
     public VolcanicAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");

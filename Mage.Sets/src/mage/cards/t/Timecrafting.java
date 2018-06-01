@@ -48,7 +48,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
  *
  * @author emerald000
  */
-public class Timecrafting extends CardImpl {
+public final class Timecrafting extends CardImpl {
 
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("permanent with a time counter on it or suspended card");
     static {

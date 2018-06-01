@@ -52,7 +52,7 @@ import mage.target.TargetSource;
  *
  * @author anonymous
  */
-public class ChoArrimAlchemist extends CardImpl {
+public final class ChoArrimAlchemist extends CardImpl {
 
     public ChoArrimAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

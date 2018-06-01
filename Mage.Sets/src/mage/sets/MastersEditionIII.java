@@ -36,7 +36,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class MastersEditionIII extends ExpansionSet {
+public final class MastersEditionIII extends ExpansionSet {
 
     private static final MastersEditionIII instance = new MastersEditionIII();
 

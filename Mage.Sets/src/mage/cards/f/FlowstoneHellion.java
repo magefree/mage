@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class FlowstoneHellion extends CardImpl {
+public final class FlowstoneHellion extends CardImpl {
 
     public FlowstoneHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

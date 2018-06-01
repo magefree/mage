@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author emerald000
  */
-public class HostileRealm extends CardImpl {
+public final class HostileRealm extends CardImpl {
 
     public HostileRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

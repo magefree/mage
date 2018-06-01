@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author FenrisulfrX
  */
-public class Overrule extends CardImpl {
+public final class Overrule extends CardImpl {
 
     public Overrule(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{U}");

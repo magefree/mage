@@ -40,7 +40,7 @@ import mage.filter.predicate.permanent.DamagedPlayerThisTurnPredicate;
  *
  * @author Plopman
  */
-public class Retaliate extends CardImpl {
+public final class Retaliate extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that dealt damage to you this turn");
     static {
         filter.add(new DamagedPlayerThisTurnPredicate(TargetController.YOU));

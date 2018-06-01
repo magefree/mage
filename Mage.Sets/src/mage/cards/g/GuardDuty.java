@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GuardDuty extends CardImpl {
+public final class GuardDuty extends CardImpl {
 
     public GuardDuty (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

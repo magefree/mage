@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LoneFox
  */
-public class SquallLine extends CardImpl {
+public final class SquallLine extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

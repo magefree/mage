@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LoneFox
  */
-public class WurmskinForger extends CardImpl {
+public final class WurmskinForger extends CardImpl {
 
     public WurmskinForger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

@@ -51,7 +51,7 @@ import mage.game.permanent.token.QueenMarchesaAssassinToken;
  *
  * @author LevelX2
  */
-public class QueenMarchesa extends CardImpl {
+public final class QueenMarchesa extends CardImpl {
 
     public QueenMarchesa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");

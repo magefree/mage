@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class SpiteflameWitch extends CardImpl {
+public final class SpiteflameWitch extends CardImpl {
 
     public SpiteflameWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}");

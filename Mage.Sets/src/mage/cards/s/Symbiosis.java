@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class Symbiosis extends CardImpl {
+public final class Symbiosis extends CardImpl {
 
     public Symbiosis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

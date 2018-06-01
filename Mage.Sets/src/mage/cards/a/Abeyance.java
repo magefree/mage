@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class Abeyance extends CardImpl {
+public final class Abeyance extends CardImpl {
 
     public Abeyance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

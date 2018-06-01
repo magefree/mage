@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class CollectiveVoyage extends CardImpl {
+public final class CollectiveVoyage extends CardImpl {
 
     public CollectiveVoyage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
@@ -101,7 +101,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, StaticFilters.FILTER_BASIC_LAND_CARD);
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (player.searchLibrary(target, game)) {
                         player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
                         player.shuffleLibrary(source, game);

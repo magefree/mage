@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class GoblinGloryChaser extends CardImpl {
+public final class GoblinGloryChaser extends CardImpl {
 
     public GoblinGloryChaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

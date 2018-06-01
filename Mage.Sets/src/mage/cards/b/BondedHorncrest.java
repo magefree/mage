@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class BondedHorncrest extends CardImpl {
+public final class BondedHorncrest extends CardImpl {
 
     public BondedHorncrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

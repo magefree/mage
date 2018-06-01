@@ -42,7 +42,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author Loki
  */
-public class MyrSire extends CardImpl {
+public final class MyrSire extends CardImpl {
 
     public MyrSire (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

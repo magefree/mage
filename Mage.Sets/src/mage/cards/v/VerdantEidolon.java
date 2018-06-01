@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author LoneFox
  */
-public class VerdantEidolon extends CardImpl {
+public final class VerdantEidolon extends CardImpl {
 
     public VerdantEidolon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

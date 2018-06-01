@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class IriniSengir extends CardImpl {
+public final class IriniSengir extends CardImpl {
     
     private static final FilterEnchantmentCard filter = new FilterEnchantmentCard("Green enchantment spells and white enchantment spells");
     static {

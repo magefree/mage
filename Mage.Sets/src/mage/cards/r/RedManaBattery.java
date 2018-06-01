@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class RedManaBattery extends CardImpl {
+public final class RedManaBattery extends CardImpl {
 
     public RedManaBattery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

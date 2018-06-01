@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class MindSculpt extends CardImpl {
+public final class MindSculpt extends CardImpl {
 
     public MindSculpt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

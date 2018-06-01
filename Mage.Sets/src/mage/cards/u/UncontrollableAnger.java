@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class UncontrollableAnger extends CardImpl {
+public final class UncontrollableAnger extends CardImpl {
 
     public UncontrollableAnger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");

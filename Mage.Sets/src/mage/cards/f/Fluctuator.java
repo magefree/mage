@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Fluctuator extends CardImpl {
+public final class Fluctuator extends CardImpl {
 
     public Fluctuator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

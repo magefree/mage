@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class BlessedAlliance extends CardImpl {
+public final class BlessedAlliance extends CardImpl {
 
     private static final FilterPlayer filterSacrifice = new FilterPlayer("opponent to sacrifice an attacking creature");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures to untap");

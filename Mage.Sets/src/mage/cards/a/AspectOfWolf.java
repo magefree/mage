@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author KholdFuzion
 
  */
-public class AspectOfWolf extends CardImpl {
+public final class AspectOfWolf extends CardImpl {
 
     public AspectOfWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

@@ -39,7 +39,7 @@ import mage.game.permanent.token.PegasusToken;
  *
  * @author fireshoes
  */
-public class StormHerd extends CardImpl {
+public final class StormHerd extends CardImpl {
 
     public StormHerd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{W}{W}");

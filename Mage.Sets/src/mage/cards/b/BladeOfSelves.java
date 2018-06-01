@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author fireshoes
  */
-public class BladeOfSelves extends CardImpl {
+public final class BladeOfSelves extends CardImpl {
 
     public BladeOfSelves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

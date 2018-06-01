@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
-public class GiftOfStrength extends CardImpl {
+public final class GiftOfStrength extends CardImpl {
 
     public GiftOfStrength(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

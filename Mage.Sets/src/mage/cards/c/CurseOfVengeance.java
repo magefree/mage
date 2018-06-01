@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author spjspj
  */
-public class CurseOfVengeance extends CardImpl {
+public final class CurseOfVengeance extends CardImpl {
 
     public CurseOfVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class LlanowarEnvoy extends CardImpl {
+public final class LlanowarEnvoy extends CardImpl {
 
     public LlanowarEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

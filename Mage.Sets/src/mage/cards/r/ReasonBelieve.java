@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ReasonBelieve extends SplitCard {
+public final class ReasonBelieve extends SplitCard {
 
     public ReasonBelieve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{U}", "{4}{G}", SpellAbilityType.SPLIT_AFTERMATH);

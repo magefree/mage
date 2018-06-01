@@ -57,7 +57,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class CityInABottle extends CardImpl {
+public final class CityInABottle extends CardImpl {
 
     public CityInABottle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

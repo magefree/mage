@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class KopalaWardenOfWaves extends CardImpl {
+public final class KopalaWardenOfWaves extends CardImpl {
 
     public KopalaWardenOfWaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

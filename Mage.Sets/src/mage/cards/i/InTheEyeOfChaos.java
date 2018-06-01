@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class InTheEyeOfChaos extends CardImpl {
+public final class InTheEyeOfChaos extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant spell");
     static {

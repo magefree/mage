@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class Sturmgeist extends CardImpl {
+public final class Sturmgeist extends CardImpl {
 
     public Sturmgeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

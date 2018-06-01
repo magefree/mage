@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class JeskaWarriorAdept extends CardImpl {
+public final class JeskaWarriorAdept extends CardImpl {
 
     public JeskaWarriorAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

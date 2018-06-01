@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class InkDissolver extends CardImpl {
+public final class InkDissolver extends CardImpl {
 
     public InkDissolver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

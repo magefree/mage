@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class OjutaiSoulOfWinter extends CardImpl {
+public final class OjutaiSoulOfWinter extends CardImpl {
 
     private static final FilterCreaturePermanent filterDragon = new FilterCreaturePermanent("Dragon you control");
     private static final FilterPermanent filterNonlandPermanent = new FilterNonlandPermanent("nonland permanent an opponent controls");

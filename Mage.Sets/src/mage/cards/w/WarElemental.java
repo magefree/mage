@@ -52,7 +52,7 @@ import mage.watchers.common.BloodthirstWatcher;
  *
  * @author spjspj
  */
-public class WarElemental extends CardImpl {
+public final class WarElemental extends CardImpl {
 
     public WarElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");

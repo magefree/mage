@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class HinterlandLogger extends CardImpl {
+public final class HinterlandLogger extends CardImpl {
 
     public HinterlandLogger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

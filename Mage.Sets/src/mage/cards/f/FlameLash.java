@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class FlameLash extends CardImpl {
+public final class FlameLash extends CardImpl {
 
     public FlameLash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");

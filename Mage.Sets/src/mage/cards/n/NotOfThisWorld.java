@@ -58,7 +58,7 @@ import mage.target.Targets;
 /**
  * @author Rafbill
  */
-public class NotOfThisWorld extends CardImpl {
+public final class NotOfThisWorld extends CardImpl {
 
     public NotOfThisWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");

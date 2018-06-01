@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class LayClaim extends CardImpl {
+public final class LayClaim extends CardImpl {
 
     public LayClaim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");

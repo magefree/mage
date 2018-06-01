@@ -40,7 +40,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class RakshasasSecret extends CardImpl {
+public final class RakshasasSecret extends CardImpl {
 
     public RakshasasSecret(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author TheElk801
  */
-public class StormFleetArsonist extends CardImpl {
+public final class StormFleetArsonist extends CardImpl {
 
     public StormFleetArsonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

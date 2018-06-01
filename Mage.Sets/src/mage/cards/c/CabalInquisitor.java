@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class CabalInquisitor extends CardImpl {
+public final class CabalInquisitor extends CardImpl {
 
     public CabalInquisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

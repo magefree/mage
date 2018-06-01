@@ -50,7 +50,7 @@ import mage.util.SubTypeList;
  *
  * @author LevelX2
  */
-public class KinTreeInvocation extends CardImpl {
+public final class KinTreeInvocation extends CardImpl {
 
     public KinTreeInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{G}");

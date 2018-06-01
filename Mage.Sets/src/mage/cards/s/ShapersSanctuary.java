@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class ShapersSanctuary extends CardImpl {
+public final class ShapersSanctuary extends CardImpl {
 
     public ShapersSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");

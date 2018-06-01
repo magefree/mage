@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Markedagain
  */
-public class TeferisMoat extends CardImpl {
+public final class TeferisMoat extends CardImpl {
 
     public TeferisMoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{U}");

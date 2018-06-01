@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class UndeadLeotau extends CardImpl {
+public final class UndeadLeotau extends CardImpl {
 
     public UndeadLeotau(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

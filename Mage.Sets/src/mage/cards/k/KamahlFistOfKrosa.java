@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Backfir3
  */
-public class KamahlFistOfKrosa extends CardImpl {
+public final class KamahlFistOfKrosa extends CardImpl {
 
     public KamahlFistOfKrosa(UUID ownerId, CardSetInfo setInfo) {
         

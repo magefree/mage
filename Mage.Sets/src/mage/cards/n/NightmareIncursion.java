@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class NightmareIncursion extends CardImpl {
+public final class NightmareIncursion extends CardImpl {
 
     public NightmareIncursion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");

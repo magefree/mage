@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class ShimmeringMirage extends CardImpl {
+public final class ShimmeringMirage extends CardImpl {
 
     public ShimmeringMirage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

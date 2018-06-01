@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author noxx
  */
-public class Ghostform extends CardImpl {
+public final class Ghostform extends CardImpl {
 
     public Ghostform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

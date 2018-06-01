@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GargoyleSentinel extends CardImpl {
+public final class GargoyleSentinel extends CardImpl {
 
     public GargoyleSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

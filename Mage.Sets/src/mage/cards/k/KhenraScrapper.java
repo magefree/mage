@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class KhenraScrapper extends CardImpl {
+public final class KhenraScrapper extends CardImpl {
 
     public KhenraScrapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

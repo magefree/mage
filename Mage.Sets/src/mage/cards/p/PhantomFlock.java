@@ -44,7 +44,7 @@ import mage.counters.CounterType;
 /**
  * @author emerald000
  */
-public class PhantomFlock extends CardImpl {
+public final class PhantomFlock extends CardImpl {
 
     public PhantomFlock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

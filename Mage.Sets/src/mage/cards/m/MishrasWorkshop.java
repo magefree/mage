@@ -40,7 +40,7 @@ import mage.filter.common.FilterArtifactSpell;
  *
  * @author LevelX2
  */
-public class MishrasWorkshop extends CardImpl {
+public final class MishrasWorkshop extends CardImpl {
 
     public MishrasWorkshop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

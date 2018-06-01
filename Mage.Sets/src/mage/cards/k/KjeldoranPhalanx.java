@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class KjeldoranPhalanx extends CardImpl {
+public final class KjeldoranPhalanx extends CardImpl {
 
     public KjeldoranPhalanx (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

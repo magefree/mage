@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Quercitron
  */
-public class GnatAlleyCreeper extends CardImpl {
+public final class GnatAlleyCreeper extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures with flying");
 

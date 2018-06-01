@@ -61,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VishKalBloodArbiter extends CardImpl {
+public final class VishKalBloodArbiter extends CardImpl {
 
     public VishKalBloodArbiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{B}{B}");

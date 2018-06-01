@@ -56,7 +56,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author BetaSteward
  */
-public class EvilTwin extends CardImpl {
+public final class EvilTwin extends CardImpl {
 
     public EvilTwin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");

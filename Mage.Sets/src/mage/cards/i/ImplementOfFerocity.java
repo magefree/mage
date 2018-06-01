@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ImplementOfFerocity extends CardImpl {
+public final class ImplementOfFerocity extends CardImpl {
 
     public ImplementOfFerocity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

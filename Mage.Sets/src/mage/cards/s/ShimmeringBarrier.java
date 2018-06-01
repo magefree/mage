@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ShimmeringBarrier extends CardImpl {
+public final class ShimmeringBarrier extends CardImpl {
 
     public ShimmeringBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

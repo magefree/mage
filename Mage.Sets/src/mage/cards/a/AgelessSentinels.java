@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class AgelessSentinels extends CardImpl {
+public final class AgelessSentinels extends CardImpl {
 
     public AgelessSentinels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

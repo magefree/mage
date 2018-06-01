@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author LoneFox
 
  */
-public class LavaZombie extends CardImpl {
+public final class LavaZombie extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black or red creature you control");
 

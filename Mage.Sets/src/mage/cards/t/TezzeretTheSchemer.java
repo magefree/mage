@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author JRHerlehy
  */
-public class TezzeretTheSchemer extends CardImpl {
+public final class TezzeretTheSchemer extends CardImpl {
 
     public TezzeretTheSchemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");

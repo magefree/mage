@@ -42,7 +42,7 @@ import mage.util.functions.CardTypeApplier;
  * @author KholdFuzion
  *
  */
-public class CopyArtifact extends CardImpl {
+public final class CopyArtifact extends CardImpl {
 
     public CopyArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

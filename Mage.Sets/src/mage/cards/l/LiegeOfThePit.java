@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author djbrez
  */
-public class LiegeOfThePit extends CardImpl {
+public final class LiegeOfThePit extends CardImpl {
 
     public LiegeOfThePit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");

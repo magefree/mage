@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class GraspingCurrent extends CardImpl {
+public final class GraspingCurrent extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Jace, Ingenious Mind-Mage");
 

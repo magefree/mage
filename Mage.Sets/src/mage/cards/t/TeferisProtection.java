@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class TeferisProtection extends CardImpl {
+public final class TeferisProtection extends CardImpl {
 
     public TeferisProtection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

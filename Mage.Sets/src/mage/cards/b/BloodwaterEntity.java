@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author ciaccona007
  */
-public class BloodwaterEntity extends CardImpl {
+public final class BloodwaterEntity extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 

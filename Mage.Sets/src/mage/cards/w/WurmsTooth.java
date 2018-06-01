@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WurmsTooth extends CardImpl {
+public final class WurmsTooth extends CardImpl {
 
     public WurmsTooth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

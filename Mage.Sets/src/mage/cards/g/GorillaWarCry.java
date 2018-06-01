@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author fireshoes
  */
-public class GorillaWarCry extends CardImpl {
+public final class GorillaWarCry extends CardImpl {
 
     public GorillaWarCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

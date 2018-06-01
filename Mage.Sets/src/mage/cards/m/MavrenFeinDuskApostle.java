@@ -52,7 +52,7 @@ import mage.game.permanent.token.IxalanVampireToken;
  *
  * @author TheElk801
  */
-public class MavrenFeinDuskApostle extends CardImpl {
+public final class MavrenFeinDuskApostle extends CardImpl {
 
     public MavrenFeinDuskApostle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

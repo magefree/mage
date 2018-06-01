@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FeralShadow extends CardImpl {
+public final class FeralShadow extends CardImpl {
 
     public FeralShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class Scarecrow extends CardImpl {
+public final class Scarecrow extends CardImpl {
 
     public Scarecrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

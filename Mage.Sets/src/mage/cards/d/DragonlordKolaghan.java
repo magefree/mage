@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DragonlordKolaghan extends CardImpl {
+public final class DragonlordKolaghan extends CardImpl {
 
     public DragonlordKolaghan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");

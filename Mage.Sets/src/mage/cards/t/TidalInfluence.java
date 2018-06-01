@@ -61,7 +61,7 @@ import mage.game.events.GameEvent;
  *
  * @author LoneFox
  */
-public class TidalInfluence extends CardImpl {
+public final class TidalInfluence extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures");
 

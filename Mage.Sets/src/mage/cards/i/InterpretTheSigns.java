@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class InterpretTheSigns extends CardImpl {
+public final class InterpretTheSigns extends CardImpl {
 
     public InterpretTheSigns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");

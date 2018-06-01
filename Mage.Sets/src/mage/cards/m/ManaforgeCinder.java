@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ManaforgeCinder extends CardImpl {
+public final class ManaforgeCinder extends CardImpl {
 
     public ManaforgeCinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B/R}");

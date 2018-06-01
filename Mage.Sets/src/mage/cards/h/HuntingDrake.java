@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class HuntingDrake extends CardImpl {
+public final class HuntingDrake extends CardImpl {
 
      private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
 

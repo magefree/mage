@@ -51,7 +51,7 @@ import mage.game.permanent.token.PirateToken;
  *
  * @author TheElk801
  */
-public class FathomFleetCaptain extends CardImpl {
+public final class FathomFleetCaptain extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another nontoken Pirate");
 

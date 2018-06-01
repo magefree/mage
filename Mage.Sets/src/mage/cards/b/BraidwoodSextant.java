@@ -46,14 +46,14 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class BraidwoodSextant extends CardImpl {
+public final class BraidwoodSextant extends CardImpl {
 
     public BraidwoodSextant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {2}, {tap}, Sacrifice Braidwood Sextant: Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-            new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
+            new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
             new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

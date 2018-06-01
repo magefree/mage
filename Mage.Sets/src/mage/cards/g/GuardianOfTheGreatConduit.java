@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class GuardianOfTheGreatConduit extends CardImpl {
+public final class GuardianOfTheGreatConduit extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final String rule = "As long as you control a Nissa planeswalker, {this} gets +2/+0";

@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Surgespanner extends CardImpl {
+public final class Surgespanner extends CardImpl {
 
     public Surgespanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

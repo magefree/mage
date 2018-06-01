@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class EverlastingTorment extends CardImpl {
+public final class EverlastingTorment extends CardImpl {
 
     public EverlastingTorment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B/R}");

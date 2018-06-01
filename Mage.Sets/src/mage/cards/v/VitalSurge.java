@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class VitalSurge extends CardImpl {
+public final class VitalSurge extends CardImpl {
 
     public VitalSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

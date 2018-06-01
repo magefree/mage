@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class HornOfPlenty extends CardImpl {
+public final class HornOfPlenty extends CardImpl {
 
     public HornOfPlenty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

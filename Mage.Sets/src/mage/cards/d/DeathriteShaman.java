@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class DeathriteShaman extends CardImpl {
+public final class DeathriteShaman extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from a graveyard");
 

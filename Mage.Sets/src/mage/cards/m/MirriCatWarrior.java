@@ -42,7 +42,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class MirriCatWarrior extends CardImpl {
+public final class MirriCatWarrior extends CardImpl {
 
     public MirriCatWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

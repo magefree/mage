@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Quercitron
  */
-public class StokeTheFlames extends CardImpl {
+public final class StokeTheFlames extends CardImpl {
 
     public StokeTheFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WallOfAir extends CardImpl {
+public final class WallOfAir extends CardImpl {
 
     public WallOfAir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

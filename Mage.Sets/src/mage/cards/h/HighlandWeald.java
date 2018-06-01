@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author dustinconrad
  */
-public class HighlandWeald extends CardImpl {
+public final class HighlandWeald extends CardImpl {
 
     public HighlandWeald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

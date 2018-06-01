@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author djbrez
  */
-public class ScreechingBuzzard extends CardImpl {
+public final class ScreechingBuzzard extends CardImpl {
 
     public ScreechingBuzzard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

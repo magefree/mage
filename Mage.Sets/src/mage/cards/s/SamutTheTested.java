@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Will
  */
-public class SamutTheTested extends CardImpl {
+public final class SamutTheTested extends CardImpl {
 
     public SamutTheTested(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");

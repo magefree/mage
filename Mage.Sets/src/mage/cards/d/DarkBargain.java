@@ -45,7 +45,7 @@ import mage.target.TargetCard;
  *
  * @author Quercitron
  */
-public class DarkBargain extends CardImpl {
+public final class DarkBargain extends CardImpl {
 
     public DarkBargain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");

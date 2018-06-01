@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author TheElk801
  */
-public class ChampionLancer extends CardImpl {
+public final class ChampionLancer extends CardImpl {
 
     public ChampionLancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

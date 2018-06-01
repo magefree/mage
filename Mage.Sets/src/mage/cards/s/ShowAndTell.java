@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class ShowAndTell extends CardImpl {
+public final class ShowAndTell extends CardImpl {
 
     public ShowAndTell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

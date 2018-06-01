@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author TheElk801
  */
-public class CrookedScales extends CardImpl {
+public final class CrookedScales extends CardImpl {
 
     public CrookedScales(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

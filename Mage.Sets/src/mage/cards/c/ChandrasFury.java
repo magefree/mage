@@ -40,7 +40,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author North
  */
-public class ChandrasFury extends CardImpl {
+public final class ChandrasFury extends CardImpl {
 
     public ChandrasFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");

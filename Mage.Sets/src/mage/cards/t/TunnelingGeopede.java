@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class TunnelingGeopede extends CardImpl {
+public final class TunnelingGeopede extends CardImpl {
 
     public TunnelingGeopede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

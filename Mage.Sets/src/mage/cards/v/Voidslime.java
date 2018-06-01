@@ -38,7 +38,7 @@ import mage.target.TargetStackObject;
  *
  * @author emerald000
  */
-public class Voidslime extends CardImpl {
+public final class Voidslime extends CardImpl {
 
     public Voidslime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{U}{U}");

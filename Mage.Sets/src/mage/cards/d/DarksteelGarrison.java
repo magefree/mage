@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class DarksteelGarrison extends CardImpl {
+public final class DarksteelGarrison extends CardImpl {
 
     public DarksteelGarrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -112,14 +112,15 @@ class FortifyAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (super.canActivate(playerId, game)) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        ActivationStatus activationStatus = super.canActivate(playerId, game);
+        if (activationStatus.canActivate()) {
             Permanent permanent = game.getPermanent(sourceId);
             if (permanent != null && permanent.hasSubtype(SubType.FORTIFICATION, game)) {
-                return true;
+                return activationStatus;
             }
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     public FortifyAbility(final FortifyAbility ability) {

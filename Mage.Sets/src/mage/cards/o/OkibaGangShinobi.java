@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class OkibaGangShinobi extends CardImpl {
+public final class OkibaGangShinobi extends CardImpl {
 
     public OkibaGangShinobi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

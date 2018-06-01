@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Plopman
  */
-public class Knighthood extends CardImpl {
+public final class Knighthood extends CardImpl {
 
     public Knighthood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

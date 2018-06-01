@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class Transcendence extends CardImpl {
+public final class Transcendence extends CardImpl {
 
     public Transcendence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}{W}");

@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class RitesOfFlourishing extends CardImpl {
+public final class RitesOfFlourishing extends CardImpl {
 
     public RitesOfFlourishing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

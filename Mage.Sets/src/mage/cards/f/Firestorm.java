@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class Firestorm extends CardImpl {
+public final class Firestorm extends CardImpl {
 
     public Firestorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

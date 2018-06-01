@@ -42,7 +42,7 @@ import mage.cards.CardSetInfo;
  *
  * @author JayDi85
  */
-public class DuskLegionZealot  extends CardImpl {
+public final class DuskLegionZealot  extends CardImpl {
 
     public DuskLegionZealot (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class Blaze extends CardImpl {
+public final class Blaze extends CardImpl {
 
     public Blaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

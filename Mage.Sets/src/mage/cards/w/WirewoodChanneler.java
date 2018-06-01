@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class WirewoodChanneler extends CardImpl {
+public final class WirewoodChanneler extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Elves");
 

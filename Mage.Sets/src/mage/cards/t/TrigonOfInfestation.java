@@ -50,7 +50,7 @@ import mage.game.permanent.token.InsectInfectToken;
 /**
  * @author nantuko
  */
-public class TrigonOfInfestation extends CardImpl {
+public final class TrigonOfInfestation extends CardImpl {
 
     private static InsectInfectToken insectToken = new InsectInfectToken();
 

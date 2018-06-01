@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class DeathreapRitual extends CardImpl {
+public final class DeathreapRitual extends CardImpl {
 
     public DeathreapRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{G}");

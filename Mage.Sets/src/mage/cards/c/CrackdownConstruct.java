@@ -47,7 +47,7 @@ import mage.game.stack.StackAbility;
  *
  * @author spjspj
  */
-public class CrackdownConstruct extends CardImpl {
+public final class CrackdownConstruct extends CardImpl {
 
     public CrackdownConstruct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

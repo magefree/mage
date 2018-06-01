@@ -42,7 +42,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class FirecannonBlast extends CardImpl {
+public final class FirecannonBlast extends CardImpl {
 
     public FirecannonBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

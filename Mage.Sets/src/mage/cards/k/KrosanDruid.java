@@ -43,7 +43,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class KrosanDruid extends CardImpl {
+public final class KrosanDruid extends CardImpl {
 
     public KrosanDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

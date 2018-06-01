@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WitnessOfTheAges extends CardImpl {
+public final class WitnessOfTheAges extends CardImpl {
 
     public WitnessOfTheAges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class Caregiver extends CardImpl {
+public final class Caregiver extends CardImpl {
 
     public Caregiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

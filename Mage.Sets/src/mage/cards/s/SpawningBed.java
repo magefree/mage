@@ -45,7 +45,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author fireshoes
  */
-public class SpawningBed extends CardImpl {
+public final class SpawningBed extends CardImpl {
 
     public SpawningBed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

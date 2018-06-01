@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class PDSFireAndLightning extends ExpansionSet {
+public final class PDSFireAndLightning extends ExpansionSet {
 
     private static final PDSFireAndLightning instance = new PDSFireAndLightning();
 

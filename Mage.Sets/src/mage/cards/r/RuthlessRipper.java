@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class RuthlessRipper extends CardImpl {
+public final class RuthlessRipper extends CardImpl {
     
     private final static FilterCard filter = new FilterCard("a black card in your hand");
     static {

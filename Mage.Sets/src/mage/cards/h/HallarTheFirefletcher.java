@@ -53,7 +53,7 @@ import mage.game.stack.Spell;
  *
  * @author TheElk801
  */
-public class HallarTheFirefletcher extends CardImpl {
+public final class HallarTheFirefletcher extends CardImpl {
 
     public HallarTheFirefletcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");

@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Loki
  */
-public class HellkiteIgniter extends CardImpl {
+public final class HellkiteIgniter extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
 

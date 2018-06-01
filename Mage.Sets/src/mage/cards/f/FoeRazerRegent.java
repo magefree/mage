@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class FoeRazerRegent extends CardImpl {
+public final class FoeRazerRegent extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

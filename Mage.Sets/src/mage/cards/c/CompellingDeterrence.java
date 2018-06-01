@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author fireshoes
  */
-public class CompellingDeterrence extends CardImpl {
+public final class CompellingDeterrence extends CardImpl {
 
     public CompellingDeterrence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

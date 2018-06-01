@@ -48,7 +48,7 @@ import mage.filter.StaticFilters;
  *
  * @author Will
  */
-public class GhituLavarunner extends CardImpl{
+public final class GhituLavarunner extends CardImpl{
     public GhituLavarunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
 

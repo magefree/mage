@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth (Steel Golem), cbt33
  */
-public class CeaseFire extends CardImpl {
+public final class CeaseFire extends CardImpl {
 
     public CeaseFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

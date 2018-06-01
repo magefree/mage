@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801 & L_J
  */
-public class EunuchsIntrigues extends CardImpl {
+public final class EunuchsIntrigues extends CardImpl {
 
     public EunuchsIntrigues(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

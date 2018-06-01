@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DarkDabbling extends CardImpl {
+public final class DarkDabbling extends CardImpl {
 
     public DarkDabbling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");

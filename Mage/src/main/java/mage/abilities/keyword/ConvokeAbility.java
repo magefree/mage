@@ -145,7 +145,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
                 Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
                 target.setTargetName("creature to convoke");
                 specialAction.addTarget(target);
-                if (specialAction.canActivate(source.getControllerId(), game)) {
+                if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
                 }
             }

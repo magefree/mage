@@ -64,7 +64,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SwiftWarkite extends CardImpl {
+public final class SwiftWarkite extends CardImpl {
 
     public SwiftWarkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");

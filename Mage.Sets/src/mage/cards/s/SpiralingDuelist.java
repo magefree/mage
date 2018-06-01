@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class SpiralingDuelist extends CardImpl {
+public final class SpiralingDuelist extends CardImpl {
 
     private static final String effectText = "Metalcraft - Spiraling Duelist has double strike as long as you control three or more artifacts.";
 

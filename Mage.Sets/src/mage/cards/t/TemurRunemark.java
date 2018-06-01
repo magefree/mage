@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class TemurRunemark extends CardImpl {
+public final class TemurRunemark extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("as long as you control a blue or red permanent");
 

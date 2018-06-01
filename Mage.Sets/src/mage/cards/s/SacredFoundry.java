@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SacredFoundry extends CardImpl {
+public final class SacredFoundry extends CardImpl {
 
     public SacredFoundry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

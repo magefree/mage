@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  * @author LoneFox
 
  */
-public class BogDown extends CardImpl {
+public final class BogDown extends CardImpl {
 
     public BogDown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

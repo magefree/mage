@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target.common;
 
 import mage.constants.Zone;
@@ -36,6 +35,7 @@ import mage.game.Game;
 import mage.target.TargetCard;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.other.OwnerIdPredicate;
 
 /**
@@ -47,7 +47,7 @@ public class TargetDiscard extends TargetCard {
     private final UUID playerId;
 
     public TargetDiscard(UUID playerId) {
-        this(1, 1, new FilterCard(), playerId);
+        this(1, 1, StaticFilters.FILTER_CARD, playerId);
     }
 
     public TargetDiscard(FilterCard filter, UUID playerId) {

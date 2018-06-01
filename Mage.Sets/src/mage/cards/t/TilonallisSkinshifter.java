@@ -54,7 +54,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author TheElk801
  */
-public class TilonallisSkinshifter extends CardImpl {
+public final class TilonallisSkinshifter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

@@ -51,7 +51,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class ImminentDoom extends CardImpl {
+public final class ImminentDoom extends CardImpl {
 
     public ImminentDoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class Illumination extends CardImpl {
+public final class Illumination extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("artifact or enchantment spell");
 

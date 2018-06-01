@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LoneFox
  */
-public class ScoriaCat extends CardImpl {
+public final class ScoriaCat extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 

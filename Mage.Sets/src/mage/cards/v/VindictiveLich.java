@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author anonymous
  */
-public class VindictiveLich extends CardImpl {
+public final class VindictiveLich extends CardImpl {
 
     public VindictiveLich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Derpthemeus
  */
-public class MoonlitWake extends CardImpl {
+public final class MoonlitWake extends CardImpl {
 
     public MoonlitWake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

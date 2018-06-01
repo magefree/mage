@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class StitcherGeralfZombieToken extends TokenImpl {
+public final class StitcherGeralfZombieToken extends TokenImpl {
 
     public StitcherGeralfZombieToken() {
         this(1);

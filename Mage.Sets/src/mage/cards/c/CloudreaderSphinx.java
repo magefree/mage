@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class CloudreaderSphinx extends CardImpl {
+public final class CloudreaderSphinx extends CardImpl {
 
     public CloudreaderSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

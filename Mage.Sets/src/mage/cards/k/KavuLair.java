@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author LevelX2
  */
-public class KavuLair extends CardImpl {
+public final class KavuLair extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 

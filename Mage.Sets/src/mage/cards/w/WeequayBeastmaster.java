@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class WeequayBeastmaster extends CardImpl {
+public final class WeequayBeastmaster extends CardImpl {
 
     public WeequayBeastmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

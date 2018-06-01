@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BlessingOfLeeches extends CardImpl {
+public final class BlessingOfLeeches extends CardImpl {
 
     public BlessingOfLeeches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

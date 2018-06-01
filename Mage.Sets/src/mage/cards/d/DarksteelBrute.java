@@ -48,7 +48,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author Loki
  */
-public class DarksteelBrute extends CardImpl {
+public final class DarksteelBrute extends CardImpl {
 
     public DarksteelBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

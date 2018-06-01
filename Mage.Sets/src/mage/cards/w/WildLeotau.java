@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class WildLeotau extends CardImpl {
+public final class WildLeotau extends CardImpl {
 
     public WildLeotau(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

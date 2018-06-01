@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class BrambleCreeper extends CardImpl {
+public final class BrambleCreeper extends CardImpl {
 
     public BrambleCreeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

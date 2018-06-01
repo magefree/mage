@@ -40,7 +40,7 @@ import mage.game.permanent.token.BirdToken;
  *
  * @author fireshoes
  */
-public class MigratoryRoute extends CardImpl {
+public final class MigratoryRoute extends CardImpl {
 
     public MigratoryRoute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{U}");

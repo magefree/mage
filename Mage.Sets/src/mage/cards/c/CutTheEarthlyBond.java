@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CutTheEarthlyBond extends CardImpl {
+public final class CutTheEarthlyBond extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchanted permanent");
     static {

@@ -54,7 +54,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class IcatianStore extends CardImpl {
+public final class IcatianStore extends CardImpl {
 
     public IcatianStore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

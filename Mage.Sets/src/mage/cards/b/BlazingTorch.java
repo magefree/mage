@@ -56,7 +56,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class BlazingTorch extends CardImpl {
+public final class BlazingTorch extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires or Zombies");
     static {

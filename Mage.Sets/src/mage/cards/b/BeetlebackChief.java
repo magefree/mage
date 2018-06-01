@@ -41,7 +41,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author LevelX2
  */
-public class BeetlebackChief extends CardImpl {
+public final class BeetlebackChief extends CardImpl {
 
     public BeetlebackChief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

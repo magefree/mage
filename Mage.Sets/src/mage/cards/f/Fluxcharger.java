@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class Fluxcharger extends CardImpl {
+public final class Fluxcharger extends CardImpl {
 
     public Fluxcharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");

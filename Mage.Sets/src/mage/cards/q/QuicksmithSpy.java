@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Styxo
  */
-public class QuicksmithSpy extends CardImpl {
+public final class QuicksmithSpy extends CardImpl {
 
     public QuicksmithSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

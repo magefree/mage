@@ -35,7 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class Dermoplasm extends CardImpl {
+public final class Dermoplasm extends CardImpl {
 
     public Dermoplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -103,7 +103,7 @@ class DermoplasmEffect extends OneShotEffect {
         Permanent thisCreature = game.getPermanent(source.getId());
         FilterCreatureCard filter = new FilterCreatureCard("a creature card with a morph ability");
         filter.add(new AbilityPredicate(MorphAbility.class));
-        Effect effect = new PutPermanentOnBattlefieldEffect(new FilterCreatureCard(filter));
+        Effect effect = new PutCardFromHandOntoBattlefieldEffect(filter);
         if (effect.apply(game, source)) {
             if (thisCreature != null) {
                 effect = new ReturnToHandTargetEffect();

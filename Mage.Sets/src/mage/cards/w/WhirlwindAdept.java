@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WhirlwindAdept extends CardImpl {
+public final class WhirlwindAdept extends CardImpl {
 
     public WhirlwindAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

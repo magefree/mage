@@ -56,7 +56,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author L_J
  */
-public class ShieldmageAdvocate extends CardImpl {
+public final class ShieldmageAdvocate extends CardImpl {
 
     public ShieldmageAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

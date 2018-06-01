@@ -56,7 +56,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author LevelX2
  */
-public class Berserk extends CardImpl {
+public final class Berserk extends CardImpl {
 
     public Berserk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

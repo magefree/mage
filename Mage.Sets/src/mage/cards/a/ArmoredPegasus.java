@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ArmoredPegasus extends CardImpl {
+public final class ArmoredPegasus extends CardImpl {
 
     public ArmoredPegasus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

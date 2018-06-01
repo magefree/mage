@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author L_J
  */
-public class Foxfire extends CardImpl {
+public final class Foxfire extends CardImpl {
 
     public Foxfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

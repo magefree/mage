@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DiscipleOfTheRing extends CardImpl {
+public final class DiscipleOfTheRing extends CardImpl {
     
     private static final FilterSpell filterSpell = new FilterSpell("noncreature spell");
 

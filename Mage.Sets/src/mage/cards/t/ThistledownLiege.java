@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class ThistledownLiege extends CardImpl {
+public final class ThistledownLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures");
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creatures");

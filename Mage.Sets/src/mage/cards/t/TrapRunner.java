@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TrapRunner extends CardImpl {
+public final class TrapRunner extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked attacking creature");
 

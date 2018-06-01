@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class EmissaryOfHope extends CardImpl {
+public final class EmissaryOfHope extends CardImpl {
 
     public EmissaryOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

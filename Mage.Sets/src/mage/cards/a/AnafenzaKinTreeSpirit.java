@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author fireshoes
  */
-public class AnafenzaKinTreeSpirit extends CardImpl {
+public final class AnafenzaKinTreeSpirit extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
 

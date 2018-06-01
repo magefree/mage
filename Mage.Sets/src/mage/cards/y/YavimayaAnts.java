@@ -43,7 +43,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class YavimayaAnts extends CardImpl {
+public final class YavimayaAnts extends CardImpl {
 
     public YavimayaAnts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

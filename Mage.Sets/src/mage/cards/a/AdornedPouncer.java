@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class AdornedPouncer extends CardImpl {
+public final class AdornedPouncer extends CardImpl {
 
     public AdornedPouncer(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

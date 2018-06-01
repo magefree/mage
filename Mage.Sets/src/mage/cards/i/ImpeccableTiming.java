@@ -38,7 +38,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LevelX2
  */
-public class ImpeccableTiming extends CardImpl {
+public final class ImpeccableTiming extends CardImpl {
 
     public ImpeccableTiming(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

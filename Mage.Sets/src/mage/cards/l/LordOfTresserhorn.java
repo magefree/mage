@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class LordOfTresserhorn extends CardImpl {
+public final class LordOfTresserhorn extends CardImpl {
 
     public LordOfTresserhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");

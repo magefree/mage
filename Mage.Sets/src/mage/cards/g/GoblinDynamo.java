@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author BursegSardaukar
  */
-public class GoblinDynamo extends CardImpl {
+public final class GoblinDynamo extends CardImpl {
 
     public GoblinDynamo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

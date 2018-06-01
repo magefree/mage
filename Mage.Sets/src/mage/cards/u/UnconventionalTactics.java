@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class UnconventionalTactics extends CardImpl {
+public final class UnconventionalTactics extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Zombie");
 

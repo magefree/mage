@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl {
+public final class Benthicore extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 

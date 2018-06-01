@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Backfir3
  */
-public class Wildfire extends CardImpl {
+public final class Wildfire extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands");
 

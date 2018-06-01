@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class OonaQueenFaerieToken extends TokenImpl {
+public final class OonaQueenFaerieToken extends TokenImpl {
 
     public OonaQueenFaerieToken() {
         super("Faerie Rogue", "1/1 blue and black Faerie Rogue creature token with flying");

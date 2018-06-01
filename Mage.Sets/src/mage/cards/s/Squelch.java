@@ -39,7 +39,7 @@ import mage.target.common.TargetActivatedAbility;
  *
  * @author LevelX2
  */
-public class Squelch extends CardImpl {
+public final class Squelch extends CardImpl {
 
     public Squelch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

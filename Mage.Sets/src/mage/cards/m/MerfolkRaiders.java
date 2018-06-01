@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MerfolkRaiders extends CardImpl {
+public final class MerfolkRaiders extends CardImpl {
 
     public MerfolkRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

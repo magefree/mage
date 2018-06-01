@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author wetterlicht
  */
-public class EmissaryOfDespair extends CardImpl {
+public final class EmissaryOfDespair extends CardImpl {
 
     public EmissaryOfDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

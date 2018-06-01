@@ -41,7 +41,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class RorixBladewing extends CardImpl {
+public final class RorixBladewing extends CardImpl {
 
     public RorixBladewing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");

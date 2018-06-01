@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author KholdFuzion
 
  */
-public class SliverLegion extends CardImpl {
+public final class SliverLegion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures");
     private static final FilterPermanent countfilter = new FilterPermanent(SubType.SLIVER, "other Sliver on the battlefield");

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BlackPoplarShaman extends CardImpl {
+public final class BlackPoplarShaman extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Treefolk");
 

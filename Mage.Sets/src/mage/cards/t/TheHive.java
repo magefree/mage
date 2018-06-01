@@ -43,7 +43,7 @@ import mage.game.permanent.token.WaspToken;
  *
  * @author Loki
  */
-public class TheHive extends CardImpl {
+public final class TheHive extends CardImpl {
 
     public TheHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

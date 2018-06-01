@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author MarcoMarin
  */
-public class FarrelsMantle extends CardImpl {
+public final class FarrelsMantle extends CardImpl {
 
     
     public FarrelsMantle(UUID ownerId, CardSetInfo setInfo) {

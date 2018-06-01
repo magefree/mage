@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class MerfolkMistbinder extends CardImpl {
+public final class MerfolkMistbinder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk you control");
 

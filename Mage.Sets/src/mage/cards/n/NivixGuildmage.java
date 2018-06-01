@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class NivixGuildmage extends CardImpl {
+public final class NivixGuildmage extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class CloudgoatRanger extends CardImpl {
+public final class CloudgoatRanger extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
 

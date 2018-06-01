@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class ForsakenWastes extends CardImpl {
+public final class ForsakenWastes extends CardImpl {
 
     public ForsakenWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

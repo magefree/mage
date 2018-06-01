@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DragonBellMonk extends CardImpl {
+public final class DragonBellMonk extends CardImpl {
 
     public DragonBellMonk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

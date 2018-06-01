@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author cbt33
  */
-public class SliverOverlord extends CardImpl {
+public final class SliverOverlord extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Sliver card");
     

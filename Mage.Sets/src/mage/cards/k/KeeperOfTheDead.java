@@ -63,7 +63,7 @@ import mage.target.TargetPlayer;
  *
  * @author spjspj
  */
-public class KeeperOfTheDead extends CardImpl {
+public final class KeeperOfTheDead extends CardImpl {
 
     private static final FilterPlayer filter = new FilterPlayer();
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nonblack creature");

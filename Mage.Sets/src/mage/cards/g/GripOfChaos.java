@@ -52,7 +52,7 @@ import mage.util.RandomUtil;
  *
  * @author emerald000
  */
-public class GripOfChaos extends CardImpl {
+public final class GripOfChaos extends CardImpl {
 
     public GripOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");

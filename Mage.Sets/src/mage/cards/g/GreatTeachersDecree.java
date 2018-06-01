@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class GreatTeachersDecree extends CardImpl {
+public final class GreatTeachersDecree extends CardImpl {
 
     public GreatTeachersDecree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class NightguardPatrol extends CardImpl {
+public final class NightguardPatrol extends CardImpl {
 
     public NightguardPatrol (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class ShriekingDrake extends CardImpl {
+public final class ShriekingDrake extends CardImpl {
 
     public ShriekingDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

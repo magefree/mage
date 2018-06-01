@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author L_J
  */
-public class GreatWall extends CardImpl {
+public final class GreatWall extends CardImpl {
 
     public GreatWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

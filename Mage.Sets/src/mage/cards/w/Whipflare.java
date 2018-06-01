@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class Whipflare extends CardImpl {
+public final class Whipflare extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class BrimstoneDragon extends CardImpl {
+public final class BrimstoneDragon extends CardImpl {
 
     public BrimstoneDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");

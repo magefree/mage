@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class SonicSeizure extends CardImpl {
+public final class SonicSeizure extends CardImpl {
 
     public SonicSeizure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

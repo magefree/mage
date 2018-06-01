@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class JuzamDjinn extends CardImpl {
+public final class JuzamDjinn extends CardImpl {
 
     public JuzamDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

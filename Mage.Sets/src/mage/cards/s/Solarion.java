@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class Solarion extends CardImpl {
+public final class Solarion extends CardImpl {
 
     public Solarion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

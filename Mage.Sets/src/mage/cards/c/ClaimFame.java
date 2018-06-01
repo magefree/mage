@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ClaimFame extends SplitCard {
+public final class ClaimFame extends SplitCard {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
 

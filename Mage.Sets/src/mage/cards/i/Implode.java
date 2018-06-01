@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  * @author LoneFox
 
  */
-public class Implode extends CardImpl {
+public final class Implode extends CardImpl {
 
     public Implode(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");

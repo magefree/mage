@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LoneFox
  */
-public class Stratadon extends CardImpl {
+public final class Stratadon extends CardImpl {
 
     public Stratadon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{10}");

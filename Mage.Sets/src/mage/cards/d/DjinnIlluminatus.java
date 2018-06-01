@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class DjinnIlluminatus extends CardImpl {
+public final class DjinnIlluminatus extends CardImpl {
 
     public DjinnIlluminatus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U/R}{U/R}");

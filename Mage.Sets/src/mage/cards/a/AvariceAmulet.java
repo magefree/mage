@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class AvariceAmulet extends CardImpl {
+public final class AvariceAmulet extends CardImpl {
 
     public AvariceAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

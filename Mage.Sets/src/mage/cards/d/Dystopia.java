@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author emerald000
  */
-public class Dystopia extends CardImpl {
+public final class Dystopia extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("green or white permanent");
     static {

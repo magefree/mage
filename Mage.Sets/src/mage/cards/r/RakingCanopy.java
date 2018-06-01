@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class RakingCanopy extends CardImpl {
+public final class RakingCanopy extends CardImpl {
 
     public RakingCanopy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");

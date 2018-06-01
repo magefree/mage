@@ -53,7 +53,7 @@ import mage.game.permanent.token.GoatToken;
  * @author jeffwadsworth
  *
  */
-public class SpringjackPasture extends CardImpl {
+public final class SpringjackPasture extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goats");
 

@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
  * @author LoneFox
 
  */
-public class GoblinGardener extends CardImpl {
+public final class GoblinGardener extends CardImpl {
 
     public GoblinGardener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

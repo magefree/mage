@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class Tunnel extends CardImpl {
+public final class Tunnel extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Wall");
 

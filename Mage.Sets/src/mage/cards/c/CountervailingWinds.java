@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class CountervailingWinds extends CardImpl {
+public final class CountervailingWinds extends CardImpl {
 
     public CountervailingWinds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

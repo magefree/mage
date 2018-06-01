@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author Plopman
  */
-public class BatteredGolem extends CardImpl {
+public final class BatteredGolem extends CardImpl {
 
     public BatteredGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

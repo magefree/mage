@@ -44,7 +44,7 @@ import mage.filter.FilterObject;
  *
  * @author LevelX2
  */
-public class ConsulateSurveillance extends CardImpl {
+public final class ConsulateSurveillance extends CardImpl {
 
     public ConsulateSurveillance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

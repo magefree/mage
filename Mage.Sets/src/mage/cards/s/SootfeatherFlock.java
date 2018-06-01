@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SootfeatherFlock extends CardImpl {
+public final class SootfeatherFlock extends CardImpl {
 
     public SootfeatherFlock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Wehk
  */
-public class SeedSpark extends CardImpl {
+public final class SeedSpark extends CardImpl {
 
     public SeedSpark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

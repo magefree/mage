@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jonubuu
  */
-public class NettleSentinel extends CardImpl {
+public final class NettleSentinel extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a green spell");
 

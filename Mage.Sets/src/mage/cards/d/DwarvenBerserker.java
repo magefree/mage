@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class DwarvenBerserker extends CardImpl {
+public final class DwarvenBerserker extends CardImpl {
 
     public DwarvenBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

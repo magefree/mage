@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Archer262
  */
-public class DauntlessAven extends CardImpl {
+public final class DauntlessAven extends CardImpl {
 
     public DauntlessAven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

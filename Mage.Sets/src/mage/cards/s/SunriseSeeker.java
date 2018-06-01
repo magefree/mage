@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class SunriseSeeker extends CardImpl {
+public final class SunriseSeeker extends CardImpl {
 
     public SunriseSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

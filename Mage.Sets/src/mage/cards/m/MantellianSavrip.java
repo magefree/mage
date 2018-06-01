@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class MantellianSavrip extends CardImpl {
+public final class MantellianSavrip extends CardImpl {
 
     public MantellianSavrip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

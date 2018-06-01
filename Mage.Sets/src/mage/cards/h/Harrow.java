@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Viserion
  */
-public class Harrow extends CardImpl {
+public final class Harrow extends CardImpl {
 
     public Harrow(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
@@ -55,7 +55,7 @@ public class Harrow extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
 
         // Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
     }
 

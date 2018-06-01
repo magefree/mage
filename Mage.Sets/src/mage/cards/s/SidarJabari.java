@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SidarJabari extends CardImpl {
+public final class SidarJabari extends CardImpl {
 
     private final UUID originalId;
 

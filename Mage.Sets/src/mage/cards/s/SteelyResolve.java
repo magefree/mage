@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author markedagain
  */
-public class SteelyResolve extends CardImpl {
+public final class SteelyResolve extends CardImpl {
 
     public SteelyResolve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

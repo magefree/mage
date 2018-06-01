@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Rattlechains extends CardImpl {
+public final class Rattlechains extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit");
     private static final FilterCard filterCard = new FilterCard("Spirit spells");

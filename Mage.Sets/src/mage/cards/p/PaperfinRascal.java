@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class PaperfinRascal extends CardImpl {
+public final class PaperfinRascal extends CardImpl {
 
     public PaperfinRascal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

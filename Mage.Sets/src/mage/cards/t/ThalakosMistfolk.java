@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class ThalakosMistfolk extends CardImpl {
+public final class ThalakosMistfolk extends CardImpl {
 
     public ThalakosMistfolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

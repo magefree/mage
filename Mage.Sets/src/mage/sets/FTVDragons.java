@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class FTVDragons extends ExpansionSet {
+public final class FTVDragons extends ExpansionSet {
 
     private static final FTVDragons instance = new FTVDragons();
 

@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class OathOfDruids extends CardImpl {
+public final class OathOfDruids extends CardImpl {
 
     private final UUID originalId;
     private static final FilterPlayer filter = new FilterPlayer();

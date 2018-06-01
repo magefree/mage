@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class DutyBoundDead extends CardImpl {
+public final class DutyBoundDead extends CardImpl {
 
     public DutyBoundDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

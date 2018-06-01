@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class KazuulTyrantOfTheCliffs extends CardImpl {
+public final class KazuulTyrantOfTheCliffs extends CardImpl {
 
     public KazuulTyrantOfTheCliffs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

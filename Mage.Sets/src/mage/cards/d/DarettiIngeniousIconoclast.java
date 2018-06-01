@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class DarettiIngeniousIconoclast extends CardImpl {
+public final class DarettiIngeniousIconoclast extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

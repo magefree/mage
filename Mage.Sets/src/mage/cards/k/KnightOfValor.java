@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
  *
  * @author LoneFox
  */
-public class KnightOfValor extends CardImpl {
+public final class KnightOfValor extends CardImpl {
 
     public KnightOfValor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

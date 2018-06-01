@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class JorubaiMurkLurker extends CardImpl {
+public final class JorubaiMurkLurker extends CardImpl {
 
     private static final String rule = "{this} gets +1/+1 as long as you control a Swamp";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Swamp");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class SkarrganPitSkulk extends CardImpl {
+public final class SkarrganPitSkulk extends CardImpl {
 
     public SkarrganPitSkulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

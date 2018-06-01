@@ -47,10 +47,10 @@ import mage.target.common.TargetOpponent;
  *
  * @author Styxo
  */
-public class TheBattleOfYavin extends CardImpl {
+public final class TheBattleOfYavin extends CardImpl {
 
     public TheBattleOfYavin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
         // For each nonland permanent target opponent controls, that player sacrificies it unless he or she pays X life.
         this.getSpellAbility().addEffect(new TheBattleOfYavinEffect());
@@ -102,7 +102,7 @@ class TheBattleOfYavinEffect extends OneShotEffect {
             int playerLife = opponent.getLife();
             for (Permanent permanent : permanents) {
                 String message = "Pay " + amount + " life? If you don't, " + permanent.getName() + " will be sacrificed.";
-                if (playerLife - amount - lifePaid >= 0 && opponent != null && opponent.chooseUse(Outcome.Neutral, message, source, game)) {
+                if (playerLife - amount - lifePaid >= 0 && opponent.chooseUse(Outcome.Neutral, message, source, game)) {
                     game.informPlayers(opponent.getLogName() + " pays " + amount + " life. He will not sacrifice " + permanent.getName());
                     lifePaid += amount;
                 } else {

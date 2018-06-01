@@ -57,7 +57,7 @@ import mage.watchers.Watcher;
  *
  * @author noxx
  */
-public class CavernOfSouls extends CardImpl {
+public final class CavernOfSouls extends CardImpl {
 
     public CavernOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

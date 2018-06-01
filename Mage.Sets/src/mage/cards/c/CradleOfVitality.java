@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Alvin
  */
-public class CradleOfVitality extends CardImpl {
+public final class CradleOfVitality extends CardImpl {
 
     public CradleOfVitality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

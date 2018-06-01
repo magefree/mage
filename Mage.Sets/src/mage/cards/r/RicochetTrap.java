@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class RicochetTrap extends CardImpl {
+public final class RicochetTrap extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with a single target");
 

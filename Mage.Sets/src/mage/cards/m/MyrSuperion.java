@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author BetaSteward
  */
-public class MyrSuperion extends CardImpl {
+public final class MyrSuperion extends CardImpl {
 
 
     public MyrSuperion(UUID ownerId, CardSetInfo setInfo) {

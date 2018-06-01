@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KessigRecluse extends CardImpl {
+public final class KessigRecluse extends CardImpl {
 
     public KessigRecluse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

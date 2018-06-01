@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class CanopyCover extends CardImpl {
+public final class CanopyCover extends CardImpl {
 
     private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 

@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class CorruptedGrafstone extends CardImpl {
+public final class CorruptedGrafstone extends CardImpl {
 
     public CorruptedGrafstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

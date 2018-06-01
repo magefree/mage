@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class SurrakarMarauder extends CardImpl {
+public final class SurrakarMarauder extends CardImpl {
 
     public SurrakarMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

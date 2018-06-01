@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author nigelzor
  */
-public class GoblinCaves extends CardImpl {
+public final class GoblinCaves extends CardImpl {
 
     public GoblinCaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");

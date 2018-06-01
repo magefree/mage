@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class WirewoodSavage extends CardImpl {
+public final class WirewoodSavage extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Beast");
 

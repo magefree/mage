@@ -49,7 +49,7 @@ import mage.game.Game;
 /**
  * @author Loki
  */
-public class WitchMawNephilim extends CardImpl {
+public final class WitchMawNephilim extends CardImpl {
 
     public WitchMawNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}{B}");

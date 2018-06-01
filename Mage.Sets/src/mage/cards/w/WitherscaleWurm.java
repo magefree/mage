@@ -48,7 +48,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class WitherscaleWurm extends CardImpl {
+public final class WitherscaleWurm extends CardImpl {
 
     public WitherscaleWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

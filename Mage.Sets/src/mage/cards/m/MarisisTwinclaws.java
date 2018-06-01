@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class MarisisTwinclaws extends CardImpl {
+public final class MarisisTwinclaws extends CardImpl {
 
     public MarisisTwinclaws (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}{G}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class NulltreadGargantuan extends CardImpl {
+public final class NulltreadGargantuan extends CardImpl {
 
     public NulltreadGargantuan (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");

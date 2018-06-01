@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class Lifespinner extends CardImpl {
+public final class Lifespinner extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("legendary Spirit permanent card");
 

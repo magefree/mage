@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Saga
  */
-public class KindredSummons extends CardImpl {
+public final class KindredSummons extends CardImpl {
 
     public KindredSummons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{G}{G}");

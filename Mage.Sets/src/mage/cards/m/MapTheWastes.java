@@ -41,13 +41,13 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class MapTheWastes extends CardImpl {
+public final class MapTheWastes extends CardImpl {
 
     public MapTheWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
         
         // Bolster 1.

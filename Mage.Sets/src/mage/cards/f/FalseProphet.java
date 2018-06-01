@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author LoneFox
 
  */
-public class FalseProphet extends CardImpl {
+public final class FalseProphet extends CardImpl {
 
     public FalseProphet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

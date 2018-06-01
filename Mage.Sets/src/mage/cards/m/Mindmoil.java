@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Mindmoil extends CardImpl {
+public final class Mindmoil extends CardImpl {
 
     public Mindmoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");

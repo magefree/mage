@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Quercitron
  */
-public class Tremor extends CardImpl {
+public final class Tremor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

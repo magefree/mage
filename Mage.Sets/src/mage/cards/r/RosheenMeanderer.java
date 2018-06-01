@@ -48,7 +48,7 @@ import mage.game.Game;
  *
  * @author jeffwadsworth
  */
-public class RosheenMeanderer extends CardImpl {
+public final class RosheenMeanderer extends CardImpl {
 
     public RosheenMeanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R/G}");

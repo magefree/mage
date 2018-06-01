@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class ShieldmageElder extends CardImpl {
+public final class ShieldmageElder extends CardImpl {
 
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("untapped Clerics you control");
 

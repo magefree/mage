@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class Bloodbriar extends CardImpl {
+public final class Bloodbriar extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("another permanent");
 

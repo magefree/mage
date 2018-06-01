@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author noxx
  */
-public class TreacherousPitDweller extends CardImpl {
+public final class TreacherousPitDweller extends CardImpl {
 
     public TreacherousPitDweller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");

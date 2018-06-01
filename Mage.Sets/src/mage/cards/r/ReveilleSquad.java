@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author TheElk801
  */
-public class ReveilleSquad extends CardImpl {
+public final class ReveilleSquad extends CardImpl {
 
     public ReveilleSquad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

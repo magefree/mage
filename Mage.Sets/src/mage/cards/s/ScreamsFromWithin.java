@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class ScreamsFromWithin extends CardImpl {
+public final class ScreamsFromWithin extends CardImpl {
 
     public ScreamsFromWithin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author TheElk801
  */
-public class UktabiFaerie extends CardImpl {
+public final class UktabiFaerie extends CardImpl {
 
     public UktabiFaerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

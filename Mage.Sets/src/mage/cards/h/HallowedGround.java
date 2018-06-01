@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Styxo
  */
-public class HallowedGround extends CardImpl {
+public final class HallowedGround extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("nonsnow land you control");
 

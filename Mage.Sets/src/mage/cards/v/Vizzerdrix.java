@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Vizzerdrix extends CardImpl {
+public final class Vizzerdrix extends CardImpl {
 
     public Vizzerdrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");

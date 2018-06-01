@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author wetterlicht & L_J
  */
-public class CragSaurian extends CardImpl {
+public final class CragSaurian extends CardImpl {
 
     public CragSaurian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");

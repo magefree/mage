@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class PeerPressure extends CardImpl {
+public final class PeerPressure extends CardImpl {
 
     public PeerPressure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

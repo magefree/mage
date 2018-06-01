@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author Loki
  */
-public class PuresteelPaladin extends CardImpl {
+public final class PuresteelPaladin extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("Equipment");
 
     static {

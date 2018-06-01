@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class GhituFireEater extends CardImpl {
+public final class GhituFireEater extends CardImpl {
 
     public GhituFireEater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

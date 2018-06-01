@@ -49,7 +49,7 @@ import mage.target.common.TargetActivatedAbility;
  *
  * @author L_J
  */
-public class AyeshaTanaka extends CardImpl {
+public final class AyeshaTanaka extends CardImpl {
 
     private final static FilterAbility filter = new FilterAbility("activated ability from an artifact source");
 

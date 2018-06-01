@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WelkinTern extends CardImpl {
+public final class WelkinTern extends CardImpl {
 
     public WelkinTern (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

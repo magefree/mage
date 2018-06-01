@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author JRHerlehy
  */
-public class TetsuoUmezawa extends CardImpl {
+public final class TetsuoUmezawa extends CardImpl {
 
     private static final FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent("tapped or blocking creature");
 

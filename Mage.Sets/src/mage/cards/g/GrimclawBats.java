@@ -47,7 +47,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class GrimclawBats extends CardImpl {
+public final class GrimclawBats extends CardImpl {
 
     public GrimclawBats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

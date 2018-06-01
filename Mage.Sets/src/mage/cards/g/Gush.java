@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class Gush extends CardImpl {
+public final class Gush extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Islands");
     static{

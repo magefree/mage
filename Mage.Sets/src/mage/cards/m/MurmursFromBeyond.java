@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class MurmursFromBeyond extends CardImpl {
+public final class MurmursFromBeyond extends CardImpl {
 
     public MurmursFromBeyond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

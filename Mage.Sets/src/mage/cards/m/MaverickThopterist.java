@@ -42,7 +42,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author fireshoes
  */
-public class MaverickThopterist extends CardImpl {
+public final class MaverickThopterist extends CardImpl {
 
     public MaverickThopterist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");

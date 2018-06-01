@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class DemonOfWailingAgonies extends CardImpl {
+public final class DemonOfWailingAgonies extends CardImpl {
 
     public DemonOfWailingAgonies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

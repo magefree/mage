@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class SlaughterhouseBouncer extends CardImpl {
+public final class SlaughterhouseBouncer extends CardImpl {
 
     public SlaughterhouseBouncer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

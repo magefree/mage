@@ -50,7 +50,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author LevelX2
  */
-public class JaceUnravelerOfSecrets extends CardImpl {
+public final class JaceUnravelerOfSecrets extends CardImpl {
 
     public JaceUnravelerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");

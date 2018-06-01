@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author TheElk801
  */
-public class LaquatussDisdain extends CardImpl {
+public final class LaquatussDisdain extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell cast from a graveyard");
 

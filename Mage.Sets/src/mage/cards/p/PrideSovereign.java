@@ -53,7 +53,7 @@ import mage.game.permanent.token.CatToken2;
  *
  * @author LevelX2
  */
-public class PrideSovereign extends CardImpl {
+public final class PrideSovereign extends CardImpl {
 
     public PrideSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

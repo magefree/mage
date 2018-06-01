@@ -37,7 +37,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class TimeSpiralTimeshifted extends ExpansionSet {
+public final class TimeSpiralTimeshifted extends ExpansionSet {
 
     private static final TimeSpiralTimeshifted instance = new TimeSpiralTimeshifted();
 

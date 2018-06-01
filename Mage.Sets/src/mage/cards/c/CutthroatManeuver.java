@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CutthroatManeuver extends CardImpl {
+public final class CutthroatManeuver extends CardImpl {
 
     public CutthroatManeuver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");

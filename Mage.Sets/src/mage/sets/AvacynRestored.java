@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class AvacynRestored extends ExpansionSet {
+public final class AvacynRestored extends ExpansionSet {
 
     private static final AvacynRestored instance = new AvacynRestored();
 

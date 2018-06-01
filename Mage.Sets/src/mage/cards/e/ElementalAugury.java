@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class ElementalAugury extends CardImpl {
+public final class ElementalAugury extends CardImpl {
 
     public ElementalAugury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");

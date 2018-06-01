@@ -41,7 +41,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author Loki
  */
-public class Needlebug extends CardImpl {
+public final class Needlebug extends CardImpl {
 
     public Needlebug(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author jonubuu
  */
-public class TalismanOfIndulgence extends CardImpl {
+public final class TalismanOfIndulgence extends CardImpl {
 
     public TalismanOfIndulgence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

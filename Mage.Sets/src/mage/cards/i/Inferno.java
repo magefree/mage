@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class Inferno extends CardImpl {
+public final class Inferno extends CardImpl {
 
     public Inferno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}{R}");

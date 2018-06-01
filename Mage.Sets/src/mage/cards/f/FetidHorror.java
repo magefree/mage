@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author djbrez
  */
-public class FetidHorror extends CardImpl {
+public final class FetidHorror extends CardImpl {
 
     public FetidHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

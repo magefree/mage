@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SeverTheBloodline extends CardImpl {
+public final class SeverTheBloodline extends CardImpl {
 
     public SeverTheBloodline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

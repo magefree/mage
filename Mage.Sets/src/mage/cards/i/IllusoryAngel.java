@@ -42,7 +42,7 @@ import mage.constants.Zone;
 *
 * @author LevelX2
 */
-public class IllusoryAngel extends CardImpl {
+public final class IllusoryAngel extends CardImpl {
 
     public IllusoryAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

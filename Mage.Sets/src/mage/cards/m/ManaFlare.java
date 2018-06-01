@@ -40,12 +40,12 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class ManaFlare extends CardImpl {
+public final class ManaFlare extends CardImpl {
 
     public ManaFlare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // Whenever a player taps a land for mana, that player adds one mana to their mana pool of any type that land produced.
+        // Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaOfAnyTypeProducedEffect(),
                 new FilterLandPermanent("a player taps a land"),

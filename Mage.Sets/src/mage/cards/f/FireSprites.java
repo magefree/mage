@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author ilcartographer
  */
-public class FireSprites extends CardImpl {
+public final class FireSprites extends CardImpl {
 
     public FireSprites(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

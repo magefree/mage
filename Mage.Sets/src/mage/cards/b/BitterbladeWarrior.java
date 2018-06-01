@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class BitterbladeWarrior extends CardImpl {
+public final class BitterbladeWarrior extends CardImpl {
 
     public BitterbladeWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

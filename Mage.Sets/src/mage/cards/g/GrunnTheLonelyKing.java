@@ -21,7 +21,7 @@ import mage.counters.CounterType;
  * @author JRHerlehy
  *         Created on 4/5/18.
  */
-public class GrunnTheLonelyKing extends CardImpl {
+public final class GrunnTheLonelyKing extends CardImpl {
 
     public GrunnTheLonelyKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

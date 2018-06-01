@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class DevilsPlay extends CardImpl {
+public final class DevilsPlay extends CardImpl {
 
     public DevilsPlay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

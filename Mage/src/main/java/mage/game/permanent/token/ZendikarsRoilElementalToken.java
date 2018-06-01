@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ZendikarsRoilElementalToken extends TokenImpl {
+public final class ZendikarsRoilElementalToken extends TokenImpl {
 
     public ZendikarsRoilElementalToken() {
         super("Elemental", "2/2 green Elemental creature token");

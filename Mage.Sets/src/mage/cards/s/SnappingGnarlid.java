@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class SnappingGnarlid extends CardImpl {
+public final class SnappingGnarlid extends CardImpl {
 
     public SnappingGnarlid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

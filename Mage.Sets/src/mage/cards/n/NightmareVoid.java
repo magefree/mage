@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author jonubuu
  */
-public class NightmareVoid extends CardImpl {
+public final class NightmareVoid extends CardImpl {
 
     public NightmareVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

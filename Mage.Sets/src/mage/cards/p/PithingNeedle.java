@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  *
  * @author jeffwadsworth, nox
  */
-public class PithingNeedle extends CardImpl {
+public final class PithingNeedle extends CardImpl {
 
     public PithingNeedle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

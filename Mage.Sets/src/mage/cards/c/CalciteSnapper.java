@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class CalciteSnapper extends CardImpl {
+public final class CalciteSnapper extends CardImpl {
 
     public CalciteSnapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

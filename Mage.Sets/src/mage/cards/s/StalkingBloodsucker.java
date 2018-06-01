@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class StalkingBloodsucker extends CardImpl {
+public final class StalkingBloodsucker extends CardImpl {
 
     public StalkingBloodsucker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class DistendedMindbender extends CardImpl {
+public final class DistendedMindbender extends CardImpl {
 
     public DistendedMindbender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");

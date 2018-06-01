@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cg5
  */
-public class IxidorRealitySculptor extends CardImpl {
+public final class IxidorRealitySculptor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creatures");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("face-down creature");

@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  *
  */
-public class BlowflyInfestation extends CardImpl {
+public final class BlowflyInfestation extends CardImpl {
     
     private static final String rule = "Whenever a creature dies, if it had a -1/-1 counter on it, put a -1/-1 counter on target creature.";
 

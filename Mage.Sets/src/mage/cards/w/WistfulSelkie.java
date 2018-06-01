@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class WistfulSelkie extends CardImpl {
+public final class WistfulSelkie extends CardImpl {
 
     public WistfulSelkie (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/U}{G/U}{G/U}");

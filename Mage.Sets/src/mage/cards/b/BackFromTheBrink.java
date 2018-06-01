@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class BackFromTheBrink extends CardImpl {
+public final class BackFromTheBrink extends CardImpl {
 
     public BackFromTheBrink(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");

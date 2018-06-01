@@ -45,7 +45,7 @@ import mage.game.stack.StackObject;
  *
  * @author JRHerlehy
  */
-public class BartelRuneaxe extends CardImpl {
+public final class BartelRuneaxe extends CardImpl {
 
     public BartelRuneaxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");

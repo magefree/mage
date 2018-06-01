@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ShahOfNaarIsle extends CardImpl {
+public final class ShahOfNaarIsle extends CardImpl {
 
     public ShahOfNaarIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

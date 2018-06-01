@@ -58,7 +58,7 @@ import mage.watchers.Watcher;
 /**
  * @author LevelX2
  */
-public class ConduitOfRuin extends CardImpl {
+public final class ConduitOfRuin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card with converted mana cost 7 or greater");
     private static final FilterCreatureCard filterCost = new FilterCreatureCard("The first creature spell");

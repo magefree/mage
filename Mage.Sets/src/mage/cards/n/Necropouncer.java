@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class Necropouncer extends CardImpl {
+public final class Necropouncer extends CardImpl {
 
     public Necropouncer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

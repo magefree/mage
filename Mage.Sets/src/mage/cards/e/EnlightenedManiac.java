@@ -41,7 +41,7 @@ import mage.game.permanent.token.EldraziHorrorToken;
  *
  * @author LevelX2
  */
-public class EnlightenedManiac extends CardImpl {
+public final class EnlightenedManiac extends CardImpl {
 
     public EnlightenedManiac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

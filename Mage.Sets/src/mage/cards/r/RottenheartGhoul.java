@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class RottenheartGhoul extends CardImpl {
+public final class RottenheartGhoul extends CardImpl {
 
     public RottenheartGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BalothWoodcrasher extends CardImpl {
+public final class BalothWoodcrasher extends CardImpl {
 
     public BalothWoodcrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

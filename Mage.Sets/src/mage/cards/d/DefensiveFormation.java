@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author L_J
  */
-public class DefensiveFormation extends CardImpl {
+public final class DefensiveFormation extends CardImpl {
 
     public DefensiveFormation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

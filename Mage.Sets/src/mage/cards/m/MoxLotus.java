@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author spjspj/psjpsj
  */
-public class MoxLotus extends CardImpl {
+public final class MoxLotus extends CardImpl {
 
     public MoxLotus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{15}");

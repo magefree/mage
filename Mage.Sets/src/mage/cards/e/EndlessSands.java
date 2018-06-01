@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-public class EndlessSands extends CardImpl {
+public final class EndlessSands extends CardImpl {
 
     public EndlessSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

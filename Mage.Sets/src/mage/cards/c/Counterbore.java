@@ -38,7 +38,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Counterbore extends CardImpl {
+public final class Counterbore extends CardImpl {
     
     public Counterbore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");

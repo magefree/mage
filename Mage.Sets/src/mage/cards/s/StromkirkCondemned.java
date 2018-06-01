@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class StromkirkCondemned extends CardImpl {
+public final class StromkirkCondemned extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires");
 

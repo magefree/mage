@@ -49,14 +49,14 @@ import java.util.UUID;
  *
  * @author Viserion
  */
-public class KhalniHeartExpedition extends CardImpl {
+public final class KhalniHeartExpedition extends CardImpl {
 
     public KhalniHeartExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
 
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay),
                 new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));

@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class PhyrexianObliterator extends CardImpl {
+public final class PhyrexianObliterator extends CardImpl {
 
     public PhyrexianObliterator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}{B}");

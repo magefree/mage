@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class VitalityCharm extends CardImpl {
+public final class VitalityCharm extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Beast");
 

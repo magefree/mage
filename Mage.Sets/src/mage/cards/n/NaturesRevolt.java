@@ -46,7 +46,7 @@ import mage.game.permanent.token.custom.CreatureToken;
  * @author LoneFox
  *
  */
-public class NaturesRevolt extends CardImpl {
+public final class NaturesRevolt extends CardImpl {
 
     public NaturesRevolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");

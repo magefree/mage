@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class StoneGiant extends CardImpl {
+public final class StoneGiant extends CardImpl {
 
     public StoneGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

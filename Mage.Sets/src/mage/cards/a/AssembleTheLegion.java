@@ -44,7 +44,7 @@ import mage.game.permanent.token.SoldierTokenWithHaste;
 *
 * @author LevelX2
 */
-public class AssembleTheLegion extends CardImpl {
+public final class AssembleTheLegion extends CardImpl {
 
     public AssembleTheLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{W}");

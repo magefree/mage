@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class MartyrOfBones extends CardImpl {
+public final class MartyrOfBones extends CardImpl {
 
     private final UUID originalId;
 

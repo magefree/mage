@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class RuneflareTrap extends CardImpl {
+public final class RuneflareTrap extends CardImpl {
 
     public RuneflareTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}{R}");

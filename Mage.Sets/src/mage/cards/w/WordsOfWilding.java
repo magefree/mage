@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class WordsOfWilding extends CardImpl {
+public final class WordsOfWilding extends CardImpl {
 
     public WordsOfWilding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

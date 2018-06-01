@@ -53,7 +53,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author spjspj
  */
-public class ChargingCinderhorn extends CardImpl {
+public final class ChargingCinderhorn extends CardImpl {
 
     public ChargingCinderhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

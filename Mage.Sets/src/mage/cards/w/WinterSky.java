@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class WinterSky extends CardImpl {
+public final class WinterSky extends CardImpl {
 
     public WinterSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

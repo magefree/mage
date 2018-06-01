@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author FenrisulfrX
  */
-public class PaladinOfPrahv extends CardImpl {
+public final class PaladinOfPrahv extends CardImpl {
 
     public PaladinOfPrahv(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

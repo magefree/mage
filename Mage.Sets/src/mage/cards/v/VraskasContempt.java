@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author spjspj
  */
-public class VraskasContempt extends CardImpl {
+public final class VraskasContempt extends CardImpl {
 
     public VraskasContempt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");

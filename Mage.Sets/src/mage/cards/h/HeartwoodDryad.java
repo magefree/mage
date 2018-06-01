@@ -46,7 +46,7 @@ import mage.game.Game;
  *
  * @author fireshoes
  */
-public class HeartwoodDryad extends CardImpl {
+public final class HeartwoodDryad extends CardImpl {
 
     public HeartwoodDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WhirlpoolWhelm extends CardImpl {
+public final class WhirlpoolWhelm extends CardImpl {
 
     public WhirlpoolWhelm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

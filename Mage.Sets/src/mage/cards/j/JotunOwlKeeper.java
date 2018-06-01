@@ -46,7 +46,7 @@ import mage.game.permanent.token.BirdToken;
  *
  * @author TheElk801
  */
-public class JotunOwlKeeper extends CardImpl {
+public final class JotunOwlKeeper extends CardImpl {
 
     public JotunOwlKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

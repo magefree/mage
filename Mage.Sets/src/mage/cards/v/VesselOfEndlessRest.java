@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInGraveyard;
 /**
  * @author noxx
  */
-public class VesselOfEndlessRest extends CardImpl {
+public final class VesselOfEndlessRest extends CardImpl {
 
     public VesselOfEndlessRest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

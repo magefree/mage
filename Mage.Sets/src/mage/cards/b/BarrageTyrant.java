@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class BarrageTyrant extends CardImpl {
+public final class BarrageTyrant extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another colorless creature");
 

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SurgingSentinels extends CardImpl {
+public final class SurgingSentinels extends CardImpl {
 
     public SurgingSentinels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

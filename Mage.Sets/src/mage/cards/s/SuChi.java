@@ -42,7 +42,7 @@ import mage.constants.SubType;
  * @author LoneFox
  *
  */
-public class SuChi extends CardImpl {
+public final class SuChi extends CardImpl {
 
     public SuChi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

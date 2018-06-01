@@ -41,7 +41,7 @@ import mage.game.permanent.token.IxalanVampireToken;
  *
  * @author L_J
  */
-public class MartyrOfDusk extends CardImpl {
+public final class MartyrOfDusk extends CardImpl {
 
     public MartyrOfDusk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

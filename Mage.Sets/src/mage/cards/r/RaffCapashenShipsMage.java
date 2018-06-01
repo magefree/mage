@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.HistoricPredicate;
  *
  * @author TheElk801
  */
-public class RaffCapashenShipsMage extends CardImpl {
+public final class RaffCapashenShipsMage extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("historic spells");
 

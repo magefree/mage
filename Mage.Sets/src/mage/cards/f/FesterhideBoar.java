@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class FesterhideBoar extends CardImpl {
+public final class FesterhideBoar extends CardImpl {
 
     public FesterhideBoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

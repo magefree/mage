@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class VedalkenGhoul extends CardImpl {
+public final class VedalkenGhoul extends CardImpl {
 
     public VedalkenGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");

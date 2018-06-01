@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class ScarscaleRitual extends CardImpl {
+public final class ScarscaleRitual extends CardImpl {
 
     public ScarscaleRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U/B}");

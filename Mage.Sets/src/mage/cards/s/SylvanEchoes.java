@@ -41,7 +41,7 @@ import mage.game.events.GameEvent;
  *
  * @author Styxo
  */
-public class SylvanEchoes extends CardImpl {
+public final class SylvanEchoes extends CardImpl {
 
     public SylvanEchoes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

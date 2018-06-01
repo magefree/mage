@@ -56,7 +56,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author BetaSteward
  */
-public class WerewolfRansacker extends CardImpl {
+public final class WerewolfRansacker extends CardImpl {
 
     public WerewolfRansacker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

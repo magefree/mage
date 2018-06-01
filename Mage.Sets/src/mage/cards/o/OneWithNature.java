@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class OneWithNature extends CardImpl {
+public final class OneWithNature extends CardImpl {
 
     public OneWithNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
@@ -64,7 +64,7 @@ public class OneWithNature extends CardImpl {
 
         // Whenever enchanted creature deals combat damage to a player, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, Outcome.PutLandInPlay)
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, Outcome.PutLandInPlay)
                         .setText("you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library."),
                 "enchanted creature", true, false, true, TargetController.ANY);
         this.addAbility(ability);

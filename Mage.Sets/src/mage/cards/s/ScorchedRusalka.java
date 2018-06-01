@@ -48,7 +48,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class ScorchedRusalka extends CardImpl {
+public final class ScorchedRusalka extends CardImpl {
 
     public ScorchedRusalka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

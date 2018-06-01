@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class PhyrexianInfiltrator extends CardImpl {
+public final class PhyrexianInfiltrator extends CardImpl {
 
     public PhyrexianInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

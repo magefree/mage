@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author spjspj
  */
-public class SeerOfTheLastTomorrow extends CardImpl {
+public final class SeerOfTheLastTomorrow extends CardImpl {
 
     public SeerOfTheLastTomorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

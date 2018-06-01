@@ -35,7 +35,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class RagavanToken extends TokenImpl {
+public final class RagavanToken extends TokenImpl {
 
     public RagavanToken() {
         super("Ragavan", "legendary 2/1 red Monkey creature token named Ragavan");

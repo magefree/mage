@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class AetherTradewinds extends CardImpl {
+public final class AetherTradewinds extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you don't control");
 

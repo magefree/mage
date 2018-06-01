@@ -66,7 +66,7 @@ import mage.watchers.common.BlockedAttackerWatcher;
 *               they remain on the battlefield.
  */
 
-public class TheWretched extends CardImpl {
+public final class TheWretched extends CardImpl {
 
     public TheWretched(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

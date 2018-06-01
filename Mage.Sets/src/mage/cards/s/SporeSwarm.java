@@ -38,7 +38,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author TheElk801
  */
-public class SporeSwarm extends CardImpl {
+public final class SporeSwarm extends CardImpl {
 
     public SporeSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");

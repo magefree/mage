@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class DecreeOfAnnihilation extends CardImpl {
+public final class DecreeOfAnnihilation extends CardImpl {
 
     public DecreeOfAnnihilation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{R}{R}");

@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Propaganda extends CardImpl {
+public final class Propaganda extends CardImpl {
 
     public Propaganda(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

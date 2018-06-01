@@ -53,7 +53,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class DirtyWererat extends CardImpl {
+public final class DirtyWererat extends CardImpl {
 
     public DirtyWererat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

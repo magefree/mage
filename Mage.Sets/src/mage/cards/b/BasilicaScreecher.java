@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BasilicaScreecher extends CardImpl {
+public final class BasilicaScreecher extends CardImpl {
 
     public BasilicaScreecher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

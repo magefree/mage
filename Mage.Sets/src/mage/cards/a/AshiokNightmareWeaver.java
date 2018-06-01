@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AshiokNightmareWeaver extends CardImpl {
+public final class AshiokNightmareWeaver extends CardImpl {
 
     public AshiokNightmareWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}");

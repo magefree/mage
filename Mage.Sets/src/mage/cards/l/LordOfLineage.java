@@ -49,7 +49,7 @@ import mage.game.permanent.token.VampireToken;
  *
  * @author Loki
  */
-public class LordOfLineage extends CardImpl {
+public final class LordOfLineage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Vampire creatures");
 

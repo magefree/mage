@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class MossDiamond extends CardImpl {
+public final class MossDiamond extends CardImpl {
 
     public MossDiamond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

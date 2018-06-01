@@ -54,7 +54,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward
  */
-public class ShrineOfBurningRage extends CardImpl {
+public final class ShrineOfBurningRage extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a red spell");
 
     static {

@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ArchangelOfTithes extends CardImpl {
+public final class ArchangelOfTithes extends CardImpl {
 
     public ArchangelOfTithes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{W}");

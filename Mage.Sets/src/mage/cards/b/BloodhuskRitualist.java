@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class BloodhuskRitualist extends CardImpl {
+public final class BloodhuskRitualist extends CardImpl {
 
     public BloodhuskRitualist (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author LoneFox
 
  */
-public class LlanowarSentinel extends CardImpl {
+public final class LlanowarSentinel extends CardImpl {
 
     public LlanowarSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

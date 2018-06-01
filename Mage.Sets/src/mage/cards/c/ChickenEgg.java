@@ -50,7 +50,7 @@ import java.util.UUID;
  * @author ciaccona007
  */
 
-public class ChickenEgg extends CardImpl {
+public final class ChickenEgg extends CardImpl {
 
     public ChickenEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

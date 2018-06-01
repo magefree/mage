@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class WantedScoundrels extends CardImpl {
+public final class WantedScoundrels extends CardImpl {
 
     public WantedScoundrels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

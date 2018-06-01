@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class MarchOfTheDrowned extends CardImpl {
+public final class MarchOfTheDrowned extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Pirate cards from your graveyard");
 

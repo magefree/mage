@@ -50,7 +50,7 @@ import mage.watchers.common.BlockedAttackerWatcher;
  *
  * @author LevelX2
  */
-public class VenomousBreath extends CardImpl {
+public final class VenomousBreath extends CardImpl {
 
     public VenomousBreath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");

@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class CaptureOfJingzhou extends CardImpl {
+public final class CaptureOfJingzhou extends CardImpl {
 
     public CaptureOfJingzhou(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

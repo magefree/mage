@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class ShriekingAffliction extends CardImpl {
+public final class ShriekingAffliction extends CardImpl {
 
     static final String rule = "At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life";
 

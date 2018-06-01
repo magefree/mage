@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class CausticRain extends CardImpl {
+public final class CausticRain extends CardImpl {
 
     public CausticRain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

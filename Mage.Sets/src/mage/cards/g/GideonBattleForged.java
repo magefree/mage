@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GideonBattleForged extends CardImpl {
+public final class GideonBattleForged extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

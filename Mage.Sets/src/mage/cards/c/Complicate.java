@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class Complicate extends CardImpl {
+public final class Complicate extends CardImpl {
 
     public Complicate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

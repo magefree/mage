@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class AccorderPaladin extends CardImpl {
+public final class AccorderPaladin extends CardImpl {
 
     public AccorderPaladin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

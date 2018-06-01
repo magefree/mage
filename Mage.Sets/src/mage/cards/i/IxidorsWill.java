@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author Quercitron
  */
-public class IxidorsWill extends CardImpl {
+public final class IxidorsWill extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent(SubType.WIZARD, "Wizard");
 

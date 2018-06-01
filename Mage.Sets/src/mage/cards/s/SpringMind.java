@@ -43,14 +43,14 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class SpringMind extends SplitCard {
+public final class SpringMind extends SplitCard {
 
     public SpringMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.INSTANT}, "{2}{G}", "{4}{U}{U}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Spring
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        getLeftHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        getLeftHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
 
         // Mind
         // Aftermath

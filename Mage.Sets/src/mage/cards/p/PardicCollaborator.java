@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class PardicCollaborator extends CardImpl {
+public final class PardicCollaborator extends CardImpl {
 
     public PardicCollaborator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

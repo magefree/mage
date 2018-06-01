@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author L_J
  */
-public class KjeldoranWarCry extends CardImpl {
+public final class KjeldoranWarCry extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards named Kjeldoran War Cry");
 

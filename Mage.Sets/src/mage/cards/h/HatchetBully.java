@@ -54,7 +54,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class HatchetBully extends CardImpl {
+public final class HatchetBully extends CardImpl {
 
     public HatchetBully(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

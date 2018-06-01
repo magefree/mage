@@ -60,7 +60,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class JabbaTheHutt extends CardImpl {
+public final class JabbaTheHutt extends CardImpl {
 
     private static final FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("creature an opponent control with a bounty counter on it");
 

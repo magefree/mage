@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class GitaxianProbe extends CardImpl {
+public final class GitaxianProbe extends CardImpl {
 
     public GitaxianProbe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U/P}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author michael.napoleon@gmail.com
  */
-public class ExplosiveGrowth extends CardImpl {
+public final class ExplosiveGrowth extends CardImpl {
 
     public ExplosiveGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

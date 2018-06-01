@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FatedInfatuation extends CardImpl {
+public final class FatedInfatuation extends CardImpl {
 
     public FatedInfatuation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}{U}");

@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class StartYourEngines extends CardImpl {
+public final class StartYourEngines extends CardImpl {
 
     public StartYourEngines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

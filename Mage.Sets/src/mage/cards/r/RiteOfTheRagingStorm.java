@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class RiteOfTheRagingStorm extends CardImpl {
+public final class RiteOfTheRagingStorm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures named Lightning Rager");
 

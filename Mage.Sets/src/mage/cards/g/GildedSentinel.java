@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class GildedSentinel extends CardImpl {
+public final class GildedSentinel extends CardImpl {
 
     public GildedSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

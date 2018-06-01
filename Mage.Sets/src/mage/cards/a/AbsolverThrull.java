@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 *
 * @author LevelX2
 */
-public class AbsolverThrull extends CardImpl {
+public final class AbsolverThrull extends CardImpl {
 
     public AbsolverThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

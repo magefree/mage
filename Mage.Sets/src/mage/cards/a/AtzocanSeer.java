@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author L_J
  */
-public class AtzocanSeer extends CardImpl {
+public final class AtzocanSeer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Dinosaur from your graveyard");
     

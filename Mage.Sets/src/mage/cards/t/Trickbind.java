@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class Trickbind extends CardImpl {
+public final class Trickbind extends CardImpl {
 
     public Trickbind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

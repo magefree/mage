@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class PullingTeeth extends CardImpl {
+public final class PullingTeeth extends CardImpl {
 
     public PullingTeeth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

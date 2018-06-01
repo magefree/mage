@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class SegmentedWurm extends CardImpl {
+public final class SegmentedWurm extends CardImpl {
 
     public SegmentedWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");

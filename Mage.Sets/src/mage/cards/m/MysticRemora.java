@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TGower
  */
-public class MysticRemora extends CardImpl {
+public final class MysticRemora extends CardImpl {
 
     public MysticRemora(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

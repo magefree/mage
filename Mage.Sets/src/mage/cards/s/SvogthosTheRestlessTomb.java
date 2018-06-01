@@ -51,7 +51,7 @@ import mage.game.permanent.token.Token;
  *
  * @author anonymous
  */
-public class SvogthosTheRestlessTomb extends CardImpl {
+public final class SvogthosTheRestlessTomb extends CardImpl {
 
     public SvogthosTheRestlessTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

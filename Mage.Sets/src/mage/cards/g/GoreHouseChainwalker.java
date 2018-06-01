@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class GoreHouseChainwalker extends CardImpl {
+public final class GoreHouseChainwalker extends CardImpl {
  
     public GoreHouseChainwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author emerald000
  */
-public class LanternOfInsight extends CardImpl {
+public final class LanternOfInsight extends CardImpl {
 
     public LanternOfInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

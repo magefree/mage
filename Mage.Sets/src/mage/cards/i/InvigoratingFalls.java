@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LoneFox
  */
-public class InvigoratingFalls extends CardImpl {
+public final class InvigoratingFalls extends CardImpl {
 
     public InvigoratingFalls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");

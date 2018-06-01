@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class BloodiedGhost extends CardImpl {
+public final class BloodiedGhost extends CardImpl {
 
     public BloodiedGhost (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/B}{W/B}");

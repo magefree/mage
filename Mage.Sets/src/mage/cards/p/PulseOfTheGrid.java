@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class PulseOfTheGrid extends CardImpl {
+public final class PulseOfTheGrid extends CardImpl {
 
     public PulseOfTheGrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class DenyReality extends CardImpl {
+public final class DenyReality extends CardImpl {
 
     public DenyReality (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{B}");

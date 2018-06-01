@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class SwornGuardian extends CardImpl {
+public final class SwornGuardian extends CardImpl {
 
     public SwornGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

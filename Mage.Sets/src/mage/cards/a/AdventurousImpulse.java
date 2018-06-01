@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author tcontis
  */
-public class AdventurousImpulse extends CardImpl {
+public final class AdventurousImpulse extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature or land card");
 

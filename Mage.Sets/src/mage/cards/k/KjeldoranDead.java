@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author Quercitron
  */
-public class KjeldoranDead extends CardImpl {
+public final class KjeldoranDead extends CardImpl {
 
     public KjeldoranDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

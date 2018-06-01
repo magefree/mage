@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class JaceCunningCastaway extends CardImpl {
+public final class JaceCunningCastaway extends CardImpl {
 
     public JaceCunningCastaway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GuardianOfPilgrims extends CardImpl {
+public final class GuardianOfPilgrims extends CardImpl {
 
     public GuardianOfPilgrims(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

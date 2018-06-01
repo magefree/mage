@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SavageAlliance extends CardImpl {
+public final class SavageAlliance extends CardImpl {
 
     private static final FilterPlayer filterPlayer = new FilterPlayer("player whose creatures gain trample");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to deal 2 damage to");

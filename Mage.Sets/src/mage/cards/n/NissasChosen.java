@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author maurer.it_at_gmail.com
  */
-public class NissasChosen extends CardImpl {
+public final class NissasChosen extends CardImpl {
 
     public NissasChosen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

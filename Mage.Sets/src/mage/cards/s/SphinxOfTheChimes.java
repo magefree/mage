@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class SphinxOfTheChimes extends CardImpl {
+public final class SphinxOfTheChimes extends CardImpl {
 
     public SphinxOfTheChimes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

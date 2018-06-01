@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class IshaiOjutaiDragonspeaker extends CardImpl {
+public final class IshaiOjutaiDragonspeaker extends CardImpl {
 
     public IshaiOjutaiDragonspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

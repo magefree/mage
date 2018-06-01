@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class HollowbornBarghest extends CardImpl {
+public final class HollowbornBarghest extends CardImpl {
 
     private static final String rule = "At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.";
 

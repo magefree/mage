@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Galatolol
  */
-public class FledglingOsprey extends CardImpl {
+public final class FledglingOsprey extends CardImpl {
 
     public FledglingOsprey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");

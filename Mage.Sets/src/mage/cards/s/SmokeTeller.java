@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SmokeTeller extends CardImpl {
+public final class SmokeTeller extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature");
 

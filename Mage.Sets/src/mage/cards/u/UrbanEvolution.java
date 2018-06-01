@@ -40,7 +40,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class UrbanEvolution extends CardImpl {
+public final class UrbanEvolution extends CardImpl {
 
     public UrbanEvolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{U}");

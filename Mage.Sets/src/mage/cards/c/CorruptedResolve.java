@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class CorruptedResolve extends CardImpl {
+public final class CorruptedResolve extends CardImpl {
 
     public CorruptedResolve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

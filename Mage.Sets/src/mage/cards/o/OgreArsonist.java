@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
  * @author LoneFox
 
  */
-public class OgreArsonist extends CardImpl {
+public final class OgreArsonist extends CardImpl {
 
     public OgreArsonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

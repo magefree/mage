@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author LevelX2
  */
-public class TuskguardCaptain extends CardImpl {
+public final class TuskguardCaptain extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

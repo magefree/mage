@@ -45,7 +45,7 @@ import mage.constants.Zone;
  * @author KholdFuzion
 
  */
-public class WallOfWater extends CardImpl {
+public final class WallOfWater extends CardImpl {
 
     public WallOfWater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

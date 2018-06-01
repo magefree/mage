@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class DroidCommando extends CardImpl {
+public final class DroidCommando extends CardImpl {
 
     public DroidCommando(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");

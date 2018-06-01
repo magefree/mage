@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author JayDi85
  */
-public class DireFleetNeckbreaker extends CardImpl {
+public final class DireFleetNeckbreaker extends CardImpl {
 
     private static final FilterAttackingCreature filterYourAttackingPirates = new FilterAttackingCreature("Attacking Pirates");
     static {

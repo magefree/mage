@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class MoonscarredWerewolf extends CardImpl {
+public final class MoonscarredWerewolf extends CardImpl {
 
     public MoonscarredWerewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

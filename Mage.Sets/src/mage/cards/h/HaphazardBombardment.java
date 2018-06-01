@@ -59,7 +59,7 @@ import mage.util.RandomUtil;
  *
  * @author LevelX2
  */
-public class HaphazardBombardment extends CardImpl {
+public final class HaphazardBombardment extends CardImpl {
 
     public HaphazardBombardment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");

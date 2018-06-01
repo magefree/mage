@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SpellgorgerBarbarian extends CardImpl {
+public final class SpellgorgerBarbarian extends CardImpl {
 
     public SpellgorgerBarbarian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

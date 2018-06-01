@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class AshenMonstrosity extends CardImpl {
+public final class AshenMonstrosity extends CardImpl {
 
     public AshenMonstrosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

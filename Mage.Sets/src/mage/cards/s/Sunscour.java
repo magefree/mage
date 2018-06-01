@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author andyfries
  */
-public class Sunscour extends CardImpl {
+public final class Sunscour extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("two white cards");
 

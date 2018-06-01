@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GoblinWardriver extends CardImpl {
+public final class GoblinWardriver extends CardImpl {
 
     public GoblinWardriver (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");

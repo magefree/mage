@@ -48,7 +48,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author LevelX2
  */
-public class CourtHussar extends CardImpl {
+public final class CourtHussar extends CardImpl {
 
     public CourtHussar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

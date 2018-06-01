@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SkeletonKey extends CardImpl {
+public final class SkeletonKey extends CardImpl {
 
     public SkeletonKey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

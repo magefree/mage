@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class Simoon extends CardImpl {
+public final class Simoon extends CardImpl {
 
     public Simoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");

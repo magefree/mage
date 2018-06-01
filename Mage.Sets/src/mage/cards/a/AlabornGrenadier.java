@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class AlabornGrenadier extends CardImpl {
+public final class AlabornGrenadier extends CardImpl {
 
     public AlabornGrenadier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author spjspj
  */
-public class ChandrasPyrohelix extends CardImpl {
+public final class ChandrasPyrohelix extends CardImpl {
 
     public ChandrasPyrohelix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

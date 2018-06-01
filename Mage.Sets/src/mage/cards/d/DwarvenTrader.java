@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DwarvenTrader extends CardImpl {
+public final class DwarvenTrader extends CardImpl {
 
     public DwarvenTrader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

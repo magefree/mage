@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AuguryOwl extends CardImpl {
+public final class AuguryOwl extends CardImpl {
 
     public AuguryOwl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class FloralSpuzzem extends CardImpl {
+public final class FloralSpuzzem extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact defending player controls");
 

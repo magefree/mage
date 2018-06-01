@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class HedronMatrix extends CardImpl {
+public final class HedronMatrix extends CardImpl {
 
     public HedronMatrix (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

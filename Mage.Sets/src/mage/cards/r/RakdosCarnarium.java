@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledPermanent;
 /**
  * @author Loki
  */
-public class RakdosCarnarium extends CardImpl {
+public final class RakdosCarnarium extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

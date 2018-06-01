@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class Ghostway extends CardImpl {
+public final class Ghostway extends CardImpl {
 
     public Ghostway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

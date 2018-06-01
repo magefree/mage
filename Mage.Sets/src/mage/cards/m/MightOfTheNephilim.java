@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class MightOfTheNephilim extends CardImpl {
+public final class MightOfTheNephilim extends CardImpl {
 
     public MightOfTheNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

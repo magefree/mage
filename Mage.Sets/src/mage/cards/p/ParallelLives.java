@@ -39,7 +39,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward
  */
-public class ParallelLives extends CardImpl {
+public final class ParallelLives extends CardImpl {
 
     public ParallelLives(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

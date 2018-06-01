@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LoneFox
  */
-public class FenStalker extends CardImpl {
+public final class FenStalker extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 

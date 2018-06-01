@@ -46,14 +46,14 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class WayfarersBauble extends CardImpl {
+public final class WayfarersBauble extends CardImpl {
 
     public WayfarersBauble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {2}, {tap}, Sacrifice Wayfarer's Bauble: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD),true, true, Outcome.PutLandInPlay), new GenericManaCost(2));
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND),true, true, Outcome.PutLandInPlay), new GenericManaCost(2));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

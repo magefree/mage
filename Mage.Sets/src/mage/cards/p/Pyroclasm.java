@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Pyroclasm extends CardImpl {
+public final class Pyroclasm extends CardImpl {
 
     public Pyroclasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

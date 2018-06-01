@@ -47,7 +47,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author spjspj
  */
-public class LudevicNecroAlchemist extends CardImpl {
+public final class LudevicNecroAlchemist extends CardImpl {
 
     public LudevicNecroAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
@@ -76,7 +76,7 @@ public class LudevicNecroAlchemist extends CardImpl {
 }
 
 class LudevicNecroAlchemistCondition implements Condition {
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
@@ -85,13 +85,14 @@ class LudevicNecroAlchemistCondition implements Condition {
         Player currentPlayer = null;
         UUID sourcePlayerId = source.getControllerId();
         Player firstPlayer = null;
-        if (playerList != null) {
-            firstPlayer = playerList.getCurrent(game);
-            currentPlayer = playerList.getNext(game);
+        if (playerList == null) {
+            return false;
         }
+        firstPlayer = playerList.getCurrent(game);
+        currentPlayer = playerList.getNext(game);
 
         while (watcher != null && currentPlayer != null) {
-            if (currentPlayer != null && !Objects.equals(currentPlayer.getId(), sourcePlayerId) && watcher.getLiveLost(currentPlayer.getId()) > 0) {
+            if (!Objects.equals(currentPlayer.getId(), sourcePlayerId) && watcher.getLiveLost(currentPlayer.getId()) > 0) {
                 return true;
             }
             if (Objects.equals(currentPlayer, firstPlayer)) {

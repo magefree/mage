@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RadiantFlames extends CardImpl {
+public final class RadiantFlames extends CardImpl {
 
     public RadiantFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

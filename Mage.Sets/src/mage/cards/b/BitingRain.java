@@ -40,7 +40,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class BitingRain extends CardImpl {
+public final class BitingRain extends CardImpl {
 
     public BitingRain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

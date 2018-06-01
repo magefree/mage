@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class PriestOfTheWakeningSun extends CardImpl {
+public final class PriestOfTheWakeningSun extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Dinosaur card");
 

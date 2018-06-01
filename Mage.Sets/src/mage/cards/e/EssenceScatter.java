@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class EssenceScatter extends CardImpl {
+public final class EssenceScatter extends CardImpl {
 
     public EssenceScatter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

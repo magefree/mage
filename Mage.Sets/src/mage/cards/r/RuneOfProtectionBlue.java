@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Backfir3
  */
-public class RuneOfProtectionBlue extends CardImpl {
+public final class RuneOfProtectionBlue extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("blue source");
     static {

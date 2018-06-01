@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class GhostCouncilOfOrzhova extends CardImpl {
+public final class GhostCouncilOfOrzhova extends CardImpl {
 
     public GhostCouncilOfOrzhova(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}{B}{B}");

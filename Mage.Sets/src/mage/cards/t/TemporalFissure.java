@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class TemporalFissure extends CardImpl {
+public final class TemporalFissure extends CardImpl {
 
     public TemporalFissure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");

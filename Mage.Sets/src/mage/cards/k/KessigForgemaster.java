@@ -49,7 +49,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class KessigForgemaster extends CardImpl {
+public final class KessigForgemaster extends CardImpl {
 
     public KessigForgemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

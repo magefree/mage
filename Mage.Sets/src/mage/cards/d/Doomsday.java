@@ -44,7 +44,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class Doomsday extends CardImpl {
+public final class Doomsday extends CardImpl {
 
     public Doomsday(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");

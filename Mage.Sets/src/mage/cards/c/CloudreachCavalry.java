@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class CloudreachCavalry extends CardImpl {
+public final class CloudreachCavalry extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
 

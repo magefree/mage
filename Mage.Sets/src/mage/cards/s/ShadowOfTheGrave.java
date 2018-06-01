@@ -44,7 +44,7 @@ import mage.watchers.common.CardsCycledOrDiscardedThisTurnWatcher;
  *
  * @author jeffwadsworth
  */
-public class ShadowOfTheGrave extends CardImpl {
+public final class ShadowOfTheGrave extends CardImpl {
 
     public ShadowOfTheGrave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

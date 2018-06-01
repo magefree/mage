@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author TheElk801
  */
-public class SigilOfTheNewDawn extends CardImpl {
+public final class SigilOfTheNewDawn extends CardImpl {
 
     public SigilOfTheNewDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

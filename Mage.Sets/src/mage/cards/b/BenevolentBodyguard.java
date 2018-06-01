@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class BenevolentBodyguard extends CardImpl {
+public final class BenevolentBodyguard extends CardImpl {
 
     public BenevolentBodyguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

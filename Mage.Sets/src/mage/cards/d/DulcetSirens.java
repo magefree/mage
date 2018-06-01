@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class DulcetSirens extends CardImpl {
+public final class DulcetSirens extends CardImpl {
 
     public DulcetSirens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class DwarvenRuins extends CardImpl {
+public final class DwarvenRuins extends CardImpl {
 
     public DwarvenRuins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class BloodOath extends CardImpl {
+public final class BloodOath extends CardImpl {
 
     public BloodOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");

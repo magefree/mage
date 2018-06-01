@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class GameDay extends ExpansionSet {
+public final class GameDay extends ExpansionSet {
 
     private static final GameDay instance = new GameDay();
 

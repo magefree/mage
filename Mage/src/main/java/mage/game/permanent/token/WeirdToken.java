@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class WeirdToken extends TokenImpl {
+public final class WeirdToken extends TokenImpl {
 
     public WeirdToken() {
         super("Weird", "3/3 blue Weird create token with defender and flying");

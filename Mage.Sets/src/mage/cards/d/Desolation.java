@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  *
  * @author L_J
  */
-public class Desolation extends CardImpl {
+public final class Desolation extends CardImpl {
 
     public Desolation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
@@ -148,7 +148,10 @@ class DesolationWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                tappedForManaThisTurnPlayers.add(playerId);
+                Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+                if (permanent != null && permanent.isLand()) {
+                    tappedForManaThisTurnPlayers.add(playerId);
+                }
             }
         }
     }

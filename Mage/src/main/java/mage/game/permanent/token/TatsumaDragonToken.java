@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class TatsumaDragonToken extends TokenImpl {
+public final class TatsumaDragonToken extends TokenImpl {
 
     public TatsumaDragonToken() {
         super("Dragon Spirit", "5/5 blue Dragon Spirit creature token with flying");

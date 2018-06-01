@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class EiganjoCastle extends CardImpl {
+public final class EiganjoCastle extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 

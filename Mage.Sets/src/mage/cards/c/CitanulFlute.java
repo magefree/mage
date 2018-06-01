@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class CitanulFlute extends CardImpl {
+public final class CitanulFlute extends CardImpl {
 
     public CitanulFlute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class UltimatePrice extends CardImpl {
+public final class UltimatePrice extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
 

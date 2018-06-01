@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ForceOfSavagery extends CardImpl {
+public final class ForceOfSavagery extends CardImpl {
 
     public ForceOfSavagery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

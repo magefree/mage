@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class UnholyHunger extends CardImpl {
+public final class UnholyHunger extends CardImpl {
 
     public UnholyHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");

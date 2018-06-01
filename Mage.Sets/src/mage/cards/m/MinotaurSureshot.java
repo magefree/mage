@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MinotaurSureshot extends CardImpl {
+public final class MinotaurSureshot extends CardImpl {
 
     public MinotaurSureshot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

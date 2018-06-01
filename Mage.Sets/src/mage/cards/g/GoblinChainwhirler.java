@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Will
  */
-public class GoblinChainwhirler extends CardImpl {
+public final class GoblinChainwhirler extends CardImpl {
 
     final static FilterPermanent filter = new FilterPermanent("creatures and planeswalkers your opponents control");
     

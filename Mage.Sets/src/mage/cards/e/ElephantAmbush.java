@@ -41,7 +41,7 @@ import mage.game.permanent.token.ElephantToken;
  *
  * @author LevelX2
  */
-public class ElephantAmbush extends CardImpl {
+public final class ElephantAmbush extends CardImpl {
 
     public ElephantAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}");

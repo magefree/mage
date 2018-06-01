@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WhiskAway extends CardImpl {
+public final class WhiskAway extends CardImpl {
     
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature();
 

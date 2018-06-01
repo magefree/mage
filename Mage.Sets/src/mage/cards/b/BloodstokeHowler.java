@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class BloodstokeHowler extends CardImpl {
+public final class BloodstokeHowler extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creatures you control");
 

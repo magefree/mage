@@ -47,7 +47,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  * @author jeffwadsworth
  *
  */
-public class UnnervingAssault extends CardImpl {
+public final class UnnervingAssault extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures you control");

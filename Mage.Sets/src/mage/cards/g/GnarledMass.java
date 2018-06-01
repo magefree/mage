@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GnarledMass extends CardImpl {
+public final class GnarledMass extends CardImpl {
 
     public GnarledMass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

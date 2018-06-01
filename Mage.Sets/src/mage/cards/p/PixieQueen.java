@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author hanasu
  */
-public class PixieQueen extends CardImpl {
+public final class PixieQueen extends CardImpl {
 
     public PixieQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class WeirdingWood extends CardImpl {
+public final class WeirdingWood extends CardImpl {
 
     public WeirdingWood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

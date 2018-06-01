@@ -44,7 +44,7 @@ import mage.watchers.common.BlockedAttackerWatcher;
  *
  * @author jeffwadsworth
  */
-public class HuntDown extends CardImpl {
+public final class HuntDown extends CardImpl {
     
     private static final FilterCreaturePermanent filterMustBlock = new FilterCreaturePermanent("Creature that must block");
     private static final FilterCreaturePermanent filterToBeBlocked = new FilterCreaturePermanent("Creature that is to be blocked");

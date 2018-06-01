@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jonubuu
  */
-public class ConclavePhalanx extends CardImpl {
+public final class ConclavePhalanx extends CardImpl {
 
     public ConclavePhalanx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

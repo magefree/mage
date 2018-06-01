@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class ThranLens extends CardImpl {
+public final class ThranLens extends CardImpl {
 
     public ThranLens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

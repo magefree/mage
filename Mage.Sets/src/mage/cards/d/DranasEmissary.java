@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class DranasEmissary extends CardImpl {
+public final class DranasEmissary extends CardImpl {
 
     public DranasEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");

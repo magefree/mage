@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class KariZevsExpertise extends CardImpl {
+public final class KariZevsExpertise extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
 

@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author Plopman
  */
-public class ViashinoSandscout extends CardImpl {
+public final class ViashinoSandscout extends CardImpl {
 
     public ViashinoSandscout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

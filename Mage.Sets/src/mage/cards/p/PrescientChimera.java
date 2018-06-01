@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class PrescientChimera extends CardImpl {
+public final class PrescientChimera extends CardImpl {
 
     public PrescientChimera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

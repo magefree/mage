@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class BloodfireEnforcers extends CardImpl {
+public final class BloodfireEnforcers extends CardImpl {
 
     public BloodfireEnforcers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

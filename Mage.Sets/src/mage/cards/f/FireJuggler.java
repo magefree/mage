@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
  *
  * @author BursegSardaukar
  */
-public class FireJuggler extends CardImpl {
+public final class FireJuggler extends CardImpl {
     
     public FireJuggler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

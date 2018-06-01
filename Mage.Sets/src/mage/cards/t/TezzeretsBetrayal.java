@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class TezzeretsBetrayal extends CardImpl {
+public final class TezzeretsBetrayal extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Tezzeret, Master of Metal");
 

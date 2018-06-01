@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class RendFlesh extends CardImpl {
+public final class RendFlesh extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Spirit creature");
 

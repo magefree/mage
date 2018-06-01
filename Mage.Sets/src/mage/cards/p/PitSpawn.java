@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author djbrez
  */
-public class PitSpawn extends CardImpl {
+public final class PitSpawn extends CardImpl {
 
     public PitSpawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");

@@ -44,7 +44,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class UlvenwaldMystics extends CardImpl {
+public final class UlvenwaldMystics extends CardImpl {
 
     public UlvenwaldMystics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

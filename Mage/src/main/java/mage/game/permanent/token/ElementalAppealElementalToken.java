@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ElementalAppealElementalToken extends TokenImpl {
+public final class ElementalAppealElementalToken extends TokenImpl {
 
     public ElementalAppealElementalToken() {
         super("Elemental", "7/1 red Elemental creature token with trample and haste");

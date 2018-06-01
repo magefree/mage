@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class PlanarGuide extends CardImpl {
+public final class PlanarGuide extends CardImpl {
 
     public PlanarGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

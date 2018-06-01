@@ -43,7 +43,7 @@ import mage.watchers.common.LandfallWatcher;
  *
  * @author Viserion
  */
-public class Groundswell extends CardImpl {
+public final class Groundswell extends CardImpl {
 
     public Groundswell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

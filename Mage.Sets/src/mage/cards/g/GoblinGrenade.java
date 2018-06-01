@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author Loki
  */
-public class GoblinGrenade extends CardImpl {
+public final class GoblinGrenade extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
 

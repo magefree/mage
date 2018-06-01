@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author tcontis
  */
-public class TrainedPronghorn extends CardImpl {
+public final class TrainedPronghorn extends CardImpl {
 
     public TrainedPronghorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

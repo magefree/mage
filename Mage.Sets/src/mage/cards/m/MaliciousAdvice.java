@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class MaliciousAdvice extends CardImpl {
+public final class MaliciousAdvice extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, and/or lands");
 

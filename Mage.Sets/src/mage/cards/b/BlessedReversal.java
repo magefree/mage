@@ -42,7 +42,7 @@ import mage.game.combat.CombatGroup;
  *
  * @author North
  */
-public class BlessedReversal extends CardImpl {
+public final class BlessedReversal extends CardImpl {
 
     public BlessedReversal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

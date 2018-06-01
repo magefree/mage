@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class PulsemageAdvocate extends CardImpl {
+public final class PulsemageAdvocate extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards from an opponent's graveyard");
 

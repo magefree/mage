@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author Styxo
  */
-public class SenatorLottDod extends CardImpl {
+public final class SenatorLottDod extends CardImpl {
 
     public SenatorLottDod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");

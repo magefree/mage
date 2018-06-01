@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 /**
  * @author noxx
  */
-public class HarvesterOfSouls extends CardImpl {
+public final class HarvesterOfSouls extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature");
 

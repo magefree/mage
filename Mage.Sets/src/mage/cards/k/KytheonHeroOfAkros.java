@@ -57,7 +57,7 @@ import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
  *
  * @author LevelX2
  */
-public class KytheonHeroOfAkros extends CardImpl {
+public final class KytheonHeroOfAkros extends CardImpl {
 
     public KytheonHeroOfAkros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

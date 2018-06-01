@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Will
  */
-public class WizardsLightning extends CardImpl {
+public final class WizardsLightning extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Wizard");
 

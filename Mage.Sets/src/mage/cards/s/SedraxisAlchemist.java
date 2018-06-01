@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author jeffwadsworth
  */
-public class SedraxisAlchemist extends CardImpl {
+public final class SedraxisAlchemist extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("blue permanent");
 

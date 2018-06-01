@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Quercitron
  */
-public class SerrasBlessing extends CardImpl {
+public final class SerrasBlessing extends CardImpl {
 
     public SerrasBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

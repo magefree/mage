@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class ChampionOfTheFlame extends CardImpl {
+public final class ChampionOfTheFlame extends CardImpl {
 
     public ChampionOfTheFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

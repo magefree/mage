@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LostSoul extends CardImpl {
+public final class LostSoul extends CardImpl {
 
     public LostSoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

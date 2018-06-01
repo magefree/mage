@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SurrakarBanisher extends CardImpl {
+public final class SurrakarBanisher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

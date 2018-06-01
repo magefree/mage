@@ -45,7 +45,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class Shimmer extends CardImpl {
+public final class Shimmer extends CardImpl {
 
     public Shimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

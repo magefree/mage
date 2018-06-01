@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author cbt33
  */
-public class AvenSmokeweaver extends CardImpl {
+public final class AvenSmokeweaver extends CardImpl {
 
     public AvenSmokeweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

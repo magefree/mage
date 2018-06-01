@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CherishedHatchling extends CardImpl {
+public final class CherishedHatchling extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("Dinosaur spells");
 

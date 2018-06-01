@@ -54,7 +54,7 @@ import mage.watchers.common.CastFromGraveyardWatcher;
  *
  * @author LevelX2
  */
-public class JayaBallard extends CardImpl {
+public final class JayaBallard extends CardImpl {
 
     public JayaBallard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}{R}");

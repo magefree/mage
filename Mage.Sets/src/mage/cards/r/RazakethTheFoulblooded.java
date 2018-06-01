@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RazakethTheFoulblooded extends CardImpl {
+public final class RazakethTheFoulblooded extends CardImpl {
 
     public RazakethTheFoulblooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");

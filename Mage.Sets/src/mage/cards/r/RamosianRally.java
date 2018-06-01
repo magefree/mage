@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author JRHerlehy
  */
-public class RamosianRally extends CardImpl {
+public final class RamosianRally extends CardImpl {
 
     private static final FilterControlledPermanent plainsFilter = new FilterControlledPermanent("If you control a Plains");
     private static final FilterControlledCreaturePermanent creatureFilter = new FilterControlledCreaturePermanent("an untapped creature you control");

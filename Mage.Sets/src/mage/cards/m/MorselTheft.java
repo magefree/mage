@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class MorselTheft extends CardImpl {
+public final class MorselTheft extends CardImpl {
 
     public MorselTheft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{2}{B}{B}");

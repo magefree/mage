@@ -45,7 +45,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author LoneFox
  */
-public class UncontrolledInfestation extends CardImpl {
+public final class UncontrolledInfestation extends CardImpl {
     public UncontrolledInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
         this.subtype.add(SubType.AURA);

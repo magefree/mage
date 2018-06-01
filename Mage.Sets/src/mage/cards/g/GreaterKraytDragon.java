@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class GreaterKraytDragon extends CardImpl {
+public final class GreaterKraytDragon extends CardImpl {
 
     public GreaterKraytDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{W}");

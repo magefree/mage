@@ -55,7 +55,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class BudokaPupil extends CardImpl {
+public final class BudokaPupil extends CardImpl {
 
     public BudokaPupil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

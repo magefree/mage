@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author emerald000
  */
-public class MindOverMatter extends CardImpl {
+public final class MindOverMatter extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
     static {

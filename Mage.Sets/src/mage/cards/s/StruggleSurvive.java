@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StruggleSurvive extends SplitCard {
+public final class StruggleSurvive extends SplitCard {
 
     public StruggleSurvive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{2}{R}", "{1}{G}", SpellAbilityType.SPLIT_AFTERMATH);

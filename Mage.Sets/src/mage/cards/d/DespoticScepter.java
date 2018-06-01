@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class DespoticScepter extends CardImpl {
+public final class DespoticScepter extends CardImpl {
 
     private final static FilterPermanent FILTER = new FilterPermanent("permanent you own");
 

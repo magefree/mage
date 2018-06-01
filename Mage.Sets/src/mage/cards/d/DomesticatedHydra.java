@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DomesticatedHydra extends CardImpl {
+public final class DomesticatedHydra extends CardImpl {
 
     public DomesticatedHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

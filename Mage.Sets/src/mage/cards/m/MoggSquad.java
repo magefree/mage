@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author BursegSardaukar
  */
-public class MoggSquad extends CardImpl {
+public final class MoggSquad extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
 

@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class BramblewoodParagon extends CardImpl {
+public final class BramblewoodParagon extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Each creature you control with a +1/+1 counter on it");
 

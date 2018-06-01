@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class Fork extends CardImpl {
+public final class Fork extends CardImpl {
 
 
     public Fork(UUID ownerId, CardSetInfo setInfo) {

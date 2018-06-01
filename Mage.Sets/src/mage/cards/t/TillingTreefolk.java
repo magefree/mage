@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class TillingTreefolk extends CardImpl {
+public final class TillingTreefolk extends CardImpl {
     
     public TillingTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

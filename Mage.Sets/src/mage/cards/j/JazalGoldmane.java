@@ -48,7 +48,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LevelX2
  */
-public class JazalGoldmane extends CardImpl {
+public final class JazalGoldmane extends CardImpl {
 
     public JazalGoldmane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

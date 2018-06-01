@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SwordwiseCentaur extends CardImpl {
+public final class SwordwiseCentaur extends CardImpl {
 
     public SwordwiseCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

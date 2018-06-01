@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JRHerlehy
  */
-public class ArborArmament extends CardImpl {
+public final class ArborArmament extends CardImpl {
 
     public ArborArmament(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

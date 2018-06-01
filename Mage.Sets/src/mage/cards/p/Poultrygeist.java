@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author ciaccona007
  */
-public class Poultrygeist extends CardImpl {
+public final class Poultrygeist extends CardImpl {
 
     public Poultrygeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

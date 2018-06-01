@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author anonymous
  */
-public class ChubToad extends CardImpl {
+public final class ChubToad extends CardImpl {
 
     public ChubToad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

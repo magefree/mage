@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author Loki
  */
-public class Esperzoa extends CardImpl {
+public final class Esperzoa extends CardImpl {
 
     
     public Esperzoa (UUID ownerId, CardSetInfo setInfo) {

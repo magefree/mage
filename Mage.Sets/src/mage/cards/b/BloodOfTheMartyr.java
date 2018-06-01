@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class BloodOfTheMartyr extends CardImpl {
+public final class BloodOfTheMartyr extends CardImpl {
 
     public BloodOfTheMartyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}{W}");

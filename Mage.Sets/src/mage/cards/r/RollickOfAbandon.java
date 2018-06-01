@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class RollickOfAbandon extends CardImpl {
+public final class RollickOfAbandon extends CardImpl {
 
     public RollickOfAbandon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

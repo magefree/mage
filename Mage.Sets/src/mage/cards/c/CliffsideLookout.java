@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CliffsideLookout extends CardImpl {
+public final class CliffsideLookout extends CardImpl {
 
     public CliffsideLookout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

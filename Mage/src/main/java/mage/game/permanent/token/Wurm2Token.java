@@ -36,7 +36,7 @@ import mage.abilities.keyword.LifelinkAbility;
  *
  * @author spjspj
  */
-public class Wurm2Token extends TokenImpl {
+public final class Wurm2Token extends TokenImpl {
 
     public Wurm2Token() {
         this("MBS");

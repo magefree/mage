@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class YargleGluttonOfUrborg extends CardImpl {
+public final class YargleGluttonOfUrborg extends CardImpl {
 
     public YargleGluttonOfUrborg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

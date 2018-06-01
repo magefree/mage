@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class StompingSlabs extends CardImpl {
+public final class StompingSlabs extends CardImpl {
 
     public StompingSlabs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

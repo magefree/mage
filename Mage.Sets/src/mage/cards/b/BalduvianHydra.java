@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class BalduvianHydra extends CardImpl {
+public final class BalduvianHydra extends CardImpl {
 
     public BalduvianHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{R}{R}");

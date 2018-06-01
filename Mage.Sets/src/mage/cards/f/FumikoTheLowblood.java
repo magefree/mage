@@ -48,7 +48,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author LevelX2
  */
-public class FumikoTheLowblood extends CardImpl {
+public final class FumikoTheLowblood extends CardImpl {
 
     public FumikoTheLowblood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

@@ -35,7 +35,7 @@ import mage.abilities.keyword.DeathtouchAbility;
  *
  * @author spjspj
  */
-public class PharikaSnakeToken extends TokenImpl {
+public final class PharikaSnakeToken extends TokenImpl {
 
     public PharikaSnakeToken() {
         super("Snake", "1/1 black and green Snake enchantment creature token with deathtouch", 1, 1);

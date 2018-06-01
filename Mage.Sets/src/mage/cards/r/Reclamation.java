@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class Reclamation extends CardImpl {
+public final class Reclamation extends CardImpl {
 
     public Reclamation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}");

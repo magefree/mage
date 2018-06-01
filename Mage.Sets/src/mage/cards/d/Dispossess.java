@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class Dispossess extends CardImpl {
+public final class Dispossess extends CardImpl {
 
     public Dispossess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

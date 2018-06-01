@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class FarhavenElf extends CardImpl {
+public final class FarhavenElf extends CardImpl {
 
     public FarhavenElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
@@ -54,7 +54,7 @@ public class FarhavenElf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Farhaven Elf enters the battlefield, you may search your library for a basic land card and put it onto the battlefield tapped. If you do, shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, false), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, false), true));
     }
 
     public FarhavenElf(final FarhavenElf card) {

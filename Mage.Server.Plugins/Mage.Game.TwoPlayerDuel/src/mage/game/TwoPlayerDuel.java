@@ -24,19 +24,15 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.game;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
-import mage.players.Player;
 
 public class TwoPlayerDuel extends GameImpl {
 
@@ -64,22 +60,6 @@ public class TwoPlayerDuel extends GameImpl {
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
     }
 
-    @Override
-    public Set<UUID> getOpponents(UUID playerId) {
-        Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
-            if (!opponentId.equals(playerId)) {
-                opponents.add(opponentId);
-            }
-        }
-        return opponents;
-    }
-
-    @Override
-    public boolean isOpponent(Player player, UUID playerToCheck) {
-       return !player.getId().equals(playerToCheck);
-    }
-    
     @Override
     public TwoPlayerDuel copy() {
         return new TwoPlayerDuel(this);

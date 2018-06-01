@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class WallOfDistortion extends CardImpl {
+public final class WallOfDistortion extends CardImpl {
 
     public WallOfDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

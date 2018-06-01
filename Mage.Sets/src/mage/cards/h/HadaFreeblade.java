@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class HadaFreeblade extends CardImpl {
+public final class HadaFreeblade extends CardImpl {
 
     public HadaFreeblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

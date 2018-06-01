@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class ChosenOfMarkov extends CardImpl {
+public final class ChosenOfMarkov extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Vampire you control");
 
     static {

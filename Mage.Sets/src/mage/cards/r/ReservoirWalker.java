@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ReservoirWalker extends CardImpl {
+public final class ReservoirWalker extends CardImpl {
 
     public ReservoirWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

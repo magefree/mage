@@ -65,7 +65,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class InfernalDenizen extends CardImpl {
+public final class InfernalDenizen extends CardImpl {
 
     public InfernalDenizen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{B}");

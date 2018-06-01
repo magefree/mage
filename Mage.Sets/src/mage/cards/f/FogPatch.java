@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class FogPatch extends CardImpl {
+public final class FogPatch extends CardImpl {
 
     public FogPatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class CrypticAnnelid extends CardImpl {
+public final class CrypticAnnelid extends CardImpl {
 
     public CrypticAnnelid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

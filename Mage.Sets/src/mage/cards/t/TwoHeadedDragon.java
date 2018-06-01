@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TwoHeadedDragon extends CardImpl {
+public final class TwoHeadedDragon extends CardImpl {
 
     public TwoHeadedDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

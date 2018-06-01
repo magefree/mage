@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class AkoumBattlesinger extends CardImpl {
+public final class AkoumBattlesinger extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("have Ally creatures");
 

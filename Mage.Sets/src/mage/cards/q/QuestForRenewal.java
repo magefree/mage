@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class QuestForRenewal extends CardImpl {
+public final class QuestForRenewal extends CardImpl {
 
     public QuestForRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

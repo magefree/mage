@@ -40,7 +40,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class FerventCharge extends CardImpl {
+public final class FerventCharge extends CardImpl {
 
     public FerventCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}{B}");

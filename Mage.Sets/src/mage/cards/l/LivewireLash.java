@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class LivewireLash extends CardImpl {
+public final class LivewireLash extends CardImpl {
 
     public LivewireLash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

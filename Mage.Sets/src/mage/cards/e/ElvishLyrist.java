@@ -46,7 +46,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Plopman
  */
-public class ElvishLyrist extends CardImpl {
+public final class ElvishLyrist extends CardImpl {
 
     public ElvishLyrist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

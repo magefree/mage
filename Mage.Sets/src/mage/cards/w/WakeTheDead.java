@@ -59,7 +59,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class WakeTheDead extends CardImpl {
+public final class WakeTheDead extends CardImpl {
 
     public WakeTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}{B}");

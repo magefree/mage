@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class OpalineBracers extends CardImpl {
+public final class OpalineBracers extends CardImpl {
 
     public OpalineBracers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

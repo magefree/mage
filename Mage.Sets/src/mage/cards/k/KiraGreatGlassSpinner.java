@@ -50,7 +50,7 @@ import mage.watchers.common.NumberOfTimesPermanentTargetedATurnWatcher;
  *
  * @author LevelX2
  */
-public class KiraGreatGlassSpinner extends CardImpl {
+public final class KiraGreatGlassSpinner extends CardImpl {
 
     public KiraGreatGlassSpinner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth & L_J
  */
-public class Wishmonger extends CardImpl {
+public final class Wishmonger extends CardImpl {
 
     public Wishmonger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

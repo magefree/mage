@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author FenrisulfrX
  */
-public class EvasiveAction extends CardImpl {
+public final class EvasiveAction extends CardImpl {
 
     public EvasiveAction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

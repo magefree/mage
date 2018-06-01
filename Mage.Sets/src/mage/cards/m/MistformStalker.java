@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class MistformStalker extends CardImpl {
+public final class MistformStalker extends CardImpl {
 
     public MistformStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

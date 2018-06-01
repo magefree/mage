@@ -44,7 +44,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author emerald000
  */
-public class MarduHordechief extends CardImpl {
+public final class MarduHordechief extends CardImpl {
 
     public MarduHordechief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

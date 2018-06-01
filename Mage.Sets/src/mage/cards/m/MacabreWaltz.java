@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author LoneFox
 
  */
-public class MacabreWaltz extends CardImpl {
+public final class MacabreWaltz extends CardImpl {
 
     public MacabreWaltz(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

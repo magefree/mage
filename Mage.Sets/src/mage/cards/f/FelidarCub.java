@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author fireshoes
  */
-public class FelidarCub extends CardImpl {
+public final class FelidarCub extends CardImpl {
 
     public FelidarCub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

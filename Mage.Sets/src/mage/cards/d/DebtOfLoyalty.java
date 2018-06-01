@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Dilnu
  */
-public class DebtOfLoyalty extends CardImpl {
+public final class DebtOfLoyalty extends CardImpl {
 
     public DebtOfLoyalty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class NeedletoothRaptor extends CardImpl {
+public final class NeedletoothRaptor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author LevelX2
  */
-public class Ixidron extends CardImpl {
+public final class Ixidron extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("face-down creatures on the battlefield");
     private static final FilterCreaturePermanent filterTurnFaceDown = new FilterCreaturePermanent("other nontoken creatures");

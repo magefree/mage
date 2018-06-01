@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
 /**
  * @author LevelX2
  */
-public class ArrowVolleyTrap extends CardImpl {
+public final class ArrowVolleyTrap extends CardImpl {
 
     public ArrowVolleyTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");

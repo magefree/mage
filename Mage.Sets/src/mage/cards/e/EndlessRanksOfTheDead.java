@@ -47,7 +47,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author BetaSteward
  */
-public class EndlessRanksOfTheDead extends CardImpl {
+public final class EndlessRanksOfTheDead extends CardImpl {
 
     public EndlessRanksOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");

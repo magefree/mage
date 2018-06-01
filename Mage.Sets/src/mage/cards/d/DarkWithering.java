@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author magenoxx_at_gmail.com
  */
-public class DarkWithering extends CardImpl {
+public final class DarkWithering extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

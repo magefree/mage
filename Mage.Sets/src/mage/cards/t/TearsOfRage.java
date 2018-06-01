@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author LevelX2
  */
-public class TearsOfRage extends CardImpl {
+public final class TearsOfRage extends CardImpl {
 
     public TearsOfRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");

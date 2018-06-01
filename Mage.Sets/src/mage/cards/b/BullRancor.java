@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class BullRancor extends CardImpl {
+public final class BullRancor extends CardImpl {
 
     public BullRancor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{G}{W}");

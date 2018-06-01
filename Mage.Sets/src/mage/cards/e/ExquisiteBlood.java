@@ -41,7 +41,7 @@ import mage.game.events.GameEvent.EventType;
 /**
  * @author noxx
  */
-public class ExquisiteBlood extends CardImpl {
+public final class ExquisiteBlood extends CardImpl {
 
     public ExquisiteBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");

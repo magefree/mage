@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class HideousVisage extends CardImpl {
+public final class HideousVisage extends CardImpl {
 
     public HideousVisage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

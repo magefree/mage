@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class AgentOfStromgald extends CardImpl {
+public final class AgentOfStromgald extends CardImpl {
 
     public AgentOfStromgald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

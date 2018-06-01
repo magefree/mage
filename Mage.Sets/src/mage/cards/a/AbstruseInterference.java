@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class AbstruseInterference extends CardImpl {
+public final class AbstruseInterference extends CardImpl {
 
     public AbstruseInterference(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

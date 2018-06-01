@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class WallOfDeceit extends CardImpl {
+public final class WallOfDeceit extends CardImpl {
 
     public WallOfDeceit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class WestvaleAbbey extends CardImpl {
+public final class WestvaleAbbey extends CardImpl {
 
     public WestvaleAbbey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ciaccona007
  */
-public class HashepOasis extends CardImpl {
+public final class HashepOasis extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Desert");
 

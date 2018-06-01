@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class StrategySchmategy extends CardImpl {
+public final class StrategySchmategy extends CardImpl {
 
     public StrategySchmategy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");

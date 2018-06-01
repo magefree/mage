@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class ReturnToDust extends CardImpl {
+public final class ReturnToDust extends CardImpl {
 
     public ReturnToDust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");

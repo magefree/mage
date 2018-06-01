@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FirewakeSliver extends CardImpl {
+public final class FirewakeSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
     private static final FilterCreaturePermanent targetSliverFilter = new FilterCreaturePermanent("Sliver");

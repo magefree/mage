@@ -68,7 +68,7 @@ import mage.util.CardUtil;
  *
  * @author L_J (based on jeffwadsworth)
  */
-public class IceCauldron extends CardImpl {
+public final class IceCauldron extends CardImpl {
 
     public IceCauldron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
@@ -81,7 +81,7 @@ public class IceCauldron extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {T}, Remove a charge counter from Ice Cauldron: Add Ice Cauldron's last noted type and amount of mana to your mana pool. Spend this mana only to cast the last card exiled with Ice Cauldron.
+        // {T}, Remove a charge counter from Ice Cauldron: Add Ice Cauldron's last noted type and amount of mana. Spend this mana only to cast the last card exiled with Ice Cauldron.
         Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new IceCauldronAddManaEffect(), new TapSourceCost());
         ability2.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability2);
@@ -221,7 +221,7 @@ class IceCauldronAddManaEffect extends ManaEffect {
 
     IceCauldronAddManaEffect() {
         super();
-        staticText = "Add {this}'s last noted type and amount of mana to your mana pool. Spend this mana only to cast the last card exiled with {this}";
+        staticText = "Add {this}'s last noted type and amount of mana. Spend this mana only to cast the last card exiled with {this}";
     }
 
     IceCauldronAddManaEffect(IceCauldronAddManaEffect effect) {

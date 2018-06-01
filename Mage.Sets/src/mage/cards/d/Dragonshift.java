@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Dragonshift extends CardImpl {
+public final class Dragonshift extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all creatures you controls");
     static {

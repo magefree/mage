@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class ZendikarVsEldrazi extends ExpansionSet {
+public final class ZendikarVsEldrazi extends ExpansionSet {
 
     private static final ZendikarVsEldrazi instance = new ZendikarVsEldrazi();
 

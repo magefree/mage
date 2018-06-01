@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author michael.napoleon@gmail.com
  */
-public class RoarOfTheCrowd extends CardImpl {
+public final class RoarOfTheCrowd extends CardImpl {
 
     public RoarOfTheCrowd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

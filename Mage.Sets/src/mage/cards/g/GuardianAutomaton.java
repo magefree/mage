@@ -41,7 +41,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class GuardianAutomaton extends CardImpl {
+public final class GuardianAutomaton extends CardImpl {
 
     public GuardianAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

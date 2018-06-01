@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class MindstormCrown extends CardImpl {
+public final class MindstormCrown extends CardImpl {
 
     public MindstormCrown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

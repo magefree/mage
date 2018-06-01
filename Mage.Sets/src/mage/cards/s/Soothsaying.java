@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class Soothsaying extends CardImpl {
+public final class Soothsaying extends CardImpl {
 
     public Soothsaying(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

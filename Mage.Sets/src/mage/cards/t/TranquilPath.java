@@ -39,7 +39,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author anonymous
  */
-public class TranquilPath extends CardImpl {
+public final class TranquilPath extends CardImpl {
 
     public TranquilPath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");

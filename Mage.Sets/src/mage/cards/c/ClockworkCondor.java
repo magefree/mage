@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class ClockworkCondor extends CardImpl {
+public final class ClockworkCondor extends CardImpl {
 
     public ClockworkCondor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

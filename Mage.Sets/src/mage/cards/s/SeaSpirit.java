@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class SeaSpirit extends CardImpl {
+public final class SeaSpirit extends CardImpl {
 
     public SeaSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

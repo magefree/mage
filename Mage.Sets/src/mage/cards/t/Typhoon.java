@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class Typhoon extends CardImpl {
+public final class Typhoon extends CardImpl {
 
     public Typhoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

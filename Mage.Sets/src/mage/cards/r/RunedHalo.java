@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RunedHalo extends CardImpl {
+public final class RunedHalo extends CardImpl {
 
     public RunedHalo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class ShiningAerosaur extends CardImpl {
+public final class ShiningAerosaur extends CardImpl {
 
     public ShiningAerosaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

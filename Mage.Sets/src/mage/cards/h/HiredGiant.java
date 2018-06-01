@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000 & L_J
  */
-public class HiredGiant extends CardImpl {
+public final class HiredGiant extends CardImpl {
 
     public HiredGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

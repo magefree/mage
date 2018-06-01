@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class AlabasterWall extends CardImpl {
+public final class AlabasterWall extends CardImpl {
 
     public AlabasterWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

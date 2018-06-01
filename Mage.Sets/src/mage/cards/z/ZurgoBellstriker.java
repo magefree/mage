@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author fireshoes
  */
-public class ZurgoBellstriker extends CardImpl {
+public final class ZurgoBellstriker extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
     

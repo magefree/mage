@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class RivalsOfIxalan extends ExpansionSet {
+public final class RivalsOfIxalan extends ExpansionSet {
 
     private static final RivalsOfIxalan instance = new RivalsOfIxalan();
 

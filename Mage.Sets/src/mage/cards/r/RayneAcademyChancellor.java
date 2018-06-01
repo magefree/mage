@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class RayneAcademyChancellor extends CardImpl {
+public final class RayneAcademyChancellor extends CardImpl {
 
     public RayneAcademyChancellor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

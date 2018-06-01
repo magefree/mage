@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class UginsInsight extends CardImpl {
+public final class UginsInsight extends CardImpl {
 
     public UginsInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

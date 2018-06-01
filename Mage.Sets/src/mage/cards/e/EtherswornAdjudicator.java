@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class EtherswornAdjudicator extends CardImpl {
+public final class EtherswornAdjudicator extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
 
     static {

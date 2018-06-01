@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author FenrisulfrX
  */
-public class VerduranEmissary extends CardImpl {
+public final class VerduranEmissary extends CardImpl {
 
     public VerduranEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

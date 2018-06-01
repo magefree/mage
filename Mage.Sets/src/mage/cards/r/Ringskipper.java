@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class Ringskipper extends CardImpl {
+public final class Ringskipper extends CardImpl {
 
     public Ringskipper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

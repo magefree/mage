@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class Gatecrash extends ExpansionSet {
+public final class Gatecrash extends ExpansionSet {
 
     private static final Gatecrash instance = new Gatecrash();
 

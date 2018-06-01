@@ -42,7 +42,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author TheElk801
  */
-public class EnergyBolt extends CardImpl {
+public final class EnergyBolt extends CardImpl {
 
     public EnergyBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{W}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponentsChoicePermanent;
  *
  * @author LevelX2
  */
-public class DiaochanArtfulBeauty extends CardImpl {
+public final class DiaochanArtfulBeauty extends CardImpl {
 
     public DiaochanArtfulBeauty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

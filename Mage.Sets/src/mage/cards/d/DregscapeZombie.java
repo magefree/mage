@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DregscapeZombie extends CardImpl {
+public final class DregscapeZombie extends CardImpl {
 
     public DregscapeZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

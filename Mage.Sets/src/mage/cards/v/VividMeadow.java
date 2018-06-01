@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class VividMeadow extends CardImpl {
+public final class VividMeadow extends CardImpl {
 
     public VividMeadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

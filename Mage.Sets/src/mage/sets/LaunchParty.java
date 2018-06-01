@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class LaunchParty extends ExpansionSet {
+public final class LaunchParty extends ExpansionSet {
 
     private static final LaunchParty instance = new LaunchParty();
 

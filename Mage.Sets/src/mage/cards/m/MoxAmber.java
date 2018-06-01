@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author CountAndromalius
  */
-public class MoxAmber extends CardImpl {
+public final class MoxAmber extends CardImpl {
 
     public MoxAmber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

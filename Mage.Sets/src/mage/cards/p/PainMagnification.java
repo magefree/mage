@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author ilcartographer
  */
-public class PainMagnification extends CardImpl {
+public final class PainMagnification extends CardImpl {
 
     public PainMagnification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{R}");

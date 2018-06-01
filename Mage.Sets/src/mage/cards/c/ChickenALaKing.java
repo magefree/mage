@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author spjspj
  */
-public class ChickenALaKing extends CardImpl {
+public final class ChickenALaKing extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Chicken you control");
 

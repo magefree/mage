@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Wehk
  */
-public class ExiledBoggart extends CardImpl {
+public final class ExiledBoggart extends CardImpl {
 
     public ExiledBoggart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

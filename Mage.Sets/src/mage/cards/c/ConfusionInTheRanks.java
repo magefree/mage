@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author anonymous
  */
-public class ConfusionInTheRanks extends CardImpl {
+public final class ConfusionInTheRanks extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("an artifact, creature, or enchantment");
 

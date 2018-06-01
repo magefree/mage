@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author North
  */
-public class ScornedVillager extends CardImpl {
+public final class ScornedVillager extends CardImpl {
 
     public ScornedVillager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

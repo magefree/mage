@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class AvenFateshaper extends CardImpl {
+public final class AvenFateshaper extends CardImpl {
 
     public AvenFateshaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");

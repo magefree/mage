@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ThoughtweftTrio extends CardImpl {
+public final class ThoughtweftTrio extends CardImpl {
 
     public ThoughtweftTrio(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class DoublingCube extends CardImpl {
+public final class DoublingCube extends CardImpl {
 
     public DoublingCube(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -73,7 +73,7 @@ class DoublingCubeEffect extends ManaEffect {
 
     DoublingCubeEffect() {
         super();
-        staticText = "Double the amount of each type of mana in your mana pool";
+        staticText = "Double the amount of each type of unspent mana you have";
     }
 
     DoublingCubeEffect(final DoublingCubeEffect effect) {

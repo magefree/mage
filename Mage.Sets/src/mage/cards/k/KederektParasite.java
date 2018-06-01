@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class KederektParasite extends CardImpl {
+public final class KederektParasite extends CardImpl {
 
     public KederektParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
@@ -101,7 +101,7 @@ class KederektParasiteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0).apply(game, this);
+        return new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0).apply(game, this);
     }
 
     @Override

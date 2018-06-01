@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class ContaminatedGround extends CardImpl {
+public final class ContaminatedGround extends CardImpl {
 
     public ContaminatedGround(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class StoneThrowingDevils extends CardImpl {
+public final class StoneThrowingDevils extends CardImpl {
 
     public StoneThrowingDevils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

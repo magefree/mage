@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.target.TargetPlayer;
 
-public class ToilTrouble extends SplitCard {
+public final class ToilTrouble extends SplitCard {
 
     public ToilTrouble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}", "{2}{R}", SpellAbilityType.SPLIT_FUSED);

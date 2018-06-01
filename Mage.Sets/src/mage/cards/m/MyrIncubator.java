@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class MyrIncubator extends CardImpl {
+public final class MyrIncubator extends CardImpl {
 
     public MyrIncubator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

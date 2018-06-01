@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class TasseledDromedary extends CardImpl {
+public final class TasseledDromedary extends CardImpl {
 
     public TasseledDromedary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

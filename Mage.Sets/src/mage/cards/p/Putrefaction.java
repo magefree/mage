@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J (based on dustinconrad)
  */
-public class Putrefaction extends CardImpl {
+public final class Putrefaction extends CardImpl {
 
     public Putrefaction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");

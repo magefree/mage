@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author stravant
  */
-public class AhnCropChampion extends CardImpl {
+public final class AhnCropChampion extends CardImpl {
     public AhnCropChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
         

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class Tarpan extends CardImpl {
+public final class Tarpan extends CardImpl {
 
     public Tarpan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

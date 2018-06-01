@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class EtherealAmbush extends CardImpl {
+public final class EtherealAmbush extends CardImpl {
 
     public EtherealAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{U}");

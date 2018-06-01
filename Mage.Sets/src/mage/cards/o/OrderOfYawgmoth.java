@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class OrderOfYawgmoth extends CardImpl {
+public final class OrderOfYawgmoth extends CardImpl {
 
     public OrderOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

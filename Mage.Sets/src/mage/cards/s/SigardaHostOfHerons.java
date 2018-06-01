@@ -48,7 +48,7 @@ import mage.game.stack.StackAbility;
 /**
  * @author noxx
  */
-public class SigardaHostOfHerons extends CardImpl {
+public final class SigardaHostOfHerons extends CardImpl {
 
     public SigardaHostOfHerons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");

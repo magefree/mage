@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author maxlebedev
  */
-public class DwarvenSong extends CardImpl {
+public final class DwarvenSong extends CardImpl {
 
     public DwarvenSong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

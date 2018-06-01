@@ -50,7 +50,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
  *
  * @author L_J
  */
-public class Timebender extends CardImpl {
+public final class Timebender extends CardImpl {
 
     public Timebender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

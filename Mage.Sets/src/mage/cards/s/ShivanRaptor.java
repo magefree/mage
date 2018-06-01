@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class ShivanRaptor extends CardImpl {
+public final class ShivanRaptor extends CardImpl {
 
     public ShivanRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

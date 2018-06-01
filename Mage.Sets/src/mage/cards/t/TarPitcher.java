@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class TarPitcher extends CardImpl {
+public final class TarPitcher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
 

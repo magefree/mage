@@ -21,7 +21,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author Rystan
  */
-public class GuardiansOfKoilos extends CardImpl {
+public final class GuardiansOfKoilos extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another historic permanent you control");
 

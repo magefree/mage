@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DurkwoodBoars extends CardImpl {
+public final class DurkwoodBoars extends CardImpl {
 
     public DurkwoodBoars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class KrosanCloudscraper extends CardImpl {
+public final class KrosanCloudscraper extends CardImpl {
 
     public KrosanCloudscraper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}{G}{G}");

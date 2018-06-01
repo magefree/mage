@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class IdentityThief extends CardImpl {
+public final class IdentityThief extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("target nontoken creature");
 

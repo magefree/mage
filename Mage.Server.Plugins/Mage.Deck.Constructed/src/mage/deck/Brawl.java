@@ -149,10 +149,12 @@ public class Brawl extends Constructed {
                 if (commanderColor.isGreen()) {
                     colorIdentity.setGreen(true);
                 }
+                if (commanderColor.isColorless()) {
+                    colorIdentity.setColorless(true);
+                }
             }
         }
-
-        List<String> basicsInDeck = new ArrayList<>();
+        Set<String> basicsInDeck = new HashSet<>();
         if (colorIdentity.isColorless()) {
             for (Card card : deck.getCards()) {
                 if (basicLandNames.contains(card.getName())) {

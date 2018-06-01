@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author mamaurer, nantuko
  */
-public class BladeOfTheBloodchief extends CardImpl {
+public final class BladeOfTheBloodchief extends CardImpl {
 
     public BladeOfTheBloodchief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

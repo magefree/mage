@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class DowsingDagger extends CardImpl {
+public final class DowsingDagger extends CardImpl {
 
     public DowsingDagger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

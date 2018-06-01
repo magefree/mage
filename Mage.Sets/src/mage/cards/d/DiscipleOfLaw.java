@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class DiscipleOfLaw extends CardImpl {
+public final class DiscipleOfLaw extends CardImpl {
 
     public DiscipleOfLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

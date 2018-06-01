@@ -56,7 +56,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author L_J
  */
-public class SeasonOfTheWitch extends CardImpl {
+public final class SeasonOfTheWitch extends CardImpl {
 
     public SeasonOfTheWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");

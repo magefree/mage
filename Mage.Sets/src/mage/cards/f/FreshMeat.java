@@ -43,7 +43,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  *
  * @author North
  */
-public class FreshMeat extends CardImpl {
+public final class FreshMeat extends CardImpl {
 
     public FreshMeat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

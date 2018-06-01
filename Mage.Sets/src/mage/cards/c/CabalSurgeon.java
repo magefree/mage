@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author markedagain
  */
-public class CabalSurgeon extends CardImpl {
+public final class CabalSurgeon extends CardImpl {
 
     public CabalSurgeon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

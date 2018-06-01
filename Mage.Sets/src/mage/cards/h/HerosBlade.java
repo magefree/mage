@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class HerosBlade extends CardImpl {
+public final class HerosBlade extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a legendary creature");
 

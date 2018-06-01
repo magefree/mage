@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class Shyft extends CardImpl {
+public final class Shyft extends CardImpl {
 
     public Shyft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

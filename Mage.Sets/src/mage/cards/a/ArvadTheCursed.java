@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author Rystan
  */
-public class ArvadTheCursed extends CardImpl {
+public final class ArvadTheCursed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures");
 

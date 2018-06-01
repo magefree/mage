@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author duncant
  */
-public class MercyKilling extends CardImpl {
+public final class MercyKilling extends CardImpl {
 
     public MercyKilling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G/W}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author emerald000
  */
-public class FangrenFirstborn extends CardImpl {
+public final class FangrenFirstborn extends CardImpl {
 
     public FangrenFirstborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}{G}");

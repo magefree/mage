@@ -52,7 +52,7 @@ import mage.game.permanent.token.RatToken;
  *
  * @author LevelX2
  */
-public class OgreSlumlord extends CardImpl {
+public final class OgreSlumlord extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Rats you control");

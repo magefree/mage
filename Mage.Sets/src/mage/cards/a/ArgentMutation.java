@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class ArgentMutation extends CardImpl {
+public final class ArgentMutation extends CardImpl {
 
     public ArgentMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

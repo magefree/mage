@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class WingsOfAesthir extends CardImpl {
+public final class WingsOfAesthir extends CardImpl {
 
     public WingsOfAesthir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}");

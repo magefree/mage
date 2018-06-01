@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class SelesnyaCluestone extends CardImpl {
+public final class SelesnyaCluestone extends CardImpl {
 
     public SelesnyaCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

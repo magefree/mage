@@ -44,7 +44,7 @@ import mage.constants.SubType;
 /**
  * @author JRHerlehy Created on 4/7/18.
  */
-public class DrudgeSentinel extends CardImpl {
+public final class DrudgeSentinel extends CardImpl {
 
     public DrudgeSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

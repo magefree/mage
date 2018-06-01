@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DecoratedGriffin extends CardImpl {
+public final class DecoratedGriffin extends CardImpl {
 
     public DecoratedGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

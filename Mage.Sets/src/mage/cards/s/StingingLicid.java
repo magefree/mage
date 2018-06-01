@@ -44,7 +44,7 @@ import mage.constants.ColoredManaSymbol;
  *
  * @author emerald000
  */
-public class StingingLicid extends CardImpl {
+public final class StingingLicid extends CardImpl {
 
     public StingingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

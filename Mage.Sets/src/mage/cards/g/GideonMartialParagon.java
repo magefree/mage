@@ -53,7 +53,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class GideonMartialParagon extends CardImpl {
+public final class GideonMartialParagon extends CardImpl {
 
     public GideonMartialParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}");

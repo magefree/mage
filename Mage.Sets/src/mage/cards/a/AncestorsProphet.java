@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Wehk
  */
-public class AncestorsProphet extends CardImpl {
+public final class AncestorsProphet extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Clerics you control");
     

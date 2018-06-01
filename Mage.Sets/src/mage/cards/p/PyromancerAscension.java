@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  * 
  * @author nantuko
  */
-public class PyromancerAscension extends CardImpl {
+public final class PyromancerAscension extends CardImpl {
 
     public PyromancerAscension(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

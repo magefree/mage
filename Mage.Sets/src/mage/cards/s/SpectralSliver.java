@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author cbt33
  */
-public class SpectralSliver extends CardImpl {
+public final class SpectralSliver extends CardImpl {
 
     public SpectralSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

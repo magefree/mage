@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  *
  * @author jeffwadsworth
  */
-public class CollectedCompany extends CardImpl {
+public final class CollectedCompany extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("up to two creature cards with converted mana cost 3 or less");
 

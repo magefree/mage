@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class RideDown extends CardImpl {
+public final class RideDown extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
 

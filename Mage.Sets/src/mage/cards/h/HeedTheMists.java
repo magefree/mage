@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HeedTheMists extends CardImpl {
+public final class HeedTheMists extends CardImpl {
 
     public HeedTheMists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

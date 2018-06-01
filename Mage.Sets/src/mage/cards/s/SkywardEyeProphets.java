@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author North
  */
-public class SkywardEyeProphets extends CardImpl {
+public final class SkywardEyeProphets extends CardImpl {
 
     public SkywardEyeProphets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}{U}");

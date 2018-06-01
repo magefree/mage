@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class StitchwingSkaab extends CardImpl {
+public final class StitchwingSkaab extends CardImpl {
 
     public StitchwingSkaab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class SustainerOfTheRealm extends CardImpl {
+public final class SustainerOfTheRealm extends CardImpl {
 
     public SustainerOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

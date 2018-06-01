@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class EtherwroughtPage extends CardImpl {
+public final class EtherwroughtPage extends CardImpl {
 
     public EtherwroughtPage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{W}{U}{B}");

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class TempleAltisaur extends CardImpl {
+public final class TempleAltisaur extends CardImpl {
 
     public TempleAltisaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

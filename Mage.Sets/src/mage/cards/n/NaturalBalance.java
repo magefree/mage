@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author Rene - bugisemail at gmail dot com
  */
-public class NaturalBalance extends CardImpl {
+public final class NaturalBalance extends CardImpl {
 
     public NaturalBalance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
@@ -117,7 +117,7 @@ public class NaturalBalance extends CardImpl {
                         int amount = 5 - landCount;
                         if (landCount < 5 && player.chooseUse(outcome, "Search your library for up to " + amount + " basic land cards and put them onto the battlefield?", source, game)) {
                             // Select lands and put them onto battlefield
-                            TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_BASIC_LAND_CARD);
+                            TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_CARD_BASIC_LAND);
                             if (player.searchLibrary(target, game)) {
                                 player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game);
                             }

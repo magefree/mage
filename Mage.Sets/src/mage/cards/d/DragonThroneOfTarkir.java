@@ -51,7 +51,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class DragonThroneOfTarkir extends CardImpl {
+public final class DragonThroneOfTarkir extends CardImpl {
 
     public DragonThroneOfTarkir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

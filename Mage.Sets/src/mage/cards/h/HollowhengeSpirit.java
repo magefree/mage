@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author BetaSteward
  */
-public class HollowhengeSpirit extends CardImpl {
+public final class HollowhengeSpirit extends CardImpl {
 
     public HollowhengeSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

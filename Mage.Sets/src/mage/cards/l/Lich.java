@@ -61,7 +61,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class Lich extends CardImpl {
+public final class Lich extends CardImpl {
 
     public Lich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}{B}");

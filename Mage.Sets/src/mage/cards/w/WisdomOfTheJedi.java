@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class WisdomOfTheJedi extends CardImpl {
+public final class WisdomOfTheJedi extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("spell with converted mana cost of 3 or less");
 

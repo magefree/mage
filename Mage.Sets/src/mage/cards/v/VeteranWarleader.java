@@ -63,7 +63,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class VeteranWarleader extends CardImpl {
+public final class VeteranWarleader extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another untapped Ally you control");
 

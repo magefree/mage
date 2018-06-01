@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author anonymous
  */
-public class ShadowstormVizier extends CardImpl {
+public final class ShadowstormVizier extends CardImpl {
 
     public ShadowstormVizier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");

@@ -40,7 +40,7 @@ import mage.constants.TimingRule;
  *
  * @author North
  */
-public class ShatteredPerception extends CardImpl {
+public final class ShatteredPerception extends CardImpl {
 
     public ShatteredPerception(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class BattlegateMimic extends CardImpl {
+public final class BattlegateMimic extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell that's both red and white");
 

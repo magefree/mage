@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class SpitfireBastion extends CardImpl {
+public final class SpitfireBastion extends CardImpl {
 
     public SpitfireBastion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

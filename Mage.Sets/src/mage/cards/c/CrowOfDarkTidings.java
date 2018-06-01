@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class CrowOfDarkTidings extends CardImpl {
+public final class CrowOfDarkTidings extends CardImpl {
 
     public CrowOfDarkTidings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

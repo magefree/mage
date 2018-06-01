@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class TempleOfPlenty extends CardImpl {
+public final class TempleOfPlenty extends CardImpl {
 
     public TempleOfPlenty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

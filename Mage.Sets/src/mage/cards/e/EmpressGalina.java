@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class EmpressGalina extends CardImpl {
+public final class EmpressGalina extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("legendary permanent");
 

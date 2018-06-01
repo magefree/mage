@@ -53,7 +53,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  * @author rscoates
  */
-public class FiresongAndSunspeaker extends CardImpl {
+public final class FiresongAndSunspeaker extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("Red instant and sorcery spells you control");
 

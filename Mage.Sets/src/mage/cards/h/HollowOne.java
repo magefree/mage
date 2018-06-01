@@ -51,7 +51,7 @@ import mage.watchers.common.CardsCycledOrDiscardedThisTurnWatcher;
  *
  * @author spjspj
  */
-public class HollowOne extends CardImpl {
+public final class HollowOne extends CardImpl {
 
     public HollowOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

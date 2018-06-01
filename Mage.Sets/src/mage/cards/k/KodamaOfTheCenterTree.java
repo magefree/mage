@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class KodamaOfTheCenterTree extends CardImpl {
+public final class KodamaOfTheCenterTree extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Spirits you control");
 

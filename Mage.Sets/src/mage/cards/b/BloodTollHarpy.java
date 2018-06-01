@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BloodTollHarpy extends CardImpl {
+public final class BloodTollHarpy extends CardImpl {
 
     public BloodTollHarpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

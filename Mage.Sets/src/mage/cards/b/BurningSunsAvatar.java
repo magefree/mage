@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author TheElk801
  */
-public class BurningSunsAvatar extends CardImpl {
+public final class BurningSunsAvatar extends CardImpl {
 
     public BurningSunsAvatar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");

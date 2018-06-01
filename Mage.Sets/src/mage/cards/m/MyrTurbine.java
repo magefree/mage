@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class MyrTurbine extends CardImpl {
+public final class MyrTurbine extends CardImpl {
 
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("Myr creature card");
     private static final FilterControlledPermanent filterMyr = new FilterControlledPermanent("Myr you control");

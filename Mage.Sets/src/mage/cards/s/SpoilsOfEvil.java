@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Blinke
  */
-public class SpoilsOfEvil extends CardImpl {
+public final class SpoilsOfEvil extends CardImpl {
     private static final FilterCard filter = new FilterCard("artifact or creature card in target opponents graveyard");
     static {
         filter.add(Predicates.or(

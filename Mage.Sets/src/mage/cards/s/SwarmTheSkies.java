@@ -38,7 +38,7 @@ import mage.game.permanent.token.TIEFighterToken;
  *
  * @author Styxo
  */
-public class SwarmTheSkies extends CardImpl {
+public final class SwarmTheSkies extends CardImpl {
 
     public SwarmTheSkies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

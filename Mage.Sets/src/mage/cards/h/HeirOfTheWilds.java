@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class HeirOfTheWilds extends CardImpl {
+public final class HeirOfTheWilds extends CardImpl {
 
     public HeirOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

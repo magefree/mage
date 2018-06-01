@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  *
  * @author Backfir3
  */
-public class TitaniasChosen extends CardImpl {
+public final class TitaniasChosen extends CardImpl {
 
     public TitaniasChosen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

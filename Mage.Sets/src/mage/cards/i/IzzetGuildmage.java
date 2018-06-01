@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class IzzetGuildmage extends CardImpl {
+public final class IzzetGuildmage extends CardImpl {
 
     private static final FilterSpell filterInstant = new FilterSpell("instant spell you control with converted mana cost 2 or less");
     private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell you control with converted mana cost 2 or less");

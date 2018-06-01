@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class GuardianIdol extends CardImpl {
+public final class GuardianIdol extends CardImpl {
 
     public GuardianIdol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

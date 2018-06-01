@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class MosquitoGuard extends CardImpl {
+public final class MosquitoGuard extends CardImpl {
 
     public MosquitoGuard (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

@@ -40,7 +40,7 @@ import mage.constants.*;
 /**
  * @author Loki
  */
-public class AngelfireCrusader extends CardImpl {
+public final class AngelfireCrusader extends CardImpl {
 
     public AngelfireCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class MeasureOfWickedness extends CardImpl {
+public final class MeasureOfWickedness extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("another card");
 

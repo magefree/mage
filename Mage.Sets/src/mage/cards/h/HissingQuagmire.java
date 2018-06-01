@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class HissingQuagmire extends CardImpl {
+public final class HissingQuagmire extends CardImpl {
 
     public HissingQuagmire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

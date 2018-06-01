@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class WormfangManta extends CardImpl {
+public final class WormfangManta extends CardImpl {
 
     public WormfangManta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

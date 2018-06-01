@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class CogworkAssembler extends CardImpl {
+public final class CogworkAssembler extends CardImpl {
 
     public CogworkAssembler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

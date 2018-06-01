@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class OraclesVault extends CardImpl {
+public final class OraclesVault extends CardImpl {
 
     public OraclesVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

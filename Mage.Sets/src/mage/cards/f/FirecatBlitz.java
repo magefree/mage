@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class FirecatBlitz extends CardImpl {
+public final class FirecatBlitz extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountains");
 

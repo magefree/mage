@@ -39,7 +39,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class GleamOfBattle extends CardImpl {
+public final class GleamOfBattle extends CardImpl {
 
     public GleamOfBattle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{W}");

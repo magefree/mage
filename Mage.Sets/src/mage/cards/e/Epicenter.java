@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class Epicenter extends CardImpl {
+public final class Epicenter extends CardImpl {
 
     public Epicenter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");

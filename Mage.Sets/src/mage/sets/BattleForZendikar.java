@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * @author fireshoes
  */
-public class BattleForZendikar extends ExpansionSet {
+public final class BattleForZendikar extends ExpansionSet {
 
     private static final BattleForZendikar instance = new BattleForZendikar();
 

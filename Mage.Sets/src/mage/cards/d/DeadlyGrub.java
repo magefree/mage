@@ -49,7 +49,7 @@ import mage.game.permanent.token.DeadlyGrubToken;
  *
  * @author LoneFox
  */
-public class DeadlyGrub extends CardImpl {
+public final class DeadlyGrub extends CardImpl {
 
     public DeadlyGrub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

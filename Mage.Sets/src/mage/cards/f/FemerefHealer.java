@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class FemerefHealer extends CardImpl {
+public final class FemerefHealer extends CardImpl {
 
     public FemerefHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

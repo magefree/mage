@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class Tinker extends CardImpl {
+public final class Tinker extends CardImpl {
 
     public Tinker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

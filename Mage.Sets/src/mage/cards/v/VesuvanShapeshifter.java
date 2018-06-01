@@ -61,7 +61,7 @@ import mage.util.functions.ApplyToPermanent;
 /**
  * @author spjspj
  */
-public class VesuvanShapeshifter extends CardImpl {
+public final class VesuvanShapeshifter extends CardImpl {
 
     protected Ability turnFaceUpAbility = null;
     private static final String effectText = "as a copy of any creature on the battlefield until {this} is turned faced down";

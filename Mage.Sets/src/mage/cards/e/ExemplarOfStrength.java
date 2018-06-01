@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ExemplarOfStrength extends CardImpl {
+public final class ExemplarOfStrength extends CardImpl {
 
     public ExemplarOfStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

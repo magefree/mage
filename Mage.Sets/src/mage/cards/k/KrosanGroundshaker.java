@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class KrosanGroundshaker extends CardImpl {
+public final class KrosanGroundshaker extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creature");
 

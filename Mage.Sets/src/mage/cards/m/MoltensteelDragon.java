@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class MoltensteelDragon extends CardImpl {
+public final class MoltensteelDragon extends CardImpl {
 
     public MoltensteelDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R/P}{R/P}");

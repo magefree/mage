@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author fireshoes
  */
-public class SanctumOfUgin extends CardImpl {
+public final class SanctumOfUgin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("colorless creature card");
     private static final FilterSpell filterSpells = new FilterSpell("colorless spell with converted mana cost 7 or greater");

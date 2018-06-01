@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WateryGrave extends CardImpl {
+public final class WateryGrave extends CardImpl {
 
     public WateryGrave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

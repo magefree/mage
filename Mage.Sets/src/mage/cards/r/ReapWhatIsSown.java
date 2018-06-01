@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ReapWhatIsSown extends CardImpl {
+public final class ReapWhatIsSown extends CardImpl {
 
     public ReapWhatIsSown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}{W}");

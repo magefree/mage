@@ -36,7 +36,7 @@ import mage.abilities.keyword.DeathtouchAbility;
  *
  * @author spjspj
  */
-public class GarrukApexPredatorBeastToken extends TokenImpl {
+public final class GarrukApexPredatorBeastToken extends TokenImpl {
 
     public GarrukApexPredatorBeastToken() {
         super("Beast", "3/3 black Beast creature token with deathtouch");

@@ -45,7 +45,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author North
  */
-public class Aggravate extends CardImpl {
+public final class Aggravate extends CardImpl {
 
     public Aggravate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");

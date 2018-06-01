@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SpikeToken extends TokenImpl {
+public final class SpikeToken extends TokenImpl {
 
     public SpikeToken() {
         super("Spike", "1/1 green Spike creature token");

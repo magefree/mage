@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class CarnageTyrant extends CardImpl {
+public final class CarnageTyrant extends CardImpl {
 
     public CarnageTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

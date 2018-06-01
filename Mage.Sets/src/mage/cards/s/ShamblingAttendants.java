@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ShamblingAttendants extends CardImpl {
+public final class ShamblingAttendants extends CardImpl {
 
     public ShamblingAttendants(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{B}");

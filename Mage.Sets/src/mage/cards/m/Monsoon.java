@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class Monsoon extends CardImpl {
+public final class Monsoon extends CardImpl {
 
     public Monsoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{G}");

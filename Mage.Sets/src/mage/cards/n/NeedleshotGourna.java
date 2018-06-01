@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class NeedleshotGourna extends CardImpl {
+public final class NeedleshotGourna extends CardImpl {
 
     public NeedleshotGourna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

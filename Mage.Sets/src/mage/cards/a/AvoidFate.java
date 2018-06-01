@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class AvoidFate extends CardImpl {
+public final class AvoidFate extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("instant or Aura spell that targets a permanent you control");
 

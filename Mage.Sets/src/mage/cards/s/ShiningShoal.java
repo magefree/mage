@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class ShiningShoal extends CardImpl {
+public final class ShiningShoal extends CardImpl {
 
     public ShiningShoal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");

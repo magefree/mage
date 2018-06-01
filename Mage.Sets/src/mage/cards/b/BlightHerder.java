@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author LevelX2
  */
-public class BlightHerder extends CardImpl {
+public final class BlightHerder extends CardImpl {
 
     public BlightHerder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}");

@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author maurer.it_at_gmail.com
  */
-public class SeachromeCoast extends CardImpl {
+public final class SeachromeCoast extends CardImpl {
 
     public SeachromeCoast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

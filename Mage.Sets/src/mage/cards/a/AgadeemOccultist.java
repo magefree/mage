@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class AgadeemOccultist extends CardImpl {
+public final class AgadeemOccultist extends CardImpl {
 
     public AgadeemOccultist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

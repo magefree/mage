@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class SamiteElder extends CardImpl {
+public final class SamiteElder extends CardImpl {
 
     public SamiteElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

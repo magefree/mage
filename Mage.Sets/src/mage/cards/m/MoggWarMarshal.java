@@ -42,7 +42,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author jonubuu
  */
-public class MoggWarMarshal extends CardImpl {
+public final class MoggWarMarshal extends CardImpl {
 
     public MoggWarMarshal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RagingPoltergeist extends CardImpl {
+public final class RagingPoltergeist extends CardImpl {
 
     public RagingPoltergeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

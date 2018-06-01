@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author ciaccona007
  */
-public class ManaVapors extends CardImpl {
+public final class ManaVapors extends CardImpl {
 
     public ManaVapors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");

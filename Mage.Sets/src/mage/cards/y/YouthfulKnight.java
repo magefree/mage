@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class YouthfulKnight extends CardImpl {
+public final class YouthfulKnight extends CardImpl {
 
     public YouthfulKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

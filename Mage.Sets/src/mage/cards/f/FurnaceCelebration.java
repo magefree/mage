@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FurnaceCelebration extends CardImpl {
+public final class FurnaceCelebration extends CardImpl {
 
     public FurnaceCelebration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");

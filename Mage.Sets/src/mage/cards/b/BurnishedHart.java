@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class BurnishedHart extends CardImpl {
+public final class BurnishedHart extends CardImpl {
 
     public BurnishedHart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
@@ -59,7 +59,7 @@ public class BurnishedHart extends CardImpl {
         // {3}, Sacrifice Burnished Hart: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
                 new GenericManaCost(3));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ZombieWizardToken extends TokenImpl {
+public final class ZombieWizardToken extends TokenImpl {
 
     public ZombieWizardToken() {
         super("Zombie Wizard", "1/1 blue and black Zombie Wizard creature token");

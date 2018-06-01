@@ -41,7 +41,7 @@ import mage.game.Game;
  *
  * @author LoneFox
  */
-public class VitalizingCascade extends CardImpl {
+public final class VitalizingCascade extends CardImpl {
 
     public VitalizingCascade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{W}");

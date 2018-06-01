@@ -49,7 +49,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class UmbraStalker extends CardImpl {
+public final class UmbraStalker extends CardImpl {
 
     public UmbraStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");

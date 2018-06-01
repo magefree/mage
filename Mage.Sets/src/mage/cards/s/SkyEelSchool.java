@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SkyEelSchool extends CardImpl {
+public final class SkyEelSchool extends CardImpl {
 
     public SkyEelSchool (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

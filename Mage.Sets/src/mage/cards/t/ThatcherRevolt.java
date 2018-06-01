@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ThatcherRevolt extends CardImpl {
+public final class ThatcherRevolt extends CardImpl {
 
     public ThatcherRevolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

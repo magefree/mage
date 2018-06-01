@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author TheElk801
  */
-public class PegasusCourser extends CardImpl {
+public final class PegasusCourser extends CardImpl {
 
     static final FilterAttackingCreature filter = new FilterAttackingCreature("another target attacking creature");
 

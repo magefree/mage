@@ -41,7 +41,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author FenrisulfrX
  */
-public class PainSuffering extends SplitCard {
+public final class PainSuffering extends SplitCard {
 
     public PainSuffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}", "{3}{R}", SpellAbilityType.SPLIT);

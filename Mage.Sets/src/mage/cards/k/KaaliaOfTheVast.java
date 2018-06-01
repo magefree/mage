@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Backfir3
  */
-public class KaaliaOfTheVast extends CardImpl {
+public final class KaaliaOfTheVast extends CardImpl {
 
     public KaaliaOfTheVast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");

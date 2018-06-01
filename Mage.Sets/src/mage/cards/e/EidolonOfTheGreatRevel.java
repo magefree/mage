@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class EidolonOfTheGreatRevel extends CardImpl {
+public final class EidolonOfTheGreatRevel extends CardImpl {
 
     public EidolonOfTheGreatRevel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{R}{R}");

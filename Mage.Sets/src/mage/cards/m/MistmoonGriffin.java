@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MistmoonGriffin extends CardImpl {
+public final class MistmoonGriffin extends CardImpl {
 
     public MistmoonGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

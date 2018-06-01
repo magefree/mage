@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BearToken extends TokenImpl {
+public final class BearToken extends TokenImpl {
 
     public BearToken() {
         super("Bear", "2/2 green Bear creature token");

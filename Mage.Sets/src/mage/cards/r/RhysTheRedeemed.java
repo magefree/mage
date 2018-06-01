@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class RhysTheRedeemed extends CardImpl {
+public final class RhysTheRedeemed extends CardImpl {
 
     public RhysTheRedeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/W}");

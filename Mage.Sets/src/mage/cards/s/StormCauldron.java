@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class StormCauldron extends CardImpl {
+public final class StormCauldron extends CardImpl {
 
     public StormCauldron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

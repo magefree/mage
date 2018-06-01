@@ -51,7 +51,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author spjspj
  */
-public class WallOfForgottenPharaohs extends CardImpl {
+public final class WallOfForgottenPharaohs extends CardImpl {
 
     private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
     private static final FilterCard filterDesertCard = new FilterCard("Desert card");

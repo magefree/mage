@@ -40,7 +40,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author noxx
  */
-public class Vanishment extends CardImpl {
+public final class Vanishment extends CardImpl {
 
     public Vanishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");

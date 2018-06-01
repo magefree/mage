@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ShepherdOfTheLost extends CardImpl {
+public final class ShepherdOfTheLost extends CardImpl {
 
     public ShepherdOfTheLost (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

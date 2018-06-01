@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author L_J
  */
-public class Corrosion extends CardImpl {
+public final class Corrosion extends CardImpl {
 
     public Corrosion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{R}");

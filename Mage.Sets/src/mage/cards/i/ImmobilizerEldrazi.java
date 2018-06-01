@@ -49,7 +49,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ImmobilizerEldrazi extends CardImpl {
+public final class ImmobilizerEldrazi extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with toughness greater than its power");
 

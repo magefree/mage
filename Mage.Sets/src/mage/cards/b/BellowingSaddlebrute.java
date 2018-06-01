@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class BellowingSaddlebrute extends CardImpl {
+public final class BellowingSaddlebrute extends CardImpl {
 
     public BellowingSaddlebrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

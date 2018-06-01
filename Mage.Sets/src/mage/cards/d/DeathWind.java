@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class DeathWind extends CardImpl {
+public final class DeathWind extends CardImpl {
 
     public DeathWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}");

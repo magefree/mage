@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class SpitefulBlow extends CardImpl {
+public final class SpitefulBlow extends CardImpl {
 
     public SpitefulBlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");

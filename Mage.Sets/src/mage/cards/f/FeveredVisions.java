@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class FeveredVisions extends CardImpl {
+public final class FeveredVisions extends CardImpl {
 
     public FeveredVisions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{R}");

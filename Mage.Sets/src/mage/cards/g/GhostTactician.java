@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class GhostTactician extends CardImpl {
+public final class GhostTactician extends CardImpl {
 
     public GhostTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

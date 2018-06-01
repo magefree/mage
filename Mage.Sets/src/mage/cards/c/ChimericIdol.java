@@ -49,7 +49,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author LevelX2
  */
-public class ChimericIdol extends CardImpl {
+public final class ChimericIdol extends CardImpl {
 
     public ChimericIdol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

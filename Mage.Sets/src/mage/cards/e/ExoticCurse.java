@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author FenrisulfrX
  */
-public class ExoticCurse extends CardImpl {
+public final class ExoticCurse extends CardImpl {
 
     public ExoticCurse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

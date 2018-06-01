@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class GiantDustwasp extends CardImpl {
+public final class GiantDustwasp extends CardImpl {
 
     public GiantDustwasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

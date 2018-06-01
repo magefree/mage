@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class DoublingChant extends CardImpl {
+public final class DoublingChant extends CardImpl {
 
     public DoublingChant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}");

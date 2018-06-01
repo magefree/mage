@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author KholdFuzion
  */
-public class RepentantBlacksmith extends CardImpl {
+public final class RepentantBlacksmith extends CardImpl {
 
     public RepentantBlacksmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

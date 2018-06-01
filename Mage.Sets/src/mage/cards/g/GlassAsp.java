@@ -43,7 +43,7 @@ import mage.constants.PhaseStep;
  *
  * @author LoneFox
  */
-public class GlassAsp extends CardImpl {
+public final class GlassAsp extends CardImpl {
 
     public GlassAsp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

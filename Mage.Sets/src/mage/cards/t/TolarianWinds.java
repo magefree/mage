@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author emerald000
  */
-public class TolarianWinds extends CardImpl {
+public final class TolarianWinds extends CardImpl {
 
     public TolarianWinds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

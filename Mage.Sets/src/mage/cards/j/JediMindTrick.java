@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class JediMindTrick extends CardImpl {
+public final class JediMindTrick extends CardImpl {
 
     public JediMindTrick(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{U}");

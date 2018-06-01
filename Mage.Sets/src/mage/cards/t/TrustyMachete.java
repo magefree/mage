@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TrustyMachete extends CardImpl {
+public final class TrustyMachete extends CardImpl {
 
     public TrustyMachete(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

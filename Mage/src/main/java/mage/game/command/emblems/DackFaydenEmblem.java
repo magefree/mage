@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -92,12 +93,14 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {
                     SpellAbility spellAbility = spell.getSpellAbility();
-                    for (Target target : spellAbility.getTargets()) {
-                        if (!target.isNotTarget()) {
-                            for (UUID targetId : target.getTargets()) {
-                                if (game.getBattlefield().containsPermanent(targetId)) {
-                                    returnValue = true;
-                                    targetedPermanentIds.add(targetId);
+                    for (Mode mode : spellAbility.getModes().values()) {
+                        for (Target target : mode.getTargets()) {
+                            if (!target.isNotTarget()) {
+                                for (UUID targetId : target.getTargets()) {
+                                    if (game.getBattlefield().containsPermanent(targetId)) {
+                                        returnValue = true;
+                                        targetedPermanentIds.add(targetId);
+                                    }
                                 }
                             }
                         }

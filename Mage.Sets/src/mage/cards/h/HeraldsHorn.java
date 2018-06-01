@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Saga
  */
-public class HeraldsHorn extends CardImpl {
+public final class HeraldsHorn extends CardImpl {
 
     public HeraldsHorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

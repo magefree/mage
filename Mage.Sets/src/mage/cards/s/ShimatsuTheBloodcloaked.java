@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ShimatsuTheBloodcloaked extends CardImpl {
+public final class ShimatsuTheBloodcloaked extends CardImpl {
 
     public ShimatsuTheBloodcloaked(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

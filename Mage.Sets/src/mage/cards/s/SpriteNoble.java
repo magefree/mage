@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  * @author LoneFox
 
  */
-public class SpriteNoble extends CardImpl {
+public final class SpriteNoble extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control with flying");
 

@@ -42,7 +42,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EmrakulsHatcher extends CardImpl {
+public final class EmrakulsHatcher extends CardImpl {
 
     public EmrakulsHatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

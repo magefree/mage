@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Persecute extends CardImpl {
+public final class Persecute extends CardImpl {
 
     public Persecute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

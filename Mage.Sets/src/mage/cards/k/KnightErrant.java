@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KnightErrant extends CardImpl {
+public final class KnightErrant extends CardImpl {
 
     public KnightErrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class Floodbringer extends CardImpl {
+public final class Floodbringer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land you control (return to hand)");
 

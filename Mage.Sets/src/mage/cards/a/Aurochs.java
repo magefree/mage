@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author anonymous
  */
-public class Aurochs extends CardImpl {
+public final class Aurochs extends CardImpl {
 
     private static final FilterAttackingCreature filter1 = new FilterAttackingCreature("other attacking Aurochs");
 

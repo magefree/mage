@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class DreamThrush extends CardImpl {
+public final class DreamThrush extends CardImpl {
 
     public DreamThrush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

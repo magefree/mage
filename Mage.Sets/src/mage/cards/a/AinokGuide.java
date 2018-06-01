@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class AinokGuide extends CardImpl {
+public final class AinokGuide extends CardImpl {
 
     public AinokGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -62,7 +62,7 @@ public class AinokGuide extends CardImpl {
 
         // * Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
         Mode mode = new Mode();
-        mode.getEffects().add(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true));
+        mode.getEffects().add(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
         ability.addMode(mode);
         this.addAbility(ability);
 

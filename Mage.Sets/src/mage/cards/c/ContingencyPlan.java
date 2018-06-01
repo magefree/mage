@@ -40,7 +40,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class ContingencyPlan extends CardImpl {
+public final class ContingencyPlan extends CardImpl {
 
     public ContingencyPlan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

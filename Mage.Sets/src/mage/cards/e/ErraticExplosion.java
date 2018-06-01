@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author nigelzor
  */
-public class ErraticExplosion extends CardImpl {
+public final class ErraticExplosion extends CardImpl {
 
     public ErraticExplosion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class WarFlare extends CardImpl {
+public final class WarFlare extends CardImpl {
 
     public WarFlare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}{W}");

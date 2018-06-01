@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class VampireToken extends TokenImpl {
+public final class VampireToken extends TokenImpl {
 
     public VampireToken() {
         super("Vampire", "2/2 black Vampire creature token with flying");

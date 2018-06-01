@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class FaerieMiscreant extends CardImpl {
+public final class FaerieMiscreant extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("you control another creature named Faerie Miscreant");
 

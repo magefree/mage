@@ -42,7 +42,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class SteelSabotage extends CardImpl {
+public final class SteelSabotage extends CardImpl {
     public SteelSabotage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 

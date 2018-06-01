@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SaltRoadQuartermasters extends CardImpl {
+public final class SaltRoadQuartermasters extends CardImpl {
 
     public SaltRoadQuartermasters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

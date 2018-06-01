@@ -50,7 +50,7 @@ import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
  *
  * @author LevelX2
  */
-public class NotionThief extends CardImpl {
+public final class NotionThief extends CardImpl {
 
     public NotionThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");

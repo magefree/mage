@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class MakeshiftMunitions extends CardImpl {
+public final class MakeshiftMunitions extends CardImpl {
 
 
 

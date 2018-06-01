@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class TrooperToken extends TokenImpl {
+public final class TrooperToken extends TokenImpl {
 
     public TrooperToken() {
         super("Trooper", "1/1 white Trooper creature token");

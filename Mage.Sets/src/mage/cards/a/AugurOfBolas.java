@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  *
  * @author jeffwadsworth
  */
-public class AugurOfBolas extends CardImpl {
+public final class AugurOfBolas extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an instant or sorcery card");
 

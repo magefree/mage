@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class DuergarCaveGuard extends CardImpl {
+public final class DuergarCaveGuard extends CardImpl {
 
     public DuergarCaveGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

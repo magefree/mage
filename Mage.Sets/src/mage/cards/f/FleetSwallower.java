@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class FleetSwallower extends CardImpl {
+public final class FleetSwallower extends CardImpl {
 
     public FleetSwallower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

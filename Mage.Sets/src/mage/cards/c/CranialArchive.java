@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CranialArchive extends CardImpl {
+public final class CranialArchive extends CardImpl {
 
     public CranialArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

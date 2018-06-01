@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class CliffrunnerBehemoth extends CardImpl {
+public final class CliffrunnerBehemoth extends CardImpl {
     private static final FilterPermanent redPermanentFilter = new FilterPermanent("red");
     private static final FilterPermanent whitePermanentFilter = new FilterPermanent("white");
 

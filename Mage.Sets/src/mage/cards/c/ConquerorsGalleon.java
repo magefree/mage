@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class ConquerorsGalleon extends CardImpl {
+public final class ConquerorsGalleon extends CardImpl {
 
     public ConquerorsGalleon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

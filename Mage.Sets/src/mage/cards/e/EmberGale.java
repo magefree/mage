@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class EmberGale extends CardImpl {
+public final class EmberGale extends CardImpl {
 
     public EmberGale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

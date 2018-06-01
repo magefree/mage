@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class MajesticHeliopterus extends CardImpl {
+public final class MajesticHeliopterus extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target Dinosaur you control");
     static {

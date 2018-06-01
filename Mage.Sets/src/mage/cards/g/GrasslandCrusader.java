@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class GrasslandCrusader extends CardImpl {
+public final class GrasslandCrusader extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf or Soldier creature");
 

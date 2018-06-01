@@ -45,13 +45,13 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.GoblinTokenWithHaste;
+import mage.game.permanent.token.GoblinToken;
 
 /**
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheForge extends CardImpl {
+public final class ChancellorOfTheForge extends CardImpl {
 
     private static String abilityText = "at the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
@@ -61,7 +61,7 @@ public class ChancellorOfTheForge extends CardImpl {
     }
 
     public ChancellorOfTheForge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
         this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(5);
@@ -72,7 +72,7 @@ public class ChancellorOfTheForge extends CardImpl {
 
         // When Chancellor of the Forge enters the battlefield, create X 1/1 red Goblin creature tokens with haste, where X is the number of creatures you control.
         DynamicValue value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste(), value), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(true), value), false));
     }
 
     public ChancellorOfTheForge(final ChancellorOfTheForge card) {
@@ -87,8 +87,8 @@ public class ChancellorOfTheForge extends CardImpl {
 
 class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    ChancellorOfTheForgeDelayedTriggeredAbility () {
-        super(new CreateTokenEffect(new GoblinTokenWithHaste()));
+    ChancellorOfTheForgeDelayedTriggeredAbility() {
+        super(new CreateTokenEffect(new GoblinToken(true)));
     }
 
     ChancellorOfTheForgeDelayedTriggeredAbility(ChancellorOfTheForgeDelayedTriggeredAbility ability) {
@@ -104,6 +104,7 @@ class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbilit
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
     }
+
     @Override
     public ChancellorOfTheForgeDelayedTriggeredAbility copy() {
         return new ChancellorOfTheForgeDelayedTriggeredAbility(this);

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class SapphireLeech extends CardImpl {
+public final class SapphireLeech extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Blue spells");
 

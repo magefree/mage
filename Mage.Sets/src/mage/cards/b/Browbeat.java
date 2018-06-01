@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author dustinconrad
  */
-public class Browbeat extends CardImpl {
+public final class Browbeat extends CardImpl {
 
     public Browbeat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KnightOfMeadowgrain extends CardImpl {
+public final class KnightOfMeadowgrain extends CardImpl {
 
     public KnightOfMeadowgrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

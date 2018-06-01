@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PalaceGuard extends CardImpl {
+public final class PalaceGuard extends CardImpl {
 
     public PalaceGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

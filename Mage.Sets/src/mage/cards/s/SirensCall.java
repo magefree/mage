@@ -53,7 +53,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author emerald000
  */
-public class SirensCall extends CardImpl {
+public final class SirensCall extends CardImpl {
 
     public SirensCall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

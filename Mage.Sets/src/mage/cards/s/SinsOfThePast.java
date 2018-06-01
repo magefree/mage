@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class SinsOfThePast extends CardImpl {
+public final class SinsOfThePast extends CardImpl {
 
     public SinsOfThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");

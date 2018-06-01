@@ -54,7 +54,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author fireshoes
  */
-public class InciteWar extends CardImpl {
+public final class InciteWar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 

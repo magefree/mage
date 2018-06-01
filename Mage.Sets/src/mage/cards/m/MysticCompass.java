@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Quercitron
  */
-public class MysticCompass extends CardImpl {
+public final class MysticCompass extends CardImpl {
 
     public MysticCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

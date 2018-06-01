@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author jeffwadsworth
  */
-public class EsperStormblade extends CardImpl {
+public final class EsperStormblade extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another multicolor permanent");
     

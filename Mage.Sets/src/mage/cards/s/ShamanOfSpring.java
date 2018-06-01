@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ShamanOfSpring extends CardImpl {
+public final class ShamanOfSpring extends CardImpl {
 
     public ShamanOfSpring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

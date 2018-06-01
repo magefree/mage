@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ArmWithAether extends CardImpl {
+public final class ArmWithAether extends CardImpl {
 
     public ArmWithAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

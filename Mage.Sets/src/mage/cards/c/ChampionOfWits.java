@@ -47,7 +47,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ChampionOfWits extends CardImpl {
+public final class ChampionOfWits extends CardImpl {
 
     public ChampionOfWits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

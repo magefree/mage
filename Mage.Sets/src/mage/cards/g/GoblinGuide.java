@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinGuide extends CardImpl {
+public final class GoblinGuide extends CardImpl {
 
     public GoblinGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

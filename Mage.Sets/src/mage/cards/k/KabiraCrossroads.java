@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KabiraCrossroads extends CardImpl {
+public final class KabiraCrossroads extends CardImpl {
 
     public KabiraCrossroads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class TrueConviction extends CardImpl {
+public final class TrueConviction extends CardImpl {
 
     public TrueConviction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}{W}");

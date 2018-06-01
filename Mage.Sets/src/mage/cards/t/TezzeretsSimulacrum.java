@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class TezzeretsSimulacrum extends CardImpl {
+public final class TezzeretsSimulacrum extends CardImpl {
 
     public TezzeretsSimulacrum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

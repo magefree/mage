@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class Grozoth extends CardImpl {
+public final class Grozoth extends CardImpl {
 
     public Grozoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}{U}");

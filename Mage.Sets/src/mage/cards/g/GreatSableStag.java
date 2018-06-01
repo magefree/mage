@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GreatSableStag extends CardImpl {
+public final class GreatSableStag extends CardImpl {
 
     public GreatSableStag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

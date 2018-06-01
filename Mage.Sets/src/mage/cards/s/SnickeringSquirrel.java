@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class SnickeringSquirrel extends CardImpl {
+public final class SnickeringSquirrel extends CardImpl {
 
     public SnickeringSquirrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

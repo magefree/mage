@@ -46,7 +46,7 @@ import mage.game.permanent.token.SnakeToken;
 /**
  * @author LevelX2
  */
-public class OrochiHatchery extends CardImpl {
+public final class OrochiHatchery extends CardImpl {
 
     public OrochiHatchery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}{X}");

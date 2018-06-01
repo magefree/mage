@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class CobbledWings extends CardImpl {
+public final class CobbledWings extends CardImpl {
 
     public CobbledWings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

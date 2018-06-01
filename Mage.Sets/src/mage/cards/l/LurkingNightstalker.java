@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class LurkingNightstalker extends CardImpl {
+public final class LurkingNightstalker extends CardImpl {
 
     public LurkingNightstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

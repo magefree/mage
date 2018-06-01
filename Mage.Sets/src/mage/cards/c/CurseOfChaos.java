@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CurseOfChaos extends CardImpl {
+public final class CurseOfChaos extends CardImpl {
 
     public CurseOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

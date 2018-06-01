@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class IronwrightsCleansing extends CardImpl {
+public final class IronwrightsCleansing extends CardImpl {
 
     public IronwrightsCleansing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

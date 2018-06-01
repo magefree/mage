@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class GontiLordOfLuxury extends CardImpl {
+public final class GontiLordOfLuxury extends CardImpl {
 
     protected static final String VALUE_PREFIX = "ExileZones";
 

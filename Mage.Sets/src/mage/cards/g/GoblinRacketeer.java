@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class GoblinRacketeer extends CardImpl {
+public final class GoblinRacketeer extends CardImpl {
 
     private final UUID originalId;
 

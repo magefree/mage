@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class VisceridDrone extends CardImpl {
+public final class VisceridDrone extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("nonartifact creature");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Swamp");

@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class ZadasCommando extends CardImpl {
+public final class ZadasCommando extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
 

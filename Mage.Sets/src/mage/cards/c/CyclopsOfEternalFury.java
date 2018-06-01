@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class CyclopsOfEternalFury extends CardImpl {
+public final class CyclopsOfEternalFury extends CardImpl {
 
     
     public CyclopsOfEternalFury(UUID ownerId, CardSetInfo setInfo) {

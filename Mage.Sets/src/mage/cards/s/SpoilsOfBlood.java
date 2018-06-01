@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class SpoilsOfBlood extends CardImpl {
+public final class SpoilsOfBlood extends CardImpl {
 
     public SpoilsOfBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

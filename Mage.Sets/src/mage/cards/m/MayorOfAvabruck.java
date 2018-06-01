@@ -52,7 +52,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North, noxx
  */
-public class MayorOfAvabruck extends CardImpl {
+public final class MayorOfAvabruck extends CardImpl {
 
     private static final String ruleText = "Other Human creatures you control get +1/+1";
 

@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class KorCartographer extends CardImpl {
+public final class KorCartographer extends CardImpl {
 
     public KorCartographer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class Whiteout extends CardImpl {
+public final class Whiteout extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
 

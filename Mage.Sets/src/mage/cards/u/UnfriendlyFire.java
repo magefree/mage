@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author spjspj
  */
-public class UnfriendlyFire extends CardImpl {
+public final class UnfriendlyFire extends CardImpl {
 
     public UnfriendlyFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");

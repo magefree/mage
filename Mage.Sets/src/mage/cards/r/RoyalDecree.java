@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class RoyalDecree extends CardImpl {
+public final class RoyalDecree extends CardImpl {
 
     public RoyalDecree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class FathomSeer extends CardImpl {
+public final class FathomSeer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
 

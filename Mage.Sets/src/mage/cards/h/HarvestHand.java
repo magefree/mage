@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author halljared
  */
-public class HarvestHand extends CardImpl {
+public final class HarvestHand extends CardImpl {
 
     public HarvestHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

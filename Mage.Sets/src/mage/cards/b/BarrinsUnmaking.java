@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class BarrinsUnmaking extends CardImpl {
+public final class BarrinsUnmaking extends CardImpl {
 
     public BarrinsUnmaking(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author TheElk801
  */
-public class WarlordsFury extends CardImpl {
+public final class WarlordsFury extends CardImpl {
 
     public WarlordsFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");

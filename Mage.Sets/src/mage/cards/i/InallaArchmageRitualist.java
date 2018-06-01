@@ -68,7 +68,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class InallaArchmageRitualist extends CardImpl {
+public final class InallaArchmageRitualist extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another nontoken Wizard");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("untapped Wizards you control");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class IllusoryAmbusher extends CardImpl {
+public final class IllusoryAmbusher extends CardImpl {
 
     public IllusoryAmbusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

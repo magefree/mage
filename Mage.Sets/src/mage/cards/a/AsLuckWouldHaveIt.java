@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class AsLuckWouldHaveIt extends CardImpl {
+public final class AsLuckWouldHaveIt extends CardImpl {
 
     static final String rule = "put a number of luck counters on {this} equal to the result. Then if there are 100 or more luck counters on {this}, you win the game.";
 

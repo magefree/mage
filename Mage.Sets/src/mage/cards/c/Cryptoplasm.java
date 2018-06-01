@@ -49,7 +49,7 @@ import mage.util.functions.ApplyToPermanent;
 /**
  * @author Loki
  */
-public class Cryptoplasm extends CardImpl {
+public final class Cryptoplasm extends CardImpl {
 
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

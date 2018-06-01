@@ -40,7 +40,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author anonymous
  */
-public class WavesOfAggression extends CardImpl {
+public final class WavesOfAggression extends CardImpl {
 
     public WavesOfAggression(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R/W}{R/W}");

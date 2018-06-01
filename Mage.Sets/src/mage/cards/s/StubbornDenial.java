@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class StubbornDenial extends CardImpl {
+public final class StubbornDenial extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
     static {

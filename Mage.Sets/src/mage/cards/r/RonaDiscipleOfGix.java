@@ -60,7 +60,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class RonaDiscipleOfGix extends CardImpl {
+public final class RonaDiscipleOfGix extends CardImpl {
 
     public RonaDiscipleOfGix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class KessigCagebreakers extends CardImpl {
+public final class KessigCagebreakers extends CardImpl {
 
     public KessigCagebreakers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

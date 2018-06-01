@@ -42,7 +42,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author dustinconrad
  */
-public class LeoninElder extends CardImpl {
+public final class LeoninElder extends CardImpl {
 
     public LeoninElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

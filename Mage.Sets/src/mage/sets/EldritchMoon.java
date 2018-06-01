@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class EldritchMoon extends ExpansionSet {
+public final class EldritchMoon extends ExpansionSet {
 
     private static final EldritchMoon instance = new EldritchMoon();
 

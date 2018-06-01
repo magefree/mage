@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class LoxodonStalwart extends CardImpl {
+public final class LoxodonStalwart extends CardImpl {
 
     public LoxodonStalwart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

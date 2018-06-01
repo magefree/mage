@@ -50,7 +50,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author Loki
  */
-public class ThopterAssembly extends CardImpl {
+public final class ThopterAssembly extends CardImpl {
 
     public ThopterAssembly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

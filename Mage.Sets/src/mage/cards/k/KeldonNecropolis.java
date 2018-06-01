@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class KeldonNecropolis extends CardImpl {
+public final class KeldonNecropolis extends CardImpl {
 
     public KeldonNecropolis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

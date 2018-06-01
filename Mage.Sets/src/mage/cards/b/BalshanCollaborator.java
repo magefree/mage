@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class BalshanCollaborator extends CardImpl {
+public final class BalshanCollaborator extends CardImpl {
 
     public BalshanCollaborator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

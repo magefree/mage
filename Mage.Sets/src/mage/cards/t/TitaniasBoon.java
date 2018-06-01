@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Backfir3
  */
-public class TitaniasBoon extends CardImpl {
+public final class TitaniasBoon extends CardImpl {
 
     public TitaniasBoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

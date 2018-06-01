@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class JaradsOrders extends CardImpl {
+public final class JaradsOrders extends CardImpl {
 
     public JaradsOrders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{G}");

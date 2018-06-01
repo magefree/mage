@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HauntedGuardian extends CardImpl {
+public final class HauntedGuardian extends CardImpl {
 
     public HauntedGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

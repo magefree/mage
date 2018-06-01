@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class HaruOnna extends CardImpl {
+public final class HaruOnna extends CardImpl {
 
     public HaruOnna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

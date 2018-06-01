@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HuatliRadiantChampion extends CardImpl {
+public final class HuatliRadiantChampion extends CardImpl {
 
     public HuatliRadiantChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");

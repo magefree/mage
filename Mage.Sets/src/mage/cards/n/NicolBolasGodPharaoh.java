@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Will
  */
-public class NicolBolasGodPharaoh extends CardImpl {
+public final class NicolBolasGodPharaoh extends CardImpl {
 
     private static final FilterPermanent opponentsNonlandPermanentsFilter = new FilterNonlandPermanent("non-land permanents your opponents control");
 

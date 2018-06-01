@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Juggernaut extends CardImpl {
+public final class Juggernaut extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
 

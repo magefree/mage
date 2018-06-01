@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class DistantMemories extends CardImpl {
+public final class DistantMemories extends CardImpl {
 
     public DistantMemories(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");

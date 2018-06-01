@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PlatedSlagwurm extends CardImpl {
+public final class PlatedSlagwurm extends CardImpl {
 
     public PlatedSlagwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");

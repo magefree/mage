@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CloudhoofKirin extends CardImpl {
+public final class CloudhoofKirin extends CardImpl {
 
     public CloudhoofKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

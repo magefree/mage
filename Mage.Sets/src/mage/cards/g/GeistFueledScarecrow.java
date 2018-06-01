@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class GeistFueledScarecrow extends CardImpl {
+public final class GeistFueledScarecrow extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Creature spells");
 

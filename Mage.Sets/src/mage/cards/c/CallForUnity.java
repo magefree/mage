@@ -50,7 +50,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author fireshoes
  */
-public class CallForUnity extends CardImpl {
+public final class CallForUnity extends CardImpl {
 
     private static final String ruleText = "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, "
             + "put a unity counter on {this}.";

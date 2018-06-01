@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MassOfGhouls extends CardImpl {
+public final class MassOfGhouls extends CardImpl {
 
     public MassOfGhouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

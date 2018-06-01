@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class EbonStronghold extends CardImpl {
+public final class EbonStronghold extends CardImpl {
 
     public EbonStronghold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

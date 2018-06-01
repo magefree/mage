@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class Inhumaniac extends CardImpl {
+public final class Inhumaniac extends CardImpl {
 
     public Inhumaniac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

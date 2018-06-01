@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Quercitron
  */
-public class BlackOakOfOdunos extends CardImpl {
+public final class BlackOakOfOdunos extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another untapped creature you control");
 

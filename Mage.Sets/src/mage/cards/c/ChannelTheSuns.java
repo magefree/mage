@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author magenoxx
  */
-public class ChannelTheSuns extends CardImpl {
+public final class ChannelTheSuns extends CardImpl {
 
     public ChannelTheSuns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

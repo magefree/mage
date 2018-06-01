@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
 /**
  * @author Loki
  */
-public class NezumiGraverobber extends CardImpl {
+public final class NezumiGraverobber extends CardImpl {
 
     public NezumiGraverobber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class DefendTheHearth extends CardImpl {
+public final class DefendTheHearth extends CardImpl {
 
     public DefendTheHearth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

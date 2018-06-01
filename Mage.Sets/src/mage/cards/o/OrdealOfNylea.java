@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OrdealOfNylea extends CardImpl {
+public final class OrdealOfNylea extends CardImpl {
 
     public OrdealOfNylea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
@@ -76,7 +76,7 @@ public class OrdealOfNylea extends CardImpl {
         this.addAbility(ability);
         // When you sacrifice Ordeal of Nylea, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
         ability = new SacrificeSourceTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_BASIC_LAND_CARD),true, true),false);
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_CARD_BASIC_LAND),true, true),false);
         this.addAbility(ability);
     }
 

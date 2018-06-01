@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class CultivatorsCaravan extends CardImpl {
+public final class CultivatorsCaravan extends CardImpl {
 
     public CultivatorsCaravan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

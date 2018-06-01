@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class DecreeOfJustice extends CardImpl {
+public final class DecreeOfJustice extends CardImpl {
 
     public DecreeOfJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{2}{W}{W}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HollowhengeBeast extends CardImpl {
+public final class HollowhengeBeast extends CardImpl {
 
     public HollowhengeBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

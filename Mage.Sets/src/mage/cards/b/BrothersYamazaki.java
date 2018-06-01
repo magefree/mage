@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BrothersYamazaki extends CardImpl {
+public final class BrothersYamazaki extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

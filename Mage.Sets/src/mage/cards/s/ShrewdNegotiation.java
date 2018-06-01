@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class ShrewdNegotiation extends CardImpl {
+public final class ShrewdNegotiation extends CardImpl {
 
     private static final String rule = "Exchange control of target artifact you control and target artifact or creature you don't control";
 

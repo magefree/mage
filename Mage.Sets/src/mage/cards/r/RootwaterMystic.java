@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class RootwaterMystic extends CardImpl {
+public final class RootwaterMystic extends CardImpl {
 
     public RootwaterMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class EnragedGiant extends CardImpl {
+public final class EnragedGiant extends CardImpl {
 
     public EnragedGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

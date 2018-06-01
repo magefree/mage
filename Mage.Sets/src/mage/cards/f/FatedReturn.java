@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class FatedReturn extends CardImpl {
+public final class FatedReturn extends CardImpl {
 
     public FatedReturn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}{B}");

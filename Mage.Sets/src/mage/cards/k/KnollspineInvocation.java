@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author anonymous
  */
-public class KnollspineInvocation extends CardImpl {
+public final class KnollspineInvocation extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a card with converted mana cost X");
 

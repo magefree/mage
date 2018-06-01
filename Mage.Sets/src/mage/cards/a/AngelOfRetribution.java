@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AngelOfRetribution extends CardImpl {
+public final class AngelOfRetribution extends CardImpl {
 
     public AngelOfRetribution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");

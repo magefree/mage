@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class NimbleMongoose extends CardImpl {
+public final class NimbleMongoose extends CardImpl {
 
     public NimbleMongoose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class Cloudform extends CardImpl {
+public final class Cloudform extends CardImpl {
 
     public Cloudform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");

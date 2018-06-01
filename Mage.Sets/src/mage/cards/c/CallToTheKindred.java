@@ -59,7 +59,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CallToTheKindred extends CardImpl {
+public final class CallToTheKindred extends CardImpl {
 
     public CallToTheKindred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

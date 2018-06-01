@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class RakshaGoldenCub extends CardImpl {
+public final class RakshaGoldenCub extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cat creatures you control");
     static {

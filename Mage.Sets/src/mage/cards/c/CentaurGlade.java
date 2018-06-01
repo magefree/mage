@@ -41,7 +41,7 @@ import mage.game.permanent.token.CentaurToken;
  *
  * @author fireshoes
  */
-public class CentaurGlade extends CardImpl {
+public final class CentaurGlade extends CardImpl {
 
     public CentaurGlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");

@@ -45,7 +45,7 @@ import mage.constants.TimingRule;
  *
  * @author fireshoes
  */
-public class MarshalingCry extends CardImpl {
+public final class MarshalingCry extends CardImpl {
     
     public MarshalingCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");

@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class WalkerOfTheWastes extends CardImpl {
+public final class WalkerOfTheWastes extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("each land you control named Wastes");
 

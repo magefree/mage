@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SurrakTheHuntCaller extends CardImpl {
+public final class SurrakTheHuntCaller extends CardImpl {
 
     public SurrakTheHuntCaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

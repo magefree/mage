@@ -58,7 +58,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Quercitron
  */
-public class PhantasmalTerrain extends CardImpl {
+public final class PhantasmalTerrain extends CardImpl {
 
     public PhantasmalTerrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");

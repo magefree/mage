@@ -47,7 +47,7 @@ import mage.util.functions.AbilityApplier;
  *
  * @author LevelX2
  */
-public class MercurialPretender extends CardImpl {
+public final class MercurialPretender extends CardImpl {
 
     private static final String effectText = "as a copy of any creature you control except it gains \"{2}{U}{U}: Return this creature to its owner's hand.\"";
 

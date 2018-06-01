@@ -44,7 +44,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class MasterOfPearls extends CardImpl {
+public final class MasterOfPearls extends CardImpl {
 
     public MasterOfPearls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

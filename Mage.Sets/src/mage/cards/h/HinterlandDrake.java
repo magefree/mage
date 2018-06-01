@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author Styxo
  */
-public class HinterlandDrake extends CardImpl {
+public final class HinterlandDrake extends CardImpl {
 
     public HinterlandDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

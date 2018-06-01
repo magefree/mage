@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author LevelX2
  */
-public class TurnTheTables extends CardImpl {
+public final class TurnTheTables extends CardImpl {
 
     public TurnTheTables(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");

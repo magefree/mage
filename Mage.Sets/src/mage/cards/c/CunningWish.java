@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class CunningWish extends CardImpl {
+public final class CunningWish extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an instant card");
 

@@ -33,7 +33,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -60,7 +60,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class CrypticGateway extends CardImpl {
+public final class CrypticGateway extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
@@ -71,7 +71,7 @@ public class CrypticGateway extends CardImpl {
     TargetControlledPermanent target;
 
     public CrypticGateway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Tap two untapped creatures you control: You may put a creature card from your hand that shares a creature type with each creature tapped this way onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrypticGatewayEffect(), new CrypticGatewayCost(new TargetControlledPermanent(filter))));
@@ -173,7 +173,7 @@ class CrypticGatewayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (source == null || source.getCosts() == null) {
+        if (source.getCosts() == null) {
             return false;
         }
 
@@ -223,7 +223,7 @@ class CrypticGatewayEffect extends OneShotEffect {
                 }
 
                 if (commonSubType) {
-                    PutPermanentOnBattlefieldEffect putIntoPlay = new PutPermanentOnBattlefieldEffect(filter);
+                    PutCardFromHandOntoBattlefieldEffect putIntoPlay = new PutCardFromHandOntoBattlefieldEffect(filter);
                     putIntoPlay.apply(game, source);
                 }
             }

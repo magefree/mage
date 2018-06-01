@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MarshCasualties extends CardImpl {
+public final class MarshCasualties extends CardImpl {
 
     private static final String ruleText = "Creatures target player controls get -1/-1 until end of turn. if this spell was kicked, those creatures get -2/-2 until end of turn instead";
 

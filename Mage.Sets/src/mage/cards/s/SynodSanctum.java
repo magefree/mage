@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author spjspj
  */
-public class SynodSanctum extends CardImpl {
+public final class SynodSanctum extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you control");
 

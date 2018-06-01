@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class EmberstrikeDuo extends CardImpl {
+public final class EmberstrikeDuo extends CardImpl {
 
     private static final FilterSpell blackFilter = new FilterSpell("a black spell");
     private static final FilterSpell redFilter = new FilterSpell("a red spell");

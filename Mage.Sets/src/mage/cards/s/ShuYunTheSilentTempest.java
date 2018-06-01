@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ShuYunTheSilentTempest extends CardImpl {
+public final class ShuYunTheSilentTempest extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

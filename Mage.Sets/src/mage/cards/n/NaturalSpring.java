@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class NaturalSpring extends CardImpl {
+public final class NaturalSpring extends CardImpl {
 
     public NaturalSpring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");

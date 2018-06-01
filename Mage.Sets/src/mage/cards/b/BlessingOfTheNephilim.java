@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class BlessingOfTheNephilim extends CardImpl {
+public final class BlessingOfTheNephilim extends CardImpl {
 
     public BlessingOfTheNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author dustinconrad
  */
-public class MaggotCarrier extends CardImpl {
+public final class MaggotCarrier extends CardImpl {
 
     public MaggotCarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

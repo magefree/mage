@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class KeeperOfTheNineGales extends CardImpl {
+public final class KeeperOfTheNineGales extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Birds you control");
 

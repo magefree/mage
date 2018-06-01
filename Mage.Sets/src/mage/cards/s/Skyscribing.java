@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class Skyscribing extends CardImpl {
+public final class Skyscribing extends CardImpl {
 
     public Skyscribing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");

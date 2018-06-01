@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author dustinconrad
  */
-public class Ghostfire extends CardImpl {
+public final class Ghostfire extends CardImpl {
 
     public Ghostfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

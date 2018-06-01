@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class VampireEnvoy extends CardImpl {
+public final class VampireEnvoy extends CardImpl {
 
     public VampireEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

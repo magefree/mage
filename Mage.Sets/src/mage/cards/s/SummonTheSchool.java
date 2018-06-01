@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class SummonTheSchool extends CardImpl {
+public final class SummonTheSchool extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 

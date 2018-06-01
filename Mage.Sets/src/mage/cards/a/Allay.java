@@ -39,7 +39,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author fireshoes
  */
-public class Allay extends CardImpl {
+public final class Allay extends CardImpl {
 
     public Allay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

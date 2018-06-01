@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author MarcoMarin
  */
-public class SerendibDjinn extends CardImpl {
+public final class SerendibDjinn extends CardImpl {
 
     public SerendibDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

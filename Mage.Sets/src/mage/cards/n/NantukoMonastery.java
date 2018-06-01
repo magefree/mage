@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author anonymous
  */
-public class NantukoMonastery extends CardImpl {
+public final class NantukoMonastery extends CardImpl {
 
     public NantukoMonastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class SpireBarrage extends CardImpl {
+public final class SpireBarrage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 

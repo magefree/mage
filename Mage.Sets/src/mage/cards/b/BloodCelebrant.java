@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class BloodCelebrant extends CardImpl {
+public final class BloodCelebrant extends CardImpl {
 
     public BloodCelebrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

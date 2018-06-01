@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class KioraTheCrashingWave extends CardImpl {
+public final class KioraTheCrashingWave extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
 

@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class Hollowsage extends CardImpl {
+public final class Hollowsage extends CardImpl {
     
     public Hollowsage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

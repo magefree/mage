@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SilverstormSamurai extends CardImpl {
+public final class SilverstormSamurai extends CardImpl {
 
     public SilverstormSamurai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

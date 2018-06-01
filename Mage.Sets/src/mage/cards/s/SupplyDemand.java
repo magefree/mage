@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class SupplyDemand extends SplitCard {
+public final class SupplyDemand extends SplitCard {
 
     private static final FilterCard filter = new FilterCard("multicolored card");
 

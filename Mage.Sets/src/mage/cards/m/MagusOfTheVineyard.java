@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MagusOfTheVineyard extends CardImpl {
+public final class MagusOfTheVineyard extends CardImpl {
 
     public MagusOfTheVineyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class JourneyersKite extends CardImpl {
+public final class JourneyersKite extends CardImpl {
 
 
         public JourneyersKite (UUID ownerId, CardSetInfo setInfo) {
@@ -54,7 +54,7 @@ public class JourneyersKite extends CardImpl {
 
         // {3}, {tap}: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

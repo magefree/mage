@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  *
  * @author Loki
  */
-public class Putrefax extends CardImpl {
+public final class Putrefax extends CardImpl {
 
     public Putrefax (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

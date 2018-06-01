@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class ProfoundJourney extends CardImpl {
+public final class ProfoundJourney extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("permanent card from your graveyard");
     

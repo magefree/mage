@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class RayOfErasure extends CardImpl {
+public final class RayOfErasure extends CardImpl {
 
     public RayOfErasure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

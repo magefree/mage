@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author stravant
  */
-public class PitilessVizier extends CardImpl {
+public final class PitilessVizier extends CardImpl {
 
     public PitilessVizier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

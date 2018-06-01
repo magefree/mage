@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class HatchingPlans extends CardImpl {
+public final class HatchingPlans extends CardImpl {
 
     public HatchingPlans (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class IdeasUnbound extends CardImpl {
+public final class IdeasUnbound extends CardImpl {
 
     public IdeasUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");

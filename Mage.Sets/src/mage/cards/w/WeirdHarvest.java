@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class WeirdHarvest extends CardImpl {
+public final class WeirdHarvest extends CardImpl {
 
     public WeirdHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}");

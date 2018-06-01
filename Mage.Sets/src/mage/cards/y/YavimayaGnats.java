@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author nigelzor
  */
-public class YavimayaGnats extends CardImpl {
+public final class YavimayaGnats extends CardImpl {
 
     public YavimayaGnats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

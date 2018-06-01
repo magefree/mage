@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevleX2
  */
-public class SunderingGrowth extends CardImpl {
+public final class SunderingGrowth extends CardImpl {
 
     public SunderingGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/W}{G/W}");

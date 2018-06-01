@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Narcolepsy extends CardImpl {
+public final class Narcolepsy extends CardImpl {
 
 
     public Narcolepsy(UUID ownerId, CardSetInfo setInfo) {

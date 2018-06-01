@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Wehk
  */
-public class ProfanePrayers extends CardImpl {
+public final class ProfanePrayers extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Cleric on the battlefield");
 

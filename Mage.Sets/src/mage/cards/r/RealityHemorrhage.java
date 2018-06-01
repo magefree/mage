@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class RealityHemorrhage extends CardImpl {
+public final class RealityHemorrhage extends CardImpl {
 
     public RealityHemorrhage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

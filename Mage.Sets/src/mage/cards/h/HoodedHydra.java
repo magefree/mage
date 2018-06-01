@@ -53,7 +53,7 @@ import mage.game.permanent.token.SnakeToken;
  *
  * @author LevelX2
  */
-public class HoodedHydra extends CardImpl {
+public final class HoodedHydra extends CardImpl {
 
     public HoodedHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{G}");

@@ -28,7 +28,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author BursegSardaukar
  */
-public class GoblinArchaeologist extends CardImpl {
+public final class GoblinArchaeologist extends CardImpl {
 
     public GoblinArchaeologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

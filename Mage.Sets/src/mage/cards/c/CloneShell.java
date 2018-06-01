@@ -49,7 +49,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko
  */
-public class CloneShell extends CardImpl {
+public final class CloneShell extends CardImpl {
 
     public CloneShell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
@@ -92,7 +92,7 @@ class CloneShellEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));

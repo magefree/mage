@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author vereena42
  */
-public class DeathWatch extends CardImpl {
+public final class DeathWatch extends CardImpl {
 
     public DeathWatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

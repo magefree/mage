@@ -45,7 +45,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class CommuneWithTheGods extends CardImpl {
+public final class CommuneWithTheGods extends CardImpl {
 
     public CommuneWithTheGods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

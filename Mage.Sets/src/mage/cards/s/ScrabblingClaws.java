@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class ScrabblingClaws extends CardImpl {
+public final class ScrabblingClaws extends CardImpl {
 
     public ScrabblingClaws(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

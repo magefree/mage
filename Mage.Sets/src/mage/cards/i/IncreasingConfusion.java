@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward
  */
-public class IncreasingConfusion extends CardImpl {
+public final class IncreasingConfusion extends CardImpl {
 
     public IncreasingConfusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}");

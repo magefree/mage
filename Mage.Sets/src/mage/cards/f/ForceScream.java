@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Styxo
  */
-public class ForceScream extends CardImpl {
+public final class ForceScream extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without spaceflight");
 

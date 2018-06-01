@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class PredatorsGambit extends CardImpl {
+public final class PredatorsGambit extends CardImpl {
 
     private static final String rule = "Enchanted creature has intimidate as long as its controller controls no other creatures";
 

@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class OkinaTempleToTheGrandfathers extends CardImpl {
+public final class OkinaTempleToTheGrandfathers extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 

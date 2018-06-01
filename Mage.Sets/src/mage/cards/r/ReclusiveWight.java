@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author TheElk801
  */
-public class ReclusiveWight extends CardImpl {
+public final class ReclusiveWight extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another nonland permanent");
 

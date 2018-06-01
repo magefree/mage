@@ -39,7 +39,7 @@ import mage.filter.common.FilterInstantOrSorcerySpell;
  *
  * @author LevelX2
  */
-public class SwarmIntelligence extends CardImpl {
+public final class SwarmIntelligence extends CardImpl {
 
     public SwarmIntelligence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{U}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class Blightspeaker extends CardImpl {
+public final class Blightspeaker extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 3 or less");
     

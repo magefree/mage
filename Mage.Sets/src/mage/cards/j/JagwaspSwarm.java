@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class JagwaspSwarm extends CardImpl {
+public final class JagwaspSwarm extends CardImpl {
 
     public JagwaspSwarm (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class WildMongrel extends CardImpl {
+public final class WildMongrel extends CardImpl {
 
     public WildMongrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

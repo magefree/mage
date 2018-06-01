@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author Plopman
  */
-public class NimGrotesque extends CardImpl {
+public final class NimGrotesque extends CardImpl {
 
     public NimGrotesque(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");

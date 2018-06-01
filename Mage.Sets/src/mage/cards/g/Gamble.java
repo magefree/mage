@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class Gamble extends CardImpl {
+public final class Gamble extends CardImpl {
 
     public Gamble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class MoralityShift extends CardImpl {
+public final class MoralityShift extends CardImpl {
 
     public MoralityShift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");

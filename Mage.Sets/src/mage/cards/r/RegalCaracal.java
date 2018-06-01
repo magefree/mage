@@ -49,7 +49,7 @@ import mage.game.permanent.token.CatToken2;
  *
  * @author fireshoes
  */
-public class RegalCaracal extends CardImpl {
+public final class RegalCaracal extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cats");
 

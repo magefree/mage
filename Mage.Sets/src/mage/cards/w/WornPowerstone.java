@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class WornPowerstone extends CardImpl {
+public final class WornPowerstone extends CardImpl {
 
     public WornPowerstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

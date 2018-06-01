@@ -42,7 +42,7 @@ import mage.game.permanent.token.DroidToken;
  *
  * @author Styxo
  */
-public class SecurityDroid extends CardImpl {
+public final class SecurityDroid extends CardImpl {
 
     public SecurityDroid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W}");

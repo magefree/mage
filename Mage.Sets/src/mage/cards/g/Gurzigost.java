@@ -58,7 +58,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000 & L_J
  */
-public class Gurzigost extends CardImpl {
+public final class Gurzigost extends CardImpl {
 
     public Gurzigost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

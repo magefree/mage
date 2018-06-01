@@ -32,6 +32,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
@@ -347,7 +348,8 @@ public class ContinuousEffects implements Serializable {
         }
         // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
-        for (ReplacementEffect effect : replacementEffects) {
+        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext();) {
+            ReplacementEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
             }
@@ -378,7 +380,8 @@ public class ContinuousEffects implements Serializable {
                 replaceEffects.put(effect, applicableAbilities);
             }
         }
-        for (PreventionEffect effect : preventionEffects) {
+        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext();) {
+            PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
             }
@@ -504,36 +507,23 @@ public class ContinuousEffects implements Serializable {
      *
      * @param objectId
      * @param type
-     * @param controllerId
-     * @param game
-     * @return sourceId of the permitting effect if any exists otherwise returns
-     * null
-     */
-    public UUID asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
-        return asThough(objectId, type, null, controllerId, game);
-    }
-
-    /**
-     *
-     * @param objectId
-     * @param type
      * @param affectedAbility
      * @param controllerId
      * @param game
      * @return sourceId of the permitting effect if any exists otherwise returns
      * null
      */
-    public UUID asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    public MageObjectReference asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         for (AsThoughEffect effect : asThoughEffectsList) {
             Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (affectedAbility == null) {
                     if (effect.applies(objectId, ability, controllerId, game)) {
-                        return ability.getSourceId();
+                        return new MageObjectReference(ability.getSourceObject(game), game);
                     }
                 } else if (effect.applies(objectId, affectedAbility, ability, game)) {
-                    return ability.getSourceId();
+                    return new MageObjectReference(ability.getSourceObject(game), game);
                 }
             }
         }
@@ -849,6 +839,9 @@ public class ContinuousEffects implements Serializable {
             if (rEffect != null) {
                 event.getAppliedEffects().add(rEffect.getId());
                 caught = rEffect.replaceEvent(event, rAbility, game);
+                if (Duration.OneUse.equals(rEffect.getDuration())) {
+                    rEffect.discard();
+                }
             }
             if (caught) { // Event was completely replaced -> stop applying effects to it
                 break;
@@ -932,8 +925,7 @@ public class ContinuousEffects implements Serializable {
             System.out.println(game.getTurn() + ", " + game.getPhase() + ": " + "need apply " + layer.stream()
                     .map((eff) -> {return eff.getClass().getName().replaceAll(".+\\.(.+)", "$1");})
                     .collect(Collectors.joining(", ")));
-            */
-
+             */
             for (ContinuousEffect effect : layer) {
                 if (activeLayerEffects.contains(effect) && !appliedEffects.contains(effect.getId())) { // Effect does still exist and was not applied yet
                     Set<UUID> dependentTo = effect.isDependentTo(layer);

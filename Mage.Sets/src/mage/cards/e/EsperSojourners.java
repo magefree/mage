@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class EsperSojourners extends CardImpl {
+public final class EsperSojourners extends CardImpl {
 
     public EsperSojourners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}{B}");

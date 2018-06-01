@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author MarcoMarin
  */
-public class ArmageddonClock extends CardImpl {
+public final class ArmageddonClock extends CardImpl {
 
     public ArmageddonClock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

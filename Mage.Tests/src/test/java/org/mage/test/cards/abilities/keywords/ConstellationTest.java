@@ -6,7 +6,6 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.util.functions.Function;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -16,11 +15,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ConstellationTest extends CardTestPlayerBase {
 
     /**
-     * Daxos's Torment {3}{B}
-     * Constellation — Whenever Daxos’s Torment or another enchantment enters the battlefield under your control,
-     * Daxos’s Torment becomes a 5/5 Demon creature with flying and haste in addition to its other types until end of turn.
+     * Daxos's Torment {3}{B} Constellation — Whenever Daxos’s Torment or
+     * another enchantment enters the battlefield under your control, Daxos’s
+     * Torment becomes a 5/5 Demon creature with flying and haste in addition to
+     * its other types until end of turn.
      */
-
     private final String daxosCard = "Daxos's Torment";
 
     private void assertDaxosBoost(boolean mustHave) {
@@ -150,7 +149,7 @@ public class ConstellationTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, daxosCard, 0);
         assertPermanentCount(playerA, daxosCard, 1);
-        assertHandCount(playerA, "Gravity Sphere", 0);
+        assertHandCount(playerA, "Gravity Sphere", 0); // Possible problem : this is sometimes 1
         assertPermanentCount(playerA, "Gravity Sphere", 1);
 
         assertPowerToughness(playerA, daxosCard, 5, 5);
@@ -227,5 +226,3 @@ public class ConstellationTest extends CardTestPlayerBase {
         playDaxosAndVampire(true);
     }
 }
-
-

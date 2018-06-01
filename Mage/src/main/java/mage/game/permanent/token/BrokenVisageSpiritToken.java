@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj & L_J
  */
-public class BrokenVisageSpiritToken extends TokenImpl {
+public final class BrokenVisageSpiritToken extends TokenImpl {
 
     public BrokenVisageSpiritToken() {
         this(0,0);

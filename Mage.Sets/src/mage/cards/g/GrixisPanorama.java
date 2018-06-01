@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class GrixisPanorama extends CardImpl {
+public final class GrixisPanorama extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a basic Island, Swamp, or Mountain card");
 

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FetidHeath extends CardImpl {
+public final class FetidHeath extends CardImpl {
 
     public FetidHeath (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

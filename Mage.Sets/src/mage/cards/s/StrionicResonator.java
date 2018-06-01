@@ -49,7 +49,7 @@ import mage.target.common.TargetTriggeredAbility;
  *
  * @author Plopman
  */
-public class StrionicResonator extends CardImpl {
+public final class StrionicResonator extends CardImpl {
 
     public StrionicResonator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

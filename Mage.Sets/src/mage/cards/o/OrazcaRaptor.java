@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class OrazcaRaptor extends CardImpl {
+public final class OrazcaRaptor extends CardImpl {
 
     public OrazcaRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

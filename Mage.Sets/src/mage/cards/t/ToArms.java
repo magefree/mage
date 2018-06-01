@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jj-marcel
  */
-public class ToArms extends CardImpl {
+public final class ToArms extends CardImpl {
 
      private static final String rule = "untap all creatures you control";
       

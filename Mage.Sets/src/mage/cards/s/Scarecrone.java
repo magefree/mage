@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class Scarecrone extends CardImpl {
+public final class Scarecrone extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact creature card from your graveyard");
     private static final FilterControlledCreaturePermanent filterScarecrow = new FilterControlledCreaturePermanent("Scarecrow");

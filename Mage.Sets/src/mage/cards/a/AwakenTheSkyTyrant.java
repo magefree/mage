@@ -44,7 +44,7 @@ import mage.game.permanent.token.DragonToken2;
  *
  * @author LevelX2
  */
-public class AwakenTheSkyTyrant extends CardImpl {
+public final class AwakenTheSkyTyrant extends CardImpl {
 
     public AwakenTheSkyTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

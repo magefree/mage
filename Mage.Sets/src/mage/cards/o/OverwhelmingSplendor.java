@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class OverwhelmingSplendor extends CardImpl {
+public final class OverwhelmingSplendor extends CardImpl {
 
     public OverwhelmingSplendor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{W}{W}");

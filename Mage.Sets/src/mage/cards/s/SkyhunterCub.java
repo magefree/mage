@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Derpthemeus
  */
-public class SkyhunterCub extends CardImpl {
+public final class SkyhunterCub extends CardImpl {
 
     private static final String rule1 = "As long as {this} is equipped, it gets +1/+1";
     private static final String rule2 = "As long as {this} is equipped, it has flying";

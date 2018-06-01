@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author fireshoes
  */
-public class AuraFracture extends CardImpl {
+public final class AuraFracture extends CardImpl {
 
     public AuraFracture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

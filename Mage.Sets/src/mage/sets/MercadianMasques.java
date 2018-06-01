@@ -34,7 +34,7 @@ import mage.constants.SetType;
 /**
  * @author North
  */
-public class MercadianMasques extends ExpansionSet {
+public final class MercadianMasques extends ExpansionSet {
 
     private static final MercadianMasques instance = new MercadianMasques();
 
@@ -142,6 +142,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Dust Bowl", 316, Rarity.RARE, mage.cards.d.DustBowl.class));
         cards.add(new SetCardInfo("Embargo", 77, Rarity.RARE, mage.cards.e.Embargo.class));
         cards.add(new SetCardInfo("Energy Flux", 78, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
+        cards.add(new SetCardInfo("Enslaved Horror", 134, Rarity.UNCOMMON, mage.cards.e.EnslavedHorror.class));
         cards.add(new SetCardInfo("Extortion", 135, Rarity.RARE, mage.cards.e.Extortion.class));
         cards.add(new SetCardInfo("Eye of Ramos", 294, Rarity.RARE, mage.cards.e.EyeOfRamos.class));
         cards.add(new SetCardInfo("False Demise", 80, Rarity.UNCOMMON, mage.cards.f.FalseDemise.class));
@@ -201,6 +202,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Jhovall Rider", 26, Rarity.UNCOMMON, mage.cards.j.JhovallRider.class));
         cards.add(new SetCardInfo("Karn's Touch", 86, Rarity.RARE, mage.cards.k.KarnsTouch.class));
         cards.add(new SetCardInfo("Kris Mage", 195, Rarity.COMMON, mage.cards.k.KrisMage.class));
+        cards.add(new SetCardInfo("Kyren Archive", 302, Rarity.RARE, mage.cards.k.KyrenArchive.class));
         cards.add(new SetCardInfo("Kyren Glider", 196, Rarity.COMMON, mage.cards.k.KyrenGlider.class));
         cards.add(new SetCardInfo("Kyren Legate", 197, Rarity.UNCOMMON, mage.cards.k.KyrenLegate.class));
         cards.add(new SetCardInfo("Kyren Negotiations", 198, Rarity.UNCOMMON, mage.cards.k.KyrenNegotiations.class));
@@ -220,6 +222,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Magistrate's Scepter", 304, Rarity.RARE, mage.cards.m.MagistratesScepter.class));
         cards.add(new SetCardInfo("Magistrate's Veto", 204, Rarity.UNCOMMON, mage.cards.m.MagistratesVeto.class));
         cards.add(new SetCardInfo("Mercadia's Downfall", 205, Rarity.UNCOMMON, mage.cards.m.MercadiasDownfall.class));
+        cards.add(new SetCardInfo("Mercadian Atlas", 305, Rarity.RARE, mage.cards.m.MercadianAtlas.class));
         cards.add(new SetCardInfo("Mercadian Bazaar", 321, Rarity.UNCOMMON, mage.cards.m.MercadianBazaar.class));
         cards.add(new SetCardInfo("Midnight Ritual", 146, Rarity.RARE, mage.cards.m.MidnightRitual.class));
         cards.add(new SetCardInfo("Misdirection", 87, Rarity.RARE, mage.cards.m.Misdirection.class));

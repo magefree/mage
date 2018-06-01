@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -119,5 +120,27 @@ public class DashTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Screamreach Brawler", 1);
         assertGraveyardCount(playerB, "Geist of the Moors", 1);
 
+    }
+
+    /**
+     * Test that the creature got Dash again if cast again
+     */
+    @Test
+    public void testDashedCreatureDiesInCombatAndIsLaterRecast() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Screamreach Brawler"); // 2/3
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
+        setChoice(playerA, "Yes");
+        attack(1, playerA, "Screamreach Brawler");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 18);
+        assertPermanentCount(playerA, "Screamreach Brawler", 1);
+        assertHandCount(playerA, "Screamreach Brawler", 0);
+        assertAbility(playerA, "Screamreach Brawler", HasteAbility.getInstance(), true);
     }
 }

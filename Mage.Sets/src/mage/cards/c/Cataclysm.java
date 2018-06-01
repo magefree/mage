@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class Cataclysm extends CardImpl {
+public final class Cataclysm extends CardImpl {
 
     public Cataclysm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");

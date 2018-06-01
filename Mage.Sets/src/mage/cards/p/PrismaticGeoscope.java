@@ -43,7 +43,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class PrismaticGeoscope extends CardImpl {
+public final class PrismaticGeoscope extends CardImpl {
 
     public PrismaticGeoscope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

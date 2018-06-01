@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class PrereleaseEvents extends ExpansionSet {
+public final class PrereleaseEvents extends ExpansionSet {
 
     private static final PrereleaseEvents instance = new PrereleaseEvents();
 

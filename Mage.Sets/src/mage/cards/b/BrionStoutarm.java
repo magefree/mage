@@ -51,7 +51,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class BrionStoutarm extends CardImpl {
+public final class BrionStoutarm extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than Brion Stoutarm");
 

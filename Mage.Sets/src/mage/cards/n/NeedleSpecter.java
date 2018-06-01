@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class NeedleSpecter extends CardImpl {
+public final class NeedleSpecter extends CardImpl {
 
     public NeedleSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

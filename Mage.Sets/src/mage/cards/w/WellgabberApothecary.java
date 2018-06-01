@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class WellgabberApothecary extends CardImpl {
+public final class WellgabberApothecary extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target tapped Merfolk or Kithkin creature this turn");
 

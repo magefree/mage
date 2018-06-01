@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class RakdosGuildgate extends CardImpl {
+public final class RakdosGuildgate extends CardImpl {
 
     public RakdosGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

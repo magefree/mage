@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class SeismicElemental extends CardImpl {
+public final class SeismicElemental extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying");
 

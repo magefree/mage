@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class DeathSpark extends CardImpl {
+public final class DeathSpark extends CardImpl {
 
     public DeathSpark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

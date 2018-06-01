@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class HallOfTriumph extends CardImpl {
+public final class HallOfTriumph extends CardImpl {
 
     public HallOfTriumph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class CurseOfTheNightlyHunt extends CardImpl {
+public final class CurseOfTheNightlyHunt extends CardImpl {
 
     public CurseOfTheNightlyHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

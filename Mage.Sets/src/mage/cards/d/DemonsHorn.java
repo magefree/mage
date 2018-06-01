@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DemonsHorn extends CardImpl {
+public final class DemonsHorn extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("a black spell");
     

@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class SwordOfWarAndPeace extends CardImpl {
+public final class SwordOfWarAndPeace extends CardImpl {
 
     public SwordOfWarAndPeace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

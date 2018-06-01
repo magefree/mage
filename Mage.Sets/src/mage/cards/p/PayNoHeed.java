@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author jeffwadsworth
  */
-public class PayNoHeed extends CardImpl {
+public final class PayNoHeed extends CardImpl {
 
     public PayNoHeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

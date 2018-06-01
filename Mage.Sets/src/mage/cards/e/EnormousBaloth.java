@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class EnormousBaloth extends CardImpl {
+public final class EnormousBaloth extends CardImpl {
 
     public EnormousBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class IndulgentAristocrat extends CardImpl {
+public final class IndulgentAristocrat extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Vampire you control");
 

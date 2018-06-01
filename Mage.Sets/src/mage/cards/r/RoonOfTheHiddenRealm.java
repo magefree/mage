@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class RoonOfTheHiddenRealm extends CardImpl {
+public final class RoonOfTheHiddenRealm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 

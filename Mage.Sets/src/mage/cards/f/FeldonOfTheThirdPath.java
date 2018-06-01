@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class FeldonOfTheThirdPath extends CardImpl {
+public final class FeldonOfTheThirdPath extends CardImpl {
 
     public FeldonOfTheThirdPath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

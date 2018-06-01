@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GoblinBattleJester extends CardImpl {
+public final class GoblinBattleJester extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a red spell");
 

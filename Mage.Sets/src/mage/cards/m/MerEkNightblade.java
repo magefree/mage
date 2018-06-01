@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author emerald000
  */
-public class MerEkNightblade extends CardImpl {
+public final class MerEkNightblade extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent();
     static {

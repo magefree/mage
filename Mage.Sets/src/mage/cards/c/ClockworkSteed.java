@@ -63,7 +63,7 @@ import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
  *
  * @author escplan9, MarcoMarin & L_J
  */
-public class ClockworkSteed extends CardImpl {
+public final class ClockworkSteed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
 

@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class ShamanOfThePack extends CardImpl {
+public final class ShamanOfThePack extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("equal to the number of elves you control");
 

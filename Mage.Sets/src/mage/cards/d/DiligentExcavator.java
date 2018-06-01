@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class DiligentExcavator extends CardImpl {
+public final class DiligentExcavator extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 

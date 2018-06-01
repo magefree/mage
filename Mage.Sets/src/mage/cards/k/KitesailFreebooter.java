@@ -62,7 +62,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class KitesailFreebooter extends CardImpl {
+public final class KitesailFreebooter extends CardImpl {
 
     public KitesailFreebooter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

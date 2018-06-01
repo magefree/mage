@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class ProteusMachine extends CardImpl {
+public final class ProteusMachine extends CardImpl {
 
     public ProteusMachine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

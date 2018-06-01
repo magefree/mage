@@ -41,7 +41,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author TheElk801
  */
-public class YavimayaSapherd extends CardImpl {
+public final class YavimayaSapherd extends CardImpl {
 
     public YavimayaSapherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

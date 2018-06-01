@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class DashHopes extends CardImpl {
+public final class DashHopes extends CardImpl {
 
     public DashHopes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");

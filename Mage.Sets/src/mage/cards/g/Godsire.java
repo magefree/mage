@@ -44,7 +44,7 @@ import mage.game.permanent.token.GodSireBeastToken;
  *
  * @author Loki
  */
-public class Godsire extends CardImpl {
+public final class Godsire extends CardImpl {
 
     public Godsire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}{G}{W}");

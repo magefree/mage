@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward
  */
-public class Mindshrieker extends CardImpl {
+public final class Mindshrieker extends CardImpl {
 
     public Mindshrieker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

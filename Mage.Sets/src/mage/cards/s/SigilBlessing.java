@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class SigilBlessing extends CardImpl {
+public final class SigilBlessing extends CardImpl {
 
     public SigilBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{W}");

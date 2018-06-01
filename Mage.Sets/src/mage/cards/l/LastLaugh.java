@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class LastLaugh extends CardImpl {
+public final class LastLaugh extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a permanent other than Last Laugh");
     static {

@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class WorldBreaker extends CardImpl {
+public final class WorldBreaker extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
 

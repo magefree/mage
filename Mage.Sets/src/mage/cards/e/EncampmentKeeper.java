@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class EncampmentKeeper extends CardImpl {
+public final class EncampmentKeeper extends CardImpl {
 
     public EncampmentKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author anonymous
  */
-public class RockHydra extends CardImpl {
+public final class RockHydra extends CardImpl {
 
     public RockHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{R}{R}");

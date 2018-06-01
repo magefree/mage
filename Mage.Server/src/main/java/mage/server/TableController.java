@@ -100,7 +100,7 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()), 
+        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
                 options.getPlayerTypes(), TableRecorderImpl.instance, match, options.getBannedUsers(), options.isPlaneChase());
         chatId = ChatManager.instance.createChatSession("Match Table " + table.getId());
         init();
@@ -120,7 +120,7 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()), 
+        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()),
                 options.getPlayerTypes(), TableRecorderImpl.instance, tournament, options.getMatchOptions().getBannedUsers(), options.isPlaneChase());
         chatId = ChatManager.instance.createChatSession("Tourn. table " + table.getId());
     }
@@ -486,7 +486,11 @@ public class TableController {
             if (userPlayerMap.get(userId) != null) {
                 return false;
             }
-            return UserManager.instance.getUser(userId).get().ccWatchGame(match.getGame().getId());
+            Optional<User> _user = UserManager.instance.getUser(userId);
+            if (!_user.isPresent()) {
+                return false;
+            }
+            return _user.get().ccWatchGame(match.getGame().getId());
         }
     }
 

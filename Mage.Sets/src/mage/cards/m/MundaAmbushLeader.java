@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class MundaAmbushLeader extends CardImpl {
+public final class MundaAmbushLeader extends CardImpl {
 
     public MundaAmbushLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");

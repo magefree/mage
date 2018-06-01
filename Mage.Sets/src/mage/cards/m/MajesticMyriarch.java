@@ -67,7 +67,7 @@ import mage.game.Game;
  *
  * @author fireshoes
  */
-public class MajesticMyriarch extends CardImpl {
+public final class MajesticMyriarch extends CardImpl {
 
     public MajesticMyriarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

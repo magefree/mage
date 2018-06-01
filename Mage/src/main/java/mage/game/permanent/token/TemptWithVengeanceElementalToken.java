@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class TemptWithVengeanceElementalToken extends TokenImpl {
+public final class TemptWithVengeanceElementalToken extends TokenImpl {
 
     public TemptWithVengeanceElementalToken() {
         super("Elemental", "1/1 red Elemental creature tokens with haste");

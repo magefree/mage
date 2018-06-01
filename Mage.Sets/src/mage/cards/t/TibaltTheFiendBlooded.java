@@ -63,7 +63,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class TibaltTheFiendBlooded extends CardImpl {
+public final class TibaltTheFiendBlooded extends CardImpl {
 
     public TibaltTheFiendBlooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{R}{R}");

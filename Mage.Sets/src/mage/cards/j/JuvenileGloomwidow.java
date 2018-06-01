@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class JuvenileGloomwidow extends CardImpl {
+public final class JuvenileGloomwidow extends CardImpl {
 
     public JuvenileGloomwidow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

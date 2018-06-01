@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class LumberingFalls extends CardImpl {
+public final class LumberingFalls extends CardImpl {
 
     public LumberingFalls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

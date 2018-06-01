@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ParagonOfNewDawns extends CardImpl {
+public final class ParagonOfNewDawns extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Another white creature you control");

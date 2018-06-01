@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class SelflessSquire extends CardImpl {
+public final class SelflessSquire extends CardImpl {
 
     public SelflessSquire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

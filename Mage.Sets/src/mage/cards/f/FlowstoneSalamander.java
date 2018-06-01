@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class FlowstoneSalamander extends CardImpl {
+public final class FlowstoneSalamander extends CardImpl {
 
     public FlowstoneSalamander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

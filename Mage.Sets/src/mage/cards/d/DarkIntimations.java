@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DarkIntimations extends CardImpl {
+public final class DarkIntimations extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Bolas planeswalker spell");
 

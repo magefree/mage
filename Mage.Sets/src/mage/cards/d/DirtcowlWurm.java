@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class DirtcowlWurm extends CardImpl {
+public final class DirtcowlWurm extends CardImpl {
 
     public DirtcowlWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

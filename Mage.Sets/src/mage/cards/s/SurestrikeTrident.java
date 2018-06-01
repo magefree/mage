@@ -54,7 +54,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author AlumiuN
  */
-public class SurestrikeTrident extends CardImpl {
+public final class SurestrikeTrident extends CardImpl {
 
     public SurestrikeTrident(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

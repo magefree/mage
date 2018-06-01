@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ViridianEmissary extends CardImpl {
+public final class ViridianEmissary extends CardImpl {
 
     public ViridianEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -54,7 +54,7 @@ public class ViridianEmissary extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true), true));
+        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true), true));
     }
 
     public ViridianEmissary(final ViridianEmissary card) {

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ScrollOfOrigins extends CardImpl {
+public final class ScrollOfOrigins extends CardImpl {
 
     public ScrollOfOrigins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

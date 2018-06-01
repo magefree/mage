@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author cbt33, jeffwadsworth (Supreme Inquisitor)
  */
-public class Extract extends CardImpl {
+public final class Extract extends CardImpl {
 
     public Extract(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

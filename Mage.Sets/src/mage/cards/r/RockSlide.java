@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author TheElk801
  */
-public class RockSlide extends CardImpl {
+public final class RockSlide extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creatures without flying");
 

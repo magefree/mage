@@ -46,7 +46,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class FromUnderTheFloorboards extends CardImpl {
+public final class FromUnderTheFloorboards extends CardImpl {
 
     public FromUnderTheFloorboards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

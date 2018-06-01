@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jonubuu
  */
-public class ArcboundRavager extends CardImpl {
+public final class ArcboundRavager extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 

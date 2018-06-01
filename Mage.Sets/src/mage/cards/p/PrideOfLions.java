@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author anonymous
  */
-public class PrideOfLions extends CardImpl {
+public final class PrideOfLions extends CardImpl {
 
     public PrideOfLions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FlowstoneGiant extends CardImpl {
+public final class FlowstoneGiant extends CardImpl {
 
     public FlowstoneGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

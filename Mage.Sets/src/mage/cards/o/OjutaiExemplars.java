@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class OjutaiExemplars extends CardImpl {
+public final class OjutaiExemplars extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

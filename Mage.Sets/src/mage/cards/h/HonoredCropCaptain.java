@@ -42,7 +42,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Styxo
  */
-public class HonoredCropCaptain extends CardImpl {
+public final class HonoredCropCaptain extends CardImpl {
 
     public HonoredCropCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");

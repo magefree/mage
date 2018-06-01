@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class ExplosiveVegetation extends CardImpl {
+public final class ExplosiveVegetation extends CardImpl {
 
     public ExplosiveVegetation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

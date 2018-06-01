@@ -43,14 +43,14 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SearchForTomorrow extends CardImpl {
+public final class SearchForTomorrow extends CardImpl {
 
     public SearchForTomorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
         // Search your library for a basic land card and put it onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
         
         // Suspend 2-{G}

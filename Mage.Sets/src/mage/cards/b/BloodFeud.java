@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author intimidatingant
  */
-public class BloodFeud extends CardImpl {
+public final class BloodFeud extends CardImpl {
 
     public BloodFeud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");

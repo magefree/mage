@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class ChokedEstuary extends CardImpl {
+public final class ChokedEstuary extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Island or Swamp card from your hand");
 

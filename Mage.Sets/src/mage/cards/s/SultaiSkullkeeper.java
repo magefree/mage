@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class SultaiSkullkeeper extends CardImpl {
+public final class SultaiSkullkeeper extends CardImpl {
 
     public SultaiSkullkeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

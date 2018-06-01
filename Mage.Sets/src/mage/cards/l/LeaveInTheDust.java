@@ -39,7 +39,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author Styxo
  */
-public class LeaveInTheDust extends CardImpl {
+public final class LeaveInTheDust extends CardImpl {
 
     public LeaveInTheDust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

@@ -43,7 +43,7 @@ import mage.players.Player;
 /**
  * @author North
  */
-public class AdNauseam extends CardImpl {
+public final class AdNauseam extends CardImpl {
 
     public AdNauseam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");

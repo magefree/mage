@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author michael.napoleon@gmail.com
  */
-public class LuminescentRain extends CardImpl {
+public final class LuminescentRain extends CardImpl {
 
     public LuminescentRain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

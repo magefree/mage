@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class MoggManiac extends CardImpl {
+public final class MoggManiac extends CardImpl {
 
     public MoggManiac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

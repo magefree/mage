@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ArchOfOrazca extends CardImpl {
+public final class ArchOfOrazca extends CardImpl {
 
     public ArchOfOrazca(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

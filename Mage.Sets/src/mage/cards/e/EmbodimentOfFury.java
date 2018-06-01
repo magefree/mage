@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class EmbodimentOfFury extends CardImpl {
+public final class EmbodimentOfFury extends CardImpl {
     
     private static final FilterPermanent filterLandCreatures = new FilterPermanent("Land creatures");
 

@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class CleaverRiot extends CardImpl {
+public final class CleaverRiot extends CardImpl {
 
     public CleaverRiot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");

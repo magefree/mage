@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SkeletalChangeling extends CardImpl {
+public final class SkeletalChangeling extends CardImpl {
 
     public SkeletalChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

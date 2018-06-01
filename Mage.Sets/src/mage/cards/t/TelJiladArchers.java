@@ -41,7 +41,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author michael.napoleon@gmail.com
  */
-public class TelJiladArchers extends CardImpl {
+public final class TelJiladArchers extends CardImpl {
 
     public TelJiladArchers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

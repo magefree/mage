@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author emerald000
  */
-public class ThelonOfHavenwood extends CardImpl {
+public final class ThelonOfHavenwood extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("a Fungus card from a graveyard");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Fungus on the battlefield");

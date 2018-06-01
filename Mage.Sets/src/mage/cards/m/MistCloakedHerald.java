@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class MistCloakedHerald extends CardImpl {
+public final class MistCloakedHerald extends CardImpl {
 
     public MistCloakedHerald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

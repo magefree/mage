@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class UtopiaSprawl extends CardImpl {
+public final class UtopiaSprawl extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "Forest");
 
@@ -69,7 +69,7 @@ public class UtopiaSprawl extends CardImpl {
         this.addAbility(ability);
         // As Utopia Sprawl enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
-        // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to their mana pool.
+        // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color.
         this.addAbility(new UtopiaSprawlTriggeredAbility());
     }
 
@@ -111,7 +111,7 @@ class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to their mana pool.";
+        return "Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color.";
     }
 }
 
@@ -119,7 +119,7 @@ class UtopiaSprawlEffect extends ManaEffect {
 
     public UtopiaSprawlEffect() {
         super();
-        staticText = "its controller adds one mana of the chosen color to their mana pool";
+        staticText = "its controller adds one mana of the chosen color";
     }
 
     public UtopiaSprawlEffect(final UtopiaSprawlEffect effect) {

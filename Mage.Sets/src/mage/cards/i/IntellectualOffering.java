@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class IntellectualOffering extends CardImpl {
+public final class IntellectualOffering extends CardImpl {
 
     public IntellectualOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");

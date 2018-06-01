@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Galatolol
  */
-public class ConclavesBlessing extends CardImpl {
+public final class ConclavesBlessing extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 

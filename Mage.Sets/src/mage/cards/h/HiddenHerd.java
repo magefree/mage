@@ -51,7 +51,7 @@ import mage.game.permanent.token.Token;
  *
  * @author TheElk801
  */
-public class HiddenHerd extends CardImpl {
+public final class HiddenHerd extends CardImpl {
 
     public HiddenHerd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");

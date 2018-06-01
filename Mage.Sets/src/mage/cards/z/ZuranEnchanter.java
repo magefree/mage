@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author nigelzor
  */
-public class ZuranEnchanter extends CardImpl {
+public final class ZuranEnchanter extends CardImpl {
 
     public ZuranEnchanter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

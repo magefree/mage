@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class Spellshock extends CardImpl {
+public final class Spellshock extends CardImpl {
 
     public Spellshock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

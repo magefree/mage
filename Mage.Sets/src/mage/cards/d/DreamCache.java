@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Quercitron
  */
-public class DreamCache extends CardImpl {
+public final class DreamCache extends CardImpl {
 
     public DreamCache(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

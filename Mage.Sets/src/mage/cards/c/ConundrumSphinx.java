@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ConundrumSphinx extends CardImpl {
+public final class ConundrumSphinx extends CardImpl {
 
     public ConundrumSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

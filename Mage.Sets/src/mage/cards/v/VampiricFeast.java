@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class VampiricFeast extends CardImpl {
+public final class VampiricFeast extends CardImpl {
 
     public VampiricFeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX
  */
-public class KashiTribeReaver extends CardImpl {
+public final class KashiTribeReaver extends CardImpl {
 
     public KashiTribeReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

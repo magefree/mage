@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class KamiOfFalseHope extends CardImpl {
+public final class KamiOfFalseHope extends CardImpl {
 
     public KamiOfFalseHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

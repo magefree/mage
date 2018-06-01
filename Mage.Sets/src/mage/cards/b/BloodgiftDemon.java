@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class BloodgiftDemon extends CardImpl {
+public final class BloodgiftDemon extends CardImpl {
 
     public BloodgiftDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

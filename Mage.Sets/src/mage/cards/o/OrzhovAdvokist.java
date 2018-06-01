@@ -58,7 +58,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class OrzhovAdvokist extends CardImpl {
+public final class OrzhovAdvokist extends CardImpl {
 
     public OrzhovAdvokist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

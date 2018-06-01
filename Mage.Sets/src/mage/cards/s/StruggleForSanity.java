@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class StruggleForSanity extends CardImpl {
+public final class StruggleForSanity extends CardImpl {
 
     public StruggleForSanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

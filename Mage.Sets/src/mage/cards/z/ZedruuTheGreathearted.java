@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author andyfries
  */
-public class ZedruuTheGreathearted extends CardImpl {
+public final class ZedruuTheGreathearted extends CardImpl {
 
     public ZedruuTheGreathearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");

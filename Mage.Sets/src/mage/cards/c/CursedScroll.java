@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  * @author jeffwadsworth
  *
  */
-public class CursedScroll extends CardImpl {
+public final class CursedScroll extends CardImpl {
 
     public CursedScroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

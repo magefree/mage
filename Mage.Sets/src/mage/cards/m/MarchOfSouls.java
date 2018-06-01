@@ -48,7 +48,7 @@ import java.util.UUID;
  * @author LoneFox
 
  */
-public class MarchOfSouls extends CardImpl {
+public final class MarchOfSouls extends CardImpl {
 
     public MarchOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");

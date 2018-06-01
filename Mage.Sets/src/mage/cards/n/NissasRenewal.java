@@ -41,13 +41,13 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class NissasRenewal extends CardImpl {
+public final class NissasRenewal extends CardImpl {
 
     public NissasRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}");
 
         // Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library. You gain 7 life.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_BASIC_LAND), true));
         this.getSpellAbility().addEffect(new GainLifeEffect(7));
     }
 

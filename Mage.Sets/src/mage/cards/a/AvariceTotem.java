@@ -43,7 +43,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author Plopman
  */
-public class AvariceTotem extends CardImpl {
+public final class AvariceTotem extends CardImpl {
 
     private static final String rule = "Exchange control of {this} and target nonland permanent";
     public AvariceTotem(UUID ownerId, CardSetInfo setInfo) {

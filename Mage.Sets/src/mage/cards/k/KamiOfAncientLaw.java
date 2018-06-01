@@ -45,7 +45,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Loki
  */
-public class KamiOfAncientLaw extends CardImpl {
+public final class KamiOfAncientLaw extends CardImpl {
 
     public KamiOfAncientLaw (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

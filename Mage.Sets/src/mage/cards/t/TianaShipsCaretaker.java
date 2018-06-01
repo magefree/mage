@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class TianaShipsCaretaker extends CardImpl {
+public final class TianaShipsCaretaker extends CardImpl {
 
     public TianaShipsCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");

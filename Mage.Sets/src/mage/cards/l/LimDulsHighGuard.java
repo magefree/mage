@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class LimDulsHighGuard extends CardImpl {
+public final class LimDulsHighGuard extends CardImpl {
 
     public LimDulsHighGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

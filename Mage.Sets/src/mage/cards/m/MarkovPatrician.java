@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MarkovPatrician extends CardImpl {
+public final class MarkovPatrician extends CardImpl {
 
     public MarkovPatrician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

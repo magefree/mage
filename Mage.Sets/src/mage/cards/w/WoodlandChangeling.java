@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class WoodlandChangeling extends CardImpl {
+public final class WoodlandChangeling extends CardImpl {
 
     public WoodlandChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

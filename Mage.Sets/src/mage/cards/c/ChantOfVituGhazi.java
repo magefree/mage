@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ChantOfVituGhazi extends CardImpl {
+public final class ChantOfVituGhazi extends CardImpl {
 
     public ChantOfVituGhazi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{6}{W}{W}");

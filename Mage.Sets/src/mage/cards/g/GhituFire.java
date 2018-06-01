@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
  *
  */
-public class GhituFire extends CardImpl {
+public final class GhituFire extends CardImpl {
 
     public GhituFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");

@@ -38,7 +38,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class Rescue extends CardImpl {
+public final class Rescue extends CardImpl {
 
     public Rescue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

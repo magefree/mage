@@ -61,7 +61,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CharmedPendant extends CardImpl {
+public final class CharmedPendant extends CardImpl {
 
     public CharmedPendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
@@ -98,12 +98,12 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
         if (player != null && !player.isInPayManaMode()) { // while paying the costs of a spell you cant activate this
             return super.canActivate(playerId, game);
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override

@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class DreamFracture extends CardImpl {
+public final class DreamFracture extends CardImpl {
 
     public DreamFracture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

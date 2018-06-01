@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class GnarlwoodDryad extends CardImpl {
+public final class GnarlwoodDryad extends CardImpl {
 
     public GnarlwoodDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

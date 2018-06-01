@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class BlanchwoodTreefolk extends CardImpl {
+public final class BlanchwoodTreefolk extends CardImpl {
 
     public BlanchwoodTreefolk (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

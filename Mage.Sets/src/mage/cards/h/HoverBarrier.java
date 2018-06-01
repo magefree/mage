@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HoverBarrier extends CardImpl {
+public final class HoverBarrier extends CardImpl {
 
     public HoverBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

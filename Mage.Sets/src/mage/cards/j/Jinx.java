@@ -42,7 +42,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class Jinx extends CardImpl {
+public final class Jinx extends CardImpl {
 
     public Jinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

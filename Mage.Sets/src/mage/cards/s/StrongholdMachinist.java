@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
  *
  * @author anonymous
  */
-public class StrongholdMachinist extends CardImpl {
+public final class StrongholdMachinist extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 

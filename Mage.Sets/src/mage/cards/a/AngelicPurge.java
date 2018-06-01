@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class AngelicPurge extends CardImpl {
+public final class AngelicPurge extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment");
 

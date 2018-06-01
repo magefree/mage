@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author cbt33, LevelX2 (Sea's Claim), LevelX2 (Pollenbright Wings)
  */
-public class CausticTar extends CardImpl {
+public final class CausticTar extends CardImpl {
 
     public CausticTar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{B}");

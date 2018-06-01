@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  * @author LoneFox
  *
  */
-public class Caltrops extends CardImpl {
+public final class Caltrops extends CardImpl {
 
     public Caltrops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

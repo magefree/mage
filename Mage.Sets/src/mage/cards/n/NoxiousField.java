@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class NoxiousField extends CardImpl {
+public final class NoxiousField extends CardImpl {
 
     public NoxiousField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author Plopman
  */
-public class ViashinoCutthroat extends CardImpl {
+public final class ViashinoCutthroat extends CardImpl {
 
     public ViashinoCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

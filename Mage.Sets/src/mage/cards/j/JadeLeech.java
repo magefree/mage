@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class JadeLeech extends CardImpl {
+public final class JadeLeech extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Green spells");
 

@@ -42,7 +42,7 @@ import mage.constants.*;
 /**
  * @author Loki
  */
-public class ArdentRecruit extends CardImpl {
+public final class ArdentRecruit extends CardImpl {
 
     public ArdentRecruit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

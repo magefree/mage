@@ -44,7 +44,7 @@ import mage.constants.Zone;
  * @author djbrez
  */
 
-public class RhysticCircle extends CardImpl {
+public final class RhysticCircle extends CardImpl {
 
     public RhysticCircle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author cbt33
  */
-public class Cognivore extends CardImpl {
+public final class Cognivore extends CardImpl {
 
     static final FilterCard filter = new FilterCard("instant cards");
 

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author LoneFox
 
  */
-public class StrengthOfNight extends CardImpl {
+public final class StrengthOfNight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
 

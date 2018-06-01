@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class WordsOfWind extends CardImpl {
+public final class WordsOfWind extends CardImpl {
 
     public WordsOfWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class GenjuOfTheFields extends CardImpl {
+public final class GenjuOfTheFields extends CardImpl {
 
     private static final FilterLandPermanent FILTER = new FilterLandPermanent(SubType.PLAINS, "Plains");
 

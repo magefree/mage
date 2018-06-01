@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author maxlebedev
  */
-public class Curfew extends CardImpl {
+public final class Curfew extends CardImpl {
 
     public Curfew(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

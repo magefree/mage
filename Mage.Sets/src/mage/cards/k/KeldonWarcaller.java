@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class KeldonWarcaller extends CardImpl {
+public final class KeldonWarcaller extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Saga you control");
 

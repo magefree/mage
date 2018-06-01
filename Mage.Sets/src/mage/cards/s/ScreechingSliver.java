@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author anonymous
  */
-public class ScreechingSliver extends CardImpl {
+public final class ScreechingSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 

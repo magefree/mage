@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class GoblinGame extends CardImpl {
+public final class GoblinGame extends CardImpl {
 
     public GoblinGame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");

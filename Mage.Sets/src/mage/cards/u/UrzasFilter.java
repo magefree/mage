@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  *
  * @author LevelX2
  */
-public class UrzasFilter extends CardImpl {
+public final class UrzasFilter extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("multicolored spells");
 

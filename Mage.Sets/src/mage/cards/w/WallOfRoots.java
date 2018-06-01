@@ -45,7 +45,7 @@ import mage.counters.BoostCounter;
  *
  * @author North
  */
-public class WallOfRoots extends CardImpl {
+public final class WallOfRoots extends CardImpl {
 
     public WallOfRoots(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

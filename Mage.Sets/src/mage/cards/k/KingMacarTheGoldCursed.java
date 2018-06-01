@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KingMacarTheGoldCursed extends CardImpl {
+public final class KingMacarTheGoldCursed extends CardImpl {
 
     public KingMacarTheGoldCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

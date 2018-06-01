@@ -46,7 +46,7 @@ import mage.game.permanent.token.custom.CreatureToken;
  *
  * @author fireshoes
  */
-public class LivingPlane extends CardImpl {
+public final class LivingPlane extends CardImpl {
 
     public LivingPlane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

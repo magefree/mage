@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class DeliriumSkeins extends CardImpl {
+public final class DeliriumSkeins extends CardImpl {
 
     public DeliriumSkeins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

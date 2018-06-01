@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
-public class CrimePunishment extends SplitCard {
+public final class CrimePunishment extends SplitCard {
 
     private static final FilterCard filter = new FilterCard("creature or enchantment card from an opponent's graveyard");
 

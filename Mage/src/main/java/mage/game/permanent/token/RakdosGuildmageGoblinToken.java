@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class RakdosGuildmageGoblinToken extends TokenImpl {
+public final class RakdosGuildmageGoblinToken extends TokenImpl {
 
     public RakdosGuildmageGoblinToken() {
         super("Goblin", "2/1 red Goblin creature token with haste");

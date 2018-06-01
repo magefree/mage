@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jonubuu
  */
-public class KikiJikiMirrorBreaker extends CardImpl {
+public final class KikiJikiMirrorBreaker extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
 

@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class IcatianSkirmishers extends CardImpl {
+public final class IcatianSkirmishers extends CardImpl {
 
     public IcatianSkirmishers (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

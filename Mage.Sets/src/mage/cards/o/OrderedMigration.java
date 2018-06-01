@@ -41,7 +41,7 @@ import mage.game.permanent.token.OrderedMigrationBirdToken;
  * @author LoneFox
  *
  */
-public class OrderedMigration extends CardImpl {
+public final class OrderedMigration extends CardImpl {
 
     public OrderedMigration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{U}");

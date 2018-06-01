@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KoboldsOfKherKeep extends CardImpl {
+public final class KoboldsOfKherKeep extends CardImpl {
 
     public KoboldsOfKherKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{0}");

@@ -51,7 +51,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class NissasJudgment extends CardImpl {
+public final class NissasJudgment extends CardImpl {
 
     private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
 

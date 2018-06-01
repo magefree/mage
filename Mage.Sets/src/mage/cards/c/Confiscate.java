@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki, noxx
  */
-public class Confiscate extends CardImpl {
+public final class Confiscate extends CardImpl {
 
     public Confiscate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}");

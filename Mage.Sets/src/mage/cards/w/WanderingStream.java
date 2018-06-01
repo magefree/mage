@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author LoneFox
  */
-public class WanderingStream extends CardImpl {
+public final class WanderingStream extends CardImpl {
 
     public WanderingStream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

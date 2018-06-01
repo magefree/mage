@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author nickymikail
  */
-public class LurchingRotbeast extends CardImpl {
+public final class LurchingRotbeast extends CardImpl {
 
     public LurchingRotbeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author LoneFox
  */
-public class ZerapaMinotaur extends CardImpl {
+public final class ZerapaMinotaur extends CardImpl {
 
     public ZerapaMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

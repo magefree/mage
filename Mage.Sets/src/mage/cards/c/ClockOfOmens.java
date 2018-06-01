@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class ClockOfOmens extends CardImpl {
+public final class ClockOfOmens extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts you control");
 

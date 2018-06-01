@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class VeryCrypticCommandD extends CardImpl {
+public final class VeryCrypticCommandD extends CardImpl {
 
     private static final FilterStackObject filter = new FilterStackObject("spell or ability with a single target");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nontoken creature");

@@ -46,7 +46,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author LoneFox
  */
-public class ChimericSphere extends CardImpl {
+public final class ChimericSphere extends CardImpl {
 
     public ChimericSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class AnuridBrushhopper extends CardImpl {
+public final class AnuridBrushhopper extends CardImpl {
 
     public AnuridBrushhopper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");

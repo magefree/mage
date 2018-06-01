@@ -53,7 +53,7 @@ import mage.watchers.common.MorbidWatcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReaperFromTheAbyss extends CardImpl {
+public final class ReaperFromTheAbyss extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
 

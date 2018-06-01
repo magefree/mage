@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DirgurNemesis extends CardImpl {
+public final class DirgurNemesis extends CardImpl {
 
     public DirgurNemesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

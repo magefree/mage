@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class ChantOfTheSkifsang extends CardImpl {
+public final class ChantOfTheSkifsang extends CardImpl {
 
     public ChantOfTheSkifsang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

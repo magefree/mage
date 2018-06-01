@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author TheElk801
  */
-public class BelligerentBrontodon extends CardImpl {
+public final class BelligerentBrontodon extends CardImpl {
 
     public BelligerentBrontodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jack-the-BOSS
  */
-public class AryelKnightOfWindgrace extends CardImpl {
+public final class AryelKnightOfWindgrace extends CardImpl {
 
     public AryelKnightOfWindgrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");

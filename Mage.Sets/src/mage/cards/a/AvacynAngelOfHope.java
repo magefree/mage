@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledPermanent;
 /**
  * @author noxx
  */
-public class AvacynAngelOfHope extends CardImpl {
+public final class AvacynAngelOfHope extends CardImpl {
 
     public AvacynAngelOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");

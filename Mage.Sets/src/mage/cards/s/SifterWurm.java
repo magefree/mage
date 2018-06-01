@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class SifterWurm extends CardImpl {
+public final class SifterWurm extends CardImpl {
 
     public SifterWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

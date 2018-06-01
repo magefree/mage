@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class ScrapheapScrounger extends CardImpl {
+public final class ScrapheapScrounger extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("another creature card");
 

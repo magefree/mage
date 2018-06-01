@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class RisingWaters extends CardImpl {
+public final class RisingWaters extends CardImpl {
 
     public RisingWaters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

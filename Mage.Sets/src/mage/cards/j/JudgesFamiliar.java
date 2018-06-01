@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class JudgesFamiliar extends CardImpl {
+public final class JudgesFamiliar extends CardImpl {
 
     public JudgesFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}");

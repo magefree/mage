@@ -51,7 +51,7 @@ import mage.game.permanent.token.UramiToken;
  *
  * @author Plopman
  */
-public class TombOfUrami extends CardImpl {
+public final class TombOfUrami extends CardImpl {
 
     public TombOfUrami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

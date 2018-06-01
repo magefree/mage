@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class Bamboozle extends CardImpl {
+public final class Bamboozle extends CardImpl {
 
     public Bamboozle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class MagetaTheLion extends CardImpl {
+public final class MagetaTheLion extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("creatures except for {this}");
 

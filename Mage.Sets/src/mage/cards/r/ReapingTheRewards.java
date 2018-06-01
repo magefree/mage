@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class ReapingTheRewards extends CardImpl {
+public final class ReapingTheRewards extends CardImpl {
 
     public ReapingTheRewards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

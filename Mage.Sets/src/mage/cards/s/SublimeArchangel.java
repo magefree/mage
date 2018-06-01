@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class SublimeArchangel extends CardImpl {
+public final class SublimeArchangel extends CardImpl {
 
     public SublimeArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

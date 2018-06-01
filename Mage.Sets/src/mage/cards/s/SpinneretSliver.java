@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author KholdFuzion
  */
-public class SpinneretSliver extends CardImpl {
+public final class SpinneretSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

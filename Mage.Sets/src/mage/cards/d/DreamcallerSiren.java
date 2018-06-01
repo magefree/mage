@@ -52,7 +52,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author TheElk801
  */
-public class DreamcallerSiren extends CardImpl {
+public final class DreamcallerSiren extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Pirate");
 

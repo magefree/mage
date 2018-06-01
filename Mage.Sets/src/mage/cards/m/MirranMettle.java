@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MirranMettle extends CardImpl {
+public final class MirranMettle extends CardImpl {
 
     private static final String effectText = "Metalcraft - That creature gets +4/+4 until end of turn instead if you control three or more artifacts.";
 

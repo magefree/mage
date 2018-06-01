@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author nantuko
  */
-public class MyrReservoir extends CardImpl {
+public final class MyrReservoir extends CardImpl {
 
     private static final FilterCard myrCardFilter = new FilterCard("Myr card from your graveyard");
 

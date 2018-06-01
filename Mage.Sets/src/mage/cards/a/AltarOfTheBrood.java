@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class AltarOfTheBrood extends CardImpl {
+public final class AltarOfTheBrood extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
 

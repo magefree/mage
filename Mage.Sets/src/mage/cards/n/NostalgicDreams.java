@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class NostalgicDreams extends CardImpl {
+public final class NostalgicDreams extends CardImpl {
 
     public NostalgicDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}");

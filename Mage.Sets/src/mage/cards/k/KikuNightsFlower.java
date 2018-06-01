@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class KikuNightsFlower extends CardImpl {
+public final class KikuNightsFlower extends CardImpl {
 
     public KikuNightsFlower (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BursegSardaukar
  */
-public class GoblinSoothsayer extends CardImpl {
+public final class GoblinSoothsayer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("goblin");

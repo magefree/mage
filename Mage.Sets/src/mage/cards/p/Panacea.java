@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class Panacea extends CardImpl {
+public final class Panacea extends CardImpl {
 
     public Panacea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

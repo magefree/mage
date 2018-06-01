@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class QuestForTheNihilStone extends CardImpl {
+public final class QuestForTheNihilStone extends CardImpl {
 
     public QuestForTheNihilStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

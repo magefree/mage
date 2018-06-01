@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes & L_J
  */
-public class GlyphOfLife extends CardImpl {
+public final class GlyphOfLife extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creature");
 

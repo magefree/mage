@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class TelimTorsEdict extends CardImpl {
+public final class TelimTorsEdict extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you own or control");
 

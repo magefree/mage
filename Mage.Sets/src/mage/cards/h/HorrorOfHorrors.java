@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class HorrorOfHorrors extends CardImpl {
+public final class HorrorOfHorrors extends CardImpl {
 
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("a Swamp");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("black creature");

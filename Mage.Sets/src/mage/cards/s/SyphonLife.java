@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class SyphonLife extends CardImpl {
+public final class SyphonLife extends CardImpl {
 
     public SyphonLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

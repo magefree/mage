@@ -46,7 +46,7 @@ import mage.game.permanent.token.TrooperToken;
  *
  * @author Styxo
  */
-public class CommanderCody extends CardImpl {
+public final class CommanderCody extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-token Trooper creatures");
 

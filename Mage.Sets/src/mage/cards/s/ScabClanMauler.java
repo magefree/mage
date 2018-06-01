@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ScabClanMauler extends CardImpl {
+public final class ScabClanMauler extends CardImpl {
 
     public ScabClanMauler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

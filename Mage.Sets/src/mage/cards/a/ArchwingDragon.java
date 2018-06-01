@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class ArchwingDragon extends CardImpl {
+public final class ArchwingDragon extends CardImpl {
 
     public ArchwingDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

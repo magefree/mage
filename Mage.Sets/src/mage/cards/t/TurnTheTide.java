@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class TurnTheTide extends CardImpl {
+public final class TurnTheTide extends CardImpl {
 
     public TurnTheTide (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

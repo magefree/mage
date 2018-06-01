@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class ThranDynamo extends CardImpl {
+public final class ThranDynamo extends CardImpl {
 
     public ThranDynamo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

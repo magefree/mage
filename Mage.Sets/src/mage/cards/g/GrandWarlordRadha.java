@@ -58,7 +58,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class GrandWarlordRadha extends CardImpl {
+public final class GrandWarlordRadha extends CardImpl {
 
     public GrandWarlordRadha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");

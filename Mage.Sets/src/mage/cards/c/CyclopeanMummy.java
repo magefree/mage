@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Derpthemeus
  */
-public class CyclopeanMummy extends CardImpl {
+public final class CyclopeanMummy extends CardImpl {
 
     public CyclopeanMummy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class SylvanMessenger extends CardImpl {
+public final class SylvanMessenger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Elf cards");
 

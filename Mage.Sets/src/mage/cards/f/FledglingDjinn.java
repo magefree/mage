@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class FledglingDjinn extends CardImpl {
+public final class FledglingDjinn extends CardImpl {
 
     public FledglingDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

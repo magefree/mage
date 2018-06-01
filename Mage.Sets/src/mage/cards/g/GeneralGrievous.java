@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author Styxo
  */
-public class GeneralGrievous extends CardImpl {
+public final class GeneralGrievous extends CardImpl {
 
     public GeneralGrievous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}{B}");

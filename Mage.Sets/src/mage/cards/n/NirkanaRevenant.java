@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class NirkanaRevenant extends CardImpl {
+public final class NirkanaRevenant extends CardImpl {
 
     public NirkanaRevenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

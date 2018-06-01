@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author JayDi85
  */
-public class DeeprootElite extends CardImpl {
+public final class DeeprootElite extends CardImpl {
 
     private static final FilterPermanent filterYourAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, "another " + SubType.MERFOLK.toString());
     static {

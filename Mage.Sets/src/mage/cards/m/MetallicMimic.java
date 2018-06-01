@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class MetallicMimic extends CardImpl {
+public final class MetallicMimic extends CardImpl {
 
     public MetallicMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

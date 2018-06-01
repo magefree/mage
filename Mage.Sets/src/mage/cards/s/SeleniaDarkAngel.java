@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SeleniaDarkAngel extends CardImpl {
+public final class SeleniaDarkAngel extends CardImpl {
 
     public SeleniaDarkAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}");

@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author TheElk801
  */
-public class SubterraneanSpirit extends CardImpl {
+public final class SubterraneanSpirit extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class Narcomoeba extends CardImpl {
+public final class Narcomoeba extends CardImpl {
 
     public Narcomoeba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

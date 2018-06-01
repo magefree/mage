@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GuulDrazOverseer extends CardImpl {
+public final class GuulDrazOverseer extends CardImpl {
 
     public GuulDrazOverseer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

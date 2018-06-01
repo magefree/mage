@@ -38,7 +38,7 @@ import mage.game.permanent.token.SliverToken;
  *
  * @author jeffwadsworth
  */
-public class HiveStirrings extends CardImpl {
+public final class HiveStirrings extends CardImpl {
 
     public HiveStirrings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

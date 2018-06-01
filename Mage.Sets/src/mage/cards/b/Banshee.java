@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author L_J
  */
-public class Banshee extends CardImpl {
+public final class Banshee extends CardImpl {
 
     public Banshee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class FrostburnWeird extends CardImpl {
+public final class FrostburnWeird extends CardImpl {
     
     public FrostburnWeird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}{U/R}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterArtifactSpell;
  *
  * @author Loki, North
  */
-public class Riddlesmith extends CardImpl {
+public final class Riddlesmith extends CardImpl {
     public Riddlesmith (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add(SubType.HUMAN);

@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  * @author LoneFox
  *
  */
-public class CollapsingBorders extends CardImpl {
+public final class CollapsingBorders extends CardImpl {
 
     public CollapsingBorders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LevelX2
  */
-public class ThousandWinds extends CardImpl {
+public final class ThousandWinds extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other tapped creatures");
 

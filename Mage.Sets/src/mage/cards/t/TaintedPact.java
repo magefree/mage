@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author cbt33, Ad Nauseum (North), Izzet Staticaster (LevelX2), Bane Alley Broker (LevelX2)
  */
-public class TaintedPact extends CardImpl {
+public final class TaintedPact extends CardImpl {
 
     public TaintedPact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class PouncingJaguar extends CardImpl {
+public final class PouncingJaguar extends CardImpl {
 
     public PouncingJaguar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

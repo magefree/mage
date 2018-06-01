@@ -71,7 +71,7 @@ import mage.target.TargetSource;
  *
  * @author ThomasLerner
  */
-public class DarkSphere extends CardImpl {
+public final class DarkSphere extends CardImpl {
 
     public DarkSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");

@@ -53,7 +53,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class IcatianMoneychanger extends CardImpl {
+public final class IcatianMoneychanger extends CardImpl {
 
     public IcatianMoneychanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

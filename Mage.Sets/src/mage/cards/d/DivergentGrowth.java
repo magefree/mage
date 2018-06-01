@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author Galatolol
  */
-public class DivergentGrowth extends CardImpl {
+public final class DivergentGrowth extends CardImpl {
 
     public DivergentGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class BoggartArsonists extends CardImpl {
+public final class BoggartArsonists extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Scarecrow or Plains");
 

@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class OliviaVoldaren extends CardImpl {
+public final class OliviaVoldaren extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     private static final FilterCreaturePermanent vampireFilter = new FilterCreaturePermanent("Vampire");

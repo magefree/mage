@@ -51,7 +51,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class VoidWinnower extends CardImpl {
+public final class VoidWinnower extends CardImpl {
 
     public VoidWinnower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");

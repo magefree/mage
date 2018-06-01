@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class ClearwaterGoblet extends CardImpl {
+public final class ClearwaterGoblet extends CardImpl {
 
     public ClearwaterGoblet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

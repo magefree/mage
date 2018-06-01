@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class FlameJab extends CardImpl {
+public final class FlameJab extends CardImpl {
 
     public FlameJab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

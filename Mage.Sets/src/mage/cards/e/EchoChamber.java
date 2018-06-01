@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class EchoChamber extends CardImpl {
+public final class EchoChamber extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

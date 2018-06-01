@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class NefariousLich extends CardImpl {
+public final class NefariousLich extends CardImpl {
 
     public NefariousLich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}{B}");

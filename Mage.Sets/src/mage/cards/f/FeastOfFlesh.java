@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class FeastOfFlesh extends CardImpl {
+public final class FeastOfFlesh extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards named Feast of Flesh");
 

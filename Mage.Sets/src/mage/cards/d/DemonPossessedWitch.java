@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class DemonPossessedWitch extends CardImpl {
+public final class DemonPossessedWitch extends CardImpl {
 
     private static final String rule = "When this creature transforms into Demon-Possessed Witch, you may destroy target creature";
 

@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author spjspj
  */
-public class TragicLesson extends CardImpl {
+public final class TragicLesson extends CardImpl {
 
     public TragicLesson(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

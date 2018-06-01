@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class AugerSpree extends CardImpl {
+public final class AugerSpree extends CardImpl {
 
     public AugerSpree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");

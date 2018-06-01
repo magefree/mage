@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GoldmeadowHarrier extends CardImpl {
+public final class GoldmeadowHarrier extends CardImpl {
 
     public GoldmeadowHarrier (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

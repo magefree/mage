@@ -29,6 +29,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -56,7 +57,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class WrexialTheRisenDeep extends CardImpl {
+public final class WrexialTheRisenDeep extends CardImpl {
 
     public WrexialTheRisenDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}");
@@ -119,7 +120,7 @@ class WrexialEffect extends OneShotEffect {
             if (controller.chooseTarget(Outcome.PlayForFree, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    controller.cast(card.getSpellAbility(), game, true);
+                    controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                     game.addEffect(new WrexialReplacementEffect(card.getId()), source);
                 }
             }

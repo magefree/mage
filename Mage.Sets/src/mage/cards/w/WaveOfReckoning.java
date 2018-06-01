@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class WaveOfReckoning extends CardImpl {
+public final class WaveOfReckoning extends CardImpl {
 
     public WaveOfReckoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");

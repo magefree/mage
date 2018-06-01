@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class BreedingPitThrullToken extends TokenImpl {
+public final class BreedingPitThrullToken extends TokenImpl {
 
     public BreedingPitThrullToken() {
         super("Thrull", "0/1 black Thrull creature token");

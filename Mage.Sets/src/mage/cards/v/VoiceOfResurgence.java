@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  *
  * @author jeffwadsworth
  */
-public class VoiceOfResurgence extends CardImpl {
+public final class VoiceOfResurgence extends CardImpl {
 
     public VoiceOfResurgence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");

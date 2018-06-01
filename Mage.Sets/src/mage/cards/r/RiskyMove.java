@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class RiskyMove extends CardImpl {
+public final class RiskyMove extends CardImpl {
 
     public RiskyMove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}{R}");

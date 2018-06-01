@@ -50,7 +50,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author loki
  */
-public class BloodhallOoze extends CardImpl {
+public final class BloodhallOoze extends CardImpl {
 
     public BloodhallOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

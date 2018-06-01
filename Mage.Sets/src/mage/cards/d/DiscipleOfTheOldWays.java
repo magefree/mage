@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class DiscipleOfTheOldWays extends CardImpl {
+public final class DiscipleOfTheOldWays extends CardImpl {
 
     public DiscipleOfTheOldWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

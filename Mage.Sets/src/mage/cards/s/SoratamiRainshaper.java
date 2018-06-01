@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class SoratamiRainshaper extends CardImpl {
+public final class SoratamiRainshaper extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

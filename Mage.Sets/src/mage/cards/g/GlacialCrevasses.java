@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class GlacialCrevasses extends CardImpl {
+public final class GlacialCrevasses extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow Mountain");
 

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SaheelisArtistry extends CardImpl {
+public final class SaheelisArtistry extends CardImpl {
 
     public SaheelisArtistry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");

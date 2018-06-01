@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author LoneFox
  */
-public class AnuridBarkripper extends CardImpl {
+public final class AnuridBarkripper extends CardImpl {
 
     public AnuridBarkripper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

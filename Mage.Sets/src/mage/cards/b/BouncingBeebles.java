@@ -45,7 +45,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author Backfir3
  */
-public class BouncingBeebles extends CardImpl {
+public final class BouncingBeebles extends CardImpl {
 
     public BouncingBeebles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

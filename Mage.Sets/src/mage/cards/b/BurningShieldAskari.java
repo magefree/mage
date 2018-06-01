@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class BurningShieldAskari extends CardImpl {
+public final class BurningShieldAskari extends CardImpl {
 
     public BurningShieldAskari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

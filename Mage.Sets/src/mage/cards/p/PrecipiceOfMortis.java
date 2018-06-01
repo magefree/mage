@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class PrecipiceOfMortis extends CardImpl {
+public final class PrecipiceOfMortis extends CardImpl {
 
     public PrecipiceOfMortis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}{W}");

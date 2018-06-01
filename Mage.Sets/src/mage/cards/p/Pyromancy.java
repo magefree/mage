@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class Pyromancy extends CardImpl {
+public final class Pyromancy extends CardImpl {
 
     public Pyromancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");

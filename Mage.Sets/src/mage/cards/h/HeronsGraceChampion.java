@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class HeronsGraceChampion extends CardImpl {
+public final class HeronsGraceChampion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other Humans");
 

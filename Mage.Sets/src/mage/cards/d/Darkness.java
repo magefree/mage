@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class Darkness extends CardImpl {
+public final class Darkness extends CardImpl {
 
     public Darkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

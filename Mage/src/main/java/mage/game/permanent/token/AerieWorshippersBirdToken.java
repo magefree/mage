@@ -38,7 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class AerieWorshippersBirdToken extends TokenImpl {
+public final class AerieWorshippersBirdToken extends TokenImpl {
 
     public AerieWorshippersBirdToken() {
         super("Bird", "2/2 blue Bird enchantment creature token with flying");

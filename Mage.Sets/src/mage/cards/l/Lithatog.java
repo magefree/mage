@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class Lithatog extends CardImpl {
+public final class Lithatog extends CardImpl {
 
     public Lithatog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");

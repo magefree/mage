@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class BeguilerOfWills extends CardImpl {
+public final class BeguilerOfWills extends CardImpl {
 
     public BeguilerOfWills(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

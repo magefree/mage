@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class TIEBomber extends CardImpl {
+public final class TIEBomber extends CardImpl {
 
     public TIEBomber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");

@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class SheepToken extends TokenImpl {
+public final class SheepToken extends TokenImpl {
 
     public SheepToken() {
         super("Sheep", "0/1 green Sheep creature token");

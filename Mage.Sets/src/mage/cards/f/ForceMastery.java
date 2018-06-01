@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class ForceMastery extends CardImpl {
+public final class ForceMastery extends CardImpl {
 
     public ForceMastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}{W}");

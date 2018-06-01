@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class OrzhovGuildmage extends CardImpl {
+public final class OrzhovGuildmage extends CardImpl {
 
     public OrzhovGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/B}{W/B}");

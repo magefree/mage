@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class AltarsLight extends CardImpl {
+public final class AltarsLight extends CardImpl {
 
     public AltarsLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");

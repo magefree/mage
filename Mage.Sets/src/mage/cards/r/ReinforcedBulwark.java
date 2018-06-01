@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class ReinforcedBulwark extends CardImpl {
+public final class ReinforcedBulwark extends CardImpl {
 
     public ReinforcedBulwark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

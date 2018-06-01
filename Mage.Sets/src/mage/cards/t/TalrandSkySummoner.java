@@ -45,7 +45,7 @@ import mage.game.permanent.token.DrakeToken;
  *
  * @author North
  */
-public class TalrandSkySummoner extends CardImpl {
+public final class TalrandSkySummoner extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 

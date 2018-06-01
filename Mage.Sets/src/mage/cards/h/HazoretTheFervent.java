@@ -52,7 +52,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class HazoretTheFervent extends CardImpl {
+public final class HazoretTheFervent extends CardImpl {
 
     public HazoretTheFervent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

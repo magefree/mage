@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class PentagramOfTheAges extends CardImpl {
+public final class PentagramOfTheAges extends CardImpl {
 
     public PentagramOfTheAges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

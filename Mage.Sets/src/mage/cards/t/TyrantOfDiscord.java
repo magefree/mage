@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author noxx
  */
-public class TyrantOfDiscord extends CardImpl {
+public final class TyrantOfDiscord extends CardImpl {
 
     public TyrantOfDiscord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{R}");

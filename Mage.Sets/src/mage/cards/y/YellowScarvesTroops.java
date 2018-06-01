@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class YellowScarvesTroops extends CardImpl {
+public final class YellowScarvesTroops extends CardImpl {
 
     public YellowScarvesTroops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

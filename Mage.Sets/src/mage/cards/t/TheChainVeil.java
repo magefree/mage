@@ -52,7 +52,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class TheChainVeil extends CardImpl {
+public final class TheChainVeil extends CardImpl {
 
     public TheChainVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

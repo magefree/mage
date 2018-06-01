@@ -42,7 +42,7 @@ import mage.game.permanent.token.ZombieToken;
 /**
  * @author Loki
  */
-public class GrixisSlavedriver extends CardImpl {
+public final class GrixisSlavedriver extends CardImpl {
 
     public GrixisSlavedriver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

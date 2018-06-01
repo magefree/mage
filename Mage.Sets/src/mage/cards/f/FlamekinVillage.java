@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FlamekinVillage extends CardImpl {
+public final class FlamekinVillage extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Elemental card from your hand");
 

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Wehk
  */
-public class AcolyteOfTheInferno extends CardImpl {
+public final class AcolyteOfTheInferno extends CardImpl {
 
     public AcolyteOfTheInferno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,13 +47,13 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LoneFox
  */
-public class HuntingGrounds extends CardImpl {
+public final class HuntingGrounds extends CardImpl {
 
     public HuntingGrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{W}");
 
         // Threshold - As long as seven or more cards are in your graveyard, Hunting Grounds has "Whenever an opponent casts a spell, you may put a creature card from your hand onto the battlefield."
-        Ability gainedAbility = new SpellCastOpponentTriggeredAbility(new PutPermanentOnBattlefieldEffect(
+        Ability gainedAbility = new SpellCastOpponentTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(
             new FilterCreatureCard("a creature card")), true);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),

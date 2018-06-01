@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX
  */
-public class BlackCat extends CardImpl {
+public final class BlackCat extends CardImpl {
 
     public BlackCat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

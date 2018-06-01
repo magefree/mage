@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class SkyDiamond extends CardImpl {
+public final class SkyDiamond extends CardImpl {
 
     public SkyDiamond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class RiptideEntrancer extends CardImpl {
+public final class RiptideEntrancer extends CardImpl {
 
     public RiptideEntrancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

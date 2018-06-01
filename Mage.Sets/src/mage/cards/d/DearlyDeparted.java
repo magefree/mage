@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,12 +43,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  * @author nantuko
  */
-public class DearlyDeparted extends CardImpl {
+public final class DearlyDeparted extends CardImpl {
 
     public DearlyDeparted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
@@ -75,7 +74,7 @@ public class DearlyDeparted extends CardImpl {
 class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     public DearlyDepartedEntersBattlefieldEffect() {
-        super(Duration.OneUse, Outcome.BoostCreature);
+        super(Duration.WhileInGraveyard, Outcome.BoostCreature);
         staticText = "As long as {this} is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 

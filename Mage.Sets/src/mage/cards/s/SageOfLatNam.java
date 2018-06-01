@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class SageOfLatNam extends CardImpl {
+public final class SageOfLatNam extends CardImpl {
 
     public SageOfLatNam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

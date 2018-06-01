@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class SorayaTheFalconer extends CardImpl {
+public final class SorayaTheFalconer extends CardImpl {
 
     public SorayaTheFalconer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class DuskFeaster extends CardImpl {
+public final class DuskFeaster extends CardImpl {
 
     public DuskFeaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");

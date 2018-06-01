@@ -55,7 +55,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class NewHorizons extends CardImpl {
+public final class NewHorizons extends CardImpl {
 
     public NewHorizons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

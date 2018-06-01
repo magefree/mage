@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class WildgrowthWalker extends CardImpl {
+public final class WildgrowthWalker extends CardImpl {
 
     public WildgrowthWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

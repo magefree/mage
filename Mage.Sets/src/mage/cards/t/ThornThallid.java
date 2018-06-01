@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ThornThallid extends CardImpl {
+public final class ThornThallid extends CardImpl {
 
     public ThornThallid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

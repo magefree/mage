@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class SoltariVisionary extends CardImpl {
+public final class SoltariVisionary extends CardImpl {
 
     public SoltariVisionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

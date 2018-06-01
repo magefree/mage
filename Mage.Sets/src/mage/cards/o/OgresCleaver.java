@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class OgresCleaver extends CardImpl {
+public final class OgresCleaver extends CardImpl {
 
     public OgresCleaver (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

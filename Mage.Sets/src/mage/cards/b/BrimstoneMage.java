@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki, noxx
  */
-public class BrimstoneMage extends LevelerCard {
+public final class BrimstoneMage extends LevelerCard {
 
     public BrimstoneMage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

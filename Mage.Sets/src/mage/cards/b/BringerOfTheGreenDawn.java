@@ -47,7 +47,7 @@ import mage.game.permanent.token.BeastToken;
  *
  * @author Plopman
  */
-public class BringerOfTheGreenDawn extends CardImpl {
+public final class BringerOfTheGreenDawn extends CardImpl {
 
     public BringerOfTheGreenDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}{G}");

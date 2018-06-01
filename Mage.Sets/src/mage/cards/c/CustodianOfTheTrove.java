@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class CustodianOfTheTrove extends CardImpl {
+public final class CustodianOfTheTrove extends CardImpl {
 
     public CustodianOfTheTrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

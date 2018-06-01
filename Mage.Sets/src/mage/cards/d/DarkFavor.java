@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class DarkFavor extends CardImpl {
+public final class DarkFavor extends CardImpl {
 
     public DarkFavor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

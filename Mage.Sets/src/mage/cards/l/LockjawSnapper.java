@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class LockjawSnapper extends CardImpl {
+public final class LockjawSnapper extends CardImpl {
 
     public LockjawSnapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

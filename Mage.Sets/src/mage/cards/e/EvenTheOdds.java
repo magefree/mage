@@ -42,7 +42,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author LevelX2
  */
-public class EvenTheOdds extends CardImpl {
+public final class EvenTheOdds extends CardImpl {
 
     public EvenTheOdds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author LoneFox
  */
-public class MineBearer extends CardImpl {
+public final class MineBearer extends CardImpl {
 
     public MineBearer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

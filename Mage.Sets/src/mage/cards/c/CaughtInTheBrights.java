@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class CaughtInTheBrights extends CardImpl {
+public final class CaughtInTheBrights extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vehicle you control");
 

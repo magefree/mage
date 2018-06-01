@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author jeffwadsworth
  *
  */
-public class NeverendingTorment extends CardImpl {
+public final class NeverendingTorment extends CardImpl {
 
     public NeverendingTorment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");

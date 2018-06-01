@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DestructiveRevelry extends CardImpl {
+public final class DestructiveRevelry extends CardImpl {
 
     public DestructiveRevelry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");

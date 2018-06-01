@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class DarksteelRelic extends CardImpl {
+public final class DarksteelRelic extends CardImpl {
 
     public DarksteelRelic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class InsidiousWill extends CardImpl {
+public final class InsidiousWill extends CardImpl {
 
     public InsidiousWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

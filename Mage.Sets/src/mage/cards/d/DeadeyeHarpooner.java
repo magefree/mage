@@ -48,7 +48,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author Styxo
  */
-public class DeadeyeHarpooner extends CardImpl {
+public final class DeadeyeHarpooner extends CardImpl {
 
     private final static FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("tapped creature an opponent controls");
 

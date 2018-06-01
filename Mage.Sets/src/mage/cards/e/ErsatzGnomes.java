@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class ErsatzGnomes extends CardImpl {
+public final class ErsatzGnomes extends CardImpl {
 
     public ErsatzGnomes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

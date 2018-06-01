@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class DispersalTechnician extends CardImpl {
+public final class DispersalTechnician extends CardImpl {
 
     public DispersalTechnician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -43,7 +43,7 @@ import mage.game.permanent.token.WeirdToken;
  *
  * @author nigelzor
  */
-public class Thunderheads extends CardImpl {
+public final class Thunderheads extends CardImpl {
 
     public Thunderheads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

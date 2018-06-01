@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author fireshoes
  */
-public class KalitasTraitorOfGhet extends CardImpl {
+public final class KalitasTraitorOfGhet extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Vampire or Zombie");
 

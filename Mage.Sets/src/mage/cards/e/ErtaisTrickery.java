@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class ErtaisTrickery extends CardImpl {
+public final class ErtaisTrickery extends CardImpl {
 
     public ErtaisTrickery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

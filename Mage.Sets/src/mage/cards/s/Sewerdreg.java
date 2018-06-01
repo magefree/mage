@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Wehk
  */
-public class Sewerdreg extends CardImpl {
+public final class Sewerdreg extends CardImpl {
 
     public Sewerdreg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

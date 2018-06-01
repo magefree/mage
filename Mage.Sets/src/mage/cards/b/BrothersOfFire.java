@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class BrothersOfFire extends CardImpl {
+public final class BrothersOfFire extends CardImpl {
 
     public BrothersOfFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

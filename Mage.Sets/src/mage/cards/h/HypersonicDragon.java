@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class HypersonicDragon extends CardImpl {
+public final class HypersonicDragon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("sorcery spells");
     

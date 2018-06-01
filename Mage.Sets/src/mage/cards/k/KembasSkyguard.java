@@ -42,7 +42,7 @@ import mage.constants.SubType;
  * 
  * @author maurer.it_at_gmail.com
  */
-public class KembasSkyguard extends CardImpl {
+public final class KembasSkyguard extends CardImpl {
 
     public KembasSkyguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

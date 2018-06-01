@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CarefulConsideration extends CardImpl {
+public final class CarefulConsideration extends CardImpl {
 
     public CarefulConsideration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class MonCalamariInitiate extends CardImpl {
+public final class MonCalamariInitiate extends CardImpl {
 
     public MonCalamariInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

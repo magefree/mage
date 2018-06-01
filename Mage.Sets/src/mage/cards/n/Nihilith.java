@@ -50,7 +50,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class Nihilith extends CardImpl {
+public final class Nihilith extends CardImpl {
 
     public Nihilith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

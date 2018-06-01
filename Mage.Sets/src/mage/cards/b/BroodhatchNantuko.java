@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Temba21
  */
-public class BroodhatchNantuko extends CardImpl {
+public final class BroodhatchNantuko extends CardImpl {
 
     public BroodhatchNantuko(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class Hateflayer extends CardImpl {
+public final class Hateflayer extends CardImpl {
 
     public Hateflayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

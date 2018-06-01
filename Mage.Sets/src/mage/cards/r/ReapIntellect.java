@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class ReapIntellect extends CardImpl {
+public final class ReapIntellect extends CardImpl {
 
     public ReapIntellect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{2}{U}{B}");

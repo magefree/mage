@@ -49,7 +49,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class MindwrackDemon extends CardImpl {
+public final class MindwrackDemon extends CardImpl {
 
     public MindwrackDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

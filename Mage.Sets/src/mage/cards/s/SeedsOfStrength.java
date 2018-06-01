@@ -43,7 +43,7 @@ import mage.target.targetpointer.ThirdTargetPointer;
  *
  * @author LevelX2
  */
-public class SeedsOfStrength extends CardImpl {
+public final class SeedsOfStrength extends CardImpl {
 
     public SeedsOfStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{W}");

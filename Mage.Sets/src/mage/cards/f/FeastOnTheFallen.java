@@ -47,7 +47,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author emerald000
  */
-public class FeastOnTheFallen extends CardImpl {
+public final class FeastOnTheFallen extends CardImpl {
 
     public FeastOnTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

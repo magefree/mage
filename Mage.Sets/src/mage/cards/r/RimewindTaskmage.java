@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class RimewindTaskmage extends CardImpl {
+public final class RimewindTaskmage extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control four or more snow permanents");
 

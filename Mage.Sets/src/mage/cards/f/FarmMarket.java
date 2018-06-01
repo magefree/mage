@@ -42,7 +42,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LevelX2
  */
-public class FarmMarket extends SplitCard {
+public final class FarmMarket extends SplitCard {
 
     public FarmMarket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{2}{W}", "{2}{U}", SpellAbilityType.SPLIT_AFTERMATH);

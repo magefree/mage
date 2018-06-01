@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class DeadbridgeGoliath extends CardImpl {
+public final class DeadbridgeGoliath extends CardImpl {
 
     public DeadbridgeGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

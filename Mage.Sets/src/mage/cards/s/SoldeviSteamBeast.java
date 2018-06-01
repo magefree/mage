@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author L_J
  */
-public class SoldeviSteamBeast extends CardImpl {
+public final class SoldeviSteamBeast extends CardImpl {
 
     public SoldeviSteamBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

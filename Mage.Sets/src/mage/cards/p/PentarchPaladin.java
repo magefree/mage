@@ -51,7 +51,7 @@ import mage.constants.TargetAdjustment;
  *
  * @author jeffwadsworth
  */
-public class PentarchPaladin extends CardImpl {
+public final class PentarchPaladin extends CardImpl {
 
     FilterPermanent filter = new FilterPermanent("permanent of the chosen color.");
 

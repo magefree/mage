@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class SundialOfTheInfinite extends CardImpl {
+public final class SundialOfTheInfinite extends CardImpl {
 
     public SundialOfTheInfinite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

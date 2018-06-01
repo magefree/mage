@@ -41,7 +41,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class GruesomeFate extends CardImpl {
+public final class GruesomeFate extends CardImpl {
 
     public GruesomeFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

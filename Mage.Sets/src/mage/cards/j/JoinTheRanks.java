@@ -38,7 +38,7 @@ import mage.game.permanent.token.JoinTheRanksSoldierToken;
  *
  * @author Loki
  */
-public class JoinTheRanks extends CardImpl {
+public final class JoinTheRanks extends CardImpl {
 
     public JoinTheRanks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

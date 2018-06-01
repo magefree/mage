@@ -47,7 +47,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class HellholeFlailer extends CardImpl {
+public final class HellholeFlailer extends CardImpl {
 
     public HellholeFlailer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

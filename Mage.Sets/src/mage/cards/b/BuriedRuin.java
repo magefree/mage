@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Loki
  */
-public class BuriedRuin extends CardImpl {
+public final class BuriedRuin extends CardImpl {
 
     public BuriedRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

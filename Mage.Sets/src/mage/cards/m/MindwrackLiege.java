@@ -33,7 +33,7 @@ import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +53,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  * @author jeffwadsworth
 
  */
-public class MindwrackLiege extends CardImpl {
+public final class MindwrackLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("red creatures you control");
@@ -81,7 +81,7 @@ public class MindwrackLiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
 
         // {UR}{UR}{UR}{UR}: You may put a blue or red creature card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(filter3), new ManaCostsImpl("{U/R}{U/R}{U/R}{U/R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter3), new ManaCostsImpl("{U/R}{U/R}{U/R}{U/R}")));
     }
 
     public MindwrackLiege(final MindwrackLiege card) {

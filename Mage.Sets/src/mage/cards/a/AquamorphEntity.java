@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AquamorphEntity extends CardImpl {
+public final class AquamorphEntity extends CardImpl {
 
     public AquamorphEntity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

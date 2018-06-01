@@ -47,7 +47,7 @@ import mage.target.TargetCard;
  * @author jeffwadsworth
  *
  */
-public class DesecratorHag extends CardImpl {
+public final class DesecratorHag extends CardImpl {
 
     public DesecratorHag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B/G}{B/G}");

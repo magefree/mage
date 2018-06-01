@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Vorstclaw extends CardImpl {
+public final class Vorstclaw extends CardImpl {
 
     public Vorstclaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

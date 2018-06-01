@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Quercitron
  */
-public class MightMakesRight extends CardImpl {
+public final class MightMakesRight extends CardImpl {
 
     private static final String ruleText = "At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, "
             + "gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.";

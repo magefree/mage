@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author fireshoes
  */
-public class ChromescaleDrake extends CardImpl {
+public final class ChromescaleDrake extends CardImpl {
 
     public ChromescaleDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}{U}");

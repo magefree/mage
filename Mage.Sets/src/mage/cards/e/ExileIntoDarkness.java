@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class ExileIntoDarkness extends CardImpl {
+public final class ExileIntoDarkness extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
 

@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class TreeOfPerdition extends CardImpl {
+public final class TreeOfPerdition extends CardImpl {
 
     public TreeOfPerdition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

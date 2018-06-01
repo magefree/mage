@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class ApothecaryGeist extends CardImpl {
+public final class ApothecaryGeist extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Elf");
 

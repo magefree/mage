@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JRHerlehy
  */
-public class Befuddle extends CardImpl {
+public final class Befuddle extends CardImpl {
 
     public Befuddle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

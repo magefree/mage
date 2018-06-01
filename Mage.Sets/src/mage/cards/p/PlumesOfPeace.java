@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Wehk
  */
-public class PlumesOfPeace extends CardImpl {
+public final class PlumesOfPeace extends CardImpl {
 
     public PlumesOfPeace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{U}");

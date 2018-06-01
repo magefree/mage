@@ -42,7 +42,7 @@ import mage.constants.SuperType;
  *
  * @author LevelX2
  */
-public class IsperiaSupremeJudge extends CardImpl {
+public final class IsperiaSupremeJudge extends CardImpl {
  
 
     public IsperiaSupremeJudge(UUID ownerId, CardSetInfo setInfo) {

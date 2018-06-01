@@ -41,7 +41,7 @@ import mage.target.common.TargetActivatedAbility;
  *
  * @author LevelX2
  */
-public class Reroute extends CardImpl {
+public final class Reroute extends CardImpl {
 
     private static final FilterAbility filter = new FilterAbility("activated ability with a single target");
 

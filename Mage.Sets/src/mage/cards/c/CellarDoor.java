@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class CellarDoor extends CardImpl {
+public final class CellarDoor extends CardImpl {
 
     public CellarDoor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

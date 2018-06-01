@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author jeffwadsworth
  */
-public class JawsOfStone extends CardImpl {
+public final class JawsOfStone extends CardImpl {
     
     static final private FilterControlledLandPermanent filter = new FilterControlledLandPermanent("mountains you control");
     

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LoxodonPartisan extends CardImpl {
+public final class LoxodonPartisan extends CardImpl {
 
     public LoxodonPartisan (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

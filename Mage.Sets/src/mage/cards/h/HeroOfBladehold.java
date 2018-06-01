@@ -42,7 +42,7 @@ import mage.game.permanent.token.SoldierToken;
 /**
  * @author Loki
  */
-public class HeroOfBladehold extends CardImpl {
+public final class HeroOfBladehold extends CardImpl {
 
     public HeroOfBladehold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

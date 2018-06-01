@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SavageTwister extends CardImpl {
+public final class SavageTwister extends CardImpl {
 
     public SavageTwister(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{G}");

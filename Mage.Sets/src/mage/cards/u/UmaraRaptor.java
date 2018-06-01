@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class UmaraRaptor extends CardImpl {
+public final class UmaraRaptor extends CardImpl {
 
     public UmaraRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

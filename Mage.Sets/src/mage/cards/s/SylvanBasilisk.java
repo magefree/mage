@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author anonymous
  */
-public class SylvanBasilisk extends CardImpl {
+public final class SylvanBasilisk extends CardImpl {
 
     public SylvanBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

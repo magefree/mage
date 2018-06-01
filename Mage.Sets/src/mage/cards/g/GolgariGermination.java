@@ -44,7 +44,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author Wehk
  */
-public class GolgariGermination extends CardImpl {
+public final class GolgariGermination extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
     

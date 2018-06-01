@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class MireShade extends CardImpl {
+public final class MireShade extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
 

@@ -50,7 +50,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author emerald000
  */
-public class GibberingDescent extends CardImpl {
+public final class GibberingDescent extends CardImpl {
 
     public GibberingDescent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{B}");

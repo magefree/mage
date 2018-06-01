@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author noxx
  */
-public class ChampionOfLambholt extends CardImpl {
+public final class ChampionOfLambholt extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

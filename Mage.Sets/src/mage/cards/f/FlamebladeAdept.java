@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class FlamebladeAdept extends CardImpl {
+public final class FlamebladeAdept extends CardImpl {
 
     public FlamebladeAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

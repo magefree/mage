@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class PredatoryAdvantage extends CardImpl {
+public final class PredatoryAdvantage extends CardImpl {
 
     public PredatoryAdvantage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{G}");

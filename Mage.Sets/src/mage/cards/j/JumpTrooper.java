@@ -50,7 +50,7 @@ import mage.target.TargetStackObject;
  *
  * @author Styxo
  */
-public class JumpTrooper extends CardImpl {
+public final class JumpTrooper extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Trooper creatures");
 

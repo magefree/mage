@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class HighGround extends CardImpl {
+public final class HighGround extends CardImpl {
 
     public HighGround(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

@@ -57,7 +57,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class WanderingMage extends CardImpl {
+public final class WanderingMage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cleric or Wizard");
 

@@ -42,7 +42,7 @@ import mage.filter.common.FilterInstantOrSorceryCard;
  *
  * @author fireshoes
  */
-public class CrypticSerpent extends CardImpl {
+public final class CrypticSerpent extends CardImpl {
 
     public CrypticSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

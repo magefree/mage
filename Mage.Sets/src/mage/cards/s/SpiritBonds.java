@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SpiritBonds extends CardImpl {
+public final class SpiritBonds extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Spirit creature you control");
     private static final FilterControlledPermanent filterSpirit = new FilterControlledPermanent("Spirit");

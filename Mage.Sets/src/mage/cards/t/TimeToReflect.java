@@ -51,7 +51,7 @@ import java.util.*;
 /**
  * @author jeffwadsworth
  */
-public class TimeToReflect extends CardImpl {
+public final class TimeToReflect extends CardImpl {
 
     public TimeToReflect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

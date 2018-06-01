@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class FreewindEquenaut extends CardImpl {
+public final class FreewindEquenaut extends CardImpl {
 
     public FreewindEquenaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

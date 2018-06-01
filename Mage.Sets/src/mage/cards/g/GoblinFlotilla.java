@@ -48,7 +48,7 @@ import mage.constants.TargetController;
  *
  * @author MarcoMarin
  */
-public class GoblinFlotilla extends CardImpl {
+public final class GoblinFlotilla extends CardImpl {
 
     public GoblinFlotilla(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

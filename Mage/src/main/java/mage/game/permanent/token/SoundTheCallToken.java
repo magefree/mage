@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author TheElk801
  */
-public class SoundTheCallToken extends TokenImpl {
+public final class SoundTheCallToken extends TokenImpl {
 
     private static final FilterCard filter = new FilterCard("card named Sound the Call");
 

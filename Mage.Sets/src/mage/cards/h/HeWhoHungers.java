@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author LevelX
  */
-public class HeWhoHungers extends CardImpl {
+public final class HeWhoHungers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Spirit");
 

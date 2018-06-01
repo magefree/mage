@@ -40,7 +40,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author LevelX2
  */
-public class RecrossThePaths extends CardImpl {
+public final class RecrossThePaths extends CardImpl {
 
     public RecrossThePaths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

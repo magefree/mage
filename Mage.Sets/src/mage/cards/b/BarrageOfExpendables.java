@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class BarrageOfExpendables extends CardImpl {
+public final class BarrageOfExpendables extends CardImpl {
 
     public BarrageOfExpendables(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");

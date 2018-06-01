@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author KholdFuzion
  */
-public class GrandColiseum extends CardImpl {
+public final class GrandColiseum extends CardImpl {
 
     public GrandColiseum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

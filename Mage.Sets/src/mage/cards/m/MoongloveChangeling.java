@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class MoongloveChangeling extends CardImpl {
+public final class MoongloveChangeling extends CardImpl {
 
     public MoongloveChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

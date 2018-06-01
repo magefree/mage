@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author LevelX
  */
-public class FeastOfWorms extends CardImpl {
+public final class FeastOfWorms extends CardImpl {
 
     public FeastOfWorms (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");

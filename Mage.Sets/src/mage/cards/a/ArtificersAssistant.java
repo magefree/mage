@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.HistoricPredicate;
  *
  * @author TheElk801
  */
-public class ArtificersAssistant extends CardImpl {
+public final class ArtificersAssistant extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Loki
  */
-public class HannasCustody extends CardImpl {
+public final class HannasCustody extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts");
 

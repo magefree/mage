@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BurningTreeEmissary extends CardImpl {
+public final class BurningTreeEmissary extends CardImpl {
 
     public BurningTreeEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}");

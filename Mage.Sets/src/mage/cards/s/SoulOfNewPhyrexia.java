@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SoulOfNewPhyrexia extends CardImpl {
+public final class SoulOfNewPhyrexia extends CardImpl {
 
     public SoulOfNewPhyrexia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

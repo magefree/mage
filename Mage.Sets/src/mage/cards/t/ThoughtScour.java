@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class ThoughtScour extends CardImpl {
+public final class ThoughtScour extends CardImpl {
 
     public ThoughtScour(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class Paraselene extends CardImpl {
+public final class Paraselene extends CardImpl {
 
     public Paraselene(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

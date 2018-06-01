@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class CharcoalDiamond extends CardImpl {
+public final class CharcoalDiamond extends CardImpl {
 
     public CharcoalDiamond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

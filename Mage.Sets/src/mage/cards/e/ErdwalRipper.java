@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class ErdwalRipper extends CardImpl {
+public final class ErdwalRipper extends CardImpl {
 
     public ErdwalRipper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

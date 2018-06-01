@@ -51,7 +51,7 @@ import mage.game.permanent.token.GutterGrimeToken;
  *
  * @author BetaSteward
  */
-public class GutterGrime extends CardImpl {
+public final class GutterGrime extends CardImpl {
 
     public GutterGrime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");

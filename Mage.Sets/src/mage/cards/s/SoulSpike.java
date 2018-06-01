@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author dustinconrad
  */
-public class SoulSpike extends CardImpl {
+public final class SoulSpike extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("two black cards");
 

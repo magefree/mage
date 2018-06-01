@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class DarksteelPlate extends CardImpl {
+public final class DarksteelPlate extends CardImpl {
 
     public DarksteelPlate (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

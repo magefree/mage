@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class FiresOfUndeath extends CardImpl {
+public final class FiresOfUndeath extends CardImpl {
 
     public FiresOfUndeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

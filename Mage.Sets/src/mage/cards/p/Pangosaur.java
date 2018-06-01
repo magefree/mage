@@ -44,7 +44,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class Pangosaur extends CardImpl {
+public final class Pangosaur extends CardImpl {
 
     public Pangosaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

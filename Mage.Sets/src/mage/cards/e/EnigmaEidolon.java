@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class EnigmaEidolon extends CardImpl {
+public final class EnigmaEidolon extends CardImpl {
 
     public EnigmaEidolon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

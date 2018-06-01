@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class EmbalmersTools extends CardImpl {
+public final class EmbalmersTools extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Zombie you control");
 

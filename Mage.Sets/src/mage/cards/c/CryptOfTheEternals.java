@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class CryptOfTheEternals extends CardImpl {
+public final class CryptOfTheEternals extends CardImpl {
 
     public CryptOfTheEternals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

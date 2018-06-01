@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class TrokinHighGuard extends CardImpl {
+public final class TrokinHighGuard extends CardImpl {
 
     public TrokinHighGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author LoneFox
  */
-public class Contemplation extends CardImpl {
+public final class Contemplation extends CardImpl {
 
     public Contemplation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");

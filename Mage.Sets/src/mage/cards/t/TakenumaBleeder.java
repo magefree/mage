@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TakenumaBleeder extends CardImpl {
+public final class TakenumaBleeder extends CardImpl {
 
     public TakenumaBleeder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class NeurokCommando extends CardImpl {
+public final class NeurokCommando extends CardImpl {
 
     public NeurokCommando(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

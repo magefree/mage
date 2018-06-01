@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class JeditOjanen extends CardImpl {
+public final class JeditOjanen extends CardImpl {
 
     public JeditOjanen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{U}");

@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  * @author Poddo
  */
 
-public class ConsumingBonfire extends CardImpl {
+public final class ConsumingBonfire extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("non-Elemental creature");
     private static final FilterPermanent filter2 = new FilterPermanent("Treefolk creature");

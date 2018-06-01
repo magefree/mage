@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class RunesOfTheDeus extends CardImpl {
+public final class RunesOfTheDeus extends CardImpl {
 
     public RunesOfTheDeus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R/G}");

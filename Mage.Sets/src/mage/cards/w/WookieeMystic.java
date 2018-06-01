@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  *
  * @author Styxo
  */
-public class WookieeMystic extends CardImpl {
+public final class WookieeMystic extends CardImpl {
 
     public WookieeMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");

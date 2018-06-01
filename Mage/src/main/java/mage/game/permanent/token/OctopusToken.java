@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class OctopusToken extends TokenImpl {
+public final class OctopusToken extends TokenImpl {
 
     public OctopusToken() {
         super("Octopus", "8/8 blue Octopus creature token");

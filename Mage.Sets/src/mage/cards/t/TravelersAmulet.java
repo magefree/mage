@@ -45,13 +45,13 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class TravelersAmulet extends CardImpl {
+public final class TravelersAmulet extends CardImpl {
 
     public TravelersAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {1}, Sacrifice Traveler's Amulet: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(target, true), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

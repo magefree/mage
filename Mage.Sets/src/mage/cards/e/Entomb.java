@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class Entomb extends CardImpl {
+public final class Entomb extends CardImpl {
 
     public Entomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

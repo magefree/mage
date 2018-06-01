@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class SarkhanTheDragonspeaker extends CardImpl {
+public final class SarkhanTheDragonspeaker extends CardImpl {
 
     public SarkhanTheDragonspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");

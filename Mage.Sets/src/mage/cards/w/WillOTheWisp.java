@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author dustinconrad
  */
-public class WillOTheWisp extends CardImpl {
+public final class WillOTheWisp extends CardImpl {
 
     public WillOTheWisp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

@@ -47,7 +47,7 @@ import mage.game.permanent.token.RakkaMarElementalToken;
  *
  * @author Loki
  */
-public class RakkaMar extends CardImpl {
+public final class RakkaMar extends CardImpl {
 
     private RakkaMarElementalToken token = new RakkaMarElementalToken();
 

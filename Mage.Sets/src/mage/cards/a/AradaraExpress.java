@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class AradaraExpress extends CardImpl {
+public final class AradaraExpress extends CardImpl {
 
     public AradaraExpress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

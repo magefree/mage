@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GobhobblerRats extends CardImpl {
+public final class GobhobblerRats extends CardImpl {
 
     public GobhobblerRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");

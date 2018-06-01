@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class UmbralMantle extends CardImpl {
+public final class UmbralMantle extends CardImpl {
 
     public UmbralMantle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

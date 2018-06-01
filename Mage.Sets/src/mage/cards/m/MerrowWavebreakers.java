@@ -47,7 +47,7 @@ import mage.constants.Zone;
  * @author jeffwadsworth
 
  */
-public class MerrowWavebreakers extends CardImpl {
+public final class MerrowWavebreakers extends CardImpl {
 
     public MerrowWavebreakers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class WanderingFumarole extends CardImpl {
+public final class WanderingFumarole extends CardImpl {
 
     public WanderingFumarole(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

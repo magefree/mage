@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class DesolationGiant extends CardImpl {
+public final class DesolationGiant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("other creatures you control");

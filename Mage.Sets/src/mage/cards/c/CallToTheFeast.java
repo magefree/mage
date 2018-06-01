@@ -38,7 +38,7 @@ import mage.game.permanent.token.IxalanVampireToken;
  *
  * @author TheElk801
  */
-public class CallToTheFeast extends CardImpl {
+public final class CallToTheFeast extends CardImpl {
 
     public CallToTheFeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{B}");

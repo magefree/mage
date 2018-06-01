@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class BloodlineShaman extends CardImpl {
+public final class BloodlineShaman extends CardImpl {
 
     public BloodlineShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

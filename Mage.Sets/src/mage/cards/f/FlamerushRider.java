@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class FlamerushRider extends CardImpl {
+public final class FlamerushRider extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target attacking creature");
 

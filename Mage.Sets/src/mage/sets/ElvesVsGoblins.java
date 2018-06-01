@@ -13,7 +13,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class ElvesVsGoblins extends ExpansionSet {
+public final class ElvesVsGoblins extends ExpansionSet {
 
     private static final ElvesVsGoblins instance = new ElvesVsGoblins();
 

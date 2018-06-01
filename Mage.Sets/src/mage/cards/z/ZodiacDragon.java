@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class ZodiacDragon extends CardImpl {
+public final class ZodiacDragon extends CardImpl {
 
     public ZodiacDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}{R}");

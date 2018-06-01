@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2 & L_J
  */
-public class BatheInLight extends CardImpl {
+public final class BatheInLight extends CardImpl {
 
     public BatheInLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

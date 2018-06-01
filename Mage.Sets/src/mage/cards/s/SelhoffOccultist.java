@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class SelhoffOccultist extends CardImpl {
+public final class SelhoffOccultist extends CardImpl {
 
     public SelhoffOccultist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

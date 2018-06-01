@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class MnemonicNexus extends CardImpl {
+public final class MnemonicNexus extends CardImpl {
 
     public MnemonicNexus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

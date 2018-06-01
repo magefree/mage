@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author djbrez
  */
-public class Ragamuffyn extends CardImpl {
+public final class Ragamuffyn extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or land");
     

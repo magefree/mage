@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class CanalMonitor extends CardImpl {
+public final class CanalMonitor extends CardImpl {
 
     public CanalMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

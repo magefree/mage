@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
-public class BreakingEntering extends SplitCard {
+public final class BreakingEntering extends SplitCard {
 
     public BreakingEntering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{B}{R}", SpellAbilityType.SPLIT_FUSED);

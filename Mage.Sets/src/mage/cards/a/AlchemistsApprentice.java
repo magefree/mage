@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author noxx
  */
-public class AlchemistsApprentice extends CardImpl {
+public final class AlchemistsApprentice extends CardImpl {
 
     public AlchemistsApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

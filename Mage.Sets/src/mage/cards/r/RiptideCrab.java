@@ -42,7 +42,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class RiptideCrab extends CardImpl {
+public final class RiptideCrab extends CardImpl {
 
     public RiptideCrab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");

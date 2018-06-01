@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author hanasu
  */
-public class SoldeviMachinist extends CardImpl {
+public final class SoldeviMachinist extends CardImpl {
 
     public SoldeviMachinist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class ShrewdHatchling extends CardImpl {
+public final class ShrewdHatchling extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("blue spell");
     private static final FilterSpell filter2 = new FilterSpell("red spell");

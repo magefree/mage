@@ -48,7 +48,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author Styxo
  */
-public class MaceWindu extends CardImpl {
+public final class MaceWindu extends CardImpl {
 
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature you don't control");
 

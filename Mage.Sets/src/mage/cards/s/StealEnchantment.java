@@ -46,7 +46,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Quercitron
  */
-public class StealEnchantment extends CardImpl {
+public final class StealEnchantment extends CardImpl {
 
     public StealEnchantment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");

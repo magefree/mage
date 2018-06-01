@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class AncestralMask extends CardImpl {
+public final class AncestralMask extends CardImpl {
     
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("each other enchantment on the battlefield");
 

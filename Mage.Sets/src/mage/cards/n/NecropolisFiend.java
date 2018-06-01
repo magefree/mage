@@ -61,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NecropolisFiend extends CardImpl {
+public final class NecropolisFiend extends CardImpl {
 
     public NecropolisFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{B}{B}");

@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class Visions extends CardImpl {
+public final class Visions extends CardImpl {
 
     public Visions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");

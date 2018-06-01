@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class VoiceOfResurgenceToken extends TokenImpl {
+public final class VoiceOfResurgenceToken extends TokenImpl {
 
     public VoiceOfResurgenceToken() {
         super("Elemental", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");

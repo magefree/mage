@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class WarrenScourgeElf extends CardImpl {
+public final class WarrenScourgeElf extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Goblin");
 

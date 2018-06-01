@@ -41,7 +41,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author nantuko
  */
-public class DoomedTraveler extends CardImpl {
+public final class DoomedTraveler extends CardImpl {
 
     public DoomedTraveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

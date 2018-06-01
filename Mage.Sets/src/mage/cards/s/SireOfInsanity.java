@@ -48,7 +48,7 @@ import mage.players.Player;
  */
 
 
-public class SireOfInsanity extends CardImpl {
+public final class SireOfInsanity extends CardImpl {
 
     public SireOfInsanity (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");

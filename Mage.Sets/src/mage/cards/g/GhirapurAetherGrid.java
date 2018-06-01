@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Wehk
  */
-public class GhirapurAetherGrid extends CardImpl {
+public final class GhirapurAetherGrid extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts you control");
 

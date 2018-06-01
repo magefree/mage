@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class GruulCluestone extends CardImpl {
+public final class GruulCluestone extends CardImpl {
 
     public GruulCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

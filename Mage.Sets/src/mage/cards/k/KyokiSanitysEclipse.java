@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class KyokiSanitysEclipse extends CardImpl {
+public final class KyokiSanitysEclipse extends CardImpl {
 
     public KyokiSanitysEclipse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

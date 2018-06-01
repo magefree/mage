@@ -47,7 +47,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author emerald000
  */
-public class WasteNot extends CardImpl {
+public final class WasteNot extends CardImpl {
 
     public WasteNot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class AjaniValiantProtector extends CardImpl {
+public final class AjaniValiantProtector extends CardImpl {
 
     public AjaniValiantProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{W}");

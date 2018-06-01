@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class ReturnToRavnica extends ExpansionSet {
+public final class ReturnToRavnica extends ExpansionSet {
 
     private static final ReturnToRavnica instance = new ReturnToRavnica();
 

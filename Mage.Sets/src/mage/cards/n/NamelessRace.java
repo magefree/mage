@@ -62,7 +62,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class NamelessRace extends CardImpl {
+public final class NamelessRace extends CardImpl {
 
     public NamelessRace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

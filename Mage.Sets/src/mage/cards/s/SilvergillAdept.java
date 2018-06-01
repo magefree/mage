@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class SilvergillAdept extends CardImpl {
+public final class SilvergillAdept extends CardImpl {
 
     public SilvergillAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

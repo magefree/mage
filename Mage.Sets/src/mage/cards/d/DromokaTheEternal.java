@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DromokaTheEternal extends CardImpl {
+public final class DromokaTheEternal extends CardImpl {
 
     public DromokaTheEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");

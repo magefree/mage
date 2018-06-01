@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class GhaltaPrimalHunger extends CardImpl {
+public final class GhaltaPrimalHunger extends CardImpl {
 
     public GhaltaPrimalHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{G}{G}");

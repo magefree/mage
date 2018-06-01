@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LandLeeches extends CardImpl {
+public final class LandLeeches extends CardImpl {
 
     public LandLeeches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

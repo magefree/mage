@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class OgreTaskmaster extends CardImpl {
+public final class OgreTaskmaster extends CardImpl {
 
     public OgreTaskmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

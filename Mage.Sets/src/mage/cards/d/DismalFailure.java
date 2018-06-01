@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class DismalFailure extends CardImpl {
+public final class DismalFailure extends CardImpl {
 
     public DismalFailure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

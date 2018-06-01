@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class SporecrownThallid extends CardImpl {
+public final class SporecrownThallid extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each other creature you control that's a Fungus or Saproling");
 

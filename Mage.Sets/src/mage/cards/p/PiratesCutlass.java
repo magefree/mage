@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class PiratesCutlass extends CardImpl {
+public final class PiratesCutlass extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Pirate you control");
 

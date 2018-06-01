@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ShiftingLoyalties extends CardImpl {
+public final class ShiftingLoyalties extends CardImpl {
 
     public ShiftingLoyalties(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");

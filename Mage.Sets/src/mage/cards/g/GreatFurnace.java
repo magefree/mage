@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class GreatFurnace extends CardImpl {
+public final class GreatFurnace extends CardImpl {
 
     public GreatFurnace (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.LAND},null);

@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author MarcoMarin
  */
-public class Rakalite extends CardImpl {
+public final class Rakalite extends CardImpl {
 
     public Rakalite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class WallOfTorches extends CardImpl {
+public final class WallOfTorches extends CardImpl {
 
     public WallOfTorches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

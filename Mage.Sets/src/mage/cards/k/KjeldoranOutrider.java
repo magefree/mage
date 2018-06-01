@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class KjeldoranOutrider extends CardImpl {
+public final class KjeldoranOutrider extends CardImpl {
 
     public KjeldoranOutrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

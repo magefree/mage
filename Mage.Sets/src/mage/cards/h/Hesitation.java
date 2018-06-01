@@ -43,7 +43,7 @@ import mage.filter.FilterSpell;
  *
  * @author LoneFox
  */
-public class Hesitation extends CardImpl {
+public final class Hesitation extends CardImpl {
 
     public Hesitation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class TsabosDecree extends CardImpl {
+public final class TsabosDecree extends CardImpl {
 
     public TsabosDecree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}");

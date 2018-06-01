@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class LoneWolf extends CardImpl {
+public final class LoneWolf extends CardImpl {
 
     public LoneWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

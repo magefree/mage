@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class UndyingEvil extends CardImpl {
+public final class UndyingEvil extends CardImpl {
 
     public UndyingEvil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

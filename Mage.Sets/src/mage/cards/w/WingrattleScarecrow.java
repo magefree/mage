@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class WingrattleScarecrow extends CardImpl {
+public final class WingrattleScarecrow extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a blue creature");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("a black creature");

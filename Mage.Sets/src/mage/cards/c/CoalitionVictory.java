@@ -46,7 +46,7 @@ import mage.game.Game;
 /**
  * @author fireshoes
  */
-public class CoalitionVictory extends CardImpl {
+public final class CoalitionVictory extends CardImpl {
 
     static final FilterControlledLandPermanent filterPlains = new FilterControlledLandPermanent();
     static final FilterControlledLandPermanent filterIsland = new FilterControlledLandPermanent();

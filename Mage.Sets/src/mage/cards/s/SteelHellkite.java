@@ -52,7 +52,7 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
 /**
  * @author nantuko
  */
-public class SteelHellkite extends CardImpl {
+public final class SteelHellkite extends CardImpl {
 
     public SteelHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

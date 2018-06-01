@@ -58,7 +58,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SasayaOrochiAscendant extends CardImpl {
+public final class SasayaOrochiAscendant extends CardImpl {
 
     public SasayaOrochiAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

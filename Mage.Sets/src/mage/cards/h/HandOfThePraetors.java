@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author Viserion, North
  */
-public class HandOfThePraetors extends CardImpl {
+public final class HandOfThePraetors extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with infect");
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with infect");

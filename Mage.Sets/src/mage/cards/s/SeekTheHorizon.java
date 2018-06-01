@@ -40,13 +40,13 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SeekTheHorizon extends CardImpl {
+public final class SeekTheHorizon extends CardImpl {
 
     public SeekTheHorizon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Search your library for up to three basic land cards, reveal them, and put them into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_BASIC_LAND), true));
     }
 
     public SeekTheHorizon(final SeekTheHorizon card) {

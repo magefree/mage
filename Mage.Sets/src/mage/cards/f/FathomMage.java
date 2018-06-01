@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Plopman
  */
-public class FathomMage extends CardImpl {
+public final class FathomMage extends CardImpl {
 
     public FathomMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");

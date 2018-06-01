@@ -49,7 +49,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author LevelX2
  */
-public class DacksDuplicate extends CardImpl {
+public final class DacksDuplicate extends CardImpl {
 
     public DacksDuplicate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");

@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class DoorToNothingness extends CardImpl {
+public final class DoorToNothingness extends CardImpl {
 
     public DoorToNothingness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

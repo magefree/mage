@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class DistantMelody extends CardImpl {
+public final class DistantMelody extends CardImpl {
 
     public DistantMelody(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

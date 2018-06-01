@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class SpiritOfTheHearth extends CardImpl {
+public final class SpiritOfTheHearth extends CardImpl {
 
     public SpiritOfTheHearth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

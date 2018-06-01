@@ -63,7 +63,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class RaidingParty extends CardImpl {
+public final class RaidingParty extends CardImpl {
     
     private static final FilterObject filterWhite = new FilterStackObject("white spells or abilities from white sources");
     private static final FilterControlledCreaturePermanent filterOrc = new FilterControlledCreaturePermanent("an Orc");

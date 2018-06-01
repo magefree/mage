@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.CommanderPredicate;
  *
  * @author Saga
  */
-public class BloodswornSteward extends CardImpl {
+public final class BloodswornSteward extends CardImpl {
     
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
     static {

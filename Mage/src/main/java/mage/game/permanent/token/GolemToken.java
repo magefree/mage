@@ -39,7 +39,7 @@ import mage.MageInt;
  *
  * @author North
  */
-public class GolemToken extends TokenImpl {
+public final class GolemToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

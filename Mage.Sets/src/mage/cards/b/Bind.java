@@ -40,7 +40,7 @@ import mage.target.common.TargetActivatedAbility;
  * @author LoneFox
 
  */
-public class Bind extends CardImpl {
+public final class Bind extends CardImpl {
 
     public Bind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

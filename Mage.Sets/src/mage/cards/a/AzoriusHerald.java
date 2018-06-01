@@ -45,7 +45,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author LevelX2
  */
-public class AzoriusHerald extends CardImpl {
+public final class AzoriusHerald extends CardImpl {
 
     public AzoriusHerald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

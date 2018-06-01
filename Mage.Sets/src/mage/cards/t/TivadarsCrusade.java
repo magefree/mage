@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class TivadarsCrusade extends CardImpl {
+public final class TivadarsCrusade extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Goblins");
     

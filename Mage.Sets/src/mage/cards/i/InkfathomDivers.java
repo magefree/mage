@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX
  */
-public class InkfathomDivers extends CardImpl {
+public final class InkfathomDivers extends CardImpl {
 
     public InkfathomDivers (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

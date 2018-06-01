@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class Interdict extends CardImpl {
+public final class Interdict extends CardImpl {
 
     private static final FilterStackObject filter = new FilterStackObject("activated ability from an artifact, creature, enchantment, or land");
 

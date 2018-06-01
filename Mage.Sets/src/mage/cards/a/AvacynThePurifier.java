@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class AvacynThePurifier extends CardImpl {
+public final class AvacynThePurifier extends CardImpl {
 
     public AvacynThePurifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

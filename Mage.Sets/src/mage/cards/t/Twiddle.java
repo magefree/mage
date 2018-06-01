@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author anonymous
  */
-public class Twiddle extends CardImpl {
+public final class Twiddle extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author ilcartographer
  */
-public class CloudDragon extends CardImpl {
+public final class CloudDragon extends CardImpl {
 
     public CloudDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

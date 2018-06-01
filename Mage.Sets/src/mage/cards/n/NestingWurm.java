@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author L_J (based on BetaSteward_at_googlemail.com)
  */
-public class NestingWurm extends CardImpl {
+public final class NestingWurm extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards named Nesting Wurm");
 

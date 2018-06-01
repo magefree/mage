@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author jonubuu
  */
-public class Brainstorm extends CardImpl {
+public final class Brainstorm extends CardImpl {
 
     public Brainstorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

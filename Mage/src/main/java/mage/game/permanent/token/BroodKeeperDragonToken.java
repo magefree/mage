@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class BroodKeeperDragonToken extends TokenImpl {
+public final class BroodKeeperDragonToken extends TokenImpl {
 
     public BroodKeeperDragonToken() {
         super("Dragon", "2/2 red Dragon creature token with flying. It has \"{R}: This creature gets +1/+0 until end of turn.\"");

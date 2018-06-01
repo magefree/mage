@@ -51,7 +51,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Viserion
  */
-public class ValakutTheMoltenPinnacle extends CardImpl {
+public final class ValakutTheMoltenPinnacle extends CardImpl {
 
     static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 

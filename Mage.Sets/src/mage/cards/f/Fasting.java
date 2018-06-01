@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class Fasting extends CardImpl {
+public final class Fasting extends CardImpl {
 
     public Fasting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author TheElk801
  */
-public class SunCrownedHunters extends CardImpl {
+public final class SunCrownedHunters extends CardImpl {
 
     public SunCrownedHunters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

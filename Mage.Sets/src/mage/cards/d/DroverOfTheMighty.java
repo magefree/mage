@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class DroverOfTheMighty extends CardImpl {
+public final class DroverOfTheMighty extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Dinosaur");
 

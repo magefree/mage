@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BlisteringBarrier extends CardImpl {
+public final class BlisteringBarrier extends CardImpl {
 
     public BlisteringBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

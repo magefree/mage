@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class AethersphereHarvester extends CardImpl {
+public final class AethersphereHarvester extends CardImpl {
 
     public AethersphereHarvester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

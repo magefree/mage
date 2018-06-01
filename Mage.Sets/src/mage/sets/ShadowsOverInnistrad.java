@@ -43,7 +43,7 @@ import mage.util.RandomUtil;
  *
  * @author fireshoes
  */
-public class ShadowsOverInnistrad extends ExpansionSet {
+public final class ShadowsOverInnistrad extends ExpansionSet {
 
     private static final ShadowsOverInnistrad instance = new ShadowsOverInnistrad();
 

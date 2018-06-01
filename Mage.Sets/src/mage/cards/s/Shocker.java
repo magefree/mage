@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author markedagain
  */
-public class Shocker extends CardImpl {
+public final class Shocker extends CardImpl {
 
     public Shocker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

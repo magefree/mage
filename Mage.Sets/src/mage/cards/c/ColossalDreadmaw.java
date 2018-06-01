@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class ColossalDreadmaw extends CardImpl {
+public final class ColossalDreadmaw extends CardImpl {
 
     public ColossalDreadmaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

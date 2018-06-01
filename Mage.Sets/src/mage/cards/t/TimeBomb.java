@@ -50,7 +50,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author fireshoes
  */
-public class TimeBomb extends CardImpl {
+public final class TimeBomb extends CardImpl {
 
     public TimeBomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

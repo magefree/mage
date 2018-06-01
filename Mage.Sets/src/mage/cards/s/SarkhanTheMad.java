@@ -59,7 +59,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author maurer.it_at_gmail.com
  */
-public class SarkhanTheMad extends CardImpl {
+public final class SarkhanTheMad extends CardImpl {
 
     public SarkhanTheMad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");

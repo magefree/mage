@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class HeedlessOne extends CardImpl {
+public final class HeedlessOne extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Elves on the battlefield");
 

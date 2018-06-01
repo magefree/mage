@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class KhenraCharioteer extends CardImpl {
+public final class KhenraCharioteer extends CardImpl {
 
     public KhenraCharioteer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");

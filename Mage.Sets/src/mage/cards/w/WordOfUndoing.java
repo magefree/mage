@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author tcontis
  */
-public class WordOfUndoing extends CardImpl {
+public final class WordOfUndoing extends CardImpl {
 
     public WordOfUndoing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

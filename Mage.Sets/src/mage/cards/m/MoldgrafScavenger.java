@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MoldgrafScavenger extends CardImpl {
+public final class MoldgrafScavenger extends CardImpl {
 
     public MoldgrafScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

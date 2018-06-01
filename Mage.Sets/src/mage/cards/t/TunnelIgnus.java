@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
 /**
  * @author Loki
  */
-public class TunnelIgnus extends CardImpl {
+public final class TunnelIgnus extends CardImpl {
 
     public TunnelIgnus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

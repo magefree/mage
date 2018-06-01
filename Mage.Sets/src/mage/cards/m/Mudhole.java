@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class Mudhole extends CardImpl {
+public final class Mudhole extends CardImpl {
 
     public Mudhole(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

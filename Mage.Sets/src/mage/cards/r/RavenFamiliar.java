@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author Plopman
  */
-public class RavenFamiliar extends CardImpl {
+public final class RavenFamiliar extends CardImpl {
 
     public RavenFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

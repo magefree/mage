@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class KiorasFollower extends CardImpl {
+public final class KiorasFollower extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 

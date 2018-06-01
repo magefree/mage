@@ -1521,8 +1521,9 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
-
+        newAbility.setSourceObject(null, this); // Update the source object to the currently existing Object
         ContinuousEffect newEffect = continuousEffect.copy();
+
         newEffect.newId();
         newEffect.init(newAbility, this);
 
@@ -2031,7 +2032,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number 
+            // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
             // and it isn’t the source of a chapter ability that has triggered but not yet left the stack, that Saga’s controller sacrifices it.
             if (perm.hasSubtype(SubType.SAGA, this)) {
                 for (Ability sagaAbility : perm.getAbilities()) {

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SandstoneDeadfall extends CardImpl {
+public final class SandstoneDeadfall extends CardImpl {
 
     public SandstoneDeadfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class AzoriusAEthermage extends CardImpl {
+public final class AzoriusAEthermage extends CardImpl {
 
     private static final String rule = "Whenever a permanent is returned to your hand, ";
 

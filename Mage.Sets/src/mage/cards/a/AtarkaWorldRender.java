@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class AtarkaWorldRender extends CardImpl {
+public final class AtarkaWorldRender extends CardImpl {
 
     public AtarkaWorldRender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SpreadTheSickness extends CardImpl {
+public final class SpreadTheSickness extends CardImpl {
 
     public SpreadTheSickness (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

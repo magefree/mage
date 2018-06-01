@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class HelixPinnacle extends CardImpl {
+public final class HelixPinnacle extends CardImpl {
 
     static final String rule = "at the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game";
 

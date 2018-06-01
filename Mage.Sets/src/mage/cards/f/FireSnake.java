@@ -42,7 +42,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class FireSnake extends CardImpl {
+public final class FireSnake extends CardImpl {
 
     public FireSnake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

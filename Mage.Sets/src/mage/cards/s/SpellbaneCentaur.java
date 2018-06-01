@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class SpellbaneCentaur extends CardImpl {
+public final class SpellbaneCentaur extends CardImpl {
 
     private static final FilterObject filter = new FilterStackObject("blue spells or abilities from blue sources");
 

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GrovetenderDruidsPlantToken extends TokenImpl {
+public final class GrovetenderDruidsPlantToken extends TokenImpl {
 
     public GrovetenderDruidsPlantToken() {
         super("Plant", "1/1 green Plant creature");

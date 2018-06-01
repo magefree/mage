@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class AdarkarWastes extends CardImpl {
+public final class AdarkarWastes extends CardImpl {
 
     public AdarkarWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

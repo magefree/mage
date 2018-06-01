@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class ReduceRubble extends SplitCard {
+public final class ReduceRubble extends SplitCard {
 
     public ReduceRubble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{2}{U}", "{2}{R}", SpellAbilityType.SPLIT_AFTERMATH);

@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
  * @author LoneFox
 
  */
-public class AnaBattlemage extends CardImpl {
+public final class AnaBattlemage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
     static {

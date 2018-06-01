@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class Splinterfright extends CardImpl {
+public final class Splinterfright extends CardImpl {
 
     public Splinterfright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

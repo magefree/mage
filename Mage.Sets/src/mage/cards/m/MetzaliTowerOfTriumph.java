@@ -58,7 +58,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author LevelX2
  */
-public class MetzaliTowerOfTriumph extends CardImpl {
+public final class MetzaliTowerOfTriumph extends CardImpl {
 
     public MetzaliTowerOfTriumph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class DevoutInvocation extends CardImpl {
+public final class DevoutInvocation extends CardImpl {
 
     public DevoutInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}");

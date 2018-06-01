@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2 & L_J
  */
-public class GoblinFurrier extends CardImpl {
+public final class GoblinFurrier extends CardImpl {
 
     public GoblinFurrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

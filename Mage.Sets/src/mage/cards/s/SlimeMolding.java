@@ -41,7 +41,7 @@ import mage.game.permanent.token.OozeToken;
  *
  * @author Plopman
  */
-public class SlimeMolding extends CardImpl {
+public final class SlimeMolding extends CardImpl {
 
     public SlimeMolding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");

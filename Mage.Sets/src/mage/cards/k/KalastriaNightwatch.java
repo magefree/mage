@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class KalastriaNightwatch extends CardImpl {
+public final class KalastriaNightwatch extends CardImpl {
 
     public KalastriaNightwatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

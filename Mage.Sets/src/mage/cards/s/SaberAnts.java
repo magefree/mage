@@ -48,7 +48,7 @@ import mage.players.Player;
  * @author LoneFox
  *
  */
-public class SaberAnts extends CardImpl {
+public final class SaberAnts extends CardImpl {
 
     public SaberAnts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

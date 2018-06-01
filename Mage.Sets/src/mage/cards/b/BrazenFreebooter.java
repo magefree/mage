@@ -41,7 +41,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author L_J
  */
-public class BrazenFreebooter extends CardImpl {
+public final class BrazenFreebooter extends CardImpl {
 
     public BrazenFreebooter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

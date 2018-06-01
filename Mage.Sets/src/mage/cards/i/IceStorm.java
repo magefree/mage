@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class IceStorm extends CardImpl {
+public final class IceStorm extends CardImpl {
 
     public IceStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

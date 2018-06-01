@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Styxo
  */
-public class MaintenanceDroid extends CardImpl {
+public final class MaintenanceDroid extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("target card you own with a repair counter on it");
 

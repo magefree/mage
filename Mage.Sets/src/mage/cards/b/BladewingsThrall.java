@@ -49,7 +49,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author nomage
  */
-public class BladewingsThrall extends CardImpl {
+public final class BladewingsThrall extends CardImpl {
 
     final static private String RULE = "{this} has flying as long as you control a Dragon";
 

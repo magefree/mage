@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class MakeshiftMannequin extends CardImpl {
+public final class MakeshiftMannequin extends CardImpl {
 
     public MakeshiftMannequin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");

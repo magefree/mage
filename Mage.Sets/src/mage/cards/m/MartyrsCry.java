@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class MartyrsCry extends CardImpl {
+public final class MartyrsCry extends CardImpl {
 
     public MartyrsCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{W}");

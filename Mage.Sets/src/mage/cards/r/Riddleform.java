@@ -53,7 +53,7 @@ import mage.game.permanent.token.Token;
  *
  * @author spjspj
  */
-public class Riddleform extends CardImpl {
+public final class Riddleform extends CardImpl {
 
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 

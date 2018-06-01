@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author emerald000 & L_J
  */
-public class RealityTwist extends CardImpl {
+public final class RealityTwist extends CardImpl {
 
     public RealityTwist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}{U}");

@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class WingsteedRider extends CardImpl {
+public final class WingsteedRider extends CardImpl {
 
     public WingsteedRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

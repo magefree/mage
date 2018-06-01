@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class AngelicFieldMarshal extends CardImpl {
+public final class AngelicFieldMarshal extends CardImpl {
 
     public AngelicFieldMarshal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

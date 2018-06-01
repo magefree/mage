@@ -43,7 +43,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class FlyingCraneTechnique extends CardImpl {
+public final class FlyingCraneTechnique extends CardImpl {
 
     public FlyingCraneTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{R}{W}");

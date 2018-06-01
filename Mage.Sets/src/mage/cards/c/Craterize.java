@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class Craterize extends CardImpl {
+public final class Craterize extends CardImpl {
 
     public Craterize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

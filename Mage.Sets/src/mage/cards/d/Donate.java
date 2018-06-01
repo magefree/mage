@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Quercitron
  */
-public class Donate extends CardImpl {
+public final class Donate extends CardImpl {
 
     public Donate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class HearthKami extends CardImpl {
+public final class HearthKami extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact with converted mana cost X");
 

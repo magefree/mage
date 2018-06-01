@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class BreakerOfArmies extends CardImpl {
+public final class BreakerOfArmies extends CardImpl {
 
     public BreakerOfArmies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");

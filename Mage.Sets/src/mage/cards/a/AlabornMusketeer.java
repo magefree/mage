@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class AlabornMusketeer extends CardImpl {
+public final class AlabornMusketeer extends CardImpl {
 
     public AlabornMusketeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

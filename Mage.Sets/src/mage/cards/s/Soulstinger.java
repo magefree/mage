@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author stravant
  */
-public class Soulstinger extends CardImpl {
+public final class Soulstinger extends CardImpl {
 
     public Soulstinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class WoodToken extends TokenImpl {
+public final class WoodToken extends TokenImpl {
 
     public WoodToken() {
         super("Wood", "0/1 green Wall creature token with defender named Wood");

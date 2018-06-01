@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class ShefetMonitor extends CardImpl {
+public final class ShefetMonitor extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("basic land card or a Desert card");
     static {

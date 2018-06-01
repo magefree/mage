@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class StormscapeApprentice extends CardImpl {
+public final class StormscapeApprentice extends CardImpl {
 
     public StormscapeApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

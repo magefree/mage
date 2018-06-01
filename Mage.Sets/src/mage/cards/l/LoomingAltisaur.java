@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class LoomingAltisaur extends CardImpl {
+public final class LoomingAltisaur extends CardImpl {
 
     public LoomingAltisaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

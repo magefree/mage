@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author cbt33, LevelX2 (Ogre Slumlord)
  */
-public class BroodSliver extends CardImpl {
+public final class BroodSliver extends CardImpl {
 
     public BroodSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

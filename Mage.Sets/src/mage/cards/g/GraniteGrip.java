@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class GraniteGrip extends CardImpl {
+public final class GraniteGrip extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 

@@ -40,7 +40,7 @@ import mage.watchers.common.LandfallWatcher;
  *
  * @author jeffwadsworth
  */
-public class MysteriesOfTheDeep extends CardImpl {
+public final class MysteriesOfTheDeep extends CardImpl {
 
     public MysteriesOfTheDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");

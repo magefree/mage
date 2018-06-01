@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class DwarvenLandslide extends CardImpl {
+public final class DwarvenLandslide extends CardImpl {
 
     public DwarvenLandslide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

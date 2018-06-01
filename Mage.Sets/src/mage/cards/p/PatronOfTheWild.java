@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class PatronOfTheWild extends CardImpl {
+public final class PatronOfTheWild extends CardImpl {
 
     public PatronOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

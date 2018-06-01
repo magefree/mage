@@ -58,7 +58,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author TheElk801
  */
-public class FieldOfRuin extends CardImpl {
+public final class FieldOfRuin extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land an opponent controls");
 
@@ -115,7 +115,7 @@ class FieldOfRuinEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD);
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (player.searchLibrary(target, game)) {
                         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                         player.shuffleLibrary(source, game);

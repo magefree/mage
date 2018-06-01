@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class IllusionaryWall extends CardImpl {
+public final class IllusionaryWall extends CardImpl {
 
     public IllusionaryWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

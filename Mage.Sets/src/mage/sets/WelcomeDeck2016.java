@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author escplan9
  */
-public class WelcomeDeck2016 extends ExpansionSet {
+public final class WelcomeDeck2016 extends ExpansionSet {
 
     private static final WelcomeDeck2016 instance = new WelcomeDeck2016();
 

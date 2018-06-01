@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class DoubleNegative extends CardImpl {
+public final class DoubleNegative extends CardImpl {
 
     public DoubleNegative(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}{R}");

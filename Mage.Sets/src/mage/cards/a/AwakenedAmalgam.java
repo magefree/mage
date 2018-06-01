@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class AwakenedAmalgam extends CardImpl {
+public final class AwakenedAmalgam extends CardImpl {
 
     public AwakenedAmalgam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

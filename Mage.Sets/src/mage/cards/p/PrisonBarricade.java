@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  * @author LoneFox
  *
  */
-public class PrisonBarricade extends CardImpl {
+public final class PrisonBarricade extends CardImpl {
 
     public PrisonBarricade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

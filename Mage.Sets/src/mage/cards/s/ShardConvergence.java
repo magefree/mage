@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class ShardConvergence extends CardImpl {
+public final class ShardConvergence extends CardImpl {
 
     public ShardConvergence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

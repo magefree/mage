@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Charisma extends CardImpl {
+public final class Charisma extends CardImpl {
     
     private static final String rule = "gain control of the other creature for as long as {this} remains on the battlefield";
 

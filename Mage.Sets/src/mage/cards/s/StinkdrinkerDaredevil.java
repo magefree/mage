@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class StinkdrinkerDaredevil extends CardImpl {
+public final class StinkdrinkerDaredevil extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Giant spells");
 

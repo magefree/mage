@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author stravant
  */
-public class CartoucheOfStrength extends CardImpl {
+public final class CartoucheOfStrength extends CardImpl {
 
     public CartoucheOfStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

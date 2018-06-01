@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author FenrisulfrX
  */
-public class SpidersilkArmor extends CardImpl {
+public final class SpidersilkArmor extends CardImpl {
 
     public SpidersilkArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

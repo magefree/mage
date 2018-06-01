@@ -6,7 +6,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Onslaught extends ExpansionSet {
+public final class Onslaught extends ExpansionSet {
 
     private static final Onslaught instance = new Onslaught();
 

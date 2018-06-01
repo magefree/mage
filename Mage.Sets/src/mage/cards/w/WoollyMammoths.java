@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class WoollyMammoths extends CardImpl {
+public final class WoollyMammoths extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("snow land");
 

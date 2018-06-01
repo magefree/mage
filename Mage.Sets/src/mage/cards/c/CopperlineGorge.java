@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author maurer.it_at_gmail.com
  */
-public class CopperlineGorge extends CardImpl {
+public final class CopperlineGorge extends CardImpl {
 
     public CopperlineGorge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

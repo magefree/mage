@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
  *
  */
-public class MagmaBurst extends CardImpl {
+public final class MagmaBurst extends CardImpl {
 
     private final UUID originalId;
 

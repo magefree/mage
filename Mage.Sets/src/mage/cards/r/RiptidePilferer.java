@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class RiptidePilferer extends CardImpl {
+public final class RiptidePilferer extends CardImpl {
 
     public RiptidePilferer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

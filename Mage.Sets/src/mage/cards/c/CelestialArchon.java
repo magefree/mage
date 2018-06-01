@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CelestialArchon extends CardImpl {
+public final class CelestialArchon extends CardImpl {
 
     public CelestialArchon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{W}{W}");

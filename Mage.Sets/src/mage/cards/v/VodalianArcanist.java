@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class VodalianArcanist extends CardImpl {
+public final class VodalianArcanist extends CardImpl {
 
     public VodalianArcanist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

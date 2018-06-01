@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author Plopman
  */
-public class SacellumGodspeaker extends CardImpl {
+public final class SacellumGodspeaker extends CardImpl {
 
     public SacellumGodspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

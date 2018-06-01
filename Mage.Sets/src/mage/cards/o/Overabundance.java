@@ -42,13 +42,13 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author elliott-king
  */
-public class Overabundance extends CardImpl {
+public final class Overabundance extends CardImpl {
 
     public Overabundance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");
         
 
-        // Whenever a player taps a land for mana, that player adds one mana to their mana pool of any type that land produced, and Overabundance deals 1 damage to him or her.
+        // Whenever a player taps a land for mana, that player adds one mana of any type that land produced, and Overabundance deals 1 damage to him or her.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaOfAnyTypeProducedEffect(),
                 new FilterLandPermanent( "a player taps a land"),

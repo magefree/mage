@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class GemstoneArray extends CardImpl {
+public final class GemstoneArray extends CardImpl {
 
     public GemstoneArray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

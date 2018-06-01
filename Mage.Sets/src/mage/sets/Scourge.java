@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Scourge extends ExpansionSet {
+public final class Scourge extends ExpansionSet {
 
     private static final Scourge instance = new Scourge();
 

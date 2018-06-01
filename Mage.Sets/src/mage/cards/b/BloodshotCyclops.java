@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Backfir3
  */
-public class BloodshotCyclops extends CardImpl {
+public final class BloodshotCyclops extends CardImpl {
 
     public BloodshotCyclops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class SunCeYoungConquerer extends CardImpl {
+public final class SunCeYoungConquerer extends CardImpl {
 
     public SunCeYoungConquerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

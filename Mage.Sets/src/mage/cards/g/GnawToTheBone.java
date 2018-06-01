@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author nantuko
  */
-public class GnawToTheBone extends CardImpl {
+public final class GnawToTheBone extends CardImpl {
 
     public GnawToTheBone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

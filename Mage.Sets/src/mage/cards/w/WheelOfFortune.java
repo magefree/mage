@@ -38,7 +38,7 @@ import mage.constants.CardType;
 /**
  * @author mluds
  */
-public class WheelOfFortune extends CardImpl {
+public final class WheelOfFortune extends CardImpl {
 
     public WheelOfFortune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

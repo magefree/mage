@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
 /**
  * @author LevelX2
  */
-public class SpellBurst extends CardImpl {
+public final class SpellBurst extends CardImpl {
 
     public SpellBurst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");

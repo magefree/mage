@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class InvokeTheFiremind extends CardImpl {
+public final class InvokeTheFiremind extends CardImpl {
 
     public InvokeTheFiremind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}{R}");

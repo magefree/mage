@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class SparringGolem extends CardImpl {
+public final class SparringGolem extends CardImpl {
 
     public SparringGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

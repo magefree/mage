@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class HeroOfGomaFada extends CardImpl {
+public final class HeroOfGomaFada extends CardImpl {
 
     public HeroOfGomaFada(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

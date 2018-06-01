@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author fireshoes
  */
-public class Revenant extends CardImpl {
+public final class Revenant extends CardImpl {
 
     public Revenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

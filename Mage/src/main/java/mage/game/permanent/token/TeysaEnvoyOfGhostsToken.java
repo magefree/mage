@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class TeysaEnvoyOfGhostsToken extends TokenImpl {
+public final class TeysaEnvoyOfGhostsToken extends TokenImpl {
 
     public TeysaEnvoyOfGhostsToken() {
         super("Spirit", "1/1 white and black Spirit creature token with flying");

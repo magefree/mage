@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX2
  */
-public class LilianasElite extends CardImpl {
+public final class LilianasElite extends CardImpl {
 
     public LilianasElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

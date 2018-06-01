@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class SamiteSanctuary extends CardImpl {
+public final class SamiteSanctuary extends CardImpl {
 
     public SamiteSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

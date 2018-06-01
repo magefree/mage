@@ -44,7 +44,7 @@ import mage.game.permanent.token.EldraziHorrorToken;
  *
  * @author LevelX2
  */
-public class HanweirTheWrithingTownship extends MeldCard {
+public final class HanweirTheWrithingTownship extends MeldCard {
     public HanweirTheWrithingTownship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         addSuperType(SuperType.LEGENDARY);

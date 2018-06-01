@@ -40,7 +40,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author AlumiuN
  */
-public class Purelace extends CardImpl {
+public final class Purelace extends CardImpl {
 
     public Purelace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

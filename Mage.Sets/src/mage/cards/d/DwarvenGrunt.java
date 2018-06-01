@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DwarvenGrunt extends CardImpl {
+public final class DwarvenGrunt extends CardImpl {
 
     public DwarvenGrunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

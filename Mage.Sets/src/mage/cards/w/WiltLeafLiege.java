@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class WiltLeafLiege extends CardImpl {
+public final class WiltLeafLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures you control");
     private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures you control");

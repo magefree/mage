@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HunterToken extends TokenImpl {
+public final class HunterToken extends TokenImpl {
 
     public HunterToken() {
         super("Hunter", "4/4 red Hunter creature token", 4, 4);

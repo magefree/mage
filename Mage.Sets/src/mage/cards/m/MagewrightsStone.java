@@ -51,7 +51,7 @@ import java.util.UUID;
 /**
  * @author BursegSardaukar
  */
-public class MagewrightsStone extends CardImpl {
+public final class MagewrightsStone extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that has an activated ability with {T} in its cost");
 

@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class JeskaiCharm extends CardImpl {
+public final class JeskaiCharm extends CardImpl {
 
     public JeskaiCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{R}{W}");

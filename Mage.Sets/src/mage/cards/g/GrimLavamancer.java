@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class GrimLavamancer extends CardImpl {
+public final class GrimLavamancer extends CardImpl {
 
     public GrimLavamancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author North
  */
-public class SoulsAttendant extends CardImpl {
+public final class SoulsAttendant extends CardImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

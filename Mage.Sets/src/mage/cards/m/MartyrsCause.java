@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class MartyrsCause extends CardImpl {
+public final class MartyrsCause extends CardImpl {
 
     public MartyrsCause(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

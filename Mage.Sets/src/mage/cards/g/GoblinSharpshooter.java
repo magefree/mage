@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jonubuu
  */
-public class GoblinSharpshooter extends CardImpl {
+public final class GoblinSharpshooter extends CardImpl {
 
     public GoblinSharpshooter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

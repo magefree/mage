@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class ShivanOasis extends CardImpl {
+public final class ShivanOasis extends CardImpl {
 
     public ShivanOasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

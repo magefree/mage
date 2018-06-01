@@ -9,7 +9,7 @@ import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 
-public class SkeletonToken extends TokenImpl {
+public final class SkeletonToken extends TokenImpl {
 
     public SkeletonToken() {
         super("Skeleton", "1/1 black Skeleton creature with \"{B}: Regenerate this creature\"");

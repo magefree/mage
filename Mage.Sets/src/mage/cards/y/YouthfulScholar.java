@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class YouthfulScholar extends CardImpl {
+public final class YouthfulScholar extends CardImpl {
 
     public YouthfulScholar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

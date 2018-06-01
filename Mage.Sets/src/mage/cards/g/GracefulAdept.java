@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class GracefulAdept extends CardImpl {
+public final class GracefulAdept extends CardImpl {
 
     public GracefulAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

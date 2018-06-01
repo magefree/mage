@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class KrallenhordeHowler extends CardImpl {
+public final class KrallenhordeHowler extends CardImpl {
 
     private static final FilterCard FILTER = new FilterCard("Creature spells");
 

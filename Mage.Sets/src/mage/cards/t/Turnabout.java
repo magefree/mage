@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class Turnabout extends CardImpl {
+public final class Turnabout extends CardImpl {
 
     public Turnabout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

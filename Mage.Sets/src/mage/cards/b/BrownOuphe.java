@@ -47,7 +47,7 @@ import mage.target.common.TargetActivatedAbility;
  *
  * @author TheElk801
  */
-public class BrownOuphe extends CardImpl {
+public final class BrownOuphe extends CardImpl {
 
     private final static FilterAbility filter = new FilterAbility("activated ability from an artifact source");
 

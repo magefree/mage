@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class VoldarenDuelist extends CardImpl {
+public final class VoldarenDuelist extends CardImpl {
 
     public VoldarenDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

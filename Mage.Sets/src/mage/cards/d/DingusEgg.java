@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Quercitron
  */
-public class DingusEgg extends CardImpl {
+public final class DingusEgg extends CardImpl {
 
     public DingusEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

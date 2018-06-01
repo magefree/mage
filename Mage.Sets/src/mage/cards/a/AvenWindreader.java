@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class AvenWindreader extends CardImpl {
+public final class AvenWindreader extends CardImpl {
 
     public AvenWindreader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

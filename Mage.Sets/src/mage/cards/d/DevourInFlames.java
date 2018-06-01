@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class DevourInFlames extends CardImpl {
+public final class DevourInFlames extends CardImpl {
 
     public DevourInFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

@@ -41,7 +41,7 @@ import mage.game.permanent.token.MerfolkHexproofToken;
  *
  * @author JayDi85
  */
-public class JunglebornPioneer extends CardImpl {
+public final class JunglebornPioneer extends CardImpl {
 
     public JunglebornPioneer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

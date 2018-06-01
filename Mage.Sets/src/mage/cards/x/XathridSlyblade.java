@@ -48,7 +48,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class XathridSlyblade extends CardImpl {
+public final class XathridSlyblade extends CardImpl {
 
     public XathridSlyblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

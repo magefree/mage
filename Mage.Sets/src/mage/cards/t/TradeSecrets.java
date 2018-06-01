@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class TradeSecrets extends CardImpl {
+public final class TradeSecrets extends CardImpl {
 
     public TradeSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");

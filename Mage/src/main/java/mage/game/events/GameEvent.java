@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.constants.Zone;
 
 /**
@@ -48,6 +49,7 @@ public class GameEvent implements Serializable {
     protected String data;
     protected Zone zone;
     protected List<UUID> appliedEffects = new ArrayList<>();
+    protected MageObjectReference reference; // e.g. the permitting object for casting a spell from non hand zone
     protected UUID customEventType = null;
 
     public enum EventType {
@@ -232,7 +234,7 @@ public class GameEvent implements Serializable {
         FLIP_COIN, COIN_FLIPPED, SCRY, FATESEAL,
         ROLL_DICE, DICE_ROLLED,
         ROLL_PLANAR_DIE, PLANAR_DIE_ROLLED,
-        PLANESWALK, PLANESWALKED, 
+        PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
         //permanent events
@@ -334,19 +336,12 @@ public class GameEvent implements Serializable {
         CUSTOM_EVENT
     }
 
-    private GameEvent(EventType type, UUID customEventType,
-            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
-        this.type = type;
-        this.customEventType = customEventType;
-        this.targetId = targetId;
-        this.sourceId = sourceId;
-        this.amount = amount;
-        this.playerId = playerId;
-        this.flag = flag;
-    }
-
     public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
         this(type, null, targetId, sourceId, playerId, 0, false);
+    }
+
+    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, MageObjectReference reference) {
+        this(type, null, targetId, sourceId, playerId, 0, false, reference);
     }
 
     public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
@@ -367,6 +362,10 @@ public class GameEvent implements Serializable {
 
     public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
         return new GameEvent(type, targetId, sourceId, playerId);
+    }
+
+    public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, MageObjectReference reference) {
+        return new GameEvent(type, targetId, sourceId, playerId, reference);
     }
 
     public static GameEvent getEvent(EventType type, UUID targetId, UUID playerId) {
@@ -397,6 +396,23 @@ public class GameEvent implements Serializable {
         event.setAmount(amount);
         event.setData(data);
         return event;
+    }
+
+    private GameEvent(EventType type, UUID customEventType,
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+        this(type, customEventType, targetId, sourceId, playerId, amount, flag, null);
+    }
+
+    private GameEvent(EventType type, UUID customEventType,
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
+        this.type = type;
+        this.customEventType = customEventType;
+        this.targetId = targetId;
+        this.sourceId = sourceId;
+        this.amount = amount;
+        this.playerId = playerId;
+        this.flag = flag;
+        this.reference = reference;
     }
 
     public EventType getType() {
@@ -453,6 +469,14 @@ public class GameEvent implements Serializable {
 
     public void setZone(Zone zone) {
         this.zone = zone;
+    }
+
+    public MageObjectReference getAdditionalReference() {
+        return reference;
+    }
+
+    public void setAdditionalReference(MageObjectReference additionalReference) {
+        this.reference = additionalReference;
     }
 
     /**

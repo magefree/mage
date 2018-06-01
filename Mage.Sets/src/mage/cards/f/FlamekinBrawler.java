@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FlamekinBrawler extends CardImpl {
+public final class FlamekinBrawler extends CardImpl {
 
     public FlamekinBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

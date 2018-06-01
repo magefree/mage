@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class MercenaryInformer extends CardImpl {
+public final class MercenaryInformer extends CardImpl {
     
     private static final FilterObject filterBlack = new FilterStackObject("black spells or abilities from black sources");
     private static final FilterPermanent filterMercenary = new FilterPermanent("nontoken Mercenary");

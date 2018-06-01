@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ShadowcloakVampire extends CardImpl {
+public final class ShadowcloakVampire extends CardImpl {
 
     public ShadowcloakVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

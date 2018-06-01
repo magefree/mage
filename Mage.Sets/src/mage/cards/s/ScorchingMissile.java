@@ -41,7 +41,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author TheElk801
  */
-public class ScorchingMissile extends CardImpl {
+public final class ScorchingMissile extends CardImpl {
 
     public ScorchingMissile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

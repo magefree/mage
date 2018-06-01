@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SigiledBehemoth extends CardImpl {
+public final class SigiledBehemoth extends CardImpl {
 
     public SigiledBehemoth (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");

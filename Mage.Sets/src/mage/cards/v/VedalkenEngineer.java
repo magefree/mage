@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class VedalkenEngineer extends CardImpl {
+public final class VedalkenEngineer extends CardImpl {
 
     public VedalkenEngineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

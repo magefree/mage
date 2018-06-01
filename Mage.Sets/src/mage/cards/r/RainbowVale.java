@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author andyfries
  */
-public class RainbowVale extends CardImpl {
+public final class RainbowVale extends CardImpl {
 
     public RainbowVale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

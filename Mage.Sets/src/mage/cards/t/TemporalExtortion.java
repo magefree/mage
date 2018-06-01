@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TemporalExtortion extends CardImpl {
+public final class TemporalExtortion extends CardImpl {
 
     public TemporalExtortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}{B}");

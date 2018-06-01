@@ -51,7 +51,7 @@ import mage.players.Player;
  * @author LoneFox
 
  */
-public class PutridWarrior extends CardImpl {
+public final class PutridWarrior extends CardImpl {
 
     public PutridWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author TheElk801
  */
-public class ZombieMusher extends CardImpl {
+public final class ZombieMusher extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow land");
 

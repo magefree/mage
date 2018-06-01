@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class BalshanGriffin extends CardImpl {
+public final class BalshanGriffin extends CardImpl {
 
     public BalshanGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

@@ -43,7 +43,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class MaskOfRiddles extends CardImpl {
+public final class MaskOfRiddles extends CardImpl {
 
     public MaskOfRiddles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}");

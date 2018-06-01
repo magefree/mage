@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class RemorselessPunishment extends CardImpl {
+public final class RemorselessPunishment extends CardImpl {
 
     public RemorselessPunishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

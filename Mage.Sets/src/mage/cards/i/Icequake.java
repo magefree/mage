@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class Icequake extends CardImpl {
+public final class Icequake extends CardImpl {
 
     public Icequake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

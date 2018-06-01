@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author TheElk801
  */
-public class TempestDjinn extends CardImpl {
+public final class TempestDjinn extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("basic Island you control");
 

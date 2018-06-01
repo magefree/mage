@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class PutridRaptor extends CardImpl {
+public final class PutridRaptor extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Zombie card");
 

@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class MasterTheWay extends CardImpl {
+public final class MasterTheWay extends CardImpl {
 
     public MasterTheWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{R}");

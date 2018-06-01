@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Wehk
  */
-public class SkirkOutrider extends CardImpl {
+public final class SkirkOutrider extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Beast");
 

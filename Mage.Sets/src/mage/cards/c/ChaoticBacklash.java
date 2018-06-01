@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class ChaoticBacklash extends CardImpl {
+public final class ChaoticBacklash extends CardImpl {
 
     public ChaoticBacklash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");

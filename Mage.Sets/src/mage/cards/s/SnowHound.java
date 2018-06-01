@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SnowHound extends CardImpl {
+public final class SnowHound extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green or blue creature");
     static {
         filter.add(Predicates.or(

@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class WaveElemental extends CardImpl {
+public final class WaveElemental extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying");
 

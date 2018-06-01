@@ -38,7 +38,7 @@ import mage.game.permanent.token.DrakeToken;
  *
  * @author North
  */
-public class TalrandsInvocation extends CardImpl {
+public final class TalrandsInvocation extends CardImpl {
 
     public TalrandsInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");

@@ -51,7 +51,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class VexingShusher extends CardImpl {
+public final class VexingShusher extends CardImpl {
 
     public VexingShusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}");

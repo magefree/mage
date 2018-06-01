@@ -39,7 +39,7 @@ import mage.ObjectColor;
  *
  * @author spjspj
  */
-public class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
+public final class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

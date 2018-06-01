@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class FanningTheFlames extends CardImpl {
+public final class FanningTheFlames extends CardImpl {
 
     public FanningTheFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");

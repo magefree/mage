@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class CratersClaws extends CardImpl {
+public final class CratersClaws extends CardImpl {
 
     public CratersClaws(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");

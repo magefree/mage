@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Markedagain
  */
-public class NecromancersMagemark extends CardImpl {
+public final class NecromancersMagemark extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control that are enchanted");
 

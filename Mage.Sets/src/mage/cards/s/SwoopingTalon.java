@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class SwoopingTalon extends CardImpl {
+public final class SwoopingTalon extends CardImpl {
 
     public SwoopingTalon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

@@ -38,7 +38,7 @@ import mage.constants.TargetController;
  *
  * @author dustinconrad
  */
-public class Sizzle extends CardImpl {
+public final class Sizzle extends CardImpl {
 
     public Sizzle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

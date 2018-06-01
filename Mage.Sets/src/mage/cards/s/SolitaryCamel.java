@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author spjspj
  */
-public class SolitaryCamel extends CardImpl {
+public final class SolitaryCamel extends CardImpl {
 
     private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
     private static final FilterCard filterDesertCard = new FilterCard("Desert card");

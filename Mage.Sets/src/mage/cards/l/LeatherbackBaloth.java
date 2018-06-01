@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LeatherbackBaloth extends CardImpl {
+public final class LeatherbackBaloth extends CardImpl {
 
     public LeatherbackBaloth (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");

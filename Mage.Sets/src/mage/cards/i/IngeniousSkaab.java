@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class IngeniousSkaab extends CardImpl {
+public final class IngeniousSkaab extends CardImpl {
 
     public IngeniousSkaab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author anonymous
  */
-public class ScalebanesElite extends CardImpl {
+public final class ScalebanesElite extends CardImpl {
 
     public ScalebanesElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");

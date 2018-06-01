@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class GwafaHazidProfiteer extends CardImpl {
+public final class GwafaHazidProfiteer extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
     

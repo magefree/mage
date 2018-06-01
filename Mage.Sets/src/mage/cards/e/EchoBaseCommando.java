@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author Styxo
  */
-public class EchoBaseCommando extends CardImpl {
+public final class EchoBaseCommando extends CardImpl {
 
     private static final Filter filter = new FilterPermanent("Beasts");
 

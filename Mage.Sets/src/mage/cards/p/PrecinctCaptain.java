@@ -42,7 +42,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author Loki
  */
-public class PrecinctCaptain extends CardImpl {
+public final class PrecinctCaptain extends CardImpl {
 
     public PrecinctCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");

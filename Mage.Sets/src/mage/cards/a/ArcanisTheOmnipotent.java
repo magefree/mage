@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ArcanisTheOmnipotent extends CardImpl {
+public final class ArcanisTheOmnipotent extends CardImpl {
 
     public ArcanisTheOmnipotent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{U}");

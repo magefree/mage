@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX
  */
-public class BrutalDeceiver extends CardImpl {
+public final class BrutalDeceiver extends CardImpl {
 
     public BrutalDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

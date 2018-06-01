@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class MercadiasDownfall extends CardImpl {
+public final class MercadiasDownfall extends CardImpl {
     
     private static String rule = "Each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls";
 

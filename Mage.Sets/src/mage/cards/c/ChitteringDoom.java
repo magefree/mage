@@ -42,7 +42,7 @@ import mage.game.permanent.token.SquirrelToken;
  *
  * @author spjspj
  */
-public class ChitteringDoom extends CardImpl {
+public final class ChitteringDoom extends CardImpl {
 
     public ChitteringDoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

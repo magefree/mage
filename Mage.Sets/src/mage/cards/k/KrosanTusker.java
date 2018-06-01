@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class KrosanTusker extends CardImpl {
+public final class KrosanTusker extends CardImpl {
 
     public KrosanTusker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
@@ -59,7 +59,7 @@ public class KrosanTusker extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{G}")));
         // When you cycle Krosan Tusker, you may search your library for a basic land card, reveal that card, put it into your hand, then shuffle your library.
         this.addAbility(new CycleTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
                 true));
     }
 

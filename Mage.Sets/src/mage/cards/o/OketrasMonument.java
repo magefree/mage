@@ -49,7 +49,7 @@ import mage.game.permanent.token.WarriorVigilantToken;
  *
  * @author fireshoes
  */
-public class OketrasMonument extends CardImpl {
+public final class OketrasMonument extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("White creature spells");
     private static final FilterSpell filter2 = new FilterSpell("a creature spell");

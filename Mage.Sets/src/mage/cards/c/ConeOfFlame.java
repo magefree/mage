@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Quercitron
  */
-public class ConeOfFlame extends CardImpl {
+public final class ConeOfFlame extends CardImpl {
 
     public ConeOfFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

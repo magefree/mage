@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author emerald000
  */
-public class Taunt extends CardImpl {
+public final class Taunt extends CardImpl {
 
     public Taunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

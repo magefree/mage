@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class DismalBackwater extends CardImpl {
+public final class DismalBackwater extends CardImpl {
 
     public DismalBackwater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

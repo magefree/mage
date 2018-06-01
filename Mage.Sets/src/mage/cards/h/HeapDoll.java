@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author North
  */
-public class HeapDoll extends CardImpl {
+public final class HeapDoll extends CardImpl {
 
     public HeapDoll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author LevelX2
  */
-public class DeathCloud extends CardImpl {
+public final class DeathCloud extends CardImpl {
 
     public DeathCloud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}{B}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Dilnu
  */
-public class Brightflame extends CardImpl {
+public final class Brightflame extends CardImpl {
 
     public Brightflame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}{W}{W}");

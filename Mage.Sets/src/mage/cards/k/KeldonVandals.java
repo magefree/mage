@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author Backfir3
  */
-public class KeldonVandals extends CardImpl {
+public final class KeldonVandals extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

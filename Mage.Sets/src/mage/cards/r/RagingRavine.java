@@ -57,7 +57,7 @@ import mage.game.permanent.token.custom.ElementalCreatureToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RagingRavine extends CardImpl {
+public final class RagingRavine extends CardImpl {
 
     public RagingRavine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

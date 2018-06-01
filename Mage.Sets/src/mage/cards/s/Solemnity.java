@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class Solemnity extends CardImpl {
+public final class Solemnity extends CardImpl {
 
     public Solemnity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

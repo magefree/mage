@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TrollAscetic extends CardImpl {
+public final class TrollAscetic extends CardImpl {
     public TrollAscetic (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add(SubType.TROLL);

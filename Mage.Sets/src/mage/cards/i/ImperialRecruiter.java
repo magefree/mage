@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class ImperialRecruiter extends CardImpl {
+public final class ImperialRecruiter extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with power 2 or less");
 

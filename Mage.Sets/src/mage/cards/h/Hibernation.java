@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Plopman
  */
-public class Hibernation extends CardImpl {
+public final class Hibernation extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("green permanents");
     static {

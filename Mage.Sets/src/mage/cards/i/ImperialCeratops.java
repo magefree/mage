@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author L_J
  */
-public class ImperialCeratops extends CardImpl {
+public final class ImperialCeratops extends CardImpl {
 
     public ImperialCeratops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

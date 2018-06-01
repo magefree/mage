@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class DarkwaterEgg extends CardImpl {
+public final class DarkwaterEgg extends CardImpl {
 
     public DarkwaterEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

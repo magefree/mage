@@ -41,7 +41,7 @@ import mage.constants.SuperType;
  *
  * @author Styxo
  */
-public class SenatorPasselArgente extends CardImpl {
+public final class SenatorPasselArgente extends CardImpl {
 
     public SenatorPasselArgente(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");

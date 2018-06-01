@@ -40,7 +40,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
 /**
  * @author nantuko
  */
-public class MausoleumGuard extends CardImpl {
+public final class MausoleumGuard extends CardImpl {
 
     public MausoleumGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

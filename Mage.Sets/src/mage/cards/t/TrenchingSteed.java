@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class TrenchingSteed extends CardImpl {
+public final class TrenchingSteed extends CardImpl {
 
     public TrenchingSteed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

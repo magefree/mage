@@ -50,7 +50,7 @@ import mage.constants.*;
  *
  * @author cbt33, plopman (Immortal Coil)
  */
-public class Bloodcurdler extends CardImpl {
+public final class Bloodcurdler extends CardImpl {
 
     public Bloodcurdler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

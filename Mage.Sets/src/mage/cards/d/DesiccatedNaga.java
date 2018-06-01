@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class DesiccatedNaga extends CardImpl {
+public final class DesiccatedNaga extends CardImpl {
 
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("you control a Liliana planeswalker");
 

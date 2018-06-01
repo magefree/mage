@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author anonymous
  */
-public class CoffinQueen extends CardImpl {
+public final class CoffinQueen extends CardImpl {
 
     public CoffinQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

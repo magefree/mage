@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class SpurredWolverine extends CardImpl {
+public final class SpurredWolverine extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Beasts you control");
 

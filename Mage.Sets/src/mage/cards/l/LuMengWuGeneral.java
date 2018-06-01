@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class LuMengWuGeneral extends CardImpl {
+public final class LuMengWuGeneral extends CardImpl {
 
     public LuMengWuGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

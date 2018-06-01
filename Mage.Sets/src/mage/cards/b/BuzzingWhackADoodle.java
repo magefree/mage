@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author spjspj
  */
-public class BuzzingWhackADoodle extends CardImpl {
+public final class BuzzingWhackADoodle extends CardImpl {
 
     public BuzzingWhackADoodle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

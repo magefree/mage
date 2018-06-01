@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class TajuruPathwarden extends CardImpl {
+public final class TajuruPathwarden extends CardImpl {
 
     public TajuruPathwarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

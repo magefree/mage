@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FrenziedTilling extends CardImpl {
+public final class FrenziedTilling extends CardImpl {
 
     public FrenziedTilling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{G}");
@@ -51,7 +51,7 @@ public class FrenziedTilling extends CardImpl {
         // Destroy target land. Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
     }
 
     public FrenziedTilling(final FrenziedTilling card) {

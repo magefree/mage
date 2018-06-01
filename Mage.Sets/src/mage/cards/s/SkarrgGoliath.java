@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class SkarrgGoliath extends CardImpl {
+public final class SkarrgGoliath extends CardImpl {
 
     public SkarrgGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fenhl
  */
-public class AnimalMagnetism extends CardImpl {
+public final class AnimalMagnetism extends CardImpl {
 
     public AnimalMagnetism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");

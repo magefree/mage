@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jonubuu
  */
-public class MurderousRedcap extends CardImpl {
+public final class MurderousRedcap extends CardImpl {
 
     public MurderousRedcap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B/R}{B/R}");

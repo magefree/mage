@@ -37,7 +37,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class UramiToken extends TokenImpl {
+public final class UramiToken extends TokenImpl {
 
     public UramiToken() {
         super("Urami", "legendary 5/5 black Demon Spirit creature token with flying named Urami");

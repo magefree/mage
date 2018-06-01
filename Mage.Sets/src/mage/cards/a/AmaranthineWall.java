@@ -22,7 +22,7 @@ import mage.constants.SubType;
  *
  * @author Rystan
  */
-public class AmaranthineWall extends CardImpl {
+public final class AmaranthineWall extends CardImpl {
 
     public AmaranthineWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

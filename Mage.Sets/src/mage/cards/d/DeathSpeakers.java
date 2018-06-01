@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class DeathSpeakers extends CardImpl {
+public final class DeathSpeakers extends CardImpl {
 
     public DeathSpeakers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

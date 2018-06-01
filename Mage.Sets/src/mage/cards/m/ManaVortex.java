@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class ManaVortex extends CardImpl {
+public final class ManaVortex extends CardImpl {
 
     public ManaVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LoneFox
  */
-public class Mortiphobia extends CardImpl {
+public final class Mortiphobia extends CardImpl {
 
     public Mortiphobia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

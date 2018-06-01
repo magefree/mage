@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  * @author LoneFox
 
  */
-public class Necravolver extends CardImpl {
+public final class Necravolver extends CardImpl {
 
     public Necravolver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

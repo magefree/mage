@@ -50,7 +50,7 @@ import mage.target.common.TargetActivatedAbility;
  *
  * @author fireshoes
  */
-public class RimewindCryomancer extends CardImpl {
+public final class RimewindCryomancer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control four or more snow permanents");
 

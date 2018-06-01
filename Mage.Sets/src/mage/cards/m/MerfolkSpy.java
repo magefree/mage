@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl {
+public final class MerfolkSpy extends CardImpl {
 
     public MerfolkSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

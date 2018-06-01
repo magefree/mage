@@ -40,7 +40,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author AlumiuN
  */
-public class Moonlace extends CardImpl {
+public final class Moonlace extends CardImpl {
 
     public Moonlace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

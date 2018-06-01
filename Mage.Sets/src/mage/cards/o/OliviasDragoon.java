@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class OliviasDragoon extends CardImpl {
+public final class OliviasDragoon extends CardImpl {
 
     public OliviasDragoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

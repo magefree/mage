@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author spjspj
  */
-public class GOTOJAIL extends CardImpl {
+public final class GOTOJAIL extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

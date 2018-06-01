@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class WirewoodHerald extends CardImpl {
+public final class WirewoodHerald extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Elf card");
 

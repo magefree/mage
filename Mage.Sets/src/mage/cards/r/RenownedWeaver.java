@@ -45,7 +45,7 @@ import mage.game.permanent.token.RenownedWeaverSpiderToken;
  *
  * @author LevelX2
  */
-public class RenownedWeaver extends CardImpl {
+public final class RenownedWeaver extends CardImpl {
 
     public RenownedWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

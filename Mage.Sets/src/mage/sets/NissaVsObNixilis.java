@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class NissaVsObNixilis extends ExpansionSet {
+public final class NissaVsObNixilis extends ExpansionSet {
 
     private static final NissaVsObNixilis instance = new NissaVsObNixilis();
 

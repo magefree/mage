@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class DemonOfDarkSchemes extends CardImpl {
+public final class DemonOfDarkSchemes extends CardImpl {
 
     public DemonOfDarkSchemes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");

@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author dustinconrad
  */
-public class ArcaneLaboratory extends CardImpl {
+public final class ArcaneLaboratory extends CardImpl {
 
     public ArcaneLaboratory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author LevelX2
  */
-public class SkullmaneBaku extends CardImpl {
+public final class SkullmaneBaku extends CardImpl {
 
     public SkullmaneBaku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

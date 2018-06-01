@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class ReliquaryTower extends CardImpl {
+public final class ReliquaryTower extends CardImpl {
 
     public ReliquaryTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class SnappingCreeper extends CardImpl {
+public final class SnappingCreeper extends CardImpl {
 
     public SnappingCreeper (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

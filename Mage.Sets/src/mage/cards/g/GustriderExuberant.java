@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author North
  */
-public class GustriderExuberant extends CardImpl {
+public final class GustriderExuberant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class Ephemeron extends CardImpl {
+public final class Ephemeron extends CardImpl {
 
     public Ephemeron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author nantuko
  */
-public class DemonmailHauberk extends CardImpl {
+public final class DemonmailHauberk extends CardImpl {
 
     public DemonmailHauberk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

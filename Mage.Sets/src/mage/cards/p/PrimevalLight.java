@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class PrimevalLight extends CardImpl {
+public final class PrimevalLight extends CardImpl {
 
     public PrimevalLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

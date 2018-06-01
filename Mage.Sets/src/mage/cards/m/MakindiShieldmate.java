@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class MakindiShieldmate extends CardImpl {
+public final class MakindiShieldmate extends CardImpl {
 
     public MakindiShieldmate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

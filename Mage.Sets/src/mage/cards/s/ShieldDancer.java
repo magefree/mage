@@ -50,7 +50,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author LevelX2
  */
-public class ShieldDancer extends CardImpl {
+public final class ShieldDancer extends CardImpl {
 
     public ShieldDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

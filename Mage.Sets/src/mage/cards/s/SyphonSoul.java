@@ -40,7 +40,7 @@ import mage.game.Game;
  *
  * @author Loki
  */
-public class SyphonSoul extends CardImpl {
+public final class SyphonSoul extends CardImpl {
 
     public SyphonSoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

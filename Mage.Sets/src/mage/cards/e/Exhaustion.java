@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class Exhaustion extends CardImpl {
+public final class Exhaustion extends CardImpl {
 
     public Exhaustion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

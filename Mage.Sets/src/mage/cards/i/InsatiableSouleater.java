@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class InsatiableSouleater extends CardImpl {
+public final class InsatiableSouleater extends CardImpl {
 
     public InsatiableSouleater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

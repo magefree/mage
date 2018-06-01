@@ -48,7 +48,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author Loki
  */
-public class Mortivore extends CardImpl {
+public final class Mortivore extends CardImpl {
 
     public Mortivore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

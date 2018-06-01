@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ThornhideWolves extends CardImpl {
+public final class ThornhideWolves extends CardImpl {
 
     public ThornhideWolves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

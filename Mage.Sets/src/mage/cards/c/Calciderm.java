@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Calciderm extends CardImpl {
+public final class Calciderm extends CardImpl {
 
     public Calciderm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

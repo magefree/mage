@@ -41,7 +41,7 @@ import mage.game.permanent.token.MerfolkWizardToken;
  *
  * @author fireshoes
  */
-public class StonybrookSchoolmaster extends CardImpl {
+public final class StonybrookSchoolmaster extends CardImpl {
 
     public StonybrookSchoolmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

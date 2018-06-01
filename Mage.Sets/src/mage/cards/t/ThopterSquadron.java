@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ThopterSquadron extends CardImpl {
+public final class ThopterSquadron extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Thopter");
 

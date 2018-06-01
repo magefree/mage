@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class Tromokratis extends CardImpl {
+public final class Tromokratis extends CardImpl {
 
     public Tromokratis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

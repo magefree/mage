@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class HarvesterTroll extends CardImpl {
+public final class HarvesterTroll extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or land");
 

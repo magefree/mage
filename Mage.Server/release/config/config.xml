@@ -142,10 +142,13 @@
         <deckType name="Constructed - Pauper" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Pauper"/>
         <deckType name="Constructed - Historical Type 2" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.HistoricalType2"/>
         <deckType name="Constructed - Super Type 2" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.SuperType2"/>
-        <deckType name="Constructed - Freeform" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Freeform"/>
-        <deckType name="Constructed - Old School 93/94" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.OldSchool9394"/>
         <deckType name="Constructed - Australian Highlander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.AusHighlander"/>
         <deckType name="Constructed - Canadian Highlander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.CanadianHighlander"/>
+        <deckType name="Constructed - Old School 93/94" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.OldSchool9394"/>
+        <deckType name="Constructed - Old School 93/94 - Italian Rules" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.OldSchool9394Italian"/>
+        <deckType name="Constructed - Old School 93/94 - Channel Fireball Rules" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.OldSchool9394CFB"/>
+        <deckType name="Constructed - Old School 93/94 - EudoGames Rules" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.OldSchool9394EG"/>
+        <deckType name="Constructed - Old School 93/94 - EC Rules" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.OldSchool9394EC"/>
         <deckType name="Constructed - Freeform" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Freeform"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.DuelCommander"/>

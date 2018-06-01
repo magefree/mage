@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class GatherSpecimens extends CardImpl {
+public final class GatherSpecimens extends CardImpl {
 
     public GatherSpecimens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}{U}");

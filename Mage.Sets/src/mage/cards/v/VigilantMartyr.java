@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class VigilantMartyr extends CardImpl {
+public final class VigilantMartyr extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell that targets an enchantment");
 

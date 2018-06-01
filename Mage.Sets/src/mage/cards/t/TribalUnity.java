@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author anonymous
  */
-public class TribalUnity extends CardImpl {
+public final class TribalUnity extends CardImpl {
 
     public TribalUnity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{2}{G}");

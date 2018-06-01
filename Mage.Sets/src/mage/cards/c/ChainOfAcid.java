@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class ChainOfAcid extends CardImpl {
+public final class ChainOfAcid extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 

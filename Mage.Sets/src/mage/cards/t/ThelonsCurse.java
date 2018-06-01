@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj & L_J
  */
-public class ThelonsCurse extends CardImpl {
+public final class ThelonsCurse extends CardImpl {
 
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("blue creatures");
 

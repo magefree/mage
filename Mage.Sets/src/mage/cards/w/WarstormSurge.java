@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class WarstormSurge extends CardImpl {
+public final class WarstormSurge extends CardImpl {
 
     public WarstormSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");

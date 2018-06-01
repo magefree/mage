@@ -57,7 +57,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class AthreosGodOfPassage extends CardImpl {
+public final class AthreosGodOfPassage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you own");
 

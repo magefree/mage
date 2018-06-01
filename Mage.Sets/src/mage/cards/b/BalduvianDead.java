@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class BalduvianDead extends CardImpl {
+public final class BalduvianDead extends CardImpl {
 
     public BalduvianDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

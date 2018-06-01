@@ -44,7 +44,7 @@ import mage.game.permanent.token.RedHumanToken;
  *
  * @author fireshoes
  */
-public class HanweirGarrison extends CardImpl {
+public final class HanweirGarrison extends CardImpl {
 
     public HanweirGarrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

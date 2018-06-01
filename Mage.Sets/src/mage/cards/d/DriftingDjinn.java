@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author Backfir3
  */
-public class DriftingDjinn extends CardImpl {
+public final class DriftingDjinn extends CardImpl {
 
     public DriftingDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

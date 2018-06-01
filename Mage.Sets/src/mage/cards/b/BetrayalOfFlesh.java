@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
  *
  */
-public class BetrayalOfFlesh extends CardImpl {
+public final class BetrayalOfFlesh extends CardImpl {
 
     public BetrayalOfFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}");

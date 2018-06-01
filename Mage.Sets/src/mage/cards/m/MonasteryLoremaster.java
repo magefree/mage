@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MonasteryLoremaster extends CardImpl {
+public final class MonasteryLoremaster extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("noncreature, nonland card from your graveyard");
 

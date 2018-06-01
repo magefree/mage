@@ -37,7 +37,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class RevelOfTheFallenGodSatyrToken extends TokenImpl {
+public final class RevelOfTheFallenGodSatyrToken extends TokenImpl {
 
     public RevelOfTheFallenGodSatyrToken() {
         super("Satyr", "2/2 red and green Satyr creature tokens with haste");

@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class WalkingDesecration extends CardImpl {
+public final class WalkingDesecration extends CardImpl {
 
     public WalkingDesecration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

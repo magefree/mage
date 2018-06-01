@@ -42,7 +42,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-public class RageOfPurphoros extends CardImpl {
+public final class RageOfPurphoros extends CardImpl {
 
     public RageOfPurphoros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");

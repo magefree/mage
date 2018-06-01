@@ -41,7 +41,7 @@ import mage.game.permanent.token.BearsCompanionBearToken;
  *
  * @author LevelX2
  */
-public class BearsCompanion extends CardImpl {
+public final class BearsCompanion extends CardImpl {
 
     public BearsCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");

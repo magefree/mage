@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class HyalopterousLemure extends CardImpl {
+public final class HyalopterousLemure extends CardImpl {
 
     public HyalopterousLemure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

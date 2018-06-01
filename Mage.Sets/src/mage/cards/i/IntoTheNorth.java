@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class IntoTheNorth extends CardImpl {
+public final class IntoTheNorth extends CardImpl {
     
     private static final FilterLandCard filter = new FilterLandCard("snow land card");
 

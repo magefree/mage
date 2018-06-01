@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class SkullFracture extends CardImpl {
+public final class SkullFracture extends CardImpl {
 
     public SkullFracture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

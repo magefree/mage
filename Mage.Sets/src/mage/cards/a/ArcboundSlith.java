@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class ArcboundSlith extends CardImpl {
+public final class ArcboundSlith extends CardImpl {
 
     public ArcboundSlith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

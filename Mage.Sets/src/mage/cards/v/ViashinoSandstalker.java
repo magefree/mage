@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  * @author jeffwadsworth
  *
  */
-public class ViashinoSandstalker extends CardImpl {
+public final class ViashinoSandstalker extends CardImpl {
 
     public ViashinoSandstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ViridianLongbow extends CardImpl {
+public final class ViridianLongbow extends CardImpl {
 
     public ViridianLongbow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

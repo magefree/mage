@@ -37,7 +37,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class SeventhEdition extends ExpansionSet {
+public final class SeventhEdition extends ExpansionSet {
 
     private static final SeventhEdition instance = new SeventhEdition();
 

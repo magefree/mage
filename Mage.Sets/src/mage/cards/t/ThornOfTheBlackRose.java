@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ThornOfTheBlackRose extends CardImpl {
+public final class ThornOfTheBlackRose extends CardImpl {
 
     public ThornOfTheBlackRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

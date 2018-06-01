@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author spjspj
  */
-public class SquirrelPoweredScheme extends CardImpl {
+public final class SquirrelPoweredScheme extends CardImpl {
 
     public SquirrelPoweredScheme(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

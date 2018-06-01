@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BattleAtTheBridge extends CardImpl {
+public final class BattleAtTheBridge extends CardImpl {
 
     public BattleAtTheBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}");

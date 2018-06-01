@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class JolraelEmpressOfBeasts extends CardImpl {
+public final class JolraelEmpressOfBeasts extends CardImpl {
 
     public JolraelEmpressOfBeasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

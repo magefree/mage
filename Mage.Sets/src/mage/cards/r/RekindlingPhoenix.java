@@ -42,7 +42,7 @@ import mage.game.permanent.token.RekindlingPhoenixToken;
  *
  * @author LevelX2
  */
-public class RekindlingPhoenix extends CardImpl {
+public final class RekindlingPhoenix extends CardImpl {
 
     public RekindlingPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

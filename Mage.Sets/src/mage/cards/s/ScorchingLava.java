@@ -53,7 +53,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class ScorchingLava extends CardImpl {
+public final class ScorchingLava extends CardImpl {
 
     public ScorchingLava(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

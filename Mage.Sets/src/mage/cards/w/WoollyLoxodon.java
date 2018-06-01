@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public final class WoollyLoxodon extends CardImpl {
 
     public WoollyLoxodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

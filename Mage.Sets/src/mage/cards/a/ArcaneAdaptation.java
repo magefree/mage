@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class ArcaneAdaptation extends CardImpl {
+public final class ArcaneAdaptation extends CardImpl {
 
     public ArcaneAdaptation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

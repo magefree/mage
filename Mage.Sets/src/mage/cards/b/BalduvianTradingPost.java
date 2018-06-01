@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class BalduvianTradingPost extends CardImpl {
+public final class BalduvianTradingPost extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Mountain");
 

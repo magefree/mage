@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EfreetWeaponmaster extends CardImpl {
+public final class EfreetWeaponmaster extends CardImpl {
 
     public EfreetWeaponmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}{W}");

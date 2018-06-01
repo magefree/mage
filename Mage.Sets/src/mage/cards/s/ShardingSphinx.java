@@ -45,7 +45,7 @@ import mage.game.permanent.token.ThopterToken;
  *
  * @author Plopman
  */
-public class ShardingSphinx extends CardImpl {
+public final class ShardingSphinx extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an artifact creature you control");
 

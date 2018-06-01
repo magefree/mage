@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class ThievesAuction extends CardImpl {
+public final class ThievesAuction extends CardImpl {
 
     public ThievesAuction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}{R}");
@@ -115,8 +115,12 @@ class ThievesAuctionEffect extends OneShotEffect {
                     if (player.choose(Outcome.PutCardInPlay, exiledCards, target, game)) {
                         // and puts it onto the battlefield tapped under their control.
                         Card chosenCard = exiledCards.get(target.getFirstTarget(), game);
-                        player.moveCards(chosenCard, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                        if (chosenCard != null) {
+                            player.moveCards(chosenCard, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                        }
                         exiledCards.remove(chosenCard);
+                    } else {
+                        break;
                     }
                 }
                 // Repeat this process until all cards exiled this way have been chosen.

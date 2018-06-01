@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author spjspj
  */
-public class AvidReclaimer extends CardImpl {
+public final class AvidReclaimer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

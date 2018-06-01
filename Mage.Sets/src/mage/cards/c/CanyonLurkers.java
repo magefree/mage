@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class CanyonLurkers extends CardImpl {
+public final class CanyonLurkers extends CardImpl {
 
     public CanyonLurkers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author L_J
  */
-public class Topple extends CardImpl {
+public final class Topple extends CardImpl {
 
     public Topple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");

@@ -58,7 +58,7 @@ import mage.watchers.Watcher;
  *
  * @author Quercitron
  */
-public class ThirstingAxe extends CardImpl {
+public final class ThirstingAxe extends CardImpl {
 
     public ThirstingAxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

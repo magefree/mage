@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LoneFox
  */
-public class Touchstone extends CardImpl {
+public final class Touchstone extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you don't control");
 

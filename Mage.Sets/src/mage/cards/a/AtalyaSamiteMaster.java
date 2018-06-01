@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class AtalyaSamiteMaster extends CardImpl {
+public final class AtalyaSamiteMaster extends CardImpl {
 
     private static final FilterMana filterWhiteMana = new FilterMana();
 

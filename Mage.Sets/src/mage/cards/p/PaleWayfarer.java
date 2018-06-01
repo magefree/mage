@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth & L_J
  */
-public class PaleWayfarer extends CardImpl {
+public final class PaleWayfarer extends CardImpl {
 
     public PaleWayfarer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

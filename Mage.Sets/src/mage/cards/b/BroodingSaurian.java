@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class BroodingSaurian extends CardImpl {
+public final class BroodingSaurian extends CardImpl {
 
     public BroodingSaurian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

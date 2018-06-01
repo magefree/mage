@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class PsychicBarrier extends CardImpl {
+public final class PsychicBarrier extends CardImpl {
 
     public PsychicBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");

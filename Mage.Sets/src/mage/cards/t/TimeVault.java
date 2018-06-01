@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class TimeVault extends CardImpl {
+public final class TimeVault extends CardImpl {
 
     public TimeVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

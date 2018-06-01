@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Luna Skyrise
  */
-public class CityOfShadows extends CardImpl {
+public final class CityOfShadows extends CardImpl {
 
     public CityOfShadows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

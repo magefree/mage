@@ -39,7 +39,7 @@ import mage.MageInt;
  *
  * @author fireshoes
  */
-public class WurmToken3 extends TokenImpl {
+public final class WurmToken3 extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

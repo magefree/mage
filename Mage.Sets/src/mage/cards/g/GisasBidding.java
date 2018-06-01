@@ -40,7 +40,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author anonymous
  */
-public class GisasBidding extends CardImpl {
+public final class GisasBidding extends CardImpl {
 
     public GisasBidding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

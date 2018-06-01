@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author MarcoMarin
  */
-public class CursedRack extends CardImpl {
+public final class CursedRack extends CardImpl {
 
     public CursedRack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

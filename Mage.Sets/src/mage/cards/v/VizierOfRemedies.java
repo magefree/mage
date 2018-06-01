@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author Stravant
  */
-public class VizierOfRemedies extends CardImpl {
+public final class VizierOfRemedies extends CardImpl {
 
     public VizierOfRemedies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

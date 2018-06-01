@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class ToTheSlaughter extends CardImpl {
+public final class ToTheSlaughter extends CardImpl {
 
     public ToTheSlaughter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");

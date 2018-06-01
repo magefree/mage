@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class LiltingRefrain extends CardImpl {
+public final class LiltingRefrain extends CardImpl {
 
     public LiltingRefrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

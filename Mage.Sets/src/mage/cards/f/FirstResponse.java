@@ -42,7 +42,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author LevelX2
  */
-public class FirstResponse extends CardImpl {
+public final class FirstResponse extends CardImpl {
 
     public FirstResponse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

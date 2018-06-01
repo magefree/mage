@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class VerdantHaven extends CardImpl {
+public final class VerdantHaven extends CardImpl {
 
     public VerdantHaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
@@ -69,7 +69,7 @@ public class VerdantHaven extends CardImpl {
         // When Verdant Haven enters the battlefield, you gain 2 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
 
-        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool.
+        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color.
         this.addAbility(new VerdantHavenTriggeredAbility());
     }
 
@@ -112,6 +112,6 @@ class VerdantHavenTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool.";
+        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color.";
     }
 }

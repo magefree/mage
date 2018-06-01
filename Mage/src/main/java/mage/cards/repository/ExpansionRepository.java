@@ -29,7 +29,7 @@ public enum ExpansionRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
     private static final long EXPANSION_DB_VERSION = 5;
-    private static final long EXPANSION_CONTENT_VERSION = 14;
+    private static final long EXPANSION_CONTENT_VERSION = 15;
 
     private Dao<ExpansionInfo, Object> expansionDao;
 
@@ -88,10 +88,10 @@ public enum ExpansionRepository {
         try {
             // only with boosters and cards
             GenericRawResults<ExpansionInfo> setsList = expansionDao.queryRaw(
-                    "select * from expansion e " +
-                            " where e.boosters = 1 " +
-                            "   and exists(select (1) from  card c where c.setcode = e.code) " +
-                            " order by e.releasedate desc",
+                    "select * from expansion e "
+                    + " where e.boosters = 1 "
+                    + "   and exists(select (1) from  card c where c.setcode = e.code) "
+                    + " order by e.releasedate desc",
                     expansionDao.getRawRowMapper());
 
             List<ExpansionInfo> resList = new ArrayList<>();

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TrainedOrgg extends CardImpl {
+public final class TrainedOrgg extends CardImpl {
 
     public TrainedOrgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");

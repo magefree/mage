@@ -51,7 +51,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ArlinnEmbracedByTheMoon extends CardImpl {
+public final class ArlinnEmbracedByTheMoon extends CardImpl {
 
     public ArlinnEmbracedByTheMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");

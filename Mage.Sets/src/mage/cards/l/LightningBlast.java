@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class LightningBlast extends CardImpl {
+public final class LightningBlast extends CardImpl {
 
     public LightningBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");

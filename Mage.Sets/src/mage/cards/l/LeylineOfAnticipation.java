@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfAnticipation extends CardImpl {
+public final class LeylineOfAnticipation extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("spells");
 

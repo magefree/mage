@@ -52,7 +52,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class FlamingSword extends CardImpl {
+public final class FlamingSword extends CardImpl {
 
     public FlamingSword(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

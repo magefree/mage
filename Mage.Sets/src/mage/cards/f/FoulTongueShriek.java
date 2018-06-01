@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class FoulTongueShriek extends CardImpl {
+public final class FoulTongueShriek extends CardImpl {
 
     public FoulTongueShriek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

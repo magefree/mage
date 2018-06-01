@@ -46,7 +46,7 @@ import mage.constants.Duration;
  *
  * @author TheElk801
  */
-public class HoppingAutomaton extends CardImpl {
+public final class HoppingAutomaton extends CardImpl {
 
     public HoppingAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

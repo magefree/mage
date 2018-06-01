@@ -27,9 +27,7 @@
  */
 package mage.game;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -198,22 +196,6 @@ public abstract class GameCommanderImpl extends GameImpl {
             }
         }
         return super.checkStateBasedActions();
-    }
-
-    @Override
-    public Set<UUID> getOpponents(UUID playerId) {
-        Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId : getState().getPlayersInRange(playerId, this)) {
-            if (!opponentId.equals(playerId)) {
-                opponents.add(opponentId);
-            }
-        }
-        return opponents;
-    }
-
-    @Override
-    public boolean isOpponent(Player player, UUID playerToCheck) {
-        return !player.getId().equals(playerToCheck);
     }
 
     public void setAlsoHand(boolean alsoHand) {

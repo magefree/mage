@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Styxo
  */
-public class BibFortuna extends CardImpl {
+public final class BibFortuna extends CardImpl {
 
     public BibFortuna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

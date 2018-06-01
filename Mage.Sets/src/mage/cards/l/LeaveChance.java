@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class LeaveChance extends SplitCard {
+public final class LeaveChance extends SplitCard {
 
     public LeaveChance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{W}", "{3}{R}", SpellAbilityType.SPLIT_AFTERMATH);

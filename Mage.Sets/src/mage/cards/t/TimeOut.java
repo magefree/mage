@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class TimeOut extends CardImpl {
+public final class TimeOut extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
 

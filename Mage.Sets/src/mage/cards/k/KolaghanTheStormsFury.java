@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class KolaghanTheStormsFury extends CardImpl {
+public final class KolaghanTheStormsFury extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon you control");
 

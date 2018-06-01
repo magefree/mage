@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class PinpointAvalanche extends CardImpl {
+public final class PinpointAvalanche extends CardImpl {
 
     public PinpointAvalanche(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");

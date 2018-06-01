@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2 & L_J
  */
-public class GauntletsOfChaos extends CardImpl {
+public final class GauntletsOfChaos extends CardImpl {
 
     public GauntletsOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

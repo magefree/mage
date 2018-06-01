@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jonubuu
  */
-public class Daze extends CardImpl {
+public final class Daze extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Island");
 

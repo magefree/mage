@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class Sanctimony extends CardImpl {
+public final class Sanctimony extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("an opponent taps a Mountain");
 

@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class BalmOfRestoration extends CardImpl {
+public final class BalmOfRestoration extends CardImpl {
 
     public BalmOfRestoration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

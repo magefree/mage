@@ -48,7 +48,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author LevelX2
  */
-public class ThespiansStage extends CardImpl {
+public final class ThespiansStage extends CardImpl {
 
     public ThespiansStage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

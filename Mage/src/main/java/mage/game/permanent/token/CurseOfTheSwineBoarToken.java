@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CurseOfTheSwineBoarToken extends TokenImpl {
+public final class CurseOfTheSwineBoarToken extends TokenImpl {
 
     public CurseOfTheSwineBoarToken() {
         super("Boar", "2/2 green Boar creature token");

@@ -40,7 +40,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FissureVent extends CardImpl {
+public final class FissureVent extends CardImpl {
 
     public FissureVent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

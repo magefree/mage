@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Catastrophe extends CardImpl {
+public final class Catastrophe extends CardImpl {
 
     public Catastrophe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");

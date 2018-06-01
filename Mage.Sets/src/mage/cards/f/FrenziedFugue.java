@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author LevelX2
  */
-public class FrenziedFugue extends CardImpl {
+public final class FrenziedFugue extends CardImpl {
 
     public FrenziedFugue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

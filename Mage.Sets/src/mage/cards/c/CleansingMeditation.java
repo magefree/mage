@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class CleansingMeditation extends CardImpl {
+public final class CleansingMeditation extends CardImpl {
 
     public CleansingMeditation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");

@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class FellShepherd extends CardImpl {
+public final class FellShepherd extends CardImpl {
 
     public FellShepherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

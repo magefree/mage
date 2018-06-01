@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class FinalRevels extends CardImpl {
+public final class FinalRevels extends CardImpl {
 
     public FinalRevels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");

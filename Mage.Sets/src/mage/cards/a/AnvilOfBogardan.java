@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class AnvilOfBogardan extends CardImpl {
+public final class AnvilOfBogardan extends CardImpl {
     
     public AnvilOfBogardan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class DualcasterMage extends CardImpl {
+public final class DualcasterMage extends CardImpl {
 
     public DualcasterMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

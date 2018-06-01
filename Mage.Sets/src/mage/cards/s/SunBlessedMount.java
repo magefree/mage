@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author TheElk801
  */
-public class SunBlessedMount extends CardImpl {
+public final class SunBlessedMount extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Huatli, Dinosaur Knight");
 

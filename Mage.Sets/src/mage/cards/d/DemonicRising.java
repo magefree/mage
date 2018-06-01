@@ -42,7 +42,7 @@ import mage.game.permanent.token.DemonToken;
 /**
  * @author noxx
  */
-public class DemonicRising extends CardImpl {
+public final class DemonicRising extends CardImpl {
 
     private static final String ruleText = "At the beginning of your end step, if you control exactly one creature, create a 5/5 black Demon creature token with flying";
 

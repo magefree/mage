@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author noxx
 
  */
-public class UndeadExecutioner extends CardImpl {
+public final class UndeadExecutioner extends CardImpl {
 
     public UndeadExecutioner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

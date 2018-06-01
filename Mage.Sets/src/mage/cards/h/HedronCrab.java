@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class HedronCrab extends CardImpl {
+public final class HedronCrab extends CardImpl {
 
     public HedronCrab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

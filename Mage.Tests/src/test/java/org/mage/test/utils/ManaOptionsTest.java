@@ -158,7 +158,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        assertManaOptions("{C}{W}{W}{G}{G}",  manaOptions);
+        assertManaOptions("{C}{W}{W}{G}{G}", manaOptions);
     }
 
     // Crystal Quarry
@@ -234,6 +234,29 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}{G}{Any}", manaOptions);
+    }
+
+    // Nykthos, Shrine to Nyx
+    // {T}: Add {C}.
+    // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+    @Test
+    public void testNykthos4() {
+        // If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.
+        // Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Damping Sphere", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}{G}{G}{G}", manaOptions);
+
     }
 
     @Test
@@ -400,5 +423,24 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{B}{B}", manaOptions);
+    }
+
+    @Test
+    public void testDampingSphere() {
+        // If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.
+        // Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Damping Sphere", 1);
+        // {T}: Add {C}.
+        // {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+        addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Temple", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}", manaOptions);
     }
 }

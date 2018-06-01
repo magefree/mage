@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class BloomTender extends CardImpl {
+public final class BloomTender extends CardImpl {
 
     public BloomTender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

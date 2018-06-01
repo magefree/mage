@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BursegSardaukar
  */
-public class GoblinSnowman extends CardImpl {
+public final class GoblinSnowman extends CardImpl {
 
     public GoblinSnowman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

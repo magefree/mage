@@ -54,7 +54,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class RoarOfJukai extends CardImpl {
+public final class RoarOfJukai extends CardImpl {
 
     public RoarOfJukai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

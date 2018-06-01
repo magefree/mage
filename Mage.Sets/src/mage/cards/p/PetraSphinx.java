@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com & L_J
  */
-public class PetraSphinx extends CardImpl {
+public final class PetraSphinx extends CardImpl {
 
     public PetraSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{W}");

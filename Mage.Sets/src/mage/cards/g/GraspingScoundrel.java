@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Will
  */
-public class GraspingScoundrel extends CardImpl{
+public final class GraspingScoundrel extends CardImpl{
     public GraspingScoundrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 

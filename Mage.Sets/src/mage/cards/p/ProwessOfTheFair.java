@@ -45,7 +45,7 @@ import mage.game.permanent.token.ElfToken;
  *
  * @author LoneFox
  */
-public class ProwessOfTheFair extends CardImpl {
+public final class ProwessOfTheFair extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another nontoken Elf");
 

@@ -43,7 +43,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Loki
  */
-public class SmogsteedRider extends CardImpl {
+public final class SmogsteedRider extends CardImpl {
 
     public SmogsteedRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

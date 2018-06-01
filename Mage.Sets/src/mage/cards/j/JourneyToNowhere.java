@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class JourneyToNowhere extends CardImpl {
+public final class JourneyToNowhere extends CardImpl {
 
     public JourneyToNowhere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

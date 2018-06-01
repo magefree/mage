@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author JayDi85
  */
-public class FanaticalFirebrand extends CardImpl {
+public final class FanaticalFirebrand extends CardImpl {
 
     public FanaticalFirebrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

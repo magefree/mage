@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class EerieInterlude extends CardImpl {
+public final class EerieInterlude extends CardImpl {
 
     public EerieInterlude(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

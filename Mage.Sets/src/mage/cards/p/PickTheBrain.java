@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class PickTheBrain extends CardImpl {
+public final class PickTheBrain extends CardImpl {
 
     public PickTheBrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

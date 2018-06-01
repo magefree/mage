@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DrownerOfHope extends CardImpl {
+public final class DrownerOfHope extends CardImpl {
 
     private static final FilterControlledPermanent FILTER = new FilterControlledPermanent("an Eldrazi Scion");
 

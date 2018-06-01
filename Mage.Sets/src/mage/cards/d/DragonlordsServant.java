@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class DragonlordsServant extends CardImpl {
+public final class DragonlordsServant extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Dragon spells");
 

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class NettleSwine extends CardImpl {
+public final class NettleSwine extends CardImpl {
 
     public NettleSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

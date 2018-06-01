@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class SangriteBacklash extends CardImpl {
+public final class SangriteBacklash extends CardImpl {
 
     public SangriteBacklash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B/G}{R}");

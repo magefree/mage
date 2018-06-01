@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ReaperOfFlightMoonsilver extends CardImpl {
+public final class ReaperOfFlightMoonsilver extends CardImpl {
 
     public ReaperOfFlightMoonsilver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

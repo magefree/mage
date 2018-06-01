@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class BloodlineNecromancer extends CardImpl {
+public final class BloodlineNecromancer extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Vampire or Wizard creature card from your graveyard");
 

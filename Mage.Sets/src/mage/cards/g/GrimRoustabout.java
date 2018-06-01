@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GrimRoustabout extends CardImpl {
+public final class GrimRoustabout extends CardImpl {
  
     public GrimRoustabout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

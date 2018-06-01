@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class BellowingAegisaur extends CardImpl {
+public final class BellowingAegisaur extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature you control");
 

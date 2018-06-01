@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class VoiceOfLaw extends CardImpl {
+public final class VoiceOfLaw extends CardImpl {
 
     public VoiceOfLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

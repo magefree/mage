@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GlimpseTheSunGod extends CardImpl {
+public final class GlimpseTheSunGod extends CardImpl {
 
     public GlimpseTheSunGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");

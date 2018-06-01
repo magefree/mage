@@ -44,7 +44,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class GatstafShepherd extends CardImpl {
+public final class GatstafShepherd extends CardImpl {
 
     public GatstafShepherd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

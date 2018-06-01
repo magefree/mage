@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class HarmonicSliver extends CardImpl {
+public final class HarmonicSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
     static {

@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author maurer.it_at_gmail.com, TheElk801
  */
-public class KalastriaHighborn extends CardImpl {
+public final class KalastriaHighborn extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire you control");
 

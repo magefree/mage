@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class DiplomacyOfTheWastes extends CardImpl {
+public final class DiplomacyOfTheWastes extends CardImpl {
 
     public DiplomacyOfTheWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

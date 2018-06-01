@@ -45,14 +45,14 @@ import mage.abilities.common.SimpleActivatedAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TerramorphicExpanse extends CardImpl {
+public final class TerramorphicExpanse extends CardImpl {
 
     public TerramorphicExpanse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

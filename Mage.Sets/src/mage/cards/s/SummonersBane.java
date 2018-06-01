@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class SummonersBane extends CardImpl {
+public final class SummonersBane extends CardImpl {
 
     public SummonersBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

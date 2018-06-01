@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author ayrat
  */
-public class LumengridDrake extends CardImpl {
+public final class LumengridDrake extends CardImpl {
 
     private static final String ruleText = "Metalcraft - When {this} enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
 

@@ -49,7 +49,7 @@ import mage.game.permanent.token.TriskelaviteToken;
  *
  * @author fireshoes
  */
-public class Triskelavus extends CardImpl {
+public final class Triskelavus extends CardImpl {
 
     public Triskelavus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

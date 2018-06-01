@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class RubblebeltRaiders extends CardImpl {
+public final class RubblebeltRaiders extends CardImpl {
 
     public RubblebeltRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R/G}{R/G}{R/G}");

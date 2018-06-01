@@ -60,7 +60,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Godsend extends CardImpl {
+public final class Godsend extends CardImpl {
 
     public Godsend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}{W}");

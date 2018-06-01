@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author spjspj
  */
-public class CombustibleGearhulk extends CardImpl {
+public final class CombustibleGearhulk extends CardImpl {
 
     public CombustibleGearhulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R}{R}");

@@ -40,7 +40,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author TheElk801
  */
-public class HeadlongRush extends CardImpl {
+public final class HeadlongRush extends CardImpl {
 
     public HeadlongRush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class LinvalaKeeperOfSilence extends CardImpl {
+public final class LinvalaKeeperOfSilence extends CardImpl {
 
     public LinvalaKeeperOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

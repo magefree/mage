@@ -27,6 +27,7 @@
  */
 package mage.abilities.keyword;
 
+import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -40,8 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.*;
 
 /**
  * 20121001 702.31. Kicker 702.31a Kicker is a static ability that functions
@@ -134,7 +133,8 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             cost.reset();
         }
         String key = getActivationKey(source, "", game);
-        for (String activationKey : activations.keySet()) {
+        for (Iterator<String> iterator = activations.keySet().iterator(); iterator.hasNext();) {
+            String activationKey = iterator.next();
             if (activationKey.startsWith(key) && activations.get(activationKey) > 0) {
                 activations.put(key, 0);
             }
@@ -212,10 +212,10 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                                 && player.chooseUse(Outcome.Benefit, "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
                             this.activateKicker(kickerCost, ability, game);
                             if (kickerCost instanceof Costs) {
-                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext(); ) {
+                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext();) {
                                     Object kickerCostObject = itKickerCost.next();
                                     if ((kickerCostObject instanceof Costs) || (kickerCostObject instanceof CostsImpl)) {
-                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext(); ) {
+                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext();) {
                                             addKickerCostsToAbility(itDetails.next(), ability, game);
                                         }
                                     } else {

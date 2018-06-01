@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author MarcoMarin, Watch out! This one I actually made from scratch!(1st
  * time \o/) Not even checked similars :) beware!
  */
-public class GhazbanOgre extends CardImpl {
+public final class GhazbanOgre extends CardImpl {
 
     public GhazbanOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

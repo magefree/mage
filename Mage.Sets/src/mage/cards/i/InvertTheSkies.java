@@ -52,7 +52,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  * @author jeffwadsworth
  *
  */
-public class InvertTheSkies extends CardImpl {
+public final class InvertTheSkies extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

@@ -42,7 +42,7 @@ import mage.game.permanent.token.PestToken;
 /**
  * @author Loki
  */
-public class NuisanceEngine extends CardImpl {
+public final class NuisanceEngine extends CardImpl {
 
     public NuisanceEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

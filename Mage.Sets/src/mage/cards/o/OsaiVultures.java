@@ -50,7 +50,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class OsaiVultures extends CardImpl {
+public final class OsaiVultures extends CardImpl {
 
     public OsaiVultures(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

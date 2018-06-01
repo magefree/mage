@@ -55,7 +55,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author L_J
  */
-public class SwordOfTheAges extends CardImpl {
+public final class SwordOfTheAges extends CardImpl {
 
     public SwordOfTheAges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

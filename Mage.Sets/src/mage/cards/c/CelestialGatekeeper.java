@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author TheElk801
  */
-public class CelestialGatekeeper extends CardImpl {
+public final class CelestialGatekeeper extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Bird and/or Cleric permanent cards");
 

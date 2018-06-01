@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class CollectiveDefiance extends CardImpl {
+public final class CollectiveDefiance extends CardImpl {
 
     private static final FilterPlayer filterDiscard = new FilterPlayer("player to discard and then draw cards");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to be dealt damage");

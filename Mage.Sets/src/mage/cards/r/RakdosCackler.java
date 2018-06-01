@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RakdosCackler extends CardImpl {
+public final class RakdosCackler extends CardImpl {
  
     public RakdosCackler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}");

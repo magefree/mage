@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FeudkillersVerdict extends CardImpl {
+public final class FeudkillersVerdict extends CardImpl {
 
     public FeudkillersVerdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{4}{W}{W}");

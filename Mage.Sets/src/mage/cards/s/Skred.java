@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author shieldal
  */
-public class Skred extends CardImpl {
+public final class Skred extends CardImpl {
     
     public Skred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

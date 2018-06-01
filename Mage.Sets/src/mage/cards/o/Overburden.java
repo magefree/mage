@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author Quercitron
  */
-public class Overburden extends CardImpl {
+public final class Overburden extends CardImpl {
 
     private static final FilterCreaturePermanent ENTERS_BATTLEFIELD_FILTER = new FilterCreaturePermanent("a nontoken creature");
 

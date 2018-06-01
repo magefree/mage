@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class TempestCaller extends CardImpl {
+public final class TempestCaller extends CardImpl {
 
     public TempestCaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

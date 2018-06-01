@@ -59,7 +59,7 @@ import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
  *
  * @author LevelX2
  */
-public class KeranosGodOfStorms extends CardImpl {
+public final class KeranosGodOfStorms extends CardImpl {
 
     
     public KeranosGodOfStorms(UUID ownerId, CardSetInfo setInfo) {

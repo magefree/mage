@@ -58,7 +58,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Quercitron
  */
-public class LyzoldaTheBloodWitch extends CardImpl {
+public final class LyzoldaTheBloodWitch extends CardImpl {
 
     private static final FilterPermanent redFilter = new FilterPermanent();
     private static final FilterPermanent blackFilter = new FilterPermanent();

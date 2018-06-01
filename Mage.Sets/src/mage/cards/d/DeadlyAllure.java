@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class DeadlyAllure extends CardImpl {
+public final class DeadlyAllure extends CardImpl {
 
     public DeadlyAllure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

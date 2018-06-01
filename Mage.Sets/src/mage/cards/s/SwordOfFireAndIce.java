@@ -56,7 +56,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author Loki
  */
-public class SwordOfFireAndIce extends CardImpl {
+public final class SwordOfFireAndIce extends CardImpl {
 
     public SwordOfFireAndIce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -495,7 +495,7 @@ public class TestPlayer implements Player {
                     List<Permanent> manaPermsWithCost = computerPlayer.getAvailableManaProducersWithCost(game);
                     for (Permanent perm : manaPermsWithCost) {
                         for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
-                            if (manaAbility.toString().startsWith(groups[0]) && manaAbility.canActivate(computerPlayer.getId(), game)) {
+                            if (manaAbility.toString().startsWith(groups[0]) && manaAbility.canActivate(computerPlayer.getId(), game).canActivate()) {
                                 Ability newManaAbility = manaAbility.copy();
                                 computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                 actions.remove(action);
@@ -1598,13 +1598,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana) {
-        return computerPlayer.cast(ability, game, noMana);
+    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference) {
+        return computerPlayer.cast(ability, game, noMana, reference);
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming) {
-        return computerPlayer.playCard(card, game, noMana, ignoreTiming);
+    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference) {
+        return computerPlayer.playCard(card, game, noMana, ignoreTiming, reference);
     }
 
     @Override
@@ -2005,6 +2005,11 @@ public class TestPlayer implements Player {
     @Override
     public void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game) {
         computerPlayer.declareBlocker(defenderId, blockerId, attackerId, game);
+    }
+
+    @Override
+    public void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game, boolean allowUndo) {
+        computerPlayer.declareBlocker(defenderId, blockerId, attackerId, game, allowUndo);
     }
 
     @Override

@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class MinotaurTactician extends CardImpl {
+public final class MinotaurTactician extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent();
     private static final FilterControlledCreaturePermanent filterBlue = new FilterControlledCreaturePermanent();

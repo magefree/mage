@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class PlanarOutburst extends CardImpl {
+public final class PlanarOutburst extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonland creatures");
 

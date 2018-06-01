@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class DosansOldestChant extends CardImpl {
+public final class DosansOldestChant extends CardImpl {
 
     public DosansOldestChant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");

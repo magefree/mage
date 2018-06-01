@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class DrakeSkullCameo extends CardImpl {
+public final class DrakeSkullCameo extends CardImpl {
 
     public DrakeSkullCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -44,7 +44,7 @@ import java.util.UUID;
  */
 
 
-public class BatteringKrasis extends CardImpl {
+public final class BatteringKrasis extends CardImpl {
 
     public BatteringKrasis (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

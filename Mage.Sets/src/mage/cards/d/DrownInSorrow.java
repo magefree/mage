@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Quercitron
  */
-public class DrownInSorrow extends CardImpl {
+public final class DrownInSorrow extends CardImpl {
 
     public DrownInSorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

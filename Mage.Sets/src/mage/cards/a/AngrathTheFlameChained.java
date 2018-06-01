@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AngrathTheFlameChained extends CardImpl {
+public final class AngrathTheFlameChained extends CardImpl {
 
     public AngrathTheFlameChained(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");

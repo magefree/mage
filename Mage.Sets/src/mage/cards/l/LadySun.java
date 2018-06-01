@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class LadySun extends CardImpl {
+public final class LadySun extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     static {

@@ -43,7 +43,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author LevelX2
  */
-public class IllusionReality extends SplitCard {
+public final class IllusionReality extends SplitCard {
 
     public IllusionReality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}", "{2}{G}", SpellAbilityType.SPLIT);

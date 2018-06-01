@@ -47,7 +47,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author North
  */
-public class ConcussiveBolt extends CardImpl {
+public final class ConcussiveBolt extends CardImpl {
 
     public ConcussiveBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

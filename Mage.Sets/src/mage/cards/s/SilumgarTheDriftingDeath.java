@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SilumgarTheDriftingDeath extends CardImpl {
+public final class SilumgarTheDriftingDeath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon you control");
 

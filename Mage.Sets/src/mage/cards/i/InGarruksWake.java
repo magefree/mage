@@ -40,7 +40,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 /**
  * @author noxx
  */
-public class InGarruksWake extends CardImpl {
+public final class InGarruksWake extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creatures you don't control and all planeswalkers you don't control");
 

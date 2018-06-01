@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author Styxo
  */
-public class FlamesOfRemembrance extends CardImpl {
+public final class FlamesOfRemembrance extends CardImpl {
 
     public FlamesOfRemembrance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");

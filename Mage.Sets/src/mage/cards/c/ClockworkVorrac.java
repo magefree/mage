@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class ClockworkVorrac extends CardImpl {
+public final class ClockworkVorrac extends CardImpl {
 
     public ClockworkVorrac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

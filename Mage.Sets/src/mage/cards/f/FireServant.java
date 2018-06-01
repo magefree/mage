@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FireServant extends CardImpl {
+public final class FireServant extends CardImpl {
 
     public FireServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

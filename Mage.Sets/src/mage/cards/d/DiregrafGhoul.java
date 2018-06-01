@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author nantuko
  */
-public class DiregrafGhoul extends CardImpl {
+public final class DiregrafGhoul extends CardImpl {
 
     public DiregrafGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

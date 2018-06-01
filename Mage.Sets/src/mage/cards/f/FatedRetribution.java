@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class FatedRetribution extends CardImpl {
+public final class FatedRetribution extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creatures and planeswalkers");
     static {

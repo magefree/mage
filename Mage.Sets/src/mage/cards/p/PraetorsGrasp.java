@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward
  */
-public class PraetorsGrasp extends CardImpl {
+public final class PraetorsGrasp extends CardImpl {
 
     public PraetorsGrasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

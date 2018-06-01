@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class AcidicSoil extends CardImpl {
+public final class AcidicSoil extends CardImpl {
 
     public AcidicSoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

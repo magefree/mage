@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class Ferropede extends CardImpl {
+public final class Ferropede extends CardImpl {
 
     public Ferropede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author noxx
  */
-public class StolenGoods extends CardImpl {
+public final class StolenGoods extends CardImpl {
 
     public StolenGoods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

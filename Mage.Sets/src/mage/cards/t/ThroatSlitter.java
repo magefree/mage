@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ThroatSlitter extends CardImpl {
+public final class ThroatSlitter extends CardImpl {
 
     public ThroatSlitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

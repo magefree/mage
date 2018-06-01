@@ -58,7 +58,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Realmwright extends CardImpl {
+public final class Realmwright extends CardImpl {
 
     public Realmwright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");

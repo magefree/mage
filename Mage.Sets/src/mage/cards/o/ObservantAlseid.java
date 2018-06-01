@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ObservantAlseid extends CardImpl {
+public final class ObservantAlseid extends CardImpl {
 
     public ObservantAlseid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{W}");

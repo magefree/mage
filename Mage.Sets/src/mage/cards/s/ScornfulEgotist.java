@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class ScornfulEgotist extends CardImpl {
+public final class ScornfulEgotist extends CardImpl {
 
     public ScornfulEgotist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}");

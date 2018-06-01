@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class RohgahhOfKherKeep extends CardImpl {
+public final class RohgahhOfKherKeep extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control named Kobolds of Kher Keep");
 

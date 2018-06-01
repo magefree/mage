@@ -41,7 +41,7 @@ import mage.constants.SubType;
 /**
  * @author Loki, nantuko, North
  */
-public class Thrummingbird extends CardImpl {
+public final class Thrummingbird extends CardImpl {
 
     public Thrummingbird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

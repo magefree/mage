@@ -51,7 +51,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author LevelX2
  */
-public class HiddenStockpile extends CardImpl {
+public final class HiddenStockpile extends CardImpl {
 
     public HiddenStockpile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}");

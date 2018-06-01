@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class DregMangler extends CardImpl {
+public final class DregMangler extends CardImpl {
 
     public DregMangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");

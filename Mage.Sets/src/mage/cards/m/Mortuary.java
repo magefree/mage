@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author HCrescent
  */
-public class Mortuary extends CardImpl {
+public final class Mortuary extends CardImpl {
 
 
     public Mortuary(UUID ownerId, CardSetInfo setInfo) {

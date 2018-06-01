@@ -56,7 +56,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author LevelX2
  */
-public class InstillFuror extends CardImpl {
+public final class InstillFuror extends CardImpl {
 
     public InstillFuror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

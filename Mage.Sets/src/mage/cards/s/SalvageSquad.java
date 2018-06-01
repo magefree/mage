@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Styxo
  */
-public class SalvageSquad extends CardImpl {
+public final class SalvageSquad extends CardImpl {
 
     public SalvageSquad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class KnightOfNewBenalia extends CardImpl {
+public final class KnightOfNewBenalia extends CardImpl {
 
     public KnightOfNewBenalia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

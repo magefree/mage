@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class LeechingLicid extends CardImpl {
+public final class LeechingLicid extends CardImpl {
 
     public LeechingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

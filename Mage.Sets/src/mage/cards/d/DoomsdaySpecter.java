@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author LoneFox
 
  */
-public class DoomsdaySpecter extends CardImpl {
+public final class DoomsdaySpecter extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue or black creature you control");
 

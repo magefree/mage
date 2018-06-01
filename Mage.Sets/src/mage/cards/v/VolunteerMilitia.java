@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class VolunteerMilitia extends CardImpl {
+public final class VolunteerMilitia extends CardImpl {
 
     public VolunteerMilitia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

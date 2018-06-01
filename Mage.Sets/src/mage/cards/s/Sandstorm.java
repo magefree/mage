@@ -38,7 +38,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author michael.napoleon@gmail.com
  */
-public class Sandstorm extends CardImpl {
+public final class Sandstorm extends CardImpl {
   
     public Sandstorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class Heliophial extends CardImpl {
+public final class Heliophial extends CardImpl {
 
     public Heliophial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

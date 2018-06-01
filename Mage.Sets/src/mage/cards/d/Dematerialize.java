@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author cbt33
  */
-public class Dematerialize extends CardImpl {
+public final class Dematerialize extends CardImpl {
 
     public Dematerialize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

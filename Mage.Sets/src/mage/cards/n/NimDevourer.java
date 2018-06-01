@@ -60,7 +60,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class NimDevourer extends CardImpl {
+public final class NimDevourer extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 

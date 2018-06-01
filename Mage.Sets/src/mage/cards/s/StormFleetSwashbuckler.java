@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class StormFleetSwashbuckler extends CardImpl {
+public final class StormFleetSwashbuckler extends CardImpl {
 
     public StormFleetSwashbuckler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

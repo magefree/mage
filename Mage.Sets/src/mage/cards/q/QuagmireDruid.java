@@ -49,7 +49,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Loki
  */
-public class QuagmireDruid extends CardImpl {
+public final class QuagmireDruid extends CardImpl {
 
     public QuagmireDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

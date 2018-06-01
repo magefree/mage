@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class VenserTheSojourner extends CardImpl {
+public final class VenserTheSojourner extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you own");
 

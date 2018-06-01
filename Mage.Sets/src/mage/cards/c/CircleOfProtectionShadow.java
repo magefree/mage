@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LoneFox
  */
-public class CircleOfProtectionShadow extends CardImpl {
+public final class CircleOfProtectionShadow extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature of your choice with shadow");
 

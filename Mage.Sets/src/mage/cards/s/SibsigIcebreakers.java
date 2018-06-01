@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SibsigIcebreakers extends CardImpl {
+public final class SibsigIcebreakers extends CardImpl {
 
     public SibsigIcebreakers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

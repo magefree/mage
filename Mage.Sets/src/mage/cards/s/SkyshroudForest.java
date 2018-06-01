@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class SkyshroudForest extends CardImpl {
+public final class SkyshroudForest extends CardImpl {
 
     public SkyshroudForest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

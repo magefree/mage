@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class ManaforceMace extends CardImpl {
+public final class ManaforceMace extends CardImpl {
 
     public ManaforceMace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

@@ -39,7 +39,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author jeffwadsworth
  */
-public class FungalSprouting extends CardImpl {
+public final class FungalSprouting extends CardImpl {
 
     public FungalSprouting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

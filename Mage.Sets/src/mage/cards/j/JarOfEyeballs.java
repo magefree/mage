@@ -58,7 +58,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class JarOfEyeballs extends CardImpl {
+public final class JarOfEyeballs extends CardImpl {
 
     public JarOfEyeballs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

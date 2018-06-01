@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class CorpseHarvester extends CardImpl {
+public final class CorpseHarvester extends CardImpl {
 
     public CorpseHarvester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

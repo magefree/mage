@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author SpikesCafe-google
  */
-public class PureReflection extends CardImpl {
+public final class PureReflection extends CardImpl {
 
     public PureReflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

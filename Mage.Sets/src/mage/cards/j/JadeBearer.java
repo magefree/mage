@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JayDi85
  */
-public class JadeBearer extends CardImpl {
+public final class JadeBearer extends CardImpl {
 
     private static final FilterCreaturePermanent filterYourAnotherMerfolk = new FilterCreaturePermanent();
     static {

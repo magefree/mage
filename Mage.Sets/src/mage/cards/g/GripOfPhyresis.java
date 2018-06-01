@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class GripOfPhyresis extends CardImpl {
+public final class GripOfPhyresis extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 

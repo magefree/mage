@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class InfiniteObliteration extends CardImpl {
+public final class InfiniteObliteration extends CardImpl {
 
     public InfiniteObliteration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

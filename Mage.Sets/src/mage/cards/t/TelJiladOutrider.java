@@ -40,7 +40,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author michael.napoleon@gmail.com
  */
-public class TelJiladOutrider extends CardImpl {
+public final class TelJiladOutrider extends CardImpl {
 
     public TelJiladOutrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

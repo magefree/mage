@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author noxx
  */
-public class LeapOfFaith extends CardImpl {
+public final class LeapOfFaith extends CardImpl {
 
     public LeapOfFaith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

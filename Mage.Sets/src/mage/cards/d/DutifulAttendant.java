@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class DutifulAttendant extends CardImpl {
+public final class DutifulAttendant extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("another target creature card from your graveyard");
 

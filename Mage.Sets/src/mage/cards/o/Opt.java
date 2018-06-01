@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author KholdFuzion
  */
-public class Opt extends CardImpl {
+public final class Opt extends CardImpl {
 
     public Opt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SekkiSeasonsGuide extends CardImpl {
+public final class SekkiSeasonsGuide extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("eight Spirits");
 

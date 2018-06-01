@@ -51,7 +51,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author Styxo
  */
-public class Revenge extends CardImpl {
+public final class Revenge extends CardImpl {
 
     public Revenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

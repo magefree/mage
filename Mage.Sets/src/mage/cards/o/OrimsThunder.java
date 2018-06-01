@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class OrimsThunder extends CardImpl {
+public final class OrimsThunder extends CardImpl {
 
     public OrimsThunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

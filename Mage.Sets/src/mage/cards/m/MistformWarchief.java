@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author TheElk801
  */
-public class MistformWarchief extends CardImpl {
+public final class MistformWarchief extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Creature spells you cast that share a creature type with {this}");
 

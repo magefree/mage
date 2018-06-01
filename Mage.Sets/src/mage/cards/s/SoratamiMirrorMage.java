@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class SoratamiMirrorMage extends CardImpl {
+public final class SoratamiMirrorMage extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands");
 

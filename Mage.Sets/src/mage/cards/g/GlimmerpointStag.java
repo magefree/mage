@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author maurer.it_at_gmail.com
  */
-public class GlimmerpointStag extends CardImpl {
+public final class GlimmerpointStag extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("another target permanent");
 

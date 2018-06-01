@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class DaruSpiritualist extends CardImpl {
+public final class DaruSpiritualist extends CardImpl {
 
     public DaruSpiritualist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

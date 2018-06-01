@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class FromBeyond extends CardImpl {
+public final class FromBeyond extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Eldrazi card");
 

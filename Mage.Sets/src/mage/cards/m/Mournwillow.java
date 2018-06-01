@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class Mournwillow extends CardImpl {
+public final class Mournwillow extends CardImpl {
 
     public Mournwillow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");

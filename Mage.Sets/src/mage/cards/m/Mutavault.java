@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jonubuu
  */
-public class Mutavault extends CardImpl {
+public final class Mutavault extends CardImpl {
 
     public Mutavault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

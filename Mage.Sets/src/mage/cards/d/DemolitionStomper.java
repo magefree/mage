@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class DemolitionStomper extends CardImpl {
+public final class DemolitionStomper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
     static {

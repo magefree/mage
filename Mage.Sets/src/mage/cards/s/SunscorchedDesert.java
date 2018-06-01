@@ -42,7 +42,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class SunscorchedDesert extends CardImpl {
+public final class SunscorchedDesert extends CardImpl {
 
     public SunscorchedDesert(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

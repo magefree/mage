@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class RapidHybridizationToken extends TokenImpl {
+public final class RapidHybridizationToken extends TokenImpl {
 
     public RapidHybridizationToken() {
         super("Frog Lizard", "3/3 green Frog Lizard creature token");

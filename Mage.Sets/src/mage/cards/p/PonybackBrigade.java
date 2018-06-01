@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class PonybackBrigade extends CardImpl {
+public final class PonybackBrigade extends CardImpl {
 
     public PonybackBrigade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}{B}");

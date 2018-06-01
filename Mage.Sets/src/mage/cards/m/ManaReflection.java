@@ -47,7 +47,7 @@ import mage.game.events.ManaEvent;
  *
  * @author jeffwadsworth
  */
-public class ManaReflection extends CardImpl {
+public final class ManaReflection extends CardImpl {
 
     public ManaReflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");

@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author TheElk801
  */
-public class FyndhornPollen extends CardImpl {
+public final class FyndhornPollen extends CardImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures");
 

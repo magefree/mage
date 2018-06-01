@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class VedalkenOutlander extends CardImpl {
+public final class VedalkenOutlander extends CardImpl {
 
     public VedalkenOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}");

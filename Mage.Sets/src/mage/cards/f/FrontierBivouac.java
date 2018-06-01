@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class FrontierBivouac extends CardImpl {
+public final class FrontierBivouac extends CardImpl {
 
     public FrontierBivouac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

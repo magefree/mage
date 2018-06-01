@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class RestorationGearsmith extends CardImpl {
+public final class RestorationGearsmith extends CardImpl {
 
     public RestorationGearsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{B}");

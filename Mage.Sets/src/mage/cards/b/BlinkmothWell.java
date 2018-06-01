@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class BlinkmothWell extends CardImpl {
+public final class BlinkmothWell extends CardImpl {
     
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature artifact");
     

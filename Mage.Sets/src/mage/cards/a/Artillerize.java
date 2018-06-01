@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class Artillerize extends CardImpl {
+public final class Artillerize extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
 

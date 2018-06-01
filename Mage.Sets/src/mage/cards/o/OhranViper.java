@@ -45,7 +45,7 @@ import mage.constants.SuperType;
  *
  * @author LevelX2
  */
-public class OhranViper extends CardImpl {
+public final class OhranViper extends CardImpl {
 
     public OhranViper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

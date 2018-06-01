@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 /**
  * @author duncant
  */
-public class MagusOfTheMoat extends CardImpl {
+public final class MagusOfTheMoat extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
 

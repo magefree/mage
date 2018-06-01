@@ -49,7 +49,7 @@ import mage.game.permanent.token.DroidToken;
  *
  * @author Styxo
  */
-public class TradeFederationBattleship extends CardImpl {
+public final class TradeFederationBattleship extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Droid creatures");
 

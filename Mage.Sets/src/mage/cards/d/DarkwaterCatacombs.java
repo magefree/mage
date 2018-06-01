@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class DarkwaterCatacombs extends CardImpl {
+public final class DarkwaterCatacombs extends CardImpl {
 
     public DarkwaterCatacombs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

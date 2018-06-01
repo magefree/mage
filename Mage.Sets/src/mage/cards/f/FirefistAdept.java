@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author TheElk801
  */
-public class FirefistAdept extends CardImpl {
+public final class FirefistAdept extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCount = new FilterControlledCreaturePermanent("Wizards you control");
 

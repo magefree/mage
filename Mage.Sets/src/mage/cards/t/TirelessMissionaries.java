@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TirelessMissionaries extends CardImpl {
+public final class TirelessMissionaries extends CardImpl {
 
     public TirelessMissionaries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

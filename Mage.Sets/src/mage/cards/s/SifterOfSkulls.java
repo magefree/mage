@@ -49,7 +49,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author fireshoes
  */
-public class SifterOfSkulls extends CardImpl {
+public final class SifterOfSkulls extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature you control");
     static {

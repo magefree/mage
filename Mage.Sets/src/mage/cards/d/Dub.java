@@ -26,7 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author JRHerlehy
  *         Created on 4/6/18.
  */
-public class Dub extends CardImpl {
+public final class Dub extends CardImpl {
 
     public Dub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class AvatarOfWoe extends CardImpl {
+public final class AvatarOfWoe extends CardImpl {
 
     public AvatarOfWoe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}");

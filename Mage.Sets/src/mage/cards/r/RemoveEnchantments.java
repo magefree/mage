@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class RemoveEnchantments extends CardImpl {
+public final class RemoveEnchantments extends CardImpl {
 
     private static final FilterPermanent filter1 = new FilterControlledEnchantmentPermanent();
     private static final FilterPermanent filter2 = new FilterPermanent();

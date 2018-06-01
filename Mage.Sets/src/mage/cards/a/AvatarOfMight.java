@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AvatarOfMight extends CardImpl {
+public final class AvatarOfMight extends CardImpl {
 
     public AvatarOfMight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

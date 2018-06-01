@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class SandsOfDelirium extends CardImpl {
+public final class SandsOfDelirium extends CardImpl {
 
     public SandsOfDelirium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

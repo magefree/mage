@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class IllusionistsStratagem extends CardImpl {
+public final class IllusionistsStratagem extends CardImpl {
 
     public IllusionistsStratagem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

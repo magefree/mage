@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class LumengridAugur extends CardImpl {
+public final class LumengridAugur extends CardImpl {
 
     public LumengridAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

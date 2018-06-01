@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ElementalUprising extends CardImpl {
+public final class ElementalUprising extends CardImpl {
 
     public ElementalUprising(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

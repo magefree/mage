@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class CemeteryRecruitment extends CardImpl {
+public final class CemeteryRecruitment extends CardImpl {
 
     public CemeteryRecruitment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

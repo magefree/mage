@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LoneFox
  */
-public class VileConsumption extends CardImpl {
+public final class VileConsumption extends CardImpl {
 
     public VileConsumption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{B}");

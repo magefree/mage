@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class FrostRaptor extends CardImpl {
+public final class FrostRaptor extends CardImpl {
 
     public FrostRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

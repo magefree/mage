@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SkymarcherAspirant extends CardImpl {
+public final class SkymarcherAspirant extends CardImpl {
 
     public SkymarcherAspirant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

@@ -44,7 +44,7 @@ import mage.constants.SubType;
  */
 
 
-public class ThrashingMossdog extends CardImpl {
+public final class ThrashingMossdog extends CardImpl {
 
     public ThrashingMossdog (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

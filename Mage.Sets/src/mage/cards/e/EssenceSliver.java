@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author cbt33
  */
-public class EssenceSliver extends CardImpl {
+public final class EssenceSliver extends CardImpl {
 
     public EssenceSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

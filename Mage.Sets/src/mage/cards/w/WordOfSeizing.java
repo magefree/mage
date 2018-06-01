@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class WordOfSeizing extends CardImpl {
+public final class WordOfSeizing extends CardImpl {
 
     public WordOfSeizing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");

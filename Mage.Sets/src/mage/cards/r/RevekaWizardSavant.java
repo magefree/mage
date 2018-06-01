@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author hanasu
  */
-public class RevekaWizardSavant extends CardImpl {
+public final class RevekaWizardSavant extends CardImpl {
 
     public RevekaWizardSavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

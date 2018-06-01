@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class DawnbreakReclaimer extends CardImpl {
+public final class DawnbreakReclaimer extends CardImpl {
 
     public DawnbreakReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

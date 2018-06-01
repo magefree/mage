@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class AerathiBerserker extends CardImpl {
+public final class AerathiBerserker extends CardImpl {
 
     public AerathiBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");

@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class DeepwoodWolverine extends CardImpl {
+public final class DeepwoodWolverine extends CardImpl {
 
     public DeepwoodWolverine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

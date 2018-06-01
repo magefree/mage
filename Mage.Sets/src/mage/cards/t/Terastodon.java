@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class Terastodon extends CardImpl {
+public final class Terastodon extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 

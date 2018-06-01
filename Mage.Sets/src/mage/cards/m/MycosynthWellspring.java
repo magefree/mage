@@ -42,15 +42,15 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MycosynthWellspring extends CardImpl {
+public final class MycosynthWellspring extends CardImpl {
 
     public MycosynthWellspring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // When Mycosynth Wellspring enters the battlefield or is put into a graveyard from the battlefield,
         // you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true), true));
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
+        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
     }
 
     public MycosynthWellspring(final MycosynthWellspring card) {

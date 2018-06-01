@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class CaravanHurda extends CardImpl {
+public final class CaravanHurda extends CardImpl {
 
     public CaravanHurda (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

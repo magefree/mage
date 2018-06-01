@@ -45,7 +45,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class ImplementOfCombustion extends CardImpl {
+public final class ImplementOfCombustion extends CardImpl {
 
     public ImplementOfCombustion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

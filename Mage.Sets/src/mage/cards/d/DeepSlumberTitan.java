@@ -45,7 +45,7 @@ import mage.constants.Zone;
  * @author jeffwadsworth
 
  */
-public class DeepSlumberTitan extends CardImpl {
+public final class DeepSlumberTitan extends CardImpl {
 
     public DeepSlumberTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

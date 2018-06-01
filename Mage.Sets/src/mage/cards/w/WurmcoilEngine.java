@@ -45,7 +45,7 @@ import mage.game.permanent.token.Wurm2Token;
  *
  * @author Loki
  */
-public class WurmcoilEngine extends CardImpl {
+public final class WurmcoilEngine extends CardImpl {
 
     public WurmcoilEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

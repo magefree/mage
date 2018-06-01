@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class ReliquaryMonk extends CardImpl {
+public final class ReliquaryMonk extends CardImpl {
 
     public ReliquaryMonk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

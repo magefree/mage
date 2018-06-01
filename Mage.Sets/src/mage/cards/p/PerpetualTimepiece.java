@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class PerpetualTimepiece extends CardImpl {
+public final class PerpetualTimepiece extends CardImpl {
 
     public PerpetualTimepiece(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class LeoninRelicWarder extends CardImpl {
+public final class LeoninRelicWarder extends CardImpl {
 
     public LeoninRelicWarder (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

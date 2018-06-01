@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class LayOfTheLand extends CardImpl {
+public final class LayOfTheLand extends CardImpl {
 
 
     public LayOfTheLand(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +47,7 @@ public class LayOfTheLand extends CardImpl {
 
 
         // Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true));
     }
 
     public LayOfTheLand(final LayOfTheLand card) {

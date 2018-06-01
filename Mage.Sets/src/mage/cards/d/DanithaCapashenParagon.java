@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class DanithaCapashenParagon extends CardImpl {
+public final class DanithaCapashenParagon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Aura and Equipment spells");
 

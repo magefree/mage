@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Twinflame extends CardImpl {
+public final class Twinflame extends CardImpl {
 
     public Twinflame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

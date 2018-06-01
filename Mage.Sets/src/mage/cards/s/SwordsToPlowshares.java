@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class SwordsToPlowshares extends CardImpl {
+public final class SwordsToPlowshares extends CardImpl {
 
     public SwordsToPlowshares(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RootbreakerWurm extends CardImpl {
+public final class RootbreakerWurm extends CardImpl {
 
     public RootbreakerWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

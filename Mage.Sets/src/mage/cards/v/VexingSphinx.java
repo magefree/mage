@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class VexingSphinx extends CardImpl {
+public final class VexingSphinx extends CardImpl {
 
     public VexingSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

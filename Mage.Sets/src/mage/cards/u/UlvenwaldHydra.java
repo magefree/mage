@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class UlvenwaldHydra extends CardImpl {
+public final class UlvenwaldHydra extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SigiledPaladin extends CardImpl {
+public final class SigiledPaladin extends CardImpl {
 
     public SigiledPaladin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

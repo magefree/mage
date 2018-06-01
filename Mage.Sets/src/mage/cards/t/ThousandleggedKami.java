@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class ThousandleggedKami extends CardImpl {
+public final class ThousandleggedKami extends CardImpl {
 
     public ThousandleggedKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

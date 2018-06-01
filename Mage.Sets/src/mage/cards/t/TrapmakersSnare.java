@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class TrapmakersSnare extends CardImpl {
+public final class TrapmakersSnare extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Trap card");
 

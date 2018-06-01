@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DeepwoodTantiv extends CardImpl {
+public final class DeepwoodTantiv extends CardImpl {
 
     public DeepwoodTantiv(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

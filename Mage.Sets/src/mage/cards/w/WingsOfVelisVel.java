@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WingsOfVelisVel extends CardImpl {
+public final class WingsOfVelisVel extends CardImpl {
 
     public WingsOfVelisVel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{1}{U}");

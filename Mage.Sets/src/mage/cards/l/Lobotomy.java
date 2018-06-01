@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class Lobotomy extends CardImpl {
+public final class Lobotomy extends CardImpl {
 
     public Lobotomy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");

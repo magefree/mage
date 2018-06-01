@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JRHerlehy
  */
-public class AcademyJourneymage extends CardImpl {
+public final class AcademyJourneymage extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Wizard");
 

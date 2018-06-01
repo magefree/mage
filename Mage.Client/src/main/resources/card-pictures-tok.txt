@@ -97,6 +97,7 @@
 |Generate|PLANE:PCA|Plane - Hedron Fields of Agadeem|||HedronFieldsOfAgadeemPlane|
 |Generate|PLANE:PCA|Plane - Lethe Lake|||LetheLakePlane|
 |Generate|PLANE:PCA|Plane - Naya|||NayaPlane|
+|Generate|PLANE:PCA|Plane - Panopticon|||PanopticonPlane|
 |Generate|PLANE:PCA|Plane - Tazeem|||TazeemPlane|
 |Generate|PLANE:PCA|Plane - The Dark Barony|||TheDarkBaronyPlane|
 |Generate|PLANE:PCA|Plane - The Eon Fog|||TheEonFogPlane|

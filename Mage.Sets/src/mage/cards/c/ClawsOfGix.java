@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Backfir3
  */
-public class ClawsOfGix extends CardImpl {
+public final class ClawsOfGix extends CardImpl {
 
     public ClawsOfGix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

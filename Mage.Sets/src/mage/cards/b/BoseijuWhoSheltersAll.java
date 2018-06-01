@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class BoseijuWhoSheltersAll extends CardImpl {
+public final class BoseijuWhoSheltersAll extends CardImpl {
 
     public BoseijuWhoSheltersAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

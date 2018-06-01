@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class TheMendingOfDominaria extends CardImpl {
+public final class TheMendingOfDominaria extends CardImpl {
 
     public TheMendingOfDominaria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");

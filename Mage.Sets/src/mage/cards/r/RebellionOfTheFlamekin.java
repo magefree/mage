@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class RebellionOfTheFlamekin extends CardImpl {
+public final class RebellionOfTheFlamekin extends CardImpl {
 
     public RebellionOfTheFlamekin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{3}{R}");

@@ -41,7 +41,7 @@ import mage.constants.SuperType;
  *
  * @author LevelX2
  */
-public class ThromokTheInsatiable extends CardImpl {
+public final class ThromokTheInsatiable extends CardImpl {
 
     public ThromokTheInsatiable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");

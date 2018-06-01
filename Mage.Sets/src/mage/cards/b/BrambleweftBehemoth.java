@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class BrambleweftBehemoth extends CardImpl {
+public final class BrambleweftBehemoth extends CardImpl {
 
     public BrambleweftBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class MagneticMountain extends CardImpl {
+public final class MagneticMountain extends CardImpl {
 
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures");
 

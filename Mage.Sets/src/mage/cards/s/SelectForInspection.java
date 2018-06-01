@@ -41,15 +41,19 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SelectForInspection extends CardImpl {
+public final class SelectForInspection extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+
+    static {
+        filter.add(new TappedPredicate());
+    }
 
     public SelectForInspection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Return target tapped creature to its owner's hand.  Scry 1.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
-        filter.add(new TappedPredicate());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new ScryEffect(1));
 

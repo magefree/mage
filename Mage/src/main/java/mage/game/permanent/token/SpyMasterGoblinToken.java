@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author spjspj
  */
-public class SpyMasterGoblinToken extends TokenImpl {
+public final class SpyMasterGoblinToken extends TokenImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 

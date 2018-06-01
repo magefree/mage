@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author North, noxx
  */
-public class HalimarWavewatch extends LevelerCard {
+public final class HalimarWavewatch extends LevelerCard {
 
     public HalimarWavewatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

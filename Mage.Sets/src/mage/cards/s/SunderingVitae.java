@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author jonubuu
  */
-public class SunderingVitae extends CardImpl {
+public final class SunderingVitae extends CardImpl {
 
     public SunderingVitae(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

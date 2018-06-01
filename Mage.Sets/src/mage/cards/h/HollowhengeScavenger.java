@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author nantuko
  */
-public class HollowhengeScavenger extends CardImpl {
+public final class HollowhengeScavenger extends CardImpl {
 
     private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
 

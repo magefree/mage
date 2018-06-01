@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class GiantHarbinger extends CardImpl {
+public final class GiantHarbinger extends CardImpl {
     
     static final FilterCard filter = new FilterCard("Giant card");
     static {

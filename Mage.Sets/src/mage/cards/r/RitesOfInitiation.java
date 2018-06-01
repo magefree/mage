@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class RitesOfInitiation extends CardImpl {
+public final class RitesOfInitiation extends CardImpl {
 
     public RitesOfInitiation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

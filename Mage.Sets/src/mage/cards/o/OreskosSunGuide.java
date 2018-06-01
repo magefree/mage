@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class OreskosSunGuide extends CardImpl {
+public final class OreskosSunGuide extends CardImpl {
 
     public OreskosSunGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

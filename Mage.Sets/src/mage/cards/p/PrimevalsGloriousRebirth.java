@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LegendarySpellAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -15,10 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- * @author JRHerlehy
- *         Created on 4/8/18.
+ * @author JRHerlehy Created on 4/8/18.
  */
-public class PrimevalsGloriousRebirth extends CardImpl {
+public final class PrimevalsGloriousRebirth extends CardImpl {
 
     public PrimevalsGloriousRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{B}");
@@ -61,11 +59,10 @@ class PrimevalsGloriousRebirthEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Card card : player.getGraveyard().getCards(filter, game)) {
-                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.moveCards(controller.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
+            return true;
         }
         return false;
     }

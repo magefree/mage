@@ -43,7 +43,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class SparkElemental extends CardImpl {
+public final class SparkElemental extends CardImpl {
 
     public SparkElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

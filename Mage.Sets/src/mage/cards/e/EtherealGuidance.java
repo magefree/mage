@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author fireshoes
  */
-public class EtherealGuidance extends CardImpl {
+public final class EtherealGuidance extends CardImpl {
 
     public EtherealGuidance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class NimbleBladeKhenra extends CardImpl {
+public final class NimbleBladeKhenra extends CardImpl {
 
     public NimbleBladeKhenra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

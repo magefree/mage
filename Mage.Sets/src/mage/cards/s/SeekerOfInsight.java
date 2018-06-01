@@ -48,7 +48,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author anonymous
  */
-public class SeekerOfInsight extends CardImpl {
+public final class SeekerOfInsight extends CardImpl {
 
     public SeekerOfInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Mitchel Sein
  */
-public class GethsGrimoire extends CardImpl {
+public final class GethsGrimoire extends CardImpl {
 
     public GethsGrimoire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

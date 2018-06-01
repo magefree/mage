@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WolfhuntersQuiver extends CardImpl {
+public final class WolfhuntersQuiver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creature");
 

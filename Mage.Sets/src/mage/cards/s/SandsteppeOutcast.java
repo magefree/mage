@@ -45,7 +45,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author emerald000
  */
-public class SandsteppeOutcast extends CardImpl {
+public final class SandsteppeOutcast extends CardImpl {
 
     public SandsteppeOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

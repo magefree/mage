@@ -41,7 +41,7 @@ import mage.game.permanent.token.OneDozenEyesBeastToken;
  *
  * @author LevelX2
  */
-public class OneDozenEyes extends CardImpl {
+public final class OneDozenEyes extends CardImpl {
 
     public OneDozenEyes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}");

@@ -45,7 +45,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class MarduHeartPiercer extends CardImpl {
+public final class MarduHeartPiercer extends CardImpl {
 
     public MarduHeartPiercer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ExpeditionRaptor extends CardImpl {
+public final class ExpeditionRaptor extends CardImpl {
 
     public ExpeditionRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

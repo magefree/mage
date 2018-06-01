@@ -61,7 +61,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class Juxtapose extends CardImpl {
+public final class Juxtapose extends CardImpl {
 
     public Juxtapose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

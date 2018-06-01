@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class InfernalGenesis extends CardImpl {
+public final class InfernalGenesis extends CardImpl {
 
     public InfernalGenesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");

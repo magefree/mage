@@ -46,7 +46,7 @@ import mage.game.permanent.token.GoldmeadowHarrierToken;
  *
  * @author fireshoes
  */
-public class GoldmeadowLookout extends CardImpl {
+public final class GoldmeadowLookout extends CardImpl {
 
     public GoldmeadowLookout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

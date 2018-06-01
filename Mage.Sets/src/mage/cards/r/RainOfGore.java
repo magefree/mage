@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RainOfGore extends CardImpl {
+public final class RainOfGore extends CardImpl {
 
     public RainOfGore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{R}");

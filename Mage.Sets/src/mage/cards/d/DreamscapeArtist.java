@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class DreamscapeArtist extends CardImpl {
+public final class DreamscapeArtist extends CardImpl {
 
     public DreamscapeArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
@@ -62,7 +62,7 @@ public class DreamscapeArtist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{U}, {tap}, Discard a card, Sacrifice a land: Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay),

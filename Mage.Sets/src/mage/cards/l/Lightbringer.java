@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Lightbringer extends CardImpl {
+public final class Lightbringer extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
     

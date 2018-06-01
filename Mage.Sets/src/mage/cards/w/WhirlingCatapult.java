@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author L_J
  */
-public class WhirlingCatapult extends CardImpl {
+public final class WhirlingCatapult extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
     static {

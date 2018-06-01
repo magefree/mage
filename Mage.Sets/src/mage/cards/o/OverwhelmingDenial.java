@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public final class OverwhelmingDenial extends CardImpl {
 
     public OverwhelmingDenial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HellkiteHatchling extends CardImpl {
+public final class HellkiteHatchling extends CardImpl {
 
     public HellkiteHatchling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");

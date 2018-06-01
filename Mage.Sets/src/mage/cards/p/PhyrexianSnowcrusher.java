@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class PhyrexianSnowcrusher extends CardImpl {
+public final class PhyrexianSnowcrusher extends CardImpl {
 
     public PhyrexianSnowcrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

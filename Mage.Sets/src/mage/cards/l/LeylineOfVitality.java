@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfVitality extends CardImpl {
+public final class LeylineOfVitality extends CardImpl {
 
     public LeylineOfVitality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

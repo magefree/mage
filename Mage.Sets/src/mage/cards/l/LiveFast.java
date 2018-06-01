@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class LiveFast extends CardImpl {
+public final class LiveFast extends CardImpl {
 
     public LiveFast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

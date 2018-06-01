@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author nantuko
  */
-public class SorinMarkov extends CardImpl {
+public final class SorinMarkov extends CardImpl {
 
     public SorinMarkov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}{B}");

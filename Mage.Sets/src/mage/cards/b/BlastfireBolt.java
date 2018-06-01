@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author Quercitron
  */
-public class BlastfireBolt extends CardImpl {
+public final class BlastfireBolt extends CardImpl {
 
     public BlastfireBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}");

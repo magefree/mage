@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Wehk
  */
-public class VeteranOfTheDepths extends CardImpl {
+public final class VeteranOfTheDepths extends CardImpl {
 
     public VeteranOfTheDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class GlintNestCrane extends CardImpl {
+public final class GlintNestCrane extends CardImpl {
 
     public GlintNestCrane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

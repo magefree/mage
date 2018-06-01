@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author daagar
  */
-public class Reminisce extends CardImpl {
+public final class Reminisce extends CardImpl {
 
     public Reminisce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

@@ -49,7 +49,7 @@ import mage.target.TargetSource;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AuriokReplica extends CardImpl {
+public final class AuriokReplica extends CardImpl {
 
     public AuriokReplica(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

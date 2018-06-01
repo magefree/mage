@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class BountySniper extends CardImpl {
+public final class BountySniper extends CardImpl {
 
     public BountySniper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

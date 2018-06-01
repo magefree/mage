@@ -46,7 +46,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class ExpelFromOrazca extends CardImpl {
+public final class ExpelFromOrazca extends CardImpl {
 
     public ExpelFromOrazca(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

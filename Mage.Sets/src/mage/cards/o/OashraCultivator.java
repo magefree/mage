@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class OashraCultivator extends CardImpl {
+public final class OashraCultivator extends CardImpl {
 
     public OashraCultivator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -61,7 +61,7 @@ public class OashraCultivator extends CardImpl {
 
         // {2}{G}, {T}, Sacrifice Oashra Cultivator: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

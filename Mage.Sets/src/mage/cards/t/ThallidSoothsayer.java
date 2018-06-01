@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class ThallidSoothsayer extends CardImpl {
+public final class ThallidSoothsayer extends CardImpl {
 
     public ThallidSoothsayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class QuillmaneBaku extends CardImpl {
+public final class QuillmaneBaku extends CardImpl {
 
     private final UUID originalId;
 

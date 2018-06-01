@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class StructuralDistortion extends CardImpl {
+public final class StructuralDistortion extends CardImpl {
 
     private static final FilterPermanent FILTER = new FilterPermanent("artifact or land");
 

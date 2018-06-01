@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author ImperatorPrime
  */
-public class VolrathsShapeshifter extends CardImpl {
+public final class VolrathsShapeshifter extends CardImpl {
 
     public VolrathsShapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

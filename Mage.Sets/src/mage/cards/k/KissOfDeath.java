@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class KissOfDeath extends CardImpl {
+public final class KissOfDeath extends CardImpl {
 
     public KissOfDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

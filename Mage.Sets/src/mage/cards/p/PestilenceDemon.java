@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class PestilenceDemon extends CardImpl {
+public final class PestilenceDemon extends CardImpl {
 
     public PestilenceDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");

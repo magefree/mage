@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class WieldingTheGreenDragon extends CardImpl {
+public final class WieldingTheGreenDragon extends CardImpl {
 
     public WieldingTheGreenDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

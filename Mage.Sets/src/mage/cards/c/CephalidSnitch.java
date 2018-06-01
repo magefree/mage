@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author tcontis
  */
-public class CephalidSnitch extends CardImpl {
+public final class CephalidSnitch extends CardImpl {
 
     public CephalidSnitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

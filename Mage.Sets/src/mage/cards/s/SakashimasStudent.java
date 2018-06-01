@@ -45,7 +45,7 @@ import mage.util.functions.AddSubtypeApplier;
  *
  * @author LevelX2
  */
-public class SakashimasStudent extends CardImpl {
+public final class SakashimasStudent extends CardImpl {
 
     public SakashimasStudent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

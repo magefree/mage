@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
 /**
  * @author LevelX2
  */
-public class ThatWhichWasTaken extends CardImpl {
+public final class ThatWhichWasTaken extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent other than That Which Was Taken");
 

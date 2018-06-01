@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class ScoutTheBorders extends CardImpl {
+public final class ScoutTheBorders extends CardImpl {
 
     public ScoutTheBorders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

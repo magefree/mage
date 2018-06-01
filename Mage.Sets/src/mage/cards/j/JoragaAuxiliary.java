@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class JoragaAuxiliary extends CardImpl {
+public final class JoragaAuxiliary extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other target creatures");
 

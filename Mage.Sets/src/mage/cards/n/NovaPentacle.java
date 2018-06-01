@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponentsChoicePermanent;
  *
  * @author L_J
  */
-public class NovaPentacle extends CardImpl {
+public final class NovaPentacle extends CardImpl {
 
     public NovaPentacle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -51,7 +51,7 @@ import mage.game.permanent.token.RiftmarkedKnightToken;
  *
  * @author JRHerlehy
  */
-public class RiftmarkedKnight extends CardImpl {
+public final class RiftmarkedKnight extends CardImpl {
 
     public RiftmarkedKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

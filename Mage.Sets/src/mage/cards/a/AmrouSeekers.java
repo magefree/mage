@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class AmrouSeekers extends CardImpl {
+public final class AmrouSeekers extends CardImpl {
 
     private final static FilterCreaturePermanent notArtificatOrWhite = new FilterCreaturePermanent("except by artifact creatures and/or white creatures");
 

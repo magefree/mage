@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class SarkhansTriumph extends CardImpl {
+public final class SarkhansTriumph extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("Dragon creature card");
     

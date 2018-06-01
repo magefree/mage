@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class MakindiSliderunner extends CardImpl {
+public final class MakindiSliderunner extends CardImpl {
 
     public MakindiSliderunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

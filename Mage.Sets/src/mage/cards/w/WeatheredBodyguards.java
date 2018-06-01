@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class WeatheredBodyguards extends CardImpl {
+public final class WeatheredBodyguards extends CardImpl {
 
     public WeatheredBodyguards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");

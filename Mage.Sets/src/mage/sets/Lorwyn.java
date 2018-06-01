@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Lorwyn extends ExpansionSet {
+public final class Lorwyn extends ExpansionSet {
 
     private static final Lorwyn instance = new Lorwyn();
 

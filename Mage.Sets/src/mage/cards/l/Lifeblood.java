@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class Lifeblood extends CardImpl {
+public final class Lifeblood extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Mountain an opponent controls");
 

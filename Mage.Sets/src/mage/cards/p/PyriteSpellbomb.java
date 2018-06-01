@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class PyriteSpellbomb extends CardImpl {
+public final class PyriteSpellbomb extends CardImpl {
 
     public PyriteSpellbomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

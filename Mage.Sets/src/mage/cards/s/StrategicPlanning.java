@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class StrategicPlanning extends CardImpl {
+public final class StrategicPlanning extends CardImpl {
 
     public StrategicPlanning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");

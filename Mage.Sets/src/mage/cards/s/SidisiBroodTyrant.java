@@ -50,7 +50,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author LevelX2
  */
-public class SidisiBroodTyrant extends CardImpl {
+public final class SidisiBroodTyrant extends CardImpl {
 
     public SidisiBroodTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");

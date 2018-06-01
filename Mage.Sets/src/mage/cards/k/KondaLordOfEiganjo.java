@@ -41,7 +41,7 @@ import mage.constants.SuperType;
 /**
  * @author Loki
  */
-public class KondaLordOfEiganjo extends CardImpl {
+public final class KondaLordOfEiganjo extends CardImpl {
 
     public KondaLordOfEiganjo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

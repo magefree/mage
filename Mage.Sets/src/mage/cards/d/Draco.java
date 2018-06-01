@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author Simown
  */
-public class Draco extends CardImpl {
+public final class Draco extends CardImpl {
 
     public Draco(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{16}");

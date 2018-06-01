@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class AnabaShaman extends CardImpl {
+public final class AnabaShaman extends CardImpl {
 
     public AnabaShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

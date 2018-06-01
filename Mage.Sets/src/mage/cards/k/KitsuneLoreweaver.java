@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KitsuneLoreweaver extends CardImpl {
+public final class KitsuneLoreweaver extends CardImpl {
 
     public KitsuneLoreweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

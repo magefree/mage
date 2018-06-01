@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class DrakeFamiliar extends CardImpl {
+public final class DrakeFamiliar extends CardImpl {
 
     public DrakeFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class Mindblaze extends CardImpl {
+public final class Mindblaze extends CardImpl {
 
     public Mindblaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}");

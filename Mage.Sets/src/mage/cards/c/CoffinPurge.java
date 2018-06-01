@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
  * @author cbt33, jonubuu (Withered Wretch)
  */
 
-public class CoffinPurge extends CardImpl {
+public final class CoffinPurge extends CardImpl {
 
     public CoffinPurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

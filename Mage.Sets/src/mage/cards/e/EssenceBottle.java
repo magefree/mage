@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class EssenceBottle extends CardImpl {
+public final class EssenceBottle extends CardImpl {
 
     public EssenceBottle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

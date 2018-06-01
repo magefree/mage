@@ -42,7 +42,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author djbrez
  */
-public class RoaringSlagwurm extends CardImpl {
+public final class RoaringSlagwurm extends CardImpl {
 
     public RoaringSlagwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

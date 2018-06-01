@@ -42,7 +42,7 @@ import mage.game.permanent.token.PenumbraSpiderToken;
  *
  * @author jonubuu
  */
-public class PenumbraSpider extends CardImpl {
+public final class PenumbraSpider extends CardImpl {
 
     public PenumbraSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

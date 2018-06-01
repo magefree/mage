@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class Martyrdom extends CardImpl {
+public final class Martyrdom extends CardImpl {
 
     public Martyrdom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
@@ -126,7 +126,7 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         if (playerId.equals(caster)) {
             Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
             if (permanent != null) {
@@ -135,7 +135,7 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
                 }
             }
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override

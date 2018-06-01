@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Planechase extends ExpansionSet {
+public final class Planechase extends ExpansionSet {
 
     private static final Planechase instance = new Planechase();
 

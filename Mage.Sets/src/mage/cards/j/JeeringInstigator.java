@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class JeeringInstigator extends CardImpl {
+public final class JeeringInstigator extends CardImpl {
     
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

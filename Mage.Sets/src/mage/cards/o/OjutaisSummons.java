@@ -39,7 +39,7 @@ import mage.game.permanent.token.DjinnMonkToken;
  *
  * @author fireshoes
  */
-public class OjutaisSummons extends CardImpl {
+public final class OjutaisSummons extends CardImpl {
 
     public OjutaisSummons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

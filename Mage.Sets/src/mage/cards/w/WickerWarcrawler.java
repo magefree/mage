@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class WickerWarcrawler extends CardImpl {
+public final class WickerWarcrawler extends CardImpl {
 
     public WickerWarcrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class Abundance extends CardImpl {
+public final class Abundance extends CardImpl {
 
     public Abundance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

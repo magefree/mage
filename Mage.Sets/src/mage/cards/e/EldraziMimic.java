@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class EldraziMimic extends CardImpl {
+public final class EldraziMimic extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("another colorless creature");
 

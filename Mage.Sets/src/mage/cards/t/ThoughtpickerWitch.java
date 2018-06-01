@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class ThoughtpickerWitch extends CardImpl {
+public final class ThoughtpickerWitch extends CardImpl {
 
     public ThoughtpickerWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

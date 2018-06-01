@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class GhorClanBloodscale extends CardImpl {
+public final class GhorClanBloodscale extends CardImpl {
 
     public GhorClanBloodscale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

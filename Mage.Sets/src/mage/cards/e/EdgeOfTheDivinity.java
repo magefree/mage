@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class EdgeOfTheDivinity extends CardImpl {
+public final class EdgeOfTheDivinity extends CardImpl {
 
     public EdgeOfTheDivinity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W/B}");

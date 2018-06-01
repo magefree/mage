@@ -53,7 +53,7 @@ import mage.game.permanent.token.VolrathsLaboratoryToken;
  *
  * @author emerald000
  */
-public class VolrathsLaboratory extends CardImpl {
+public final class VolrathsLaboratory extends CardImpl {
 
     public VolrathsLaboratory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

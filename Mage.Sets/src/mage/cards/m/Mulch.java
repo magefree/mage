@@ -39,7 +39,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author North
  */
-public class Mulch extends CardImpl {
+public final class Mulch extends CardImpl {
 
     public Mulch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

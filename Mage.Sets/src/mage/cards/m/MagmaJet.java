@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jonubuu
  */
-public class MagmaJet extends CardImpl {
+public final class MagmaJet extends CardImpl {
 
     public MagmaJet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

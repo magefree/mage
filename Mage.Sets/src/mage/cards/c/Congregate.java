@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class Congregate extends CardImpl {
+public final class Congregate extends CardImpl {
 
     public Congregate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

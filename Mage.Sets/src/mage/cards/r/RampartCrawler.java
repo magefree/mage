@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Backfir3
  */
-public class RampartCrawler extends CardImpl {
+public final class RampartCrawler extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
 

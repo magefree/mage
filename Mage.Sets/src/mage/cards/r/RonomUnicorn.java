@@ -45,7 +45,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Jgod
  */
-public class RonomUnicorn extends CardImpl {
+public final class RonomUnicorn extends CardImpl {
 
     public RonomUnicorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

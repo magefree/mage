@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author ESOF_1617_T5_G3
  */
-public class DarkSuspicions extends CardImpl {
+public final class DarkSuspicions extends CardImpl {
 
     public DarkSuspicions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

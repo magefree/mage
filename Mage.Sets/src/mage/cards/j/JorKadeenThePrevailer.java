@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class JorKadeenThePrevailer extends CardImpl {
+public final class JorKadeenThePrevailer extends CardImpl {
 
     private static final String effectText = "Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.";
 

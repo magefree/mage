@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class PlanarOverlay extends CardImpl {
+public final class PlanarOverlay extends CardImpl {
 
     public PlanarOverlay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

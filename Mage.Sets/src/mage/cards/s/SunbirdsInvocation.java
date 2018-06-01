@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -56,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class SunbirdsInvocation extends CardImpl {
+public final class SunbirdsInvocation extends CardImpl {
 
     public SunbirdsInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
@@ -156,7 +157,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
-                        controller.cast(card.getSpellAbility(), game, true);
+                        controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         cards.remove(card);
                     }
                 }

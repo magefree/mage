@@ -46,7 +46,7 @@ import mage.game.stack.Spell;
  *
  * @author fireshoes
  */
-public class DesolationTwin extends CardImpl {
+public final class DesolationTwin extends CardImpl {
 
     public DesolationTwin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}");

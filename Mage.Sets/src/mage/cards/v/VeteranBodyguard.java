@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author MTGfan
  */
-public class VeteranBodyguard extends CardImpl {
+public final class VeteranBodyguard extends CardImpl {
 
     public VeteranBodyguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

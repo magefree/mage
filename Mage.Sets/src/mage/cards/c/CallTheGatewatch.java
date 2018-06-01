@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class CallTheGatewatch extends CardImpl {
+public final class CallTheGatewatch extends CardImpl {
     
     private static final FilterPlaneswalkerCard filter = new FilterPlaneswalkerCard("planeswalker card");
 

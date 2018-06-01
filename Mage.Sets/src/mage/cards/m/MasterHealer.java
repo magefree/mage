@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class MasterHealer extends CardImpl {
+public final class MasterHealer extends CardImpl {
 
     public MasterHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

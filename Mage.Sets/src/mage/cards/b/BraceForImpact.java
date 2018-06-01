@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class BraceForImpact extends CardImpl {
+public final class BraceForImpact extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("multicolored creature");
 

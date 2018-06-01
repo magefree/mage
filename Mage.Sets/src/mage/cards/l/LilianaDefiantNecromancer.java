@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class LilianaDefiantNecromancer extends CardImpl {
+public final class LilianaDefiantNecromancer extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("nonlegendary creature with converted mana cost X from your graveyard");
 

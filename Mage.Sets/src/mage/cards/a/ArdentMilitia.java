@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ArdentMilitia extends CardImpl {
+public final class ArdentMilitia extends CardImpl {
 
     public ArdentMilitia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

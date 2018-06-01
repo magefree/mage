@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class RelentlessSkaabs extends CardImpl {
+public final class RelentlessSkaabs extends CardImpl {
 
     public RelentlessSkaabs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

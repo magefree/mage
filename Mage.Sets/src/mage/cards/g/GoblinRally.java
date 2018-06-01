@@ -39,7 +39,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author LevelX2
  */
-public class GoblinRally extends CardImpl {
+public final class GoblinRally extends CardImpl {
 
     public GoblinRally(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

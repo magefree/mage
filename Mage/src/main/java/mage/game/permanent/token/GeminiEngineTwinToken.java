@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class GeminiEngineTwinToken extends TokenImpl {
+public final class GeminiEngineTwinToken extends TokenImpl {
 
     public GeminiEngineTwinToken() { this(0, 0); }
 

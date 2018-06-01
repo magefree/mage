@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author andyfries
  */
-public class Annex extends CardImpl {
+public final class Annex extends CardImpl {
 
     public Annex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

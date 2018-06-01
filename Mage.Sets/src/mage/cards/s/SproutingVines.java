@@ -41,14 +41,14 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class SproutingVines extends CardImpl {
+public final class SproutingVines extends CardImpl {
 
     public SproutingVines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
 
         // Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true));
         // Storm
         this.addAbility(new StormAbility());
     }

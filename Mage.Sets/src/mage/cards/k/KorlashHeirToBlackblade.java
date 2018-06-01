@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class KorlashHeirToBlackblade extends CardImpl {
+public final class KorlashHeirToBlackblade extends CardImpl {
     
     private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("Swamps you control");
     private static final FilterCard filterCard = new FilterLandCard("Swamp cards");

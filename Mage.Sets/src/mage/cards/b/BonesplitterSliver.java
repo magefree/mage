@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author Sir-Speshkitty
  */
-public class BonesplitterSliver extends CardImpl {
+public final class BonesplitterSliver extends CardImpl {
 
     public BonesplitterSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

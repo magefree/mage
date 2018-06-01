@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class TheMirariConjecture extends CardImpl {
+public final class TheMirariConjecture extends CardImpl {
 
     private static final FilterCard filterInstantCard = new FilterCard("instant card from your graveyard");
     private static final FilterCard filterSorceryCard = new FilterCard("sorcery card from your graveyard");
@@ -102,7 +102,7 @@ public class TheMirariConjecture extends CardImpl {
 class TheMirariConjectureDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public TheMirariConjectureDelayedTriggeredAbility() {
-        super(new CopyTargetSpellEffect(), Duration.EndOfTurn, false);
+        super(new CopyTargetSpellEffect(true), Duration.EndOfTurn, false);
     }
 
     public TheMirariConjectureDelayedTriggeredAbility(final TheMirariConjectureDelayedTriggeredAbility ability) {

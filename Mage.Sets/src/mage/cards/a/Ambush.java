@@ -40,7 +40,7 @@ import mage.filter.common.FilterBlockingCreature;
  *
  * @author fireshoes
  */
-public class Ambush extends CardImpl {
+public final class Ambush extends CardImpl {
     
     private static final FilterBlockingCreature filter = new FilterBlockingCreature("Blocking creatures");
 

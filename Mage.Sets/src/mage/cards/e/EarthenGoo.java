@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class EarthenGoo extends CardImpl {
+public final class EarthenGoo extends CardImpl {
 
     public EarthenGoo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

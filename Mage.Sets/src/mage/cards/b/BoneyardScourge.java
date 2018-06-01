@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class BoneyardScourge extends CardImpl {
+public final class BoneyardScourge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Dragon you control");
 

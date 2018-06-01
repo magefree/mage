@@ -56,7 +56,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author cbt33, Plopman (Archdemon of Unx)
  */
-public class WaywardAngel extends CardImpl {
+public final class WaywardAngel extends CardImpl {
 
     public WaywardAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

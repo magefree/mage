@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class CarnivalHellsteed extends CardImpl {
+public final class CarnivalHellsteed extends CardImpl {
  
     public CarnivalHellsteed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");

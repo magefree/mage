@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Markedagain
  */
-public class FencersMagemark extends CardImpl {
+public final class FencersMagemark extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control that are enchanted");
     static {

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WretchedBanquet extends CardImpl {
+public final class WretchedBanquet extends CardImpl {
 
     public WretchedBanquet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
@@ -83,6 +83,9 @@ class WretchedBanquetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
+        if (targetCreature == null) {
+            return false;
+        }
         List<Permanent> creatures = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game);
 
         int minPower = targetCreature.getPower().getValue() + 1;
@@ -92,7 +95,7 @@ class WretchedBanquetEffect extends OneShotEffect {
             }
         }
 
-        if (targetCreature != null && targetCreature.getPower().getValue() <= minPower) {
+        if (targetCreature.getPower().getValue() <= minPower) {
             targetCreature.destroy(source.getSourceId(), game, false);
             return true;
         }

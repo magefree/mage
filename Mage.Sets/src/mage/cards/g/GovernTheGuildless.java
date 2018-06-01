@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Wehk
  */
-public class GovernTheGuildless extends CardImpl {
+public final class GovernTheGuildless extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
 

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author emerald000
  */
-public class GodPharaohsFaithful extends CardImpl {
+public final class GodPharaohsFaithful extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a blue, black or red spell");
     static {

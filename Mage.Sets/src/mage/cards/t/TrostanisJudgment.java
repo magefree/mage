@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevleX2
  */
-public class TrostanisJudgment extends CardImpl {
+public final class TrostanisJudgment extends CardImpl {
 
     public TrostanisJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{W}");

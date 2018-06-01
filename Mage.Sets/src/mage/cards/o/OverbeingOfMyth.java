@@ -48,7 +48,7 @@ import mage.constants.Zone;
  * @author jeffwadsworth
  *
  */
-public class OverbeingOfMyth extends CardImpl {
+public final class OverbeingOfMyth extends CardImpl {
 
     public OverbeingOfMyth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}{G/U}{G/U}{G/U}");

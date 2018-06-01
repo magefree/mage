@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Backfir3
  */
-public class AetherSting extends CardImpl {
+public final class AetherSting extends CardImpl {
 
     public AetherSting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

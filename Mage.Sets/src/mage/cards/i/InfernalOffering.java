@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class InfernalOffering extends CardImpl {
+public final class InfernalOffering extends CardImpl {
 
     public InfernalOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

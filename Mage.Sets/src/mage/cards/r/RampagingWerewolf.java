@@ -44,7 +44,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class RampagingWerewolf extends CardImpl {
+public final class RampagingWerewolf extends CardImpl {
 
     public RampagingWerewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

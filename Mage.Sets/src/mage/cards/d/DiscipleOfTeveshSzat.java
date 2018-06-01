@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class DiscipleOfTeveshSzat extends CardImpl {
+public final class DiscipleOfTeveshSzat extends CardImpl {
 
     public DiscipleOfTeveshSzat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

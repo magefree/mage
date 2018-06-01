@@ -39,7 +39,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author TheElk801
  */
-public class SpreadingRot extends CardImpl {
+public final class SpreadingRot extends CardImpl {
 
     public SpreadingRot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");

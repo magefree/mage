@@ -48,7 +48,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author emerald000
  */
-public class MagnigothTreefolk extends CardImpl {
+public final class MagnigothTreefolk extends CardImpl {
     
     private static final FilterLandPermanent filterPlains = new FilterLandPermanent(SubType.PLAINS, "Plains");
     private static final FilterLandPermanent filterIsland = new FilterLandPermanent(SubType.ISLAND, "Island");

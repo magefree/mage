@@ -52,7 +52,7 @@ import mage.target.targetpointer.FirstTargetPointer;
  *
  * @author LevelX2
  */
-public class SentinelOfTheEternalWatch extends CardImpl {
+public final class SentinelOfTheEternalWatch extends CardImpl {
 
     private final UUID originalId;
 

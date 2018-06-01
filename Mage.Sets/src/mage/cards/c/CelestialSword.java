@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author choiseul11
  */
-public class CelestialSword extends CardImpl {
+public final class CelestialSword extends CardImpl {
 
     public CelestialSword(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class DwarvenLieutenant extends CardImpl {
+public final class DwarvenLieutenant extends CardImpl {
 
     static FilterCreaturePermanent filter = new FilterCreaturePermanent("Dwarf creature");
 

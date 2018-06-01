@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author cbt33, LevelX2 (Walk the Aeons), KholdFuzion (Dandan)
  */
-public class Dreamwinder extends CardImpl {
+public final class Dreamwinder extends CardImpl {
                
     public Dreamwinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

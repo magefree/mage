@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VinesOfTheRecluse extends CardImpl {
+public final class VinesOfTheRecluse extends CardImpl {
 
     public VinesOfTheRecluse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

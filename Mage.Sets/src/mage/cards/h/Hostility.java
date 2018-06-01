@@ -52,10 +52,10 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class Hostility extends CardImpl {
+public final class Hostility extends CardImpl {
 
     public Hostility(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.INCARNATION);
         this.power = new MageInt(6);
@@ -124,17 +124,8 @@ class HostilityEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
         if (preventionEffectData.getPreventedDamage() > 0) {
-            new CreateTokenEffect(new HostilityElementalToken(), preventionEffectData.getPreventedDamage()).apply(game, source);
+            new CreateTokenEffect(new ElementalShamanToken(true), preventionEffectData.getPreventedDamage()).apply(game, source);
         }
         return true;
-    }
-}
-
-class HostilityElementalToken extends ElementalShamanToken {
-
-    public HostilityElementalToken() {
-        super("DD2");
-        description = description + " with haste";
-        addAbility(HasteAbility.getInstance());
     }
 }

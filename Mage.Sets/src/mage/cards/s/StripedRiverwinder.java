@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class StripedRiverwinder extends CardImpl {
+public final class StripedRiverwinder extends CardImpl {
 
     public StripedRiverwinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}");

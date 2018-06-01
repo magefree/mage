@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LoneFox
  */
-public class RhysticTutor extends CardImpl {
+public final class RhysticTutor extends CardImpl {
 
     public RhysticTutor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

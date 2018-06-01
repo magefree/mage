@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class LeoninSquire extends CardImpl {
+public final class LeoninSquire extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("target artifact card with converted mana cost 1 or less from your graveyard");
     static {

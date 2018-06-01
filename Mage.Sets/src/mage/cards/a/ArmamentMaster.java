@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ArmamentMaster extends CardImpl {
+public final class ArmamentMaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
 

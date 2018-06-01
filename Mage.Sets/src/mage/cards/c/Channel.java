@@ -51,7 +51,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author emerald000
  */
-public class Channel extends CardImpl {
+public final class Channel extends CardImpl {
 
     public Channel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{G}");

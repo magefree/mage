@@ -47,7 +47,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class WolfbittenCaptive extends CardImpl {
+public final class WolfbittenCaptive extends CardImpl {
 
     public WolfbittenCaptive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

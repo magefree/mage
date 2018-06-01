@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class RefreshingRain extends CardImpl {
+public final class RefreshingRain extends CardImpl {
 
     private static final FilterPermanent filterForest = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();

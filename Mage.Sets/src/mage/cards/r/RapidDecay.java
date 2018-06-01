@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author fireshoes
  */
-public class RapidDecay extends CardImpl {
+public final class RapidDecay extends CardImpl {
 
     public RapidDecay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

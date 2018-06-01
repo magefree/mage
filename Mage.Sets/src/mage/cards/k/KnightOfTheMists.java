@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class KnightOfTheMists extends CardImpl {
+public final class KnightOfTheMists extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight");
 

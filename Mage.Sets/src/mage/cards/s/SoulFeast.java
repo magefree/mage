@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class SoulFeast extends CardImpl {
+public final class SoulFeast extends CardImpl {
 
     public SoulFeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

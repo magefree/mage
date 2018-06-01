@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class Omen extends CardImpl {
+public final class Omen extends CardImpl {
 
     public Omen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

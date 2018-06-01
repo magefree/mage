@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class GriffinProtector extends CardImpl {
+public final class GriffinProtector extends CardImpl {
 
     public GriffinProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

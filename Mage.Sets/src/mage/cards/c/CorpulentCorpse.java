@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class CorpulentCorpse extends CardImpl {
+public final class CorpulentCorpse extends CardImpl {
 
     public CorpulentCorpse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

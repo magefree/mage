@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Styxo
  */
-public class QuiGonJinn extends CardImpl {
+public final class QuiGonJinn extends CardImpl {
 
     public QuiGonJinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}{W}");

@@ -44,7 +44,7 @@ import mage.watchers.common.ZuberasDiedWatcher;
 /**
  * @author Loki
  */
-public class AshenSkinZubera extends CardImpl {
+public final class AshenSkinZubera extends CardImpl {
 
     public AshenSkinZubera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

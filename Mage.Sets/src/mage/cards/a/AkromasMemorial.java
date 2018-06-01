@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 /**
  * @author Loki, noxx
  */
-public class AkromasMemorial extends CardImpl {
+public final class AkromasMemorial extends CardImpl {
 
     public AkromasMemorial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");

@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class CompellingArgument extends CardImpl {
+public final class CompellingArgument extends CardImpl {
 
     public CompellingArgument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");

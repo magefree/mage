@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class EyeSpy extends CardImpl {
+public final class EyeSpy extends CardImpl {
 
     public EyeSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

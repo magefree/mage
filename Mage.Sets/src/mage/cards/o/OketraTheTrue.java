@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class OketraTheTrue extends CardImpl {
+public final class OketraTheTrue extends CardImpl {
 
     public OketraTheTrue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

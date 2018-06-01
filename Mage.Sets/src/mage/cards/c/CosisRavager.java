@@ -42,7 +42,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class CosisRavager extends CardImpl {
+public final class CosisRavager extends CardImpl {
 
     public CosisRavager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author anonymous
  */
-public class Douse extends CardImpl {
+public final class Douse extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("red spell");
 

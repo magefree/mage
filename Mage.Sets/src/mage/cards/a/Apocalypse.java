@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author markedagain
  */
-public class Apocalypse extends CardImpl {
+public final class Apocalypse extends CardImpl {
 
     public Apocalypse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}{R}");

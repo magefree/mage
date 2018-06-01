@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author Backfir3
  */
-public class UrzasSaga extends ExpansionSet {
+public final class UrzasSaga extends ExpansionSet {
 
     private static final UrzasSaga instance = new UrzasSaga();
 
@@ -134,6 +134,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Dromosaur", 182, Rarity.COMMON, mage.cards.d.Dromosaur.class));
         cards.add(new SetCardInfo("Duress", 132, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Eastern Paladin", 133, Rarity.RARE, mage.cards.e.EasternPaladin.class));
+        cards.add(new SetCardInfo("Electryte", 183, Rarity.RARE, mage.cards.e.Electryte.class));
         cards.add(new SetCardInfo("Elite Archers", 13, Rarity.RARE, mage.cards.e.EliteArchers.class));
         cards.add(new SetCardInfo("Elvish Herder", 247, Rarity.COMMON, mage.cards.e.ElvishHerder.class));
         cards.add(new SetCardInfo("Elvish Lyrist", 248, Rarity.COMMON, mage.cards.e.ElvishLyrist.class));
@@ -262,6 +263,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Presence of the Master", 32, Rarity.UNCOMMON, mage.cards.p.PresenceOfTheMaster.class));
         cards.add(new SetCardInfo("Priest of Gix", 150, Rarity.UNCOMMON, mage.cards.p.PriestOfGix.class));
         cards.add(new SetCardInfo("Priest of Titania", 270, Rarity.COMMON, mage.cards.p.PriestOfTitania.class));
+        cards.add(new SetCardInfo("Purging Scythe", 308, Rarity.RARE, mage.cards.p.PurgingScythe.class));
         cards.add(new SetCardInfo("Rain of Filth", 151, Rarity.UNCOMMON, mage.cards.r.RainOfFilth.class));
         cards.add(new SetCardInfo("Rain of Salt", 206, Rarity.UNCOMMON, mage.cards.r.RainOfSalt.class));
         cards.add(new SetCardInfo("Ravenous Skirge", 152, Rarity.COMMON, mage.cards.r.RavenousSkirge.class));

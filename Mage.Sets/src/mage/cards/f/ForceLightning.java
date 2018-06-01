@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Styxo
  */
-public class ForceLightning extends CardImpl {
+public final class ForceLightning extends CardImpl {
 
     public ForceLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");

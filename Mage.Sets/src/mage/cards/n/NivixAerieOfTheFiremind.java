@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class NivixAerieOfTheFiremind extends CardImpl {
+public final class NivixAerieOfTheFiremind extends CardImpl {
 
     public NivixAerieOfTheFiremind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

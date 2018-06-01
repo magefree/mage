@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LunarchMantle extends CardImpl {
+public final class LunarchMantle extends CardImpl {
 
     static final String rule = "and has \"{1}, Sacrifice a permanent: This creature gains flying until end of turn.\"";
 

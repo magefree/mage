@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class FlamecoreElemental extends CardImpl {
+public final class FlamecoreElemental extends CardImpl {
 
     public FlamecoreElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

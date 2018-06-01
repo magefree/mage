@@ -46,7 +46,7 @@ import mage.game.permanent.token.KnightToken;
  *
  * @author fireshoes
  */
-public class GideonsPhalanx extends CardImpl {
+public final class GideonsPhalanx extends CardImpl {
 
     public GideonsPhalanx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{W}{W}");

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Wehk
  */
-public class PureSimple extends SplitCard {
+public final class PureSimple extends SplitCard {
 
     private static final FilterPermanent filterDestroy = new FilterPermanent("Auras and Equipment");
     private static final FilterPermanent filterMulticolor = new FilterPermanent("multicolored permanent");

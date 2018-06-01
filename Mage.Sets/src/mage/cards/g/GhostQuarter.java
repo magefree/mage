@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class GhostQuarter extends CardImpl {
+public final class GhostQuarter extends CardImpl {
 
     public GhostQuarter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
@@ -100,7 +100,7 @@ class GhostQuarterEffect extends OneShotEffect {
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", source, game)) {
-                TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+                TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
                 if (controller.searchLibrary(target, game)) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {

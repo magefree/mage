@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class FalkenrathTorturer extends CardImpl {
+public final class FalkenrathTorturer extends CardImpl {
 
     public FalkenrathTorturer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

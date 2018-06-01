@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class GlamerSpinners extends CardImpl {
+public final class GlamerSpinners extends CardImpl {
 
     public GlamerSpinners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W/U}");

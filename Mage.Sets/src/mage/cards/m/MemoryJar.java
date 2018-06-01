@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class MemoryJar extends CardImpl {
+public final class MemoryJar extends CardImpl {
 
     public MemoryJar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

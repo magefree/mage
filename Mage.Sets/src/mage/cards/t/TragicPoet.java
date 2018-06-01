@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class TragicPoet extends CardImpl {
+public final class TragicPoet extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
 

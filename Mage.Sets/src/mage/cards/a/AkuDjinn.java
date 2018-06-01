@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class AkuDjinn extends CardImpl {
+public final class AkuDjinn extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature each opponent controls");
 

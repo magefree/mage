@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MannichiTheFeveredDream extends CardImpl {
+public final class MannichiTheFeveredDream extends CardImpl {
 
     public MannichiTheFeveredDream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

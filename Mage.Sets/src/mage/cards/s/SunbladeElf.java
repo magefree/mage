@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class SunbladeElf extends CardImpl {
+public final class SunbladeElf extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Plains");
 

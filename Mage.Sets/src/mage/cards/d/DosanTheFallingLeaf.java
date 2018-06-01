@@ -42,7 +42,7 @@ import mage.game.events.GameEvent;
  *
  * @author Loki
  */
-public class DosanTheFallingLeaf extends CardImpl {
+public final class DosanTheFallingLeaf extends CardImpl {
 
     public DosanTheFallingLeaf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

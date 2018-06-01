@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author spjspj
  */
-public class VileManifestation extends CardImpl {
+public final class VileManifestation extends CardImpl {
     
     private static final FilterCard filter = new FilterCard();
     

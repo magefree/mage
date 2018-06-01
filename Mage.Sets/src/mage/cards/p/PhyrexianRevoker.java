@@ -50,7 +50,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PhyrexianRevoker extends CardImpl {
+public final class PhyrexianRevoker extends CardImpl {
 
     public PhyrexianRevoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

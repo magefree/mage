@@ -43,7 +43,7 @@ import mage.constants.Zone;
 /**
  * @author JRHerlehy Created on 4/4/18.
  */
-public class BairdStewardOfArgive extends CardImpl {
+public final class BairdStewardOfArgive extends CardImpl {
 
     public BairdStewardOfArgive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

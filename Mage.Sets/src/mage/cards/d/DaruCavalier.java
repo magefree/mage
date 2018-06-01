@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author fireshoes
  */
 
-public class DaruCavalier extends CardImpl {
+public final class DaruCavalier extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("card named Daru Cavalier");
 

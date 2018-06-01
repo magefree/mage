@@ -35,7 +35,7 @@ import mage.abilities.keyword.SpaceflightAbility;
  *
  * @author spjspj
  */
-public class RebelStarshipToken extends TokenImpl {
+public final class RebelStarshipToken extends TokenImpl {
 
     public RebelStarshipToken() {
         super("B-Wing", "2/3 blue Rebel Starship artifact creature tokens with spaceflight name B-Wing", 2, 3);

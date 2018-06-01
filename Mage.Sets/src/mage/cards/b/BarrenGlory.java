@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 /**
  * @author fireshoes
  */
-public class BarrenGlory extends CardImpl {
+public final class BarrenGlory extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

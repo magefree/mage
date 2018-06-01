@@ -44,7 +44,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class AngrathsFury extends CardImpl {
+public final class AngrathsFury extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Angrath, Minotaur Pirate");
 

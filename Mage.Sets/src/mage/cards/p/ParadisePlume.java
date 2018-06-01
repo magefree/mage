@@ -51,7 +51,7 @@ import mage.game.stack.Spell;
  *
  * @author jeffwadsworth
  */
-public class ParadisePlume extends CardImpl {
+public final class ParadisePlume extends CardImpl {
 
     public ParadisePlume(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

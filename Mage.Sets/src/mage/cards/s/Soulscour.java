@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Loki
  */
-public class Soulscour extends CardImpl {
+public final class Soulscour extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonartifact permanents");
 

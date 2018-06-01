@@ -46,7 +46,7 @@ import mage.players.Player;
  * @author noxx
 
  */
-public class VexingDevil extends CardImpl {
+public final class VexingDevil extends CardImpl {
 
     public VexingDevil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

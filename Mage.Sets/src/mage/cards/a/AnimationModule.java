@@ -58,7 +58,7 @@ import mage.target.common.TargetPermanentOrPlayer;
  *
  * @author emerald000
  */
-public class AnimationModule extends CardImpl {
+public final class AnimationModule extends CardImpl {
 
     public AnimationModule(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -47,7 +47,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author TheElk801
  */
-public class RaidersWake extends CardImpl {
+public final class RaidersWake extends CardImpl {
 
     public RaidersWake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

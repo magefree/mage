@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author dustinconrad
  */
-public class BlackVise extends CardImpl {
+public final class BlackVise extends CardImpl {
 
     public BlackVise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

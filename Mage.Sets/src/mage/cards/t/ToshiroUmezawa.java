@@ -29,6 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -55,7 +56,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class ToshiroUmezawa extends CardImpl {
+public final class ToshiroUmezawa extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
     private static final FilterCard filterInstant = new FilterCard("instant card from your graveyard");
@@ -115,7 +116,7 @@ class ToshiroUmezawaEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                controller.cast(card.getSpellAbility(), game, false);
+                controller.cast(card.getSpellAbility(), game, false, new MageObjectReference(source.getSourceObject(game), game));
                 game.addEffect(new ToshiroUmezawaReplacementEffect(card.getId()), source);
             }
         }

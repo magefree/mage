@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class VillageCannibals extends CardImpl {
+public final class VillageCannibals extends CardImpl {
 
     public VillageCannibals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

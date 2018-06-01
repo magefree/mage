@@ -42,7 +42,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class ViridianAcolyte extends CardImpl {
+public final class ViridianAcolyte extends CardImpl {
 
     public ViridianAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

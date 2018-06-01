@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author duncant
  */
-public class ScionOfTheUrDragon extends CardImpl {
+public final class ScionOfTheUrDragon extends CardImpl {
 
     public ScionOfTheUrDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");

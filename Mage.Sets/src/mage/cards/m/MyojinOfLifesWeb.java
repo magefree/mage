@@ -56,7 +56,7 @@ import mage.watchers.common.CastFromHandWatcher;
 /**
  * @author LevelX
  */
-public class MyojinOfLifesWeb extends CardImpl {
+public final class MyojinOfLifesWeb extends CardImpl {
 
     public MyojinOfLifesWeb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}{G}");

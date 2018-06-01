@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX
  */
-public class DuneriderOutlaw extends CardImpl {
+public final class DuneriderOutlaw extends CardImpl {
 
     private static final String ruleText = "At the beginning of each end step, if {this} dealt damage to an opponent this turn, put a +1/+1 counter on it.";
 

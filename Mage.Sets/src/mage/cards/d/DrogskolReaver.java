@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Loki
  */
-public class DrogskolReaver extends CardImpl {
+public final class DrogskolReaver extends CardImpl {
 
     public DrogskolReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{U}");

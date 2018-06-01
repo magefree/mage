@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class StonybrookBanneret extends CardImpl {
+public final class StonybrookBanneret extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Merfolk spells and Wizard spells");
 

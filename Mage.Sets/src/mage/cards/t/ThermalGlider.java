@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class ThermalGlider extends CardImpl {
+public final class ThermalGlider extends CardImpl {
 
     public ThermalGlider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

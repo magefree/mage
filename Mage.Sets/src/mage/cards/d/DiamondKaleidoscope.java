@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class DiamondKaleidoscope extends CardImpl {
+public final class DiamondKaleidoscope extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Prism token");
 

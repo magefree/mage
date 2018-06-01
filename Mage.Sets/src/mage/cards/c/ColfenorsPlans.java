@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author Styxo
  */
-public class ColfenorsPlans extends CardImpl {
+public final class ColfenorsPlans extends CardImpl {
 
     public ColfenorsPlans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

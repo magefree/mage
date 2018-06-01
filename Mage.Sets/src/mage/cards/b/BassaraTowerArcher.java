@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BassaraTowerArcher extends CardImpl {
+public final class BassaraTowerArcher extends CardImpl {
 
     public BassaraTowerArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

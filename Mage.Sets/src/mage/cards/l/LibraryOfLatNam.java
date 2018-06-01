@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Quercitron
  */
-public class LibraryOfLatNam extends CardImpl {
+public final class LibraryOfLatNam extends CardImpl {
 
     public LibraryOfLatNam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");

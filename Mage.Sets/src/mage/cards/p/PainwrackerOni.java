@@ -48,7 +48,7 @@ import mage.game.Game;
  *
  * @author LevelX
  */
-public class PainwrackerOni extends CardImpl {
+public final class PainwrackerOni extends CardImpl {
 
     public PainwrackerOni (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

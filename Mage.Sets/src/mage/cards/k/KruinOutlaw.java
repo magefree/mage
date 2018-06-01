@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author North
  */
-public class KruinOutlaw extends CardImpl {
+public final class KruinOutlaw extends CardImpl {
 
     public KruinOutlaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

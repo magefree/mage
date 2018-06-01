@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author jonubuu
  */
-public class Electrolyze extends CardImpl {
+public final class Electrolyze extends CardImpl {
 
     public Electrolyze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{R}");

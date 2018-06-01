@@ -38,7 +38,7 @@ import mage.filter.StaticFilters;
  *
  * @author Quercitron
  */
-public class Vitalize extends CardImpl {
+public final class Vitalize extends CardImpl {
 
     public Vitalize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

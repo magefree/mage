@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class CinderBarrens extends CardImpl {
+public final class CinderBarrens extends CardImpl {
 
     public CinderBarrens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

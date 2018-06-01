@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class WaterfrontBouncer extends CardImpl {
+public final class WaterfrontBouncer extends CardImpl {
 
     public WaterfrontBouncer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -60,7 +60,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class RenownedWeaponsmith extends CardImpl {
+public final class RenownedWeaponsmith extends CardImpl {
 
     public RenownedWeaponsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

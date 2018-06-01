@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author Mitchel Stein
  */
-public class CausticWasps extends CardImpl {
+public final class CausticWasps extends CardImpl {
 
     public CausticWasps(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

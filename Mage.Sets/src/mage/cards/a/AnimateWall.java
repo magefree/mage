@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class AnimateWall extends CardImpl {
+public final class AnimateWall extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall");
     

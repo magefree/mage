@@ -48,7 +48,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author fireshoes
  */
-public class Plaxmanta extends CardImpl {
+public final class Plaxmanta extends CardImpl {
 
     public Plaxmanta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class WitchEngine extends CardImpl {
+public final class WitchEngine extends CardImpl {
 
     public WitchEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

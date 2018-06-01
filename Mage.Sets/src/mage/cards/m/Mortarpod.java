@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class Mortarpod extends CardImpl {
+public final class Mortarpod extends CardImpl {
 
     public Mortarpod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author Loki
  */
-public class ShimmerMyr extends CardImpl {
+public final class ShimmerMyr extends CardImpl {
 
     public ShimmerMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

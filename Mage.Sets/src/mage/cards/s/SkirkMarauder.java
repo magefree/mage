@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Temba21
  */
-public class SkirkMarauder extends CardImpl {
+public final class SkirkMarauder extends CardImpl {
 
     public SkirkMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

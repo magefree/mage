@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author emerald000
  */
-public class MindscourDragon extends CardImpl {
+public final class MindscourDragon extends CardImpl {
 
     public MindscourDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

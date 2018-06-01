@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author LevelX2
  */
-public class DreamStalker extends CardImpl {
+public final class DreamStalker extends CardImpl {
 
     public DreamStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

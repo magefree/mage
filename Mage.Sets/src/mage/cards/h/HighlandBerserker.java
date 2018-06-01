@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class HighlandBerserker extends CardImpl {
+public final class HighlandBerserker extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
 

@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Armistice extends CardImpl {
+public final class Armistice extends CardImpl {
 
     public Armistice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

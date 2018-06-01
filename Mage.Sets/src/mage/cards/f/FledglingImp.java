@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class FledglingImp extends CardImpl {
+public final class FledglingImp extends CardImpl {
 
     public FledglingImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

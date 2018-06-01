@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ViridianClaw extends CardImpl {
+public final class ViridianClaw extends CardImpl {
 
     public ViridianClaw (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

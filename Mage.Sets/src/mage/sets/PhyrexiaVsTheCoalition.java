@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class PhyrexiaVsTheCoalition extends ExpansionSet {
+public final class PhyrexiaVsTheCoalition extends ExpansionSet {
 
     private static final PhyrexiaVsTheCoalition instance = new PhyrexiaVsTheCoalition();
 

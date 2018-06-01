@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class StigmaLasher extends CardImpl {
+public final class StigmaLasher extends CardImpl {
     
     public StigmaLasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");

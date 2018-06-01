@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class ThornwindFaeries extends CardImpl {
+public final class ThornwindFaeries extends CardImpl {
 
     public ThornwindFaeries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

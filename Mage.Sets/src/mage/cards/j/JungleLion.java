@@ -40,7 +40,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class JungleLion extends CardImpl {
+public final class JungleLion extends CardImpl {
 
     public JungleLion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

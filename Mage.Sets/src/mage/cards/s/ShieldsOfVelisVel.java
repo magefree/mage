@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class ShieldsOfVelisVel extends CardImpl {
+public final class ShieldsOfVelisVel extends CardImpl {
 
     public ShieldsOfVelisVel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{W}");

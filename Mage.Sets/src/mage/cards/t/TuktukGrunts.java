@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class TuktukGrunts extends CardImpl {
+public final class TuktukGrunts extends CardImpl {
 
     public TuktukGrunts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

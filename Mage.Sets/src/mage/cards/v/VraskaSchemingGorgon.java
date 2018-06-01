@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VraskaSchemingGorgon extends CardImpl {
+public final class VraskaSchemingGorgon extends CardImpl {
 
     public VraskaSchemingGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{B}");

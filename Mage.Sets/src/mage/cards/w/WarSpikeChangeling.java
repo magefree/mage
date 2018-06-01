@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class WarSpikeChangeling extends CardImpl {
+public final class WarSpikeChangeling extends CardImpl {
 
     public WarSpikeChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

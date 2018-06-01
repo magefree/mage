@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class YisanTheWandererBard extends CardImpl {
+public final class YisanTheWandererBard extends CardImpl {
 
     public YisanTheWandererBard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class MassacreWurm extends CardImpl {
+public final class MassacreWurm extends CardImpl {
 
     public MassacreWurm (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");

@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class HushwingGryff extends CardImpl {
+public final class HushwingGryff extends CardImpl {
 
     public HushwingGryff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

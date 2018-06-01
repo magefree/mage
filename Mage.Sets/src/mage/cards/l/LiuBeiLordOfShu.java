@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author LoneFox
  */
-public class LiuBeiLordOfShu extends CardImpl {
+public final class LiuBeiLordOfShu extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

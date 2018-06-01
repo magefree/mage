@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class RepayInKind extends CardImpl {
+public final class RepayInKind extends CardImpl {
 
     public RepayInKind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");

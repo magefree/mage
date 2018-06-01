@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class KnightOfSursi extends CardImpl {
+public final class KnightOfSursi extends CardImpl {
 
     public KnightOfSursi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  *
  * @author MarcoMarin
  */
-public class ArgothianTreefolk extends CardImpl {
+public final class ArgothianTreefolk extends CardImpl {
 
     public ArgothianTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

@@ -49,7 +49,7 @@ import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.
  *
  * @author LevelX2
  */
-public class SteamfloggerBoss extends CardImpl {
+public final class SteamfloggerBoss extends CardImpl {
 
     public SteamfloggerBoss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

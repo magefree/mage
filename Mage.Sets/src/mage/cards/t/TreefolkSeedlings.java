@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Backfir3
  */
-public class TreefolkSeedlings extends CardImpl {
+public final class TreefolkSeedlings extends CardImpl {
 
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 

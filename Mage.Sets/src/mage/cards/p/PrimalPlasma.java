@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PrimalPlasma extends CardImpl {
+public final class PrimalPlasma extends CardImpl {
 
     public PrimalPlasma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

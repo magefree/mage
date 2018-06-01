@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  * @author LoneFox
 
  */
-public class FaerieSquadron extends CardImpl {
+public final class FaerieSquadron extends CardImpl {
 
     public FaerieSquadron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

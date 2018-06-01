@@ -59,7 +59,7 @@ import mage.target.targetpointer.TargetPointer;
  * @author Jason E. Wall
  *
  */
-public class ScytheOfTheWretched extends CardImpl {
+public final class ScytheOfTheWretched extends CardImpl {
 
     public ScytheOfTheWretched(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

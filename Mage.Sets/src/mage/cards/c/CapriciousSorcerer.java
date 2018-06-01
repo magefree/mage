@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class CapriciousSorcerer extends CardImpl {
+public final class CapriciousSorcerer extends CardImpl {
 
     public CapriciousSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class BenevolentAncestor extends CardImpl {
+public final class BenevolentAncestor extends CardImpl {
 
     public BenevolentAncestor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

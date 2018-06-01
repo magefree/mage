@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Melkhior
  */
-public class UrzasPowerPlant extends CardImpl {
+public final class UrzasPowerPlant extends CardImpl {
     public UrzasPowerPlant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add(SubType.URZAS, SubType.POWER_PLANT);

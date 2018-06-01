@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class AllSunsDawn extends CardImpl {
+public final class AllSunsDawn extends CardImpl {
 
     private final static FilterCard filterGreen = new FilterCard("green card from your graveyard");
     private final static FilterCard filterRed = new FilterCard("red card from your graveyard");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SageOwl extends CardImpl {
+public final class SageOwl extends CardImpl {
 
     public SageOwl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

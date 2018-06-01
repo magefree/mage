@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class BlossomingSands extends CardImpl {
+public final class BlossomingSands extends CardImpl {
 
     public BlossomingSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -40,7 +40,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class Respite extends CardImpl {
+public final class Respite extends CardImpl {
 
     public Respite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

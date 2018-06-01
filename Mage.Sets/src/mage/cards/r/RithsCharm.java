@@ -42,7 +42,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author FenrisulfrX
  */
-public class RithsCharm extends CardImpl {
+public final class RithsCharm extends CardImpl {
 
     public RithsCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}{W}");

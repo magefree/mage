@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Zeplar1_at_googlemail.com
  */
-public class DustElemental extends CardImpl {
+public final class DustElemental extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" creatures you control");
     

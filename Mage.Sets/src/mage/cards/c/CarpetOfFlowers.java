@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class CarpetOfFlowers extends CardImpl {
+public final class CarpetOfFlowers extends CardImpl {
 
     public CarpetOfFlowers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");

@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class SteelSquirrel extends CardImpl {
+public final class SteelSquirrel extends CardImpl {
 
     public SteelSquirrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

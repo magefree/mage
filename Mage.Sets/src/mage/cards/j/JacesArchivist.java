@@ -47,7 +47,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class JacesArchivist extends CardImpl {
+public final class JacesArchivist extends CardImpl {
 
     public JacesArchivist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

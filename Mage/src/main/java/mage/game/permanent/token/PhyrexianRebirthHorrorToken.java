@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PhyrexianRebirthHorrorToken extends TokenImpl {
+public final class PhyrexianRebirthHorrorToken extends TokenImpl {
 
     public PhyrexianRebirthHorrorToken() {
         super("Horror", "X/X colorless Horror artifact creature token");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SqueeGoblinNabob extends CardImpl {
+public final class SqueeGoblinNabob extends CardImpl {
 
     public SqueeGoblinNabob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

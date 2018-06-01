@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class WallOfBlossoms extends CardImpl {
+public final class WallOfBlossoms extends CardImpl {
 
     public WallOfBlossoms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

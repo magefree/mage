@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author Wehk
  */
-public class Prickleboar extends CardImpl {
+public final class Prickleboar extends CardImpl {
 
     public Prickleboar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

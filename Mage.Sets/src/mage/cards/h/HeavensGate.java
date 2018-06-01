@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author maxlebedev
  */
-public class HeavensGate extends CardImpl {
+public final class HeavensGate extends CardImpl {
 
     public HeavensGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

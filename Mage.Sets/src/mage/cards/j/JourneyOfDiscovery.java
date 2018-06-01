@@ -44,13 +44,13 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class JourneyOfDiscovery extends CardImpl {
+public final class JourneyOfDiscovery extends CardImpl {
 
     public JourneyOfDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Choose one - Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle your library; 
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD)));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND)));
         
         // or you may play up to two additional lands this turn.
         Mode mode = new Mode();

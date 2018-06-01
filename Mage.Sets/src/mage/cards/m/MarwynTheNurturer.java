@@ -20,7 +20,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 /**
  * @author JRHerlehy Created on 4/7/18.
  */
-public class MarwynTheNurturer extends CardImpl {
+public final class MarwynTheNurturer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Elf");
 

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * 
  * @author L_J
  */
-public class FortifiedArea extends CardImpl {
+public final class FortifiedArea extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creatures");
 

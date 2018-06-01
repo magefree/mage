@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author TheElk801
  */
-public class FreneticRaptor extends CardImpl {
+public final class FreneticRaptor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.BEAST, "Beasts");
 

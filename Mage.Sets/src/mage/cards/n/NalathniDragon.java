@@ -53,7 +53,7 @@ import mage.game.Game;
  *
  * @author North & L_J
  */
-public class NalathniDragon extends CardImpl {
+public final class NalathniDragon extends CardImpl {
 
     public NalathniDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

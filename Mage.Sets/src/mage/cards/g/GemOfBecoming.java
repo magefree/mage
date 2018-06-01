@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class GemOfBecoming extends CardImpl {
+public final class GemOfBecoming extends CardImpl {
 
     public GemOfBecoming(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

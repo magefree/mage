@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DwarvenThaumaturgist extends CardImpl {
+public final class DwarvenThaumaturgist extends CardImpl {
 
     public DwarvenThaumaturgist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

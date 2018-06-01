@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class EmissaryOfSunrise extends CardImpl {
+public final class EmissaryOfSunrise extends CardImpl {
 
     public EmissaryOfSunrise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

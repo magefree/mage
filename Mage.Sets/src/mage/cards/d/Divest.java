@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  * @author MasterSamurai
  *
  */
-public class Divest extends CardImpl {
+public final class Divest extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact or creature card");
 

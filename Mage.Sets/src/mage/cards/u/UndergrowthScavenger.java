@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX2
  */
-public class UndergrowthScavenger extends CardImpl {
+public final class UndergrowthScavenger extends CardImpl {
 
     public UndergrowthScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

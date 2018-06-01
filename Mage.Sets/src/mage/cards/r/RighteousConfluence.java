@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class RighteousConfluence extends CardImpl {
+public final class RighteousConfluence extends CardImpl {
 
     public RighteousConfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");

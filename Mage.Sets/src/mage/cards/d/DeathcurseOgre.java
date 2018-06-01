@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DeathcurseOgre extends CardImpl {
+public final class DeathcurseOgre extends CardImpl {
 
     public DeathcurseOgre (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

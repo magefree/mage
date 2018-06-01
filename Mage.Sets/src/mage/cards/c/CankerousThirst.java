@@ -48,7 +48,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  * @author jeffwadsworth
  *
  */
-public class CankerousThirst extends CardImpl {
+public final class CankerousThirst extends CardImpl {
 
     public CankerousThirst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B/G}");

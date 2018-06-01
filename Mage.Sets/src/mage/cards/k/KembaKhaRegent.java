@@ -44,7 +44,7 @@ import mage.game.permanent.token.CatToken;
  *
  * @author Loki, North
  */
-public class KembaKhaRegent extends CardImpl {
+public final class KembaKhaRegent extends CardImpl {
 
     public KembaKhaRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

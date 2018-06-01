@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class WalkThePlank extends CardImpl {
+public final class WalkThePlank extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Merfolk creature");
 

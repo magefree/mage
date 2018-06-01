@@ -43,7 +43,7 @@ import mage.players.PlayerList;
  *
  * @author LevelX2
  */
-public class PainsReward extends CardImpl {
+public final class PainsReward extends CardImpl {
 
     public PainsReward(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

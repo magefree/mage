@@ -58,7 +58,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class LiegeOfTheTangle extends CardImpl {
+public final class LiegeOfTheTangle extends CardImpl {
 
     public LiegeOfTheTangle (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

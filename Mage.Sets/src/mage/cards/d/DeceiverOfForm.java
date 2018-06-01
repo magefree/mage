@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DeceiverOfForm extends CardImpl {
+public final class DeceiverOfForm extends CardImpl {
 
     public DeceiverOfForm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{C}");

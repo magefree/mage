@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jerekwilson
  */
-public class JaggedPoppet extends CardImpl {
+public final class JaggedPoppet extends CardImpl {
 
     public JaggedPoppet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

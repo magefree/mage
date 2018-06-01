@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class RhoxPikemaster extends CardImpl {
+public final class RhoxPikemaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 

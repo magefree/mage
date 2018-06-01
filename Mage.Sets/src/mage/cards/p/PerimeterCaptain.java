@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class PerimeterCaptain extends CardImpl {
+public final class PerimeterCaptain extends CardImpl {
 
     public PerimeterCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

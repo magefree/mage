@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class FleshCarverHorrorToken extends TokenImpl {
+public final class FleshCarverHorrorToken extends TokenImpl {
 
     public FleshCarverHorrorToken() {
         this(1);

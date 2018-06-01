@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author Backfir3
  */
-public class Judgment extends ExpansionSet {
+public final class Judgment extends ExpansionSet {
 
     private static final Judgment instance = new Judgment();
 

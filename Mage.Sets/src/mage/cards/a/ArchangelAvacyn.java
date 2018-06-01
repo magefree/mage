@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class ArchangelAvacyn extends CardImpl {
+public final class ArchangelAvacyn extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Angel creature you control");
 

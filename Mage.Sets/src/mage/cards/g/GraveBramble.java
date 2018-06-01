@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class GraveBramble extends CardImpl {
+public final class GraveBramble extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("Zombies");
 

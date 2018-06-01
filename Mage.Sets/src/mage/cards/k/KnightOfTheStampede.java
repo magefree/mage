@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North & L_J
  */
-public class KnightOfTheStampede extends CardImpl {
+public final class KnightOfTheStampede extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Dinosaur spells");
 

@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DictateOfKruphix extends CardImpl {
+public final class DictateOfKruphix extends CardImpl {
 
     public DictateOfKruphix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");

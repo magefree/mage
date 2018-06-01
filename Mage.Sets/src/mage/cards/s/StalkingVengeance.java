@@ -51,7 +51,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class StalkingVengeance extends CardImpl {
+public final class StalkingVengeance extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 

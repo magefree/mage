@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class EdificeOfAuthority extends CardImpl {
+public final class EdificeOfAuthority extends CardImpl {
 
     private static final String rule = "{1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate this ability only if there are three or more brick counter on {this}.";
 

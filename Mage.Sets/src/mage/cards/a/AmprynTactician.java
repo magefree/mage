@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Wehk
  */
-public class AmprynTactician extends CardImpl {
+public final class AmprynTactician extends CardImpl {
 
     public AmprynTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

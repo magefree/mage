@@ -49,7 +49,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class Festercreep extends CardImpl {
+public final class Festercreep extends CardImpl {
 
     public Festercreep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

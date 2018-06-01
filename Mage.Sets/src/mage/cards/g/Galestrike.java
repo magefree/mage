@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class Galestrike extends CardImpl {
+public final class Galestrike extends CardImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

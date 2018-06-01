@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class ForebodingRuins extends CardImpl {
+public final class ForebodingRuins extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Swamp or Mountain card from your hand");
 

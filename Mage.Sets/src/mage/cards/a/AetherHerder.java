@@ -45,7 +45,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author fireshoes
  */
-public class AetherHerder extends CardImpl {
+public final class AetherHerder extends CardImpl {
 
     public AetherHerder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

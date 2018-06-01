@@ -42,7 +42,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author LevelX2
  */
-public class GleamingBarrier extends CardImpl {
+public final class GleamingBarrier extends CardImpl {
 
     public GleamingBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

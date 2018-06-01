@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author LevelX2
  */
-public class AnointerPriest extends CardImpl {
+public final class AnointerPriest extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature token");
 

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class EagerCadet extends CardImpl {
+public final class EagerCadet extends CardImpl {
     
   public EagerCadet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

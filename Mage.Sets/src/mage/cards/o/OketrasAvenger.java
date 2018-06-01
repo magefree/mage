@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author nickymikail
  */
-public class OketrasAvenger extends CardImpl {
+public final class OketrasAvenger extends CardImpl {
 
     public OketrasAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

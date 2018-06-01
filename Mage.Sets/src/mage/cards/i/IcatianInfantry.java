@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author L_J
  */
-public class IcatianInfantry extends CardImpl {
+public final class IcatianInfantry extends CardImpl {
 
     public IcatianInfantry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

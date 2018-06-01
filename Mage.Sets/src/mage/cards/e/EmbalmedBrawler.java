@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class EmbalmedBrawler extends CardImpl {
+public final class EmbalmedBrawler extends CardImpl {
 
     public EmbalmedBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

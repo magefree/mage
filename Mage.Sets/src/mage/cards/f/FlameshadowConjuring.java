@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class FlameshadowConjuring extends CardImpl {
+public final class FlameshadowConjuring extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
 

@@ -39,7 +39,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author Loki
  */
-public class RaiseTheAlarm extends CardImpl {
+public final class RaiseTheAlarm extends CardImpl {
 
     public RaiseTheAlarm (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

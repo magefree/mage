@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author cbt33
  */
-public class SadisticHypnotist extends CardImpl {
+public final class SadisticHypnotist extends CardImpl {
 
     public SadisticHypnotist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

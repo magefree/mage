@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class EndangeredArmodon extends CardImpl {
+public final class EndangeredArmodon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 2 or less");
 

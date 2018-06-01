@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class WanderingChampion extends CardImpl {
+public final class WanderingChampion extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("green permanent");
 

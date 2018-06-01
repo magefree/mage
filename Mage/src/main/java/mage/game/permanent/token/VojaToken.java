@@ -36,7 +36,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class VojaToken extends TokenImpl {
+public final class VojaToken extends TokenImpl {
 
     public VojaToken() {
         super("Voja", "legendary 2/2 green and white Wolf creature token named Voja");

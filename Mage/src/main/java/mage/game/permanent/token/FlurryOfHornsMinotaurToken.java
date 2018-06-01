@@ -37,7 +37,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class FlurryOfHornsMinotaurToken extends TokenImpl {
+public final class FlurryOfHornsMinotaurToken extends TokenImpl {
 
     public FlurryOfHornsMinotaurToken() {
         super("Minotaur", "2/3 red Minotaur creature tokens with haste");

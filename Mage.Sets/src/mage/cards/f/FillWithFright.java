@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class FillWithFright extends CardImpl {
+public final class FillWithFright extends CardImpl {
 
     public FillWithFright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

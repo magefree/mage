@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Styxo
  */
-public class DroidFoundry extends CardImpl {
+public final class DroidFoundry extends CardImpl {
 
     public DroidFoundry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
@@ -53,7 +53,7 @@ public class DroidFoundry extends CardImpl {
         // When Droid Foundry enters the battlefield , add {U}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.BlueMana(1))));
 
-        // {T}: Add {W} or {B} to you mana pool.
+        // {T}: Add {W} or {B}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
     }

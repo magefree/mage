@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class KavuRecluse extends CardImpl {
+public final class KavuRecluse extends CardImpl {
 
     public KavuRecluse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

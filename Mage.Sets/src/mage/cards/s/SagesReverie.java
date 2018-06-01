@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class SagesReverie extends CardImpl {
+public final class SagesReverie extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("aura you control that's attached to a creature");
     static {

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class Songstitcher extends CardImpl {
+public final class Songstitcher extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with flying");
 

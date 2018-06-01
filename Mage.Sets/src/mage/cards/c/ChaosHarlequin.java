@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class ChaosHarlequin extends CardImpl {
+public final class ChaosHarlequin extends CardImpl {
 
     public ChaosHarlequin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

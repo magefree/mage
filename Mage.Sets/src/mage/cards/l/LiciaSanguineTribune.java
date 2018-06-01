@@ -60,7 +60,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  *
  * @author TheElk801
  */
-public class LiciaSanguineTribune extends CardImpl {
+public final class LiciaSanguineTribune extends CardImpl {
 
     public LiciaSanguineTribune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{W}{B}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class TheftOfDreams extends CardImpl {
+public final class TheftOfDreams extends CardImpl {
 
     public TheftOfDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

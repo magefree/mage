@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class PrimalFrenzy extends CardImpl {
+public final class PrimalFrenzy extends CardImpl {
 
     public PrimalFrenzy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

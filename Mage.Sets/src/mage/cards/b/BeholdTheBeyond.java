@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class BeholdTheBeyond extends CardImpl {
+public final class BeholdTheBeyond extends CardImpl {
 
     public BeholdTheBeyond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");

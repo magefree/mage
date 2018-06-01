@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
 /**
  * @author nantuko
  */
-public class TrigonOfMending extends CardImpl {
+public final class TrigonOfMending extends CardImpl {
 
     public TrigonOfMending(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class WarmongersChariot extends CardImpl {
+public final class WarmongersChariot extends CardImpl {
 
     public WarmongersChariot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

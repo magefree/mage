@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class StrongarmMonk extends CardImpl {
+public final class StrongarmMonk extends CardImpl {
     
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 

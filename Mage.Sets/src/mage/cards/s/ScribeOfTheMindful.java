@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class ScribeOfTheMindful extends CardImpl {
+public final class ScribeOfTheMindful extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 

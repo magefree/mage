@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BoggartRamGang extends CardImpl {
+public final class BoggartRamGang extends CardImpl {
 
     public BoggartRamGang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}{R/G}");

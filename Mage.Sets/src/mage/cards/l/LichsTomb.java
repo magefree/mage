@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author emerald000
  */
-public class LichsTomb extends CardImpl {
+public final class LichsTomb extends CardImpl {
 
     public LichsTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

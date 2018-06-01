@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class ReaperOfSheoldred extends CardImpl {
+public final class ReaperOfSheoldred extends CardImpl {
 
     public ReaperOfSheoldred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

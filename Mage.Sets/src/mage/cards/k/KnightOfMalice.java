@@ -18,7 +18,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
-public class KnightOfMalice extends CardImpl {
+public final class KnightOfMalice extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("white permanent");
 

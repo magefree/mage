@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  * @author noxx
 
  */
-public class Dreadwaters extends CardImpl {
+public final class Dreadwaters extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands you control");
 

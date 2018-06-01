@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class SplinterTwin extends CardImpl {
+public final class SplinterTwin extends CardImpl {
 
     public SplinterTwin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");

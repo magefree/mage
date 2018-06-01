@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author nantuko
  */
-public class ElderCathar extends CardImpl {
+public final class ElderCathar extends CardImpl {
 
     public ElderCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

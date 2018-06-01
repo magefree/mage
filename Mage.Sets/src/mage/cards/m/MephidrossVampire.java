@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class MephidrossVampire extends CardImpl {
+public final class MephidrossVampire extends CardImpl {
 
     public MephidrossVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

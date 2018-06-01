@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Gristleback extends CardImpl {
+public final class Gristleback extends CardImpl {
 
     public Gristleback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

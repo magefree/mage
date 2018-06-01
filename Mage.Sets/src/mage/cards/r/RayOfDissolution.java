@@ -39,7 +39,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class RayOfDissolution extends CardImpl {
+public final class RayOfDissolution extends CardImpl {
 
     public RayOfDissolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

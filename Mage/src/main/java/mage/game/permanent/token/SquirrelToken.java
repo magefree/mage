@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SquirrelToken extends TokenImpl {
+public final class SquirrelToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

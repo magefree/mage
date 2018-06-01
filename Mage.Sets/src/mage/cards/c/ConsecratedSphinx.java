@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Loki
  */
-public class ConsecratedSphinx extends CardImpl {
+public final class ConsecratedSphinx extends CardImpl {
 
     public ConsecratedSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

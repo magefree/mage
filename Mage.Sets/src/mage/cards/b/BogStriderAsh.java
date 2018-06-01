@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author EvilGeek
  */
-public class BogStriderAsh extends CardImpl {
+public final class BogStriderAsh extends CardImpl {
 
 	private static final FilterSpell filter = new FilterSpell("a Goblin spell");
 	

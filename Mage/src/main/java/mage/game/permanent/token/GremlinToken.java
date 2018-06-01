@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class GremlinToken extends TokenImpl {
+public final class GremlinToken extends TokenImpl {
 
     public GremlinToken() {
         super("Gremlin", "2/2 red Gremlin creature token");

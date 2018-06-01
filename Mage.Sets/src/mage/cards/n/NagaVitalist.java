@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class NagaVitalist extends CardImpl {
+public final class NagaVitalist extends CardImpl {
 
     public NagaVitalist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

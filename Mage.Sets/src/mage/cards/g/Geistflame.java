@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author nantuko
  */
-public class Geistflame extends CardImpl {
+public final class Geistflame extends CardImpl {
 
     public Geistflame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

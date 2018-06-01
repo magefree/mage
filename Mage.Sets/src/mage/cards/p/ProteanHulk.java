@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class ProteanHulk extends CardImpl {
+public final class ProteanHulk extends CardImpl {
 
     public ProteanHulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

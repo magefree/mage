@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author michael.napoleon@gmail.com
  */
-public class EmpyrialPlate extends CardImpl {
+public final class EmpyrialPlate extends CardImpl {
 
     public EmpyrialPlate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

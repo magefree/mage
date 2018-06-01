@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class EntropicEidolon extends CardImpl {
+public final class EntropicEidolon extends CardImpl {
 
     public EntropicEidolon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

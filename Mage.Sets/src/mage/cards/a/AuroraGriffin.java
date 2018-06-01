@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class AuroraGriffin extends CardImpl {
+public final class AuroraGriffin extends CardImpl {
 
     public AuroraGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

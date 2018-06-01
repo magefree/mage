@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class StampedingRhino extends CardImpl {
+public final class StampedingRhino extends CardImpl {
 
     public StampedingRhino(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

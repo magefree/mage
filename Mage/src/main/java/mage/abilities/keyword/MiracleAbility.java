@@ -27,6 +27,7 @@
  */
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -52,8 +53,8 @@ import mage.watchers.common.MiracleWatcher;
  * cost."
  *
  * 702.92b If a player chooses to reveal a card using its miracle ability, he or
- * she plays with that card revealed until that card leaves their hand,
- * that ability resolves, or that ability otherwise leaves the stack.
+ * she plays with that card revealed until that card leaves their hand, that
+ * ability resolves, or that ability otherwise leaves the stack.
  *
  * You can cast a card for its miracle cost only as the miracle triggered
  * ability resolves. If you don't want to cast it at that time (or you can't
@@ -172,7 +173,7 @@ class MiracleEffect extends OneShotEffect {
             // replace with the new cost
             costRef.clear();
             costRef.add(miracleCosts);
-            controller.cast(abilityToCast, game, false);
+            controller.cast(abilityToCast, game, false, new MageObjectReference(source.getSourceObject(game), game));
             return true;
         }
         return false;

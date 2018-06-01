@@ -47,7 +47,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author LevelX2
  */
-public class BirthingHulk extends CardImpl {
+public final class BirthingHulk extends CardImpl {
 
     public BirthingHulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");

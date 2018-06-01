@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Archangel extends CardImpl {
+public final class Archangel extends CardImpl {
 
     public Archangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

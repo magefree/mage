@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MarduStrikeLeaderWarriorToken extends TokenImpl {
+public final class MarduStrikeLeaderWarriorToken extends TokenImpl {
 
     public MarduStrikeLeaderWarriorToken() {
         super("Warrior", "2/1 black Warrior creature token");

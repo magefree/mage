@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Peregrination extends CardImpl {
+public final class Peregrination extends CardImpl {
 
     public Peregrination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
@@ -96,7 +96,7 @@ class PeregrinationEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
         if (controller.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards revealed = new CardsImpl();

@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class RemoteFarm extends CardImpl {
+public final class RemoteFarm extends CardImpl {
 
     public RemoteFarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

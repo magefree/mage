@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ShanodinDryads extends CardImpl {
+public final class ShanodinDryads extends CardImpl {
 
     public ShanodinDryads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

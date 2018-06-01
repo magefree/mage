@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Plopman
  */
-public class SwordDancer extends CardImpl {
+public final class SwordDancer extends CardImpl {
 
     public SwordDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

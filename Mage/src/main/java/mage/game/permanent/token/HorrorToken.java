@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HorrorToken extends TokenImpl {
+public final class HorrorToken extends TokenImpl {
 
     public HorrorToken() {
         super("Horror", "4/4 black Horror creature token");

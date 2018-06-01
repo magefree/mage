@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Plopman
  */
-public class PerniciousDeed extends CardImpl {
+public final class PerniciousDeed extends CardImpl {
 
 
     public PerniciousDeed(UUID ownerId, CardSetInfo setInfo) {

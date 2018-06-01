@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SeaGateWreckage extends CardImpl {
+public final class SeaGateWreckage extends CardImpl {
 
     public SeaGateWreckage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

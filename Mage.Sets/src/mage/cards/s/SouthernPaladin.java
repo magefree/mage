@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  * @author LoneFox
 
  */
-public class SouthernPaladin extends CardImpl {
+public final class SouthernPaladin extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("red permanent");
 

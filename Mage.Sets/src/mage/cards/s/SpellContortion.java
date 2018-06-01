@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class SpellContortion extends CardImpl {
+public final class SpellContortion extends CardImpl {
 
     public SpellContortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

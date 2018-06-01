@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class SkyshroudWarBeast extends CardImpl {
+public final class SkyshroudWarBeast extends CardImpl {
 
     public SkyshroudWarBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

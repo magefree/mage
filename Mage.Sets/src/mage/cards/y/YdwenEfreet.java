@@ -48,7 +48,7 @@ import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
  *
  * @author MarcoMarin & L_J
  */
-public class YdwenEfreet extends CardImpl {
+public final class YdwenEfreet extends CardImpl {
 
     public YdwenEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");

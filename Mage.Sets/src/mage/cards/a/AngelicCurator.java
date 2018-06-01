@@ -41,7 +41,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author Backfir3
  */
-public class AngelicCurator extends CardImpl {
+public final class AngelicCurator extends CardImpl {
 
     public AngelicCurator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

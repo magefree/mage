@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class EtherealChampion extends CardImpl {
+public final class EtherealChampion extends CardImpl {
 
     public EtherealChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{W}");

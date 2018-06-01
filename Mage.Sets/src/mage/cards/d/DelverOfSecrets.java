@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Alvin
  */
-public class DelverOfSecrets extends CardImpl {
+public final class DelverOfSecrets extends CardImpl {
 
     public DelverOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

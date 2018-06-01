@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class SaprazzanOutrigger extends CardImpl {
+public final class SaprazzanOutrigger extends CardImpl {
 
     public SaprazzanOutrigger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

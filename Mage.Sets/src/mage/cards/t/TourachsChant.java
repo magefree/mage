@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class TourachsChant extends CardImpl {
+public final class TourachsChant extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Forest");
 

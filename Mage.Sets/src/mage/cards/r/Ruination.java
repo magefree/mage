@@ -38,7 +38,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class Ruination extends CardImpl {
+public final class Ruination extends CardImpl {
 
     public Ruination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

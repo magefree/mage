@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ExtricatorOfSin extends CardImpl {
+public final class ExtricatorOfSin extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
 

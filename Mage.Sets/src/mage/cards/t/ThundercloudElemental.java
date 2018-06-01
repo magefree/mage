@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class ThundercloudElemental extends CardImpl {
+public final class ThundercloudElemental extends CardImpl {
 
     private static final FilterCreaturePermanent toughnessFilter = new FilterCreaturePermanent("creatures with toughness 2 or less");
     private static final FilterCreaturePermanent flyingFilter = new FilterCreaturePermanent("All other creatures");

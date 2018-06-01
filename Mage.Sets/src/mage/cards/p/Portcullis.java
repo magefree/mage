@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author spjspj
  */
-public class Portcullis extends CardImpl {
+public final class Portcullis extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 

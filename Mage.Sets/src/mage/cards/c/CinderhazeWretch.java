@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
  *
  */
-public class CinderhazeWretch extends CardImpl {
+public final class CinderhazeWretch extends CardImpl {
 
     public CinderhazeWretch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

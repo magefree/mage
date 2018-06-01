@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class GhirapurOsprey extends CardImpl {
+public final class GhirapurOsprey extends CardImpl {
 
     public GhirapurOsprey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

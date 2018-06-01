@@ -55,7 +55,7 @@ import mage.players.Player;
  * @author LoneFox
  *
  */
-public class CrosisThePurger extends CardImpl {
+public final class CrosisThePurger extends CardImpl {
 
     public CrosisThePurger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");

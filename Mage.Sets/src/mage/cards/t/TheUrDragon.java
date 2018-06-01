@@ -27,6 +27,9 @@
  */
 package mage.cards.t;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -34,7 +37,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -48,14 +51,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  * @author TheElk801
  */
-public class TheUrDragon extends CardImpl {
+public final class TheUrDragon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Dragon spells");
 
@@ -180,7 +179,7 @@ class TheUrDragonEffect extends OneShotEffect {
 
     public TheUrDragonEffect() {
         super(Outcome.Benefit);
-        this.staticText = "draw that many cards, then you may put a permanent card from your hand onto the battlefield.";
+        this.staticText = "draw that many cards, then you may put a permanent card from your hand onto the battlefield";
     }
 
     public TheUrDragonEffect(final TheUrDragonEffect effect) {
@@ -207,9 +206,7 @@ class TheUrDragonEffect extends OneShotEffect {
                 if (attackingDragons > 0) {
                     controller.drawCards(attackingDragons, game);
                 }
-                Effect effect = new PutPermanentOnBattlefieldEffect();
-                effect.apply(game, source);
-                return true;
+                return new PutCardFromHandOntoBattlefieldEffect().apply(game, source);
             }
         }
         return false;

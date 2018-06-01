@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class AysenHighway extends CardImpl {
+public final class AysenHighway extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
     

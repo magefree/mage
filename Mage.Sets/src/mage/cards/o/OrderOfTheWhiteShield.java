@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class OrderOfTheWhiteShield extends CardImpl {
+public final class OrderOfTheWhiteShield extends CardImpl {
 
     public OrderOfTheWhiteShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

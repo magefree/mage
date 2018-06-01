@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author JRHerlehy
  */
-public class SelvalasStampede extends CardImpl {
+public final class SelvalasStampede extends CardImpl {
 
     public SelvalasStampede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");

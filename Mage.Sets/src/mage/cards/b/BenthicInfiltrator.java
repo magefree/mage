@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class BenthicInfiltrator extends CardImpl {
+public final class BenthicInfiltrator extends CardImpl {
 
     public BenthicInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

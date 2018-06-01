@@ -38,7 +38,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class VoidSnare extends CardImpl {
+public final class VoidSnare extends CardImpl {
 
     public VoidSnare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

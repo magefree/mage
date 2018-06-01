@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Roast extends CardImpl {
+public final class Roast extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

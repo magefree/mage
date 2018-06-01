@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class LoxodonGatekeeper extends CardImpl {
+public final class LoxodonGatekeeper extends CardImpl {
 
     public LoxodonGatekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

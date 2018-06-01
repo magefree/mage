@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MagnifyingGlass extends CardImpl {
+public final class MagnifyingGlass extends CardImpl {
 
     public MagnifyingGlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class Reconnaissance extends CardImpl {
+public final class Reconnaissance extends CardImpl {
 
     private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature controlled by you");
 

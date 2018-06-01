@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class RuinInTheirWake extends CardImpl {
+public final class RuinInTheirWake extends CardImpl {
 
     public RuinInTheirWake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
@@ -96,7 +96,7 @@ class RuinInTheirWakeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+            TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
             if (controller.searchLibrary(target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
 /**
  * @author MarcoMarin
  */
-public class JandorsRing extends CardImpl {
+public final class JandorsRing extends CardImpl {
 
     public JandorsRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

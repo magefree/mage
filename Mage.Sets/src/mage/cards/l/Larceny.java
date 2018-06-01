@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class Larceny extends CardImpl {
+public final class Larceny extends CardImpl {
 
     public Larceny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

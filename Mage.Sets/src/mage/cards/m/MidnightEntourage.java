@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Styxo
  */
-public class MidnightEntourage extends CardImpl {
+public final class MidnightEntourage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Aetherborn you control");
 

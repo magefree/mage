@@ -45,7 +45,7 @@ import mage.game.stack.Spell;
 /**
  * @author noxx
  */
-public class TajuruPreserver extends CardImpl {
+public final class TajuruPreserver extends CardImpl {
 
     public TajuruPreserver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

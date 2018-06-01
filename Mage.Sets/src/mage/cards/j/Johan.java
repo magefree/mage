@@ -54,7 +54,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class Johan extends CardImpl {
+public final class Johan extends CardImpl {
 
     public Johan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");

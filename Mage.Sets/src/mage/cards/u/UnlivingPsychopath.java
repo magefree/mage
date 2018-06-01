@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class UnlivingPsychopath extends CardImpl {
+public final class UnlivingPsychopath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than Unliving Psychopath's power");
 

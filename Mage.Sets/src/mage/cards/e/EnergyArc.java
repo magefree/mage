@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class EnergyArc extends CardImpl {
+public final class EnergyArc extends CardImpl {
 
     public EnergyArc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}");

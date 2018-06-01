@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Styxo
  */
-public class PiasRevolution extends CardImpl {
+public final class PiasRevolution extends CardImpl {
 
     public PiasRevolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

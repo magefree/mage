@@ -49,7 +49,7 @@ import mage.filter.StaticFilters;
  *
  * @author North, noxx
  */
-public class KabiraVindicator extends LevelerCard {
+public final class KabiraVindicator extends LevelerCard {
 
     public KabiraVindicator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class RiptideDirector extends CardImpl {
+public final class RiptideDirector extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("Wizard you control");
 

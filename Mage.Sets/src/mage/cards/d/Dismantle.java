@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Styxo
  */
-public class Dismantle extends CardImpl {
+public final class Dismantle extends CardImpl {
 
     public Dismantle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

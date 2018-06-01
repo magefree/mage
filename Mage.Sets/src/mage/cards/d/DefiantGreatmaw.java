@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DefiantGreatmaw extends CardImpl {
+public final class DefiantGreatmaw extends CardImpl {
 
     public DefiantGreatmaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

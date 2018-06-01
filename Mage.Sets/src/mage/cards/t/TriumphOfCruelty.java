@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author noxx
  */
-public class TriumphOfCruelty extends CardImpl {
+public final class TriumphOfCruelty extends CardImpl {
 
     private static final String ruleText = "target opponent discards a card if you control the creature with the greatest power or tied for the greatest power";
 

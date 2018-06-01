@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreatureInPlay;
  *
  * @author TheElk801
  */
-public class InnerSanctum extends CardImpl {
+public final class InnerSanctum extends CardImpl {
 
     public InnerSanctum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");

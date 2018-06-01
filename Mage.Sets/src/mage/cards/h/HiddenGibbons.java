@@ -51,7 +51,7 @@ import java.util.UUID;
  * @author LoneFox
  *
  */
-public class HiddenGibbons extends CardImpl {
+public final class HiddenGibbons extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant spell");
 

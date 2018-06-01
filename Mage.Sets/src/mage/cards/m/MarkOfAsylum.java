@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreatureInPlay;
  *
  * @author jeffwadsworth
  */
-public class MarkOfAsylum extends CardImpl {
+public final class MarkOfAsylum extends CardImpl {
     
     private static final FilterControlledCreatureInPlay filter = new FilterControlledCreatureInPlay("creatures you control");
     

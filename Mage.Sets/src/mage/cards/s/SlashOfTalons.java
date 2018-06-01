@@ -38,7 +38,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author TheElk801
  */
-public class SlashOfTalons extends CardImpl {
+public final class SlashOfTalons extends CardImpl {
 
     public SlashOfTalons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

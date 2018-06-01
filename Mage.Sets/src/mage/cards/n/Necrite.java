@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author MarcoMarin
  */
-public class Necrite extends CardImpl {
+public final class Necrite extends CardImpl {
 
     public Necrite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

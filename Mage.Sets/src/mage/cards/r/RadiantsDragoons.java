@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class RadiantsDragoons extends CardImpl {
+public final class RadiantsDragoons extends CardImpl {
 
     public RadiantsDragoons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

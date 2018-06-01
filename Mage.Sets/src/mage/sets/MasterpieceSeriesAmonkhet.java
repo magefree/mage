@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class MasterpieceSeriesAmonkhet extends ExpansionSet {
+public final class MasterpieceSeriesAmonkhet extends ExpansionSet {
 
     private static final MasterpieceSeriesAmonkhet instance = new MasterpieceSeriesAmonkhet();
 

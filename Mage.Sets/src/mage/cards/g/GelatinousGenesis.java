@@ -41,7 +41,7 @@ import mage.game.permanent.token.OozeToken;
  *
  * @author jeffwadsworth
  */
-public class GelatinousGenesis extends CardImpl {
+public final class GelatinousGenesis extends CardImpl {
 
     public GelatinousGenesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}");

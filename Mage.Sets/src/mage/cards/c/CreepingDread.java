@@ -47,7 +47,7 @@ import mage.target.TargetCard;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class CreepingDread extends CardImpl {
+public final class CreepingDread extends CardImpl {
 
     public CreepingDread(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

@@ -28,15 +28,14 @@
 package mage.deck;
 
 import java.util.*;
-import java.util.Map.Entry;
-import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerAbility;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 
 /**
@@ -90,15 +89,29 @@ public class FreeformCommander extends Constructed {
             invalid.put("Commander", "Sideboard must contain only the commander(s)");
             valid = false;
         } else {
+            Set<String> commanderNames = new HashSet<>();
             for (Card commander : deck.getSideboard()) {
-                if (!(commander.isCreature() ||
-                    commander.isLegendary())) {
+                commanderNames.add(commander.getName());
+            }
+            for (Card commander : deck.getSideboard()) {
+                if (!(commander.isCreature()
+                        || commander.isLegendary())) {
                     invalid.put("Commander", "For Freeform Commander, the commander must be a creature or be legendary. Yours was: " + commander.getName());
                     valid = false;
                 }
                 if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                    invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
-                    valid = false;
+                    boolean partnersWith = false;
+                    for (Ability ability : commander.getAbilities()) {
+                        if (ability instanceof PartnerWithAbility
+                                && commanderNames.contains(((PartnerWithAbility) ability).getPartnerName())) {
+                            partnersWith = true;
+                            break;
+                        }
+                    }
+                    if (!partnersWith) {
+                        invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
+                        valid = false;
+                    }
                 }
                 FilterMana commanderColor = commander.getColorIdentity();
                 if (commanderColor.isWhite()) {

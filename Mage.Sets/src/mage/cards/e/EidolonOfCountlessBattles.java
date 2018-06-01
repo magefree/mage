@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class EidolonOfCountlessBattles extends CardImpl {
+public final class EidolonOfCountlessBattles extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     static {

@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author anonymous
  */
-public class BlizzardSpecter extends CardImpl {
+public final class BlizzardSpecter extends CardImpl {
 
     public BlizzardSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");

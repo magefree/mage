@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class WalkerOfSecretWays extends CardImpl {
+public final class WalkerOfSecretWays extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("Ninja you control");
     static {

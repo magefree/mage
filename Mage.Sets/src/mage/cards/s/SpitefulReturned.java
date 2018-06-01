@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Quercitron
  */
-public class SpitefulReturned extends CardImpl {
+public final class SpitefulReturned extends CardImpl {
 
     public SpitefulReturned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}");

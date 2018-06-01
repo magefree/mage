@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Styxo
  */
-public class NuteGunray extends CardImpl {
+public final class NuteGunray extends CardImpl {
 
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("non-token artifact");
 

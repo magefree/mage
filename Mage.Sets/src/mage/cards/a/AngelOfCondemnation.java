@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class AngelOfCondemnation extends CardImpl {
+public final class AngelOfCondemnation extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     static {

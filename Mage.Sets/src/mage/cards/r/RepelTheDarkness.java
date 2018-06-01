@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class RepelTheDarkness extends CardImpl {
+public final class RepelTheDarkness extends CardImpl {
 
     public RepelTheDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

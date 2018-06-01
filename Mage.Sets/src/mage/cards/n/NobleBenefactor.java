@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author ciaccona007
  */
-public class NobleBenefactor extends CardImpl {
+public final class NobleBenefactor extends CardImpl {
 
     public NobleBenefactor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

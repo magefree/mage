@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class BatteringCraghorn extends CardImpl {
+public final class BatteringCraghorn extends CardImpl {
 
     public BatteringCraghorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

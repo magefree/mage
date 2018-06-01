@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class GloryOfWarfare extends CardImpl {
+public final class GloryOfWarfare extends CardImpl {
 
     public GloryOfWarfare (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{W}");

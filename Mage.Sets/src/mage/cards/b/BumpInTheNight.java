@@ -40,7 +40,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author nantuko
  */
-public class BumpInTheNight extends CardImpl {
+public final class BumpInTheNight extends CardImpl {
 
     public BumpInTheNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

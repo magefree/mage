@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class GraniticTitan extends CardImpl {
+public final class GraniticTitan extends CardImpl {
 
     public GraniticTitan(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE},"{4}{R}{R}");

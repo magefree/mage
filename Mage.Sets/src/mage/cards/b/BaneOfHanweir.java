@@ -45,7 +45,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class BaneOfHanweir extends CardImpl {
+public final class BaneOfHanweir extends CardImpl {
 
     public BaneOfHanweir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

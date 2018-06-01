@@ -43,7 +43,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Plopman
  */
-public class FangrenPathcutter extends CardImpl {
+public final class FangrenPathcutter extends CardImpl {
 
     public FangrenPathcutter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

@@ -53,7 +53,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  *
  * @author emerald000
  */
-public class CrestedSunmare extends CardImpl {
+public final class CrestedSunmare extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Horses you control");
 

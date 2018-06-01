@@ -49,7 +49,7 @@ import mage.game.events.NumberOfTriggersEvent;
  *
  * @author TheElk801
  */
-public class NabanDeanOfIteration extends CardImpl {
+public final class NabanDeanOfIteration extends CardImpl {
 
     public NabanDeanOfIteration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

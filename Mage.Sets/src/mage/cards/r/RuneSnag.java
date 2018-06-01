@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class RuneSnag extends CardImpl {
+public final class RuneSnag extends CardImpl {
 
     private static final FilterCard filter = new FilterCard();
 

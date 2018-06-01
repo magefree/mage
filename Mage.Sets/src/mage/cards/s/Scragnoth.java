@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author shieldal
  */
-public class Scragnoth extends CardImpl {
+public final class Scragnoth extends CardImpl {
 
     public Scragnoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

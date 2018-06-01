@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class ShadowedCaravel extends CardImpl {
+public final class ShadowedCaravel extends CardImpl {
 
     public ShadowedCaravel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

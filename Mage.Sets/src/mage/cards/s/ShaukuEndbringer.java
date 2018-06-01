@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Saga
  */
-public class ShaukuEndbringer extends CardImpl{
+public final class ShaukuEndbringer extends CardImpl{
     
      public ShaukuEndbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");

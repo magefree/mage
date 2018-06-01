@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class WarBarge extends CardImpl {
+public final class WarBarge extends CardImpl {
 
     public WarBarge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

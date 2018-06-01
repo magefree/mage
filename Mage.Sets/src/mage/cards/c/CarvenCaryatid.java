@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class CarvenCaryatid extends CardImpl {
+public final class CarvenCaryatid extends CardImpl {
 
     public CarvenCaryatid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

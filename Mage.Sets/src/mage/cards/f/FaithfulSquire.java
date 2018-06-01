@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class FaithfulSquire extends CardImpl {
+public final class FaithfulSquire extends CardImpl {
 
     public FaithfulSquire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

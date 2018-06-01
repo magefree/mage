@@ -41,7 +41,7 @@ import mage.game.permanent.token.KorAllyToken;
  *
  * @author LevelX2
  */
-public class UnifiedFront extends CardImpl {
+public final class UnifiedFront extends CardImpl {
 
     public UnifiedFront(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");

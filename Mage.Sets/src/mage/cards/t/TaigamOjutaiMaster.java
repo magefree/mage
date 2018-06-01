@@ -59,7 +59,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class TaigamOjutaiMaster extends CardImpl {
+public final class TaigamOjutaiMaster extends CardImpl {
 
     private static final String effectText = "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, that spell gains rebound.";
     private static final FilterSpell filter = new FilterSpell("Instant, Sorcery, and Dragon spells");

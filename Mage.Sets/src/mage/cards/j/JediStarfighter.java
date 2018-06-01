@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class JediStarfighter extends CardImpl {
+public final class JediStarfighter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Jedi creatures you control");
 

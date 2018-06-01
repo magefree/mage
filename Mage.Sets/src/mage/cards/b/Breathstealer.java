@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Breathstealer extends CardImpl {
+public final class Breathstealer extends CardImpl {
 
     public Breathstealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

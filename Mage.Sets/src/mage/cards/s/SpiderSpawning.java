@@ -43,7 +43,7 @@ import mage.game.permanent.token.SpiderToken;
  *
  * @author North
  */
-public class SpiderSpawning extends CardImpl {
+public final class SpiderSpawning extends CardImpl {
 
     public SpiderSpawning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");

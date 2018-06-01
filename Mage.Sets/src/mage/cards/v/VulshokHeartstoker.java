@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class VulshokHeartstoker extends CardImpl {
+public final class VulshokHeartstoker extends CardImpl {
 
     public VulshokHeartstoker (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

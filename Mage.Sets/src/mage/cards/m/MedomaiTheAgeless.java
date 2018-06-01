@@ -51,7 +51,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MedomaiTheAgeless extends CardImpl {
+public final class MedomaiTheAgeless extends CardImpl {
 
     public MedomaiTheAgeless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{U}");

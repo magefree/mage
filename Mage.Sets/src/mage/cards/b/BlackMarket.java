@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author markedagain
  */
-public class BlackMarket extends CardImpl {
+public final class BlackMarket extends CardImpl {
 
     public BlackMarket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

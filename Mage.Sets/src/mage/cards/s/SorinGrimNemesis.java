@@ -59,7 +59,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class SorinGrimNemesis extends CardImpl {
+public final class SorinGrimNemesis extends CardImpl {
 
     public SorinGrimNemesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{B}");

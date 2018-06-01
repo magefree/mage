@@ -48,7 +48,7 @@ import mage.util.RandomUtil;
  *
  * @author LevelX2
  */
-public class WhimsOfTheFates extends CardImpl {
+public final class WhimsOfTheFates extends CardImpl {
 
     public WhimsOfTheFates(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");

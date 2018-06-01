@@ -45,7 +45,7 @@ import mage.watchers.Watcher;
 /**
  * @author nantuko
  */
-public class HomicidalBrute extends CardImpl {
+public final class HomicidalBrute extends CardImpl {
 
     public HomicidalBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

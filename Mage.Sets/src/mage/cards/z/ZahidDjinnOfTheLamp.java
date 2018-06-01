@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ZahidDjinnOfTheLamp extends CardImpl {
+public final class ZahidDjinnOfTheLamp extends CardImpl {
 
     public ZahidDjinnOfTheLamp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

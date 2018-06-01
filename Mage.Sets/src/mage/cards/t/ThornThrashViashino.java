@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ThornThrashViashino extends CardImpl {
+public final class ThornThrashViashino extends CardImpl {
 
     public ThornThrashViashino(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

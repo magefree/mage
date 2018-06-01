@@ -51,7 +51,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author emerald000
  */
-public class CouncilsJudgment extends CardImpl {
+public final class CouncilsJudgment extends CardImpl {
 
     public CouncilsJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");

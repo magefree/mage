@@ -40,7 +40,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author fireshoes
  */
-public class ServoSchematic extends CardImpl {
+public final class ServoSchematic extends CardImpl {
 
     public ServoSchematic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

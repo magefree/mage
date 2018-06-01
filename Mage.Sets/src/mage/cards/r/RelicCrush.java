@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class RelicCrush extends CardImpl {
+public final class RelicCrush extends CardImpl {
 
     public RelicCrush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}");

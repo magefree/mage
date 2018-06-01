@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Styxo
  */
-public class AerialModification extends CardImpl {
+public final class AerialModification extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or vehicle");
 

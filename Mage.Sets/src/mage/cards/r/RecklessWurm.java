@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class RecklessWurm extends CardImpl {
+public final class RecklessWurm extends CardImpl {
 
     public RecklessWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

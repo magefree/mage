@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class PrimevalProtector extends CardImpl {
+public final class PrimevalProtector extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 

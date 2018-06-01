@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class SylvanTutor extends CardImpl {
+public final class SylvanTutor extends CardImpl {
 
     public SylvanTutor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class BaralChiefOfCompliance extends CardImpl {
+public final class BaralChiefOfCompliance extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Instant and sorcery spells");
 

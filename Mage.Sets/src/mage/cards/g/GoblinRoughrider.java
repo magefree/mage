@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GoblinRoughrider extends CardImpl {
+public final class GoblinRoughrider extends CardImpl {
 
     public GoblinRoughrider (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

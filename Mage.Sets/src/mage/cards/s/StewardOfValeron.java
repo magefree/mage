@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class StewardOfValeron extends CardImpl {
+public final class StewardOfValeron extends CardImpl {
 
     public StewardOfValeron (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

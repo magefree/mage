@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DesertOfTheMindful extends CardImpl {
+public final class DesertOfTheMindful extends CardImpl {
 
     public DesertOfTheMindful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

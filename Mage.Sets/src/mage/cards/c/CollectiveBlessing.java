@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CollectiveBlessing extends CardImpl {
+public final class CollectiveBlessing extends CardImpl {
 
     public CollectiveBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}{W}");

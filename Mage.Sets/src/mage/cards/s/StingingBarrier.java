@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class StingingBarrier extends CardImpl {
+public final class StingingBarrier extends CardImpl {
 
     public StingingBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

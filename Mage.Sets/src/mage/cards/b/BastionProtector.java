@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.CommanderPredicate;
  *
  * @author LevelX2
  */
-public class BastionProtector extends CardImpl {
+public final class BastionProtector extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
 

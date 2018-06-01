@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class RamosianRevivalist extends CardImpl {
+public final class RamosianRevivalist extends CardImpl {
     
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 5 or less from your graveyard");
 

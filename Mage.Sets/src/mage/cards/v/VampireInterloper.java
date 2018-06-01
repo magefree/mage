@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author nantuko
  */
-public class VampireInterloper extends CardImpl {
+public final class VampireInterloper extends CardImpl {
 
     public VampireInterloper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

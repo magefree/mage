@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class SeismicSpike extends CardImpl {
+public final class SeismicSpike extends CardImpl {
 
     public SeismicSpike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

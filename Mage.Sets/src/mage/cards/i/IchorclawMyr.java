@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class IchorclawMyr extends CardImpl {
+public final class IchorclawMyr extends CardImpl {
 
     public IchorclawMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

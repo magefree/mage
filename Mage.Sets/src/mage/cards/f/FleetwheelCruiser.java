@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class FleetwheelCruiser extends CardImpl {
+public final class FleetwheelCruiser extends CardImpl {
 
     public FleetwheelCruiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

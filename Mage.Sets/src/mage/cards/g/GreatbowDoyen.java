@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class GreatbowDoyen extends CardImpl {
+public final class GreatbowDoyen extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Archer creatures you control");
 

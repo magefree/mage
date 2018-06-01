@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class IridescentAngel extends CardImpl {
+public final class IridescentAngel extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("all colors");
 

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class KioraKrakenToken extends TokenImpl {
+public final class KioraKrakenToken extends TokenImpl {
 
     public KioraKrakenToken() {
         super("Kraken", "9/9 blue Kraken creature token");

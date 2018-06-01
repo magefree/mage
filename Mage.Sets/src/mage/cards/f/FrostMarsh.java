@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author dustinconrad
  */
-public class FrostMarsh extends CardImpl {
+public final class FrostMarsh extends CardImpl {
 
     public FrostMarsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

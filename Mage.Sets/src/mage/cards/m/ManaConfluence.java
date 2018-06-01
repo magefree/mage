@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class ManaConfluence extends CardImpl {
+public final class ManaConfluence extends CardImpl {
 
     public ManaConfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

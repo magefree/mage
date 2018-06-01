@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class EnragingLicid extends CardImpl {
+public final class EnragingLicid extends CardImpl {
 
     public EnragingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

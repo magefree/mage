@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class DeathPitOffering extends CardImpl {
+public final class DeathPitOffering extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

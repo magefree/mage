@@ -43,7 +43,7 @@ import mage.game.permanent.token.TuktukTheReturnedToken;
  *
  * @author Loki
  */
-public class TuktukTheExplorer extends CardImpl {
+public final class TuktukTheExplorer extends CardImpl {
 
     public TuktukTheExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

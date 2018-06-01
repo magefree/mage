@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WarclampMastiff extends CardImpl {
+public final class WarclampMastiff extends CardImpl {
 
     public WarclampMastiff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

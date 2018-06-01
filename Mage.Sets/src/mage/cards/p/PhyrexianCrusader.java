@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Viserion
  */
-public class PhyrexianCrusader extends CardImpl {
+public final class PhyrexianCrusader extends CardImpl {
 
     public PhyrexianCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

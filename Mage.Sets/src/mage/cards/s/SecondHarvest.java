@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class SecondHarvest extends CardImpl {
+public final class SecondHarvest extends CardImpl {
 
     public SecondHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}");

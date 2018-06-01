@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class GriffinToken extends TokenImpl {
+public final class GriffinToken extends TokenImpl {
 
     public GriffinToken() {
         super("Griffin", "2/2 white Griffin creature token with flying");

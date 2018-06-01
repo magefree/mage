@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author North
  */
-public class MirrorOfFate extends CardImpl {
+public final class MirrorOfFate extends CardImpl {
 
     public MirrorOfFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

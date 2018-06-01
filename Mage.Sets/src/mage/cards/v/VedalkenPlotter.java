@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class VedalkenPlotter extends CardImpl {
+public final class VedalkenPlotter extends CardImpl {
     
     private static final String rule = "exchange control of target land you control and target land an opponent controls";
     

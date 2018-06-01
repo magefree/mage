@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class AndraditeLeech extends CardImpl {
+public final class AndraditeLeech extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Black spells");
 

@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class EncirclingFissure extends CardImpl {
+public final class EncirclingFissure extends CardImpl {
 
     public EncirclingFissure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

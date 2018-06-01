@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class NezahalPrimalTide extends CardImpl {
+public final class NezahalPrimalTide extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

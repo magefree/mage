@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author fireshoes
  */
-public class ArcMage extends CardImpl {
+public final class ArcMage extends CardImpl {
 
     public ArcMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

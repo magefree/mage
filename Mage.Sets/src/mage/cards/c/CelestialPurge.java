@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CelestialPurge extends CardImpl {
+public final class CelestialPurge extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("black or red permanent");
 

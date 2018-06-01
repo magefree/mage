@@ -41,7 +41,7 @@ import mage.counters.CounterType;
 /**
  * @author nantuko
  */
-public class SengirVampire extends CardImpl {
+public final class SengirVampire extends CardImpl {
 
     public SengirVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

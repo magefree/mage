@@ -45,7 +45,7 @@ import mage.filter.FilterPermanent;
  *
  * @author fireshoes
  */
-public class WaterWurm extends CardImpl {
+public final class WaterWurm extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.ISLAND, "Island");
 

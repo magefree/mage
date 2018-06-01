@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author nantuko
  */
-public class ConsumeSpirit extends CardImpl {
+public final class ConsumeSpirit extends CardImpl {
 
     static final FilterMana filterBlack = new FilterMana();
 

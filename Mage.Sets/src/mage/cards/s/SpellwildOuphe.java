@@ -45,7 +45,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2 & L_J
  */
-public class SpellwildOuphe extends CardImpl {
+public final class SpellwildOuphe extends CardImpl {
 
     public SpellwildOuphe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

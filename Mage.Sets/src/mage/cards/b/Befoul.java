@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX
  */
-public class Befoul extends CardImpl {
+public final class Befoul extends CardImpl {
 
     static final FilterPermanent filter = new FilterPermanent("land or nonblack creature");
 

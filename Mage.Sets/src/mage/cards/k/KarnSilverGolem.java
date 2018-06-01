@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class KarnSilverGolem extends CardImpl {
+public final class KarnSilverGolem extends CardImpl {
 
     private static final FilterArtifactPermanent filterNonCreature = new FilterArtifactPermanent("noncreature artifact");
 

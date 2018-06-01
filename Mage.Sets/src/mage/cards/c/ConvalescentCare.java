@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class ConvalescentCare extends CardImpl {
+public final class ConvalescentCare extends CardImpl {
 
     public ConvalescentCare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FarbogExplorer extends CardImpl {
+public final class FarbogExplorer extends CardImpl {
 
     public FarbogExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

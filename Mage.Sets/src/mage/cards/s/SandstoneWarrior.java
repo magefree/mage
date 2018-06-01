@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class SandstoneWarrior extends CardImpl {
+public final class SandstoneWarrior extends CardImpl {
 
     public SandstoneWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

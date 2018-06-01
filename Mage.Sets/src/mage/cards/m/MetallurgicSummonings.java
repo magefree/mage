@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class MetallurgicSummonings extends CardImpl {
+public final class MetallurgicSummonings extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
 

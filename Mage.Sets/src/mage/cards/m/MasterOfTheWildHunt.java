@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MasterOfTheWildHunt extends CardImpl {
+public final class MasterOfTheWildHunt extends CardImpl {
 
     private static WolfToken wolfToken = new WolfToken();
 

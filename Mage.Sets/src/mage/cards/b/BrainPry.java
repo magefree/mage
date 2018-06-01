@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class BrainPry extends CardImpl {
+public final class BrainPry extends CardImpl {
 
     public BrainPry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

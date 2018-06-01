@@ -38,7 +38,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LoneFox
  */
-public class FalseMourning extends CardImpl {
+public final class FalseMourning extends CardImpl {
 
     public FalseMourning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

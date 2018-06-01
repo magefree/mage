@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class LabyrinthChampion extends CardImpl {
+public final class LabyrinthChampion extends CardImpl {
 
     public LabyrinthChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

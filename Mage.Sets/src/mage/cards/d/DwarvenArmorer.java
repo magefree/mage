@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LoneFox
  */
-public class DwarvenArmorer extends CardImpl {
+public final class DwarvenArmorer extends CardImpl {
 
     public DwarvenArmorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

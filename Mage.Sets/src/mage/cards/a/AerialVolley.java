@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class AerialVolley extends CardImpl {
+public final class AerialVolley extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying");
 

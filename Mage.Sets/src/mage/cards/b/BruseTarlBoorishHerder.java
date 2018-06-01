@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class BruseTarlBoorishHerder extends CardImpl {
+public final class BruseTarlBoorishHerder extends CardImpl {
 
     public BruseTarlBoorishHerder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");

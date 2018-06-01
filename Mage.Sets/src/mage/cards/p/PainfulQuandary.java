@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PainfulQuandary extends CardImpl {
+public final class PainfulQuandary extends CardImpl {
 
     public PainfulQuandary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

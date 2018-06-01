@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author jeffwadsworth
  */
-public class AvatarOfTheResolute extends CardImpl {
+public final class AvatarOfTheResolute extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control with a +1/+1 counter on it");
     

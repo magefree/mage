@@ -48,7 +48,7 @@ import mage.util.functions.EmptyApplyToPermanent;
 /**
  * @author duncant
  */
-public class Shapesharer extends CardImpl {
+public final class Shapesharer extends CardImpl {
 
     private static final FilterPermanent filterShapeshifter = new FilterPermanent("Shapeshifter");
 

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ShatterskullGiant extends CardImpl {
+public final class ShatterskullGiant extends CardImpl {
 
     public ShatterskullGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TemurCharger extends CardImpl {
+public final class TemurCharger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a green card in your hand");
 

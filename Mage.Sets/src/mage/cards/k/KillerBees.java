@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class KillerBees extends CardImpl {
+public final class KillerBees extends CardImpl {
 
     public KillerBees(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

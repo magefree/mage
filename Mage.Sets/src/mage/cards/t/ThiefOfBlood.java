@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class ThiefOfBlood extends CardImpl {
+public final class ThiefOfBlood extends CardImpl {
 
     public ThiefOfBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

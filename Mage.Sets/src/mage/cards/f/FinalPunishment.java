@@ -43,7 +43,7 @@ import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
  *
  * @author LoneFox
  */
-public class FinalPunishment extends CardImpl {
+public final class FinalPunishment extends CardImpl {
 
     public FinalPunishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

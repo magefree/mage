@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class Extinguish extends CardImpl {
+public final class Extinguish extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("sorcery spell");
 

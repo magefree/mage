@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class EnchantedEvening extends CardImpl {
+public final class EnchantedEvening extends CardImpl {
 
     public EnchantedEvening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W/U}{W/U}");

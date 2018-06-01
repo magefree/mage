@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
 /**
  * @author JRHerlehy
  */
-public class SiegeModification extends CardImpl {
+public final class SiegeModification extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or vehicle");
 

@@ -49,7 +49,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author Styxo
  */
-public class KraumLudevicsOpus extends CardImpl {
+public final class KraumLudevicsOpus extends CardImpl {
 
     public KraumLudevicsOpus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author nantuko
  */
-public class AngelsHerald extends CardImpl {
+public final class AngelsHerald extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card named Empyrial Archangel");
     private static final FilterControlledCreaturePermanent filterGreen = new FilterControlledCreaturePermanent("a green creature");

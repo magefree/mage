@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class OneDozenEyesBeastToken extends TokenImpl {
+public final class OneDozenEyesBeastToken extends TokenImpl {
 
     public OneDozenEyesBeastToken() {
         super("Beast", "5/5 green Beast creature token");

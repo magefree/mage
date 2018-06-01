@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class OathOfLieges extends CardImpl {
+public final class OathOfLieges extends CardImpl {
 
     private final UUID originalId;
     private static final FilterPlayer FILTER = new FilterPlayer("player who controls more lands than you do and is your opponent");
@@ -119,7 +119,7 @@ class OathOfLiegesEffect extends OneShotEffect {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
             if (activePlayer.chooseUse(outcome, "Search your library for a basic land card, put that card onto the battlefield, then shuffle your library?", source, game)) {
-                Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), false, true, Outcome.PutLandInPlay, true);
+                Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), false, true, Outcome.PutLandInPlay, true);
                 effect.setTargetPointer(new FixedTarget(game.getActivePlayerId()));
                 return effect.apply(game, source);
             }

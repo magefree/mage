@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PhyrexianWalker extends CardImpl {
+public final class PhyrexianWalker extends CardImpl {
 
     public PhyrexianWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{0}");

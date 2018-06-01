@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class BurrentonForgeTender extends CardImpl {
+public final class BurrentonForgeTender extends CardImpl {
 
     private static final FilterObject filterObject = new FilterObject("a red");
 

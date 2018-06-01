@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class CopperhornScout extends CardImpl {
+public final class CopperhornScout extends CardImpl {
 
     public CopperhornScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

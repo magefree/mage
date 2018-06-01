@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class HeraldOfAnguish extends CardImpl {
+public final class HeraldOfAnguish extends CardImpl {
 
     public HeraldOfAnguish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

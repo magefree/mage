@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class SunscapeApprentice extends CardImpl {
+public final class SunscapeApprentice extends CardImpl {
 
     public SunscapeApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

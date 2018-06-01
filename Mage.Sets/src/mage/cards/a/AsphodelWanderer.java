@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class AsphodelWanderer extends CardImpl {
+public final class AsphodelWanderer extends CardImpl {
 
     public AsphodelWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

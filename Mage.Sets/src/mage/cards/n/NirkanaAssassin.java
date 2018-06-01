@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class NirkanaAssassin extends CardImpl {
+public final class NirkanaAssassin extends CardImpl {
 
     public NirkanaAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author hanasu
  */
-public class StormSeeker extends CardImpl {
+public final class StormSeeker extends CardImpl {
 
     public StormSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

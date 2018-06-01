@@ -56,7 +56,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class CruelReality extends CardImpl {
+public final class CruelReality extends CardImpl {
 
     public CruelReality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");

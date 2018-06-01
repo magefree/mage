@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  * really support "once each turn" alternative costs in an obvious way, but it should work in all scenarios as far
  * as I can see.
  */
-public class AsForetold extends CardImpl {
+public final class AsForetold extends CardImpl {
     public AsForetold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 

@@ -36,7 +36,7 @@ import mage.ObjectColor;
  *
  * @author spjspj
  */
-public class RedHumanToken extends TokenImpl {
+public final class RedHumanToken extends TokenImpl {
 
     public RedHumanToken() {
         super("Human", "1/1 red Human creature token");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JotaPeRL
  */
-public class AquastrandSpider extends CardImpl {
+public final class AquastrandSpider extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
     static {

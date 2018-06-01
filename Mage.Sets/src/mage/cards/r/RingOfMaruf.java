@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class RingOfMaruf extends CardImpl {
+public final class RingOfMaruf extends CardImpl {
 
     public RingOfMaruf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

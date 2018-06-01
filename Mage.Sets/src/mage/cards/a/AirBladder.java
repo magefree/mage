@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class AirBladder extends CardImpl {
+public final class AirBladder extends CardImpl {
 
     public AirBladder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

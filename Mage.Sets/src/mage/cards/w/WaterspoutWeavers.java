@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WaterspoutWeavers extends CardImpl {
+public final class WaterspoutWeavers extends CardImpl {
 
     public WaterspoutWeavers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

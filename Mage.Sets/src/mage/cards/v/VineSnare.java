@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author LevelX2
  */
-public class VineSnare extends CardImpl {
+public final class VineSnare extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or less");
 

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class TrenchGorger extends CardImpl {
+public final class TrenchGorger extends CardImpl {
 
     public TrenchGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");

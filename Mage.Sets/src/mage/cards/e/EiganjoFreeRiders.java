@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author Loki
  */
-public class EiganjoFreeRiders extends CardImpl {
+public final class EiganjoFreeRiders extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white creature you control");
 

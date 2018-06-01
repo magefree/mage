@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Antiquities extends ExpansionSet {
+public final class Antiquities extends ExpansionSet {
 
     private static final Antiquities instance = new Antiquities();
 

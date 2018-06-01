@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author fireshoes
  */
-public class BenefactionOfRhonas extends CardImpl {
+public final class BenefactionOfRhonas extends CardImpl {
 
     public BenefactionOfRhonas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

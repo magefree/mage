@@ -50,7 +50,7 @@ import mage.game.events.GameEvent;
  *
  * @author spjspj
  */
-public class WillingTestSubject extends CardImpl {
+public final class WillingTestSubject extends CardImpl {
 
     public WillingTestSubject(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

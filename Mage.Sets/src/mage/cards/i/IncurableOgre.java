@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class IncurableOgre extends CardImpl {
+public final class IncurableOgre extends CardImpl {
 
     public IncurableOgre (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

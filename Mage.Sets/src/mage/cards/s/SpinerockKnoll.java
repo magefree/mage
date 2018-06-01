@@ -54,7 +54,7 @@ import mage.watchers.Watcher;
 /**
  * @author emerald000
  */
-public class SpinerockKnoll extends CardImpl {
+public final class SpinerockKnoll extends CardImpl {
 
     public SpinerockKnoll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

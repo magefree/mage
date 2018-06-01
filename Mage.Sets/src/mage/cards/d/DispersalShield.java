@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author nigelzor
  */
-public class DispersalShield extends CardImpl {
+public final class DispersalShield extends CardImpl {
 
     public DispersalShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

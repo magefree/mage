@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author stravant
  */
-public class RhetCropSpearmaster extends CardImpl {
+public final class RhetCropSpearmaster extends CardImpl {
 
     public RhetCropSpearmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

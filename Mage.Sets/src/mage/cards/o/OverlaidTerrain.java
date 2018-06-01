@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class OverlaidTerrain extends CardImpl {
+public final class OverlaidTerrain extends CardImpl {
 
     public OverlaidTerrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author cbt33, Loki (Contaminated Ground), Plopman (Larceny)
  */
-public class GracefulAntelope extends CardImpl {
+public final class GracefulAntelope extends CardImpl {
 
     public GracefulAntelope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

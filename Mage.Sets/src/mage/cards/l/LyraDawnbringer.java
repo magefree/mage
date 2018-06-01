@@ -19,7 +19,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
-public class LyraDawnbringer extends CardImpl {
+public final class LyraDawnbringer extends CardImpl {
 
     private static final FilterCreaturePermanent AngelFilter = new FilterCreaturePermanent(SubType.ANGEL, "Angels");
 

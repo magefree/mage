@@ -47,7 +47,7 @@ import mage.game.permanent.token.WireflyToken;
  *
  * @author fireshoes
  */
-public class WireflyHive extends CardImpl {
+public final class WireflyHive extends CardImpl {
 
     public WireflyHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

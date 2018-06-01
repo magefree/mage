@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class CrystalGolem extends CardImpl {
+public final class CrystalGolem extends CardImpl {
 
     public CrystalGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

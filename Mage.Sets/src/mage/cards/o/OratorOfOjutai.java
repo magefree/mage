@@ -54,7 +54,7 @@ import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
  *
  * @author LevelX2
  */
-public class OratorOfOjutai extends CardImpl {
+public final class OratorOfOjutai extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Dragon card from your hand (you don't have to)");
 

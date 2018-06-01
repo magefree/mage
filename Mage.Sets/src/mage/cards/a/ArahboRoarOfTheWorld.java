@@ -59,7 +59,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class ArahboRoarOfTheWorld extends CardImpl {
+public final class ArahboRoarOfTheWorld extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target Cat you control");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("another Cat you control");

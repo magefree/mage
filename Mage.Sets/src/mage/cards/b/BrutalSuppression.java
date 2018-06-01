@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author L_J
  */
-public class BrutalSuppression extends CardImpl {
+public final class BrutalSuppression extends CardImpl {
 
     public BrutalSuppression(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");

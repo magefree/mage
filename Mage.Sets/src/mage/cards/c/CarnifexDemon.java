@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class CarnifexDemon extends CardImpl {
+public final class CarnifexDemon extends CardImpl {
 
     public CarnifexDemon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

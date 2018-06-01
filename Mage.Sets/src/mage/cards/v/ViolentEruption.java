@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author magenoxx_at_gmail.com
  */
-public class ViolentEruption extends CardImpl {
+public final class ViolentEruption extends CardImpl {
 
     public ViolentEruption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}{R}");

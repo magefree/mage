@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author spjspj
  */
-public class SunsetPyramid extends CardImpl {
+public final class SunsetPyramid extends CardImpl {
 
     public SunsetPyramid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

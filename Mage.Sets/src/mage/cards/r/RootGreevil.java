@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Derpthemeus
  */
-public class RootGreevil extends CardImpl {
+public final class RootGreevil extends CardImpl {
 
     public RootGreevil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

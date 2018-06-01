@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class RuggedPrairie extends CardImpl {
+public final class RuggedPrairie extends CardImpl {
 
     public RuggedPrairie (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

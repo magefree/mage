@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class ViashinoSkeleton extends CardImpl {
+public final class ViashinoSkeleton extends CardImpl {
 
     public ViashinoSkeleton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

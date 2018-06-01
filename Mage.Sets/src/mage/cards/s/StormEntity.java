@@ -47,7 +47,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author Quercitron
  */
-public class StormEntity extends CardImpl {
+public final class StormEntity extends CardImpl {
 
     public StormEntity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

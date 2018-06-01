@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class KrosanColossus extends CardImpl {
+public final class KrosanColossus extends CardImpl {
 
     public KrosanColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}{G}");

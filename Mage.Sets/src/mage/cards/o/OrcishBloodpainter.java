@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class OrcishBloodpainter extends CardImpl {
+public final class OrcishBloodpainter extends CardImpl {
 
     public OrcishBloodpainter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

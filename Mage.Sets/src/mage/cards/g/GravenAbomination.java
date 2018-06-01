@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class GravenAbomination extends CardImpl {
+public final class GravenAbomination extends CardImpl {
 
     private final UUID originalId;
 

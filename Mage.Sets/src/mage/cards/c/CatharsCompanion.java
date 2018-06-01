@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class CatharsCompanion extends CardImpl {
+public final class CatharsCompanion extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
     static {

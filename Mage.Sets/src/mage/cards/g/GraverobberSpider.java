@@ -48,7 +48,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX2
  */
-public class GraverobberSpider extends CardImpl {
+public final class GraverobberSpider extends CardImpl {
 
     public GraverobberSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

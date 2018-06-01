@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class DreadShade extends CardImpl {
+public final class DreadShade extends CardImpl {
 
     public DreadShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");

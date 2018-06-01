@@ -45,7 +45,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class PriestOfIroas extends CardImpl {
+public final class PriestOfIroas extends CardImpl {
 
     public PriestOfIroas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

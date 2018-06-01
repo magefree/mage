@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class SandsOfTime extends CardImpl {
+public final class SandsOfTime extends CardImpl {
 
     public SandsOfTime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

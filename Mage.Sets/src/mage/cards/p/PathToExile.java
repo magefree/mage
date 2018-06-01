@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PathToExile extends CardImpl {
+public final class PathToExile extends CardImpl {
 
     public PathToExile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
@@ -94,7 +94,7 @@ class PathToExileEffect extends OneShotEffect {
             // if the zone change to exile gets replaced does not prevent the target controller to be able to search
             controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
             if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for a basic land card?", source, game)) {
-                TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+                TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
                 if (player.searchLibrary(target, game)) {
                     Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {

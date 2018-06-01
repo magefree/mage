@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MultiformWonder extends CardImpl {
+public final class MultiformWonder extends CardImpl {
 
     public MultiformWonder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

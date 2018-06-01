@@ -25,7 +25,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author Loki
  */
-public class AkkiLavarunner extends CardImpl {
+public final class AkkiLavarunner extends CardImpl {
 
     public AkkiLavarunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

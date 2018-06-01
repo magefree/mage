@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class PlaneswalkersScorn extends CardImpl {
+public final class PlaneswalkersScorn extends CardImpl {
 
     public PlaneswalkersScorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

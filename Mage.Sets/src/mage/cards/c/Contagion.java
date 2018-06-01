@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author Plopman
  */
-public class Contagion extends CardImpl {
+public final class Contagion extends CardImpl {
 
     public Contagion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");

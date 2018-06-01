@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class HazoretsFavor extends CardImpl {
+public final class HazoretsFavor extends CardImpl {
 
     public HazoretsFavor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

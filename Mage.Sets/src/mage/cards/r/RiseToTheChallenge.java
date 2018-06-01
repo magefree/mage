@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RiseToTheChallenge extends CardImpl {
+public final class RiseToTheChallenge extends CardImpl {
 
     public RiseToTheChallenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

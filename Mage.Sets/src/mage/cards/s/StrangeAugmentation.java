@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StrangeAugmentation extends CardImpl {
+public final class StrangeAugmentation extends CardImpl {
 
     public StrangeAugmentation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");

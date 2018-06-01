@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Saga
  */
-public class CurseOfOpulence extends CardImpl {
+public final class CurseOfOpulence extends CardImpl {
 
     public CurseOfOpulence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");

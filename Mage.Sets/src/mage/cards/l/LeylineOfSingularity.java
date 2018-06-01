@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class LeylineOfSingularity extends CardImpl {
+public final class LeylineOfSingularity extends CardImpl {
 
     public LeylineOfSingularity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

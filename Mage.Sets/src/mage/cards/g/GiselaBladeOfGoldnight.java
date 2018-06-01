@@ -46,7 +46,7 @@ import mage.util.CardUtil;
 /**
  * @author noxx
  */
-public class GiselaBladeOfGoldnight extends CardImpl {
+public final class GiselaBladeOfGoldnight extends CardImpl {
 
     public GiselaBladeOfGoldnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{W}");

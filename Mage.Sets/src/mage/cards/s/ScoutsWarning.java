@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class ScoutsWarning extends CardImpl {
+public final class ScoutsWarning extends CardImpl {
 
     public ScoutsWarning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

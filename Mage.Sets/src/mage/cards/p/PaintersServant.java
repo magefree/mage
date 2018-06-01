@@ -51,13 +51,13 @@ import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.sets.Commander;
+import mage.game.command.Commander;
 
 /**
  *
  * @author LevelX2
  */
-public class PaintersServant extends CardImpl {
+public final class PaintersServant extends CardImpl {
 
     public PaintersServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

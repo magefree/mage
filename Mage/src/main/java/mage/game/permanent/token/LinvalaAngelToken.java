@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class LinvalaAngelToken extends TokenImpl {
+public final class LinvalaAngelToken extends TokenImpl {
 
     public LinvalaAngelToken() {
         super("Angel", "3/3 white Angel creature token with flying");

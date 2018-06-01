@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class AnyaMercilessAngel extends CardImpl {
+public final class AnyaMercilessAngel extends CardImpl {
 
     public AnyaMercilessAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");

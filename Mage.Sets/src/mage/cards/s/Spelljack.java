@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class Spelljack extends CardImpl {
+public final class Spelljack extends CardImpl {
 
     public Spelljack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}{U}");

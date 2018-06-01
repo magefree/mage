@@ -45,7 +45,7 @@ import mage.filter.FilterPermanent;
  *
  * @author North
  */
-public class NightRevelers extends CardImpl {
+public final class NightRevelers extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.HUMAN, "Human");
 

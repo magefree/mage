@@ -50,7 +50,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class WickerboughElder extends CardImpl {
+public final class WickerboughElder extends CardImpl {
 
     public WickerboughElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

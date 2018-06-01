@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class IreShaman extends CardImpl {
+public final class IreShaman extends CardImpl {
 
     public IreShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

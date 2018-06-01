@@ -36,7 +36,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class KaldraToken extends TokenImpl {
+public final class KaldraToken extends TokenImpl {
 
     public KaldraToken() {
         super("Kaldra", "legendary 4/4 colorless Avatar creature token named Kaldra");

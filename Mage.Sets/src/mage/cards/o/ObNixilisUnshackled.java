@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class ObNixilisUnshackled extends CardImpl {
+public final class ObNixilisUnshackled extends CardImpl {
 
     public ObNixilisUnshackled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

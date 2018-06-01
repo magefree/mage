@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PhantasmalAbomination extends CardImpl {
+public final class PhantasmalAbomination extends CardImpl {
 
     public PhantasmalAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

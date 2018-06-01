@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class IroncladRevolutionary extends CardImpl {
+public final class IroncladRevolutionary extends CardImpl {
 
     public IroncladRevolutionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

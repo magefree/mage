@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class TamiyosJournal extends CardImpl {
+public final class TamiyosJournal extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clues");
 

@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author KholdFuzion
  */
-public class Opposition extends CardImpl {
+public final class Opposition extends CardImpl {
 
     private static final FilterPermanent artifactcreatureorland = new FilterPermanent("artifact, creature, or land");
 

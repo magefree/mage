@@ -8,7 +8,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class MerfolkWizardToken extends TokenImpl {
+public final class MerfolkWizardToken extends TokenImpl {
 
     public MerfolkWizardToken() {
         super("Merfolk Wizard", "1/1 blue Merfolk Wizard creature token");

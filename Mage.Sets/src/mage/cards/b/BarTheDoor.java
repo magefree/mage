@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class BarTheDoor extends CardImpl {
+public final class BarTheDoor extends CardImpl {
 
     public BarTheDoor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

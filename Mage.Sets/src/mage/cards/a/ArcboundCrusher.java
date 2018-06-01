@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class ArcboundCrusher extends CardImpl {
+public final class ArcboundCrusher extends CardImpl {
 
     private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
 

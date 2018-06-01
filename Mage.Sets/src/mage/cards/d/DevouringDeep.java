@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DevouringDeep extends CardImpl {
+public final class DevouringDeep extends CardImpl {
 
     public DevouringDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

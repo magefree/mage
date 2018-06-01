@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class RiseOfEaglesBirdToken extends TokenImpl {
+public final class RiseOfEaglesBirdToken extends TokenImpl {
 
     public RiseOfEaglesBirdToken() {
         super("Bird", "2/2 blue Bird enchantment creature tokens with flying");

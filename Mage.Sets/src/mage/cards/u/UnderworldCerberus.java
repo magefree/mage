@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX2
  */
-public class UnderworldCerberus extends CardImpl {
+public final class UnderworldCerberus extends CardImpl {
 
     public UnderworldCerberus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

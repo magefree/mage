@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class AcklayOfTheArena extends CardImpl {
+public final class AcklayOfTheArena extends CardImpl {
 
     public AcklayOfTheArena(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}{W}");

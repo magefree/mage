@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward
  */
-public class Spinebiter extends CardImpl {
+public final class Spinebiter extends CardImpl {
 
     public Spinebiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

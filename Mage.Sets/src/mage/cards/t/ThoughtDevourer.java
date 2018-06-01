@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ThoughtDevourer extends CardImpl {
+public final class ThoughtDevourer extends CardImpl {
 
     public ThoughtDevourer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

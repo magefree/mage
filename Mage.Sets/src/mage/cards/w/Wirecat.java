@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Derpthemeus
  */
-public class Wirecat extends CardImpl {
+public final class Wirecat extends CardImpl {
 
     public Wirecat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

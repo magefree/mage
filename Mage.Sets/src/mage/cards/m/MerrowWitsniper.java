@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class MerrowWitsniper extends CardImpl {
+public final class MerrowWitsniper extends CardImpl {
 
     public MerrowWitsniper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

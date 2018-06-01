@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class FatalFrenzy extends CardImpl {
+public final class FatalFrenzy extends CardImpl {
 
     public FatalFrenzy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class SpawningBreath extends CardImpl {
+public final class SpawningBreath extends CardImpl {
 
     public SpawningBreath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

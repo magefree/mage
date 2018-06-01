@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
 /**
  * @author spjspj
  */
-public class FailureComply extends SplitCard {
+public final class FailureComply extends SplitCard {
 
     public FailureComply(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{U}", "{W}", SpellAbilityType.SPLIT_AFTERMATH);

@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author KholdFuzion
  *
  */
-public class ZombieMaster extends CardImpl {
+public final class ZombieMaster extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Zombie creatures");
 

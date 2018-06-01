@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ThalakosDeceiver extends CardImpl {
+public final class ThalakosDeceiver extends CardImpl {
 
     public ThalakosDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

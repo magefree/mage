@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class DoublingSeason extends CardImpl {
+public final class DoublingSeason extends CardImpl {
 
     public DoublingSeason(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
@@ -96,6 +96,9 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
+        if (!event.getFlag()) {
+            return false;
+        }
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
             landPlayed = (permanent != null

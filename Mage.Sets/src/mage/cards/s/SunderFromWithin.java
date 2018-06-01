@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SunderFromWithin extends CardImpl {
+public final class SunderFromWithin extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

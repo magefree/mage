@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class MausoleumTurnkey extends CardImpl {
+public final class MausoleumTurnkey extends CardImpl {
 
     public MausoleumTurnkey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

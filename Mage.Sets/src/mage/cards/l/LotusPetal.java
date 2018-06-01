@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class LotusPetal extends CardImpl {
+public final class LotusPetal extends CardImpl {
 
     public LotusPetal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

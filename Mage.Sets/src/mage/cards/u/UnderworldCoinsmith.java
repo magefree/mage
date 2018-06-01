@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class UnderworldCoinsmith extends CardImpl {
+public final class UnderworldCoinsmith extends CardImpl {
 
     public UnderworldCoinsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{W}{B}");

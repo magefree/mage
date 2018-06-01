@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class AAT1 extends CardImpl {
+public final class AAT1 extends CardImpl {
 
     public AAT1(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{U}{B}");

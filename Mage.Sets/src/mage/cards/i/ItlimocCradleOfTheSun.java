@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author JRHerlehy
  */
-public class ItlimocCradleOfTheSun extends CardImpl {
+public final class ItlimocCradleOfTheSun extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature you control");
 

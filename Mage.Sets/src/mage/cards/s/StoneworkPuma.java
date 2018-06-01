@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class StoneworkPuma extends CardImpl {
+public final class StoneworkPuma extends CardImpl {
 
     public StoneworkPuma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

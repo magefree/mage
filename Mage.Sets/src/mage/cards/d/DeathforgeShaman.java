@@ -48,7 +48,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author jeffwadsworth
  */
-public class DeathforgeShaman extends CardImpl {
+public final class DeathforgeShaman extends CardImpl {
 
     public DeathforgeShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class FaerieConclave extends CardImpl {
+public final class FaerieConclave extends CardImpl {
 
     public FaerieConclave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

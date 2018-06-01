@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Styxo
  */
-public class BattleTactics extends CardImpl {
+public final class BattleTactics extends CardImpl {
 
     public BattleTactics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

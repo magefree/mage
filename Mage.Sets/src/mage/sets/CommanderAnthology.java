@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class CommanderAnthology extends ExpansionSet {
+public final class CommanderAnthology extends ExpansionSet {
 
     private static final CommanderAnthology instance = new CommanderAnthology();
 

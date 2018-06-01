@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class MindKnives extends CardImpl {
+public final class MindKnives extends CardImpl {
 
     public MindKnives(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

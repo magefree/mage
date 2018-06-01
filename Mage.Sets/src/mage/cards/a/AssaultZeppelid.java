@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AssaultZeppelid extends CardImpl {
+public final class AssaultZeppelid extends CardImpl {
 
     public AssaultZeppelid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");

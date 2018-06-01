@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ChariotOfVictory extends CardImpl {
+public final class ChariotOfVictory extends CardImpl {
 
     public ChariotOfVictory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

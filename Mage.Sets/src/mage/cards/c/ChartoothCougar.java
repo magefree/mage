@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class ChartoothCougar extends CardImpl {
+public final class ChartoothCougar extends CardImpl {
 
     public ChartoothCougar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

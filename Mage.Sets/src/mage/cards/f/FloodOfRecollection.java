@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author L_J
  */
-public class FloodOfRecollection extends CardImpl {
+public final class FloodOfRecollection extends CardImpl {
 
     public FloodOfRecollection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");

@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Traumatize extends CardImpl {
+public final class Traumatize extends CardImpl {
 
     public Traumatize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

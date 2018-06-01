@@ -52,7 +52,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class QuicksilverDragon extends CardImpl {
+public final class QuicksilverDragon extends CardImpl {
 
     public QuicksilverDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

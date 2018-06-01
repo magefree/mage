@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Loki (Mortivore), cbt33
  */
-public class Cantivore extends CardImpl {
+public final class Cantivore extends CardImpl {
 
     static final FilterCard filter = new FilterCard("enchantment cards");
     

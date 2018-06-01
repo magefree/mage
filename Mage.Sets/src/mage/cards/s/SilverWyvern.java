@@ -53,7 +53,7 @@ import mage.target.Targets;
  *
  * @author LevelX2
  */
-public class SilverWyvern extends CardImpl {
+public final class SilverWyvern extends CardImpl {
     
     public SilverWyvern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

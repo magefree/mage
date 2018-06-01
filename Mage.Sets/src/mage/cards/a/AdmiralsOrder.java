@@ -42,7 +42,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author L_J
  */
-public class AdmiralsOrder extends CardImpl { 
+public final class AdmiralsOrder extends CardImpl { 
 
     public AdmiralsOrder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

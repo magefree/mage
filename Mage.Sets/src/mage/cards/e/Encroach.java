@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LoneFox
  */
-public class Encroach extends CardImpl {
+public final class Encroach extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a nonbasic land card");
 

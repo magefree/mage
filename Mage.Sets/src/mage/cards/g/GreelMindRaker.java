@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Styxo
  */
-public class GreelMindRaker extends CardImpl {
+public final class GreelMindRaker extends CardImpl {
 
     public GreelMindRaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

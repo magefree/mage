@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class TrigonOfRage extends CardImpl {
+public final class TrigonOfRage extends CardImpl {
 
     public TrigonOfRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

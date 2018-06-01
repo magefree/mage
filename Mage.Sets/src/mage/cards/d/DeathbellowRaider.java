@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class DeathbellowRaider extends CardImpl {
+public final class DeathbellowRaider extends CardImpl {
 
     public DeathbellowRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

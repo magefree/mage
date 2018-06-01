@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class IgnobleSoldier extends CardImpl {
+public final class IgnobleSoldier extends CardImpl {
 
     public IgnobleSoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

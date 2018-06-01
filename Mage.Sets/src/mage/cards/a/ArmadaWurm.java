@@ -42,7 +42,7 @@ import mage.game.permanent.token.WurmToken2;
  *
  * @author LevelX2
  */
-public class ArmadaWurm extends CardImpl {
+public final class ArmadaWurm extends CardImpl {
 
     public ArmadaWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}{W}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class FeralAnimist extends CardImpl {
+public final class FeralAnimist extends CardImpl {
 
     public FeralAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");

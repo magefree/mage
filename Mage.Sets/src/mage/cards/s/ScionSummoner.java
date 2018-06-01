@@ -43,7 +43,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author fireshoes
  */
-public class ScionSummoner extends CardImpl {
+public final class ScionSummoner extends CardImpl {
 
     public ScionSummoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

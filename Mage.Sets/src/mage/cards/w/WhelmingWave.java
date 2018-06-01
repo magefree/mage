@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class WhelmingWave extends CardImpl {
+public final class WhelmingWave extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

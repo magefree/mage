@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class StirThePride extends CardImpl {
+public final class StirThePride extends CardImpl {
 
     public StirThePride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WarkiteMarauder extends CardImpl {
+public final class WarkiteMarauder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 

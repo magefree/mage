@@ -44,7 +44,7 @@ import mage.constants.Zone;
 /**
  * @author JRHerlehy
  */
-public class FreejamRegent extends CardImpl {
+public final class FreejamRegent extends CardImpl {
 
     public FreejamRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

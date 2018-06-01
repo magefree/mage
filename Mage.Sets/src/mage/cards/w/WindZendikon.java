@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class WindZendikon extends CardImpl {
+public final class WindZendikon extends CardImpl {
 
     public WindZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

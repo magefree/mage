@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class SoulSeparator extends CardImpl {
+public final class SoulSeparator extends CardImpl {
 
     public SoulSeparator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

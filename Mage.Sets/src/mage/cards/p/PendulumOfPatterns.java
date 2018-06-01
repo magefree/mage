@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class PendulumOfPatterns extends CardImpl {
+public final class PendulumOfPatterns extends CardImpl {
 
     public PendulumOfPatterns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

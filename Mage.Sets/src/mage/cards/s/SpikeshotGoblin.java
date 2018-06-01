@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class SpikeshotGoblin extends CardImpl {
+public final class SpikeshotGoblin extends CardImpl {
 
     public SpikeshotGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

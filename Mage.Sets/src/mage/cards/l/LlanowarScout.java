@@ -31,18 +31,19 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author TheElk801
  */
-public class LlanowarScout extends CardImpl {
+public final class LlanowarScout extends CardImpl {
 
     public LlanowarScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -53,7 +54,8 @@ public class LlanowarScout extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: You may put a land card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_BASIC_LAND_A), new TapSourceCost()));
     }
 
     public LlanowarScout(final LlanowarScout card) {

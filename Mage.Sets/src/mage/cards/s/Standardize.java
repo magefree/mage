@@ -48,7 +48,7 @@ import mage.players.Player;
 /**
  * @author EvilGeek
  */
-public class Standardize extends CardImpl {
+public final class Standardize extends CardImpl {
 
     public Standardize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");

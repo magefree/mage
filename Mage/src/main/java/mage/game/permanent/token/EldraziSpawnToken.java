@@ -44,7 +44,7 @@ import mage.util.RandomUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EldraziSpawnToken extends TokenImpl {
+public final class EldraziSpawnToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

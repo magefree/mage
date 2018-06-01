@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author emerald000
  */
-public class DwynenGiltLeafDaen extends CardImpl {
+public final class DwynenGiltLeafDaen extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ELF, "attacking Elf you control");
     static {

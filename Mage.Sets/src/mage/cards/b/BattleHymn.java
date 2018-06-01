@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class BattleHymn extends CardImpl {
+public final class BattleHymn extends CardImpl {
 
     public BattleHymn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

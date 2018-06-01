@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class Thermokarst extends CardImpl {
+public final class Thermokarst extends CardImpl {
 
     public Thermokarst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");

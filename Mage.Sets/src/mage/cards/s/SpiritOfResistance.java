@@ -50,7 +50,7 @@ import java.util.UUID;
 /**
  * @author Quercitron
  */
-public class SpiritOfResistance extends CardImpl {
+public final class SpiritOfResistance extends CardImpl {
 
     public SpiritOfResistance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

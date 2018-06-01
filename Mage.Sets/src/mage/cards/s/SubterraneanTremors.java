@@ -48,7 +48,7 @@ import mage.game.permanent.token.SubterraneanTremorsLizardToken;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class SubterraneanTremors extends CardImpl {
+public final class SubterraneanTremors extends CardImpl {
 
     public SubterraneanTremors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");

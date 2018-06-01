@@ -46,7 +46,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class TorchFiend extends CardImpl {
+public final class TorchFiend extends CardImpl {
 
     public TorchFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

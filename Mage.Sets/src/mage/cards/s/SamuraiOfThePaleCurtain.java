@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX
  */
-public class SamuraiOfThePaleCurtain extends CardImpl {
+public final class SamuraiOfThePaleCurtain extends CardImpl {
 
     public SamuraiOfThePaleCurtain (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

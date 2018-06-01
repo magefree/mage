@@ -48,7 +48,7 @@ import mage.game.permanent.token.MasterOfWavesElementalToken;
  *
  * @author LevelX2
  */
-public class MasterOfWaves extends CardImpl {
+public final class MasterOfWaves extends CardImpl {
 
     private static final FilterCreaturePermanent filterBoost = new FilterCreaturePermanent("Elemental creatures");
     static {

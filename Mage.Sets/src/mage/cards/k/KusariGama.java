@@ -58,7 +58,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class KusariGama extends CardImpl {
+public final class KusariGama extends CardImpl {
 
     public KusariGama(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

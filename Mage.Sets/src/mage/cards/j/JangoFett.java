@@ -60,7 +60,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo/spjspj
  */
-public class JangoFett extends CardImpl {
+public final class JangoFett extends CardImpl {
 
     public JangoFett(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

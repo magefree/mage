@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class EnhancedAwareness extends CardImpl {
+public final class EnhancedAwareness extends CardImpl {
 
     public EnhancedAwareness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");

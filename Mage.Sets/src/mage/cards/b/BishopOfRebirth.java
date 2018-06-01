@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TacomenX
  */
-public class BishopOfRebirth extends CardImpl {
+public final class BishopOfRebirth extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
 

@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author Derpthemeus
  */
-public class FathomTrawl extends CardImpl {
+public final class FathomTrawl extends CardImpl {
 
     public FathomTrawl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

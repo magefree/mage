@@ -66,7 +66,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class FallenEmpires extends ExpansionSet {
+public final class FallenEmpires extends ExpansionSet {
 
     private static final FallenEmpires instance = new FallenEmpires();
 

@@ -43,7 +43,7 @@ import mage.cards.CardSetInfo;
  *
  * @author JayDi85
  */
-public class KitesailCorsair extends CardImpl {
+public final class KitesailCorsair extends CardImpl {
 
     public KitesailCorsair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

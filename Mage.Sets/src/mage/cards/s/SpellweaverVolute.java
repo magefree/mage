@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -52,7 +53,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class SpellweaverVolute extends CardImpl {
+public final class SpellweaverVolute extends CardImpl {
 
     public SpellweaverVolute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
@@ -119,7 +120,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                             game.getState().setZone(copiedCard.getId(), Zone.GRAVEYARD);
                             if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
-                                    controller.cast(copiedCard.getSpellAbility(), game, true);
+                                    controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                                 }
                                 if (controller.moveCards(enchantedCard, Zone.EXILED, source, game)) {
                                     FilterCard filter = new FilterCard("instant card in a graveyard");

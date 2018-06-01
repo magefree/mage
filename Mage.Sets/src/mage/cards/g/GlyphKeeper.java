@@ -50,7 +50,7 @@ import mage.watchers.common.NumberOfTimesPermanentTargetedATurnWatcher;
  *
  * @author Styxo
  */
-public class GlyphKeeper extends CardImpl {
+public final class GlyphKeeper extends CardImpl {
 
     public GlyphKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

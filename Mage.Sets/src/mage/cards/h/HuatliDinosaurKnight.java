@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class HuatliDinosaurKnight extends CardImpl {
+public final class HuatliDinosaurKnight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaur you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you don't control");

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class KhalniGem extends CardImpl {
+public final class KhalniGem extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class NearheathPilgrim extends CardImpl {
+public final class NearheathPilgrim extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, both creatures have lifelink";
 

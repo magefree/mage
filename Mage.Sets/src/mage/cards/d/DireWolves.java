@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author L_J
  */
-public class DireWolves extends CardImpl {
+public final class DireWolves extends CardImpl {
 
     private static final String rule = "{this} has banding as long as you control a Plains.";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Plains");

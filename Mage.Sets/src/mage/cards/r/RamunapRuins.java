@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class RamunapRuins extends CardImpl {
+public final class RamunapRuins extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Desert");
 

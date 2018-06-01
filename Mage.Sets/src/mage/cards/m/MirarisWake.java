@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author LevelX2
  */
-public class MirarisWake extends CardImpl {
+public final class MirarisWake extends CardImpl {
 
     public MirarisWake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{W}");

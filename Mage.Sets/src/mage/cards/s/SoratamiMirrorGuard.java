@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class SoratamiMirrorGuard extends CardImpl {
+public final class SoratamiMirrorGuard extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature with power 2 or less");

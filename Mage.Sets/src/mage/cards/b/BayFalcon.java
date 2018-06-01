@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BayFalcon extends CardImpl {
+public final class BayFalcon extends CardImpl {
 
     public BayFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

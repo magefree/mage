@@ -42,7 +42,7 @@ import mage.game.Game;
  *
  * @author Plopman
  */
-public class Subversion extends CardImpl {
+public final class Subversion extends CardImpl {
 
     public Subversion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

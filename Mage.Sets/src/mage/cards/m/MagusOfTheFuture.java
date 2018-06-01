@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class MagusOfTheFuture extends CardImpl {
+public final class MagusOfTheFuture extends CardImpl {
 
     public MagusOfTheFuture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{U}");

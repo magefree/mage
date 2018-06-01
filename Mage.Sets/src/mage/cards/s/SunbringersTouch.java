@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author fireshoes
  */
-public class SunbringersTouch extends CardImpl {
+public final class SunbringersTouch extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Each creature you control with a +1/+1 counter on it");
     static {

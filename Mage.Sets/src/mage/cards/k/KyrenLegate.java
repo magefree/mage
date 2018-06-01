@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class KyrenLegate extends CardImpl {
+public final class KyrenLegate extends CardImpl {
 
     private static final FilterPermanent filterPlains = new FilterPermanent();
     private static final FilterPermanent filterMountain = new FilterPermanent();

@@ -47,7 +47,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author fireshoes
  */
-public class MizziumTransreliquat extends CardImpl {
+public final class MizziumTransreliquat extends CardImpl {
 
     public MizziumTransreliquat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

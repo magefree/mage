@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class MundasVanguard extends CardImpl {
+public final class MundasVanguard extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
 

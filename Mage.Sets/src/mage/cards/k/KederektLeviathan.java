@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author Plopman
  */
-public class KederektLeviathan extends CardImpl {
+public final class KederektLeviathan extends CardImpl {
     
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("all other nonland permanents");
     static{

@@ -60,7 +60,7 @@ import java.util.UUID;
  *
  * @author anonymous
  */
-public class CurseOfTheCabal extends CardImpl {
+public final class CurseOfTheCabal extends CardImpl {
 
     public CurseOfTheCabal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{9}{B}");

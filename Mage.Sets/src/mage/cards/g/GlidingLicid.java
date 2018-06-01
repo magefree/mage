@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class GlidingLicid extends CardImpl {
+public final class GlidingLicid extends CardImpl {
 
     public GlidingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

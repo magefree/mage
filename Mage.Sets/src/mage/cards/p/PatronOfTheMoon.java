@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author LevelX2
  */
-public class PatronOfTheMoon extends CardImpl {
+public final class PatronOfTheMoon extends CardImpl {
 
     public PatronOfTheMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

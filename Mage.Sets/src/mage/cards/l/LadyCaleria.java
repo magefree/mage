@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LoneFox
  */
-public class LadyCaleria extends CardImpl {
+public final class LadyCaleria extends CardImpl {
 
     public LadyCaleria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{W}{W}");

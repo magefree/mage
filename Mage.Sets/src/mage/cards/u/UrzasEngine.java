@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class UrzasEngine extends CardImpl {
+public final class UrzasEngine extends CardImpl {
 
     public UrzasEngine (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

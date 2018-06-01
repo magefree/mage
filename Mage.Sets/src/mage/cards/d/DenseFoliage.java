@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Quercitron
  */
-public class DenseFoliage extends CardImpl {
+public final class DenseFoliage extends CardImpl {
 
     public DenseFoliage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

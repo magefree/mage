@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Galatolol
  */
-public class StandingStones extends CardImpl {
+public final class StandingStones extends CardImpl {
 
     public StandingStones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

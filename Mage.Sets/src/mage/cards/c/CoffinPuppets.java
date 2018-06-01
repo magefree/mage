@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class CoffinPuppets extends CardImpl {
+public final class CoffinPuppets extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Swamp");
 

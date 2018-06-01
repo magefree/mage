@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class GoblinKaboomist extends CardImpl {
+public final class GoblinKaboomist extends CardImpl {
 
     public GoblinKaboomist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

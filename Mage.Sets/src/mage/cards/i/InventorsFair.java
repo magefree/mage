@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class InventorsFair extends CardImpl {
+public final class InventorsFair extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact");
 

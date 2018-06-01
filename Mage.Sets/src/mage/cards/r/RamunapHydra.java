@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class RamunapHydra extends CardImpl {
+public final class RamunapHydra extends CardImpl {
 
     public RamunapHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class AnkleShanker extends CardImpl {
+public final class AnkleShanker extends CardImpl {
 
     public AnkleShanker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}{B}");

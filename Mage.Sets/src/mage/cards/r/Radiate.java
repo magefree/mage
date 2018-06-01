@@ -52,7 +52,7 @@ import mage.util.TargetAddress;
 /**
  * @author duncant
  */
-public class Radiate extends CardImpl {
+public final class Radiate extends CardImpl {
 
     protected static final FilterSpell filter = new FilterInstantOrSorcerySpell();
 

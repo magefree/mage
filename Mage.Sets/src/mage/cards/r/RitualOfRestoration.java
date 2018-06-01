@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class RitualOfRestoration extends CardImpl {
+public final class RitualOfRestoration extends CardImpl {
 
     public RitualOfRestoration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");

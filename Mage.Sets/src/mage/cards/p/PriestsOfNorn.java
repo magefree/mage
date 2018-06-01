@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author ayratn
  */
-public class PriestsOfNorn extends CardImpl {
+public final class PriestsOfNorn extends CardImpl {
 
     public PriestsOfNorn (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

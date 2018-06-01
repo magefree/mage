@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CrookclawTransmuter extends CardImpl {
+public final class CrookclawTransmuter extends CardImpl {
 
     public CrookclawTransmuter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

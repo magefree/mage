@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author stravant
  */
-public class TrueheartTwins extends CardImpl {
+public final class TrueheartTwins extends CardImpl {
 
     public TrueheartTwins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

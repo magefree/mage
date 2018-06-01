@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class ResoundingScream extends CardImpl {
+public final class ResoundingScream extends CardImpl {
 
     public ResoundingScream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

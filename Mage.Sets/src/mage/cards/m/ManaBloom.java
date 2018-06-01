@@ -50,7 +50,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class ManaBloom extends CardImpl {
+public final class ManaBloom extends CardImpl {
 
     static final String rule = "with X charge counters on it";
 

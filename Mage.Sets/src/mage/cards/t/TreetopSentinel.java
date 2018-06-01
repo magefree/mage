@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author cbt33
  */
-public class TreetopSentinel extends CardImpl {
+public final class TreetopSentinel extends CardImpl {
     
     public TreetopSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

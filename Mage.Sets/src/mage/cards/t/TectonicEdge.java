@@ -53,7 +53,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TectonicEdge extends CardImpl {
+public final class TectonicEdge extends CardImpl {
 
     public TectonicEdge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

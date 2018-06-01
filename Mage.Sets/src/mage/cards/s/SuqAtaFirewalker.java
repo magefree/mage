@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author igout
  */
-public class SuqAtaFirewalker extends CardImpl {
+public final class SuqAtaFirewalker extends CardImpl {
 
     private static final FilterObject filterRed = new FilterStackObject("red spells or abilities from red sources");
 

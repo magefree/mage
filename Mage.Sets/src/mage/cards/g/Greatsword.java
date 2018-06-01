@@ -43,7 +43,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class Greatsword extends CardImpl {
+public final class Greatsword extends CardImpl {
 
     public Greatsword(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

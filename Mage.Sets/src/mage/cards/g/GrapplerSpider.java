@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GrapplerSpider extends CardImpl {
+public final class GrapplerSpider extends CardImpl {
 
     public GrapplerSpider (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

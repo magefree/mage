@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author Loki
  */
-public class JadeIdol extends CardImpl {
+public final class JadeIdol extends CardImpl {
 
     public JadeIdol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

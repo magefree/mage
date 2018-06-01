@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class AncientZiggurat extends CardImpl {
+public final class AncientZiggurat extends CardImpl {
 
     public AncientZiggurat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

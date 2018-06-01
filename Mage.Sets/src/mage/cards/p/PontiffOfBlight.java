@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 
 
-public class PontiffOfBlight extends CardImpl {
+public final class PontiffOfBlight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other creatures you control");
     static {

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class InformationDealer extends CardImpl {
+public final class InformationDealer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Wizards on the battlefield");
 

@@ -38,7 +38,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author LevelX2
  */
-public class SowingSalt extends CardImpl {
+public final class SowingSalt extends CardImpl {
 
     public SowingSalt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

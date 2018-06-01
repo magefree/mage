@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ReclusiveArtificer extends CardImpl {
+public final class ReclusiveArtificer extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
 

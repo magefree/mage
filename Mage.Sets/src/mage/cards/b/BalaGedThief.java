@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class BalaGedThief extends CardImpl {
+public final class BalaGedThief extends CardImpl {
 
     public BalaGedThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

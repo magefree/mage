@@ -58,7 +58,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ShamanOfForgottenWays extends CardImpl {
+public final class ShamanOfForgottenWays extends CardImpl {
 
     public ShamanOfForgottenWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author tcontis
  */
-public class AvenSentry extends CardImpl {
+public final class AvenSentry extends CardImpl {
 
     public AvenSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

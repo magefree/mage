@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DuskhunterBat extends CardImpl {
+public final class DuskhunterBat extends CardImpl {
 
     public DuskhunterBat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

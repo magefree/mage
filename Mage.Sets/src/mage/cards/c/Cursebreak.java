@@ -38,7 +38,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 /**
  * @author noxx
  */
-public class Cursebreak extends CardImpl {
+public final class Cursebreak extends CardImpl {
 
     public Cursebreak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

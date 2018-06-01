@@ -45,7 +45,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class EmissaryOfTheSleepless extends CardImpl {
+public final class EmissaryOfTheSleepless extends CardImpl {
 
     public EmissaryOfTheSleepless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

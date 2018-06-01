@@ -53,7 +53,7 @@ import mage.game.permanent.token.HumanSoldierToken;
  *
  * @author fireshoes
  */
-public class UlvenwaldMysteries extends CardImpl {
+public final class UlvenwaldMysteries extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
     private static final FilterControlledPermanent filterClue = new FilterControlledPermanent("a Clue");

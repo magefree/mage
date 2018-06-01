@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class DenyingWind extends CardImpl {
+public final class DenyingWind extends CardImpl {
 
     public DenyingWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}{U}");

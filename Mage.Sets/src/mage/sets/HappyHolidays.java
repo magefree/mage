@@ -8,7 +8,7 @@ import mage.constants.SetType;
  *
  * @author spjspj
  */
-public class HappyHolidays extends ExpansionSet {
+public final class HappyHolidays extends ExpansionSet {
 
     private static final HappyHolidays instance = new HappyHolidays();
 

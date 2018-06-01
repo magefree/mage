@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class JovensTools extends CardImpl {
+public final class JovensTools extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by walls");
     static {

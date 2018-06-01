@@ -43,7 +43,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class ChromaticStar extends CardImpl {
+public final class ChromaticStar extends CardImpl {
 
     public ChromaticStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class CallOfTheFullMoon extends CardImpl {
+public final class CallOfTheFullMoon extends CardImpl {
 
     public CallOfTheFullMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

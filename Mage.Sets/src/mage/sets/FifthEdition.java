@@ -16,7 +16,7 @@ import mage.cards.v.VodalianSoldiers;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class FifthEdition extends ExpansionSet {
+public final class FifthEdition extends ExpansionSet {
 
     private static final FifthEdition instance = new FifthEdition();
 

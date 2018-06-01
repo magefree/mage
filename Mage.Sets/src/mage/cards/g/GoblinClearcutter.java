@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author BursegSardaukar
  */
-public class GoblinClearcutter extends CardImpl {
+public final class GoblinClearcutter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 

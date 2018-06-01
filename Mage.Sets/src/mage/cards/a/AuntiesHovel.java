@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class AuntiesHovel extends CardImpl {
+public final class AuntiesHovel extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
     static {

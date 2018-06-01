@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class DrownyardTemple extends CardImpl {
+public final class DrownyardTemple extends CardImpl {
 
     public DrownyardTemple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

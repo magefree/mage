@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class AbhorrentOverlordHarpyToken extends TokenImpl {
+public final class AbhorrentOverlordHarpyToken extends TokenImpl {
 
     public AbhorrentOverlordHarpyToken() {
         super("Harpy", "1/1 black Harpy creature tokens with flying");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class TritonShorestalker extends CardImpl {
+public final class TritonShorestalker extends CardImpl {
 
     public TritonShorestalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

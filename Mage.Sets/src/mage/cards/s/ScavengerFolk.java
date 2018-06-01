@@ -47,7 +47,7 @@ import mage.target.common.TargetArtifactPermanent;
  * @author LoneFox
 
  */
-public class ScavengerFolk extends CardImpl {
+public final class ScavengerFolk extends CardImpl {
 
     public ScavengerFolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

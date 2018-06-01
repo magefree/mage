@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class UnbenderTine extends CardImpl {
+public final class UnbenderTine extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
     

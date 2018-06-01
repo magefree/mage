@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ReachThroughMists extends CardImpl {
+public final class ReachThroughMists extends CardImpl {
 
     public ReachThroughMists (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

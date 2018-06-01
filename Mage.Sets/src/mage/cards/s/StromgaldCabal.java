@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author Quercitron
  */
-public class StromgaldCabal extends CardImpl {
+public final class StromgaldCabal extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("white spell");
 

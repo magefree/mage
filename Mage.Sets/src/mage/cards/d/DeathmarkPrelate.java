@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class DeathmarkPrelate extends CardImpl {
+public final class DeathmarkPrelate extends CardImpl {
 
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("Zombie");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("non-Zombie creature");

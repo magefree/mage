@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class ServantOfVolrath extends CardImpl {
+public final class ServantOfVolrath extends CardImpl {
 
     public ServantOfVolrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

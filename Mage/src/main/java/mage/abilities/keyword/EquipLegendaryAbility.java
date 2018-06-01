@@ -27,23 +27,21 @@
  */
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
-import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  * @author Rystan
@@ -67,14 +65,15 @@ public class EquipLegendaryAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (super.canActivate(playerId, game)) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        ActivationStatus activationStatus = super.canActivate(playerId, game);
+        if (activationStatus.canActivate()) {
             Permanent permanent = game.getPermanent(sourceId);
             if (permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game)) {
-                return true;
+                return activationStatus;
             }
         }
-        return false;
+        return activationStatus;
     }
 
     public EquipLegendaryAbility(final EquipLegendaryAbility ability) {
@@ -88,9 +87,9 @@ public class EquipLegendaryAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Equip legendary creature " + costs.getText() + 
-                manaCosts.getText() + " (" + manaCosts.getText() + 
-                ": <i>Attach to target legendary creature you control. Equip only as a sorcery.)</i>";
+        return "Equip legendary creature " + costs.getText()
+                + manaCosts.getText() + " (" + manaCosts.getText()
+                + ": <i>Attach to target legendary creature you control. Equip only as a sorcery.)</i>";
     }
 
 }

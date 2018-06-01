@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class WaveskimmerAven extends CardImpl {
+public final class WaveskimmerAven extends CardImpl {
 
     public WaveskimmerAven (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{U}");

@@ -42,13 +42,13 @@ import java.util.UUID;
  *
  * @author North
  */
-public class GrowthSpasm extends CardImpl {
+public final class GrowthSpasm extends CardImpl {
 
     public GrowthSpasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()));
     }
 

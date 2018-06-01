@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class ConcordantCrossroads extends CardImpl {
+public final class ConcordantCrossroads extends CardImpl {
 
     public ConcordantCrossroads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

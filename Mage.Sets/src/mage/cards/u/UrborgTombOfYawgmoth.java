@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class UrborgTombOfYawgmoth extends CardImpl {
+public final class UrborgTombOfYawgmoth extends CardImpl {
 
     public UrborgTombOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

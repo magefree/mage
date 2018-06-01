@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Plopman
  */
-public class MazeOfIth extends CardImpl {
+public final class MazeOfIth extends CardImpl {
 
     public MazeOfIth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -66,7 +66,7 @@ public class SurgeAbility extends SpellAbility {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         // check if controller or teammate has already cast a spell this turn
         CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
         if (watcher != null) {
@@ -81,7 +81,7 @@ public class SurgeAbility extends SpellAbility {
                 }
             }
         }
-        return false;
+        return ActivationStatus.getFalse();
     }
 
     @Override

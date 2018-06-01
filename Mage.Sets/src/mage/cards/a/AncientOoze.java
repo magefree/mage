@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class AncientOoze extends CardImpl {
+public final class AncientOoze extends CardImpl {
 
     public AncientOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

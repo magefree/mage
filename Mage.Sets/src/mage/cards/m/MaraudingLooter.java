@@ -45,7 +45,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author TheElk801
  */
-public class MaraudingLooter extends CardImpl {
+public final class MaraudingLooter extends CardImpl {
 
     public MaraudingLooter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");

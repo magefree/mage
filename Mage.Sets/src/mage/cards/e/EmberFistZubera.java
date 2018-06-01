@@ -45,7 +45,7 @@ import mage.watchers.common.ZuberasDiedWatcher;
  *
  * @author Loki
  */
-public class EmberFistZubera extends CardImpl {
+public final class EmberFistZubera extends CardImpl {
 
     public EmberFistZubera (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class RitualOfTheReturnedZombieToken extends TokenImpl {
+public final class RitualOfTheReturnedZombieToken extends TokenImpl {
 
     public RitualOfTheReturnedZombieToken() {
         this(1,1);

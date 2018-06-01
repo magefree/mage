@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SlithBloodletter extends CardImpl {
+public final class SlithBloodletter extends CardImpl {
 
     public SlithBloodletter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

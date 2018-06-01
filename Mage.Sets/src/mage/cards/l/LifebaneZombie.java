@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class LifebaneZombie extends CardImpl {
+public final class LifebaneZombie extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a green or white creature card");
     static {

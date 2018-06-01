@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class RallyTheHordeWarriorToken extends TokenImpl {
+public final class RallyTheHordeWarriorToken extends TokenImpl {
 
     public RallyTheHordeWarriorToken() {
         super("Warrior", "1/1 red Warrior creature token");

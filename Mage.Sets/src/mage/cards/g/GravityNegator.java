@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class GravityNegator extends CardImpl {
+public final class GravityNegator extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 

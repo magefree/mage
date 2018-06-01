@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author hanasu
  */
-public class FolkOfThePines extends CardImpl {
+public final class FolkOfThePines extends CardImpl {
 
     public FolkOfThePines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

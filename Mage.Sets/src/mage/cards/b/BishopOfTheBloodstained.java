@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class BishopOfTheBloodstained extends CardImpl {
+public final class BishopOfTheBloodstained extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire you control");
 

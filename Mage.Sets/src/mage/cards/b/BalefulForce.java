@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class BalefulForce extends CardImpl {
+public final class BalefulForce extends CardImpl {
 
     public BalefulForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");

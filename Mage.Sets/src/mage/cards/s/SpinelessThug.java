@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SpinelessThug extends CardImpl {
+public final class SpinelessThug extends CardImpl {
 
     public SpinelessThug(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

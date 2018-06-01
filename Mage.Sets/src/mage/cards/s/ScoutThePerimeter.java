@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class ScoutThePerimeter extends CardImpl {
+public final class ScoutThePerimeter extends CardImpl {
 
     public ScoutThePerimeter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

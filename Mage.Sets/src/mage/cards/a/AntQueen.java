@@ -44,7 +44,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AntQueen extends CardImpl {
+public final class AntQueen extends CardImpl {
 
     private static InsectToken insectToken = new InsectToken();
 

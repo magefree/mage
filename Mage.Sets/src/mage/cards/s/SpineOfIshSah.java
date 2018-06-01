@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class SpineOfIshSah extends CardImpl {
+public final class SpineOfIshSah extends CardImpl {
 
     public SpineOfIshSah(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");

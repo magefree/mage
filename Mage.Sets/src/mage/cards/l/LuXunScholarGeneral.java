@@ -42,7 +42,7 @@ import mage.constants.SuperType;
  *
  * @author LevelX2
  */
-public class LuXunScholarGeneral extends CardImpl {
+public final class LuXunScholarGeneral extends CardImpl {
 
     public LuXunScholarGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

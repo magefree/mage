@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class WaywardDisciple extends CardImpl {
+public final class WaywardDisciple extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 

@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author TheElk801
  */
-public class ZealotsEnDal extends CardImpl {
+public final class ZealotsEnDal extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

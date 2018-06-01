@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class ThreeWishes extends CardImpl {
+public final class ThreeWishes extends CardImpl {
 
     public ThreeWishes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

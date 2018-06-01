@@ -53,7 +53,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author L_J
  */
-public class ShrivelingRot extends CardImpl {
+public final class ShrivelingRot extends CardImpl {
 
     public ShrivelingRot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");

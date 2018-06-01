@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class RealmRazer extends CardImpl {
+public final class RealmRazer extends CardImpl {
 
     public RealmRazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{W}");

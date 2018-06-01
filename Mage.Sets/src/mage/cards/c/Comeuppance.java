@@ -49,7 +49,7 @@ import org.apache.log4j.Logger;
  *
  * @author LevelX2
  */
-public class Comeuppance extends CardImpl {
+public final class Comeuppance extends CardImpl {
 
     public Comeuppance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

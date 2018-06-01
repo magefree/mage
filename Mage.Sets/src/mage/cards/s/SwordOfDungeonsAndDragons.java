@@ -63,7 +63,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Saga
  */
-public class SwordOfDungeonsAndDragons extends CardImpl {
+public final class SwordOfDungeonsAndDragons extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Rogues and from Clerics");
      static {filter.add(Predicates.or(

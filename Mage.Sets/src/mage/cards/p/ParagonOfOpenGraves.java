@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ParagonOfOpenGraves extends CardImpl {
+public final class ParagonOfOpenGraves extends CardImpl {
 
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("black creatures");
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("another target black creature you control");

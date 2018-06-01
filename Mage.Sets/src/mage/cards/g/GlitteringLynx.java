@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author L_J
  */
-public class GlitteringLynx extends CardImpl {
+public final class GlitteringLynx extends CardImpl {
 
     public GlitteringLynx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

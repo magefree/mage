@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class WhisperingSpecter extends CardImpl {
+public final class WhisperingSpecter extends CardImpl {
 
     public WhisperingSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

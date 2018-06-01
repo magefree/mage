@@ -56,7 +56,7 @@ import mage.target.Targets;
  *
  * @author spjspj
  */
-public class SirenStormtamer extends CardImpl {
+public final class SirenStormtamer extends CardImpl {
 
     public SirenStormtamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");

@@ -47,7 +47,7 @@ import mage.watchers.common.PermanentsEnteredBattlefieldYourLastTurnWatcher;
  *
  * @author spjspj
  */
-public class Arboria extends CardImpl {
+public final class Arboria extends CardImpl {
 
     public Arboria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class Geosurge extends CardImpl {
+public final class Geosurge extends CardImpl {
 
     public Geosurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}{R}{R}");

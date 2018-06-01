@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class ImmolatingSouleater extends CardImpl {
+public final class ImmolatingSouleater extends CardImpl {
 
     public ImmolatingSouleater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

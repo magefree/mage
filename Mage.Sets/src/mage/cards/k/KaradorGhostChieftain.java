@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  *
  * @author emerald000
  */
-public class KaradorGhostChieftain extends CardImpl {
+public final class KaradorGhostChieftain extends CardImpl {
 
     public KaradorGhostChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}{G}");

@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class LifecraftAwakening extends CardImpl {
+public final class LifecraftAwakening extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
 

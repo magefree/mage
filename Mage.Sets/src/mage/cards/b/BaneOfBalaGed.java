@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class BaneOfBalaGed extends CardImpl {
+public final class BaneOfBalaGed extends CardImpl {
 
     public BaneOfBalaGed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}");

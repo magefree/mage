@@ -41,7 +41,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
-public class BoomBust extends SplitCard {
+public final class BoomBust extends SplitCard {
 
     private static final FilterLandPermanent filter1 = new FilterLandPermanent("land you control");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("land you don't control");

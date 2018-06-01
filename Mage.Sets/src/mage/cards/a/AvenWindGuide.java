@@ -49,7 +49,7 @@ import mage.filter.StaticFilters;
  *
  * @author stravant
  */
-public class AvenWindGuide extends CardImpl {
+public final class AvenWindGuide extends CardImpl {
 
     public AvenWindGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class CrimsonMage extends CardImpl {
+public final class CrimsonMage extends CardImpl {
 
     public CrimsonMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

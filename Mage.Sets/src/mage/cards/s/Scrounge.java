@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LoneFox & L_J
  */
-public class Scrounge extends CardImpl {
+public final class Scrounge extends CardImpl {
 
     public Scrounge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

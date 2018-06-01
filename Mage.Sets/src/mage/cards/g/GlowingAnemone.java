@@ -42,7 +42,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author TheElk801
  */
-public class GlowingAnemone extends CardImpl {
+public final class GlowingAnemone extends CardImpl {
 
     public GlowingAnemone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

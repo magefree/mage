@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author noxx
  */
-public class GeistSnatch extends CardImpl {
+public final class GeistSnatch extends CardImpl {
 
     public GeistSnatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

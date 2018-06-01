@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author TheElk801
  */
-public class AmateurAuteur extends CardImpl {
+public final class AmateurAuteur extends CardImpl {
 
     public AmateurAuteur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

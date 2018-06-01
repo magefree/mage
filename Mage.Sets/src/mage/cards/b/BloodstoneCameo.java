@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class BloodstoneCameo extends CardImpl {
+public final class BloodstoneCameo extends CardImpl {
 
     public BloodstoneCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class RecklessAssault extends CardImpl {
+public final class RecklessAssault extends CardImpl {
 
     public RecklessAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{R}");

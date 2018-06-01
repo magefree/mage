@@ -54,7 +54,7 @@ import mage.util.SubTypeList;
  *
  * @author TheElk801
  */
-public class ShadesBreath extends CardImpl {
+public final class ShadesBreath extends CardImpl {
 
     public ShadesBreath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
@@ -127,7 +127,7 @@ class ShadesBreathSetSubtypeEffect extends ContinuousEffectImpl {
         for (Permanent permanent : permanents) {
             if (permanent != null) {
                 SubTypeList subtype = permanent.getSubtype(game);
-                if (subtype != null && subtype.size() != 1 || !subtype.contains(SubType.SHADE)) {
+                if (subtype != null && (subtype.size() != 1 || !subtype.contains(SubType.SHADE))) {
                     subtype.removeAll(SubType.getCreatureTypes(false));
                     subtype.add(SubType.SHADE);
                 }

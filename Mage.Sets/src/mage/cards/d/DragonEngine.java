@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class DragonEngine extends CardImpl {
+public final class DragonEngine extends CardImpl {
 
     public DragonEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

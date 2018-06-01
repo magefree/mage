@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class SacredKnight extends CardImpl {
+public final class SacredKnight extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black and/or red creatures");
     

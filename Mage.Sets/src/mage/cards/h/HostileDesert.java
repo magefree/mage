@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author ciaccona007
  */
-public class HostileDesert extends CardImpl {
+public final class HostileDesert extends CardImpl {
 
     public HostileDesert(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

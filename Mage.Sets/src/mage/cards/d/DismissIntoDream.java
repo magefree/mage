@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class DismissIntoDream extends CardImpl {
+public final class DismissIntoDream extends CardImpl {
 
     public DismissIntoDream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{U}");

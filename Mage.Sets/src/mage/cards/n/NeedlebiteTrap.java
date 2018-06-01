@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class NeedlebiteTrap extends CardImpl {
+public final class NeedlebiteTrap extends CardImpl {
 
     public NeedlebiteTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}{B}");

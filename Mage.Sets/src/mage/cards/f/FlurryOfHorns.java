@@ -38,7 +38,7 @@ import mage.game.permanent.token.FlurryOfHornsMinotaurToken;
  *
  * @author LevelX2
  */
-public class FlurryOfHorns extends CardImpl {
+public final class FlurryOfHorns extends CardImpl {
 
     public FlurryOfHorns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");

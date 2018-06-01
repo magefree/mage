@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HeroOfOxidRidge extends CardImpl {
+public final class HeroOfOxidRidge extends CardImpl {
 
     public HeroOfOxidRidge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

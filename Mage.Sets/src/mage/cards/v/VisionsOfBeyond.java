@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author nantuko
  */
-public class VisionsOfBeyond extends CardImpl {
+public final class VisionsOfBeyond extends CardImpl {
 
     public VisionsOfBeyond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

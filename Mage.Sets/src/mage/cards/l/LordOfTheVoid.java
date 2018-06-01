@@ -52,7 +52,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class LordOfTheVoid extends CardImpl {
+public final class LordOfTheVoid extends CardImpl {
 
     public LordOfTheVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class BloodfellCaves extends CardImpl {
+public final class BloodfellCaves extends CardImpl {
 
     public BloodfellCaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

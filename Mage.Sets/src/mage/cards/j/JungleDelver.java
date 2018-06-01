@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class JungleDelver extends CardImpl {
+public final class JungleDelver extends CardImpl {
 
     public JungleDelver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DragonScarredBear extends CardImpl {
+public final class DragonScarredBear extends CardImpl {
 
     public DragonScarredBear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

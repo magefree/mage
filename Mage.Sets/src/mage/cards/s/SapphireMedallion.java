@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author noxx
  */
-public class SapphireMedallion extends CardImpl {
+public final class SapphireMedallion extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Blue spells");
 

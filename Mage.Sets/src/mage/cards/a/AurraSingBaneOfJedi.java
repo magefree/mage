@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class AurraSingBaneOfJedi extends CardImpl {
+public final class AurraSingBaneOfJedi extends CardImpl {
 
     public AurraSingBaneOfJedi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class Ostracize extends CardImpl {
+public final class Ostracize extends CardImpl {
 
     public Ostracize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

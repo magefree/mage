@@ -39,7 +39,7 @@ import mage.constants.CardType;
 /**
  * @author ayratn
  */
-public class IchorWellspring extends CardImpl {
+public final class IchorWellspring extends CardImpl {
 
     public IchorWellspring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

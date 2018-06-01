@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author spjspj
  */
-public class KalonianTwingroveTreefolkWarriorToken extends TokenImpl {
+public final class KalonianTwingroveTreefolkWarriorToken extends TokenImpl {
     
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 

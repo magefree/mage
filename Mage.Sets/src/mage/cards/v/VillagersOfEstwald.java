@@ -45,7 +45,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class VillagersOfEstwald extends CardImpl {
+public final class VillagersOfEstwald extends CardImpl {
 
     public VillagersOfEstwald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

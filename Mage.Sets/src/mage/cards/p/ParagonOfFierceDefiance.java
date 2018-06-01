@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Quercitron
  */
-public class ParagonOfFierceDefiance extends CardImpl {
+public final class ParagonOfFierceDefiance extends CardImpl {
 
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("red creatures");
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("another target red creature you control");

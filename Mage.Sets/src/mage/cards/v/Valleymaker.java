@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Valleymaker extends CardImpl {
+public final class Valleymaker extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Mountain");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("a Forest");
@@ -74,7 +74,7 @@ public class Valleymaker extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
-        // {tap}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G} to their mana pool.
+        // {tap}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G}.
         Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(3), "chosen player"), new TapSourceCost());
         ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
         ability2.addTarget(new TargetPlayer(1, 1, true));

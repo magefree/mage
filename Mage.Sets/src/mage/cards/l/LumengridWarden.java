@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LumengridWarden extends CardImpl {
+public final class LumengridWarden extends CardImpl {
 
     public LumengridWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

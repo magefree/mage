@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author dustinconrad
  */
-public class ChainersEdict extends CardImpl {
+public final class ChainersEdict extends CardImpl {
 
     public ChainersEdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

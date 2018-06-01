@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class TortoiseFormation extends CardImpl {
+public final class TortoiseFormation extends CardImpl {
 
     public TortoiseFormation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

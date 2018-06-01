@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class DiscipleOfGriselbrand extends CardImpl {
+public final class DiscipleOfGriselbrand extends CardImpl {
 
     public DiscipleOfGriselbrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

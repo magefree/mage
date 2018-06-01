@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class VendilionClique extends CardImpl {
+public final class VendilionClique extends CardImpl {
 
     public VendilionClique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

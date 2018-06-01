@@ -48,7 +48,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class TimelyHordemate extends CardImpl {
+public final class TimelyHordemate extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
 

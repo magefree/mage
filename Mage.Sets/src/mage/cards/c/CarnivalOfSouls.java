@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Galatolol
  */
-public class CarnivalOfSouls extends CardImpl {
+public final class CarnivalOfSouls extends CardImpl {
 
     public CarnivalOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

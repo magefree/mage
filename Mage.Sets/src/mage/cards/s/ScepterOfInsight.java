@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ScepterOfInsight extends CardImpl {
+public final class ScepterOfInsight extends CardImpl {
 
     public ScepterOfInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{U}{U}");

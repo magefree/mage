@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class VraskaRelicSeeker extends CardImpl {
+public final class VraskaRelicSeeker extends CardImpl {
 
     public VraskaRelicSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{G}");

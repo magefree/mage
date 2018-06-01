@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class FelhideBrawler extends CardImpl {
+public final class FelhideBrawler extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Minotaur");
 

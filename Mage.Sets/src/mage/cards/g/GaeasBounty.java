@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author hanasu
  */
-public class GaeasBounty extends CardImpl {
+public final class GaeasBounty extends CardImpl {
     
     private static final FilterLandCard filter = new FilterLandCard("Forest");
     

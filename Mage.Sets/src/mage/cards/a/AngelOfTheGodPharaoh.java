@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class AngelOfTheGodPharaoh extends CardImpl {
+public final class AngelOfTheGodPharaoh extends CardImpl {
 
     public AngelOfTheGodPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

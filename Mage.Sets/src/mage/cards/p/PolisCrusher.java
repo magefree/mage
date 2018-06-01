@@ -57,7 +57,7 @@ import mage.target.targetpointer.FirstTargetPointer;
  *
  * @author LevelX2
  */
-public class PolisCrusher extends CardImpl {
+public final class PolisCrusher extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantments");
 

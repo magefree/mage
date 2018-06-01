@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class PyromancersGoggles extends CardImpl {
+public final class PyromancersGoggles extends CardImpl {
 
     public PyromancersGoggles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

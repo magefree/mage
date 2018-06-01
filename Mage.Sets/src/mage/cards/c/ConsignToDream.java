@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
  *
  */
-public class ConsignToDream extends CardImpl {
+public final class ConsignToDream extends CardImpl {
 
     public ConsignToDream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

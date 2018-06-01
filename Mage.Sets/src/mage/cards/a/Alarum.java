@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class Alarum extends CardImpl {
+public final class Alarum extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonattacking creature");
 

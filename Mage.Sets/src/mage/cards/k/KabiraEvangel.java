@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class KabiraEvangel extends CardImpl {
+public final class KabiraEvangel extends CardImpl {
 
     private static final FilterControlledCreaturePermanent FILTER1 = new FilterControlledCreaturePermanent();
 

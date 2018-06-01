@@ -44,7 +44,7 @@ import mage.constants.*;
  *
  * @author nantuko
  */
-public class ButchersCleaver extends CardImpl {
+public final class ButchersCleaver extends CardImpl {
 
     private static final String staticText = "As long as equipped creature is a Human, it has lifelink";
 

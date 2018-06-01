@@ -39,7 +39,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Jgod
  */
-public class ShatteringPulse extends CardImpl {
+public final class ShatteringPulse extends CardImpl {
 
     public ShatteringPulse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

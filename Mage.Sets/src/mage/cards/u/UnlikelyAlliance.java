@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class UnlikelyAlliance extends CardImpl {
+public final class UnlikelyAlliance extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonattacking, nonblocking creature");
 

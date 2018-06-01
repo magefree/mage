@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class CultivatorOfBlades extends CardImpl {
+public final class CultivatorOfBlades extends CardImpl {
 
     public CultivatorOfBlades(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author maxlebedev
  */
-public class TouchOfDarkness extends CardImpl {
+public final class TouchOfDarkness extends CardImpl {
 
     public TouchOfDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

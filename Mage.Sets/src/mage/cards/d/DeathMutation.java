@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class DeathMutation extends CardImpl {
+public final class DeathMutation extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

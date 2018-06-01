@@ -48,7 +48,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author intimidatingant
  */
-public class RequiemAngel extends CardImpl {
+public final class RequiemAngel extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another non-Spirit creature you control");
 
     static {

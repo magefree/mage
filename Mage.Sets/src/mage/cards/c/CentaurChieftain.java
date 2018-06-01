@@ -53,7 +53,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class CentaurChieftain extends CardImpl {
+public final class CentaurChieftain extends CardImpl {
 
     public CentaurChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

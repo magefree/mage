@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  * @author LoneFox
 
  */
-public class StillLife extends CardImpl {
+public final class StillLife extends CardImpl {
 
     public StillLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");

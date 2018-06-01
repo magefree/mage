@@ -54,7 +54,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author fireshoes
  */
-public class NeckBreaker extends CardImpl {
+public final class NeckBreaker extends CardImpl {
 
     public NeckBreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

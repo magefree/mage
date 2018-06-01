@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author Backfir3
  */
-public class BarrinMasterWizard extends CardImpl {
+public final class BarrinMasterWizard extends CardImpl {
 
     public BarrinMasterWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

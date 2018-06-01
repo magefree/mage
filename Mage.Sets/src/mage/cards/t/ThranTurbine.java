@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author spjspjs
  */
-public class ThranTurbine extends CardImpl {
+public final class ThranTurbine extends CardImpl {
 
     public ThranTurbine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

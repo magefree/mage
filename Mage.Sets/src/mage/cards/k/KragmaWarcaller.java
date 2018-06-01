@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class KragmaWarcaller extends CardImpl {
+public final class KragmaWarcaller extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("Minotaur creatures you control");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Minotaur you control");

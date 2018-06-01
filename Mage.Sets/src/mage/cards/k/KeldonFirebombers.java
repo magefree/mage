@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class KeldonFirebombers extends CardImpl {
+public final class KeldonFirebombers extends CardImpl {
 
     public KeldonFirebombers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

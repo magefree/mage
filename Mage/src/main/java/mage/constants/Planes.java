@@ -43,6 +43,7 @@ public enum Planes {
     PLANE_HEDRON_FIELDS_OF_AGADEEM("HedronFieldsOfAgadeemPlane"),
     PLANE_LETHE_LAKE("LetheLakePlane"),
     PLANE_NAYA("NayaPlane"),
+    PLANE_PANOPTICON("PanopticonPlane"),
     PLANE_TAZEEM("TazeemPlane"),
     PLANE_THE_DARK_BARONY("TheDarkBaronyPlane"),
     PLANE_THE_EON_FOG("TheEonFogPlane"),

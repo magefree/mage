@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class AuriokWindwalker extends CardImpl {
+public final class AuriokWindwalker extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 

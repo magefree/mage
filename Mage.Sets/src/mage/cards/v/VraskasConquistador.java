@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class VraskasConquistador extends CardImpl {
+public final class VraskasConquistador extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

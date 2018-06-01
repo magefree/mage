@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class DranasChosen extends CardImpl {
+public final class DranasChosen extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
     

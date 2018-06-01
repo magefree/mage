@@ -54,7 +54,7 @@ import mage.watchers.Watcher;
  *
  * @author nantuko
  */
-public class FleshAllergy extends CardImpl {
+public final class FleshAllergy extends CardImpl {
 
     public FleshAllergy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

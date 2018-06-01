@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author halljared
  */
-public class BoundByMoonsilver extends CardImpl {
+public final class BoundByMoonsilver extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
 

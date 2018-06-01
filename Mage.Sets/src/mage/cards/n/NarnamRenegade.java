@@ -44,7 +44,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author fireshoes
  */
-public class NarnamRenegade extends CardImpl {
+public final class NarnamRenegade extends CardImpl {
 
     public NarnamRenegade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

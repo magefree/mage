@@ -43,7 +43,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class HeartlessPillage extends CardImpl {
+public final class HeartlessPillage extends CardImpl {
 
     public HeartlessPillage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

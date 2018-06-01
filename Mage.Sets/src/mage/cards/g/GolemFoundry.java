@@ -45,7 +45,7 @@ import mage.game.permanent.token.GolemToken;
  *
  * @author Loki, North
  */
-public class GolemFoundry extends CardImpl {
+public final class GolemFoundry extends CardImpl {
     public GolemFoundry (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 

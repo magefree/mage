@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author spjspj
  */
-public class ZealotOfTheGodPharaoh extends CardImpl {
+public final class ZealotOfTheGodPharaoh extends CardImpl {
 
     public ZealotOfTheGodPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

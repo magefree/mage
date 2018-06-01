@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class EtchedOracle extends CardImpl {
+public final class EtchedOracle extends CardImpl {
 
     public EtchedOracle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

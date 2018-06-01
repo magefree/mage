@@ -50,7 +50,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author fireshoes
  */
-public class Jilt extends CardImpl {
+public final class Jilt extends CardImpl {
 
     public Jilt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

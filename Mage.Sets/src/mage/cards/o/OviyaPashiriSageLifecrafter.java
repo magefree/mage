@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class OviyaPashiriSageLifecrafter extends CardImpl {
+public final class OviyaPashiriSageLifecrafter extends CardImpl {
 
     public OviyaPashiriSageLifecrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

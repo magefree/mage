@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class RetaliatorGriffin extends CardImpl {
+public final class RetaliatorGriffin extends CardImpl {
 
     public RetaliatorGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}{W}");

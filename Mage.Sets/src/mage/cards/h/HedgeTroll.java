@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class HedgeTroll extends CardImpl {
+public final class HedgeTroll extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Plains");
 

@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class MaskedGorgon extends CardImpl {
+public final class MaskedGorgon extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("green creatures and white creatures");
     private static final FilterCard filter2 = new FilterCard("Gorgons");

@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class Joven extends CardImpl {
+public final class Joven extends CardImpl {
     
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature artifact");
     

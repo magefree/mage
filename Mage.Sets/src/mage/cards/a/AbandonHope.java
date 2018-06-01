@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class AbandonHope extends CardImpl {
+public final class AbandonHope extends CardImpl {
 
     public AbandonHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");

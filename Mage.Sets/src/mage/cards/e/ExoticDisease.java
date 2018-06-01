@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class ExoticDisease extends CardImpl {
+public final class ExoticDisease extends CardImpl {
 
     public ExoticDisease(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

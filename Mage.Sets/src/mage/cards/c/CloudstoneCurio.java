@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CloudstoneCurio extends CardImpl {
+public final class CloudstoneCurio extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a nonartifact permanent");
 

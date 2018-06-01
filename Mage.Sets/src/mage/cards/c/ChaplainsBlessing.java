@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class ChaplainsBlessing extends CardImpl {
+public final class ChaplainsBlessing extends CardImpl {
 
     public ChaplainsBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");

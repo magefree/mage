@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author ilcartographer
  */
-public class SedgeTroll extends CardImpl {
+public final class SedgeTroll extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Swamp");
 

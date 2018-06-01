@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author ciaccona007
  */
-public class FirebrandArcher extends CardImpl {
+public final class FirebrandArcher extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

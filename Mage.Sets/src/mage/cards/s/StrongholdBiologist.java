@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author TheElk801
  */
-public class StrongholdBiologist extends CardImpl {
+public final class StrongholdBiologist extends CardImpl {
 
     public StrongholdBiologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

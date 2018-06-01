@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class DranaLiberatorOfMalakir extends CardImpl {
+public final class DranaLiberatorOfMalakir extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("each attacking creature you control");
 

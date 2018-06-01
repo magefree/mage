@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class Scandalmonger extends CardImpl {
+public final class Scandalmonger extends CardImpl {
 
     public Scandalmonger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

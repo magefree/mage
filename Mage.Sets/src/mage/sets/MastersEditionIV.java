@@ -43,7 +43,7 @@ import java.util.List;
  *
  * @author LevelX2
  */
-public class MastersEditionIV extends ExpansionSet {
+public final class MastersEditionIV extends ExpansionSet {
 
     private static final MastersEditionIV instance = new MastersEditionIV();
 

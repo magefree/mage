@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class SavingGrace extends CardImpl {
+public final class SavingGrace extends CardImpl {
 
     public SavingGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
@@ -131,10 +131,10 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent) event;
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        
+
         if (sourcePermanent != null) {
             Permanent creature = game.getPermanent(sourcePermanent.getAttachedTo());
-            
+
             if (creature == null) {
                 return false;
             }
@@ -157,10 +157,8 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
             }
             game.informPlayers(message.toString());
             // Redirect damage
-            if (creature != null) {
-                creature.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-                return true;
-            }
+            creature.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+            return true;
         }
         return false;
     }

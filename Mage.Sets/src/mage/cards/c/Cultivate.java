@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cultivate extends CardImpl {
+public final class Cultivate extends CardImpl {
 
     public Cultivate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
@@ -92,7 +92,7 @@ class CultivateEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
         if (controller.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards revealed = new CardsImpl(target.getTargets());

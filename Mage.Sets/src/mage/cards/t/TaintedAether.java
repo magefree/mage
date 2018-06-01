@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author LoneFox
 
  */
-public class TaintedAether extends CardImpl {
+public final class TaintedAether extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or a land");
 

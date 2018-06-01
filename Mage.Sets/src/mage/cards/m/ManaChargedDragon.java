@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class ManaChargedDragon extends CardImpl {
+public final class ManaChargedDragon extends CardImpl {
 
     public ManaChargedDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

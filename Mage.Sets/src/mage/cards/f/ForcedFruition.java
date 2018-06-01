@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author dustinconrad
  */
-public class ForcedFruition extends CardImpl {
+public final class ForcedFruition extends CardImpl {
 
     public ForcedFruition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}");

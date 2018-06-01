@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class CacklingImp extends CardImpl {
+public final class CacklingImp extends CardImpl {
 
     public CacklingImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

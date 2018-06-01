@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class KuldothaRebirth extends CardImpl {
+public final class KuldothaRebirth extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 

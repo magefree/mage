@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class PhyrexianScriptures extends CardImpl {
+public final class PhyrexianScriptures extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creatures");
     private static final FilterCard filter2 = new FilterCard("opponents' cards");

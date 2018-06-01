@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TwilightMire extends CardImpl {
+public final class TwilightMire extends CardImpl {
 
     public TwilightMire (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

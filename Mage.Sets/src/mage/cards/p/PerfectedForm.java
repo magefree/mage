@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class PerfectedForm extends CardImpl {
+public final class PerfectedForm extends CardImpl {
 
     public PerfectedForm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");

@@ -41,7 +41,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author North
  */
-public class RayOfRevelation extends CardImpl {
+public final class RayOfRevelation extends CardImpl {
 
     public RayOfRevelation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

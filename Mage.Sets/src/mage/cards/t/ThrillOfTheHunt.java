@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ThrillOfTheHunt extends CardImpl {
+public final class ThrillOfTheHunt extends CardImpl {
 
     public ThrillOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

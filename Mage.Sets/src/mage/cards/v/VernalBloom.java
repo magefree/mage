@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class VernalBloom extends CardImpl {
+public final class VernalBloom extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
 
@@ -55,7 +55,7 @@ public class VernalBloom extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
 
-        // Whenever a Forest is tapped for mana, its controller adds {G} to their mana pool.
+        // Whenever a Forest is tapped for mana, its controller adds {G}.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.G), "their"),
                 filter, SetTargetPointer.PLAYER));

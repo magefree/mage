@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class JoinTheRanksSoldierToken extends TokenImpl {
+public final class JoinTheRanksSoldierToken extends TokenImpl {
 
     public JoinTheRanksSoldierToken() {
         super("Soldier Ally", "1/1 white Soldier Ally creature token");

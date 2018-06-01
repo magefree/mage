@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class Metamorphosis extends CardImpl {
+public final class Metamorphosis extends CardImpl {
 
     public Metamorphosis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");

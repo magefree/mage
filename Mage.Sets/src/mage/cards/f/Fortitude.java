@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author hanasu
  */
-public class Fortitude extends CardImpl {
+public final class Fortitude extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 

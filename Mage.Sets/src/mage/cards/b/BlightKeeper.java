@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class BlightKeeper extends CardImpl {
+public final class BlightKeeper extends CardImpl {
 
     public BlightKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

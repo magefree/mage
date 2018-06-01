@@ -64,7 +64,7 @@ import mage.watchers.Watcher;
  *
  * @author fireshoes
  */
-public class IcefallRegent extends CardImpl {
+public final class IcefallRegent extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

@@ -52,7 +52,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author L_J
  */
-public class ForcemageAdvocate extends CardImpl {
+public final class ForcemageAdvocate extends CardImpl {
 
     public ForcemageAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

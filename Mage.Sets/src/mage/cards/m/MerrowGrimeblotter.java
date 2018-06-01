@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MerrowGrimeblotter extends CardImpl {
+public final class MerrowGrimeblotter extends CardImpl {
 
     public MerrowGrimeblotter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U/B}");

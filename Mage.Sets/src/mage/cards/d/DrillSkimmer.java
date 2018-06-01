@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author wetterlicht
  */
-public class DrillSkimmer extends CardImpl {
+public final class DrillSkimmer extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("you control another artifact creature");
 

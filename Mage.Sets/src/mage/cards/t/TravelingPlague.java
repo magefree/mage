@@ -64,7 +64,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class TravelingPlague extends CardImpl {
+public final class TravelingPlague extends CardImpl {
 
     public TravelingPlague(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

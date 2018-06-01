@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author Johnny E. Hastings
  */
-public class SoulBurn extends CardImpl {
+public final class SoulBurn extends CardImpl {
 
     static final FilterMana filterBlackOrRed = new FilterMana();
 

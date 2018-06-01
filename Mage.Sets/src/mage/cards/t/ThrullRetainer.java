@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class ThrullRetainer extends CardImpl {
+public final class ThrullRetainer extends CardImpl {
 
     public ThrullRetainer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");

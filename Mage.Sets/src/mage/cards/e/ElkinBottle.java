@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author L_J
  */
-public class ElkinBottle extends CardImpl {
+public final class ElkinBottle extends CardImpl {
 
     public ElkinBottle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

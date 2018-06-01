@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class PhyrexianTyranny extends CardImpl {
+public final class PhyrexianTyranny extends CardImpl {
 
     public PhyrexianTyranny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");

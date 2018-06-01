@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FloodedGrove extends CardImpl {
+public final class FloodedGrove extends CardImpl {
 
     public FloodedGrove (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

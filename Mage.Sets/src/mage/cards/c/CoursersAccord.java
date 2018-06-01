@@ -39,7 +39,7 @@ import mage.game.permanent.token.CentaurToken;
  *
  * @author LevleX2
  */
-public class CoursersAccord extends CardImpl {
+public final class CoursersAccord extends CardImpl {
 
     public CoursersAccord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{W}");

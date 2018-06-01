@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class QuagVampires extends CardImpl {
+public final class QuagVampires extends CardImpl {
 
     public QuagVampires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

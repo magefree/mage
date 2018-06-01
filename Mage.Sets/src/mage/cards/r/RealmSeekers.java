@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class RealmSeekers extends CardImpl {
+public final class RealmSeekers extends CardImpl {
 
     public RealmSeekers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

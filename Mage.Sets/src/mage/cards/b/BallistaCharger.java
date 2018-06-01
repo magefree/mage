@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author spjspj
  */
-public class BallistaCharger extends CardImpl {
+public final class BallistaCharger extends CardImpl {
 
     public BallistaCharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

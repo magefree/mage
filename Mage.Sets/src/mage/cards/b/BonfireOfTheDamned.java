@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author noxx
  */
-public class BonfireOfTheDamned extends CardImpl {
+public final class BonfireOfTheDamned extends CardImpl {
 
     public BonfireOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");

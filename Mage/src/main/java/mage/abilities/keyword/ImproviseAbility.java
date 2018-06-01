@@ -6,7 +6,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -69,7 +68,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
                 Target target = new TargetControlledPermanent(1, unpaid.getMana().getGeneric(), filter, true);
                 target.setTargetName("artifact to Improvise");
                 specialAction.addTarget(target);
-                if (specialAction.canActivate(source.getControllerId(), game)) {
+                if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
                 }
             }

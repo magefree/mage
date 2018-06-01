@@ -35,7 +35,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Masters25 extends ExpansionSet {
+public final class Masters25 extends ExpansionSet {
 
     private static final Masters25 instance = new Masters25();
 

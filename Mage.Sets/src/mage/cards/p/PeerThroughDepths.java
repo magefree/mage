@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LevelX
  */
-public class PeerThroughDepths extends CardImpl {
+public final class PeerThroughDepths extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an instant or sorcery card");
     static {

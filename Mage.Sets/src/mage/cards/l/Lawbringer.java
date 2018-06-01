@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Lawbringer extends CardImpl {
+public final class Lawbringer extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creature");
     

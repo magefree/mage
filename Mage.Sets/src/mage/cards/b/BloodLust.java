@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author jeffwadsworth
  */
-public class BloodLust extends CardImpl {
+public final class BloodLust extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

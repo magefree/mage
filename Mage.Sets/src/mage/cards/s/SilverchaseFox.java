@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 /**
  * @author nantuko
  */
-public class SilverchaseFox extends CardImpl {
+public final class SilverchaseFox extends CardImpl {
 
     public SilverchaseFox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

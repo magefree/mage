@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class DefenderOfTheOrder extends CardImpl {
+public final class DefenderOfTheOrder extends CardImpl {
 
     public DefenderOfTheOrder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

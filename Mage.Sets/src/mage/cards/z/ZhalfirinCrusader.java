@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ZhalfirinCrusader extends CardImpl {
+public final class ZhalfirinCrusader extends CardImpl {
 
     public ZhalfirinCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

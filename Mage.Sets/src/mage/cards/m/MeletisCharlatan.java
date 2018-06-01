@@ -52,7 +52,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class MeletisCharlatan extends CardImpl {
+public final class MeletisCharlatan extends CardImpl {
 
     public MeletisCharlatan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

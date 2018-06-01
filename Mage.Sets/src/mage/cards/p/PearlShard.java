@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class PearlShard extends CardImpl {
+public final class PearlShard extends CardImpl {
 
     public PearlShard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

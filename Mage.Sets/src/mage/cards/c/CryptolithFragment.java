@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class CryptolithFragment extends CardImpl {
+public final class CryptolithFragment extends CardImpl {
 
     public CryptolithFragment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class Liquify extends CardImpl {
+public final class Liquify extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 3 or less");
 

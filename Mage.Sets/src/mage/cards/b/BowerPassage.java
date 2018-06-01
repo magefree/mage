@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author noxx
  */
-public class BowerPassage extends CardImpl {
+public final class BowerPassage extends CardImpl {
 
     public BowerPassage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

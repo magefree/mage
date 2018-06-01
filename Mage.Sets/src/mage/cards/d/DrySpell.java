@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class DrySpell extends CardImpl {
+public final class DrySpell extends CardImpl {
 
     public DrySpell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

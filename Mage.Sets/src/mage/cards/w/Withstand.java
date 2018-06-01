@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class Withstand extends CardImpl {
+public final class Withstand extends CardImpl {
 
     public Withstand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

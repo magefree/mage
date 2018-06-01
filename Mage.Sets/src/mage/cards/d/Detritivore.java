@@ -60,7 +60,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author LevelX2
  */
-public class Detritivore extends CardImpl {
+public final class Detritivore extends CardImpl {
 
     public Detritivore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

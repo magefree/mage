@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class RakdosLordOfRiots extends CardImpl {
+public final class RakdosLordOfRiots extends CardImpl {
 
     public RakdosLordOfRiots(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{R}{R}");

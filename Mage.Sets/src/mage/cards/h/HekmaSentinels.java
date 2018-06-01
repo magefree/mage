@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Styxo
  */
-public class HekmaSentinels extends CardImpl {
+public final class HekmaSentinels extends CardImpl {
 
     public HekmaSentinels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

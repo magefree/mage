@@ -29,6 +29,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -49,7 +50,7 @@ import mage.util.GameLog;
  *
  * @author BetaSteward_at_googlemail.com and jeff
  */
-public class WildEvocation extends CardImpl {
+public final class WildEvocation extends CardImpl {
 
     public WildEvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
@@ -96,7 +97,7 @@ class WildEvocationEffect extends OneShotEffect {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else if (card.getSpellAbility() != null
                         && card.getSpellAbility().getTargets().canChoose(player.getId(), game)) {
-                    player.cast(card.getSpellAbility(), game, true);
+                    player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 } else {
                     game.informPlayers(GameLog.getColoredObjectName(card) + " can't be cast now by " + player.getLogName());
                 }

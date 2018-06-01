@@ -44,7 +44,7 @@ import mage.watchers.Watcher;
 /**
  * @author BetaSteward
  */
-public class CathedralMembrane extends CardImpl {
+public final class CathedralMembrane extends CardImpl {
 
     public CathedralMembrane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W/P}");

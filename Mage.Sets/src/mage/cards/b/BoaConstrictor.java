@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class BoaConstrictor extends CardImpl {
+public final class BoaConstrictor extends CardImpl {
 
     public BoaConstrictor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

@@ -43,7 +43,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author fireshoes
  */
-public class ThunderingWurm extends CardImpl {
+public final class ThunderingWurm extends CardImpl {
 
     public ThunderingWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

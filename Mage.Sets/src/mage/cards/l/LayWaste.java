@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Backfir3
  */
-public class LayWaste extends CardImpl {
+public final class LayWaste extends CardImpl {
 
     public LayWaste(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

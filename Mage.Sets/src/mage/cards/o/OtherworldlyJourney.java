@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX
  */
-public class OtherworldlyJourney extends CardImpl {
+public final class OtherworldlyJourney extends CardImpl {
 
     public OtherworldlyJourney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

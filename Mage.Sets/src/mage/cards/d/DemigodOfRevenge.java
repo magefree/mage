@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DemigodOfRevenge extends CardImpl {
+public final class DemigodOfRevenge extends CardImpl {
 
     public DemigodOfRevenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}{B/R}{B/R}{B/R}{B/R}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class MorbidPlunder extends CardImpl {
+public final class MorbidPlunder extends CardImpl {
 
     public MorbidPlunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

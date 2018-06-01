@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  * @author Mitchel Stein
  *
  */
-public class ChaosWarp extends CardImpl {
+public final class ChaosWarp extends CardImpl {
 
     public ChaosWarp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 /**
  * @author nantuko
  */
-public class MikaeusTheLunarch extends CardImpl {
+public final class MikaeusTheLunarch extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

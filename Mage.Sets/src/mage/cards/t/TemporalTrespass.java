@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class TemporalTrespass extends CardImpl {
+public final class TemporalTrespass extends CardImpl {
 
     public TemporalTrespass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}{U}");

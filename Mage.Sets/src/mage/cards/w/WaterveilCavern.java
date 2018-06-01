@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class WaterveilCavern extends CardImpl {
+public final class WaterveilCavern extends CardImpl {
 
     public WaterveilCavern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

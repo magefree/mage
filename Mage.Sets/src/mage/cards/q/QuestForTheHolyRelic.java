@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki, North
  */
-public class QuestForTheHolyRelic extends CardImpl {
+public final class QuestForTheHolyRelic extends CardImpl {
 
     public QuestForTheHolyRelic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

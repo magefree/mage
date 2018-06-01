@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class UndeadGladiator extends CardImpl {
+public final class UndeadGladiator extends CardImpl {
 
     public UndeadGladiator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

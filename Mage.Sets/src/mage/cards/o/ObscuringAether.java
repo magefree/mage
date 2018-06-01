@@ -46,7 +46,7 @@ import mage.filter.predicate.other.FaceDownPredicate;
  *
  * @author LevelX2
  */
-public class ObscuringAether extends CardImpl {
+public final class ObscuringAether extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
 

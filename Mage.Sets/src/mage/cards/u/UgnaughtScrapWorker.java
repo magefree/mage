@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Styxo
  */
-public class UgnaughtScrapWorker extends CardImpl {
+public final class UgnaughtScrapWorker extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Droid spells");
 

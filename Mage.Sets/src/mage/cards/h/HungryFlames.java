@@ -43,7 +43,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author JRHerlehy
  */
-public class HungryFlames extends CardImpl {
+public final class HungryFlames extends CardImpl {
 
     public HungryFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

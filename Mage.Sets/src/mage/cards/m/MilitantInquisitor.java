@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class MilitantInquisitor extends CardImpl {
+public final class MilitantInquisitor extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 

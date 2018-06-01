@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class MeteorBlast extends CardImpl {
+public final class MeteorBlast extends CardImpl {
 
     public MeteorBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}{R}");

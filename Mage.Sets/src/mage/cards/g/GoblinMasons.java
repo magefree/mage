@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author BursegSardaukar
  */
-public class GoblinMasons extends CardImpl {
+public final class GoblinMasons extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Wall");
 

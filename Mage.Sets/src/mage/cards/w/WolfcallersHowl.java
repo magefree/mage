@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WolfcallersHowl extends CardImpl {
+public final class WolfcallersHowl extends CardImpl {
 
     public WolfcallersHowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");

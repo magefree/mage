@@ -43,7 +43,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Loki
  */
-public class KithkinDaggerdare extends CardImpl {
+public final class KithkinDaggerdare extends CardImpl {
 
     public KithkinDaggerdare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

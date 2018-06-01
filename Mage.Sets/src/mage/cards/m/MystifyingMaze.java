@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MystifyingMaze extends CardImpl {
+public final class MystifyingMaze extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature an opponent controls");
 

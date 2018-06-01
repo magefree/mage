@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Brainspoil extends CardImpl {
+public final class Brainspoil extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that isn't enchanted");
 

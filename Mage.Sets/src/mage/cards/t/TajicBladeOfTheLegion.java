@@ -43,7 +43,7 @@ import mage.constants.SuperType;
  *
  * @author jeffwadsworth
  */
-public class TajicBladeOfTheLegion extends CardImpl {
+public final class TajicBladeOfTheLegion extends CardImpl {
 
     public TajicBladeOfTheLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");

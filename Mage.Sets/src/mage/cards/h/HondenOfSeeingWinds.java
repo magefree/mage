@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class HondenOfSeeingWinds extends CardImpl {
+public final class HondenOfSeeingWinds extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 

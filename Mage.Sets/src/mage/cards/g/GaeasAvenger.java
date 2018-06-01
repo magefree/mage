@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author MarcoMarin
  */
-public class GaeasAvenger extends CardImpl {
+public final class GaeasAvenger extends CardImpl {
     
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts opponent control");
 

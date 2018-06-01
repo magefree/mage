@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RiptideSurvivor extends CardImpl {
+public final class RiptideSurvivor extends CardImpl {
 
     public RiptideSurvivor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

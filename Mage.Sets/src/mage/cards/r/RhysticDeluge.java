@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class RhysticDeluge extends CardImpl {
+public final class RhysticDeluge extends CardImpl {
 
     public RhysticDeluge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

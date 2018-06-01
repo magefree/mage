@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class AerialCaravan extends CardImpl {
+public final class AerialCaravan extends CardImpl {
 
     public AerialCaravan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author LevelX2
  */
-public class NivixBarrier extends CardImpl {
+public final class NivixBarrier extends CardImpl {
 
     public NivixBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

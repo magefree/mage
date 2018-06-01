@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Quercitron
  */
-public class EverflameEidolon extends CardImpl {
+public final class EverflameEidolon extends CardImpl {
 
     public EverflameEidolon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{R}");

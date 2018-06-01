@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class EgoErasure extends CardImpl {
+public final class EgoErasure extends CardImpl {
 
     public EgoErasure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");

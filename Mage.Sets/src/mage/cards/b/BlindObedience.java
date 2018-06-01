@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BlindObedience extends CardImpl {
+public final class BlindObedience extends CardImpl {
 
     public BlindObedience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

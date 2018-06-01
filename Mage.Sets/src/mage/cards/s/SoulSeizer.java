@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class SoulSeizer extends CardImpl {
+public final class SoulSeizer extends CardImpl {
 
     public SoulSeizer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class VirtuousCharge extends CardImpl {
+public final class VirtuousCharge extends CardImpl {
 
     public VirtuousCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

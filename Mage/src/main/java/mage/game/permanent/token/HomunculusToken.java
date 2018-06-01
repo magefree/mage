@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HomunculusToken extends TokenImpl {
+public final class HomunculusToken extends TokenImpl {
 
     public HomunculusToken() {
         super("Homunculus", "0/1 blue Homunculus artifact creature token");

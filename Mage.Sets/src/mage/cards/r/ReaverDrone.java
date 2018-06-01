@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class ReaverDrone extends CardImpl {
+public final class ReaverDrone extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another colorless creature");
 

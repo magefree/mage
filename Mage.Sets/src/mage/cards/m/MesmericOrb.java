@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class MesmericOrb extends CardImpl {
+public final class MesmericOrb extends CardImpl {
 
     public MesmericOrb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

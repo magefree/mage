@@ -39,7 +39,7 @@ import mage.constants.SetTargetPointer;
  *
  * @author Loki
  */
-public class Megrim extends CardImpl {
+public final class Megrim extends CardImpl {
 
     public Megrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");

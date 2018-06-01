@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ValeronOutlander extends CardImpl {
+public final class ValeronOutlander extends CardImpl {
 
     public ValeronOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

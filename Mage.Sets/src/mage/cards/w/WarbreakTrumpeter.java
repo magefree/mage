@@ -45,7 +45,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author fireshoes
  */
-public class WarbreakTrumpeter extends CardImpl {
+public final class WarbreakTrumpeter extends CardImpl {
 
     public WarbreakTrumpeter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

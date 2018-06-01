@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class EuropeanLandProgram extends ExpansionSet {
+public final class EuropeanLandProgram extends ExpansionSet {
 
     private static final EuropeanLandProgram instance = new EuropeanLandProgram();
 

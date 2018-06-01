@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class EidolonOfRhetoric extends CardImpl {
+public final class EidolonOfRhetoric extends CardImpl {
 
     public EidolonOfRhetoric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{W}");

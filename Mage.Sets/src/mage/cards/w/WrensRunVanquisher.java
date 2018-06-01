@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class WrensRunVanquisher extends CardImpl {
+public final class WrensRunVanquisher extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Elf card from your hand");
     static {

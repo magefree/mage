@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801 & L_J
  */
-public class ThermalFlux extends CardImpl {
+public final class ThermalFlux extends CardImpl {
 
     private static final FilterPermanent filterNonsnow = new FilterPermanent("nonsnow permanent");
     private static final FilterPermanent filterSnow = new FilterPermanent("snow permanent");

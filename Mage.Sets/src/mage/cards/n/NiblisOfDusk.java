@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class NiblisOfDusk extends CardImpl {
+public final class NiblisOfDusk extends CardImpl {
 
     public NiblisOfDusk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

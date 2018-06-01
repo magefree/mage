@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class RidingTheDiluHorse extends CardImpl {
+public final class RidingTheDiluHorse extends CardImpl {
 
     public RidingTheDiluHorse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

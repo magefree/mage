@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Nyxathid extends CardImpl {
+public final class Nyxathid extends CardImpl {
 
     public Nyxathid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

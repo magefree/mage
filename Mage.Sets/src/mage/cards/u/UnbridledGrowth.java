@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class UnbridledGrowth extends CardImpl {
+public final class UnbridledGrowth extends CardImpl {
 
     public UnbridledGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");

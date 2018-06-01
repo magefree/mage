@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ElectrostaticBolt extends CardImpl {
+public final class ElectrostaticBolt extends CardImpl {
 
     public ElectrostaticBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

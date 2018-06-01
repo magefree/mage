@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class AphettoAlchemist extends CardImpl {
+public final class AphettoAlchemist extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

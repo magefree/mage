@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX
  */
-public class ShisatoWhisperingHunter extends CardImpl {
+public final class ShisatoWhisperingHunter extends CardImpl {
 
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Snake");

@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author nigelzor
  */
-public class PhyrexianTribute extends CardImpl {
+public final class PhyrexianTribute extends CardImpl {
 
     public PhyrexianTribute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

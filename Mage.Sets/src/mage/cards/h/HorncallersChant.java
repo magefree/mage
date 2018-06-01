@@ -39,7 +39,7 @@ import mage.game.permanent.token.RhinoToken;
  *
  * @author LevleX2
  */
-public class HorncallersChant extends CardImpl {
+public final class HorncallersChant extends CardImpl {
 
     public HorncallersChant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{G}");

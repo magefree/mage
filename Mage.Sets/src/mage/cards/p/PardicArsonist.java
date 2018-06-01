@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class PardicArsonist extends CardImpl {
+public final class PardicArsonist extends CardImpl {
 
     public PardicArsonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

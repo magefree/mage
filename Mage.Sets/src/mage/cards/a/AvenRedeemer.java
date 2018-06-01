@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class AvenRedeemer extends CardImpl {
+public final class AvenRedeemer extends CardImpl {
 
     public AvenRedeemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class GrinningDemon extends CardImpl {
+public final class GrinningDemon extends CardImpl {
 
     public GrinningDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

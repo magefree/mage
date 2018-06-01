@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class NipGwyllion extends CardImpl {
+public final class NipGwyllion extends CardImpl {
 
     public NipGwyllion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/B}");

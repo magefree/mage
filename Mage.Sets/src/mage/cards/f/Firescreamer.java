@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author michael.napoleon@gmail.com
  */
-public class Firescreamer extends CardImpl {
+public final class Firescreamer extends CardImpl {
 
     public Firescreamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

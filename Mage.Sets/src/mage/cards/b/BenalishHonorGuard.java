@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author TheElk801
  */
-public class BenalishHonorGuard extends CardImpl {
+public final class BenalishHonorGuard extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("legendary creature you control");
     static {

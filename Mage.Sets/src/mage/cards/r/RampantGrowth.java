@@ -41,13 +41,13 @@ import java.util.UUID;
  *
  * @author LokiX
  */
-public class RampantGrowth extends CardImpl {
+public final class RampantGrowth extends CardImpl {
 
     public RampantGrowth(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
     }
 
     public RampantGrowth(final RampantGrowth card) {

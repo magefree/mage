@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class MemorySluice extends CardImpl {
+public final class MemorySluice extends CardImpl {
 
     public MemorySluice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U/B}");

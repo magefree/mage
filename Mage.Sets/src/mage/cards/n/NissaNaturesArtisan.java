@@ -59,7 +59,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class NissaNaturesArtisan extends CardImpl {
+public final class NissaNaturesArtisan extends CardImpl {
 
     public NissaNaturesArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{G}{G}");

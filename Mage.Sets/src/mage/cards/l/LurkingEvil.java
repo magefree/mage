@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class LurkingEvil extends CardImpl {
+public final class LurkingEvil extends CardImpl {
 
     public LurkingEvil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");

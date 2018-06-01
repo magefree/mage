@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class FencingAce extends CardImpl {
+public final class FencingAce extends CardImpl {
 
     public FencingAce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

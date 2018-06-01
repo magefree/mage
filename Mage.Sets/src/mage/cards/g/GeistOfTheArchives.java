@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GeistOfTheArchives extends CardImpl {
+public final class GeistOfTheArchives extends CardImpl {
 
     public GeistOfTheArchives(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

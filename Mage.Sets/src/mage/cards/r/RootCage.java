@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class RootCage extends CardImpl {
+public final class RootCage extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Mercenaries");
 

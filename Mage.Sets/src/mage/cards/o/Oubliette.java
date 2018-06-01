@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
+public final class Oubliette extends CardImpl {
 
     public Oubliette(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");

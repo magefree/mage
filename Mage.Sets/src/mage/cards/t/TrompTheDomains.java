@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class TrompTheDomains extends CardImpl {
+public final class TrompTheDomains extends CardImpl {
 
     public TrompTheDomains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}");

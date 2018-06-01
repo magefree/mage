@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Prophecy extends ExpansionSet {
+public final class Prophecy extends ExpansionSet {
 
     private static final Prophecy instance = new Prophecy();
 

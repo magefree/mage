@@ -46,7 +46,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author LevelX2
  */
-public class ScionOfVituGhazi extends CardImpl {
+public final class ScionOfVituGhazi extends CardImpl {
 
     public ScionOfVituGhazi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

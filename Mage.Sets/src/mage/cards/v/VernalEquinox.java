@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author maxlebedev
  */
-public class VernalEquinox extends CardImpl {
+public final class VernalEquinox extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature and enchantment spells");
 

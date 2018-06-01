@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Hovermyr extends CardImpl {
+public final class Hovermyr extends CardImpl {
 
     public Hovermyr (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

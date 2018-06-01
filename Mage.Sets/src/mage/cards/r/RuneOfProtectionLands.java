@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class RuneOfProtectionLands extends CardImpl {
+public final class RuneOfProtectionLands extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("land source");
     static {

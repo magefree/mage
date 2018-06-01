@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class DeathsShadow extends CardImpl {
+public final class DeathsShadow extends CardImpl {
 
     public DeathsShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

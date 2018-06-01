@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author BetaSteward
  */
-public class HeartlessSummoning extends CardImpl {
+public final class HeartlessSummoning extends CardImpl {
 
     public HeartlessSummoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

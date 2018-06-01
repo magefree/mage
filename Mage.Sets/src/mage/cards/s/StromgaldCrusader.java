@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class StromgaldCrusader extends CardImpl {
+public final class StromgaldCrusader extends CardImpl {
 
     public StromgaldCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

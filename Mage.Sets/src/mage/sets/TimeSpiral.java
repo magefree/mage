@@ -8,7 +8,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class TimeSpiral extends ExpansionSet {
+public final class TimeSpiral extends ExpansionSet {
 
     private static final TimeSpiral instance = new TimeSpiral();
 
@@ -54,6 +54,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Raptors", 5, Rarity.COMMON, mage.cards.c.CastleRaptors.class));
         cards.add(new SetCardInfo("Cavalry Master", 6, Rarity.UNCOMMON, mage.cards.c.CavalryMaster.class));
         cards.add(new SetCardInfo("Celestial Crusader", 7, Rarity.UNCOMMON, mage.cards.c.CelestialCrusader.class));
+        cards.add(new SetCardInfo("Chameleon Blur", 192, Rarity.COMMON, mage.cards.c.ChameleonBlur.class));
         cards.add(new SetCardInfo("Children of Korlis", 8, Rarity.COMMON, mage.cards.c.ChildrenOfKorlis.class));
         cards.add(new SetCardInfo("Chromatic Star", 251, Rarity.COMMON, mage.cards.c.ChromaticStar.class));
         cards.add(new SetCardInfo("Chronatog Totem", 252, Rarity.UNCOMMON, mage.cards.c.ChronatogTotem.class));
@@ -83,6 +84,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Drifter il-Dal", 59, Rarity.COMMON, mage.cards.d.DrifterIlDal.class));
         cards.add(new SetCardInfo("Drudge Reavers", 105, Rarity.COMMON, mage.cards.d.DrudgeReavers.class));
         cards.add(new SetCardInfo("Durkwood Baloth", 193, Rarity.COMMON, mage.cards.d.DurkwoodBaloth.class));
+        cards.add(new SetCardInfo("Durkwood Tracker", 194, Rarity.UNCOMMON, mage.cards.d.DurkwoodTracker.class));
         cards.add(new SetCardInfo("Duskrider Peregrine", 14, Rarity.UNCOMMON, mage.cards.d.DuskriderPeregrine.class));
         cards.add(new SetCardInfo("Empty the Warrens", 152, Rarity.COMMON, mage.cards.e.EmptyTheWarrens.class));
         cards.add(new SetCardInfo("Endrek Sahr, Master Breeder", 106, Rarity.RARE, mage.cards.e.EndrekSahrMasterBreeder.class));

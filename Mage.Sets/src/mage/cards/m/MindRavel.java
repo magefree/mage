@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class MindRavel extends CardImpl {
+public final class MindRavel extends CardImpl {
 
     public MindRavel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

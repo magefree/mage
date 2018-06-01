@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class EmeraldOryx extends CardImpl {
+public final class EmeraldOryx extends CardImpl {
 
     public EmeraldOryx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

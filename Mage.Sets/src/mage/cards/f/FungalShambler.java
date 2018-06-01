@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class FungalShambler extends CardImpl {
+public final class FungalShambler extends CardImpl {
 
     public FungalShambler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}{U}");

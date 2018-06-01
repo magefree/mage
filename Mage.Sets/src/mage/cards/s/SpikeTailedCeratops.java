@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SpikeTailedCeratops extends CardImpl {
+public final class SpikeTailedCeratops extends CardImpl {
 
     public SpikeTailedCeratops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

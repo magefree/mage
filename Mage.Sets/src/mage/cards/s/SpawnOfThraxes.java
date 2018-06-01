@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class SpawnOfThraxes extends CardImpl {
+public final class SpawnOfThraxes extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 

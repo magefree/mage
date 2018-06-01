@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class JunglePatrol extends CardImpl {
+public final class JunglePatrol extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a token named Wood");
 

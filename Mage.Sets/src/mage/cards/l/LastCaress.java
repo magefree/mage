@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class LastCaress extends CardImpl {
+public final class LastCaress extends CardImpl {
 
     public LastCaress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

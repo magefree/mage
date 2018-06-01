@@ -38,7 +38,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author North
  */
-public class DragonFodder extends CardImpl {
+public final class DragonFodder extends CardImpl {
 
     public DragonFodder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

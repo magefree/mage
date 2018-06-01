@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class CunningBreezedancer extends CardImpl {
+public final class CunningBreezedancer extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

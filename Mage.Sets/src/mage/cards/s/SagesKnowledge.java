@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LoneFox
  */
-public class SagesKnowledge extends CardImpl {
+public final class SagesKnowledge extends CardImpl {
 
     static final FilterCard filter = new FilterCard("sorcery card from your graveyard");
 

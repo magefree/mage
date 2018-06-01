@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RiverwheelAerialists extends CardImpl {
+public final class RiverwheelAerialists extends CardImpl {
 
     public RiverwheelAerialists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

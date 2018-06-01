@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Markedagain
  */
-public class BerserkMurlodont extends CardImpl {
+public final class BerserkMurlodont extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Beast");
 

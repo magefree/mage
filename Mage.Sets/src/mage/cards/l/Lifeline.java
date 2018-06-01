@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author HCrescent
  */
-public class Lifeline extends CardImpl {
+public final class Lifeline extends CardImpl {
 
 
     public Lifeline(UUID ownerId, CardSetInfo setInfo) {

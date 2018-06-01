@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class IonStorm extends CardImpl {
+public final class IonStorm extends CardImpl {
 
     public IonStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

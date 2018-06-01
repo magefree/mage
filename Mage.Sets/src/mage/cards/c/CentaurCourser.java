@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CentaurCourser extends CardImpl {
+public final class CentaurCourser extends CardImpl {
 
     public CentaurCourser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DawnCharm extends CardImpl {
+public final class DawnCharm extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell that targets you");
 

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class BenalishInfantry extends CardImpl {
+public final class BenalishInfantry extends CardImpl {
 
     public BenalishInfantry (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

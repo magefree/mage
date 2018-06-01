@@ -43,7 +43,7 @@ import mage.game.permanent.token.VampireKnightToken;
  *
  * @author fireshoes
  */
-public class CallTheBloodline extends CardImpl {
+public final class CallTheBloodline extends CardImpl {
 
     public CallTheBloodline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author jeffwadsworth
 
  */
-public class OrderOfWhiteclay extends CardImpl {
+public final class OrderOfWhiteclay extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
     

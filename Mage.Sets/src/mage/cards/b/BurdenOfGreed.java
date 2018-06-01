@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author wetterlicht
  */
-public class BurdenOfGreed extends CardImpl {
+public final class BurdenOfGreed extends CardImpl {
 
     public BurdenOfGreed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");

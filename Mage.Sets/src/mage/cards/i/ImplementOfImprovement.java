@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ImplementOfImprovement extends CardImpl {
+public final class ImplementOfImprovement extends CardImpl {
 
     public ImplementOfImprovement(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

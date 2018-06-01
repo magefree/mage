@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author Galatolol
  */
-public class PendrellFlux extends CardImpl {
+public final class PendrellFlux extends CardImpl {
 
     public PendrellFlux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

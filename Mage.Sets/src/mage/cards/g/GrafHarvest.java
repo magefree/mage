@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class GrafHarvest extends CardImpl {
+public final class GrafHarvest extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
 

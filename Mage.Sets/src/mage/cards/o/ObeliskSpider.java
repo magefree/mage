@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class ObeliskSpider extends CardImpl {
+public final class ObeliskSpider extends CardImpl {
 
     public ObeliskSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

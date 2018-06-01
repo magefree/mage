@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MagmaSpray extends CardImpl {
+public final class MagmaSpray extends CardImpl {
 
     public MagmaSpray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

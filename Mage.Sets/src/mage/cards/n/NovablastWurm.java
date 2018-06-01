@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author jeffwadsworth
  */
-public class NovablastWurm extends CardImpl {
+public final class NovablastWurm extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("other creatures");
 

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class FrogtosserBanneret extends CardImpl {
+public final class FrogtosserBanneret extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Goblin spells and Rogue spells");
 

@@ -28,6 +28,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -151,7 +152,7 @@ class CipherStoreEffect extends OneShotEffect {
             }
             ability.getEffects().remove(cipherEffect);
             if (ability instanceof SpellAbility) {
-                controller.cast(ability, game, true);
+                controller.cast(ability, game, true, new MageObjectReference(source.getSourceObject(game), game));
             }
         }
 

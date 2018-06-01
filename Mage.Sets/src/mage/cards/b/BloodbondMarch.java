@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author JRHerlehy
  */
-public class BloodbondMarch extends CardImpl {
+public final class BloodbondMarch extends CardImpl {
 
     public BloodbondMarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{G}");

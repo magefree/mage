@@ -52,7 +52,7 @@ import mage.game.permanent.PermanentToken;
  *
  * @author Plopman
  */
-public class LegionLoyalist extends CardImpl {
+public final class LegionLoyalist extends CardImpl {
 
     public LegionLoyalist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class MesaPegasus extends CardImpl {
+public final class MesaPegasus extends CardImpl {
 
     public MesaPegasus (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

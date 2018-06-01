@@ -53,7 +53,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class CrazedArmodon extends CardImpl {
+public final class CrazedArmodon extends CardImpl {
 
     public CrazedArmodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

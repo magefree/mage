@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author ayratn
  */
-public class UntamedMight extends CardImpl {
+public final class UntamedMight extends CardImpl {
 
     public UntamedMight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}");

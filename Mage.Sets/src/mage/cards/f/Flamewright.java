@@ -53,7 +53,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class Flamewright extends CardImpl {
+public final class Flamewright extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature with defender");
 

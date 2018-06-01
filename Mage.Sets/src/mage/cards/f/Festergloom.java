@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author noxx
  */
-public class Festergloom extends CardImpl {
+public final class Festergloom extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonblack creatures");
 

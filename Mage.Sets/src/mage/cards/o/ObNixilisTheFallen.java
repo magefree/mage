@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class ObNixilisTheFallen extends CardImpl {
+public final class ObNixilisTheFallen extends CardImpl {
 
     public ObNixilisTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

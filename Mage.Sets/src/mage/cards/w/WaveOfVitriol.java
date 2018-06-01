@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class WaveOfVitriol extends CardImpl {
+public final class WaveOfVitriol extends CardImpl {
 
     public WaveOfVitriol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
@@ -125,7 +125,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
             Set<Player> playersToShuffle = new LinkedHashSet<>();
             for (Map.Entry<Player, Integer> entry : sacrificedLands.entrySet()) {
                 if (entry.getKey().chooseUse(Outcome.PutLandInPlay, "Search your library for up to " + entry.getValue() + " basic lands?", source, game)) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_BASIC_LAND_CARD);
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (entry.getKey().searchLibrary(target, game)) {
                         if (!target.getTargets().isEmpty()) {
                             toBattlefield.addAll(target.getTargets());

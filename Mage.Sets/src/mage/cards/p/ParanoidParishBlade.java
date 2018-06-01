@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ParanoidParishBlade extends CardImpl {
+public final class ParanoidParishBlade extends CardImpl {
 
     public ParanoidParishBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

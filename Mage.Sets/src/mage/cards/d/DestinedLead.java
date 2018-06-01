@@ -42,7 +42,7 @@ import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
 
-public class DestinedLead extends SplitCard {
+public final class DestinedLead extends SplitCard {
 
     public DestinedLead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{B}", "{3}{G}", SpellAbilityType.SPLIT_AFTERMATH);

@@ -43,7 +43,7 @@ import mage.target.common.TargetSpellOrPermanent;
  * @author LoneFox
 
  */
-public class BlindSeer extends CardImpl {
+public final class BlindSeer extends CardImpl {
 
     public BlindSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

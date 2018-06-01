@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class KamiOfTatteredShoji extends CardImpl {
+public final class KamiOfTatteredShoji extends CardImpl {
 
     public KamiOfTatteredShoji(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

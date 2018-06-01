@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class MindstabThrull extends CardImpl {
+public final class MindstabThrull extends CardImpl {
 
     public MindstabThrull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

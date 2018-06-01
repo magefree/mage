@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class ZombieTrailblazer extends CardImpl {
+public final class ZombieTrailblazer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Zombie you control");
 

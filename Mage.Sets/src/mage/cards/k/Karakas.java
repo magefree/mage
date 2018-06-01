@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Plopman
  */
-public class Karakas extends CardImpl {
+public final class Karakas extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 

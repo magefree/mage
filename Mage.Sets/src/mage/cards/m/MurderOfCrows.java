@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class MurderOfCrows extends CardImpl {
+public final class MurderOfCrows extends CardImpl {
 
     public MurderOfCrows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

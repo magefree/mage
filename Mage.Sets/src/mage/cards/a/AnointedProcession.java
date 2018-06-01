@@ -39,7 +39,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class AnointedProcession extends CardImpl {
+public final class AnointedProcession extends CardImpl {
 
     public AnointedProcession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

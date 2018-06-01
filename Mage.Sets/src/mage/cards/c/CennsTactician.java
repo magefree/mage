@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class CennsTactician extends CardImpl {
+public final class CennsTactician extends CardImpl {
     
     private static final FilterCreaturePermanent filterSoldier = new FilterCreaturePermanent("Soldier creature");
     private static final FilterControlledCreaturePermanent filterCounter = new FilterControlledCreaturePermanent("Each creature you control with a +1/+1 counter on it");

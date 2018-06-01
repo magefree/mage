@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class AuratouchedMage extends CardImpl {
+public final class AuratouchedMage extends CardImpl {
 
     public AuratouchedMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");

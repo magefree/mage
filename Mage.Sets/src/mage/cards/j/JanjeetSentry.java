@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class JanjeetSentry extends CardImpl {
+public final class JanjeetSentry extends CardImpl {
 
     public JanjeetSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

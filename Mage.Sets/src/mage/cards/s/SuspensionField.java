@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class SuspensionField extends CardImpl {
+public final class SuspensionField extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 3 or greater");
 

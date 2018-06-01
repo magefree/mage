@@ -41,7 +41,7 @@ import mage.game.Game;
  *
  * @author Loki
  */
-public class Exsanguinate extends CardImpl {
+public final class Exsanguinate extends CardImpl {
 
     public Exsanguinate (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");

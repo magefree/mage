@@ -39,7 +39,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Loki
  */
-public class Demystify extends CardImpl {
+public final class Demystify extends CardImpl {
 
     public Demystify (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

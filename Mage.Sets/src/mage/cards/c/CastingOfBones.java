@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author AMWJ
  */
-public class CastingOfBones extends CardImpl {
+public final class CastingOfBones extends CardImpl {
 
     public CastingOfBones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

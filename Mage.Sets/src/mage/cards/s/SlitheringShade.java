@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class SlitheringShade extends CardImpl {
+public final class SlitheringShade extends CardImpl {
 
     public SlitheringShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

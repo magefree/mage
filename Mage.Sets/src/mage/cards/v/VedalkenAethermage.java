@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author anonymous
  */
-public class VedalkenAethermage extends CardImpl {
+public final class VedalkenAethermage extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Sliver");
     private static final FilterCard filter2 = new FilterCard("Wizard");

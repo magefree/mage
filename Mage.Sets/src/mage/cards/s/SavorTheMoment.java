@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SavorTheMoment extends CardImpl {
+public final class SavorTheMoment extends CardImpl {
 
     public SavorTheMoment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{U}");

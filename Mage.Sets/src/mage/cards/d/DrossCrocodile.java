@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DrossCrocodile extends CardImpl {
+public final class DrossCrocodile extends CardImpl {
 
     public DrossCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

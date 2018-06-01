@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author TheElk801
  */
-public class FreyalisesRadiance extends CardImpl {
+public final class FreyalisesRadiance extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("snow permanents");
 

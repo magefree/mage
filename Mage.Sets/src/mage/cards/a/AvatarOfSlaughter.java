@@ -48,7 +48,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author fireshoes
  */
-public class AvatarOfSlaughter extends CardImpl {
+public final class AvatarOfSlaughter extends CardImpl {
 
     public AvatarOfSlaughter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");

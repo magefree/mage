@@ -46,7 +46,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author LevelX2
  */
-public class Firespout extends CardImpl {
+public final class Firespout extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature without flying");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with flying");

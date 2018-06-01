@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class EmbraalGearSmasher extends CardImpl {
+public final class EmbraalGearSmasher extends CardImpl {
 
     public EmbraalGearSmasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

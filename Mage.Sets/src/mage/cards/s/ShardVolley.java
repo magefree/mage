@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class ShardVolley extends CardImpl {
+public final class ShardVolley extends CardImpl {
 
     public ShardVolley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

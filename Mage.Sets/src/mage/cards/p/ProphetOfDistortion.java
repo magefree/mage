@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ProphetOfDistortion extends CardImpl {
+public final class ProphetOfDistortion extends CardImpl {
 
     public ProphetOfDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

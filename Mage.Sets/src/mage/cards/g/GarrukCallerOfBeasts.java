@@ -32,7 +32,7 @@ import mage.ObjectColor;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ import mage.game.command.emblems.GarrukCallerOfBeastsEmblem;
  *
  * @author LevelX2 import mage.game.command.emblems.GarrukCallerOfBeastsEmblem;
  */
-public class GarrukCallerOfBeasts extends CardImpl {
+public final class GarrukCallerOfBeasts extends CardImpl {
 
     private static final FilterCreatureCard filterGreenCreature = new FilterCreatureCard("a green creature card");
 
@@ -67,7 +67,7 @@ public class GarrukCallerOfBeasts extends CardImpl {
         this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(5, new FilterCreatureCard("creature cards"), Zone.LIBRARY), 1));
 
         // -3: You may put a green creature card from your hand onto the battlefield.
-        this.addAbility(new LoyaltyAbility(new PutPermanentOnBattlefieldEffect(filterGreenCreature), -3));
+        this.addAbility(new LoyaltyAbility(new PutCardFromHandOntoBattlefieldEffect(filterGreenCreature), -3));
 
         // -7: You get an emblem with "Whenever you cast a creature spell, you may search your library for a creature card, put it onto the battlefield, then shuffle your library.");
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new GarrukCallerOfBeastsEmblem()), -7));

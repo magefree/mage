@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class SirenOfTheSilentSong extends CardImpl {
+public final class SirenOfTheSilentSong extends CardImpl {
 
     public SirenOfTheSilentSong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");

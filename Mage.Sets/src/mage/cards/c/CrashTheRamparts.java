@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class CrashTheRamparts extends CardImpl {
+public final class CrashTheRamparts extends CardImpl {
 
     public CrashTheRamparts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

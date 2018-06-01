@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class Excruciator extends CardImpl {
+public final class Excruciator extends CardImpl {
 
     public Excruciator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");

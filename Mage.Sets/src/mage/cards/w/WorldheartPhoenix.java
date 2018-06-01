@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WorldheartPhoenix extends CardImpl {
+public final class WorldheartPhoenix extends CardImpl {
 
     public WorldheartPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

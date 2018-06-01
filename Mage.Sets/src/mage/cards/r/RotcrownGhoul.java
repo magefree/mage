@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
 /**
  * @author noxx
  */
-public class RotcrownGhoul extends CardImpl {
+public final class RotcrownGhoul extends CardImpl {
 
     public RotcrownGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

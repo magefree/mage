@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Styxo
  */
-public class WoodlandGuidance extends CardImpl {
+public final class WoodlandGuidance extends CardImpl {
 
     public WoodlandGuidance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

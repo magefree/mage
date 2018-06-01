@@ -45,7 +45,7 @@ import mage.game.permanent.token.QuestForTheGravelordZombieToken;
  *
  * @author North
  */
-public class QuestForTheGravelord extends CardImpl {
+public final class QuestForTheGravelord extends CardImpl {
 
     public QuestForTheGravelord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

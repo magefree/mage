@@ -47,7 +47,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class KrarksOtherThumb extends CardImpl {
+public final class KrarksOtherThumb extends CardImpl {
 
     public KrarksOtherThumb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

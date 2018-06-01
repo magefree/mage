@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class QarsiSadist extends CardImpl {
+public final class QarsiSadist extends CardImpl {
 
     public QarsiSadist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

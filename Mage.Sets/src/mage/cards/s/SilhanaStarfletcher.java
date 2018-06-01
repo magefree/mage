@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SilhanaStarfletcher extends CardImpl {
+public final class SilhanaStarfletcher extends CardImpl {
 
     public SilhanaStarfletcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

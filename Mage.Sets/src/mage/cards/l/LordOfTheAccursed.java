@@ -49,7 +49,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author jonubuu
  */
-public class LordOfTheAccursed extends CardImpl {
+public final class LordOfTheAccursed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie creatures");
 

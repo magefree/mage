@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward
  */
-public class IncreasingAmbition extends CardImpl {
+public final class IncreasingAmbition extends CardImpl {
 
     public IncreasingAmbition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

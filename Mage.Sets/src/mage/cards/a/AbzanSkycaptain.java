@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class AbzanSkycaptain extends CardImpl {
+public final class AbzanSkycaptain extends CardImpl {
 
     public AbzanSkycaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class KarplusanForest extends CardImpl {
+public final class KarplusanForest extends CardImpl {
 
     public KarplusanForest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

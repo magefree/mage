@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class OverwhelmingIntellect extends CardImpl {
+public final class OverwhelmingIntellect extends CardImpl {
 
     public OverwhelmingIntellect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");

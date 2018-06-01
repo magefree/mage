@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author anonymous
  */
-public class WintermoonMesa extends CardImpl {
+public final class WintermoonMesa extends CardImpl {
 
     public WintermoonMesa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

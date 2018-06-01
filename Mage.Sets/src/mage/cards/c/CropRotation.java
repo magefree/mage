@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class CropRotation extends CardImpl {
+public final class CropRotation extends CardImpl {
 
     public CropRotation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

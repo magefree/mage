@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class NemesisOfMortals extends CardImpl {
+public final class NemesisOfMortals extends CardImpl {
 
     public NemesisOfMortals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

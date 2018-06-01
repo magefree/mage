@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Jgod
  */
-public class PreemptiveStrike extends CardImpl {
+public final class PreemptiveStrike extends CardImpl {
 
     public PreemptiveStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

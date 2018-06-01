@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author JRHerlehy
  */
-public class Expropriate extends CardImpl {
+public final class Expropriate extends CardImpl {
 
     public Expropriate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}");

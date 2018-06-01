@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author jeffwadsworth
  */
-public class SeersSundial extends CardImpl {
+public final class SeersSundial extends CardImpl {
 
     public SeersSundial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

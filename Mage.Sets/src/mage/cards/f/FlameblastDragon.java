@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author Loki
  */
-public class FlameblastDragon extends CardImpl {
+public final class FlameblastDragon extends CardImpl {
 
     public FlameblastDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

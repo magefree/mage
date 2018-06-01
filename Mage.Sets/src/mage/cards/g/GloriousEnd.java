@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class GloriousEnd extends CardImpl {
+public final class GloriousEnd extends CardImpl {
 
     public GloriousEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

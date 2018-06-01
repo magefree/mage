@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author Styxo
  */
-public class PersonalEnergyShield extends CardImpl {
+public final class PersonalEnergyShield extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell that targets you or a permanent you control");
 

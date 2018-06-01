@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class LegacyOfTheBeloved extends CardImpl {
+public final class LegacyOfTheBeloved extends CardImpl {
 
     public LegacyOfTheBeloved(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

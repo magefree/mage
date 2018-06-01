@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class WildernessElemental extends CardImpl {
+public final class WildernessElemental extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands your opponents control");
 

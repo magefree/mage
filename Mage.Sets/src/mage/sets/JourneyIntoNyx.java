@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class JourneyIntoNyx extends ExpansionSet {
+public final class JourneyIntoNyx extends ExpansionSet {
 
     private static final JourneyIntoNyx instance = new JourneyIntoNyx();
 

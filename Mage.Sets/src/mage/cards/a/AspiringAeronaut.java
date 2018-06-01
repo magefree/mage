@@ -42,7 +42,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author fireshoes
  */
-public class AspiringAeronaut extends CardImpl {
+public final class AspiringAeronaut extends CardImpl {
 
     public AspiringAeronaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

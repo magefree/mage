@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Backfir3
  */
-public class BlastedLandscape extends CardImpl {
+public final class BlastedLandscape extends CardImpl {
 
     public BlastedLandscape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

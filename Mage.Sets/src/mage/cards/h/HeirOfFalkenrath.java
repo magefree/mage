@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class HeirOfFalkenrath extends CardImpl {
+public final class HeirOfFalkenrath extends CardImpl {
 
     public HeirOfFalkenrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

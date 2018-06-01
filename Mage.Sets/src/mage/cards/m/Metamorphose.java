@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author JRHerlehy
  */
-public class Metamorphose extends CardImpl {
+public final class Metamorphose extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
 

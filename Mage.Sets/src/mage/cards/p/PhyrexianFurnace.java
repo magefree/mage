@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class PhyrexianFurnace extends CardImpl {
+public final class PhyrexianFurnace extends CardImpl {
 
     public PhyrexianFurnace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

@@ -45,7 +45,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class GrizzledOutcasts extends CardImpl {
+public final class GrizzledOutcasts extends CardImpl {
 
     public GrizzledOutcasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

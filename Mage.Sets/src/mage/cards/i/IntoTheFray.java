@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class IntoTheFray extends CardImpl {
+public final class IntoTheFray extends CardImpl {
 
     public IntoTheFray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

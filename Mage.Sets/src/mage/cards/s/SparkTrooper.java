@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class SparkTrooper extends CardImpl {
+public final class SparkTrooper extends CardImpl {
 
     public SparkTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{W}");

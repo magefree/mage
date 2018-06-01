@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author ciaccona007
  */
-public class SkySwallower extends CardImpl {
+public final class SkySwallower extends CardImpl {
 
     public SkySwallower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

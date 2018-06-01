@@ -50,7 +50,7 @@ import mage.game.permanent.token.ValdukElementalToken;
  *
  * @author spjspj
  */
-public class ValdukKeeperOfTheFlame extends CardImpl {
+public final class ValdukKeeperOfTheFlame extends CardImpl {
 
     public ValdukKeeperOfTheFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class Sunstone extends CardImpl {
+public final class Sunstone extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
 

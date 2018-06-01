@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RangerOfEos extends CardImpl {
+public final class RangerOfEos extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature cards with converted mana cost 1 or less");
 

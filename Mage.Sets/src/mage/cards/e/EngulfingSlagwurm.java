@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class EngulfingSlagwurm extends CardImpl {
+public final class EngulfingSlagwurm extends CardImpl {
 
     public EngulfingSlagwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

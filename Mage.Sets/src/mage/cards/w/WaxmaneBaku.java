@@ -56,7 +56,7 @@ import mage.target.TargetPermanent;
 /**
  * @author LevelX2
  */
-public class WaxmaneBaku extends CardImpl {
+public final class WaxmaneBaku extends CardImpl {
 
     public WaxmaneBaku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

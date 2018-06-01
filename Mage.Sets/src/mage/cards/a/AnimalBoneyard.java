@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author anonymous
  */
-public class AnimalBoneyard extends CardImpl {
+public final class AnimalBoneyard extends CardImpl {
 
     public AnimalBoneyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

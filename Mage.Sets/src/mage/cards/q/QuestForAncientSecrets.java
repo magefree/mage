@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class QuestForAncientSecrets extends CardImpl {
+public final class QuestForAncientSecrets extends CardImpl {
 
     public QuestForAncientSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

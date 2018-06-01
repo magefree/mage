@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class WordsOfWaste extends CardImpl {
+public final class WordsOfWaste extends CardImpl {
 
     public WordsOfWaste(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

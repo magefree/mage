@@ -28,6 +28,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
@@ -206,7 +207,7 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && reboundCard != null) {
             SpellAbility ability = reboundCard.getSpellAbility();
-            player.cast(ability, game, true);
+            player.cast(ability, game, true, new MageObjectReference(source.getSourceObject(game), game));
             zone.remove(reboundCard.getId());
             return true;
         }

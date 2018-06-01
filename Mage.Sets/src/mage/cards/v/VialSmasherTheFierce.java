@@ -58,7 +58,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author LevelX2
  */
-public class VialSmasherTheFierce extends CardImpl {
+public final class VialSmasherTheFierce extends CardImpl {
 
     public VialSmasherTheFierce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

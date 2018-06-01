@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class SacredNectar extends CardImpl {
+public final class SacredNectar extends CardImpl {
 
     public SacredNectar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

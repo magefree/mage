@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class SeaOfClouds extends CardImpl {
+public final class SeaOfClouds extends CardImpl {
 
     public SeaOfClouds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

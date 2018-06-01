@@ -49,7 +49,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Loki
  */
-public class HarpoonSniper extends CardImpl {
+public final class HarpoonSniper extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
 

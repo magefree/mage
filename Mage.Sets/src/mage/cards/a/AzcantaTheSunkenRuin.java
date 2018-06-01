@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class AzcantaTheSunkenRuin extends CardImpl {
+public final class AzcantaTheSunkenRuin extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 

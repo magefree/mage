@@ -38,7 +38,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Loki
  */
-public class NeckSnap extends CardImpl {
+public final class NeckSnap extends CardImpl {
 
     public NeckSnap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Loki
  */
-public class ScionOfOona extends CardImpl {
+public final class ScionOfOona extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Faeries");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Faeries");

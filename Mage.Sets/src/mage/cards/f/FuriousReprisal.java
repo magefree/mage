@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class FuriousReprisal extends CardImpl {
+public final class FuriousReprisal extends CardImpl {
 
     public FuriousReprisal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

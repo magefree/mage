@@ -42,7 +42,7 @@ import mage.target.common.TargetLandPermanent;
  * @author noxx
 
  */
-public class RainOfThorns extends CardImpl {
+public final class RainOfThorns extends CardImpl {
 
     public RainOfThorns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CrystalBall extends CardImpl {
+public final class CrystalBall extends CardImpl {
 
     public CrystalBall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

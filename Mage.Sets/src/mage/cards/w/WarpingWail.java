@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WarpingWail extends CardImpl {
+public final class WarpingWail extends CardImpl {
 
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature with power or toughness 1 or less");
     private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell");

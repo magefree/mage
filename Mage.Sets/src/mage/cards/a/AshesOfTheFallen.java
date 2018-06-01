@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class AshesOfTheFallen extends CardImpl {
+public final class AshesOfTheFallen extends CardImpl {
 
     public AshesOfTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

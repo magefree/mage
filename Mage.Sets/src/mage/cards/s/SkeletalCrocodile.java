@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class SkeletalCrocodile extends CardImpl {
+public final class SkeletalCrocodile extends CardImpl {
 
     public SkeletalCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

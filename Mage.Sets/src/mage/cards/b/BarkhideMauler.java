@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BarkhideMauler extends CardImpl {
+public final class BarkhideMauler extends CardImpl {
 
     public BarkhideMauler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

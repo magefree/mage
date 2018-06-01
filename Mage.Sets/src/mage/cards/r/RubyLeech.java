@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class RubyLeech extends CardImpl {
+public final class RubyLeech extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red spells");
 

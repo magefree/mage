@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class DarkestHour extends CardImpl {
+public final class DarkestHour extends CardImpl {
 
     public DarkestHour(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

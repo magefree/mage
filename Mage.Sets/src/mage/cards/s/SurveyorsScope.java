@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SurveyorsScope extends CardImpl {
+public final class SurveyorsScope extends CardImpl {
 
     public SurveyorsScope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
@@ -102,7 +102,7 @@ class SurveyorsScopeEffect extends OneShotEffect {
             }
             game.informPlayers(new StringBuilder("Surveyor's Scope: X = ").append(numberOfLands).toString());
             // 10/17/2013 	If no players control at least two more lands than you when the ability resolves, you’ll still search and shuffle your library.
-            return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, numberOfLands, StaticFilters.FILTER_BASIC_LAND_CARD)).apply(game, source);
+            return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, numberOfLands, StaticFilters.FILTER_CARD_BASIC_LAND)).apply(game, source);
         }
         return false;
     }

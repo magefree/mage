@@ -42,7 +42,7 @@ import mage.game.permanent.token.MarduStrikeLeaderWarriorToken;
  *
  * @author LevelX2
  */
-public class MarduStrikeLeader extends CardImpl {
+public final class MarduStrikeLeader extends CardImpl {
 
     public MarduStrikeLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

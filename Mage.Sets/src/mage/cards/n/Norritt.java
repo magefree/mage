@@ -60,7 +60,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author MTGfan & L_J
  */
-public class Norritt extends CardImpl {
+public final class Norritt extends CardImpl {
 
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creature");
 

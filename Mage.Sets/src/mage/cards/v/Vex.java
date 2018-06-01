@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author wetterlicht
  */
-public class Vex extends CardImpl {
+public final class Vex extends CardImpl {
 
     public Vex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

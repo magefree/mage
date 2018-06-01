@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class LavaballTrap extends CardImpl {
+public final class LavaballTrap extends CardImpl {
 
     public LavaballTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{R}{R}");

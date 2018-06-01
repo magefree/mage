@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki, nantuko
  */
-public class FiresOfYavimaya extends CardImpl {
+public final class FiresOfYavimaya extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
 

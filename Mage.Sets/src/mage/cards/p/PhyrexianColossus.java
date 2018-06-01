@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author FenrisulfrX
  */
-public class PhyrexianColossus extends CardImpl {
+public final class PhyrexianColossus extends CardImpl {
 
     public PhyrexianColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

@@ -39,7 +39,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class CrucibleOfWorlds extends CardImpl {
+public final class CrucibleOfWorlds extends CardImpl {
 
     public CrucibleOfWorlds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

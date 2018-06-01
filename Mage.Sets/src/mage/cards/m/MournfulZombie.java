@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class MournfulZombie extends CardImpl {
+public final class MournfulZombie extends CardImpl {
 
     public MournfulZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

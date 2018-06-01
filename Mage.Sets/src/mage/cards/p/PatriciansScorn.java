@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class PatriciansScorn extends CardImpl { 
+public final class PatriciansScorn extends CardImpl { 
 
     public PatriciansScorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author anonymous
  */
-public class RancidEarth extends CardImpl {
+public final class RancidEarth extends CardImpl {
 
     public RancidEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class RooftopStorm extends CardImpl {
+public final class RooftopStorm extends CardImpl {
 
     public RooftopStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");

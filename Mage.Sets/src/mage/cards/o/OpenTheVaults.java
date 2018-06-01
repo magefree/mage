@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class OpenTheVaults extends CardImpl {
+public final class OpenTheVaults extends CardImpl {
 
     public OpenTheVaults(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");

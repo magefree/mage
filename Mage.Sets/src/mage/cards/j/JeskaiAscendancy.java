@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class JeskaiAscendancy extends CardImpl {
+public final class JeskaiAscendancy extends CardImpl {
 
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 

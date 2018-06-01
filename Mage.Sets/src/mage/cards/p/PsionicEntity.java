@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class PsionicEntity extends CardImpl {
+public final class PsionicEntity extends CardImpl {
 
     public PsionicEntity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

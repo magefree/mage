@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX
  */
-public class OrochiRanger extends CardImpl {
+public final class OrochiRanger extends CardImpl {
 
     public OrochiRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

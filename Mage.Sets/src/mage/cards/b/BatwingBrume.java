@@ -53,7 +53,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  * @author jeffwadsworth
  *
  */
-public class BatwingBrume extends CardImpl {
+public final class BatwingBrume extends CardImpl {
 
     public BatwingBrume(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/B}");

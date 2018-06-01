@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class ScatterArc extends CardImpl {
+public final class ScatterArc extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 

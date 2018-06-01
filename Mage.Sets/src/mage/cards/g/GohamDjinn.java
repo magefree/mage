@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class GohamDjinn extends CardImpl {
+public final class GohamDjinn extends CardImpl {
 
     public GohamDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SandbarMerfolk extends CardImpl {
+public final class SandbarMerfolk extends CardImpl {
 
     public SandbarMerfolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

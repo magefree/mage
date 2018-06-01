@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DragonMage extends CardImpl {
+public final class DragonMage extends CardImpl {
 
     public DragonMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

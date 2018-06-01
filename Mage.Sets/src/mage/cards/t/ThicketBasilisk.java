@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Backfir3
  */
-public class ThicketBasilisk extends CardImpl {
+public final class ThicketBasilisk extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature");
 

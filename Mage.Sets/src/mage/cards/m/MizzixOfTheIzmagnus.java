@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class MizzixOfTheIzmagnus extends CardImpl {
+public final class MizzixOfTheIzmagnus extends CardImpl {
 
     private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell("an instant or sorcery spell with converted mana cost greater than the number of experience counters you have");
 

@@ -51,7 +51,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class EchoingTruth extends CardImpl {
+public final class EchoingTruth extends CardImpl {
 
     public EchoingTruth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

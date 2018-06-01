@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GoblinOutlander extends CardImpl {
+public final class GoblinOutlander extends CardImpl {
 
     public GoblinOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");

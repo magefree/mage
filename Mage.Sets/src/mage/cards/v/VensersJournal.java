@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class VensersJournal extends CardImpl {
+public final class VensersJournal extends CardImpl {
 
     public VensersJournal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

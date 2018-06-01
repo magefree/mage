@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * @author fireshoes
  */
-public class HourOfDevastation extends ExpansionSet {
+public final class HourOfDevastation extends ExpansionSet {
 
     private static final HourOfDevastation instance = new HourOfDevastation();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class BornOfTheGods extends ExpansionSet {
+public final class BornOfTheGods extends ExpansionSet {
 
     private static final BornOfTheGods instance = new BornOfTheGods();
 

@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ChargingTuskodon extends CardImpl {
+public final class ChargingTuskodon extends CardImpl {
 
     public ChargingTuskodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

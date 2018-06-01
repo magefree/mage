@@ -39,7 +39,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author JayDi85
  */
-public class StrengthOfThePack extends CardImpl {
+public final class StrengthOfThePack extends CardImpl {
 
     public StrengthOfThePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");

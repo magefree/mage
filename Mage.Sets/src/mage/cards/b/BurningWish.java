@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class BurningWish extends CardImpl {
+public final class BurningWish extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a sorcery card");
 

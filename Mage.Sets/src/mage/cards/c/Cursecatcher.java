@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class Cursecatcher extends CardImpl {
+public final class Cursecatcher extends CardImpl {
 
     public Cursecatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

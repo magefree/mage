@@ -39,7 +39,7 @@ import mage.target.common.TargetActivatedOrTriggeredAbility;
  *
  * @author Plopman
  */
-public class Stifle extends CardImpl {
+public final class Stifle extends CardImpl {
 
     public Stifle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

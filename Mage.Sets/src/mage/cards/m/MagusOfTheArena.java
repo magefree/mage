@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponentsChoicePermanent;
  *
  * @author LevelX2
  */
-public class MagusOfTheArena extends CardImpl {
+public final class MagusOfTheArena extends CardImpl {
 
     public MagusOfTheArena(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BloodfireMentor extends CardImpl {
+public final class BloodfireMentor extends CardImpl {
 
     public BloodfireMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

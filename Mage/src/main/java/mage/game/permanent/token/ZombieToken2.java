@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class ZombieToken2 extends TokenImpl {
+public final class ZombieToken2 extends TokenImpl {
 
     public ZombieToken2() {
         this(0, 0);

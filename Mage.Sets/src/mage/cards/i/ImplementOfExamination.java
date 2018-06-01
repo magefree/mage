@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ImplementOfExamination extends CardImpl {
+public final class ImplementOfExamination extends CardImpl {
 
     public ImplementOfExamination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class HorobisWhisper extends CardImpl {
+public final class HorobisWhisper extends CardImpl {
 
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("nonblack creature");
     private static final FilterLandPermanent filterCondition = new FilterLandPermanent("Swamp");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author FenrisulfrX
  */
-public class MorgueToad extends CardImpl {
+public final class MorgueToad extends CardImpl {
 
     public MorgueToad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

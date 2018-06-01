@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class PsychicPuppetry extends CardImpl {
+public final class PsychicPuppetry extends CardImpl {
 
     public PsychicPuppetry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

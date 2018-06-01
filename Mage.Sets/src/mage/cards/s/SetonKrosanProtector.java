@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author cbt33
  */
-public class SetonKrosanProtector extends CardImpl {
+public final class SetonKrosanProtector extends CardImpl {
     
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Druid you control");
     

@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801 & L_J
  */
-public class BalduvianFrostwaker extends CardImpl {
+public final class BalduvianFrostwaker extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow land");
 

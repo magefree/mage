@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreatureCard;
 /**
  * @author nantuko
  */
-public class GarruksHorde extends CardImpl {
+public final class GarruksHorde extends CardImpl {
 
     public GarruksHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

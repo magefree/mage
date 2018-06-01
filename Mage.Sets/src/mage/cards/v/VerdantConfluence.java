@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class VerdantConfluence extends CardImpl {
+public final class VerdantConfluence extends CardImpl {
 
     public VerdantConfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
@@ -68,7 +68,7 @@ public class VerdantConfluence extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
         
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         mode = new Mode();
         mode.getEffects().add(new SearchLibraryPutInPlayEffect(target, true));
         this.getSpellAbility().getModes().addMode(mode);

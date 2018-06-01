@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class SamutVoiceOfDissent extends CardImpl {
+public final class SamutVoiceOfDissent extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Other creatures you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target creature");

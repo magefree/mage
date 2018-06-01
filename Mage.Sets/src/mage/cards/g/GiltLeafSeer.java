@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class GiltLeafSeer extends CardImpl {
+public final class GiltLeafSeer extends CardImpl {
 
     public GiltLeafSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

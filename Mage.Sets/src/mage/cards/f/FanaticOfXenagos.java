@@ -48,7 +48,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class FanaticOfXenagos extends CardImpl {
+public final class FanaticOfXenagos extends CardImpl {
 
     public FanaticOfXenagos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");

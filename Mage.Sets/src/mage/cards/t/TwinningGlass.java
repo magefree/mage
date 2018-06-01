@@ -29,6 +29,7 @@ package mage.cards.t;
 
 import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -55,7 +56,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author jeffwadsworth
  */
-public class TwinningGlass extends CardImpl {
+public final class TwinningGlass extends CardImpl {
 
     public TwinningGlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
@@ -121,7 +122,7 @@ class TwinningGlassEffect extends OneShotEffect {
                 Card chosenCard = game.getCard(target.getFirstTarget());
                 if (chosenCard != null) {
                     if (controller.chooseUse(outcome, "Cast the card without paying mana cost?", source, game)) {
-                        return controller.cast(chosenCard.getSpellAbility(), game, true);
+                        return controller.cast(chosenCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                     }
                 }
             }

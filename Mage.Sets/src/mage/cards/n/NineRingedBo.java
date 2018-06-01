@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class NineRingedBo extends CardImpl {
+public final class NineRingedBo extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
 

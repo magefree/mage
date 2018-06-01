@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MarchesasSmuggler extends CardImpl {
+public final class MarchesasSmuggler extends CardImpl {
 
     public MarchesasSmuggler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");

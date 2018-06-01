@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class TerraStomper extends CardImpl {
+public final class TerraStomper extends CardImpl {
 
     public TerraStomper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");

@@ -40,7 +40,7 @@ import mage.game.permanent.token.WurmToken;
 /**
  * @author JRHerlehy
  */
-public class CrushOfWurms extends CardImpl {
+public final class CrushOfWurms extends CardImpl {
 
     public CrushOfWurms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{G}{G}{G}");

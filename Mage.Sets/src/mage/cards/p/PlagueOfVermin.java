@@ -46,7 +46,7 @@ import mage.players.PlayerList;
  *
  * @author jeffwadsworth
  */
-public class PlagueOfVermin extends CardImpl {
+public final class PlagueOfVermin extends CardImpl {
 
     public PlagueOfVermin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}");

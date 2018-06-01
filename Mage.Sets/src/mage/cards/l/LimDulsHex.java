@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class LimDulsHex extends CardImpl {
+public final class LimDulsHex extends CardImpl {
 
     public LimDulsHex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

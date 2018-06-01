@@ -48,7 +48,7 @@ import mage.util.CardUtil;
 /**
  * @author noxx
  */
-public class HeraldOfWar extends CardImpl {
+public final class HeraldOfWar extends CardImpl {
 
     public HeraldOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

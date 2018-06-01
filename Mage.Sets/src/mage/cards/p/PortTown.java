@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class PortTown extends CardImpl {
+public final class PortTown extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Plains or Island card from your hand");
 

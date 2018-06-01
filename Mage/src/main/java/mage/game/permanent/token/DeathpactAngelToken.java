@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author spjspj
  */
-public class DeathpactAngelToken extends TokenImpl {
+public final class DeathpactAngelToken extends TokenImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("card named Deathpact Angel from your graveyard");
 

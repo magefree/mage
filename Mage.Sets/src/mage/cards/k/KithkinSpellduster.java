@@ -47,7 +47,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Loki
  */
-public class KithkinSpellduster extends CardImpl {
+public final class KithkinSpellduster extends CardImpl {
 
     public KithkinSpellduster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

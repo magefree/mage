@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class HammerOfRuin extends CardImpl {
+public final class HammerOfRuin extends CardImpl {
 
     public HammerOfRuin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

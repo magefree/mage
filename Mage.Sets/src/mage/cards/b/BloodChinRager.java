@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class BloodChinRager extends CardImpl {
+public final class BloodChinRager extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR,"Warrior creatures you control");
 

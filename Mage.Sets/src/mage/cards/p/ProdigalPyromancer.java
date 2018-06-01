@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ProdigalPyromancer extends CardImpl {
+public final class ProdigalPyromancer extends CardImpl {
 
     public ProdigalPyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

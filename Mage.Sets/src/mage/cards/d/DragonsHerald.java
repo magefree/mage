@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class DragonsHerald extends CardImpl {
+public final class DragonsHerald extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card named Hellkite Overlord");
     private static final FilterControlledCreaturePermanent filterBlack = new FilterControlledCreaturePermanent("a black creature");

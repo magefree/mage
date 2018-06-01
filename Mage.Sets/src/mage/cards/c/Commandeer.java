@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class Commandeer extends CardImpl {
+public final class Commandeer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("two blue cards");
     private static final FilterSpell filterSpell = new FilterSpell("noncreature spell");

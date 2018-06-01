@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FurnaceWhelp extends CardImpl {
+public final class FurnaceWhelp extends CardImpl {
 
     public FurnaceWhelp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

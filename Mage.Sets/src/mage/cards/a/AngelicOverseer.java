@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author nantuko
  */
-public class AngelicOverseer extends CardImpl {
+public final class AngelicOverseer extends CardImpl {
 
     private static final String rule1 = "As long as you control a Human, {this} has hexproof";
     private static final String rule2 = "and is indestructible";

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class PyromanticPilgrim extends CardImpl {
+public final class PyromanticPilgrim extends CardImpl {
 
     public PyromanticPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

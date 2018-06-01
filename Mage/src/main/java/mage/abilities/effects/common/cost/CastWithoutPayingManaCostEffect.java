@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.cost;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -101,7 +102,7 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
                 }
             }
             if (cardToCast != null) {
-                controller.cast(cardToCast.getSpellAbility(), game, true);
+                controller.cast(cardToCast.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
             }
         }
         return true;

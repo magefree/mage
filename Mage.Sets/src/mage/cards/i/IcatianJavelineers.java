@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class IcatianJavelineers extends CardImpl {
+public final class IcatianJavelineers extends CardImpl {
 
     public IcatianJavelineers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

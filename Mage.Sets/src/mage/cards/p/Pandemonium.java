@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Pandemonium extends CardImpl {
+public final class Pandemonium extends CardImpl {
 
     private final UUID originalId;
 

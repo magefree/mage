@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class ExquisiteArchangel extends CardImpl {
+public final class ExquisiteArchangel extends CardImpl {
 
     public ExquisiteArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

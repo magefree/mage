@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class WitnessTheEnd extends CardImpl {
+public final class WitnessTheEnd extends CardImpl {
 
     public WitnessTheEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class SkySkiff extends CardImpl {
+public final class SkySkiff extends CardImpl {
 
     public SkySkiff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -63,7 +63,7 @@ import mage.target.TargetCard;
  *
  * @author spjspj
  */
-public class UneshCriosphinxSovereign extends CardImpl {
+public final class UneshCriosphinxSovereign extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Sphinx spells");
 

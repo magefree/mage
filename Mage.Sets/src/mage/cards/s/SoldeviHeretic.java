@@ -50,7 +50,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author L_J
  */
-public class SoldeviHeretic extends CardImpl {
+public final class SoldeviHeretic extends CardImpl {
 
     public SoldeviHeretic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class TranquilThicket extends CardImpl {
+public final class TranquilThicket extends CardImpl {
 
     public TranquilThicket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

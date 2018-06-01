@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class FinalFortune extends CardImpl {
+public final class FinalFortune extends CardImpl {
 
     public FinalFortune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");

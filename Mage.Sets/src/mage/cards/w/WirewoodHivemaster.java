@@ -47,7 +47,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author Plopman
  */
-public class WirewoodHivemaster extends CardImpl {
+public final class WirewoodHivemaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken Elf");
     static {

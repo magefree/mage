@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Backfir3
  */
-public class ArgothianElder extends CardImpl {
+public final class ArgothianElder extends CardImpl {
 
     public ArgothianElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

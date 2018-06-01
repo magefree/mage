@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000 & L_J
  */
-public class ForceBubble extends CardImpl {
+public final class ForceBubble extends CardImpl {
 
     public ForceBubble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");

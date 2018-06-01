@@ -39,7 +39,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author LevelX2
  */
-public class TriplicateSpirits extends CardImpl {
+public final class TriplicateSpirits extends CardImpl {
 
     public TriplicateSpirits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");

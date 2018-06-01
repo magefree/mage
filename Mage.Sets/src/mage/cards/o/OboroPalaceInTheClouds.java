@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class OboroPalaceInTheClouds extends CardImpl {
+public final class OboroPalaceInTheClouds extends CardImpl {
 
     public OboroPalaceInTheClouds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

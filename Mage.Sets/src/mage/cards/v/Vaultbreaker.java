@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class Vaultbreaker extends CardImpl {
+public final class Vaultbreaker extends CardImpl {
 
     public Vaultbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

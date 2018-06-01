@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class GrotesqueHybrid extends CardImpl {
+public final class GrotesqueHybrid extends CardImpl {
 
     public GrotesqueHybrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SunbeamSpellbomb extends CardImpl {
+public final class SunbeamSpellbomb extends CardImpl {
 
     public SunbeamSpellbomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

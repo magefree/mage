@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ShuEliteInfantry extends CardImpl {
+public final class ShuEliteInfantry extends CardImpl {
 
     public ShuEliteInfantry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

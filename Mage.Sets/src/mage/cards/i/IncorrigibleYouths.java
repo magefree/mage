@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class IncorrigibleYouths extends CardImpl {
+public final class IncorrigibleYouths extends CardImpl {
 
     public IncorrigibleYouths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

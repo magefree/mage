@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class SmugglersCopter extends CardImpl {
+public final class SmugglersCopter extends CardImpl {
 
     public SmugglersCopter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

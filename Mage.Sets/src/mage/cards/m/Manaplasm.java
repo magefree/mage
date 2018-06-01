@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class Manaplasm extends CardImpl {
+public final class Manaplasm extends CardImpl {
 
     public Manaplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

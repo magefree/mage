@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class SqueakingPieGrubfellows extends CardImpl {
+public final class SqueakingPieGrubfellows extends CardImpl {
 
     public SqueakingPieGrubfellows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

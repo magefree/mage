@@ -39,7 +39,7 @@ import mage.constants.Duration;
 /**
  * @author fireshoes
  */
-public class YahennisExpertise extends CardImpl {
+public final class YahennisExpertise extends CardImpl {
 
     public YahennisExpertise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author tomd1990
  */
-public class BookBurning extends CardImpl {
+public final class BookBurning extends CardImpl {
 
     public BookBurning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

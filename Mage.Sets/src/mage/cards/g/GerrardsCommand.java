@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author FenrisulfrX
  */
-public class GerrardsCommand extends CardImpl {
+public final class GerrardsCommand extends CardImpl {
 
     public GerrardsCommand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");

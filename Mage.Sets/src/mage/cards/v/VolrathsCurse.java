@@ -61,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VolrathsCurse extends CardImpl {
+public final class VolrathsCurse extends CardImpl {
 
     static final String keyString = "_ignoreEffectForTurn";
 

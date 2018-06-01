@@ -36,6 +36,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageItem;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -359,7 +360,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int drawCards(int num, Game game, List<UUID> appliedEffects);
 
-    boolean cast(SpellAbility ability, Game game, boolean noMana);
+    boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
 
     SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana);
 
@@ -399,7 +400,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * to be the turn of the player playing that card.
      * @return
      */
-    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming);
+    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference);
 
     /**
      *
@@ -627,6 +628,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game);
 
+    void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game, boolean allowUndo);
+
     List<Permanent> getAvailableAttackers(Game game);
 
     List<Permanent> getAvailableAttackers(UUID defenderId, Game game);
@@ -792,6 +795,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param withName
      * @return
      */
+    @Deprecated
     boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName);
 
     /**

@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CrabappleCohort extends CardImpl {
+public final class CrabappleCohort extends CardImpl {
 
     private static final String rule = "{this} gets +1/+1 as long as you control another green creature";
 

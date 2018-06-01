@@ -56,7 +56,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class WheelOfSunAndMoon extends CardImpl {
+public final class WheelOfSunAndMoon extends CardImpl {
 
     public WheelOfSunAndMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G/W}{G/W}");

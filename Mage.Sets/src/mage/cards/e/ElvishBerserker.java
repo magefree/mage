@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author ilcartographer
  */
-public class ElvishBerserker extends CardImpl {
+public final class ElvishBerserker extends CardImpl {
 
     public ElvishBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

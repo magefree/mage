@@ -38,7 +38,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class ScourFromExistence extends CardImpl {
+public final class ScourFromExistence extends CardImpl {
 
     public ScourFromExistence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{7}");

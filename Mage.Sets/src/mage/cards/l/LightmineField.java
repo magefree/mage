@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class LightmineField extends CardImpl {
+public final class LightmineField extends CardImpl {
 
     public LightmineField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

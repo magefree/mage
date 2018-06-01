@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class MorgueTheft extends CardImpl {
+public final class MorgueTheft extends CardImpl {
     
     public MorgueTheft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

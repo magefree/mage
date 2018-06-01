@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class DaxosSpiritToken extends TokenImpl {
+public final class DaxosSpiritToken extends TokenImpl {
 
     public DaxosSpiritToken() {
         super("Spirit", "white and black Spirit enchantment creature token with \"This creature's power and toughness are each equal to the number of experience counters you have.\"");

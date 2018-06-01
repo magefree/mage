@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JinxedIdol extends CardImpl {
+public final class JinxedIdol extends CardImpl {
 
     public JinxedIdol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -92,7 +92,7 @@ class JinxedIdolEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             return permanent.changeControllerId(source.getFirstTarget(), game);
         } else {

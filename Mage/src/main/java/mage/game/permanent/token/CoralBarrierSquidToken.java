@@ -36,7 +36,7 @@ import mage.abilities.keyword.IslandwalkAbility;
  *
  * @author spjspj
  */
-public class CoralBarrierSquidToken extends TokenImpl {
+public final class CoralBarrierSquidToken extends TokenImpl {
 
     public CoralBarrierSquidToken() {
         super("Squid", "1/1 blue Squid creature token with islandwalk");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author jeffwadsworth
  */
-public class BurningEarth extends CardImpl {
+public final class BurningEarth extends CardImpl {
 
     private final static FilterLandPermanent filter = new FilterLandPermanent("a player taps a nonbasic land");
     

@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class TouchOfTheEternal extends CardImpl {
+public final class TouchOfTheEternal extends CardImpl {
 
     public TouchOfTheEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{W}{W}");

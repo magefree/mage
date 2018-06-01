@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class SunflareShaman extends CardImpl {
+public final class SunflareShaman extends CardImpl {
 
     public SunflareShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

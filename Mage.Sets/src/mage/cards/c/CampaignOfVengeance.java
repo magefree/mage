@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CampaignOfVengeance extends CardImpl {
+public final class CampaignOfVengeance extends CardImpl {
 
     public CampaignOfVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{B}");

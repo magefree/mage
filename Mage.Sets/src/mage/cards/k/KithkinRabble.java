@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class KithkinRabble extends CardImpl {
+public final class KithkinRabble extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("white permanents you control");
 

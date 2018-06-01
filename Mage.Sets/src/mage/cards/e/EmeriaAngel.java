@@ -43,7 +43,7 @@ import mage.game.permanent.token.BirdToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EmeriaAngel extends CardImpl {
+public final class EmeriaAngel extends CardImpl {
 
     public EmeriaAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

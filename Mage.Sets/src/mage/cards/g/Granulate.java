@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  *
  * @author Plopman
  */
-public class Granulate extends CardImpl {
+public final class Granulate extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland artifact with converted mana cost 4 or less");
     static {

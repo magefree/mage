@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author JRHerlehy
  */
-public class AeronautAdmiral extends CardImpl {
+public final class AeronautAdmiral extends CardImpl {
 
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("Vehicles");
 

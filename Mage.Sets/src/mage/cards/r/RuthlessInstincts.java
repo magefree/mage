@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RuthlessInstincts extends CardImpl {
+public final class RuthlessInstincts extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonattacking creature");
     private static final FilterCreaturePermanent filterAttacking = new FilterCreaturePermanent("attacking creature");

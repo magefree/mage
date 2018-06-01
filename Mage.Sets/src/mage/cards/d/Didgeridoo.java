@@ -30,7 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class Didgeridoo extends CardImpl {
+public final class Didgeridoo extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("a Minotaur permanent card");
 
@@ -55,7 +55,7 @@ public class Didgeridoo extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {3}: You may put a Minotaur permanent card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(filter), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter), new ManaCostsImpl("{3}")));
     }
 
     public Didgeridoo(final Didgeridoo card) {

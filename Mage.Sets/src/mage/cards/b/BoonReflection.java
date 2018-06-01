@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
  * @author jeffwadsworth
  *
  */
-public class BoonReflection extends CardImpl {
+public final class BoonReflection extends CardImpl {
 
     public BoonReflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");

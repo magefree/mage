@@ -44,7 +44,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class DistortingWake extends CardImpl {
+public final class DistortingWake extends CardImpl {
 
     public DistortingWake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}{U}");

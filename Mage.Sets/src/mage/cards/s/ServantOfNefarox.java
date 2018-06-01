@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ServantOfNefarox extends CardImpl {
+public final class ServantOfNefarox extends CardImpl {
 
     public ServantOfNefarox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

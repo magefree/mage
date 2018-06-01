@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class ReignOfChaos extends CardImpl {
+public final class ReignOfChaos extends CardImpl {
 
     private static final FilterPermanent filter1 = new FilterPermanent("Plains");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("white creature");

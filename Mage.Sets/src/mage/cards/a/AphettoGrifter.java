@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class AphettoGrifter extends CardImpl {
+public final class AphettoGrifter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Wizards you control");
 

@@ -45,7 +45,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author emerald000
  */
-public class EnergyFlux extends CardImpl {
+public final class EnergyFlux extends CardImpl {
 
     public EnergyFlux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

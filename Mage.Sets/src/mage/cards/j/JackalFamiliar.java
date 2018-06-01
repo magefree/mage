@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class JackalFamiliar extends CardImpl {
+public final class JackalFamiliar extends CardImpl {
 
     public JackalFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author cbt33
  */
-public class ToxinSliver extends CardImpl {
+public final class ToxinSliver extends CardImpl {
 
     public ToxinSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

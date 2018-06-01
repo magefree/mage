@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author North
  * @author LevelX - changed to checkInterveningIfClause
  */
-public class EmeriaTheSkyRuin extends CardImpl {
+public final class EmeriaTheSkyRuin extends CardImpl {
 
     public EmeriaTheSkyRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

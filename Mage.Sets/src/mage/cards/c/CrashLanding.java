@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class CrashLanding extends CardImpl {
+public final class CrashLanding extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forests you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with flying");

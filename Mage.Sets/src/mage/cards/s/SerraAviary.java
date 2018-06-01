@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author ilcartographer
  */
-public class SerraAviary extends CardImpl {
+public final class SerraAviary extends CardImpl {
     
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Creatures with flying");
     

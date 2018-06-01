@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class GraspOfFate extends CardImpl {
+public final class GraspOfFate extends CardImpl {
 
     public GraspOfFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");

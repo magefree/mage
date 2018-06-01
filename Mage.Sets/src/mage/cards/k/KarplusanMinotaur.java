@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author L_J
  */
-public class KarplusanMinotaur extends CardImpl {
+public final class KarplusanMinotaur extends CardImpl {
 
     public KarplusanMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class VedalkenAnatomist extends CardImpl {
+public final class VedalkenAnatomist extends CardImpl {
 
     public VedalkenAnatomist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

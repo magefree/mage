@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author emerald000
  */
-public class KarmicJustice extends CardImpl {
+public final class KarmicJustice extends CardImpl {
 
     public KarmicJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

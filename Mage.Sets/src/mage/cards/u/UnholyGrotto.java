@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author anonymous
  */
-public class UnholyGrotto extends CardImpl {
+public final class UnholyGrotto extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Zombie card from your graveyard");
     

@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class KothophedSoulHoarder extends CardImpl {
+public final class KothophedSoulHoarder extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent();
 

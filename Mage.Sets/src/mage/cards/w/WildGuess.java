@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class WildGuess extends CardImpl {
+public final class WildGuess extends CardImpl {
 
     public WildGuess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}");

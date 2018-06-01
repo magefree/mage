@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class MoonveilDragon extends CardImpl {
+public final class MoonveilDragon extends CardImpl {
 
     public MoonveilDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");

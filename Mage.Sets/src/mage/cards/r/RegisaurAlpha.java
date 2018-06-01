@@ -50,7 +50,7 @@ import mage.game.permanent.token.DinosaurToken;
  *
  * @author TheElk801
  */
-public class RegisaurAlpha extends CardImpl {
+public final class RegisaurAlpha extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Dinosaurs");
 

@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.BlockedPredicate;
  *
  * @author jeffwadsworth
  */
-public class TattermungeWitch extends CardImpl {
+public final class TattermungeWitch extends CardImpl {
 
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("Each blocked creature");
 

@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class Chromium extends CardImpl {
+public final class Chromium extends CardImpl {
 
     public Chromium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{U}{U}{B}{B}");

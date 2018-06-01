@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class NoDachi extends CardImpl {
+public final class NoDachi extends CardImpl {
 
     public NoDachi (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

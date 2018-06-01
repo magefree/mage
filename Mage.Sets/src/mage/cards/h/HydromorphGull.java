@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class HydromorphGull extends CardImpl {
+public final class HydromorphGull extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
 

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
  *
  * @author fireshoes
  */
-public class DragonlordAtarka extends CardImpl {
+public final class DragonlordAtarka extends CardImpl {
 
     private static final FilterCreatureOrPlaneswalkerPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("target creatures and/or planeswalkers your opponents control");
 

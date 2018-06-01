@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WindingConstrictor extends CardImpl {
+public final class WindingConstrictor extends CardImpl {
 
     public WindingConstrictor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");

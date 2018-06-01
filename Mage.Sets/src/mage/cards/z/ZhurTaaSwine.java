@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ZhurTaaSwine extends CardImpl {
+public final class ZhurTaaSwine extends CardImpl {
 
     public ZhurTaaSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");

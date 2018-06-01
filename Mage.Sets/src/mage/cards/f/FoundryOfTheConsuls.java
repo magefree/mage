@@ -46,7 +46,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  * @author LoneFox
  *
  */
-public class FoundryOfTheConsuls extends CardImpl {
+public final class FoundryOfTheConsuls extends CardImpl {
 
     public FoundryOfTheConsuls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

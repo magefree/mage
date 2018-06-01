@@ -46,7 +46,7 @@ import mage.counters.CounterType;
 /**
  * @author Loki
  */
-public class Spincrusher extends CardImpl {
+public final class Spincrusher extends CardImpl {
 
     public Spincrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

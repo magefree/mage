@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DrownedCatacomb extends CardImpl {
+public final class DrownedCatacomb extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

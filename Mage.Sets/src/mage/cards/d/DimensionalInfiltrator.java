@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class DimensionalInfiltrator extends CardImpl {
+public final class DimensionalInfiltrator extends CardImpl {
 
     public DimensionalInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

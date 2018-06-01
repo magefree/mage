@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class LaquatussChampion extends CardImpl {
+public final class LaquatussChampion extends CardImpl {
 
     public LaquatussChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

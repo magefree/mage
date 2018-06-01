@@ -55,7 +55,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class ScourgeOfValkas extends CardImpl {
+public final class ScourgeOfValkas extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Dragon");
 

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class EmpyrealVoyager extends CardImpl {
+public final class EmpyrealVoyager extends CardImpl {
 
     public EmpyrealVoyager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");

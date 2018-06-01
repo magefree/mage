@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JayDi85
  */
-public class ForerunnerOfTheLegion extends CardImpl {
+public final class ForerunnerOfTheLegion extends CardImpl {
 
     private static final FilterPermanent filterAnotherVampire = new FilterPermanent(SubType.VAMPIRE, "another " + SubType.VAMPIRE.toString());
     static {

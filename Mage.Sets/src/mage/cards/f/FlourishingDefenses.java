@@ -45,7 +45,7 @@ import mage.game.permanent.token.ElfToken;
  *
  * @author jeffwadsworth
  */
-public class FlourishingDefenses extends CardImpl {
+public final class FlourishingDefenses extends CardImpl {
 
     public FlourishingDefenses(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class RevengeOfTheHunted extends CardImpl {
+public final class RevengeOfTheHunted extends CardImpl {
 
     public RevengeOfTheHunted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");

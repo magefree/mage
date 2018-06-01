@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class SoulNet extends CardImpl {
+public final class SoulNet extends CardImpl {
 
     public SoulNet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

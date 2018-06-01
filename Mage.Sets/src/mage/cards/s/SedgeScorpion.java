@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SedgeScorpion extends CardImpl {
+public final class SedgeScorpion extends CardImpl {
 
     public SedgeScorpion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

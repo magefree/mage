@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class ConcertedEffort extends CardImpl {
+public final class ConcertedEffort extends CardImpl {
 
     public ConcertedEffort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");

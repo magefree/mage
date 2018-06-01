@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class Plaguebearer extends CardImpl {
+public final class Plaguebearer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonblack creature with converted mana cost X");
 

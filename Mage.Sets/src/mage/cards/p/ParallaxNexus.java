@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author spjspj
  */
-public class ParallaxNexus extends CardImpl {
+public final class ParallaxNexus extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 

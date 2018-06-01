@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class DarkHeartOfTheWood extends CardImpl {
+public final class DarkHeartOfTheWood extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 

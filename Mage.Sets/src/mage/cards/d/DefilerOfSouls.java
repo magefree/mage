@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class DefilerOfSouls extends CardImpl {
+public final class DefilerOfSouls extends CardImpl {
 
     public DefilerOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{R}");

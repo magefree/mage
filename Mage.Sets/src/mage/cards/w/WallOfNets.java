@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.BlockedByIdPredicate;
  *
  * @author LoneFox
  */
-public class WallOfNets extends CardImpl {
+public final class WallOfNets extends CardImpl {
 
     public WallOfNets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

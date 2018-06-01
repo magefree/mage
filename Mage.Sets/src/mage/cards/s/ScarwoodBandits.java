@@ -61,7 +61,7 @@ import mage.util.CardUtil;
  *
  * @author L_J
  */
-public class ScarwoodBandits extends CardImpl {
+public final class ScarwoodBandits extends CardImpl {
 
     public ScarwoodBandits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

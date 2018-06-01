@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Wehk
  */
-public class ShieldingPlax extends CardImpl {
+public final class ShieldingPlax extends CardImpl {
 
     private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 

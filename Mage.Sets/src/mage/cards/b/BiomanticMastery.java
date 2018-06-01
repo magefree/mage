@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class BiomanticMastery extends CardImpl {
+public final class BiomanticMastery extends CardImpl {
 
     public BiomanticMastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G/U}{G/U}{G/U}");

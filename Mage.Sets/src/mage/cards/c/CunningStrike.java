@@ -43,7 +43,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author fireshoes
  */
-public class CunningStrike extends CardImpl {
+public final class CunningStrike extends CardImpl {
 
     public CunningStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");

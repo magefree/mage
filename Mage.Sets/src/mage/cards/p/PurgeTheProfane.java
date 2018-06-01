@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class PurgeTheProfane extends CardImpl {
+public final class PurgeTheProfane extends CardImpl {
 
     public PurgeTheProfane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{B}");

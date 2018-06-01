@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class ExperimentOne extends CardImpl {
+public final class ExperimentOne extends CardImpl {
 
     public ExperimentOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

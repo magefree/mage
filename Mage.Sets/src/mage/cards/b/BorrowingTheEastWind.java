@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LoneFox
  */
-public class BorrowingTheEastWind extends CardImpl {
+public final class BorrowingTheEastWind extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with horsemanship");
 

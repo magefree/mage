@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward
  */
-public class CurseOfBloodletting extends CardImpl {
+public final class CurseOfBloodletting extends CardImpl {
 
     public CurseOfBloodletting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");

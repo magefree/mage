@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class RustScarab extends CardImpl {
+public final class RustScarab extends CardImpl {
 
     public RustScarab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

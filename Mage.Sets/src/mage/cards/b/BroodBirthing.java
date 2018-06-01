@@ -44,7 +44,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author North
  */
-public class BroodBirthing extends CardImpl {
+public final class BroodBirthing extends CardImpl {
 
     public BroodBirthing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

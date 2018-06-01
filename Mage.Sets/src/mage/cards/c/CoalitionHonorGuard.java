@@ -43,7 +43,7 @@ import mage.filter.FilterPermanent;
  *
  * @author LevelX2
  */
-public class CoalitionHonorGuard extends CardImpl {
+public final class CoalitionHonorGuard extends CardImpl {
 
     public CoalitionHonorGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

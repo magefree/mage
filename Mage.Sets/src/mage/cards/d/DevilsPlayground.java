@@ -39,7 +39,7 @@ import mage.game.permanent.token.DevilToken;
  *
  * @author fireshoes
  */
-public class DevilsPlayground extends CardImpl {
+public final class DevilsPlayground extends CardImpl {
 
     public DevilsPlayground(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

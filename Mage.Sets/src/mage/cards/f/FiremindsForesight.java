@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class FiremindsForesight extends CardImpl {
+public final class FiremindsForesight extends CardImpl {
 
     public FiremindsForesight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}{R}");

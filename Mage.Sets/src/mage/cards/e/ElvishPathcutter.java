@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ElvishPathcutter extends CardImpl {
+public final class ElvishPathcutter extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creature");
 

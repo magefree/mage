@@ -52,7 +52,7 @@ import mage.watchers.Watcher;
  *
  * @author BetaSteward
  */
-public class DungeonGeists extends CardImpl {
+public final class DungeonGeists extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

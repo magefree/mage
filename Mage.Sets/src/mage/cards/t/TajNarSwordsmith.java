@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class TajNarSwordsmith extends CardImpl {
+public final class TajNarSwordsmith extends CardImpl {
 
     public TajNarSwordsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

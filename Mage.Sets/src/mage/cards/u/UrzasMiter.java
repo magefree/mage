@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author MarcoMarin
  */
-public class UrzasMiter extends CardImpl {
+public final class UrzasMiter extends CardImpl {
 
     public UrzasMiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

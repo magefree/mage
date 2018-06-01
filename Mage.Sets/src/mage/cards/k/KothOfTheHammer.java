@@ -57,7 +57,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki, North
  */
-public class KothOfTheHammer extends CardImpl {
+public final class KothOfTheHammer extends CardImpl {
 
     static final FilterLandPermanent filter = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
     static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");

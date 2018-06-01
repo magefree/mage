@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Styxo
  */
-public class SubterraneanShambler extends CardImpl {
+public final class SubterraneanShambler extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

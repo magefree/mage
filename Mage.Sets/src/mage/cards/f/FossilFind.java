@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class FossilFind extends CardImpl {
+public final class FossilFind extends CardImpl {
 
     public FossilFind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R/G}");

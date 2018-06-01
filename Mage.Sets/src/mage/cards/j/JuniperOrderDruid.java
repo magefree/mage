@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author hanasu
  */
-public class JuniperOrderDruid extends CardImpl {
+public final class JuniperOrderDruid extends CardImpl {
 
     public JuniperOrderDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

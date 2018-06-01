@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class FledglingGriffin extends CardImpl {
+public final class FledglingGriffin extends CardImpl {
 
     public FledglingGriffin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

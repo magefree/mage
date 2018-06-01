@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class KnightOfGlory extends CardImpl {
+public final class KnightOfGlory extends CardImpl {
     
     public KnightOfGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  */
 
 
-public class CryptIncursion extends CardImpl {
+public final class CryptIncursion extends CardImpl {
 
     public CryptIncursion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");

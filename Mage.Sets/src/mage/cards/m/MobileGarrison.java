@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class MobileGarrison extends CardImpl {
+public final class MobileGarrison extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target artifact or creature you control");
 

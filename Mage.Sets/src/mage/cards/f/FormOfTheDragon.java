@@ -51,7 +51,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class FormOfTheDragon extends CardImpl {
+public final class FormOfTheDragon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying");
 

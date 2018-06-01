@@ -50,7 +50,7 @@ import mage.target.TargetStackObject;
  *
  * @author LevelX2
  */
-public class DiffusionSliver extends CardImpl {
+public final class DiffusionSliver extends CardImpl {
 
     public DiffusionSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

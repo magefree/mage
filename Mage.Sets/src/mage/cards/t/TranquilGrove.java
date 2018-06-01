@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author Quercitron
  */
-public class TranquilGrove extends CardImpl {
+public final class TranquilGrove extends CardImpl {
 
     private static final FilterPermanent filter = new FilterEnchantmentPermanent("other enchantments");
     

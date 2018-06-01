@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author daagar
  */
-public class RighteousCause extends CardImpl {
+public final class RighteousCause extends CardImpl {
 
     public RighteousCause(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");

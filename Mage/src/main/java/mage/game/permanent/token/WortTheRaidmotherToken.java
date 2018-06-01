@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class WortTheRaidmotherToken extends TokenImpl {
+public final class WortTheRaidmotherToken extends TokenImpl {
 
     public WortTheRaidmotherToken() {
         super("Goblin Warrior", "1/1 red and green Goblin Warrior creature token");

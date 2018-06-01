@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CumberStone extends CardImpl {
+public final class CumberStone extends CardImpl {
 
     public CumberStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{U}");

@@ -40,7 +40,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class HazeOfRage extends CardImpl {
+public final class HazeOfRage extends CardImpl {
 
     public HazeOfRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

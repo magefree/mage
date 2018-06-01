@@ -42,7 +42,7 @@ import mage.constants.Duration;
  * @author LoneFox
 
  */
-public class ViciousKavu extends CardImpl {
+public final class ViciousKavu extends CardImpl {
 
     public ViciousKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");

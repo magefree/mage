@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class SagesRowDenizen extends CardImpl {
+public final class SagesRowDenizen extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another blue creature");
 

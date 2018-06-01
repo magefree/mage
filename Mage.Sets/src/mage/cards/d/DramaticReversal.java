@@ -40,7 +40,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class DramaticReversal extends CardImpl {
+public final class DramaticReversal extends CardImpl {
 
     private final static FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanents");
 

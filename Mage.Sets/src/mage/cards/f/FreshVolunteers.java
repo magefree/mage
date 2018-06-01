@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FreshVolunteers extends CardImpl {
+public final class FreshVolunteers extends CardImpl {
 
     public FreshVolunteers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

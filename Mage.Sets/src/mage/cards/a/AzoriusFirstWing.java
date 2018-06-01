@@ -42,7 +42,7 @@ import mage.filter.common.FilterEnchantmentCard;
  * @author LoneFox
 
  */
-public class AzoriusFirstWing extends CardImpl {
+public final class AzoriusFirstWing extends CardImpl {
 
     public AzoriusFirstWing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Derpthemeus
  */
-public class WalkingDead extends CardImpl {
+public final class WalkingDead extends CardImpl {
 
     public WalkingDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

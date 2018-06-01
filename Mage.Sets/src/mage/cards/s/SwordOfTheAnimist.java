@@ -50,7 +50,7 @@ import java.util.UUID;
  * @author LoneFox
 
  */
-public class SwordOfTheAnimist extends CardImpl {
+public final class SwordOfTheAnimist extends CardImpl {
 
     public SwordOfTheAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
@@ -60,7 +60,7 @@ public class SwordOfTheAnimist extends CardImpl {
         // Equipped creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
         // Whenever equipped creature attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD);
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         this.addAbility(new AttacksAttachedTriggeredAbility(new SearchLibraryPutInPlayEffect(target, true), true));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

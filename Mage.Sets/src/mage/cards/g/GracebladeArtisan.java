@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class GracebladeArtisan extends CardImpl {
+public final class GracebladeArtisan extends CardImpl {
 
     public GracebladeArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

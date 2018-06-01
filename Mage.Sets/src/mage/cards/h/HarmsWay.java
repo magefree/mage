@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author noxx
  */
-public class HarmsWay extends CardImpl {
+public final class HarmsWay extends CardImpl {
 
     public HarmsWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

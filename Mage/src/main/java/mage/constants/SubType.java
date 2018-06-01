@@ -61,6 +61,7 @@ public enum SubType {
     AUROCHS("Aurochs", SubTypeSet.CreatureType),
     AUTOBOT("Autobot", SubTypeSet.CreatureType, true), // H17, Grimlock
     AVATAR("Avatar", SubTypeSet.CreatureType),
+    AZRA("Azra", SubTypeSet.CreatureType),
     // B
     BADGER("Badger", SubTypeSet.CreatureType),
     BARBARIAN("Barbarian", SubTypeSet.CreatureType),
@@ -389,6 +390,7 @@ public enum SubType {
     NIXILIS("Nixilis", SubTypeSet.PlaneswalkerType),
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
     RAL("Ral", SubTypeSet.PlaneswalkerType),
+    ROWAN("Rowan", SubTypeSet.PlaneswalkerType),
     SAHEELI("Saheeli", SubTypeSet.PlaneswalkerType),
     SAMUT("Samut", SubTypeSet.PlaneswalkerType),
     SARKHAN("Sarkhan", SubTypeSet.PlaneswalkerType),
@@ -401,6 +403,7 @@ public enum SubType {
     UGIN("Ugin", SubTypeSet.PlaneswalkerType),
     VENSER("Venser", SubTypeSet.PlaneswalkerType),
     VRASKA("Vraska", SubTypeSet.PlaneswalkerType),
+    WILL("Will", SubTypeSet.PlaneswalkerType),
     XENAGOS("Xenagos", SubTypeSet.PlaneswalkerType),
     YANGGU("Yanggu", SubTypeSet.PlaneswalkerType),
     YANLING("Yanling", SubTypeSet.PlaneswalkerType),

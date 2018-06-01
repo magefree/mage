@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class FigureOfDestiny extends CardImpl {
+public final class FigureOfDestiny extends CardImpl {
 
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent();

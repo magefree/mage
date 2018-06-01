@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class Evaporate extends CardImpl {
+public final class Evaporate extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white and/or blue creature");
     

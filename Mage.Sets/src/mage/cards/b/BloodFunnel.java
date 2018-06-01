@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BloodFunnel extends CardImpl {
+public final class BloodFunnel extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Noncreature spells");
     private static final FilterSpell filterNoncreature = new FilterSpell("a noncreature spell");

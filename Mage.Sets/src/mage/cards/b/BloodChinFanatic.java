@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class BloodChinFanatic extends CardImpl {
+public final class BloodChinFanatic extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Warrior creature");
     

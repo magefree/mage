@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class NissasExpedition extends CardImpl {
+public final class NissasExpedition extends CardImpl {
 
     public NissasExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
@@ -50,7 +50,7 @@ public class NissasExpedition extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_BASIC_LAND_CARD), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
     }
 
     public NissasExpedition(final NissasExpedition card) {

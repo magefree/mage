@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class Concentrate extends CardImpl {
+public final class Concentrate extends CardImpl {
 
     public Concentrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");

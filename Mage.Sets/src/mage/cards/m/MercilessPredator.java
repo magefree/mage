@@ -44,7 +44,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class MercilessPredator extends CardImpl {
+public final class MercilessPredator extends CardImpl {
 
     public MercilessPredator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

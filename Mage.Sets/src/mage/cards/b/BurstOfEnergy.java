@@ -38,7 +38,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class BurstOfEnergy extends CardImpl {
+public final class BurstOfEnergy extends CardImpl {
 
     public BurstOfEnergy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

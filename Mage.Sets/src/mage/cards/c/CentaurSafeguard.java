@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class CentaurSafeguard extends CardImpl {
+public final class CentaurSafeguard extends CardImpl {
 
     public CentaurSafeguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/W}");

@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class AshesToAshes extends CardImpl {
+public final class AshesToAshes extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 

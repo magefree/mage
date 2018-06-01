@@ -49,7 +49,7 @@ import mage.target.common.TargetActivatedOrTriggeredAbility;
  *
  * @author caldover
  */
-public class NimbleObstructionist extends CardImpl {
+public final class NimbleObstructionist extends CardImpl {
 
     private static final FilterStackObject filter = new FilterStackObject("activated or triggered ability you don't control");
     static {

@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class DjinnToken extends TokenImpl {
+public final class DjinnToken extends TokenImpl {
 
     public DjinnToken() {
         super("Djinn", "5/5 colorless Djinn artifact creature token with flying");

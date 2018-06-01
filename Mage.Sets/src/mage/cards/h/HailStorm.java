@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author L_J
  */
-public class HailStorm extends CardImpl {
+public final class HailStorm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
     static {

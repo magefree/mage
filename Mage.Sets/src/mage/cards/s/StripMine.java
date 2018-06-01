@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class StripMine extends CardImpl {
+public final class StripMine extends CardImpl {
 
     public StripMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

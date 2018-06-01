@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes & L_J
  */
-public class FlintGolem extends CardImpl {
+public final class FlintGolem extends CardImpl {
 
     public FlintGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

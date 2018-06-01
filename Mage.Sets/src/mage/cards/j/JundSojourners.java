@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class JundSojourners extends CardImpl {
+public final class JundSojourners extends CardImpl {
 
     public JundSojourners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");

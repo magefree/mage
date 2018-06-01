@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Saga
  */
-public class GrimlockFerociousKing extends CardImpl{
+public final class GrimlockFerociousKing extends CardImpl{
     
    public GrimlockFerociousKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"");

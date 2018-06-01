@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class GoatToken extends TokenImpl {
+public final class GoatToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

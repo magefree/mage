@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LoneFox
  */
-public class XanthicStatue extends CardImpl {
+public final class XanthicStatue extends CardImpl {
 
     public XanthicStatue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{8}");

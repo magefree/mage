@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author nantuko
  */
-public class FalkenrathMarauders extends CardImpl {
+public final class FalkenrathMarauders extends CardImpl {
 
     public FalkenrathMarauders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class SagesDousing extends CardImpl {
+public final class SagesDousing extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Wizard");
 

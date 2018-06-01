@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CavesOfKoilos extends CardImpl {
+public final class CavesOfKoilos extends CardImpl {
 
     public CavesOfKoilos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

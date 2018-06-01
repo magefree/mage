@@ -54,7 +54,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class SunDroplet extends CardImpl {
+public final class SunDroplet extends CardImpl {
 
     public SunDroplet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class LifecraftersBestiary extends CardImpl {
+public final class LifecraftersBestiary extends CardImpl {
 
     public LifecraftersBestiary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

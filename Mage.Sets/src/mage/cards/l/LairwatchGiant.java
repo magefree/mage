@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class LairwatchGiant extends CardImpl {
+public final class LairwatchGiant extends CardImpl {
 
     public LairwatchGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");

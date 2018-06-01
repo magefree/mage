@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class SunkenRuins extends CardImpl {
+public final class SunkenRuins extends CardImpl {
 
     public SunkenRuins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AnuridMurkdiver extends CardImpl {
+public final class AnuridMurkdiver extends CardImpl {
 
     public AnuridMurkdiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

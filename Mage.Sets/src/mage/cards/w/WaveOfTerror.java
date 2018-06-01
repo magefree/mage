@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class WaveOfTerror extends CardImpl {
+public final class WaveOfTerror extends CardImpl {
 
     public WaveOfTerror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

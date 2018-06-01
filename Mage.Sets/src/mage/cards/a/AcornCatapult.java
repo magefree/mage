@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class AcornCatapult extends CardImpl {
+public final class AcornCatapult extends CardImpl {
 
     public AcornCatapult(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

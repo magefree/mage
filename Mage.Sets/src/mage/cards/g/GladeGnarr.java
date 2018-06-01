@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author Loki
  */
-public class GladeGnarr extends CardImpl {
+public final class GladeGnarr extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a blue spell");
 

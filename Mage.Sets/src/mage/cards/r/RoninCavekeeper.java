@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RoninCavekeeper extends CardImpl {
+public final class RoninCavekeeper extends CardImpl {
 
     public RoninCavekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

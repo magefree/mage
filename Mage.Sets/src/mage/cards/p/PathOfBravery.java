@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author jeffwadsworth
  */
-public class PathOfBravery extends CardImpl {
+public final class PathOfBravery extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 

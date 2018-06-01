@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Styxo
  */
-public class WebOfInertia extends CardImpl {
+public final class WebOfInertia extends CardImpl {
 
     public WebOfInertia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

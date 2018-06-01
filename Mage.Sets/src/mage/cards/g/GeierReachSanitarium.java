@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class GeierReachSanitarium extends CardImpl {
+public final class GeierReachSanitarium extends CardImpl {
 
     public GeierReachSanitarium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

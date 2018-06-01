@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class MagosiTheWaterveil extends CardImpl {
+public final class MagosiTheWaterveil extends CardImpl {
 
     public MagosiTheWaterveil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

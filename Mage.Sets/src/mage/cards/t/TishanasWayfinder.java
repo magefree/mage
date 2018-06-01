@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class TishanasWayfinder extends CardImpl {
+public final class TishanasWayfinder extends CardImpl {
 
     public TishanasWayfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

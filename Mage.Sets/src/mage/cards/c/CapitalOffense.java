@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class CapitalOffense extends CardImpl {
+public final class CapitalOffense extends CardImpl {
 
     public CapitalOffense(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
@@ -86,10 +86,12 @@ class NumberOfCapitalsInTextOfTargetCreatureCount implements DynamicValue {
             if (cards != null) {
                 for (CardInfo cardInfo : cards) {
                     Card dummy = cardInfo != null ? cardInfo.getCard() : null;
-                    for (String line : dummy.getRules()) {
-                        line = line.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-                        line = line.replaceAll("\\{this\\}", permanent.getName());
-                        capitals += line.length() - line.replaceAll("[A-Z]", "").length();
+                    if (dummy != null) {
+                        for (String line : dummy.getRules()) {
+                            line = line.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+                            line = line.replaceAll("\\{this\\}", permanent.getName());
+                            capitals += line.length() - line.replaceAll("[A-Z]", "").length();
+                        }
                     }
                     return -1 * capitals;
                 }

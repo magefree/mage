@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class WaterspoutDjinn extends CardImpl {
+public final class WaterspoutDjinn extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Island");
 

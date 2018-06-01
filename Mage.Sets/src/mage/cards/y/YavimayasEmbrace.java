@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class YavimayasEmbrace extends CardImpl {
+public final class YavimayasEmbrace extends CardImpl {
 
     public YavimayasEmbrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}{U}{U}");

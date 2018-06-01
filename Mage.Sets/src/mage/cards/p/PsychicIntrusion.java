@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PsychicIntrusion extends CardImpl {
+public final class PsychicIntrusion extends CardImpl {
 
     public PsychicIntrusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{B}");

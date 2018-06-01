@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class ImperialHellkite extends CardImpl {
+public final class ImperialHellkite extends CardImpl {
     
     public ImperialHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

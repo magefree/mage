@@ -36,7 +36,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class ElspethVsKiora extends ExpansionSet {
+public final class ElspethVsKiora extends ExpansionSet {
 
     private static final ElspethVsKiora instance = new ElspethVsKiora();
 

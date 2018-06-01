@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author anonymous
  */
-public class ChamberOfManipulation extends CardImpl {
+public final class ChamberOfManipulation extends CardImpl {
 
     public ChamberOfManipulation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

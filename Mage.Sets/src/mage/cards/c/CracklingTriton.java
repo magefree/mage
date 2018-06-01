@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class CracklingTriton extends CardImpl {
+public final class CracklingTriton extends CardImpl {
 
     public CracklingTriton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

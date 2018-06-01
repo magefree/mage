@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author nigelzor
  */
-public class Mundungu extends CardImpl {
+public final class Mundungu extends CardImpl {
 
     public Mundungu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");

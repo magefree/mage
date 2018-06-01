@@ -43,7 +43,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author Backfir3
  */
-public class GoblinMarshal extends CardImpl {
+public final class GoblinMarshal extends CardImpl {
 
     public GoblinMarshal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

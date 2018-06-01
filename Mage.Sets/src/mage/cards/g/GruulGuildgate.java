@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GruulGuildgate extends CardImpl {
+public final class GruulGuildgate extends CardImpl {
 
     public GruulGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

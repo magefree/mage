@@ -49,7 +49,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author Loki
  */
-public class OriginSpellbomb extends CardImpl {
+public final class OriginSpellbomb extends CardImpl {
 
     public OriginSpellbomb (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

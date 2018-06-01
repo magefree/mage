@@ -44,7 +44,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author fireshoes
  */
-public class SaprolingCluster extends CardImpl {
+public final class SaprolingCluster extends CardImpl {
 
     public SaprolingCluster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CrawlingFilth extends CardImpl {
+public final class CrawlingFilth extends CardImpl {
 
     public CrawlingFilth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

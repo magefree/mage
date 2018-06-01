@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author TheElk801
  */
-public class FlowstoneSurge extends CardImpl {
+public final class FlowstoneSurge extends CardImpl {
 
     public FlowstoneSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author dustinconrad
  */
-public class TresserhornSinks extends CardImpl {
+public final class TresserhornSinks extends CardImpl {
 
     public TresserhornSinks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

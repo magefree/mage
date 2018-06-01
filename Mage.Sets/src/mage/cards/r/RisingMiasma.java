@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class RisingMiasma extends CardImpl {
+public final class RisingMiasma extends CardImpl {
 
     public RisingMiasma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

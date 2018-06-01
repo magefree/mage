@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author ciaccona007
  */
-public class DaggerOfTheWorthy extends CardImpl {
+public final class DaggerOfTheWorthy extends CardImpl {
 
     public DaggerOfTheWorthy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

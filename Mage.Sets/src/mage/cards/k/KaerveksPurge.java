@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author sinsedrix
  */
-public class KaerveksPurge extends CardImpl {
+public final class KaerveksPurge extends CardImpl {
 
     public KaerveksPurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");

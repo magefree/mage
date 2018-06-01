@@ -45,7 +45,7 @@ import mage.constants.*;
  *
  * @author LoneFox
  */
-public class BattlewiseAven extends CardImpl {
+public final class BattlewiseAven extends CardImpl {
 
     public BattlewiseAven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

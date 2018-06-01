@@ -44,7 +44,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author TheElk801
  */
-public class ChieftainEnDal extends CardImpl {
+public final class ChieftainEnDal extends CardImpl {
 
     public ChieftainEnDal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

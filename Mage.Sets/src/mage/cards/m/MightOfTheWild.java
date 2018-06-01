@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Styxo
  */
-public class MightOfTheWild extends CardImpl {
+public final class MightOfTheWild extends CardImpl {
 
     private static final FilterCreaturePermanent filterMode1 = new FilterCreaturePermanent("Creatures with power 3 or less");
     private static final FilterPermanent filterMode2 = new FilterPermanent("artifact or enchantment");

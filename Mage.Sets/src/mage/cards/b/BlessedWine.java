@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class BlessedWine extends CardImpl {
+public final class BlessedWine extends CardImpl {
 
     public BlessedWine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

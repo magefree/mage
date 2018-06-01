@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class PlagueBelcher extends CardImpl {
+public final class PlagueBelcher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Zombie you control");
 

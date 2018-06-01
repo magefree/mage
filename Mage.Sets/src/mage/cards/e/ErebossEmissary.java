@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class ErebossEmissary extends CardImpl {
+public final class ErebossEmissary extends CardImpl {
 
     public ErebossEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{B}");

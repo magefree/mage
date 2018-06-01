@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class ElaborateFirecannon extends CardImpl {
+public final class ElaborateFirecannon extends CardImpl {
 
     public ElaborateFirecannon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

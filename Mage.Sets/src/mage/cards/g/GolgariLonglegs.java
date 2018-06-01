@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GolgariLonglegs extends CardImpl {
+public final class GolgariLonglegs extends CardImpl {
 
     public GolgariLonglegs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/G}{B/G}");

@@ -30,6 +30,7 @@ package mage.cards.p;
 import java.util.EnumSet;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -53,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class PossibilityStorm extends CardImpl {
+public final class PossibilityStorm extends CardImpl {
 
     public PossibilityStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
@@ -155,7 +156,7 @@ class PossibilityStormEffect extends OneShotEffect {
                             && !card.isLand()
                             && card.getSpellAbility().canChooseTarget(game)) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
-                            spellController.cast(card.getSpellAbility(), game, true);
+                            spellController.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         }
                     }
 

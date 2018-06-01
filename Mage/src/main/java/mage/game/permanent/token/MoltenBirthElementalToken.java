@@ -36,7 +36,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class MoltenBirthElementalToken extends TokenImpl {
+public final class MoltenBirthElementalToken extends TokenImpl {
 
     public MoltenBirthElementalToken() {
         super("Elemental", "1/1 red Elemental creature");

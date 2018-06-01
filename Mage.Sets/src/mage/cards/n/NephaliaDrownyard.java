@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
 /**
  * @author nantuko
  */
-public class NephaliaDrownyard extends CardImpl {
+public final class NephaliaDrownyard extends CardImpl {
 
     public NephaliaDrownyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

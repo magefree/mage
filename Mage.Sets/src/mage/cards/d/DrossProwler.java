@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DrossProwler extends CardImpl {
+public final class DrossProwler extends CardImpl {
 
     public DrossProwler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

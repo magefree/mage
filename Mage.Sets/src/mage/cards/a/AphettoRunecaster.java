@@ -42,7 +42,7 @@ import mage.filter.FilterPermanent;
  *
  * @author fireshoes
  */
-public class AphettoRunecaster extends CardImpl {
+public final class AphettoRunecaster extends CardImpl {
 
     public AphettoRunecaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

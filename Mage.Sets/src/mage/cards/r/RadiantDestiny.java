@@ -54,7 +54,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class RadiantDestiny extends CardImpl {
+public final class RadiantDestiny extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 

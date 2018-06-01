@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class ThundercloudShaman extends CardImpl {
+public final class ThundercloudShaman extends CardImpl {
 
     private static final FilterCreaturePermanent filterGiants = new FilterCreaturePermanent("equal to the number of Giants you control");
     private static final FilterCreaturePermanent filterNonGiants = new FilterCreaturePermanent("non-Giant creature");

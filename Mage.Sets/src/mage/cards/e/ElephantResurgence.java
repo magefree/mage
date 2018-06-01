@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class ElephantResurgence extends CardImpl {
+public final class ElephantResurgence extends CardImpl {
 
     public ElephantResurgence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

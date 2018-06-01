@@ -44,7 +44,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class TandemLookout extends CardImpl {
+public final class TandemLookout extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"Whenever this creature deals damage to an opponent, draw a card.\"";
 

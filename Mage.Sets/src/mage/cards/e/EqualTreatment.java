@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
 /**
  * @author L_J
  */
-public class EqualTreatment extends CardImpl {
+public final class EqualTreatment extends CardImpl {
 
     public EqualTreatment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

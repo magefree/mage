@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author Backfir3
  */
-public class Rescind extends CardImpl {
+public final class Rescind extends CardImpl {
 
     public Rescind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

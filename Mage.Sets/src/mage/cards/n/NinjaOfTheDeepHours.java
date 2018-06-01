@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class NinjaOfTheDeepHours extends CardImpl {
+public final class NinjaOfTheDeepHours extends CardImpl {
 
     public NinjaOfTheDeepHours(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

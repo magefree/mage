@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class FaerieTauntings extends CardImpl {
+public final class FaerieTauntings extends CardImpl {
 
     public FaerieTauntings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{2}{B}");

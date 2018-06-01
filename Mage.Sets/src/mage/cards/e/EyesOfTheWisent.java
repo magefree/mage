@@ -45,7 +45,7 @@ import mage.game.permanent.token.EyesOfTheWisentElementalToken;
  *
  * @author LevelX2
  */
-public class EyesOfTheWisent extends CardImpl {
+public final class EyesOfTheWisent extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a blue spell");
 

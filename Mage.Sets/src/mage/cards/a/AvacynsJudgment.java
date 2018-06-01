@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author LevelX2
  */
-public class AvacynsJudgment extends CardImpl {
+public final class AvacynsJudgment extends CardImpl {
 
     public AvacynsJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

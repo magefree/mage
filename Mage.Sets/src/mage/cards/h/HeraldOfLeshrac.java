@@ -66,7 +66,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class HeraldOfLeshrac extends CardImpl {
+public final class HeraldOfLeshrac extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledLandPermanent("land you control but don't own");
     static {

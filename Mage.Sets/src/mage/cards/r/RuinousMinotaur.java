@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class RuinousMinotaur extends CardImpl {
+public final class RuinousMinotaur extends CardImpl {
 
     public RuinousMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

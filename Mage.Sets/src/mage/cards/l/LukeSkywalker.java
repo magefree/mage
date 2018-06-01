@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class LukeSkywalker extends CardImpl {
+public final class LukeSkywalker extends CardImpl {
 
     public LukeSkywalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");

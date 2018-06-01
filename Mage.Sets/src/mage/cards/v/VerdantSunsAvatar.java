@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class VerdantSunsAvatar extends CardImpl {
+public final class VerdantSunsAvatar extends CardImpl {
 
     public VerdantSunsAvatar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

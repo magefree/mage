@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class SuqAtaLancer extends CardImpl {
+public final class SuqAtaLancer extends CardImpl {
 
     public SuqAtaLancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

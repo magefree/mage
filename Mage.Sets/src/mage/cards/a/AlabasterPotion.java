@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class AlabasterPotion extends CardImpl {
+public final class AlabasterPotion extends CardImpl {
 
     public AlabasterPotion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");

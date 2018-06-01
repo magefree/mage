@@ -33,29 +33,28 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author emerald000
  */
-public class PerilousVault extends CardImpl {
+public final class PerilousVault extends CardImpl {
 
     public PerilousVault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {5}, {T}, Exile Perilous Vault: Exile all nonland permanents.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PerilousVaultEffect(), new GenericManaCost(5));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new ExileAllEffect(StaticFilters.FILTER_PERMANENTS_NON_LAND),
+                new GenericManaCost(5)
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
@@ -68,36 +67,5 @@ public class PerilousVault extends CardImpl {
     @Override
     public PerilousVault copy() {
         return new PerilousVault(this);
-    }
-}
-
-class PerilousVaultEffect extends OneShotEffect {
-    
-    private static final FilterPermanent filter = new FilterNonlandPermanent();
-    
-    PerilousVaultEffect() {
-        super(Outcome.Exile);
-        this.staticText = "Exile all nonland permanents";
-    }
-    
-    PerilousVaultEffect(final PerilousVaultEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public PerilousVaultEffect copy() {
-        return new PerilousVaultEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.HAND, true);
-            }
-            return true;
-        }
-        return false;
     }
 }

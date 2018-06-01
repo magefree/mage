@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class AshnodsCylix extends CardImpl {
+public final class AshnodsCylix extends CardImpl {
 
     public AshnodsCylix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

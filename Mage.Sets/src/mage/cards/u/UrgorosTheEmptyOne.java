@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class UrgorosTheEmptyOne extends CardImpl {
+public final class UrgorosTheEmptyOne extends CardImpl {
 
     public UrgorosTheEmptyOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

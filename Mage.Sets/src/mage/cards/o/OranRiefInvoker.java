@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class OranRiefInvoker extends CardImpl {
+public final class OranRiefInvoker extends CardImpl {
 
     public OranRiefInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

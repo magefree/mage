@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class SurvivalCache extends CardImpl {
+public final class SurvivalCache extends CardImpl {
 
     public SurvivalCache(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

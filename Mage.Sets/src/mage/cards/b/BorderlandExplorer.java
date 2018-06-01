@@ -52,7 +52,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author fireshoes
  */
-public class BorderlandExplorer extends CardImpl {
+public final class BorderlandExplorer extends CardImpl {
 
     public BorderlandExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -135,7 +135,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                 if (player != null) {
                     Cards cardsPlayer = cardsToDiscard.get(playerId);
                     if (cardsPlayer != null && !cardsPlayer.isEmpty()) {
-                        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD);
+                        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND);
                         if (player.searchLibrary(target, game)) {
                             if (!target.getTargets().isEmpty()) {
                                 Cards cards = new CardsImpl(target.getTargets());

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class FridayNightMagic extends ExpansionSet {
+public final class FridayNightMagic extends ExpansionSet {
 
     private static final FridayNightMagic instance = new FridayNightMagic();
 

@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000 / HCrescent
  */
-public class SharedFate extends CardImpl {
+public final class SharedFate extends CardImpl {
 
     public SharedFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");

@@ -38,7 +38,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Boomerang extends CardImpl {
+public final class Boomerang extends CardImpl {
 
     public Boomerang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");

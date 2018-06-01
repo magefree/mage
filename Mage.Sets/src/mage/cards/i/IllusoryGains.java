@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class IllusoryGains extends CardImpl {
+public final class IllusoryGains extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
 

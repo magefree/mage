@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class LunarchInquisitors extends CardImpl {
+public final class LunarchInquisitors extends CardImpl {
 
     private static final String rule = "Whenever this creature transforms into Lunarch Inquisitors, you may exile another target creature until Lunarch Inquisitors leaves the battlefield";
 

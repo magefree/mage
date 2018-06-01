@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class UncheckedGrowth extends CardImpl {
+public final class UncheckedGrowth extends CardImpl {
 
     public UncheckedGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

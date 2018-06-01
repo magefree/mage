@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class PeregrineDrake extends CardImpl {
+public final class PeregrineDrake extends CardImpl {
 
     public PeregrineDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

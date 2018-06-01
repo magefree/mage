@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North, Loki
  */
-public class AshmouthHound extends CardImpl {
+public final class AshmouthHound extends CardImpl {
 
     public AshmouthHound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

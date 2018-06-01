@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LoneFox
 
  */
-public class LavaRunner extends CardImpl {
+public final class LavaRunner extends CardImpl {
 
     public LavaRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class QuietusSpike extends CardImpl {
+public final class QuietusSpike extends CardImpl {
 
     public QuietusSpike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

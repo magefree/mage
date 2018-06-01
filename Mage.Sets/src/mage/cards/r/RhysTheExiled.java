@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class RhysTheExiled extends CardImpl {
+public final class RhysTheExiled extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Elf you control");

@@ -58,7 +58,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ErebossTitan extends CardImpl {
+public final class ErebossTitan extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

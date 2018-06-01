@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class UlrichUncontestedAlpha extends CardImpl {
+public final class UlrichUncontestedAlpha extends CardImpl {
 
     public UlrichUncontestedAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

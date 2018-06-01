@@ -35,7 +35,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class NissaSageAnimistToken extends TokenImpl {
+public final class NissaSageAnimistToken extends TokenImpl {
 
     public NissaSageAnimistToken() {
         super("Ashaya, the Awoken World", "legendary 4/4 green Elemental creature token named Ashaya, the Awoken World");

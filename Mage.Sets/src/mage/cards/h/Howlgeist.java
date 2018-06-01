@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class Howlgeist extends CardImpl {
+public final class Howlgeist extends CardImpl {
 
     public Howlgeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

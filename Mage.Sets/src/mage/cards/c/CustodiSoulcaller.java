@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
  *
  * @author L_J
  */
-public class CustodiSoulcaller extends CardImpl {
+public final class CustodiSoulcaller extends CardImpl {
 
     public CustodiSoulcaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

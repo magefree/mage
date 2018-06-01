@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ChaosCharm extends CardImpl {
+public final class ChaosCharm extends CardImpl {
 
    private static final FilterPermanent filter = new FilterPermanent("Wall");
 

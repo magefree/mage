@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class SaprazzanBreaker extends CardImpl {
+public final class SaprazzanBreaker extends CardImpl {
 
     public SaprazzanBreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

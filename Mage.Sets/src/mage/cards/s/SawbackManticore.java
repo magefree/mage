@@ -50,7 +50,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author TheElk801
  */
-public class SawbackManticore extends CardImpl {
+public final class SawbackManticore extends CardImpl {
 
     public SawbackManticore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");

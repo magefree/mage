@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  * @author KholdFuzion
  *
  */
-public class DrainLife extends CardImpl {
+public final class DrainLife extends CardImpl {
 
     static final FilterMana filterBlack = new FilterMana();
 

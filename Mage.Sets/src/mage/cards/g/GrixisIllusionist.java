@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class GrixisIllusionist extends CardImpl {
+public final class GrixisIllusionist extends CardImpl {
 
     public GrixisIllusionist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

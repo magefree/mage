@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author stravant
  */
-public class TrespassersCurse extends CardImpl {
+public final class TrespassersCurse extends CardImpl {
 
     public TrespassersCurse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

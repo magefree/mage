@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class LocustMiser extends CardImpl {
+public final class LocustMiser extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue creature");
 

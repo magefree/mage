@@ -40,7 +40,7 @@ import mage.constants.Zone;
 /**
  * @author jeffwadsworth
  */
-public class GroundSeal extends CardImpl {
+public final class GroundSeal extends CardImpl {
 
     public GroundSeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

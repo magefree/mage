@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Styxo
  */
-public class TerentatekCub extends CardImpl {
+public final class TerentatekCub extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Hunter or Rogue card");
 

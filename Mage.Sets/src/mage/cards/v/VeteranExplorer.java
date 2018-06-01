@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class VeteranExplorer extends CardImpl {
+public final class VeteranExplorer extends CardImpl {
 
     public VeteranExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -116,7 +116,7 @@ class VeteranExplorerEffect extends OneShotEffect {
     private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, Ability source, Game game) {
         if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up to two basic land cards and put them onto the battlefield?", source, game)) {
             usingPlayers.add(player);
-            TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
+            TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
             if (player.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
                     player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);

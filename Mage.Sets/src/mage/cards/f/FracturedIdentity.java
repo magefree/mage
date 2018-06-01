@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class FracturedIdentity extends CardImpl {
+public final class FracturedIdentity extends CardImpl {
 
     public FracturedIdentity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{U}");

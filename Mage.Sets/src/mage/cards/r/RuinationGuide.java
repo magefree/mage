@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  *
  * @author LevelX2
  */
-public class RuinationGuide extends CardImpl {
+public final class RuinationGuide extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creatures");
 

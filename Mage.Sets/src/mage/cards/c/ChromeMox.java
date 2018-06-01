@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
@@ -60,14 +61,14 @@ import mage.util.GameLog;
  *
  * @author Plopman
  */
-public class ChromeMox extends CardImpl {
+public final class ChromeMox extends CardImpl {
 
     public ChromeMox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromeMoxEffect(), true));
-        // {tap}: Add one mana of any of the exiled card's colors.
+        // {T}: Add one mana of any of the exiled card's colors.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ChromeMoxManaEffect(), new TapSourceCost()));
     }
 
@@ -150,14 +151,45 @@ class ChromeMoxManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             checkToFirePossibleEvents(getMana(game, source), game, source);
-            player.getManaPool().addMana(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
             return true;
 
         }
         return false;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            List<UUID> imprinted = permanent.getImprinted();
+            if (!imprinted.isEmpty()) {
+                Card imprintedCard = game.getCard(imprinted.get(0));
+                if (imprintedCard != null) {
+                    ObjectColor color = imprintedCard.getColor(game);
+                    if (color.isBlack()) {
+                        netMana.add(Mana.BlackMana(1));
+                    }
+                    if (color.isRed()) {
+                        netMana.add(Mana.RedMana(1));
+                    }
+                    if (color.isBlue()) {
+                        netMana.add(Mana.BlueMana(1));
+                    }
+                    if (color.isGreen()) {
+                        netMana.add(Mana.GreenMana(1));
+                    }
+                    if (color.isWhite()) {
+                        netMana.add(Mana.WhiteMana(1));
+                    }
+                }
+            }
+        }
+        return netMana;
     }
 
     @Override
@@ -213,9 +245,6 @@ class ChromeMoxManaEffect extends ManaEffect {
                                 break;
                             case "White":
                                 player.getManaPool().addMana(Mana.WhiteMana(1), game, source);
-                                break;
-                            case "Colorless":
-                                player.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
                                 break;
                             default:
                                 break;

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class BastionMastodon extends CardImpl {
+public final class BastionMastodon extends CardImpl {
 
     public BastionMastodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

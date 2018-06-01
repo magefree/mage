@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2 & L_J
  */
-public class ThrashingBrontodon extends CardImpl {
+public final class ThrashingBrontodon extends CardImpl {
 
     public ThrashingBrontodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author fireshoes
  */
-public class InspiringCaptain extends CardImpl {
+public final class InspiringCaptain extends CardImpl {
 
     public InspiringCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

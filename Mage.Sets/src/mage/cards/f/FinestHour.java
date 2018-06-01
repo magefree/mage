@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FinestHour extends CardImpl {
+public final class FinestHour extends CardImpl {
 
     public FinestHour(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{W}{U}");

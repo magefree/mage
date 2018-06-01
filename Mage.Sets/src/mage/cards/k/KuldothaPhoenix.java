@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KuldothaPhoenix extends CardImpl {
+public final class KuldothaPhoenix extends CardImpl {
 
     public KuldothaPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");

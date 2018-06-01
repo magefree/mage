@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class SpontaneousCombustion extends CardImpl {
+public final class SpontaneousCombustion extends CardImpl {
 
     public SpontaneousCombustion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");

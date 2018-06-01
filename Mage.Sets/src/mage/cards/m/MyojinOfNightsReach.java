@@ -54,7 +54,7 @@ import mage.watchers.common.CastFromHandWatcher;
 /**
  * @author LevelX
  */
-public class MyojinOfNightsReach extends CardImpl {
+public final class MyojinOfNightsReach extends CardImpl {
 
     public MyojinOfNightsReach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");

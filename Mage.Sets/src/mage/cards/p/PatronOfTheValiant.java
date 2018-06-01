@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class PatronOfTheValiant extends CardImpl {
+public final class PatronOfTheValiant extends CardImpl {
 
     public PatronOfTheValiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

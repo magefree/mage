@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  * @author LoneFox
  *
  */
-public class NimAbomination extends CardImpl {
+public final class NimAbomination extends CardImpl {
 
     public NimAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

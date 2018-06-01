@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class KiorasDismissal extends CardImpl {
+public final class KiorasDismissal extends CardImpl {
 
     public KiorasDismissal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

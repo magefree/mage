@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RustrazorButcher extends CardImpl {
+public final class RustrazorButcher extends CardImpl {
 
     public RustrazorButcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

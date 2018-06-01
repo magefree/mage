@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  *
  * @author LevelX2
  */
-public class KozileksSentinel extends CardImpl {
+public final class KozileksSentinel extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a colorless spell");
 

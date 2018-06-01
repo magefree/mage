@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Wehk
  */
-public class TransguildCourier extends CardImpl {
+public final class TransguildCourier extends CardImpl {
 
     public TransguildCourier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class RhonassMonument extends CardImpl {
+public final class RhonassMonument extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Green creature spells");
     private static final FilterSpell filter2 = new FilterSpell("a creature spell");

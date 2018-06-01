@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
 /**
  * @author nantuko, Loki
  */
-public class BoldDefense extends CardImpl {
+public final class BoldDefense extends CardImpl {
 
     public BoldDefense(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

@@ -51,7 +51,7 @@ import mage.game.permanent.token.DragonToken;
  *
  * @author fireshoes
  */
-public class DragonWhisperer extends CardImpl {
+public final class DragonWhisperer extends CardImpl {
 
     public DragonWhisperer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");

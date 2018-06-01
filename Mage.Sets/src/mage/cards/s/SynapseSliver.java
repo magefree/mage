@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author cbt33
  */
-public class SynapseSliver extends CardImpl {
+public final class SynapseSliver extends CardImpl {
 
     public SynapseSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

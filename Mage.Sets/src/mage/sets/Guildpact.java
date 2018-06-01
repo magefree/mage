@@ -34,7 +34,7 @@ import mage.constants.SetType;
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
  */
-public class Guildpact extends ExpansionSet {
+public final class Guildpact extends ExpansionSet {
 
     private static final Guildpact instance = new Guildpact();
 
@@ -151,6 +151,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Ostiary Thrull", 55, Rarity.COMMON, mage.cards.o.OstiaryThrull.class));
         cards.add(new SetCardInfo("Parallectric Feedback", 71, Rarity.RARE, mage.cards.p.ParallectricFeedback.class));
         cards.add(new SetCardInfo("Petrahydrox", 148, Rarity.COMMON, mage.cards.p.Petrahydrox.class));
+        cards.add(new SetCardInfo("Petrified Wood-Kin", 91, Rarity.RARE, mage.cards.p.PetrifiedWoodKin.class));
         cards.add(new SetCardInfo("Pillory of the Sleepless", 125, Rarity.COMMON, mage.cards.p.PilloryOfTheSleepless.class));
         cards.add(new SetCardInfo("Plagued Rusalka", 56, Rarity.UNCOMMON, mage.cards.p.PlaguedRusalka.class));
         cards.add(new SetCardInfo("Poisonbelly Ogre", 57, Rarity.COMMON, mage.cards.p.PoisonbellyOgre.class));

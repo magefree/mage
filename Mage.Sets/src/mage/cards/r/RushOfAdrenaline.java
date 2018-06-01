@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RushOfAdrenaline extends CardImpl {
+public final class RushOfAdrenaline extends CardImpl {
 
     public RushOfAdrenaline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

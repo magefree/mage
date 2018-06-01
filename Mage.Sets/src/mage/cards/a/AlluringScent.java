@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ilcartographer
  */
-public class AlluringScent extends CardImpl {
+public final class AlluringScent extends CardImpl {
 
     public AlluringScent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");

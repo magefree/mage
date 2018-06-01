@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author noxx
  */
-public class SpectralPrison extends CardImpl {
+public final class SpectralPrison extends CardImpl {
 
     public SpectralPrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Reverberate extends CardImpl {
+public final class Reverberate extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell();
 

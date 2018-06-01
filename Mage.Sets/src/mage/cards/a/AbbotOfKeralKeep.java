@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class AbbotOfKeralKeep extends CardImpl {
+public final class AbbotOfKeralKeep extends CardImpl {
 
     public AbbotOfKeralKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

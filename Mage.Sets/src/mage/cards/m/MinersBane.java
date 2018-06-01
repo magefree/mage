@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class MinersBane extends CardImpl {
+public final class MinersBane extends CardImpl {
 
     public MinersBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

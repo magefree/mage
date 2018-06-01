@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class DeadeyeQuartermaster extends CardImpl {
+public final class DeadeyeQuartermaster extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment or Vehicle card");
 

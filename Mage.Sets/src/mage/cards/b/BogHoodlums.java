@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class BogHoodlums extends CardImpl {
+public final class BogHoodlums extends CardImpl {
 
     public BogHoodlums(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

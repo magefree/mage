@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author cbt33, jeffwadsworth (Archmage Ascension)
  */
-public class ObstinateFamiliar extends CardImpl {
+public final class ObstinateFamiliar extends CardImpl {
 
     public ObstinateFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

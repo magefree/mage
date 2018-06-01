@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class JacesSanctum extends CardImpl {
+public final class JacesSanctum extends CardImpl {
     
     
     private static final FilterCard filter = new FilterCard("Instant and sorcery spells");

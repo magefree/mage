@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class LuxurySuite extends CardImpl {
+public final class LuxurySuite extends CardImpl {
 
     public LuxurySuite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

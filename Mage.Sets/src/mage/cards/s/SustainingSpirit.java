@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author KholdFuzion
  */
-public class SustainingSpirit extends CardImpl {
+public final class SustainingSpirit extends CardImpl {
 
     public SustainingSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

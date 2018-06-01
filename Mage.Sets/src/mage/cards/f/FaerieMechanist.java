@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX
  */
-public class FaerieMechanist extends CardImpl {
+public final class FaerieMechanist extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card");
     static {

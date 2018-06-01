@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ayratn
  */
-public class BurntheImpure extends CardImpl {
+public final class BurntheImpure extends CardImpl {
 
     public BurntheImpure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

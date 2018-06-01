@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class AvacynianMissionaries extends CardImpl {
+public final class AvacynianMissionaries extends CardImpl {
 
     public AvacynianMissionaries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class LeeryFogbeast extends CardImpl {
+public final class LeeryFogbeast extends CardImpl {
 
     public LeeryFogbeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

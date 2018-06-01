@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class MimicVat extends CardImpl {
+public final class MimicVat extends CardImpl {
 
     public MimicVat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

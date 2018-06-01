@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class LambholtButcher extends CardImpl {
+public final class LambholtButcher extends CardImpl {
 
     public LambholtButcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

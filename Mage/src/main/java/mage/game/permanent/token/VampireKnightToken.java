@@ -5,7 +5,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class VampireKnightToken extends TokenImpl {
+public final class VampireKnightToken extends TokenImpl {
 
     public VampireKnightToken() {
         super("Vampire Knight", "1/1 black Vampire Knight creature token with lifelink");

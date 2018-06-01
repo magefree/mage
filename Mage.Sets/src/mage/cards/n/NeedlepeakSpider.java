@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class NeedlepeakSpider extends CardImpl {
+public final class NeedlepeakSpider extends CardImpl {
 
     public NeedlepeakSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

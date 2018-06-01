@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class RoarOfTheKha extends CardImpl {
+public final class RoarOfTheKha extends CardImpl {
     
     private static final String rule = "untap all creatures you control";
 

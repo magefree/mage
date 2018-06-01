@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class PrakhataClubSecurity extends CardImpl {
+public final class PrakhataClubSecurity extends CardImpl {
 
     public PrakhataClubSecurity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 /**
  * @author BursegSardaukar
  */
-public class MoggJailer extends CardImpl {
+public final class MoggJailer extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature with power 2 or less");
 

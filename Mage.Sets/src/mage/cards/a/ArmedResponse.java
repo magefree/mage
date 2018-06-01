@@ -43,7 +43,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Plopman
  */
-public class ArmedResponse extends CardImpl {
+public final class ArmedResponse extends CardImpl {
     
         private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("Equipment you control");
 

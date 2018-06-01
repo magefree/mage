@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class DrownyardBehemoth extends CardImpl {
+public final class DrownyardBehemoth extends CardImpl {
 
     public DrownyardBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");

@@ -59,7 +59,7 @@ import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
  *
  * @author MarcoMarin
  */
-public class ClockworkAvian extends CardImpl {
+public final class ClockworkAvian extends CardImpl {
 
     public ClockworkAvian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

@@ -42,13 +42,13 @@ import java.util.UUID;
  *
  * @author Archer262
  */
-public class BeneathTheSands extends CardImpl {
+public final class BeneathTheSands extends CardImpl {
 
     public BeneathTheSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

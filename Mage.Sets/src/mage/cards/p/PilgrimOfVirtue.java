@@ -53,7 +53,7 @@ import mage.target.TargetSource;
  *
  * @author cbt33, Plopman (Circle of Protection: Red)
  */
-public class PilgrimOfVirtue extends CardImpl {
+public final class PilgrimOfVirtue extends CardImpl {
 
     public PilgrimOfVirtue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class UnwindingClock extends CardImpl {
+public final class UnwindingClock extends CardImpl {
 
     public UnwindingClock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LoneFox
  */
-public class ZuoCiTheMockingSage extends CardImpl {
+public final class ZuoCiTheMockingSage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with horsemanship");
 

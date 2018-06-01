@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class MaintenanceHangar extends CardImpl {
+public final class MaintenanceHangar extends CardImpl {
 
     private static final FilterCreaturePermanent filterPermanent = new FilterCreaturePermanent("Starship creatures");
 

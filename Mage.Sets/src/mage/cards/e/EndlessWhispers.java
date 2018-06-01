@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class EndlessWhispers extends CardImpl {
+public final class EndlessWhispers extends CardImpl {
 
     public EndlessWhispers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

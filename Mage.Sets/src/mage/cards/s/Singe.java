@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class Singe extends CardImpl {
+public final class Singe extends CardImpl {
 
     public Singe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

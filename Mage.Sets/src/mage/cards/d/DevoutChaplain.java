@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class DevoutChaplain extends CardImpl {
+public final class DevoutChaplain extends CardImpl {
     private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
 
     static {

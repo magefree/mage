@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KingCheetah extends CardImpl {
+public final class KingCheetah extends CardImpl {
 
     public KingCheetah(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

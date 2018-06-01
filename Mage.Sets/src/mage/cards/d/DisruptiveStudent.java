@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class DisruptiveStudent extends CardImpl {
+public final class DisruptiveStudent extends CardImpl {
 
     public DisruptiveStudent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

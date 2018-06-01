@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class Magnify extends CardImpl {
+public final class Magnify extends CardImpl {
 
     public Magnify(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

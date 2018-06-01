@@ -49,7 +49,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class VolrathTheFallen extends CardImpl {
+public final class VolrathTheFallen extends CardImpl {
 
     public VolrathTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");

@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class DivineIntervention extends CardImpl {
+public final class DivineIntervention extends CardImpl {
 
     public DivineIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{W}{W}");

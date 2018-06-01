@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class FrontierGuide extends CardImpl {
+public final class FrontierGuide extends CardImpl {
 
     public FrontierGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -58,7 +58,7 @@ public class FrontierGuide extends CardImpl {
 
         //{3}{G}, {T}: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new ManaCostsImpl("{3}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

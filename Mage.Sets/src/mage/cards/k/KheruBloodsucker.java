@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class KheruBloodsucker extends CardImpl {
+public final class KheruBloodsucker extends CardImpl {
 
     private static final FilterCreaturePermanent toughnessFilter = new FilterCreaturePermanent("a creature you control with toughness 4 or greater");
 

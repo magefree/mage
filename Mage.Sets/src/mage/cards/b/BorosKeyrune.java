@@ -49,7 +49,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author LevelX2
  */
-public class BorosKeyrune extends CardImpl {
+public final class BorosKeyrune extends CardImpl {
 
     public BorosKeyrune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

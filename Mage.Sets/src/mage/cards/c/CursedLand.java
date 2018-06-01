@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class CursedLand extends CardImpl {
+public final class CursedLand extends CardImpl {
 
     public CursedLand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");

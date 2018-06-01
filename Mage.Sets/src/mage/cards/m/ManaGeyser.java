@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author Plopman
  */
-public class ManaGeyser extends CardImpl {
+public final class ManaGeyser extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("tapped land your opponents control");
     static {

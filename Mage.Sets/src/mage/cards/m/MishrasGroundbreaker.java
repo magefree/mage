@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author L_J
  */
-public class MishrasGroundbreaker extends CardImpl {
+public final class MishrasGroundbreaker extends CardImpl {
 
     public MishrasGroundbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Quercitron
  */
-public class EvilEyeOfOrmsByGore extends CardImpl {
+public final class EvilEyeOfOrmsByGore extends CardImpl {
 
     private static final FilterCreaturePermanent cantAttackFilter = new FilterCreaturePermanent("Non-Eye creatures you control");
     private static final FilterCreaturePermanent cantBeBlockedByFilter = new FilterCreaturePermanent("except by Walls");

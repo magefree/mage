@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class SivitriScarzam extends CardImpl {
+public final class SivitriScarzam extends CardImpl {
 
     public SivitriScarzam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{B}");

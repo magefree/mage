@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class VenomousDragonfly extends CardImpl {
+public final class VenomousDragonfly extends CardImpl {
 
     public VenomousDragonfly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

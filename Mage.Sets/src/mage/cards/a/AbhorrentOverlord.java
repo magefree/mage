@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class AbhorrentOverlord extends CardImpl {
+public final class AbhorrentOverlord extends CardImpl {
 
     public AbhorrentOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

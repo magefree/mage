@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fenhl
  */
-public class PacksDisdain extends CardImpl {
+public final class PacksDisdain extends CardImpl {
 
     public PacksDisdain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

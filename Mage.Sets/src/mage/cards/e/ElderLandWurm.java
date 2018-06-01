@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author TheElk801
  */
-public class ElderLandWurm extends CardImpl {
+public final class ElderLandWurm extends CardImpl {
 
     public ElderLandWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");

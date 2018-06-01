@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class TheLocustGodInsectToken extends TokenImpl {
+public final class TheLocustGodInsectToken extends TokenImpl {
 
     public TheLocustGodInsectToken() {
         super("Insect", "1/1 blue and red Insect creature token with flying and haste");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class GoblinGaveleer extends CardImpl {
+public final class GoblinGaveleer extends CardImpl {
 
     public GoblinGaveleer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

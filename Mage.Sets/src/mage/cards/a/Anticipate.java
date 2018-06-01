@@ -40,7 +40,7 @@ import mage.filter.FilterCard;
  *
  * @author fireshoes
  */
-public class Anticipate extends CardImpl {
+public final class Anticipate extends CardImpl {
 
     public Anticipate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

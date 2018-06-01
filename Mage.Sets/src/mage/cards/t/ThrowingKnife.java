@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class ThrowingKnife extends CardImpl {
+public final class ThrowingKnife extends CardImpl {
 
     public ThrowingKnife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

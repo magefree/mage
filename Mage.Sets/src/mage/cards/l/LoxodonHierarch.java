@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author dustinconrad
  */
-public class LoxodonHierarch extends CardImpl {
+public final class LoxodonHierarch extends CardImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com, Loki
  */
-public class BirdsOfParadise extends CardImpl {
+public final class BirdsOfParadise extends CardImpl {
 
     public BirdsOfParadise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

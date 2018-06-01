@@ -17,7 +17,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class SpiderToken extends TokenImpl {
+public final class SpiderToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

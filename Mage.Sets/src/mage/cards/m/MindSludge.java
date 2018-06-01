@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MindSludge extends CardImpl {
+public final class MindSludge extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 

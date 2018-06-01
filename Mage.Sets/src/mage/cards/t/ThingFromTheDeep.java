@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class ThingFromTheDeep extends CardImpl {
+public final class ThingFromTheDeep extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an Island");
     

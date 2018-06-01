@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class Facevaulter extends CardImpl {
+public final class Facevaulter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 

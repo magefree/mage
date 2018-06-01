@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class ZirilanOfTheClaw extends CardImpl {
+public final class ZirilanOfTheClaw extends CardImpl {
 
     public ZirilanOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

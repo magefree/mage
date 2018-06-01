@@ -55,7 +55,7 @@ import mage.watchers.common.CastFromHandWatcher;
 /**
  * @author LevelX
  */
-public class MyojinOfInfiniteRage extends CardImpl {
+public final class MyojinOfInfiniteRage extends CardImpl {
 
     public MyojinOfInfiniteRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}{R}{R}");

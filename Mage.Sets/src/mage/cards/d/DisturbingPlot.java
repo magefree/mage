@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class DisturbingPlot extends CardImpl {
+public final class DisturbingPlot extends CardImpl {
 
     public DisturbingPlot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

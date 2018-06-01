@@ -56,7 +56,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class GoblinShrine extends CardImpl {
+public final class GoblinShrine extends CardImpl {
 
     private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent("Goblin creature");
     private static final String rule = "As long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.";

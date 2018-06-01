@@ -43,7 +43,7 @@ import mage.game.permanent.token.PegasusToken;
  *
  * @author LoneFox
  */
-public class PegasusRefuge extends CardImpl {
+public final class PegasusRefuge extends CardImpl {
 
     public PegasusRefuge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

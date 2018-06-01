@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class HeliodsPilgrim extends CardImpl {
+public final class HeliodsPilgrim extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Aura card");
 

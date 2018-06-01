@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class FromTheAshes extends CardImpl {
+public final class FromTheAshes extends CardImpl {
 
     public FromTheAshes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
@@ -106,7 +106,7 @@ class FromTheAshesEffect extends OneShotEffect {
             for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null && player.chooseUse(outcome, "Search your library for up to " + entry.getValue() + " basic land card(s) to put it onto the battlefield?", source, game)) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_BASIC_LAND_CARD);
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (player.searchLibrary(target, game)) {
                         if (!target.getTargets().isEmpty()) {
                             player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);

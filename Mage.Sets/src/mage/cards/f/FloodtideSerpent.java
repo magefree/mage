@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class FloodtideSerpent extends CardImpl {
+public final class FloodtideSerpent extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment you control");
 

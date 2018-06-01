@@ -45,7 +45,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author jeffwadsworth
  */
-public class RiverKelpie extends CardImpl {
+public final class RiverKelpie extends CardImpl {
 
     public RiverKelpie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SootstokeKindler extends CardImpl {
+public final class SootstokeKindler extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black or red creature");
 

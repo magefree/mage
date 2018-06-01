@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class YidrisMaelstromWielder extends CardImpl {
+public final class YidrisMaelstromWielder extends CardImpl {
 
     public YidrisMaelstromWielder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}{R}{G}");

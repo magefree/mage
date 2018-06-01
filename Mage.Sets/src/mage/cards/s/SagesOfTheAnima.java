@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class SagesOfTheAnima extends CardImpl {
+public final class SagesOfTheAnima extends CardImpl {
 
     public SagesOfTheAnima(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author FenrisulfrX
  */
-public class HornetToken extends TokenImpl {
+public final class HornetToken extends TokenImpl {
     
     public HornetToken() {
         this("DDE");

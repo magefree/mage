@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author emerald000
  */
-public class RiftstonePortal extends CardImpl {
+public final class RiftstonePortal extends CardImpl {
 
     public RiftstonePortal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

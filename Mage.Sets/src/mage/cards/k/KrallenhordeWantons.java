@@ -44,7 +44,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class KrallenhordeWantons extends CardImpl {
+public final class KrallenhordeWantons extends CardImpl {
 
 
     public KrallenhordeWantons(UUID ownerId, CardSetInfo setInfo) {

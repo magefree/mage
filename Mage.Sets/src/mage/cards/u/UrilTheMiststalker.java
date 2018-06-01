@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class UrilTheMiststalker extends CardImpl {
+public final class UrilTheMiststalker extends CardImpl {
 
     public UrilTheMiststalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");

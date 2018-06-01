@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author LevelX2
  */
-public class Dragonrage extends CardImpl {
+public final class Dragonrage extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature you control");
     

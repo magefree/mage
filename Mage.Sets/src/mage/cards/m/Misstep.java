@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author djbrez
  */
-public class Misstep extends CardImpl {
+public final class Misstep extends CardImpl {
     
     public Misstep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

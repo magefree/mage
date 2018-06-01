@@ -48,7 +48,7 @@ import mage.game.Game;
  *
  * @author LoneFox
  */
-public class BrassHerald extends CardImpl {
+public final class BrassHerald extends CardImpl {
 
     public BrassHerald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

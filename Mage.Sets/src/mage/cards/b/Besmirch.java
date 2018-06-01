@@ -51,7 +51,7 @@ import mage.target.targetpointer.TargetPointer;
  *
  * @author TheElk801
  */
-public class Besmirch extends CardImpl {
+public final class Besmirch extends CardImpl {
 
     public Besmirch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

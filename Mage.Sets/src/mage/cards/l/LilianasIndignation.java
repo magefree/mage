@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class LilianasIndignation extends CardImpl {
+public final class LilianasIndignation extends CardImpl {
 
     public LilianasIndignation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");

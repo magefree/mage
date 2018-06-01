@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class DiscipleOfDeceit extends CardImpl {
+public final class DiscipleOfDeceit extends CardImpl {
 
     public DiscipleOfDeceit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");

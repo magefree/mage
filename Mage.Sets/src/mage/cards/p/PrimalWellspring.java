@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class PrimalWellspring extends CardImpl {
+public final class PrimalWellspring extends CardImpl {
 
     public PrimalWellspring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

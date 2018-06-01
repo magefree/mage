@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ApprenticeWizard extends CardImpl {
+public final class ApprenticeWizard extends CardImpl {
 
     public ApprenticeWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

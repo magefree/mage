@@ -19,7 +19,7 @@ import mage.game.permanent.token.HippoToken2;
 /**
  * @author Stravant
  */
-public class MouthFeed extends SplitCard {
+public final class MouthFeed extends SplitCard {
 
     private static final FilterControlledCreaturePermanent filterCreaturesYouControlPower3orGreater
             = new FilterControlledCreaturePermanent("creature you control with power 3 or greater.");

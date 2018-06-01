@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Hornswoggle extends CardImpl {
+public final class Hornswoggle extends CardImpl {
 
     public Hornswoggle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class WizenedCenn extends CardImpl {
+public final class WizenedCenn extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kithkin creatures");
 

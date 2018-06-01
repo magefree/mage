@@ -54,7 +54,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class LightFromWithin extends CardImpl {
+public final class LightFromWithin extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 

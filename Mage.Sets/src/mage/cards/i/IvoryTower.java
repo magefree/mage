@@ -44,7 +44,7 @@ import mage.players.Player;
  * @author LoneFox
 
  */
-public class IvoryTower extends CardImpl {
+public final class IvoryTower extends CardImpl {
 
     public IvoryTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

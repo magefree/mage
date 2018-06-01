@@ -40,7 +40,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class HonorGuard extends CardImpl {
+public final class HonorGuard extends CardImpl {
 
     public HonorGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

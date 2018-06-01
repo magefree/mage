@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ProteanHydra extends CardImpl {
+public final class ProteanHydra extends CardImpl {
 
     public ProteanHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class OrissSamiteGuardian extends CardImpl {
+public final class OrissSamiteGuardian extends CardImpl {
 
     public OrissSamiteGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

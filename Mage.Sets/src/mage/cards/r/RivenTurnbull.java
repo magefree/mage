@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class RivenTurnbull extends CardImpl {
+public final class RivenTurnbull extends CardImpl {
 
     public RivenTurnbull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{B}");

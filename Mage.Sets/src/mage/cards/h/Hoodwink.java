@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author markedagain
  */
-public class Hoodwink extends CardImpl {
+public final class Hoodwink extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
     

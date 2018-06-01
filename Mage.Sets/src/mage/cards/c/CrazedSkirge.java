@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class CrazedSkirge extends CardImpl {
+public final class CrazedSkirge extends CardImpl {
 
     public CrazedSkirge (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LoneFox
  */
-public class LivingArtifact extends CardImpl {
+public final class LivingArtifact extends CardImpl {
 
     public LivingArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

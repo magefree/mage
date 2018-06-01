@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class Contradict extends CardImpl {
+public final class Contradict extends CardImpl {
 
     public Contradict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");

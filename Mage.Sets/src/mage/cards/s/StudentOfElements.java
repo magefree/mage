@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class StudentOfElements extends CardImpl {
+public final class StudentOfElements extends CardImpl {
 
     public StudentOfElements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

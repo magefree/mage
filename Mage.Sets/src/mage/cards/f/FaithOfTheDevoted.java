@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Styxo
  */
-public class FaithOfTheDevoted extends CardImpl {
+public final class FaithOfTheDevoted extends CardImpl {
 
     public FaithOfTheDevoted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

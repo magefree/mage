@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class ElectrostaticPummeler extends CardImpl {
+public final class ElectrostaticPummeler extends CardImpl {
 
     public ElectrostaticPummeler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

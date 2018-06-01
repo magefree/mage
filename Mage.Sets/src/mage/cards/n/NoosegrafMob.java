@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class NoosegrafMob extends CardImpl {
+public final class NoosegrafMob extends CardImpl {
 
     public NoosegrafMob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

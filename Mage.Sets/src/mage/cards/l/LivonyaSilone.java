@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LoneFox
  */
-public class LivonyaSilone extends CardImpl {
+public final class LivonyaSilone extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Legendary land");
 

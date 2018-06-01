@@ -39,7 +39,7 @@ import mage.game.permanent.token.NightwingHorrorToken;
  *
  * @author LevelX2
  */
-public class CallOfTheNightwing extends CardImpl {
+public final class CallOfTheNightwing extends CardImpl {
 
     public CallOfTheNightwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");

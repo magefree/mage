@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class CovetedPeacock extends CardImpl {
+public final class CovetedPeacock extends CardImpl {
 
     private final UUID originalId;
 

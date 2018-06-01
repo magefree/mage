@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class ArgentSphinx extends CardImpl {
+public final class ArgentSphinx extends CardImpl {
 
     public ArgentSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

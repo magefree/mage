@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author noxx
  */
-public class SkyshroudElf extends CardImpl {
+public final class SkyshroudElf extends CardImpl {
 
     public SkyshroudElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

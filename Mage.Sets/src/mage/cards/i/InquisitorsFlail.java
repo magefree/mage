@@ -50,7 +50,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko
  */
-public class InquisitorsFlail extends CardImpl {
+public final class InquisitorsFlail extends CardImpl {
 
     public InquisitorsFlail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

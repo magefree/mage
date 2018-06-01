@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class ApexHawks extends CardImpl {
+public final class ApexHawks extends CardImpl {
 
     public ApexHawks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

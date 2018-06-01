@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class Earthlink extends CardImpl {
+public final class Earthlink extends CardImpl {
 
     public Earthlink(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}{G}");

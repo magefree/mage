@@ -46,7 +46,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author LevelX2
  */
-public class RakshasaVizier extends CardImpl {
+public final class RakshasaVizier extends CardImpl {
 
     public RakshasaVizier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}{U}");

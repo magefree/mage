@@ -40,7 +40,7 @@ import mage.constants.*;
  *
  * @author LoneFox
  */
-public class BorealCentaur extends CardImpl {
+public final class BorealCentaur extends CardImpl {
 
     public BorealCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

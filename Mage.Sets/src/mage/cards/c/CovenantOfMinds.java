@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class CovenantOfMinds extends CardImpl {
+public final class CovenantOfMinds extends CardImpl {
 
     public CovenantOfMinds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");

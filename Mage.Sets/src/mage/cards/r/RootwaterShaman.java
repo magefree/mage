@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author L_J
  */
-public class RootwaterShaman extends CardImpl {
+public final class RootwaterShaman extends CardImpl {
 
    private static final FilterCard filter = new FilterCard("Aura spells with enchant creature");
     static {

@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class JasmineBoreal extends CardImpl {
+public final class JasmineBoreal extends CardImpl {
 
     public JasmineBoreal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");

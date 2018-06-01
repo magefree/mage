@@ -51,10 +51,10 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class GlissaSunseeker extends CardImpl {
+public final class GlissaSunseeker extends CardImpl {
 
     public GlissaSunseeker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.power = new MageInt(3);
@@ -62,7 +62,7 @@ public class GlissaSunseeker extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // {tap}: Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlissaSunseekerEffect(), new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
@@ -83,7 +83,7 @@ class GlissaSunseekerEffect extends OneShotEffect {
 
     public GlissaSunseekerEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool";
+        this.staticText = "Destroy target artifact if its converted mana cost is equal to the amount of unspent mana you have";
     }
 
     public GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {
@@ -98,6 +98,10 @@ class GlissaSunseekerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || permanent == null) {
+            return false;
+        }
         ManaPool pool = controller.getManaPool();
         int blackMana = pool.getBlack();
         int whiteMana = pool.getWhite();
@@ -106,11 +110,8 @@ class GlissaSunseekerEffect extends OneShotEffect {
         int redMana = pool.getRed();
         int colorlessMana = pool.getColorless();
         int manaPoolTotal = blackMana + whiteMana + blueMana + greenMana + redMana + colorlessMana;
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (controller != null && permanent != null) {
-            if (permanent.getConvertedManaCost() == manaPoolTotal) {
-                return permanent.destroy(source.getSourceId(), game, false);
-            }
+        if (permanent.getConvertedManaCost() == manaPoolTotal) {
+            return permanent.destroy(source.getSourceId(), game, false);
         }
         return false;
     }

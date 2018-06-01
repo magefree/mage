@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class RingOfThreeWishes extends CardImpl {
+public final class RingOfThreeWishes extends CardImpl {
 
     public RingOfThreeWishes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

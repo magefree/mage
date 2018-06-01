@@ -52,7 +52,7 @@ import mage.watchers.Watcher;
  *
  * @author MTGfan
  */
-public class PowerSurge extends CardImpl {
+public final class PowerSurge extends CardImpl {
 
     public PowerSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");

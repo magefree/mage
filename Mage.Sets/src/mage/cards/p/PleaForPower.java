@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class PleaForPower extends CardImpl {
+public final class PleaForPower extends CardImpl {
 
     public PleaForPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class TraverseTheUlvenwald extends CardImpl {
+public final class TraverseTheUlvenwald extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature or land card");
 
@@ -59,7 +59,7 @@ public class TraverseTheUlvenwald extends CardImpl {
 
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new InvertCondition(DeliriumCondition.instance),
                 "Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library."));
 

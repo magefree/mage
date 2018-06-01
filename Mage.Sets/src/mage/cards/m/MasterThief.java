@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
 /**
  * @author Loki, JayDi85
  */
-public class MasterThief extends CardImpl {
+public final class MasterThief extends CardImpl {
 
     public MasterThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

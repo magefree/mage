@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author noxx
  */
-public class GallowsAtWillowHill extends CardImpl {
+public final class GallowsAtWillowHill extends CardImpl {
 
     private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
 

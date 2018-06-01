@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class StonySilence extends CardImpl {
+public final class StonySilence extends CardImpl {
 
     public StonySilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

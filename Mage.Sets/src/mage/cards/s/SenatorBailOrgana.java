@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class SenatorBailOrgana extends CardImpl {
+public final class SenatorBailOrgana extends CardImpl {
 
     public SenatorBailOrgana(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

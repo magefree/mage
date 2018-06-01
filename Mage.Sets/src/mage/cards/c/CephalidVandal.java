@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class CephalidVandal extends CardImpl {
+public final class CephalidVandal extends CardImpl {
 
     public CephalidVandal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

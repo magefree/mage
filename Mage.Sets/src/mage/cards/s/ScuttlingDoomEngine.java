@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author emerald000
  */
-public class ScuttlingDoomEngine extends CardImpl {
+public final class ScuttlingDoomEngine extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 

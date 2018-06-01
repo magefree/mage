@@ -43,7 +43,7 @@ import mage.constants.*;
  *
  * @author LoneFox
  */
-public class VaevictisAsmadi extends CardImpl {
+public final class VaevictisAsmadi extends CardImpl {
 
     public VaevictisAsmadi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{R}{R}{G}{G}");

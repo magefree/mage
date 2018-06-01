@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class UnknownShores extends CardImpl {
+public final class UnknownShores extends CardImpl {
 
     public UnknownShores(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

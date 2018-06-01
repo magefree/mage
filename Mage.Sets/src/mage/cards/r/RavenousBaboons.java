@@ -42,7 +42,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author LevelX2
  */
-public class RavenousBaboons extends CardImpl {
+public final class RavenousBaboons extends CardImpl {
 
     public RavenousBaboons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author dustinconrad
  */
-public class CruelTutor extends CardImpl {
+public final class CruelTutor extends CardImpl {
 
     public CruelTutor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class SyphonMind extends CardImpl {
+public final class SyphonMind extends CardImpl {
 
     public SyphonMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class LagonnaBandElder extends CardImpl {
+public final class LagonnaBandElder extends CardImpl {
 
     public LagonnaBandElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

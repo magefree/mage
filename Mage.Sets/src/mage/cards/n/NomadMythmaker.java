@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class NomadMythmaker extends CardImpl {
+public final class NomadMythmaker extends CardImpl {
 
     private static final FilterCard FILTER = new FilterCard("Aura card from a graveyard");
 
@@ -110,8 +110,7 @@ class NomadMythmakerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card aura = game.getCard(source.getFirstTarget());
-        if (controller == null
-                || aura == null) {
+        if (controller == null || aura == null) {
             return false;
         }
         FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("Choose a creature you control");
@@ -122,7 +121,7 @@ class NomadMythmakerEffect extends OneShotEffect {
             if (permanent != null
                     && !permanent.cantBeAttachedBy(aura, game)) {
                 game.getState().setValue("attachTo:" + aura.getId(), permanent);
-                aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
+                controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                 return permanent.addAttachment(aura.getId(), game);
             }
         }

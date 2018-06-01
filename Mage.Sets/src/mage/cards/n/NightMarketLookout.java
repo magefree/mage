@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class NightMarketLookout extends CardImpl {
+public final class NightMarketLookout extends CardImpl {
 
     public NightMarketLookout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

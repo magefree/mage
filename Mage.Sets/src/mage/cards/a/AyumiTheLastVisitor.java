@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LevelX2
  */
-public class AyumiTheLastVisitor extends CardImpl {
+public final class AyumiTheLastVisitor extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Legendary land");
     static {

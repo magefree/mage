@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author Styxo
  */
-public class Gundark extends CardImpl {
+public final class Gundark extends CardImpl {
 
     public Gundark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

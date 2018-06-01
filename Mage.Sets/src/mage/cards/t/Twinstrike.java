@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Wehk
  */
-public class Twinstrike extends CardImpl {
+public final class Twinstrike extends CardImpl {
 
     public Twinstrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{R}");

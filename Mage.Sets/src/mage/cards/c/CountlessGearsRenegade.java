@@ -45,7 +45,7 @@ import mage.watchers.common.RevoltWatcher;
 /**
  * @author JRHerlehy
  */
-public class CountlessGearsRenegade extends CardImpl {
+public final class CountlessGearsRenegade extends CardImpl {
 
     public CountlessGearsRenegade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

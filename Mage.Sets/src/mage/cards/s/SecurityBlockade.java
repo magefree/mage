@@ -54,7 +54,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class SecurityBlockade extends CardImpl {
+public final class SecurityBlockade extends CardImpl {
 
     static final String rule = "Enchanted land has \"{T}: Prevent the next 1 damage that would be dealt to you this turn.\"";
 

@@ -23,7 +23,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
 /**
  * @author JRHerlehy Created on 4/8/18.
  */
-public class YawgmothsVileOffering extends CardImpl {
+public final class YawgmothsVileOffering extends CardImpl {
 
     private static final FilterPermanentCard cardFilter = new FilterPermanentCard("creature or planeswalker card");
 

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class DragonBroodmotherDragonToken extends TokenImpl {
+public final class DragonBroodmotherDragonToken extends TokenImpl {
 
     public DragonBroodmotherDragonToken() {
         super("Dragon", "1/1 red and green Dragon creature token with flying and devour 2");

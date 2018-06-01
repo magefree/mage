@@ -43,7 +43,7 @@ import mage.constants.PhaseStep;
  *
  * @author LoneFox
  */
-public class NafsAsp extends CardImpl {
+public final class NafsAsp extends CardImpl {
 
     public NafsAsp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
