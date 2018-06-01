@@ -376,6 +376,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Wash Out", 87, Rarity.UNCOMMON, mage.cards.w.WashOut.class));
         cards.add(new SetCardInfo("Wax // Wane", 296, Rarity.UNCOMMON, mage.cards.w.WaxWane.class));
         cards.add(new SetCardInfo("Wayfaring Giant", 44, Rarity.UNCOMMON, mage.cards.w.WayfaringGiant.class));
+        cards.add(new SetCardInfo("Well-Laid Plans", 88, Rarity.RARE, mage.cards.w.WellLaidPlans.class));
         cards.add(new SetCardInfo("Whip Silk", 225, Rarity.COMMON, mage.cards.w.WhipSilk.class));
         cards.add(new SetCardInfo("Wings of Hope", 289, Rarity.COMMON, mage.cards.w.WingsOfHope.class));
         cards.add(new SetCardInfo("Winnow", 45, Rarity.RARE, mage.cards.w.Winnow.class));
