@@ -110,6 +110,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Despotic Scepter", 206, Rarity.RARE, mage.cards.d.DespoticScepter.class));
         cards.add(new SetCardInfo("Diabolic Vision", 191, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Disenchant", 10, Rarity.COMMON, mage.cards.d.Disenchant.class));
+        cards.add(new SetCardInfo("Dreams of the Dead", 46, Rarity.RARE, mage.cards.d.DreamsOfTheDead.class));
         cards.add(new SetCardInfo("Drift of the Dead", 86, Rarity.COMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Dwarven Ruins", 227, Rarity.UNCOMMON, mage.cards.d.DwarvenRuins.class));
         cards.add(new SetCardInfo("Dystopia", 88, Rarity.RARE, mage.cards.d.Dystopia.class));
