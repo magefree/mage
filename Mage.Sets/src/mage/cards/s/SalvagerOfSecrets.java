@@ -25,49 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author North
+ * @author TheElk801
  */
-public final class Archaeomancer extends CardImpl {
+public final class SalvagerOfSecrets extends CardImpl {
 
     private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
 
-    public Archaeomancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
+    public SalvagerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.power = new MageInt(1);
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Archaeomancer enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
+        // When Salvager of Secrets enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         Target target = new TargetCardInYourGraveyard(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }
 
-    public Archaeomancer(final Archaeomancer card) {
+    public SalvagerOfSecrets(final SalvagerOfSecrets card) {
         super(card);
     }
 
     @Override
-    public Archaeomancer copy() {
-        return new Archaeomancer(this);
+    public SalvagerOfSecrets copy() {
+        return new SalvagerOfSecrets(this);
     }
 }
