@@ -85,5 +85,6 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Trumpet Blast", 165, Rarity.COMMON, mage.cards.t.TrumpetBlast.class));
         cards.add(new SetCardInfo("Trusty Packbeast", 41, Rarity.COMMON, mage.cards.t.TrustyPackbeast.class));
         cards.add(new SetCardInfo("Uncomfortable Chill", 82, Rarity.COMMON, mage.cards.u.UncomfortableChill.class));
+        cards.add(new SetCardInfo("Wall of Mist", 83, Rarity.COMMON, mage.cards.w.WallOfMist.class));
     }
 }
