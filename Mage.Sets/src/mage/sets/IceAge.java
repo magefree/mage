@@ -70,13 +70,13 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Balduvian Hydra", 173, Rarity.RARE, mage.cards.b.BalduvianHydra.class));
         cards.add(new SetCardInfo("Barbed Sextant", 312, Rarity.COMMON, mage.cards.b.BarbedSextant.class));
         cards.add(new SetCardInfo("Baton of Morale", 313, Rarity.UNCOMMON, mage.cards.b.BatonOfMorale.class));
-        cards.add(new SetCardInfo("Battle Cry", 229, Rarity.UNCOMMON, mage.cards.b.BattleCry.class));
+        cards.add(new SetCardInfo("Battle Cry", 5, Rarity.UNCOMMON, mage.cards.b.BattleCry.class));
         cards.add(new SetCardInfo("Battle Frenzy", 175, Rarity.COMMON, mage.cards.b.BattleFrenzy.class));
         cards.add(new SetCardInfo("Binding Grasp", 60, Rarity.UNCOMMON, mage.cards.b.BindingGrasp.class));
         cards.add(new SetCardInfo("Black Scarab", 6, Rarity.UNCOMMON, mage.cards.b.BlackScarab.class));
         cards.add(new SetCardInfo("Blessed Wine", 7, Rarity.COMMON, mage.cards.b.BlessedWine.class));
         cards.add(new SetCardInfo("Blinking Spirit", 8, Rarity.RARE, mage.cards.b.BlinkingSpirit.class));
-        cards.add(new SetCardInfo("Blizzard", 115, Rarity.RARE, mage.cards.b.Blizzard.class));
+        cards.add(new SetCardInfo("Blizzard", 227, Rarity.RARE, mage.cards.b.Blizzard.class));
         cards.add(new SetCardInfo("Blue Scarab", 9, Rarity.UNCOMMON, mage.cards.b.BlueScarab.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brand of Ill Omen", 177, Rarity.RARE, mage.cards.b.BrandOfIllOmen.class));
@@ -113,8 +113,8 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Vision", 284, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Dire Wolves", 230, Rarity.COMMON, mage.cards.d.DireWolves.class));
         cards.add(new SetCardInfo("Disenchant", 20, Rarity.COMMON, mage.cards.d.Disenchant.class));
-        cards.add(new SetCardInfo("Drift of the Dead", 123, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Dreams of the Dead", 66, Rarity.UNCOMMON, mage.cards.d.DreamsOfTheDead.class));
+        cards.add(new SetCardInfo("Drift of the Dead", 123, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Drought", 21, Rarity.UNCOMMON, mage.cards.d.Drought.class));
         cards.add(new SetCardInfo("Dwarven Armory", 182, Rarity.RARE, mage.cards.d.DwarvenArmory.class));
         cards.add(new SetCardInfo("Earthlink", 285, Rarity.RARE, mage.cards.e.Earthlink.class));
@@ -245,6 +245,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Monsoon", 298, Rarity.RARE, mage.cards.m.Monsoon.class));
         cards.add(new SetCardInfo("Moor Fiend", 153, Rarity.COMMON, mage.cards.m.MoorFiend.class));
         cards.add(new SetCardInfo("Mountain Goat", 202, Rarity.COMMON, mage.cards.m.MountainGoat.class));
+        cards.add(new SetCardInfo("Mountain Titan", 299, Rarity.RARE, mage.cards.m.MountainTitan.class));
         cards.add(new SetCardInfo("Mountain", 376, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 377, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 378, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -292,7 +293,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Rime Dryad", 260, Rarity.COMMON, mage.cards.r.RimeDryad.class));
         cards.add(new SetCardInfo("Ritual of Subdual", 261, Rarity.RARE, mage.cards.r.RitualOfSubdual.class));
         cards.add(new SetCardInfo("River Delta", 359, Rarity.RARE, mage.cards.r.RiverDelta.class));
-        cards.add(new SetCardInfo("Runed Arch", 309, Rarity.RARE, mage.cards.r.RunedArch.class));
+        cards.add(new SetCardInfo("Runed Arch", 334, Rarity.RARE, mage.cards.r.RunedArch.class));
         cards.add(new SetCardInfo("Sabretooth Tiger", 215, Rarity.COMMON, mage.cards.s.SabretoothTiger.class));
         cards.add(new SetCardInfo("Scaled Wurm", 262, Rarity.COMMON, mage.cards.s.ScaledWurm.class));
         cards.add(new SetCardInfo("Sea Spirit", 95, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class));
@@ -361,7 +362,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Shields", 347, Rarity.UNCOMMON, mage.cards.w.WallOfShields.class));
         cards.add(new SetCardInfo("War Chariot", 348, Rarity.UNCOMMON, mage.cards.w.WarChariot.class));
         cards.add(new SetCardInfo("Warning", 55, Rarity.COMMON, mage.cards.w.Warning.class));
-        cards.add(new SetCardInfo("Whalebone Glider", 324, Rarity.UNCOMMON, mage.cards.w.WhaleboneGlider.class));
+        cards.add(new SetCardInfo("Whalebone Glider", 349, Rarity.UNCOMMON, mage.cards.w.WhaleboneGlider.class));
         cards.add(new SetCardInfo("White Scarab", 56, Rarity.UNCOMMON, mage.cards.w.WhiteScarab.class));
         cards.add(new SetCardInfo("Whiteout", 275, Rarity.UNCOMMON, mage.cards.w.Whiteout.class));
         cards.add(new SetCardInfo("Wild Growth", 277, Rarity.COMMON, mage.cards.w.WildGrowth.class));
