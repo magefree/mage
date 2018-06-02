@@ -25,13 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.keyword.BasicLandcyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,26 +37,25 @@ import mage.target.TargetPlayer;
 
 /**
  *
- * @author Loki
+ * @author TheElk801
  */
-public final class AbsorbVis extends CardImpl {
+public final class SovereignsBite extends CardImpl {
 
-    public AbsorbVis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}");
+    public SovereignsBite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
-        this.getSpellAbility().addEffect(new GainLifeEffect(4).setText("and you gain 4 life"));
+        // Target player loses 3 life and you gain 3 life.
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
+        this.getSpellAbility().addEffect(new GainLifeEffect(3).setText("and you gain 3 life"));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{B}")));
     }
 
-    public AbsorbVis(final AbsorbVis card) {
+    public SovereignsBite(final SovereignsBite card) {
         super(card);
     }
 
     @Override
-    public AbsorbVis copy() {
-        return new AbsorbVis(this);
+    public SovereignsBite copy() {
+        return new SovereignsBite(this);
     }
-
 }

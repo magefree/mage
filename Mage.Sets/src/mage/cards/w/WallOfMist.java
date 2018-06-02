@@ -43,7 +43,7 @@ public final class WallOfMist extends CardImpl {
 
     public WallOfMist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        
+
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
