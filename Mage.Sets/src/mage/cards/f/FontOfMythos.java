@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -38,7 +37,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -47,7 +46,7 @@ import mage.target.TargetPlayer;
 public final class FontOfMythos extends CardImpl {
 
     public FontOfMythos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.addAbility(new FontOfMythosAbility());
     }
 
@@ -84,9 +83,7 @@ class FontOfMythosAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        this.getTargets().clear();
-        this.addTarget(new TargetPlayer());
-        getTargets().get(0).add(event.getPlayerId(),game);
+        this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getActivePlayerId(), game));
         return true;
     }
 
