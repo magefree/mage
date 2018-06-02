@@ -262,7 +262,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Spinal Villain", 164, Rarity.RARE, mage.cards.s.SpinalVillain.class));
         cards.add(new SetCardInfo("Spirit Link", 37, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
         cards.add(new SetCardInfo("Spirit Shackle", 117, Rarity.COMMON, mage.cards.s.SpiritShackle.class));
-        cards.add(new SetCardInfo("Spiritual Sanctuary", 207, Rarity.RARE, mage.cards.s.SpiritualSanctuary.class));
+        cards.add(new SetCardInfo("Spiritual Sanctuary", 38, Rarity.RARE, mage.cards.s.SpiritualSanctuary.class));
         cards.add(new SetCardInfo("Stangg", 260, Rarity.RARE, mage.cards.s.Stangg.class));
         cards.add(new SetCardInfo("Storm Seeker", 205, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
         cards.add(new SetCardInfo("Storm World", 165, Rarity.RARE, mage.cards.s.StormWorld.class));
