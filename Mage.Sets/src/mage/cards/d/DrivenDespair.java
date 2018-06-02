@@ -42,6 +42,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -63,9 +64,9 @@ public final class DrivenDespair extends SplitCard {
         // Aftermath
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Until end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."
-        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn));
+        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES));
         ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true);
-        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn)
+        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText("and \"Whenever this creature deals combat damage to a player, that player discards a card.\""));
 
     }
