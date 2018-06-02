@@ -122,6 +122,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Warrior", 260, Rarity.COMMON, mage.cards.e.ElvishWarrior.class));
         cards.add(new SetCardInfo("Embermage Goblin", 200, Rarity.UNCOMMON, mage.cards.e.EmbermageGoblin.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 261, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
+        cards.add(new SetCardInfo("Endemic Plague", 142, Rarity.RARE, mage.cards.e.EndemicPlague.class));
         cards.add(new SetCardInfo("Entrails Feaster", 143, Rarity.RARE, mage.cards.e.EntrailsFeaster.class));
         cards.add(new SetCardInfo("Erratic Explosion", 201, Rarity.COMMON, mage.cards.e.ErraticExplosion.class));
         cards.add(new SetCardInfo("Essence Fracture", 82, Rarity.UNCOMMON, mage.cards.e.EssenceFracture.class));
