@@ -1,10 +1,9 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.PhaseInTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
 import mage.abilities.effects.common.PhaseOutSourceEffect;
@@ -15,10 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -46,7 +42,7 @@ public final class WarpingWurm extends CardImpl {
         ));
 
         // When Warping Wurm phases in, put a +1/+1 counter on it.
-        this.addAbility(new WarpingWurmTriggeredAbility());
+        this.addAbility(new PhaseInTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
     public WarpingWurm(final WarpingWurm card) {
@@ -56,36 +52,5 @@ public final class WarpingWurm extends CardImpl {
     @Override
     public WarpingWurm copy() {
         return new WarpingWurm(this);
-    }
-}
-
-class WarpingWurmTriggeredAbility extends TriggeredAbilityImpl {
-
-    WarpingWurmTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-    }
-
-    WarpingWurmTriggeredAbility(final WarpingWurmTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WarpingWurmTriggeredAbility copy() {
-        return new WarpingWurmTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.PHASED_IN;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return getSourceId().equals(event.getTargetId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} phases in, put a +1/+1 counter on it";
     }
 }

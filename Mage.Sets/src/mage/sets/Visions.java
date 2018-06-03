@@ -134,6 +134,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Rowen", 119, Rarity.RARE, mage.cards.r.Rowen.class));
         cards.add(new SetCardInfo("Sands of Time", 153, Rarity.RARE, mage.cards.s.SandsOfTime.class));
         cards.add(new SetCardInfo("Scalebane's Elite", 135, Rarity.UNCOMMON, mage.cards.s.ScalebanesElite.class));
+        cards.add(new SetCardInfo("Shimmering Efreet", 42, Rarity.UNCOMMON, mage.cards.s.ShimmeringEfreet.class));
         cards.add(new SetCardInfo("Shrieking Drake", 43, Rarity.COMMON, mage.cards.s.ShriekingDrake.class));
         cards.add(new SetCardInfo("Simoon", 136, Rarity.UNCOMMON, mage.cards.s.Simoon.class));
         cards.add(new SetCardInfo("Sisay's Ring", 154, Rarity.COMMON, mage.cards.s.SisaysRing.class));
