@@ -49,6 +49,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
@@ -119,15 +120,35 @@ class WordOfCommandEffect extends OneShotEffect {
 
             // The player plays that card if able
             if (card != null) {
+                // While doing so, the player can activate mana abilities only if they're from lands that player controls
                 RestrictionEffect effect = new WordOfCommandCantActivateEffect();
                 effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
-                game.addEffect(effect, source); // While doing so, the player can activate mana abilities only if they're from lands that player controls
-                // TODO: and only if mana they produce is spent to activate other mana abilities of lands he or she controls and/or play that card (so you can't tap out the player's lands)
+                game.addEffect(effect, source);
+
+                // and only if mana they produce is spent to activate other mana abilities of lands he or she controls and/or play that card
+                ManaPool manaPool = targetPlayer.getManaPool();
+                boolean autoPayment = manaPool.isAutoPayment();
+                boolean autoPaymentRestricted = manaPool.isAutoPaymentRestricted();
+                manaPool.setAutoPayment(true);
+                manaPool.setAutoPaymentRestricted(true);
+                manaPool.setForcedToPay(true);
+                int bookmark = game.bookmarkState();
+
                 if ((card.isLand() && (!targetPlayer.canPlayLand() || !game.getActivePlayerId().equals(targetPlayer.getId())))
                         || !targetPlayer.playCard(card, game, false, true, new MageObjectReference(source.getSourceObject(game), game))) {
-                    game.informPlayers(targetPlayer.getLogName() + " didn't play " + card.getLogName());
                     // TODO: needs an automatic check for whether the card is castable (so it can't be cancelled if that's the case)
+                    game.informPlayers(targetPlayer.getLogName() + " didn't play " + card.getLogName());
                 }
+
+                manaPool.setForcedToPay(false); // duplicate in case of a a new mana pool existing - probably not necessary, but just in case
+                manaPool.setAutoPayment(autoPayment);
+                manaPool.setAutoPaymentRestricted(autoPaymentRestricted);
+                manaPool = targetPlayer.getManaPool(); // a rollback creates a new mana pool for the player, so it's necessary to find it again
+                manaPool.setForcedToPay(false);
+                manaPool.setAutoPayment(autoPayment);
+                manaPool.setAutoPaymentRestricted(autoPaymentRestricted);
+                game.removeBookmark(bookmark);
+                targetPlayer.resetStoredBookmark(game);
 
                 for (RestrictionEffect eff : game.getContinuousEffects().getRestrictionEffects()) {
                     if (eff instanceof WordOfCommandCantActivateEffect) {
@@ -197,7 +218,7 @@ class WordOfCommandDelayedTriggeredAbility extends DelayedTriggeredAbility {
     private UUID cardId;
 
     WordOfCommandDelayedTriggeredAbility(Effect effect, UUID cardId) {
-        super(effect, Duration.EndOfStep);
+        super(effect, Duration.EndOfTurn);
         this.cardId = cardId;
         this.usesStack = false;
     }

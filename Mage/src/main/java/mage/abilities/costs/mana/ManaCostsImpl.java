@@ -265,6 +265,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             // if auto payment is inactive and no mana type was clicked manually - do nothing
             return;
         }
+        ManaCosts referenceCosts = null;
+        if (pool.isForcedToPay()) {
+            referenceCosts = this.copy();
+        }
         // attempt to pay colorless costs (not generic) mana costs first
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof ColorlessManaCost) {
@@ -344,6 +348,22 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
         // stop using mana of the clicked mana type
         pool.lockManaType();
+        handleForcedToPayOnlyForCurrentPayment(game, pool, referenceCosts);
+    }
+
+    private void handleForcedToPayOnlyForCurrentPayment(Game game, ManaPool pool, ManaCosts referenceCosts) {
+        // for Word of Command
+        if (pool.isForcedToPay()) {
+            if (referenceCosts != null && this.getPayment().equals(referenceCosts.getPayment())) {
+                UUID playerId = pool.getPlayerId();
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    game.undo(playerId);
+                    this.clearPaid();
+                    game.bookmarkState();
+                }
+            }
+        }
     }
 
     @Override
