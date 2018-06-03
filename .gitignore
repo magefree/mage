@@ -131,7 +131,6 @@ hs_err*.log
 /Mage.Stats/target/
 /Utils/*_unimplemented.txt
 *.netbeans_automatic_build
-*.txt
 Mage.Client/serverlist.txt
 /bin/
 /out/
