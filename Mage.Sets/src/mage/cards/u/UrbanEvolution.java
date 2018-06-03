@@ -1,5 +1,3 @@
-/*
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -17,11 +15,11 @@ import mage.constants.Duration;
 public final class UrbanEvolution extends CardImpl {
 
     public UrbanEvolution(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");
 
-        //Draw three cards. 
+        //Draw three cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
-        
+
         //You may play an additional land this turn.
         this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
     }

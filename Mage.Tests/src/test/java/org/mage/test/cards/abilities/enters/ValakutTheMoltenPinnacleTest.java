@@ -1,5 +1,3 @@
-/*
- 
 package org.mage.test.cards.abilities.enters;
 
 import mage.constants.PhaseStep;
@@ -17,8 +15,7 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
      * Valakut, the Molten Pinnacle Land Valakut, the Molten Pinnacle enters the
      * battlefield tapped. Whenever a Mountain enters the battlefield under your
      * control, if you control at least five other Mountains, you may have
-     * Valakut, the Molten Pinnacle deal 3 damage to any target.
-     * {T}: Add {R}.
+     * Valakut, the Molten Pinnacle deal 3 damage to any target. {T}: Add {R}.
      */
     @Test
     public void onlyFourMountainsNoDamage() {

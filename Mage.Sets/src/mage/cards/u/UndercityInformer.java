@@ -1,5 +1,3 @@
-/*
-
 package mage.cards.u;
 
 import java.util.UUID;

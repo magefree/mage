@@ -1,5 +1,3 @@
-/*
- 
 package mage.cards.f;
 
 import java.util.UUID;
@@ -24,7 +22,7 @@ import mage.game.events.GameEvent.EventType;
 public final class FathomMage extends CardImpl {
 
     public FathomMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 

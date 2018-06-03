@@ -94,6 +94,8 @@ Mage.Verify/AllSets.json
 
 releases
 Utils/author.txt
+Utils/*_tracker.txt
+Utils/*implemented.txt
 .DS_Store
 .metadata
 .project

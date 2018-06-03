@@ -1,5 +1,3 @@
-/*
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -23,10 +21,9 @@ import mage.game.events.GameEvent.EventType;
 public final class LeylinePhantom extends CardImpl {
 
     public LeylinePhantom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.ILLUSION);
 
-        
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
@@ -43,7 +40,6 @@ public final class LeylinePhantom extends CardImpl {
         return new LeylinePhantom(this);
     }
 }
-
 
 class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
 

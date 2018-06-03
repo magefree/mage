@@ -1,5 +1,3 @@
-/*
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -14,8 +12,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -29,10 +27,9 @@ import mage.game.permanent.Permanent;
 public final class HellraiserGoblin extends CardImpl {
 
     public HellraiserGoblin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.BERSERKER);
-
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -67,7 +64,6 @@ class AttacksIfAbleAllEffect extends RequirementEffect {
         super(duration);
         this.filter = filter;
     }
-
 
     public AttacksIfAbleAllEffect(final AttacksIfAbleAllEffect effect) {
         super(effect);

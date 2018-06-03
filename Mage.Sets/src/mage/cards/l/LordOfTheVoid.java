@@ -1,5 +1,3 @@
-/*
- 
 package mage.cards.l;
 
 import java.util.UUID;
@@ -14,8 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -29,7 +27,7 @@ import mage.target.TargetCard;
 public final class LordOfTheVoid extends CardImpl {
 
     public LordOfTheVoid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(7);

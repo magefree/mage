@@ -1,5 +1,3 @@
-/*
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -18,7 +16,7 @@ import mage.constants.SubType;
 public final class Crocanura extends CardImpl {
 
     public Crocanura(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.CROCODILE);
         this.subtype.add(SubType.FROG);
 
@@ -27,11 +25,11 @@ public final class Crocanura extends CardImpl {
 
         //Reach
         this.addAbility(ReachAbility.getInstance());
-        
+
         // Evolve (Whenever a creature enters the battlefield under your control, if that creature
         // has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
         this.addAbility(new EvolveAbility());
-    
+
     }
 
     public Crocanura(final Crocanura card) {

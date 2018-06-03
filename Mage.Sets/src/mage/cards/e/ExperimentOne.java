@@ -1,5 +1,3 @@
-/*
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -22,7 +20,7 @@ import mage.counters.CounterType;
 public final class ExperimentOne extends CardImpl {
 
     public ExperimentOne(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.OOZE);
 
@@ -32,7 +30,7 @@ public final class ExperimentOne extends CardImpl {
         // Evolve (Whenever a creature enters the battlefield under your control, if that creature
         // has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
         this.addAbility(new EvolveAbility());
-        
+
         //Remove two +1/+1 counters from Experiment One: Regenerate Experiment One.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }

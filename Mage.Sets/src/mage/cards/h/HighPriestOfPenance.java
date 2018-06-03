@@ -1,5 +1,3 @@
-/*
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -23,11 +21,10 @@ import mage.target.common.TargetNonlandPermanent;
 public final class HighPriestOfPenance extends CardImpl {
 
     public HighPriestOfPenance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
-        
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -46,7 +43,6 @@ public final class HighPriestOfPenance extends CardImpl {
 }
 
 class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl {
-
 
     public HighPriestOfPenanceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);

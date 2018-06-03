@@ -1,5 +1,3 @@
-/*
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -27,7 +25,7 @@ import mage.game.permanent.Permanent;
 public final class CryptGhast extends CardImpl {
 
     public CryptGhast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);
@@ -50,10 +48,11 @@ public final class CryptGhast extends CardImpl {
 }
 
 class CryptGhastTriggeredAbility extends TriggeredManaAbility {
-    
+
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Swamp");
+
     static {
-            filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public CryptGhastTriggeredAbility() {
