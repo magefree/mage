@@ -36,7 +36,13 @@ public class SpellStack extends ArrayDeque<StackObject> {
         StackObject top = null;
         try {
             top = this.peek();
-            top.resolve(game);
+            Spell topSpell = getSpell(top.getId());
+            if (topSpell != null) {
+                top.resolve(game);
+                game.resetControlAfterSpellResolve(topSpell);
+            } else {
+                top.resolve(game);
+            }
         } finally {
             if (top != null) {
                 if (contains(top)) {

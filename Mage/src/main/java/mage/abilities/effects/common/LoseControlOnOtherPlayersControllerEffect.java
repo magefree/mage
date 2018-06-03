@@ -33,10 +33,6 @@ public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.resetOtherTurnsControlled();
-            Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            if (targetPlayer != null) {
-                targetPlayer.setGameUnderYourControl(true);
-            }
             return true;
         }
         return false;

@@ -1395,7 +1395,13 @@ public abstract class GameImpl implements Game, Serializable {
         StackObject top = null;
         try {
             top = state.getStack().peek();
-            top.resolve(this);
+            Spell topSpell = getSpell(top.getId());
+            if (topSpell != null) {
+                top.resolve(this);
+                resetControlAfterSpellResolve(topSpell);
+            } else {
+                top.resolve(this);
+            }
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
@@ -1404,6 +1410,31 @@ public abstract class GameImpl implements Game, Serializable {
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
                         state.handleSimultaneousEvent(this);
+                    }
+                }
+            }
+        }
+    }
+    
+    @Override
+    public void resetControlAfterSpellResolve(Spell spell) {
+        // for Word of Command
+        if (spell.getCommandedBy() != null) {
+            UUID commandedBy = spell.getCommandedBy();
+            UUID spellControllerId = null;
+            if (commandedBy.equals(spell.getControllerId())) {
+                spellControllerId = spell.getSpellAbility().getFirstTarget(); // i.e. resolved spell is Word of Command
+            } else {
+                spellControllerId = spell.getControllerId(); // i.e. resolved spell is the target opponent's spell
+            }
+            if (commandedBy != null && spellControllerId != null) {
+                Player turnController = getPlayer(commandedBy);
+                if (turnController != null) {
+                    Player targetPlayer = getPlayer(spellControllerId);
+                    if (targetPlayer != null) {
+                        informPlayers(turnController.getLogName() + " lost control over " + targetPlayer.getLogName());
+                        turnController.resetOtherTurnsControlled();
+                        targetPlayer.setGameUnderYourControl(true);
                     }
                 }
             }

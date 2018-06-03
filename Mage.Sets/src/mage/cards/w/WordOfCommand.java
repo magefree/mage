@@ -126,22 +126,10 @@ class WordOfCommandEffect extends OneShotEffect {
                     spell.setCommandedBy(controller.getId()); // If the chosen card is cast as a spell, you control the player while that spell is resolving
                 }
             }
-
-            if (sourceObject != null) {
-                Effect effect = new LoseControlOnOtherPlayersControllerEffect(controller.getLogName(), targetPlayer.getLogName());
-                effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
-                // You control the player until Word of Command finishes resolving
-                // TODO: using a DelayedTriggeredAbility to end the effect isn't the optimal solution, since effects like Time Stop can stop it from triggering even outside the stack
-                DelayedTriggeredAbility ability = new WordOfCommandDelayedTriggeredAbility(effect, source.getSourceId());
-                ability.setSourceId(controller.getId());
-                ability.setControllerId(controller.getId());
-                game.addDelayedTriggeredAbility(ability);
-                if (card != null && !card.isLand()) { // this sets up a lose control effect for when the spell finishes resolving
-                    ability = new WordOfCommandDelayedTriggeredAbility(effect, card.getId());
-                    ability.setSourceId(controller.getId());
-                    ability.setControllerId(controller.getId());
-                    game.addDelayedTriggeredAbility(ability);
-                }
+            
+            Spell wordOfCommand = game.getSpell(sourceObject.getId());
+            if (wordOfCommand != null) {
+                wordOfCommand.setCommandedBy(controller.getId()); // You control the player until Word of Command finishes resolving
             } else {
                 controller.resetOtherTurnsControlled();
                 targetPlayer.setGameUnderYourControl(true);
@@ -174,41 +162,6 @@ class WordOfCommandCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
-        return false;
-    }
-}
-
-class WordOfCommandDelayedTriggeredAbility extends DelayedTriggeredAbility {
-    
-    private UUID cardId;
-
-    WordOfCommandDelayedTriggeredAbility(Effect effect, UUID cardId) {
-        super(effect, Duration.EndOfTurn);
-        this.cardId = cardId;
-        this.usesStack = false;
-    }
-
-    WordOfCommandDelayedTriggeredAbility(final WordOfCommandDelayedTriggeredAbility ability) {
-        super(ability);
-        this.cardId = ability.cardId;
-    }
-
-    @Override
-    public WordOfCommandDelayedTriggeredAbility copy() {
-        return new WordOfCommandDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.STACK && event.getTargetId().equals(cardId)) {
-            return true;
-        }
         return false;
     }
 }
