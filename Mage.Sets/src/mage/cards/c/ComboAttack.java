@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -56,6 +55,9 @@ class ComboAttackEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (source.getTargets().size() < 2) {
+            return false;
+        }
         Permanent permanent1 = game.getPermanent(source.getTargets().get(0).getTargets().get(0));
         Permanent permanent2 = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
         Permanent permanent3 = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
