@@ -68,6 +68,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Auspicious Ancestor", 3, Rarity.RARE, mage.cards.a.AuspiciousAncestor.class));
         cards.add(new SetCardInfo("Azimaet Drake", 53, Rarity.COMMON, mage.cards.a.AzimaetDrake.class));
         cards.add(new SetCardInfo("Bad River", 324, Rarity.UNCOMMON, mage.cards.b.BadRiver.class));
+        cards.add(new SetCardInfo("Barbed Foliage", 105, Rarity.UNCOMMON, mage.cards.b.BarbedFoliage.class));
         cards.add(new SetCardInfo("Barbed-Back Wurm", 105, Rarity.UNCOMMON, mage.cards.b.BarbedBackWurm.class));
         cards.add(new SetCardInfo("Bay Falcon", 54, Rarity.COMMON, mage.cards.b.BayFalcon.class));
         cards.add(new SetCardInfo("Benthic Djinn", 257, Rarity.RARE, mage.cards.b.BenthicDjinn.class));

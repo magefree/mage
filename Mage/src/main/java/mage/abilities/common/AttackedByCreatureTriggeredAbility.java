@@ -32,6 +32,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -44,6 +46,7 @@ import mage.target.targetpointer.FixedTarget;
 public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     protected SetTargetPointer setTargetPointer;
+    protected FilterCreaturePermanent filter;
 
     public AttackedByCreatureTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -58,13 +61,19 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public AttackedByCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
+        this(zone, effect, optional, setTargetPointer, StaticFilters.FILTER_PERMANENT_A_CREATURE);
+    }
+
+    public AttackedByCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer, FilterCreaturePermanent filter) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        this.filter = filter;
     }
 
     public AttackedByCreatureTriggeredAbility(final AttackedByCreatureTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
+        this.filter = ability.filter;
     }
 
     @Override
@@ -76,7 +85,9 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID defendingPlayer = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
         Permanent attackingCreature = game.getPermanent(event.getSourceId());
-        if (getControllerId().equals(defendingPlayer) && attackingCreature != null) {
+        if (filter.match(attackingCreature, game)
+                && getControllerId().equals(defendingPlayer)
+                && attackingCreature != null) {
             switch (setTargetPointer) {
                 case PERMANENT:
                     this.getEffects().setTargetPointer(new FixedTarget(attackingCreature, game));
@@ -97,7 +108,7 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature attacks you, " + super.getRule();
+        return "Whenever " + filter.getMessage() + " attacks you, " + super.getRule();
     }
 
 }
