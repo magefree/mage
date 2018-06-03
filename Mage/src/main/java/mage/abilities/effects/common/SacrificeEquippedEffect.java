@@ -1,14 +1,11 @@
-
-
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -32,7 +29,7 @@ public class SacrificeEquippedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             UUID uuid = getTargetPointer().getFirst(game, source);
             Permanent permanent = game.getPermanent(uuid);
