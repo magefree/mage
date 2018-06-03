@@ -94,6 +94,8 @@ Mage.Verify/AllSets.json
 
 releases
 Utils/author.txt
+Utils/*_tracker.txt
+Utils/*implemented.txt
 .DS_Store
 .metadata
 .project
@@ -131,7 +133,6 @@ hs_err*.log
 /Mage.Stats/target/
 /Utils/*_unimplemented.txt
 *.netbeans_automatic_build
-*.txt
 Mage.Client/serverlist.txt
 /bin/
 /out/
