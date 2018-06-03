@@ -1,6 +1,7 @@
-
 package mage.cards.f;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
@@ -20,6 +21,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -63,6 +65,8 @@ class FoodChainManaBuilder extends ConditionalManaBuilder {
 
 class FoodChainManaEffect extends ManaEffect {
 
+    ConditionalManaBuilder manaBuilder = new FoodChainManaBuilder();
+
     FoodChainManaEffect() {
         this.staticText = "Add X mana of any one color, where X is 1 plus the exiled creature's converted mana cost. Spend this mana only to cast creature spells";
     }
@@ -89,6 +93,25 @@ class FoodChainManaEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        int cmc = -1;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
+            if (permanent.isCreature()) {
+                cmc = Math.max(cmc, permanent.getManaCost().convertedManaCost());
+            }
+        }
+        if (cmc != -1) {
+            netMana.add(manaBuilder.setMana(Mana.BlackMana(cmc + 1), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.BlueMana(cmc + 1), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.RedMana(cmc + 1), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.GreenMana(cmc + 1), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.WhiteMana(cmc + 1), source, game).build());
+        }
+        return netMana;
+    }
+
+    @Override
     public Mana produceMana(boolean netMana, Game game, Ability source) {
         if (netMana) {
             return null;
@@ -108,7 +131,7 @@ class FoodChainManaEffect extends ManaEffect {
                 return null;
             }
             Mana chosen = choice.getMana(manaCostExiled + 1);
-            return new FoodChainManaBuilder().setMana(chosen, source, game).build();
+            return manaBuilder.setMana(chosen, source, game).build();
         }
 
         return null;

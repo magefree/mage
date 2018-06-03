@@ -1,4 +1,3 @@
-
 package mage.abilities.mana;
 
 import java.util.ArrayList;
@@ -71,11 +70,13 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
     @Override
     public List<Mana> getNetMana(Game game) {
         if (netMana.isEmpty()) {
+            ArrayList<Mana> dynamicNetMana = new ArrayList<>();
             for (Effect effect : getEffects()) {
                 if (effect instanceof ManaEffect) {
-                    netMana.addAll(((ManaEffect) effect).getNetMana(game, this));
+                    dynamicNetMana.addAll(((ManaEffect) effect).getNetMana(game, this));
                 }
             }
+            return dynamicNetMana;
         }
         ArrayList<Mana> netManaCopy = new ArrayList<>();
         for (Mana mana : netMana) {
