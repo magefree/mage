@@ -33,6 +33,7 @@ public final class PyricSalamander extends CardImpl {
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect())
         ).setText("Sacrifice {this} at the beginning of the next end step"));
+        this.addAbility(ability);
     }
 
     public PyricSalamander(final PyricSalamander card) {

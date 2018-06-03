@@ -1,4 +1,4 @@
-package mage.cards.e;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,51 +10,50 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public final class EbonyOwlNetsuke extends CardImpl {
+public final class MisersCage extends CardImpl {
 
-    public EbonyOwlNetsuke(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+    public MisersCage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, Ebony Owl Netsuke deals 4 damage to him or her.
-        this.addAbility(new EbonyOwlNetsukeTriggeredAbility());
+        // At the beginning of each opponent's upkeep, if that player has five or more cards in hand, Misers' Cage deals 2 damage to him or her.
+        this.addAbility(new MisersCageTriggeredAbility());
     }
 
-    public EbonyOwlNetsuke(final EbonyOwlNetsuke card) {
+    public MisersCage(final MisersCage card) {
         super(card);
     }
 
     @Override
-    public EbonyOwlNetsuke copy() {
-        return new EbonyOwlNetsuke(this);
+    public MisersCage copy() {
+        return new MisersCage(this);
     }
 }
 
-class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
+class MisersCageTriggeredAbility extends TriggeredAbilityImpl {
 
-    EbonyOwlNetsukeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(4), false);
+    MisersCageTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
     }
 
-    EbonyOwlNetsukeTriggeredAbility(final EbonyOwlNetsukeTriggeredAbility ability) {
+    MisersCageTriggeredAbility(final MisersCageTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public EbonyOwlNetsukeTriggeredAbility copy() {
-        return new EbonyOwlNetsukeTriggeredAbility(this);
+    public MisersCageTriggeredAbility copy() {
+        return new MisersCageTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
@@ -74,11 +73,11 @@ class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Player player = game.getPlayer(game.getActivePlayerId());
-        return player != null && player.getHand().size() >= 7;
+        return player != null && player.getHand().size() >= 5;
     }
 
     @Override
     public String getRule() {
-        return "At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, {this} deals 4 damage to that player";
+        return "at the beginning of each opponent’s upkeep, if that player has five or more cards in hand, {this} deals 2 damage to that player";
     }
 }
