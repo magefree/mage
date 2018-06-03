@@ -225,6 +225,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Raging Spirit", 188, Rarity.COMMON, mage.cards.r.RagingSpirit.class));
         cards.add(new SetCardInfo("Rampant Growth", 235, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rashida Scalebane", 35, Rarity.RARE, mage.cards.r.RashidaScalebane.class));
+        cards.add(new SetCardInfo("Ravenous Vampire", 136, Rarity.UNCOMMON, mage.cards.r.RavenousVampire.class));
         cards.add(new SetCardInfo("Ray of Command", 86, Rarity.COMMON, mage.cards.r.RayOfCommand.class));
         cards.add(new SetCardInfo("Reality Ripple", 87, Rarity.COMMON, mage.cards.r.RealityRipple.class));
         cards.add(new SetCardInfo("Reckless Embermage", 189, Rarity.RARE, mage.cards.r.RecklessEmbermage.class));
