@@ -144,6 +144,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Flare", 176, Rarity.COMMON, mage.cards.f.Flare.class));
         cards.add(new SetCardInfo("Flash", 66, Rarity.RARE, mage.cards.f.Flash.class));
         cards.add(new SetCardInfo("Flood Plain", 326, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
+        cards.add(new SetCardInfo("Floodgate", 67, Rarity.UNCOMMON, mage.cards.f.Floodgate.class));
         cards.add(new SetCardInfo("Fog", 216, Rarity.COMMON, mage.cards.f.Fog.class));
         cards.add(new SetCardInfo("Foratog", 217, Rarity.UNCOMMON, mage.cards.f.Foratog.class));
         cards.add(new SetCardInfo("Forbidden Crypt", 124, Rarity.RARE, mage.cards.f.ForbiddenCrypt.class));
