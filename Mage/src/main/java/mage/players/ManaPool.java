@@ -1,30 +1,3 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.players;
 
 import java.io.Serializable;
@@ -117,12 +90,12 @@ public class ManaPool implements Serializable {
      * @return
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, Mana usedManaToPay) {
-        if (!autoPayment && manaType != unlockedManaType) {
+        if (!isAutoPayment() && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
         }
         ManaType possibleAsThoughtPoolManaType = null;
-        if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && manaType != unlockedManaType) {
+        if (isAutoPayment() && isAutoPaymentRestricted() && !wasManaAddedBeyondStock() && manaType != unlockedManaType) {
             // if automatic restricted payment and there is already mana in the pool
             // and the needed mana type was not unlocked, nothing will be paid
             if (unlockedManaType != null) {
@@ -151,7 +124,7 @@ public class ManaPool implements Serializable {
                     }
                 }
             }
-            if (possibleAsThoughtPoolManaType == null && manaType != unlockedManaType && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
+            if (possibleAsThoughtPoolManaType == null && manaType != unlockedManaType && isAutoPayment() && isAutoPaymentRestricted() && mana.count() == mana.getStock()) {
                 // no mana added beyond the stock so don't auto pay this
                 continue;
             }
@@ -465,23 +438,19 @@ public class ManaPool implements Serializable {
     }
 
     public boolean isAutoPayment() {
-        return autoPayment;
+        return autoPayment || forcedToPay;
     }
 
     public void setAutoPayment(boolean autoPayment) {
-        if (!forcedToPay) {
-            this.autoPayment = autoPayment;
-        }
+        this.autoPayment = autoPayment;
     }
 
     public boolean isAutoPaymentRestricted() {
-        return autoPaymentRestricted;
+        return autoPaymentRestricted || forcedToPay;
     }
 
     public void setAutoPaymentRestricted(boolean autoPaymentRestricted) {
-        if (!forcedToPay) {
-            this.autoPaymentRestricted = autoPaymentRestricted;
-        }
+        this.autoPaymentRestricted = autoPaymentRestricted;
     }
 
     public ManaType getUnlockedManaType() {
