@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -79,7 +78,7 @@ class CharmedGriffinEffect extends OneShotEffect {
                                 && player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
-                                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                                player.moveCards(card, Zone.BATTLEFIELD, source, game);
                             }
                         }
                     }
