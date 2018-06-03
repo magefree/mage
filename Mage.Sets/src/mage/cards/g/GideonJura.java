@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -15,8 +14,8 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
@@ -24,7 +23,6 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
@@ -41,7 +39,7 @@ public final class GideonJura extends CardImpl {
     }
 
     public GideonJura(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
@@ -86,10 +84,12 @@ class GideonJuraToken extends TokenImpl {
         power = new MageInt(6);
         toughness = new MageInt(6);
     }
+
     public GideonJuraToken(final GideonJuraToken token) {
         super(token);
     }
 
+    @Override
     public GideonJuraToken copy() {
         return new GideonJuraToken(this);
     }
