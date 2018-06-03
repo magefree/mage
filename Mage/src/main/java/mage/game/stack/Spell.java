@@ -1036,4 +1036,8 @@ public class Spell extends StackObjImpl implements Card {
         this.commandedBy = playerId;
     }
 
+    public UUID getCommandedBy() {
+        return commandedBy;
+    }
+
 }
