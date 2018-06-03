@@ -166,6 +166,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Maniacal Rage", 155, Rarity.COMMON, mage.cards.m.ManiacalRage.class));
         cards.add(new SetCardInfo("Manipulate Fate", 60, Rarity.UNCOMMON, mage.cards.m.ManipulateFate.class));
         cards.add(new SetCardInfo("Marauding Knight", 110, Rarity.RARE, mage.cards.m.MaraudingKnight.class));
+        cards.add(new SetCardInfo("Metathran Aerostat", 61, Rarity.RARE, mage.cards.m.MetathranAerostat.class));
         cards.add(new SetCardInfo("Metathran Transport", 62, Rarity.UNCOMMON, mage.cards.m.MetathranTransport.class));
         cards.add(new SetCardInfo("Metathran Zombie", 63, Rarity.COMMON, mage.cards.m.MetathranZombie.class));
         cards.add(new SetCardInfo("Meteor Storm", 256, Rarity.RARE, mage.cards.m.MeteorStorm.class));
