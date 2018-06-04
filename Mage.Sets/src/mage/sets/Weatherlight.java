@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -86,7 +85,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Flux", 39, Rarity.COMMON, mage.cards.f.Flux.class));
         cards.add(new SetCardInfo("Fog Elemental", 40, Rarity.COMMON, mage.cards.f.FogElemental.class));
         cards.add(new SetCardInfo("Foriysian Brigade", 14, Rarity.UNCOMMON, mage.cards.f.ForiysianBrigade.class));
-        cards.add(new SetCardInfo("Fungus Elemental", 70, Rarity.RARE, mage.cards.f.FungusElemental.class));
+        cards.add(new SetCardInfo("Fungus Elemental", 128, Rarity.RARE, mage.cards.f.FungusElemental.class));
         cards.add(new SetCardInfo("Gaea's Blessing", 129, Rarity.UNCOMMON, mage.cards.g.GaeasBlessing.class));
         cards.add(new SetCardInfo("Gallowbraid", 70, Rarity.RARE, mage.cards.g.Gallowbraid.class));
         cards.add(new SetCardInfo("Gemstone Mine", 164, Rarity.UNCOMMON, mage.cards.g.GemstoneMine.class));
