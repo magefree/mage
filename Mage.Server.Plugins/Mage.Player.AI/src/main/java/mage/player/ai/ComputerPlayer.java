@@ -1472,18 +1472,25 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
         if (numAvailable < 0) {
             numAvailable = 0;
-        }
-        if (numAvailable > max) {
-            numAvailable = max;
+        } else {
+            if (numAvailable < min) {
+                numAvailable = min;
+            }
+            if (numAvailable > max) {
+                numAvailable = max;
+            }
         }
         return numAvailable;
     }
 
     @Override
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
-        log.debug("announceXMana");
+        log.debug("announceXCost");
         //TODO: improve this
         int value = RandomUtil.nextInt(max + 1);
+        if (value < min) {
+            value = min;
+        }
         if (value < max) {
             value++;
         }
