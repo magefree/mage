@@ -890,12 +890,12 @@ public class PlayerStub implements Player {
 
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        return 0;
+        return min;
     }
 
     @Override
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
-        return 0;
+        return min;
     }
 
     @Override
