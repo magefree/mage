@@ -118,6 +118,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Rofellos, Llanowar Emissary", 118, Rarity.RARE, mage.cards.r.RofellosLlanowarEmissary.class));
         cards.add(new SetCardInfo("Sanctimony", 16, Rarity.UNCOMMON, mage.cards.s.Sanctimony.class));
         cards.add(new SetCardInfo("Scent of Brine", 45, Rarity.COMMON, mage.cards.s.ScentOfBrine.class));
+        cards.add(new SetCardInfo("Scent of Cinder", 96, Rarity.COMMON, mage.cards.s.ScentOfCinder.class));
         cards.add(new SetCardInfo("Scent of Ivy", 120, Rarity.COMMON, mage.cards.s.ScentOfIvy.class));
         cards.add(new SetCardInfo("Scent of Jasmine", 17, Rarity.COMMON, mage.cards.s.ScentOfJasmine.class));
         cards.add(new SetCardInfo("Scour", 18, Rarity.UNCOMMON, mage.cards.s.Scour.class));

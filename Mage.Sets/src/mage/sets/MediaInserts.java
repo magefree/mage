@@ -171,6 +171,7 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctifier of Souls", 157, Rarity.RARE, mage.cards.s.SanctifierOfSouls.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 134, Rarity.SPECIAL, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 70, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
+        cards.add(new SetCardInfo("Scent of Cinder", 9, Rarity.SPECIAL, mage.cards.s.ScentOfCinder.class));
         cards.add(new SetCardInfo("Scrap Trawler", 164, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
         cards.add(new SetCardInfo("Scythe Leopard", 141, Rarity.SPECIAL, mage.cards.s.ScytheLeopard.class));
         cards.add(new SetCardInfo("Seeker of the Way", 130, Rarity.SPECIAL, mage.cards.s.SeekerOfTheWay.class));
