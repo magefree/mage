@@ -38,6 +38,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Cataclysm", 3, Rarity.RARE, mage.cards.c.Cataclysm.class));
         cards.add(new SetCardInfo("Cat Burglar", 54, Rarity.COMMON, mage.cards.c.CatBurglar.class));
         cards.add(new SetCardInfo("Charging Paladin", 4, Rarity.COMMON, mage.cards.c.ChargingPaladin.class));
+        cards.add(new SetCardInfo("Cinder Crawler", 80, Rarity.COMMON, mage.cards.c.CinderCrawler.class));
         cards.add(new SetCardInfo("City of Traitors", 143, Rarity.RARE, mage.cards.c.CityOfTraitors.class));
         cards.add(new SetCardInfo("Coat of Arms", 131, Rarity.RARE, mage.cards.c.CoatOfArms.class));
         cards.add(new SetCardInfo("Convalescence", 5, Rarity.RARE, mage.cards.c.Convalescence.class));
