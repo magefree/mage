@@ -36,6 +36,7 @@ public class ManaPool implements Serializable {
     private boolean autoPaymentRestricted; // auto payment from mana pool: true - if auto Payment is on, it will only pay if one kind of mana is in the pool
     private ManaType unlockedManaType; // type of mana that was selected to pay manually
     private boolean forcedToPay; // for Word of Command
+    private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
 
@@ -56,6 +57,9 @@ public class ManaPool implements Serializable {
         this.autoPaymentRestricted = pool.autoPaymentRestricted;
         this.unlockedManaType = pool.unlockedManaType;
         this.forcedToPay = pool.forcedToPay;
+        for (ManaPoolItem item : pool.poolBookmark) {
+            poolBookmark.add(item.copy());
+        }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
     }
 
@@ -502,5 +506,29 @@ public class ManaPool implements Serializable {
 
     public UUID getPlayerId() {
         return playerId;
+    }
+    
+    public void storeMana() {
+        poolBookmark.clear();
+        poolBookmark.addAll(getManaItems());
+    }
+    
+    public List<ManaPoolItem> getPoolBookmark() {
+        List<ManaPoolItem> itemsCopy = new ArrayList<>();
+        for (ManaPoolItem manaItem : poolBookmark) {
+            itemsCopy.add(manaItem.copy());
+        }
+        return itemsCopy;
+    }
+    
+    public void restoreMana(List<ManaPoolItem> manaList) {
+        manaItems.clear();
+        if (!manaList.isEmpty()) {
+            List<ManaPoolItem> itemsCopy = new ArrayList<>();
+            for (ManaPoolItem manaItem : manaList) {
+                itemsCopy.add(manaItem.copy());
+            }
+            manaItems.addAll(itemsCopy);
+        }
     }
 }

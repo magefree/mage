@@ -394,7 +394,7 @@ public interface Game extends MageItem, Serializable {
 
     void playPriority(UUID activePlayerId, boolean resuming);
     
-    void resetControlAfterSpellResolve(Spell spell);
+    void resetControlAfterSpellResolve(UUID topId);
 
     boolean endTurn(Ability source);
 

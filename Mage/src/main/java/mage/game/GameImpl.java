@@ -1395,13 +1395,8 @@ public abstract class GameImpl implements Game, Serializable {
         StackObject top = null;
         try {
             top = state.getStack().peek();
-            Spell topSpell = getSpell(top.getId());
-            if (topSpell != null) {
-                top.resolve(this);
-                resetControlAfterSpellResolve(topSpell);
-            } else {
-                top.resolve(this);
-            }
+            top.resolve(this);
+            resetControlAfterSpellResolve(top.getId());
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
@@ -1417,24 +1412,27 @@ public abstract class GameImpl implements Game, Serializable {
     }
     
     @Override
-    public void resetControlAfterSpellResolve(Spell spell) {
+    public void resetControlAfterSpellResolve(UUID topId) {
         // for Word of Command
-        if (spell.getCommandedBy() != null) {
-            UUID commandedBy = spell.getCommandedBy();
-            UUID spellControllerId = null;
-            if (commandedBy.equals(spell.getControllerId())) {
-                spellControllerId = spell.getSpellAbility().getFirstTarget(); // i.e. resolved spell is Word of Command
-            } else {
-                spellControllerId = spell.getControllerId(); // i.e. resolved spell is the target opponent's spell
-            }
-            if (commandedBy != null && spellControllerId != null) {
-                Player turnController = getPlayer(commandedBy);
-                if (turnController != null) {
-                    Player targetPlayer = getPlayer(spellControllerId);
-                    if (targetPlayer != null) {
-                        informPlayers(turnController.getLogName() + " lost control over " + targetPlayer.getLogName());
-                        turnController.resetOtherTurnsControlled();
-                        targetPlayer.setGameUnderYourControl(true);
+        Spell spell = getSpellOrLKIStack(topId);
+        if (spell != null) {
+            if (spell.getCommandedBy() != null) {
+                UUID commandedBy = spell.getCommandedBy();
+                UUID spellControllerId = null;
+                if (commandedBy.equals(spell.getControllerId())) {
+                    spellControllerId = spell.getSpellAbility().getFirstTarget(); // i.e. resolved spell is Word of Command
+                } else {
+                    spellControllerId = spell.getControllerId(); // i.e. resolved spell is the target opponent's spell
+                }
+                if (commandedBy != null && spellControllerId != null) {
+                    Player turnController = getPlayer(commandedBy);
+                    if (turnController != null) {
+                        Player targetPlayer = getPlayer(spellControllerId);
+                        if (targetPlayer != null) {
+                            informPlayers(turnController.getLogName() + " lost control over " + targetPlayer.getLogName());
+                            turnController.resetOtherTurnsControlled();
+                            targetPlayer.setGameUnderYourControl(true);
+                        }
                     }
                 }
             }

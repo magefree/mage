@@ -4,11 +4,8 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,8 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPool;
@@ -101,6 +96,7 @@ class WordOfCommandEffect extends OneShotEffect {
                 // and only if mana they produce is spent to activate other mana abilities of lands he or she controls and/or play that card
                 ManaPool manaPool = targetPlayer.getManaPool();
                 manaPool.setForcedToPay(true);
+                manaPool.storeMana();
                 int bookmark = game.bookmarkState();
 
                 if ((card.isLand() && (!targetPlayer.canPlayLand() || !game.getActivePlayerId().equals(targetPlayer.getId())))
@@ -127,7 +123,7 @@ class WordOfCommandEffect extends OneShotEffect {
                 }
             }
             
-            Spell wordOfCommand = game.getSpell(sourceObject.getId());
+            Spell wordOfCommand = game.getSpell(source.getSourceId());
             if (wordOfCommand != null) {
                 wordOfCommand.setCommandedBy(controller.getId()); // You control the player until Word of Command finishes resolving
             } else {

@@ -237,7 +237,8 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
-        if (!pool.isAutoPayment() && pool.getUnlockedManaType() == null) {
+        boolean wasUnlockedManaType = (pool.getUnlockedManaType() != null);
+        if (!pool.isAutoPayment() && !wasUnlockedManaType) {
             // if auto payment is inactive and no mana type was clicked manually - do nothing
             return;
         }
@@ -324,7 +325,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
         // stop using mana of the clicked mana type
         pool.lockManaType();
-        handleForcedToPayOnlyForCurrentPayment(game, pool, referenceCosts);
+        if (!wasUnlockedManaType) {
+            handleForcedToPayOnlyForCurrentPayment(game, pool, referenceCosts);
+        }
     }
 
     private void handleForcedToPayOnlyForCurrentPayment(Game game, ManaPool pool, ManaCosts referenceCosts) {
@@ -336,6 +339,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 if (player != null) {
                     game.undo(playerId);
                     this.clearPaid();
+                    player.getManaPool().restoreMana(pool.getPoolBookmark());
                     game.bookmarkState();
                 }
             }
