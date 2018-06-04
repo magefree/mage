@@ -40,6 +40,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Braidwood Cup", 126, Rarity.UNCOMMON, mage.cards.b.BraidwoodCup.class));
         cards.add(new SetCardInfo("Braidwood Sextant", 127, Rarity.UNCOMMON, mage.cards.b.BraidwoodSextant.class));
         cards.add(new SetCardInfo("Brass Secretary", 128, Rarity.UNCOMMON, mage.cards.b.BrassSecretary.class));
+        cards.add(new SetCardInfo("Brine Seer", 28, Rarity.UNCOMMON, mage.cards.b.BrineSeer.class));
         cards.add(new SetCardInfo("Bubbling Beebles", 29, Rarity.COMMON, mage.cards.b.BubblingBeebles.class));
         cards.add(new SetCardInfo("Bubbling Muck", 54, Rarity.COMMON, mage.cards.b.BubblingMuck.class));
         cards.add(new SetCardInfo("Caltrops", 129, Rarity.UNCOMMON, mage.cards.c.Caltrops.class));
