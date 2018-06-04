@@ -76,6 +76,10 @@ public abstract class RequirementEffect extends ContinuousEffectImpl {
         return null;
     }
 
+    public int getMinNumberOfBlockers() {
+        return 0;
+    }
+
     /**
      * Player related check The player returned or controlled planeswalker must
      * be attacked with at least one attacker
