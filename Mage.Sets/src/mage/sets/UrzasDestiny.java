@@ -83,6 +83,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Impatience", 88, Rarity.RARE, mage.cards.i.Impatience.class));
         cards.add(new SetCardInfo("Iridescent Drake", 35, Rarity.UNCOMMON, mage.cards.i.IridescentDrake.class));
         cards.add(new SetCardInfo("Ivy Seer", 110, Rarity.UNCOMMON, mage.cards.i.IvySeer.class));
+        cards.add(new SetCardInfo("Jasmine Seer", 10, Rarity.UNCOMMON, mage.cards.j.JasmineSeer.class));
         cards.add(new SetCardInfo("Junk Diver", 132, Rarity.RARE, mage.cards.j.JunkDiver.class));
         cards.add(new SetCardInfo("Keldon Champion", 90, Rarity.UNCOMMON, mage.cards.k.KeldonChampion.class));
         cards.add(new SetCardInfo("Keldon Vandals", 91, Rarity.COMMON, mage.cards.k.KeldonVandals.class));

@@ -1,11 +1,16 @@
-package mage.cards.s;
+package mage.cards.j;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,26 +24,33 @@ import mage.target.common.TargetCardInHand;
  *
  * @author TheElk801
  */
-public final class ScentOfJasmine extends CardImpl {
+public final class JasmineSeer extends CardImpl {
 
-    public ScentOfJasmine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
+    public JasmineSeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        // Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
-        this.getSpellAbility().addEffect(new ScentOfJasmineEffect());
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {2}{W}, {tap}: Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
+        Ability ability = new SimpleActivatedAbility(new JasmineSeerEffect(), new ManaCostsImpl("{2}{WF}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public ScentOfJasmine(final ScentOfJasmine card) {
+    public JasmineSeer(final JasmineSeer card) {
         super(card);
     }
 
     @Override
-    public ScentOfJasmine copy() {
-        return new ScentOfJasmine(this);
+    public JasmineSeer copy() {
+        return new JasmineSeer(this);
     }
 }
 
-class ScentOfJasmineEffect extends OneShotEffect {
+class JasmineSeerEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("any number of white cards");
 
@@ -46,19 +58,19 @@ class ScentOfJasmineEffect extends OneShotEffect {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public ScentOfJasmineEffect() {
+    public JasmineSeerEffect() {
         super(Outcome.GainLife);
         this.staticText = "reveal any number of white cards in your hand. "
                 + "You gain 2 life for each card revealed this way";
     }
 
-    public ScentOfJasmineEffect(final ScentOfJasmineEffect effect) {
+    public JasmineSeerEffect(final JasmineSeerEffect effect) {
         super(effect);
     }
 
     @Override
-    public ScentOfJasmineEffect copy() {
-        return new ScentOfJasmineEffect(this);
+    public JasmineSeerEffect copy() {
+        return new JasmineSeerEffect(this);
     }
 
     @Override
