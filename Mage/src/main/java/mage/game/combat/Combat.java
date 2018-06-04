@@ -695,7 +695,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         //20101001 - 509.1c
         // map with attackers (UUID) that must be blocked by at least one blocker and a set of all creatures that can block it and don't block yet
         Map<UUID, Set<UUID>> mustBeBlockedByAtLeastOne = new HashMap<>();
-        int minNumberOfBlockers = 0;
+        Map<UUID, Integer> minNumberOfBlockersMap = new HashMap<>();
 
         // check mustBlock requirements of creatures from opponents of attacking player
         for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED, player.getId(), game)) {
@@ -711,7 +711,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         for (Ability ability : entry.getValue()) {
                             UUID toBeBlockedCreature = effect.mustBlockAttackerIfElseUnblocked(ability, game);
                             if (toBeBlockedCreature != null) {
-                                minNumberOfBlockers = effect.getMinNumberOfBlockers();
+                                minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers());
                                 Set<UUID> potentialBlockers;
                                 if (mustBeBlockedByAtLeastOne.containsKey(toBeBlockedCreature)) {
                                     potentialBlockers = mustBeBlockedByAtLeastOne.get(toBeBlockedCreature);
@@ -806,7 +806,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         for (Ability ability : entry.getValue()) {
                             UUID toBeBlockedCreature = effect.mustBlockAttackerIfElseUnblocked(ability, game);
                             if (toBeBlockedCreature != null) {
-                                minNumberOfBlockers = effect.getMinNumberOfBlockers();
+                                minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers());
                                 Set<UUID> potentialBlockers;
                                 if (mustBeBlockedByAtLeastOne.containsKey(toBeBlockedCreature)) {
                                     potentialBlockers = mustBeBlockedByAtLeastOne.get(toBeBlockedCreature);
@@ -901,7 +901,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             break;
                         }
                     }
-                    requirementFulfilled &= (combatGroup.getBlockers().size() >= Math.min(minNumberOfBlockers, mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId).size()));
+                    requirementFulfilled &= (combatGroup.getBlockers().size() >= Math.min(minNumberOfBlockersMap.get(toBeBlockedCreatureId), mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId).size()));
                     if (!requirementFulfilled) {
                         // creature is not blocked but has possible blockers
                         if (controller.isHuman()) {
@@ -938,7 +938,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                         }
                                         defender.declareBlocker(defender.getId(), possibleBlockerId, toBeBlockedCreatureId, game);
                                     }
-                                    if (combatGroup.getBlockers().size() >= minNumberOfBlockers) {
+                                    if (combatGroup.getBlockers().size() >= minNumberOfBlockersMap.get(toBeBlockedCreatureId)) {
                                         break;
                                     }
                                 }
