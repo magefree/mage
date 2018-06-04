@@ -121,6 +121,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Scent of Cinder", 96, Rarity.COMMON, mage.cards.s.ScentOfCinder.class));
         cards.add(new SetCardInfo("Scent of Ivy", 120, Rarity.COMMON, mage.cards.s.ScentOfIvy.class));
         cards.add(new SetCardInfo("Scent of Jasmine", 17, Rarity.COMMON, mage.cards.s.ScentOfJasmine.class));
+        cards.add(new SetCardInfo("Scent of Nightshade", 69, Rarity.COMMON, mage.cards.s.ScentOfNightshade.class));
         cards.add(new SetCardInfo("Scour", 18, Rarity.UNCOMMON, mage.cards.s.Scour.class));
         cards.add(new SetCardInfo("Serra Advocate", 19, Rarity.UNCOMMON, mage.cards.s.SerraAdvocate.class));
         cards.add(new SetCardInfo("Sigil of Sleep", 46, Rarity.COMMON, mage.cards.s.SigilOfSleep.class));
