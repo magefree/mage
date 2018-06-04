@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -68,6 +41,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Auspicious Ancestor", 3, Rarity.RARE, mage.cards.a.AuspiciousAncestor.class));
         cards.add(new SetCardInfo("Azimaet Drake", 53, Rarity.COMMON, mage.cards.a.AzimaetDrake.class));
         cards.add(new SetCardInfo("Bad River", 324, Rarity.UNCOMMON, mage.cards.b.BadRiver.class));
+        cards.add(new SetCardInfo("Barbed Foliage", 207, Rarity.UNCOMMON, mage.cards.b.BarbedFoliage.class));
         cards.add(new SetCardInfo("Barbed-Back Wurm", 105, Rarity.UNCOMMON, mage.cards.b.BarbedBackWurm.class));
         cards.add(new SetCardInfo("Bay Falcon", 54, Rarity.COMMON, mage.cards.b.BayFalcon.class));
         cards.add(new SetCardInfo("Benthic Djinn", 257, Rarity.RARE, mage.cards.b.BenthicDjinn.class));
@@ -143,6 +117,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Flare", 176, Rarity.COMMON, mage.cards.f.Flare.class));
         cards.add(new SetCardInfo("Flash", 66, Rarity.RARE, mage.cards.f.Flash.class));
         cards.add(new SetCardInfo("Flood Plain", 326, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
+        cards.add(new SetCardInfo("Floodgate", 67, Rarity.UNCOMMON, mage.cards.f.Floodgate.class));
         cards.add(new SetCardInfo("Fog", 216, Rarity.COMMON, mage.cards.f.Fog.class));
         cards.add(new SetCardInfo("Foratog", 217, Rarity.UNCOMMON, mage.cards.f.Foratog.class));
         cards.add(new SetCardInfo("Forbidden Crypt", 124, Rarity.RARE, mage.cards.f.ForbiddenCrypt.class));
@@ -210,6 +185,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Merfolk Seer", 76, Rarity.COMMON, mage.cards.m.MerfolkSeer.class));
         cards.add(new SetCardInfo("Mind Harness", 78, Rarity.UNCOMMON, mage.cards.m.MindHarness.class));
         cards.add(new SetCardInfo("Mire Shade", 131, Rarity.UNCOMMON, mage.cards.m.MireShade.class));
+        cards.add(new SetCardInfo("Misers' Cage", 311, Rarity.RARE, mage.cards.m.MisersCage.class));
         cards.add(new SetCardInfo("Mist Dragon", 79, Rarity.RARE, mage.cards.m.MistDragon.class));
         cards.add(new SetCardInfo("Moss Diamond", 312, Rarity.UNCOMMON, mage.cards.m.MossDiamond.class));
         cards.add(new SetCardInfo("Mountain Valley", 328, Rarity.UNCOMMON, mage.cards.m.MountainValley.class));
@@ -245,11 +221,13 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Transfer", 85, Rarity.RARE, mage.cards.p.PsychicTransfer.class));
         cards.add(new SetCardInfo("Purgatory", 275, Rarity.RARE, mage.cards.p.Purgatory.class));
         cards.add(new SetCardInfo("Purraj of Urborg", 135, Rarity.RARE, mage.cards.p.PurrajOfUrborg.class));
+        cards.add(new SetCardInfo("Pyric Salamander", 187, Rarity.COMMON, mage.cards.p.PyricSalamander.class));
         cards.add(new SetCardInfo("Quirion Elves", 234, Rarity.COMMON, mage.cards.q.QuirionElves.class));
         cards.add(new SetCardInfo("Radiant Essence", 276, Rarity.UNCOMMON, mage.cards.r.RadiantEssence.class));
         cards.add(new SetCardInfo("Raging Spirit", 188, Rarity.COMMON, mage.cards.r.RagingSpirit.class));
         cards.add(new SetCardInfo("Rampant Growth", 235, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rashida Scalebane", 35, Rarity.RARE, mage.cards.r.RashidaScalebane.class));
+        cards.add(new SetCardInfo("Ravenous Vampire", 136, Rarity.UNCOMMON, mage.cards.r.RavenousVampire.class));
         cards.add(new SetCardInfo("Ray of Command", 86, Rarity.COMMON, mage.cards.r.RayOfCommand.class));
         cards.add(new SetCardInfo("Reality Ripple", 87, Rarity.COMMON, mage.cards.r.RealityRipple.class));
         cards.add(new SetCardInfo("Reckless Embermage", 189, Rarity.RARE, mage.cards.r.RecklessEmbermage.class));

@@ -1,30 +1,4 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.player.ai;
 
 import java.io.IOException;
@@ -96,7 +70,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     private static final Logger log = Logger.getLogger(ComputerPlayer.class);
 
-    protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are availble
+    protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are available
     protected boolean ALLOW_INTERRUPT = true;     // change this for test to false / debugging purposes to false to switch off interrupts while debugging
 
     private transient Map<Mana, Card> unplayable = new TreeMap<>();
@@ -305,9 +279,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = threats(randomOpponentId, sourceId, ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             }
             for (Permanent permanent : targets) {
-                List<UUID> alreadyTargetted = target.getTargets();
+                List<UUID> alreadyTargeted = target.getTargets();
                 if (t.canTarget(abilityControllerId, permanent.getId(), null, game)) {
-                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
                         target.add(permanent.getId(), game);
                         return true;
                     }
@@ -338,9 +312,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = opponentTargets;
             }
             for (Permanent permanent : targets) {
-                List<UUID> alreadyTargetted = target.getTargets();
+                List<UUID> alreadyTargeted = target.getTargets();
                 if (t.canTarget(permanent.getId(), game)) {
-                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
                         target.add(permanent.getId(), game);
                         return true;
                     }
@@ -372,9 +346,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = ownedTargets;
             }
             for (Permanent permanent : targets) {
-                List<UUID> alreadyTargetted = target.getTargets();
+                List<UUID> alreadyTargeted = target.getTargets();
                 if (t.canTarget(permanent.getId(), game)) {
-                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
                         target.add(permanent.getId(), game);
                         return true;
                     }
@@ -402,11 +376,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard
                 || target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
-            List<UUID> alreadyTargetted = target.getTargets();
+            List<UUID> alreadyTargeted = target.getTargets();
             List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards((FilterCard) target.getFilter(), game));
             while (!cards.isEmpty()) {
                 Card card = pickTarget(cards, outcome, target, null, game);
-                if (card != null && alreadyTargetted != null && !alreadyTargetted.contains(card.getId())) {
+                if (card != null && alreadyTargeted != null && !alreadyTargeted.contains(card.getId())) {
                     target.add(card.getId(), game);
                     if (target.isChosen()) {
                         return true;
@@ -422,9 +396,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (UUID targetId : targets) {
                 MageObject targetObject = game.getObject(targetId);
                 if (targetObject != null) {
-                    List<UUID> alreadyTargetted = target.getTargets();
+                    List<UUID> alreadyTargeted = target.getTargets();
                     if (t.canTarget(targetObject.getId(), game)) {
-                        if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
+                        if (alreadyTargeted != null && !alreadyTargeted.contains(targetObject.getId())) {
                             target.add(targetObject.getId(), game);
                             return true;
                         }
@@ -573,9 +547,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = game.getBattlefield().getActivePermanents(((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
-                List<UUID> alreadyTargetted = target.getTargets();
+                List<UUID> alreadyTargeted = target.getTargets();
                 if (t.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
                         target.addTarget(permanent.getId(), source, game);
                         return true;
                     }
@@ -620,9 +594,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = game.getBattlefield().getActivePermanents(((FilterCreaturePlayerOrPlaneswalker) t.getFilter()).getCreatureFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
-                List<UUID> alreadyTargetted = target.getTargets();
+                List<UUID> alreadyTargeted = target.getTargets();
                 if (t.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
                         target.addTarget(permanent.getId(), source, game);
                         return true;
                     }
@@ -667,9 +641,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = game.getBattlefield().getActivePermanents(((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
-                List<UUID> alreadyTargetted = target.getTargets();
+                List<UUID> alreadyTargeted = target.getTargets();
                 if (t.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
                         target.addTarget(permanent.getId(), source, game);
                         return true;
                     }
@@ -702,9 +676,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = game.getBattlefield().getActivePermanents(((TargetPlayerOrPlaneswalker) t.getFilter()).getFilterPermanent(), playerId, game);
             }
             for (Permanent permanent : targets) {
-                List<UUID> alreadyTargetted = target.getTargets();
+                List<UUID> alreadyTargeted = target.getTargets();
                 if (t.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
                         target.addTarget(permanent.getId(), source, game);
                         return true;
                     }
@@ -1408,7 +1382,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private Abilities<ActivatedManaAbilityImpl> getManaAbilitiesSortedByManaCount(MageObject mageObject, final Game game) {
         Abilities<ActivatedManaAbilityImpl> manaAbilities = mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game);
         if (manaAbilities.size() > 1) {
-            // Sort mana abilities by numbver of produced manas, to use ability first that produces most mana (maybe also conditional if possible)
+            // Sort mana abilities by number of produced manas, to use ability first that produces most mana (maybe also conditional if possible)
             Collections.sort(manaAbilities, new Comparator<ActivatedManaAbilityImpl>() {
                 @Override
                 public int compare(ActivatedManaAbilityImpl a1, ActivatedManaAbilityImpl a2) {
@@ -1498,18 +1472,25 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
         if (numAvailable < 0) {
             numAvailable = 0;
-        }
-        if (numAvailable > max) {
-            numAvailable = max;
+        } else {
+            if (numAvailable < min) {
+                numAvailable = min;
+            }
+            if (numAvailable > max) {
+                numAvailable = max;
+            }
         }
         return numAvailable;
     }
 
     @Override
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
-        log.debug("announceXMana");
+        log.debug("announceXCost");
         //TODO: improve this
         int value = RandomUtil.nextInt(max + 1);
+        if (value < min) {
+            value = min;
+        }
         if (value < max) {
             value++;
         }
@@ -1928,7 +1909,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         double total = mana.getBlack() + mana.getBlue() + mana.getGreen() + mana.getRed() + mana.getWhite();
 
-        // most frequent land is forest by defalt
+        // most frequent land is forest by default
         int mostLand = 0;
         String mostLandName = "Forest";
         if (mana.getGreen() > 0) {
@@ -2025,7 +2006,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     // but also check it can be targeted
                     betterCard = target.canTarget(getId(), card.getId(), source, game);
                 } else {
-                    // target object wasn't provided, so acceptings it anyway
+                    // target object wasn't provided, so accepting it anyway
                     betterCard = true;
                 }
             }

@@ -72,7 +72,7 @@ public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
                 }
             }
         }
-        return true;
+        return false;
     }
 
     @Override
