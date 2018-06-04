@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.target.Target;
 import mage.target.common.TargetSpellOrPermanent;
 
 /**
@@ -34,8 +33,7 @@ public final class VenserShaperSavant extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // When Venser, Shaper Savant enters the battlefield, return target spell or permanent to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        Target target = new TargetSpellOrPermanent();
-        ability.addTarget(target);
+        ability.addTarget(new TargetSpellOrPermanent());
         this.addAbility(ability);
     }
 
