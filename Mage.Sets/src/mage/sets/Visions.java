@@ -88,6 +88,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiration", 35, Rarity.COMMON, mage.cards.i.Inspiration.class));
         cards.add(new SetCardInfo("Iron-Heart Chimera", 146, Rarity.UNCOMMON, mage.cards.i.IronHeartChimera.class));
         cards.add(new SetCardInfo("Jamuraan Lion", 10, Rarity.COMMON, mage.cards.j.JamuraanLion.class));
+        cards.add(new SetCardInfo("Juju Bubble", 147, Rarity.UNCOMMON, mage.cards.j.JujuBubble.class));
         cards.add(new SetCardInfo("Jungle Basin", 164, Rarity.UNCOMMON, mage.cards.j.JungleBasin.class));
         cards.add(new SetCardInfo("Kaervek's Spite", 63, Rarity.RARE, mage.cards.k.KaerveksSpite.class));
         cards.add(new SetCardInfo("Karoo", 165, Rarity.UNCOMMON, mage.cards.k.Karoo.class));
