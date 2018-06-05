@@ -1,4 +1,3 @@
-
 package mage.abilities.decorator;
 
 import mage.Mana;
@@ -47,13 +46,22 @@ public class ConditionalManaEffect extends ManaEffect {
         if (controller == null) {
             return false;
         }
-        controller.getManaPool().addMana(getMana(game, source), game, source);
+        Mana mana = getMana(game, source);
+        controller.getManaPool().addMana(mana, game, source);
+        if (produceMana(true, game, source).getAny() > 0) {
+            checkToFirePossibleEvents(mana, game, source);
+        }
         return true;
     }
 
     @Override
     public ConditionalManaEffect copy() {
         return new ConditionalManaEffect(this);
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return produceMana(false, game, source);
     }
 
     @Override
@@ -75,7 +83,6 @@ public class ConditionalManaEffect extends ManaEffect {
                 mana.setAny(0);
                 mana.add(choice.getMana(amount));
             }
-            checkToFirePossibleEvents(mana, game, source);
         }
         return mana;
     }
