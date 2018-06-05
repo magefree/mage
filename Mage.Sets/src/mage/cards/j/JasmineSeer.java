@@ -10,11 +10,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -35,7 +35,7 @@ public final class JasmineSeer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{W}, {tap}: Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
-        Ability ability = new SimpleActivatedAbility(new JasmineSeerEffect(), new ManaCostsImpl("{2}{WF}"));
+        Ability ability = new SimpleActivatedAbility(new JasmineSeerEffect(), new ManaCostsImpl("{2}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
