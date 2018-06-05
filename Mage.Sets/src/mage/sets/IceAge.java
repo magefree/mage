@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -193,7 +192,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Stromgald", 138, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Elementalist", 27, Rarity.UNCOMMON, mage.cards.k.KrovikanElementalist.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 140, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
-        cards.add(new SetCardInfo("Krovikan Sorcerer", 81, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
+        cards.add(new SetCardInfo("Krovikan Sorcerer", 139, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
         cards.add(new SetCardInfo("Land Cap", 357, Rarity.RARE, mage.cards.l.LandCap.class));
         cards.add(new SetCardInfo("Lapis Lazuli Talisman", 327, Rarity.UNCOMMON, mage.cards.l.LapisLazuliTalisman.class));
         cards.add(new SetCardInfo("Lava Tubes", 358, Rarity.RARE, mage.cards.l.LavaTubes.class));
