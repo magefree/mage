@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -107,6 +106,7 @@ class BrightlingEffect extends OneShotEffect {
             return false;
         }
         int boost = (player.chooseUse(outcome, "Give +1/-1 or -1/+1?", null, "+1/-1", "-1/+1", source, game) ? 1 : -1);
-        return new BoostSourceEffect(boost, -1 * boost, Duration.EndOfTurn).apply(game, source);
+        game.addEffect(new BoostSourceEffect(boost, -1 * boost, Duration.EndOfTurn), source);
+        return true;
     }
 }
