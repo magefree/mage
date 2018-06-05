@@ -33,6 +33,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Armistice", 3, Rarity.RARE, mage.cards.a.Armistice.class));
         cards.add(new SetCardInfo("Arms Dealer", 172, Rarity.UNCOMMON, mage.cards.a.ArmsDealer.class));
         cards.add(new SetCardInfo("Arrest", 4, Rarity.UNCOMMON, mage.cards.a.Arrest.class));
+        cards.add(new SetCardInfo("Assembly Hall", 286, Rarity.RARE, mage.cards.a.AssemblyHall.class));
         cards.add(new SetCardInfo("Ballista Squad", 5, Rarity.UNCOMMON, mage.cards.b.BallistaSquad.class));
         cards.add(new SetCardInfo("Balloon Peddler", 59, Rarity.COMMON, mage.cards.b.BalloonPeddler.class));
         cards.add(new SetCardInfo("Battle Rampart", 173, Rarity.COMMON, mage.cards.b.BattleRampart.class));
