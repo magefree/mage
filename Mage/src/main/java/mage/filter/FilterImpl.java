@@ -1,4 +1,3 @@
-
 package mage.filter;
 
 import java.util.ArrayList;
@@ -17,13 +16,14 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     protected List<Predicate<Object>> predicates = new ArrayList<>();
     protected String message;
-    protected boolean lockedFilter = false; // Helps to prevent to "accidently" modify the StaticFilters objects
+    protected boolean lockedFilter; // Helps to prevent to "accidently" modify the StaticFilters objects
 
     @Override
     public abstract FilterImpl<E> copy();
 
     public FilterImpl(String name) {
         this.message = name;
+        this.lockedFilter = false;
     }
 
     public FilterImpl(final FilterImpl<E> filter) {
