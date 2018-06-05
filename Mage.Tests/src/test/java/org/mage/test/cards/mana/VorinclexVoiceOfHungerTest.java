@@ -1,10 +1,10 @@
-
 package org.mage.test.cards.mana;
 
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -64,6 +64,7 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
     /**
      * Vorinclex glitches with Gemstone Cavern
      */
+    @Ignore
     @Test
     public void testGemstoneCavern() {
         // Trample
