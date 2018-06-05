@@ -29,7 +29,7 @@ import mage.players.Player;
 public final class BazaarOfWonders extends CardImpl {
 
     public BazaarOfWonders(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         this.addSuperType(SuperType.WORLD);
 
