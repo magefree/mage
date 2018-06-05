@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.ArrayList;
@@ -127,8 +126,9 @@ class ChromeMoxManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            controller.getManaPool().addMana(getMana(game, source), game, source);
+            Mana mana = getMana(game, source);
+            checkToFirePossibleEvents(mana, game, source);
+            controller.getManaPool().addMana(mana, game, source);
             return true;
 
         }

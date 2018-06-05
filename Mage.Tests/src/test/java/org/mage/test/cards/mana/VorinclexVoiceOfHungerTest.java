@@ -4,7 +4,6 @@ import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -41,7 +40,6 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
      * Vorinclex, Voice of Hunger is not mana doubling River of Tears.
      */
     @Test
-    // @Ignore // TODO: need to fix Vorinclex, Voice of Hunger -- it's double fireup mana tap event
     public void testVorinclexVoiceofHungerRiverOfTearsManaMultiplier() {
         // Mana pools don't empty as steps and phases end.
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);
@@ -64,7 +62,6 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
     /**
      * Vorinclex glitches with Gemstone Cavern
      */
-    @Ignore
     @Test
     public void testGemstoneCavern() {
         // Trample

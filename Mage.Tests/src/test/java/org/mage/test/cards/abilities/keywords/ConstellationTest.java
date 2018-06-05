@@ -135,10 +135,11 @@ public class ConstellationTest extends CardTestPlayerBase {
     @Test
     public void test_DaxosGotBoostWithLoseFlyAndGotItAgain() {
         // 112.10c  If two or more effects add and remove the same ability, in general the most recent one prevails.
-        addCard(Zone.HAND, playerA, daxosCard, 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        addCard(Zone.HAND, playerA, "Gravity Sphere", 1); // All creatures lose flying.
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, daxosCard, 1); // {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        // All creatures lose flying.
+        addCard(Zone.HAND, playerA, "Gravity Sphere", 1); // World Enchantment {2}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
 
         // got fly on enter, lose on gravity, got fly on gravity enter
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, daxosCard);

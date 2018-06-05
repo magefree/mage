@@ -1,5 +1,6 @@
 package mage.abilities.decorator;
 
+import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -47,10 +48,10 @@ public class ConditionalManaEffect extends ManaEffect {
             return false;
         }
         Mana mana = getMana(game, source);
-        controller.getManaPool().addMana(mana, game, source);
         if (produceMana(true, game, source).getAny() > 0) {
             checkToFirePossibleEvents(mana, game, source);
         }
+        controller.getManaPool().addMana(mana, game, source);
         return true;
     }
 
@@ -62,6 +63,16 @@ public class ConditionalManaEffect extends ManaEffect {
     @Override
     public Mana getMana(Game game, Ability source) {
         return produceMana(false, game, source);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        if (condition.apply(game, source)) {
+            return effect.getNetMana(game, source);
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.getNetMana(game, source);
+        }
+        return null;
     }
 
     @Override
