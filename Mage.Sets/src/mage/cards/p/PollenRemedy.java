@@ -35,7 +35,7 @@ public final class PollenRemedy extends CardImpl {
         // Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose. If Pollen Remedy was kicked, prevent the next 6 damage this way instead.
         Effect effect = new ConditionalReplacementEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 6),
             KickedCondition.instance, new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 3));
-        effect.setText("Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose. if this spell was kicked, prevent the next 6 damage this way instead.");
+        effect.setText("Prevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose. if this spell was kicked, prevent the next 6 damage this way instead.");
         this.getSpellAbility().addEffect(effect);
         originalId = this.getSpellAbility().getOriginalId();
     }
