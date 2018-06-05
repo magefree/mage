@@ -1,4 +1,3 @@
-
 package mage.players;
 
 import java.io.Serializable;
@@ -492,18 +491,22 @@ public abstract class PlayerImpl implements Player, Serializable {
             PlayerList players = game.getState().getPlayerList(playerId);
             for (int i = 0; i < range.getRange(); i++) {
                 Player player = players.getNext(game);
-                while (player.hasLeft()) {
-                    player = players.getNext(game);
+                if (player != null) {
+                    while (player.hasLeft()) {
+                        player = players.getNext(game);
+                    }
+                    inRange.add(player.getId());
                 }
-                inRange.add(player.getId());
             }
             players = game.getState().getPlayerList(playerId);
             for (int i = 0; i < range.getRange(); i++) {
                 Player player = players.getPrevious(game);
-                while (player.hasLeft()) {
-                    player = players.getPrevious(game);
+                if (player != null) {
+                    while (player.hasLeft()) {
+                        player = players.getPrevious(game);
+                    }
+                    inRange.add(player.getId());
                 }
-                inRange.add(player.getId());
             }
         }
     }

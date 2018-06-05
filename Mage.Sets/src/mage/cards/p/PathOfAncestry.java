@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.Iterator;
@@ -75,7 +74,7 @@ class PathOfAncestryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(getSourceId())) {
+        if (getSourceId().equals(event.getSourceId())) {
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
             if (sourcePermanent != null) {
                 boolean found = false;

@@ -1,19 +1,18 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -30,7 +29,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class VorinclexVoiceOfHunger extends CardImpl {
 
     public VorinclexVoiceOfHunger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.PRAETOR);
 
@@ -62,8 +61,6 @@ public final class VorinclexVoiceOfHunger extends CardImpl {
 }
 
 class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
-
-    private static final String staticText = "Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.";
 
     public VorinclexTriggeredAbility2() {
         super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect());
@@ -97,6 +94,6 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return staticText;
+        return "Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.";
     }
 }
