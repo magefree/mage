@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -41,7 +41,7 @@ public final class IsperiaTheInscrutable extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Isperia the Inscrutable deals combat damage to a player, name a card. That player reveals their hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library.
-        Effect effect1 = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
+        Effect effect1 = new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect1, false, true);
         Effect effect2 = new IsperiaTheInscrutableEffect();
         ability.addEffect(effect2);
@@ -69,7 +69,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
 
     public IsperiaTheInscrutableEffect() {
         super(Outcome.Neutral);
-        staticText = "That player reveals their hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library";
+        staticText = "That player reveals their hand. If a card with the chosen name is revealed this way, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library";
     }
 
     public IsperiaTheInscrutableEffect(final IsperiaTheInscrutableEffect effect) {
@@ -79,7 +79,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Object object = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        Object object = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (player != null && object instanceof String) {
             player.revealCards(player.getLogName() + " hand", player.getHand(), game, true);
             String namedCard = (String) object;

@@ -1,11 +1,10 @@
-
 package mage.cards.c;
 
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -26,10 +25,10 @@ import java.util.UUID;
 public final class CabalTherapy extends CardImpl {
 
     public CabalTherapy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Name a nonland card. Target player reveals their hand and discards all cards with that name.
-        this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
+        this.getSpellAbility().addEffect((new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
 
@@ -53,7 +52,7 @@ class CabalTherapyEffect extends OneShotEffect {
 
     public CabalTherapyEffect() {
         super(Outcome.Discard);
-        staticText = "Name a nonland card. Target player reveals their hand and discards all cards with that name";
+        staticText = "Target player reveals their hand and discards all cards with that name";
     }
 
     public CabalTherapyEffect(final CabalTherapyEffect effect) {
@@ -66,16 +65,15 @@ class CabalTherapyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer != null && controller != null && sourceObject != null) {
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
             Cards hand = targetPlayer.getHand();
 
             for (Card card : hand.getCards(game)) {
-                if(card.isSplitCard()){
+                if (card.isSplitCard()) {
                     SplitCard splitCard = (SplitCard) card;
-                    if(splitCard.getLeftHalfCard().getName().equals(cardName)){
+                    if (splitCard.getLeftHalfCard().getName().equals(cardName)) {
                         targetPlayer.discard(card, source, game);
-                    }
-                    else if(splitCard.getRightHalfCard().getName().equals(cardName)){
+                    } else if (splitCard.getRightHalfCard().getName().equals(cardName)) {
                         targetPlayer.discard(card, source, game);
                     }
                 }

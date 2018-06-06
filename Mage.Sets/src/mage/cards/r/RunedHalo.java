@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class RunedHalo extends CardImpl {
 
 
         // As Runed Halo enters the battlefield, name a card.
-        Ability ability = new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
+        Ability ability = new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL));
         // You have protection from the chosen name.
         ability.addEffect(new RunedHaloSetProtectionEffect());
         this.addAbility(ability);
@@ -67,7 +67,7 @@ class RunedHaloSetProtectionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (controller != null && cardName != null && !cardName.isEmpty()) {            
             FilterObject filter = new FilterObject("the name [" + cardName + ']');
             filter.add(new NamePredicate(cardName));            

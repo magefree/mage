@@ -8,7 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
@@ -47,10 +47,10 @@ public final class SorcerousSpyglass extends CardImpl {
     }
 }
 
-class SorcerousSpyglassEntersEffect extends NameACardEffect {
+class SorcerousSpyglassEntersEffect extends ChooseACardNameEffect {
 
     SorcerousSpyglassEntersEffect() {
-        super(NameACardEffect.TypeOfName.ALL);
+        super(ChooseACardNameEffect.TypeOfName.ALL);
         staticText = "look at an opponent's hand, then choose any card name";
     }
 
@@ -114,7 +114,7 @@ class SorcerousSpyglassActivationEffect extends ContinuousRuleModifyingEffectImp
         if (ability.isPresent() && object != null) {
             if (game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId()) // controller in range
                     && ability.get().getAbilityType() != AbilityType.MANA
-                    && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
+                    && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))) {
                 return true;
             }
         }

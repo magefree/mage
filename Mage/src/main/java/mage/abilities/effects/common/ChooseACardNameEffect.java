@@ -16,7 +16,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class NameACardEffect extends OneShotEffect {
+public class ChooseACardNameEffect extends OneShotEffect {
 
     public static String INFO_KEY = "NAMED_CARD";
 
@@ -33,13 +33,13 @@ public class NameACardEffect extends OneShotEffect {
 
     private final TypeOfName typeOfName;
 
-    public NameACardEffect(TypeOfName typeOfName) {
+    public ChooseACardNameEffect(TypeOfName typeOfName) {
         super(Outcome.Detriment);
         this.typeOfName = typeOfName;
         staticText = setText();
     }
 
-    public NameACardEffect(final NameACardEffect effect) {
+    public ChooseACardNameEffect(final ChooseACardNameEffect effect) {
         super(effect);
         this.typeOfName = effect.typeOfName;
     }
@@ -100,8 +100,8 @@ public class NameACardEffect extends OneShotEffect {
     }
 
     @Override
-    public NameACardEffect copy() {
-        return new NameACardEffect(this);
+    public ChooseACardNameEffect copy() {
+        return new ChooseACardNameEffect(this);
     }
 
     private String setText() {

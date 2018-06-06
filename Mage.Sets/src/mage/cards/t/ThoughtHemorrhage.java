@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.LinkedHashSet;
@@ -8,7 +7,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +33,7 @@ public final class ThoughtHemorrhage extends CardImpl {
 
         // Name a nonland card. Target player reveals their hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles their library.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME));
+        this.getSpellAbility().addEffect(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME));
         this.getSpellAbility().addEffect(new ThoughtHemorrhageEffect());
     }
 
@@ -50,7 +49,10 @@ public final class ThoughtHemorrhage extends CardImpl {
 
 class ThoughtHemorrhageEffect extends OneShotEffect {
 
-    static final String rule = "Target player reveals their hand. {this} deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles their library";
+    static final String rule = "Target player reveals their hand. "
+            + "{this} deals 3 damage to that player for each card with the chosen name revealed this way. "
+            + "Search that player’s graveyard, hand, and library for all cards with that name and exile them. "
+            + "Then that player shuffles their library";
 
     public ThoughtHemorrhageEffect() {
         super(Outcome.Exile);
@@ -65,7 +67,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (sourceObject != null && controller != null && cardName != null && !cardName.isEmpty()) {
             Player targetPlayer = game.getPlayer(source.getFirstTarget());
             if (targetPlayer != null) {

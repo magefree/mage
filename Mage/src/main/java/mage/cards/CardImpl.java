@@ -12,7 +12,7 @@ import mage.abilities.*;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -401,7 +401,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             case CHOSEN_NAME: //Declaration of Naught only
                 ability.getTargets().clear();
                 FilterSpell filterSpell = new FilterSpell("spell with the chosen name");
-                filterSpell.add(new NamePredicate((String) game.getState().getValue(ability.getSourceId().toString() + NameACardEffect.INFO_KEY)));
+                filterSpell.add(new NamePredicate((String) game.getState().getValue(ability.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY)));
                 TargetSpell target = new TargetSpell(1, filterSpell);
                 ability.addTarget(target);
                 break;

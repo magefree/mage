@@ -3,7 +3,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -26,7 +26,7 @@ public final class DesperateResearch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Choose a card name other than a basic land card name. Reveal the top seven cards of your library and put all of them with that name into your hand. Exile the rest.
-        this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.NOT_BASIC_LAND_NAME));
+        this.getSpellAbility().addEffect(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NOT_BASIC_LAND_NAME));
         this.getSpellAbility().addEffect(new DesperateResearchEffect());
     }
 
@@ -58,7 +58,7 @@ class DesperateResearchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || cardName == null) {
             return false;

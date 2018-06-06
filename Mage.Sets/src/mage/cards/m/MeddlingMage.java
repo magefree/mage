@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -8,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +26,7 @@ import mage.game.events.GameEvent.EventType;
 public final class MeddlingMage extends CardImpl {
 
     public MeddlingMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -35,7 +34,7 @@ public final class MeddlingMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As Meddling Mage enters the battlefield, name a nonland card.
-        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
 
         //The named card can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeddlingMageReplacementEffect()));
@@ -55,7 +54,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MeddlingMageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "The named card can't be cast";
+        staticText = "Spells with the chosen name can’t be cast";
     }
 
     public MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {
@@ -76,7 +75,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast a card with that name (" + mageObject.getLogName() + " in play).";
+            return "You can't cast a spell with that name (" + mageObject.getLogName() + " in play).";
         }
         return null;
     }
@@ -90,7 +89,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         // fixes issue #1072
-        return object != null && !object.isCopy() && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY));
+        return object != null && !object.isCopy() && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
     }
 
 }
