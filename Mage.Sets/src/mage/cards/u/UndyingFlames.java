@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -64,7 +63,7 @@ class UndyingFlamesEffect extends OneShotEffect {
             while (controller.getLibrary().hasCards() && controller.isInGame()) {
                 Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
-                    controller.moveCards(card, Zone.LIBRARY, source, game);
+                    controller.moveCards(card, Zone.EXILED, source, game);
                     if (!card.isLand()) {
                         new DamageTargetEffect(card.getConvertedManaCost()).apply(game, source);
                         break;
