@@ -1,4 +1,3 @@
-
 package mage.cards.repository;
 
 import com.j256.ormlite.dao.Dao;
@@ -17,6 +16,7 @@ import java.util.*;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
+import mage.constants.SuperType;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
@@ -136,6 +136,29 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
             qb.where().not().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                int result = card.getName().indexOf(" // ");
+                if (result > 0) {
+                    names.add(card.getName().substring(0, result));
+                    names.add(card.getName().substring(result + 4));
+                } else {
+                    names.add(card.getName());
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
+
+        }
+        return names;
+    }
+
+    public Set<String> getNotBasicLandNames() {
+        Set<String> names = new TreeSet<>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("name");
+            qb.where().not().like("supertypes", new SelectArg('%' + SuperType.BASIC.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");

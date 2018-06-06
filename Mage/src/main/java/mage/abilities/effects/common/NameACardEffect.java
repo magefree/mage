@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -24,6 +23,7 @@ public class NameACardEffect extends OneShotEffect {
     public enum TypeOfName {
 
         ALL,
+        NOT_BASIC_LAND_NAME,
         NON_ARTIFACT_AND_NON_LAND_NAME,
         NON_LAND_NAME,
         NON_LAND_AND_NON_CREATURE_NAME,
@@ -57,6 +57,10 @@ public class NameACardEffect extends OneShotEffect {
                 case ALL:
                     cardChoice.setChoices(CardRepository.instance.getNames());
                     cardChoice.setMessage("Choose a card name");
+                    break;
+                case NOT_BASIC_LAND_NAME:
+                    cardChoice.setChoices(CardRepository.instance.getNotBasicLandNames());
+                    cardChoice.setMessage("Choose a card name other than a basic land card name");
                     break;
                 case NON_ARTIFACT_AND_NON_LAND_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonArtifactAndNonLandNames());
@@ -105,6 +109,9 @@ public class NameACardEffect extends OneShotEffect {
         switch (typeOfName) {
             case ALL:
                 sb.append("card");
+                break;
+            case NOT_BASIC_LAND_NAME:
+                sb.append("card name other than a basic land card");
                 break;
             case NON_ARTIFACT_AND_NON_LAND_NAME:
                 sb.append("nonartifact, nonland card");

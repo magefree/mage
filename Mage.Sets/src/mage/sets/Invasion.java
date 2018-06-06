@@ -88,6 +88,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Darigaaz's Attendant", 301, Rarity.UNCOMMON, mage.cards.d.DarigaazsAttendant.class));
         cards.add(new SetCardInfo("Darigaaz, the Igniter", 243, Rarity.RARE, mage.cards.d.DarigaazTheIgniter.class));
         cards.add(new SetCardInfo("Defiling Tears", 99, Rarity.UNCOMMON, mage.cards.d.DefilingTears.class));
+        cards.add(new SetCardInfo("Desperate Research", 100, Rarity.RARE, mage.cards.d.DesperateResearch.class));
         cards.add(new SetCardInfo("Devouring Strossus", 101, Rarity.RARE, mage.cards.d.DevouringStrossus.class));
         cards.add(new SetCardInfo("Dismantling Blow", 14, Rarity.COMMON, mage.cards.d.DismantlingBlow.class));
         cards.add(new SetCardInfo("Disrupt", 51, Rarity.UNCOMMON, mage.cards.d.Disrupt.class));
