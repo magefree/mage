@@ -12,8 +12,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class DreadWandererTest extends CardTestPlayerBase {
 
     /**
-     * That the +1/+1 counters are added to Living Lore before state based
-     * actions take place
+     * Creatures that enter the battlefield tapped, like Dread Wanderer, if you
+     * bring them back from graveyard to the battlefield they enter untapped!!
      */
     @Test
     public void testTappedFromHand() {
