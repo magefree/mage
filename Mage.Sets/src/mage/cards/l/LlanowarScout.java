@@ -29,7 +29,7 @@ public final class LlanowarScout extends CardImpl {
 
         // {T}: You may put a land card from your hand onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_BASIC_LAND_A), new TapSourceCost()));
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new TapSourceCost()));
     }
 
     public LlanowarScout(final LlanowarScout card) {
