@@ -9,7 +9,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class DreadWandererTest extends CardTestPlayerBase {
+public class EntersTheBattlefieldTappedTest extends CardTestPlayerBase {
 
     /**
      * Creatures that enter the battlefield tapped, like Dread Wanderer, if you
@@ -47,6 +47,20 @@ public class DreadWandererTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Dread Wanderer", 1);
         assertTapped("Dread Wanderer", true);
+    }
+
+    @Test
+    public void testScryLandEntersTapped() {
+        // Temple of Enlightenment enters the battlefield tapped.
+        // When Temple of Enlightenment enters the battlefield, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+        addCard(Zone.HAND, playerA, "Temple of Enlightenment"); // Land
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Temple of Enlightenment");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Temple of Enlightenment", 1);
+        assertTapped("Temple of Enlightenment", true);
     }
 
 }
