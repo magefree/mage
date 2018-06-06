@@ -32,7 +32,7 @@ public final class KitesailCorsair extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,  new ConditionalContinuousEffect(
                 gainEffect,
                 SourceAttackingCondition.instance,
-                "{this} has flying as long as it’s attacking."
+                "{this} has flying as long as it's attacking."
         )));
     }
 

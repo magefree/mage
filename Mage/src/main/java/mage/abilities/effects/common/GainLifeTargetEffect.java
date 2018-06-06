@@ -60,7 +60,7 @@ public class GainLifeTargetEffect extends OneShotEffect {
         String message = life.getMessage();
 
         if (!mode.getTargets().isEmpty()) {
-            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("that player");
         }
