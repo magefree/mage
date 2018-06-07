@@ -1,19 +1,18 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -30,12 +29,17 @@ public class RowanKenrithEmblem extends Emblem {
 
 class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RowanKenrithEmblemTriggeredAbility() {
-        super(Zone.COMMAND, new RowanKenrithEmblemCopyEffect(), false);
+    RowanKenrithEmblemTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new RowanKenrithEmblemEffect(), false);
     }
 
-    public RowanKenrithEmblemTriggeredAbility(final RowanKenrithEmblemTriggeredAbility ability) {
+    RowanKenrithEmblemTriggeredAbility(final RowanKenrithEmblemTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public RowanKenrithEmblemTriggeredAbility copy() {
+        return new RowanKenrithEmblemTriggeredAbility(this);
     }
 
     @Override
@@ -45,10 +49,11 @@ class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            StackObject ability = game.getStack().getStackObject(event.getTargetId());
-            if (ability != null && !(ability instanceof ManaAbility)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(ability.getId()));
+        if (event.getPlayerId().equals(getControllerId())) {
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+                Effect effect = this.getEffects().get(0);
+                effect.setValue("stackAbility", stackAbility);
                 return true;
             }
         }
@@ -59,40 +64,38 @@ class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy.";
     }
-
-    @Override
-    public RowanKenrithEmblemTriggeredAbility copy() {
-        return new RowanKenrithEmblemTriggeredAbility(this);
-    }
 }
 
-class RowanKenrithEmblemCopyEffect extends OneShotEffect {
+class RowanKenrithEmblemEffect extends OneShotEffect {
 
-    public RowanKenrithEmblemCopyEffect() {
-        super(Outcome.Copy);
-        this.staticText = "copy it. You may choose new targets for the copy.";
+    RowanKenrithEmblemEffect() {
+        super(Outcome.Benefit);
+        this.staticText = ", copy it. You may choose new targets for the copy.";
     }
 
-    public RowanKenrithEmblemCopyEffect(final RowanKenrithEmblemCopyEffect effect) {
+    RowanKenrithEmblemEffect(final RowanKenrithEmblemEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (stackAbility != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                return true;
-            }
-        }
-        return false;
-
+    public RowanKenrithEmblemEffect copy() {
+        return new RowanKenrithEmblemEffect(this);
     }
 
     @Override
-    public RowanKenrithEmblemCopyEffect copy() {
-        return new RowanKenrithEmblemCopyEffect(this);
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        StackAbility ability = (StackAbility) getValue("stackAbility");
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (ability != null && controller != null && sourcePermanent != null) {
+            ability.createCopyOnStack(game, source, source.getControllerId(), true);
+            game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied activated ability");
+            return true;
+        }
+        return false;
     }
 }
