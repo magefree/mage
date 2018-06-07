@@ -333,13 +333,13 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     private void handleForcedToPayOnlyForCurrentPayment(Game game, ManaPool pool, ManaCosts referenceCosts) {
         // for Word of Command
         if (pool.isForcedToPay()) {
-            if (referenceCosts != null && this.getPayment().equals(referenceCosts.getPayment())) {
+            if (referenceCosts != null && this.getText().equals(referenceCosts.getText())) {
                 UUID playerId = pool.getPlayerId();
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     game.undo(playerId);
                     this.clearPaid();
-                    this.setX(0);
+                    this.setX(referenceCosts.getX());
                     player.getManaPool().restoreMana(pool.getPoolBookmark());
                     game.bookmarkState();
                 }
