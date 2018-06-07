@@ -346,6 +346,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
     }
 
+    public void forceManaRollback(Game game, ManaPool pool) {
+        // for Word of Command
+        handleForcedToPayOnlyForCurrentPayment(game, pool, this);
+    }
+
     @Override
     public final void load(String mana) {
         this.clear();
