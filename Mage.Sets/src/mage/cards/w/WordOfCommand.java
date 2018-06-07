@@ -105,43 +105,22 @@ class WordOfCommandEffect extends OneShotEffect {
                 manaPool.storeMana();
                 int bookmark = game.bookmarkState();
 
-                // check for card playability (Word of Command allows the chosen card to be played "as if it had flash" so we need to invoke such effect to bypass the check)
-                boolean canPlay = false;
-                if (card.isLand()) { // we can't use getPlayableInHand(game) in here because it disallows playing lands outside the main step
-                    if (targetPlayer.canPlayLand()
-                            && game.getActivePlayerId().equals(targetPlayer.getId())) {
-                        canPlay = true;
-                        for (Ability ability : card.getAbilities(game)) {
-                            if (!game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), targetPlayer.getId()), ability, game, true)) {
-                                canPlay &= true;
-                            }
-                        }
-                    }
-                } else {
-                    AsThoughEffectImpl effect2 = new WordOfCommandTestFlashEffect();
-                    game.addEffect(effect2, source);
-                    if (targetPlayer.getPlayableInHand(game).contains(card.getId())) {
-                        canPlay = true;
-                    }
-                    for (AsThoughEffect eff : game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.CAST_AS_INSTANT, game)) {
-                        if (eff instanceof WordOfCommandTestFlashEffect) {
-                            eff.discard();
-                            break;
-                        }
+                boolean canPlay = checkPlayability(card, targetPlayer, game, source);
+                while (canPlay
+                        && targetPlayer.canRespond()
+                        && !targetPlayer.playCard(card, game, false, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                    SpellAbility spellAbility = card.getSpellAbility();
+                    if (spellAbility != null) {
+                        spellAbility.getManaCostsToPay().clear();
+                        spellAbility.getManaCostsToPay().addAll(spellAbility.getManaCosts());
+                        ((ManaCostsImpl) spellAbility.getManaCostsToPay()).forceManaRollback(game, manaPool); // force rollback if card was deemed playable
+                        canPlay = checkPlayability(card, targetPlayer, game, source);
+                    } else {
+                        break;
                     }
                 }
-
-                if (canPlay) {
-                    while (!targetPlayer.playCard(card, game, false, true, new MageObjectReference(source.getSourceObject(game), game))) {
-                        SpellAbility spellAbility = card.getSpellAbility();
-                        if (spellAbility != null) {
-                            ((ManaCostsImpl) spellAbility.getManaCosts()).forceManaRollback(game, manaPool); // force rollback if card was deemed playable
-                        } else {
-                            break;
-                        }
-                    }
-                } else {
-                    game.informPlayers(targetPlayer.getLogName() + " didn't play " + card.getLogName() + (canPlay ? "" : " (card can't be played)"));
+                if (!canPlay) {
+                    game.informPlayers(targetPlayer.getLogName() + " didn't play " + card.getLogName() + " (card can't be played)");
                 }
 
                 manaPool.setForcedToPay(false); // duplicate in case of a new mana pool existing - probably not necessary, but just in case
@@ -149,7 +128,6 @@ class WordOfCommandEffect extends OneShotEffect {
                 manaPool.setForcedToPay(false);
                 game.removeBookmark(bookmark);
                 targetPlayer.resetStoredBookmark(game);
-
                 for (RestrictionEffect eff : game.getContinuousEffects().getRestrictionEffects()) {
                     if (eff instanceof WordOfCommandCantActivateEffect) {
                         eff.discard();
@@ -173,6 +151,35 @@ class WordOfCommandEffect extends OneShotEffect {
             return true;
         }
         return false;
+    }
+
+    private boolean checkPlayability(Card card, Player targetPlayer, Game game, Ability source) {
+        // check for card playability
+        boolean canPlay = false;
+        if (card.isLand()) { // we can't use getPlayableInHand(game) in here because it disallows playing lands outside the main step
+            if (targetPlayer.canPlayLand()
+                    && game.getActivePlayerId().equals(targetPlayer.getId())) {
+                canPlay = true;
+                for (Ability ability : card.getAbilities(game)) {
+                    if (!game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), targetPlayer.getId()), ability, game, true)) {
+                        canPlay &= true;
+                    }
+                }
+            }
+        } else { // Word of Command allows the chosen card to be played "as if it had flash" so we need to invoke such effect to bypass the check
+            AsThoughEffectImpl effect2 = new WordOfCommandTestFlashEffect();
+            game.addEffect(effect2, source);
+            if (targetPlayer.getPlayableInHand(game).contains(card.getId())) {
+                canPlay = true;
+            }
+            for (AsThoughEffect eff : game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.CAST_AS_INSTANT, game)) {
+                if (eff instanceof WordOfCommandTestFlashEffect) {
+                    eff.discard();
+                    break;
+                }
+            }
+        }
+        return canPlay;
     }
 }
 

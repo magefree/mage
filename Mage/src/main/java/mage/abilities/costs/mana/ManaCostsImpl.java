@@ -339,6 +339,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 if (player != null) {
                     game.undo(playerId);
                     this.clearPaid();
+                    this.setX(0);
                     player.getManaPool().restoreMana(pool.getPoolBookmark());
                     game.bookmarkState();
                 }
