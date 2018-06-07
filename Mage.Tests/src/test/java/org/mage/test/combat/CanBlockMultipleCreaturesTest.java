@@ -92,7 +92,7 @@ public class CanBlockMultipleCreaturesTest extends CardTestPlayerBase {
     public void testCanOnlyBlockSingle() {
 
         // Hundred-Handed One {2}{W}{W}
-        // Monstrosity 3. {3}{W}{W}{W} (If this creature isn’t monstrous, put three +1/+1 counters on it and it becomes monstrous.)
+        // Monstrosity 3. {3}{W}{W}{W} (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)
         //As long as Hundred-Handed One is monstrous, it has reach and can block an additional ninety-nine creatures each combat.
         addCard(Zone.BATTLEFIELD, playerA, "Hundred-Handed One", 1);
 
@@ -121,7 +121,7 @@ public class CanBlockMultipleCreaturesTest extends CardTestPlayerBase {
     public void testCanBlockMultiple() {
 
         // Hundred-Handed One {2}{W}{W}
-        // Monstrosity 3. {3}{W}{W}{W} (If this creature isn’t monstrous, put three +1/+1 counters on it and it becomes monstrous.)
+        // Monstrosity 3. {3}{W}{W}{W} (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)
         // As long as Hundred-Handed One is monstrous, it has reach and can block an additional ninety-nine creatures each combat.
         addCard(Zone.BATTLEFIELD, playerA, "Hundred-Handed One", 1);
         // For monstrosity

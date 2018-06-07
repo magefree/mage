@@ -71,7 +71,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
     public ChandraPyromasterEffect1() {
         super(Outcome.Damage);
-        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to up to one target creature that player or that planeswalker’s controller controls. That creature can’t block this turn.";
+        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to up to one target creature that player or that planeswalker's controller controls. That creature can't block this turn.";
     }
 
     public ChandraPyromasterEffect1(final ChandraPyromasterEffect1 effect) {

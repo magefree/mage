@@ -21,9 +21,9 @@ import mage.players.Player;
  */
 //20130711
 /*
- * 903.11. If a commander would be put into its owner’s graveyard from anywhere, that player may put it into the command zone instead.
+ * 903.11. If a commander would be put into its owner's graveyard from anywhere, that player may put it into the command zone instead.
  * 903.12. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.
- * 903.9. If a commander would be exiled from anywhere or put into its owner’s hand, graveyard, or
+ * 903.9. If a commander would be exiled from anywhere or put into its owner's hand, graveyard, or
 library from anywhere, its owner may put it into the command zone instead. This replacement effect
 may apply more than once to the same event. This is an exception to rule 614.5.
  */
@@ -35,7 +35,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     public CommanderReplacementEffect(UUID commanderId, boolean alsoHand, boolean alsoLibrary) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a commander would be put into its owner’s graveyard from anywhere, that player may put it into the command zone instead. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.";
+        staticText = "If a commander would be put into its owner's graveyard from anywhere, that player may put it into the command zone instead. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.";
         this.commanderId = commanderId;
         this.duration = Duration.EndOfGame;
         this.alsoHand = alsoHand;

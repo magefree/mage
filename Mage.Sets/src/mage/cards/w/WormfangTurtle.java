@@ -43,7 +43,7 @@ public final class WormfangTurtle extends CardImpl {
         ability1.addTarget(target);
         this.addAbility(ability1);
 
-        // When Wormfang Turtle leaves the battlefield, return the exiled card to the battlefield under its owner’s control.
+        // When Wormfang Turtle leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
         this.addAbility(ability2);
     }

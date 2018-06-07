@@ -77,7 +77,7 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "When a player doesn't pay {this}'s cumulative upkeep, "
                 + "{this} deals X damage to target player or planeswalker "
-                + "and each creature that player or that planeswalker’s controller controls,"
+                + "and each creature that player or that planeswalker's controller controls,"
                 + " where X is twice the number of age counters on {this} minus 2.";
     }
 }
@@ -87,7 +87,7 @@ class HeartOfBogardanEffect extends OneShotEffect {
     public HeartOfBogardanEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to target player or planeswalker "
-                + "and each creature that player or that planeswalker’s controller controls, "
+                + "and each creature that player or that planeswalker's controller controls, "
                 + "where X is twice the number of age counters on {this} minus 2";
     }
 

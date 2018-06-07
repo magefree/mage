@@ -321,7 +321,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
     }
 
     /**
-     * Jace, Vryn’s Prodigy – Jace, Telepath Unbound
+     * Jace, Vryn's Prodigy – Jace, Telepath Unbound
      *
      * You can't whip him back with Whip of Erebos , flip him and then keep him.
      * I think he is considered a new object after being exiled by his own

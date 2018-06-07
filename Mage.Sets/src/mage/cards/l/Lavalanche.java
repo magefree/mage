@@ -51,7 +51,7 @@ class LavalancheEffect extends OneShotEffect {
     public LavalancheEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
-        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker’s controller controls";
+        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls";
     }
 
     public LavalancheEffect(final LavalancheEffect effect) {
@@ -71,7 +71,7 @@ class LavalancheEffect extends OneShotEffect {
             return false;
         }
         targetPlayer.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
-        FilterPermanent filter = new FilterPermanent("and each creature that player or that planeswalker’s controller controls");
+        FilterPermanent filter = new FilterPermanent("and each creature that player or that planeswalker's controller controls");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);

@@ -22,7 +22,7 @@ import mage.players.Player;
 //
 //    702.96a Unleash is a keyword that represents two static abilities.
 //            "Unleash" means "You may have this permanent enter the battlefield with an additional +1/+1 counter on it"
-//            and "This permanent can’t block as long as it has a +1/+1 counter on it."
+//            and "This permanent can't block as long as it has a +1/+1 counter on it."
 public class UnleashAbility extends SimpleStaticAbility {
 
     public UnleashAbility() {

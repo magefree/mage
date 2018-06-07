@@ -40,7 +40,7 @@ public class HivestoneTest extends CardTestPlayerBase {
 
     /**
      * Turns only your creatures on the battlefield, not in other zones, into
-     * Slivers. It won’t allow you to have Root Sliver on the battlefield and
+     * Slivers. It won't allow you to have Root Sliver on the battlefield and
      * make your Grizzly Bears uncounterable, for example.
      */
     @Test

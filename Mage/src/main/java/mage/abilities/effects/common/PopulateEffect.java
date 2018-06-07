@@ -24,10 +24,10 @@ import mage.target.targetpointer.FixedTarget;
 //    701.27. Populate
 //
 //    701.27a To populate means to choose a creature token you control and put a
-//    token onto the battlefield that’s a copy of that creature token.
+//    token onto the battlefield that's a copy of that creature token.
 //
 //    701.27b If you control no creature tokens when instructed to populate, you
-//    won’t put a token onto the battlefield.
+//    won't put a token onto the battlefield.
 //
 public class PopulateEffect extends OneShotEffect {
 

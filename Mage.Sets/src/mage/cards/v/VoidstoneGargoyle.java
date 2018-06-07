@@ -57,7 +57,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
 
     public VoidstoneGargoyleReplacementEffect1() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Spells with the chosen name can’t be cast";
+        staticText = "Spells with the chosen name can't be cast";
     }
 
     public VoidstoneGargoyleReplacementEffect1(final VoidstoneGargoyleReplacementEffect1 effect) {

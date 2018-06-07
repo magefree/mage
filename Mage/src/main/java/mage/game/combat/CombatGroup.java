@@ -869,7 +869,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         // for handling Butcher Orgg
         if (creature.getAbilities().containsKey(ControllerDivideCombatDamageAbility.getInstance().getId())) {
             Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : (!isAttacking && attackerAssignsCombatDamage(game) ? game.getCombat().getAttackingPlayerId() : playerId));
-            // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won’t be able to deal combat damage and you won’t be able to use its ability.
+            // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won't be able to deal combat damage and you won't be able to use its ability.
             // (same principle should apply if it's blocking and its blocked attacker is removed from combat)
             if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking)) && canDamage(creature, first)) {
                 if (player.chooseUse(Outcome.Damage, "Do you wish to assign " + creature.getLogName() + "'s combat damage divided among defending player and/or any number of defending creatures?", null, game)) {

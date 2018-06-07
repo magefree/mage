@@ -78,11 +78,11 @@ class CelestialConvergenceEffect extends OneShotEffect {
 
             /**
              * 801.14. If an effect states that a player wins the game, all of
-             * that player’s opponents within their range of influence lose the
+             * that player's opponents within their range of influence lose the
              * game instead. #
              *
              * 801.15. If the effect of a spell or ability states that the game
-             * is a draw, the game is a draw for that spell or ability’s
+             * is a draw, the game is a draw for that spell or ability's
              * controller and all players within their range of influence. They
              * leave the game. All remaining players continue to play the game.
              *

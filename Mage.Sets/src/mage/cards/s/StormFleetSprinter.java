@@ -26,7 +26,7 @@ public final class StormFleetSprinter extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Storm Fleet Sprinter can’t be blocked.
+        // Storm Fleet Sprinter can't be blocked.
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 

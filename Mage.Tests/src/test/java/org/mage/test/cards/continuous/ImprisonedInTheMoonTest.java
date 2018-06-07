@@ -21,7 +21,7 @@ public class ImprisonedInTheMoonTest extends CardTestPlayerBase {
      * 
      * Card ruling: http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=414360
      *   If the enchanted permanent is a land and has land types, it retains those types even though it loses any intrinsic mana abilities associated with them. 
-     *   For example, a Plains enchanted by Imprisoned in the Moon is still a Plains, but it can’t tap for {W}, only for {C}.
+     *   For example, a Plains enchanted by Imprisoned in the Moon is still a Plains, but it can't tap for {W}, only for {C}.
     */
     @Test
     public void testEnchantUrzaLand() {

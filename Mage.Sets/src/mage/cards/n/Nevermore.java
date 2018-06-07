@@ -49,7 +49,7 @@ class NevermoreEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public NevermoreEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Spells with the chosen name can’t be cast";
+        staticText = "Spells with the chosen name can't be cast";
     }
 
     public NevermoreEffect2(final NevermoreEffect2 effect) {

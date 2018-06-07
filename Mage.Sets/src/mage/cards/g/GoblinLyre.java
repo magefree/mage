@@ -48,7 +48,7 @@ class GoblinLyreEffect extends OneShotEffect {
     public GoblinLyreEffect() {
         super(Outcome.Damage);
         this.staticText = "Flip a coin. If you win the flip, {this} deals damage to target opponent or planeswalker equal to the number of creatures you control. "
-                + "If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent or that planeswalker’s controller controls";
+                + "If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent or that planeswalker's controller controls";
     }
 
     public GoblinLyreEffect(final GoblinLyreEffect effect) {

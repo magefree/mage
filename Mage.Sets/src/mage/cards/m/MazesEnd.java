@@ -49,7 +49,7 @@ public final class MazesEnd extends CardImpl {
         // {T}: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // 3, {T}, Return Maze's End  to its owner’s hand: Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.
+        // 3, {T}, Return Maze's End  to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterCard)), new GenericManaCost(3));
         ability.addEffect(new MazesEndEffect());
         ability.addCost(new TapSourceCost());

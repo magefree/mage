@@ -48,9 +48,9 @@ import mage.util.GameLog;
  * 702.94d A creature can be paired with only one other creature.
  *
  * 702.94e A paired creature becomes unpaired if any of the following occur:
- * another player gains control of it or the creature it’s paired with; it or
- * the creature it’s paired with stops being a creature; or it or the creature
- * it’s paired with leaves the battlefield.
+ * another player gains control of it or the creature it's paired with; it or
+ * the creature it's paired with stops being a creature; or it or the creature
+ * it's paired with leaves the battlefield.
  *
  * @author LevelX2
  */

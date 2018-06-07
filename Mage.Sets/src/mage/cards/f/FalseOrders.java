@@ -156,7 +156,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
         if (chosenGroup != null) {
             // Relevant ruling for Balduvian Warlord:
             // 7/15/2006 	If an attacking creature has an ability that triggers “When this creature becomes blocked,” 
-            // it triggers when a creature blocks it due to the Warlord’s ability only if it was unblocked at that point.
+            // it triggers when a creature blocks it due to the Warlord's ability only if it was unblocked at that point.
             boolean notYetBlocked = chosenGroup.getBlockers().isEmpty();
             chosenGroup.addBlockerToGroup(permanent.getId(), controller.getId(), game);
             game.getCombat().addBlockingGroup(permanent.getId(), chosenPermanent.getId(), controller.getId(), game); // 702.21h

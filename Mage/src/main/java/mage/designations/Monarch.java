@@ -27,7 +27,7 @@ public class Monarch extends Designation {
     }
 }
 
-// At the beginning of the monarch’s end step, that player draws a card
+// At the beginning of the monarch's end step, that player draws a card
 class MonarchDrawTriggeredAbility extends BeginningOfEndStepTriggeredAbility {
 
     public MonarchDrawTriggeredAbility() {
@@ -60,7 +60,7 @@ class MonarchDrawTriggeredAbility extends BeginningOfEndStepTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "At the beginning of the monarch’s end step, that player draws a card.";
+        return "At the beginning of the monarch's end step, that player draws a card.";
     }
 }
 

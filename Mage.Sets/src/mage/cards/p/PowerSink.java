@@ -29,7 +29,7 @@ public final class PowerSink extends CardImpl {
     public PowerSink(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
-        // Counter target spell unless its controller pays {X}. If that player doesn’t, they tap all lands with mana abilities they control and lose all unspent mana.
+        // Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana.
         this.getSpellAbility().addEffect(new PowerSinkCounterUnlessPaysEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
@@ -48,7 +48,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
 
     public PowerSinkCounterUnlessPaysEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell unless its controller pays {X}. If that player doesn’t, they tap all lands with mana abilities they control and lose all unspent mana";
+        this.staticText = "Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana";
     }
 
     public PowerSinkCounterUnlessPaysEffect(final PowerSinkCounterUnlessPaysEffect effect) {

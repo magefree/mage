@@ -45,7 +45,7 @@ public final class ChandraPyrogenius extends CardImpl {
         Effects effects = new Effects();
         effects.add(new DamageTargetEffect(6));
         effects.add(new DamageAllControlledTargetEffect(6, new FilterCreaturePermanent())
-                .setText("and each creature that player or that planeswalker’s controller controls")
+                .setText("and each creature that player or that planeswalker's controller controls")
         );
         ability = new LoyaltyAbility(effects, -10);
         ability.addTarget(new TargetPlayerOrPlaneswalker());

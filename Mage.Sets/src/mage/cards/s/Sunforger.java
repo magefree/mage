@@ -92,7 +92,7 @@ class SunforgerEffect extends OneShotEffect {
                 /**
                  * 10/1/2005 Any card you find must be legally castable (for
                  * example, you have to be able to choose a legal target for
-                 * it). If you can’t find a castable card (or choose not to),
+                 * it). If you can't find a castable card (or choose not to),
                  * nothing happens and you shuffle your library.
                  */
 

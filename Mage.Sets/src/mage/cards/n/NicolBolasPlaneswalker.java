@@ -53,7 +53,7 @@ public final class NicolBolasPlaneswalker extends CardImpl {
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -9);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addEffect(new DiscardTargetEffect(7)
-                .setText("That player or that planeswalker’s controller discards seven cards")
+                .setText("That player or that planeswalker's controller discards seven cards")
         );
         ability.addEffect(new SacrificeEffect(new FilterPermanent(), 7, "then")
                 .setText("then sacrifices seven permanents")

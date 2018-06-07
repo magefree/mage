@@ -31,7 +31,7 @@ public final class HelmOfTheHost extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
-        // At the beginning of combat on your turn, create a token that’s a copy of equipped creature, except the token isn’t legendary if equipped creature is legendary. That token gains haste.
+        // At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.
         TriggeredAbility ability = new BeginningOfCombatTriggeredAbility(
                 new HelmOfTheHostEffect(),
                 TargetController.YOU,

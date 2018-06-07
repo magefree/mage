@@ -16,7 +16,7 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 /* 20130711
- *903.14a A player that’s been dealt 21 or more combat damage by the same commander
+ *903.14a A player that's been dealt 21 or more combat damage by the same commander
  * over the course of the game loses the game. (This is a state-based action. See rule 704.)
  *
  *

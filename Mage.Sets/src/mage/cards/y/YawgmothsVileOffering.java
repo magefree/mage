@@ -42,7 +42,7 @@ public final class YawgmothsVileOffering extends CardImpl {
         this.addAbility(new LegendarySpellAbility());
 
         // Put up to one target creature or planeswalker from a graveyard onto the battlefield under your control.
-        // Destroy up to one target creature or planeswalker. Exile Yawgmoth’s Vile Offering.
+        // Destroy up to one target creature or planeswalker. Exile Yawgmoth's Vile Offering.
         this.getSpellAbility().addEffect(new YawgmothsVileOfferingEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 1, cardFilter));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1, new FilterCreatureOrPlaneswalkerPermanent(), false));

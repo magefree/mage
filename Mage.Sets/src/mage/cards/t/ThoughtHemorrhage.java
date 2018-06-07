@@ -51,7 +51,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
 
     static final String rule = "Target player reveals their hand. "
             + "{this} deals 3 damage to that player for each card with the chosen name revealed this way. "
-            + "Search that player’s graveyard, hand, and library for all cards with that name and exile them. "
+            + "Search that player's graveyard, hand, and library for all cards with that name and exile them. "
             + "Then that player shuffles their library";
 
     public ThoughtHemorrhageEffect() {

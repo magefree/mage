@@ -46,7 +46,7 @@ class RakdossReturnEffect extends OneShotEffect {
 
     RakdossReturnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "That player or that planeswalker’s controller discards X cards.";
+        this.staticText = "That player or that planeswalker's controller discards X cards.";
     }
 
     RakdossReturnEffect(final RakdossReturnEffect effect) {

@@ -17,8 +17,8 @@ public class RiverOfTearsTest extends CardTestPlayerBase {
      * 17/11/2017 The turn you play River of Tears, it will produce Black when
      * tapped for mana.
      *
-     * 17/11/2017 River of Tears produces Black only after you’ve played a land,
-     * not after you’ve put a land onto the battlefield (such as with Evolving
+     * 17/11/2017 River of Tears produces Black only after you've played a land,
+     * not after you've put a land onto the battlefield (such as with Evolving
      * Wilds).
      */
     @Test

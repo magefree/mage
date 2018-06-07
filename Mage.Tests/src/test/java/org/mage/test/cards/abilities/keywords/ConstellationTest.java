@@ -15,8 +15,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ConstellationTest extends CardTestPlayerBase {
 
     /**
-     * Daxos's Torment {3}{B} Constellation — Whenever Daxos’s Torment or
-     * another enchantment enters the battlefield under your control, Daxos’s
+     * Daxos's Torment {3}{B} Constellation — Whenever Daxos's Torment or
+     * another enchantment enters the battlefield under your control, Daxos's
      * Torment becomes a 5/5 Demon creature with flying and haste in addition to
      * its other types until end of turn.
      */

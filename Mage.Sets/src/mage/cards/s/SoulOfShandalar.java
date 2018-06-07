@@ -70,7 +70,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
     public SoulOfShandalarEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target player or planeswalker "
-                + "and 3 damage to up to one target creature that player or that planeswalker’s controller controls";
+                + "and 3 damage to up to one target creature that player or that planeswalker's controller controls";
     }
 
     public SoulOfShandalarEffect(final SoulOfShandalarEffect effect) {

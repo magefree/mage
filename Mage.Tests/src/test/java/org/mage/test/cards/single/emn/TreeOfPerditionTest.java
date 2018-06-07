@@ -26,7 +26,7 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         
         /*
          Tree of Perdition - {3}{B} - Creature Plant - 0/13
-           {T}: Exchange target opponent’s life total with Tree of Perdition’s toughness.
+           {T}: Exchange target opponent's life total with Tree of Perdition's toughness.
         Defender
         Tap: Exchange target opponent's life total with Tree of Perdition's toughness.
         */
