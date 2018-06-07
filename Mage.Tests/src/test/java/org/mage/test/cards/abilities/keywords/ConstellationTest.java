@@ -193,12 +193,12 @@ public class ConstellationTest extends CardTestPlayerBase {
         // 613.7 -- dependacy effects (Mephidross Vampire must ALWAYS wait Daxos effect, not timestamp)
         addCard(Zone.HAND, playerA, daxosCard, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        // Each creature you control is a Vampire in addition to its other creature types
+        addCard(Zone.HAND, playerA, "Mephidross Vampire", 1); // {4}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
         //
-        addCard(Zone.HAND, playerA, "Mephidross Vampire", 1); // Each creature you control is a Vampire in addition to its other creature types
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
-        //
-        addCard(Zone.HAND, playerA, "Archetype of Courage", 1); // Enchantment to trigger Daxos
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Archetype of Courage", 1); // Enchantment {1}{W}{W} to trigger Daxos
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
         // dax cast
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, daxosCard);
@@ -223,7 +223,7 @@ public class ConstellationTest extends CardTestPlayerBase {
 
     @Test
     public void test_DaxosGotBoostAndNewTypeByDependencyEffects() {
-        playDaxosAndVampire(false);
+        playDaxosAndVampire(false); // sfails sometimes
         playDaxosAndVampire(true);
     }
 }
