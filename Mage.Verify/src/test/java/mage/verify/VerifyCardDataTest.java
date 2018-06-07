@@ -462,11 +462,11 @@ public class VerifyCardDataTest {
 
         Collection<String> expected = ref.subtypes;
 
-        // fix names (e.g. Urza's to Urza's)
-        if (expected != null && expected.contains("Urza's")) {
+        // fix names (e.g. Urza’s to Urza's)
+        if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
             for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
-                if (it.next().equals("Urza's")) {
+                if (it.next().equals("Urza’s")) {
                     it.set("Urza's");
                 }
             }
