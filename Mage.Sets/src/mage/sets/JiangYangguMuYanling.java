@@ -41,6 +41,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         cards.add(new SetCardInfo("Mu Yanling", 1, Rarity.MYTHIC, mage.cards.m.MuYanling.class));
         cards.add(new SetCardInfo("Nine-Tail White Fox", 8, Rarity.COMMON, mage.cards.n.NineTailWhiteFox.class));
         cards.add(new SetCardInfo("Plains", 20, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Purple-Crystal Crab", 3, Rarity.COMMON, mage.cards.p.PurpleCrystalCrab.class));
         cards.add(new SetCardInfo("Timber Gorge", 38, Rarity.COMMON, mage.cards.t.TimberGorge.class));
         cards.add(new SetCardInfo("Welkin Tern", 5, Rarity.COMMON, mage.cards.w.WelkinTern.class));
     }
