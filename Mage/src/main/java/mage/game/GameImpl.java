@@ -1429,12 +1429,15 @@ public abstract class GameImpl implements Game, Serializable {
                     if (turnController != null) {
                         Player targetPlayer = getPlayer(spellControllerId);
                         if (targetPlayer != null) {
+                            targetPlayer.setGameUnderYourControl(true, false);
                             informPlayers(turnController.getLogName() + " lost control over " + targetPlayer.getLogName());
-                            turnController.resetOtherTurnsControlled();
-                            targetPlayer.setGameUnderYourControl(true);
+                            if (targetPlayer.getTurnControlledBy().equals(turnController.getId())) {
+                                turnController.getPlayersUnderYourControl().remove(targetPlayer.getId());
+                            }
                         }
                     }
                 }
+                spell.setCommandedBy(null);
             }
         }
     }

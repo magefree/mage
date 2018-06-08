@@ -393,7 +393,7 @@ public interface Game extends MageItem, Serializable {
     boolean checkStateAndTriggered();
 
     void playPriority(UUID activePlayerId, boolean resuming);
-    
+
     void resetControlAfterSpellResolve(UUID topId);
 
     boolean endTurn(Ability source);

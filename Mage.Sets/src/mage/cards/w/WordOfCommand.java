@@ -1,3 +1,4 @@
+
 package mage.cards.w;
 
 import java.util.UUID;
@@ -71,11 +72,23 @@ class WordOfCommandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+        Player sourceController = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
         Card card = null;
-        if (controller != null && targetPlayer != null && sourceObject != null) {
+        if (sourceController != null && targetPlayer != null && sourceObject != null) {
+            Player controller = null;
+            Spell wordOfCommand = game.getSpell(source.getSourceId());
+            if (wordOfCommand != null) {
+                if (wordOfCommand.getCommandedBy() != null) {
+                    controller = game.getPlayer(wordOfCommand.getCommandedBy());
+                } else {
+                    controller = game.getPlayer(sourceController.getTurnControlledBy());
+                }
+            }
+            if (controller == null) {
+                controller = sourceController; // reset the controller to avoid NPE
+            }
 
             // Look at target opponent's hand and choose a card from it
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
@@ -140,13 +153,15 @@ class WordOfCommandEffect extends OneShotEffect {
                     spell.setCommandedBy(controller.getId()); // If the chosen card is cast as a spell, you control the player while that spell is resolving
                 }
             }
-            
-            Spell wordOfCommand = game.getSpell(source.getSourceId());
+
+            wordOfCommand = game.getSpell(source.getSourceId());
             if (wordOfCommand != null) {
                 wordOfCommand.setCommandedBy(controller.getId()); // You control the player until Word of Command finishes resolving
             } else {
-                controller.resetOtherTurnsControlled();
-                targetPlayer.setGameUnderYourControl(true);
+                targetPlayer.setGameUnderYourControl(true, false);
+                if (!targetPlayer.getTurnControlledBy().equals(controller.getId())) {
+                    controller.getPlayersUnderYourControl().remove(targetPlayer.getId());
+                }
             }
             return true;
         }
