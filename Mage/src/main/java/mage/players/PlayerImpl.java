@@ -390,7 +390,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.draws = false;
         this.loses = false;
         this.left = false;
-        // reset is neccessary because in tournament player will be used for each round
+        // reset is necessary because in tournament player will be used for each round
         this.quit = false;
         this.timerTimeout = false;
         this.idleTimeout = false;
@@ -1117,12 +1117,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game); // prevent undo after playing a land
                 return true;
             }
-            // putOntoBattlefield retured false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldorian Outpost).
+            // putOntoBattlefield returned false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldoran Outpost).
             // But that would undo the effect completely,
-            // what makes no real sense. So it makes no sense to generally do a restorState here.
+            // what makes no real sense. So it makes no sense to generally do a restoreState here.
             // restoreState(bookmark, card.getName(), game);
         }
-        // if the to play the land is replaced (e.g. Kjeldoran Outpos and don't sacrificing a Plains) it's a valid state so returning true here
+        // if the to play the land is replaced (e.g. Kjeldoran Outpost and don't sacrificing a Plains) it's a valid state so returning true here
         return true;
     }
 
@@ -1132,7 +1132,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (ability.activate(game, false)) {
                 if (ability.resolve(game)) {
                     if (ability.isUndoPossible()) {
-                        if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. usefull for undo Nykthos, Shrine to Nyx
+                        if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx
                             setStoredBookmark(bookmark);
                         }
                     } else {
@@ -1381,7 +1381,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
-        if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack actilities
+        if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack abilities
             return useable;
         }
         if (object instanceof SplitCard) {
@@ -1397,7 +1397,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return useable;
     }
 
-    // Adds special abilities that are given to non permanants by continuous effects
+    // Adds special abilities that are given to non permanents by continuous effects
     private void getOtherUseableActivatedAbilities(MageObject object, Zone zone, Game game, Map<UUID, ActivatedAbility> useable) {
         Abilities<ActivatedAbility> otherAbilities = game.getState().getActivatedOtherAbilities(object.getId(), zone);
         if (otherAbilities != null) {
@@ -1587,7 +1587,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // selected permanents to untap
             List<Permanent> selectedToUntap = new ArrayList<>();
 
-            // player can cancel the seletion of an effect to use a prefered order of restriction effects
+            // player can cancel the selection of an effect to use a preferred order of restriction effects
             boolean playerCanceledSelection;
             do {
                 playerCanceledSelection = false;
@@ -1601,7 +1601,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                         FilterControlledPermanent filter = handledEntry.getKey().getKey().getFilter().copy();
                         String message = filter.getMessage();
-                        // omitt already from other untap effects selected permanents
+                        // omit already from other untap effects selected permanents
                         for (Permanent permanent : selectedToUntap) {
                             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
                         }
@@ -1702,7 +1702,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Permanent permanent : canBeUntapped) {
             if (handledEffect.getFilter().match(permanent, game)) { // matches the restricted permanents of handled entry
                 boolean canBeSelected = true;
-                // check if the permanent is restriced by another restriction that has left no permanent
+                // check if the permanent is restricted by another restriction that has left no permanent
                 for (Entry<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
                     if (notMoreThanEffect.getKey().getKey().getFilter().match(permanent, game) && notMoreThanEffect.getValue() == 0) {
                         canBeSelected = false;
@@ -2635,7 +2635,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             available.addManaWithCost(manaAbilities, game);
         }
 
-        // remove duplicated variants (see ManaOptionsTest for info - when thats rises)
+        // remove duplicated variants (see ManaOptionsTest for info - when that rises)
         available.removeDuplicated();
 
         return available;

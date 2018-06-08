@@ -516,7 +516,7 @@ public enum WizardCardsImageSource implements CardImageSource {
             if (setNames == null) {
                 setNames = Sets.getInstance().get(cardSet).getName();
             }
-            String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
+            String preferredLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
             for (String setName : setNames.split("\\^")) {
                 // String URLSetName = URLEncoder.encode(setName, "UTF-8");
                 String URLSetName = setName.replaceAll(" ", "%20");
@@ -554,8 +554,8 @@ public enum WizardCardsImageSource implements CardImageSource {
                                         cardName = cardName.substring(0, pos1);
                                     }
                                 }
-                                Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-                                setLinks.put(cardName.toLowerCase(Locale.ENGLISH) + numberChar, generateLink(preferedMultiverseId));
+                                Integer preferredMultiverseId = getLocalizedMultiverseId(preferredLanguage, multiverseId);
+                                setLinks.put(cardName.toLowerCase(Locale.ENGLISH) + numberChar, generateLink(preferredMultiverseId));
                             }
                         }
                     }
@@ -643,12 +643,12 @@ public enum WizardCardsImageSource implements CardImageSource {
         return "/Handlers/Image.ashx?multiverseid=" + landMultiverseId + "&type=card";
     }
 
-    private int getLocalizedMultiverseId(String preferedLanguage, Integer multiverseId) throws IOException {
-        if (preferedLanguage.equals("en")) {
+    private int getLocalizedMultiverseId(String preferredLanguage, Integer multiverseId) throws IOException {
+        if (preferredLanguage.equals("en")) {
             return multiverseId;
         }
 
-        String languageName = languageAliases.get(preferedLanguage);
+        String languageName = languageAliases.get(preferredLanguage);
         HashMap<String, Integer> localizedLanguageIds = getlocalizedMultiverseIds(multiverseId);
         if (localizedLanguageIds.containsKey(languageName)) {
             return localizedLanguageIds.get(languageName);
@@ -712,20 +712,20 @@ public enum WizardCardsImageSource implements CardImageSource {
 //
 //        private int multiverseId;
 //        private String cardName;
-//        private String preferedLanguage;
+//        private String preferredLanguage;
 //        private LinkedHashMap setLinks;
 //
-//        public GetImageLinkTask(int multiverseId, String cardName, String preferedLanguage, LinkedHashMap setLinks) {
+//        public GetImageLinkTask(int multiverseId, String cardName, String preferredLanguage, LinkedHashMap setLinks) {
 //            try {
 //                this.multiverseId = multiverseId;
 //                this.cardName = cardName;
-//                this.preferedLanguage = preferedLanguage;
+//                this.preferredLanguage = preferredLanguage;
 //                this.setLinks = setLinks;
 //            } catch (Exception ex) {
 //                logger.error(ex.getMessage());
 //                logger.error("multiverseId: " + multiverseId);
 //                logger.error("cardName: " + cardName);
-//                logger.error("preferedLanguage: " + preferedLanguage);
+//                logger.error("preferredLanguage: " + preferredLanguage);
 //                logger.error("setLinks: " + setLinks.toString());
 //            }
 //        }
@@ -736,8 +736,8 @@ public enum WizardCardsImageSource implements CardImageSource {
 //                if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
 //                    setLinks.putAll(getLandVariations(multiverseId, cardName));
 //                } else {
-//                    Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-//                    setLinks.put(cardName.toLowerCase(Locale.ENGLISH), generateLink(preferedMultiverseId));
+//                    Integer preferredMultiverseId = getLocalizedMultiverseId(preferredLanguage, multiverseId);
+//                    setLinks.put(cardName.toLowerCase(Locale.ENGLISH), generateLink(preferredMultiverseId));
 //                }
 //            } catch (IOException | NumberFormatException ex) {
 //                logger.error("Exception when parsing the wizards page: " + ex.getMessage());
