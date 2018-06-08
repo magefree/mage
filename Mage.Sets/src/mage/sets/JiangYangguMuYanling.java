@@ -44,6 +44,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         cards.add(new SetCardInfo("Jiang Yanggu", 22, Rarity.MYTHIC, mage.cards.j.JiangYanggu.class));
         cards.add(new SetCardInfo("Leopard-Spotted Jiao", 23, Rarity.COMMON, mage.cards.l.LeopardSpottedJiao.class));
         cards.add(new SetCardInfo("Meandering River", 19, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
+        cards.add(new SetCardInfo("Moon-Eating Dog", 10, Rarity.UNCOMMON, mage.cards.m.MoonEatingDog.class));
         cards.add(new SetCardInfo("Mountain", 39, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mu Yanling", 1, Rarity.MYTHIC, mage.cards.m.MuYanling.class));
         cards.add(new SetCardInfo("Nine-Tail White Fox", 8, Rarity.COMMON, mage.cards.n.NineTailWhiteFox.class));
