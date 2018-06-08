@@ -35,6 +35,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         cards.add(new SetCardInfo("Earthshaking Si", 31, Rarity.COMMON, mage.cards.e.EarthshakingSi.class));
         cards.add(new SetCardInfo("Feiyi Snake", 24, Rarity.COMMON, mage.cards.f.FeiyiSnake.class));
         cards.add(new SetCardInfo("Ferocious Zheng", 28, Rarity.COMMON, mage.cards.f.FerociousZheng.class));
+        cards.add(new SetCardInfo("Fire-Omen Crane", 29, Rarity.UNCOMMON, mage.cards.f.FireOmenCrane.class));
         cards.add(new SetCardInfo("Forest", 40, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Spider", 27, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Hardened-Scale Armor", 32, Rarity.COMMON, mage.cards.h.HardenedScaleArmor.class));
