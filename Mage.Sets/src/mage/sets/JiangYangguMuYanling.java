@@ -21,6 +21,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         this.blockName = "Global Series";
         this.hasBasicLands = true;
         cards.add(new SetCardInfo("Armored Whirl Turtle", 7, Rarity.COMMON, mage.cards.a.ArmoredWhirlTurtle.class));
+        cards.add(new SetCardInfo("Breath of Fire", 33, Rarity.COMMON, mage.cards.b.BreathOfFire.class));
         cards.add(new SetCardInfo("Brilliant Plan", 17, Rarity.UNCOMMON, mage.cards.b.BrilliantPlan.class));
         cards.add(new SetCardInfo("Cloak of Mists", 13, Rarity.COMMON, mage.cards.c.CloakOfMists.class));
         cards.add(new SetCardInfo("Forest", 40, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
