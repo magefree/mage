@@ -72,7 +72,7 @@ public class GathererSets implements Iterable<DownloadJob> {
 
     private static final String[] symbolsBasicWithMyth = {"M10", "M11", "M12", "M13", "M14", "M15", "ORI",
         "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN",
-        "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT",
+        "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT", "DDU",
         "ALA", "CON", "ARB",
         "ZEN", "WWK", "ROE",
         "SOM", "MBS", "NPH",

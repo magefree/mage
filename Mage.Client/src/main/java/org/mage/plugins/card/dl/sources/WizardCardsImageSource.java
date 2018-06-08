@@ -238,6 +238,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("C17");
         supportedSets.add("XLN");
         supportedSets.add("DDT"); // Duel Decks: Merfolk vs. Goblins
+        supportedSets.add("DDU"); // Duel Decks: Elves vs. Inventors
         supportedSets.add("IMA"); // Iconic Msters
         supportedSets.add("E02"); // Explorers of Ixalan
         supportedSets.add("V17"); // From the Vault: Transform
@@ -312,6 +313,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DDR", "Duel Decks: Nissa vs. Ob Nixilis");
         setsAliases.put("DDS", "Duel Decks: Mind vs. Might");
         setsAliases.put("DDT", "Duel Decks: Merfolk vs. Goblins");
+        setsAliases.put("DDU", "Duel Decks: Elves vs. Inventors");
         setsAliases.put("DGM", "Dragon's Maze");
         setsAliases.put("DIS", "Dissension");
         setsAliases.put("DKA", "Dark Ascension");
