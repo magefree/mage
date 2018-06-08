@@ -4,9 +4,11 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ChoosePlayerEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.continuous.UntapSourceDuringEachOtherPlayersUntapStepEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,6 +28,7 @@ public final class VictoryChimes extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Untap Victory Chimes during each other player's untap step.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapSourceDuringEachOtherPlayersUntapStepEffect()));
         // {T}: A player of your choice adds {C}.
         ManaEffect effect = new VictoryChimesManaEffect("chosen player");
         effect.setText("a player of your choice adds {C}");
