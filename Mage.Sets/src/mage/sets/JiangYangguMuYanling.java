@@ -32,6 +32,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         cards.add(new SetCardInfo("Ferocious Zheng", 28, Rarity.COMMON, mage.cards.f.FerociousZheng.class));
         cards.add(new SetCardInfo("Forest", 40, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Spider", 27, Rarity.COMMON, mage.cards.g.GiantSpider.class));
+        cards.add(new SetCardInfo("Hardened-Scale Armor", 32, Rarity.COMMON, mage.cards.h.HardenedScaleArmor.class));
         cards.add(new SetCardInfo("Island", 21, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jiang Yanggu", 22, Rarity.MYTHIC, mage.cards.j.JiangYanggu.class));
         cards.add(new SetCardInfo("Meandering River", 19, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
