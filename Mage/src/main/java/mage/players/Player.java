@@ -1,4 +1,3 @@
-
 package mage.players;
 
 import java.io.Serializable;
@@ -352,14 +351,19 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean searchLibrary(TargetCardInLibrary target, Game game);
 
+    boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents);
+
+    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId);
+
     /**
      *
      * @param target
      * @param game
      * @param targetPlayerId player whose library will be searched
+     * @param triggerEvents whether searching will trigger any game events
      * @return true if search was successful
      */
-    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId);
+    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents);
 
     boolean canPlayLand();
 

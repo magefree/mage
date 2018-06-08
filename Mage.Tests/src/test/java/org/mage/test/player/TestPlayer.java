@@ -1,4 +1,3 @@
-
 package org.mage.test.player;
 
 import java.io.Serializable;
@@ -1992,8 +1991,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
+        return computerPlayer.searchLibrary(target, game, triggerEvents);
+    }
+
+    @Override
     public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
         return computerPlayer.searchLibrary(target, game, targetPlayerId);
+    }
+
+    @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
+        return computerPlayer.searchLibrary(target, game, targetPlayerId, triggerEvents);
     }
 
     @Override

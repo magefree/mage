@@ -42,6 +42,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         cards.add(new SetCardInfo("Heavenly Qilin", 6, Rarity.COMMON, mage.cards.h.HeavenlyQilin.class));
         cards.add(new SetCardInfo("Island", 21, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jiang Yanggu", 22, Rarity.MYTHIC, mage.cards.j.JiangYanggu.class));
+        cards.add(new SetCardInfo("Journey for the Elixir", 36, Rarity.RARE, mage.cards.j.JourneyForTheElixir.class));
         cards.add(new SetCardInfo("Leopard-Spotted Jiao", 23, Rarity.COMMON, mage.cards.l.LeopardSpottedJiao.class));
         cards.add(new SetCardInfo("Meandering River", 19, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
         cards.add(new SetCardInfo("Moon-Eating Dog", 10, Rarity.UNCOMMON, mage.cards.m.MoonEatingDog.class));

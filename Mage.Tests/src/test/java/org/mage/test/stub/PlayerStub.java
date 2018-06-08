@@ -1,4 +1,3 @@
-
 package org.mage.test.stub;
 
 import java.io.Serializable;
@@ -584,7 +583,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
+        return false;
+    }
+
+    @Override
     public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
+        return false;
+    }
+
+    @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
         return false;
     }
 
