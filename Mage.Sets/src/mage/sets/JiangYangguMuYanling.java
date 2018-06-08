@@ -26,6 +26,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         cards.add(new SetCardInfo("Cleansing Screech", 37, Rarity.COMMON, mage.cards.c.CleansingScreech.class));
         cards.add(new SetCardInfo("Cloak of Mists", 13, Rarity.COMMON, mage.cards.c.CloakOfMists.class));
         cards.add(new SetCardInfo("Colorful Feiyi Sparrow", 2, Rarity.COMMON, mage.cards.c.ColorfulFeiyiSparrow.class));
+        cards.add(new SetCardInfo("Drown in Shapelessness", 15, Rarity.COMMON, mage.cards.d.DrownInShapelessness.class));
         cards.add(new SetCardInfo("Forest", 40, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Spider", 27, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Island", 21, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
