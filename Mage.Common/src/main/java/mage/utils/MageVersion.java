@@ -1,4 +1,3 @@
-
 package mage.utils;
 
 import java.io.Serializable;
@@ -15,7 +14,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
     public final static int MAGE_VERSION_MAJOR = 1;
     public final static int MAGE_VERSION_MINOR = 4;
     public final static int MAGE_VERSION_PATCH = 30;
-    public final static String MAGE_VERSION_MINOR_PATCH = "V2";
+    public final static String MAGE_VERSION_MINOR_PATCH = "V3";
     public final static String MAGE_VERSION_INFO = "";
 
     private final int major;

@@ -93,7 +93,7 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
         if (colorChosen != null) {
             ManaEvent manaEvent = (ManaEvent) event;
             Mana mana = manaEvent.getMana();
-            // 8/23/2016 	Colorless mana added to a player’s mana pool isn’t affected.
+            // 8/23/2016 	Colorless mana added to a player's mana pool isn't affected.
             int genericAmount = mana.getGeneric();
             int colorlessAmount = mana.getColorless();
             int coloredAmount = mana.countColored();

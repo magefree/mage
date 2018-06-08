@@ -26,7 +26,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
     protected String searchForText;
 
     /* Slaughter Games
-     * 10/1/2012: You can leave any cards with that name in the zone they are in. You don’t have to exile them.
+     * 10/1/2012: You can leave any cards with that name in the zone they are in. You don't have to exile them.
      *
      * Sowing Salt
      * 2/1/2005: The copies must be found if they are in publicly viewable zones. Finding copies while searching private zones is optional.

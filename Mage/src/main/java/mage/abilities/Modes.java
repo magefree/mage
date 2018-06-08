@@ -198,8 +198,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
             // 700.2d
             // Some spells and abilities specify that a player other than their controller chooses a mode for it.
-            // In that case, the other player does so when the spell or ability’s controller normally would do so.
-            // If there is more than one other player who could make such a choice, the spell or ability’s controller decides which of those players will make the choice.
+            // In that case, the other player does so when the spell or ability's controller normally would do so.
+            // If there is more than one other player who could make such a choice, the spell or ability's controller decides which of those players will make the choice.
             UUID playerId = null;
             if (modeChooser == TargetController.OPPONENT) {
                 TargetOpponent targetOpponent = new TargetOpponent();

@@ -24,8 +24,8 @@ import mage.util.CardUtil;
 //    701.26. Detain
 //
 //    701.26a Certain spells and abilities can detain a permanent. Until the next
-//    turn of the controller of that spell or ability, that permanent can’t attack
-//    or block and its activated abilities can’t be activated.
+//    turn of the controller of that spell or ability, that permanent can't attack
+//    or block and its activated abilities can't be activated.
 //
 public class DetainTargetEffect extends OneShotEffect {
 

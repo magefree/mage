@@ -7,8 +7,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
-import mage.abilities.effects.common.NameACardEffect.TypeOfName;
+import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect.TypeOfName;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -65,8 +65,8 @@ class CheeringFanaticEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        new NameACardEffect(TypeOfName.ALL).apply(game, source);
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        new ChooseACardNameEffect(TypeOfName.ALL).apply(game, source);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         FilterCard filter = new FilterCard();
         filter.add(new NamePredicate(cardName));
         ContinuousEffect effect = new SpellsCostReductionAllEffect(filter, 1);

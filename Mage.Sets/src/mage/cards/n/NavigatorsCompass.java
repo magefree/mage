@@ -25,7 +25,7 @@ public final class NavigatorsCompass extends CardImpl {
     public NavigatorsCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // When Navigator’s Compass enters the battlefield, you gain 3 life.
+        // When Navigator's Compass enters the battlefield, you gain 3 life.
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3));
         this.addAbility(etbAbility);
         // {tap}: Until end of turn, target land you control becomes the basic land type of your choice in addition to its other types.

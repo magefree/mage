@@ -37,7 +37,7 @@ public final class CelestialColonnade extends CardImpl {
         this.addAbility(new BlueManaAbility());
         this.addAbility(new WhiteManaAbility());
 
-        // {3}{W}{U}: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It’s still a land.
+        // {3}{W}{U}: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
                 new CreatureToken(4, 4, "4/4 white and blue Elemental creature with flying and vigilance")
                         .withColor("WU")

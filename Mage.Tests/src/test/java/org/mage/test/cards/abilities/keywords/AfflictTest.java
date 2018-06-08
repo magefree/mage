@@ -52,7 +52,7 @@ public class AfflictTest extends CardTestPlayerBase {
 
         // {T}: Add {C}.
         // {2}, {T}: Exile target creature you control.
-        // {4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner’s control.
+        // {4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner's control.
         addCard(Zone.BATTLEFIELD, playerA, "Endless Sands");
 
         // Deathtouch

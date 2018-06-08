@@ -114,7 +114,7 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever this creature transforms into {this}, "
                 + "it deals 2 damage to target opponent or planeswalker "
-                + "and 2 damage to up to one target creature that player or that planeswalker’s controller controls.";
+                + "and 2 damage to up to one target creature that player or that planeswalker's controller controls.";
     }
 
 }

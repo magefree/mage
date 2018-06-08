@@ -171,9 +171,9 @@ class MoveAuraEffect extends OneShotEffect {
             5/1/2006
             For the second ability, only the Aura is targeted.
             When the ability resolves, you choose a permanent to move the Aura onto.
-            It can’t be the permanent the Aura is already attached to, it must be controlled by the player who controls the permanent the Aura is attached to, and it must be able to be enchanted by the Aura.
-            (It doesn’t matter who controls the Aura or who controls Simic Guildmage.)
-            If no such permanent exists, the Aura doesn’t move.
+            It can't be the permanent the Aura is already attached to, it must be controlled by the player who controls the permanent the Aura is attached to, and it must be able to be enchanted by the Aura.
+            (It doesn't matter who controls the Aura or who controls Simic Guildmage.)
+            If no such permanent exists, the Aura doesn't move.
          */
 
         Player controller = game.getPlayer(source.getControllerId());

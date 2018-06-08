@@ -22,7 +22,7 @@ public class HideawayTest extends CardTestPlayerBase {
      * at the top four cards of your library. Exile one of them face down and
      * put the rest on the bottom of your library in any order. The exiled card
      * gains ‘Any player who has controlled the permanent that exiled this card
-     * may look at this card in the exile zone.’”
+     * may look at this card in the exile zone.'”
      *
      */
     /**

@@ -1,4 +1,3 @@
-
 package mage.filter;
 
 import java.util.ArrayList;
@@ -42,6 +41,9 @@ public class FilterStackObject extends FilterObject<StackObject> {
     }
 
     public void add(ObjectPlayerPredicate predicate) {
+        if (isLockedFilter()) {
+            throw new UnsupportedOperationException("You may not modify a locked filter");
+        }
         extraPredicates.add(predicate);
     }
 

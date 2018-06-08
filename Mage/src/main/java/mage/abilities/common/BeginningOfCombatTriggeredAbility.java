@@ -77,11 +77,11 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of combat on your turn, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of combat on your turn, " + generateZoneString() + super.getRule();
             case OPPONENT:
-                return "At the beginning of each opponent's combat step, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each opponent's combat step, " + generateZoneString() + super.getRule();
             case ANY:
-                return "At the beginning of each combat, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each combat, " + generateZoneString() + super.getRule();
         }
         return "";
     }

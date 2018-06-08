@@ -27,7 +27,7 @@ public final class WordOfUndoing extends CardImpl {
     public WordOfUndoing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
-        //Return target creature and all white Auras you own attached to it to their owners’ hands.
+        //Return target creature and all white Auras you own attached to it to their owners' hands.
         this.getSpellAbility().addEffect(new WordOfUndoingReturnToHandEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
@@ -47,7 +47,7 @@ class WordOfUndoingReturnToHandEffect extends OneShotEffect {
 
     public WordOfUndoingReturnToHandEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return target creature and all white Auras you own attached to it to their owners’ hands.";
+        this.staticText = "Return target creature and all white Auras you own attached to it to their owners' hands.";
     }
 
     public WordOfUndoingReturnToHandEffect(final WordOfUndoingReturnToHandEffect effect) {

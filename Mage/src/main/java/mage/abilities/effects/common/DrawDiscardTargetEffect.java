@@ -28,10 +28,10 @@ public class DrawDiscardTargetEffect extends OneShotEffect {
         this.cardsToDiscard = cardsToDiscard;
         staticText = new StringBuilder("Target player draws ")
                 .append(cardsToDraw == 1?"a": CardUtil.numberToText(cardsToDraw))
-                .append(" card").append(cardsToDraw == 1?" ": "s")
+                .append(" card").append(cardsToDraw == 1?"": "s")
                 .append(", then discards ")
                 .append(cardsToDiscard == 1?"a": CardUtil.numberToText(cardsToDiscard))
-                .append(" card").append(cardsToDiscard == 1?" ": "s").toString();
+                .append(" card").append(cardsToDiscard == 1?"": "s").toString();
     }
 
     public DrawDiscardTargetEffect(final DrawDiscardTargetEffect effect) {

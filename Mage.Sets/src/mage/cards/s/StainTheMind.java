@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
@@ -24,7 +24,7 @@ public final class StainTheMind extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Name a nonland card. Search target player's graveyard, hand, and library for any number of card's with that name and exile them. Then that player shuffles their library.
-        this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
+        this.getSpellAbility().addEffect((new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
         this.getSpellAbility().addEffect(new StainTheMindEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -51,7 +51,7 @@ class StainTheMindEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
     }
 

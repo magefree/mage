@@ -48,7 +48,7 @@ class ConcussiveBoltEffect extends OneShotEffect {
 
     public ConcussiveBoltEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Metalcraft - If you control three or more artifacts, creatures controlled by that player or by that planeswalker’s controller can’t block this turn.";
+        this.staticText = "Metalcraft - If you control three or more artifacts, creatures controlled by that player or by that planeswalker's controller can't block this turn.";
     }
 
     public ConcussiveBoltEffect(final ConcussiveBoltEffect effect) {

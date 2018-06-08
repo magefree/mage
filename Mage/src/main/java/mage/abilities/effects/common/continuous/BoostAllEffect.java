@@ -147,7 +147,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     protected void setText() {
         StringBuilder sb = new StringBuilder();
         if (excludeSource) {
-            sb.append("Other ");
+            sb.append("other ");
         }
         sb.append(filter.getMessage()).append(" get ");
         String p = power.toString();

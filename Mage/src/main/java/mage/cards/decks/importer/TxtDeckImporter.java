@@ -83,7 +83,7 @@ public class TxtDeckImporter extends DeckImporter {
             return;
         }
         String lineNum = line.substring(0, delim).trim();
-        String lineName = line.substring(delim).replace("’", "\'").trim();
+        String lineName = line.substring(delim).replace("'", "\'").trim();
         lineName = lineName
                 .replace("&amp;", "//")
                 .replace("Ã†", "Ae")

@@ -24,7 +24,7 @@ public final class JayasImmolatingInferno extends CardImpl {
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
         this.addAbility(new LegendarySpellAbility());
 
-        // Jaya’s Immolating Inferno deals X damage to each of up to three targets.
+        // Jaya's Immolating Inferno deals X damage to each of up to three targets.
         Effect effect = new DamageTargetEffect(new ManacostVariableValue());
         effect.setText("{this} deals X damage to each of up to three targets");
         this.getSpellAbility().addEffect(effect);

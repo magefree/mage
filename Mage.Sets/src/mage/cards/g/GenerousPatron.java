@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -63,12 +62,16 @@ class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (!getControllerId().equals(game.getControllerId(event.getSourceId()))) {
+            return false;
+        }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return event.getPlayerId().equals(this.getControllerId())
-                && permanent != null
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
+        return permanent != null
                 && permanent.isCreature()
-                && !permanent.getControllerId().equals(getControllerId())
-                && event.getAmount() > 0;
+                && !permanent.getControllerId().equals(getControllerId());
     }
 
     @Override

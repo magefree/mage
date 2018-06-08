@@ -53,7 +53,7 @@ class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         /**
-         * 29/05/2014	The ability of Dack’s Duplicate doesn’t target the
+         * 29/05/2014	The ability of Dack's Duplicate doesn't target the
          * creature.
          */
         permanent.addAbility(new DethroneAbility(), game);

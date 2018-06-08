@@ -78,6 +78,6 @@ class HellriderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control attacks, {this} deals 1 damage to the player or planeswalker it’s attacking.";
+        return "Whenever a creature you control attacks, {this} deals 1 damage to the player or planeswalker it's attacking.";
     }
 }

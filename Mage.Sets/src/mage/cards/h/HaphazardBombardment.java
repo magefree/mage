@@ -126,7 +126,7 @@ class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
 
         // 4/27/2018 	If one or more of the permanents with aim counters on them have indestructible,
         // select the permanent destroyed at random from among the permanents with aim counters
-        // that don’t have indestructible.
+        // that don't have indestructible.
         FilterPermanent filter = new FilterPermanent("if two or more permanents you don't control have an aim counter on them");
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
         filter.add(new CounterPredicate(CounterType.AIM));

@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -121,6 +120,7 @@ class GemstoneCavernsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        boolean result = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(source.getSourceId());
@@ -133,13 +133,12 @@ class GemstoneCavernsEffect extends OneShotEffect {
                     if (permanent != null) {
                         Cost cost = new ExileFromHandCost(new TargetCardInHand());
                         if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
-                            cost.pay(source, game, source.getSourceId(), source.getControllerId(), true, null);
+                            result = cost.pay(source, game, source.getSourceId(), source.getControllerId(), true, null);
                         }
                     }
                 }
             }
-            return true;
         }
-        return false;
+        return result;
     }
 }

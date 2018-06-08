@@ -28,9 +28,9 @@ public final class SakuraTribeSpringcaller extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // At the beginning of your upkeep, add {G}. Until end of turn, you don’t lose this mana as steps and phases end.
+        // At the beginning of your upkeep, add {G}. Until end of turn, you don't lose this mana as steps and phases end.
         Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(Mana.GreenMana(1)), "your", true);
-        effect.setText("add {G}. Until end of turn, you don’t lose this mana as steps and phases end");
+        effect.setText("add {G}. Until end of turn, you don't lose this mana as steps and phases end");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
     }
 

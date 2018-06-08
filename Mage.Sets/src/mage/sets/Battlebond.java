@@ -115,6 +115,7 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Growth", 200, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Goblin Razerunners", 179, Rarity.RARE, mage.cards.g.GoblinRazerunners.class));
         cards.add(new SetCardInfo("Gold-Forged Sentinel", 236, Rarity.UNCOMMON, mage.cards.g.GoldForgedSentinel.class));
+        cards.add(new SetCardInfo("Gorm the Great", 8, Rarity.RARE, mage.cards.g.GormTheGreat.class));
         cards.add(new SetCardInfo("Greater Good", 201, Rarity.RARE, mage.cards.g.GreaterGood.class));
         cards.add(new SetCardInfo("Grotesque Mutation", 145, Rarity.COMMON, mage.cards.g.GrotesqueMutation.class));
         cards.add(new SetCardInfo("Grothama, All-Devouring", 71, Rarity.MYTHIC, mage.cards.g.GrothamaAllDevouring.class));

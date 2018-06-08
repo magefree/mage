@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -22,10 +17,20 @@ public final class JiangYangguMuYanling extends ExpansionSet {
     }
 
     private JiangYangguMuYanling() {
-        super("Global Series: Jiang Yanggu & Mu Yanling", "GS1", ExpansionSet.buildDate(2018, 6, 22), SetType.SUPPLEMENTAL);
+        super("Global Series: Jiang Yanggu & Mu Yanling", "GS1", ExpansionSet.buildDate(2018, 6, 22), SetType.SUPPLEMENTAL_STANDARD_LEGAL);
         this.blockName = "Global Series";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
+        cards.add(new SetCardInfo("Brilliant Plan", 17, Rarity.UNCOMMON, mage.cards.b.BrilliantPlan.class));
+        cards.add(new SetCardInfo("Cloak of Mists", 13, Rarity.COMMON, mage.cards.c.CloakOfMists.class));
+        cards.add(new SetCardInfo("Forest", 40, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Giant Spider", 27, Rarity.COMMON, mage.cards.g.GiantSpider.class));
+        cards.add(new SetCardInfo("Island", 21, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jiang Yanggu", 22, Rarity.MYTHIC, mage.cards.j.JiangYanggu.class));
+        cards.add(new SetCardInfo("Meandering River", 19, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
+        cards.add(new SetCardInfo("Mountain", 39, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mu Yanling", 1, Rarity.MYTHIC, mage.cards.m.MuYanling.class));
+        cards.add(new SetCardInfo("Plains", 20, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Timber Gorge", 38, Rarity.COMMON, mage.cards.t.TimberGorge.class));
+        cards.add(new SetCardInfo("Welkin Tern", 5, Rarity.COMMON, mage.cards.w.WelkinTern.class));
     }
 }

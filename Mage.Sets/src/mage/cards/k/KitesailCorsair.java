@@ -27,12 +27,12 @@ public final class KitesailCorsair extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Kitesail Corsair has flying as long as it’s attacking.
+        // Kitesail Corsair has flying as long as it's attacking.
         ContinuousEffect gainEffect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,  new ConditionalContinuousEffect(
                 gainEffect,
                 SourceAttackingCondition.instance,
-                "{this} has flying as long as it’s attacking."
+                "{this} has flying as long as it's attacking."
         )));
     }
 

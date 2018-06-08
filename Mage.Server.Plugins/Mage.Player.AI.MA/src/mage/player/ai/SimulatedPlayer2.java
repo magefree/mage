@@ -132,8 +132,8 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             if (variableManaCost != null) {
                 int multiplier = variableManaCost.getMultiplier();
 
-                for (int mana = 0; mana <= numAvailable; mana++) {
-                    if (mana % multiplier == 0) { // use only values dependant from muliplier
+                for (int mana = variableManaCost.getMinX(); mana <= numAvailable; mana++) {
+                    if (mana % multiplier == 0) { // use only values dependant from multiplier
                         int xAmount = mana / multiplier;
                         Ability newAbility = ability.copy();
                         VariableManaCost varCost = null;

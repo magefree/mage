@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -16,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -27,7 +27,7 @@ import mage.target.common.TargetCardInHand;
 public final class ScrollRack extends CardImpl {
 
     public ScrollRack(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {tap}: Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScrollRackEffect(), new GenericManaCost(1));
@@ -62,7 +62,6 @@ class ScrollRackEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             FilterCard filter = new FilterCard("card in your hand to exile");
-//            FilterCard filter2 = new FilterCard("(move the window) card exiled by " + sourceObject.getIdName() + " to put on top of library");
             TargetCardInHand target = new TargetCardInHand(0, controller.getHand().size(), filter);
             target.setRequired(false);
             int amountExiled = 0;
@@ -76,8 +75,11 @@ class ScrollRackEffect extends OneShotEffect {
                         }
                     }
                     controller.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, false, source.getSourceId(), sourceObject.getIdName());
-                    for (Card card : game.getExile().getExileZone(source.getSourceId()).getCards(game)) {
-                        card.setFaceDown(true, game);
+                    ExileZone exileZone = game.getExile().getExileZone(source.getSourceId());
+                    if (exileZone != null) {
+                        for (Card card : exileZone.getCards(game)) {
+                            card.setFaceDown(true, game);
+                        }
                     }
                 }
             }

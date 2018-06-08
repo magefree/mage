@@ -60,7 +60,7 @@ class NimbusChampionEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "return target creature to its owner's hand if "
                 + "that creature's power is less than or equal to "
-                + "the number of Warriors your team control.";
+                + "the number of Warriors your team controls";
     }
 
     NimbusChampionEffect(final NimbusChampionEffect effect) {

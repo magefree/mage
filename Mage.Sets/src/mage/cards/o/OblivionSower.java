@@ -73,8 +73,8 @@ class OblivionSowerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         /*
-        8/25/2015: Oblivion Sower’s ability allows you to put any land cards the player owns from exile onto the battlefield, regardless of how those cards were exiled.
-        8/25/2015: Cards that are face down in exile have no characteristics. Such cards can’t be put onto the battlefield with Oblivion Sower’s ability.
+        8/25/2015: Oblivion Sower's ability allows you to put any land cards the player owns from exile onto the battlefield, regardless of how those cards were exiled.
+        8/25/2015: Cards that are face down in exile have no characteristics. Such cards can't be put onto the battlefield with Oblivion Sower's ability.
          */
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));

@@ -37,7 +37,7 @@ public final class AquaticIncursion extends CardImpl {
         // When Aquatic Incursion enters the battlefield, create two 1/1 blue Merfolk creature tokens with hexproof.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkHexproofToken(), 2), false));
         
-        // {3}{U}: Target Merfolk can’t be blocked this turn.
+        // {3}{U}: Target Merfolk can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{U}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

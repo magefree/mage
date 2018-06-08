@@ -15,7 +15,7 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
     @Test
     public void testCastSuccessful() {
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
-        // Exile all nonland permanents that aren’t legendary.
+        // Exile all nonland permanents that aren't legendary.
         addCard(Zone.HAND, playerA, "Urza's Ruinous Blast"); // Sorcery Legendary  {4}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1); // non Legendary
@@ -46,7 +46,7 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
     @Test
     public void testCastNotSuccessful() {
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
-        // Exile all nonland permanents that aren’t legendary.
+        // Exile all nonland permanents that aren't legendary.
         addCard(Zone.HAND, playerA, "Urza's Ruinous Blast"); // Sorcery Legendary  {4}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1); // non Legendary
@@ -88,7 +88,7 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
         // Flying, first strike, vigilance, trample, haste, protection from black and from red
         addCard(Zone.BATTLEFIELD, playerB, "Akroma, Angel of Wrath", 1); // Legendary
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
-        // Exile all nonland permanents that aren’t legendary.
+        // Exile all nonland permanents that aren't legendary.
         addCard(Zone.GRAVEYARD, playerB, "Urza's Ruinous Blast"); // Sorcery Legendary  {4}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dire Fleet Daredevil");

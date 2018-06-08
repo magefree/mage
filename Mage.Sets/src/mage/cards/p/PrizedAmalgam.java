@@ -77,11 +77,11 @@ class PrizedAmalgamTriggerdAbility extends EntersBattlefieldAllTriggeredAbility 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         /**
-         * 4/8/2016 Prized Amalgam’s ability triggers only if it’s in your
+         * 4/8/2016 Prized Amalgam's ability triggers only if it's in your
          * graveyard immediately after a creature enters the battlefield from
          * your graveyard or you cast a creature from your graveyard. A Prized
-         * Amalgam that’s already on the battlefield won’t be returned at the
-         * beginning of the next end step if it’s put into your graveyard later.
+         * Amalgam that's already on the battlefield won't be returned at the
+         * beginning of the next end step if it's put into your graveyard later.
          */
         boolean result = false;
         if (super.checkTrigger(event, game)) {

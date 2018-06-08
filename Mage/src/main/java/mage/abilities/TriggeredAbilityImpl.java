@@ -141,7 +141,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
          * fail to do anything. The ability could be unable to find the object
          * because the object never entered the specified zone, because it left
          * the zone before the ability resolved, or because it is in a zone that
-         * is hidden from a player, such as a library or an opponent’s hand.
+         * is hidden from a player, such as a library or an opponent's hand.
          * (This rule applies even if the object leaves the zone and returns
          * again before the ability resolves.) The most common zone-change
          * triggers are enters-the-battlefield triggers and

@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.mana;
 
 import mage.constants.ManaType;
@@ -41,7 +40,6 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
      * Vorinclex, Voice of Hunger is not mana doubling River of Tears.
      */
     @Test
-    // @Ignore // TODO: need to fix Vorinclex, Voice of Hunger -- it's double fireup mana tap event
     public void testVorinclexVoiceofHungerRiverOfTearsManaMultiplier() {
         // Mana pools don't empty as steps and phases end.
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);

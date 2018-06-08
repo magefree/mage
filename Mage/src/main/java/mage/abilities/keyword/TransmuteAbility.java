@@ -23,14 +23,14 @@ import mage.target.common.TargetCardInLibrary;
  * 702.52. Transmute
  *
  * 702.52a Transmute is an activated ability that functions only while the card
- * with transmute is in a player’s hand. “Transmute [cost]” means “[Cost],
+ * with transmute is in a player's hand. “Transmute [cost]” means “[Cost],
  * Discard this card: Search your library for a card with the same converted
  * mana cost as the discarded card, reveal that card, and put it into your hand.
  * Then shuffle your library. Play this ability only any time you could play a
  * sorcery.”
  *
  * 702.52b Although the transmute ability is playable only if the card is in a
- * player’s hand, it continues to exist while the object is in play and in all
+ * player's hand, it continues to exist while the object is in play and in all
  * other zones. Therefore objects with transmute will be affected by effects
  * that depend on objects having one or more activated abilities.
  *

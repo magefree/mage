@@ -42,7 +42,7 @@ public final class RunedArch extends CardImpl {
         // {X}, {tap}, Sacrifice Runed Arch: X target creatures with power 2 or less are unblockable this turn.
         Ability ability = new SimpleActivatedAbility(
                 new CantBeBlockedTargetEffect(Duration.EndOfGame)
-                        .setText("X target creatures with power 2 or less can’t be blocked this turn."),
+                        .setText("X target creatures with power 2 or less can't be blocked this turn."),
                 new ManaCostsImpl("{X}")
         );
         ability.addCost(new TapSourceCost());

@@ -21,14 +21,14 @@ import mage.game.stack.StackObject;
 
 /**
  * Protection from a player is a new variant of the protection ability. It means
- * the following: -- True-Name Nemesis can’t be the target of spells or
- * abilities controlled by the chosen player. -- True-Name Nemesis can’t be
+ * the following: -- True-Name Nemesis can't be the target of spells or
+ * abilities controlled by the chosen player. -- True-Name Nemesis can't be
  * enchanted by Auras or equipped by Equipment controlled by the chosen player.
  * (The same is true for Fortifications controlled by the chosen player, if
- * True-Name Nemesis becomes a land.) -- True-Name Nemesis can’t be blocked by
+ * True-Name Nemesis becomes a land.) -- True-Name Nemesis can't be blocked by
  * creatures controlled by the chosen player. -- All damage that would be dealt
  * to True-Name Nemesis by sources controlled by the chosen player is prevented.
- * (The same is true for sources owned by the chosen player that don’t have
+ * (The same is true for sources owned by the chosen player that don't have
  * controllers.)
  *
  * @author LevelX2

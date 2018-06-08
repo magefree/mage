@@ -82,7 +82,7 @@ import mage.target.targetpointer.FixedTarget;
  * play the spell if possible, even if that player doesn't want to. Normal
  * timing considerations for the spell are ignored (for example, if the
  * suspended card is a creature and this ability resolves during your upkeep,
- * you’re able to play the card), but other play restrictions are not ignored.
+ * you're able to play the card), but other play restrictions are not ignored.
  *
  * If the second triggered ability of suspend resolves and the suspended card
  * can't be played due to a lack of legal targets or a play restriction, for

@@ -35,18 +35,26 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 public class MustBeBlockedByAtLeastOneSourceEffect extends RequirementEffect {
+    
+    private int minNumberOfBlockers;
 
     public MustBeBlockedByAtLeastOneSourceEffect() {
         this(Duration.EndOfTurn);
     }
 
     public MustBeBlockedByAtLeastOneSourceEffect(Duration duration) {
+        this(duration, 1);
+    }
+
+    public MustBeBlockedByAtLeastOneSourceEffect(Duration duration, int minNumberOfBlockers) {
         super(duration);
+        this.minNumberOfBlockers = minNumberOfBlockers;
         staticText = "{this} must be blocked " + (duration == Duration.EndOfTurn ? "this turn " : "") + "if able";
     }
 
     public MustBeBlockedByAtLeastOneSourceEffect(final MustBeBlockedByAtLeastOneSourceEffect effect) {
         super(effect);
+        this.minNumberOfBlockers = effect.minNumberOfBlockers;
     }
 
     @Override
@@ -67,6 +75,11 @@ public class MustBeBlockedByAtLeastOneSourceEffect extends RequirementEffect {
     @Override
     public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
         return source.getSourceId();
+    }
+
+    @Override
+    public int getMinNumberOfBlockers() {
+        return minNumberOfBlockers;
     }
 
     @Override

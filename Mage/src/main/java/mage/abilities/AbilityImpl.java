@@ -460,7 +460,7 @@ public abstract class AbilityImpl implements Ability {
             // controller specific alternate spell costs
             if (!noMana && !alternativeCostisUsed) {
                 if (this.getAbilityType() == AbilityType.SPELL
-                        // 117.9a Only one alternative cost can be applied to any one spell as it’s being cast.
+                        // 117.9a Only one alternative cost can be applied to any one spell as it's being cast.
                         // So an alternate spell ability can't be paid with Omniscience
                         && ((SpellAbility) this).getSpellAbilityType() != SpellAbilityType.BASE_ALTERNATE) {
                     for (AlternativeSourceCosts alternativeSourceCosts : controller.getAlternativeSourceCosts()) {

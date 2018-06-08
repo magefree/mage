@@ -50,7 +50,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
 
     public BonfireOfTheDamnedEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker’s controller controls";
+        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls";
     }
 
     public BonfireOfTheDamnedEffect(final BonfireOfTheDamnedEffect effect) {

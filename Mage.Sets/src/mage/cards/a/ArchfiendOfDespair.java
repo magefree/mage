@@ -64,7 +64,7 @@ class ArchfiendOfDespairEffect extends OneShotEffect {
 
     public ArchfiendOfDespairEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "each opponent loses life equal to the life he or she lost this turn";
+        this.staticText = "each opponent loses life equal to the life that player lost this turn";
     }
 
     public ArchfiendOfDespairEffect(final ArchfiendOfDespairEffect effect) {

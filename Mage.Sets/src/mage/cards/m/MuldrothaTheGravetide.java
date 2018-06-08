@@ -115,7 +115,7 @@ class MuldrothaTheGravetideWatcher extends Watcher {
     final HashMap<MageObjectReference, Set<CardType>> sourcePlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
     // final HashMap<UUID, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // player that played permanent types from graveyard
     // 4/27/2018 If multiple effects allow you to play a card from your graveyard, such as those of Gisa and Geralf and Karador,
-    // Ghost Chieftain, you must announce which permission you’re using as you begin to play the card.
+    // Ghost Chieftain, you must announce which permission you're using as you begin to play the card.
     // 4/27/2018: If you play a card from your graveyard and then have a new Muldrotha come under your control in the same turn,
     // you may play another card of that type from your graveyard that turn.
     private Zone fromZone;
