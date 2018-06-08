@@ -20,6 +20,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         super("Global Series: Jiang Yanggu & Mu Yanling", "GS1", ExpansionSet.buildDate(2018, 6, 22), SetType.SUPPLEMENTAL_STANDARD_LEGAL);
         this.blockName = "Global Series";
         this.hasBasicLands = true;
+        cards.add(new SetCardInfo("Aggressive Instinct", 34, Rarity.COMMON, mage.cards.a.AggressiveInstinct.class));
         cards.add(new SetCardInfo("Armored Whirl Turtle", 7, Rarity.COMMON, mage.cards.a.ArmoredWhirlTurtle.class));
         cards.add(new SetCardInfo("Breath of Fire", 33, Rarity.COMMON, mage.cards.b.BreathOfFire.class));
         cards.add(new SetCardInfo("Brilliant Plan", 17, Rarity.UNCOMMON, mage.cards.b.BrilliantPlan.class));
