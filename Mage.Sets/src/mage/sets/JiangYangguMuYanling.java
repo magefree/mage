@@ -56,6 +56,7 @@ public final class JiangYangguMuYanling extends ExpansionSet {
         cards.add(new SetCardInfo("Screeching Phoenix", 30, Rarity.RARE, mage.cards.s.ScreechingPhoenix.class));
         cards.add(new SetCardInfo("Stormcloud Spirit", 11, Rarity.UNCOMMON, mage.cards.s.StormcloudSpirit.class));
         cards.add(new SetCardInfo("Timber Gorge", 38, Rarity.COMMON, mage.cards.t.TimberGorge.class));
+        cards.add(new SetCardInfo("Vivid Flying Fish", 4, Rarity.COMMON, mage.cards.v.VividFlyingFish.class));
         cards.add(new SetCardInfo("Welkin Tern", 5, Rarity.COMMON, mage.cards.w.WelkinTern.class));
     }
 }
