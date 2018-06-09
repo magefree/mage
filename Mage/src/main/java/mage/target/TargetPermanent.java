@@ -1,4 +1,3 @@
-
 package mage.target;
 
 import java.util.HashSet;
@@ -8,6 +7,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -20,11 +20,11 @@ public class TargetPermanent extends TargetObject {
     protected FilterPermanent filter;
 
     public TargetPermanent() {
-        this(1, 1, new FilterPermanent(), false);
+        this(StaticFilters.FILTER_PERMANENT);
     }
 
     public TargetPermanent(FilterPermanent filter) {
-        this(1, 1, filter, false);
+        this(1, filter);
     }
 
     public TargetPermanent(int numTargets, FilterPermanent filter) {

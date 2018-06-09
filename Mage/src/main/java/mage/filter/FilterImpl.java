@@ -55,7 +55,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
     }
 
     @Override
-    public void setMessage(String message) {
+    public final void setMessage(String message) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
