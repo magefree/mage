@@ -61,7 +61,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(permanent, sourceId, playerId), game);
     }
 
-    public void add(ObjectPlayerPredicate predicate) {
+    public final void add(ObjectPlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
