@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -100,7 +99,7 @@ class SasayasEssence extends TokenImpl {
 
         // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new SasayasEssenceManaEffectEffect(),
+                new SasayasEssenceManaEffect(),
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
     }
 
@@ -114,28 +113,28 @@ class SasayasEssence extends TokenImpl {
     }
 }
 
-class SasayasEssenceManaEffectEffect extends ManaEffect {
+class SasayasEssenceManaEffect extends ManaEffect {
 
-    public SasayasEssenceManaEffectEffect() {
+    public SasayasEssenceManaEffect() {
         super();
         this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }
 
-    public SasayasEssenceManaEffectEffect(final SasayasEssenceManaEffectEffect effect) {
+    public SasayasEssenceManaEffect(final SasayasEssenceManaEffect effect) {
         super(effect);
     }
 
     @Override
-    public SasayasEssenceManaEffectEffect copy() {
-        return new SasayasEssenceManaEffectEffect(this);
+    public SasayasEssenceManaEffect copy() {
+        return new SasayasEssenceManaEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.getManaPool().addMana(getMana(game, source), game, source);
             checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
             return true;
 
         }
@@ -211,7 +210,7 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
 
                 }
             }
-            return mana;
+            return newMana;
         }
         return null;
     }
