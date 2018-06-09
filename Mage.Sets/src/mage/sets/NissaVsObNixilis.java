@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -39,7 +38,7 @@ public final class NissaVsObNixilis extends ExpansionSet {
         cards.add(new SetCardInfo("Despoiler of Souls", 45, Rarity.RARE, mage.cards.d.DespoilerOfSouls.class));
         cards.add(new SetCardInfo("Disfigure", 46, Rarity.COMMON, mage.cards.d.Disfigure.class));
         cards.add(new SetCardInfo("Doom Blade", 47, Rarity.COMMON, mage.cards.d.DoomBlade.class));
-        cards.add(new SetCardInfo("Elvish Visionary", 8, Rarity.UNCOMMON, mage.cards.e.ElvishVisionary.class));
+        cards.add(new SetCardInfo("Elvish Visionary", 8, Rarity.COMMON, mage.cards.e.ElvishVisionary.class));
         cards.add(new SetCardInfo("Fertile Thicket", 27, Rarity.COMMON, mage.cards.f.FertileThicket.class));
         cards.add(new SetCardInfo("Fertilid", 9, Rarity.COMMON, mage.cards.f.Fertilid.class));
         cards.add(new SetCardInfo("Fetid Imp", 48, Rarity.COMMON, mage.cards.f.FetidImp.class));
