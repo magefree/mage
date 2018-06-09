@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class MadScienceFairProject extends CardImpl {
     public MadScienceFairProject(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {tap}: Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color he or she chooses.
+        // {T}: Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color he or she chooses.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MadScienceFairManaEffect(), new TapSourceCost()));
     }
 
@@ -79,7 +78,6 @@ class MadScienceFairManaEffect extends ManaEffect {
                 ChoiceColor choice = new ChoiceColor();
                 if (controller.choose(Outcome.PutManaInPool, choice, game)) {
                     Mana chosen = choice.getMana(1);
-                    checkToFirePossibleEvents(chosen, game, source);
                     return chosen;
                 }
             }
