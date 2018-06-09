@@ -137,6 +137,12 @@ public final class StaticFilters {
         FILTER_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENTS = new FilterPermanent("permanents");
+
+    static {
+        FILTER_PERMANENTS.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_AN = new FilterArtifactPermanent("an artifact");
 
     static {
