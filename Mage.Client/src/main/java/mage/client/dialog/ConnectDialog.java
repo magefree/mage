@@ -1,6 +1,4 @@
-
-
- /*
+/*
  * ConnectDialog.java
  *
  * Created on 20-Jan-2010, 9:37:07 PM
@@ -17,7 +15,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.Writer;
-import java.io.Closeable;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketException;
@@ -646,7 +643,6 @@ public class ConnectDialog extends MageDialog {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-
     private void jProxySettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProxySettingsButtonActionPerformed
         PreferencesDialog.main(new String[]{PreferencesDialog.OPEN_CONNECTION_TAB});
     }//GEN-LAST:event_jProxySettingsButtonActionPerformed
@@ -691,54 +687,54 @@ public class ConnectDialog extends MageDialog {
 
     }//GEN-LAST:event_btnFind2findPublicServerActionPerformed
 
-    private void connectXmageus(java.awt.event.ActionEvent evt) {                                
-        String serverAddress = "xmage.us";
+    private void connectXmageus(java.awt.event.ActionEvent evt) {
+        String serverAddress = "vapormtgserver.com";
         this.txtServer.setText(serverAddress);
         this.txtPort.setText("17171");
         // Update userName and password according to the chosen server.
         this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
         this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
-    }                               
+    }
 
     private void btnFlagSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlagSearchActionPerformed
         doFastFlagSearch();
     }//GEN-LAST:event_btnFlagSearchActionPerformed
 
-    private void doFastFlagSearch(){
+    private void doFastFlagSearch() {
         Choice choice = new ChoiceImpl(false);
 
         // collect data from country combobox String[name][code]
         Map<String, String> choiceItems = new LinkedHashMap<>();
-        DefaultComboBoxModel flagModel = (DefaultComboBoxModel)cbFlag.getModel();
+        DefaultComboBoxModel flagModel = (DefaultComboBoxModel) cbFlag.getModel();
         String[] flagItem;
-        
-        for(int i = 0; i < flagModel.getSize(); i++){
-            flagItem = (String[])flagModel.getElementAt(i);
+
+        for (int i = 0; i < flagModel.getSize(); i++) {
+            flagItem = (String[]) flagModel.getElementAt(i);
             choiceItems.put(flagItem[1], flagItem[0]);
         }
-        
+
         choice.setKeyChoices(choiceItems);
         choice.setMessage("Select your country");
-        
+
         // current selection value restore
         String needSelectValue = null;
-        flagItem = (String[])flagModel.getSelectedItem();
-        if (flagItem != null){
-            needSelectValue = flagItem[1];            
+        flagItem = (String[]) flagModel.getSelectedItem();
+        if (flagItem != null) {
+            needSelectValue = flagItem[1];
         }
 
         // ask for new value
         PickChoiceDialog dlg = new PickChoiceDialog();
         dlg.setWindowSize(300, 500);
         dlg.showDialog(choice, needSelectValue);
-        if(choice.isChosen()){
+        if (choice.isChosen()) {
             flagItem = new String[2];
             flagItem[0] = choice.getChoiceValue();
-            flagItem[1] = choice.getChoiceKey();            
-            flagModel.setSelectedItem(flagItem);            
+            flagItem[1] = choice.getChoiceKey();
+            flagModel.setSelectedItem(flagItem);
         }
     }
-            
+
     public String getServer() {
         return this.txtServer.getText();
     }
