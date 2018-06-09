@@ -1,4 +1,3 @@
-
 package mage.game;
 
 import java.io.IOException;
@@ -2552,11 +2551,11 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        //Remove all emblems/plane the player controls
+        //Remove all commander/emblems/plane the player controls
         boolean addPlaneAgain = false;
         for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
             CommandObject obj = it.next();
-            if ((obj instanceof Emblem || obj instanceof Plane) && obj.getControllerId().equals(playerId)) {
+            if (obj.getControllerId().equals(playerId)) {
                 if (obj instanceof Emblem) {
                     ((Emblem) obj).discardEffects();// This may not be the best fix but it works
                 }
@@ -2590,6 +2589,8 @@ public abstract class GameImpl implements Game, Serializable {
                 it.remove();
             }
         }
+        // Make sure effects of no longer existing objects are removed
+        getContinuousEffects().removeInactiveEffects(this);
         // If the current monarch leaves the game. When that happens, the player whose turn it is becomes the monarch.
         // If the monarch leaves the game on their turn, the next player in turn order becomes the monarch.
         if (playerId.equals(getMonarchId())) {

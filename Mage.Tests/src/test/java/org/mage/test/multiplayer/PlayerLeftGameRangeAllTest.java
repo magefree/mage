@@ -1,4 +1,3 @@
-
 package org.mage.test.multiplayer;
 
 import java.io.FileNotFoundException;
@@ -324,4 +323,98 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerD, "Silvercoat Lion", 1);
 
     }
+
+    /**
+     * In an EDH game, a player controlling Thalia left the game and the ability
+     * still lasted for the rest of the game. Gamelog if it helps.
+     */
+    @Test
+    public void TestThaliaHereticCatharContinuousEffectEndsIfPlayerDies() {
+        // Player order: A -> D -> C -> B
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        // First strike
+        // Creatures and nonbasic lands your opponents control enter the battlefield tapped.
+        addCard(Zone.HAND, playerA, "Thalia, Heretic Cathar"); // Creature {2}{W}
+
+        addCard(Zone.HAND, playerD, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerD, "Mountain", 1);
+
+        addCard(Zone.HAND, playerC, "Pillarfield Ox", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Plains", 4);
+
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thalia, Heretic Cathar");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Lightning Bolt", playerA);
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerC, "Pillarfield Ox");
+
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+
+        setStopAt(4, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerD, "Lightning Bolt", 1);
+
+        assertLife(playerA, -1);
+        Assert.assertFalse("Player D is no longer in the game", playerA.isInGame());
+
+        assertPermanentCount(playerC, "Pillarfield Ox", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+
+        assertTapped("Pillarfield Ox", false);
+        assertTapped("Silvercoat Lion", false);
+
+    }
+
+    /**
+     * In an EDH game, a player controlling Thalia left the game and the ability
+     * still lasted for the rest of the game. Gamelog if it helps.
+     */
+    @Test
+    public void TestThaliaHereticCatharContinuousEffectEndsIfPlayerConcedes() {
+        // Player order: A -> D -> C -> B
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        // First strike
+        // Creatures and nonbasic lands your opponents control enter the battlefield tapped.
+        addCard(Zone.HAND, playerA, "Thalia, Heretic Cathar"); // Creature {2}{W}
+
+        addCard(Zone.HAND, playerD, "Juggernaut");
+        addCard(Zone.BATTLEFIELD, playerD, "Plains", 4);
+
+        addCard(Zone.HAND, playerC, "Pillarfield Ox", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Plains", 4);
+
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thalia, Heretic Cathar");
+
+        concede(2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Juggernaut");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerC, "Pillarfield Ox");
+
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+
+        setStopAt(4, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        Assert.assertFalse("Player D is no longer in the game", playerA.isInGame());
+        assertLife(playerA, 2);
+
+        assertPermanentCount(playerD, "Juggernaut", 1);
+        assertPermanentCount(playerC, "Pillarfield Ox", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+
+        assertTapped("Pillarfield Ox", false);
+        assertTapped("Silvercoat Lion", false);
+        assertTapped("Juggernaut", false);
+
+    }
+
 }
