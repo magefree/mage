@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -26,7 +25,7 @@ import mage.players.Player;
 public final class RootingKavu extends CardImpl {
 
     public RootingKavu(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.KAVU);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -44,33 +43,34 @@ public final class RootingKavu extends CardImpl {
         return new RootingKavu(this);
     }
 
-    static class RootingKavuEffect extends OneShotEffect {
+}
 
-        public RootingKavuEffect() {
-            super(Outcome.Benefit);
-            this.staticText = "shuffle all creature cards from your graveyard into your library.";
-        }
+class RootingKavuEffect extends OneShotEffect {
 
-        public RootingKavuEffect(final RootingKavuEffect effect) {
-            super(effect);
-        }
+    public RootingKavuEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "shuffle all creature cards from your graveyard into your library.";
+    }
 
-        @Override
-        public RootingKavuEffect copy() {
-            return new RootingKavuEffect(this);
-        }
+    public RootingKavuEffect(final RootingKavuEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                Cards cards = new CardsImpl();
-                cards.addAll(controller.getGraveyard().getCards(new FilterCreatureCard(), game));
-                controller.putCardsOnTopOfLibrary(cards, game, source, false);
-                controller.shuffleLibrary(source, game);
-                return true;
-            }
-            return false;
+    @Override
+    public RootingKavuEffect copy() {
+        return new RootingKavuEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards cards = new CardsImpl();
+            cards.addAll(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+            controller.putCardsOnTopOfLibrary(cards, game, source, false);
+            controller.shuffleLibrary(source, game);
+            return true;
         }
+        return false;
     }
 }
