@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.ArrayList;
@@ -34,6 +33,7 @@ public final class Fumble extends CardImpl {
 
         // Return target creature to its owner's hand. Gain control of all Auras and Equipment that were attached to it, then attach them to another creature.
         this.getSpellAbility().addEffect(new FumbleEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Fumble(final Fumble card) {
