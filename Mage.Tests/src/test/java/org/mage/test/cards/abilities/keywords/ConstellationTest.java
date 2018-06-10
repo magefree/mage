@@ -210,12 +210,12 @@ public class ConstellationTest extends CardTestPlayerBase {
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mephidross Vampire"); // give vampire to creatures
         } else {
             // Make sure not white mana is used here to cast the vampire
-            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
-            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
-            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
-            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
-            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
-            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {B}");
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mephidross Vampire"); // give vampire to creatures
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Archetype of Courage"); // make dax to creature
         }
