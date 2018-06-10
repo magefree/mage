@@ -14,7 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterHistoricSpell;
 
-public class SerraDisciple extends CardImpl {
+public final class SerraDisciple extends CardImpl {
 
     public SerraDisciple(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

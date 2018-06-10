@@ -22,6 +22,7 @@ Anthologies|ATH|
 Antiquities|ATQ|
 Avacyn Restored|AVR|
 Battle for Zendikar|BFZ|
+Battlebond|BBD|
 Born of the Gods|BNG|
 Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
@@ -86,6 +87,7 @@ Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
 Future Sight|FUT|
+Global Series: Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
 Grand Prix|GPX|
 WPN Gateway|GRC|
@@ -116,7 +118,7 @@ Magic 2012|M12|
 Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
-Core 2019|M19|
+Core Set 2019|M19|
 Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|

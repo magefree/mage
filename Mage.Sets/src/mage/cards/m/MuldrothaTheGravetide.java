@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.m;
 
 import java.util.EnumSet;
@@ -33,6 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -60,7 +35,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class MuldrothaTheGravetide extends CardImpl {
+public final class MuldrothaTheGravetide extends CardImpl {
 
     public MuldrothaTheGravetide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");
@@ -118,7 +93,8 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
             if (mageObject != null && watcher != null) {
                 for (CardType cardType : mageObject.getCardType()) {
                     if (cardType.isPermanentType()) {
-                        if (!watcher.permanentTypePlayedFromGraveyard(affectedControllerId, cardType)) {
+                        MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
+                        if (!watcher.permanentTypePlayedFromGraveyard(mor, cardType)) {
                             return true;
                         }
                     }
@@ -136,10 +112,12 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
  */
 class MuldrothaTheGravetideWatcher extends Watcher {
 
-    // final HashMap<MageObjectReference, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
-    final HashMap<UUID, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // player that played permanent types from graveyard
+    final HashMap<MageObjectReference, Set<CardType>> sourcePlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
+    // final HashMap<UUID, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // player that played permanent types from graveyard
     // 4/27/2018 If multiple effects allow you to play a card from your graveyard, such as those of Gisa and Geralf and Karador,
-    // Ghost Chieftain, you must announce which permission you’re using as you begin to play the card.
+    // Ghost Chieftain, you must announce which permission you're using as you begin to play the card.
+    // 4/27/2018: If you play a card from your graveyard and then have a new Muldrotha come under your control in the same turn,
+    // you may play another card of that type from your graveyard that turn.
     private Zone fromZone;
 
     public MuldrothaTheGravetideWatcher() {
@@ -148,7 +126,7 @@ class MuldrothaTheGravetideWatcher extends Watcher {
 
     public MuldrothaTheGravetideWatcher(final MuldrothaTheGravetideWatcher watcher) {
         super(watcher);
-        playerPlayedPermanentTypes.putAll(watcher.playerPlayedPermanentTypes);
+        sourcePlayedPermanentTypes.putAll(watcher.sourcePlayedPermanentTypes);
     }
 
     @Override
@@ -174,7 +152,7 @@ class MuldrothaTheGravetideWatcher extends Watcher {
     }
 
     private void addPermanentTypes(GameEvent event, Card mageObject, Game game) {
-        if (mageObject != null) {
+        if (mageObject != null && event.getAdditionalReference() != null) {
             UUID playerId = null;
             if (mageObject instanceof Spell) {
                 playerId = ((Spell) mageObject).getControllerId();
@@ -182,10 +160,10 @@ class MuldrothaTheGravetideWatcher extends Watcher {
                 playerId = ((Permanent) mageObject).getControllerId();
             }
             if (playerId != null) {
-                Set<CardType> permanentTypes = playerPlayedPermanentTypes.get(playerId);
+                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getAdditionalReference());
                 if (permanentTypes == null) {
                     permanentTypes = EnumSet.noneOf(CardType.class);
-                    playerPlayedPermanentTypes.put(playerId, permanentTypes);
+                    sourcePlayedPermanentTypes.put(event.getAdditionalReference(), permanentTypes);
                 }
                 Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
                 for (CardType cardType : mageObject.getCardType()) {
@@ -226,12 +204,12 @@ class MuldrothaTheGravetideWatcher extends Watcher {
 
     @Override
     public void reset() {
-        playerPlayedPermanentTypes.clear();
+        sourcePlayedPermanentTypes.clear();
         super.reset();
     }
 
-    public boolean permanentTypePlayedFromGraveyard(UUID playerId, CardType cardType) {
-        Set<CardType> permanentTypes = playerPlayedPermanentTypes.get(playerId);
+    public boolean permanentTypePlayedFromGraveyard(MageObjectReference sourceMor, CardType cardType) {
+        Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(sourceMor);
         if (permanentTypes != null) {
             return permanentTypes.contains(cardType);
         }

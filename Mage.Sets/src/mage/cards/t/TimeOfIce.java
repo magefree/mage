@@ -1,37 +1,11 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.constants.SubType;
@@ -44,7 +18,7 @@ import mage.constants.PhaseStep;
 import mage.constants.SagaChapter;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -58,7 +32,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class TimeOfIce extends CardImpl {
+public final class TimeOfIce extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creatures");
 
@@ -75,9 +49,13 @@ public class TimeOfIce extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
 
         // I, II — Tap target creature an opponent controls. It doesn't untap during its controller's untap step for as long as you control Time of Ice.
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new TapTargetEffect());
-        ability.addEffect(new TimeOfIceEffect());
-        ability.addTarget(new TargetCreaturePermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
+        Effects effects = new Effects();
+        effects.add(new TapTargetEffect());
+        effects.add(new TimeOfIceEffect());
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, effects,
+                new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE)
+        );
 
         // III — Return all tapped creatures to their owners' hands.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ReturnToHandFromBattlefieldAllEffect(filter));
@@ -120,8 +98,8 @@ class TimeOfIceEffect extends ContinuousRuleModifyingEffectImpl {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (!(sourceObject instanceof Permanent) || !((Permanent) sourceObject).getControllerId().equals(source.getControllerId())) {
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null || sourceObject.getZoneChangeCounter(game) > source.getSourceObjectZoneChangeCounter() + 1) {
             discard();
             return false;
         }

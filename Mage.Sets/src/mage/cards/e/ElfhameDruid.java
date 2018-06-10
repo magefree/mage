@@ -21,7 +21,7 @@ import mage.game.Game;
 
 import java.util.UUID;
 
-public class ElfhameDruid extends CardImpl {
+public final class ElfhameDruid extends CardImpl {
 
     public ElfhameDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

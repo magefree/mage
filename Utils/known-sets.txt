@@ -10,6 +10,7 @@ Arabian Nights|ArabianNights|
 Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
 Avacyn Restored|AvacynRestored|
+Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
 Born of the Gods|BornOfTheGods|
@@ -21,14 +22,14 @@ Classic Sixth Edition|ClassicSixthEdition|
 Coldsnap|Coldsnap|
 Commander 2013 Edition|Commander2013|
 Commander 2014 Edition|Commander2014|
-Commander 2015|Commander2015|
-Commander 2016|Commander2016|
-Commander 2017|Commander2017|
+Commander 2015 Edition|Commander2015|
+Commander 2016 Edition|Commander2016|
+Commander 2017 Edition|Commander2017|
 Commander Anthology|CommanderAnthology|
 Commander's Arsenal|CommandersArsenal|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
-Core 2019|Core2019|
+Core Set 2019|CoreSet2019|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
@@ -86,6 +87,7 @@ From the Vault: Twenty|FTVTwenty|
 Future Sight|FutureSight|
 Game Day|GameDay|
 Gatecrash|Gatecrash|
+Global Series: Jiang Yanggu & Mu Yanling|JiangYangguMuYanling|
 Grand Prix|GrandPrix|
 Guildpact|Guildpact|
 Guru|Guru|

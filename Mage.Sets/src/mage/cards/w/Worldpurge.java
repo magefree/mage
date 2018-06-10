@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.w;
 
 import java.util.HashSet;
@@ -51,12 +25,12 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class Worldpurge extends CardImpl {
+public final class Worldpurge extends CardImpl {
 
     public Worldpurge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W/U}{W/U}{W/U}{W/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W/U}{W/U}{W/U}{W/U}");
 
-        // Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Empty all mana pools.
+        // Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana.
         this.getSpellAbility().addEffect(new WorldpurgeEffect());
 
     }
@@ -75,7 +49,7 @@ class WorldpurgeEffect extends OneShotEffect {
 
     public WorldpurgeEffect() {
         super(Outcome.Discard);
-        this.staticText = "Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Empty all mana pools.";
+        this.staticText = "Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana";
     }
 
     public WorldpurgeEffect(final WorldpurgeEffect effect) {
@@ -117,7 +91,7 @@ class WorldpurgeEffect extends OneShotEffect {
                 }
             }
             game.emptyManaPools();
-            game.informPlayers(sourceObject.getLogName() + " - All mana pools have been emptied");
+            game.informPlayers(sourceObject.getLogName() + " - All players have lost all unspent mana");
             return true;
         }
         return false;

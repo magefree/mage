@@ -1,5 +1,6 @@
 package org.mage.test.serverside.base.impl;
 
+import mage.MageInt;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -47,6 +48,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // Defines the constant if for activate ability is not target but a ability on the stack to define
     public static final String NO_TARGET = "NO_TARGET";
 
+    public static final String CHECK_COMMAND_PT = "PT";
+    public static final String CHECK_COMMAND_ABILITY = "ABILITY";
+    public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
+    public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
+    public static final String CHECK_COMMAND_COLOR = "COLOR";
+    public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
+
     protected GameOptions gameOptions;
 
     protected String deckNameA;
@@ -64,7 +72,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         UNKNOWN
     }
 
-    public CardTestPlayerAPIImpl(){
+    public CardTestPlayerAPIImpl() {
         // load all cards to db from class list
         ArrayList<String> errorsList = new ArrayList<>();
         CardScanner.scan(errorsList);
@@ -217,6 +225,38 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 throw new IllegalArgumentException("Wrong player in 'battlefield' line, player=" + player + ", line=" + line);
         }
         return player;
+    }
+
+    private void check(String checkName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
+        String res = "check:" + command;
+        for (String param : params) {
+            res += "@" + param;
+        }
+        player.addAction(checkName, turnNum, step, res);
+    }
+
+    public void checkPT(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer power, Integer toughness) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PT, permanentName, power.toString(), toughness.toString());
+    }
+
+    public void checkAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Class<?> abilityClass, Boolean mustHave) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_ABILITY, permanentName, abilityClass.getName(), mustHave.toString());
+    }
+
+    public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNT, permanentName, count.toString());
+    }
+
+    public void checkHandCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_HAND_COUNT, count.toString());
+    }
+
+    public void checkColor(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, String colors, Boolean mustHave) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_COLOR, permanentName, colors, mustHave.toString());
+    }
+
+    public void checkSubType(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, SubType subType, Boolean mustHave) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_SUBTYPE, permanentName, subType.toString(), mustHave.toString());
     }
 
     /**
@@ -525,7 +565,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param cardName
      * @param ability
-     * @param mustHave     true if creature should contain ability, false if it should
+     * @param mustHave true if creature should contain ability, false if it should
      *                 NOT contain it instead
      * @param count    number of permanents with that ability
      * @throws AssertionError
@@ -683,7 +723,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param cardName Name of the permanent that should be checked.
      * @param type     A type to test for
-     * @param mustHave     true if creature should have type, false if it should not
+     * @param mustHave true if creature should have type, false if it should not
      */
     public void assertType(String cardName, CardType type, boolean mustHave) throws AssertionError {
         Permanent found = null;
@@ -742,10 +782,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert permanent color
      *
-     * @param player player to check
-     * @param cardName card name on battlefield from player
+     * @param player       player to check
+     * @param cardName     card name on battlefield from player
      * @param searchColors colors list with searchable values
-     * @param mustHave must or not must have that colors
+     * @param mustHave     must or not must have that colors
      */
     public void assertColor(Player player, String cardName, ObjectColor searchColors, boolean mustHave) {
         Assert.assertNotEquals("must setup colors to search", 0, searchColors.getColorCount());
@@ -876,26 +916,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
 
-    public void assertManaPool(Player player, ManaType color, int amount){
+    public void assertManaPool(Player player, ManaType color, int amount) {
         ManaPool manaPool = currentGame.getPlayer(player.getId()).getManaPool();
-        switch (color){
+        switch (color) {
             case COLORLESS:
-                Assert.assertEquals(amount,manaPool.getColorless() + manaPool.getConditionalMana().stream().mapToInt(Mana::getColorless).sum());
+                Assert.assertEquals(amount, manaPool.getColorless() + manaPool.getConditionalMana().stream().mapToInt(Mana::getColorless).sum());
                 break;
             case RED:
-                Assert.assertEquals(amount,manaPool.getRed() + manaPool.getConditionalMana().stream().mapToInt(Mana::getRed).sum());
+                Assert.assertEquals(amount, manaPool.getRed() + manaPool.getConditionalMana().stream().mapToInt(Mana::getRed).sum());
                 break;
             case BLUE:
-                Assert.assertEquals(amount,manaPool.getBlue() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlue).sum());
+                Assert.assertEquals(amount, manaPool.getBlue() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlue).sum());
                 break;
             case WHITE:
-                Assert.assertEquals(amount,manaPool.getWhite() + manaPool.getConditionalMana().stream().mapToInt(Mana::getWhite).sum());
+                Assert.assertEquals(amount, manaPool.getWhite() + manaPool.getConditionalMana().stream().mapToInt(Mana::getWhite).sum());
                 break;
             case GREEN:
-                Assert.assertEquals(amount,manaPool.getGreen() + manaPool.getConditionalMana().stream().mapToInt(Mana::getGreen).sum());
+                Assert.assertEquals(amount, manaPool.getGreen() + manaPool.getConditionalMana().stream().mapToInt(Mana::getGreen).sum());
                 break;
             case BLACK:
-                Assert.assertEquals(amount,manaPool.getBlack() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlack).sum());
+                Assert.assertEquals(amount, manaPool.getBlack() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlack).sum());
                 break;
         }
     }

@@ -16,7 +16,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
-public class AngelOfFlightAlabaster extends CardImpl {
+public final class AngelOfFlightAlabaster extends CardImpl {
     private static final FilterCard filter = new FilterCard("Spirit card from your graveyard");
 
     static {

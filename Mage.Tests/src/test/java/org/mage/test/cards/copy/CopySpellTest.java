@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package org.mage.test.cards.copy;
 
 import mage.abilities.keyword.FlyingAbility;
@@ -164,16 +138,16 @@ public class CopySpellTest extends CardTestPlayerBase {
      *
      * 702.46a Splice is a static ability that functions while a card is in your
      * hand. “Splice onto [subtype] [cost]” means “You may reveal this card from
-     * your hand as you cast a [subtype] spell. If you do, copy this card’s text
+     * your hand as you cast a [subtype] spell. If you do, copy this card's text
      * box onto that spell and pay [cost] as an additional cost to cast that
-     * spell.” Paying a card’s splice cost follows the rules for paying
+     * spell.” Paying a card's splice cost follows the rules for paying
      * additional costs in rules 601.2b and 601.2e–g. 601.2b If the spell is
      * modal the player announces the mode choice (see rule 700.2). If the
      * player wishes to splice any cards onto the spell (see rule 702.46), he or
      * she reveals those cards in their hand. 706.10. To copy a spell,
      * activated ability, or triggered ability means to put a copy of it onto
-     * the stack; a copy of a spell isn’t cast and a copy of an activated
-     * ability isn’t activated. A copy of a spell or ability copies both the
+     * the stack; a copy of a spell isn't cast and a copy of an activated
+     * ability isn't activated. A copy of a spell or ability copies both the
      * characteristics of the spell or ability and all decisions made for it,
      * including modes, targets, the value of X, and additional or alternative
      * costs. (See rule 601, “Casting Spells.”)

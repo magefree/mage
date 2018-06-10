@@ -25,7 +25,7 @@ import mage.players.Player;
  *
  * @author nickmyers
  */
-public class BlinkmothUrn extends CardImpl {
+public final class BlinkmothUrn extends CardImpl {
 
     public BlinkmothUrn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
@@ -51,7 +51,7 @@ class BlinkmothUrnEffect extends OneShotEffect {
 
     public BlinkmothUrnEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "if Blinkmoth Urn is untapped, that player adds {1} to their mana pool for each artifact he or she controls";
+        this.staticText = "if Blinkmoth Urn is untapped, that player adds {1} for each artifact he or she controls";
     }
 
     public BlinkmothUrnEffect(final BlinkmothUrnEffect effect) {

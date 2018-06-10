@@ -12,7 +12,7 @@ import mage.util.SubTypeList;
  *
  * @author JayDi85
  */
-public class CreatureToken extends TokenImpl {
+public final class CreatureToken extends TokenImpl {
 
     public CreatureToken() {
         this(0, 0);

@@ -1,30 +1,4 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.abilities.effects;
 
 import java.io.Serializable;
@@ -32,6 +6,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
@@ -347,7 +322,8 @@ public class ContinuousEffects implements Serializable {
         }
         // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
-        for (ReplacementEffect effect : replacementEffects) {
+        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext();) {
+            ReplacementEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
             }
@@ -378,7 +354,8 @@ public class ContinuousEffects implements Serializable {
                 replaceEffects.put(effect, applicableAbilities);
             }
         }
-        for (PreventionEffect effect : preventionEffects) {
+        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext();) {
+            PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
             }
@@ -504,36 +481,23 @@ public class ContinuousEffects implements Serializable {
      *
      * @param objectId
      * @param type
-     * @param controllerId
-     * @param game
-     * @return sourceId of the permitting effect if any exists otherwise returns
-     * null
-     */
-    public UUID asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
-        return asThough(objectId, type, null, controllerId, game);
-    }
-
-    /**
-     *
-     * @param objectId
-     * @param type
      * @param affectedAbility
      * @param controllerId
      * @param game
      * @return sourceId of the permitting effect if any exists otherwise returns
      * null
      */
-    public UUID asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    public MageObjectReference asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         for (AsThoughEffect effect : asThoughEffectsList) {
             Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (affectedAbility == null) {
                     if (effect.applies(objectId, ability, controllerId, game)) {
-                        return ability.getSourceId();
+                        return new MageObjectReference(ability.getSourceObject(game), game);
                     }
                 } else if (effect.applies(objectId, affectedAbility, ability, game)) {
-                    return ability.getSourceId();
+                    return new MageObjectReference(ability.getSourceObject(game), game);
                 }
             }
         }
@@ -606,7 +570,7 @@ public class ContinuousEffects implements Serializable {
      * the mana cost or alternative cost (as determined in rule 601.2b), plus
      * all additional costs and cost increases, and minus all cost reductions.
      * If the mana component of the total cost is reduced to nothing by cost
-     * reduction effects, it is considered to be {0}. It can’t be reduced to
+     * reduction effects, it is considered to be {0}. It can't be reduced to
      * less than {0}. Once the total cost is determined, any effects that
      * directly affect the total cost are applied. Then the resulting total cost
      * becomes “locked in.” If effects would change the total cost after this
@@ -849,6 +813,9 @@ public class ContinuousEffects implements Serializable {
             if (rEffect != null) {
                 event.getAppliedEffects().add(rEffect.getId());
                 caught = rEffect.replaceEvent(event, rAbility, game);
+                if (Duration.OneUse.equals(rEffect.getDuration())) {
+                    rEffect.discard();
+                }
             }
             if (caught) { // Event was completely replaced -> stop applying effects to it
                 break;
@@ -926,6 +893,13 @@ public class ContinuousEffects implements Serializable {
         while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
             done = true;
             layer = filterLayeredEffects(activeLayerEffects, Layer.AbilityAddingRemovingEffects_6);
+
+            // debug
+            /*
+            System.out.println(game.getTurn() + ", " + game.getPhase() + ": " + "need apply " + layer.stream()
+                    .map((eff) -> {return eff.getClass().getName().replaceAll(".+\\.(.+)", "$1");})
+                    .collect(Collectors.joining(", ")));
+             */
             for (ContinuousEffect effect : layer) {
                 if (activeLayerEffects.contains(effect) && !appliedEffects.contains(effect.getId())) { // Effect does still exist and was not applied yet
                     Set<UUID> dependentTo = effect.isDependentTo(layer);

@@ -6,7 +6,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Onslaught extends ExpansionSet {
+public final class Onslaught extends ExpansionSet {
 
     private static final Onslaught instance = new Onslaught();
 
@@ -97,6 +97,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Dawning Purist", 22, Rarity.UNCOMMON, mage.cards.d.DawningPurist.class));
         cards.add(new SetCardInfo("Death Match", 136, Rarity.RARE, mage.cards.d.DeathMatch.class));
         cards.add(new SetCardInfo("Death Pulse", 137, Rarity.UNCOMMON, mage.cards.d.DeathPulse.class));
+        cards.add(new SetCardInfo("Defensive Maneuvers", 23, Rarity.COMMON, mage.cards.d.DefensiveManeuvers.class));
         cards.add(new SetCardInfo("Demystify", 24, Rarity.COMMON, mage.cards.d.Demystify.class));
         cards.add(new SetCardInfo("Dirge of Dread", 138, Rarity.COMMON, mage.cards.d.DirgeOfDread.class));
         cards.add(new SetCardInfo("Disciple of Grace", 25, Rarity.COMMON, mage.cards.d.DiscipleOfGrace.class));
@@ -121,6 +122,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Warrior", 260, Rarity.COMMON, mage.cards.e.ElvishWarrior.class));
         cards.add(new SetCardInfo("Embermage Goblin", 200, Rarity.UNCOMMON, mage.cards.e.EmbermageGoblin.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 261, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
+        cards.add(new SetCardInfo("Endemic Plague", 142, Rarity.RARE, mage.cards.e.EndemicPlague.class));
         cards.add(new SetCardInfo("Entrails Feaster", 143, Rarity.RARE, mage.cards.e.EntrailsFeaster.class));
         cards.add(new SetCardInfo("Erratic Explosion", 201, Rarity.COMMON, mage.cards.e.ErraticExplosion.class));
         cards.add(new SetCardInfo("Essence Fracture", 82, Rarity.UNCOMMON, mage.cards.e.EssenceFracture.class));

@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.d;
 
 import java.util.UUID;
@@ -36,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -50,7 +23,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class DementiaSliver extends CardImpl {
+public final class DementiaSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 
@@ -65,7 +38,7 @@ public class DementiaSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All Slivers have "{T}: Name a card. Target opponent reveals a card at random from their hand. If it's the named card, that player discards it. Activate this ability only during your turn."
-        Ability gainedAbility = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new TapSourceCost(), MyTurnCondition.instance);
+        Ability gainedAbility = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new TapSourceCost(), MyTurnCondition.instance);
         gainedAbility.addEffect(new DementiaSliverEffect());
         gainedAbility.addTarget(new TargetOpponent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
@@ -92,7 +65,7 @@ class DementiaSliverEffect extends OneShotEffect {
 
     public DementiaSliverEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals a card at random from their hand. If it's the named card, that player discards it";
+        staticText = "Target opponent reveals a card at random from their hand. If that card has the chose name, that player discards it";
     }
 
     public DementiaSliverEffect(final DementiaSliverEffect effect) {
@@ -103,7 +76,7 @@ class DementiaSliverEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (opponent != null && sourceObject != null && !cardName.isEmpty()) {
             if (!opponent.getHand().isEmpty()) {
                 Cards revealed = new CardsImpl();

@@ -18,7 +18,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Styxo
  */
-public class HeavenEarth extends SplitCard {
+public final class HeavenEarth extends SplitCard {
 
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     private static final FilterCreaturePermanent filterWithouFlying = new FilterCreaturePermanent("creature without flying");

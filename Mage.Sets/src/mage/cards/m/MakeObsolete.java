@@ -10,7 +10,7 @@ import mage.constants.Duration;
 /**
  * @author royk
  */
-public class MakeObsolete extends CardImpl {
+public final class MakeObsolete extends CardImpl {
 
     public MakeObsolete(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");

@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -35,7 +9,7 @@ import mage.constants.SetType;
  *
  * @author Backfir3
  */
-public class UrzasSaga extends ExpansionSet {
+public final class UrzasSaga extends ExpansionSet {
 
     private static final UrzasSaga instance = new UrzasSaga();
 
@@ -134,6 +108,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Dromosaur", 182, Rarity.COMMON, mage.cards.d.Dromosaur.class));
         cards.add(new SetCardInfo("Duress", 132, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Eastern Paladin", 133, Rarity.RARE, mage.cards.e.EasternPaladin.class));
+        cards.add(new SetCardInfo("Electryte", 183, Rarity.RARE, mage.cards.e.Electryte.class));
         cards.add(new SetCardInfo("Elite Archers", 13, Rarity.RARE, mage.cards.e.EliteArchers.class));
         cards.add(new SetCardInfo("Elvish Herder", 247, Rarity.COMMON, mage.cards.e.ElvishHerder.class));
         cards.add(new SetCardInfo("Elvish Lyrist", 248, Rarity.COMMON, mage.cards.e.ElvishLyrist.class));
@@ -262,6 +237,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Presence of the Master", 32, Rarity.UNCOMMON, mage.cards.p.PresenceOfTheMaster.class));
         cards.add(new SetCardInfo("Priest of Gix", 150, Rarity.UNCOMMON, mage.cards.p.PriestOfGix.class));
         cards.add(new SetCardInfo("Priest of Titania", 270, Rarity.COMMON, mage.cards.p.PriestOfTitania.class));
+        cards.add(new SetCardInfo("Purging Scythe", 308, Rarity.RARE, mage.cards.p.PurgingScythe.class));
         cards.add(new SetCardInfo("Rain of Filth", 151, Rarity.UNCOMMON, mage.cards.r.RainOfFilth.class));
         cards.add(new SetCardInfo("Rain of Salt", 206, Rarity.UNCOMMON, mage.cards.r.RainOfSalt.class));
         cards.add(new SetCardInfo("Ravenous Skirge", 152, Rarity.COMMON, mage.cards.r.RavenousSkirge.class));

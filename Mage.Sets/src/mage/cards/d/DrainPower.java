@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.d;
 
 import java.util.ArrayList;
@@ -56,7 +30,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class DrainPower extends CardImpl {
+public final class DrainPower extends CardImpl {
 
     public DrainPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
@@ -102,7 +76,7 @@ class DrainPowerEffect extends OneShotEffect {
             List<Permanent> ignorePermanents = new ArrayList<>();
             Map<Permanent, List<ActivatedManaAbilityImpl>> manaAbilitiesMap = new HashMap<>();
             TargetPermanent target = null;
-            
+
             while (true) {
                 manaAbilitiesMap.clear();
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, targetPlayer.getId(), game)) {
@@ -112,7 +86,7 @@ class DrainPowerEffect extends OneShotEffect {
                         for (Ability ability : permanent.getAbilities()) {
                             if (ability instanceof ActivatedAbility && ability.getAbilityType() == AbilityType.MANA) {
                                 ActivatedManaAbilityImpl manaAbility = (ActivatedManaAbilityImpl) ability;
-                                if (manaAbility != null && manaAbility.canActivate(targetPlayer.getId(), game)) {
+                                if (manaAbility.canActivate(targetPlayer.getId(), game).canActivate()) {
                                     // canActivate can't check for mana abilities that require a mana cost, if the payment isn't possible (Cabal Coffers etc)
                                     // so it's necessary to filter them out manually - might be buggy in some fringe cases
                                     for (ManaCost manaCost : manaAbility.getManaCosts()) {
@@ -166,7 +140,7 @@ class DrainPowerEffect extends OneShotEffect {
             }
 
             // 106.12. One card (Drain Power) causes one player to lose unspent mana and another to add “the mana lost this way.” (Note that these may be the same player.)
-            // This empties the former player’s mana pool and causes the mana emptied this way to be put into the latter player’s mana pool. Which permanents, spells, and/or
+            // This empties the former player's mana pool and causes the mana emptied this way to be put into the latter player's mana pool. Which permanents, spells, and/or
             // abilities produced that mana are unchanged, as are any restrictions or additional effects associated with any of that mana.
             List<ManaPoolItem> manaItems = targetPlayer.getManaPool().getManaItems();
             targetPlayer.getManaPool().emptyPool(game);

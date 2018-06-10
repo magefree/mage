@@ -8,7 +8,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class BatToken extends TokenImpl {
+public final class BatToken extends TokenImpl {
     
     final static private List<String> tokenImageSets = new ArrayList<>();
 

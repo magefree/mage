@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class ManticoreEternal extends CardImpl {
+public final class ManticoreEternal extends CardImpl {
 
     public ManticoreEternal(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

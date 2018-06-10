@@ -1,51 +1,23 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -53,10 +25,10 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class ScionOfDarkness extends CardImpl {
+public final class ScionOfDarkness extends CardImpl {
 
     public ScionOfDarkness(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);
@@ -66,8 +38,7 @@ public class ScionOfDarkness extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Scion of Darkness deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ScionOfDarknessEffect(), true, true);
-        this.addAbility(ability);
+        this.addAbility(new ScionOfDarknessTriggeredAbility());
 
         // Cycling {3}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
@@ -83,39 +54,48 @@ public class ScionOfDarkness extends CardImpl {
     }
 }
 
-class ScionOfDarknessEffect extends OneShotEffect {
+class ScionOfDarknessTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ScionOfDarknessEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may put target creature card from that player's graveyard onto the battlefield under your control";
+    public ScionOfDarknessTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
     }
 
-    public ScionOfDarknessEffect(final ScionOfDarknessEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ScionOfDarknessEffect copy() {
-        return new ScionOfDarknessEffect(this);
+    public ScionOfDarknessTriggeredAbility(final ScionOfDarknessTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        Player you = game.getPlayer(source.getControllerId());
-        FilterCard filter = new FilterCard("creature in that player's graveyard");
+    public ScionOfDarknessTriggeredAbility copy() {
+        return new ScionOfDarknessTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getSourceId().equals(this.sourceId) || !((DamagedPlayerEvent) event).isCombatDamage()) {
+            return false;
+        }
+        Player damagedPlayer = game.getPlayer(event.getTargetId());
+        if (damagedPlayer == null) {
+            return false;
+        }
+        FilterCard filter = new FilterCard("creature in " + damagedPlayer.getName() + "'s graveyard");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-        if (target.canChoose(source.getSourceId(), you.getId(), game)) {
-            if (you.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), you.getId());
-                    return true;
-                }
-            }
-        }
-        return false;
+        this.getTargets().clear();
+        this.addTarget(target);
+        return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player, "
+                + "you may put target creature card from that player's "
+                + "graveyard onto the battlefield under your control";
     }
 }

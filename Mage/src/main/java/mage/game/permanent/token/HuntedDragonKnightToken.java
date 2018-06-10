@@ -12,7 +12,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HuntedDragonKnightToken extends TokenImpl {
+public final class HuntedDragonKnightToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

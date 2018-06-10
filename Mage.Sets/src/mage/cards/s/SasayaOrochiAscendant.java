@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.s;
 
 import java.util.UUID;
@@ -52,14 +25,13 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class SasayaOrochiAscendant extends CardImpl {
+public final class SasayaOrochiAscendant extends CardImpl {
 
     public SasayaOrochiAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -127,40 +99,55 @@ class SasayasEssence extends TokenImpl {
 
         // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new SasayasEssenceManaEffectEffect(),
+                new SasayasEssenceManaEffect(),
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
     }
+
     public SasayasEssence(final SasayasEssence token) {
         super(token);
     }
 
+    @Override
     public SasayasEssence copy() {
         return new SasayasEssence(this);
     }
 }
 
-class SasayasEssenceManaEffectEffect extends ManaEffect {
+class SasayasEssenceManaEffect extends ManaEffect {
 
-    public SasayasEssenceManaEffectEffect() {
+    public SasayasEssenceManaEffect() {
         super();
         this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }
 
-    public SasayasEssenceManaEffectEffect(final SasayasEssenceManaEffectEffect effect) {
+    public SasayasEssenceManaEffect(final SasayasEssenceManaEffect effect) {
         super(effect);
     }
 
     @Override
-    public SasayasEssenceManaEffectEffect copy() {
-        return new SasayasEssenceManaEffectEffect(this);
+    public SasayasEssenceManaEffect copy() {
+        return new SasayasEssenceManaEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Mana mana = (Mana) this.getValue("mana");
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && mana != null && permanent != null) {
+            Mana newMana = new Mana();
             FilterPermanent filter = new FilterLandPermanent();
             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
             filter.add(new NamePredicate(permanent.getName()));
@@ -189,14 +176,14 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                 }
 
                 if (!choice.getChoices().isEmpty()) {
-                    Mana newMana = new Mana();
+
                     for (int i = 0; i < count; i++) {
                         choice.clearChoice();
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
                             if (!controller.choose(outcome, choice, game)) {
-                                return false;
+                                return null;
                             }
                         }
                         switch (choice.getChoice()) {
@@ -220,17 +207,11 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                                 break;
                         }
                     }
-                    controller.getManaPool().addMana(newMana, game, source);
-                    checkToFirePossibleEvents(newMana, game, source);
+
                 }
             }
-            return true;
+            return newMana;
         }
-        return false;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

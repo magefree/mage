@@ -30,7 +30,7 @@ import java.util.UUID;
  * @author nick.myers
  */
 
-public class AuraThief extends CardImpl {
+public final class AuraThief extends CardImpl {
     
     public AuraThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

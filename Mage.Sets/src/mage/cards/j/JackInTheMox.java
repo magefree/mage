@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.j;
 
 import java.util.UUID;
@@ -45,7 +19,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class JackInTheMox extends CardImpl {
+public final class JackInTheMox extends CardImpl {
 
     public JackInTheMox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
@@ -91,44 +65,50 @@ class JackInTheMoxManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            int amount = controller.rollDice(game, 6);
-            switch (amount) {
-                case 1:
-                    permanent.sacrifice(source.getSourceId(), game);
-                    controller.loseLife(5, game, false);
-                    break;
-                case 2:
-                    controller.getManaPool().addMana(Mana.WhiteMana(1), game, source);
-                    break;
-                case 3:
-                    controller.getManaPool().addMana(Mana.BlueMana(1), game, source);
-                    break;
-                case 4:
-                    controller.getManaPool().addMana(Mana.BlackMana(1), game, source);
-                    break;
-                case 5:
-                    controller.getManaPool().addMana(Mana.RedMana(1), game, source);
-                    break;
-                case 6:
-                    controller.getManaPool().addMana(Mana.GreenMana(1), game, source);
-                    break;
-                default:
-                    break;
-            }
+        if (controller != null) {
+            controller.getManaPool().addMana(getMana(game, source), game, source);
             return true;
         }
         return false;
     }
 
     @Override
-    public JackInTheMoxManaEffect copy() {
-        return new JackInTheMoxManaEffect(this);
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller != null && permanent != null) {
+            int amount = controller.rollDice(game, 6);
+            Mana mana = new Mana();
+            switch (amount) {
+                case 1:
+                    permanent.sacrifice(source.getSourceId(), game);
+                    controller.loseLife(5, game, false);
+                    break;
+                case 2:
+                    mana.add(Mana.WhiteMana(1));
+                    break;
+                case 3:
+                    mana.add(Mana.BlueMana(1));
+                    break;
+                case 4:
+                    mana.add(Mana.BlackMana(1));
+                    break;
+                case 5:
+                    mana.add(Mana.RedMana(1));
+                    break;
+                case 6:
+                    mana.add(Mana.GreenMana(1));
+                    break;
+                default:
+                    break;
+            }
+            return mana;
+        }
+        return null;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
+    public JackInTheMoxManaEffect copy() {
+        return new JackInTheMoxManaEffect(this);
     }
 }

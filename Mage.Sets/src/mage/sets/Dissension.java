@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -34,7 +8,7 @@ import mage.constants.SetType;
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:40
  */
-public class Dissension extends ExpansionSet {
+public final class Dissension extends ExpansionSet {
 
     private static final Dissension instance = new Dissension();
 
@@ -131,6 +105,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Minister of Impediments", 144, Rarity.COMMON, mage.cards.m.MinisterOfImpediments.class));
         cards.add(new SetCardInfo("Mistral Charger", 13, Rarity.UNCOMMON, mage.cards.m.MistralCharger.class));
         cards.add(new SetCardInfo("Momir Vig, Simic Visionary", 118, Rarity.RARE, mage.cards.m.MomirVigSimicVisionary.class));
+        cards.add(new SetCardInfo("Nihilistic Glee", 50, Rarity.RARE, mage.cards.n.NihilisticGlee.class));
         cards.add(new SetCardInfo("Novijen, Heart of Progress", 175, Rarity.UNCOMMON, mage.cards.n.NovijenHeartOfProgress.class));
         cards.add(new SetCardInfo("Novijen Sages", 27, Rarity.RARE, mage.cards.n.NovijenSages.class));
         cards.add(new SetCardInfo("Ocular Halo", 28, Rarity.COMMON, mage.cards.o.OcularHalo.class));
@@ -214,6 +189,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Wakestone Gargoyle", 21, Rarity.RARE, mage.cards.w.WakestoneGargoyle.class));
         cards.add(new SetCardInfo("Walking Archive", 169, Rarity.RARE, mage.cards.w.WalkingArchive.class));
         cards.add(new SetCardInfo("War's Toll", 77, Rarity.RARE, mage.cards.w.WarsToll.class));
+        cards.add(new SetCardInfo("Weight of Spires", 78, Rarity.UNCOMMON, mage.cards.w.WeightOfSpires.class));
         cards.add(new SetCardInfo("Whiptail Moloch", 79, Rarity.COMMON, mage.cards.w.WhiptailMoloch.class));
         cards.add(new SetCardInfo("Windreaver", 138, Rarity.RARE, mage.cards.w.Windreaver.class));
         cards.add(new SetCardInfo("Wit's End", 58, Rarity.RARE, mage.cards.w.WitsEnd.class));

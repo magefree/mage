@@ -17,9 +17,9 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  * @author JRHerlehy
  *         Created on 4/8/18.
  */
-public class UrzasRuinousBlast extends CardImpl {
+public final class UrzasRuinousBlast extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonland permanents that aren’t legendary");
+    private static final FilterPermanent filter = new FilterPermanent("nonland permanents that aren't legendary");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
@@ -33,7 +33,7 @@ public class UrzasRuinousBlast extends CardImpl {
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
         this.addAbility(new LegendarySpellAbility());
 
-        // Exile all nonland permanents that aren’t legendary.
+        // Exile all nonland permanents that aren't legendary.
         this.getSpellAbility().addEffect(new ExileAllEffect(filter));
     }
 

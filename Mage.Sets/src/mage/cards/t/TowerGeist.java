@@ -46,7 +46,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX
  */
-public class TowerGeist extends CardImpl {
+public final class TowerGeist extends CardImpl {
 
     public TowerGeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

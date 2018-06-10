@@ -1,36 +1,12 @@
-/*
- * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.deck;
 
 import java.util.*;
 import java.util.Map.Entry;
+import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.keyword.PartnerAbility;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
@@ -98,6 +74,10 @@ public class PennyDreadfulCommander extends Constructed {
             invalid.put("Commander", "Sideboard must contain only the commander(s)");
             valid = false;
         } else {
+            Set<String> commanderNames = new HashSet<>();
+            for (Card commander : deck.getSideboard()) {
+                commanderNames.add(commander.getName());
+            }
             for (Card commander : deck.getSideboard()) {
                 if ((!commander.isCreature() || !commander.isLegendary())
                         && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
@@ -105,8 +85,18 @@ public class PennyDreadfulCommander extends Constructed {
                     valid = false;
                 }
                 if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                    invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
-                    valid = false;
+                    boolean partnersWith = false;
+                    for (Ability ability : commander.getAbilities()) {
+                        if (ability instanceof PartnerWithAbility
+                                && commanderNames.contains(((PartnerWithAbility) ability).getPartnerName())) {
+                            partnersWith = true;
+                            break;
+                        }
+                    }
+                    if (!partnersWith) {
+                        invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
+                        valid = false;
+                    }
                 }
                 FilterMana commanderColor = commander.getColorIdentity();
                 if (commanderColor.isWhite()) {

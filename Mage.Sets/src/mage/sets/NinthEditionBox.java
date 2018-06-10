@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class NinthEditionBox extends ExpansionSet {
+public final class NinthEditionBox extends ExpansionSet {
 
     private static final NinthEditionBox instance = new NinthEditionBox();
 

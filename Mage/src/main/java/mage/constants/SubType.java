@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import mage.util.SubTypeList;
 
 public enum SubType {
@@ -60,6 +61,7 @@ public enum SubType {
     AUROCHS("Aurochs", SubTypeSet.CreatureType),
     AUTOBOT("Autobot", SubTypeSet.CreatureType, true), // H17, Grimlock
     AVATAR("Avatar", SubTypeSet.CreatureType),
+    AZRA("Azra", SubTypeSet.CreatureType),
     // B
     BADGER("Badger", SubTypeSet.CreatureType),
     BARBARIAN("Barbarian", SubTypeSet.CreatureType),
@@ -245,6 +247,7 @@ public enum SubType {
     OX("Ox", SubTypeSet.CreatureType),
     OYSTER("Oyster", SubTypeSet.CreatureType),
     // P
+    PANGOLIN("Pangolin", SubTypeSet.CreatureType),
     PEGASUS("Pegasus", SubTypeSet.CreatureType),
     PENTAVITE("Pentavite", SubTypeSet.CreatureType),
     PEST("Pest", SubTypeSet.CreatureType),
@@ -328,17 +331,16 @@ public enum SubType {
     TROOPER("Trooper", SubTypeSet.CreatureType, true), // Star Wars
     TRILOBITE("Trilobite", SubTypeSet.CreatureType),
     TWILEK("Twi'lek", SubTypeSet.CreatureType, true), // Star Wars
-
     // U
     UGNAUGHT("Ugnaught", SubTypeSet.CreatureType, true),
     UNICORN("Unicorn", SubTypeSet.CreatureType),
-    //V
+    // V
     VAMPIRE("Vampire", SubTypeSet.CreatureType),
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
     VIASHINO("Viashino", SubTypeSet.CreatureType),
     VILLAIN("Villain", SubTypeSet.CreatureType, true), // Unstable
     VOLVER("Volver", SubTypeSet.CreatureType),
-    //W
+    // W
     WALL("Wall", SubTypeSet.CreatureType),
     WARRIOR("Warrior", SubTypeSet.CreatureType),
     WEEQUAY("Weequay", SubTypeSet.CreatureType, true),
@@ -389,6 +391,7 @@ public enum SubType {
     NIXILIS("Nixilis", SubTypeSet.PlaneswalkerType),
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
     RAL("Ral", SubTypeSet.PlaneswalkerType),
+    ROWAN("Rowan", SubTypeSet.PlaneswalkerType),
     SAHEELI("Saheeli", SubTypeSet.PlaneswalkerType),
     SAMUT("Samut", SubTypeSet.PlaneswalkerType),
     SARKHAN("Sarkhan", SubTypeSet.PlaneswalkerType),
@@ -401,7 +404,10 @@ public enum SubType {
     UGIN("Ugin", SubTypeSet.PlaneswalkerType),
     VENSER("Venser", SubTypeSet.PlaneswalkerType),
     VRASKA("Vraska", SubTypeSet.PlaneswalkerType),
+    WILL("Will", SubTypeSet.PlaneswalkerType),
     XENAGOS("Xenagos", SubTypeSet.PlaneswalkerType),
+    YANGGU("Yanggu", SubTypeSet.PlaneswalkerType),
+    YANLING("Yanling", SubTypeSet.PlaneswalkerType),
     YODA("Yoda", SubTypeSet.PlaneswalkerType, true);  // Star Wars
 
     private final SubTypeSet subTypeSet;
@@ -427,6 +433,16 @@ public enum SubType {
     @Override
     public String toString() {
         return description;
+    }
+
+    public static SubType fromString(String value) {
+        for (SubType st : SubType.values()) {
+            if (st.toString().equals(value)) {
+                return st;
+            }
+        }
+
+        throw new IllegalArgumentException("Can''t find subtype enum value: " + value);
     }
 
     public static SubType byDescription(String subType) {

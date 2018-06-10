@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.r;
 
 import java.util.HashMap;
@@ -55,10 +29,10 @@ import mage.target.Target;
  *
  * @author L_J
  */
-public class Retether extends CardImpl {
+public final class Retether extends CardImpl {
 
     public Retether(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
 
         // Return each Aura card from your graveyard to the battlefield. Only creatures can be enchanted this way.
         this.getSpellAbility().addEffect(new RetetherEffect());
@@ -108,7 +82,7 @@ class RetetherEffect extends OneShotEffect {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature to enchant (" + aura.getLogName() + ')');
                     filter.add(new CanBeEnchantedByPredicate(aura));
                     Target target = null;
-                                
+
                     auraLegalitySearch:
                     for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
@@ -135,6 +109,7 @@ class RetetherEffect extends OneShotEffect {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null && !permanent.cantBeAttachedBy(aura, game)) {
                                     auraMap.put(aura, permanent);
+                                    game.getState().setValue("attachTo:" + aura.getId(), permanent);
                                     continue auraCardsInGraveyard;
                                 }
                             }
@@ -143,17 +118,12 @@ class RetetherEffect extends OneShotEffect {
                     game.informPlayers("No valid creature targets for " + aura.getLogName());
                 }
             }
+            controller.moveCards(auraMap.keySet(), Zone.BATTLEFIELD, source, game);
             for (Entry<Card, Permanent> entry : auraMap.entrySet()) {
                 Card aura = entry.getKey();
                 Permanent permanent = entry.getValue();
-                if (aura != null) {
-                    if (permanent != null) {
-                        game.getState().setValue("attachTo:" + aura.getId(), permanent);
-                    }
-                    aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
-                    if (permanent != null) {
-                        permanent.addAttachment(aura.getId(), game);
-                    }
+                if (aura != null && permanent != null) {
+                    permanent.addAttachment(aura.getId(), game);
                 }
             }
             return true;

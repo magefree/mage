@@ -8,7 +8,7 @@ import mage.constants.Duration;
 
 import java.util.UUID;
 
-public class Charge extends CardImpl {
+public final class Charge extends CardImpl {
 
     public Charge(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.INSTANT}, "{W}");

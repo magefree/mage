@@ -12,6 +12,7 @@ import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -70,6 +71,13 @@ public final class StaticFilters {
     static {
         FILTER_CARD_CREATURE.setLockedFilter(true);
     }
+
+    public static final FilterCreatureCard FILTER_CARD_CREATURE_A = new FilterCreatureCard("a creature card");
+
+    static {
+        FILTER_CARD_CREATURE_A.setLockedFilter(true);
+    }
+
     public static final FilterCreatureCard FILTER_CARD_CREATURE_YOUR_GRAVEYARD = new FilterCreatureCard("creature card from your graveyard");
 
     static {
@@ -87,6 +95,25 @@ public final class StaticFilters {
     static {
         FILTER_CARD_LAND.setLockedFilter(true);
     }
+
+    public static final FilterLandCard FILTER_CARD_LAND_A = new FilterLandCard("a land card");
+
+    static {
+        FILTER_CARD_LAND_A.setLockedFilter(true);
+    }
+
+    public static final FilterBasicLandCard FILTER_CARD_BASIC_LAND = new FilterBasicLandCard();
+
+    static {
+        FILTER_CARD_BASIC_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterBasicLandCard FILTER_CARD_BASIC_LAND_A = new FilterBasicLandCard("a basic land card");
+
+    static {
+        FILTER_CARD_BASIC_LAND_A.setLockedFilter(true);
+    }
+
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();
 
     static {
@@ -108,6 +135,12 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENT.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_PERMANENTS = new FilterPermanent("permanents");
+
+    static {
+        FILTER_PERMANENTS.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_AN = new FilterArtifactPermanent("an artifact");
@@ -285,12 +318,6 @@ public final class StaticFilters {
         FILTER_LANDS_NONBASIC.setLockedFilter(true);
     }
 
-    public static final FilterBasicLandCard FILTER_BASIC_LAND_CARD = new FilterBasicLandCard();
-
-    static {
-        FILTER_BASIC_LAND_CARD.setLockedFilter(true);
-    }
-
     // Used for sacrifice targets that don't need the "you control" text
     public static final FilterControlledLandPermanent FILTER_CONTROLLED_LAND_SHORT_TEXT = new FilterControlledLandPermanent("a land");
 
@@ -356,6 +383,12 @@ public final class StaticFilters {
         FILTER_PERMANENT_NON_LAND.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENTS_NON_LAND = new FilterNonlandPermanent("nonland permanents");
+
+    static {
+        FILTER_PERMANENTS_NON_LAND.setLockedFilter(true);
+    }
+
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");
 
     static {
@@ -377,10 +410,18 @@ public final class StaticFilters {
     static {
         FILTER_SPELL.setLockedFilter(true);
     }
-    public static final FilterSpell FILTER_A_SPELL = new FilterSpell("a spell");
+
+    public static final FilterSpell FILTER_SPELL_A = new FilterSpell("a spell");
 
     static {
-        FILTER_A_SPELL.setLockedFilter(true);
+        FILTER_SPELL_A.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_A_MULTICOLORED = new FilterSpell("a multicolored spell");
+
+    static {
+        FILTER_SPELL_A_MULTICOLORED.add(new MulticoloredPredicate());
+        FILTER_SPELL_A_MULTICOLORED.setLockedFilter(true);
     }
 
     public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");

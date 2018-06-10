@@ -6,7 +6,7 @@ import mage.cards.r.RukhEgg;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class EighthEdition extends ExpansionSet {
+public final class EighthEdition extends ExpansionSet {
 
     private static final EighthEdition instance = new EighthEdition();
 

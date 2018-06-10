@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class KhenraEternal extends CardImpl {
+public final class KhenraEternal extends CardImpl {
 
     public KhenraEternal(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

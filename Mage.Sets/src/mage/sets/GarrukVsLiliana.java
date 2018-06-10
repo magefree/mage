@@ -13,7 +13,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class GarrukVsLiliana extends ExpansionSet {
+public final class GarrukVsLiliana extends ExpansionSet {
 
     private static final GarrukVsLiliana instance = new GarrukVsLiliana();
 

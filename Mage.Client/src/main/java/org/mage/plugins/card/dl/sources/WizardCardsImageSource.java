@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package org.mage.plugins.card.dl.sources;
 
 import java.io.BufferedReader;
@@ -265,6 +239,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("C17");
         supportedSets.add("XLN");
         supportedSets.add("DDT"); // Duel Decks: Merfolk vs. Goblins
+        supportedSets.add("DDU"); // Duel Decks: Elves vs. Inventors
         supportedSets.add("IMA"); // Iconic Msters
         supportedSets.add("E02"); // Explorers of Ixalan
         supportedSets.add("V17"); // From the Vault: Transform
@@ -340,6 +315,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DDR", "Duel Decks: Nissa vs. Ob Nixilis");
         setsAliases.put("DDS", "Duel Decks: Mind vs. Might");
         setsAliases.put("DDT", "Duel Decks: Merfolk vs. Goblins");
+        setsAliases.put("DDU", "Duel Decks: Elves vs. Inventors");
         setsAliases.put("DGM", "Dragon's Maze");
         setsAliases.put("DIS", "Dissension");
         setsAliases.put("DKA", "Dark Ascension");
@@ -544,7 +520,7 @@ public enum WizardCardsImageSource implements CardImageSource {
             if (setNames == null) {
                 setNames = Sets.getInstance().get(cardSet).getName();
             }
-            String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
+            String preferredLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
             for (String setName : setNames.split("\\^")) {
                 // String URLSetName = URLEncoder.encode(setName, "UTF-8");
                 String URLSetName = setName.replaceAll(" ", "%20");
@@ -582,8 +558,8 @@ public enum WizardCardsImageSource implements CardImageSource {
                                         cardName = cardName.substring(0, pos1);
                                     }
                                 }
-                                Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-                                setLinks.put(cardName.toLowerCase(Locale.ENGLISH) + numberChar, generateLink(preferedMultiverseId));
+                                Integer preferredMultiverseId = getLocalizedMultiverseId(preferredLanguage, multiverseId);
+                                setLinks.put(cardName.toLowerCase(Locale.ENGLISH) + numberChar, generateLink(preferredMultiverseId));
                             }
                         }
                     }
@@ -671,12 +647,12 @@ public enum WizardCardsImageSource implements CardImageSource {
         return "/Handlers/Image.ashx?multiverseid=" + landMultiverseId + "&type=card";
     }
 
-    private int getLocalizedMultiverseId(String preferedLanguage, Integer multiverseId) throws IOException {
-        if (preferedLanguage.equals("en")) {
+    private int getLocalizedMultiverseId(String preferredLanguage, Integer multiverseId) throws IOException {
+        if (preferredLanguage.equals("en")) {
             return multiverseId;
         }
 
-        String languageName = languageAliases.get(preferedLanguage);
+        String languageName = languageAliases.get(preferredLanguage);
         HashMap<String, Integer> localizedLanguageIds = getlocalizedMultiverseIds(multiverseId);
         if (localizedLanguageIds.containsKey(languageName)) {
             return localizedLanguageIds.get(languageName);
@@ -740,20 +716,20 @@ public enum WizardCardsImageSource implements CardImageSource {
 //
 //        private int multiverseId;
 //        private String cardName;
-//        private String preferedLanguage;
+//        private String preferredLanguage;
 //        private LinkedHashMap setLinks;
 //
-//        public GetImageLinkTask(int multiverseId, String cardName, String preferedLanguage, LinkedHashMap setLinks) {
+//        public GetImageLinkTask(int multiverseId, String cardName, String preferredLanguage, LinkedHashMap setLinks) {
 //            try {
 //                this.multiverseId = multiverseId;
 //                this.cardName = cardName;
-//                this.preferedLanguage = preferedLanguage;
+//                this.preferredLanguage = preferredLanguage;
 //                this.setLinks = setLinks;
 //            } catch (Exception ex) {
 //                logger.error(ex.getMessage());
 //                logger.error("multiverseId: " + multiverseId);
 //                logger.error("cardName: " + cardName);
-//                logger.error("preferedLanguage: " + preferedLanguage);
+//                logger.error("preferredLanguage: " + preferredLanguage);
 //                logger.error("setLinks: " + setLinks.toString());
 //            }
 //        }
@@ -764,8 +740,8 @@ public enum WizardCardsImageSource implements CardImageSource {
 //                if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
 //                    setLinks.putAll(getLandVariations(multiverseId, cardName));
 //                } else {
-//                    Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-//                    setLinks.put(cardName.toLowerCase(Locale.ENGLISH), generateLink(preferedMultiverseId));
+//                    Integer preferredMultiverseId = getLocalizedMultiverseId(preferredLanguage, multiverseId);
+//                    setLinks.put(cardName.toLowerCase(Locale.ENGLISH), generateLink(preferredMultiverseId));
 //                }
 //            } catch (IOException | NumberFormatException ex) {
 //                logger.error("Exception when parsing the wizards page: " + ex.getMessage());

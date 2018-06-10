@@ -10,7 +10,7 @@ import mage.constants.SetType;
  *
  * @author lopho
  */
-public class Unglued extends ExpansionSet {
+public final class Unglued extends ExpansionSet {
 
     private static final Unglued instance = new Unglued();
 

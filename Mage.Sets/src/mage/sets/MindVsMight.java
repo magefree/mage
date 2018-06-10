@@ -13,7 +13,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class MindVsMight extends ExpansionSet {
+public final class MindVsMight extends ExpansionSet {
 
     private static final MindVsMight instance = new MindVsMight();
 
