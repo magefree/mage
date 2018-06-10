@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.List;
@@ -86,7 +85,7 @@ class HaphazardBombardmentEffect extends OneShotEffect {
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             if (permanents.size() > 4) {
                 permanents.clear();
-                TargetPermanent target = new TargetPermanent(4, filter);
+                TargetPermanent target = new TargetPermanent(4, 4, filter, true);
                 controller.chooseTarget(outcome, target, source, game);
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
