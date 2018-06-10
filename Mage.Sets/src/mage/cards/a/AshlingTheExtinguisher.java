@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class AshlingTheExtinguisher extends CardImpl {
 
     public AshlingTheExtinguisher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.SHAMAN);
@@ -89,6 +88,6 @@ class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, choose target creature that player controls. He or she sacrifices that creature.";
+        return "Whenever {this} deals combat damage to a player, choose target creature that player controls. The player sacrifices that creature.";
     }
 }
