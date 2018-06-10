@@ -119,6 +119,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Energy Flux", 78, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
         cards.add(new SetCardInfo("Enslaved Horror", 134, Rarity.UNCOMMON, mage.cards.e.EnslavedHorror.class));
         cards.add(new SetCardInfo("Extortion", 135, Rarity.RARE, mage.cards.e.Extortion.class));
+        cards.add(new SetCardInfo("Extravagant Spirit", 79, Rarity.RARE, mage.cards.e.ExtravagantSpirit.class));
         cards.add(new SetCardInfo("Eye of Ramos", 294, Rarity.RARE, mage.cards.e.EyeOfRamos.class));
         cards.add(new SetCardInfo("False Demise", 80, Rarity.UNCOMMON, mage.cards.f.FalseDemise.class));
         cards.add(new SetCardInfo("Ferocity", 245, Rarity.COMMON, mage.cards.f.Ferocity.class));
