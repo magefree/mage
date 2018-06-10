@@ -173,6 +173,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Lost Soul", 111, Rarity.COMMON, mage.cards.l.LostSoul.class));
         cards.add(new SetCardInfo("Mana Drain", 65, Rarity.UNCOMMON, mage.cards.m.ManaDrain.class));
         cards.add(new SetCardInfo("Mana Matrix", 285, Rarity.RARE, mage.cards.m.ManaMatrix.class));
+        cards.add(new SetCardInfo("Marble Priest", 231, Rarity.UNCOMMON, mage.cards.m.MarblePriest.class));
         cards.add(new SetCardInfo("Marhault Elsdragon", 244, Rarity.UNCOMMON, mage.cards.m.MarhaultElsdragon.class));
         cards.add(new SetCardInfo("Mirror Universe", 287, Rarity.RARE, mage.cards.m.MirrorUniverse.class));
         cards.add(new SetCardInfo("Moat", 28, Rarity.RARE, mage.cards.m.Moat.class));
