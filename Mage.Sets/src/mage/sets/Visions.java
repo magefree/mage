@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -118,7 +117,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Parapet", 14, Rarity.COMMON, mage.cards.p.Parapet.class));
         cards.add(new SetCardInfo("Phyrexian Marauder", 151, Rarity.RARE, mage.cards.p.PhyrexianMarauder.class));
         cards.add(new SetCardInfo("Phyrexian Walker", 152, Rarity.COMMON, mage.cards.p.PhyrexianWalker.class));
-        cards.add(new SetCardInfo("Pillar Tombs of Aku", 17, Rarity.RARE, mage.cards.p.PillarTombsOfAku.class));
+        cards.add(new SetCardInfo("Pillar Tombs of Aku", 67, Rarity.RARE, mage.cards.p.PillarTombsOfAku.class));
         cards.add(new SetCardInfo("Prosperity", 40, Rarity.UNCOMMON, mage.cards.p.Prosperity.class));
         cards.add(new SetCardInfo("Python", 68, Rarity.COMMON, mage.cards.p.Python.class));
         cards.add(new SetCardInfo("Quicksand", 166, Rarity.UNCOMMON, mage.cards.q.Quicksand.class));
