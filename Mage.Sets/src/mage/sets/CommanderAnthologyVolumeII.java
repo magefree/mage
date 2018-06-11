@@ -57,7 +57,7 @@ public class CommanderAnthologyVolumeII extends ExpansionSet {
         cards.add(new SetCardInfo("Brave the Sands", 19, Rarity.UNCOMMON, mage.cards.b.BraveTheSands.class));
         cards.add(new SetCardInfo("Brawn", 133, Rarity.UNCOMMON, mage.cards.b.Brawn.class));
         cards.add(new SetCardInfo("Breath of Darigaaz", 88, Rarity.UNCOMMON, mage.cards.b.BreathOfDarigaaz.class));
-        cards.add(new SetCardInfo("Bred for the Hunt", 150, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
+        cards.add(new SetCardInfo("Bred for the Hunt", 151, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
         cards.add(new SetCardInfo("Buried Alive", 59, Rarity.UNCOMMON, mage.cards.b.BuriedAlive.class));
         cards.add(new SetCardInfo("Buried Ruin", 241, Rarity.UNCOMMON, mage.cards.b.BuriedRuin.class));
         cards.add(new SetCardInfo("Butcher of Malakir", 60, Rarity.RARE, mage.cards.b.ButcherOfMalakir.class));
@@ -311,7 +311,7 @@ public class CommanderAnthologyVolumeII extends ExpansionSet {
         cards.add(new SetCardInfo("Unnerve", 81, Rarity.COMMON, mage.cards.u.Unnerve.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 227, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
         cards.add(new SetCardInfo("Urza's Incubator", 228, Rarity.RARE, mage.cards.u.UrzasIncubator.class));
-        cards.add(new SetCardInfo("Victory's Herald", 48, Rarity.RARE, mage.cards.v.VictorysHerald.class));
+        cards.add(new SetCardInfo("Victory's Herald", 38, Rarity.RARE, mage.cards.v.VictorysHerald.class));
         cards.add(new SetCardInfo("Vivid Crag", 276, Rarity.UNCOMMON, mage.cards.v.VividCrag.class));
         cards.add(new SetCardInfo("Vivid Meadow", 277, Rarity.UNCOMMON, mage.cards.v.VividMeadow.class));
         cards.add(new SetCardInfo("Volcanic Offering", 126, Rarity.RARE, mage.cards.v.VolcanicOffering.class));
