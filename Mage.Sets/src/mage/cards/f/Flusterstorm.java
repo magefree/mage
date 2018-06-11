@@ -22,7 +22,7 @@ public final class Flusterstorm extends CardImpl {
 
         // Counter target instant or sorcery spell unless its controller pays {1}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManaCostsImpl("{1}")));
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         // Storm
         this.addAbility(new StormAbility());
     }

@@ -29,7 +29,7 @@ public final class BlistercoilWeird extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast an instant or sorcery spell, Blistercoil Weird gets +1/+1 until end of turn. Untap it.
-        Ability ability = new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false);
         ability.addEffect(new UntapSourceEffect());
         this.addAbility(ability);
 

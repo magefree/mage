@@ -82,7 +82,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
         if ((abilityToModify instanceof SpellAbility)
                 && abilityToModify.getControllerId().equals(source.getControllerId())) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-            return spell != null && StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL.match(spell, game);
+            return spell != null && StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY.match(spell, game);
         }
         return false;
     }

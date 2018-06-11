@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -10,9 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -20,22 +17,19 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public final class KilnFiend extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
     public KilnFiend(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new BoostSourceEffect(3, 0, Duration.EndOfTurn),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
+                false
+        ));
     }
 
     public KilnFiend(final KilnFiend card) {

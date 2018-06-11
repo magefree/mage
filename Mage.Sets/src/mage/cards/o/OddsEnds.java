@@ -26,7 +26,7 @@ public final class OddsEnds extends SplitCard {
         // Odds
         // Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.
         getLeftHalfCard().getSpellAbility().addEffect(new OddsEffect());
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
 
         // Ends
         // Target player sacrifices two attacking creatures.

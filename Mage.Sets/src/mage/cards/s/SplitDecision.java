@@ -25,7 +25,7 @@ public final class SplitDecision extends CardImpl {
 
         // Will of the council - Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter the spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new SplitDecisionEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
     }
 
     public SplitDecision(final SplitDecision card) {

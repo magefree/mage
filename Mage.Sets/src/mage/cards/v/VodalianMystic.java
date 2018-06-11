@@ -31,7 +31,7 @@ public final class VodalianMystic extends CardImpl {
 
         // {T}: Target instant or sorcery spell becomes the color of your choice.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(Duration.WhileOnStack), new TapSourceCost());
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
     }
 

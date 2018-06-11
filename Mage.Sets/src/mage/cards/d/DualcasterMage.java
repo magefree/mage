@@ -33,7 +33,7 @@ public final class DualcasterMage extends CardImpl {
         
         // When Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CopyTargetSpellEffect(), false);
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
 
     }

@@ -29,7 +29,7 @@ public final class Fork extends CardImpl {
 
         // Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new ForkEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
 
     }
 

@@ -20,7 +20,7 @@ public class WillKenrithEmblem extends Emblem {
                 Zone.COMMAND,
                 new CopyTargetSpellEffect(true)
                         .setText("copy that spell. You may choose new targets for the copy"),
-                StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL,
+                StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
                 false,
                 true
         ));

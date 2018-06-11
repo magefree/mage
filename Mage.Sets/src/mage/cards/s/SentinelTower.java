@@ -46,7 +46,7 @@ public final class SentinelTower extends CardImpl {
 class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
 
     SentinelTowerTriggeredAbility() {
-        super(new DamageTargetEffect(0), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false);
+        super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false);
         this.addTarget(new TargetAnyTarget());
     }
 

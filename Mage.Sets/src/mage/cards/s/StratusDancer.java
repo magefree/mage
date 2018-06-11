@@ -40,7 +40,7 @@ public final class StratusDancer extends CardImpl {
         Effect effect = new CounterTargetEffect();
         effect.setText("counter target instant or sorcery spell");
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect, false);
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
         
     }

@@ -37,7 +37,7 @@ public final class JudgesFamiliar extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CounterUnlessPaysEffect(new GenericManaCost(1)),
                 new SacrificeSourceCost());
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
     }
 
