@@ -75,6 +75,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Luminous Bonds", 25, Rarity.COMMON, mage.cards.l.LuminousBonds.class));
         cards.add(new SetCardInfo("Marauder's Axe", 240, Rarity.COMMON, mage.cards.m.MaraudersAxe.class));
         cards.add(new SetCardInfo("Mighty Leap", 28, Rarity.COMMON, mage.cards.m.MightyLeap.class));
+        cards.add(new SetCardInfo("Militia Bugler", 29, Rarity.UNCOMMON, mage.cards.m.MilitiaBugler.class));
         cards.add(new SetCardInfo("Mist-Cloaked Herald", 310, Rarity.COMMON, mage.cards.m.MistCloakedHerald.class));
         cards.add(new SetCardInfo("Murder", 110, Rarity.UNCOMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Nexus of Fate", 306, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class));
