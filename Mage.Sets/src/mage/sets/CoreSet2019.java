@@ -87,6 +87,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Recollect", 197, Rarity.UNCOMMON, mage.cards.r.Recollect.class));
         cards.add(new SetCardInfo("Reliquary Tower", 254, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Revitalize", 35, Rarity.COMMON, mage.cards.r.Revitalize.class));
+        cards.add(new SetCardInfo("Riddlemaster Sphinx", 287, Rarity.RARE, mage.cards.r.RiddlemasterSphinx.class));
         cards.add(new SetCardInfo("Rustwing Falcon", 36, Rarity.COMMON, mage.cards.r.RustwingFalcon.class));
         cards.add(new SetCardInfo("Salvager of Secrets", 70, Rarity.COMMON, mage.cards.s.SalvagerOfSecrets.class));
         cards.add(new SetCardInfo("Scholar of Stars", 71, Rarity.COMMON, mage.cards.s.ScholarOfStars.class));
