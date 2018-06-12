@@ -1,9 +1,9 @@
-
 package mage.abilities.keyword;
 
 import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -18,6 +18,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class EquipAbility extends ActivatedAbilityImpl {
+
+    public EquipAbility(int cost) {
+        this(Outcome.AddAbility, new GenericManaCost(cost));
+    }
 
     public EquipAbility(Outcome outcome, Cost cost) {
         this(outcome, cost, new TargetControlledCreaturePermanent());
