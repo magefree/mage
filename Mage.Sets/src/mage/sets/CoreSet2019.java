@@ -52,6 +52,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Gearsmith Prodigy", 57, Rarity.COMMON, mage.cards.g.GearsmithProdigy.class));
         cards.add(new SetCardInfo("Ghastbark Twins", 181, Rarity.UNCOMMON, mage.cards.g.GhastbarkTwins.class));
         cards.add(new SetCardInfo("Giant Spider", 183, Rarity.COMMON, mage.cards.g.GiantSpider.class));
+        cards.add(new SetCardInfo("Gigantosaurus", 185, Rarity.RARE, mage.cards.g.Gigantosaurus.class));
         cards.add(new SetCardInfo("Goblin Instigator", 142, Rarity.COMMON, mage.cards.g.GoblinInstigator.class));
         cards.add(new SetCardInfo("Goblin Motivator", 143, Rarity.COMMON, mage.cards.g.GoblinMotivator.class));
         cards.add(new SetCardInfo("Grasping Scoundrel", 312, Rarity.COMMON, mage.cards.g.GraspingScoundrel.class));
