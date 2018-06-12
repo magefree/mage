@@ -1,23 +1,23 @@
-package mage.cards.m;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author TheElk801
  */
-public final class MasterOfDiversion extends CardImpl {
+public final class StarCrownedStag extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
@@ -25,26 +25,25 @@ public final class MasterOfDiversion extends CardImpl {
         filter.add(new DefendingPlayerControlsPredicate());
     }
 
-    public MasterOfDiversion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SCOUT);
+    public StarCrownedStag(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add(SubType.ELK);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Whenever Master of Diversion attacks, tap target creature defending player controls.
+        // Whenever attacks, tap target creature defending player controls.
         Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    public MasterOfDiversion(final MasterOfDiversion card) {
+    public StarCrownedStag(final StarCrownedStag card) {
         super(card);
     }
 
     @Override
-    public MasterOfDiversion copy() {
-        return new MasterOfDiversion(this);
+    public StarCrownedStag copy() {
+        return new StarCrownedStag(this);
     }
 }
