@@ -403,6 +403,7 @@ public enum SubType {
     TIBALT("Tibalt", SubTypeSet.PlaneswalkerType),
     UGIN("Ugin", SubTypeSet.PlaneswalkerType),
     VENSER("Venser", SubTypeSet.PlaneswalkerType),
+    VIVIEN("Vivien", SubTypeSet.PlaneswalkerType),
     VRASKA("Vraska", SubTypeSet.PlaneswalkerType),
     WILL("Will", SubTypeSet.PlaneswalkerType),
     XENAGOS("Xenagos", SubTypeSet.PlaneswalkerType),
