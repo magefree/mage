@@ -40,6 +40,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Dreadmaw", 172, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Daybreak Chaplain", 10, Rarity.COMMON, mage.cards.d.DaybreakChaplain.class));
         cards.add(new SetCardInfo("Demon of Catastrophes", 91, Rarity.RARE, mage.cards.d.DemonOfCatastrophes.class));
+        cards.add(new SetCardInfo("Desecrated Tomb", 230, Rarity.RARE, mage.cards.d.DesecratedTomb.class));
         cards.add(new SetCardInfo("Diregraf Ghoul", 92, Rarity.UNCOMMON, mage.cards.d.DiregrafGhoul.class));
         cards.add(new SetCardInfo("Disperse", 50, Rarity.COMMON, mage.cards.d.Disperse.class));
         cards.add(new SetCardInfo("Divination", 51, Rarity.COMMON, mage.cards.d.Divination.class));
