@@ -46,6 +46,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Priest", 11, Rarity.COMMON, mage.cards.d.DwarvenPriest.class));
         cards.add(new SetCardInfo("Dwindle", 53, Rarity.COMMON, mage.cards.d.Dwindle.class));
         cards.add(new SetCardInfo("Electrify", 139, Rarity.COMMON, mage.cards.e.Electrify.class));
+        cards.add(new SetCardInfo("Elvish Rejuvenator", 180, Rarity.COMMON, mage.cards.e.ElvishRejuvenator.class));
         cards.add(new SetCardInfo("Fiery Finish", 140, Rarity.UNCOMMON, mage.cards.f.FieryFinish.class));
         cards.add(new SetCardInfo("Fire Elemental", 141, Rarity.COMMON, mage.cards.f.FireElemental.class));
         cards.add(new SetCardInfo("Fountain of Renewal", 235, Rarity.UNCOMMON, mage.cards.f.FountainOfRenewal.class));
