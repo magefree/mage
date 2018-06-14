@@ -1,14 +1,17 @@
-
-
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.StaticAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -17,7 +20,7 @@ import mage.game.Game;
 public final class TetraviteToken extends TokenImpl {
 
     public TetraviteToken() {
-        super("Tetravite", "1/1 colorless Tetravite artifact creature token");
+        super("Tetravite", "1/1 colorless Tetravite artifact creature token with flying and \"This creature can’t be enchanted.\"");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TETRAVITE);
@@ -25,7 +28,7 @@ public final class TetraviteToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new CantBeEnchantedAbility());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetraviteTokenEffect()));
     }
 
     public TetraviteToken(final TetraviteToken token) {
@@ -37,24 +40,30 @@ public final class TetraviteToken extends TokenImpl {
     }
 }
 
-class CantBeEnchantedAbility extends StaticAbility {
+class TetraviteTokenEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantBeEnchantedAbility() {
-        super(Zone.BATTLEFIELD, null);
+    public TetraviteTokenEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "this creature can't be enchanted";
     }
 
-    public CantBeEnchantedAbility(final CantBeEnchantedAbility ability) {
-        super(ability);
+    public TetraviteTokenEffect(final TetraviteTokenEffect effect) {
+        super(effect);
     }
 
     @Override
-    public CantBeEnchantedAbility copy() {
-        return new CantBeEnchantedAbility(this);
+    public TetraviteTokenEffect copy() {
+        return new TetraviteTokenEffect(this);
     }
 
-    public boolean canTarget(MageObject source, Game game) {
-        return !(source.isEnchantment()
-                && source.hasSubtype(SubType.AURA, game));
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACH
+                || event.getType() == GameEvent.EventType.STAY_ATTACHED;
     }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(source.getSourceId());
+    }
 }
