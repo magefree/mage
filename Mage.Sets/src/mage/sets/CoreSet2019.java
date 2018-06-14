@@ -128,6 +128,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Totally Lost", 81, Rarity.COMMON, mage.cards.t.TotallyLost.class));
         cards.add(new SetCardInfo("Trumpet Blast", 165, Rarity.COMMON, mage.cards.t.TrumpetBlast.class));
         cards.add(new SetCardInfo("Trusty Packbeast", 41, Rarity.COMMON, mage.cards.t.TrustyPackbeast.class));
+        cards.add(new SetCardInfo("Two-Headed Zombie", 123, Rarity.COMMON, mage.cards.t.TwoHeadedZombie.class));
         cards.add(new SetCardInfo("Uncomfortable Chill", 82, Rarity.COMMON, mage.cards.u.UncomfortableChill.class));
         cards.add(new SetCardInfo("Ursine Champion", 304, Rarity.COMMON, mage.cards.u.UrsineChampion.class));
         cards.add(new SetCardInfo("Vampire Sovereign", 125, Rarity.UNCOMMON, mage.cards.v.VampireSovereign.class));
