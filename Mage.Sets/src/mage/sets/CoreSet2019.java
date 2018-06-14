@@ -64,6 +64,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Guttersnipe", 145, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Herald of Faith", 13, Rarity.UNCOMMON, mage.cards.h.HeraldOfFaith.class));
         cards.add(new SetCardInfo("Highland Game", 188, Rarity.COMMON, mage.cards.h.HighlandGame.class));
+        cards.add(new SetCardInfo("Horizon Scholar", 59, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Hostile Minotaur", 147, Rarity.COMMON, mage.cards.h.HostileMinotaur.class));
         cards.add(new SetCardInfo("Infernal Judgment", 102, Rarity.RARE, mage.cards.i.InfernalJudgment.class));
         cards.add(new SetCardInfo("Infernal Scarring", 103, Rarity.COMMON, mage.cards.i.InfernalScarring.class));
@@ -97,6 +98,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 254, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Revitalize", 35, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Riddlemaster Sphinx", 287, Rarity.RARE, mage.cards.r.RiddlemasterSphinx.class));
+        cards.add(new SetCardInfo("Rogue's Gloves", 243, Rarity.UNCOMMON, mage.cards.r.RoguesGloves.class));
         cards.add(new SetCardInfo("Rustwing Falcon", 36, Rarity.COMMON, mage.cards.r.RustwingFalcon.class));
         cards.add(new SetCardInfo("Salvager of Secrets", 70, Rarity.COMMON, mage.cards.s.SalvagerOfSecrets.class));
         cards.add(new SetCardInfo("Scholar of Stars", 71, Rarity.COMMON, mage.cards.s.ScholarOfStars.class));
@@ -108,6 +110,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Skymarch Bloodletter", 119, Rarity.COMMON, mage.cards.s.SkymarchBloodletter.class));
         cards.add(new SetCardInfo("Skyscanner", 245, Rarity.COMMON, mage.cards.s.Skyscanner.class));
         cards.add(new SetCardInfo("Sleep", 74, Rarity.UNCOMMON, mage.cards.s.Sleep.class));
+        cards.add(new SetCardInfo("Smelt", 158, Rarity.COMMON, mage.cards.s.Smelt.class));
         cards.add(new SetCardInfo("Snapping Drake", 75, Rarity.COMMON, mage.cards.s.SnappingDrake.class));
         cards.add(new SetCardInfo("Sovereign's Bite", 120, Rarity.COMMON, mage.cards.s.SovereignsBite.class));
         cards.add(new SetCardInfo("Sparktongue Dragon", 159, Rarity.COMMON, mage.cards.s.SparktongueDragon.class));
