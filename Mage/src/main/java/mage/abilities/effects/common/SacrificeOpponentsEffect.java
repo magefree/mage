@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.ArrayList;
@@ -9,9 +8,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -57,7 +54,6 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<UUID> perms = new ArrayList<>();
-        filter.add(new ControllerPredicate(TargetController.YOU));
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

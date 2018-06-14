@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -74,7 +73,7 @@ class MalfegorEffect extends OneShotEffect {
             return true;
         }
         new DiscardHandControllerEffect().apply(game, source);
-        return new SacrificeOpponentsEffect(sacrificeNumber, StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
+        return new SacrificeOpponentsEffect(sacrificeNumber, StaticFilters.FILTER_CONTROLLED_CREATURE).apply(game, source);
     }
 
     @Override
