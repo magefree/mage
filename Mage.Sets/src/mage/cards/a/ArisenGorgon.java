@@ -21,7 +21,11 @@ import mage.filter.common.FilterControlledPlaneswalkerPermanent;
  */
 public final class ArisenGorgon extends CardImpl {
 
-    private static final FilterControlledPlaneswalkerPermanent filter = new FilterControlledPlaneswalkerPermanent(SubType.LILIANA, "a Liliana planeswalker");
+    private static final FilterControlledPlaneswalkerPermanent filter
+            = new FilterControlledPlaneswalkerPermanent(
+                    SubType.LILIANA,
+                    "a Liliana planeswalker"
+            );
 
     public ArisenGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

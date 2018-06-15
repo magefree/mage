@@ -12,12 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 
 /**
  *
@@ -25,13 +21,11 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class MoonEatingDog extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a Yanling planeswalker");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
-        filter.add(new SubtypePredicate(SubType.YANLING));
-    }
+    private static final FilterControlledPlaneswalkerPermanent filter
+            = new FilterControlledPlaneswalkerPermanent(
+                    SubType.YANLING,
+                    "a Tezzeret planeswalker"
+            );
 
     public MoonEatingDog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -44,7 +38,10 @@ public final class MoonEatingDog extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
-                        new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
+                        new GainAbilitySourceEffect(
+                                FlyingAbility.getInstance(),
+                                Duration.WhileOnBattlefield
+                        ),
                         new PermanentsOnTheBattlefieldCondition(filter),
                         "As long as you control a Yanling planeswalker, {this} has flying."
                 )

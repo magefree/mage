@@ -21,7 +21,11 @@ import mage.filter.common.FilterControlledPlaneswalkerPermanent;
  */
 public final class TezzeretsStrider extends CardImpl {
 
-    private static final FilterControlledPlaneswalkerPermanent filter = new FilterControlledPlaneswalkerPermanent(SubType.TEZZERET, "a Tezzeret planeswalker");
+    private static final FilterControlledPlaneswalkerPermanent filter
+            = new FilterControlledPlaneswalkerPermanent(
+                    SubType.TEZZERET,
+                    "a Tezzeret planeswalker"
+            );
 
     public TezzeretsStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
