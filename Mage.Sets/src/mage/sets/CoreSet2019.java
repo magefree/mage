@@ -145,6 +145,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Sovereign", 125, Rarity.UNCOMMON, mage.cards.v.VampireSovereign.class));
         cards.add(new SetCardInfo("Vivien Reid", 208, Rarity.MYTHIC, mage.cards.v.VivienReid.class));
         cards.add(new SetCardInfo("Vivien's Invocation", 209, Rarity.RARE, mage.cards.v.ViviensInvocation.class));
+        cards.add(new SetCardInfo("Vivien's Jaguar", 305, Rarity.UNCOMMON, mage.cards.v.ViviensJaguar.class));
         cards.add(new SetCardInfo("Volcanic Dragon", 167, Rarity.UNCOMMON, mage.cards.v.VolcanicDragon.class));
         cards.add(new SetCardInfo("Walking Corpse", 126, Rarity.COMMON, mage.cards.w.WalkingCorpse.class));
         cards.add(new SetCardInfo("Wall of Mist", 83, Rarity.COMMON, mage.cards.w.WallOfMist.class));
