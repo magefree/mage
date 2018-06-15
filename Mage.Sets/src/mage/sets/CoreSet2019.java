@@ -79,6 +79,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Lava Axe", 150, Rarity.COMMON, mage.cards.l.LavaAxe.class));
         cards.add(new SetCardInfo("Lich's Caress", 105, Rarity.COMMON, mage.cards.l.LichsCaress.class));
         cards.add(new SetCardInfo("Lightning Strike", 152, Rarity.COMMON, mage.cards.l.LightningStrike.class));
+        cards.add(new SetCardInfo("Liliana's Spoils", 294, Rarity.RARE, mage.cards.l.LilianasSpoils.class));
         cards.add(new SetCardInfo("Llanowar Elves", 314, Rarity.COMMON, mage.cards.l.LlanowarElves.class));
         cards.add(new SetCardInfo("Loxodon Line Breaker", 24, Rarity.COMMON, mage.cards.l.LoxodonLineBreaker.class));
         cards.add(new SetCardInfo("Luminous Bonds", 25, Rarity.COMMON, mage.cards.l.LuminousBonds.class));
