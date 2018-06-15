@@ -129,6 +129,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Tattered Mummy", 295, Rarity.COMMON, mage.cards.t.TatteredMummy.class));
         cards.add(new SetCardInfo("Tezzeret's Strider", 290, Rarity.UNCOMMON, mage.cards.t.TezzeretsStrider.class));
         cards.add(new SetCardInfo("Thornhide Wolves", 204, Rarity.COMMON, mage.cards.t.ThornhideWolves.class));
+        cards.add(new SetCardInfo("Thud", 163, Rarity.UNCOMMON, mage.cards.t.Thud.class));
         cards.add(new SetCardInfo("Timber Gorge", 258, Rarity.COMMON, mage.cards.t.TimberGorge.class));
         cards.add(new SetCardInfo("Titanic Growth", 205, Rarity.COMMON, mage.cards.t.TitanicGrowth.class));
         cards.add(new SetCardInfo("Tolarian Scholar", 80, Rarity.COMMON, mage.cards.t.TolarianScholar.class));
