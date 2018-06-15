@@ -34,6 +34,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Arisen Gorgon", 292, Rarity.UNCOMMON, mage.cards.a.ArisenGorgon.class));
         cards.add(new SetCardInfo("Aven Wind Mage", 45, Rarity.COMMON, mage.cards.a.AvenWindMage.class));
         cards.add(new SetCardInfo("Befuddle", 309, Rarity.COMMON, mage.cards.b.Befuddle.class));
+        cards.add(new SetCardInfo("Blood Divination", 86, Rarity.UNCOMMON, mage.cards.b.BloodDivination.class));
         cards.add(new SetCardInfo("Bogstomper", 87, Rarity.COMMON, mage.cards.b.Bogstomper.class));
         cards.add(new SetCardInfo("Bristling Boar", 170, Rarity.COMMON, mage.cards.b.BristlingBoar.class));
         cards.add(new SetCardInfo("Cancel", 48, Rarity.COMMON, mage.cards.c.Cancel.class));
