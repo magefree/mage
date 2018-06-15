@@ -28,6 +28,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Act of Treason", 127, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Aggressive Mammoth", 302, Rarity.RARE, mage.cards.a.AggressiveMammoth.class));
         cards.add(new SetCardInfo("Air Elemental", 308, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
+        cards.add(new SetCardInfo("Ajani's Pridemate", 5, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Anticipate", 44, Rarity.COMMON, mage.cards.a.Anticipate.class));
         cards.add(new SetCardInfo("Apex of Power", 129, Rarity.MYTHIC, mage.cards.a.ApexOfPower.class));
         cards.add(new SetCardInfo("Arisen Gorgon", 292, Rarity.UNCOMMON, mage.cards.a.ArisenGorgon.class));
