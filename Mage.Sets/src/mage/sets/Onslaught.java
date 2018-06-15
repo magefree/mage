@@ -79,6 +79,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Charging Slateback", 194, Rarity.COMMON, mage.cards.c.ChargingSlateback.class));
         cards.add(new SetCardInfo("Choking Tethers", 74, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
         cards.add(new SetCardInfo("Clone", 75, Rarity.RARE, mage.cards.c.Clone.class));
+        cards.add(new SetCardInfo("Commando Raid", 195, Rarity.UNCOMMON, mage.cards.c.CommandoRaid.class));
         cards.add(new SetCardInfo("Complicate", 76, Rarity.UNCOMMON, mage.cards.c.Complicate.class));
         cards.add(new SetCardInfo("Contested Cliffs", 314, Rarity.RARE, mage.cards.c.ContestedCliffs.class));
         cards.add(new SetCardInfo("Convalescent Care", 14, Rarity.RARE, mage.cards.c.ConvalescentCare.class));
