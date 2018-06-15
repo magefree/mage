@@ -39,6 +39,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Bristling Boar", 170, Rarity.COMMON, mage.cards.b.BristlingBoar.class));
         cards.add(new SetCardInfo("Cancel", 48, Rarity.COMMON, mage.cards.c.Cancel.class));
         cards.add(new SetCardInfo("Catalyst Elemental", 132, Rarity.COMMON, mage.cards.c.CatalystElemental.class));
+        cards.add(new SetCardInfo("Cavalry Drillmaster", 8, Rarity.COMMON, mage.cards.c.CavalryDrillmaster.class));
         cards.add(new SetCardInfo("Centaur Courser", 171, Rarity.COMMON, mage.cards.c.CentaurCourser.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 172, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Court Cleric", 283, Rarity.UNCOMMON, mage.cards.c.CourtCleric.class));
