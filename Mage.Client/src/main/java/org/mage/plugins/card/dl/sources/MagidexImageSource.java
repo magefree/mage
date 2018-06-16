@@ -213,6 +213,7 @@ public enum MagidexImageSource implements CardImageSource {
         supportedSets.add("RIX");
         supportedSets.add("A25");
         supportedSets.add("DOM");
+//        supportedSets.add("CM2");
 //        supportedSets.add("M19");
     }
 

@@ -91,7 +91,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         "AKH", "HOU",
         "XLN", "C17",
         "RIX", "DOM", "M19", // not released
-        "E01"
+        "E01", "CM2"
     };
 
     private static final String[] symbolsOnlyMyth = {

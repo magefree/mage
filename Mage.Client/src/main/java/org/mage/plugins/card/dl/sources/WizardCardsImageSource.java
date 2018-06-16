@@ -233,6 +233,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("AKH");
         supportedSets.add("MPS");
         supportedSets.add("CMA");
+//        supportedSets.add("CM2"); // Commander Anthology, Vol. II
         supportedSets.add("E01");
         supportedSets.add("HOU");
         supportedSets.add("C17");
@@ -283,6 +284,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("C16", "Commander 2016");
         setsAliases.put("C17", "Commander 2017");
         setsAliases.put("CMA", "Commander Anthology");
+//        setsAliases.put("CM2", "Commander Anthology, Vol. II");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
         setsAliases.put("CMD", "Magic: The Gathering-Commander");
