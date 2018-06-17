@@ -102,6 +102,8 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Mist-Cloaked Herald", 310, Rarity.COMMON, mage.cards.m.MistCloakedHerald.class));
         cards.add(new SetCardInfo("Murder", 110, Rarity.UNCOMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Nexus of Fate", 306, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class));
+        cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 218, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class));
+        cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 218, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class));
         cards.add(new SetCardInfo("Oakenform", 191, Rarity.COMMON, mage.cards.o.Oakenform.class));
         cards.add(new SetCardInfo("Omenspeaker", 64, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
         cards.add(new SetCardInfo("Onakke Ogre", 153, Rarity.COMMON, mage.cards.o.OnakkeOgre.class));
