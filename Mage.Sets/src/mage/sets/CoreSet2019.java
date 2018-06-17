@@ -160,6 +160,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Two-Headed Zombie", 123, Rarity.COMMON, mage.cards.t.TwoHeadedZombie.class));
         cards.add(new SetCardInfo("Uncomfortable Chill", 82, Rarity.COMMON, mage.cards.u.UncomfortableChill.class));
         cards.add(new SetCardInfo("Ursine Champion", 304, Rarity.COMMON, mage.cards.u.UrsineChampion.class));
+        cards.add(new SetCardInfo("Vaevictis Asmadi, the Dire", 225, Rarity.MYTHIC, mage.cards.v.VaevictisAsmadiTheDire.class));
         cards.add(new SetCardInfo("Vampire Sovereign", 125, Rarity.UNCOMMON, mage.cards.v.VampireSovereign.class));
         cards.add(new SetCardInfo("Viashino Pyromancer", 166, Rarity.COMMON, mage.cards.v.ViashinoPyromancer.class));
         cards.add(new SetCardInfo("Vivien Reid", 208, Rarity.MYTHIC, mage.cards.v.VivienReid.class));
