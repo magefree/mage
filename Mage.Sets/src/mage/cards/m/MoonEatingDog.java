@@ -24,7 +24,7 @@ public final class MoonEatingDog extends CardImpl {
     private static final FilterControlledPlaneswalkerPermanent filter
             = new FilterControlledPlaneswalkerPermanent(
                     SubType.YANLING,
-                    "a Tezzeret planeswalker"
+                    "a Yanling planeswalker"
             );
 
     public MoonEatingDog(UUID ownerId, CardSetInfo setInfo) {
