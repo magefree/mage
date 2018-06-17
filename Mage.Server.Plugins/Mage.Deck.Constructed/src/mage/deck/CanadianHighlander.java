@@ -1,4 +1,3 @@
-
 package mage.deck;
 
 import java.util.HashMap;
@@ -14,6 +13,53 @@ import mage.constants.SetType;
  * @author spjspj
  */
 public class CanadianHighlander extends Constructed {
+
+    public static final Map<String, Integer> pointMap = new HashMap();
+
+    static {
+        pointMap.put("Ancestral Recall", 7);
+        pointMap.put("Balance", 1);
+        pointMap.put("Birthing Pod", 3);
+        pointMap.put("Black Lotus", 7);
+        pointMap.put("Demonic Tutor", 4);
+        pointMap.put("Dig Through Time", 1);
+        pointMap.put("Enlightened Tutor", 1);
+        pointMap.put("Fastbond", 1);
+        pointMap.put("Flash", 7);
+        pointMap.put("Gifts Ungiven", 2);
+        pointMap.put("Hermit Druid", 1);
+        pointMap.put("Imperial Seal", 1);
+        pointMap.put("Intuition", 1);
+        pointMap.put("Library of Alexandria", 1);
+        pointMap.put("Mana Crypt", 2);
+        pointMap.put("Mana Drain", 1);
+        pointMap.put("Mana Vault", 1);
+        pointMap.put("Merchant Scroll", 1);
+        pointMap.put("Mind Twist", 1);
+        pointMap.put("Mox Emerald", 3);
+        pointMap.put("Mox Jet", 3);
+        pointMap.put("Mox Pearl", 3);
+        pointMap.put("Mox Ruby", 3);
+        pointMap.put("Mox Sapphire", 3);
+        pointMap.put("Mystical Tutor", 2);
+        pointMap.put("Natural Order", 4);
+        pointMap.put("Personal Tutor", 1);
+        pointMap.put("Protean Hulk", 3);
+        pointMap.put("Sol Ring", 3);
+        pointMap.put("Stoneforge Mystic", 1);
+        pointMap.put("Strip Mine", 2);
+        pointMap.put("Summoner's Pact", 2);
+        pointMap.put("Survival of the Fittest", 2);
+        pointMap.put("Time Vault", 6);
+        pointMap.put("Time Walk", 6);
+        pointMap.put("Tinker", 4);
+        pointMap.put("Tolarian Academy", 1);
+        pointMap.put("Transmute Artifact", 1);
+        pointMap.put("Treasure Cruise", 1);
+        pointMap.put("True-Name Nemesis", 1);
+        pointMap.put("Umezawa's Jitte", 2);
+        pointMap.put("Vampiric Tutor", 3);
+    }
 
     public CanadianHighlander() {
         this("Canadian Highlander");
@@ -54,74 +100,13 @@ public class CanadianHighlander extends Constructed {
             }
         }
 
-        int allowedPoints = 10 * (int) Math.floor(deck.getCards().size() / 100.0);
+        int allowedPoints = 10;
         int totalPoints = 0;
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             String cn = entry.getKey();
-            if (cn.equals("Balance")
-                    || cn.equals("Dig Through Time")
-                    || cn.equals("Doomsday")
-                    || cn.equals("Enlightened Tutor")
-                    || cn.equals("Fastbond")
-                    || cn.equals("Intuition")
-                    || cn.equals("Library of Alexandria")
-                    || cn.equals("Mana Vault")
-                    || cn.equals("Merchant Scroll")
-                    || cn.equals("Mind Twist")
-                    || cn.equals("Personal Tutor")
-                    || cn.equals("Stoneforge Mystic")
-                    || cn.equals("Tainted Pact")
-                    || cn.equals("Tolarian Academy")
-                    || cn.equals("Transmute Artifact")
-                    || cn.equals("Treasure Cruise")
-                    || cn.equals("True-Name Nemesis")
-                    || cn.equals("Worldly Tutor")) {
-                totalPoints += 1;
-                invalid.put(entry.getKey(), " 1 point " + cn);
-            }
-            if (cn.equals("Gifts Ungiven")
-                    || cn.equals("Hermit Druid")
-                    || cn.equals("Imperial Seal")
-                    || cn.equals("Mana Crypt")
-                    || cn.equals("Mystical Tutor")
-                    || cn.equals("Strip Mine")
-                    || cn.equals("Summoner's Pact")
-                    || cn.equals("Survival of the Fittest")
-                    || cn.equals("Umezawa's Jitte")) {
-                totalPoints += 2;
-                invalid.put(entry.getKey(), " 2 points " + cn);
-            }
-            if (cn.equals("Birthing Pod")
-                    || cn.equals("Mox Emerald")
-                    || cn.equals("Mox Jet")
-                    || cn.equals("Mox Pearl")
-                    || cn.equals("Mox Ruby")
-                    || cn.equals("Mox Sapphire")
-                    || cn.equals("Protean Hulk")
-                    || cn.equals("Sol Ring")
-                    || cn.equals("Vampiric Tutor")) {
-                totalPoints += 3;
-                invalid.put(entry.getKey(), " 3 points " + cn);
-            }
-            if (cn.equals("Demonic Tutor")
-                    || cn.equals("Tinker")) {
-                totalPoints += 4;
-                invalid.put(entry.getKey(), " 4 points " + cn);
-            }
-            if (cn.equals("Natural Order")
-                    || cn.equals("Time Walk")) {
-                totalPoints += 5;
-                invalid.put(entry.getKey(), " 5 points " + cn);
-            }
-            if (cn.equals("Ancestral Recall")
-                    || cn.equals("Time Vault")) {
-                totalPoints += 6;
-                invalid.put(entry.getKey(), " 6 points " + cn);
-            }
-            if (cn.equals("Black Lotus")
-                    || cn.equals("Flash")) {
-                totalPoints += 7;
-                invalid.put(entry.getKey(), " 7 points " + cn);
+            if (pointMap.containsKey(cn)) {
+                totalPoints += pointMap.get(cn);
+                invalid.put(entry.getKey(), " " + pointMap.get(cn) + " point " + cn);
             }
         }
         if (totalPoints > allowedPoints) {
