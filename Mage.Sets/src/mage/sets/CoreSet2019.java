@@ -84,6 +84,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Kargan Dragonrider", 297, Rarity.COMMON, mage.cards.k.KarganDragonrider.class));
         cards.add(new SetCardInfo("Knight of the Tusk", 18, Rarity.COMMON, mage.cards.k.KnightOfTheTusk.class));
         cards.add(new SetCardInfo("Knight's Pledge", 19, Rarity.COMMON, mage.cards.k.KnightsPledge.class));
+        cards.add(new SetCardInfo("Lathliss, Dragon Queen", 149, Rarity.RARE, mage.cards.l.LathlissDragonQueen.class));
         cards.add(new SetCardInfo("Lava Axe", 150, Rarity.COMMON, mage.cards.l.LavaAxe.class));
         cards.add(new SetCardInfo("Lich's Caress", 105, Rarity.COMMON, mage.cards.l.LichsCaress.class));
         cards.add(new SetCardInfo("Lightning Strike", 152, Rarity.COMMON, mage.cards.l.LightningStrike.class));
