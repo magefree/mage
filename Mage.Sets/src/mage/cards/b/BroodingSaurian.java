@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.Iterator;
@@ -12,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -27,8 +25,8 @@ import mage.players.Player;
 public final class BroodingSaurian extends CardImpl {
 
     public BroodingSaurian(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-    this.subtype.add(SubType.LIZARD);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -49,7 +47,8 @@ public final class BroodingSaurian extends CardImpl {
 
 class BroodingSaurianControlEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
+
     static {
         filter.add(Predicates.not(new TokenPredicate()));
     }
@@ -77,7 +76,7 @@ class BroodingSaurianControlEffect extends ContinuousEffectImpl {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 FilterPermanent playerFilter = filter.copy();
                 playerFilter.add(new OwnerIdPredicate(playerId));
-                for (Permanent permanent :game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {
                     affectedObjectList.add(new MageObjectReference(permanent, game));
                 }
             }
@@ -86,7 +85,7 @@ class BroodingSaurianControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent creature = it.next().getPermanent(game);
             if (creature != null) {
                 if (!creature.getControllerId().equals(creature.getOwnerId())) {
