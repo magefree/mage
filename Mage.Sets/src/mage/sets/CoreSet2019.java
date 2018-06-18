@@ -82,7 +82,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Highland Game", 188, Rarity.COMMON, mage.cards.h.HighlandGame.class));
         cards.add(new SetCardInfo("Horizon Scholar", 59, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Hostile Minotaur", 147, Rarity.COMMON, mage.cards.h.HostileMinotaur.class));
-        cards.add(new SetCardInfo("Infernal Judgment", 102, Rarity.RARE, mage.cards.i.InfernalJudgment.class));
+        cards.add(new SetCardInfo("Infernal Reckoning", 102, Rarity.RARE, mage.cards.i.InfernalReckoning.class));
         cards.add(new SetCardInfo("Infernal Scarring", 103, Rarity.COMMON, mage.cards.i.InfernalScarring.class));
         cards.add(new SetCardInfo("Inspired Charge", 15, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
         cards.add(new SetCardInfo("Kargan Dragonrider", 297, Rarity.COMMON, mage.cards.k.KarganDragonrider.class));

@@ -18,7 +18,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public final class InfernalJudgment extends CardImpl {
+public final class InfernalReckoning extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature");
 
@@ -26,7 +26,7 @@ public final class InfernalJudgment extends CardImpl {
         filter.add(new ColorlessPredicate());
     }
 
-    public InfernalJudgment(UUID ownerId, CardSetInfo setInfo) {
+    public InfernalReckoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Exile target colorless creature. You gain life equal to its power.
@@ -34,13 +34,13 @@ public final class InfernalJudgment extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public InfernalJudgment(final InfernalJudgment card) {
+    public InfernalReckoning(final InfernalReckoning card) {
         super(card);
     }
 
     @Override
-    public InfernalJudgment copy() {
-        return new InfernalJudgment(this);
+    public InfernalReckoning copy() {
+        return new InfernalReckoning(this);
     }
 }
 
