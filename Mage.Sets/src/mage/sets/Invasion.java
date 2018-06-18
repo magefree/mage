@@ -206,6 +206,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Portal", 308, Rarity.RARE, mage.cards.p.PlanarPortal.class));
+        cards.add(new SetCardInfo("Pledge of Loyalty", 24, Rarity.UNCOMMON, mage.cards.p.PledgeOfLoyalty.class));
         cards.add(new SetCardInfo("Pouncing Kavu", 158, Rarity.COMMON, mage.cards.p.PouncingKavu.class));
         cards.add(new SetCardInfo("Power Armor", 309, Rarity.UNCOMMON, mage.cards.p.PowerArmor.class));
         cards.add(new SetCardInfo("Prison Barricade", 25, Rarity.COMMON, mage.cards.p.PrisonBarricade.class));
