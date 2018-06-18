@@ -106,6 +106,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Elfhame Sanctuary", 185, Rarity.UNCOMMON, mage.cards.e.ElfhameSanctuary.class));
         cards.add(new SetCardInfo("Elvish Champion", 186, Rarity.RARE, mage.cards.e.ElvishChampion.class));
         cards.add(new SetCardInfo("Empress Galina", 54, Rarity.RARE, mage.cards.e.EmpressGalina.class));
+        cards.add(new SetCardInfo("Essence Leak", 55, Rarity.UNCOMMON, mage.cards.e.EssenceLeak.class));
         cards.add(new SetCardInfo("Exclude", 56, Rarity.COMMON, mage.cards.e.Exclude.class));
         cards.add(new SetCardInfo("Exotic Curse", 105, Rarity.COMMON, mage.cards.e.ExoticCurse.class));
         cards.add(new SetCardInfo("Explosive Growth", 187, Rarity.COMMON, mage.cards.e.ExplosiveGrowth.class));
