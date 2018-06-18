@@ -49,6 +49,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Dreadmaw", 172, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Colossal Majesty", 173, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
         cards.add(new SetCardInfo("Court Cleric", 283, Rarity.UNCOMMON, mage.cards.c.CourtCleric.class));
+        cards.add(new SetCardInfo("Crucible of Worlds", 229, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Daybreak Chaplain", 10, Rarity.COMMON, mage.cards.d.DaybreakChaplain.class));
         cards.add(new SetCardInfo("Death Baron", 90, Rarity.RARE, mage.cards.d.DeathBaron.class));
         cards.add(new SetCardInfo("Declare Dominance", 175, Rarity.UNCOMMON, mage.cards.d.DeclareDominance.class));
@@ -97,6 +98,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Llanowar Elves", 314, Rarity.COMMON, mage.cards.l.LlanowarElves.class));
         cards.add(new SetCardInfo("Loxodon Line Breaker", 24, Rarity.COMMON, mage.cards.l.LoxodonLineBreaker.class));
         cards.add(new SetCardInfo("Luminous Bonds", 25, Rarity.COMMON, mage.cards.l.LuminousBonds.class));
+        cards.add(new SetCardInfo("Magistrate's Scepter", 238, Rarity.RARE, mage.cards.m.MagistratesScepter.class));
         cards.add(new SetCardInfo("Manalith", 239, Rarity.COMMON, mage.cards.m.Manalith.class));
         cards.add(new SetCardInfo("Marauder's Axe", 240, Rarity.COMMON, mage.cards.m.MaraudersAxe.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 27, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
@@ -128,6 +130,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Salvager of Secrets", 70, Rarity.COMMON, mage.cards.s.SalvagerOfSecrets.class));
         cards.add(new SetCardInfo("Sarkhan's Whelp", 299, Rarity.UNCOMMON, mage.cards.s.SarkhansWhelp.class));
         cards.add(new SetCardInfo("Sarkhan, Dragonsoul", 296, Rarity.MYTHIC, mage.cards.s.SarkhanDragonsoul.class));
+        cards.add(new SetCardInfo("Scapeshift", 201, Rarity.MYTHIC, mage.cards.s.Scapeshift.class));
         cards.add(new SetCardInfo("Scholar of Stars", 71, Rarity.COMMON, mage.cards.s.ScholarOfStars.class));
         cards.add(new SetCardInfo("Serra's Guardian", 284, Rarity.RARE, mage.cards.s.SerrasGuardian.class));
         cards.add(new SetCardInfo("Shivan Dragon", 300, Rarity.RARE, mage.cards.s.ShivanDragon.class));
