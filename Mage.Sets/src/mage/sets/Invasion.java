@@ -253,6 +253,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Scavenged Weaponry", 123, Rarity.COMMON, mage.cards.s.ScavengedWeaponry.class));
         cards.add(new SetCardInfo("Scorching Lava", 164, Rarity.COMMON, mage.cards.s.ScorchingLava.class));
         cards.add(new SetCardInfo("Scouting Trek", 210, Rarity.UNCOMMON, mage.cards.s.ScoutingTrek.class));
+        cards.add(new SetCardInfo("Searing Rays", 165, Rarity.UNCOMMON, mage.cards.s.SearingRays.class));
         cards.add(new SetCardInfo("Seashell Cameo", 311, Rarity.UNCOMMON, mage.cards.s.SeashellCameo.class));
         cards.add(new SetCardInfo("Seer's Vision", 270, Rarity.UNCOMMON, mage.cards.s.SeersVision.class));
         cards.add(new SetCardInfo("Serpentine Kavu", 211, Rarity.COMMON, mage.cards.s.SerpentineKavu.class));
