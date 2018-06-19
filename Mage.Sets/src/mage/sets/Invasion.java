@@ -248,6 +248,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Salt Marsh", 326, Rarity.UNCOMMON, mage.cards.s.SaltMarsh.class));
         cards.add(new SetCardInfo("Samite Archer", 269, Rarity.UNCOMMON, mage.cards.s.SamiteArcher.class));
         cards.add(new SetCardInfo("Sapphire Leech", 71, Rarity.RARE, mage.cards.s.SapphireLeech.class));
+        cards.add(new SetCardInfo("Saproling Infestation", 208, Rarity.RARE, mage.cards.s.SaprolingInfestation.class));
         cards.add(new SetCardInfo("Saproling Symbiosis", 209, Rarity.RARE, mage.cards.s.SaprolingSymbiosis.class));
         cards.add(new SetCardInfo("Savage Offensive", 162, Rarity.COMMON, mage.cards.s.SavageOffensive.class));
         cards.add(new SetCardInfo("Scarred Puma", 163, Rarity.COMMON, mage.cards.s.ScarredPuma.class));

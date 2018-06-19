@@ -14,6 +14,7 @@ import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
@@ -152,6 +153,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             amount += activations.get(key);
         }
         activations.put(key, amount);
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.KICKED, source.getSourceId(), source.getSourceId(), source.getControllerId()));
     }
 
     private String getActivationKey(Ability source, String costText, Game game) {
