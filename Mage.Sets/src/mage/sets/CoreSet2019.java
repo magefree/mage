@@ -123,6 +123,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Patient Rebuilding", 67, Rarity.RARE, mage.cards.p.PatientRebuilding.class));
         cards.add(new SetCardInfo("Pegasus Courser", 32, Rarity.COMMON, mage.cards.p.PegasusCourser.class));
         cards.add(new SetCardInfo("Plummet", 193, Rarity.COMMON, mage.cards.p.Plummet.class));
+        cards.add(new SetCardInfo("Psychic Symbiont", 221, Rarity.UNCOMMON, mage.cards.p.PsychicSymbiont.class));
         cards.add(new SetCardInfo("Rabid Bite", 195, Rarity.COMMON, mage.cards.r.RabidBite.class));
         cards.add(new SetCardInfo("Radiating Lightning", 313, Rarity.COMMON, mage.cards.r.RadiatingLightning.class));
         cards.add(new SetCardInfo("Reassembling Skeleton", 116, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
