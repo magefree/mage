@@ -163,6 +163,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Scapeshift", 201, Rarity.MYTHIC, mage.cards.s.Scapeshift.class));
         cards.add(new SetCardInfo("Scholar of Stars", 71, Rarity.COMMON, mage.cards.s.ScholarOfStars.class));
         cards.add(new SetCardInfo("Serra's Guardian", 284, Rarity.RARE, mage.cards.s.SerrasGuardian.class));
+        cards.add(new SetCardInfo("Shield Mare", 37, Rarity.UNCOMMON, mage.cards.s.ShieldMare.class));
         cards.add(new SetCardInfo("Shivan Dragon", 300, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Shock", 156, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Silverbeak Griffin", 285, Rarity.COMMON, mage.cards.s.SilverbeakGriffin.class));
