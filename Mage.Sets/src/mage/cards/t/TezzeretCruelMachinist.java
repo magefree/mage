@@ -22,6 +22,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -103,13 +104,71 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
                 continue;
             }
             cardsToMove.add(card);
-            ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.WhileOnBattlefield, CardType.ARTIFACT, CardType.CREATURE);
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
+            ContinuousEffect effect = new TezzeretCruelMachinistCardTypeEffect();
+            effect.setTargetPointer(new FixedTarget(
+                    card.getId(),
+                    card.getZoneChangeCounter(game) + 1
+            ));
             game.addEffect(effect, source);
-            effect = new SetPowerToughnessTargetEffect(5, 5, Duration.WhileOnBattlefield);
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
+            effect = new TezzeretCruelMachinistPowerToughnessEffect();
+            effect.setTargetPointer(new FixedTarget(
+                    card.getId(),
+                    card.getZoneChangeCounter(game) + 1
+            ));
             game.addEffect(effect, source);
         }
         return player.moveCards(cardsToMove.getCards(game), Zone.BATTLEFIELD, source, game, false, true, true, null);
+    }
+}
+
+class TezzeretCruelMachinistCardTypeEffect extends AddCardTypeTargetEffect {
+
+    public TezzeretCruelMachinistCardTypeEffect() {
+        super(Duration.WhileOnBattlefield, CardType.ARTIFACT, CardType.CREATURE);
+    }
+
+    public TezzeretCruelMachinistCardTypeEffect(final TezzeretCruelMachinistCardTypeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public TezzeretCruelMachinistCardTypeEffect copy() {
+        return new TezzeretCruelMachinistCardTypeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null || !permanent.isFaceDown(game)) {
+            this.discard();
+            return false;
+        }
+        return super.apply(game, source);
+    }
+}
+
+class TezzeretCruelMachinistPowerToughnessEffect extends SetPowerToughnessTargetEffect {
+
+    public TezzeretCruelMachinistPowerToughnessEffect() {
+        super(5, 5, Duration.WhileOnBattlefield);
+    }
+
+    public TezzeretCruelMachinistPowerToughnessEffect(final TezzeretCruelMachinistPowerToughnessEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public TezzeretCruelMachinistPowerToughnessEffect copy() {
+        return new TezzeretCruelMachinistPowerToughnessEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null || !permanent.isFaceDown(game)) {
+            this.discard();
+            return false;
+        }
+        return super.apply(game, source);
     }
 }
