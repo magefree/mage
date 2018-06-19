@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DiscardedByOpponentTriggerAbility;
+import mage.abilities.common.DiscardedByOpponentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class GuerrillaTactics extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // When a spell or ability an opponent controls causes you to discard Guerrilla Tactics, Guerrilla Tactics deals 4 damage to any target.
-        Ability ability = new DiscardedByOpponentTriggerAbility(new DamageTargetEffect(4));
+        Ability ability = new DiscardedByOpponentTriggeredAbility(new DamageTargetEffect(4));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

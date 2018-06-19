@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -13,23 +12,23 @@ import mage.game.stack.StackObject;
  *
  * @author Styxo
  */
-public class DiscardedByOpponentTriggerAbility extends TriggeredAbilityImpl {
+public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DiscardedByOpponentTriggerAbility(Effect effect) {
+    public DiscardedByOpponentTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public DiscardedByOpponentTriggerAbility(Effect effect, boolean optional) {
+    public DiscardedByOpponentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.GRAVEYARD, effect, optional);
     }
 
-    public DiscardedByOpponentTriggerAbility(final DiscardedByOpponentTriggerAbility ability) {
+    public DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public DiscardedByOpponentTriggerAbility copy() {
-        return new DiscardedByOpponentTriggerAbility(this);
+    public DiscardedByOpponentTriggeredAbility copy() {
+        return new DiscardedByOpponentTriggeredAbility(this);
     }
 
     @Override
@@ -50,6 +49,6 @@ public class DiscardedByOpponentTriggerAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When a spell or ability an opponent controls causes you to discard {this}, " + super.getRule();
+        return "When a spell or ability an opponent controls causes you to discard this card, " + super.getRule();
     }
 }
