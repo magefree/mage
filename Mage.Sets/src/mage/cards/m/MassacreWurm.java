@@ -1,5 +1,3 @@
-
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -28,8 +26,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class MassacreWurm extends CardImpl {
 
-    public MassacreWurm (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
+    public MassacreWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.subtype.add(SubType.WURM);
 
         this.power = new MageInt(6);
@@ -38,7 +36,7 @@ public final class MassacreWurm extends CardImpl {
         this.addAbility(new MassacreWurmTriggeredAbility());
     }
 
-    public MassacreWurm (final MassacreWurm card) {
+    public MassacreWurm(final MassacreWurm card) {
         super(card);
     }
 
@@ -50,6 +48,7 @@ public final class MassacreWurm extends CardImpl {
 }
 
 class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
+
     MassacreWurmTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
     }
@@ -70,7 +69,7 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent)event).isDiesEvent()) {
+        if (((ZoneChangeEvent) event).isDiesEvent()) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (p != null && p.isCreature() && game.getOpponents(this.getControllerId()).contains(p.getControllerId())) {
                 for (Effect effect : this.getEffects()) {
@@ -84,6 +83,6 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, " + super.getRule();
+        return "Whenever a creature an opponent controls dies, " + super.getRule();
     }
 }

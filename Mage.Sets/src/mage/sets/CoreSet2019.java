@@ -139,6 +139,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Palladia-Mors, the Ruiner", 219, Rarity.MYTHIC, mage.cards.p.PalladiaMorsTheRuiner.class));
         cards.add(new SetCardInfo("Patient Rebuilding", 67, Rarity.RARE, mage.cards.p.PatientRebuilding.class));
         cards.add(new SetCardInfo("Pegasus Courser", 32, Rarity.COMMON, mage.cards.p.PegasusCourser.class));
+        cards.add(new SetCardInfo("Plague Mare", 114, Rarity.UNCOMMON, mage.cards.p.PlagueMare.class));
         cards.add(new SetCardInfo("Plummet", 193, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Prodigious Growth", 194, Rarity.RARE, mage.cards.p.ProdigiousGrowth.class));
         cards.add(new SetCardInfo("Psychic Symbiont", 221, Rarity.UNCOMMON, mage.cards.p.PsychicSymbiont.class));
