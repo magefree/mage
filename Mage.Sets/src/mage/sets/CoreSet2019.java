@@ -37,6 +37,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani's Pridemate", 5, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, Adversary of Tyrants", 3, Rarity.MYTHIC, mage.cards.a.AjaniAdversaryOfTyrants.class));
         cards.add(new SetCardInfo("Ajani, Wise Counselor", 281, Rarity.MYTHIC, mage.cards.a.AjaniWiseCounselor.class));
+        cards.add(new SetCardInfo("Alpine Moon", 128, Rarity.RARE, mage.cards.a.AlpineMoon.class));
         cards.add(new SetCardInfo("Anticipate", 44, Rarity.COMMON, mage.cards.a.Anticipate.class));
         cards.add(new SetCardInfo("Apex of Power", 129, Rarity.MYTHIC, mage.cards.a.ApexOfPower.class));
         cards.add(new SetCardInfo("Arisen Gorgon", 292, Rarity.UNCOMMON, mage.cards.a.ArisenGorgon.class));

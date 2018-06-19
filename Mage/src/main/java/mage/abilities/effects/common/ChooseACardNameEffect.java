@@ -24,6 +24,7 @@ public class ChooseACardNameEffect extends OneShotEffect {
 
         ALL,
         NOT_BASIC_LAND_NAME,
+        NONBASIC_LAND_NAME,
         NON_ARTIFACT_AND_NON_LAND_NAME,
         NON_LAND_NAME,
         NON_LAND_AND_NON_CREATURE_NAME,
@@ -61,6 +62,10 @@ public class ChooseACardNameEffect extends OneShotEffect {
                 case NOT_BASIC_LAND_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNotBasicLandNames());
                     cardChoice.setMessage("Choose a card name other than a basic land card name");
+                    break;
+                case NONBASIC_LAND_NAME:
+                    cardChoice.setChoices(CardRepository.instance.getNonbasicLandNames());
+                    cardChoice.setMessage("Choose a nonbasic land card name");
                     break;
                 case NON_ARTIFACT_AND_NON_LAND_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonArtifactAndNonLandNames());
@@ -112,6 +117,9 @@ public class ChooseACardNameEffect extends OneShotEffect {
                 break;
             case NOT_BASIC_LAND_NAME:
                 sb.append("card name other than a basic land card");
+                break;
+            case NONBASIC_LAND_NAME:
+                sb.append("nonbasic land card name");
                 break;
             case NON_ARTIFACT_AND_NON_LAND_NAME:
                 sb.append("nonartifact, nonland card");
