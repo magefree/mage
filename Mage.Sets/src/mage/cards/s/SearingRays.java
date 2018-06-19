@@ -60,7 +60,7 @@ class SearingRaysEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choice = new ChoiceColor();
-        if (controller != null && controller.choose(outcome, choice, game)) {
+        if (controller != null && controller.choose(outcome, choice, game) && choice.getColor() != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent(choice.getColor().getDescription()+" creatures");
             filter.add(new ColorPredicate(choice.getColor()));
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
