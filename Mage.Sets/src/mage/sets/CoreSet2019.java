@@ -54,6 +54,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Majesty", 173, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
         cards.add(new SetCardInfo("Court Cleric", 283, Rarity.UNCOMMON, mage.cards.c.CourtCleric.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 229, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
+        cards.add(new SetCardInfo("Dark-Dweller Oracle", 134, Rarity.RARE, mage.cards.d.DarkDwellerOracle.class));
         cards.add(new SetCardInfo("Daybreak Chaplain", 10, Rarity.COMMON, mage.cards.d.DaybreakChaplain.class));
         cards.add(new SetCardInfo("Death Baron", 90, Rarity.RARE, mage.cards.d.DeathBaron.class));
         cards.add(new SetCardInfo("Declare Dominance", 175, Rarity.UNCOMMON, mage.cards.d.DeclareDominance.class));
