@@ -28,6 +28,7 @@ public final class CoreSet2019 extends ExpansionSet {
         this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 280;
 
+        cards.add(new SetCardInfo("Abnormal Endurance", 85, Rarity.COMMON, mage.cards.a.AbnormalEndurance.class));
         cards.add(new SetCardInfo("Act of Treason", 127, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Aerial Engineer", 211, Rarity.UNCOMMON, mage.cards.a.AerialEngineer.class));
         cards.add(new SetCardInfo("Aggressive Mammoth", 302, Rarity.RARE, mage.cards.a.AggressiveMammoth.class));

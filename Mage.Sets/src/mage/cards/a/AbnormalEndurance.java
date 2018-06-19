@@ -1,4 +1,4 @@
-package mage.cards.s;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -13,12 +13,12 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author TheElk801
  */
-public final class SupernaturalStamina extends CardImpl {
+public final class AbnormalEndurance extends CardImpl {
 
-    public SupernaturalStamina(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
+    public AbnormalEndurance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."
         getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -26,20 +26,18 @@ public final class SupernaturalStamina extends CardImpl {
                 .setText("Until end of turn, target creature gets +2/+0")
         );
         getSpellAbility().addEffect(new GainAbilityTargetEffect(
-                new DiesTriggeredAbility(
-                        new ReturnSourceFromGraveyardToBattlefieldEffect(true, true),
-                        false),
+                new DiesTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true, true), false),
                 Duration.EndOfTurn,
                 "and gains \"When this creature dies, return it to the battlefield tapped under its owner's control.\""
         ));
     }
 
-    public SupernaturalStamina(final SupernaturalStamina card) {
+    public AbnormalEndurance(final AbnormalEndurance card) {
         super(card);
     }
 
     @Override
-    public SupernaturalStamina copy() {
-        return new SupernaturalStamina(this);
+    public AbnormalEndurance copy() {
+        return new AbnormalEndurance(this);
     }
 }
