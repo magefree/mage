@@ -50,6 +50,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Catalyst Elemental", 132, Rarity.COMMON, mage.cards.c.CatalystElemental.class));
         cards.add(new SetCardInfo("Cavalry Drillmaster", 8, Rarity.COMMON, mage.cards.c.CavalryDrillmaster.class));
         cards.add(new SetCardInfo("Centaur Courser", 171, Rarity.COMMON, mage.cards.c.CentaurCourser.class));
+        cards.add(new SetCardInfo("Child of Night", 89, Rarity.COMMON, mage.cards.c.ChildOfNight.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 172, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Colossal Majesty", 173, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
         cards.add(new SetCardInfo("Court Cleric", 283, Rarity.UNCOMMON, mage.cards.c.CourtCleric.class));
@@ -124,6 +125,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 218, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class));
         cards.add(new SetCardInfo("Oakenform", 191, Rarity.COMMON, mage.cards.o.Oakenform.class));
         cards.add(new SetCardInfo("Omenspeaker", 64, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
+        cards.add(new SetCardInfo("Omniscience", 65, Rarity.MYTHIC, mage.cards.o.Omniscience.class));
         cards.add(new SetCardInfo("Onakke Ogre", 153, Rarity.COMMON, mage.cards.o.OnakkeOgre.class));
         cards.add(new SetCardInfo("Oreskos Swiftclaw", 31, Rarity.COMMON, mage.cards.o.OreskosSwiftclaw.class));
         cards.add(new SetCardInfo("Palladia-Mors, the Ruiner", 219, Rarity.MYTHIC, mage.cards.p.PalladiaMorsTheRuiner.class));
