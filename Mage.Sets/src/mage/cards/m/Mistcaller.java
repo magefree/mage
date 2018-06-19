@@ -1,17 +1,17 @@
-package mage.cards.c;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -23,39 +23,40 @@ import mage.watchers.common.CreatureWasCastWatcher;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public final class ContainmentPriest extends CardImpl {
+public final class Mistcaller extends CardImpl {
 
-    public ContainmentPriest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.CLERIC);
+    public Mistcaller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add(SubType.MERFOLK);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-        // If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContainmentPriestReplacementEffect()), new CreatureWasCastWatcher());
+        // Sacrifice Mistcaller: Until end of turn, if a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
+        this.addAbility(new SimpleActivatedAbility(
+                new ContainmentPriestReplacementEffect(),
+                new SacrificeSourceCost()
+        ), new CreatureWasCastWatcher());
     }
 
-    public ContainmentPriest(final ContainmentPriest card) {
+    public Mistcaller(final Mistcaller card) {
         super(card);
     }
 
     @Override
-    public ContainmentPriest copy() {
-        return new ContainmentPriest(this);
+    public Mistcaller copy() {
+        return new Mistcaller(this);
     }
 }
 
 class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
 
     public ContainmentPriestReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead";
+        super(Duration.EndOfTurn, Outcome.Exile);
+        staticText = "until end of turn, if a nontoken creature would enter the battlefield and it wasn't cast, exile it instead";
     }
 
     public ContainmentPriestReplacementEffect(final ContainmentPriestReplacementEffect effect) {

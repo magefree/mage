@@ -116,6 +116,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Militia Bugler", 29, Rarity.UNCOMMON, mage.cards.m.MilitiaBugler.class));
         cards.add(new SetCardInfo("Mirror Image", 61, Rarity.UNCOMMON, mage.cards.m.MirrorImage.class));
         cards.add(new SetCardInfo("Mist-Cloaked Herald", 310, Rarity.COMMON, mage.cards.m.MistCloakedHerald.class));
+        cards.add(new SetCardInfo("Mistcaller", 62, Rarity.RARE, mage.cards.m.Mistcaller.class));
         cards.add(new SetCardInfo("Murder", 110, Rarity.UNCOMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Nexus of Fate", 306, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class));
         cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 218, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class));
