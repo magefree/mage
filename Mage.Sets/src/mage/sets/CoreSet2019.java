@@ -129,6 +129,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Omenspeaker", 64, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
         cards.add(new SetCardInfo("Omniscience", 65, Rarity.MYTHIC, mage.cards.o.Omniscience.class));
         cards.add(new SetCardInfo("Onakke Ogre", 153, Rarity.COMMON, mage.cards.o.OnakkeOgre.class));
+        cards.add(new SetCardInfo("Open the Graves", 112, Rarity.RARE, mage.cards.o.OpenTheGraves.class));
         cards.add(new SetCardInfo("Oreskos Swiftclaw", 31, Rarity.COMMON, mage.cards.o.OreskosSwiftclaw.class));
         cards.add(new SetCardInfo("Palladia-Mors, the Ruiner", 219, Rarity.MYTHIC, mage.cards.p.PalladiaMorsTheRuiner.class));
         cards.add(new SetCardInfo("Patient Rebuilding", 67, Rarity.RARE, mage.cards.p.PatientRebuilding.class));
