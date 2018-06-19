@@ -1,8 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
@@ -17,14 +14,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -33,7 +26,7 @@ import mage.watchers.Watcher;
 public final class TinderWall extends CardImpl {
 
     public TinderWall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.PLANT);
         this.subtype.add(SubType.WALL);
 
@@ -50,7 +43,7 @@ public final class TinderWall extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability, new BlockedByWatcher());
+        this.addAbility(ability);
     }
 
     public TinderWall(final TinderWall card) {
@@ -61,39 +54,4 @@ public final class TinderWall extends CardImpl {
     public TinderWall copy() {
         return new TinderWall(this);
     }
-}
-
-class BlockedByWatcher extends Watcher {
-
-    public List<UUID> blockedByWatcher = new ArrayList<>();
-
-    public BlockedByWatcher() {
-        super("BlockedByWatcher", WatcherScope.CARD);
-    }
-
-    public BlockedByWatcher(final BlockedByWatcher watcher) {
-        super(watcher);
-        this.blockedByWatcher.addAll(watcher.blockedByWatcher);
-    }
-
-    @Override
-    public BlockedByWatcher copy() {
-        return new BlockedByWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            if (sourceId.equals(event.getSourceId()) && !blockedByWatcher.contains(event.getTargetId())) {
-                blockedByWatcher.add(event.getTargetId());
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        blockedByWatcher.clear();
-    }
-
 }
