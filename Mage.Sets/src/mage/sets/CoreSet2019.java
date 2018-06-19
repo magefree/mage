@@ -64,6 +64,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Priest", 11, Rarity.COMMON, mage.cards.d.DwarvenPriest.class));
         cards.add(new SetCardInfo("Dwindle", 53, Rarity.COMMON, mage.cards.d.Dwindle.class));
         cards.add(new SetCardInfo("Electrify", 139, Rarity.COMMON, mage.cards.e.Electrify.class));
+        cards.add(new SetCardInfo("Elvish Clancaller", 179, Rarity.RARE, mage.cards.e.ElvishClancaller.class));
         cards.add(new SetCardInfo("Elvish Rejuvenator", 180, Rarity.COMMON, mage.cards.e.ElvishRejuvenator.class));
         cards.add(new SetCardInfo("Exclusion Mage", 55, Rarity.UNCOMMON, mage.cards.e.ExclusionMage.class));
         cards.add(new SetCardInfo("Field Creeper", 234, Rarity.COMMON, mage.cards.f.FieldCreeper.class));
