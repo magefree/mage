@@ -53,6 +53,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Cavalry Drillmaster", 8, Rarity.COMMON, mage.cards.c.CavalryDrillmaster.class));
         cards.add(new SetCardInfo("Centaur Courser", 171, Rarity.COMMON, mage.cards.c.CentaurCourser.class));
         cards.add(new SetCardInfo("Child of Night", 89, Rarity.COMMON, mage.cards.c.ChildOfNight.class));
+        cards.add(new SetCardInfo("Chromium, the Mutable", 214, Rarity.MYTHIC, mage.cards.c.ChromiumTheMutable.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 172, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Colossal Majesty", 173, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
         cards.add(new SetCardInfo("Contrite Cleric", 33, Rarity.RARE, mage.cards.c.ContriteCleric.class));
