@@ -163,6 +163,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Reassembling Skeleton", 116, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
         cards.add(new SetCardInfo("Reclamation Sage", 196, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Recollect", 197, Rarity.UNCOMMON, mage.cards.r.Recollect.class));
+        cards.add(new SetCardInfo("Regal Bloodlord", 222, Rarity.UNCOMMON, mage.cards.r.RegalBloodlord.class));
         cards.add(new SetCardInfo("Reliquary Tower", 254, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Remorseful Cleric", 33, Rarity.RARE, mage.cards.r.RemorsefulCleric.class));
         cards.add(new SetCardInfo("Resplendent Angel", 34, Rarity.MYTHIC, mage.cards.r.ResplendentAngel.class));
