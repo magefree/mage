@@ -31,9 +31,9 @@ public final class TearsOfValakut extends CardImpl {
     public TearsOfValakut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-        // Tears of Valakut can't be countered by spells or abilities.
+        // Tears of Valakut can't be countered.
         Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
+        effect.setText("this spell can't be countered");
         Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);

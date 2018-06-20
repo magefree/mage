@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -31,12 +30,12 @@ import mage.target.common.TargetAnyTarget;
 public final class Banefire extends CardImpl {
 
     public Banefire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
         // Banefire deals X damage to any target.       
         this.getSpellAbility().addEffect(new BaneFireEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        // If X is 5 or more, Banefire can't be countered by spells or abilities and the damage can't be prevented.
+        // If X is 5 or more, Banefire can't be countered and the damage can't be prevented.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new BanefireCantCounterEffect()));
     }
 
@@ -111,7 +110,7 @@ class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     public BanefireCantCounterEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit);
-        staticText = "If X is 5 or more, {this} can't be countered by spells or abilities and the damage can't be prevented";
+        staticText = "If X is 5 or more, this spell can't be countered and the damage can't be prevented";
     }
 
     public BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {

@@ -38,7 +38,7 @@ public final class Combust extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         
-        // Combust can't be countered by spells or abilities.
+        // Combust can't be countered.
         Ability ability = new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);

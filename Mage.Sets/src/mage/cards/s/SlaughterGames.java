@@ -24,9 +24,9 @@ public final class SlaughterGames extends CardImpl {
     public SlaughterGames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{R}");
 
-        // Slaughter Games can't be countered by spells or abilities.
+        // Slaughter Games can't be countered.
         Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
+        effect.setText("this spell can't be countered");
         Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);

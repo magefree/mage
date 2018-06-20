@@ -26,7 +26,7 @@ public final class Insist extends CardImpl {
     public Insist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
-        // The next creature spell you cast this turn can't be countered by spells or abilities.
+        // The next creature spell you cast this turn can't be countered.
         this.getSpellAbility().addEffect(new InsistEffect());
         this.getSpellAbility().addWatcher(new InsistWatcher());
 
@@ -50,7 +50,7 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
 
     InsistEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "The next creature spell you cast this turn can't be countered by spells or abilities";
+        staticText = "The next creature spell you cast this turn can't be countered";
     }
 
     InsistEffect(final InsistEffect effect) {
