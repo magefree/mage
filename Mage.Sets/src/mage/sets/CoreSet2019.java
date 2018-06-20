@@ -191,6 +191,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Sovereign's Bite", 120, Rarity.COMMON, mage.cards.s.SovereignsBite.class));
         cards.add(new SetCardInfo("Sparktongue Dragon", 159, Rarity.COMMON, mage.cards.s.SparktongueDragon.class));
         cards.add(new SetCardInfo("Star-Crowned Stag", 38, Rarity.COMMON, mage.cards.s.StarCrownedStag.class));
+        cards.add(new SetCardInfo("Stitcher's Supplier", 121, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Strangling Spores", 122, Rarity.COMMON, mage.cards.s.StranglingSpores.class));
         cards.add(new SetCardInfo("Sun Sentinel", 307, Rarity.COMMON, mage.cards.s.SunSentinel.class));
         cards.add(new SetCardInfo("Sure Strike", 161, Rarity.COMMON, mage.cards.s.SureStrike.class));
