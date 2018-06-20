@@ -108,6 +108,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Guttersnipe", 145, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Havoc Devils", 146, Rarity.COMMON, mage.cards.h.HavocDevils.class));
         cards.add(new SetCardInfo("Herald of Faith", 13, Rarity.UNCOMMON, mage.cards.h.HeraldOfFaith.class));
+        cards.add(new SetCardInfo("Heroic Reinforcements", 217, Rarity.UNCOMMON, mage.cards.h.HeroicReinforcements.class));
         cards.add(new SetCardInfo("Highland Game", 188, Rarity.COMMON, mage.cards.h.HighlandGame.class));
         cards.add(new SetCardInfo("Horizon Scholar", 59, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Hostile Minotaur", 147, Rarity.COMMON, mage.cards.h.HostileMinotaur.class));
