@@ -179,6 +179,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Rustwing Falcon", 36, Rarity.COMMON, mage.cards.r.RustwingFalcon.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 69, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
         cards.add(new SetCardInfo("Salvager of Secrets", 70, Rarity.COMMON, mage.cards.s.SalvagerOfSecrets.class));
+        cards.add(new SetCardInfo("Sarkhan's Dragonfire", 298, Rarity.RARE, mage.cards.s.SarkhansDragonfire.class));
         cards.add(new SetCardInfo("Sarkhan's Unsealing", 155, Rarity.RARE, mage.cards.s.SarkhansUnsealing.class));
         cards.add(new SetCardInfo("Sarkhan's Whelp", 299, Rarity.UNCOMMON, mage.cards.s.SarkhansWhelp.class));
         cards.add(new SetCardInfo("Sarkhan, Dragonsoul", 296, Rarity.MYTHIC, mage.cards.s.SarkhanDragonsoul.class));
