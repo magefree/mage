@@ -34,9 +34,9 @@ public final class RendingVolley extends CardImpl {
     public RendingVolley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        // Rending Volley can't be countered by spells or abilities.
+        // Rending Volley can't be countered.
         Effect effect =  new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
+        effect.setText("this spell can't be countered");
         Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);

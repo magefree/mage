@@ -43,7 +43,7 @@ public final class BoundDetermined extends SplitCard {
         effect.setText("Exile this card");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         // Determined
-        // Other spells you control can't be countered by spells or abilities this turn.
+        // Other spells you control can't be countered this turn.
         // Draw a card.
         getRightHalfCard().getSpellAbility().addEffect(new DeterminedEffect());
         getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
@@ -107,7 +107,7 @@ class DeterminedEffect extends ContinuousRuleModifyingEffectImpl {
 
     DeterminedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Other spells you control can't be countered by spells or abilities this turn";
+        staticText = "Other spells you control can't be countered this turn";
     }
 
     DeterminedEffect(final DeterminedEffect effect) {

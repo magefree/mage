@@ -13,7 +13,7 @@ public class OvermasterTest extends CardTestPlayerBase {
     /*
      * Overmaster
      * Sorcery, R (1)
-     * The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
+     * The next instant or sorcery spell you cast this turn can't be countered.
      * Draw a card.
      *
     */

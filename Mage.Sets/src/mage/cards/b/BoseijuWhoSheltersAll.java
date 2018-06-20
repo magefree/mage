@@ -36,12 +36,12 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
         // Boseiju, Who Shelters All enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}, Pay 2 life: Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
+        // {T}, Pay 2 life: Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered.
         Mana mana = Mana.ColorlessMana(1);
         mana.setFlag(true); // used to indicate this mana ability
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
         ability.addCost(new PayLifeCost(2));
-        ability.getEffects().get(0).setText("Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities");
+        ability.getEffects().get(0).setText("Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered");
         this.addAbility(ability);
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoseijuWhoSheltersAllCantCounterEffect()), new BoseijuWhoSheltersAllWatcher());
@@ -119,7 +119,7 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null) {
-            return "This spell can't be countered by spells or abilities (" + sourceObject.getName() + ").";
+            return "This spell can't be countered (" + sourceObject.getName() + ").";
         }
         return null;
     }

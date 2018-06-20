@@ -23,7 +23,7 @@ public class SwansOfBrynArgollTest extends CardTestPlayerBase{
         addCard(Zone.BATTLEFIELD, playerA, "Swans of Bryn Argoll");
         
         // Combust deals 5 damage to target white or blue creature. The damage can't be prevented.
-        // Combust can't be countered by spells or abilities.
+        // Combust can't be countered.
         addCard(Zone.HAND, playerB, "Combust", 1);        
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
         
@@ -48,7 +48,7 @@ public class SwansOfBrynArgollTest extends CardTestPlayerBase{
         addCard(Zone.BATTLEFIELD, playerA, "Swans of Bryn Argoll");
         
         // Banefire deals X damage to any target.
-        // If X is 5 or more, Banefire can't be countered by spells or abilities and the damage can't be prevented.
+        // If X is 5 or more, Banefire can't be countered and the damage can't be prevented.
         addCard(Zone.HAND, playerB, "Banefire", 1);        
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 8);
         

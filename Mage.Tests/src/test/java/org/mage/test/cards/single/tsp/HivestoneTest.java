@@ -47,7 +47,7 @@ public class HivestoneTest extends CardTestPlayerBase {
     public void rootSliverTest() {
         addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Hivestone", 1);
-        // Root Sliver can't be countered. Sliver spells can't be countered by spells or abilities.
+        // Root Sliver can't be countered. Sliver spells can't be countered.
         addCard(Zone.BATTLEFIELD, playerA, "Root Sliver", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
