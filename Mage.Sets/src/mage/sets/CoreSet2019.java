@@ -181,6 +181,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Shield Mare", 37, Rarity.UNCOMMON, mage.cards.s.ShieldMare.class));
         cards.add(new SetCardInfo("Shivan Dragon", 300, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Shock", 156, Rarity.COMMON, mage.cards.s.Shock.class));
+        cards.add(new SetCardInfo("Sigiled Sword of Valeron", 244, Rarity.RARE, mage.cards.s.SigiledSwordOfValeron.class));
         cards.add(new SetCardInfo("Silverbeak Griffin", 285, Rarity.COMMON, mage.cards.s.SilverbeakGriffin.class));
         cards.add(new SetCardInfo("Skeleton Archer", 118, Rarity.COMMON, mage.cards.s.SkeletonArcher.class));
         cards.add(new SetCardInfo("Skilled Animator", 73, Rarity.UNCOMMON, mage.cards.s.SkilledAnimator.class));
