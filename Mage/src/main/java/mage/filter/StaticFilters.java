@@ -452,7 +452,7 @@ public final class StaticFilters {
         ));
         FILTER_SPELLS_INSTANT_OR_SORCERY.setLockedFilter(true);
     }
-    public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
+    public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
     static {
         FILTER_CREATURE_TOKENS.add(new TokenPredicate());
