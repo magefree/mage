@@ -81,6 +81,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Rejuvenator", 180, Rarity.COMMON, mage.cards.e.ElvishRejuvenator.class));
         cards.add(new SetCardInfo("Epicure of Blood", 95, Rarity.COMMON, mage.cards.e.EpicureOfBlood.class));
         cards.add(new SetCardInfo("Exclusion Mage", 55, Rarity.UNCOMMON, mage.cards.e.ExclusionMage.class));
+        cards.add(new SetCardInfo("Fell Specter", 96, Rarity.UNCOMMON, mage.cards.f.FellSpecter.class));
         cards.add(new SetCardInfo("Field Creeper", 234, Rarity.COMMON, mage.cards.f.FieldCreeper.class));
         cards.add(new SetCardInfo("Fiery Finish", 140, Rarity.UNCOMMON, mage.cards.f.FieryFinish.class));
         cards.add(new SetCardInfo("Fire Elemental", 141, Rarity.COMMON, mage.cards.f.FireElemental.class));
