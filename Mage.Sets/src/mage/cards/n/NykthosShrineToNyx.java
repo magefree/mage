@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.ArrayList;
@@ -107,7 +106,10 @@ class NykthosDynamicManaEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         for (String colorChoice : ChoiceColor.getBaseColors()) {
-            netMana.add(computeMana(colorChoice, game, source));
+            Mana mana = computeMana(colorChoice, game, source);
+            if (mana.count() > 0) {
+                netMana.add(mana);
+            }
         }
         return netMana;
     }
