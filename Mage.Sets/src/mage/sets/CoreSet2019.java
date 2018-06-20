@@ -46,6 +46,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Arisen Gorgon", 292, Rarity.UNCOMMON, mage.cards.a.ArisenGorgon.class));
         cards.add(new SetCardInfo("Aven Wind Mage", 45, Rarity.COMMON, mage.cards.a.AvenWindMage.class));
         cards.add(new SetCardInfo("Aviation Pioneer", 46, Rarity.COMMON, mage.cards.a.AviationPioneer.class));
+        cards.add(new SetCardInfo("Banefire", 130, Rarity.RARE, mage.cards.b.Banefire.class));
         cards.add(new SetCardInfo("Befuddle", 309, Rarity.COMMON, mage.cards.b.Befuddle.class));
         cards.add(new SetCardInfo("Blood Divination", 86, Rarity.UNCOMMON, mage.cards.b.BloodDivination.class));
         cards.add(new SetCardInfo("Bogstomper", 87, Rarity.COMMON, mage.cards.b.Bogstomper.class));
@@ -61,7 +62,6 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Cleansing Nova", 9, Rarity.RARE, mage.cards.c.CleansingNova.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 172, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Colossal Majesty", 173, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
-        cards.add(new SetCardInfo("Remorseful Cleric", 33, Rarity.RARE, mage.cards.r.RemorsefulCleric.class));
         cards.add(new SetCardInfo("Court Cleric", 283, Rarity.UNCOMMON, mage.cards.c.CourtCleric.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 229, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Dark-Dweller Oracle", 134, Rarity.RARE, mage.cards.d.DarkDwellerOracle.class));
@@ -150,6 +150,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Palladia-Mors, the Ruiner", 219, Rarity.MYTHIC, mage.cards.p.PalladiaMorsTheRuiner.class));
         cards.add(new SetCardInfo("Patient Rebuilding", 67, Rarity.RARE, mage.cards.p.PatientRebuilding.class));
         cards.add(new SetCardInfo("Pegasus Courser", 32, Rarity.COMMON, mage.cards.p.PegasusCourser.class));
+        cards.add(new SetCardInfo("Phylactery Lich", 113, Rarity.RARE, mage.cards.p.PhylacteryLich.class));
         cards.add(new SetCardInfo("Plague Mare", 114, Rarity.UNCOMMON, mage.cards.p.PlagueMare.class));
         cards.add(new SetCardInfo("Plummet", 193, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Prodigious Growth", 194, Rarity.RARE, mage.cards.p.ProdigiousGrowth.class));
@@ -160,6 +161,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Reclamation Sage", 196, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Recollect", 197, Rarity.UNCOMMON, mage.cards.r.Recollect.class));
         cards.add(new SetCardInfo("Reliquary Tower", 254, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
+        cards.add(new SetCardInfo("Remorseful Cleric", 33, Rarity.RARE, mage.cards.r.RemorsefulCleric.class));
         cards.add(new SetCardInfo("Resplendent Angel", 34, Rarity.MYTHIC, mage.cards.r.ResplendentAngel.class));
         cards.add(new SetCardInfo("Revitalize", 35, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Riddlemaster Sphinx", 287, Rarity.RARE, mage.cards.r.RiddlemasterSphinx.class));
