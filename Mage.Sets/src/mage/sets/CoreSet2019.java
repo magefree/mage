@@ -61,7 +61,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Cleansing Nova", 9, Rarity.RARE, mage.cards.c.CleansingNova.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 172, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Colossal Majesty", 173, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
-        cards.add(new SetCardInfo("Contrite Cleric", 33, Rarity.RARE, mage.cards.c.ContriteCleric.class));
+        cards.add(new SetCardInfo("Remorseful Cleric", 33, Rarity.RARE, mage.cards.r.RemorsefulCleric.class));
         cards.add(new SetCardInfo("Court Cleric", 283, Rarity.UNCOMMON, mage.cards.c.CourtCleric.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 229, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Dark-Dweller Oracle", 134, Rarity.RARE, mage.cards.d.DarkDwellerOracle.class));

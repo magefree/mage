@@ -1,4 +1,4 @@
-package mage.cards.c;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -18,9 +18,9 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public final class ContriteCleric extends CardImpl {
+public final class RemorsefulCleric extends CardImpl {
 
-    public ContriteCleric(UUID ownerId, CardSetInfo setInfo) {
+    public RemorsefulCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
         this.subtype.add(SubType.SPIRIT);
@@ -37,12 +37,12 @@ public final class ContriteCleric extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ContriteCleric(final ContriteCleric card) {
+    public RemorsefulCleric(final RemorsefulCleric card) {
         super(card);
     }
 
     @Override
-    public ContriteCleric copy() {
-        return new ContriteCleric(this);
+    public RemorsefulCleric copy() {
+        return new RemorsefulCleric(this);
     }
 }
