@@ -33,6 +33,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Aerial Engineer", 211, Rarity.UNCOMMON, mage.cards.a.AerialEngineer.class));
         cards.add(new SetCardInfo("Aggressive Mammoth", 302, Rarity.RARE, mage.cards.a.AggressiveMammoth.class));
         cards.add(new SetCardInfo("Air Elemental", 308, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
+        cards.add(new SetCardInfo("Ajani's Influence", 282, Rarity.RARE, mage.cards.a.AjanisInfluence.class));
         cards.add(new SetCardInfo("Ajani's Last Stand", 4, Rarity.RARE, mage.cards.a.AjanisLastStand.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 5, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani's Welcome", 6, Rarity.UNCOMMON, mage.cards.a.AjanisWelcome.class));
