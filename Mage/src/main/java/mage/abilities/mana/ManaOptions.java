@@ -1,4 +1,3 @@
-
 package mage.abilities.mana;
 
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -23,6 +23,8 @@ import mage.game.events.ManaEvent;
  *
  */
 public class ManaOptions extends ArrayList<Mana> {
+
+    private static final Logger logger = Logger.getLogger(ManaOptions.class);
 
     public ManaOptions() {
     }
@@ -185,6 +187,7 @@ public class ManaOptions extends ArrayList<Mana> {
                                                 Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
                                                 if (moreValuable != null) {
                                                     existingMana.setToMana(moreValuable);
+                                                    logger.trace("mana replaced " + newMana.toString() + " <=> " + existingMana.toString() + " from " + ability.getRule());
                                                     continue CombineWithExisting;
                                                 }
                                             }

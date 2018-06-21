@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public final class OrcishLumberjack extends CardImpl {
 
 class OrcishLumberjackManaEffect extends ManaEffect {
 
-    private List<Mana> netMana = new ArrayList<Mana>();
+    private List<Mana> netMana = new ArrayList<>();
 
     public OrcishLumberjackManaEffect() {
         super();

@@ -1,4 +1,3 @@
-
 package org.mage.test.utils;
 
 import mage.abilities.mana.ManaOptions;
@@ -234,6 +233,25 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testNykthos5() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
+        assertManaOptions("{W}{W}{G}", manaOptions);
+        assertManaOptions("{C}{G}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
+    }
+
+    @Test
     public void testDuplicatedDontHave1() {
         addCard(Zone.BATTLEFIELD, playerA, "City of Brass", 2); // Any
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
@@ -416,5 +434,24 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}", manaOptions);
+    }
+
+    @Test
+    public void testCharmedPedant() {
+        // {T}, Put the top card of your library into your graveyard: For each colored mana symbol in that card's mana cost, add one mana of that color.
+        // Activate this ability only any time you could cast an instant.
+        addCard(Zone.BATTLEFIELD, playerA, "Charmed Pendant", 1);
+        // {T}: Add {C}.
+        // {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+        addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Temple", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}{C}", manaOptions);
     }
 }

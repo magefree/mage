@@ -73,7 +73,10 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
             ArrayList<Mana> dynamicNetMana = new ArrayList<>();
             for (Effect effect : getEffects()) {
                 if (effect instanceof ManaEffect) {
-                    dynamicNetMana.addAll(((ManaEffect) effect).getNetMana(game, this));
+                    List<Mana> effectNetMana = ((ManaEffect) effect).getNetMana(game, this);
+                    if (effectNetMana != null) {
+                        dynamicNetMana.addAll(effectNetMana);
+                    }
                 }
             }
             return dynamicNetMana;

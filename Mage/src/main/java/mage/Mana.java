@@ -1,4 +1,3 @@
-
 package mage;
 
 import java.io.Serializable;
@@ -30,6 +29,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Default constructor. Creates a {@link Mana} object with 0 values.
      */
     public Mana() {
+        red = 0;
+        green = 0;
+        blue = 0;
+        white = 0;
+        black = 0;
+        generic = 0;
+        colorless = 0;
+        flag = false;
     }
 
     /**
@@ -54,6 +61,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         this.generic = notNegative(generic, "Generic");
         this.colorless = notNegative(colorless, "Colorless");
         this.any = notNegative(any, "Any");
+        this.flag = false;
     }
 
     /**
@@ -492,25 +500,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         if (generic > 0) {
             sbMana.append('{').append(Integer.toString(generic)).append('}');
         }
-        if (colorless >= 20) { 
+        if (colorless >= 20) {
             sbMana.append(Integer.toString(colorless)).append("{C}");
         }
-        if (white >= 20) { 
+        if (white >= 20) {
             sbMana.append(Integer.toString(white)).append("{W}");
         }
-        if (blue >= 20) { 
+        if (blue >= 20) {
             sbMana.append(Integer.toString(blue)).append("{U}");
         }
-        if (black >= 20) { 
+        if (black >= 20) {
             sbMana.append(Integer.toString(black)).append("{B}");
         }
-        if (red >= 20) { 
+        if (red >= 20) {
             sbMana.append(Integer.toString(red)).append("{R}");
         }
-        if (green >= 20) { 
+        if (green >= 20) {
             sbMana.append(Integer.toString(green)).append("{G}");
         }
-        if (any >= 20) { 
+        if (any >= 20) {
             sbMana.append(Integer.toString(any)).append("{Any}");
         }
         for (int i = 0; i < colorless && colorless < 20; i++) {
@@ -908,7 +916,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return true;
         } else if (mana.colorless > 0 && this.colorless > 0 && includeColorless) {
             return true;
-        } else if (mana.any > 0 && this.count() > 0){
+        } else if (mana.any > 0 && this.count() > 0) {
             return true;
         }
 
