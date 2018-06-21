@@ -4,6 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.constants.SubType;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -26,6 +27,9 @@ public final class PoisonTipArcher extends CardImpl {
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
+
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever another creature dies, each opponent loses 1 life.
         this.addAbility(new DiesCreatureTriggeredAbility(
