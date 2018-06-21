@@ -1,8 +1,8 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -15,21 +15,17 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author Loki
  */
 public final class DrogskolCaptain extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit");
 
-    static {
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SPIRIT, "Spirits");
 
     public DrogskolCaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.SOLDIER);
 
@@ -37,9 +33,21 @@ public final class DrogskolCaptain extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
+
         // Other Spirit creatures you control get +1/+1 and have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+        Ability ability = new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new BoostControlledEffect(
+                        1, 1, Duration.WhileOnBattlefield,
+                        filter, true
+                )
+        );
+        ability.addEffect(new GainAbilityControlledEffect(
+                HexproofAbility.getInstance(),
+                Duration.WhileOnBattlefield,
+                filter, true
+        ).setText("and have hexproof"));
+        this.addAbility(ability);
     }
 
     public DrogskolCaptain(final DrogskolCaptain card) {
