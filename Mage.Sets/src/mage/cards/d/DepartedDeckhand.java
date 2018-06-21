@@ -50,7 +50,7 @@ public final class DepartedDeckhand extends CardImpl {
                 Zone.BATTLEFIELD,
                 new CantBeBlockedByCreaturesSourceEffect(
                         filter, Duration.WhileOnBattlefield
-                ).setText("{this} can only be blocked by Spirits")
+                ).setText("{this} can't be blocked except by Spirits")
         );
         this.addAbility(ability);
 
@@ -58,10 +58,10 @@ public final class DepartedDeckhand extends CardImpl {
         ability = new SimpleActivatedAbility(
                 new CantBeBlockedTargetEffect(
                         filter, Duration.EndOfTurn
-                ).setText("Target creature you control can only be blocked by Spirits this turn"),
+                ).setText("Another target creature you control can't be blocked this turn except by Spirits"),
                 new ManaCostsImpl("{3}{U}")
         );
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 
