@@ -4,6 +4,7 @@ import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
 import mage.game.Game;
@@ -78,6 +79,11 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public Effects getEffects() {
         return ability.getEffects();
+    }
+
+    @Override
+    public void addEffect(Effect effect) {
+        ability.addEffect(effect);
     }
 
     @Override
