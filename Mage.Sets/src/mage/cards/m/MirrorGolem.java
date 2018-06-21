@@ -128,26 +128,6 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
                 }
             }
         }
-
-//        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-//            Player player = game.getPlayer(playerId);
-//            if (player != null) {
-//                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
-//                if (exileId != null) {
-//                    for (UUID cardId : game.getState().getExile().getExileZone(exileId)) {
-//                        Card card = game.getCard(cardId);
-//                        if (card != null) {
-//                            for (CardType cardType : card.getCardType()){
-//                                FilterCard filterCard = new FilterCard();
-//                                filterCard.add(new CardTypePredicate(cardType));
-//                                sourceObject.addAbility(new ProtectionAbility(filterCard));
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
         return true;
     }
 
