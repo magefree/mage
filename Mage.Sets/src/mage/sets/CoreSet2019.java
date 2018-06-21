@@ -105,6 +105,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Grasping Scoundrel", 312, Rarity.COMMON, mage.cards.g.GraspingScoundrel.class));
         cards.add(new SetCardInfo("Gravedigger", 98, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Gravewaker", 293, Rarity.RARE, mage.cards.g.Gravewaker.class));
+        cards.add(new SetCardInfo("Graveyard Marshal", 99, Rarity.RARE, mage.cards.g.GraveyardMarshal.class));
         cards.add(new SetCardInfo("Guttersnipe", 145, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Havoc Devils", 146, Rarity.COMMON, mage.cards.h.HavocDevils.class));
         cards.add(new SetCardInfo("Herald of Faith", 13, Rarity.UNCOMMON, mage.cards.h.HeraldOfFaith.class));
