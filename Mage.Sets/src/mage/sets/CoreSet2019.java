@@ -132,6 +132,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Lathliss, Dragon Queen", 149, Rarity.RARE, mage.cards.l.LathlissDragonQueen.class));
         cards.add(new SetCardInfo("Lava Axe", 150, Rarity.COMMON, mage.cards.l.LavaAxe.class));
         cards.add(new SetCardInfo("Lena, Selfless Champion", 21, Rarity.RARE, mage.cards.l.LenaSelflessChampion.class));
+        cards.add(new SetCardInfo("Leonin Warleader", 23, Rarity.RARE, mage.cards.l.LeoninWarleader.class));
         cards.add(new SetCardInfo("Lich's Caress", 105, Rarity.COMMON, mage.cards.l.LichsCaress.class));
         cards.add(new SetCardInfo("Lightning Mare", 151, Rarity.UNCOMMON, mage.cards.l.LightningMare.class));
         cards.add(new SetCardInfo("Lightning Strike", 152, Rarity.UNCOMMON, mage.cards.l.LightningStrike.class));
