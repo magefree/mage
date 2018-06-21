@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -23,6 +24,8 @@ public final class SuspiciousBookcase extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
 
         this.subtype.add(SubType.WALL);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
