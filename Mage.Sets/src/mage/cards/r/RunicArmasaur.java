@@ -20,9 +20,9 @@ import mage.game.stack.StackAbility;
  *
  * @author LevelX2
  */
-public final class RunedArmasaur extends CardImpl {
+public final class RunicArmasaur extends CardImpl {
 
-    public RunedArmasaur(UUID ownerId, CardSetInfo setInfo) {
+    public RunicArmasaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
 
         this.subtype.add(SubType.DINOSAUR);
@@ -30,32 +30,32 @@ public final class RunedArmasaur extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever an opponent activates an ability of a creature or a land that is not a mana ability, you may draw a card.
-        this.addAbility(new RunedArmasaurTriggeredAbility());
+        this.addAbility(new RunicArmasaurTriggeredAbility());
     }
 
-    public RunedArmasaur(final RunedArmasaur card) {
+    public RunicArmasaur(final RunicArmasaur card) {
         super(card);
     }
 
     @Override
-    public RunedArmasaur copy() {
-        return new RunedArmasaur(this);
+    public RunicArmasaur copy() {
+        return new RunicArmasaur(this);
     }
 }
 
-class RunedArmasaurTriggeredAbility extends TriggeredAbilityImpl {
+class RunicArmasaurTriggeredAbility extends TriggeredAbilityImpl {
 
-    RunedArmasaurTriggeredAbility() {
+    RunicArmasaurTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    RunedArmasaurTriggeredAbility(final RunedArmasaurTriggeredAbility ability) {
+    RunicArmasaurTriggeredAbility(final RunicArmasaurTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public RunedArmasaurTriggeredAbility copy() {
-        return new RunedArmasaurTriggeredAbility(this);
+    public RunicArmasaurTriggeredAbility copy() {
+        return new RunicArmasaurTriggeredAbility(this);
     }
 
     @Override

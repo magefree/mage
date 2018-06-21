@@ -80,6 +80,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Dismissive Pyromancer", 136, Rarity.RARE, mage.cards.d.DismissivePyromancer.class));
         cards.add(new SetCardInfo("Disperse", 50, Rarity.COMMON, mage.cards.d.Disperse.class));
         cards.add(new SetCardInfo("Divination", 51, Rarity.COMMON, mage.cards.d.Divination.class));
+        cards.add(new SetCardInfo("Djinn of Wishes", 52, Rarity.RARE, mage.cards.d.DjinnOfWishes.class));
         cards.add(new SetCardInfo("Draconic Disciple", 215, Rarity.UNCOMMON, mage.cards.d.DraconicDisciple.class));
         cards.add(new SetCardInfo("Druid of the Cowl", 177, Rarity.COMMON, mage.cards.d.DruidOfTheCowl.class));
         cards.add(new SetCardInfo("Dryad Greenseeker", 178, Rarity.UNCOMMON, mage.cards.d.DryadGreenseeker.class));
@@ -182,9 +183,10 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Resplendent Angel", 34, Rarity.MYTHIC, mage.cards.r.ResplendentAngel.class));
         cards.add(new SetCardInfo("Revitalize", 35, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Riddlemaster Sphinx", 287, Rarity.RARE, mage.cards.r.RiddlemasterSphinx.class));
+        cards.add(new SetCardInfo("Rise from the Grave", 117, Rarity.UNCOMMON, mage.cards.r.RiseFromTheGrave.class));
         cards.add(new SetCardInfo("Rogue's Gloves", 243, Rarity.UNCOMMON, mage.cards.r.RoguesGloves.class));
         cards.add(new SetCardInfo("Root Snare", 199, Rarity.COMMON, mage.cards.r.RootSnare.class));
-        cards.add(new SetCardInfo("Runed Armasaur", 200, Rarity.RARE, mage.cards.r.RunedArmasaur.class));
+        cards.add(new SetCardInfo("Runic Armasaur", 200, Rarity.RARE, mage.cards.r.RunicArmasaur.class));
         cards.add(new SetCardInfo("Rustwing Falcon", 36, Rarity.COMMON, mage.cards.r.RustwingFalcon.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 69, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
         cards.add(new SetCardInfo("Salvager of Secrets", 70, Rarity.COMMON, mage.cards.s.SalvagerOfSecrets.class));
@@ -222,6 +224,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Sure Strike", 161, Rarity.COMMON, mage.cards.s.SureStrike.class));
         cards.add(new SetCardInfo("Surge Mare", 77, Rarity.UNCOMMON, mage.cards.s.SurgeMare.class));
         cards.add(new SetCardInfo("Suspicious Bookcase", 246, Rarity.UNCOMMON, mage.cards.s.SuspiciousBookcase.class));
+        cards.add(new SetCardInfo("Switcheroo", 78, Rarity.UNCOMMON, mage.cards.s.Switcheroo.class));
         cards.add(new SetCardInfo("Take Vengeance", 40, Rarity.COMMON, mage.cards.t.TakeVengeance.class));
         cards.add(new SetCardInfo("Tattered Mummy", 295, Rarity.COMMON, mage.cards.t.TatteredMummy.class));
         cards.add(new SetCardInfo("Tezzeret's Gatebreaker", 289, Rarity.RARE, mage.cards.t.TezzeretsGatebreaker.class));
@@ -254,5 +257,6 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Mist", 83, Rarity.COMMON, mage.cards.w.WallOfMist.class));
         cards.add(new SetCardInfo("Wall of Vines", 210, Rarity.COMMON, mage.cards.w.WallOfVines.class));
         cards.add(new SetCardInfo("Waterknot", 311, Rarity.COMMON, mage.cards.w.Waterknot.class));
+        cards.add(new SetCardInfo("Windreader Sphinx", 84, Rarity.MYTHIC, mage.cards.w.WindreaderSphinx.class));
     }
 }
