@@ -1,6 +1,8 @@
 package mage.cards.n;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
@@ -22,11 +24,10 @@ public final class NightmaresThirst extends CardImpl {
 
         // You gain 1 life. Target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn.
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
+        DynamicValue xValue = new MultipliedValue(ControllerGotLifeCount.getInstance(), -1);
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ControllerGotLifeCount.getInstance(),
-                ControllerGotLifeCount.getInstance(),
-                Duration.EndOfTurn, true
-        ));
+                xValue, xValue, Duration.EndOfTurn, true
+        ).setText("Target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addWatcher(new PlayerGainedLifeWatcher());
     }
