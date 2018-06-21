@@ -183,6 +183,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Sarkhan's Unsealing", 155, Rarity.RARE, mage.cards.s.SarkhansUnsealing.class));
         cards.add(new SetCardInfo("Sarkhan's Whelp", 299, Rarity.UNCOMMON, mage.cards.s.SarkhansWhelp.class));
         cards.add(new SetCardInfo("Sarkhan, Dragonsoul", 296, Rarity.MYTHIC, mage.cards.s.SarkhanDragonsoul.class));
+        cards.add(new SetCardInfo("Sarkhan, Fireblood", 154, Rarity.MYTHIC, mage.cards.s.SarkhanFireblood.class));
         cards.add(new SetCardInfo("Satyr Enchanter", 223, Rarity.UNCOMMON, mage.cards.s.SatyrEnchanter.class));
         cards.add(new SetCardInfo("Scapeshift", 201, Rarity.MYTHIC, mage.cards.s.Scapeshift.class));
         cards.add(new SetCardInfo("Scholar of Stars", 71, Rarity.COMMON, mage.cards.s.ScholarOfStars.class));
