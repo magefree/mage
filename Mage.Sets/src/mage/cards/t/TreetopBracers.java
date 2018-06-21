@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -21,12 +20,12 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  *
  * @author Jason E. Wall
-
+ *
  */
 public final class TreetopBracers extends CardImpl {
 
     public TreetopBracers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -37,7 +36,7 @@ public final class TreetopBracers extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
         ability.addEffect(new TreetopBracersRestrictEffect());
         this.addAbility(ability);
     }
@@ -51,7 +50,6 @@ public final class TreetopBracers extends CardImpl {
         return new TreetopBracers(this);
     }
 }
-
 
 class TreetopBracersRestrictEffect extends RestrictionEffect {
 
@@ -69,7 +67,7 @@ class TreetopBracersRestrictEffect extends RestrictionEffect {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            if (permanent.getId().equals(equipped.getId())) {
+            if (permanent != null && permanent.getId().equals(equipped.getId())) {
                 return true;
             }
         }

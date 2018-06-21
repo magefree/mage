@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -11,8 +10,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -75,7 +74,7 @@ class SelflessSquireTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getControllerId())) {
+        if (getControllerId().equals(event.getTargetId())) {
             getEffects().clear();
             getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(event.getAmount())));
             return true;

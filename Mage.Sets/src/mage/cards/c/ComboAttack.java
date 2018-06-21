@@ -55,7 +55,7 @@ class ComboAttackEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() < 2) {
+        if (source.getTargets().size() < 2 || source.getTargets().get(0).getTargets().size() < 2) {
             return false;
         }
         Permanent permanent1 = game.getPermanent(source.getTargets().get(0).getTargets().get(0));
