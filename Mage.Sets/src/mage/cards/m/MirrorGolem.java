@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -102,13 +103,14 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId()));
 
         if (sourceObject == null || sourceObject.getImprinted() == null) {
             return false;
         }
 
         for (UUID imprinted : sourceObject.getImprinted()){
-            if (imprinted != null){
+            if (imprinted != null && exileZone.contains(imprinted)){
                 Card card = game.getCard(imprinted);
                 if (card != null) {
                     for (CardType cardType : card.getCardType()){
