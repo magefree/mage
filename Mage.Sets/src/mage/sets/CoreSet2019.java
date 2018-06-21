@@ -128,6 +128,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Invoke the Divine", 16, Rarity.COMMON, mage.cards.i.InvokeTheDivine.class));
         cards.add(new SetCardInfo("Isareth the Awakener", 104, Rarity.RARE, mage.cards.i.IsarethTheAwakener.class));
         cards.add(new SetCardInfo("Isolate", 17, Rarity.RARE, mage.cards.i.Isolate.class));
+        cards.add(new SetCardInfo("Isolation Tower", 249, Rarity.RARE, mage.cards.i.IsolationTower.class));
         cards.add(new SetCardInfo("Kargan Dragonrider", 297, Rarity.COMMON, mage.cards.k.KarganDragonrider.class));
         cards.add(new SetCardInfo("Knight of the Tusk", 18, Rarity.COMMON, mage.cards.k.KnightOfTheTusk.class));
         cards.add(new SetCardInfo("Knight's Pledge", 19, Rarity.COMMON, mage.cards.k.KnightsPledge.class));
