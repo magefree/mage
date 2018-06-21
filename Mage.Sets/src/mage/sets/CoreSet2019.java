@@ -199,6 +199,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Skeleton Archer", 118, Rarity.COMMON, mage.cards.s.SkeletonArcher.class));
         cards.add(new SetCardInfo("Skilled Animator", 73, Rarity.UNCOMMON, mage.cards.s.SkilledAnimator.class));
         cards.add(new SetCardInfo("Skymarch Bloodletter", 119, Rarity.COMMON, mage.cards.s.SkymarchBloodletter.class));
+        cards.add(new SetCardInfo("Skyrider Patrol", 224, Rarity.UNCOMMON, mage.cards.s.SkyriderPatrol.class));
         cards.add(new SetCardInfo("Skyscanner", 245, Rarity.COMMON, mage.cards.s.Skyscanner.class));
         cards.add(new SetCardInfo("Sleep", 74, Rarity.UNCOMMON, mage.cards.s.Sleep.class));
         cards.add(new SetCardInfo("Smelt", 158, Rarity.COMMON, mage.cards.s.Smelt.class));
