@@ -248,6 +248,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Valiant Knight", 42, Rarity.RARE, mage.cards.v.ValiantKnight.class));
         cards.add(new SetCardInfo("Vampire Sovereign", 125, Rarity.UNCOMMON, mage.cards.v.VampireSovereign.class));
         cards.add(new SetCardInfo("Viashino Pyromancer", 166, Rarity.COMMON, mage.cards.v.ViashinoPyromancer.class));
+        cards.add(new SetCardInfo("Vigilant Baloth", 206, Rarity.UNCOMMON, mage.cards.v.VigilantBaloth.class));
         cards.add(new SetCardInfo("Vine Mare", 207, Rarity.UNCOMMON, mage.cards.v.VineMare.class));
         cards.add(new SetCardInfo("Vivien Reid", 208, Rarity.MYTHIC, mage.cards.v.VivienReid.class));
         cards.add(new SetCardInfo("Vivien of the Arkbow", 301, Rarity.MYTHIC, mage.cards.v.VivienOfTheArkbow.class));
