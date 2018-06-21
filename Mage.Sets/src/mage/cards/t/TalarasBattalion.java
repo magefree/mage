@@ -61,7 +61,7 @@ class TalarasBattalionEffect extends ContinuousRuleModifyingEffectImpl {
 
     TalarasBattalionEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only if you've cast another green spell this turn";
+        staticText = "Cast this spell only if you've cast another green spell this turn";
     }
 
     TalarasBattalionEffect(final TalarasBattalionEffect effect) {

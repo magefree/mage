@@ -22,7 +22,7 @@ public final class Reset extends CardImpl {
         // Cast Reset only during an opponent's turn after their upkeep step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
                 new CompoundCondition(OnOpponentsTurnCondition.instance, AfterUpkeepStepCondtion.instance),
-                "Cast {this} only during an opponent's turn after their upkeep step"));
+                "Cast this spell only during an opponent's turn after their upkeep step"));
 
         // Untap all lands you control.
         this.getSpellAbility().addEffect(new UntapAllLandsControllerEffect());

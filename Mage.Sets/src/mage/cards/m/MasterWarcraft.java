@@ -42,7 +42,7 @@ public final class MasterWarcraft extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R/W}{R/W}");
 
         // Cast Master Warcraft only before attackers are declared.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, BeforeAttackersAreDeclaredCondition.instance, "Cast {this} only before attackers are declared"));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, BeforeAttackersAreDeclaredCondition.instance, "Cast this spell only before attackers are declared"));
 
         // You choose which creatures attack this turn.
         this.getSpellAbility().addEffect(new MasterWarcraftChooseAttackersEffect());

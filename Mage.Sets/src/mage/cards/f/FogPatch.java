@@ -25,7 +25,7 @@ public final class FogPatch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Cast Fog Patch only during the declare blockers step.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.DECLARE_BLOCKERS, null, "Cast {this} only during the declare blockers step"));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.DECLARE_BLOCKERS, null, "Cast this spell only during the declare blockers step"));
 
         // Attacking creatures become blocked.
         this.getSpellAbility().addEffect(new FogPatchEffect());
