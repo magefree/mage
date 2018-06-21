@@ -162,6 +162,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 218, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 218, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class));
         cards.add(new SetCardInfo("Nightmare's Thirst", 111, Rarity.UNCOMMON, mage.cards.n.NightmaresThirst.class));
+        cards.add(new SetCardInfo("Novice Knight", 30, Rarity.UNCOMMON, mage.cards.n.NoviceKnight.class));
         cards.add(new SetCardInfo("Oakenform", 191, Rarity.COMMON, mage.cards.o.Oakenform.class));
         cards.add(new SetCardInfo("Omenspeaker", 64, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
         cards.add(new SetCardInfo("Omniscience", 65, Rarity.MYTHIC, mage.cards.o.Omniscience.class));
