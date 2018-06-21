@@ -70,6 +70,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Daybreak Chaplain", 10, Rarity.COMMON, mage.cards.d.DaybreakChaplain.class));
         cards.add(new SetCardInfo("Death Baron", 90, Rarity.RARE, mage.cards.d.DeathBaron.class));
         cards.add(new SetCardInfo("Declare Dominance", 175, Rarity.UNCOMMON, mage.cards.d.DeclareDominance.class));
+        cards.add(new SetCardInfo("Demanding Dragon", 135, Rarity.RARE, mage.cards.d.DemandingDragon.class));
         cards.add(new SetCardInfo("Demon of Catastrophes", 91, Rarity.RARE, mage.cards.d.DemonOfCatastrophes.class));
         cards.add(new SetCardInfo("Departed Deckhand", 49, Rarity.UNCOMMON, mage.cards.d.DepartedDeckhand.class));
         cards.add(new SetCardInfo("Desecrated Tomb", 230, Rarity.RARE, mage.cards.d.DesecratedTomb.class));
