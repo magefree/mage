@@ -135,6 +135,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Strike", 152, Rarity.UNCOMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Liliana's Contract", 107, Rarity.RARE, mage.cards.l.LilianasContract.class));
         cards.add(new SetCardInfo("Liliana's Spoils", 294, Rarity.RARE, mage.cards.l.LilianasSpoils.class));
+        cards.add(new SetCardInfo("Liliana, Untouched by Death", 106, Rarity.MYTHIC, mage.cards.l.LilianaUntouchedByDeath.class));
         cards.add(new SetCardInfo("Liliana, the Necromancer", 291, Rarity.MYTHIC, mage.cards.l.LilianaTheNecromancer.class));
         cards.add(new SetCardInfo("Llanowar Elves", 314, Rarity.COMMON, mage.cards.l.LlanowarElves.class));
         cards.add(new SetCardInfo("Loxodon Line Breaker", 24, Rarity.COMMON, mage.cards.l.LoxodonLineBreaker.class));
