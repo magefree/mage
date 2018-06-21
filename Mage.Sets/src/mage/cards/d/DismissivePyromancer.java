@@ -21,9 +21,9 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public final class DisdainfulPyromancer extends CardImpl {
+public final class DismissivePyromancer extends CardImpl {
 
-    public DisdainfulPyromancer(UUID ownerId, CardSetInfo setInfo) {
+    public DismissivePyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
         this.subtype.add(SubType.HUMAN);
@@ -41,10 +41,10 @@ public final class DisdainfulPyromancer extends CardImpl {
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
 
-        // {2}{R}, {T}, Sacrifice Disdainful Pyromancer: Disdainful Pyromancer deals 4 damage to target creature.
+        // {2}{R}, {T}, Sacrifice Dismissive Pyromancer: It deals 4 damage to target creature.
         ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new DamageTargetEffect(4),
+                new DamageTargetEffect(4, "it"),
                 new ManaCostsImpl("{2}{R}")
         );
         ability.addCost(new TapSourceCost());
@@ -53,12 +53,12 @@ public final class DisdainfulPyromancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DisdainfulPyromancer(final DisdainfulPyromancer card) {
+    public DismissivePyromancer(final DismissivePyromancer card) {
         super(card);
     }
 
     @Override
-    public DisdainfulPyromancer copy() {
-        return new DisdainfulPyromancer(this);
+    public DismissivePyromancer copy() {
+        return new DismissivePyromancer(this);
     }
 }

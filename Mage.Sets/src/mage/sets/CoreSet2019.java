@@ -77,7 +77,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Desecrated Tomb", 230, Rarity.RARE, mage.cards.d.DesecratedTomb.class));
         cards.add(new SetCardInfo("Diamond Mare", 231, Rarity.UNCOMMON, mage.cards.d.DiamondMare.class));
         cards.add(new SetCardInfo("Diregraf Ghoul", 92, Rarity.UNCOMMON, mage.cards.d.DiregrafGhoul.class));
-        cards.add(new SetCardInfo("Disdainful Pyromancer", 136, Rarity.RARE, mage.cards.d.DisdainfulPyromancer.class));
+        cards.add(new SetCardInfo("Dismissive Pyromancer", 136, Rarity.RARE, mage.cards.d.DismissivePyromancer.class));
         cards.add(new SetCardInfo("Disperse", 50, Rarity.COMMON, mage.cards.d.Disperse.class));
         cards.add(new SetCardInfo("Divination", 51, Rarity.COMMON, mage.cards.d.Divination.class));
         cards.add(new SetCardInfo("Draconic Disciple", 215, Rarity.UNCOMMON, mage.cards.d.DraconicDisciple.class));
