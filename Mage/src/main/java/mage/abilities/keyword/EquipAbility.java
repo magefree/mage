@@ -35,14 +35,12 @@ public class EquipAbility extends ActivatedAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        ActivationStatus activationStatus = super.canActivate(playerId, game);
-        if (activationStatus.canActivate()) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game)) {
-                return activationStatus;
-            }
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game) && !permanent.isCreature()) {
+            return super.canActivate(playerId, game);
+        } else {
+            return ActivationStatus.getFalse();
         }
-        return activationStatus;
     }
 
     public EquipAbility(final EquipAbility ability) {
