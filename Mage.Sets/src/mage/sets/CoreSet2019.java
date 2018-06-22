@@ -45,6 +45,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Anticipate", 44, Rarity.COMMON, mage.cards.a.Anticipate.class));
         cards.add(new SetCardInfo("Apex of Power", 129, Rarity.MYTHIC, mage.cards.a.ApexOfPower.class));
         cards.add(new SetCardInfo("Arcades, the Strategist", 212, Rarity.MYTHIC, mage.cards.a.ArcadesTheStrategist.class));
+        cards.add(new SetCardInfo("Arcane Encyclopedia", 227, Rarity.UNCOMMON, mage.cards.a.ArcaneEncyclopedia.class));
         cards.add(new SetCardInfo("Arisen Gorgon", 292, Rarity.UNCOMMON, mage.cards.a.ArisenGorgon.class));
         cards.add(new SetCardInfo("Aven Wind Mage", 45, Rarity.COMMON, mage.cards.a.AvenWindMage.class));
         cards.add(new SetCardInfo("Aviation Pioneer", 46, Rarity.COMMON, mage.cards.a.AviationPioneer.class));
