@@ -103,6 +103,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Forget", 26, Rarity.RARE, mage.cards.f.Forget.class));
         cards.add(new SetCardInfo("Funeral March", 48, Rarity.UNCOMMON, mage.cards.f.FuneralMarch.class));
         cards.add(new SetCardInfo("Ghost Hounds", 49, Rarity.UNCOMMON, mage.cards.g.GhostHounds.class));
+        cards.add(new SetCardInfo("Giant Oyster", 35, Rarity.UNCOMMON, mage.cards.g.GiantOyster.class));
         cards.add(new SetCardInfo("Grandmother Sengir", 50, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
         cards.add(new SetCardInfo("Greater Werewolf", 51, Rarity.UNCOMMON, mage.cards.g.GreaterWerewolf.class));
         cards.add(new SetCardInfo("Hazduhr the Abbot", 8, Rarity.RARE, mage.cards.h.HazduhrTheAbbot.class));
