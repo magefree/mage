@@ -10,15 +10,15 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -58,7 +58,7 @@ public final class PalladiaMorsTheRuiner extends CardImpl {
                         PalladiaMorsTheRuinerCondition.instance,
                         "{this} has hexproof if it hasn't dealt damage yet"
                 )
-        ));
+        ), new PalladiaMorsTheRuinerWatcher());
     }
 
     public PalladiaMorsTheRuiner(final PalladiaMorsTheRuiner card) {
