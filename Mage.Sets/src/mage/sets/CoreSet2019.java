@@ -182,6 +182,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Plummet", 193, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Poison-Tip Archer", 220, Rarity.UNCOMMON, mage.cards.p.PoisonTipArcher.class));
         cards.add(new SetCardInfo("Prodigious Growth", 194, Rarity.RARE, mage.cards.p.ProdigiousGrowth.class));
+        cards.add(new SetCardInfo("Psychic Corrosion", 68, Rarity.UNCOMMON, mage.cards.p.PsychicCorrosion.class));
         cards.add(new SetCardInfo("Psychic Symbiont", 221, Rarity.UNCOMMON, mage.cards.p.PsychicSymbiont.class));
         cards.add(new SetCardInfo("Rabid Bite", 195, Rarity.COMMON, mage.cards.r.RabidBite.class));
         cards.add(new SetCardInfo("Radiating Lightning", 313, Rarity.COMMON, mage.cards.r.RadiatingLightning.class));
