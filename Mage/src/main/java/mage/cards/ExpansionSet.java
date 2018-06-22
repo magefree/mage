@@ -183,7 +183,7 @@ public abstract class ExpansionSet implements Serializable {
                     if (ability instanceof PartnerWithAbility) {               
                         //Check if the pack already contains a partner pair
                         if (partnerAllowed){
-                            //Added card always replaces a common card
+                            //Added card always replaces an uncommon card
                             Card card = CardRepository.instance.findCard(((PartnerWithAbility) ability).getPartnerName()).getCard();
                             if (i<max){
                                 booster.add(card);
