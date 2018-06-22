@@ -102,6 +102,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Finish", 140, Rarity.UNCOMMON, mage.cards.f.FieryFinish.class));
         cards.add(new SetCardInfo("Fire Elemental", 141, Rarity.COMMON, mage.cards.f.FireElemental.class));
         cards.add(new SetCardInfo("Fountain of Renewal", 235, Rarity.UNCOMMON, mage.cards.f.FountainOfRenewal.class));
+        cards.add(new SetCardInfo("Fraying Omnipotence", 97, Rarity.RARE, mage.cards.f.FrayingOmnipotence.class));
         cards.add(new SetCardInfo("Frilled Sea Serpent", 56, Rarity.COMMON, mage.cards.f.FrilledSeaSerpent.class));
         cards.add(new SetCardInfo("Gallant Cavalry", 12, Rarity.COMMON, mage.cards.g.GallantCavalry.class));
         cards.add(new SetCardInfo("Gearsmith Guardian", 237, Rarity.COMMON, mage.cards.g.GearsmithGuardian.class));

@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -24,8 +23,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class Pox extends CardImpl {
 
     public Pox(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
 
         // Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
         this.getSpellAbility().addEffect(new PoxEffect());
@@ -42,21 +40,25 @@ public final class Pox extends CardImpl {
 }
 
 class PoxEffect extends OneShotEffect {
-    
+
     PoxEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.";
+        this.staticText = "Each player loses a third of their life, "
+                + "then discards a third of the cards in their hand, "
+                + "then sacrifices a third of the creatures they control, "
+                + "then sacrifices a third of the lands they control. "
+                + "Round up each time.";
     }
-    
+
     PoxEffect(final PoxEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PoxEffect copy() {
         return new PoxEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
