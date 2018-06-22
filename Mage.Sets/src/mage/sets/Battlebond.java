@@ -9,23 +9,27 @@ import mage.constants.SetType;
  * @author TheElk801
  */
 public final class Battlebond extends ExpansionSet {
-
+    
     private static final Battlebond instance = new Battlebond();
-
+    public int i;
+    
     public static Battlebond getInstance() {
         return instance;
     }
-
-    private Battlebond() {
+    
+    
+    public Battlebond() {
         super("Battlebond", "BBD", ExpansionSet.buildDate(2018, 6, 8), SetType.SUPPLEMENTAL);
         this.blockName = "Battlebond";
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.PartnerMechanic = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Aim High", 189, Rarity.UNCOMMON, mage.cards.a.AimHigh.class));
         cards.add(new SetCardInfo("Angel of Retribution", 86, Rarity.UNCOMMON, mage.cards.a.AngelOfRetribution.class));
         cards.add(new SetCardInfo("Angelic Chorus", 87, Rarity.RARE, mage.cards.a.AngelicChorus.class));
@@ -283,4 +287,5 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Zndrsplt's Judgment", 43, Rarity.RARE, mage.cards.z.ZndrspltsJudgment.class));
         cards.add(new SetCardInfo("Zndrsplt, Eye of Wisdom", 5, Rarity.RARE, mage.cards.z.ZndrspltEyeOfWisdom.class));
     }
+    
 }
