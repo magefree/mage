@@ -147,6 +147,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Hieromancer's Cage", 14, Rarity.UNCOMMON, mage.cards.h.HieromancersCage.class));
         cards.add(new SetCardInfo("Highland Game", 188, Rarity.COMMON, mage.cards.h.HighlandGame.class));
         cards.add(new SetCardInfo("Highland Lake", 252, Rarity.COMMON, mage.cards.h.HighlandLake.class));
+        cards.add(new SetCardInfo("Hired Blade", 100, Rarity.COMMON, mage.cards.h.HiredBlade.class));
         cards.add(new SetCardInfo("Horizon Scholar", 59, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Hostile Minotaur", 147, Rarity.COMMON, mage.cards.h.HostileMinotaur.class));
         cards.add(new SetCardInfo("Hungering Hydra", 189, Rarity.RARE, mage.cards.h.HungeringHydra.class));
