@@ -89,6 +89,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Dry Spell", "46a", Rarity.COMMON, DrySpell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dry Spell", "46b", Rarity.COMMON, DrySpell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dwarven Pony", 70, Rarity.RARE, mage.cards.d.DwarvenPony.class));
+        cards.add(new SetCardInfo("Dwarven Sea Clan", 71, Rarity.RARE, mage.cards.d.DwarvenSeaClan.class));
         cards.add(new SetCardInfo("Dwarven Trader", "72a", Rarity.COMMON, DwarvenTrader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dwarven Trader", "72b", Rarity.COMMON, DwarvenTrader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ebony Rhino", 106, Rarity.COMMON, mage.cards.e.EbonyRhino.class));
