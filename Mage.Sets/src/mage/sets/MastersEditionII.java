@@ -144,6 +144,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Jester's Mask", 211, Rarity.RARE, mage.cards.j.JestersMask.class));
         cards.add(new SetCardInfo("Jeweled Amulet", 212, Rarity.UNCOMMON, mage.cards.j.JeweledAmulet.class));
         cards.add(new SetCardInfo("Johtull Wurm", 168, Rarity.UNCOMMON, mage.cards.j.JohtullWurm.class));
+        cards.add(new SetCardInfo("Joven's Ferrets", 169, Rarity.UNCOMMON, mage.cards.j.JovensFerrets.class));
         cards.add(new SetCardInfo("Juniper Order Advocate", 20, Rarity.UNCOMMON, mage.cards.j.JuniperOrderAdvocate.class));
         cards.add(new SetCardInfo("Karplusan Giant", 133, Rarity.UNCOMMON, mage.cards.k.KarplusanGiant.class));
         cards.add(new SetCardInfo("Kaysa", 170, Rarity.RARE, mage.cards.k.Kaysa.class));
