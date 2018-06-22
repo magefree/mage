@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -24,6 +25,8 @@ public final class FellSpecter extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
         this.subtype.add(SubType.SPECTER);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
