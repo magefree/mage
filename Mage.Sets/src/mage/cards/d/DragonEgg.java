@@ -19,7 +19,7 @@ public final class DragonEgg extends CardImpl {
 
     public DragonEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add(SubType.DRAGON, SubType.EGG);
+        this.subtype.add(SubType.DRAGON);//, SubType.EGG); uncomment when MTGJSON is updated with M19
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
