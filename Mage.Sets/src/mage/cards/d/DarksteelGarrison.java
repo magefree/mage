@@ -12,6 +12,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.FortifyAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +54,7 @@ public final class DarksteelGarrison extends CardImpl {
         this.addAbility(ability);
 
         // Fortify {3}
-        this.addAbility(new FortifyAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new FortifyAbility(3));
 
     }
 
@@ -65,50 +66,4 @@ public final class DarksteelGarrison extends CardImpl {
     public DarksteelGarrison copy() {
         return new DarksteelGarrison(this);
     }
-}
-
-class FortifyAbility extends ActivatedAbilityImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
-
-    public FortifyAbility(Outcome outcome, Cost cost) {
-        this(outcome, cost, new TargetControlledPermanent(filter));
-    }
-
-    public FortifyAbility(Outcome outcome, Cost cost, Target target) {
-        super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Fortify"), cost);
-        this.addTarget(target);
-        this.timing = TimingRule.SORCERY;
-    }
-
-    @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
-        ActivationStatus activationStatus = super.canActivate(playerId, game);
-        if (activationStatus.canActivate()) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.hasSubtype(SubType.FORTIFICATION, game)) {
-                return activationStatus;
-            }
-        }
-        return ActivationStatus.getFalse();
-    }
-
-    public FortifyAbility(final FortifyAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FortifyAbility copy() {
-        return new FortifyAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Fortify " + costs.getText() + manaCosts.getText() + " (" + manaCosts.getText() + ": <i>Attach to target land you control. Fortify only as a sorcery.)</i>";
-    }
-
 }
