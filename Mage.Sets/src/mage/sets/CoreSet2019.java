@@ -32,6 +32,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Act of Treason", 127, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Aegis of the Heavens", 1, Rarity.UNCOMMON, mage.cards.a.AegisOfTheHeavens.class));
         cards.add(new SetCardInfo("Aerial Engineer", 211, Rarity.UNCOMMON, mage.cards.a.AerialEngineer.class));
+        cards.add(new SetCardInfo("Aether Tunnel", 43, Rarity.UNCOMMON, mage.cards.a.AetherTunnel.class));
         cards.add(new SetCardInfo("Aethershield Artificer", 2, Rarity.UNCOMMON, mage.cards.a.AethershieldArtificer.class));
         cards.add(new SetCardInfo("Aggressive Mammoth", 302, Rarity.RARE, mage.cards.a.AggressiveMammoth.class));
         cards.add(new SetCardInfo("Air Elemental", 308, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
