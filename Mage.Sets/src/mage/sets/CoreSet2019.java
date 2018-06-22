@@ -185,6 +185,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Symbiont", 221, Rarity.UNCOMMON, mage.cards.p.PsychicSymbiont.class));
         cards.add(new SetCardInfo("Rabid Bite", 195, Rarity.COMMON, mage.cards.r.RabidBite.class));
         cards.add(new SetCardInfo("Radiating Lightning", 313, Rarity.COMMON, mage.cards.r.RadiatingLightning.class));
+        cards.add(new SetCardInfo("Ravenous Harpy", 115, Rarity.UNCOMMON, mage.cards.r.RavenousHarpy.class));
         cards.add(new SetCardInfo("Reassembling Skeleton", 116, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
         cards.add(new SetCardInfo("Reclamation Sage", 196, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Recollect", 197, Rarity.UNCOMMON, mage.cards.r.Recollect.class));
