@@ -99,7 +99,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
     protected int ratioBoosterMythic;
     protected boolean needsLegends = false;
-    protected boolean PartnerMechanic = false;
+    protected boolean hasPartnerMechanic = false;
     
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
@@ -231,7 +231,7 @@ public abstract class ExpansionSet implements Serializable {
             }
         }
         //Battlebond packs alway contain both partners
-        if (PartnerMechanic){
+        if (hasPartnerMechanic){
             List<Card> booster = createPartnerBooster();
             return booster;
         }
