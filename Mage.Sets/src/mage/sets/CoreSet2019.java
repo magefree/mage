@@ -50,6 +50,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Aviation Pioneer", 46, Rarity.COMMON, mage.cards.a.AviationPioneer.class));
         cards.add(new SetCardInfo("Banefire", 130, Rarity.RARE, mage.cards.b.Banefire.class));
         cards.add(new SetCardInfo("Befuddle", 309, Rarity.COMMON, mage.cards.b.Befuddle.class));
+        cards.add(new SetCardInfo("Blanchwood Armor", 169, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
         cards.add(new SetCardInfo("Blood Divination", 86, Rarity.UNCOMMON, mage.cards.b.BloodDivination.class));
         cards.add(new SetCardInfo("Bogstomper", 87, Rarity.COMMON, mage.cards.b.Bogstomper.class));
         cards.add(new SetCardInfo("Bone Dragon", 88, Rarity.MYTHIC, mage.cards.b.BoneDragon.class));
@@ -128,7 +129,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Invoke the Divine", 16, Rarity.COMMON, mage.cards.i.InvokeTheDivine.class));
         cards.add(new SetCardInfo("Isareth the Awakener", 104, Rarity.RARE, mage.cards.i.IsarethTheAwakener.class));
         cards.add(new SetCardInfo("Isolate", 17, Rarity.RARE, mage.cards.i.Isolate.class));
-        cards.add(new SetCardInfo("Isolation Tower", 249, Rarity.RARE, mage.cards.i.IsolationTower.class));
+        cards.add(new SetCardInfo("Isolated Tower", 249, Rarity.RARE, mage.cards.i.IsolatedTower.class));
         cards.add(new SetCardInfo("Kargan Dragonrider", 297, Rarity.COMMON, mage.cards.k.KarganDragonrider.class));
         cards.add(new SetCardInfo("Knight of the Tusk", 18, Rarity.COMMON, mage.cards.k.KnightOfTheTusk.class));
         cards.add(new SetCardInfo("Knight's Pledge", 19, Rarity.COMMON, mage.cards.k.KnightsPledge.class));
@@ -174,6 +175,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Palladia-Mors, the Ruiner", 219, Rarity.MYTHIC, mage.cards.p.PalladiaMorsTheRuiner.class));
         cards.add(new SetCardInfo("Patient Rebuilding", 67, Rarity.RARE, mage.cards.p.PatientRebuilding.class));
         cards.add(new SetCardInfo("Pegasus Courser", 32, Rarity.COMMON, mage.cards.p.PegasusCourser.class));
+        cards.add(new SetCardInfo("Pelakka Wurm", 192, Rarity.UNCOMMON, mage.cards.p.PelakkaWurm.class));
         cards.add(new SetCardInfo("Phylactery Lich", 113, Rarity.RARE, mage.cards.p.PhylacteryLich.class));
         cards.add(new SetCardInfo("Plague Mare", 114, Rarity.UNCOMMON, mage.cards.p.PlagueMare.class));
         cards.add(new SetCardInfo("Plummet", 193, Rarity.COMMON, mage.cards.p.Plummet.class));
@@ -195,6 +197,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue's Gloves", 243, Rarity.UNCOMMON, mage.cards.r.RoguesGloves.class));
         cards.add(new SetCardInfo("Root Snare", 199, Rarity.COMMON, mage.cards.r.RootSnare.class));
         cards.add(new SetCardInfo("Runic Armasaur", 200, Rarity.RARE, mage.cards.r.RunicArmasaur.class));
+        cards.add(new SetCardInfo("Rupture Spire", 255, Rarity.UNCOMMON, mage.cards.r.RuptureSpire.class));
         cards.add(new SetCardInfo("Rustwing Falcon", 36, Rarity.COMMON, mage.cards.r.RustwingFalcon.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 69, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
         cards.add(new SetCardInfo("Salvager of Secrets", 70, Rarity.COMMON, mage.cards.s.SalvagerOfSecrets.class));
@@ -211,6 +214,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Shivan Dragon", 300, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Shock", 156, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Siegebreaker Giant", 157, Rarity.UNCOMMON, mage.cards.s.SiegebreakerGiant.class));
+        cards.add(new SetCardInfo("Sift", 72, Rarity.UNCOMMON, mage.cards.s.Sift.class));
         cards.add(new SetCardInfo("Sigiled Sword of Valeron", 244, Rarity.RARE, mage.cards.s.SigiledSwordOfValeron.class));
         cards.add(new SetCardInfo("Silverbeak Griffin", 285, Rarity.COMMON, mage.cards.s.SilverbeakGriffin.class));
         cards.add(new SetCardInfo("Skalla Wolf", 303, Rarity.RARE, mage.cards.s.SkallaWolf.class));
@@ -268,6 +272,6 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Mist", 83, Rarity.COMMON, mage.cards.w.WallOfMist.class));
         cards.add(new SetCardInfo("Wall of Vines", 210, Rarity.COMMON, mage.cards.w.WallOfVines.class));
         cards.add(new SetCardInfo("Waterknot", 311, Rarity.COMMON, mage.cards.w.Waterknot.class));
-        cards.add(new SetCardInfo("Windreader Sphinx", 84, Rarity.MYTHIC, mage.cards.w.WindreaderSphinx.class));
+        cards.add(new SetCardInfo("Windreader Sphinx", 84, Rarity.RARE, mage.cards.w.WindreaderSphinx.class));
     }
 }

@@ -20,9 +20,9 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public final class IsolationTower extends CardImpl {
+public final class IsolatedTower extends CardImpl {
 
-    public IsolationTower(UUID ownerId, CardSetInfo setInfo) {
+    public IsolatedTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C}.
@@ -30,26 +30,26 @@ public final class IsolationTower extends CardImpl {
 
         // {1}, {T}: Until end of turn, your opponents and creatures with hexproof they control can be the targets of spells and abilities you control as though they didn't have hexproof.
         Ability ability = new SimpleActivatedAbility(
-                new IsolationTowerEffect(),
+                new IsolatedTowerEffect(),
                 new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public IsolationTower(final IsolationTower card) {
+    public IsolatedTower(final IsolatedTower card) {
         super(card);
     }
 
     @Override
-    public IsolationTower copy() {
-        return new IsolationTower(this);
+    public IsolatedTower copy() {
+        return new IsolatedTower(this);
     }
 }
 
-class IsolationTowerEffect extends AsThoughEffectImpl {
+class IsolatedTowerEffect extends AsThoughEffectImpl {
 
-    public IsolationTowerEffect() {
+    public IsolatedTowerEffect() {
         super(AsThoughEffectType.HEXPROOF, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, your opponents and "
                 + "creatures with hexproof they control "
@@ -57,7 +57,7 @@ class IsolationTowerEffect extends AsThoughEffectImpl {
                 + "you control as though they didn't have hexproof";
     }
 
-    public IsolationTowerEffect(final IsolationTowerEffect effect) {
+    public IsolatedTowerEffect(final IsolatedTowerEffect effect) {
         super(effect);
     }
 
@@ -67,8 +67,8 @@ class IsolationTowerEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public IsolationTowerEffect copy() {
-        return new IsolationTowerEffect(this);
+    public IsolatedTowerEffect copy() {
+        return new IsolatedTowerEffect(this);
     }
 
     @Override
