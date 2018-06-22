@@ -259,6 +259,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Tolarian Scholar", 80, Rarity.COMMON, mage.cards.t.TolarianScholar.class));
         cards.add(new SetCardInfo("Tormenting Voice", 164, Rarity.COMMON, mage.cards.t.TormentingVoice.class));
         cards.add(new SetCardInfo("Totally Lost", 81, Rarity.COMMON, mage.cards.t.TotallyLost.class));
+        cards.add(new SetCardInfo("Transmogrifying Wand", 247, Rarity.RARE, mage.cards.t.TransmogrifyingWand.class));
         cards.add(new SetCardInfo("Trumpet Blast", 165, Rarity.COMMON, mage.cards.t.TrumpetBlast.class));
         cards.add(new SetCardInfo("Trusty Packbeast", 41, Rarity.COMMON, mage.cards.t.TrustyPackbeast.class));
         cards.add(new SetCardInfo("Two-Headed Zombie", 123, Rarity.COMMON, mage.cards.t.TwoHeadedZombie.class));
