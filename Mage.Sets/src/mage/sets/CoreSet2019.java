@@ -245,6 +245,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Tattered Mummy", 295, Rarity.COMMON, mage.cards.t.TatteredMummy.class));
         cards.add(new SetCardInfo("Tezzeret's Gatebreaker", 289, Rarity.RARE, mage.cards.t.TezzeretsGatebreaker.class));
         cards.add(new SetCardInfo("Tezzeret's Strider", 290, Rarity.UNCOMMON, mage.cards.t.TezzeretsStrider.class));
+        cards.add(new SetCardInfo("Tezzeret, Artifice Master", 79, Rarity.MYTHIC, mage.cards.t.TezzeretArtificeMaster.class));
         cards.add(new SetCardInfo("Tezzeret, Cruel Machinist", 286, Rarity.MYTHIC, mage.cards.t.TezzeretCruelMachinist.class));
         cards.add(new SetCardInfo("Thorn Lieutenant", 203, Rarity.RARE, mage.cards.t.ThornLieutenant.class));
         cards.add(new SetCardInfo("Thornhide Wolves", 204, Rarity.COMMON, mage.cards.t.ThornhideWolves.class));
