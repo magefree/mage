@@ -223,6 +223,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Patient Rebuilding", 67, Rarity.RARE, mage.cards.p.PatientRebuilding.class));
         cards.add(new SetCardInfo("Pegasus Courser", 32, Rarity.COMMON, mage.cards.p.PegasusCourser.class));
         cards.add(new SetCardInfo("Pelakka Wurm", 192, Rarity.RARE, mage.cards.p.PelakkaWurm.class));
+        cards.add(new SetCardInfo("Pendulum of Patterns", 288, Rarity.COMMON, mage.cards.p.PendulumOfPatterns.class));
         cards.add(new SetCardInfo("Phylactery Lich", 113, Rarity.RARE, mage.cards.p.PhylacteryLich.class));
         cards.add(new SetCardInfo("Plague Mare", 114, Rarity.UNCOMMON, mage.cards.p.PlagueMare.class));
         cards.add(new SetCardInfo("Plains", 261, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
