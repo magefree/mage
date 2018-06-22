@@ -157,6 +157,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Infectious Horror", 101, Rarity.COMMON, mage.cards.i.InfectiousHorror.class));
         cards.add(new SetCardInfo("Infernal Reckoning", 102, Rarity.RARE, mage.cards.i.InfernalReckoning.class));
         cards.add(new SetCardInfo("Infernal Scarring", 103, Rarity.COMMON, mage.cards.i.InfernalScarring.class));
+        cards.add(new SetCardInfo("Inferno Hellion", 148, Rarity.UNCOMMON, mage.cards.i.InfernoHellion.class));
         cards.add(new SetCardInfo("Inspired Charge", 15, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
         cards.add(new SetCardInfo("Invoke the Divine", 16, Rarity.COMMON, mage.cards.i.InvokeTheDivine.class));
         cards.add(new SetCardInfo("Isareth the Awakener", 104, Rarity.RARE, mage.cards.i.IsarethTheAwakener.class));
