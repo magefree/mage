@@ -80,11 +80,6 @@ class GiantAlbatrossEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         DealtDamageToWatcher watcher = (DealtDamageToWatcher) game.getState().getWatchers().get(DealtDamageToWatcher.class.getSimpleName(), source.getSourceId());
-        System.out.println("Dealt damage: "+watcher.dealtDamageToSource);
-        for (MageObjectReference mageObjectReference : watcher.dealtDamageToSource){
-            System.out.println(mageObjectReference.getCard(game).getName());
-            System.out.println(mageObjectReference.getCard(game).getLogName());
-        }
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
