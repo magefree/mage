@@ -66,7 +66,9 @@ class RunicArmasaurTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility != null && stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
+        if (stackAbility != null
+                && stackAbility.getAbilityType() == AbilityType.ACTIVATED
+                && game.getOpponents(this.getControllerId()).contains(stackAbility.getControllerId())) {
             MageObject abilitySourceObject = stackAbility.getSourceObject(game);
             return abilitySourceObject != null && (abilitySourceObject.isLand() || abilitySourceObject.isCreature());
         }
