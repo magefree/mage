@@ -21,7 +21,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public final class AetherShieldArtificer extends CardImpl {
+public final class AethershieldArtificer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("artifact creature you control");
@@ -30,7 +30,7 @@ public final class AetherShieldArtificer extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public AetherShieldArtificer(UUID ownerId, CardSetInfo setInfo) {
+    public AethershieldArtificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
         this.subtype.add(SubType.DWARF);
@@ -52,12 +52,12 @@ public final class AetherShieldArtificer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AetherShieldArtificer(final AetherShieldArtificer card) {
+    public AethershieldArtificer(final AethershieldArtificer card) {
         super(card);
     }
 
     @Override
-    public AetherShieldArtificer copy() {
-        return new AetherShieldArtificer(this);
+    public AethershieldArtificer copy() {
+        return new AethershieldArtificer(this);
     }
 }
