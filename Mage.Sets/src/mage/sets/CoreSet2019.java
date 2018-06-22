@@ -297,6 +297,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Switcheroo", 78, Rarity.UNCOMMON, mage.cards.s.Switcheroo.class));
         cards.add(new SetCardInfo("Take Vengeance", 40, Rarity.COMMON, mage.cards.t.TakeVengeance.class));
+        cards.add(new SetCardInfo("Talons of Wildwood", 202, Rarity.COMMON, mage.cards.t.TalonsOfWildwood.class));
         cards.add(new SetCardInfo("Tattered Mummy", 295, Rarity.COMMON, mage.cards.t.TatteredMummy.class));
         cards.add(new SetCardInfo("Tectonic Rift", 162, Rarity.UNCOMMON, mage.cards.t.TectonicRift.class));
         cards.add(new SetCardInfo("Tezzeret's Gatebreaker", 289, Rarity.RARE, mage.cards.t.TezzeretsGatebreaker.class));
