@@ -85,6 +85,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Djinn of Wishes", 52, Rarity.RARE, mage.cards.d.DjinnOfWishes.class));
         cards.add(new SetCardInfo("Draconic Disciple", 215, Rarity.UNCOMMON, mage.cards.d.DraconicDisciple.class));
         cards.add(new SetCardInfo("Dragon's Hoard", 232, Rarity.RARE, mage.cards.d.DragonsHoard.class));
+        cards.add(new SetCardInfo("Druid of Horns", 176, Rarity.UNCOMMON, mage.cards.d.DruidOfHorns.class));
         cards.add(new SetCardInfo("Druid of the Cowl", 177, Rarity.COMMON, mage.cards.d.DruidOfTheCowl.class));
         cards.add(new SetCardInfo("Dryad Greenseeker", 178, Rarity.UNCOMMON, mage.cards.d.DryadGreenseeker.class));
         cards.add(new SetCardInfo("Dwarven Priest", 11, Rarity.COMMON, mage.cards.d.DwarvenPriest.class));
