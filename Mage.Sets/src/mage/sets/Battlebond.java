@@ -23,7 +23,7 @@ public final class Battlebond extends ExpansionSet {
         this.blockName = "Battlebond";
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.PartnerMechanic = true;
+        this.hasPartnerMechanic = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
