@@ -72,6 +72,7 @@ public class VerifyCardDataTest {
 
         // subtype
         skipListCreate("SUBTYPE");
+        skipListAddName("SUBTYPE", "Dragon Egg"); // uncomment when MTGJSON is updated with M19
 
         // number
         skipListCreate("NUMBER");
