@@ -114,6 +114,7 @@ public class ManaOptions extends ArrayList<Mana> {
     }
 
     public void addManaWithCost(List<ActivatedManaAbilityImpl> abilities, Game game) {
+        int replaces = 0;
         if (isEmpty()) {
             this.add(new Mana());
         }
@@ -187,7 +188,8 @@ public class ManaOptions extends ArrayList<Mana> {
                                                 Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
                                                 if (moreValuable != null) {
                                                     existingMana.setToMana(moreValuable);
-                                                    logger.trace("mana replaced " + newMana.toString() + " <=> " + existingMana.toString() + " from " + ability.getRule());
+                                                    replaces++;
+                                                    // logger.info("mana replaced " + newMana.toString() + " <=> " + existingMana.toString() + " from " + ability.getRule());
                                                     continue CombineWithExisting;
                                                 }
                                             }
@@ -202,6 +204,10 @@ public class ManaOptions extends ArrayList<Mana> {
 
                 }
             }
+        }
+        if (this.size() > 5 || replaces > 5) {
+            logger.info("ManaOptionsCosts " + this.size() + " Ign:" + replaces + " => " + this.toString());
+            logger.info("Abilities: " + abilities.toString());
         }
     }
 
@@ -255,20 +261,28 @@ public class ManaOptions extends ArrayList<Mana> {
         this.clear();
         for (Mana mana : copy) {
             Mana oldMan = mana.copy();
-            if (mana.includesMana(cost)) {
-                // colorless costs can be paid with different colored mana, can lead to different color combinations
+            if (mana.includesMana(cost)) { // it can be paid
+                // generic mana costs can be paid with different colored mana, can lead to different color combinations
                 if (cost.getGeneric() > 0 && cost.getGeneric() > (mana.getGeneric() + mana.getColorless())) {
                     Mana coloredCost = cost.copy();
                     coloredCost.setGeneric(0);
                     mana.subtract(coloredCost);
+                    boolean oldManaWasReplaced = false;
                     for (Mana payCombination : getPossiblePayCombinations(cost.getGeneric(), mana)) {
                         Mana newMana = mana.copy();
                         newMana.subtract(payCombination);
                         newMana.add(addMana);
-                        if (oldMan.contains(newMana) && oldMan.count() > newMana.count()) {
-                            newMana.setToMana(oldMan);
+                        Mana moreValuable = Mana.getMoreValuableMana(oldMan, newMana);
+                        if (!oldMan.equals(moreValuable)) {
+                            this.add(newMana);
+                            if (moreValuable != null) {
+                                oldManaWasReplaced = true; // the new mana includes all possibilities of the old one
+                            }
                         }
-                        this.add(newMana);
+
+                    }
+                    if (!oldManaWasReplaced) {
+                        this.add(oldMan);
                     }
                 } else {
                     while (mana.includesMana(cost)) {
@@ -303,27 +317,32 @@ public class ManaOptions extends ArrayList<Mana> {
                     existingManas.add(new Mana());
                 }
                 for (Mana existingMana : existingManas) {
-                    Mana manaToPay = manaAvailable.copy();
-                    manaToPay.subtract(existingMana);
-                    if (manaToPay.getBlack() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlackMana(1).toString())) {
-                        manaToPay.subtract(Mana.BlackMana(1));
+                    Mana manaToPayFrom = manaAvailable.copy();
+                    manaToPayFrom.subtract(existingMana);
+                    if (manaToPayFrom.getBlack() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlackMana(1).toString())) {
+                        manaToPayFrom.subtract(Mana.BlackMana(1));
                         addManaCombination(Mana.BlackMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPay.getBlue() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlueMana(1).toString())) {
-                        manaToPay.subtract(Mana.BlueMana(1));
+                    if (manaToPayFrom.getBlue() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlueMana(1).toString())) {
+                        manaToPayFrom.subtract(Mana.BlueMana(1));
                         addManaCombination(Mana.BlueMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPay.getGreen() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.GreenMana(1).toString())) {
-                        manaToPay.subtract(Mana.GreenMana(1));
+                    if (manaToPayFrom.getGreen() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.GreenMana(1).toString())) {
+                        manaToPayFrom.subtract(Mana.GreenMana(1));
                         addManaCombination(Mana.GreenMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPay.getRed() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.RedMana(1).toString())) {
-                        manaToPay.subtract(Mana.RedMana(1));
+                    if (manaToPayFrom.getRed() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.RedMana(1).toString())) {
+                        manaToPayFrom.subtract(Mana.RedMana(1));
                         addManaCombination(Mana.RedMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPay.getWhite() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.WhiteMana(1).toString())) {
-                        manaToPay.subtract(Mana.WhiteMana(1));
+                    if (manaToPayFrom.getWhite() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.WhiteMana(1).toString())) {
+                        manaToPayFrom.subtract(Mana.WhiteMana(1));
                         addManaCombination(Mana.WhiteMana(1), existingMana, payCombinations, payCombinationsStrings);
+                    }
+                    // Pay with any only needed if colored payment was not possible
+                    if (payCombinations.isEmpty() && manaToPayFrom.getAny() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.AnyMana(1).toString())) {
+                        manaToPayFrom.subtract(Mana.AnyMana(1));
+                        addManaCombination(Mana.AnyMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                 }
             }
@@ -350,6 +369,17 @@ public class ManaOptions extends ArrayList<Mana> {
                 this.remove(i);
             } else {
                 list.add(s);
+            }
+        }
+        // Remove fully included variations
+        for (int i = this.size() - 1; i >= 0; i--) {
+            for (int ii = 0; ii < i; ii++) {
+                Mana moreValuable = Mana.getMoreValuableMana(this.get(i), this.get(ii));
+                if (moreValuable != null) {
+                    this.get(ii).setToMana(moreValuable);
+                    this.remove(i);
+                    break;
+                }
             }
         }
     }
