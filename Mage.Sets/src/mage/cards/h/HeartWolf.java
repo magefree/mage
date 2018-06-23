@@ -86,10 +86,8 @@ class HeartWolfDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        System.out.println("Source: "+game.getCard(sourceId).getLogName());
-        System.out.println("Source ID: "+sourceId);
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if(zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getTarget() != null && zEvent.getTargetId().equals(getTargets().getFirstTarget())){
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getTarget() != null && zEvent.getTargetId().equals(getTargets().getFirstTarget())) {
             this.getTargets().clear(); // else spell fizzles because target creature died
             return true;
         }
@@ -104,10 +102,5 @@ class HeartWolfDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "When that creature leaves the battlefield this turn, sacrifice {this}.";
-    }
-
-    @Override
-    public String toString() {
-        return "HeartWolfDelayedTriggeredAbility as a string!";
     }
 }

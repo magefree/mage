@@ -31,9 +31,7 @@ public class SacrificeSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        System.out.println("Source class: "+ source.getClass().getName());
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        System.out.println("Source object: "+sourceObject);
         if (sourceObject == null) {
             // Check if the effect was installed by the spell the source was cast by (e.g. Necromancy), if not don't sacrifice the permanent
             if (source.getSourceObject(game) instanceof Spell) {
