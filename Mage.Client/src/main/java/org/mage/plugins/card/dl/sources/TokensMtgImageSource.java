@@ -16,6 +16,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
+
 import mage.constants.SubType;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -23,7 +24,6 @@ import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
- *
  * @author Quercitron
  */
 public enum TokensMtgImageSource implements CardImageSource {
@@ -58,7 +58,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         return null;
     }
 
@@ -80,7 +80,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) throws IOException {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) throws IOException {
         String name = card.getName();
         String set = card.getSet();
         int type = card.getType();
@@ -125,7 +125,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + '_'
                 + tokenData.getNumber().trim() + '-' + tokenData.getName().trim() + ".jpg";
         url = url.replace(' ', '-');
-        return url;
+        return new CardImageUrls(url);
     }
 
     @Override
@@ -248,7 +248,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         List<TokenData> newTokensData = new ArrayList<>();
 
         try (InputStreamReader inputReader = new InputStreamReader(inputStream, "Cp1252");
-                BufferedReader reader = new BufferedReader(inputReader)) {
+             BufferedReader reader = new BufferedReader(inputReader)) {
             // we have to specify encoding to read special comma
 
             reader.readLine(); // skip header

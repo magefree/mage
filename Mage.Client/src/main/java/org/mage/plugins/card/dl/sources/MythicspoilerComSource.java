@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.prefs.Preferences;
+
 import mage.client.MageFrame;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
@@ -28,7 +29,6 @@ import org.jsoup.select.Elements;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- *
  * @author LevelX2
  */
 public enum MythicspoilerComSource implements CardImageSource {
@@ -329,7 +329,7 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     private Map<String, String> getSetLinksFromPage(String cardSet, Set<String> aliasesStart, Preferences prefs,
-            ProxyType proxyType, String baseUrl, String pageUrl) throws IOException {
+                                                    ProxyType proxyType, String baseUrl, String pageUrl) throws IOException {
         Map<String, String> pageLinks = new HashMap<>();
 
         String urlDocument;
@@ -391,7 +391,7 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
@@ -410,11 +410,11 @@ public enum MythicspoilerComSource implements CardImageSource {
                 .replaceAll(",", "")
                 .replaceAll("/", "");
         String link = setLinks.get(searchName);
-        return link;
+        return new CardImageUrls(link);
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card
+    public CardImageUrls generateTokenUrl(CardDownloadData card
     ) {
         return null;
     }

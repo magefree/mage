@@ -8,11 +8,11 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- *
  * @author spjspj
  */
 public enum GrabbagImageSource implements CardImageSource {
@@ -48,7 +48,7 @@ public enum GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         if (singleLinks == null) {
             setupLinks();
         }
@@ -63,7 +63,7 @@ public enum GrabbagImageSource implements CardImageSource {
         }
 
         if (url != null) {
-            return getSourceName(card, url) + url;
+            return new CardImageUrls(getSourceName(card, url) + url);
         }
         return null;
     }
@@ -375,7 +375,7 @@ public enum GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) throws IOException {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) throws IOException {
         try {
             return generateURL(card);
         } catch (Exception ex) {
