@@ -111,6 +111,6 @@ class ShieldMareTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "When {this} enters the battlefield or becomes the target"
-                + " of a spell or ability and opponent controls, you gain 3 life";
+                + " of a spell or ability an opponent controls, you gain 3 life";
     }
 }
