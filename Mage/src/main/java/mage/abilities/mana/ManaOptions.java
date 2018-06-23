@@ -189,7 +189,6 @@ public class ManaOptions extends ArrayList<Mana> {
                                                 if (moreValuable != null) {
                                                     existingMana.setToMana(moreValuable);
                                                     replaces++;
-                                                    // logger.info("mana replaced " + newMana.toString() + " <=> " + existingMana.toString() + " from " + ability.getRule());
                                                     continue CombineWithExisting;
                                                 }
                                             }
@@ -205,9 +204,9 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
-        if (this.size() > 5 || replaces > 5) {
-            logger.info("ManaOptionsCosts " + this.size() + " Ign:" + replaces + " => " + this.toString());
-            logger.info("Abilities: " + abilities.toString());
+        if (this.size() > 30 || replaces > 30) {
+            logger.trace("ManaOptionsCosts " + this.size() + " Ign:" + replaces + " => " + this.toString());
+            logger.trace("Abilities: " + abilities.toString());
         }
     }
 
