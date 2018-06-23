@@ -44,9 +44,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
 
-    public static final String ALL_IMAGES = "- All images from that source";
-    public static final String ALL_STANDARD_IMAGES = "- All images from standard from that source";
-    public static final String ALL_TOKENS = "- Only all token images from that source";
+    public static final String ALL_IMAGES = "- ALL images from selected source (CAN BE VERY SLOW)";
+    public static final String ALL_STANDARD_IMAGES = "- Only images from STANDARD sets";
+    public static final String ALL_TOKENS = "- Only token images from selected source";
 
     private JDialog dialog;
     private final JProgressBar bar;
@@ -78,14 +78,14 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     private Proxy p = Proxy.NO_PROXY;
 
     enum DownloadSources {
-        WIZARDS("wizards.com", WizardCardsImageSource.instance),
-        MYTHICSPOILER("mythicspoiler.com", MythicspoilerComSource.instance),
-        TOKENS("tokens.mtg.onl", TokensMtgImageSource.instance),
+        WIZARDS("1. wizards.com - low quality CARDS, multi-language, can be SLOW", WizardCardsImageSource.instance),
+        TOKENS("2. tokens.mtg.onl - high quality TOKENS", TokensMtgImageSource.instance),
+        SCRYFALL("3. scryfall.com - high quality CARDS, multi-language", ScryfallImageSource.instance),
+        MAGIDEX("4. magidex.com - high quality CARDS", MagidexImageSource.instance),
+        GRAB_BAG("5. GrabBag - STAR WARS cards and tokens", GrabbagImageSource.instance),
+        MYTHICSPOILER("6. mythicspoiler.com", MythicspoilerComSource.instance),
+        ALTERNATIVE("7. alternative.mtg.onl", AltMtgOnlTokensImageSource.instance);
         // MTG_ONL("mtg.onl", MtgOnlTokensImageSource.instance), Not working correctly yet
-        ALTERNATIVE("alternative.mtg.onl", AltMtgOnlTokensImageSource.instance),
-        GRAB_BAG("GrabBag", GrabbagImageSource.instance),
-        MAGIDEX("magidex.com", MagidexImageSource.instance),
-        SCRYFALL("scryfall.com", ScryfallImageSource.instance);
         // MAGICCARDS("magiccards.info", MagicCardsImageSource.instance)
 
         private final String text;
