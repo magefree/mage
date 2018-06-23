@@ -25,6 +25,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
@@ -61,10 +62,10 @@ public final class JovensFerrets extends CardImpl {
     }
 }
 
-class JovensFerretsEffect extends DontUntapInControllersNextUntapStepTargetEffect {
+class JovensFerretsEffect extends OneShotEffect {
 
     public JovensFerretsEffect() {
-        super();
+        super(Outcome.Benefit);
     }
 
     public JovensFerretsEffect(final JovensFerretsEffect effect) {
@@ -93,7 +94,9 @@ class JovensFerretsEffect extends DontUntapInControllersNextUntapStepTargetEffec
                 }
                 for (Permanent creature : toTap) {
                     creature.tap(game);
-                    getTargetPointer().getTargets(game, source).add(creature.getId());
+                    DontUntapInControllersNextUntapStepTargetEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
+                    effect.setTargetPointer(new FixedTarget(creature.getId()));
+                    game.addEffect(effect, source);
                 }
                 return true;
             }
