@@ -169,6 +169,7 @@ public final class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Mind's Eye", 205, Rarity.RARE, mage.cards.m.MindsEye.class));
         cards.add(new SetCardInfo("Mindslaver", 206, Rarity.RARE, mage.cards.m.Mindslaver.class));
         cards.add(new SetCardInfo("Mindstorm Crown", 207, Rarity.UNCOMMON, mage.cards.m.MindstormCrown.class));
+        cards.add(new SetCardInfo("Mirror Golem", 208, Rarity.UNCOMMON, mage.cards.m.MirrorGolem.class));
         cards.add(new SetCardInfo("Molder Slug", 125, Rarity.RARE, mage.cards.m.MolderSlug.class));
         cards.add(new SetCardInfo("Molten Rain", 101, Rarity.COMMON, mage.cards.m.MoltenRain.class));
         cards.add(new SetCardInfo("Moriok Scavenger", 68, Rarity.COMMON, mage.cards.m.MoriokScavenger.class));
