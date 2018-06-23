@@ -80,6 +80,7 @@ public enum CounterType {
     MUSTER("muster"),
     NET("net"),
     OMEN("omen"),
+    ORE("ore"),
     P0P1(new BoostCounter(0, 1).name),
     P1P0(new BoostCounter(1, 0).name),
     P1P1(new BoostCounter(1, 1).name),
