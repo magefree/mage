@@ -44,9 +44,6 @@ public final class GiantAlbatross extends CardImpl {
 
         // When Giant Albatross dies, you may pay {1}{U}. If you do, for each creature that dealt damage to Giant Albatross this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can't be regenerated.
         Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new GiantAlbatrossEffect(), new ManaCostsImpl("{1}{U}")));
-        DealtDamageToWatcher watcher = new DealtDamageToWatcher();
-        watcher.setSourceId(this.objectId);
-        ability.addWatcher(watcher);
         this.addAbility(ability);
     }
 
@@ -79,21 +76,23 @@ class GiantAlbatrossEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        DealtDamageToWatcher watcher = (DealtDamageToWatcher) game.getState().getWatchers().get(DealtDamageToWatcher.class.getSimpleName(), source.getSourceId());
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game);
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourcePermanent != null) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game);
 
-                Cost cost = new PayLifeCost(2);
-                for (Permanent creature : creatures) {
-                    if (watcher.didDamage(creature, game)) {
-                        final StringBuilder sb = new StringBuilder("Pay 2 life? (Otherwise ").append(creature.getName()).append(" will be destroyed)");
-                        if (cost.canPay(source, creature.getControllerId(), creature.getControllerId(), game) && player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
-                            cost.pay(source, game, creature.getControllerId(), creature.getControllerId(), true, null);
-                        }
-                        if (!cost.isPaid()) {
-                            creature.destroy(source.getSourceId(), game, true);
+                    Cost cost = new PayLifeCost(2);
+                    for (Permanent creature : creatures) {
+                        if (sourcePermanent.getDealtDamageByThisTurn().contains(new MageObjectReference(creature.getId(), game))) {
+                            final StringBuilder sb = new StringBuilder("Pay 2 life? (Otherwise ").append(creature.getName()).append(" will be destroyed)");
+                            if (cost.canPay(source, creature.getControllerId(), creature.getControllerId(), game) && player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
+                                cost.pay(source, game, creature.getControllerId(), creature.getControllerId(), true, null);
+                            }
+                            if (!cost.isPaid()) {
+                                creature.destroy(source.getSourceId(), game, true);
+                            }
                         }
                     }
                 }
