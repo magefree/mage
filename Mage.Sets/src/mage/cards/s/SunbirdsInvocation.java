@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -136,14 +135,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
                     }
                 }
             }
-        }
-
-        while (!cards.isEmpty()) {
-            Card card = cards.getRandom(game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
+            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         }
         return true;
     }
