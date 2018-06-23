@@ -11,7 +11,6 @@ import mage.constants.SetType;
 public final class Battlebond extends ExpansionSet {
     
     private static final Battlebond instance = new Battlebond();
-    public int i;
     
     public static Battlebond getInstance() {
         return instance;
