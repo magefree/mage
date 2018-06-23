@@ -176,6 +176,7 @@ public final class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 300, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 301, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 302, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mourner's Shield", 209, Rarity.UNCOMMON, mage.cards.m.MournersShield.class));
         cards.add(new SetCardInfo("Myr Adapter", 210, Rarity.COMMON, mage.cards.m.MyrAdapter.class));
         cards.add(new SetCardInfo("Myr Enforcer", 211, Rarity.COMMON, mage.cards.m.MyrEnforcer.class));
         cards.add(new SetCardInfo("Myr Incubator", 212, Rarity.RARE, mage.cards.m.MyrIncubator.class));
