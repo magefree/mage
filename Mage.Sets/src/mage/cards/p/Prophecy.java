@@ -17,6 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -29,7 +30,8 @@ public final class Prophecy extends CardImpl {
         
 
         // Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles his or her library.
-        this.spellAbility.addEffect(new ProphecyEffect());
+        this.getSpellAbility().addEffect(new ProphecyEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
@@ -64,8 +66,9 @@ class ProphecyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject == null || targetPlayer == null) {
+        if (sourceObject == null || targetPlayer == null || controller == null) {
             return false;
         }
         if (targetPlayer.getLibrary().hasCards()) {
@@ -75,9 +78,9 @@ class ProphecyEffect extends OneShotEffect {
                 return false;
             }
             cards.add(card);
-            targetPlayer.revealCards(sourceObject.getName(), cards, game);
+            targetPlayer.revealCards(sourceObject.getIdName(), cards, game);
             if (card.isLand()) {
-                targetPlayer.gainLife(1, game, source.getSourceId());
+                controller.gainLife(1, game, source.getSourceId());
             }
             targetPlayer.shuffleLibrary(source, game);
         }
