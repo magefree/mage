@@ -1,17 +1,26 @@
 package mage.abilities.meta;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
 
+import java.util.UUID;
+
+/**
+ * A triggered ability that combines several others and triggers whenever one or more of them would. The abilities
+ * passed in should have null as their effect, and should have their own targets set if necessary. All other information
+ * will be passed in from changes to this Ability.
+ * @author noahg
+ */
 public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TriggeredAbility[] triggeredAbilities;
-
     private final String ruleTrigger;
+    private TriggeredAbility[] triggeredAbilities;
 
     public OrTriggeredAbility(Zone zone, Effect effect, TriggeredAbility... abilities) {
         this(zone, effect, false, null, abilities);
@@ -21,11 +30,9 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.triggeredAbilities = abilities;
         this.ruleTrigger = ruleTrigger;
-        for (TriggeredAbility  ability : triggeredAbilities){
+        for (TriggeredAbility ability : triggeredAbilities) {
             //Remove useless data
             ability.getEffects().clear();
-            ability.setSourceId(this.getSourceId());
-            ability.setControllerId(this.getControllerId());
         }
     }
 
@@ -39,11 +46,11 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         boolean toRet = false;
-        for (TriggeredAbility ability : triggeredAbilities){
+        for (TriggeredAbility ability : triggeredAbilities) {
             toRet = toRet || ability.checkEventType(event, game);
         }
-        if (toRet){
-            System.out.println("Correct event type ("+event.getType()+")");
+        if (toRet) {
+            System.out.println("Correct event type (" + event.getType() + ")");
         }
         return toRet;
     }
@@ -51,7 +58,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean toRet = false;
-        for (TriggeredAbility ability : triggeredAbilities){
+        for (TriggeredAbility ability : triggeredAbilities) {
             toRet = toRet || ability.checkTrigger(event, game);
         }
         return toRet;
@@ -73,11 +80,44 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
                     .append(triggeredAbilities[0].getRule().substring(1).toLowerCase());
         }
 
-        for (int i = 1; i < (triggeredAbilities.length - 1); i++){
+        for (int i = 1; i < (triggeredAbilities.length - 1); i++) {
             sb.append(triggeredAbilities[i].getRule().toLowerCase());
         }
 
         sb.append(" or ").append(triggeredAbilities[triggeredAbilities.length - 1].getRule().toLowerCase());
-        return sb.toString()+super.getRule();
+        return sb.toString() + super.getRule();
+    }
+
+
+    @Override
+    public void setControllerId(UUID controllerId) {
+        super.setControllerId(controllerId);
+        for (TriggeredAbility ability : triggeredAbilities) {
+            ability.setControllerId(controllerId);
+        }
+    }
+
+    @Override
+    public void setSourceId(UUID sourceId) {
+        super.setSourceId(sourceId);
+        for (TriggeredAbility ability : triggeredAbilities) {
+            ability.setSourceId(sourceId);
+        }
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        super.addWatcher(watcher);
+        for (TriggeredAbility ability : triggeredAbilities) {
+            ability.addWatcher(watcher);
+        }
+    }
+
+    @Override
+    public void setSourceObject(MageObject sourceObject, Game game) {
+        super.setSourceObject(sourceObject, game);
+        for (TriggeredAbility ability : triggeredAbilities) {
+            ability.setSourceObject(sourceObject, game);
+        }
     }
 }

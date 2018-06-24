@@ -1,29 +1,28 @@
 package mage.cards.o;
 
-import java.util.UUID;
-
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.effects.common.DestroyAttachedToEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.meta.OrTriggeredAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetLandPermanent;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.AttachEffect;
 import mage.target.TargetPermanent;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
