@@ -4,11 +4,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -27,7 +27,7 @@ public final class HeraldOfFaith extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Herald of Faith attacks, you gain 2 life.
-        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(1), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(2), false));
     }
 
     public HeraldOfFaith(final HeraldOfFaith card) {
