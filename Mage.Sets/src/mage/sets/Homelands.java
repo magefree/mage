@@ -108,6 +108,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Greater Werewolf", 51, Rarity.UNCOMMON, mage.cards.g.GreaterWerewolf.class));
         cards.add(new SetCardInfo("Hazduhr the Abbot", 8, Rarity.RARE, mage.cards.h.HazduhrTheAbbot.class));
         cards.add(new SetCardInfo("Headstone", 52, Rarity.COMMON, mage.cards.h.Headstone.class));
+        cards.add(new SetCardInfo("Heart Wolf", 75, Rarity.RARE, mage.cards.h.HeartWolf.class));
         cards.add(new SetCardInfo("Hungry Mist", "88a", Rarity.COMMON, mage.cards.h.HungryMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hungry Mist", "88b", Rarity.COMMON, mage.cards.h.HungryMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ihsan's Shade", 53, Rarity.UNCOMMON, mage.cards.i.IhsansShade.class));
