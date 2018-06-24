@@ -45,23 +45,25 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        boolean toRet = false;
         for (TriggeredAbility ability : triggeredAbilities) {
-            toRet = toRet || ability.checkEventType(event, game);
+            if (ability.checkEventType(event, game)){
+                System.out.println("Correct event type (" + event.getType() + ")");
+                return true;
+            }
         }
-        if (toRet) {
-            System.out.println("Correct event type (" + event.getType() + ")");
-        }
-        return toRet;
+        return false;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean toRet = false;
         for (TriggeredAbility ability : triggeredAbilities) {
-            toRet = toRet || ability.checkTrigger(event, game);
+            if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)){
+                System.out.println("Triggered from "+ability.getRule());
+                return true;
+            }
+            System.out.println("Checked "+ability.getRule());
         }
-        return toRet;
+        return false;
     }
 
     @Override
