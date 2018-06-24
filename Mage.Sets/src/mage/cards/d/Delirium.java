@@ -6,9 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
-import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
-import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +23,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author noahg
  */
-public final class DeliriumCard extends CardImpl {
+public final class Delirium extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -33,38 +31,38 @@ public final class DeliriumCard extends CardImpl {
         filter.add(new ControllerIsActivePlayerPredicate());
     }
 
-    public DeliriumCard(UUID ownerId, CardSetInfo setInfo) {
+    public Delirium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
         
 
         // Cast this spell only during an opponent’s turn.
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(OnOpponentsTurnCondition.instance, "Cast this spell only during an opponent’s turn."));
         // Tap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
-        this.spellAbility.addEffect(new TapTargetEffect().setText("tap target creature that player controls"));
-        this.spellAbility.addTarget(new TargetCreaturePermanent(filter));
-        this.spellAbility.addEffect(new DeliriumCardEffect());
-        this.spellAbility.addEffect(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn).setText("Prevent all combat damage that would be dealt to"));
-        this.spellAbility.addEffect(new PreventCombatDamageToSourceEffect(Duration.EndOfTurn).setText("and dealt by the creature this turn."));
+        this.getSpellAbility().addEffect(new TapTargetEffect().setText("target creature that player controls"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DeliriumEffect());
+        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("Prevent all combat damage that would be dealt to"));
+        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText("and dealt by the creature this turn."));
     }
 
-    public DeliriumCard(final DeliriumCard card) {
+    public Delirium(final Delirium card) {
         super(card);
     }
 
     @Override
-    public DeliriumCard copy() {
-        return new DeliriumCard(this);
+    public Delirium copy() {
+        return new Delirium(this);
     }
 }
 
-class DeliriumCardEffect extends OneShotEffect {
+class DeliriumEffect extends OneShotEffect {
 
-    public DeliriumCardEffect() {
+    public DeliriumEffect() {
         super(Outcome.Damage);
         this.staticText = "that creature deals damage equal to its power to the player";
     }
 
-    public DeliriumCardEffect(DeliriumCardEffect effect) {
+    public DeliriumEffect(DeliriumEffect effect) {
         super(effect);
     }
 
@@ -83,7 +81,7 @@ class DeliriumCardEffect extends OneShotEffect {
     }
 
     @Override
-    public DeliriumCardEffect copy() {
-        return new DeliriumCardEffect(this);
+    public DeliriumEffect copy() {
+        return new DeliriumEffect(this);
     }
 }
