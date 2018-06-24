@@ -131,6 +131,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Decree", 34, Rarity.RARE, mage.cards.m.MysticDecree.class));
         cards.add(new SetCardInfo("Narwhal", 35, Rarity.RARE, mage.cards.n.Narwhal.class));
         cards.add(new SetCardInfo("Primal Order", 92, Rarity.RARE, mage.cards.p.PrimalOrder.class));
+        cards.add(new SetCardInfo("Prophecy", 11, Rarity.COMMON, mage.cards.p.Prophecy.class));
         cards.add(new SetCardInfo("Rashka the Slayer", 12, Rarity.RARE, mage.cards.r.RashkaTheSlayer.class));
         cards.add(new SetCardInfo("Reef Pirates", "36a", Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reef Pirates", "36b", Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
