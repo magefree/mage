@@ -66,11 +66,11 @@ class NykthosShrineToNyxManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        netMana.clear();
+        ArrayList<Mana> netManaCopy = new ArrayList<>();
         if (game != null) {
-            netMana.addAll(((ManaEffect) this.getEffects().get(0)).getNetMana(game, this));
+            netManaCopy.addAll(((ManaEffect) this.getEffects().get(0)).getNetMana(game, this));
         }
-        return netMana;
+        return netManaCopy;
     }
 }
 

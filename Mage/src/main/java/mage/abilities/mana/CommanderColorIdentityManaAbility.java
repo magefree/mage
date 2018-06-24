@@ -1,6 +1,6 @@
-
 package mage.abilities.mana;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Mana;
@@ -42,6 +42,7 @@ public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl 
 
     @Override
     public List<Mana> getNetMana(Game game) {
+        List<Mana> netManas = new ArrayList<>();
         if (netMana.isEmpty() && game != null) {
             Player controller = game.getPlayer(getControllerId());
             if (controller != null) {
@@ -68,7 +69,8 @@ public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl 
                 }
             }
         }
-        return netMana;
+        netManas.addAll(netMana);
+        return netManas;
     }
 
     @Override
