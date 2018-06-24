@@ -142,6 +142,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Root Spider", 94, Rarity.UNCOMMON, mage.cards.r.RootSpider.class));
         cards.add(new SetCardInfo("Roots", 95, Rarity.UNCOMMON, mage.cards.r.Roots.class));
         cards.add(new SetCardInfo("Roterothopter", 109, Rarity.COMMON, mage.cards.r.Roterothopter.class));
+        cards.add(new SetCardInfo("Rysorian Badger", 96, Rarity.RARE, mage.cards.r.RysorianBadger.class));
         cards.add(new SetCardInfo("Samite Alchemist", 117, Rarity.COMMON, mage.cards.s.SamiteAlchemist.class));
         cards.add(new SetCardInfo("Sea Sprite", 38, Rarity.UNCOMMON, mage.cards.s.SeaSprite.class));
         cards.add(new SetCardInfo("Sengir Autocrat", 56, Rarity.UNCOMMON, mage.cards.s.SengirAutocrat.class));
