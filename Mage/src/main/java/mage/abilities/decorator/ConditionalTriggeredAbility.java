@@ -48,6 +48,8 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
+        System.out.println("Source ID: "+this.getControllerId());
+        System.out.println("Active player ID: "+game.getActivePlayerId());
         return condition.apply(game, this);
     }
 

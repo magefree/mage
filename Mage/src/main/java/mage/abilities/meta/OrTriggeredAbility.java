@@ -38,7 +38,10 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     public OrTriggeredAbility(OrTriggeredAbility ability) {
         super(ability);
-        this.triggeredAbilities = ability.triggeredAbilities;
+        this.triggeredAbilities = new TriggeredAbility[ability.triggeredAbilities.length];
+        for (int i = 0; i < this.triggeredAbilities.length; i++){
+            this.triggeredAbilities[i] = ability.triggeredAbilities[i].copy();
+        }
         this.ruleTrigger = ability.ruleTrigger;
     }
 
@@ -121,5 +124,25 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (TriggeredAbility ability : triggeredAbilities) {
             ability.setSourceObject(sourceObject, game);
         }
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        for (TriggeredAbility ability : triggeredAbilities) {
+            if (!ability.checkInterveningIfClause(game)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean checkIfClause(Game game) {
+        for (TriggeredAbility ability : triggeredAbilities) {
+            if (!ability.checkIfClause(game)){
+                return false;
+            }
+        }
+        return true;
     }
 }

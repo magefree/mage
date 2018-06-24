@@ -3,13 +3,21 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
+import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -31,7 +39,14 @@ public final class VoiceOfResurgence extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
-        this.addAbility(new VoiceOfResurgenceTriggeredAbility());
+        OrTriggeredAbility ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()),
+                new ConditionalTriggeredAbility(
+                        new SpellCastOpponentTriggeredAbility(null, new FilterSpell("a spell"), false),
+                        MyTurnCondition.instance,
+                        "Whenever an opponent casts a spell during your turn, "),
+                new DiesTriggeredAbility(null, false));
+        ability.setLeavesTheBattlefieldTrigger(true);
+        this.addAbility(ability);
 
     }
 
@@ -42,51 +57,5 @@ public final class VoiceOfResurgence extends CardImpl {
     @Override
     public VoiceOfResurgence copy() {
         return new VoiceOfResurgence(this);
-    }
-}
-
-class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
-
-    public VoiceOfResurgenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()), false);
-        setLeavesTheBattlefieldTrigger(true);
-    }
-
-    public VoiceOfResurgenceTriggeredAbility(final VoiceOfResurgenceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST || event.getType() == EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        // Opponent casts spell during your turn
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null
-                    && game.getOpponents(super.getControllerId()).contains(spell.getControllerId())
-                    && game.getActivePlayerId().equals(super.getControllerId())) {
-                return true;
-            }
-        }
-        // Voice of Resurgence Dies
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && getSourceId().equals(event.getTargetId())) {
-            ZoneChangeEvent zce = (ZoneChangeEvent) event;
-            return zce.getFromZone() == Zone.BATTLEFIELD && zce.getToZone() == Zone.GRAVEYARD;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts a spell during your turn or when {this} dies, create a green and white Elemental creature token with \"This creature's power and toughness are each equal to the number of creatures you control.";
-    }
-
-    @Override
-    public VoiceOfResurgenceTriggeredAbility copy() {
-        return new VoiceOfResurgenceTriggeredAbility(this);
     }
 }
