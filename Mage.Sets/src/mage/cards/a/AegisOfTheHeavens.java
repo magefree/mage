@@ -18,7 +18,7 @@ public final class AegisOfTheHeavens extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Target creature gets +1/+7 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 7, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
