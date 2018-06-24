@@ -29,7 +29,7 @@ public final class Prophecy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");
         
 
-        // Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles his or her library.
+        // Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new ProphecyEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -51,7 +51,7 @@ class ProphecyEffect extends OneShotEffect {
 
     public ProphecyEffect() {
         super(Outcome.GainLife);
-        this.staticText = "Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles his or her library";
+        this.staticText = "Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles their library";
     }
 
     public ProphecyEffect(final ProphecyEffect effect) {
