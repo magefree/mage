@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class BattleOfWits extends CardImpl {
 
         // At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new BattleOfWitsCondition(), "At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new BattleOfWitsCondition(), "At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game."));
     }
 
     public BattleOfWits(final BattleOfWits card) {

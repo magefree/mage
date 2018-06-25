@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.condition.common.DealtDamageToAnOpponent;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class DuneriderOutlaw extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
         // At the beginning of each end step, if Dunerider Outlaw dealt damage to an opponent this turn, put a +1/+1 counter on it.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each end step", true, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        this.addAbility(new ConditionalTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
     }
 
     public DuneriderOutlaw(final DuneriderOutlaw card) {

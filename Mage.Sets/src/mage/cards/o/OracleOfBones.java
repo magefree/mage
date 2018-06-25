@@ -8,7 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TributeAbility;
@@ -45,7 +45,7 @@ public final class OracleOfBones extends CardImpl {
         this.addAbility(new TributeAbility(2));
         // When Oracle of Bones enters the battlefield, if tribute wasn't paid, you may cast an instant or sorcery card from your hand without paying its mana cost.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new OracleOfBonesCastEffect(), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, you may cast an instant or sorcery card from your hand without paying its mana cost."));
     }
 

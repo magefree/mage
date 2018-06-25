@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.EnchantedSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class DreampodDruid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each upkeep, if Dreampod Druid is enchanted, create a 1/1 green Saproling creature token.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(), 1), TargetController.ANY, false, false),
                 new EnchantedSourceCondition(),
                 "At the beginning of each upkeep, if Dreampod Druid is enchanted, create a 1/1 green Saproling creature token."));

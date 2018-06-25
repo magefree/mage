@@ -6,7 +6,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class DimensionalBreach extends CardImpl {
 
         // Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards he or she owns to the battlefield.
         this.getSpellAbility().addEffect(new DimensionalBreachExileEffect());
-        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new DimensionalBreachReturnFromExileEffect(), TargetController.ANY, false, true, null), new CardsStillInExileCondition(), null));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new DimensionalBreachReturnFromExileEffect(), TargetController.ANY, false, true, null), new CardsStillInExileCondition(), null));
 
     }
 

@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -50,7 +50,7 @@ public final class Kookus extends CardImpl {
         // At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(3), TargetController.YOU, false);
         ability.addEffect(new AttacksIfAbleSourceEffect(Duration.EndOfTurn));
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
                 "At the beginning of your upkeep, "

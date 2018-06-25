@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class ImaginaryPet extends CardImpl {
 
         // At the beginning of your upkeep, if you have a card in hand, return Imaginary Pet to its owner's hand.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new CardsInHandCondition(ComparisonType.MORE_THAN, 0),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new CardsInHandCondition(ComparisonType.MORE_THAN, 0),
             "At the beginning of your upkeep, if you have a card in hand, return {this} to its owner's hand."));
     }
 

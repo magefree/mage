@@ -6,7 +6,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class SaruliGatekeepers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Saruli Gatekeepers enters the battlefield, if you control two or more Gates, gain 7 life.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(7)),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1),
                 "When {this} enters the battlefield, if you control two or more Gates, gain 7 life."));

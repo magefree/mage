@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -46,7 +46,7 @@ public final class ProgenitorMimic extends CardImpl {
         effect.setText("create a token that's a copy of this creature");
 
         AbilityApplier applier = new AbilityApplier(
-                new ConditionalTriggeredAbility(
+                new ConditionalInterveningIfTriggeredAbility(
                         new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false),
                         new SourceMatchesFilterCondition(filter),
                         "At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature.")

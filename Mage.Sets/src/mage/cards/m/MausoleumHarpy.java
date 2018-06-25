@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -46,7 +46,7 @@ public final class MausoleumHarpy extends CardImpl {
         this.addAbility(new AscendAbility());
 
         // Whenever another creature you control dies, if you have the city's blessing, put a +1/+1 counter on Mausoleum Harpy.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter),
                 CitysBlessingCondition.instance,
                 "Whenever another creature you control dies, if you have the city's blessing, put a +1/+1 counter on {this}. "));

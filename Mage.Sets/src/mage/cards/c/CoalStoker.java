@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class CoalStoker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Coal Stoker enters the battlefield, if you cast it from your hand, add {R}{R}{R}.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BasicManaEffect(Mana.RedMana(3)), false),
                 CastFromHandSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, add {R}{R}{R}."),

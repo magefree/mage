@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class WoodlandSleuth extends CardImpl {
 
         // Morbid - When Woodland Sleuth enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new WoodlandSleuthEffect());
-        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.instance, staticText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }
 
     public WoodlandSleuth(final WoodlandSleuth card) {

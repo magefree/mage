@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCostCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -45,7 +45,7 @@ public final class StormscapeBattlemage extends CardImpl {
         this.addAbility(kickerAbility);
 
         // When Stormscape Battlemage enters the battlefield, if it was kicked with its {W} kicker, you gain 3 life.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3),false),
                 new KickedCostCondition("{W}"),
                 "When Stormscape Battlemage enters the battlefield, if it was kicked with its {W} kicker, you gain 3 life."));
@@ -53,7 +53,7 @@ public final class StormscapeBattlemage extends CardImpl {
         // When Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated.        
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true),false);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability, new KickedCostCondition("{2}{B}"),
                 "When Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated."));        
     }

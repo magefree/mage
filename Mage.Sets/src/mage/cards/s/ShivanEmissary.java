@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class ShivanEmissary extends CardImpl {
         // When Shivan Emissary enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true));
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
             "When {this} enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated."));
     }
 

@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class RevelInRiches extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new TreasureToken("XLN")), false, filter));
         // At the beginning of your upkeep, if you control ten or more Treasures, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 9),
                 "At the beginning of your upkeep, if you control ten or more Treasures, you win the game."));

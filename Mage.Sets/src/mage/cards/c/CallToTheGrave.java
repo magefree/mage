@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.condition.common.CreatureCountCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class CallToTheGrave extends CardImpl {
         this.addAbility(ability);
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
     }
 
     public CallToTheGrave(final CallToTheGrave card) {

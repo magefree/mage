@@ -7,7 +7,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -56,7 +56,7 @@ public final class DreamcallerSiren extends CardImpl {
         // When Dreamcaller Siren enters the battlefield, if you control another Pirate, tap up to two nonland permanents.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
         ability.addTarget(new TargetNonlandPermanent(0, 2, false));
-        this.addAbility(new ConditionalTriggeredAbility(ability,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability,
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "when {this} enters the battlefield, if you control another Pirate, tap up to two target nonland permanents."));
     }

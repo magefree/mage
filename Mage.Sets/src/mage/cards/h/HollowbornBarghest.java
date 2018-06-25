@@ -9,7 +9,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +43,7 @@ public final class HollowbornBarghest extends CardImpl {
         // At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.
         Condition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new HollowbornBarghestEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, condition, rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, rule));
 
         // At the beginning of each opponent's upkeep, if that player has no cards in hand, he or she loses 2 life.
         this.addAbility(new HollowbornBarghestTriggeredAbility());

@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class NetherSpirit extends CardImpl {
 
         // At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to the battlefield.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), TargetController.YOU, true);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new NetherSpiritCondition(), "At the beginning of your upkeep, if {this} is the only creature card in your graveyard, you may return {this} to the battlefield."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new NetherSpiritCondition(), "At the beginning of your upkeep, if {this} is the only creature card in your graveyard, you may return {this} to the battlefield."));
     }
 
     public NetherSpirit(final NetherSpirit card) {

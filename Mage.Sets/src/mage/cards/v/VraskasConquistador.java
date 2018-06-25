@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -43,7 +43,7 @@ public final class VraskasConquistador extends CardImpl {
         TriggeredAbility ability = new AttacksOrBlocksTriggeredAbility(new LoseLifeTargetEffect(2), false);
         ability.addEffect(new GainLifeEffect(2).setText("and you gain 2 life"));
         ability.addTarget(new TargetOpponent());
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability, new PermanentsOnTheBattlefieldCondition(filter),
                 "Whenever {this} attacks or blocks, if you control a Vraska planeswalker, target opponent loses 2 life and you gain 2 life."));
     }

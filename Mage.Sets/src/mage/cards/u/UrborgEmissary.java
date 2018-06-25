@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class UrborgEmissary extends CardImpl {
         // When Urborg Emissary enters the battlefield, if it was kicked, return target permanent to its owner's hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetPermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
             "When {this} enters the battlefield, if it was kicked, return target permanent to its owner's hand."));
     }
 

@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -45,7 +45,7 @@ public final class ThaumaticCompass extends CardImpl {
         // At the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
         this.addAbility(new TransformAbility());
         TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability2,
                 new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), ComparisonType.MORE_THAN, 6, true),
                 "At the beginning of your end step, if you control seven or more lands, transform {this}."));

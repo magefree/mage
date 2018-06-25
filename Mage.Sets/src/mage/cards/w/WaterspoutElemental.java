@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -42,7 +42,7 @@ public final class WaterspoutElemental extends CardImpl {
         // When Waterspout Elemental enters the battlefield, if it was kicked, return all other creatures to their owners' hands and you skip your next turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter));
         ability.addEffect(new SkipNextTurnSourceEffect());
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
             "When {this} enters the battlefield, if it was kicked, return all other creatures to their owners' hands and you skip your next turn."));
     }
 

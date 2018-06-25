@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class Sarcomancy extends CardImpl {
         // When Sarcomancy enters the battlefield, create a 2/2 black Zombie creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 1), false));
         // At the beginning of your upkeep, if there are no Zombies on the battlefield, Sarcomancy deals 1 damage to you.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(1), TargetController.YOU, false),
                 new PermanentsOnTheBattlefieldCondition(new FilterPermanent(SubType.ZOMBIE, "Zombies"), ComparisonType.EQUAL_TO, 0, false),
                 "At the beginning of your upkeep, if there are no Zombies on the battlefield, {this} deals 1 damage to you."));        

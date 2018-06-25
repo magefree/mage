@@ -7,7 +7,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SkipNextCombatEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class RevenantPatriarch extends CardImpl {
         // When Revenant Patriarch enters the battlefield, if {W} was spent to cast it, target player skips their next combat phase.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SkipNextCombatEffect(), false);
         ability.addTarget(new TargetPlayer());
-        this.addAbility(new ConditionalTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.W), 
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.W),
                 "if {W} was spent to cast it, target player skips their next combat phase."), new ManaSpentToCastWatcher());
         // Revenant Patriarch can't block.
         this.addAbility(new CantBlockAbility());

@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCostCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -38,13 +38,13 @@ public final class ThunderscapeBattlemage extends CardImpl {
         // When {this} enters the battlefield, if it was kicked with its {1}{B} kicker, target player discards two cards.
         TriggeredAbility ability1 = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(2));
         ability1.addTarget(new TargetPlayer());
-        this.addAbility(new ConditionalTriggeredAbility(ability1, new KickedCostCondition("{1}{B}"),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability1, new KickedCostCondition("{1}{B}"),
                 "When {this} enters the battlefield, if it was kicked with its {1}{B} kicker, target player discards two cards."));
 
         // When {this} enters the battlefield, if it was kicked with its {G} kicker, destroy target enchantment.
         TriggeredAbility ability2 = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         ability2.addTarget(new TargetEnchantmentPermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability2, new KickedCostCondition("{G}"),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, new KickedCostCondition("{G}"),
                 "When {this} enters the battlefield, if it was kicked with its {G} kicker, destroy target enchantment."));
     }
 

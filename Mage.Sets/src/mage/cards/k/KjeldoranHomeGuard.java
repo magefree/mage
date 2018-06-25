@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.condition.common.AttackedOrBlockedThisCombatSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.SubType;
@@ -32,7 +32,7 @@ public final class KjeldoranHomeGuard extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At end of combat, if Kjeldoran Home Guard attacked or blocked this combat, put a -0/-1 counter on Kjeldoran Home Guard and put a 0/1 white Deserter creature token onto the battlefield.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EndOfCombatTriggeredAbility(new AddCountersSourceEffect(new BoostCounter(0, -1)), false),
                 AttackedOrBlockedThisCombatSourceCondition.instance,
                 "At end of combat, if {this} attacked or blocked this combat, put a -0/-1 counter on {this} and create a 0/1 white Deserter creature token.");

@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.MenaceAbility;
@@ -47,7 +47,7 @@ public final class FathomFleetCaptain extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Whenever Fathom Fleet Captain attacks, if you control another nontoken Pirate, you may pay {2}. If you do, creature a 2/2 black Pirate creature token with menace.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new PirateToken()), new GenericManaCost(2)), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "Whenever {this} attacks, if you control another nontoken Pirate, you may pay {2}. If you do, create a 2/2 black Pirate creature token with menace"));

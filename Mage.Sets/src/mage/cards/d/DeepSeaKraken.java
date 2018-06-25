@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.keyword.SuspendAbility;
@@ -45,7 +45,7 @@ public final class DeepSeaKraken extends CardImpl {
         // Suspend 9-{2}{U}
         this.addAbility(new SuspendAbility(9, new ManaCostsImpl("{2}{U}"), this));
         // Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastAllTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), filter, false, SetTargetPointer.NONE), SuspendedCondition.instance,
                 "Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it."));
     }

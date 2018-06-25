@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,8 @@ public final class ScreechingSilcaw extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        TriggeredAbility conditional = new ConditionalTriggeredAbility(
+        //"Metalcraft - Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.
+        TriggeredAbility conditional = new ConditionalInterveningIfTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false, true),
                 MetalcraftCondition.instance, text);
         this.addAbility(conditional);

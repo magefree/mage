@@ -5,7 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DiscardedByOpponentTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class AjanisLastStand extends CardImpl {
         this.addAbility(new AjanisLastStandTriggeredAbility());
 
         // When a spell or ability an opponent controls causes you to discard this card, if you control a Plains, create a 4/4 white Avatar creature token with flying.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiscardedByOpponentTriggeredAbility(new CreateTokenEffect(new AvatarToken2())),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "When a spell or ability an opponent controls causes you to discard this card, "

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class ShorelineSalvager extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.
-        this.addAbility(new ConditionalTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter), rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter), rule));
     }
 
     public ShorelineSalvager(final ShorelineSalvager card) {

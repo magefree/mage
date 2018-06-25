@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
@@ -39,7 +39,7 @@ public final class ManaVault extends CardImpl {
                 TargetController.YOU,
                 false));
         // At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(1), TargetController.YOU, false),
                 SourceTappedCondition.instance,
                 "At the beginning of your draw step, if {this} is tapped, it deals 1 damage to you."));

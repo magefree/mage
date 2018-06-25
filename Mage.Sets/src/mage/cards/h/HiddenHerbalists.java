@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class HiddenHerbalists extends CardImpl {
 
         // <i>Revolt</i> &mdash When Hidden Herbalists enters the battlefield, if a permanent you controlled left the battlefield this turn, add {G}{G};
         this.addAbility(
-                new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+                new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                         new BasicManaEffect(Mana.GreenMana(2)), false), RevoltCondition.instance,
                         "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
                         + " the battlefield this turn, add {G}{G}."),

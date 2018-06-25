@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -41,7 +41,7 @@ public final class ZealotsEnDal extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, false),
                 new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
                 "At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life."

@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FormidableCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class SurrakTheHuntCaller extends CardImpl {
         this.toughness = new MageInt(4);
 
         // <i>Formidable</i> &mdash; At the beginning of combat on your turn, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), TargetController.YOU, false),
                 FormidableCondition.instance,
                 "<i>Formidable</i> &mdash; At the beginning of combat on your turn, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn.");

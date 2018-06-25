@@ -11,7 +11,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.condition.common.SourceOnBattlefieldOrCommandZoneCondition;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -65,7 +65,7 @@ public final class InallaArchmageRitualist extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Eminence - Whenever another nontoken Wizard enters the battlefield under your control, if Inalla, Archmage Ritualist is in the command zone or on the battlefield, you may pay {1}. If you do, create a token that's a copy of that Wizard. The token gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(Zone.ALL, new DoIfCostPaid(
                         new InallaArchmageRitualistEffect(), new ManaCostsImpl("{1}"), "Pay {1} to create a token copy?"),
                         filter, false, SetTargetPointer.PERMANENT, ""),

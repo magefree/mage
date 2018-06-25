@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TributeAbility;
@@ -37,7 +37,7 @@ public final class ShrikeHarpy extends CardImpl {
         // When Shrike Harpy enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent("a creature"), 1, "target opponent"), false);
         ability.addTarget(new TargetOpponent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));
     }
 

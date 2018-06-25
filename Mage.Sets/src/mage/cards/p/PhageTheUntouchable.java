@@ -8,7 +8,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.CastFromHandSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseGameSourceControllerEffect;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
@@ -35,7 +35,7 @@ public final class PhageTheUntouchable extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Phage the Untouchable enters the battlefield, if you didn't cast it from your hand, you lose the game.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false),
                 new InvertCondition(CastFromHandSourceCondition.instance),
                 "When {this} enters the battlefield, if you didn't cast it from your hand, you lose the game"

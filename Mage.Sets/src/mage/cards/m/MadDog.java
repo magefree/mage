@@ -9,7 +9,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class MadDog extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your end step, if Mad Dog didn't attack or come under your control this turn, sacrifice it.
-        Ability ability = new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false), MadDogCondition.instance, "At the beginning of your end step, if {this} didn't attack or come under your control this turn, sacrifice it");
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false), MadDogCondition.instance, "At the beginning of your end step, if {this} didn't attack or come under your control this turn, sacrifice it");
         ability.addWatcher(new AttackedThisTurnWatcher());
         ability.addWatcher(new PermanentsEnteredBattlefieldWatcher());
         this.addAbility(ability);

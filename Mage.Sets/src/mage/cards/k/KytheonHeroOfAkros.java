@@ -10,7 +10,7 @@ import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -47,7 +47,7 @@ public final class KytheonHeroOfAkros extends CardImpl {
         // At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon,
         // then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalTriggeredAbility(new EndOfCombatTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.MALE), false),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EndOfCombatTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.MALE), false),
                 new KytheonHeroOfAkrosCondition(), "At end of combat, if {this} and at least two other creatures attacked this combat, exile {this}, "
                 + "then return him to the battlefield transformed under his owner's control."), new AttackedOrBlockedThisCombatWatcher());
 

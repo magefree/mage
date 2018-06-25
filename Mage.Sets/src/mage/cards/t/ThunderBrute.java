@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -36,7 +36,7 @@ public final class ThunderBrute extends CardImpl {
         this.addAbility(new TributeAbility(3));
         // When Thunder Brute enters the battlefield, if tribute wasn't paid, it gains haste until end of turn.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, it gains haste until end of turn."));        
     }
 

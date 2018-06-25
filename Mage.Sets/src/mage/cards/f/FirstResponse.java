@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.LiveLostLastTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class FirstResponse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SoldierToken()), TargetController.ANY, false),
                 LiveLostLastTurnCondition.instance,
                 "At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token."));

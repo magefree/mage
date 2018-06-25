@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCostCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -51,12 +51,12 @@ public final class AnaBattlemage extends CardImpl {
         // When Ana Battlemage enters the battlefield, if it was kicked with its {2}{U} kicker, target player discards three cards.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(3));
         ability.addTarget(new TargetOpponent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, new KickedCostCondition("{2}{U}"),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{2}{U}"),
             "When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, target player discards three cards."));
         // When Ana Battlemage enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller.
         ability = new EntersBattlefieldTriggeredAbility(new AnaBattlemageKickerEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new ConditionalTriggeredAbility(ability, new KickedCostCondition("{1}{B}"),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{1}{B}"),
             "When {this} enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller."));
     }
 

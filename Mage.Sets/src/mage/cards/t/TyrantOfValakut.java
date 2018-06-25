@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SurgedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SurgeAbility;
@@ -36,7 +36,7 @@ public final class TyrantOfValakut extends CardImpl {
         // When Tyrant of Valakut enters the battlefield, if its surge cost was paid, it deals 3 damage to any target.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(new ConditionalTriggeredAbility(ability, SurgedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, SurgedCondition.instance,
                 "When {this} enters the battlefield, if its surge cost was paid, it deals 3 damage to any target."));
     }
 

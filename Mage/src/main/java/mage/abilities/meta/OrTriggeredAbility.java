@@ -9,18 +9,21 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * A triggered ability that combines several others and triggers whenever one or more of them would. The abilities
  * passed in should have null as their effect, and should have their own targets set if necessary. All other information
- * will be passed in from changes to this Ability.
+ * will be passed in from changes to this Ability. Note: this does NOT work with abilities that have intervening if clauses.
  * @author noahg
  */
 public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     private final String ruleTrigger;
     private TriggeredAbility[] triggeredAbilities;
+    private List<Integer> triggeringAbilities;
 
     public OrTriggeredAbility(Zone zone, Effect effect, TriggeredAbility... abilities) {
         this(zone, effect, false, null, abilities);
@@ -30,6 +33,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.triggeredAbilities = abilities;
         this.ruleTrigger = ruleTrigger;
+        this.triggeringAbilities = new ArrayList<>();
         for (TriggeredAbility ability : triggeredAbilities) {
             //Remove useless data
             ability.getEffects().clear();
@@ -42,6 +46,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (int i = 0; i < this.triggeredAbilities.length; i++){
             this.triggeredAbilities[i] = ability.triggeredAbilities[i].copy();
         }
+        this.triggeringAbilities = new ArrayList<>(ability.triggeringAbilities);
         this.ruleTrigger = ability.ruleTrigger;
     }
 
@@ -59,14 +64,17 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for (TriggeredAbility ability : triggeredAbilities) {
-            if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)){
-                System.out.println("Triggered from "+ability.getRule());
-                return true;
+        boolean toRet = false;
+        for (int i = 0; i < triggeredAbilities.length; i++) {
+            TriggeredAbility ability = triggeredAbilities[i];
+            if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)) {
+                System.out.println("Triggered from " + ability.getRule());
+                triggeringAbilities.add(i);
+                toRet = true;
             }
-            System.out.println("Checked "+ability.getRule());
+            System.out.println("Checked " + ability.getRule());
         }
-        return false;
+        return toRet;
     }
 
     @Override
@@ -124,25 +132,5 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (TriggeredAbility ability : triggeredAbilities) {
             ability.setSourceObject(sourceObject, game);
         }
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        for (TriggeredAbility ability : triggeredAbilities) {
-            if (!ability.checkInterveningIfClause(game)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean checkIfClause(Game game) {
-        for (TriggeredAbility ability : triggeredAbilities) {
-            if (!ability.checkIfClause(game)){
-                return false;
-            }
-        }
-        return true;
     }
 }

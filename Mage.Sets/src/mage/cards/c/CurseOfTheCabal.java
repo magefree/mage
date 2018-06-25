@@ -7,7 +7,7 @@ import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -45,7 +45,7 @@ public final class CurseOfTheCabal extends CardImpl {
         // Suspend 2-{2}{B}{B}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{2}{B}{B}"), this));
         // At the beginning of each player's upkeep, if Curse of the Cabal is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on Curse of the Cabal.
-        this.addAbility(new CurseOfTheCabalTriggeredAbility());
+        this.addAbility(new CurseOfTheCabalInterveningIfTriggeredAbility());
     }
 
     public CurseOfTheCabal(final CurseOfTheCabal card) {
@@ -99,9 +99,9 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
     }
 }
 
-class CurseOfTheCabalTriggeredAbility extends ConditionalTriggeredAbility {
+class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
-    public CurseOfTheCabalTriggeredAbility() {
+    public CurseOfTheCabalInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(
                 Zone.EXILED, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
                 TargetController.ANY, false, true
@@ -113,13 +113,13 @@ class CurseOfTheCabalTriggeredAbility extends ConditionalTriggeredAbility {
         // counters aren't placed
     }
 
-    public CurseOfTheCabalTriggeredAbility(final CurseOfTheCabalTriggeredAbility effect) {
+    public CurseOfTheCabalInterveningIfTriggeredAbility(final CurseOfTheCabalInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
     @Override
-    public CurseOfTheCabalTriggeredAbility copy() {
-        return new CurseOfTheCabalTriggeredAbility(this);
+    public CurseOfTheCabalInterveningIfTriggeredAbility copy() {
+        return new CurseOfTheCabalInterveningIfTriggeredAbility(this);
     }
 }
 

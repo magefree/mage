@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -34,7 +34,7 @@ public final class CallForUnity extends CardImpl {
 
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a unity counter on Call for Unity.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.UNITY.createInstance(), true), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, RevoltCondition.instance, ruleText), new RevoltWatcher());
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, RevoltCondition.instance, ruleText), new RevoltWatcher());
 
         // Creatures you control get +1/+1 for each unity counter on Call for Unity.
         Effect effect = new BoostControlledEffect(new CountersSourceCount(CounterType.UNITY), new CountersSourceCount(CounterType.UNITY), Duration.WhileOnBattlefield,

@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.AttacksFirstTimeTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.DethroneAbility;
@@ -45,7 +45,7 @@ public final class ScourgeOfTheThrone extends CardImpl {
                 ), false
         );
         ability.addEffect(new AdditionalCombatPhaseEffect());
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 ScourgeOfTheThroneCondition.instance,
                 "Whenever {this} attacks for the first time each turn, "

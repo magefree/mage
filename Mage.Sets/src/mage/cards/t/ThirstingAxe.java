@@ -14,7 +14,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.AttachedCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEquippedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -48,7 +48,7 @@ public final class ThirstingAxe extends CardImpl {
                 new InvertCondition(new EquippedDealtCombatDamageToCreatureCondition()));
         String triggeredAbilityText = "At the beginning of your end step, if equipped creature " +
             "didn't deal combat damage to a creature this turn, sacrifice it.";
-        ConditionalTriggeredAbility sacrificeTriggeredAbility = new ConditionalTriggeredAbility(ability, condition, triggeredAbilityText);
+        ConditionalInterveningIfTriggeredAbility sacrificeTriggeredAbility = new ConditionalInterveningIfTriggeredAbility(ability, condition, triggeredAbilityText);
         this.addAbility(sacrificeTriggeredAbility, new CombatDamageToCreatureWatcher());
 
         // Equip {2}

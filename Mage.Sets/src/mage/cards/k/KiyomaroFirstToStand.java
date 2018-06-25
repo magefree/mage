@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.Effect;
@@ -54,7 +54,7 @@ public final class KiyomaroFirstToStand extends CardImpl {
         this.addAbility(ability);
         
         // Whenever Kiyomaro deals damage, if you have seven or more cards in hand, you gain 7 life.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new KiyomaroFirstToStandDealsDamageTriggeredAbility(),
                 new CardsInHandCondition(ComparisonType.MORE_THAN, 6),
                 "Whenever {this} deals damage, if you have seven or more cards in hand, you gain 7 life"

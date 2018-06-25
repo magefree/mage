@@ -6,7 +6,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -39,7 +39,7 @@ public final class MaliciousAffliction extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
         // Morbid - When you cast Malicious Affliction, if a creature died this turn, you may copy Malicious Affliction and may choose a new target for the copy.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new CastSourceTriggeredAbility(new CopySourceSpellEffect(), true),
                 new LockedInCondition(MorbidCondition.instance),
                 "<i>Morbid</i> &mdash; When you cast {this}, if a creature died this turn, you may copy {this} and may choose a new target for the copy");

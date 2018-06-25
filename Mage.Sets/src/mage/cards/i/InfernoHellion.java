@@ -6,7 +6,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
@@ -35,7 +35,7 @@ public final class InfernoHellion extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of each end step, if Inferno Hellion attacked or blocked this turn, its owner shuffles it into their library.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new ShuffleIntoLibrarySourceEffect(),
                         TargetController.ANY, false

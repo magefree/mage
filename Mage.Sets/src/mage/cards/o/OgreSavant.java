@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,9 +29,10 @@ public final class OgreSavant extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
+        //When Ogre Savant enters the battlefield, if {U} was spent to cast Ogre Savant, return target creature to its owner’s hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(),false);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.U),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.U),
                 "if {U} was spent to cast {this}, return target creature to its owner's hand."),
                 new ManaSpentToCastWatcher());
     }

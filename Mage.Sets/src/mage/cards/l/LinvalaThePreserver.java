@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.OpponentControlsMoreCondition;
 import mage.abilities.condition.common.OpponentHasMoreLifeCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,12 +35,12 @@ public final class LinvalaThePreserver extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Linvala, the Preserver enters the battlefield, if an opponent has more life than you, you gain 5 life.
-        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5), false),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5), false),
                 OpponentHasMoreLifeCondition.instance,
                 "When {this} enters the battlefield, if an opponent has more life than you, you gain 5 life."));
 
         // When Linvala enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.
-        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new LinvalaAngelToken()), false),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new LinvalaAngelToken()), false),
                 new OpponentControlsMoreCondition(new FilterCreaturePermanent()),
                 "When {this} enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying."));
     }

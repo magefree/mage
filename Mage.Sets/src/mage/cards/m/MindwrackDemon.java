@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,7 +41,7 @@ public final class MindwrackDemon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(4)));
 
         // At the beginning of your upkeep, if you don't have 4 or more card types in your graveyard, you lose 4 life.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(4), TargetController.YOU, false),
                 new InvertCondition(DeliriumCondition.instance),
                 "<i>Delirium</i> &mdash; At the beginning of your upkeep, you lose 4 life unless there are four or more card types among cards in your graveyard.");

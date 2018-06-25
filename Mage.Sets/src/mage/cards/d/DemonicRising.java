@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.condition.common.CreatureCountCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class DemonicRising extends CardImpl {
 
         // At the beginning of your end step, if you control exactly one creature, create a 5/5 black Demon creature token with flying.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new DemonToken()), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new CreatureCountCondition(1, TargetController.YOU), ruleText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new CreatureCountCondition(1, TargetController.YOU), ruleText));
     }
 
     public DemonicRising(final DemonicRising card) {

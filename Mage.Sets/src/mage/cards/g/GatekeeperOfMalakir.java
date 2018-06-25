@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class GatekeeperOfMalakir extends CardImpl {
         // When Gatekeeper of Malakir enters the battlefield, if it was kicked, target player sacrifices a creature.
         EntersBattlefieldTriggeredAbility ability =
                 new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
-        Ability conditionalAbility = new ConditionalTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature.");
+        Ability conditionalAbility = new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature.");
         conditionalAbility.addTarget(new TargetPlayer());
         this.addAbility(conditionalAbility);
     }

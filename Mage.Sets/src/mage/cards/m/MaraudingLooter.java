@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class MaraudingLooter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Raid - At the beginning of your end step, if you attacked with a creature this turn, you may draw a card. If you do, discard a card.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true), TargetController.YOU, false),
                 RaidCondition.instance,
                 "<i>Raid</i> &mdash; At the beginning of your end step, "

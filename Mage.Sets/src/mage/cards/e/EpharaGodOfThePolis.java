@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -36,12 +36,14 @@ public final class EpharaGodOfThePolis extends CardImpl {
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
+
         // As long as your devotion to white and blue is less than seven, Ephara isn't a creature.
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.W, ColoredManaSymbol.U), 7);
         effect.setText("As long as your devotion to white and blue is less than seven, Ephara isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
         // At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), TargetController.ANY, false, false),
                 HadAnotherCreatureEnterTheBattlefieldCondition.instance,
                 "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."),

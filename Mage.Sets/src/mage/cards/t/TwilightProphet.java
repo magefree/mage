@@ -7,7 +7,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.AscendAbility;
@@ -46,7 +46,7 @@ public final class TwilightProphet extends CardImpl {
 
         // At the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand.
         // Each opponent loses X life and you gain X life, where X is that card's converted mana cost.
-        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
                 new TwilightProphetEffect(), TargetController.YOU, false), CitysBlessingCondition.instance,
                 "At the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand."
                 + "Each opponent loses X life and you gain X life, where X is that card's converted mana cost."));

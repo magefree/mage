@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class EmissaryOfTheSleepless extends CardImpl {
         
         // When Emissary of the Sleepless enters the battlefield, if a creature died this turn, create a 1/1 white Spirit creature token with flying.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()));
-        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.instance, "When {this} enters the battlefield, if a creature died this turn, create a 1/1 white Spirit creature token with flying."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, "When {this} enters the battlefield, if a creature died this turn, create a 1/1 white Spirit creature token with flying."));
     }
 
     public EmissaryOfTheSleepless(final EmissaryOfTheSleepless card) {

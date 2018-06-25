@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class TestOfEndurance extends CardImpl {
 
         // At the beginning of your upkeep, if you have 50 or more life, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new FiftyOrMoreLifeCondition(), "At the beginning of your upkeep, if you have 50 or more life, you win the game."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new FiftyOrMoreLifeCondition(), "At the beginning of your upkeep, if you have 50 or more life, you win the game."));
     }
 
     public TestOfEndurance(final TestOfEndurance card) {

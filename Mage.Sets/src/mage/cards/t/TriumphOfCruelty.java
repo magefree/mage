@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsCreatureGreatestPowerCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class TriumphOfCruelty extends CardImpl {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false);
         Target target =  new TargetOpponent();
         ability.addTarget(target);
-        this.addAbility(new ConditionalTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, ruleText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, ruleText));
     }
 
     public TriumphOfCruelty(final TriumphOfCruelty card) {

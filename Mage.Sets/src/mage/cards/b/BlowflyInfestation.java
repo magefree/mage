@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -34,12 +34,12 @@ public final class BlowflyInfestation extends CardImpl {
     public BlowflyInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
-
+        //Whenever a creature dies, if it had a -1/-1 counter on it, put a -1/-1 counter on target creature.
         Effect effect = new BlowflyInfestationEffect();
         TriggeredAbility triggeredAbility = new DiesCreatureTriggeredAbility(effect, false, false, true);
         triggeredAbility.addTarget(new TargetCreaturePermanent());
         Condition condition = new BlowflyInfestationCondition();
-        this.addAbility(new ConditionalTriggeredAbility(triggeredAbility, condition, rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggeredAbility, condition, rule));
 
     }
 

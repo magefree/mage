@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class ApothecaryGeist extends CardImpl {
         
         // When Apothecary Geist enters the battlefield, if you control another Spirit, you gain 3 life.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3));
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "When {this} enters the battlefield, if you control another Spirit, you gain 3 life."));

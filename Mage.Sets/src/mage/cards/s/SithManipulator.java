@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HateCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToLibraryPermanentEffect;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class SithManipulator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Sith Manipulator enters the battlefield, return target creature to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()),
                 new InvertCondition(HateCondition.instance),
                 "When Sith Manipulator enters the battlefield, return target creature to its owner's hand");
@@ -39,7 +39,7 @@ public final class SithManipulator extends CardImpl {
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
 
         // <i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead.
-        ability = new ConditionalTriggeredAbility(
+        ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToLibraryPermanentEffect(true)),
                 HateCondition.instance,
                 "<i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead");

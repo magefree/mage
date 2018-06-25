@@ -8,7 +8,7 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -22,7 +22,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 
 /**
  *
@@ -40,7 +39,7 @@ public final class WeatherseedTotem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new WeatherseedTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}{G}{G}")));
 
         // When Weatherseed Totem is put into a graveyard from the battlefield, if it was a creature, return this card to its owner's hand.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()),
                 new WeatherseedTotemCondition(),
                 "When {this} is put into a graveyard from the battlefield, "

@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttackedThisTurnSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantBeCounteredControlledEffect;
@@ -60,7 +60,7 @@ public final class TaigamOjutaiMaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, new FilterStackObject(), Duration.WhileOnBattlefield)));
         
         // Whenever you cast an instant or sorcery spell from your hand, if Taigam, Ojutai Master attacked this turn, that spell gains rebound.
-        Ability ability = new ConditionalTriggeredAbility(new TaigamOjutaiMasterTriggeredAbility(),
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new TaigamOjutaiMasterTriggeredAbility(),
                 AttackedThisTurnSourceCondition.instance,
                 effectText);
         this.addAbility(ability, new AttackedThisTurnWatcher());

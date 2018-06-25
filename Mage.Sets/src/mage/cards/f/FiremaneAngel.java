@@ -9,7 +9,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -41,7 +41,7 @@ public final class FiremaneAngel extends CardImpl {
         // Firststrike
         this.addAbility(FirstStrikeAbility.getInstance());
         // At the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new GainLifeEffect(1), TargetController.YOU, true),
                 SourceOnBattlefieldOrGraveyardCondition.instance,
                 "At the beginning of your upkeep, if {this} is in your graveyard or on the battlefield, you may gain 1 life");
