@@ -99,7 +99,7 @@ class SkyriderPatrolReflexiveTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     public SkyriderPatrolReflexiveTriggeredAbility() {
-        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.OneUse, false);
+        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.OneUse, true);
         this.addEffect(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(),
                 Duration.EndOfTurn
