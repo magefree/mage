@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -55,6 +54,7 @@ public final class JaceTheLivingGuildpact extends CardImpl {
         // -8: Each player shuffles their hand and graveyard into their library. You draw seven cards.
         ability = new LoyaltyAbility(new ShuffleHandGraveyardAllEffect(), -8);
         ability.addEffect(new DrawCardSourceControllerEffect(7).setText("You draw seven cards"));
+        this.addAbility(ability);
 
     }
 
