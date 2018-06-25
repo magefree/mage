@@ -50,11 +50,11 @@ public final class SarkhanFireblood extends CardImpl {
                         new StaticValue(2),
                         new ConditionalSpellManaBuilder(filter),
                         false
-                )
+                ), 1
         ));
 
         // -7: Create four 5/5 red Dragon creature tokens with flying.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DragonToken2(), 4)));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DragonToken2(), 4), -7));
     }
 
     public SarkhanFireblood(final SarkhanFireblood card) {

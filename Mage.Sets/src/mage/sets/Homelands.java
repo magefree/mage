@@ -89,6 +89,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Dry Spell", "46a", Rarity.COMMON, DrySpell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dry Spell", "46b", Rarity.COMMON, DrySpell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dwarven Pony", 70, Rarity.RARE, mage.cards.d.DwarvenPony.class));
+        cards.add(new SetCardInfo("Dwarven Sea Clan", 71, Rarity.RARE, mage.cards.d.DwarvenSeaClan.class));
         cards.add(new SetCardInfo("Dwarven Trader", "72a", Rarity.COMMON, DwarvenTrader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dwarven Trader", "72b", Rarity.COMMON, DwarvenTrader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ebony Rhino", 106, Rarity.COMMON, mage.cards.e.EbonyRhino.class));
@@ -104,10 +105,13 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Funeral March", 48, Rarity.UNCOMMON, mage.cards.f.FuneralMarch.class));
         cards.add(new SetCardInfo("Ghost Hounds", 49, Rarity.UNCOMMON, mage.cards.g.GhostHounds.class));
         cards.add(new SetCardInfo("Giant Oyster", 35, Rarity.UNCOMMON, mage.cards.g.GiantOyster.class));
+        cards.add(new SetCardInfo("Giant Albatross", "27a", Rarity.COMMON, mage.cards.g.GiantAlbatross.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Giant Albatross", "27b", Rarity.COMMON, mage.cards.g.GiantAlbatross.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grandmother Sengir", 50, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
         cards.add(new SetCardInfo("Greater Werewolf", 51, Rarity.UNCOMMON, mage.cards.g.GreaterWerewolf.class));
         cards.add(new SetCardInfo("Hazduhr the Abbot", 8, Rarity.RARE, mage.cards.h.HazduhrTheAbbot.class));
         cards.add(new SetCardInfo("Headstone", 52, Rarity.COMMON, mage.cards.h.Headstone.class));
+        cards.add(new SetCardInfo("Heart Wolf", 75, Rarity.RARE, mage.cards.h.HeartWolf.class));
         cards.add(new SetCardInfo("Hungry Mist", "88a", Rarity.COMMON, mage.cards.h.HungryMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hungry Mist", "88b", Rarity.COMMON, mage.cards.h.HungryMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ihsan's Shade", 53, Rarity.UNCOMMON, mage.cards.i.IhsansShade.class));
@@ -115,6 +119,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Ironclaw Curse", 76, Rarity.RARE, mage.cards.i.IronclawCurse.class));
         cards.add(new SetCardInfo("Jinx", 29, Rarity.COMMON, mage.cards.j.Jinx.class));
         cards.add(new SetCardInfo("Joven", 77, Rarity.COMMON, mage.cards.j.Joven.class));
+        cards.add(new SetCardInfo("Joven's Ferrets", 89, Rarity.COMMON, mage.cards.j.JovensFerrets.class));
         cards.add(new SetCardInfo("Joven's Tools", 108, Rarity.UNCOMMON, mage.cards.j.JovensTools.class));
         cards.add(new SetCardInfo("Koskun Falls", 55, Rarity.RARE, mage.cards.k.KoskunFalls.class));
         cards.add(new SetCardInfo("Koskun Keep", 114, Rarity.UNCOMMON, mage.cards.k.KoskunKeep.class));
@@ -131,6 +136,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Decree", 34, Rarity.RARE, mage.cards.m.MysticDecree.class));
         cards.add(new SetCardInfo("Narwhal", 35, Rarity.RARE, mage.cards.n.Narwhal.class));
         cards.add(new SetCardInfo("Primal Order", 92, Rarity.RARE, mage.cards.p.PrimalOrder.class));
+        cards.add(new SetCardInfo("Prophecy", 11, Rarity.COMMON, mage.cards.p.Prophecy.class));
         cards.add(new SetCardInfo("Rashka the Slayer", 12, Rarity.RARE, mage.cards.r.RashkaTheSlayer.class));
         cards.add(new SetCardInfo("Reef Pirates", "36a", Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reef Pirates", "36b", Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
@@ -140,6 +146,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Root Spider", 94, Rarity.UNCOMMON, mage.cards.r.RootSpider.class));
         cards.add(new SetCardInfo("Roots", 95, Rarity.UNCOMMON, mage.cards.r.Roots.class));
         cards.add(new SetCardInfo("Roterothopter", 109, Rarity.COMMON, mage.cards.r.Roterothopter.class));
+        cards.add(new SetCardInfo("Rysorian Badger", 96, Rarity.RARE, mage.cards.r.RysorianBadger.class));
         cards.add(new SetCardInfo("Samite Alchemist", 117, Rarity.COMMON, mage.cards.s.SamiteAlchemist.class));
         cards.add(new SetCardInfo("Sea Sprite", 38, Rarity.UNCOMMON, mage.cards.s.SeaSprite.class));
         cards.add(new SetCardInfo("Sengir Autocrat", 56, Rarity.UNCOMMON, mage.cards.s.SengirAutocrat.class));

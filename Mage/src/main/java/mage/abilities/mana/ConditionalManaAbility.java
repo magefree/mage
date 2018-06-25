@@ -33,8 +33,6 @@ public class ConditionalManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        List<Mana> newNetMana = new ArrayList<>();
-        newNetMana.addAll(conditionalManaEffect.getNetMana(game, this));
-        return newNetMana;
+        return new ArrayList<>(conditionalManaEffect.getNetMana(game, this));
     }
 }

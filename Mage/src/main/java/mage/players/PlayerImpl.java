@@ -2647,6 +2647,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             available.addMana(manaAbilities, game);
         }
         for (Abilities<ActivatedManaAbilityImpl> manaAbilities : sourceWithCosts) {
+            available.removeDuplicated();
             available.addManaWithCost(manaAbilities, game);
         }
 

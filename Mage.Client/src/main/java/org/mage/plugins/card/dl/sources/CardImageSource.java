@@ -9,9 +9,9 @@ import org.mage.plugins.card.images.CardDownloadData;
  */
 public interface CardImageSource {
 
-    String generateURL(CardDownloadData card) throws Exception;
+    CardImageUrls generateURL(CardDownloadData card) throws Exception;
 
-    String generateTokenUrl(CardDownloadData card) throws Exception;
+    CardImageUrls generateTokenUrl(CardDownloadData card) throws Exception;
 
     String getNextHttpImageUrl();
 

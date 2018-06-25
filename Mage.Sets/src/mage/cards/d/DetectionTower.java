@@ -1,4 +1,4 @@
-package mage.cards.i;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -20,9 +20,9 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public final class IsolatedTower extends CardImpl {
+public final class DetectionTower extends CardImpl {
 
-    public IsolatedTower(UUID ownerId, CardSetInfo setInfo) {
+    public DetectionTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C}.
@@ -30,26 +30,26 @@ public final class IsolatedTower extends CardImpl {
 
         // {1}, {T}: Until end of turn, your opponents and creatures with hexproof they control can be the targets of spells and abilities you control as though they didn't have hexproof.
         Ability ability = new SimpleActivatedAbility(
-                new IsolatedTowerEffect(),
+                new DetectionTowerEffect(),
                 new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public IsolatedTower(final IsolatedTower card) {
+    public DetectionTower(final DetectionTower card) {
         super(card);
     }
 
     @Override
-    public IsolatedTower copy() {
-        return new IsolatedTower(this);
+    public DetectionTower copy() {
+        return new DetectionTower(this);
     }
 }
 
-class IsolatedTowerEffect extends AsThoughEffectImpl {
+class DetectionTowerEffect extends AsThoughEffectImpl {
 
-    public IsolatedTowerEffect() {
+    public DetectionTowerEffect() {
         super(AsThoughEffectType.HEXPROOF, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, your opponents and "
                 + "creatures with hexproof they control "
@@ -57,7 +57,7 @@ class IsolatedTowerEffect extends AsThoughEffectImpl {
                 + "you control as though they didn't have hexproof";
     }
 
-    public IsolatedTowerEffect(final IsolatedTowerEffect effect) {
+    public DetectionTowerEffect(final DetectionTowerEffect effect) {
         super(effect);
     }
 
@@ -67,8 +67,8 @@ class IsolatedTowerEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public IsolatedTowerEffect copy() {
-        return new IsolatedTowerEffect(this);
+    public DetectionTowerEffect copy() {
+        return new DetectionTowerEffect(this);
     }
 
     @Override

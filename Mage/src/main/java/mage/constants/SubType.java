@@ -462,6 +462,16 @@ public enum SubType {
         return subTypeSet;
     }
 
+    public static Set<SubType> getArtifactTypes(boolean withCustomSets) {
+        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
+        for (SubType subType : values()) {
+            if (subType.getSubTypeSet() == SubTypeSet.ArtifactType && (withCustomSets || !subType.customSet)) {
+                subTypes.add(subType);
+            }
+        }
+        return subTypes;
+    }
+
     public static Set<SubType> getPlaneswalkerTypes(boolean withCustomSets) {
         Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
         for (SubType subType : values()) {

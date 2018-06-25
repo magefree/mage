@@ -62,7 +62,7 @@ class BurnAwayDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent() && zEvent.getTarget() != null && zEvent.getTargetId().equals(getTargets().getFirstTarget())) {
-            this.getTargets().clear(); // else spell fizzels because target creature died
+            this.getTargets().clear(); // else spell fizzles because target creature died
             Target target = new TargetPlayer();
             target.add(zEvent.getTarget().getControllerId(), game);
             this.addTarget(target);

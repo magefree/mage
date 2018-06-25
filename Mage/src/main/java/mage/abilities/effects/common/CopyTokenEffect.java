@@ -5,10 +5,10 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 public class CopyTokenEffect extends ContinuousEffectImpl {
+
     protected Token token;
 
     public CopyTokenEffect(Token token) {
@@ -28,19 +28,19 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         permanent.setName(token.getName());
         permanent.getColor(game).setColor(token.getColor(game));
         permanent.getCardType().clear();
-        for (CardType type: token.getCardType()) {
+        for (CardType type : token.getCardType()) {
             permanent.addCardType(type);
         }
         permanent.getSubtype(game).clear();
-        for (SubType type: token.getSubtype(game)) {
+        for (SubType type : token.getSubtype(game)) {
             permanent.getSubtype(game).add(type);
         }
         permanent.getSuperType().clear();
-        for (SuperType type: token.getSuperType()) {
+        for (SuperType type : token.getSuperType()) {
             permanent.addSuperType(type);
         }
         permanent.getAbilities().clear();
-        for (Ability ability: token.getAbilities()) {
+        for (Ability ability : token.getAbilities()) {
             permanent.addAbility(ability, game);
         }
         permanent.getPower().setValue(token.getPower().getValue());

@@ -2,13 +2,11 @@
 package org.mage.plugins.card.dl.sources;
 
 import java.util.Locale;
+
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
  * Site was shutdown by wizards Feb. 2015
- *
- *
- *
  *
  * @author LevelX2
  */
@@ -32,7 +30,7 @@ public enum MtgImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
@@ -59,11 +57,11 @@ public enum MtgImageSource implements CardImageSource {
         }
         url.append(".jpg");
 
-        return url.toString();
+        return new CardImageUrls(url.toString());
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) {
         return null;
     }
 

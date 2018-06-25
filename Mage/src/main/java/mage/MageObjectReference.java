@@ -1,4 +1,3 @@
-
 package mage;
 
 import java.io.Serializable;
@@ -24,6 +23,11 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     private final int zoneChangeCounter;
 
     public MageObjectReference(MageObject mageObject, Game game) {
+        if (mageObject == null) {
+            this.sourceId = null;
+            this.zoneChangeCounter = -1;
+            return;
+        }
         this.sourceId = mageObject.getId();
         this.zoneChangeCounter = mageObject.getZoneChangeCounter(game);
     }

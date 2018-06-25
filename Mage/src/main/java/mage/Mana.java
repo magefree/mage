@@ -1051,7 +1051,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     /**
      * Returns if this {@link Mana} object has more than or equal values of mana
-     * as the passed in {@link Mana} object.
+     * as the passed in {@link Mana} object. Ignores {Any} mana to prevent
+     * endless iterations.
      *
      * @param mana the mana to compare with
      * @return if this object has more than or equal mana to the passed in
@@ -1090,13 +1091,44 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             moreMana = mana1;
             lessMana = mana2;
         }
-        if (lessMana.getWhite() > moreMana.getWhite()
-                || lessMana.getRed() > moreMana.getRed()
-                || lessMana.getGreen() > moreMana.getGreen()
-                || lessMana.getBlue() > moreMana.getBlue()
-                || lessMana.getBlack() > moreMana.getBlack()
-                || lessMana.getColorless() > moreMana.getColorless()
-                || lessMana.getAny() > moreMana.getAny()) {
+        int anyDiff = mana2.getAny() - mana1.getAny();
+        if (lessMana.getWhite() > moreMana.getWhite()) {
+            anyDiff -= lessMana.getWhite() - moreMana.getWhite();
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+        if (lessMana.getRed() > moreMana.getRed()) {
+            anyDiff -= lessMana.getRed() - moreMana.getRed();
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+        if (lessMana.getGreen() > moreMana.getGreen()) {
+            anyDiff -= lessMana.getGreen() - moreMana.getGreen();
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+        if (lessMana.getBlue() > moreMana.getBlue()) {
+            anyDiff -= lessMana.getBlue() - moreMana.getBlue();
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+        if (lessMana.getBlack() > moreMana.getBlack()) {
+            anyDiff -= lessMana.getBlack() - moreMana.getBlack();
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+        if (lessMana.getColorless() > moreMana.getColorless()) {
+            anyDiff -= lessMana.getColorless() - moreMana.getColorless();
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+        if (lessMana.getAny() > moreMana.getAny()) {
             return null;
         }
         return moreMana;

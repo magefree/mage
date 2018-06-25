@@ -48,8 +48,8 @@ public class Standard extends Constructed {
             if ((set.getSetType() == SetType.CORE
                     || set.getSetType() == SetType.EXPANSION
                     || set.getSetType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL)
-                    && (!set.getReleaseDate().before(earliestDate)
-                    && !set.getReleaseDate().after(current.getTime()))) {
+                    && !set.getReleaseDate().before(earliestDate)) {
+//                    && !set.getReleaseDate().after(current.getTime()))) {
                 setCodes.add(set.getCode());
             }
         }
