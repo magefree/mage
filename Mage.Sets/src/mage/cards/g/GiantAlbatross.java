@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -11,20 +9,19 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.Watcher;
-import mage.watchers.common.DealtDamageToWatcher;
-import mage.watchers.common.PlayerDamagedBySourceWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
