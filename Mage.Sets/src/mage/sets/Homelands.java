@@ -116,6 +116,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Ironclaw Curse", 76, Rarity.RARE, mage.cards.i.IronclawCurse.class));
         cards.add(new SetCardInfo("Jinx", 29, Rarity.COMMON, mage.cards.j.Jinx.class));
         cards.add(new SetCardInfo("Joven", 77, Rarity.COMMON, mage.cards.j.Joven.class));
+        cards.add(new SetCardInfo("Joven's Ferrets", 89, Rarity.COMMON, mage.cards.j.JovensFerrets.class));
         cards.add(new SetCardInfo("Joven's Tools", 108, Rarity.UNCOMMON, mage.cards.j.JovensTools.class));
         cards.add(new SetCardInfo("Koskun Falls", 55, Rarity.RARE, mage.cards.k.KoskunFalls.class));
         cards.add(new SetCardInfo("Koskun Keep", 114, Rarity.UNCOMMON, mage.cards.k.KoskunKeep.class));
