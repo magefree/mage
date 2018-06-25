@@ -159,7 +159,10 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
             Where where = qb.where();
-            where.and(where.not().not().like("supertypes", '%' + SuperType.BASIC.name() + '%'), where.like("types", '%' + CardType.LAND.name() + '%'));
+            where.and(
+                    where.not().like("supertypes", '%' + SuperType.BASIC.name() + '%'),
+                    where.like("types", '%' + CardType.LAND.name() + '%')
+            );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
@@ -252,7 +255,10 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
             Where where = qb.where();
-            where.and(where.not().like("types", '%' + CardType.CREATURE.name() + '%'), where.not().like("types", '%' + CardType.LAND.name() + '%'));
+            where.and(
+                    where.not().like("types", '%' + CardType.CREATURE.name() + '%'),
+                    where.not().like("types", '%' + CardType.LAND.name() + '%')
+            );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
@@ -275,7 +281,10 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
             Where where = qb.where();
-            where.and(where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'), where.not().like("types", '%' + CardType.LAND.name() + '%'));
+            where.and(
+                    where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'),
+                    where.not().like("types", '%' + CardType.LAND.name() + '%')
+            );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
