@@ -154,6 +154,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Sengir Bats", "57b", Rarity.COMMON, SengirBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serra Aviary", 14, Rarity.RARE, mage.cards.s.SerraAviary.class));
         cards.add(new SetCardInfo("Serra Bestiary", 15, Rarity.UNCOMMON, mage.cards.s.SerraBestiary.class));
+        cards.add(new SetCardInfo("Serra Inquisitors", 16, Rarity.UNCOMMON, mage.cards.s.SerraInquisitors.class));
         cards.add(new SetCardInfo("Serra Paladin", 17, Rarity.COMMON, mage.cards.s.SerraPaladin.class));
         cards.add(new SetCardInfo("Serrated Arrows", 110, Rarity.COMMON, mage.cards.s.SerratedArrows.class));
         cards.add(new SetCardInfo("Shrink", "97a", Rarity.COMMON, mage.cards.s.Shrink.class, NON_FULL_USE_VARIOUS));
