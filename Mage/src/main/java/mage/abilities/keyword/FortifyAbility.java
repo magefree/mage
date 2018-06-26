@@ -3,6 +3,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.FortifyEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TimingRule;
@@ -36,19 +37,9 @@ public class FortifyAbility extends ActivatedAbilityImpl {
     }
 
     public FortifyAbility(Outcome outcome, Cost cost, Target target) {
-        super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Fortify"), cost);
+        super(Zone.BATTLEFIELD, new FortifyEffect(outcome), cost);
         this.addTarget(target);
         this.timing = TimingRule.SORCERY;
-    }
-
-    @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null && permanent.hasSubtype(SubType.FORTIFICATION, game) && !permanent.isCreature() && !permanent.isLand()) {
-            return super.canActivate(playerId, game);
-        } else {
-            return ActivationStatus.getFalse();
-        }
     }
 
     public FortifyAbility(final FortifyAbility ability) {
