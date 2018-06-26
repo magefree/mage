@@ -1,9 +1,9 @@
-
 package org.mage.test.cards.mana;
 
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -48,6 +48,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     }
 
     @Test
+    @Ignore
     public void testWorkingWithReflectingPool() {
         addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1); // can give {C] or {any} mana ({any} with restrictions)
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // must give {C} or {any} mana from the Cavern, but without restrictions
