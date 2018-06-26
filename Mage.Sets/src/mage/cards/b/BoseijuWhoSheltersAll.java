@@ -13,11 +13,10 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -42,9 +41,9 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
         ability.addCost(new PayLifeCost(2));
         ability.getEffects().get(0).setText("Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered");
-        this.addAbility(ability);
+        this.addAbility(ability, new BoseijuWhoSheltersAllWatcher(ability.getOriginalId()));
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoseijuWhoSheltersAllCantCounterEffect()), new BoseijuWhoSheltersAllWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoseijuWhoSheltersAllCantCounterEffect()));
     }
 
     public BoseijuWhoSheltersAll(final BoseijuWhoSheltersAll card) {
@@ -59,14 +58,18 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
 
 class BoseijuWhoSheltersAllWatcher extends Watcher {
 
-    public List<UUID> spells = new ArrayList<>();
+    private List<UUID> spells = new ArrayList<>();
+    private final String originalId;
 
-    public BoseijuWhoSheltersAllWatcher() {
-        super(BoseijuWhoSheltersAllWatcher.class.getSimpleName(), WatcherScope.GAME);
+    public BoseijuWhoSheltersAllWatcher(UUID originalId) {
+        super(BoseijuWhoSheltersAllWatcher.class.getSimpleName(), WatcherScope.CARD);
+        this.originalId = originalId.toString();
     }
 
     public BoseijuWhoSheltersAllWatcher(final BoseijuWhoSheltersAllWatcher watcher) {
         super(watcher);
+        this.spells.addAll(watcher.spells);
+        this.originalId = watcher.originalId;
     }
 
     @Override
@@ -77,12 +80,17 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            MageObject object = game.getObject(event.getSourceId());
-            // TODO: Replace identification by name by better method that also works if ability is copied from other land with other name
-            if (object != null && object.getName().equals("Boseiju, Who Shelters All") && event.getFlag()) {
-                spells.add(event.getTargetId());
+            if (event.getData() != null && event.getData().equals(originalId)) {
+                Card spell = game.getCard(event.getTargetId());
+                if (spell != null && (spell.isInstant() || spell.isSorcery())) {
+                    spells.add(event.getTargetId());
+                }
             }
         }
+    }
+
+    public boolean spellCantBeCountered(UUID spellId) {
+        return spells.contains(spellId);
     }
 
     @Override
@@ -94,10 +102,8 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
 
 class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private static final FilterCard filter = new FilterInstantOrSorceryCard();
-
     public BoseijuWhoSheltersAllCantCounterEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.EndOfGame, Outcome.Benefit);
         staticText = null;
     }
 
@@ -119,7 +125,7 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null) {
-            return "This spell can't be countered (" + sourceObject.getName() + ").";
+            return "This spell can't be countered because mana from " + sourceObject.getName() + " was spent to cast it.";
         }
         return null;
     }
@@ -131,13 +137,8 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get(BoseijuWhoSheltersAllWatcher.class.getSimpleName());
+        BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get(BoseijuWhoSheltersAllWatcher.class.getSimpleName(), source.getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && watcher.spells.contains(spell.getId())) {
-            if (filter.match(spell.getCard(), game)) {
-                return true;
-            }
-        }
-        return false;
+        return spell != null && watcher != null && watcher.spellCantBeCountered(spell.getId());
     }
 }
