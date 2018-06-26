@@ -27,7 +27,7 @@ public final class DwarvenSoldier extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Dwarven Soldier blocks or becomes blocked by one or more Orcs, Dwarven Soldier gets +0/+2 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), new FilterCreaturePermanent(SubType.ORC, "Orc creature"), false));
+        this.addAbility(new BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), new FilterCreaturePermanent(SubType.ORC, "Orcs"), false));
     }
 
     public DwarvenSoldier(final DwarvenSoldier card) {
