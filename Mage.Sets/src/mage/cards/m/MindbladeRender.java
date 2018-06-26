@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -12,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -80,7 +80,7 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                && event.getFlag()
+                && ((DamagedPlayerEvent) event).isCombatDamage()
                 && controller.hasOpponent(event.getTargetId(), game)
                 && damager.hasSubtype(SubType.WARRIOR, game)
                 && !usedForCombatDamageStep) {
