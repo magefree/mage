@@ -61,7 +61,7 @@ public final class VivienReid extends CardImpl {
         ));
 
         // -3: Destroy target artifact, enchantment, or creature with flying.
-        Ability ability = new LoyaltyAbility(new DestroyTargetEffect());
+        Ability ability = new LoyaltyAbility(new DestroyTargetEffect(), -3);
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
 
