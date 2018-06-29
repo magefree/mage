@@ -1470,7 +1470,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected boolean isActivePlayer(Game game) {
-        return game.getActivePlayerId().equals(this.playerId);
+        return game.isActivePlayer(this.playerId);
     }
 
     @Override

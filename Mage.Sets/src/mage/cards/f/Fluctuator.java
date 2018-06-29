@@ -43,7 +43,7 @@ public final class Fluctuator extends CardImpl {
 
 class FluctuatorEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Cycling abilities you activate cost you up to {2} less to activate";
+    private static final String effectText = "Cycling abilities you activate cost up to {2} less to activate";
 
     public FluctuatorEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);

@@ -180,7 +180,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             Player player = game.getPlayer(startingControllerId);
             if (player != null) {
                 if (player.isInGame()) {
-                    return game.getActivePlayerId().equals(startingControllerId) && game.getTurnNum() != startingTurn;
+                    return game.isActivePlayer(startingControllerId) && game.getTurnNum() != startingTurn;
                 }
                 return player.hasReachedNextTurnAfterLeaving();
             }

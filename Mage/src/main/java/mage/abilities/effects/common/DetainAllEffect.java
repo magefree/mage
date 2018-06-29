@@ -77,7 +77,7 @@ class DetainAllRestrictionEffect extends RestrictionEffect {
         for (FixedTarget fixedTarget : this.detainedObjects) {
             Permanent permanent = game.getPermanent(fixedTarget.getFirst(game, source));
             if (permanent != null) {
-                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(), "[Detained]", game);
+                permanent.addInfo("detain" + getId(), "[Detained]", game);
             }
         }
     }
@@ -85,11 +85,11 @@ class DetainAllRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE) {
-            if (game.getActivePlayerId().equals(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
+            if (game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
                 for (FixedTarget fixedTarget : this.detainedObjects) {
                     Permanent permanent = game.getPermanent(fixedTarget.getFirst(game, source));
                     if (permanent != null) {
-                        permanent.addInfo(new StringBuilder("detain").append(getId()).toString(), "", game);
+                        permanent.addInfo("detain" + getId(), "", game);
                     }
                 }
                 return true;

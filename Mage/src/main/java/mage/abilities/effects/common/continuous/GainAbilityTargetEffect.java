@@ -88,7 +88,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             return true;
         }
         if (durationPhaseStep != null && durationPhaseStep == game.getPhase().getStep().getType()) {
-            if (!sameStep && game.getActivePlayerId().equals(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
+            if (!sameStep && game.isActivePlayer(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
                 return true;
             }
         } else {

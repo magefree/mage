@@ -44,7 +44,7 @@ public class PopulateEffect extends OneShotEffect {
 
     public PopulateEffect(String prefixText) {
         super(Outcome.Copy);
-        this.staticText = (!prefixText.isEmpty() ? prefixText + " p" : "P") + "opulate <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>";
+        this.staticText = (!prefixText.isEmpty() ? prefixText + " p" : "P") + "opulate <i>(Create a token that's a copy of a creature token you control.)</i>";
     }
 
     public PopulateEffect(final PopulateEffect effect) {

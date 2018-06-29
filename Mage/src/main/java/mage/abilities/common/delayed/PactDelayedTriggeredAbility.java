@@ -36,7 +36,7 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getActivePlayerId().equals(this.getControllerId());
+        return game.isActivePlayer(this.getControllerId());
     }
 
     

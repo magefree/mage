@@ -17,7 +17,7 @@ public class ControllerIsActivePlayerPredicate implements Predicate<Permanent> {
         if(input.getControllerId() == null){
             return false;
         }
-        return game.getActivePlayerId().equals(input.getControllerId());
+        return game.isActivePlayer(input.getControllerId());
     }
 
     @Override

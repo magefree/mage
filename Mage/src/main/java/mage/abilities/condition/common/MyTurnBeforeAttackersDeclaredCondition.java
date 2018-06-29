@@ -16,7 +16,7 @@ public enum  MyTurnBeforeAttackersDeclaredCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getActivePlayerId().equals(source.getControllerId())) {
+        if (game.isActivePlayer(source.getControllerId())) {
             TurnPhase turnPhase = game.getTurn().getPhase().getType();
             if (turnPhase == TurnPhase.BEGINNING || turnPhase == TurnPhase.PRECOMBAT_MAIN) {
                 return true;
