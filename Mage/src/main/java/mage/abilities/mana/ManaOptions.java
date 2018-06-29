@@ -154,7 +154,7 @@ public class ManaOptions extends ArrayList<Mana> {
                         }
                     }
                 }
-            } else if (abilities.size() > 1) {
+            } else {
                 //perform a union of all existing options and the new options
                 List<Mana> copy = copy();
                 this.clear();
@@ -227,7 +227,7 @@ public class ManaOptions extends ArrayList<Mana> {
             if (options.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
                 addMana(options.get(0));
-            } else if (options.size() > 1) {
+            } else {
                 //perform a union of all existing options and the new options
                 List<Mana> copy = copy();
                 this.clear();

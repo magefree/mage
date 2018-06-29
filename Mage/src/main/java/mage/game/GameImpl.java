@@ -2450,7 +2450,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public boolean canPlaySorcery(UUID playerId) {
-        return isMainPhase() && getActivePlayerId().equals(playerId) && getStack().isEmpty();
+        return isMainPhase() && isActivePlayer(playerId) && getStack().isEmpty();
     }
 
     /**
@@ -2594,7 +2594,7 @@ public abstract class GameImpl implements Game, Serializable {
         // If the current monarch leaves the game. When that happens, the player whose turn it is becomes the monarch.
         // If the monarch leaves the game on their turn, the next player in turn order becomes the monarch.
         if (playerId.equals(getMonarchId())) {
-            if (!getActivePlayerId().equals(playerId)) {
+            if (!isActivePlayer(playerId)) {
                 setMonarchId(null, getActivePlayerId());
             } else {
                 Player nextPlayer = getPlayerList().getNext(this);

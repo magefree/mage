@@ -254,7 +254,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             } else if (stepFinished) {
                 logger.debug("Step finished");
                 int testScore = GameStateEvaluator2.evaluate(playerId, game);
-                if (game.getActivePlayerId().equals(playerId)) {
+                if (game.isActivePlayer(playerId)) {
                     if (testScore < currentScore) {
                         // if score at end of step is worse than original score don't check further
                         //logger.debug("Add Action -- abandoning check, no immediate benefit");

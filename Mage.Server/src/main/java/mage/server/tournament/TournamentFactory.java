@@ -40,7 +40,7 @@ public enum TournamentFactory {
                 Map<String,Integer> setInfo = new LinkedHashMap<>();
                 for (String setCode: options.getLimitedOptions().getSetCodes()) {
                     tournament.getSets().add(Sets.findSet(setCode));
-                    int count = setInfo.containsKey(setCode) ? setInfo.get(setCode) : 0;
+                    int count = setInfo.getOrDefault(setCode, 0);
                     setInfo.put(setCode, count + 1);
                 }
                 tournament.getOptions().getLimitedOptions().setNumberBoosters(tournament.getTournamentType().getNumBoosters());

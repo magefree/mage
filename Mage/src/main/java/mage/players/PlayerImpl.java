@@ -2956,9 +2956,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // Other activated abilities
                 LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
                 getOtherUseableActivatedAbilities(card, Zone.GRAVEYARD, game, useable);
-                for (Ability ability : useable.values()) {
-                    playable.add(ability);
-                }
+                playable.addAll(useable.values());
             }
             for (ExileZone exile : game.getExile().getExileZones()) {
                 for (Card card : exile.getCards(game)) {

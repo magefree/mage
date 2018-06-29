@@ -76,7 +76,7 @@ public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
     }
 
     public List<Permanent> getPermanentsEnteringOnPlayersLastTurn(Game game, UUID playerId) {
-        if (game.getActivePlayerId().equals(playerId)) {
+        if (game.isActivePlayer(playerId)) {
             return enteringBattlefield.get(playerId);
         }
         return enteringBattlefieldLastTurn.get(playerId);

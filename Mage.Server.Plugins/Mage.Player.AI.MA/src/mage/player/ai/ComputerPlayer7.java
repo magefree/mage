@@ -54,7 +54,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case PRECOMBAT_MAIN:
-                if (game.getActivePlayerId().equals(playerId)) {
+                if (game.isActivePlayer(playerId)) {
                     printOutState(game);
                     if (actions.isEmpty()) {
                         logger.info("Sim Calculate pre combat actions ----------------------------------------------------- ");

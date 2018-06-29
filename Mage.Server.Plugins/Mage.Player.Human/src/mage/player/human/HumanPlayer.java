@@ -1943,7 +1943,7 @@ public class HumanPlayer extends PlayerImpl {
         if (userData.confirmEmptyManaPool()
                 && game.getStack().isEmpty() && getManaPool().count() > 0) {
             String activePlayerText;
-            if (game.getActivePlayerId().equals(playerId)) {
+            if (game.isActivePlayer(playerId)) {
                 activePlayerText = "Your turn";
             } else {
                 activePlayerText = game.getPlayer(game.getActivePlayerId()).getName() + "'s turn";
