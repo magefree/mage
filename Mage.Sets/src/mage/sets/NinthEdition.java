@@ -57,6 +57,7 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Imp", 116, Rarity.COMMON, mage.cards.b.BogImp.class));
         cards.add(new SetCardInfo("Bog Wraith", 117, Rarity.UNCOMMON, mage.cards.b.BogWraith.class));
         cards.add(new SetCardInfo("Boiling Seas", 178, Rarity.UNCOMMON, mage.cards.b.BoilingSeas.class));
+        cards.add(new SetCardInfo("Booby Trap", 289, Rarity.RARE, mage.cards.b.BoobyTrap.class));
         cards.add(new SetCardInfo("Boomerang", 66, Rarity.COMMON, mage.cards.b.Boomerang.class));
         cards.add(new SetCardInfo("Bottle Gnomes", 290, Rarity.UNCOMMON, mage.cards.b.BottleGnomes.class));
         cards.add(new SetCardInfo("Brushland", 319, Rarity.RARE, mage.cards.b.Brushland.class));
