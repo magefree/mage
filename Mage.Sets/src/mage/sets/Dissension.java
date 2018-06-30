@@ -38,6 +38,7 @@ public final class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Azorius First-Wing", 105, Rarity.COMMON, mage.cards.a.AzoriusFirstWing.class));
         cards.add(new SetCardInfo("Azorius Guildmage", 141, Rarity.UNCOMMON, mage.cards.a.AzoriusGuildmage.class));
         cards.add(new SetCardInfo("Azorius Herald", 2, Rarity.UNCOMMON, mage.cards.a.AzoriusHerald.class));
+        cards.add(new SetCardInfo("Azorius Ploy", 106, Rarity.UNCOMMON, mage.cards.a.AzoriusPloy.class));
         cards.add(new SetCardInfo("Azorius Signet", 159, Rarity.COMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Beacon Hawk", 3, Rarity.COMMON, mage.cards.b.BeaconHawk.class));
         cards.add(new SetCardInfo("Biomantic Mastery", 142, Rarity.RARE, mage.cards.b.BiomanticMastery.class));
