@@ -44,7 +44,7 @@ public final class MuseVessel extends CardImpl {
 
         // {1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
         SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new MuseVesselMayPlayExiledEffect(), new ManaCostsImpl("{1}"));
-        playAbility.addTarget(new TargetCardInMuseVesselExile(this.getId()));
+        playAbility.addTarget(new TargetCardInMuseVesselExile());
         this.addAbility(playAbility);
     }
 
@@ -99,6 +99,7 @@ class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
 
     public MuseVesselMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        this.staticText = "Choose a card exiled with {this}. You may play that card this turn";
     }
 
     public MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
@@ -125,8 +126,8 @@ class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
 
 class TargetCardInMuseVesselExile extends TargetCardInExile {
 
-    public TargetCardInMuseVesselExile(UUID cardId) {
-        super(1, 1, new FilterCard("card exiled with {this}"), null);
+    public TargetCardInMuseVesselExile() {
+        super(1, 1, new FilterCard("card exiled with Muse Vessel"), null);
     }
 
     public TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
