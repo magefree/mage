@@ -40,11 +40,10 @@ public final class RakdosAugermage extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {tap}: Reveal your hand and discard a card of target opponent’s choice. Then that player reveals their hand and discards a card of your choice. Activate this ability only any time you could cast a sorcery.
-        ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new RevealHandSourceControllerEffect(), new TapSourceCost());
-        ability.addEffect(new RakdosAugermageEffect());
-        ability.addEffect(new RevealHandTargetEffect());
+        ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new RakdosAugermageEffect(), new TapSourceCost());
         ability.addEffect(new DiscardCardYouChooseTargetEffect());
         ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
     public RakdosAugermage(final RakdosAugermage card) {
@@ -61,7 +60,7 @@ class RakdosAugermageEffect extends OneShotEffect {
 
     public RakdosAugermageEffect() {
         super(Outcome.Discard);
-        staticText = "discard a card of target opponent’s choice";
+        staticText = "reveal your hand and discard a card of target opponent’s choice";
     }
 
     public RakdosAugermageEffect(final RakdosAugermageEffect effect) {
@@ -76,7 +75,7 @@ class RakdosAugermageEffect extends OneShotEffect {
         if (player != null && controller != null) {
             Cards revealedCards = new CardsImpl();
             revealedCards.addAll(controller.getHand());
-            player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
+            player.revealCards((sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ") (" : "Discard (")+controller.getName()+")", revealedCards, game);
             TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
             if (player.choose(Outcome.Benefit, revealedCards, target, game)) {
                 Card card = revealedCards.get(target.getFirstTarget(), game);
