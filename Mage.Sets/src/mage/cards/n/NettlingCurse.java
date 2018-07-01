@@ -40,7 +40,7 @@ public final class NettlingCurse extends CardImpl {
         this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(3)));
 
         // {1}{R}: Enchanted creature attacks this turn if able.
-        this.addAbility(new SimpleActivatedAbility(new AttacksIfAbleAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new AttacksIfAbleAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA).setText("Enchanted creature attacks this turn if able."), new ManaCostsImpl("{1}{R}")));
     }
 
     public NettlingCurse(final NettlingCurse card) {
