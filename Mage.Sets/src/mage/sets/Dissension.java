@@ -131,6 +131,7 @@ public final class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Pure // Simple", 154, Rarity.UNCOMMON, mage.cards.p.PureSimple.class));
         cards.add(new SetCardInfo("Ragamuffyn", 51, Rarity.UNCOMMON, mage.cards.r.Ragamuffyn.class));
         cards.add(new SetCardInfo("Rain of Gore", 126, Rarity.RARE, mage.cards.r.RainOfGore.class));
+        cards.add(new SetCardInfo("Rakdos Augermage", 127, Rarity.RARE, mage.cards.r.RakdosAugermage.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 178, Rarity.COMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Rakdos Guildmage", 145, Rarity.UNCOMMON, mage.cards.r.RakdosGuildmage.class));
         cards.add(new SetCardInfo("Rakdos Ickspitter", 128, Rarity.COMMON, mage.cards.r.RakdosIckspitter.class));
