@@ -73,6 +73,7 @@ public final class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Entropic Eidolon", 45, Rarity.COMMON, mage.cards.e.EntropicEidolon.class));
         cards.add(new SetCardInfo("Evolution Vat", 161, Rarity.RARE, mage.cards.e.EvolutionVat.class));
         cards.add(new SetCardInfo("Experiment Kraj", 110, Rarity.RARE, mage.cards.e.ExperimentKraj.class));
+        cards.add(new SetCardInfo("Fertile Imagination", 84, Rarity.UNCOMMON, mage.cards.f.FertileImagination.class));
         cards.add(new SetCardInfo("Flame-Kin War Scout", 61, Rarity.UNCOMMON, mage.cards.f.FlameKinWarScout.class));
         cards.add(new SetCardInfo("Flaring Flame-Kin", 62, Rarity.UNCOMMON, mage.cards.f.FlaringFlameKin.class));
         cards.add(new SetCardInfo("Freewind Equenaut", 9, Rarity.COMMON, mage.cards.f.FreewindEquenaut.class));
