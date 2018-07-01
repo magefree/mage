@@ -36,7 +36,7 @@ public final class Nightcreep extends CardImpl {
         
 
         // Until end of turn, all creatures become black and all lands become Swamps.
-        this.getSpellAbility().addEffect(new BecomesColorAllEffect(ObjectColor.BLACK, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true, "Until end of turn, all creatures become black and"));
+        this.getSpellAbility().addEffect(new BecomesColorAllEffect(ObjectColor.BLACK, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true, "Until end of turn, all creatures become black and all lands become Swamps"));
         this.getSpellAbility().addEffect(new NightcreepEffect());
     }
 
@@ -54,6 +54,7 @@ class NightcreepEffect extends ContinuousEffectImpl {
 
     public NightcreepEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
+        this.staticText = "";
     }
 
     public NightcreepEffect(NightcreepEffect effect) {
