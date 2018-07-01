@@ -75,6 +75,7 @@ public final class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Experiment Kraj", 110, Rarity.RARE, mage.cards.e.ExperimentKraj.class));
         cards.add(new SetCardInfo("Flame-Kin War Scout", 61, Rarity.UNCOMMON, mage.cards.f.FlameKinWarScout.class));
         cards.add(new SetCardInfo("Flaring Flame-Kin", 62, Rarity.UNCOMMON, mage.cards.f.FlaringFlameKin.class));
+        cards.add(new SetCardInfo("Flash Foliage", 85, Rarity.UNCOMMON, mage.cards.f.FlashFoliage.class));
         cards.add(new SetCardInfo("Freewind Equenaut", 9, Rarity.COMMON, mage.cards.f.FreewindEquenaut.class));
         cards.add(new SetCardInfo("Ghost Quarter", 173, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
         cards.add(new SetCardInfo("Gnat Alley Creeper", 63, Rarity.UNCOMMON, mage.cards.g.GnatAlleyCreeper.class));
