@@ -1,9 +1,9 @@
-
-package mage.cards.b;
+package mage.cards.f;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -16,34 +16,36 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.permanent.token.SaprolingToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author TheElk801
+ * @author noahg
  */
-public final class BloodOath extends CardImpl {
+public final class FertileImagination extends CardImpl {
 
-    public BloodOath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
+    public FertileImagination(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
+        
 
-        // Choose a card type. Target opponent reveals their hand. Blood Oath deals 3 damage to that player for each card of the chosen type revealed this way.
-        this.getSpellAbility().addEffect(new BloodOathEffect());
+        // Choose a card type. Target opponent reveals their hand. Create two 1/1 green Saproling creature tokens for each card of the chosen type revealed this way.
+        this.getSpellAbility().addEffect(new FertileImaginationEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public BloodOath(final BloodOath card) {
+    public FertileImagination(final FertileImagination card) {
         super(card);
     }
 
     @Override
-    public BloodOath copy() {
-        return new BloodOath(this);
+    public FertileImagination copy() {
+        return new FertileImagination(this);
     }
 }
 
-class BloodOathEffect extends OneShotEffect {
+class FertileImaginationEffect extends OneShotEffect {
 
     private static final Set<String> choice = new LinkedHashSet<>();
 
@@ -58,18 +60,18 @@ class BloodOathEffect extends OneShotEffect {
         choice.add(CardType.TRIBAL.toString());
     }
 
-    public BloodOathEffect() {
+    public FertileImaginationEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose a card type. Target opponent reveals their hand. {this} deals 3 damage to that player for each card of the chosen type revealed this way";
+        staticText = "Choose a card type. Target opponent reveals their hand. Create two 1/1 green Saproling creature tokens for each card of the chosen type revealed this way";
     }
 
-    public BloodOathEffect(final BloodOathEffect effect) {
+    public FertileImaginationEffect(final FertileImaginationEffect effect) {
         super(effect);
     }
 
     @Override
-    public BloodOathEffect copy() {
-        return new BloodOathEffect(this);
+    public FertileImaginationEffect copy() {
+        return new FertileImaginationEffect(this);
     }
 
     @Override
@@ -103,16 +105,17 @@ class BloodOathEffect extends OneShotEffect {
                 }
                 if (type != null) {
                     Cards hand = opponent.getHand();
+                    SaprolingToken saprolingToken = new SaprolingToken();
                     opponent.revealCards(sourceObject.getIdName(), hand, game);
                     Set<Card> cards = hand.getCards(game);
-                    int damageToDeal = 0;
+                    int tokensToMake = 0;
                     for (Card card : cards) {
                         if (card != null && card.getCardType().contains(type)) {
-                            damageToDeal += 3;
+                            tokensToMake += 2;
                         }
                     }
-                    game.informPlayers(sourceObject.getLogName() + " deals " + (damageToDeal == 0 ? "no" : "" + damageToDeal) + " damage to " + opponent.getLogName());
-                    opponent.damage(damageToDeal, source.getSourceId(), game, false, true);
+                    game.informPlayers(sourceObject.getLogName() + " creates " + (tokensToMake == 0 ? "no" : "" + tokensToMake) + " 1/1 green Saproling creature tokens.");
+                    saprolingToken.putOntoBattlefield(tokensToMake, game, source.getId(), source.getControllerId());
                     return true;
                 }
             }
