@@ -1,7 +1,9 @@
 package mage.sets;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -22,6 +24,7 @@ public final class CoreSet2019 extends ExpansionSet {
         return instance;
     }
     List<CardInfo> savedSpecialCommon = new ArrayList<>();
+    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private CoreSet2019() {
         super("Core Set 2019", "M19", ExpansionSet.buildDate(2018, 7, 13), SetType.CORE);
@@ -35,6 +38,10 @@ public final class CoreSet2019 extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 280;
+        
+        // Core 2019 boosters have a 5/12 chance of basic land being replaced
+        // with the common taplands, which DO NOT appear in the common slot.
+        this.ratioBoosterSpecialLand = 5/12;
 
         cards.add(new SetCardInfo("Abnormal Endurance", 85, Rarity.COMMON, mage.cards.a.AbnormalEndurance.class));
         cards.add(new SetCardInfo("Act of Treason", 127, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
@@ -387,4 +394,29 @@ public final class CoreSet2019 extends ExpansionSet {
         specialCommons.addAll(savedSpecialCommon);
         return specialCommons;
     }
+    
+    @Override
+    // the common taplands replacing the basic land
+    public List<CardInfo> getSpecialLand()
+    {
+        if (savedSpecialLand.isEmpty())
+        {
+            List<String> TaplandNames = Arrays.asList(
+                "Cinder Barrens", "Forsaken Sanctuary", "Foul Orchard",
+                "Highland Lake", "Meandering River", "Stone Quarry",
+                "Submerged Boneyard", "Timber Gorge", "Tranquil Expanse",
+                "Woodland Stream"
+            );
+            
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes("M19");
+            for (String name: TaplandNames) { criteria.nameExact(name); }
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+        }
+        
+        return new ArrayList<>(savedSpecialLand);
+    }
+    
+    
+    
 }
