@@ -52,6 +52,7 @@ public final class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Commandeer", 29, Rarity.RARE, mage.cards.c.Commandeer.class));
         cards.add(new SetCardInfo("Controvert", 30, Rarity.UNCOMMON, mage.cards.c.Controvert.class));
         cards.add(new SetCardInfo("Counterbalance", 31, Rarity.UNCOMMON, mage.cards.c.Counterbalance.class));
+        cards.add(new SetCardInfo("Cover of Winter", 3, Rarity.RARE, mage.cards.c.CoverOfWinter.class));
         cards.add(new SetCardInfo("Cryoclasm", 79, Rarity.UNCOMMON, mage.cards.c.Cryoclasm.class));
         cards.add(new SetCardInfo("Darien, King of Kjeldor", 4, Rarity.RARE, mage.cards.d.DarienKingOfKjeldor.class));
         cards.add(new SetCardInfo("Dark Depths", 145, Rarity.RARE, mage.cards.d.DarkDepths.class));
