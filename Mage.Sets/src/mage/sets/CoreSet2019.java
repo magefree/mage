@@ -207,6 +207,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Marauder's Axe", 240, Rarity.COMMON, mage.cards.m.MaraudersAxe.class));
         cards.add(new SetCardInfo("Meandering River", 253, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 27, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
+        cards.add(new SetCardInfo("Metamorphic Alteration", 60, Rarity.RARE, mage.cards.m.MetamorphicAlteration.class));
         cards.add(new SetCardInfo("Meteor Golem", 241, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Mighty Leap", 28, Rarity.COMMON, mage.cards.m.MightyLeap.class));
         cards.add(new SetCardInfo("Militia Bugler", 29, Rarity.UNCOMMON, mage.cards.m.MilitiaBugler.class));
