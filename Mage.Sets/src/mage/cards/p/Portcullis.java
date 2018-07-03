@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class Portcullis extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     public Portcullis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.
         String rule = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature";
@@ -91,14 +90,18 @@ class PortcullisExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
 
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        }
         if (permanent != null && creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             Zone currentZone = game.getState().getZone(creature.getId());
             if (currentZone == Zone.BATTLEFIELD) {
                 controller.moveCardsToExile(creature, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
+                return true;
             }
         }
         return false;
