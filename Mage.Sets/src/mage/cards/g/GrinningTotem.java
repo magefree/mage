@@ -140,7 +140,7 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId)
+        return source.isControlledBy(affectedControllerId)
                 && sourceId.equals(getTargetPointer().getFirst(game, source));
     }
     

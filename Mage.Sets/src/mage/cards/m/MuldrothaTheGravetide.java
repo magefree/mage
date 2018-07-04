@@ -84,8 +84,8 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.getControllerId().equals(affectedControllerId)
-                && source.getControllerId().equals(game.getOwnerId(objectId)) // only from your graveyard
+        if (source.isControlledBy(affectedControllerId)
+                && source.isControlledBy(game.getOwnerId(objectId)) // only from your graveyard
                 && affectedControllerId.equals(game.getActivePlayerId()) // only during your turns (e.g. prevent flash creatures)
                 && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
             MuldrothaTheGravetideWatcher watcher = (MuldrothaTheGravetideWatcher) game.getState().getWatchers().get(MuldrothaTheGravetideWatcher.class.getSimpleName());

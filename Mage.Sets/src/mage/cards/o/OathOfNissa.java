@@ -128,7 +128,7 @@ class OathOfNissaSpendAnyManaEffect extends AsThoughEffectImpl implements AsThou
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.getControllerId().equals(affectedControllerId)) {
+        if (source.isControlledBy(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
             if (mageObject != null) {
                 if (mageObject.isPlaneswalker()) {

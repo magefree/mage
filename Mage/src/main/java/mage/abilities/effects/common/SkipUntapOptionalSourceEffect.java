@@ -27,7 +27,7 @@ public class SkipUntapOptionalSourceEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return permanent.getId().equals(source.getSourceId())
-                && permanent.getControllerId().equals(game.getActivePlayerId()) && // your untap step
+                && permanent.isControlledBy(game.getActivePlayerId()) && // your untap step
                 permanent.isTapped();
     }
 

@@ -81,7 +81,7 @@ class WortGainConspireEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (StackObject stackObject : game.getStack()) {
             // only spells cast, so no copies of spells
-            if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
+            if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) stackObject;
                 if (filter.match(stackObject, game)) {
                     game.getState().addOtherAbility(spell.getCard(), conspireAbility);

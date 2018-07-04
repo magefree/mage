@@ -61,7 +61,7 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
             if (permanent != null) {
                 switch(targetController) {
                     case YOU:
-                        if (!permanent.getControllerId().equals(source.getControllerId())) {
+                        if (!permanent.isControlledBy(source.getControllerId())) {
                             return false;
                         }
                         break;

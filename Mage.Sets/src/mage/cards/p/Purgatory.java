@@ -94,7 +94,7 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
                         && zEvent.getFromZone() == Zone.BATTLEFIELD
                         && !(permanent instanceof PermanentToken)
                         && permanent.isCreature()
-                        && permanent.getOwnerId().equals(controller.getId())) {
+                        && permanent.isOwnedBy(controller.getId())) {
         
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                     return true;

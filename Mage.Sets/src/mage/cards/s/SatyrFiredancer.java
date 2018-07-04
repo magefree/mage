@@ -95,7 +95,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(game.getControllerId(event.getSourceId()))) {
+        if (isControlledBy(game.getControllerId(event.getSourceId()))) {
             MageObject damageSource = game.getObject(event.getSourceId());
             if (damageSource != null) {            
                 if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {

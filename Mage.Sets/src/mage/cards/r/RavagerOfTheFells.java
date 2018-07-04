@@ -164,7 +164,7 @@ class RavagerOfTheFellsTarget extends TargetPermanent {
         }
         UUID firstTarget = player.getId();
         Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
+        if (firstTarget != null && permanent != null && permanent.isControlledBy(firstTarget)) {
             return super.canTarget(id, source, game);
         }
         return false;
@@ -191,7 +191,7 @@ class RavagerOfTheFellsTarget extends TargetPermanent {
             if (player != null) {
                 for (UUID targetId : availablePossibleTargets) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.getControllerId().equals(player.getId())) {
+                    if (permanent != null && permanent.isControlledBy(player.getId())) {
                         possibleTargets.add(targetId);
                     }
                 }

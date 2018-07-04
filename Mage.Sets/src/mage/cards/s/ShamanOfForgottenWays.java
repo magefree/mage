@@ -92,7 +92,7 @@ class ShamanOfForgottenWaysManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = source.getSourceObject(game);
-        return object != null && (object instanceof Spell) && object.isCreature();
+        return object instanceof Spell && object.isCreature();
     }
 }
 

@@ -91,7 +91,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Permanent permanent = zEvent.getTarget();
         if (permanent != null
-                && permanent.getOwnerId().equals(this.controllerId)
+                && permanent.isOwnedBy(this.controllerId)
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && !(permanent instanceof PermanentToken)

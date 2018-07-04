@@ -107,7 +107,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(sourceId);
-            if (!card.getOwnerId().equals(source.getControllerId())) {
+            if (!card.isOwnedBy(source.getControllerId())) {
                 return false;
             }
             // because can activate is always called twice, result from first call will be used

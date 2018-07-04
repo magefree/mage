@@ -80,7 +80,7 @@ public final class WorldheartPhoenix extends CardImpl {
 
         @Override
         public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-            if (sourceId.equals(source.getSourceId()) && source.getControllerId().equals(affectedControllerId)) {
+            if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
                 if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                     Player player = game.getPlayer(affectedControllerId);
                     if (player != null) {

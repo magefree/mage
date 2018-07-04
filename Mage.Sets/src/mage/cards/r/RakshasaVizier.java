@@ -67,7 +67,7 @@ class RakshasaVizierTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.GRAVEYARD
                 && zEvent.getToZone() == Zone.EXILED) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getOwnerId().equals(getControllerId())) {
+            if (card != null && card.isOwnedBy(getControllerId())) {
                 return true;
             }
 

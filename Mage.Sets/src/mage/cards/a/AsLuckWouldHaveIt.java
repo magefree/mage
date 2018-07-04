@@ -68,7 +68,7 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.getControllerId().equals(event.getPlayerId()) && event.getFlag()) {
+        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
             for (Effect effect : this.getEffects()) {
                 effect.setValue("rolled", event.getAmount());
             }

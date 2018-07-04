@@ -90,7 +90,7 @@ class ShipbreakerKrakenReplacementEffect extends ContinuousRuleModifyingEffectIm
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
+        if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
             discard();
             return false;
         }

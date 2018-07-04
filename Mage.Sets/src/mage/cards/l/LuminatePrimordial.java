@@ -88,7 +88,7 @@ class LuminatePrimordialEffect extends OneShotEffect {
         for (Target target: source.getTargets()) {
             if (target instanceof TargetCreaturePermanent) {
                 Permanent targetCreature = game.getPermanent(target.getFirstTarget());
-                if (targetCreature != null && !targetCreature.getControllerId().equals(source.getControllerId())) {
+                if (targetCreature != null && !targetCreature.isControlledBy(source.getControllerId())) {
                     int amountLife = targetCreature.getPower().getValue();
                     Player controller = game.getPlayer(targetCreature.getControllerId());
                     targetCreature.moveToExile(null, null, source.getSourceId(), game);

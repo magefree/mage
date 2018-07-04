@@ -67,7 +67,7 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.getControllerId().equals(game.getControllerId(event.getSourceId()))) {
+        if (source.isControlledBy(game.getControllerId(event.getSourceId()))) {
             MageObject object = game.getObject(event.getSourceId());
             return object != null && (object.isInstant() || object.isSorcery());
         }

@@ -122,7 +122,7 @@ class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if (source.getControllerId().equals(abilityToModify.getControllerId())) {
+            if (source.isControlledBy(abilityToModify.getControllerId())) {
                 for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
                     Mode mode = abilityToModify.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {

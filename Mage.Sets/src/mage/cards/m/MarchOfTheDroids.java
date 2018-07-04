@@ -69,7 +69,7 @@ class MarchOfTheDroidsEffect extends OneShotEffect {
         if (controller != null) {
             Cards cardsToReturn = new CardsImpl();
             for (Card card : controller.getGraveyard().getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.getCounters(game).getCount(CounterType.REPAIR) > 0) {
+                if (card.isOwnedBy(controller.getId()) && card.getCounters(game).getCount(CounterType.REPAIR) > 0) {
                     int number = card.getCounters(game).getCount(CounterType.REPAIR);
                     if (number > 0) {
                         cardsToReturn.add(card);

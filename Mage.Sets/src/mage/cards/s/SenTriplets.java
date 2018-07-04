@@ -147,7 +147,7 @@ class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(objectId);
         return card != null &&
-                card.getOwnerId().equals(getTargetPointer().getFirst(game, source)) &&
+                card.isOwnedBy(getTargetPointer().getFirst(game, source)) &&
                 game.getState().getZone(objectId) == Zone.HAND &&
                 affectedControllerId.equals(source.getControllerId());
     }

@@ -83,7 +83,7 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         for (UUID creatureId : game.getCombat().getAttackers()) {
             Permanent creature = game.getPermanent(creatureId);
-            if (creature != null && filter.match(creature, game) && creature.getControllerId().equals(controllerId)) {
+            if (creature != null && filter.match(creature, game) && creature.isControlledBy(controllerId)) {
                 return true;
             }
         }

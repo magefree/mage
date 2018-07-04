@@ -104,7 +104,7 @@ class ShannaSisaysLegacyEffect extends ContinuousRuleModifyingEffectImpl {
         StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
         if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
             if (stackObject instanceof Ability) {
-                if (!stackObject.getControllerId().equals(source.getControllerId())) {
+                if (!stackObject.isControlledBy(source.getControllerId())) {
                     return true;
                 }
             }

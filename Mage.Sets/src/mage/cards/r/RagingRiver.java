@@ -128,11 +128,11 @@ class RagingRiverEffect extends OneShotEffect {
                             } else {
                                 List<Permanent> leftLog = left.stream()
                                         .filter(permanent -> permanent.getControllerId() != null)
-                                        .filter(permanent -> permanent.getControllerId().equals(defender.getId()))
+                                        .filter(permanent -> permanent.isControlledBy(defender.getId()))
                                         .collect(Collectors.toList());
                                 List<Permanent> rightLog = right.stream()
                                         .filter(permanent -> permanent.getControllerId() != null)
-                                        .filter(permanent -> permanent.getControllerId().equals(defender.getId()))
+                                        .filter(permanent -> permanent.isControlledBy(defender.getId()))
                                         .collect(Collectors.toList());
 
                                 

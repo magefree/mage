@@ -65,7 +65,7 @@ class DauntingDefenderEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype(SubType.CLERIC, game)) {
+            if (permanent != null && permanent.isControlledBy(source.getControllerId()) && permanent.hasSubtype(SubType.CLERIC, game)) {
                 return super.applies(event, source, game);
             }
         }

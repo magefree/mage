@@ -72,7 +72,7 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanent != null
                 && permanent.isCreature()
-                && permanent.getControllerId().equals(source.getControllerId());
+                && permanent.isControlledBy(source.getControllerId());
     }
 
     @Override

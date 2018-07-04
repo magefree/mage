@@ -27,8 +27,8 @@ public class MeldCondition implements Condition {
         MageObject sourceMageObject = source.getSourceObjectIfItStillExists(game);
         if (sourceMageObject != null && sourceMageObject instanceof Permanent) {
             Permanent sourcePermanent = (Permanent) sourceMageObject;
-            if (sourcePermanent.getControllerId().equals(source.getControllerId())
-                    && sourcePermanent.getOwnerId().equals(source.getControllerId())) {
+            if (sourcePermanent.isControlledBy(source.getControllerId())
+                    && sourcePermanent.isOwnedBy(source.getControllerId())) {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                 filter.add(new NamePredicate(this.meldWithName));
                 filter.add(new OwnerIdPredicate(source.getControllerId()));

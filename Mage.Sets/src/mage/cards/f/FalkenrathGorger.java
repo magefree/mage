@@ -99,7 +99,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
                 if (filter.match(card, source.getSourceId(), controller.getId(), game)) {
-                    if (card.getOwnerId().equals(controller.getId())) {
+                    if (card.isOwnedBy(controller.getId())) {
                         addMadnessToCard(game, card, usedMadnessAbilities);
                     }
                 }

@@ -15,7 +15,7 @@ public enum MonarchIsSourceControllerCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getControllerId().equals(game.getMonarchId());
+        return source.isControlledBy(game.getMonarchId());
     }
 
     @Override

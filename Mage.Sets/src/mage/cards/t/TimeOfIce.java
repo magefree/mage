@@ -119,7 +119,7 @@ class TimeOfIceEffect extends ContinuousRuleModifyingEffectImpl {
                 if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getTargetId().equals(targetPointer.getFirst(game, source))) {
                     Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
                     if (targetCreature != null) {
-                        return targetCreature.getControllerId().equals(game.getActivePlayerId());
+                        return targetCreature.isControlledBy(game.getActivePlayerId());
                     } else {
                         discard();
                         return false;

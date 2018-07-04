@@ -136,7 +136,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         sb.setLength(0);
         sb.append("-> Permanents: [");
         for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
-            if (permanent.getOwnerId().equals(player.getId())) {
+            if (permanent.isOwnedBy(player.getId())) {
                 sb.append(permanent.getName());
                 if (permanent.isTapped()) {
                     sb.append("(tapped)");

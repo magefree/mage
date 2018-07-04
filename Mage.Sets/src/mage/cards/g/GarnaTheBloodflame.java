@@ -85,7 +85,7 @@ class GarnaTheBloodflameEffect extends OneShotEffect {
                 Set<Card> toHand = new HashSet<>();
                 for (UUID cardId : watcher.getCardsPutToGraveyardThisTurn()) {
                     Card card = game.getCard(cardId);
-                    if (card != null && card.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(cardId) == Zone.GRAVEYARD) {
+                    if (card != null && card.isOwnedBy(source.getControllerId()) && game.getState().getZone(cardId) == Zone.GRAVEYARD) {
                         toHand.add(card);
                     }
                 }

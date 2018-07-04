@@ -31,7 +31,7 @@ public class TargetCreaturePermanentSameController extends TargetCreaturePermane
                     Permanent targetPermanent = game.getPermanent(targetId);
                     if (targetPermanent != null) {
                         if (!firstTargetPermanent.getId().equals(targetPermanent.getId())) {
-                            if (!firstTargetPermanent.getControllerId().equals(targetPermanent.getOwnerId())) {
+                            if (!firstTargetPermanent.isControlledBy(targetPermanent.getOwnerId())) {
                                 return false;
                             }
                         }

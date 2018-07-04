@@ -110,7 +110,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
             if (source.getTargets().size() > 1) {
                 toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             }
-            if (fromPermanent == null || toPermanent == null || !fromPermanent.getControllerId().equals(toPermanent.getControllerId())) {
+            if (fromPermanent == null || toPermanent == null || !fromPermanent.isControlledBy(toPermanent.getControllerId())) {
                 return false;
             }
             fromPermanent.removeCounters(CounterType.P1P1.createInstance(1), game);
@@ -136,7 +136,7 @@ class SameControllerPredicate implements ObjectSourcePlayerPredicate<ObjectSourc
                     source.getStackAbility().getTargets().get(0).getTargets().get(0));
             Permanent inputPermanent = game.getPermanent(input.getObject().getId());
             if (firstTarget != null && inputPermanent != null) {
-                return firstTarget.getControllerId().equals(inputPermanent.getControllerId());
+                return firstTarget.isControlledBy(inputPermanent.getControllerId());
             }
         }
         return true;

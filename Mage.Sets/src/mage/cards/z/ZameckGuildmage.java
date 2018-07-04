@@ -69,7 +69,7 @@ class ZameckGuildmageEntersBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.isCreature();
+        return permanent != null && permanent.isControlledBy(source.getControllerId()) && permanent.isCreature();
     }
 
     @Override

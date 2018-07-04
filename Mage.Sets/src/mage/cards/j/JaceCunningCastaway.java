@@ -112,7 +112,7 @@ class JaceCunningCastawayDamageTriggeredAbility extends DelayedTriggeredAbility 
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.getControllerId().equals(controllerId)
+                if (creature != null && creature.isControlledBy(controllerId)
                         && !damagedPlayerIds.contains(event.getTargetId())) {
                     damagedPlayerIds.add(event.getTargetId());
                     return true;

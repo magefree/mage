@@ -58,7 +58,7 @@ class TelimTorsEdictPredicate implements ObjectPlayerPredicate<ObjectPlayer<Perm
     public boolean apply(ObjectPlayer<Permanent> input, Game game) {
         Permanent permanent = input.getObject();
         UUID playerId = input.getPlayerId();
-        if (permanent.getControllerId().equals(playerId) || permanent.getOwnerId().equals(playerId)) {
+        if (permanent.isControlledBy(playerId) || permanent.isOwnedBy(playerId)) {
             return true;
         }
         return false;

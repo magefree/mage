@@ -71,7 +71,7 @@ public final class FracturedLoyalty extends CardImpl {
                 if (enchantedCreature != null) {
                     Player controller = game.getPlayer(enchantedCreature.getControllerId());
                     if (enchantment.getAttachedTo() != null) {
-                        if (controller != null && !enchantedCreature.getControllerId().equals(this.getTargetPointer().getFirst(game, source))) {
+                        if (controller != null && !enchantedCreature.isControlledBy(this.getTargetPointer().getFirst(game, source))) {
                             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, this.getTargetPointer().getFirst(game, source));
                             effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
                             game.addEffect(effect, source);

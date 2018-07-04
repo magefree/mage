@@ -128,7 +128,7 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
     public boolean canTarget(UUID id, Ability source, Game game) {
         UUID firstTarget = source.getFirstTarget();
         Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
+        if (firstTarget != null && permanent != null && permanent.isControlledBy(firstTarget)) {
             return super.canTarget(id, source, game);
         }
         return false;
@@ -153,7 +153,7 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
             UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
             for (UUID targetId : availablePossibleTargets) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && nonblackCreaturefilter.match(permanent, game) && permanent.getControllerId().equals(playerId)) {
+                if (permanent != null && nonblackCreaturefilter.match(permanent, game) && permanent.isControlledBy(playerId)) {
                     possibleTargets.add(targetId);
                 }
             }

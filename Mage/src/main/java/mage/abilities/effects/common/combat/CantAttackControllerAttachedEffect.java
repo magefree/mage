@@ -38,7 +38,7 @@ public class CantAttackControllerAttachedEffect extends RestrictionEffect {
             return false;
         }
         Permanent planeswalker = game.getPermanent(defenderId);
-        return planeswalker == null || !planeswalker.getControllerId().equals(source.getControllerId());
+        return planeswalker == null || !planeswalker.isControlledBy(source.getControllerId());
     }
 
 

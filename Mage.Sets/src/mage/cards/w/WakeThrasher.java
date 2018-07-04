@@ -67,7 +67,7 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getPermanent(event.getTargetId()).getControllerId().equals(this.controllerId);
+        return game.getPermanent(event.getTargetId()).isControlledBy(this.controllerId);
     }
 
     @Override

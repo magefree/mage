@@ -66,7 +66,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
         if (event instanceof NumberOfTriggersEvent) {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
             // Only triggers of the controller of Precipice of Mortis
-            if (source.getControllerId().equals(event.getPlayerId())) {
+            if (source.isControlledBy(event.getPlayerId())) {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // enters triggers
                 if (sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {

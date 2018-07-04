@@ -87,7 +87,7 @@ class DrawCardIfCreatureTypeAbility extends TriggeredAbilityImpl {
             if (spell != null
                     && spell.isCreature()
                     && spell.hasSubtype(subType, game)
-                    && spell.getControllerId().equals(getControllerId())) {
+                    && spell.isControlledBy(getControllerId())) {
                 return true;
             }
         }

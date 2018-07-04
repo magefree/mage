@@ -107,7 +107,7 @@ class RowanKenrithAttackEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getControllerId().equals(source.getFirstTarget());
+        return permanent.isControlledBy(source.getFirstTarget());
     }
 
     @Override

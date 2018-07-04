@@ -73,7 +73,7 @@ class HardenedScalesEffect extends ReplacementEffectImpl {
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
+            if (permanent != null && permanent.isControlledBy(source.getControllerId())
                     && permanent.isCreature()) {
                 return true;
             }

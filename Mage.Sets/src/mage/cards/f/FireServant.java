@@ -74,7 +74,7 @@ class FireServantEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         StackObject spell = game.getStack().getStackObject(event.getSourceId());
         return spell != null &&
-                spell.getControllerId().equals(source.getControllerId()) &&
+                spell.isControlledBy(source.getControllerId()) &&
                 spell.getColor(game).isRed() &&
                 (spell.isInstant() || spell.isSorcery());
     }

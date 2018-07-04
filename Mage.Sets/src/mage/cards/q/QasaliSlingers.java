@@ -76,7 +76,7 @@ class QasaliSlingersTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent.getId().equals(this.getSourceId())) {
                 return true;
             }
-            if (permanent.hasSubtype(SubType.CAT, game) && permanent.getControllerId().equals(this.getControllerId())) {
+            if (permanent.hasSubtype(SubType.CAT, game) && permanent.isControlledBy(this.getControllerId())) {
                 return true;
             }
         }

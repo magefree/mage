@@ -103,7 +103,7 @@ class GoblinWarCryRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getControllerId().equals(source.getFirstTarget())) {
+        if (permanent.isControlledBy(source.getFirstTarget())) {
             return true;
         }
         return false;

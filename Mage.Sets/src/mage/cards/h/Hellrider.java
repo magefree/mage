@@ -68,7 +68,7 @@ class HellriderTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = game.getPermanent(event.getSourceId());
-        if (source != null && source.getControllerId().equals(controllerId)) {
+        if (source != null && source.isControlledBy(controllerId)) {
             UUID defendingPlayerId = game.getCombat().getDefenderId(event.getSourceId());
             this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
             return true;

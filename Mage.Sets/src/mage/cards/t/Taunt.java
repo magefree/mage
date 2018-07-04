@@ -55,7 +55,7 @@ class TauntEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getControllerId().equals(this.getTargetPointer().getFirst(game, source));
+        return permanent.isControlledBy(this.getTargetPointer().getFirst(game, source));
     }
 
     @Override

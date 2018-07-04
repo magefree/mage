@@ -94,7 +94,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (filter.match(permanent, sourceId, controllerId, game)
-                && (permanent.getControllerId().equals(this.controllerId) ^ opponentController)) {
+                && (permanent.isControlledBy(this.controllerId) ^ opponentController)) {
             if (!this.getTargets().isEmpty()) {
                 Target target = this.getTargets().get(0);
                 if (target instanceof TargetPlayer) {

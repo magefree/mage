@@ -93,7 +93,7 @@ class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getZone() == Zone.LIBRARY) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
-                    && spell.getOwnerId().equals(super.getControllerId())
+                    && spell.isOwnedBy(super.getControllerId())
                     && (spell.isInstant()
                     || spell.isSorcery())) {
                 for (Effect effect : this.getEffects()) {

@@ -58,7 +58,7 @@ class WorshipReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.getControllerId().equals(event.getPlayerId())) {
+        if (source.isControlledBy(event.getPlayerId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null
                     && (controller.getLife() - event.getAmount()) < 1

@@ -96,7 +96,7 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && (permanent.isArtifact() && permanent.hasSubtype(SubType.EQUIPMENT, game)
                     || permanent.isEnchantment() && permanent.hasSubtype(SubType.AURA, game))
-                && permanent.getControllerId().equals(this.controllerId)) {
+                && permanent.isControlledBy(this.controllerId)) {
             this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             return true;
         }

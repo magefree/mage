@@ -27,7 +27,7 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean weAreExerting = getControllerId().equals(event.getPlayerId());
+        boolean weAreExerting = isControlledBy(event.getPlayerId());
         Permanent exerted = game.getPermanent(event.getTargetId());
         boolean exertedIsCreature = (exerted != null) && exerted.isCreature();
         return weAreExerting && exertedIsCreature;

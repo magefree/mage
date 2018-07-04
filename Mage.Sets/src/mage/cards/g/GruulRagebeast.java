@@ -83,7 +83,7 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent.getControllerId().equals(this.controllerId)
+        if (permanent.isControlledBy(this.controllerId)
                 && permanent.isCreature()
                 && (targetId.equals(this.getSourceId())
                 || !targetId.equals(this.getSourceId()))) {

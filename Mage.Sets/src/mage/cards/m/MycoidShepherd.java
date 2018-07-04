@@ -75,7 +75,7 @@ class MycoidShepherdTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (super.getSourceId().equals(event.getTargetId())
                 || permanent.getPower().getValue() > 4
-                && permanent.getControllerId().equals(controllerId)) {
+                && permanent.isControlledBy(controllerId)) {
             Zone after = game.getState().getZone(event.getTargetId());
             return after != null && Zone.GRAVEYARD.match(after);
         }

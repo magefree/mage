@@ -72,7 +72,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD
-                && permanent.getOwnerId().equals(controllerId)
+                && permanent.isOwnedBy(controllerId)
                 && permanent.isCreature()) {
             Effect effect = this.getEffects().get(0);
             effect.setValue("damageSource", event.getTargetId());

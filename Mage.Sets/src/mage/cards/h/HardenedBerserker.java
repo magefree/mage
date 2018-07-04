@@ -84,7 +84,7 @@ class HardenedBerserkerSpellsCostReductionEffect extends CostModificationEffectI
             }
         }        
         if (abilityToModify instanceof SpellAbility) {
-            return abilityToModify.getControllerId().equals(source.getControllerId());
+            return abilityToModify.isControlledBy(source.getControllerId());
         }
         return false;
     }

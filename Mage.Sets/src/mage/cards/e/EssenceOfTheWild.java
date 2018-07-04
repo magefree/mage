@@ -66,7 +66,7 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent perm = ((EntersTheBattlefieldEvent) event).getTarget();
-        return perm != null && perm.isCreature() && perm.getControllerId().equals(source.getControllerId());
+        return perm != null && perm.isCreature() && perm.isControlledBy(source.getControllerId());
     }
 
     @Override
