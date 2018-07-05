@@ -30,7 +30,7 @@ public class RowanKenrithEmblem extends Emblem {
 class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     RowanKenrithEmblemTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RowanKenrithEmblemEffect(), false);
+        super(Zone.COMMAND, new RowanKenrithEmblemEffect(), false);
     }
 
     RowanKenrithEmblemTriggeredAbility(final RowanKenrithEmblemTriggeredAbility ability) {
