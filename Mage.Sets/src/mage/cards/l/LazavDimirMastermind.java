@@ -38,7 +38,7 @@ public final class LazavDimirMastermind extends CardImpl {
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
 
-        // Whenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir Mastermind become a copy of that card except its name is still Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it gains hexproof and this ability.
+        // Whenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir Mastermind become a copy of that card except its name is Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it has hexproof and this ability.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),
@@ -59,7 +59,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
 
     LazavDimirMastermindEffect() {
         super(Outcome.Copy);
-        staticText = "you may have {this} become a copy of that card except its name is still {this}, it's legendary in addition to its other types, and it gains hexproof and this ability";
+        staticText = "you may have {this} become a copy of that card except its name is Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it has hexproof and this ability";
     }
 
     LazavDimirMastermindEffect(final LazavDimirMastermindEffect effect) {
