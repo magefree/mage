@@ -211,6 +211,7 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 284, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 285, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plated Pegasus", 34, Rarity.UNCOMMON, mage.cards.p.PlatedPegasus.class));
         cards.add(new SetCardInfo("Plunder", 174, Rarity.COMMON, mage.cards.p.Plunder.class));
         cards.add(new SetCardInfo("Primal Forcemage", 212, Rarity.UNCOMMON, mage.cards.p.PrimalForcemage.class));
         cards.add(new SetCardInfo("Prismatic Lens", 262, Rarity.COMMON, mage.cards.p.PrismaticLens.class));
