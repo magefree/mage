@@ -25,7 +25,7 @@ public final class Electryte extends CardImpl {
 
     public Electryte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.subtype.add(SubType.BEAST);
+        this.subtype.add(SubType.BEAST, SubType.TRILOBITE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
