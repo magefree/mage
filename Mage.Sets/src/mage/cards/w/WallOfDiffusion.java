@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.CanBlockAsThoughtItHadShadowEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +34,7 @@ public final class WallOfDiffusion extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Wall of Diffusion can block creatures with shadow as though Wall of Diffusion had shadow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAsThoughtIthadShadowEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAsThoughtItHadShadowEffect(Duration.WhileOnBattlefield)));
     }
 
     public WallOfDiffusion(final WallOfDiffusion card) {
@@ -44,32 +45,4 @@ public final class WallOfDiffusion extends CardImpl {
     public WallOfDiffusion copy() {
         return new WallOfDiffusion(this);
     }
-}
-
-class CanBlockAsThoughtIthadShadowEffect extends AsThoughEffectImpl {
-
-    public CanBlockAsThoughtIthadShadowEffect(Duration duration) {
-        super(AsThoughEffectType.BLOCK_SHADOW, duration, Outcome.Benefit);
-        staticText = "{this} can block creatures with shadow as though {this} had shadow";
-    }
-
-    public CanBlockAsThoughtIthadShadowEffect(final CanBlockAsThoughtIthadShadowEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public CanBlockAsThoughtIthadShadowEffect copy() {
-        return new CanBlockAsThoughtIthadShadowEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return sourceId.equals(source.getSourceId());
-    }
-
 }
