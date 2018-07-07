@@ -41,7 +41,7 @@ public final class ChoArrimLegate extends CardImpl {
         // Protection from black
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
-        // If an opponent controls a Swamp and you control a Plains, you may cast Cho-Arrim Legate without paying its mana cost.
+        // If an opponent controls a Swamp and you control a Plains, you may cast this spell without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Swamp and you control a Plains", 
                 new OpponentControlsPermanentCondition(filterSwamp),
                 new PermanentsOnTheBattlefieldCondition(filterPlains));

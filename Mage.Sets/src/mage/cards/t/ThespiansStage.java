@@ -30,7 +30,7 @@ public final class ThespiansStage extends CardImpl {
         // {T}: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // 2, {T}: Thespian's Stage becomes a copy of target land and gains this ability.
+        // 2, {T}: Thespian's Stage becomes a copy of target land, except it has this ability.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThespiansStageCopyEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
@@ -52,7 +52,7 @@ class ThespiansStageCopyEffect extends OneShotEffect {
 
     public ThespiansStageCopyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} becomes a copy of target land and gains this ability";
+        this.staticText = "{this} becomes a copy of target land, except it has this ability";
     }
 
     public ThespiansStageCopyEffect(final ThespiansStageCopyEffect effect) {

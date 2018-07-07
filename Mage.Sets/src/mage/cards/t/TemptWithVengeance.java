@@ -23,7 +23,7 @@ public final class TemptWithVengeance extends CardImpl {
     public TemptWithVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
-        // Tempting offer - create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each player who does, create X 1/1 red Elemental creature tokens with haste.
+        // Tempting offer - create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste.
         this.getSpellAbility().addEffect(new TemptWithVengeanceEffect());
     }
 
@@ -41,7 +41,7 @@ class TemptWithVengeanceEffect extends OneShotEffect {
 
     public TemptWithVengeanceEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "<i>Tempting offer</i> &mdash; create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each player who does, create X 1/1 red Elemental creature tokens with haste";
+        this.staticText = "<i>Tempting offer</i> &mdash; create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste";
     }
 
     public TemptWithVengeanceEffect(final TemptWithVengeanceEffect effect) {

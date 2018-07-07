@@ -25,7 +25,7 @@ public final class IncreasingDevotion extends CardImpl {
     public IncreasingDevotion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
-        // Create five 1/1 white Human creature tokens. If Increasing Devotion was cast from a graveyard, create ten of those tokens instead.
+        // Create five 1/1 white Human creature tokens. If this spell was cast from a graveyard, create ten of those tokens instead.
         this.getSpellAbility().addEffect(new IncreasingDevotionEffect());
 
         // Flashback {7}{W}{W}
@@ -48,7 +48,7 @@ class IncreasingDevotionEffect extends OneShotEffect {
 
     public IncreasingDevotionEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Create five 1/1 white Human creature tokens. If {this} was cast from a graveyard, create ten of those tokens instead";
+        staticText = "Create five 1/1 white Human creature tokens. If this spell was cast from a graveyard, create ten of those tokens instead";
     }
 
     public IncreasingDevotionEffect(final IncreasingDevotionEffect effect) {

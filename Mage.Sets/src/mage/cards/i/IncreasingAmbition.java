@@ -30,7 +30,7 @@ public final class IncreasingAmbition extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
 
-        // Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library.
+        // Search your library for a card and put that card into your hand. If this spell was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new IncreasingAmbitionEffect());
 
         // Flashback {7}{B}
@@ -51,7 +51,7 @@ class IncreasingAmbitionEffect extends SearchEffect {
 
     public IncreasingAmbitionEffect() {
         super(new TargetCardInLibrary(), Outcome.DrawCard);
-        staticText = "Search your library for a card and put that card into your hand. If {this} was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library";
+        staticText = "Search your library for a card and put that card into your hand. If this spell was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library";
     }
 
     public IncreasingAmbitionEffect(final IncreasingAmbitionEffect effect) {
