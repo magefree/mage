@@ -1408,12 +1408,18 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     while (regexMatcher.find()) {
                         String val = regexMatcher.group(1);
                         int colorless_val = Integer.parseInt(val);
-                        int pip_value = 0;
-                        if (pips_at_cmcs.get(cmc + "##c}") != null) {
-                            pip_value = pips.get("#c}");
+                        
+                        int total_c_pip = 0;
+                        if (pips.get("#c}") != null) { 
+                            total_c_pip = pips.get("#c}");
                         }
-                        pips_at_cmcs.put(cmc + "##c}", colorless_val + pip_value);
-                        pips.put("#c}", colorless_val + pip_value);
+                        pips.put("#c}", colorless_val + total_c_pip);
+                        
+                        int cmc_pip_value = pips.get("#c}");
+                        if (pips_at_cmcs.get(cmc + "##c}") != null) {
+                            cmc_pip_value = pips_at_cmcs.get(cmc + "##c}");
+                        }
+                        pips_at_cmcs.put(cmc + "##c}", colorless_val + cmc_pip_value);
                     }
 
                     for (String pip : pips.keySet()) {
