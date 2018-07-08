@@ -95,7 +95,7 @@ public final class AssaultSuit extends CardImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT) {
             Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment != null && equipment.getAttachedTo() != null) {
+            if (equipment != null) {
                 return equipment.isAttachedTo(event.getTargetId());
             }
         }

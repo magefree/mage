@@ -106,7 +106,7 @@ class SoulEchoReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (!sameStep && game.getActivePlayerId().equals(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
+            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
                 return true;
             }
         } else {

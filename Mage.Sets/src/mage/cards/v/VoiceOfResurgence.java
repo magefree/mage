@@ -68,7 +68,7 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
                     && game.getOpponents(super.getControllerId()).contains(spell.getControllerId())
-                    && game.getActivePlayerId().equals(super.getControllerId())) {
+                    && game.isActivePlayer(super.getControllerId())) {
                 return true;
             }
         }

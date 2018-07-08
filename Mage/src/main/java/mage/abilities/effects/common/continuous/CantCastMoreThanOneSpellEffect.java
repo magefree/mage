@@ -65,7 +65,7 @@ public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifyingEffec
                 break;
             case CONTROLLER_ATTACHED_TO:
                 Permanent attachment = game.getPermanent(source.getSourceId());
-                if (attachment == null || !attachment.getAttachedTo().equals(event.getPlayerId())) {
+                if (attachment == null || !attachment.isAttachedTo(event.getPlayerId())) {
                     return false;
                 }
         }
