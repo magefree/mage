@@ -1397,6 +1397,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     }
                     mc = mc.replaceAll("\\{([WUBRG]).([WUBRG])\\}", "{$1}{$2}");
                     mc = mc.replaceAll("\\{", "#");
+                    mc = mc.replaceAll("#2\\/", "#");
+                    mc = mc.replaceAll("p}", "}");
                     mc = mc.toLowerCase(Locale.ENGLISH);
                     int cmc = card.getConvertedManaCost();
 
