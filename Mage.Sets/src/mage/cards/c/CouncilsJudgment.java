@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.HashMap;
@@ -28,7 +27,7 @@ import mage.target.common.TargetNonlandPermanent;
 public final class CouncilsJudgment extends CardImpl {
 
     public CouncilsJudgment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
 
         // Will of the council - Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes.
         this.getSpellAbility().addEffect(new CouncilsJudgmentEffect());
@@ -89,7 +88,7 @@ class CouncilsJudgmentEffect extends OneShotEffect {
                                 }
                                 chosenCards.put(permanent, 1);
                             }
-                            game.informPlayers(player.getLogName() + " has chosen: " + permanent.getName());
+                            game.informPlayers(player.getLogName() + " has chosen: " + permanent.getLogName());
                         }
                     }
                 }
