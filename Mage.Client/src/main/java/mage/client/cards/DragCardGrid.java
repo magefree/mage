@@ -1415,7 +1415,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         }
                         pips.put("#c}", colorless_val + total_c_pip);
                         
-                        int cmc_pip_value = pips.get("#c}");
+                        int cmc_pip_value = 0;
                         if (pips_at_cmcs.get(cmc + "##c}") != null) {
                             cmc_pip_value = pips_at_cmcs.get(cmc + "##c}");
                         }
