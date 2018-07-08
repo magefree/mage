@@ -1083,10 +1083,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         repaint();
     }
-    
+
     private void chooseMatching() {
         Collection<CardView> toMatch = dragCardList();
-        
+
         for (DragCardGridListener l : listeners) {
             for (CardView card : allCards) {
                 for (CardView aMatch : toMatch) {
@@ -1337,6 +1337,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     public void analyseDeck() {
         HashMap<String, Integer> qtys = new HashMap<>();
         HashMap<String, Integer> pips = new HashMap<>();
+        HashMap<String, Integer> pips_at_cmcs = new HashMap<>();
         HashMap<String, Integer> sourcePips = new HashMap<>();
         HashMap<String, Integer> manaCounts = new HashMap<>();
         pips.put("#w}", 0);
@@ -1397,10 +1398,31 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     mc = mc.replaceAll("\\{([WUBRG]).([WUBRG])\\}", "{$1}{$2}");
                     mc = mc.replaceAll("\\{", "#");
                     mc = mc.toLowerCase(Locale.ENGLISH);
+                    int cmc = card.getConvertedManaCost();
+
+                    // Do colorless mana pips
+                    Pattern regex = Pattern.compile("#([0-9]+)}");
+                    Matcher regexMatcher = regex.matcher(mc);
+                    while (regexMatcher.find()) {
+                        String val = regexMatcher.group(1);
+                        int colorless_val = Integer.parseInt(val);
+                        int pip_value = 0;
+                        if (pips_at_cmcs.get(cmc + "##c}") != null) {
+                            pip_value = pips.get("#c}");
+                        }
+                        pips_at_cmcs.put(cmc + "##c}", colorless_val + pip_value);
+                        pips.put("#c}", colorless_val + pip_value);
+                    }
+
                     for (String pip : pips.keySet()) {
                         int value = pips.get(pip);
                         while (mc.toLowerCase(Locale.ENGLISH).contains(pip)) {
                             pips.put(pip, ++value);
+                            int pip_value = 0;
+                            if (pips_at_cmcs.get(cmc + "#" + pip) != null) {
+                                pip_value = pips_at_cmcs.get(cmc + "#" + pip);
+                            }
+                            pips_at_cmcs.put(cmc + "#" + pip, ++pip_value);
                             mc = mc.replaceFirst(pip, "");
                         }
                     }
@@ -1448,9 +1470,17 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         panel4.add(new JLabel("Mana sources found:"));
         panel4.add(chart3);
 
+        JPanel panel5 = new JPanel();
+        panel5.setLayout(new BoxLayout(panel5, BoxLayout.Y_AXIS));
+        ManaBarChart chart4 = new ManaBarChart(pips_at_cmcs);
+        chart4.setMinimumSize(new Dimension(200, 200));
+        panel5.add(new JLabel("Mana distribution:"));
+        panel5.add(chart4);
+
         panel.add(panel2);
         panel.add(panel3);
         panel.add(panel4);
+        panel.add(panel5);
 
         JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
         JOptionPane.showMessageDialog(frame, panel, "This is the distribution of colors found", JOptionPane.INFORMATION_MESSAGE);
@@ -1719,7 +1749,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         JMenuItem invertSelection = new JMenuItem("Invert Selection");
         invertSelection.addActionListener(e2 -> invertSelection());
         menu.add(invertSelection);
-        
+
         JMenuItem chooseMatching = new JMenuItem("Choose Matching");
         chooseMatching.addActionListener(e2 -> chooseMatching());
         menu.add(chooseMatching);
