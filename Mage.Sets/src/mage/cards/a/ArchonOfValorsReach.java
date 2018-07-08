@@ -133,7 +133,7 @@ class ArchonOfValorsReachChoice extends ChoiceImpl {
                 return CardType.INSTANT;
             case "Sorcery":
                 return CardType.SORCERY;
-            case "Planewswalker":
+            case "Planeswalker":
                 return CardType.PLANESWALKER;
             default:
                 return null;
