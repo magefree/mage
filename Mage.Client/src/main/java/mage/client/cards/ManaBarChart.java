@@ -120,7 +120,7 @@ public class ManaBarChart extends JComponent {
                 if (color.equalsIgnoreCase("c")) {
                     g.setColor(Color.DARK_GRAY);
                 }
-                g.fill(new Rectangle2D.Double(cmc_num * width_factor, 200 - total_at_cmc - num_pips * height_factor, 10, num_pips * height_factor));
+                g.fill(new Rectangle2D.Double(cmc_num * width_factor, 200 - 1 - total_at_cmc - num_pips * height_factor, 10, num_pips * height_factor));
                 running_totals_at_cmcs.put(cmc_num, total_at_cmc + num_pips * height_factor);
             }
         }
