@@ -44,7 +44,7 @@ public class ExileSourceCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         MageObject sourceObject = ability.getSourceObject(game);
         Player controller = game.getPlayer(controllerId);
-        if (controller != null && sourceObject != null && (sourceObject instanceof Card)) {
+        if (controller != null && sourceObject instanceof Card) {
             UUID exileZoneId = null;
             String exileZoneName = "";
             if (toUniqueExileZone) {

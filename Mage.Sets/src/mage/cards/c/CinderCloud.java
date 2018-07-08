@@ -61,7 +61,7 @@ class CinderCloudEffect extends OneShotEffect {
         if (permanent != null && permanent.destroy(source.getSourceId(), game, false) && permanent.getColor(game).equals(ObjectColor.WHITE)) {
             game.applyEffects();
             if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
-                    && !game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                    && game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
                 // A replacement effect has moved the card to another zone as grvayard
                 return true;
             }

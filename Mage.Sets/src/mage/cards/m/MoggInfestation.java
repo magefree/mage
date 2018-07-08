@@ -65,7 +65,7 @@ class MoggInfestationEffect extends OneShotEffect {
         if (controller != null && getTargetPointer().getFirst(game, source) != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
-                    if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) { // If a commander is replaced to command zone, the creature does not die
+                    if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) { // If a commander is replaced to command zone, the creature does not die
                         Effect effect = new CreateTokenTargetEffect(new GoblinToken(), 2);
                         effect.setTargetPointer(getTargetPointer());
                         effect.apply(game, source);
