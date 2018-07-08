@@ -66,6 +66,9 @@ public class ManaBarChart extends JComponent {
             }
         }
 
+        if (max_num_pips <= 0) {
+            max_num_pips = 1;
+        }
         int height_factor = 200 / max_num_pips;
         int width_factor = 200 / (max_cmc + 2);
         if (width_factor > 20) {
@@ -75,17 +78,36 @@ public class ManaBarChart extends JComponent {
             width_factor = 11;
         }
 
-        g.setColor(Color.LIGHT_GRAY);
+        g.setColor(new Color(130, 130, 130));
         for (int i = 0; i < max_num_pips; i++) {
-            if (i % 10 == 0) {
+            if (max_num_pips > 10) {
+                if (i % 10 == 0) {
+                    g.drawLine(0, 200 - 1 - i * height_factor, 400, 200 - 1 - i * height_factor);
+                } else if (i % 10 == 5) {
+                    Stroke dashed = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{5}, 0);
+                    Stroke oldstroke = g.getStroke();
+                    g.setStroke(dashed);
+                    g.drawLine(0, 200 - 1 - i * height_factor, 400, 200 - 1 - i * height_factor);
+                    g.setStroke(oldstroke);
+                }
+            } else if (i % 2 == 0) {
                 g.drawLine(0, 200 - 1 - i * height_factor, 400, 200 - 1 - i * height_factor);
-            } else if (i % 10 == 5) {
+            } else if (i % 2 == 1) {
                 Stroke dashed = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{5}, 0);
                 Stroke oldstroke = g.getStroke();
                 g.setStroke(dashed);
                 g.drawLine(0, 200 - 1 - i * height_factor, 400, 200 - 1 - i * height_factor);
                 g.setStroke(oldstroke);
             }
+        }
+
+        for (int i = 0; i < 17; i++) {
+            if (i % 5 == 0) {
+                g.drawLine(width_factor * i, 200, width_factor * i, 190);
+            } else {
+                g.drawLine(width_factor * i, 200, width_factor * i, 195);
+            }
+
         }
 
         HashMap<Integer, Integer> running_totals_at_cmcs = new HashMap<Integer, Integer>();
