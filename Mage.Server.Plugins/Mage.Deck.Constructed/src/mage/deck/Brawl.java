@@ -50,8 +50,8 @@ public class Brawl extends Constructed {
             if ((set.getSetType() == SetType.CORE
                     || set.getSetType() == SetType.EXPANSION
                     || set.getSetType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL)
-                    && (!set.getReleaseDate().before(earliestDate)
-                    && !set.getReleaseDate().after(current.getTime()))) {
+                    && (!set.getReleaseDate().before(earliestDate))) {
+                    // && !set.getReleaseDate().after(current.getTime()))) // spjspj - allow m19 to be included..
                 setCodes.add(set.getCode());
             }
         }
