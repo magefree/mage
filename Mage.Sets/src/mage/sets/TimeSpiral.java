@@ -283,6 +283,7 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Thallid Shell-Dweller", 226, Rarity.COMMON, mage.cards.t.ThallidShellDweller.class));
         cards.add(new SetCardInfo("Thelonite Hermit", 228, Rarity.RARE, mage.cards.t.TheloniteHermit.class));
         cards.add(new SetCardInfo("Thelon of Havenwood", 227, Rarity.RARE, mage.cards.t.ThelonOfHavenwood.class));
+        cards.add(new SetCardInfo("Thick-Skinned Goblin", 182, Rarity.UNCOMMON, mage.cards.t.ThickSkinnedGoblin.class));
         cards.add(new SetCardInfo("Think Twice", 86, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thrill of the Hunt", 229, Rarity.COMMON, mage.cards.t.ThrillOfTheHunt.class));
         cards.add(new SetCardInfo("Thunder Totem", 265, Rarity.UNCOMMON, mage.cards.t.ThunderTotem.class));

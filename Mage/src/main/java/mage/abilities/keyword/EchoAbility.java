@@ -1,23 +1,18 @@
 
 package mage.abilities.keyword;
 
-import java.util.Locale;
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import mage.abilities.effects.keyword.EchoEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +77,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // reset the echo paid state back, if creature enteres the battlefield
+        // reset the echo paid state back, if creature enters the battlefield
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 && event.getTargetId().equals(this.getSourceId())) {
 
@@ -128,70 +123,3 @@ public class EchoAbility extends TriggeredAbilityImpl {
     }
 }
 
-class EchoEffect extends OneShotEffect {
-
-    protected Cost cost;
-    protected DynamicValue amount;
-
-    public EchoEffect(Cost costs) {
-        super(Outcome.Sacrifice);
-        this.cost = costs;
-        this.amount = null;
-    }
-
-    public EchoEffect(DynamicValue amount) {
-        super(Outcome.Sacrifice);
-        this.amount = amount;
-        this.cost = null;
-    }
-
-    public EchoEffect(final EchoEffect effect) {
-        super(effect);
-        this.cost = effect.cost;
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (amount != null) {
-            cost = new ManaCostsImpl(Integer.toString(amount.calculate(game, source, this)));
-        }
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null
-                && source.getSourceObjectIfItStillExists(game) != null) {
-            if (controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + '?', source, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ECHO_PAID, source.getSourceId(), source.getSourceId(), source.getControllerId()));
-                    return true;
-                }
-            }
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public EchoEffect copy() {
-        return new EchoEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
-        String costText = cost.getText();
-        if (costText.toLowerCase(Locale.ENGLISH).startsWith("discard")) {
-            sb.append(costText.substring(0, 1).toLowerCase(Locale.ENGLISH));
-            sb.append(costText.substring(1));
-        } else {
-            sb.append("pay ").append(costText);
-        }
-
-        return sb.toString();
-
-    }
-}
