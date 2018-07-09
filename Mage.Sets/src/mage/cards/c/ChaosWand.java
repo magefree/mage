@@ -82,14 +82,16 @@ class ChaosWandEffect extends OneShotEffect {
                 break;
             }
             opponent.moveCards(card, Zone.EXILED, source, game);
+            controller.revealCards(source, new CardsImpl(card), game);
             if (card.isInstant() || card.isSorcery()) {
                 if (!controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)
                         || !controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                     cardsToShuffle.add(card);
                 }
                 break;
+            } else {
+                cardsToShuffle.add(card);
             }
-            cardsToShuffle.add(card);
         }
         return opponent.putCardsOnBottomOfLibrary(cardsToShuffle, game, source, false);
     }
