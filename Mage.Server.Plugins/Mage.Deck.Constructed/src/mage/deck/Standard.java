@@ -20,6 +20,28 @@ public class Standard extends Constructed {
 
     public Standard() {
         super("Constructed - Standard");
+
+        setCodes.addAll(makeLegalSets());
+
+        banned.add("Attune with Aether"); // since 2018-01-15
+        banned.add("Aetherworks Marvel");
+        banned.add("Felidar Guardian");
+        banned.add("Rampaging Ferocidon"); // since 2018-01-15
+        banned.add("Ramunap Ruins"); // since 2018-01-15
+        banned.add("Rogue Refiner"); // since 2018-01-15
+        banned.add("Smuggler's Copter");
+    }
+
+    private static boolean isFallSet(ExpansionSet set) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(set.getReleaseDate());
+        // Fall sets are normally released during or after September
+        return set.getSetType() == SetType.EXPANSION
+                && (cal.get(Calendar.MONTH) > 7);
+    }
+
+    public static List<String> makeLegalSets() {
+        List<String> codes = new ArrayList();
         GregorianCalendar current = new GregorianCalendar();
         List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());
         Collections.sort(sets, new Comparator<ExpansionSet>() {
@@ -50,23 +72,9 @@ public class Standard extends Constructed {
                     || set.getSetType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL)
                     && !set.getReleaseDate().before(earliestDate)) {
 //                    && !set.getReleaseDate().after(current.getTime()))) {
-                setCodes.add(set.getCode());
+                codes.add(set.getCode());
             }
         }
-        banned.add("Attune with Aether"); // since 2018-01-15
-        banned.add("Aetherworks Marvel");
-        banned.add("Felidar Guardian");
-        banned.add("Rampaging Ferocidon"); // since 2018-01-15
-        banned.add("Ramunap Ruins"); // since 2018-01-15
-        banned.add("Rogue Refiner"); // since 2018-01-15
-        banned.add("Smuggler's Copter");
-    }
-
-    private static boolean isFallSet(ExpansionSet set) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(set.getReleaseDate());
-        // Fall sets are normally released during or after September
-        return set.getSetType() == SetType.EXPANSION
-                && (cal.get(Calendar.MONTH) > 7);
+        return codes;
     }
 }
