@@ -23,16 +23,16 @@ import org.mage.plugins.card.utils.CardImageUtils;
  * The class DownloadJob.
  *
  * @version V0.0 25.08.2010
- * @author Clemens Koza
+ * @author Clemens Koza, JayDi85
  */
 public class DownloadJob extends AbstractLaternaBean {
 
     public enum State {
-        NEW, WORKING, FINISHED, ABORTED
+        NEW, PREPARING, WORKING, FINISHED, ABORTED
     }
 
     private final String name;
-    private final Source source;
+    private Source source;
     private final Destination destination;
     private final Property<State> state = properties.property("state", State.NEW);
     private final Property<String> message = properties.property("message");
@@ -99,6 +99,36 @@ public class DownloadJob extends AbstractLaternaBean {
     }
 
     /**
+     * Inner prepare cycle from new to working
+     */
+    public void doPrepareAndStartWork() {
+        if (this.state.getValue() != State.NEW) {
+            setError("Can't call prepare at this point.");
+            return;
+        }
+
+        this.state.setValue(State.PREPARING);
+
+        try {
+            onPreparing();
+        } catch (Exception e) {
+            setError("Prepare error: " + e.getMessage(), e);
+            return;
+        }
+
+        // change to working state on good prepare call
+        this.state.setValue(State.WORKING);
+    }
+
+
+    /**
+     * Prepare code to override in custom download tasks (it's calls before work start)
+     */
+    public void onPreparing() throws Exception {
+        return;
+    }
+
+    /**
      * Sets the job's message.
      *
      * @param message
@@ -129,6 +159,10 @@ public class DownloadJob extends AbstractLaternaBean {
 
     public Source getSource() {
         return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 
     public Destination getDestination() {

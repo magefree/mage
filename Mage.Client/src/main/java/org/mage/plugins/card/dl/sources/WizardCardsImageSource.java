@@ -35,6 +35,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mage.plugins.card.images.CardDownloadData;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  * @author North
@@ -535,7 +536,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                 while (page < 999) {
                     String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&page=" + page + "&action=advanced&output=spoiler&method=visual&set=+%5B%22" + URLSetName + "%22%5D";
                     logger.debug("URL: " + searchUrl);
-                    Document doc = getDocument(searchUrl);
+                    Document doc = CardImageUtils.downloadHtmlDocument(searchUrl);
                     Elements cardsImages = doc.select("img[src^=../../Handlers/]");
                     if (cardsImages.isEmpty()) {
                         break;
@@ -587,33 +588,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         return setLinks;
     }
 
-    private Document getDocument(String urlString) throws NumberFormatException, IOException {
-        Preferences prefs = MageFrame.getPreferences();
-        Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
-        Document doc;
-        if (proxyType == ProxyType.NONE) {
-            doc = Jsoup.connect(urlString).timeout(60 * 1000).get();
-        } else {
-            String proxyServer = prefs.get("proxyAddress", "");
-            int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
-            URL url = new URL(urlString);
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
-            HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
-            uc.setConnectTimeout(10000);
-            uc.setReadTimeout(60000);
-            uc.connect();
-
-            String line;
-            StringBuffer tmp = new StringBuffer();
-            BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            while ((line = in.readLine()) != null) {
-                tmp.append(line);
-            }
-            doc = Jsoup.parse(String.valueOf(tmp));
-        }
-        return doc;
-    }
-
     private void getLandVariations(LinkedHashMap<String, String> setLinks, String cardSet, int multiverseId, String cardName) throws IOException, NumberFormatException {
         CardCriteria criteria = new CardCriteria();
         criteria.nameExact(cardName);
@@ -621,7 +595,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
-        Document landDoc = getDocument(urlLandDocument);
+        Document landDoc = CardImageUtils.downloadHtmlDocument(urlLandDocument);
         Elements variations = landDoc.select("a.variationlink");
         if (!variations.isEmpty()) {
             if (variations.size() > cards.size()) {
@@ -668,7 +642,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     private HashMap<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {
         String cardLanguagesUrl = "http://gatherer.wizards.com/Pages/Card/Languages.aspx?multiverseid=" + englishMultiverseId;
-        Document cardLanguagesDoc = getDocument(cardLanguagesUrl);
+        Document cardLanguagesDoc = CardImageUtils.downloadHtmlDocument(cardLanguagesUrl);
         Elements languageTableRows = cardLanguagesDoc.select("tr.cardItem");
         HashMap<String, Integer> localizedIds = new HashMap<>();
         if (!languageTableRows.isEmpty()) {
