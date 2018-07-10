@@ -1,29 +1,20 @@
 package mage.cards.n;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
-import mage.abilities.effects.common.continuous.BecomesColorAllEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -36,8 +27,8 @@ public final class Nightcreep extends CardImpl {
         
 
         // Until end of turn, all creatures become black and all lands become Swamps.
-        this.getSpellAbility().addEffect(new BecomesColorAllEffect(ObjectColor.BLACK, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true, "Until end of turn, all creatures become black and all lands become Swamps"));
-        this.getSpellAbility().addEffect(new NightcreepEffect());
+        this.getSpellAbility().addEffect(new NightcreepCreatureEffect());
+        this.getSpellAbility().addEffect(new NightcreepLandEffect());
     }
 
     public Nightcreep(final Nightcreep card) {
@@ -50,48 +41,60 @@ public final class Nightcreep extends CardImpl {
     }
 }
 
-class NightcreepEffect extends ContinuousEffectImpl {
+class NightcreepLandEffect extends BecomesBasicLandTargetEffect {
 
-    public NightcreepEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+    public NightcreepLandEffect() {
+        super(Duration.EndOfTurn, SubType.SWAMP);
         this.staticText = "";
     }
 
-    public NightcreepEffect(NightcreepEffect effect) {
+    public NightcreepLandEffect(NightcreepLandEffect effect) {
         super(effect);
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source.getSourceId(), game));
+        this.setTargetPointer(new FixedTargets(targets, game));
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent land : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), game)) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
-                    // So the ability removing has to be done before Layer 6
-                    land.removeAllAbilities(source.getSourceId(), game);
-                    land.getSubtype(game).removeAll(SubType.getLandTypes(false));
-                    land.getSubtype(game).add(SubType.SWAMP);
-                    break;
-                case AbilityAddingRemovingEffects_6:
-                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                    break;
-            }
-        }
-        return true;
+        return super.apply(layer, sublayer, source, game);
     }
 
     @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+    public NightcreepLandEffect copy() {
+        return new NightcreepLandEffect(this);
+    }
+}
+
+class NightcreepCreatureEffect extends BecomesColorTargetEffect {
+
+    public NightcreepCreatureEffect() {
+        super(ObjectColor.BLACK, Duration.EndOfTurn);
+        this.staticText = "Until end of turn, all creatures become black and all lands become Swamps";
+    }
+
+    public NightcreepCreatureEffect(NightcreepCreatureEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
+        this.setTargetPointer(new FixedTargets(targets, game));
     }
 
     @Override
-    public NightcreepEffect copy() {
-        return new NightcreepEffect(this);
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        return super.apply(layer, sublayer, source, game);
+    }
+
+    @Override
+    public NightcreepCreatureEffect copy() {
+        return new NightcreepCreatureEffect(this);
     }
 }
