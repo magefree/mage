@@ -2,7 +2,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.w.WreathOfGeists;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -310,7 +309,7 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Wooden Stake", 237, Rarity.COMMON, mage.cards.w.WoodenStake.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 249, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Woodland Sleuth", 210, Rarity.COMMON, mage.cards.w.WoodlandSleuth.class));
-        cards.add(new SetCardInfo("Wreath of Geists", 211, Rarity.UNCOMMON, WreathOfGeists.class));
+        cards.add(new SetCardInfo("Wreath of Geists", 211, Rarity.UNCOMMON, mage.cards.w.WreathOfGeists.class));
     }
 
 }

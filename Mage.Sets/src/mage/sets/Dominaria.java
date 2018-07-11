@@ -2,7 +2,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.g.GiftOfGrowth;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -118,7 +117,7 @@ public final class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Ghitu Journeymage", 126, Rarity.COMMON, mage.cards.g.GhituJourneymage.class));
         cards.add(new SetCardInfo("Ghitu Lavarunner", 127, Rarity.COMMON, mage.cards.g.GhituLavarunner.class));
         cards.add(new SetCardInfo("Gideon's Reproach", 19, Rarity.COMMON, mage.cards.g.GideonsReproach.class));
-        cards.add(new SetCardInfo("Gift of Growth", 163, Rarity.COMMON, GiftOfGrowth.class));
+        cards.add(new SetCardInfo("Gift of Growth", 163, Rarity.COMMON, mage.cards.g.GiftOfGrowth.class));
         cards.add(new SetCardInfo("Gilded Lotus", 215, Rarity.RARE, mage.cards.g.GildedLotus.class));
         cards.add(new SetCardInfo("Goblin Barrage", 128, Rarity.UNCOMMON, mage.cards.g.GoblinBarrage.class));
         cards.add(new SetCardInfo("Goblin Chainwhirler", 129, Rarity.RARE, mage.cards.g.GoblinChainwhirler.class));
