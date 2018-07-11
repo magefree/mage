@@ -61,6 +61,7 @@ public final class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Grub", 69, Rarity.COMMON, mage.cards.d.DeadlyGrub.class));
         cards.add(new SetCardInfo("Deadwood Treefolk", 126, Rarity.UNCOMMON, mage.cards.d.DeadwoodTreefolk.class));
         cards.add(new SetCardInfo("Detritivore", 96, Rarity.RARE, mage.cards.d.Detritivore.class));
+        cards.add(new SetCardInfo("Dichotomancy", 38, Rarity.RARE, mage.cards.d.Dichotomancy.class));
         cards.add(new SetCardInfo("Dismal Failure", 39, Rarity.UNCOMMON, mage.cards.d.DismalFailure.class));
         cards.add(new SetCardInfo("Dormant Sliver", 156, Rarity.UNCOMMON, mage.cards.d.DormantSliver.class));
         cards.add(new SetCardInfo("Dreamscape Artist", 40, Rarity.COMMON, mage.cards.d.DreamscapeArtist.class));
