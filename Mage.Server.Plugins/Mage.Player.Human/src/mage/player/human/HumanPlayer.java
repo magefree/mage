@@ -341,8 +341,18 @@ public class HumanPlayer extends PlayerImpl {
 
         replacementEffectChoice.getChoices().clear();
         replacementEffectChoice.setKeyChoices(rEffects);
+        
+        // Check if there are different ones
+        int differentChoices = 0;
+        String lastChoice = "";
+        for (String value : replacementEffectChoice.getKeyChoices().values()) {
+            if (!lastChoice.equalsIgnoreCase(value)) {
+                lastChoice = value;
+                differentChoices++;
+            }
+        }
 
-        while (!abort) {
+        while (!abort && differentChoices > 1) {
             updateGameStatePriority("chooseEffect", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
