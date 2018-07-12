@@ -18,40 +18,41 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ayratn
  */
-public final class BurntheImpure extends CardImpl {
+public final class BurnTheImpure extends CardImpl {
 
-    public BurntheImpure(UUID ownerId, CardSetInfo setInfo) {
+    public BurnTheImpure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
+        // Burn the Impure deals 3 damage to target creature. If that creature has infect, Burn the Impure deals 3 damage to that creature’s controller.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BurntheImpureEffect());
+        this.getSpellAbility().addEffect(new BurnTheImpureEffect());
     }
 
-    public BurntheImpure(final BurntheImpure card) {
+    public BurnTheImpure(final BurnTheImpure card) {
         super(card);
     }
 
     @Override
-    public BurntheImpure copy() {
-        return new BurntheImpure(this);
+    public BurnTheImpure copy() {
+        return new BurnTheImpure(this);
     }
 
 }
 
-class BurntheImpureEffect extends OneShotEffect {
+class BurnTheImpureEffect extends OneShotEffect {
 
-    public BurntheImpureEffect() {
+    public BurnTheImpureEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target creature. If that creature has infect, {this} deals 3 damage to that creature's controller.";
     }
 
-    public BurntheImpureEffect(final BurntheImpureEffect effect) {
+    public BurnTheImpureEffect(final BurnTheImpureEffect effect) {
         super(effect);
     }
 
     @Override
-    public BurntheImpureEffect copy() {
-        return new BurntheImpureEffect(this);
+    public BurnTheImpureEffect copy() {
+        return new BurnTheImpureEffect(this);
     }
 
     @Override
