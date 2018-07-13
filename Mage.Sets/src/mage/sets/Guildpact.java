@@ -130,6 +130,7 @@ public final class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Pillory of the Sleepless", 125, Rarity.COMMON, mage.cards.p.PilloryOfTheSleepless.class));
         cards.add(new SetCardInfo("Plagued Rusalka", 56, Rarity.UNCOMMON, mage.cards.p.PlaguedRusalka.class));
         cards.add(new SetCardInfo("Poisonbelly Ogre", 57, Rarity.COMMON, mage.cards.p.PoisonbellyOgre.class));
+        cards.add(new SetCardInfo("Predatory Focus", 92, Rarity.UNCOMMON, mage.cards.p.PredatoryFocus.class));
         cards.add(new SetCardInfo("Primeval Light", 93, Rarity.UNCOMMON, mage.cards.p.PrimevalLight.class));
         cards.add(new SetCardInfo("Pyromatics", 72, Rarity.COMMON, mage.cards.p.Pyromatics.class));
         cards.add(new SetCardInfo("Quicken", 31, Rarity.RARE, mage.cards.q.Quicken.class));
