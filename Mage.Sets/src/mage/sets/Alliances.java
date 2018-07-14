@@ -89,7 +89,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Inheritance", 4, Rarity.UNCOMMON, mage.cards.i.Inheritance.class));
         cards.add(new SetCardInfo("Insidious Bookworms", "51a", Rarity.COMMON, mage.cards.i.InsidiousBookworms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Insidious Bookworms", "51b", Rarity.COMMON, mage.cards.i.InsidiousBookworms.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ivory Gargoyle", 131, Rarity.RARE, mage.cards.i.IvoryGargoyle.class));
+        cards.add(new SetCardInfo("Ivory Gargoyle", 5, Rarity.RARE, mage.cards.i.IvoryGargoyle.class));
         cards.add(new SetCardInfo("Juniper Order Advocate", 6, Rarity.UNCOMMON, mage.cards.j.JuniperOrderAdvocate.class));
         cards.add(new SetCardInfo("Kaysa", 96, Rarity.RARE, mage.cards.k.Kaysa.class));
         cards.add(new SetCardInfo("Keeper of Tresserhorn", 52, Rarity.RARE, mage.cards.k.KeeperOfTresserhorn.class));
