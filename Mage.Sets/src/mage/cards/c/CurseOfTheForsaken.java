@@ -83,8 +83,7 @@ class CurseOfTheForsakenTriggeredAbility extends TriggeredAbilityImpl {
         if (defender != null) {
             Permanent enchantment = game.getPermanent(this.getSourceId());
             if (enchantment != null
-                    && enchantment.getAttachedTo() != null
-                    && enchantment.getAttachedTo().equals(defender.getId())) {
+                    && enchantment.isAttachedTo(defender.getId())) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

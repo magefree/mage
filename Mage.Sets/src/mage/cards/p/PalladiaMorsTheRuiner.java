@@ -33,7 +33,7 @@ import mage.watchers.Watcher;
 public final class PalladiaMorsTheRuiner extends CardImpl {
 
     public PalladiaMorsTheRuiner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);

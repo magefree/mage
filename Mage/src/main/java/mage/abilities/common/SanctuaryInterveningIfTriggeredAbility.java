@@ -8,7 +8,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author TheElk801
  */
-public class SanctuaryTriggeredAbility extends ConditionalTriggeredAbility {
+public class SanctuaryInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
     private static Condition makeOrCondition(ObjectColor color1, ObjectColor color2) {
         FilterPermanent filter = new FilterPermanent();
@@ -48,7 +48,7 @@ public class SanctuaryTriggeredAbility extends ConditionalTriggeredAbility {
         return ability;
     }
 
-    public SanctuaryTriggeredAbility(OneShotEffect effect1, OneShotEffect effect2, ObjectColor color1, ObjectColor color2, String text) {
+    public SanctuaryInterveningIfTriggeredAbility(OneShotEffect effect1, OneShotEffect effect2, ObjectColor color1, ObjectColor color2, String text) {
         super(makeTrigger(effect1, effect2, color1, color2), makeOrCondition(color1, color2), text);
     }
 }

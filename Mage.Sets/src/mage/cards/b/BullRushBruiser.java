@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.constants.SubType;
@@ -36,7 +36,7 @@ public final class BullRushBruiser extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Bull-Rush Bruiser attacks, if your team controls another Warrior, Bull-Rush Bruiser gains first strike until end of turn.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "Whenever {this} attacks, if your team controls another Warrior, "

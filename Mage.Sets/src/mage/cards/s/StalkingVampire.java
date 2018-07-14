@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  * @author nantuko

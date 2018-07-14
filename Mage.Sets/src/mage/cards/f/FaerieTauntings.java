@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *

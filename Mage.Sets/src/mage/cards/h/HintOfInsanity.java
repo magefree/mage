@@ -46,7 +46,7 @@ class HintOfInsanityEffect extends OneShotEffect {
 
     public HintOfInsanityEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals his or her hand. That player discards all nonland cards with the same name as another card in his or her hand";
+        this.staticText = "Target player reveals their hand. That player discards all nonland cards with the same name as another card in their hand";
     }
 
     public HintOfInsanityEffect(final HintOfInsanityEffect effect) {

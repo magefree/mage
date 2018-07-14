@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
@@ -37,7 +37,7 @@ public final class BrinkOfMadness extends CardImpl {
         ability.addEffect(new BrinkOfMadnessEffect());
         ability.addTarget(new TargetOpponent());
         CardsInHandCondition contition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
-        this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards their hand."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards their hand."));
         
     }
 

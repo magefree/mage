@@ -105,7 +105,7 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (castOnTurn != game.getTurnNum() && game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
+            if (game.isActivePlayer(source.getControllerId())) {
                 return true;
             }
         }

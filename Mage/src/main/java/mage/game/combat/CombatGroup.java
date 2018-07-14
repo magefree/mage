@@ -12,6 +12,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -124,11 +125,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     return;
                 } else {
                     Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : attacker.getControllerId());
-                    if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) { // for handling creatures like Thorn Elemental
-                        if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", null, game)) {
-                            blocked = false;
-                            unblockedDamage(first, game);
-                        }
+                    if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
+                            player.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
+                            + attacker.getLogName() + " as though it weren't blocked?", null, game)) ||
+                            game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED
+                                    , null, attacker.getControllerId(), game) != null) {
+                        // for handling creatures like Thorn Elemental
+                        blocked = false;
+                        unblockedDamage(first, game);
                     }
                     if (blockers.size() == 1) {
                         singleBlockerDamage(player, first, game);

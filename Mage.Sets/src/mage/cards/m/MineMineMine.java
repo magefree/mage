@@ -63,7 +63,7 @@ class MineMineMineDrawEffect extends OneShotEffect {
 
     MineMineMineDrawEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "each player puts his or her library into his or her hand";
+        this.staticText = "each player puts their library into their hand";
     }
 
     MineMineMineDrawEffect(final MineMineMineDrawEffect effect) {

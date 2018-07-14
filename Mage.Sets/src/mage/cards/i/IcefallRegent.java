@@ -132,7 +132,7 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {
                 Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
-                return targetCreature != null && game.getActivePlayerId().equals(targetCreature.getControllerId());
+                return targetCreature != null && game.isActivePlayer(targetCreature.getControllerId());
             }
         }
 

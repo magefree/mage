@@ -129,7 +129,7 @@ class PurgatoryExileEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (sourceController != null && exileId != null && sourceObject != null && card != null) {
-            if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+            if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                 sourceController.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
             }
             return true;

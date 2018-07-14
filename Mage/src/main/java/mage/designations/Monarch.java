@@ -84,8 +84,7 @@ class MonarchDealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             MageObject damagingObject = game.getObject(event.getSourceId());
-            if (damagingObject != null
-                    && damagingObject instanceof Permanent
+            if (damagingObject instanceof Permanent
                     && damagingObject.isCreature()
                     && event.getTargetId().equals(game.getMonarchId())) {
                 setControllerId(event.getPlayerId());

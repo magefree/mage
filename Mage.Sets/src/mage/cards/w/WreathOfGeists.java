@@ -23,9 +23,9 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public final class WreathofGeists extends CardImpl {
+public final class WreathOfGeists extends CardImpl {
 
-    public WreathofGeists(UUID ownerId, CardSetInfo setInfo) {
+    public WreathOfGeists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
         this.subtype.add(SubType.AURA);
 
@@ -43,12 +43,12 @@ public final class WreathofGeists extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(value, value)));
     }
 
-    public WreathofGeists(final WreathofGeists card) {
+    public WreathOfGeists(final WreathOfGeists card) {
         super(card);
     }
 
     @Override
-    public WreathofGeists copy() {
-        return new WreathofGeists(this);
+    public WreathOfGeists copy() {
+        return new WreathOfGeists(this);
     }
 }

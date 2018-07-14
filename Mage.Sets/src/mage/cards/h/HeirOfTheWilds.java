@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class HeirOfTheWilds extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // <em>Ferocious</em> - Whenever Heir of the Wilds attacks, if you control a creature with power 4 or greater, Heir of the Wilds gets +1/+1 until end of turn.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new BoostSourceEffect(1,1,Duration.EndOfTurn), false),
                 FerociousCondition.instance,
                 "<i>Ferocious</i> &mdash; Whenever {this} attacks, if you control a creature with power 4 or greater, {this} gets +1/+1 until end of turn."

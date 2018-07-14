@@ -73,7 +73,7 @@ class SirensCallMustAttackEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return game.getActivePlayerId().equals(permanent.getControllerId());
+        return game.isActivePlayer(permanent.getControllerId());
     }
 
     @Override

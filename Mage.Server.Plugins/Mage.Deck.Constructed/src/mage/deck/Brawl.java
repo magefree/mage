@@ -3,11 +3,8 @@ package mage.deck;
 import java.util.*;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 
 /**
@@ -22,50 +19,11 @@ public class Brawl extends Constructed {
         super("Brawl");
 
         // Copy of standard sets
-        GregorianCalendar current = new GregorianCalendar();
-        List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());
-        Collections.sort(sets, new Comparator<ExpansionSet>() {
-            @Override
-            public int compare(final ExpansionSet lhs, ExpansionSet rhs) {
-                return lhs.getReleaseDate().after(rhs.getReleaseDate()) ? -1 : 1;
-            }
-        });
-        int fallSetsAdded = 0;
-        Date earliestDate = null;
-        // Get the second most recent fall set that's been released.
-        for (ExpansionSet set : sets) {
-            if (set.getReleaseDate().after(current.getTime())) {
-                continue;
-            }
-            if (isFallSet(set)) {
-                fallSetsAdded++;
-                if (fallSetsAdded == 2) {
-                    earliestDate = set.getReleaseDate();
-                    break;
-                }
-            }
-        }
-        // Get all sets released on or after the second most recent fall set's release
-        for (ExpansionSet set : sets) {
-            if ((set.getSetType() == SetType.CORE
-                    || set.getSetType() == SetType.EXPANSION
-                    || set.getSetType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL)
-                    && (!set.getReleaseDate().before(earliestDate)
-                    && !set.getReleaseDate().after(current.getTime()))) {
-                setCodes.add(set.getCode());
-            }
-        }
+        setCodes.addAll(Standard.makeLegalSets());
+
         banned.add("Baral, Chief of Compliance");
         banned.add("Smuggler's Copter");
-        banned.add("Sorcerers' Spyglass");
-    }
-
-    private static boolean isFallSet(ExpansionSet set) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(set.getReleaseDate());
-        // Fall sets are normally released during or after September
-        return set.getSetType() == SetType.EXPANSION
-                && (cal.get(Calendar.MONTH) > 7);
+        banned.add("Sorcerous Spyglass");
     }
 
     public Brawl(String name) {

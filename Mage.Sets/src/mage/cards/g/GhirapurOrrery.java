@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.IntCompareCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsAllEffect;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class GhirapurOrrery extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
 
         // At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), TargetController.ANY, false, true),
                 new GhirapurOrreryCondition(),
                 "At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards."));

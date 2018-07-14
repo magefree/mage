@@ -11,7 +11,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -59,7 +59,7 @@ public final class RavagerOfTheFells extends CardImpl {
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 TwoOrMoreSpellsWereCastLastTurnCondition.instance,
                 TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE

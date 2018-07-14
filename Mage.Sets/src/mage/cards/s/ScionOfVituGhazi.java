@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
@@ -29,9 +29,10 @@ public final class ScionOfVituGhazi extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        //When Scion of Vitu-Ghazi enters the battlefield, if you cast it from your hand, create a 1/1 white Bird creature token with flying, then populate.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken()), false);
         ability.addEffect(new PopulateEffect("then"));
-        this.addAbility(new ConditionalTriggeredAbility(ability, CastFromHandSourceCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, CastFromHandSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, create a 1/1 white Bird creature token with flying, then populate."),
                 new CastFromHandWatcher());
     }

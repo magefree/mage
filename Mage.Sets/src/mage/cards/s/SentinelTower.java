@@ -61,7 +61,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(getControllerId())
+        if (game.isActivePlayer(getControllerId())
                 && super.checkTrigger(event, game)) {
             SentinelTowerWatcher watcher = (SentinelTowerWatcher) game.getState().getWatchers().get(SentinelTowerWatcher.class.getSimpleName());
             if (watcher == null) {

@@ -16,7 +16,7 @@ public class BrawlDuelMatch extends MatchImpl {
 
     @Override
     public void startGame() throws GameException {
-        int startLife = 20;
+        int startLife = 25;
         boolean alsoHand = true;
         BrawlDuel game = new BrawlDuel(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setCheckCommanderDamage(false);

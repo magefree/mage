@@ -139,13 +139,13 @@ class MuldrothaTheGravetideWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.PLAY_LAND) {
             fromZone = game.getState().getZone(event.getTargetId()); // Remember the Zone the land came from
         }
-        if (event.getType() == GameEvent.EventType.LAND_PLAYED && fromZone.equals(Zone.GRAVEYARD)) {
+        if (event.getType() == GameEvent.EventType.LAND_PLAYED && fromZone == Zone.GRAVEYARD) {
             addPermanentTypes(event, game.getPermanentOrLKIBattlefield(event.getTargetId()), game);
         }
 
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.getFromZone().equals(Zone.GRAVEYARD)) {
+            if (spell.getFromZone() == Zone.GRAVEYARD) {
                 addPermanentTypes(event, spell, game);
             }
         }

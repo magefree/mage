@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
@@ -36,9 +36,8 @@ public final class Portcullis extends CardImpl {
         // Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.
         String rule = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature";
         TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PortcullisExileEffect(), filter, false, SetTargetPointer.PERMANENT, rule);
-
         MoreThanXCreaturesOnBFCondition condition = new MoreThanXCreaturesOnBFCondition(2);
-        this.addAbility(new ConditionalTriggeredAbility(ability, condition, rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, rule));
 
         // Return that card to the battlefield under its owner's control when Portcullis leaves the battlefield.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);

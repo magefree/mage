@@ -1,9 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,9 +11,9 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
@@ -25,6 +22,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetDefender;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

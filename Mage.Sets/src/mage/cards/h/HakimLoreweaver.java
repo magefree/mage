@@ -145,7 +145,7 @@ class HakimLoreweaverCondition implements Condition {
                 }
             }
             return PhaseStep.UPKEEP == game.getStep().getType()
-                    && game.getActivePlayerId().equals(source.getControllerId());
+                    && game.isActivePlayer(source.getControllerId());
         }
         return false;
     }

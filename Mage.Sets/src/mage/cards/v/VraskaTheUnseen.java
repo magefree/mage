@@ -112,7 +112,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (startingTurn != 0 && game.getTurnNum() != startingTurn) {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
+            if (game.isActivePlayer(source.getControllerId())) {
                 return true;
             }
         }

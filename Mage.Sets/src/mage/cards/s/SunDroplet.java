@@ -7,7 +7,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -36,8 +36,9 @@ public final class SunDroplet extends CardImpl {
         // Whenever you're dealt damage, put that many charge counters on Sun Droplet.
         this.addAbility(new SunDropletTriggeredAbility());
         // At the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life.
+        //TODO this shouldn't be conditional because you can respond to the trigger by adding counters.
         Effect effect = new DoIfCostPaid(new GainLifeEffect(1), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
-        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false),
                 new SourceHasCounterCondition(CounterType.CHARGE, 1),
                 "At the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life"));
     }

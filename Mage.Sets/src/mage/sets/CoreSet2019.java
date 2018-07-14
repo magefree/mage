@@ -30,8 +30,8 @@ public final class CoreSet2019 extends ExpansionSet {
         super("Core Set 2019", "M19", ExpansionSet.buildDate(2018, 7, 13), SetType.CORE);
         this.hasBoosters = true;
         this.hasBasicLands = true;
-        this.numBoosterSpecial = 1;
-        this.numBoosterLands = 0;
+        this.numBoosterSpecial = 0;
+        this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
@@ -41,7 +41,8 @@ public final class CoreSet2019 extends ExpansionSet {
         
         // Core 2019 boosters have a 5/12 chance of basic land being replaced
         // with the common taplands, which DO NOT appear in the common slot.
-        this.ratioBoosterSpecialLand = 5/12;
+        this.ratioBoosterSpecialLand = 12;
+        this.ratioBoosterSpecialLandNumerator = 5;
 
         cards.add(new SetCardInfo("Abnormal Endurance", 85, Rarity.COMMON, mage.cards.a.AbnormalEndurance.class));
         cards.add(new SetCardInfo("Act of Treason", 127, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
@@ -362,17 +363,17 @@ public final class CoreSet2019 extends ExpansionSet {
 
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        // Common cards retrievement of Fate Reforged boosters - prevent the retrievement of the common lands (e.g. Blossoming Sands)
+        // Common cards retrievement of Core Set 2019 boosters - prevent the retrievement of the common lands (e.g. Meandering River)
         if (rarity == Rarity.COMMON) {
             List<CardInfo> savedCardsInfos = savedCards.get(rarity);
             if (savedCardsInfos == null) {
                 CardCriteria criteria = new CardCriteria();
                 criteria.rarities(Rarity.COMMON);
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    criteria.maxCardNumber(maxCardNumberInBooster);
-                }
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
+                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                }
                 savedCards.put(rarity, savedCardsInfos);
             }
             // Return a copy of the saved cards information, as not to let modify the original.
@@ -381,20 +382,6 @@ public final class CoreSet2019 extends ExpansionSet {
             return super.getCardsByRarity(rarity);
         }
     }
-
-    @Override
-    public List<CardInfo> getSpecialCommon() {
-        List<CardInfo> specialCommons = new ArrayList<>();
-        if (savedSpecialCommon.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.rarities(Rarity.COMMON).setCodes(this.code).types(CardType.LAND);
-            savedSpecialCommon = CardRepository.instance.findCards(criteria);
-            criteria.rarities(Rarity.LAND).setCodes(this.code);
-            savedSpecialCommon.addAll(CardRepository.instance.findCards(criteria));
-        }
-        specialCommons.addAll(savedSpecialCommon);
-        return specialCommons;
-    }
     
     @Override
     // the common taplands replacing the basic land
@@ -402,16 +389,10 @@ public final class CoreSet2019 extends ExpansionSet {
     {
         if (savedSpecialLand.isEmpty())
         {
-            List<String> TaplandNames = Arrays.asList(
-                "Cinder Barrens", "Forsaken Sanctuary", "Foul Orchard",
-                "Highland Lake", "Meandering River", "Stone Quarry",
-                "Submerged Boneyard", "Timber Gorge", "Tranquil Expanse",
-                "Woodland Stream"
-            );
-            
             CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("M19");
-            for (String name: TaplandNames) { criteria.nameExact(name); }
+            criteria.setCodes(this.code);
+            criteria.rarities(Rarity.COMMON);
+            criteria.types(CardType.LAND);
             savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
         }
         

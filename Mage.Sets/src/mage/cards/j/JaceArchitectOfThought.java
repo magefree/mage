@@ -134,7 +134,7 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
 
     @Override
     public boolean isInactive(Game game) {
-        return game.getActivePlayerId().equals(getControllerId()) && game.getTurnNum() != startingTurn;
+        return game.isActivePlayer(getControllerId()) && game.getTurnNum() != startingTurn;
     }
 
     @Override

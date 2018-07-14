@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class ImpendingDisaster extends CardImpl {
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new DestroyAllEffect(new FilterLandPermanent()));
         ImpendingDisasterCondition contition = new ImpendingDisasterCondition();
-        this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if there are seven or more lands on the battlefield, sacrifice {this} and destroy all lands"));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if there are seven or more lands on the battlefield, sacrifice {this} and destroy all lands"));
         
     }
 

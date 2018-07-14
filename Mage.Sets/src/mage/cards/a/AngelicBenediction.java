@@ -62,7 +62,7 @@ class AngelicBenedictionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(this.controllerId)) {
+        if (game.isActivePlayer(this.controllerId)) {
             if (game.getCombat().attacksAlone()) {
                 return true;
             }

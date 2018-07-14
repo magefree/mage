@@ -7,6 +7,9 @@ import java.util.List;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.sets.CoreSet2019;
 import mage.sets.FateReforged;
 import mage.sets.MastersEditionII;
 import mage.sets.MastersEditionIV;
@@ -97,6 +100,19 @@ public class BoosterGenerationTest extends MageTestBase {
             assertTrue(str(booster), contains(booster, urzaLand, "ME4"));
             assertFalse(str(booster), contains(booster, basics, null));
         }
+    }
+
+    @Test
+    public void testCoreSet2019_DualLandsAreGenerated() {
+        List<Card> allCards = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            List<Card> booster = CoreSet2019.getInstance().createBooster();
+            // check that booster contains a land card
+            assertTrue(booster.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND)));
+            allCards.addAll(booster);
+        }
+        // check that some dual lands were generated
+        assertTrue(allCards.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND) && card.getRarity().equals(Rarity.COMMON)));
     }
 
     private static String str(List<Card> cards) {

@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class HaphazardBombardment extends CardImpl {
         FilterPermanent filter = new FilterPermanent("if two or more permanents you don't control have an aim counter on them");
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
         filter.add(new CounterPredicate(CounterType.AIM));
-        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new HaphazardBombardmentEndOfTurnEffect(), false),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new HaphazardBombardmentEndOfTurnEffect(), false),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, false),
                 "At the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random"));
     }

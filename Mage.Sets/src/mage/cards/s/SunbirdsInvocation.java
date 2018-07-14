@@ -64,7 +64,7 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
         if (event.getPlayerId().equals(getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
-                    && spell.getFromZone().equals(Zone.HAND)
+                    && spell.getFromZone() == Zone.HAND
                     && spell.isOwnedBy(getControllerId())) { // must be from the controller's hand
                 if (spell.getCard() != null) {
                     for (Effect effect : getEffects()) {

@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -40,7 +40,7 @@ public final class AkutaBornOfAsh extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of your upkeep, if you have more cards in hand than each opponent, you may sacrifice a Swamp. If you do, return Akuta, Born of Ash from your graveyard to the battlefield.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
                     new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filterSwamp))),
                     TargetController.YOU, false),

@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -41,7 +41,7 @@ public final class UrborgStalker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of each player's upkeep, if that player controls a nonblack, nonland permanent, Urborg Stalker deals 1 damage to that player.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(1), TargetController.ANY, false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "At the beginning of each player's upkeep, "

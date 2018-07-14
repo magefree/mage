@@ -48,8 +48,7 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
         if (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage()) {
             Permanent attachment = game.getPermanent(this.getSourceId());
             if (attachment != null
-                    && attachment.getAttachedTo() != null
-                    && event.getSourceId().equals(attachment.getAttachedTo())) {
+                    && attachment.isAttachedTo(event.getSourceId())) {
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));

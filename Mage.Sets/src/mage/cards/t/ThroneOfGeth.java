@@ -20,27 +20,31 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public final class ThroneofGeth extends CardImpl {
+public final class ThroneOfGeth extends CardImpl {
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public ThroneofGeth (UUID ownerId, CardSetInfo setInfo) {
+    public ThroneOfGeth(UUID ownerId, CardSetInfo setInfo) {
+
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+
+        // {T}, Sacrifice an artifact: Proliferate.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
 
-    public ThroneofGeth (final ThroneofGeth card) {
+    public ThroneOfGeth(final ThroneOfGeth card) {
         super(card);
     }
 
     @Override
-    public ThroneofGeth copy() {
-        return new ThroneofGeth(this);
+    public ThroneOfGeth copy() {
+        return new ThroneOfGeth(this);
     }
 
 }

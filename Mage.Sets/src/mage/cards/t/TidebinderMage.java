@@ -118,7 +118,7 @@ class TidebinderMageEffect extends ContinuousRuleModifyingEffectImpl {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                if (permanent != null && game.isActivePlayer(permanent.getControllerId())) {
                     return true;
                 }
             }

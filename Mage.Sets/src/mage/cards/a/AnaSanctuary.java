@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SanctuaryTriggeredAbility;
+import mage.abilities.common.SanctuaryInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -27,7 +27,7 @@ public final class AnaSanctuary extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.
-        Ability ability = new SanctuaryTriggeredAbility(
+        Ability ability = new SanctuaryInterveningIfTriggeredAbility(
                 new BoostEffect(1), new BoostEffect(5), ObjectColor.BLACK, ObjectColor.BLUE,
                 "At the beginning of your upkeep, if you control a blue or black permanent, "
                 + "target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead."

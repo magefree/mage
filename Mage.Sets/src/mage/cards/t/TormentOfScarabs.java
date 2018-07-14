@@ -80,7 +80,7 @@ class TormentOfScarabsAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (game.getActivePlayerId().equals(enchantment.getAttachedTo())) {
+            if (game.isActivePlayer(enchantment.getAttachedTo())) {
                 return true;
             }
         }

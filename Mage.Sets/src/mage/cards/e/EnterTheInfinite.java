@@ -123,7 +123,7 @@ class MaximumHandSizeEffect extends MaximumHandSizeControllerEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE) {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
+            if (game.isActivePlayer(source.getControllerId())) {
                 return true;
             }
         }
