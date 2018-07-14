@@ -1888,7 +1888,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int gainLife(int amount, Game game, UUID sourceId) {
-        if (!canGainLife || amount == 0) {
+        if (!canGainLife || amount <= 0) {
             return 0;
         }
         GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
