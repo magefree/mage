@@ -35,6 +35,7 @@ public final class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Arctic Nishoba", 102, Rarity.UNCOMMON, mage.cards.a.ArcticNishoba.class));
         cards.add(new SetCardInfo("Arcum Dagsson", 27, Rarity.RARE, mage.cards.a.ArcumDagsson.class));
         cards.add(new SetCardInfo("Aurochs Herd", 103, Rarity.COMMON, mage.cards.a.AurochsHerd.class));
+        cards.add(new SetCardInfo("Balduvian Fallen", 51, Rarity.UNCOMMON, mage.cards.b.BalduvianFallen.class));
         cards.add(new SetCardInfo("Balduvian Frostwaker", 28, Rarity.UNCOMMON, mage.cards.b.BalduvianFrostwaker.class));
         cards.add(new SetCardInfo("Balduvian Rage", 76, Rarity.UNCOMMON, mage.cards.b.BalduvianRage.class));
         cards.add(new SetCardInfo("Balduvian Warlord", 77, Rarity.UNCOMMON, mage.cards.b.BalduvianWarlord.class));
