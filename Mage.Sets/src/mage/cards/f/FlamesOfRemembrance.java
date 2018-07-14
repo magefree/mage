@@ -111,6 +111,6 @@ class FlamesOfRemembranceMayPlayExiledEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId) && this.getTargetPointer().getTargets(game, source).contains(objectId);
+        return source.isControlledBy(affectedControllerId) && this.getTargetPointer().getTargets(game, source).contains(objectId);
     }
 }

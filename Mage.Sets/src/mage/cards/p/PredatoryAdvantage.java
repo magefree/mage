@@ -76,7 +76,7 @@ class CastCreatureWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && game.getActivePlayerId().equals(event.getPlayerId())
+                && game.isActivePlayer(event.getPlayerId())
                 && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell.isCreature()) {

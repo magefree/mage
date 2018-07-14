@@ -156,7 +156,7 @@ class HaakonPlayKnightsFromGraveyardEffect extends AsThoughEffectImpl {
             Card knightToCast = game.getCard(objectId);
             if (knightToCast != null
                     && knightToCast.hasSubtype(SubType.KNIGHT, game)
-                    && knightToCast.getOwnerId().equals(source.getControllerId())
+                    && knightToCast.isOwnedBy(source.getControllerId())
                     && game.getState().getZone(objectId) == Zone.GRAVEYARD) {
                 return true;
             }

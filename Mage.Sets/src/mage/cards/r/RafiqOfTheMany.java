@@ -77,7 +77,7 @@ class RafiqOfTheManyAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(this.controllerId) ) {
+        if (game.isActivePlayer(this.controllerId) ) {
             if (game.getCombat().attacksAlone()) {
                 for (Effect effect: this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));

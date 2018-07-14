@@ -81,7 +81,7 @@ class SeshiroTheAnointedAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         Permanent p = game.getPermanent(event.getSourceId());
-        if (damageEvent.isCombatDamage() && p != null && p.hasSubtype(SubType.SNAKE, game) && p.getControllerId().equals(controllerId)) {
+        if (damageEvent.isCombatDamage() && p != null && p.hasSubtype(SubType.SNAKE, game) && p.isControlledBy(controllerId)) {
             return true;
         }
         return false;

@@ -140,7 +140,7 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
         // TODO: Does not handle if a player had the control of the land permanent some time before
         // we would need to add a watcher to handle this
         Permanent sourcePermanet = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanet != null && sourcePermanet.getControllerId().equals(affectedControllerId)) {
+        if (sourcePermanet != null && sourcePermanet.isControlledBy(affectedControllerId)) {
             ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
             Card card = game.getCard(objectId);
             if (exile != null && exile.contains(objectId) && card != null) {

@@ -48,7 +48,7 @@ public class LandfallAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
                 && permanent.isLand()
-                && permanent.getControllerId().equals(this.controllerId)) {
+                && permanent.isControlledBy(this.controllerId)) {
             triggeringLand = permanent;
             if (setTargetPointer == SetTargetPointer.PERMANENT) {
                 for (Effect effect : getAllEffects()) {

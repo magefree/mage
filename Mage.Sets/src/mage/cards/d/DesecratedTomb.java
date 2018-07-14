@@ -65,7 +65,7 @@ class DesecratedTombTriggeredAbility extends TriggeredAbilityImpl {
                     Set<CardType> cardType = card.getCardType();
 
                     if (cardOwnerId != null
-                            && card.getOwnerId().equals(getControllerId())
+                            && card.isOwnedBy(getControllerId())
                             && cardType != null
                             && card.isCreature()) {
                         return true;

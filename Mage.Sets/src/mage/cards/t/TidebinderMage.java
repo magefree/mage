@@ -97,7 +97,7 @@ class TidebinderMageEffect extends ContinuousRuleModifyingEffectImpl {
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
+        if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
             discard();
             return false;
         }
@@ -118,7 +118,7 @@ class TidebinderMageEffect extends ContinuousRuleModifyingEffectImpl {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                if (permanent != null && game.isActivePlayer(permanent.getControllerId())) {
                     return true;
                 }
             }

@@ -148,7 +148,7 @@ class ShrivelingRotEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
-                    && !game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                    && game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
                 // A replacement effect has moved the card to another zone as graveyard
                 return true;
             }

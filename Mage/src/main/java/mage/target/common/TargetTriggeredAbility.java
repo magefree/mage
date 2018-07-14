@@ -40,7 +40,7 @@ public class TargetTriggeredAbility extends TargetObject {
         return stackObject.getStackAbility() != null
                 && (stackObject.getStackAbility() instanceof TriggeredAbility)
                 && source != null
-                && stackObject.getStackAbility().getControllerId().equals(source.getControllerId());
+                && stackObject.getStackAbility().isControlledBy(source.getControllerId());
     }
 
     @Override
@@ -53,7 +53,7 @@ public class TargetTriggeredAbility extends TargetObject {
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility() != null
                     && stackObject.getStackAbility() instanceof TriggeredAbility
-                    && stackObject.getStackAbility().getControllerId().equals(sourceControllerId)) {
+                    && stackObject.getStackAbility().isControlledBy(sourceControllerId)) {
                 return true;
             }
         }
@@ -71,7 +71,7 @@ public class TargetTriggeredAbility extends TargetObject {
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility() != null
                     && stackObject.getStackAbility() instanceof TriggeredAbility
-                    && stackObject.getStackAbility().getControllerId().equals(sourceControllerId)) {
+                    && stackObject.getStackAbility().isControlledBy(sourceControllerId)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }

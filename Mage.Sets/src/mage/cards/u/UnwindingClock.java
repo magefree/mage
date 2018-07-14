@@ -67,7 +67,7 @@ class UnwindingClockEffect extends ContinuousEffectImpl {
             applied = Boolean.FALSE;
         }
         if (!applied && layer == Layer.RulesEffects) {
-            if (!game.getActivePlayerId().equals(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
+            if (!game.isActivePlayer(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
                 for (Permanent artifact : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;

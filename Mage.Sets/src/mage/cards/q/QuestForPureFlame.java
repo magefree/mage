@@ -72,7 +72,7 @@ class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {
-            return getControllerId().equals(game.getControllerId(event.getSourceId()));
+            return isControlledBy(game.getControllerId(event.getSourceId()));
         }
         return false;
     }
@@ -108,7 +108,7 @@ class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getControllerId().equals(game.getControllerId(event.getSourceId()));
+        return source.isControlledBy(game.getControllerId(event.getSourceId()));
     }
 
     @Override

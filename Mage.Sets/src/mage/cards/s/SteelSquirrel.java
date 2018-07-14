@@ -76,7 +76,7 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.getControllerId().equals(event.getPlayerId()) && event.getFlag()) {
+        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
             if (event.getAmount() >= 5) {
                 for (Effect effect : this.getEffects()) {
                     effect.setValue("rolled", event.getAmount());

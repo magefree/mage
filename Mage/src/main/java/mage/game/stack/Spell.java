@@ -244,7 +244,7 @@ public class Spell extends StackObjImpl implements Card {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
                         Permanent permanent = game.getPermanent(card.getId());
-                        if (permanent != null && permanent instanceof PermanentCard) {
+                        if (permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             if (!card.getCardType().contains(CardType.CREATURE)) {
                                 card.addCardType(CardType.CREATURE);
@@ -264,7 +264,7 @@ public class Spell extends StackObjImpl implements Card {
                 updateOptionalCosts(0);
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null && permanent instanceof PermanentCard) {
+                    if (permanent instanceof PermanentCard) {
                         ((PermanentCard) permanent).getCard().addCardType(CardType.CREATURE);
                         ((PermanentCard) permanent).getCard().getSubtype(game).remove(SubType.AURA);
                         return true;

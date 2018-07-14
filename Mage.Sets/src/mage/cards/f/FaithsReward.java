@@ -61,7 +61,7 @@ class FaithsRewardEffect extends OneShotEffect {
         if (watcher != null) {
             for (UUID id : watcher.cards) {
                 Card c = game.getCard(id);
-                if (c != null && c.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(id) == Zone.GRAVEYARD) {
+                if (c != null && c.isOwnedBy(source.getControllerId()) && game.getState().getZone(id) == Zone.GRAVEYARD) {
                     c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
                 }
             }

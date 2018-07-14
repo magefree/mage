@@ -84,7 +84,7 @@ enum SavageStompCondition implements Condition {
             Iterator<Target> targets = sourceSpell.getStackAbility().getTargets().iterator();
             while (targets.hasNext()) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(targets.next().getFirstTarget());
-                if (permanent != null && filter.match(permanent, game) && permanent.getControllerId().equals(source.getControllerId())) {
+                if (permanent != null && filter.match(permanent, game) && permanent.isControlledBy(source.getControllerId())) {
                     return true;
                 }
             }

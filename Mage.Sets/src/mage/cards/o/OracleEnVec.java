@@ -139,7 +139,7 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
     public boolean isInactive(Ability source, Game game) {
         return startingTurn != game.getTurnNum()
                 && (game.getPhase().getType() == TurnPhase.END
-                && game.getActivePlayerId().equals(this.getTargetPointer().getFirst(game, source)));
+                && game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
     }
 
     @Override
@@ -177,7 +177,7 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
     public boolean isInactive(Ability source, Game game) {
         return startingTurn != game.getTurnNum()
                 && (game.getPhase().getType() == TurnPhase.END
-                && game.getActivePlayerId().equals(this.getTargetPointer().getFirst(game, source)));
+                && game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
     }
 
     @Override
@@ -207,7 +207,7 @@ class OracleEnVecDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return startingTurn != game.getTurnNum() && game.getActivePlayerId().equals(event.getPlayerId());
+        return startingTurn != game.getTurnNum() && game.isActivePlayer(event.getPlayerId());
     }
 
     @Override

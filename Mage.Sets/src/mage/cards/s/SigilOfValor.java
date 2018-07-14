@@ -75,13 +75,12 @@ class SigilOfValorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(getControllerId())) {
+        if (game.isActivePlayer(getControllerId())) {
             if (game.getCombat().attacksAlone()) {
                 Permanent equipment = game.getPermanent(getSourceId());
                 UUID attackerId = game.getCombat().getAttackers().get(0);
                 if (equipment != null
-                        && equipment.getAttachedTo() != null
-                        && equipment.getAttachedTo().equals(attackerId)) {
+                        && equipment.isAttachedTo(attackerId)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(attackerId));
                     return true;
                 }

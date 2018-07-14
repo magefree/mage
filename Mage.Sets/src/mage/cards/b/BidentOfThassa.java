@@ -74,7 +74,7 @@ class BidentOfThassaTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.getControllerId().equals(controllerId)) {
+            if (creature != null && creature.isControlledBy(controllerId)) {
                 return true;
             }
         }

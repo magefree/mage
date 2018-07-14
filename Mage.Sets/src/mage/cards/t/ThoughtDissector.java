@@ -30,7 +30,7 @@ public final class ThoughtDissector extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         
 
-        // {X}, {tap}: Target opponent reveals cards from the top of his or her library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice Thought Dissector. Put the rest of the revealed cards into that player's graveyard.
+        // {X}, {tap}: Target opponent reveals cards from the top of their library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice Thought Dissector. Put the rest of the revealed cards into that player's graveyard.
         SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThoughtDissectorEffect(), new VariableManaCost());
         abilitiy.addCost(new TapSourceCost());
         abilitiy.addTarget(new TargetOpponent());
@@ -53,7 +53,7 @@ class ThoughtDissectorEffect extends OneShotEffect {
 
     public ThoughtDissectorEffect() {
         super(Outcome.Detriment);
-        staticText = "Target opponent reveals cards from the top of his or her library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice {this}. Put the rest of the revealed cards into that player's graveyard.";
+        staticText = "Target opponent reveals cards from the top of their library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice {this}. Put the rest of the revealed cards into that player's graveyard.";
     }
 
     public ThoughtDissectorEffect(final ThoughtDissectorEffect effect) {

@@ -95,7 +95,7 @@ class DontUntapIfAttackedLastTurnSourceEffect extends ContinuousRuleModifyingEff
         if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getTargetId().equals(source.getSourceId())) {
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && permanent.getControllerId().equals(game.getActivePlayerId())) {
+            if (permanent != null && permanent.isControlledBy(game.getActivePlayerId())) {
                 AttackedLastTurnWatcher watcher = (AttackedLastTurnWatcher) game.getState().getWatchers().get(AttackedLastTurnWatcher.class.getSimpleName());
                 if (watcher != null) {
                     Set<MageObjectReference> attackingCreatures = watcher.getAttackedLastTurnCreatures(permanent.getControllerId());

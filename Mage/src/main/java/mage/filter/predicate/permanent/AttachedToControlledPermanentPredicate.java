@@ -17,7 +17,7 @@ public class AttachedToControlledPermanentPredicate implements ObjectPlayerPredi
         Permanent attachement = input.getObject();
         if (attachement != null) {
             Permanent permanent = game.getPermanent(attachement.getAttachedTo());
-            if (permanent != null && permanent.getControllerId().equals(input.getPlayerId())) {
+            if (permanent != null && permanent.isControlledBy(input.getPlayerId())) {
                 return true;
             }
         }

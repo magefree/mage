@@ -85,7 +85,7 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
                 && permanent.isLand()
-                && permanent.getControllerId().equals(getControllerId())) {
+                && permanent.isControlledBy(getControllerId())) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof GuardianOfTazeemEffect) {
                     effect.setTargetPointer(new FixedTarget(permanent, game));

@@ -56,13 +56,13 @@ class LightOfSanctionEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
+            if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
                 MageObject damageSource = game.getObject(event.getSourceId());
                 if (damageSource instanceof Controllable) {
-                    return ((Controllable) damageSource).getControllerId().equals(source.getControllerId());
+                    return ((Controllable) damageSource).isControlledBy(source.getControllerId());
                 }
                 else if (damageSource instanceof Card) {
-                    return ((Card) damageSource).getOwnerId().equals(source.getControllerId());
+                    return ((Card) damageSource).isOwnedBy(source.getControllerId());
                 }
             }
         }

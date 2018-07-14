@@ -77,7 +77,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 Permanent attachment = game.getPermanent(sourceId);
                 if (attachment != null && attachment.getAttachedTo() != null) {
                     Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                    if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
+                    if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
                         if (getTargets().isEmpty()) {
                             this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }

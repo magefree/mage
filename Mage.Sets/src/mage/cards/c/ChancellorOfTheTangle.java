@@ -67,7 +67,7 @@ class ChancellorOfTheTangleDelayedTriggeredAbility extends DelayedTriggeredAbili
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getActivePlayerId().equals(controllerId);
+        return game.isActivePlayer(controllerId);
     }
     @Override
     public ChancellorOfTheTangleDelayedTriggeredAbility copy() {

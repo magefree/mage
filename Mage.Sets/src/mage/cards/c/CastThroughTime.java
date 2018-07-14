@@ -77,7 +77,7 @@ class GainReboundEffect extends ContinuousEffectImpl {
             }
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
-                if (stackObject instanceof Spell && stackObject.getControllerId().equals(source.getControllerId())) {
+                if (stackObject instanceof Spell && stackObject.isControlledBy(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
                     Card card = spell.getCard();
                     if (card != null) {

@@ -24,7 +24,7 @@ public enum CommanderInPlayCondition implements Condition {
         if (controller != null) {
             for (UUID commanderId : controller.getCommandersIds()) {
                 Permanent commander = game.getPermanent(commanderId);
-                if (commander != null && commander.getControllerId().equals(source.getControllerId())) {
+                if (commander != null && commander.isControlledBy(source.getControllerId())) {
                     return true;
                 }
             }

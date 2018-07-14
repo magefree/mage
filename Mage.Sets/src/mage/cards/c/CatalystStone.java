@@ -89,7 +89,7 @@ class CatalystStoneCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if (abilityToModify.getControllerId().equals(source.getControllerId())) {
+            if (abilityToModify.isControlledBy(source.getControllerId())) {
                 return SpellAbilityCastMode.FLASHBACK.equals(((SpellAbility) abilityToModify).getSpellAbilityCastMode());
             }
         }

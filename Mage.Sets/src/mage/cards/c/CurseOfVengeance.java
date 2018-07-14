@@ -84,8 +84,7 @@ class CurseOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
         Spell spell = game.getStack().getSpell(event.getSourceId());
 
         if (enchantment != null && spell != null
-                && enchantment.getAttachedTo() != null
-                && enchantment.getAttachedTo().equals(spell.getControllerId())) {
+                && enchantment.isAttachedTo(spell.getControllerId())) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(getSourceId()));
             return true;
         }
@@ -126,7 +125,7 @@ class CurseOfVengeancePlayerLosesTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(this.getSourceId());
-        return sourceObject != null && sourceObject.getAttachedTo().equals(event.getPlayerId());
+        return sourceObject != null && sourceObject.isAttachedTo(event.getPlayerId());
     }
 
     @Override

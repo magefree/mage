@@ -72,7 +72,7 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
                         Set<CardType> cardType = card.getCardType();
 
                         if (cardOwnerId != null
-                                && card.getOwnerId().equals(getControllerId())
+                                && card.isOwnedBy(getControllerId())
                                 && cardType != null
                                 && card.isLand()) {
                             game.getState().setValue("usedOnTurn" + getControllerId() + getOriginalId(), game.getTurnNum());

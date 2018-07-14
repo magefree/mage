@@ -86,7 +86,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
         if (creature != null && damagedCreature != null 
                 && creature.isCreature()
                 && creature.hasSubtype(SubType.ARCHER, game)
-                && creature.getControllerId().equals(controllerId)) {
+                && creature.isControlledBy(controllerId)) {
             this.getEffects().get(0).setValue("damageAmount", event.getAmount());
             this.getEffects().get(0).setValue("controller", damagedCreature.getControllerId());
             this.getEffects().get(0).setValue("source", event.getSourceId());

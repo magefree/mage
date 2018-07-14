@@ -73,7 +73,7 @@ class SettleTheWreckageEffect extends OneShotEffect {
         Iterator<UUID> creatureIds = game.getCombat().getAttackers().iterator();
         while (creatureIds.hasNext()) {
             Permanent creature = game.getPermanent(creatureIds.next());
-            if (creature != null && creature.getControllerId().equals(player.getId())) {
+            if (creature != null && creature.isControlledBy(player.getId())) {
                 toExile.add(creature);
                 attackers++;
             }

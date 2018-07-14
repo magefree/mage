@@ -40,7 +40,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
             if (game.getPlayer(source.getControllerId()).hasOpponent(card.getOwnerId(), game)) {
                 if (allFromOneOpponent && !targets.isEmpty()) {
                     Card firstCard = game.getCard(targets.keySet().iterator().next());
-                    if (firstCard != null && !card.getOwnerId().equals(firstCard.getOwnerId())) {
+                    if (firstCard != null && !card.isOwnedBy(firstCard.getOwnerId())) {
                         return false;
                     }
                 }

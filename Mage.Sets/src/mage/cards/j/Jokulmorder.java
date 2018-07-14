@@ -86,7 +86,7 @@ class JokulmorderTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
         return land.hasSubtype(SubType.ISLAND, game)
-                && land.getControllerId().equals(this.controllerId);
+                && land.isControlledBy(this.controllerId);
     }
 
     @Override

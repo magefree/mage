@@ -70,7 +70,7 @@ class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getControllerId().equals(source.getControllerId())
+        if (abilityToModify.isControlledBy(source.getControllerId())
                 && (abilityToModify instanceof SpellAbility)) {
             return true;
         }

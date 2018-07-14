@@ -120,10 +120,10 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (onlyControlled && !abilityToModify.getControllerId().equals(source.getControllerId())) {
+        if (onlyControlled && !abilityToModify.isControlledBy(source.getControllerId())) {
             return false;
         }
-        if (controllerId != null && !abilityToModify.getControllerId().equals(controllerId)) {
+        if (controllerId != null && !abilityToModify.isControlledBy(controllerId)) {
             return false;
         }
         if (abilityToModify instanceof SpellAbility) {

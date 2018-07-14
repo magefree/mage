@@ -1,7 +1,9 @@
 package mage.sets;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -22,19 +24,25 @@ public final class CoreSet2019 extends ExpansionSet {
         return instance;
     }
     List<CardInfo> savedSpecialCommon = new ArrayList<>();
+    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private CoreSet2019() {
         super("Core Set 2019", "M19", ExpansionSet.buildDate(2018, 7, 13), SetType.CORE);
         this.hasBoosters = true;
         this.hasBasicLands = true;
-        this.numBoosterSpecial = 1;
-        this.numBoosterLands = 0;
+        this.numBoosterSpecial = 0;
+        this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 280;
+        
+        // Core 2019 boosters have a 5/12 chance of basic land being replaced
+        // with the common taplands, which DO NOT appear in the common slot.
+        this.ratioBoosterSpecialLand = 12;
+        this.ratioBoosterSpecialLandNumerator = 5;
 
         cards.add(new SetCardInfo("Abnormal Endurance", 85, Rarity.COMMON, mage.cards.a.AbnormalEndurance.class));
         cards.add(new SetCardInfo("Act of Treason", 127, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
@@ -200,6 +208,7 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Marauder's Axe", 240, Rarity.COMMON, mage.cards.m.MaraudersAxe.class));
         cards.add(new SetCardInfo("Meandering River", 253, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 27, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
+        cards.add(new SetCardInfo("Metamorphic Alteration", 60, Rarity.RARE, mage.cards.m.MetamorphicAlteration.class));
         cards.add(new SetCardInfo("Meteor Golem", 241, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Mighty Leap", 28, Rarity.COMMON, mage.cards.m.MightyLeap.class));
         cards.add(new SetCardInfo("Militia Bugler", 29, Rarity.UNCOMMON, mage.cards.m.MilitiaBugler.class));
@@ -354,17 +363,17 @@ public final class CoreSet2019 extends ExpansionSet {
 
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        // Common cards retrievement of Fate Reforged boosters - prevent the retrievement of the common lands (e.g. Blossoming Sands)
+        // Common cards retrievement of Core Set 2019 boosters - prevent the retrievement of the common lands (e.g. Meandering River)
         if (rarity == Rarity.COMMON) {
             List<CardInfo> savedCardsInfos = savedCards.get(rarity);
             if (savedCardsInfos == null) {
                 CardCriteria criteria = new CardCriteria();
                 criteria.rarities(Rarity.COMMON);
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    criteria.maxCardNumber(maxCardNumberInBooster);
-                }
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
+                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                }
                 savedCards.put(rarity, savedCardsInfos);
             }
             // Return a copy of the saved cards information, as not to let modify the original.
@@ -373,18 +382,23 @@ public final class CoreSet2019 extends ExpansionSet {
             return super.getCardsByRarity(rarity);
         }
     }
-
+    
     @Override
-    public List<CardInfo> getSpecialCommon() {
-        List<CardInfo> specialCommons = new ArrayList<>();
-        if (savedSpecialCommon.isEmpty()) {
+    // the common taplands replacing the basic land
+    public List<CardInfo> getSpecialLand()
+    {
+        if (savedSpecialLand.isEmpty())
+        {
             CardCriteria criteria = new CardCriteria();
-            criteria.rarities(Rarity.COMMON).setCodes(this.code).types(CardType.LAND);
-            savedSpecialCommon = CardRepository.instance.findCards(criteria);
-            criteria.rarities(Rarity.LAND).setCodes(this.code);
-            savedSpecialCommon.addAll(CardRepository.instance.findCards(criteria));
+            criteria.setCodes(this.code);
+            criteria.rarities(Rarity.COMMON);
+            criteria.types(CardType.LAND);
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
         }
-        specialCommons.addAll(savedSpecialCommon);
-        return specialCommons;
+        
+        return new ArrayList<>(savedSpecialLand);
     }
+    
+    
+    
 }

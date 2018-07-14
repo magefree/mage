@@ -27,7 +27,7 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
     public LinkedHashMap<UUID, SpecialAction> getControlledBy(UUID controllerId, boolean manaAction) {
         LinkedHashMap<UUID, SpecialAction> controlledBy = new LinkedHashMap<>();
         for (SpecialAction action: this) {
-            if (action.getControllerId().equals(controllerId) && action.isManaAction() == manaAction) {
+            if (action.isControlledBy(controllerId) && action.isManaAction() == manaAction) {
                 controlledBy.put(action.id, action);
             }
         }

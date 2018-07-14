@@ -88,7 +88,8 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterSpecial;
 
     protected int numBoosterLands;
-    protected int ratioBoosterSpecialLand = 0; // if > 0 basic lands are replaced with special land in the ratio every X land is replaced by special land
+    protected int ratioBoosterSpecialLand = 0; // if > 0 basic lands are replaced with special land with probability ratioBoosterSpecialLandNumerator / ratioBoosterSpecialLand
+    protected int ratioBoosterSpecialLandNumerator = 1;
 
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
@@ -208,7 +209,7 @@ public abstract class ExpansionSet implements Serializable {
             List<CardInfo> specialLands = getSpecialLand();
             List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
             for (int i = 0; i < numBoosterLands; i++) {
-                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) == 0 && specialLands != null) {
+                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator && specialLands != null) {
                     addToBooster(booster, specialLands);
                 } else {
                     addToBooster(booster, basicLands);

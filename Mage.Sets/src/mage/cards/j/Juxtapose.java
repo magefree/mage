@@ -97,7 +97,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
 
             if (permanent1 != null && permanent2 != null) {
                 // exchange works only for two different controllers
-                if (permanent1.getControllerId().equals(permanent2.getControllerId())) {
+                if (permanent1.isControlledBy(permanent2.getControllerId())) {
                     // discard effect if controller of both permanents is the same
                     discard();
                     return;

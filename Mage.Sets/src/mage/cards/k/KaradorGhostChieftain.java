@@ -111,7 +111,7 @@ class KaradorGhostChieftainContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (game.getActivePlayerId() == null || !game.getActivePlayerId().equals(player.getId())) {
+            if (game.getActivePlayerId() == null || !game.isActivePlayer(player.getId())) {
                 return false;
             }
             for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {

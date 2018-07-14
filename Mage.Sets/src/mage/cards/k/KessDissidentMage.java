@@ -97,7 +97,7 @@ class KessDissidentMageContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (!game.getActivePlayerId().equals(player.getId())) {
+            if (!game.isActivePlayer(player.getId())) {
                 return false;
             }
             for (Card card : player.getGraveyard().getCards(filter, game)) {
@@ -138,7 +138,7 @@ class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
-                if (game.getActivePlayerId().equals(source.getControllerId())) {
+                if (game.isActivePlayer(source.getControllerId())) {
                     KessDissidentMageWatcher watcher = (KessDissidentMageWatcher) game.getState().getWatchers().get(KessDissidentMageWatcher.class.getSimpleName(), source.getSourceId());
                     if (!(source instanceof FlashbackAbility)) {
                         return !watcher.isAbilityUsed();

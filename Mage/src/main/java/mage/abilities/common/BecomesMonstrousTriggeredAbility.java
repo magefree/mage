@@ -41,7 +41,7 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isCreature()
-                && (permanent.getControllerId().equals(getControllerId()))) {
+                && (permanent.isControlledBy(getControllerId()))) {
             this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
             return true;
         }

@@ -147,7 +147,7 @@ class DireFleetDaredevilPlayEffect extends AsThoughEffectImpl {
         UUID targetId = getTargetPointer().getFirst(game, source);
         if (targetId != null) {
             return targetId.equals(objectId)
-                    && source.getControllerId().equals(affectedControllerId);
+                    && source.isControlledBy(affectedControllerId);
         } else {
             // the target card has changed zone meanwhile, so the effect is no longer needed
             discard();
@@ -179,7 +179,7 @@ class DireFleetDaredevilSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId)
+        return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
                 && game.getState().getZone(objectId) == Zone.STACK;
@@ -210,7 +210,7 @@ class DireFleetDaredevilReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        UUID eventObject = ((ZoneChangeEvent) event).getTargetId();
+        UUID eventObject = event.getTargetId();
         StackObject stackObject = game.getStack().getStackObject(eventObject);
         if (stackObject != null) {
             if (stackObject instanceof Spell) {

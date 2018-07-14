@@ -77,7 +77,7 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+        if (enchantment != null && enchantment.isAttachedTo(event.getSourceId())) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(enchanted.getControllerId()));

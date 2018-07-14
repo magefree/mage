@@ -99,7 +99,7 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
 
         // You control
         Player player = game.getPlayer(this.getControllerId());
-        if (player == null || !permanent.getControllerId().equals(getControllerId())) {
+        if (player == null || !permanent.isControlledBy(getControllerId())) {
             return false;
         }
 

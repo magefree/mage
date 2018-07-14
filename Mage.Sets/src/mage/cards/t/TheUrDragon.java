@@ -94,7 +94,7 @@ class TheUrDragonTriggeredAbility extends TriggeredAbilityImpl {
             Permanent creature = game.getPermanent(attacker);
             if (creature != null
                     && creature.getControllerId() != null
-                    && creature.getControllerId().equals(this.getControllerId())
+                    && creature.isControlledBy(this.getControllerId())
                     && creature.hasSubtype(SubType.DRAGON, game)) {
                 attackingDragons++;
             }

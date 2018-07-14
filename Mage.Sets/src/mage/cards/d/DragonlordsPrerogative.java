@@ -91,7 +91,7 @@ class DragonlordsPrerogativeCondition implements Condition {
         if (spell != null && spell.getSpellAbility() != null) {
             for(Cost cost: spell.getSpellAbility().getCosts()) {
                 if (cost instanceof RevealTargetFromHandCost) {
-                    applies = !((RevealTargetFromHandCost)cost).getTargets().isEmpty();
+                    applies = !cost.getTargets().isEmpty();
                     break;
                 }
             }

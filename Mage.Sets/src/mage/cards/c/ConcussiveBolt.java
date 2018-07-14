@@ -89,7 +89,7 @@ class ConcussiveBoltRestrictionEffect extends RestrictionEffect {
         if (player == null) {
             return false;
         }
-        if (metalcraft && permanent.getControllerId().equals(player.getId())) {
+        if (metalcraft && permanent.isControlledBy(player.getId())) {
             return true;
         }
         return false;

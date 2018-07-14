@@ -78,7 +78,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.getControllerId().equals(event.getPlayerId())) {
+        if (source.isControlledBy(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null && permanent.isTapped()) {
                 return true;

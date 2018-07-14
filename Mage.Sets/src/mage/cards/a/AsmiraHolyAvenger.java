@@ -78,7 +78,7 @@ class AsmiraHolyAvengerWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && ((Card) card).getOwnerId().equals(this.controllerId) && card.isCreature()) {
+            if (card != null && ((Card) card).isOwnedBy(this.controllerId) && card.isCreature()) {
                 creaturesCount++;
             }
         }

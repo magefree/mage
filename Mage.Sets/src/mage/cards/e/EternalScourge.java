@@ -71,7 +71,7 @@ class EternalScourgePlayEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && card.getOwnerId().equals(affectedControllerId) && game.getState().getZone(source.getSourceId()) == Zone.EXILED) {
+            if (card != null && card.isOwnedBy(affectedControllerId) && game.getState().getZone(source.getSourceId()) == Zone.EXILED) {
                 return true;
             }
         }

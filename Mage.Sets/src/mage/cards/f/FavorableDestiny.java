@@ -90,7 +90,7 @@ class FavorableDestinyCondition implements Condition {
                 Player controller = game.getPlayer(creature.getControllerId());
                 if (controller != null) {
                     for (Permanent perm : game.getBattlefield().getActivePermanents(controller.getId(), game)) {
-                        if (perm.getControllerId().equals(controller.getId())
+                        if (perm.isControlledBy(controller.getId())
                                 && perm.isCreature()
                                 && !perm.equals(creature)) {
                             return true;

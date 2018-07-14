@@ -71,7 +71,7 @@ class PureIntentionsAllTriggeredAbility extends DelayedTriggeredAbility {
         if (stackObject != null
                 && game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId())) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getOwnerId().equals(getControllerId())) {
+            if (card != null && card.isOwnedBy(getControllerId())) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }

@@ -910,7 +910,7 @@ public abstract class AbilityImpl implements Ability {
             }
             MageObject object = game.getObject(this.getSourceId());
             // emblem/planes are always actual
-            if (object != null && (object instanceof Emblem || object instanceof Plane)) {
+            if (object instanceof Emblem || object instanceof Plane) {
                 return true;
             }
         }

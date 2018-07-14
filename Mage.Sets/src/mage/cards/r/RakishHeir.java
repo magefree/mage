@@ -71,7 +71,7 @@ class RakishHeirTriggeredAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent permanent = game.getPermanent(event.getSourceId());
         if (damageEvent.isCombatDamage() && permanent != null
-                && permanent.hasSubtype(SubType.VAMPIRE, game) && permanent.getControllerId().equals(controllerId)) {
+                && permanent.hasSubtype(SubType.VAMPIRE, game) && permanent.isControlledBy(controllerId)) {
             this.getEffects().clear();
             AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
             effect.setTargetPointer(new FixedTarget(permanent.getId()));

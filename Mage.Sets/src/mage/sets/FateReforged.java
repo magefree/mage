@@ -236,10 +236,10 @@ public final class FateReforged extends ExpansionSet {
                 CardCriteria criteria = new CardCriteria();
                 criteria.rarities(Rarity.COMMON);
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    criteria.maxCardNumber(maxCardNumberInBooster);
-                }
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
+                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                }
                 savedCards.put(rarity, savedCardsInfos);
             }
             // Return a copy of the saved cards information, as not to let modify the original.

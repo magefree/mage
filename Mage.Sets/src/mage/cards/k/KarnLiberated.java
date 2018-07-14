@@ -111,7 +111,7 @@ class KarnLiberatedEffect extends OneShotEffect {
                 player.getHand().clear();
                 player.getLibrary().clear();
                 for (Card card : game.getCards()) {
-                    if (card.getOwnerId().equals(player.getId()) && !card.isCopy() // no copies
+                    if (card.isOwnedBy(player.getId()) && !card.isCopy() // no copies
                             && !player.getSideboard().contains(card.getId())
                             && !cards.contains(card)) { // not the exiled cards
                         if (player.getCommandersIds().contains(card.getId())) {

@@ -78,7 +78,7 @@ class MarketFestivalTriggeredAbility extends TriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
+        return enchantment != null && enchantment.isAttachedTo(event.getSourceId());
     }
 
     @Override

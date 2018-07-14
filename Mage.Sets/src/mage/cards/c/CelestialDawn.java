@@ -122,13 +122,13 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
             }
             // Stack
             for (MageObject object : game.getStack()) {
-                if (object instanceof Spell && ((Spell) object).getControllerId().equals(controller.getId())) {
+                if (object instanceof Spell && ((Spell) object).isControlledBy(controller.getId())) {
                     setColor(object.getColor(game), game);
                 }
             }
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(controller.getId())) {
+                if (card.isOwnedBy(controller.getId())) {
                     setColor(card.getColor(game), game);
                 }
             }

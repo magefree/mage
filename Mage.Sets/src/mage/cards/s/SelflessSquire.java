@@ -74,7 +74,7 @@ class SelflessSquireTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(event.getTargetId())) {
+        if (isControlledBy(event.getTargetId())) {
             getEffects().clear();
             getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(event.getAmount())));
             return true;

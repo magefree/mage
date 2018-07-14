@@ -57,7 +57,7 @@ class AcidicSoilEffect extends OneShotEffect {
             if (player != null) {
                 int amount = 0;
                 for (Permanent permanent : permanents) {
-                    if (permanent.getControllerId().equals(playerId)) {
+                    if (permanent.isControlledBy(playerId)) {
                         amount++;
                     }
                 }

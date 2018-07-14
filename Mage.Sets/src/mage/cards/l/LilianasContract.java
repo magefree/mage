@@ -70,7 +70,7 @@ enum LilianasContractCondition implements Condition {
         Set<String> demonNames = new HashSet();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent == null
-                    || !permanent.getControllerId().equals(source.getControllerId())
+                    || !permanent.isControlledBy(source.getControllerId())
                     || !permanent.hasSubtype(SubType.DEMON, game)) {
                 continue;
             }
