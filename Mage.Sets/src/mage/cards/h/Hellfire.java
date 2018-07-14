@@ -66,7 +66,7 @@ class HellfireEffect extends OneShotEffect {
             filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
             for (Permanent creature : game.getState().getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
                 if (creature.destroy(source.getSourceId(), game, false)
-                        && game.getState().getZone(creature.getId()).equals(Zone.GRAVEYARD)) { // If a commander is replaced to command zone, the creature does not die) {
+                        && game.getState().getZone(creature.getId()) == Zone.GRAVEYARD) { // If a commander is replaced to command zone, the creature does not die) {
                     destroyedCreature++;
                 }
             }

@@ -85,7 +85,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
             if (card != null) {
                 Permanent enchantment = game.getPermanent(source.getSourceId());
                 if (enchantment != null && enchantment.getAttachedTo() != null
-                        && card.getOwnerId().equals(enchantment.getAttachedTo())) {
+                        && card.isOwnedBy(enchantment.getAttachedTo())) {
                     return true;
                 }
             }

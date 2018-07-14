@@ -85,7 +85,7 @@ class CruelRealityTriggeredAbiilty extends TriggeredAbilityImpl {
                 && enchantment.getAttachedTo() != null) {
             Player cursedPlayer = game.getPlayer(enchantment.getAttachedTo());
             if (cursedPlayer != null
-                    && game.getActivePlayerId().equals(cursedPlayer.getId())) {
+                    && game.isActivePlayer(cursedPlayer.getId())) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(cursedPlayer.getId()));
                 return true;
             }

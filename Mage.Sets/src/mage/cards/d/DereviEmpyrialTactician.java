@@ -87,7 +87,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.getControllerId().equals(controllerId)) {
+                if (creature != null && creature.isControlledBy(controllerId)) {
                     return true;
                 }
             }

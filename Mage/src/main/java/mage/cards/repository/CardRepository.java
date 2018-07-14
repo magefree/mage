@@ -32,7 +32,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 115;
+    private static final long CARD_CONTENT_VERSION = 116;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
@@ -159,7 +159,10 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
             Where where = qb.where();
-            where.and(where.not().not().like("supertypes", '%' + SuperType.BASIC.name() + '%'), where.like("types", '%' + CardType.LAND.name() + '%'));
+            where.and(
+                    where.not().like("supertypes", '%' + SuperType.BASIC.name() + '%'),
+                    where.like("types", '%' + CardType.LAND.name() + '%')
+            );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
@@ -252,7 +255,10 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
             Where where = qb.where();
-            where.and(where.not().like("types", '%' + CardType.CREATURE.name() + '%'), where.not().like("types", '%' + CardType.LAND.name() + '%'));
+            where.and(
+                    where.not().like("types", '%' + CardType.CREATURE.name() + '%'),
+                    where.not().like("types", '%' + CardType.LAND.name() + '%')
+            );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
@@ -275,7 +281,10 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
             Where where = qb.where();
-            where.and(where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'), where.not().like("types", '%' + CardType.LAND.name() + '%'));
+            where.and(
+                    where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'),
+                    where.not().like("types", '%' + CardType.LAND.name() + '%')
+            );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");

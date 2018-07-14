@@ -143,7 +143,7 @@ class SealOfTheGuildpactCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getControllerId().equals(source.getControllerId())
+        return abilityToModify.isControlledBy(source.getControllerId())
                 && abilityToModify instanceof SpellAbility;
     }
 

@@ -98,7 +98,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (targetPermanent != null && 
-                    targetPermanent.getControllerId().equals(source.getControllerId()) &&
+                    targetPermanent.isControlledBy(source.getControllerId()) &&
                     !targetPermanent.getName().equals(sourcePermanent.getName())) {  // no redirection from or to other Palisade Giants
                 return true;
             }

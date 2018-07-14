@@ -160,7 +160,7 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.getControllerId().equals(affectedControllerId)) {
+        if (source.isControlledBy(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
             return mageObject != null
                     && mageObject.isCreature();

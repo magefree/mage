@@ -63,7 +63,7 @@ class NaturesWillEffect extends OneShotEffect {
             for (Permanent land : lands) {
                 if (damagedPlayers.contains(land.getControllerId())) {
                    land.tap(game);
-                } else if (land.getControllerId().equals(source.getControllerId())) {
+                } else if (land.isControlledBy(source.getControllerId())) {
                     land.untap(game);
                 }
             }

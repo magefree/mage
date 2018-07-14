@@ -86,7 +86,7 @@ class JourneyToEternityReturnTransformedSourceEffect extends OneShotEffect {
         if (card != null && controller != null) {
             Zone zone = game.getState().getZone(card.getId());
             // cards needs to be in public non battlefield zone
-            if (zone.equals(Zone.BATTLEFIELD) || !zone.isPublicZone()) {
+            if (zone == Zone.BATTLEFIELD || !zone.isPublicZone()) {
                 return true;
             }
             game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);

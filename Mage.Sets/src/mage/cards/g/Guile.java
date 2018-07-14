@@ -107,6 +107,6 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
         StackObject counteringObject = game.getStack().getStackObject(event.getSourceId());
         return counteredSpell != null
                 && counteringObject != null
-                && counteringObject.getControllerId().equals(source.getControllerId());
+                && counteringObject.isControlledBy(source.getControllerId());
     }
 }

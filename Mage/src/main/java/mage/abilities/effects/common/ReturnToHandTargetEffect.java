@@ -57,7 +57,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             for (Target target : source.getTargets()) {
                 for (UUID targetId : target.getTargets()) {
                     MageObject mageObject = game.getObject(targetId);
-                    if (mageObject instanceof Spell && ((Spell) mageObject).isCopy()) {
+                    if (mageObject instanceof Spell && mageObject.isCopy()) {
                         copyIds.add(targetId);
                     } else if (mageObject instanceof Card) {
                         cards.add((Card) mageObject);
@@ -68,7 +68,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 MageObject mageObject = game.getObject(targetId);
                 if (mageObject != null) {
-                    if (mageObject instanceof Spell && ((Spell) mageObject).isCopy()) {
+                    if (mageObject instanceof Spell &&  mageObject.isCopy()) {
                         copyIds.add(targetId);
                     } else {
                         cards.add((Card) mageObject);

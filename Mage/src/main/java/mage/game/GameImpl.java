@@ -1865,7 +1865,7 @@ public abstract class GameImpl implements Game, Serializable {
                     //702.93e.: ...another player gains control
                     // ...or the creature it's paired with leaves the battlefield.
                     Permanent paired = perm.getPairedCard().getPermanent(this);
-                    if (paired == null || !perm.getControllerId().equals(paired.getControllerId()) || paired.getPairedCard() == null) {
+                    if (paired == null || !perm.isControlledBy(paired.getControllerId()) || paired.getPairedCard() == null) {
                         perm.setPairedCard(null);
                         if (paired != null && paired.getPairedCard() != null) {
                             paired.setPairedCard(null);
@@ -1876,7 +1876,7 @@ public abstract class GameImpl implements Game, Serializable {
                 if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {
                     for (UUID bandedId : new ArrayList<>(perm.getBandedCards())) {
                         Permanent banded = getPermanent(bandedId);
-                        if (banded == null || !perm.getControllerId().equals(banded.getControllerId()) || !banded.getBandedCards().contains(perm.getId())) {
+                        if (banded == null || !perm.isControlledBy(banded.getControllerId()) || !banded.getBandedCards().contains(perm.getId())) {
                             perm.removeBandedCard(bandedId);
                             if (banded != null && banded.getBandedCards().contains(perm.getId())) {
                                 banded.removeBandedCard(perm.getId());
@@ -1993,7 +1993,7 @@ public abstract class GameImpl implements Game, Serializable {
                         } else if (target instanceof TargetCard) {
                             Card attachedTo = getCard(perm.getAttachedTo());
                             if (attachedTo == null
-                                    || !((TargetCard) spellAbility.getTargets().get(0)).canTarget(perm.getControllerId(), perm.getAttachedTo(), spellAbility, this)) {
+                                    || !(spellAbility.getTargets().get(0)).canTarget(perm.getControllerId(), perm.getAttachedTo(), spellAbility, this)) {
                                 if (movePermanentToGraveyardWithInfo(perm)) {
                                     if (attachedTo != null) {
                                         attachedTo.removeAttachment(perm.getId(), this);
@@ -2450,7 +2450,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public boolean canPlaySorcery(UUID playerId) {
-        return isMainPhase() && getActivePlayerId().equals(playerId) && getStack().isEmpty();
+        return isMainPhase() && isActivePlayer(playerId) && getStack().isEmpty();
     }
 
     /**
@@ -2482,7 +2482,7 @@ public abstract class GameImpl implements Game, Serializable {
         Set<Card> toOutside = new HashSet<>();
         for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
             Permanent perm = it.next();
-            if (perm.getOwnerId().equals(playerId)) {
+            if (perm.isOwnedBy(playerId)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent attachedTo = getPermanent(perm.getAttachedTo());
                     if (attachedTo != null) {
@@ -2500,7 +2500,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
                 toOutside.add(perm);
 //                it.remove();
-            } else if (perm.getControllerId().equals(player.getId())) {
+            } else if (perm.isControlledBy(player.getId())) {
                 // and any effects which give that player control of any objects or players end
                 Effects:
                 for (ContinuousEffect effect : getContinuousEffects().getLayeredEffects(this)) {
@@ -2533,7 +2533,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.
         this.getState().getContinuousEffects().removeInactiveEffects(this);
-        getStack().removeIf(object -> object.getControllerId().equals(playerId));
+        getStack().removeIf(object -> object.isControlledBy(playerId));
         // Then, if there are any objects still controlled by that player, those objects are exiled.
         applyEffects(); // to remove control from effects removed meanwhile
         List<Permanent> permanents = this.getBattlefield().getAllActivePermanents(playerId);
@@ -2545,7 +2545,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (ExileZone exile : this.getExile().getExileZones()) {
             for (Iterator<UUID> it = exile.iterator(); it.hasNext();) {
                 Card card = this.getCard(it.next());
-                if (card != null && card.getOwnerId().equals(playerId)) {
+                if (card != null && card.isOwnedBy(playerId)) {
                     it.remove();
                 }
             }
@@ -2579,13 +2579,12 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
-
         Iterator<Entry<UUID, Card>> it = gameCards.entrySet().iterator();
 
         while (it.hasNext()) {
             Entry<UUID, Card> entry = it.next();
             Card card = entry.getValue();
-            if (card.getOwnerId().equals(playerId)) {
+            if (card.isOwnedBy(playerId)) {
                 it.remove();
             }
         }
@@ -2594,7 +2593,7 @@ public abstract class GameImpl implements Game, Serializable {
         // If the current monarch leaves the game. When that happens, the player whose turn it is becomes the monarch.
         // If the monarch leaves the game on their turn, the next player in turn order becomes the monarch.
         if (playerId.equals(getMonarchId())) {
-            if (!getActivePlayerId().equals(playerId)) {
+            if (!isActivePlayer(playerId)) {
                 setMonarchId(null, getActivePlayerId());
             } else {
                 Player nextPlayer = getPlayerList().getNext(this);

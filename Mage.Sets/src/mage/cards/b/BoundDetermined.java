@@ -141,6 +141,6 @@ class DeterminedEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && !spell.getSourceId().equals(source.getSourceId()) && spell.getControllerId().equals(source.getControllerId());
+        return spell != null && !spell.getSourceId().equals(source.getSourceId()) && spell.isControlledBy(source.getControllerId());
     }
 }

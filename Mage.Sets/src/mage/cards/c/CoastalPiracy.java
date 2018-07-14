@@ -63,7 +63,7 @@ class CoastalPiracyTriggeredAbility extends TriggeredAbilityImpl {
         if (((DamagedPlayerEvent) event).isCombatDamage()
                 && game.getOpponents(this.controllerId).contains(((DamagedPlayerEvent) event).getPlayerId())) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.getControllerId().equals(controllerId)) {
+            if (creature != null && creature.isControlledBy(controllerId)) {
                 return true;
             }
         }

@@ -118,7 +118,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used) {
-            return source.getControllerId().equals(event.getPlayerId());
+            return source.isControlledBy(event.getPlayerId());
         }
         return false;
     }

@@ -69,7 +69,7 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
                 Permanent attachment = game.getPermanent(sourceId);
                 if (attachment != null && attachment.getAttachedTo() != null) {
                     Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                    if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
+                    if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
                         correctEndPhase = true;
                     }
                 }

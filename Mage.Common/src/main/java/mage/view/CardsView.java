@@ -73,7 +73,7 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                 case BATTLEFIELD:
                     sourceObject = game.getPermanent(ability.getSourceId());
                     if (sourceObject == null) {
-                        sourceObject = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
+                        sourceObject = game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
                     }
                     isPermanent = true;
                     break;

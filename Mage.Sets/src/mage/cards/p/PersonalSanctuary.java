@@ -68,7 +68,7 @@ class PersonalSanctuaryEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
-            if (event.getTargetId().equals(source.getControllerId()) && game.getActivePlayerId().equals(source.getControllerId()))
+            if (event.getTargetId().equals(source.getControllerId()) && game.isActivePlayer(source.getControllerId()))
                 return super.applies(event, source, game);
         }
         return false;

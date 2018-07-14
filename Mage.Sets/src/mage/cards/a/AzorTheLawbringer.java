@@ -123,7 +123,7 @@ class AzorTheLawbringerCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         UUID opponentId = getTargetPointer().getFirst(game, source);
-        if (game.getActivePlayerId().equals(opponentId)) {
+        if (game.isActivePlayer(opponentId)) {
             if (playersNextTurn == 0) {
                 playersNextTurn = game.getTurnNum();
             }

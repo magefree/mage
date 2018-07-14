@@ -51,6 +51,7 @@ public final class VivienOfTheArkbow extends CardImpl {
         ability = new LoyaltyAbility(new DamageWithPowerTargetEffect(), -3);
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
 
         // −9: Creatures you control get +4/+4 and gain trample until end of turn.
         ability = new LoyaltyAbility(

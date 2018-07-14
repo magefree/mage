@@ -66,7 +66,7 @@ class NoblePurposeTriggeredAbility extends TriggeredAbilityImpl {
         if (damageEvent.isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null && permanent.isCreature()
-                    && permanent.getControllerId().equals(this.getControllerId())) {
+                    && permanent.isControlledBy(this.getControllerId())) {
                 this.getEffects().clear();
                 this.getEffects().add(new GainLifeEffect(damageEvent.getAmount()));
                 return true;

@@ -141,6 +141,7 @@ public class DoIfCostPaid extends OneShotEffect {
         String costText = cost.getText();
         if (costText != null
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("put")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("return")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("exile")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")

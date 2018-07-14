@@ -68,7 +68,7 @@ class ChanceEncounterTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return this.getControllerId().equals(event.getPlayerId()) && event.getFlag();
+        return this.isControlledBy(event.getPlayerId()) && event.getFlag();
     }
     
     @Override

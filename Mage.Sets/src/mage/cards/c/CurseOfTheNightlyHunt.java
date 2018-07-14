@@ -67,7 +67,7 @@ class CurseOfTheNightlyHuntEffect extends RequirementEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (permanent.getControllerId().equals(enchantment.getAttachedTo())) {
+            if (permanent.isControlledBy(enchantment.getAttachedTo())) {
                 return true;
             }
         }

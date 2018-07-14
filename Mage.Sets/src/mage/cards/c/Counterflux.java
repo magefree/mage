@@ -84,7 +84,7 @@ class CounterfluxEffect extends OneShotEffect {
 
         List<Spell> spellsToCounter = new LinkedList<>();
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject instanceof Spell && !stackObject.getControllerId().equals(source.getControllerId())) {
+            if (stackObject instanceof Spell && !stackObject.isControlledBy(source.getControllerId())) {
                 spellsToCounter.add((Spell) stackObject);
             }
         }

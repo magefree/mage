@@ -71,7 +71,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
             MageObject damageDealingObject = game.getObject(event.getSourceId());
             UUID objectControllerId = null;
             if (damageDealingObject instanceof Permanent) {
-                if (((Permanent) damageDealingObject).isCreature()) {
+                if (damageDealingObject.isCreature()) {
                     ((Permanent) damageDealingObject).damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
                 } else {
                     objectControllerId = ((Permanent) damageDealingObject).getControllerId();
@@ -102,7 +102,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
         } else {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             if (targetPermanent != null &&
-                    targetPermanent.getControllerId().equals(source.getControllerId()) &&
+                    targetPermanent.isControlledBy(source.getControllerId()) &&
                     targetPermanent.isPlaneswalker()) {
                 catched = true;
             }
@@ -110,11 +110,11 @@ class ComeuppanceEffect extends PreventionEffectImpl {
         if (catched) {
             MageObject damageSource = game.getObject(event.getSourceId());
             if (damageSource instanceof StackObject) {
-                return !((StackObject) damageSource).getControllerId().equals(source.getControllerId());
+                return !((StackObject) damageSource).isControlledBy(source.getControllerId());
             } else if (damageSource instanceof Permanent) {
-                return !((Permanent) damageSource).getControllerId().equals(source.getControllerId());
+                return !((Permanent) damageSource).isControlledBy(source.getControllerId());
             } else if (damageSource instanceof Card) {
-                return !((Card) damageSource).getOwnerId().equals(source.getControllerId());
+                return !((Card) damageSource).isOwnedBy(source.getControllerId());
             }
             Logger.getLogger(Comeuppance.class).error("Comeuppance: could not define source objects controller - " + (damageSource != null ? damageSource.getName(): "null"));
         }

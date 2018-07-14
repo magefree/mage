@@ -62,7 +62,7 @@ class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!getControllerId().equals(game.getControllerId(event.getSourceId()))) {
+        if (!isControlledBy(game.getControllerId(event.getSourceId()))) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
@@ -71,7 +71,7 @@ class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
         }
         return permanent != null
                 && permanent.isCreature()
-                && !permanent.getControllerId().equals(getControllerId());
+                && !permanent.isControlledBy(getControllerId());
     }
 
     @Override

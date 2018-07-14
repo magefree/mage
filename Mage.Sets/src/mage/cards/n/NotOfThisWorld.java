@@ -94,7 +94,7 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
                     for (Target target : objectTargets) {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
-                            if (targetedPermanent != null && targetedPermanent.getControllerId().equals(sourceControllerId)) {
+                            if (targetedPermanent != null && targetedPermanent.isControlledBy(sourceControllerId)) {
                                 return true;
                             }
                         }
@@ -121,7 +121,7 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
                     for (Target target : objectTargets) {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
-                            if (targetedPermanent != null && targetedPermanent.getControllerId().equals(sourceControllerId)) {
+                            if (targetedPermanent != null && targetedPermanent.isControlledBy(sourceControllerId)) {
                                 possibleTargets.add(stackObject.getId());
                             }
                         }

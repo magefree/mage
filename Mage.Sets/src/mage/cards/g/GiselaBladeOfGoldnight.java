@@ -106,7 +106,7 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
             case DAMAGE_PLANESWALKER:
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent != null) {
-                    if (permanent.getControllerId().equals(source.getControllerId())) {
+                    if (permanent.isControlledBy(source.getControllerId())) {
                         preventDamage(event, source, permanent.getId(), game);
                     } else if (game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
                         event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));

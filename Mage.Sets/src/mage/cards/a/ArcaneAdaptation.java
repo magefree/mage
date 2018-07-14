@@ -89,7 +89,7 @@ class ConspyEffect extends ContinuousEffectImpl {
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.isCreature() && !card.hasSubtype(subType, game)) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature() && !card.hasSubtype(subType, game)) {
                     game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                 }
             }
@@ -106,7 +106,7 @@ class ConspyEffect extends ContinuousEffectImpl {
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell
-                        && stackObject.getControllerId().equals(source.getControllerId())
+                        && stackObject.isControlledBy(source.getControllerId())
                         && stackObject.isCreature()
                         && !stackObject.hasSubtype(subType, game)) {
                     Card card = ((Spell) stackObject).getCard();

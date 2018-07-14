@@ -42,8 +42,8 @@ public final class LionsEyeDiamond extends CardImpl {
 class LionsEyeDiamondAbility extends ActivatedManaAbilityImpl {
 
     public LionsEyeDiamondAbility() {
-        super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new SacrificeSourceCost());
-        this.addCost(new DiscardHandCost());
+        super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new DiscardHandCost());
+        this.addCost(new SacrificeSourceCost());
         this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 3, 0));
     }
 

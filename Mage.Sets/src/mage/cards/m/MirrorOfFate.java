@@ -134,7 +134,7 @@ class MirrorOfFateTarget extends TargetCardInExile {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getCard(id);
-        if (card != null && card.getOwnerId().equals(source.getControllerId())
+        if (card != null && card.isOwnedBy(source.getControllerId())
                 && game.getState().getZone(card.getId()) == Zone.EXILED) {
             for (ExileZone exile : game.getExile().getExileZones()) {
                 if (exile != null && exile.contains(id)) {

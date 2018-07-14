@@ -61,8 +61,8 @@ enum AshenGhoulCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (!game.getStep().getType().equals(PhaseStep.UPKEEP)
-                || !game.getActivePlayerId().equals(source.getControllerId())) {
+        if (game.getStep().getType() != PhaseStep.UPKEEP
+                || !game.isActivePlayer(source.getControllerId())) {
             return false;
         }
         if (controller != null) {

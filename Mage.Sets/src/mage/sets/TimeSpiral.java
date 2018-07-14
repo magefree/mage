@@ -26,6 +26,7 @@ public final class TimeSpiral extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Academy Ruins", 269, Rarity.RARE, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Aetherflame Wall", 142, Rarity.COMMON, mage.cards.a.AetherflameWall.class));
         cards.add(new SetCardInfo("Amrou Scout", 1, Rarity.COMMON, mage.cards.a.AmrouScout.class));
         cards.add(new SetCardInfo("Amrou Seekers", 2, Rarity.COMMON, mage.cards.a.AmrouSeekers.class));
         cards.add(new SetCardInfo("Ancestral Vision", 48, Rarity.RARE, mage.cards.a.AncestralVision.class));
@@ -293,6 +294,7 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Trickbind", 88, Rarity.RARE, mage.cards.t.Trickbind.class));
         cards.add(new SetCardInfo("Triskelavus", 266, Rarity.RARE, mage.cards.t.Triskelavus.class));
         cards.add(new SetCardInfo("Tromp the Domains", 230, Rarity.UNCOMMON, mage.cards.t.TrompTheDomains.class));
+        cards.add(new SetCardInfo("Truth or Tale", 89, Rarity.UNCOMMON, mage.cards.t.TruthOrTale.class));
         cards.add(new SetCardInfo("Two-Headed Sliver", 183, Rarity.COMMON, mage.cards.t.TwoHeadedSliver.class));
         cards.add(new SetCardInfo("Undying Rage", 184, Rarity.UNCOMMON, mage.cards.u.UndyingRage.class));
         cards.add(new SetCardInfo("Unyaro Bees", 231, Rarity.RARE, mage.cards.u.UnyaroBees.class));

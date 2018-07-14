@@ -74,7 +74,7 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null
-                    && permanent.getControllerId().equals(this.getControllerId())
+                    && permanent.isControlledBy(this.getControllerId())
                     && permanent.isCreature()
                     && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return true;

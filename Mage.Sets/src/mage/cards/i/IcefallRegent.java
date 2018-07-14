@@ -111,7 +111,7 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
+        if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
             discard();
             return false;
         }
@@ -132,7 +132,7 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {
                 Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
-                return targetCreature != null && game.getActivePlayerId().equals(targetCreature.getControllerId());
+                return targetCreature != null && game.isActivePlayer(targetCreature.getControllerId());
             }
         }
 

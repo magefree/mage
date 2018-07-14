@@ -30,18 +30,18 @@ public class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>>
 
         switch (targetOwner) {
             case YOU:
-                if (card.getOwnerId().equals(playerId)) {
+                if (card.isOwnedBy(playerId)) {
                     return true;
                 }
                 break;
             case OPPONENT:
-                if (!card.getOwnerId().equals(playerId)
+                if (!card.isOwnedBy(playerId)
                         && game.getPlayer(playerId).hasOpponent(card.getOwnerId(), game)) {
                     return true;
                 }
                 break;
             case NOT_YOU:
-                if (!card.getOwnerId().equals(playerId)) {
+                if (!card.isOwnedBy(playerId)) {
                     return true;
                 }
                 break;

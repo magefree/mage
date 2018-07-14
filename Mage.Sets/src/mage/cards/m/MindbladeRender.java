@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -12,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,13 +48,13 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean usedForCombatDamageStep;
 
-    MindbladeRenderTriggeredAbility() {
+    public MindbladeRenderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         this.addEffect(new LoseLifeSourceControllerEffect(1));
         this.usedForCombatDamageStep = false;
     }
 
-    MindbladeRenderTriggeredAbility(final MindbladeRenderTriggeredAbility effect) {
+    public MindbladeRenderTriggeredAbility(final MindbladeRenderTriggeredAbility effect) {
         super(effect);
         this.usedForCombatDamageStep = effect.usedForCombatDamageStep;
     }
@@ -71,6 +71,13 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
+            usedForCombatDamageStep = false;
+            return false;
+        }
+        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER) {
+            return false;
+        }
         Player controller = game.getPlayer(getControllerId());
         if (controller == null) {
             return false;
@@ -79,16 +86,12 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
         if (damager == null) {
             return false;
         }
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                && event.getFlag()
+        if (((DamagedPlayerEvent) event).isCombatDamage()
                 && controller.hasOpponent(event.getTargetId(), game)
                 && damager.hasSubtype(SubType.WARRIOR, game)
                 && !usedForCombatDamageStep) {
             usedForCombatDamageStep = true;
             return true;
-        }
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
-            usedForCombatDamageStep = false;
         }
         return false;
     }

@@ -86,7 +86,7 @@ class HostilityEffect extends PreventionEffectImpl {
         if (super.applies(event, source, game)) {
             if (game.getOpponents(source.getControllerId()).contains(event.getTargetId())) {
                 Spell spell = game.getStack().getSpell(event.getSourceId());
-                if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
+                if (spell != null && spell.isControlledBy(source.getControllerId())) {
                     return true;
                 }
             }

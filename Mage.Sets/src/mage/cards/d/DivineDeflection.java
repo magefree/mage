@@ -118,12 +118,12 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
             //   check permanent first
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                if (permanent.getControllerId().equals(source.getControllerId())) {
+                if (permanent.isControlledBy(source.getControllerId())) {
                     return true;
                 }
             }
             //   check player
-            if (source.getControllerId().equals(event.getTargetId())) {
+            if (source.isControlledBy(event.getTargetId())) {
                 return true;
             }
         }

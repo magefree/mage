@@ -139,7 +139,7 @@ class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
                 || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER))) {
             if (object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))
                     && (event.getTargetId().equals(source.getControllerId())
-                    || targetPerm != null && targetPerm.getControllerId().equals(source.getControllerId()))) {
+                    || targetPerm != null && targetPerm.isControlledBy(source.getControllerId()))) {
                 return super.applies(event, source, game);
             }
         }

@@ -19,7 +19,7 @@ public class InvestigateEffect extends CreateTokenEffect {
 
     public InvestigateEffect() {
         super(new ClueArtifactToken());
-        this.staticText = "Investigate. <i>(Create a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
+        this.staticText = "Investigate. <i>(Create a colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
     }
 
     public InvestigateEffect(final InvestigateEffect effect) {

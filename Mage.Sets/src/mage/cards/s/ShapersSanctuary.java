@@ -61,7 +61,7 @@ class CreaturesYouControlTargetedTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
         Player targetter = game.getPlayer(event.getPlayerId());
-        if (permanent != null && permanent.getControllerId().equals(this.getControllerId()) && permanent.isCreature()) {
+        if (permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature()) {
             Object object = game.getObject(event.getSourceId());
             if (object != null && targetter != null && targetter.hasOpponent(this.getControllerId(), game)) {
                 return true;

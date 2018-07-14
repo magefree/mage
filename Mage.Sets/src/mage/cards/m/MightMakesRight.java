@@ -82,7 +82,7 @@ enum ControlsEachCreatureWithGreatestPowerCondition implements Condition {
                 result = true;
             }
             if (power == maxPower) {
-                result &= permanent.getControllerId().equals(source.getControllerId());
+                result &= permanent.isControlledBy(source.getControllerId());
             }
         }
         return result;

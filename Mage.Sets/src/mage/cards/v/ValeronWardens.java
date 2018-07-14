@@ -69,7 +69,7 @@ class ValeronWardensTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return permanent != null && permanent.getControllerId().equals(getControllerId());
+        return permanent != null && permanent.isControlledBy(getControllerId());
     }
 
     @Override

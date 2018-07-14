@@ -84,7 +84,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
+            if (game.isActivePlayer(source.getControllerId())) {
                 return true;
             }
         }

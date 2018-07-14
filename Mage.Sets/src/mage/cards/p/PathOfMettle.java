@@ -101,7 +101,7 @@ class PathOfMettleTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         int attackerCount = 0;
         if (game.getCombat() != null) {
-            if (getControllerId().equals(game.getCombat().getAttackingPlayerId())) {
+            if (isControlledBy(game.getCombat().getAttackingPlayerId())) {
                 for (UUID attacker : game.getCombat().getAttackers()) {
                     if (filter.match(game.getPermanent(attacker), game)) {
                         attackerCount++;

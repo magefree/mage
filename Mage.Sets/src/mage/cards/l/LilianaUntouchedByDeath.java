@@ -135,7 +135,7 @@ class LilianaUntouchedByDeathGraveyardEffect extends AsThoughEffectImpl {
             Card card = game.getCard(objectId);
             if (card != null
                     && card.hasSubtype(SubType.ZOMBIE, game)
-                    && card.getOwnerId().equals(source.getControllerId())
+                    && card.isOwnedBy(source.getControllerId())
                     && game.getState().getZone(objectId) == Zone.GRAVEYARD) {
                 return true;
             }

@@ -67,7 +67,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
                     check = true;
                 } else {
                     Permanent planeswalker = game.getPermanent(event.getTargetId());
-                    if (planeswalker != null && planeswalker.isPlaneswalker() && planeswalker.getControllerId().equals(getControllerId())) {
+                    if (planeswalker != null && planeswalker.isPlaneswalker() && planeswalker.isControlledBy(getControllerId())) {
                         check = true;
                     }
                 }

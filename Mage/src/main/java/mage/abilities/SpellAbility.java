@@ -76,7 +76,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             MageObjectReference permittingSource = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, playerId, game);
             if (permittingSource == null) {
                 Card card = game.getCard(sourceId);
-                if (!(card != null && card.getOwnerId().equals(playerId))) {
+                if (!(card != null && card.isOwnedBy(playerId))) {
                     return ActivationStatus.getFalse();
                 }
             }

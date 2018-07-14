@@ -80,6 +80,6 @@ class CanAttackAsThoughItHadHasteEnchantedEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        return enchantment != null && enchantment.getAttachedTo() != null && enchantment.getAttachedTo().equals(objectId);
+        return enchantment != null && enchantment.isAttachedTo(objectId);
     }
 }

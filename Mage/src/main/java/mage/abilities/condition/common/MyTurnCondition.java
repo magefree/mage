@@ -10,7 +10,7 @@ public enum MyTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(source.getControllerId());
+        return game.isActivePlayer(source.getControllerId());
     }
     
     @Override

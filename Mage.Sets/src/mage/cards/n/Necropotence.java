@@ -79,7 +79,7 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(event.getPlayerId())) {
+        if (isControlledBy(event.getPlayerId())) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }

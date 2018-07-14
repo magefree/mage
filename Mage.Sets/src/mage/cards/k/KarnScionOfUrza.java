@@ -170,7 +170,7 @@ class KarnMinus1Effect extends OneShotEffect {
                 Cards filteredCards = new CardsImpl();
 
                 for (Card exileCard : exile) {
-                    if (exileCard.getOwnerId().equals(source.getControllerId()) && filter.match(exileCard, game)) {
+                    if (exileCard.isOwnedBy(source.getControllerId()) && filter.match(exileCard, game)) {
                         filteredCards.add(exileCard);
                     }
                 }

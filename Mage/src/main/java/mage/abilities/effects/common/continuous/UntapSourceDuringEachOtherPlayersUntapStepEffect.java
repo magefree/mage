@@ -39,7 +39,7 @@ public class UntapSourceDuringEachOtherPlayersUntapStepEffect extends Continuous
             applied = Boolean.FALSE;
         }
         if (!applied && layer == Layer.RulesEffects) {
-            if (!source.getControllerId().equals(game.getActivePlayerId())
+            if (!source.isControlledBy(game.getActivePlayerId())
                     && game.getStep() != null
                     && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);

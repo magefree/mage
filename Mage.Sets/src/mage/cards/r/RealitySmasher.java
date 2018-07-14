@@ -73,7 +73,7 @@ class RealitySmasherTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject spell = game.getStack().getStackObject(event.getSourceId());
-        if (spell == null || !(spell instanceof Spell)) {
+        if (!(spell instanceof Spell)) {
             return false;
         } else {
             if (event.getTargetId().equals(this.getSourceId())

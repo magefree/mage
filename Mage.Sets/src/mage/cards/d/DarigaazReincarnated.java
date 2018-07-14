@@ -161,7 +161,7 @@ class DarigaazReincarnatedReturnEffect extends OneShotEffect {
             return false;
         }
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (sourceObject != null && sourceObject instanceof Card) {
+        if (sourceObject instanceof Card) {
             Card card = (Card) sourceObject;
             new RemoveCounterSourceEffect(CounterType.EGG.createInstance()).apply(game, source);
             if (card.getCounters(game).getCount(CounterType.EGG) == 0) {

@@ -60,6 +60,7 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
         for (DownloadJob j : jobs) {
             switch (j.getState()) {
                 case NEW:
+                case PREPARING:
                 case WORKING:
                     j.setState(State.ABORTED);
             }
@@ -82,8 +83,11 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
     }
 
     public void add(DownloadJob job) {
+        if (job.getState() == State.PREPARING) {
+            throw new IllegalArgumentException("Job already preparing");
+        }
         if (job.getState() == State.WORKING) {
-            throw new IllegalArgumentException("Job already running");
+            throw new IllegalArgumentException("Job already working");
         }
         if (job.getState() == State.FINISHED) {
             throw new IllegalArgumentException("Job already finished");
@@ -106,13 +110,22 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
 
         @Override
         public void onMessage(DownloadJob job) {
-            //the job won't be processed by multiple threads
+
+            // start to work
+            // the job won't be processed by multiple threads
             synchronized (job) {
                 if (job.getState() != State.NEW) {
                     return;
                 }
-                job.setState(State.WORKING);
+
+                job.doPrepareAndStartWork();
+
+                if (job.getState() != State.WORKING) {
+                    return;
+                }
             }
+
+            // download and save data
             try {
                 Source src = job.getSource();
                 Destination dst = job.getDestination();

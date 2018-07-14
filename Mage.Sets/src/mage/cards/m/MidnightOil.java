@@ -87,10 +87,8 @@ class MidnightOilTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return isControlledBy(event.getPlayerId());
+
     }
 
     @Override

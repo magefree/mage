@@ -4,6 +4,7 @@ import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.EquipEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -28,19 +29,9 @@ public class EquipAbility extends ActivatedAbilityImpl {
     }
 
     public EquipAbility(Outcome outcome, Cost cost, Target target) {
-        super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Equip"), cost);
+        super(Zone.BATTLEFIELD, new EquipEffect(outcome), cost);
         this.addTarget(target);
         this.timing = TimingRule.SORCERY;
-    }
-
-    @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game) && !permanent.isCreature()) {
-            return super.canActivate(playerId, game);
-        } else {
-            return ActivationStatus.getFalse();
-        }
     }
 
     public EquipAbility(final EquipAbility ability) {

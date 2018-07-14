@@ -120,7 +120,7 @@ class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if ((abilityToModify instanceof SpellAbility)
-                && abilityToModify.getControllerId().equals(source.getControllerId())) {
+                && abilityToModify.isControlledBy(source.getControllerId())) {
             Card card = game.getCard(abilityToModify.getSourceId());
             return card.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
         }

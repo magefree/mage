@@ -64,7 +64,7 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
             if (Zone.BATTLEFIELD == zce.getFromZone() && Zone.GRAVEYARD == zce.getToZone()) {
                 Permanent targetPermanent = zce.getTarget();
-                if (targetPermanent.isLand() && targetPermanent.getControllerId().equals(getControllerId())) {
+                if (targetPermanent.isLand() && targetPermanent.isControlledBy(getControllerId())) {
                     getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent.getId(), game.getState().getZoneChangeCounter(targetPermanent.getId())));
                     return true;
                 }

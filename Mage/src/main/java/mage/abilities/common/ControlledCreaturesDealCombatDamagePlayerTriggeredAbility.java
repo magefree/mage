@@ -55,7 +55,7 @@ public class ControlledCreaturesDealCombatDamagePlayerTriggeredAbility extends T
         if (event.getType() == EventType.DAMAGED_PLAYER) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getControllerId().equals(this.getControllerId())) {
+            if (damageEvent.isCombatDamage() && p != null && p.isControlledBy(this.getControllerId())) {
                 madeDamage = true;
                 damagedPlayerIds.add(event.getPlayerId());
             }

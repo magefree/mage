@@ -17,7 +17,7 @@ public class PermanentsYouOwnThatOpponentsControlCount implements DynamicValue {
         int count = 0;
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(sourceAbility.getControllerId(), game)) {
-            if (!permanent.getOwnerId().equals(permanent.getControllerId()) && permanent.getOwnerId().equals(sourceAbility.getControllerId())) {
+            if (!permanent.isOwnedBy(permanent.getControllerId()) && permanent.isOwnedBy(sourceAbility.getControllerId())) {
                 if (opponentIds.contains(permanent.getControllerId())) {
                     count++;
                 }

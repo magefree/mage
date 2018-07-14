@@ -81,7 +81,7 @@ class CopySourceSpellEffect extends OneShotEffect {
             Spell spell = game.getStack().getSpell(source.getSourceId());
             if (spell != null) {
                 StackObject stackObjectCopy = spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                if (stackObjectCopy != null && stackObjectCopy instanceof Spell) {
+                if (stackObjectCopy instanceof Spell) {
                     String activateMessage = ((Spell) stackObjectCopy).getActivatedMessage(game);
                     if (activateMessage.startsWith(" casts ")) {
                         activateMessage = activateMessage.substring(6);

@@ -78,7 +78,7 @@ class FlamebladeAngelTriggeredAbility extends TriggeredAbilityImpl {
                 result = true;
             } else {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (permanent != null && getControllerId().equals(permanent.getControllerId())) {
+                if (permanent != null && isControlledBy(permanent.getControllerId())) {
                     result = true;
                 }
             }

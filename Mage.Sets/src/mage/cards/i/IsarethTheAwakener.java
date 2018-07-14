@@ -105,7 +105,7 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
 class IsarethTheAwakenerReflexiveTriggeredAbility extends DelayedTriggeredAbility {
 
     public IsarethTheAwakenerReflexiveTriggeredAbility() {
-        super(new IsarethTheAwakenerEffect(), Duration.OneUse, false);
+        super(new IsarethTheAwakenerEffect(), Duration.OneUse, true);
         this.addEffect(new IsarethTheAwakenerReplacementEffect());
     }
 

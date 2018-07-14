@@ -3,12 +3,13 @@ package mage.game.command.emblems;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.command.Emblem;
 import mage.game.permanent.token.CatToken2;
 
 /**
  *
- * @author spjspj
+ * @author TheElk801
  */
 public class AjaniAdversaryOfTyrantsEmblem extends Emblem {
 
@@ -17,8 +18,8 @@ public class AjaniAdversaryOfTyrantsEmblem extends Emblem {
         this.setName("Emblem Ajani");
         this.setExpansionSetCodeForImage("M19");
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new CatToken2(), 3),
-                TargetController.YOU, false
+                Zone.COMMAND, new CreateTokenEffect(new CatToken2(), 3),
+                TargetController.YOU, null, false
         ));
     }
 }

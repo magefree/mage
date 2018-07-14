@@ -72,12 +72,7 @@ class BloodSunEffect extends ContinuousEffectImpl {
             for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, player.getId(), source.getSourceId(), game)) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
-                        for (Iterator<Ability> it = permanent.getAbilities().iterator(); it.hasNext();) {
-                            Ability ability = it.next();
-                            if (!ability.getAbilityType().equals(AbilityType.MANA)) {
-                                it.remove();
-                            }
-                        }
+                        permanent.getAbilities().removeIf(ability -> ability.getAbilityType() != AbilityType.MANA);
                         break;
                 }
             }

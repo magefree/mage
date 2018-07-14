@@ -82,7 +82,7 @@ class GleancrawlerEffect extends OneShotEffect {
                 if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
                     Card card = game.getCard(mor.getSourceId());
                     if (card != null && card.isCreature()
-                            && card.getOwnerId().equals(source.getControllerId())) {
+                            && card.isOwnedBy(source.getControllerId())) {
                         cardsToHand.add(card);
                     }
                 }

@@ -50,7 +50,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 pass(game);
                 return false;
             case PRECOMBAT_MAIN:
-                if (game.getActivePlayerId().equals(playerId)) {
+                if (game.isActivePlayer(playerId)) {
                     if (actions.isEmpty()) {
                         calculatePreCombatActions(game);
                     }
@@ -64,7 +64,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 pass(game);
                 return false;
             case DECLARE_ATTACKERS:
-                if (!game.getActivePlayerId().equals(playerId)) {
+                if (!game.isActivePlayer(playerId)) {
                     if (actions.isEmpty()) {
                         calculatePreCombatActions(game);
                     }
@@ -81,7 +81,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 pass(game);
                 return false;
             case POSTCOMBAT_MAIN:
-                if (game.getActivePlayerId().equals(playerId)) {
+                if (game.isActivePlayer(playerId)) {
                     if (actions.isEmpty()) {
                         calculatePostCombatActions(game);
                     }
@@ -184,7 +184,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             else if (stepFinished) {
                 logger.debug(indent(node.depth) + "step finished");
                 int testScore = GameStateEvaluator.evaluate(playerId, game);
-                if (game.getActivePlayerId().equals(playerId)) {
+                if (game.isActivePlayer(playerId)) {
                     if (testScore < currentScore) {
                         // if score at end of step is worse than original score don't check further
                         logger.debug(indent(node.depth) + "simulating -- abandoning check, no immediate benefit");

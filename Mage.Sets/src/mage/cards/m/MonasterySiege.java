@@ -86,7 +86,7 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
                                     return true;
                                 }
                                 Permanent permanent = game.getPermanent(targetUUID);
-                                if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
+                                if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
                                     return true;
                                 }
                             }

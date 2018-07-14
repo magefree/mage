@@ -51,4 +51,6 @@ public final class VoiceOfResurgence extends CardImpl {
     public VoiceOfResurgence copy() {
         return new VoiceOfResurgence(this);
     }
+
 }
+

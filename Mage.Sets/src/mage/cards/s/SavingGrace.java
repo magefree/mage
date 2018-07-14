@@ -94,7 +94,7 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
         if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER) {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             if (targetPermanent != null
-                    && targetPermanent.getControllerId().equals(source.getControllerId())) {
+                    && targetPermanent.isControlledBy(source.getControllerId())) {
                 return true;
             }
         }

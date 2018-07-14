@@ -78,7 +78,7 @@ class WitchstalkerTriggeredAbility extends TriggeredAbilityImpl {
         return spell != null
                 && filter.match(spell,game)
                 && game.getOpponents(this.getControllerId()).contains(spell.getControllerId())
-                && game.getActivePlayerId().equals(this.getControllerId());
+                && game.isActivePlayer(this.getControllerId());
     }
 
     @Override

@@ -78,7 +78,7 @@ class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
                 && permanent.isLand()
-                && permanent.getControllerId().equals(getControllerId())) {
+                && permanent.isControlledBy(getControllerId())) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
             if (sourcePermanent != null) {
                 for (Effect effect : getEffects()) {

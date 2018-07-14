@@ -73,7 +73,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = (Permanent) card;
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD
-                    && permanent.getControllerId().equals(this.controllerId)
+                    && permanent.isControlledBy(this.controllerId)
                     && (targetId.equals(this.getSourceId())
                     || (permanent.isCreature()
                     && !(permanent instanceof PermanentToken)))) {

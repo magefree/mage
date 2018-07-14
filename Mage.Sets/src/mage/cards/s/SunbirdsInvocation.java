@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -65,8 +64,8 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
         if (event.getPlayerId().equals(getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
-                    && spell.getFromZone().equals(Zone.HAND)
-                    && spell.getOwnerId().equals(getControllerId())) { // must be from the controller's hand
+                    && spell.getFromZone() == Zone.HAND
+                    && spell.isOwnedBy(getControllerId())) { // must be from the controller's hand
                 if (spell.getCard() != null) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(spell.getId()));
@@ -136,14 +135,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
                     }
                 }
             }
-        }
-
-        while (!cards.isEmpty()) {
-            Card card = cards.getRandom(game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
+            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         }
         return true;
     }

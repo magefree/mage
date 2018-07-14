@@ -90,7 +90,7 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
                 && permanent.getId().equals(this.getSourceId())
                 && // 5/1/2009 If you control an Enigma Sphinx that's owned by another player, it's put into that player's
                 //          graveyard from the battlefield, so Enigma Sphinx's middle ability won't trigger.
-                permanent.getOwnerId().equals(permanent.getControllerId())) {
+                permanent.isOwnedBy(permanent.getControllerId())) {
             return true;
         }
         return false;

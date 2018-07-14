@@ -70,7 +70,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
         if (controller != null) {
             Map<UUID, UUID> playerCreature = new HashMap<>(2);
             Choice choice = new ChoiceLeftOrRight();
-            if (controller.choose(Outcome.Neutral, choice, game)) {
+            if (!controller.choose(Outcome.Neutral, choice, game)) {
                 return false;
             }
             boolean left = choice.getChoice().equals("Left");

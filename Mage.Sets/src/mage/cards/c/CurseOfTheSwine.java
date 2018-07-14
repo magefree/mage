@@ -36,7 +36,7 @@ public final class CurseOfTheSwine extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility && ability.getAbilityType().equals(AbilityType.SPELL)) {
+        if (ability instanceof SpellAbility && ability.getAbilityType() == AbilityType.SPELL) {
             ability.getTargets().clear();
             ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
         }

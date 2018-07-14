@@ -20,7 +20,7 @@ public enum MyMainPhaseCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(source.getControllerId()) &&
+        return game.isActivePlayer(source.getControllerId()) &&
                 turnPhases.contains(game.getTurn().getPhase().getType());
     }
 }
