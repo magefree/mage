@@ -2,21 +2,17 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -33,14 +29,13 @@ public final class Aetherplasm extends CardImpl {
 
     public Aetherplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        
+
         this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever Aetherplasm blocks a creature, you may return Aetherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.
-        this.addAbility(new BlocksTriggeredAbility
-                (new DoIfCostPaid(new AetherplasmEffect(), new ReturnToHandFromBattlefieldSourceCost()), false, true));
+        this.addAbility(new BlocksTriggeredAbility(new DoIfCostPaid(new AetherplasmEffect(), new ReturnToHandFromBattlefieldSourceCost()), false, true));
     }
 
     public Aetherplasm(final Aetherplasm card) {
@@ -67,7 +62,6 @@ class AetherplasmEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent blockedCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (player == null) {
             return false;
         }
@@ -76,19 +70,20 @@ class AetherplasmEffect extends OneShotEffect {
             if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    if(player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null)
-                            && game.getCombat() != null && blockedCreature != null){
+                    Permanent blockedCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+                    if (player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null)
+                            && game.getCombat() != null && blockedCreature != null) {
                         CombatGroup attacker = game.getCombat().findGroup(blockedCreature.getId());
                         Permanent putIntoPlay = game.getPermanent(target.getFirstTarget());
-                        if (putIntoPlay != null && putIntoPlay.isCreature() &&attacker != null) {
+                        if (putIntoPlay != null && putIntoPlay.isCreature() && attacker != null) {
                             game.getCombat().findGroup(blockedCreature.getId()).addBlocker(putIntoPlay.getId(), source.getControllerId(), game);
-                            return true;
+
                         }
                     }
                 }
             }
         }
-        return false;
+        return true;
     }
 
     @Override
