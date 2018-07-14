@@ -37,10 +37,11 @@ public class SpellStack extends ArrayDeque<StackObject> {
         try {
             top = this.peek();
             top.resolve(game);
+            game.resetControlAfterSpellResolve(top.getId());
         } finally {
             if (top != null) {
                 if (contains(top)) {
-                    logger.warn("StackObject was still on the stack after resoving" + top.getName());
+                    logger.warn("StackObject was still on the stack after resolving" + top.getName());
                     this.remove(top, game);
                 }
             }

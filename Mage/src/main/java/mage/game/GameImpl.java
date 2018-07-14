@@ -1395,6 +1395,7 @@ public abstract class GameImpl implements Game, Serializable {
         try {
             top = state.getStack().peek();
             top.resolve(this);
+            resetControlAfterSpellResolve(top.getId());
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
@@ -1405,6 +1406,37 @@ public abstract class GameImpl implements Game, Serializable {
                         state.handleSimultaneousEvent(this);
                     }
                 }
+            }
+        }
+    }
+    
+    @Override
+    public void resetControlAfterSpellResolve(UUID topId) {
+        // for Word of Command
+        Spell spell = getSpellOrLKIStack(topId);
+        if (spell != null) {
+            if (spell.getCommandedBy() != null) {
+                UUID commandedBy = spell.getCommandedBy();
+                UUID spellControllerId = null;
+                if (commandedBy.equals(spell.getControllerId())) {
+                    spellControllerId = spell.getSpellAbility().getFirstTarget(); // i.e. resolved spell is Word of Command
+                } else {
+                    spellControllerId = spell.getControllerId(); // i.e. resolved spell is the target opponent's spell
+                }
+                if (commandedBy != null && spellControllerId != null) {
+                    Player turnController = getPlayer(commandedBy);
+                    if (turnController != null) {
+                        Player targetPlayer = getPlayer(spellControllerId);
+                        if (targetPlayer != null) {
+                            targetPlayer.setGameUnderYourControl(true, false);
+                            informPlayers(turnController.getLogName() + " lost control over " + targetPlayer.getLogName());
+                            if (targetPlayer.getTurnControlledBy().equals(turnController.getId())) {
+                                turnController.getPlayersUnderYourControl().remove(targetPlayer.getId());
+                            }
+                        }
+                    }
+                }
+                spell.setCommandedBy(null);
             }
         }
     }
