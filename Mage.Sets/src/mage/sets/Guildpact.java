@@ -29,6 +29,7 @@ public final class Guildpact extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Absolver Thrull", 1, Rarity.COMMON, mage.cards.a.AbsolverThrull.class));
         cards.add(new SetCardInfo("Abyssal Nocturnus", 43, Rarity.RARE, mage.cards.a.AbyssalNocturnus.class));
+        cards.add(new SetCardInfo("Aetherplasm", 22, Rarity.UNCOMMON, mage.cards.a.Aetherplasm.class));
         cards.add(new SetCardInfo("Agent of Masks", 100, Rarity.UNCOMMON, mage.cards.a.AgentOfMasks.class));
         cards.add(new SetCardInfo("Angel of Despair", 101, Rarity.RARE, mage.cards.a.AngelOfDespair.class));
         cards.add(new SetCardInfo("Battering Wurm", 79, Rarity.UNCOMMON, mage.cards.b.BatteringWurm.class));
