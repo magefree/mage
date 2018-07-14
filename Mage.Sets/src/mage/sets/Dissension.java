@@ -110,6 +110,7 @@ public final class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Momir Vig, Simic Visionary", 118, Rarity.RARE, mage.cards.m.MomirVigSimicVisionary.class));
         cards.add(new SetCardInfo("Muse Vessel", 163, Rarity.RARE, mage.cards.m.MuseVessel.class));
         cards.add(new SetCardInfo("Nettling Curse", 48, Rarity.COMMON, mage.cards.n.NettlingCurse.class));
+        cards.add(new SetCardInfo("Nightcreep", 49, Rarity.UNCOMMON, mage.cards.n.Nightcreep.class));
         cards.add(new SetCardInfo("Nihilistic Glee", 50, Rarity.RARE, mage.cards.n.NihilisticGlee.class));
         cards.add(new SetCardInfo("Novijen, Heart of Progress", 175, Rarity.UNCOMMON, mage.cards.n.NovijenHeartOfProgress.class));
         cards.add(new SetCardInfo("Novijen Sages", 27, Rarity.RARE, mage.cards.n.NovijenSages.class));
