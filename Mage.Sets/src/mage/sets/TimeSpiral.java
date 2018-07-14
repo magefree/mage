@@ -26,6 +26,7 @@ public final class TimeSpiral extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Academy Ruins", 269, Rarity.RARE, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Aether Web", 189, Rarity.COMMON, mage.cards.a.AetherWeb.class));
         cards.add(new SetCardInfo("Aetherflame Wall", 142, Rarity.COMMON, mage.cards.a.AetherflameWall.class));
         cards.add(new SetCardInfo("Amrou Scout", 1, Rarity.COMMON, mage.cards.a.AmrouScout.class));
         cards.add(new SetCardInfo("Amrou Seekers", 2, Rarity.COMMON, mage.cards.a.AmrouSeekers.class));
