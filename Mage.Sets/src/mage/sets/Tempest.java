@@ -43,6 +43,7 @@ public final class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Frenzy", 164, Rarity.COMMON, mage.cards.b.BloodFrenzy.class));
         cards.add(new SetCardInfo("Blood Pet", 109, Rarity.COMMON, mage.cards.b.BloodPet.class));
         cards.add(new SetCardInfo("Boil", 165, Rarity.UNCOMMON, mage.cards.b.Boil.class));
+        cards.add(new SetCardInfo("Booby Trap", 267, Rarity.RARE, mage.cards.b.BoobyTrap.class));
         cards.add(new SetCardInfo("Bottle Gnomes", 278, Rarity.UNCOMMON, mage.cards.b.BottleGnomes.class));
         cards.add(new SetCardInfo("Bounty Hunter", 110, Rarity.RARE, mage.cards.b.BountyHunter.class));
         cards.add(new SetCardInfo("Broken Fall", 216, Rarity.COMMON, mage.cards.b.BrokenFall.class));
