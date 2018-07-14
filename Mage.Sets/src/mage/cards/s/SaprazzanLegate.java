@@ -32,15 +32,14 @@ public final class SaprazzanLegate extends CardImpl {
 
     public SaprazzanLegate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.MERFOLK, SubType.SOLDIER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // If an opponent controls a Mountain and you control an Island, you may cast Saprazzan Legate without paying its mana cost.
+        // If an opponent controls a Mountain and you control an Island, you may cast this spell without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Mountain and you control an Island",
                 new OpponentControlsPermanentCondition(filterMountain),
                 new PermanentsOnTheBattlefieldCondition(filterIsland));

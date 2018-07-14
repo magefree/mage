@@ -39,9 +39,9 @@ public final class EvilTwin extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // You may have Evil Twin enter the battlefield as a copy of any creature on the battlefield except it gains "{U}{B}, {T}: Destroy target creature with the same name as this creature."
+        // You may have Evil Twin enter the battlefield as a copy of any creature on the battlefield, except it has "{U}{B}, {T}: Destroy target creature with the same name as this creature."
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new EvilTwinApplyToPermanent());
-        effect.setText("as a copy of any creature on the battlefield except it gains \"{U}{B}, {T}: Destroy target creature with the same name as this creature.\"");
+        effect.setText("as a copy of any creature on the battlefield, except it has \"{U}{B}, {T}: Destroy target creature with the same name as this creature.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
 
     }

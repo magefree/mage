@@ -30,7 +30,7 @@ import mage.util.functions.ApplyToPermanent;
  */
 public final class VesuvanDoppelganger extends CardImpl {
 
-    private static final String rule = "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it gains \"At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.\"";
+    private static final String rule = "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it has \"At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability.\"";
 
     public VesuvanDoppelganger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -38,7 +38,7 @@ public final class VesuvanDoppelganger extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // You may have Vesuvan Doppelganger enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it gains "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability."
+        // You may have Vesuvan Doppelganger enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it has "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new VesuvanDoppelgangerCopyEffect(), rule, true));
         this.addAbility(ability);
 
@@ -56,7 +56,7 @@ public final class VesuvanDoppelganger extends CardImpl {
 
 class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
 
-    private static final String rule2 = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.";
+    private static final String rule2 = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability.";
 
     public VesuvanDoppelgangerCopyEffect() {
         super(Outcome.Copy);

@@ -40,7 +40,7 @@ public final class ProgenitorMimic extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Progenitor Mimic enter the battlefield as a copy of any creature on the battlefield
-        // except it gains "At the beginning of your upkeep, if this creature isn't a token,
+        // except it has "At the beginning of your upkeep, if this creature isn't a token,
         // create a token that's a copy of this creature."
         Effect effect = new CreateTokenCopySourceEffect();
         effect.setText("create a token that's a copy of this creature");
@@ -52,7 +52,7 @@ public final class ProgenitorMimic extends CardImpl {
                         "At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature.")
         );
         effect = new CopyPermanentEffect(applier);
-        effect.setText("as a copy of any creature on the battlefield except it gains \"At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature.\"");
+        effect.setText("as a copy of any creature on the battlefield except it has \"At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 

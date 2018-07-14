@@ -37,7 +37,7 @@ public final class DreamPillager extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Dream Pillager deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast nonland cards exiled this way.
+        // Whenever Dream Pillager deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast nonland cards from among those exiled cards.
         this.addAbility(new DreamPillagerTriggeredAbility());
     }
 
@@ -84,7 +84,7 @@ class DreamPillagerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast nonland cards exiled this way.";
+        return "Whenever {this} deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast nonland cards from among those exiled cards.";
     }
 }
 
@@ -92,7 +92,7 @@ class DreamPillagerEffect extends OneShotEffect {
 
     public DreamPillagerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile that many cards from the top of your library. Until end of turn, you may cast nonland cards exiled this way";
+        this.staticText = "exile that many cards from the top of your library. Until end of turn, you may cast nonland cards from among those exiled cards";
     }
 
     public DreamPillagerEffect(final DreamPillagerEffect effect) {

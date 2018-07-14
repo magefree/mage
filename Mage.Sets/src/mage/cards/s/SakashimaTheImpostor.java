@@ -37,9 +37,9 @@ public final class SakashimaTheImpostor extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // You may have Sakashima the Impostor enter the battlefield as a copy of any creature on the battlefield, except its name is still Sakashima the Impostor, it's legendary in addition to its other types, and it gains "{2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step."
+        // You may have Sakashima the Impostor enter the battlefield as a copy of any creature on the battlefield, except its name is Sakashima the Impostor, it's legendary in addition to its other types, and it has "{2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step."
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new SakashimaTheImpostorApplier());
-        effect.setText("as a copy of any creature on the battlefield, except its name is still Sakashima the Impostor, it's legendary in addition to its other types, and it gains \"{2}{U}{U}: Return {this} to its owner's hand at the beginning of the next end step.\"");
+        effect.setText("as a copy of any creature on the battlefield, except its name is Sakashima the Impostor, it's legendary in addition to its other types, and it has \"{2}{U}{U}: Return {this} to its owner's hand at the beginning of the next end step.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 

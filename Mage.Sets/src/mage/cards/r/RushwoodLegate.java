@@ -35,7 +35,7 @@ public final class RushwoodLegate extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // If an opponent controls an Island and you control a Forest, you may cast Rushwood Legate without paying its mana cost.
+        // If an opponent controls an Island and you control a Forest, you may cast this spell without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls an Island and you control a Forest",
                 new OpponentControlsPermanentCondition(filterIsland),
                 new PermanentsOnTheBattlefieldCondition(filterForest));

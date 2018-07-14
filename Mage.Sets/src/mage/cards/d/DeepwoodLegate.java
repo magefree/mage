@@ -40,7 +40,7 @@ public final class DeepwoodLegate extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // If an opponent controls a Forest and you control a Swamp, you may cast Deepwood Legate without paying its mana cost.
+        // If an opponent controls a Forest and you control a Swamp, you may cast this spell without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Forest and you control a Swamp",
                 new OpponentControlsPermanentCondition(filterForest),
                 new PermanentsOnTheBattlefieldCondition(filterSwamp));
