@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -16,10 +15,10 @@ public class CommanderAnthologyVolumeII extends ExpansionSet {
     public static CommanderAnthologyVolumeII getInstance() {
         return instance;
     }
-    
+
     private CommanderAnthologyVolumeII() {
-        super("Commander Anthology Volume II", "CM2", ExpansionSet.buildDate(2018, 6, 8), SetType.SUPPLEMENTAL);
-        this.blockName = "Commander Anthology Volume II";
+        super("Commander Anthology 2018", "CM2", ExpansionSet.buildDate(2018, 6, 8), SetType.SUPPLEMENTAL);
+        this.blockName = "Commander Anthology 2018";
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abzan Falconer", 15, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
