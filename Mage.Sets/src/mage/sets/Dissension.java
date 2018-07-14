@@ -179,6 +179,7 @@ public final class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Stormscale Anarch", 74, Rarity.RARE, mage.cards.s.StormscaleAnarch.class));
         cards.add(new SetCardInfo("Street Savvy", 97, Rarity.COMMON, mage.cards.s.StreetSavvy.class));
         cards.add(new SetCardInfo("Supply // Demand", 157, Rarity.UNCOMMON, mage.cards.s.SupplyDemand.class));
+        cards.add(new SetCardInfo("Swift Silence", 132, Rarity.RARE, mage.cards.s.SwiftSilence.class));
         cards.add(new SetCardInfo("Taste for Mayhem", 75, Rarity.COMMON, mage.cards.t.TasteForMayhem.class));
         cards.add(new SetCardInfo("Thrive", 98, Rarity.COMMON, mage.cards.t.Thrive.class));
         cards.add(new SetCardInfo("Tidespout Tyrant", 34, Rarity.RARE, mage.cards.t.TidespoutTyrant.class));
