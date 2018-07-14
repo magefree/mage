@@ -195,6 +195,7 @@ public final class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Vesper Ghoul", 57, Rarity.COMMON, mage.cards.v.VesperGhoul.class));
         cards.add(new SetCardInfo("Vigean Graftmage", 35, Rarity.UNCOMMON, mage.cards.v.VigeanGraftmage.class));
         cards.add(new SetCardInfo("Vigean Hydropon", 135, Rarity.COMMON, mage.cards.v.VigeanHydropon.class));
+        cards.add(new SetCardInfo("Vigean Intuition", 136, Rarity.UNCOMMON, mage.cards.v.VigeanIntuition.class));
         cards.add(new SetCardInfo("Vision Skeins", 36, Rarity.COMMON, mage.cards.v.VisionSkeins.class));
         cards.add(new SetCardInfo("Voidslime", 137, Rarity.RARE, mage.cards.v.Voidslime.class));
         cards.add(new SetCardInfo("Wakestone Gargoyle", 21, Rarity.RARE, mage.cards.w.WakestoneGargoyle.class));
