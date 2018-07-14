@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class JaggedPoppet extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new JaggedPoppetDealtDamageEffect(), false, false, true));
 
         // Hellbent - Whenever Jagged Poppet deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
-        Ability hellbentAbility = new ConditionalTriggeredAbility(
+        Ability hellbentAbility = new ConditionalInterveningIfTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new JaggedPoppetDealsDamageEffect(), false, true),
                 HellbentCondition.instance,
                 "<i>Hellbent</i> &mdash; Whenever {this} deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.");

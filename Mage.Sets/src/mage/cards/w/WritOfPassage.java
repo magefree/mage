@@ -2,16 +2,15 @@
 package mage.cards.w;
 
 import java.util.UUID;
+
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
@@ -51,7 +50,7 @@ public final class WritOfPassage extends CardImpl {
         // Whenever enchanted creature attacks, if its power is 2 or less, it's unblockable this turn.
         FilterPermanent filter = new FilterPermanent("if enchanted creature's power is 2 or less");
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
-        ability = new ConditionalTriggeredAbility(new AttacksAttachedTriggeredAbility(
+        ability = new ConditionalInterveningIfTriggeredAbility(new AttacksAttachedTriggeredAbility(
                 new WritOfPassageAttachedEffect(AttachmentType.AURA), AttachmentType.AURA, false),
                 new AttachedToMatchesFilterCondition(filter), "Whenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.");
         this.addAbility(ability);

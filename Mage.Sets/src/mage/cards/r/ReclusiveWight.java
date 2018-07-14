@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class ReclusiveWight extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, if you control another nonland permanent, sacrifice Reclusive Wight.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "At the beginning of your upkeep, if you control another nonland permanent, sacrifice {this}."

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -42,7 +42,7 @@ public final class FurnaceDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Furnace Dragon enters the battlefield, if you cast it from your hand, exile all artifacts.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ExileAllEffect(filter), false),
                 CastFromHandSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, exile all artifacts."),

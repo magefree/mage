@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class DefenseOfTheHeart extends CardImpl {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterCreatureCard()), false, Outcome.PutLandInPlay));
         DefenseOfTheHeartCondition contition = new DefenseOfTheHeartCondition();
-        this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice {this}, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library"));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice {this}, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library"));
 
     }
 

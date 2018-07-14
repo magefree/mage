@@ -13,7 +13,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -54,7 +54,7 @@ public final class RasputinDreamweaver extends CardImpl {
 
         // At the beginning of your upkeep, if Rasputin started the turn untapped, put a dream counter on it.
         this.addAbility(
-                new ConditionalTriggeredAbility(
+                new ConditionalInterveningIfTriggeredAbility(
                         new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance()), TargetController.YOU, false),
                         RasputinDreamweaverStartedUntappedCondition.instance,
                         "At the beginning of your upkeep, if {this} started the turn untapped, put a dream counter on it."),

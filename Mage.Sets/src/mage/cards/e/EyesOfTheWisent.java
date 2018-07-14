@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -14,6 +13,8 @@ import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.EyesOfTheWisentElementalToken;
+
+import java.util.UUID;
 
 /**
  *

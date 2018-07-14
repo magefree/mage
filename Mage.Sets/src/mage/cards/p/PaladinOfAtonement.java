@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.condition.common.LiveLostLastTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -32,7 +32,7 @@ public final class PaladinOfAtonement extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on Paladin of Atonement.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.ANY, false),
                 LiveLostLastTurnCondition.instance,
                 "At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on {this}"));
