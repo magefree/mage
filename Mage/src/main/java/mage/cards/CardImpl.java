@@ -59,7 +59,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     protected UUID ownerId;
     protected String cardNumber;
-    public String expansionSetCode;
+    protected String expansionSetCode;
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;

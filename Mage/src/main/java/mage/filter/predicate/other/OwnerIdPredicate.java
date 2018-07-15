@@ -19,8 +19,8 @@ public class OwnerIdPredicate implements Predicate<Card> {
     }
 
     @Override
-    public boolean apply(Card input, Game game) {
-        return ownerId.equals(input.getOwnerId());
+    public boolean apply(Card card, Game game) {
+        return card.isOwnedBy(ownerId);
     }
 
     @Override

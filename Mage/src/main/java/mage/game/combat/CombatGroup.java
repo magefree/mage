@@ -3,6 +3,8 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Stream;
+
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
@@ -61,19 +63,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean hasFirstOrDoubleStrike(Game game) {
-        for (UUID permId : attackers) {
-            Permanent attacker = game.getPermanent(permId);
-            if (attacker != null && hasFirstOrDoubleStrike(attacker)) {
-                return true;
-            }
-        }
-        for (UUID permId : blockers) {
-            Permanent blocker = game.getPermanent(permId);
-            if (blocker != null && hasFirstOrDoubleStrike(blocker)) {
-                return true;
-            }
-        }
-        return false;
+        return Stream.concat(attackers.stream(), blockers.stream())
+                .map(id -> game.getPermanent(id))
+                .filter(Objects::nonNull)
+                .anyMatch(this::hasFirstOrDoubleStrike);
+
     }
 
     public UUID getDefenderId() {

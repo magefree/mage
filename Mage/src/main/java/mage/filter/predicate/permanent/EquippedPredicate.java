@@ -5,27 +5,26 @@
  */
 package mage.filter.predicate.permanent;
 
-import java.util.UUID;
 import mage.constants.SubType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
- *
  * @author LevelX2
  */
 public class EquippedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        for (UUID attachmentId : input.getAttachments()) {
-            Permanent attachment = game.getPermanent(attachmentId);
-            if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                return true;
-            }
-        }
-        return false;
+        return input.getAttachments()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .anyMatch(attachment -> attachment.hasSubtype(SubType.EQUIPMENT, game));
+
     }
 
     @Override
