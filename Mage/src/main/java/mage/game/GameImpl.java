@@ -75,6 +75,10 @@ public abstract class GameImpl implements Game, Serializable {
 
     private static final Logger logger = Logger.getLogger(GameImpl.class);
 
+    private static final Set<String> ANTE_CARDS = new HashSet<>(Arrays.asList("Amulet of Quoz", "Bronze Tablet",
+            "Contract from Below", "Darkpact", "Demonic Attorney", "Jeweled Bird", "Rebirth", "Tempest Efreet",
+            "Timmerian Fiends"));
+
     private transient Object customData;
     protected boolean simulation = false;
 
@@ -887,9 +891,29 @@ public abstract class GameImpl implements Game, Serializable {
                 initTimer(player.getId());
             }
         }
+
+        //Ante
+        for (Player player : state.getPlayers().values()) {
+            List<Card> cardsInLibrary = player.getLibrary().getCards(this);
+            for (Card card : cardsInLibrary){
+                if (ANTE_CARDS.contains(card.getName())){
+                    fireInformEvent("Removed "+card.getIdName()+" from "+player.getName()+"'s deck (not playing for ante).");
+                    player.getLibrary().remove(card.getId(), this);
+                }
+            }
+            Set<Card> cardsInSideboard = player.getSideboard().getCards(this);
+            for (Card card : cardsInSideboard){
+                if (ANTE_CARDS.contains(card.getName())){
+                    fireInformEvent("Removed "+card.getIdName()+" from "+player.getName()+"'s sideboard (not playing for ante).");
+                    player.getSideboard().remove(card);
+                }
+            }
+        }
+
         if (startMessage == null || startMessage.isEmpty()) {
             startMessage = "Game has started";
         }
+
         fireStatusEvent(startMessage, false);
 
         saveState(false);

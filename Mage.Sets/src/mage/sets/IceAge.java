@@ -30,6 +30,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Wastes", 351, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aegis of the Meek", 307, Rarity.RARE, mage.cards.a.AegisOfTheMeek.class));
         cards.add(new SetCardInfo("Altar of Bone", 281, Rarity.RARE, mage.cards.a.AltarOfBone.class));
+        cards.add(new SetCardInfo("Amulet of Quoz", 308, Rarity.RARE, mage.cards.a.AmuletOfQuoz.class));
         cards.add(new SetCardInfo("Anarchy", 170, Rarity.UNCOMMON, mage.cards.a.Anarchy.class));
         cards.add(new SetCardInfo("Arenson's Aura", 3, Rarity.COMMON, mage.cards.a.ArensonsAura.class));
         cards.add(new SetCardInfo("Armor of Faith", 4, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class));

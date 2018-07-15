@@ -148,9 +148,7 @@ public class Library implements Serializable {
 
     public void set(Library newLibrary) {
         library.clear();
-        for (UUID card : newLibrary.getCardList()) {
-            library.add(card);
-        }
+        library.addAll(newLibrary.getCardList());
     }
 
     public List<UUID> getCardList() {
