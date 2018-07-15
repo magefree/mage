@@ -65,6 +65,7 @@ public final class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Cockatrice", 189, Rarity.RARE, mage.cards.c.Cockatrice.class));
         cards.add(new SetCardInfo("Consecrate Land", 14, Rarity.UNCOMMON, mage.cards.c.ConsecrateLand.class));
         cards.add(new SetCardInfo("Conservator", 237, Rarity.UNCOMMON, mage.cards.c.Conservator.class));
+        cards.add(new SetCardInfo("Contract from Below", 96, Rarity.RARE, mage.cards.c.ContractFromBelow.class));
         cards.add(new SetCardInfo("Control Magic", 52, Rarity.UNCOMMON, mage.cards.c.ControlMagic.class));
         cards.add(new SetCardInfo("Conversion", 15, Rarity.UNCOMMON, mage.cards.c.Conversion.class));
         cards.add(new SetCardInfo("Copper Tablet", 238, Rarity.UNCOMMON, mage.cards.c.CopperTablet.class));
@@ -77,9 +78,11 @@ public final class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Cursed Land", 97, Rarity.UNCOMMON, mage.cards.c.CursedLand.class));
         cards.add(new SetCardInfo("Cyclopean Tomb", 240, Rarity.RARE, mage.cards.c.CyclopeanTomb.class));
         cards.add(new SetCardInfo("Dark Ritual", 98, Rarity.COMMON, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Darkpact", 99, Rarity.RARE, mage.cards.d.Darkpact.class));
         cards.add(new SetCardInfo("Death Ward", 17, Rarity.COMMON, mage.cards.d.DeathWard.class));
         cards.add(new SetCardInfo("Deathgrip", 100, Rarity.UNCOMMON, mage.cards.d.Deathgrip.class));
         cards.add(new SetCardInfo("Deathlace", 101, Rarity.RARE, mage.cards.d.Deathlace.class));
+        cards.add(new SetCardInfo("Demonic Attorney", 102, Rarity.RARE, mage.cards.d.DemonicAttorney.class));
         cards.add(new SetCardInfo("Demonic Hordes", 103, Rarity.RARE, mage.cards.d.DemonicHordes.class));
         cards.add(new SetCardInfo("Demonic Tutor", 104, Rarity.UNCOMMON, mage.cards.d.DemonicTutor.class));
         cards.add(new SetCardInfo("Dingus Egg", 241, Rarity.RARE, mage.cards.d.DingusEgg.class));

@@ -81,6 +81,7 @@ public final class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Island of Wak-Wak", 75, Rarity.RARE, mage.cards.i.IslandOfWakWak.class));
         cards.add(new SetCardInfo("Jandor's Ring", 64, Rarity.RARE, mage.cards.j.JandorsRing.class));
         cards.add(new SetCardInfo("Jandor's Saddlebags", 65, Rarity.RARE, mage.cards.j.JandorsSaddlebags.class));
+        cards.add(new SetCardInfo("Jeweled Bird", 66, Rarity.UNCOMMON, mage.cards.j.JeweledBird.class));
         cards.add(new SetCardInfo("Jihad", 5, Rarity.RARE, mage.cards.j.Jihad.class));
         cards.add(new SetCardInfo("Junún Efreet", 28, Rarity.RARE, mage.cards.j.JununEfreet.class));
         cards.add(new SetCardInfo("Juzam Djinn", 29, Rarity.RARE, mage.cards.j.JuzamDjinn.class));

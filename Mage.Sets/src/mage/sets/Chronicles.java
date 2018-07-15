@@ -81,6 +81,7 @@ public final class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Indestructible Aura", 63, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
         cards.add(new SetCardInfo("Ivory Guardians", 64, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jalum Tome", 81, Rarity.RARE, mage.cards.j.JalumTome.class));
+        cards.add(new SetCardInfo("Jeweled Bird", 102, Rarity.RARE, mage.cards.j.JeweledBird.class));
         cards.add(new SetCardInfo("Johan", 112, Rarity.RARE, mage.cards.j.Johan.class));
         cards.add(new SetCardInfo("Juxtapose", 22, Rarity.RARE, mage.cards.j.Juxtapose.class));
         cards.add(new SetCardInfo("Keepers of the Faith", 65, Rarity.COMMON, mage.cards.k.KeepersOfTheFaith.class));
