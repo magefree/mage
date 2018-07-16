@@ -61,6 +61,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     private boolean putOnTopSelected;
     private boolean anyOrder;
 
+    //TODO: These constructors are a mess
     public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards,
             boolean mayShuffleAfter, DynamicValue numberToPick,
             FilterCard pickFilter, boolean putOnTop) {

@@ -16,6 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -76,7 +77,7 @@ class VirtussManeuverEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            FilterCard filter = new FilterCard("card in your graveyard");
+            FilterCard filter = new FilterCreatureCard("creature card in your graveyard");
             filter.add(new OwnerIdPredicate(player.getId()));
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             getBackMap.put(player.getId(), null);
