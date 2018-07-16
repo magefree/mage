@@ -1,13 +1,6 @@
-
 package org.mage.plugins.card.dl.sources;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -19,18 +12,12 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.prefs.Preferences;
-
 import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
-import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
 import org.apache.log4j.Logger;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -235,7 +222,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("AKH");
         supportedSets.add("MPS");
         supportedSets.add("CMA");
-//        supportedSets.add("CM2"); // Commander Anthology, Vol. II
+        supportedSets.add("CM2"); // Commander Anthology, Vol. II
         supportedSets.add("E01");
         supportedSets.add("HOU");
         supportedSets.add("C17");
@@ -249,7 +236,10 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("RIX"); // Rivals of Ixalan
         supportedSets.add("A25"); // Masters 25
         supportedSets.add("DOM"); // Dominaria
-//        supportedSets.add("M19"); // Core 2019
+        supportedSets.add("M19"); // Core 2019
+//      supportedSets.add("GRN"); // Guilds of Ravnica
+//      supportedSets.add("RNA"); // Ravnica Allegiance
+//      supportedSets.add("C18"); // Commander 2018
 
         sets = new HashMap<>();
         setsAliases = new HashMap<>();
@@ -286,7 +276,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("C16", "Commander 2016");
         setsAliases.put("C17", "Commander 2017");
         setsAliases.put("CMA", "Commander Anthology");
-//        setsAliases.put("CM2", "Commander Anthology, Vol. II");
+        setsAliases.put("CM2", "Commander Anthology 2018");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
         setsAliases.put("CMD", "Magic: The Gathering-Commander");

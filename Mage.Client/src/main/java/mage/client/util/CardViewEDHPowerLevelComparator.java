@@ -11,7 +11,7 @@ import mage.view.CardView;
  */
 public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
 
-    public int getPowerLevel(CardView card) {
+    private int getPowerLevel(CardView card) {
 
         int thisMaxPower = 0;
 
@@ -306,7 +306,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             thisMaxPower = Math.max(thisMaxPower, 1);
         }
 
-        if (card.getCardTypes().contains("Plainswalker")) {
+        if (card.isPlanesWalker()) {
             if (card.getName().toLowerCase(Locale.ENGLISH).equals("jace, the mind sculptor")) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
             }
@@ -509,7 +509,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView o1, CardView o2) {
-        return Integer.valueOf(getPowerLevel(o1)).compareTo(getPowerLevel(o2));
+        return Integer.compare(getPowerLevel(o1), getPowerLevel(o2));
     }
 
 }

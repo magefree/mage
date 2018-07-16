@@ -45,9 +45,14 @@ public final class SarkhanDragonsoul extends CardImpl {
                 .setText("and each creature your opponents control")
         );
 
+        this.addAbility(ability);
+
+
         // −3: Sarkhan, Dragonsoul deals 4 damage to target player or planeswalker.
-        ability = new LoyaltyAbility(new DamageTargetEffect(4), -3);
-        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        Ability ability2 = new LoyaltyAbility(new DamageTargetEffect(4), -3);
+        ability2.addTarget(new TargetPlayerOrPlaneswalker());
+
+        this.addAbility(ability2);
 
         // −9: Search your library for any number of Dragon creature cards, put them onto the battlefield, then shuffle your library.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter)), -9));

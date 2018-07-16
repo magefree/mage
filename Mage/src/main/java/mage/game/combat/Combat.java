@@ -1,8 +1,6 @@
 
 package mage.game.combat;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
@@ -33,6 +31,9 @@ import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
+import java.util.*;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -47,7 +48,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     protected List<CombatGroup> groups = new ArrayList<>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
-    // player and plainswalker ids
+    // player and planeswalker ids
     protected Set<UUID> defenders = new HashSet<>();
     // how many creatures attack defending player
     protected Map<UUID, Set<UUID>> numberCreaturesDefenderAttackedBy = new HashMap<>();
@@ -310,31 +311,28 @@ public class Combat implements Serializable, Copyable<Combat> {
                         for (UUID targetId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(targetId);
                             if (permanent != null) {
-                                if (permanent != null) {
 
-                                    for (UUID bandedId : attacker.getBandedCards()) {
-                                        permanent.addBandedCard(bandedId);
-                                        Permanent banded = game.getPermanent(bandedId);
-                                        if (banded != null) {
-                                            banded.addBandedCard(targetId);
-                                        }
-                                    }
-                                    permanent.addBandedCard(creatureId);
-                                    attacker.addBandedCard(targetId);
-                                    if (!permanent.getAbilities().containsKey(BandingAbility.getInstance().getId())) {
-                                        filter.add(new AbilityPredicate(BandingAbility.class));
+                                for (UUID bandedId : attacker.getBandedCards()) {
+                                    permanent.addBandedCard(bandedId);
+                                    Permanent banded = game.getPermanent(bandedId);
+                                    if (banded != null) {
+                                        banded.addBandedCard(targetId);
                                     }
                                 }
+                                permanent.addBandedCard(creatureId);
+                                attacker.addBandedCard(targetId);
+                                if (!permanent.getAbilities().containsKey(BandingAbility.getInstance().getId())) {
+                                    filter.add(new AbilityPredicate(BandingAbility.class));
+                                }
                             }
+
                         }
                     }
                 }
                 if (isBanded) {
                     StringBuilder sb = new StringBuilder(player.getLogName()).append(" formed a band with ").append((attacker.getBandedCards().size() + 1) + " creatures: ");
                     sb.append(attacker.getLogName());
-                    int i = 0;
                     for (UUID id : attacker.getBandedCards()) {
-                        i++;
                         sb.append(", ");
                         Permanent permanent = game.getPermanent(id);
                         if (permanent != null) {
@@ -415,7 +413,6 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     /**
-     *
      * @param player
      * @param game
      * @return true if the attack with that set of creatures and attacked
@@ -486,7 +483,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Handle the blocker selection process
      *
      * @param blockController player that controlls how to block, if null the
-     * defender is the controller
+     *                        defender is the controller
      * @param game
      */
     public void selectBlockers(Player blockController, Game game) {
@@ -532,7 +529,6 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     /**
      * Add info about attacker blocked by blocker to the game log
-     *
      */
     private void logBlockerInfo(Player defender, Game game) {
         boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no ned to sow the attacked player
@@ -1191,9 +1187,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                     break;
                 case MULTIPLE:
-                    for (UUID opponentId : game.getOpponents(attackingPlayerId)) {
-                        attackablePlayers.add(opponentId);
-                    }
+                    attackablePlayers.addAll(game.getOpponents(attackingPlayerId));
                     break;
             }
         }
@@ -1281,10 +1275,10 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (defenderAttackedBy.size() >= defendingPlayer.getMaxAttackedBy()) {
             Player attackingPlayer = game.getPlayer(game.getControllerId(attackerId));
             if (attackingPlayer != null && !game.isSimulation()) {
-                game.informPlayer(attackingPlayer, new StringBuilder("No more than ")
-                        .append(CardUtil.numberToText(defendingPlayer.getMaxAttackedBy()))
-                        .append(" creatures can attack ")
-                        .append(defendingPlayer.getLogName()).toString());
+                game.informPlayer(attackingPlayer, "No more than " +
+                        CardUtil.numberToText(defendingPlayer.getMaxAttackedBy()) +
+                        " creatures can attack " +
+                        defendingPlayer.getLogName());
             }
             return false;
         }
@@ -1314,7 +1308,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param playerId
      * @param game
      * @param solveBanding check whether also add creatures banded with
-     * attackerId
+     *                     attackerId
      */
     public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game, boolean solveBanding) {
         Permanent blocker = game.getPermanent(blockerId);
@@ -1325,9 +1319,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 // add all blocked attackers
                 for (CombatGroup group : groups) {
                     if (group.getBlockers().contains(blockerId)) {
-                        for (UUID attacker : group.attackers) {
-                            newGroup.attackers.add(attacker);
-                        }
+                        newGroup.attackers.addAll(group.attackers);
                     }
                 }
                 blockingGroups.put(blockerId, newGroup);
@@ -1423,12 +1415,8 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean hasFirstOrDoubleStrike(Game game) {
-        for (CombatGroup group : groups) {
-            if (group.hasFirstOrDoubleStrike(game)) {
-                return true;
-            }
-        }
-        return false;
+        return groups.stream()
+                .anyMatch(group -> group.hasFirstOrDoubleStrike(game));
     }
 
     public CombatGroup findGroup(UUID attackerId) {
@@ -1449,7 +1437,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         return null;
     }
 
-//    public int totalUnblockedDamage(Game game) {
+    //    public int totalUnblockedDamage(Game game) {
 //        int total = 0;
 //        for (CombatGroup group : groups) {
 //            if (group.getBlockers().isEmpty()) {
@@ -1482,7 +1470,6 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     /**
-     *
      * @param attackerId
      * @return uuid of defending player or planeswalker
      */

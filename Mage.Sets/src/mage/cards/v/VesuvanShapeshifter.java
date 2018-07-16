@@ -58,7 +58,7 @@ public final class VesuvanShapeshifter extends CardImpl {
         ability.setWorksFaceDown(false);
         this.addAbility(ability);
 
-        // and gains "At the beginning of your upkeep, you may turn this creature face down".
+        // and has "At the beginning of your upkeep, you may turn this creature face down".
         effect = new VesuvanShapeshifterFaceDownEffect();
         ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         this.addAbility(ability);
@@ -102,7 +102,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
 
     public VesuvanShapeshifterEffect() {
         super(Outcome.Copy);
-        staticText = "have {this} become a copy of a creature and gain this ability";
+        staticText = "have {this} become a copy of a creature, except it has this ability";
     }
 
     public VesuvanShapeshifterEffect(final VesuvanShapeshifterEffect effect) {

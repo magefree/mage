@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -34,7 +34,7 @@ public final class PouncingWurm extends CardImpl {
         // Kicker {2}{G}
         this.addAbility(new KickerAbility("{2}{G}"));
         // If Pouncing Wurm was kicked, it enters the battlefield with three +1/+1 counters on it and with haste.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3))),
                 KickedCondition.instance,"If Pouncing Wurm was kicked, it enters the battlefield with three +1/+1 counters on it and with haste.");
 		ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));

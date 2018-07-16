@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -32,7 +32,7 @@ public final class CaligoSkinWitch extends CardImpl {
         this.addAbility(new KickerAbility("{3}{B}"));
 
         // When Caligo Skin-Witch enters the battlefield, if it was kicked, each opponent discards two cards.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(
                         new StaticValue(2),
                         false,

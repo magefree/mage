@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.HexproofAbility;
@@ -34,7 +34,7 @@ public final class ImperialMask extends CardImpl {
 
         // When Imperial Mask enters the battlefield, if it's not a token, each of your teammates puts a token that's a copy of Imperial Mask onto the battlefield.
         // No implementation of teammates currently, so no effect needed
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new InfoEffect("each of your teammates puts a token that's a copy of {this} onto the battlefield"), false),
                 new SourceMatchesFilterCondition(filter),
                 "When {this} enters the battlefield, if it's not a token, "

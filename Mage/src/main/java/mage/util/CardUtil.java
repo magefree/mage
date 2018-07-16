@@ -2,6 +2,8 @@
 package mage.util;
 
 import java.util.UUID;
+import java.util.stream.Stream;
+
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -354,13 +356,8 @@ public final class CardUtil {
     }
 
     public static boolean checkNumeric(String s) {
+        return s.chars().allMatch(Character::isDigit);
 
-        for (int i = 0; i < s.length(); i++) {
-            if (!Character.isDigit(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -442,9 +439,9 @@ public final class CardUtil {
     public static String getObjectZoneString(String text, MageObject mageObject, Game game) {
         int zoneChangeCounter = 0;
         if (mageObject instanceof Permanent) {
-            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter(game);
+            zoneChangeCounter = mageObject.getZoneChangeCounter(game);
         } else if (mageObject instanceof Card) {
-            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter(game);
+            zoneChangeCounter = mageObject.getZoneChangeCounter(game);
         }
         return getObjectZoneString(text, mageObject.getId(), game, zoneChangeCounter, false);
     }

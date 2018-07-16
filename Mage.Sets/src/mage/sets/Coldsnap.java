@@ -35,6 +35,7 @@ public final class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Arctic Nishoba", 102, Rarity.UNCOMMON, mage.cards.a.ArcticNishoba.class));
         cards.add(new SetCardInfo("Arcum Dagsson", 27, Rarity.RARE, mage.cards.a.ArcumDagsson.class));
         cards.add(new SetCardInfo("Aurochs Herd", 103, Rarity.COMMON, mage.cards.a.AurochsHerd.class));
+        cards.add(new SetCardInfo("Balduvian Fallen", 51, Rarity.UNCOMMON, mage.cards.b.BalduvianFallen.class));
         cards.add(new SetCardInfo("Balduvian Frostwaker", 28, Rarity.UNCOMMON, mage.cards.b.BalduvianFrostwaker.class));
         cards.add(new SetCardInfo("Balduvian Rage", 76, Rarity.UNCOMMON, mage.cards.b.BalduvianRage.class));
         cards.add(new SetCardInfo("Balduvian Warlord", 77, Rarity.UNCOMMON, mage.cards.b.BalduvianWarlord.class));
@@ -52,6 +53,7 @@ public final class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Commandeer", 29, Rarity.RARE, mage.cards.c.Commandeer.class));
         cards.add(new SetCardInfo("Controvert", 30, Rarity.UNCOMMON, mage.cards.c.Controvert.class));
         cards.add(new SetCardInfo("Counterbalance", 31, Rarity.UNCOMMON, mage.cards.c.Counterbalance.class));
+        cards.add(new SetCardInfo("Cover of Winter", 3, Rarity.RARE, mage.cards.c.CoverOfWinter.class));
         cards.add(new SetCardInfo("Cryoclasm", 79, Rarity.UNCOMMON, mage.cards.c.Cryoclasm.class));
         cards.add(new SetCardInfo("Darien, King of Kjeldor", 4, Rarity.RARE, mage.cards.d.DarienKingOfKjeldor.class));
         cards.add(new SetCardInfo("Dark Depths", 145, Rarity.RARE, mage.cards.d.DarkDepths.class));
@@ -141,6 +143,7 @@ public final class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Rune Snag", 46, Rarity.COMMON, mage.cards.r.RuneSnag.class));
         cards.add(new SetCardInfo("Scrying Sheets", 149, Rarity.RARE, mage.cards.s.ScryingSheets.class));
         cards.add(new SetCardInfo("Sek'Kuar, Deathkeeper", 131, Rarity.RARE, mage.cards.s.SekKuarDeathkeeper.class));
+        cards.add(new SetCardInfo("Shape of the Wiitigo", 120, Rarity.RARE, mage.cards.s.ShapeOfTheWiitigo.class));
         cards.add(new SetCardInfo("Sheltering Ancient", 121, Rarity.UNCOMMON, mage.cards.s.ShelteringAncient.class));
         cards.add(new SetCardInfo("Simian Brawler", 122, Rarity.COMMON, mage.cards.s.SimianBrawler.class));
         cards.add(new SetCardInfo("Skred", 97, Rarity.COMMON, mage.cards.s.Skred.class));

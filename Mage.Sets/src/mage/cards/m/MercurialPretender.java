@@ -23,7 +23,7 @@ import mage.util.functions.AbilityApplier;
  */
 public final class MercurialPretender extends CardImpl {
 
-    private static final String effectText = "as a copy of any creature you control except it gains \"{2}{U}{U}: Return this creature to its owner's hand.\"";
+    private static final String effectText = "as a copy of any creature you control, except it has \"{2}{U}{U}: Return this creature to its owner's hand.\"";
 
     public MercurialPretender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
@@ -33,8 +33,8 @@ public final class MercurialPretender extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // You may have Mercurial Pretender enter the battlefield as a copy of any creature you control
-        // except it gains "{2}{U}{U}: Return this creature to its owner's hand."
+        // You may have Mercurial Pretender enter the battlefield as a copy of any creature you control,
+        // except it has "{2}{U}{U}: Return this creature to its owner's hand."
         Effect effect = new CopyPermanentEffect(new FilterControlledCreaturePermanent(),
                 new AbilityApplier(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}"))));
         effect.setText(effectText);

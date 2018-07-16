@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class NantukoShaman extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Nantuko Shaman enters the battlefield, if you control no tapped lands, draw a card.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0),
                 "When {this} enters the battlefield, if you control no tapped lands, draw a card");

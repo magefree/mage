@@ -36,7 +36,7 @@ public final class CemeteryPuca extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Whenever a creature dies, you may pay {1}. If you do, Cemetery Puca becomes a copy of that creature and gains this ability.
+        // Whenever a creature dies, you may pay {1}. If you do, Cemetery Puca becomes a copy of that creature, except it has this ability.
         this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl("{1}")), false, new FilterCreaturePermanent("a creature"), true));
 
     }
@@ -55,7 +55,7 @@ class CemeteryPucaEffect extends OneShotEffect {
 
     public CemeteryPucaEffect() {
         super(Outcome.Copy);
-        staticText = " {this} becomes a copy of that creature and gains this ability";
+        staticText = " {this} becomes a copy of that creature, except it has this ability";
     }
 
     public CemeteryPucaEffect(final CemeteryPucaEffect effect) {

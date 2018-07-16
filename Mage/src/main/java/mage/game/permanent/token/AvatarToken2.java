@@ -6,8 +6,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 public final class AvatarToken2 extends TokenImpl {
+
     public AvatarToken2() {
-        super("Angel", "4/4 white Avatar creature token with flying");
+        super("Avatar", "4/4 white Avatar creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.AVATAR);

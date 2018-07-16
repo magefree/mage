@@ -35,6 +35,8 @@ public class ManaPool implements Serializable {
     private boolean autoPayment; // auto payment from mana pool: true - mode is active
     private boolean autoPaymentRestricted; // auto payment from mana pool: true - if auto Payment is on, it will only pay if one kind of mana is in the pool
     private ManaType unlockedManaType; // type of mana that was selected to pay manually
+    private boolean forcedToPay; // for Word of Command
+    private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
 
@@ -43,6 +45,7 @@ public class ManaPool implements Serializable {
         autoPayment = true;
         autoPaymentRestricted = true;
         unlockedManaType = null;
+        forcedToPay = false;
     }
 
     public ManaPool(final ManaPool pool) {
@@ -53,6 +56,10 @@ public class ManaPool implements Serializable {
         this.autoPayment = pool.autoPayment;
         this.autoPaymentRestricted = pool.autoPaymentRestricted;
         this.unlockedManaType = pool.unlockedManaType;
+        this.forcedToPay = pool.forcedToPay;
+        for (ManaPoolItem item : pool.poolBookmark) {
+            poolBookmark.add(item.copy());
+        }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
     }
 
@@ -87,12 +94,12 @@ public class ManaPool implements Serializable {
      * @return
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, Mana usedManaToPay) {
-        if (!autoPayment && manaType != unlockedManaType) {
+        if (!isAutoPayment() && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
         }
         ManaType possibleAsThoughtPoolManaType = null;
-        if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && manaType != unlockedManaType) {
+        if (isAutoPayment() && isAutoPaymentRestricted() && !wasManaAddedBeyondStock() && manaType != unlockedManaType) {
             // if automatic restricted payment and there is already mana in the pool
             // and the needed mana type was not unlocked, nothing will be paid
             if (unlockedManaType != null) {
@@ -111,6 +118,7 @@ public class ManaPool implements Serializable {
             lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
+        
         for (ManaPoolItem mana : manaItems) {
             if (filter != null) {
                 if (!filter.match(mana.getSourceObject(), game)) {
@@ -120,7 +128,7 @@ public class ManaPool implements Serializable {
                     }
                 }
             }
-            if (possibleAsThoughtPoolManaType == null && manaType != unlockedManaType && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
+            if (possibleAsThoughtPoolManaType == null && manaType != unlockedManaType && isAutoPayment() && isAutoPaymentRestricted() && mana.count() == mana.getStock()) {
                 // no mana added beyond the stock so don't auto pay this
                 continue;
             }
@@ -436,19 +444,19 @@ public class ManaPool implements Serializable {
     }
 
     public boolean isAutoPayment() {
-        return autoPayment;
+        return autoPayment || forcedToPay;
     }
 
     public void setAutoPayment(boolean autoPayment) {
         this.autoPayment = autoPayment;
     }
 
-    public void setAutoPaymentRestricted(boolean autoPaymentRestricted) {
-        this.autoPaymentRestricted = autoPaymentRestricted;
+    public boolean isAutoPaymentRestricted() {
+        return autoPaymentRestricted || forcedToPay;
     }
 
-    public boolean isAutoPaymentRestricted() {
-        return autoPaymentRestricted;
+    public void setAutoPaymentRestricted(boolean autoPaymentRestricted) {
+        this.autoPaymentRestricted = autoPaymentRestricted;
     }
 
     public ManaType getUnlockedManaType() {
@@ -490,4 +498,39 @@ public class ManaPool implements Serializable {
         return itemsCopy;
     }
 
+    public void setForcedToPay(boolean forcedToPay) {
+        this.forcedToPay = forcedToPay;
+    }
+
+    public boolean isForcedToPay() {
+        return forcedToPay;
+    }
+
+    public UUID getPlayerId() {
+        return playerId;
+    }
+    
+    public void storeMana() {
+        poolBookmark.clear();
+        poolBookmark.addAll(getManaItems());
+    }
+    
+    public List<ManaPoolItem> getPoolBookmark() {
+        List<ManaPoolItem> itemsCopy = new ArrayList<>();
+        for (ManaPoolItem manaItem : poolBookmark) {
+            itemsCopy.add(manaItem.copy());
+        }
+        return itemsCopy;
+    }
+    
+    public void restoreMana(List<ManaPoolItem> manaList) {
+        manaItems.clear();
+        if (!manaList.isEmpty()) {
+            List<ManaPoolItem> itemsCopy = new ArrayList<>();
+            for (ManaPoolItem manaItem : manaList) {
+                itemsCopy.add(manaItem.copy());
+            }
+            manaItems.addAll(itemsCopy);
+        }
+    }
 }

@@ -278,6 +278,8 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void setTurnControlledBy(UUID playerId);
 
+    List<UUID> getTurnControllers();
+
     UUID getTurnControlledBy();
 
     /**
@@ -304,6 +306,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param value
      */
     void setGameUnderYourControl(boolean value);
+
+    void setGameUnderYourControl(boolean value, boolean fullRestore);
 
     boolean isTestMode();
 
@@ -855,6 +859,8 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isRequestToShowHandCardsAllowed();
 
     Set<UUID> getUsersAllowedToSeeHandCards();
+
+    void setPayManaMode(boolean payManaMode);
 
     boolean isInPayManaMode();
 
