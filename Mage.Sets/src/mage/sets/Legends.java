@@ -207,7 +207,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Ramirez DePietro", 251, Rarity.UNCOMMON, mage.cards.r.RamirezDePietro.class));
         cards.add(new SetCardInfo("Ramses Overdark", 252, Rarity.RARE, mage.cards.r.RamsesOverdark.class));
         cards.add(new SetCardInfo("Rasputin Dreamweaver", 253, Rarity.RARE, mage.cards.r.RasputinDreamweaver.class));
-        cards.add(new SetCardInfo("Rebirth", 114, Rarity.RARE, mage.cards.r.Rebirth.class));
+        cards.add(new SetCardInfo("Rebirth", 200, Rarity.RARE, mage.cards.r.Rebirth.class));
         cards.add(new SetCardInfo("Recall", 70, Rarity.RARE, mage.cards.r.Recall.class));
         cards.add(new SetCardInfo("Red Mana Battery", 291, Rarity.UNCOMMON, mage.cards.r.RedManaBattery.class));
         cards.add(new SetCardInfo("Reincarnation", 201, Rarity.UNCOMMON, mage.cards.r.Reincarnation.class));
@@ -248,7 +248,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Syphon Soul", 118, Rarity.COMMON, mage.cards.s.SyphonSoul.class));
         cards.add(new SetCardInfo("Telekinesis", 79, Rarity.RARE, mage.cards.t.Telekinesis.class));
         cards.add(new SetCardInfo("Teleport", 80, Rarity.RARE, mage.cards.t.Teleport.class));
-        cards.add(new SetCardInfo("Tempest Efreet", 163, Rarity.RARE, mage.cards.t.TempestEfreet.class));
+        cards.add(new SetCardInfo("Tempest Efreet", 166, Rarity.RARE, mage.cards.t.TempestEfreet.class));
         cards.add(new SetCardInfo("Tetsuo Umezawa", 262, Rarity.RARE, mage.cards.t.TetsuoUmezawa.class));
         cards.add(new SetCardInfo("The Abyss", 120, Rarity.RARE, mage.cards.t.TheAbyss.class));
         cards.add(new SetCardInfo("The Brute", 167, Rarity.COMMON, mage.cards.t.TheBrute.class));
