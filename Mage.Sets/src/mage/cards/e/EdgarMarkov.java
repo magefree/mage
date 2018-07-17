@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldOrCommandZoneCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -49,7 +49,7 @@ public final class EdgarMarkov extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Eminence - Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(Zone.ALL, new CreateTokenEffect(new EdgarMarkovToken()), filter2, false, false),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
                 "<i>Eminence</i> &mdash; Whenever you cast another Vampire spell, if {this} is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.");

@@ -38,7 +38,7 @@ public final class IncreasingVengeance extends CardImpl {
     public IncreasingVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
 
-        // Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
+        // Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
         this.getSpellAbility().addEffect(new IncreasingVengeanceEffect());
         Target target = new TargetSpell(filter);
         this.getSpellAbility().addTarget(target);
@@ -61,7 +61,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
 
     public IncreasingVengeanceEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies";
+        staticText = "Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies";
     }
 
     public IncreasingVengeanceEffect(final IncreasingVengeanceEffect effect) {

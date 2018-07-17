@@ -31,7 +31,7 @@ public final class PatriciansScorn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
-        // If you've cast another white spell this turn, you may cast Patrician's Scorn without paying its mana cost.
+        // If you've cast another white spell this turn, you may cast this spell without paying its mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new CastWhiteSpellThisTurnCondition()), new PatriciansScornWatcher());
         // Destroy all enchantments.
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
@@ -87,7 +87,7 @@ class PatriciansScornWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) { //no need to check - condition has already occured
+        if (condition) { //no need to check - condition has already occured
             return;
         }
         if (event.getType() == EventType.SPELL_CAST && controllerId.equals(event.getPlayerId())) {

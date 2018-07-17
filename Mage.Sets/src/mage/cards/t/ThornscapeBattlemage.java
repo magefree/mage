@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCostCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -38,13 +38,13 @@ public final class ThornscapeBattlemage extends CardImpl {
         // When {this} enters the battlefield, if it was kicked with its {R} kicker, it deals 2 damage to any target.
         TriggeredAbility ability1 = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability1.addTarget(new TargetAnyTarget());
-        this.addAbility(new ConditionalTriggeredAbility(ability1, new KickedCostCondition("{R}"),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability1, new KickedCostCondition("{R}"),
                 "When {this} enters the battlefield, if it was kicked with its {R} kicker, it deals 2 damage to any target."));
 
         // When {this} enters the battlefield, if it was kicked with its {W} kicker, destroy target artifact.
         TriggeredAbility ability2 = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         ability2.addTarget(new TargetArtifactPermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability2, new KickedCostCondition("{W}"),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, new KickedCostCondition("{W}"),
                 "When {this} enters the battlefield, if it was kicked with its {W} kicker, destroy target artifact."));
     }
 

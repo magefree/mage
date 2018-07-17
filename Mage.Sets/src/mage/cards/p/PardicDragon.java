@@ -9,7 +9,7 @@ import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -43,7 +43,7 @@ public final class PardicDragon extends CardImpl {
         // Suspend 2-{R}{R}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{R}{R}"), this, true));
         // Whenever an opponent casts a spell, if Pardic Dragon is suspended, that player may put a time counter on Pardic Dragon.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastOpponentTriggeredAbility(Zone.EXILED, new PardicDragonEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER),
                 SuspendedCondition.instance,
                 "Whenever an opponent casts a spell, if {this} is suspended, that player may put a time counter on {this}."

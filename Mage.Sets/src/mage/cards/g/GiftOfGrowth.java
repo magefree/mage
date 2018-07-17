@@ -4,7 +4,6 @@ package mage.cards.g;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -20,9 +19,9 @@ import java.util.UUID;
  *
  * @author rscoates
  */
-public final class GiftofGrowth extends CardImpl {
+public final class GiftOfGrowth extends CardImpl {
 
-    public GiftofGrowth(UUID ownerId, CardSetInfo setInfo) {
+    public GiftOfGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Kicker {2}
@@ -36,12 +35,12 @@ public final class GiftofGrowth extends CardImpl {
                 "It gets +2/+2 until end of turn. If this spell was kicked, that creature gets +4/+4 until end of turn instead."));
     }
 
-    public GiftofGrowth(final GiftofGrowth card) {
+    public GiftOfGrowth(final GiftOfGrowth card) {
         super(card);
     }
 
     @Override
-    public GiftofGrowth copy() {
-        return new GiftofGrowth(this);
+    public GiftOfGrowth copy() {
+        return new GiftOfGrowth(this);
     }
 }

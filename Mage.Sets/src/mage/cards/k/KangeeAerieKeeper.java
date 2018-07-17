@@ -8,7 +8,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
@@ -56,7 +56,7 @@ public final class KangeeAerieKeeper extends CardImpl {
 
         // When Kangee, Aerie Keeper enters the battlefield, if it was kicked, put X feather counters on it.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance(), new KangeeAerieKeeperGetKickerXValue(), true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, put X feather counters on it."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, put X feather counters on it."));
 
         // Other Bird creatures get +1/+1 for each feather counter on Kangee, Aerie Keeper.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersSourceCount(CounterType.FEATHER), new CountersSourceCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter, true, "Other Bird creatures get +1/+1 for each feather counter on {this}.")));

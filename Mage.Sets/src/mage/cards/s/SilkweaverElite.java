@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class SilkweaverElite extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // <i>Revolt</i> &mdash; When Silkweaver Elite enters the battlefield, if a permanent you controlled left the battlefield this turn, draw a card.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false), RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
                 + " the battlefield this turn, draw a card.");

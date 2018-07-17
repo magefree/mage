@@ -8,7 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class ErgRaiders extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your end step, if Erg Raiders didn't attack this turn, Erg Raiders deals 2 damage to you unless it came under your control this turn.
-        TriggeredAbility ability = new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(2), TargetController.YOU, false),
+        TriggeredAbility ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(2), TargetController.YOU, false),
                 new ErgRaidersCondition(), "At the beginning of your end step, if {this} didn't attack this turn, {this} deals 2 damage to you unless it came under your control this turn.");
         ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);

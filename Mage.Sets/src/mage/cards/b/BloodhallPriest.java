@@ -7,7 +7,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class BloodhallPriest extends CardImpl {
         // Whenever Bloodhall Priest enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to any target.
         TriggeredAbility triggeredAbility = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(2));
         triggeredAbility.addTarget(new TargetAnyTarget());
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 HellbentCondition.instance,
                 "Whenever {this} enters the battlefield or attacks, if you have no cards in hand, {this} deals 2 damage to any target"

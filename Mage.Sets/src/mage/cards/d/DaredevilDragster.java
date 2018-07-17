@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.condition.common.AttackedOrBlockedThisCombatSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class DaredevilDragster extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At end of combat, if Daredevil Dragster attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EndOfCombatTriggeredAbility(new DaredevilDragsterEffect(), false),
                 AttackedOrBlockedThisCombatSourceCondition.instance,
                 "At end of combat, if {this} attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards."),

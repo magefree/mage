@@ -16,12 +16,8 @@ public class VariableManaCostPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        for (ManaCost manaCost : input.getManaCost()) {
-            if (manaCost instanceof VariableManaCost) {
-                return true;
-            }
-        }
-        return false;
+        return input.getManaCost().stream().anyMatch(manaCost -> manaCost instanceof VariableManaCost);
+
     }
 
     @Override

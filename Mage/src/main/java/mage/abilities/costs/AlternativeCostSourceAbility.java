@@ -230,7 +230,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         if (condition == null || alternateCosts.size() == 1) {
             sb.append(" rather than pay this spell's mana cost");
         } else if (alternateCosts.isEmpty()) {
-            sb.append("cast {this} without paying its mana cost");
+            sb.append("cast this spell without paying its mana cost");
         }
         sb.append('.');
         if (numberCosts == 1 && remarkText != null) {

@@ -34,7 +34,7 @@ public final class Submerge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
 
-        // If an opponent controls a Forest and you control an Island, you may cast Submerge without paying its mana cost.
+        // If an opponent controls a Forest and you control an Island, you may cast this spell without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Forest and you control an Island", 
                 new OpponentControlsPermanentCondition(filterForest),
                 new PermanentsOnTheBattlefieldCondition(filterIsland));

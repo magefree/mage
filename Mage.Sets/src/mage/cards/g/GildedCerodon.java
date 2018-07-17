@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class GildedCerodon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Gilded Cerodon attacks, if you control a Desert or there is a Desert card in your graveyard, target creature can't block this turn.
-        Ability ability = new ConditionalTriggeredAbility(new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), false), new GildedCerodonCondition(), rule);
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), false), new GildedCerodonCondition(), rule);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

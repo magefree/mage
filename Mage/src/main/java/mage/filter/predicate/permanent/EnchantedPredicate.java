@@ -1,7 +1,10 @@
 
 package mage.filter.predicate.permanent;
 
+import java.util.Objects;
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -14,13 +17,11 @@ public class EnchantedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        for (UUID attachmentId : input.getAttachments()) {
-            Permanent attachment = game.getPermanent(attachmentId);
-            if (attachment != null && attachment.isEnchantment()) {
-                return true;
-            }
-        }
-        return false;
+        return input.getAttachments()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .anyMatch(MageObject::isEnchantment);
     }
 
     @Override

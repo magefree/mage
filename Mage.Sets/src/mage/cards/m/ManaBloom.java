@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -40,7 +40,7 @@ public final class ManaBloom extends CardImpl {
 
         // At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand.
         TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(triggeredAbility, new SourceHasCounterCondition(CounterType.CHARGE, 0, 0), "At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggeredAbility, new SourceHasCounterCondition(CounterType.CHARGE, 0, 0), "At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand."));
 
     }
 

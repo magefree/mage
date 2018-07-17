@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.IngestAbility;
@@ -47,7 +47,7 @@ public final class DominatorDrone extends CardImpl {
 
         // When Dominator Drone enters the battlefield, if you control another colorless creature, each opponent loses 2 life.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(2));
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "When {this} enters the battlefield, if you control another colorless creature, each opponent loses 2 life."));

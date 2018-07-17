@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class HiddenStockpile extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}");
 
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.
-        Ability ability = new ConditionalTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new ServoToken()), false), RevoltCondition.instance,
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new ServoToken()), false), RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 colorless Servo artifact creature token");
         ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addWatcher(new RevoltWatcher());

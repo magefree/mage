@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -30,7 +31,8 @@ public final class HeroicReinforcements extends CardImpl {
         this.getSpellAbility().addEffect(
                 new GainAbilityControlledEffect(
                         HasteAbility.getInstance(),
-                        Duration.EndOfTurn
+                        Duration.EndOfTurn,
+                        StaticFilters.FILTER_CONTROLLED_CREATURE
                 ).setText("and gain haste")
         );
     }

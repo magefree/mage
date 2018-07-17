@@ -26,6 +26,7 @@ public final class TimeSpiral extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Academy Ruins", 269, Rarity.RARE, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Aether Web", 189, Rarity.COMMON, mage.cards.a.AetherWeb.class));
         cards.add(new SetCardInfo("Aetherflame Wall", 142, Rarity.COMMON, mage.cards.a.AetherflameWall.class));
         cards.add(new SetCardInfo("Amrou Scout", 1, Rarity.COMMON, mage.cards.a.AmrouScout.class));
         cards.add(new SetCardInfo("Amrou Seekers", 2, Rarity.COMMON, mage.cards.a.AmrouSeekers.class));
@@ -69,6 +70,7 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Corpulent Corpse", 98, Rarity.COMMON, mage.cards.c.CorpulentCorpse.class));
         cards.add(new SetCardInfo("Crookclaw Transmuter", 55, Rarity.COMMON, mage.cards.c.CrookclawTransmuter.class));
         cards.add(new SetCardInfo("Curse of the Cabal", 99, Rarity.RARE, mage.cards.c.CurseOfTheCabal.class));
+        cards.add(new SetCardInfo("Cyclopean Giant", 100, Rarity.COMMON, mage.cards.c.CyclopeanGiant.class));
         cards.add(new SetCardInfo("Dark Withering", 101, Rarity.COMMON, mage.cards.d.DarkWithering.class));
         cards.add(new SetCardInfo("D'Avenant Healer", 11, Rarity.COMMON, mage.cards.d.DAvenantHealer.class));
         cards.add(new SetCardInfo("Deathspore Thallid", 102, Rarity.COMMON, mage.cards.d.DeathsporeThallid.class));
@@ -212,7 +214,9 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 284, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 285, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plated Pegasus", 34, Rarity.UNCOMMON, mage.cards.p.PlatedPegasus.class));
         cards.add(new SetCardInfo("Plunder", 174, Rarity.COMMON, mage.cards.p.Plunder.class));
+        cards.add(new SetCardInfo("Premature Burial", 125, Rarity.UNCOMMON, mage.cards.p.PrematureBurial.class));
         cards.add(new SetCardInfo("Primal Forcemage", 212, Rarity.UNCOMMON, mage.cards.p.PrimalForcemage.class));
         cards.add(new SetCardInfo("Prismatic Lens", 262, Rarity.COMMON, mage.cards.p.PrismaticLens.class));
         cards.add(new SetCardInfo("Psionic Sliver", 72, Rarity.RARE, mage.cards.p.PsionicSliver.class));
@@ -284,6 +288,7 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Thallid Shell-Dweller", 226, Rarity.COMMON, mage.cards.t.ThallidShellDweller.class));
         cards.add(new SetCardInfo("Thelonite Hermit", 228, Rarity.RARE, mage.cards.t.TheloniteHermit.class));
         cards.add(new SetCardInfo("Thelon of Havenwood", 227, Rarity.RARE, mage.cards.t.ThelonOfHavenwood.class));
+        cards.add(new SetCardInfo("Thick-Skinned Goblin", 182, Rarity.UNCOMMON, mage.cards.t.ThickSkinnedGoblin.class));
         cards.add(new SetCardInfo("Think Twice", 86, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thrill of the Hunt", 229, Rarity.COMMON, mage.cards.t.ThrillOfTheHunt.class));
         cards.add(new SetCardInfo("Thunder Totem", 265, Rarity.UNCOMMON, mage.cards.t.ThunderTotem.class));

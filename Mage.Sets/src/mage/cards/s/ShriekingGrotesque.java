@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class ShriekingGrotesque extends CardImpl {
         // When Shrieking Grotesque enters the battlefield, if {B} was spent to cast it, target player discards a card.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
-        this.addAbility(new ConditionalTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.B),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.B),
             "if {B} was spent to cast {this}, target player discards a card."), new ManaSpentToCastWatcher());
     }
 

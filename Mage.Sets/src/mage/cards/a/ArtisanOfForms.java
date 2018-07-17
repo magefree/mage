@@ -32,9 +32,9 @@ public final class ArtisanOfForms extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature and gain this ability.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature, except it has this ability.
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new ArtisanOfFormsApplyToPermanent(), true);
-        effect.setText("have {this} become a copy of target creature and gain this ability");
+        effect.setText("have {this} become a copy of target creature, except it has this ability");
         Ability ability = new HeroicAbility(effect, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -55,7 +55,7 @@ class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
     @Override
     public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
-        effect.setText("have {this} become a copy of target creature and gain this ability");
+        effect.setText("have {this} become a copy of target creature, except it has this ability");
         mageObject.getAbilities().add(new HeroicAbility(effect, true));
         return true;
     }
@@ -63,7 +63,7 @@ class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
-        effect.setText("have {this} become a copy of target creature and gain this ability");
+        effect.setText("have {this} become a copy of target creature, except it has this ability");
         permanent.addAbility(new HeroicAbility(effect, true), game);
         return true;
     }

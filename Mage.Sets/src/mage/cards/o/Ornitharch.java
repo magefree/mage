@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TributeAbility;
@@ -35,7 +35,7 @@ public final class Ornitharch extends CardImpl {
         this.addAbility(new TributeAbility(2));
         // When Ornitharch enters the battlefield, if tribute wasn't paid, create two 1/1 white Bird creature tokens with flying.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken(), 2), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, create two 1/1 white Bird creature tokens with flying."));
     }
 

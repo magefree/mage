@@ -27,7 +27,7 @@ public final class ProwlingPangolin extends CardImpl {
 
     public ProwlingPangolin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.subtype.add(SubType.BEAST);
+        this.subtype.add(SubType.BEAST, SubType.PANGOLIN);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

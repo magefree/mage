@@ -8,7 +8,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -51,7 +51,7 @@ public final class ZacamaPrimalCalamity extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Zacama, Primal Calamity enters the battlefield, if you cast it, untap all lands you control.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new UntapAllLandsControllerEffect(), false),
                 CastFromEverywhereSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it, untap all lands you control."));

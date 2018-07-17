@@ -543,7 +543,7 @@ public class ContinuousEffects implements Serializable {
      * @param game
      * @return
      */
-    private List<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
+    public List<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
         List<AsThoughEffect> asThoughEffectsList = new ArrayList<>();
         if (asThoughEffectsMap.containsKey(type)) {
             for (AsThoughEffect effect : asThoughEffectsMap.get(type)) {

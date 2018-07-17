@@ -34,7 +34,7 @@ public final class AjaniWiseCounselor extends CardImpl {
         // +2: You gain 1 life for each creature you control.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(
                 new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE)
-        ).setText("you gain 1 life for each "), 2));
+        ).setText("you gain 1 life for each creature you control"), 2));
 
         // −3: Creatures you control get +2/+2 until end of turn.
         this.addAbility(new LoyaltyAbility(
@@ -46,6 +46,7 @@ public final class AjaniWiseCounselor extends CardImpl {
                 CounterType.P1P1.createInstance(),
                 new ControllerLifeCount()
         ).setText("put X +1/+1 counters on target creature, where X is your life total"), -9);
+        this.addAbility(ability);
     }
 
     public AjaniWiseCounselor(final AjaniWiseCounselor card) {

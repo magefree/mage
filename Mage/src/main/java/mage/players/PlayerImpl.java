@@ -155,6 +155,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected boolean isGameUnderControl = true;
     protected UUID turnController;
+    protected List<UUID> turnControllers = new ArrayList<>();
     protected Set<UUID> playersUnderYourControl = new HashSet<>();
 
     protected Set<UUID> usersAllowedToSeeHandCards = new HashSet<>();
@@ -262,6 +263,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.isGameUnderControl = player.isGameUnderControl;
 
         this.turnController = player.turnController;
+        this.turnControllers.clear();
+        this.turnControllers.addAll(player.turnControllers);
 
         this.passed = player.passed;
         this.passedTurn = player.passedTurn;
@@ -342,6 +345,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.isGameUnderControl = player.isGameUnderControl();
 
         this.turnController = player.getTurnControlledBy();
+        this.turnControllers.clear();
+        this.turnControllers.addAll(player.getTurnControllers());
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
         this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
         this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
@@ -397,6 +402,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.turns = 0;
         this.isGameUnderControl = true;
         this.turnController = this.getId();
+        this.turnControllers.clear();
         this.playersUnderYourControl.clear();
 
         this.passed = false;
@@ -523,13 +529,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void controlPlayersTurn(Game game, UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        player.setTurnControlledBy(this.getId());
+        game.informPlayers(getLogName() + " controls the turn of " + player.getLogName());
         if (!playerId.equals(this.getId())) {
             this.playersUnderYourControl.add(playerId);
-            Player player = game.getPlayer(playerId);
             if (!player.hasLeft() && !player.hasLost()) {
                 player.setGameUnderYourControl(false);
-                player.setTurnControlledBy(this.getId());
-                game.informPlayers(getLogName() + " controls the turn of " + player.getLogName());
             }
             DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), player.getLogName()));
             ability.setSourceId(getId());
@@ -541,6 +547,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setTurnControlledBy(UUID playerId) {
         this.turnController = playerId;
+        this.turnControllers.add(playerId);
+    }
+
+    @Override
+    public List<UUID> getTurnControllers() {
+        return this.turnControllers;
     }
 
     @Override
@@ -566,9 +578,27 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void setGameUnderYourControl(boolean value) {
+        setGameUnderYourControl(value, true);
+    }
+
+    @Override
+    public void setGameUnderYourControl(boolean value, boolean fullRestore) {
         this.isGameUnderControl = value;
         if (isGameUnderControl) {
-            this.turnController = getId();
+            if (fullRestore) {
+                this.turnControllers.clear();
+                this.turnController = getId();
+            } else {
+                if (turnControllers.size() > 0) {
+                    this.turnControllers.remove(turnControllers.size() - 1);
+                }
+                if (turnControllers.isEmpty()) {
+                    this.turnController = getId();
+                } else {
+                    this.turnController = turnControllers.get(turnControllers.size() - 1);
+                    isGameUnderControl = false;
+                }
+            }
         }
     }
 
@@ -981,6 +1011,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public ManaCosts getCastSourceIdManaCosts() {
         return castSourceIdManaCosts;
+    }
+
+    @Override
+    public void setPayManaMode(boolean payManaMode) {
+        this.payManaMode = payManaMode;
     }
 
     @Override
@@ -1853,7 +1888,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int gainLife(int amount, Game game, UUID sourceId) {
-        if (!canGainLife || amount == 0) {
+        if (!canGainLife || amount <= 0) {
             return 0;
         }
         GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);

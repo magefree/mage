@@ -33,7 +33,7 @@ public final class RefreshingRain extends CardImpl {
     public RefreshingRain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
-        // If an opponent controls a Swamp and you control a Forest, you may cast Refreshing Rain without paying its mana cost.
+        // If an opponent controls a Swamp and you control a Forest, you may cast this spell without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Swamp and you control a Forest",
                 new OpponentControlsPermanentCondition(filterSwamp),
                 new PermanentsOnTheBattlefieldCondition(filterForest));

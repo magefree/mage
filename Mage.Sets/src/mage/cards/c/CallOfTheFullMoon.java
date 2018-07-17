@@ -7,7 +7,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -47,7 +47,7 @@ public final class CallOfTheFullMoon extends CardImpl {
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice Call of the Full Moon.
         TriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability2, TwoOrMoreSpellsWereCastLastTurnCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, TwoOrMoreSpellsWereCastLastTurnCondition.instance,
             "At the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice {this}."));
     }
 

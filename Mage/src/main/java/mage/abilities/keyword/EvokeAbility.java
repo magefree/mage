@@ -16,7 +16,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -42,7 +42,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         super(Zone.ALL, null);
         name = EVOKE_KEYWORD;
         this.addEvokeCost(manaString);
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.instance, "Sacrifice {this} when it enters the battlefield and was evoked.");
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.instance, "Sacrifice {this} when it enters the battlefield and was evoked.");
         ability.setRuleVisible(false);
         addSubAbility(ability);
 

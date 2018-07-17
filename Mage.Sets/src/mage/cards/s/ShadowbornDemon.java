@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -55,7 +55,7 @@ public final class ShadowbornDemon extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), TargetController.YOU, false),
                 new InvertCondition(new CreatureCardsInControllerGraveCondition(6)),
                 "At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature"));

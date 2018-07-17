@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,7 +34,7 @@ public final class RegalBloodlord extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each end step, if you gained life this turn, create a 1/1 black Bat creature token with flying.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(new BatToken()),
                         TargetController.ANY, false

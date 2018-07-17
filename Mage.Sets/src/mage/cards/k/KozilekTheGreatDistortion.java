@@ -10,7 +10,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -48,7 +48,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
         this.toughness = new MageInt(12);
 
         // When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new CastSourceTriggeredAbility(new KozilekDrawEffect(), false),
                 new CardsInHandCondition(ComparisonType.FEWER_THAN, 7),
                 "When you cast {this}, if you have fewer than seven cards in hand, draw cards equal to the difference."));
