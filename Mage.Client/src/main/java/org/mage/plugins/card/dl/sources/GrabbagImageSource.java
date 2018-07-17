@@ -360,7 +360,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Astromech Droid", "v0TpHMh.jpg");
         singleLinks.put("SWS/Buried Ruin", "QkmIWYg.png");
         singleLinks.put("SWS/Flame Trooper", "RkY7KFJ.jpg");
-        singleLinks.put("SWS/Force Statis", "FavLrcY.jpg");
+        singleLinks.put("SWS/Force Stasis", "FavLrcY.jpg");
         singleLinks.put("SWS/Salvage Trader", "qGwk7Bn.jpg");
         singleLinks.put("SWS/Outer Rim Gang", "kEjKQGy.png");
         singleLinks.put("SWS/Rathtar", "CYhHRqF.png");
@@ -431,6 +431,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Aurra Sing", "BLWbVJC.png");
         singleLinks.put("SWS/Yoda", "zH0sYxg.png");
         singleLinks.put("SWS/Emblem Luke Skywalker", "kHELZDJ.jpg");
+
         // Tokens
         singleLinks.put("SWS/Ewok", "N2MvJyr.png");
         singleLinks.put("SWS/B-Wing", "oH62AUD.png");

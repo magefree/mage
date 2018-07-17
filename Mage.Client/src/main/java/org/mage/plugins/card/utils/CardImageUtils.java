@@ -218,6 +218,7 @@ public final class CardImageUtils {
         if (cardName.isEmpty()) {
             cardName = prepareCardNameForFile(card.getName());
         }
+        cardName = cardName.replaceAll("[\\\\/:*?\"<>|]", "");
 
         String finalFileName = "";
         if (card.getUsesVariousArt()) {

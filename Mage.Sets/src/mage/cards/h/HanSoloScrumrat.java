@@ -2,10 +2,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbilities;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -68,10 +65,10 @@ public final class HanSoloScrumrat extends CardImpl {
     }
 }
 
-class HanSoloScrumratTriggeredAbility extends DelayedTriggeredAbility {
+class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
 
     public HanSoloScrumratTriggeredAbility() {
-        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.EndOfTurn, false);
+        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
     }
 
     public HanSoloScrumratTriggeredAbility(final HanSoloScrumratTriggeredAbility ability) {
@@ -85,25 +82,17 @@ class HanSoloScrumratTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
-            case DAMAGED_CREATURE:
-            case DAMAGED_PLAYER:
-            case DAMAGED_PLANESWALKER:
-                return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() ==  GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent target = game.getPermanent(this.getFirstTarget());
-        if (target != null && event.getSourceId().equals(target.getId()) && MyTurnCondition.instance.apply(game, this)) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("damage", event.getAmount());
-            }
-            return true;
-        }
-        return false;
+        Permanent source = game.getPermanent(this.getSourceId());
+        return source != null
+                && game.isActivePlayer(source.getControllerId())
+                && event.getSourceId().equals(this.getSourceId());
     }
 
     @Override

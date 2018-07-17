@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -41,9 +42,12 @@ public final class GeneralHux extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever General Hux or another nontoken creature enters the battlefield under your control, until end of turn, target creature gains "{B}: This creature gets +1/+1 until end of turn."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
-        Effect effect = new GainAbilityTargetEffect(ability, Duration.EndOfTurn);
-        effect.setText("until end of turn, target creature gains \"{B}: This creature gets +1/+1 until end of turn.\"");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn)
+                        .setText("This creature gets +1/+1 until end of turn"),
+                new ManaCostsImpl("{B}"));
+        Effect effect = new GainAbilitySourceEffect(ability, Duration.EndOfTurn);
+        effect.setText("until end of turn, target creature gains");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false));
     }
 

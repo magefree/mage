@@ -66,7 +66,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
         ability3.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield).setText("It gains haste"));
         ability3.addEffect(new GainAbilityTargetEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect()), Duration.WhileOnBattlefield)
             .setText("Sacrifice that creature at the beginning of the next end step"));
-        ability3Id = ability2.getOriginalId();
+        ability3Id = ability3.getOriginalId();
         ability3.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability3);
     }
