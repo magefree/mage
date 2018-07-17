@@ -20,7 +20,8 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage</artifactId>
-            <version>${mage-version}</version>
+            <version>1.4.30</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>

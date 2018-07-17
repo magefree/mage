@@ -64,6 +64,7 @@ public enum SubType {
     AZRA("Azra", SubTypeSet.CreatureType),
     // B
     BADGER("Badger", SubTypeSet.CreatureType),
+    BARABEL("Barabel", SubTypeSet.CreatureType, true), // Star Wars
     BARBARIAN("Barbarian", SubTypeSet.CreatureType),
     BASILISK("Basilisk", SubTypeSet.CreatureType),
     BAT("Bat", SubTypeSet.CreatureType),
@@ -99,6 +100,7 @@ public enum SubType {
     COWARD("Coward", SubTypeSet.CreatureType),
     CRAB("Crab", SubTypeSet.CreatureType),
     CROCODILE("Crocodile", SubTypeSet.CreatureType),
+    CROLUTE("Crolute", SubTypeSet.CreatureType, true), // Star Wars
     CYBORG("Cyborg", SubTypeSet.CreatureType, true), // Star Wars
     CYCLOPS("Cyclops", SubTypeSet.CreatureType),
     // D
@@ -204,6 +206,7 @@ public enum SubType {
     LICID("Licid", SubTypeSet.CreatureType),
     LIZARD("Lizard", SubTypeSet.CreatureType),
     LOBSTER("Lobster", SubTypeSet.CreatureType, true), // Unglued
+    LUKE("Luke", SubTypeSet.PlaneswalkerType, true), // Star Wars
     // M
     MANTELLIAN("Mantellian", SubTypeSet.CreatureType, true), // Star Wars
     MANTICORE("Manticore", SubTypeSet.CreatureType),
@@ -312,6 +315,7 @@ public enum SubType {
     SPONGE("Sponge", SubTypeSet.CreatureType),
     SQUID("Squid", SubTypeSet.CreatureType),
     SQUIRREL("Squirrel", SubTypeSet.CreatureType),
+    SNOKE("Snoke", SubTypeSet.PlaneswalkerType, true), // Star Wars
     STARFISH("Starfish", SubTypeSet.CreatureType),
     STARSHIP("Starship", SubTypeSet.CreatureType, true), // Star Wars
     SULLUSTAN("Sullustan", SubTypeSet.CreatureType, true), // Star Wars
