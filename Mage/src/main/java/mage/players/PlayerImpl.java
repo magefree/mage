@@ -1853,7 +1853,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int loseLife(int amount, Game game, boolean atCombat) {
-        if (!canLoseLife) {
+        if (!canLoseLife || !this.isInGame()) {
             return 0;
         }
         GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, atCombat);
