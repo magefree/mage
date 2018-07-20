@@ -1,10 +1,10 @@
 
 package mage.cards;
 
-import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.Counter;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -108,7 +108,7 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
+    public boolean addCounters(Counter counter, Controllable source, Game game, List<UUID> appliedEffects) {
         if (this.isMelded()) {
             return super.addCounters(counter, source, game, appliedEffects);
         } else {

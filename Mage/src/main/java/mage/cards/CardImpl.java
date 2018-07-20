@@ -762,24 +762,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
+    public boolean addCounters(Counter counter, Controllable source, Game game) {
         return addCounters(counter, source, game, null, true);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect) {
+    public boolean addCounters(Counter counter, Controllable source, Game game, boolean isEffect) {
         return addCounters(counter, source, game, null, isEffect);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
+    public boolean addCounters(Counter counter, Controllable source, Game game, List<UUID> appliedEffects) {
         return addCounters(counter, source, game, appliedEffects, true);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+    public boolean addCounters(Counter counter, Controllable source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         boolean returnCode = true;
-        UUID sourceId = (source == null ? getId() : source.getSourceId());
+        UUID sourceId = (source == null ? getId() : source.getId());
         GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, sourceId, getControllerOrOwner(), counter.getName(), counter.getCount());
         countersEvent.setAppliedEffects(appliedEffects);
         countersEvent.setFlag(isEffect);

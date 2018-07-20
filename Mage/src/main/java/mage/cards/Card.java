@@ -13,6 +13,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
@@ -133,13 +134,13 @@ public interface Card extends MageObject {
 
     void addAbility(Ability ability);
 
-    boolean addCounters(Counter counter, Ability source, Game game);
+    boolean addCounters(Counter counter, Controllable source, Game game);
 
-    boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect);
+    boolean addCounters(Counter counter, Controllable source, Game game, boolean isEffect);
 
-    boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects);
+    boolean addCounters(Counter counter, Controllable source, Game game, List<UUID> appliedEffects);
 
-    boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect);
+    boolean addCounters(Counter counter, Controllable source, Game game, List<UUID> appliedEffects, boolean isEffect);
 
     void removeCounters(String name, int amount, Game game);
 

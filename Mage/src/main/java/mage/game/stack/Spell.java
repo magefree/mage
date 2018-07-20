@@ -28,6 +28,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.events.GameEvent;
@@ -868,22 +869,22 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
+    public boolean addCounters(Counter counter, Controllable source, Game game) {
         return card.addCounters(counter, source, game);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect) {
+    public boolean addCounters(Counter counter, Controllable source, Game game, boolean isEffect) {
         return card.addCounters(counter, source, game, isEffect);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
+    public boolean addCounters(Counter counter, Controllable source, Game game, List<UUID> appliedEffects) {
         return card.addCounters(counter, source, game, appliedEffects);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+    public boolean addCounters(Counter counter, Controllable source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         return card.addCounters(counter, source, game, appliedEffects, isEffect);
     }
 
