@@ -886,11 +886,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             MorphAbility.setPermanentToFaceDownCreature(this);
         }
 
-        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone, EnterEventType.SELF);
-        if (game.replaceEvent(event)) {
-            return false;
-        }
-        event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
+        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
         if (!game.replaceEvent(event)) {
             if (fireEvent) {
                 game.addSimultaneousEvent(event);
