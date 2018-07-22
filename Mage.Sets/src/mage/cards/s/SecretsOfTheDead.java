@@ -12,6 +12,7 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class SecretsOfTheDead extends CardImpl {
     }
 }
 
-class SpellZonePredicate implements Predicate<Spell> {
+class SpellZonePredicate implements Predicate<StackObject> {
 
     private final Zone zone;
 
@@ -52,8 +53,8 @@ class SpellZonePredicate implements Predicate<Spell> {
     }
 
     @Override
-    public boolean apply(Spell input, Game game) {
-        return input.getFromZone().match(zone);
+    public boolean apply(StackObject input, Game game) {
+        return input instanceof Spell && ((Spell) input).getFromZone().match(zone);
     }
 
     @Override
