@@ -791,9 +791,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return 0;
         }
         for (MarkedDamageInfo mdi : markedDamage) {
-            Permanent source = null;
+            Ability source = null;
             if (mdi.sourceObject instanceof Permanent) {
-                source = (Permanent) mdi.sourceObject;
+                source = ((Permanent) mdi.sourceObject).getSpellAbility();
             }
             addCounters(mdi.counter, source, game);
         }
