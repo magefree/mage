@@ -32,7 +32,7 @@ public final class MetallicMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As Metallic Mimic enters the battlefield, choose a creature type.
-        AsEntersBattlefieldAbility ability = new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature), null, EnterEventType.SELF);
+        AsEntersBattlefieldAbility ability = new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature));
         // Metallic Mimic is the chosen type in addition to its other types.
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
