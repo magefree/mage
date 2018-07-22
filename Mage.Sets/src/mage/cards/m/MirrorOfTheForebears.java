@@ -38,7 +38,7 @@ public final class MirrorOfTheForebears extends CardImpl {
 
         // 1: Until end of turn, Mirror of the Forebears becomes a copy of target creature you control of the chosen type, except it's an artifact in addition to its other types.
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(new ChosenSubtypePredicate(this.getId()));
+        filter.add(new ChosenSubtypePredicate());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorOfTheForebearsCopyEffect(), new ManaCostsImpl("{1}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -34,6 +34,8 @@ import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -94,6 +96,14 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
 
     public FilterSpell getspellFilter() {
         return this.spellFilter;
+    }
+
+    public final void add(ObjectPlayerPredicate<? extends ObjectPlayer> predicate) {
+        if (isLockedFilter()) {
+            throw new UnsupportedOperationException("You may not modify a locked filter");
+        }
+        spellFilter.add(predicate);
+        permanentFilter.add(predicate);
     }
 
     public void setPermanentFilter(FilterPermanent permanentFilter) {
