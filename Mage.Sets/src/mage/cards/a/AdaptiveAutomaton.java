@@ -38,7 +38,7 @@ public final class AdaptiveAutomaton extends CardImpl {
 
         // As Adaptive Automaton enters the battlefield, choose a creature type.
         // Adaptive Automaton is the chosen type in addition to its other types.
-        AsEntersBattlefieldAbility ability = new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature), null, EnterEventType.SELF);
+        AsEntersBattlefieldAbility ability = new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature));
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
 
