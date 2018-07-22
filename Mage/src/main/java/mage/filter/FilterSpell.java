@@ -1,7 +1,11 @@
 
 package mage.filter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;

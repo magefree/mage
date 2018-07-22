@@ -61,15 +61,16 @@ public final class OupheVandals extends CardImpl {
     }
 }
 
-class ArtifactSourcePredicate implements Predicate<Ability> {
+class ArtifactSourcePredicate implements Predicate<StackObject> {
 
     public ArtifactSourcePredicate() {
     }
 
     @Override
-    public boolean apply(Ability input, Game game) {
+    public boolean apply(StackObject input, Game game) {
         if (input instanceof StackAbility) {
-            return input.getSourceObject(game).isArtifact() && input.getAbilityType() == AbilityType.ACTIVATED;
+            StackAbility ability = (StackAbility) input;
+            return ability.getSourceObject(game).isArtifact() && ability.getAbilityType() == AbilityType.ACTIVATED;
         }
         return false;
     }

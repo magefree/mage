@@ -30,6 +30,8 @@
 package mage.filter.common;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.counters.CounterType;
@@ -46,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class FilterPermanentOrSuspendedCard extends FilterImpl<Object> implements FilterInPlay<Object> {
+public class FilterPermanentOrSuspendedCard extends FilterImpl<MageObject> implements FilterInPlay<MageObject> {
 
     protected FilterCard cardFilter;
     protected FilterPermanent permanentFilter;
@@ -71,11 +73,11 @@ public class FilterPermanentOrSuspendedCard extends FilterImpl<Object> implement
 
     @Override
     public boolean checkObjectClass(Object object) {
-        return true;
+        return object instanceof MageObject;
     }
 
     @Override
-    public boolean match(Object o, Game game) {
+    public boolean match(MageObject o, Game game) {
         if (o instanceof Permanent) {
             return permanentFilter.match((Permanent) o, game);
         } else if (o instanceof Card) {
@@ -85,7 +87,7 @@ public class FilterPermanentOrSuspendedCard extends FilterImpl<Object> implement
     }
 
     @Override
-    public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(MageObject o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Permanent) {
             return permanentFilter.match((Permanent) o, sourceId, playerId, game);
         } else if (o instanceof Card) {
@@ -106,7 +108,7 @@ public class FilterPermanentOrSuspendedCard extends FilterImpl<Object> implement
         this.permanentFilter = permanentFilter;
     }
 
-    public void setSpellFilter(FilterCard cardFilter) {
+    public void setCardFilter(FilterCard cardFilter) {
         this.cardFilter = cardFilter;
     }
 
