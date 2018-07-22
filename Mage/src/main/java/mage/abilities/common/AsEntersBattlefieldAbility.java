@@ -4,7 +4,6 @@ package mage.abilities.common;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.constants.EnterEventType;
 import mage.constants.Zone;
 
 /**
@@ -14,15 +13,11 @@ import mage.constants.Zone;
 public class AsEntersBattlefieldAbility extends StaticAbility {
 
     public AsEntersBattlefieldAbility(Effect effect) {
-        this(effect, null, EnterEventType.OTHER);
+        this(effect, null);
     }
 
     public AsEntersBattlefieldAbility(Effect effect, String text) {
-        this(effect, text, EnterEventType.OTHER);
-    }
-
-    public AsEntersBattlefieldAbility(Effect effect, String text, EnterEventType enterEventType) {
-        super(Zone.ALL, new EntersBattlefieldEffect(effect, null, text, true, false, enterEventType));
+        super(Zone.ALL, new EntersBattlefieldEffect(effect, null, text, true, false));
     }
 
     public AsEntersBattlefieldAbility(final AsEntersBattlefieldAbility ability) {

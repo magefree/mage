@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class MetallicMiminTest extends CardTestPlayerBase {
+public class MetallicMimicTest extends CardTestPlayerBase {
 
     /**
      * Additionally, if you play a Mimic naming, for example, "Dwarf", then if

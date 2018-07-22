@@ -337,7 +337,7 @@ public class ContinuousEffects implements Serializable {
             Set<Ability> abilities = replacementEffects.getAbility(effect.getId());
             Set<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                // for replacment effects of static abilities do not use LKI to check if to apply
+                // for replacement effects of static abilities do not use LKI to check if to apply
                 if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
                     if (!effect.isUsed()) {
                         if (!game.getScopeRelevant()

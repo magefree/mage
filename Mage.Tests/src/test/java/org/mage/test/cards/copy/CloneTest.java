@@ -4,6 +4,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectsList;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -89,7 +90,7 @@ public class CloneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Public Executio", "Llanowar Elves");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Public Execution", "Llanowar Elves");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -197,6 +198,34 @@ public class CloneTest extends CardTestPlayerBase {
         }
 
         Assert.assertTrue("There should be a white and a blue Silvercoat Lion be on the battlefield", blueLion && whiteLion);
+    }
+
+    @Test
+    public void testAdaptiveAutomaton() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Adaptive Automaton");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+        addCard(Zone.HAND, playerB, "Clone");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Adaptive Automaton");
+        setChoice(playerA, "Elf");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        setChoice(playerB, "Adaptive Automaton");
+        setChoice(playerB, "Goblin");
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Adaptive Automaton", 1);
+        Permanent original = getPermanent("Adaptive Automaton", playerA);
+        Assert.assertTrue("The original Adaptive Automaton should be an Elf", original.hasSubtype(SubType.ELF, currentGame));
+
+        assertPermanentCount(playerB, "Adaptive Automaton", 1);
+        Permanent clone = getPermanent("Adaptive Automaton", playerB);
+        Assert.assertFalse("The cloned Adaptive Automaton should not be as Elf", clone.hasSubtype(SubType.ELF, currentGame));
+        Assert.assertTrue("The cloned Adaptive Automaton should be a Goblin", clone.hasSubtype(SubType.GOBLIN, currentGame));
     }
 
 }

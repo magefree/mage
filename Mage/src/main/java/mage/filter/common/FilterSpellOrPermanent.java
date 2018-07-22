@@ -30,10 +30,14 @@
 package mage.filter.common;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -42,7 +46,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX
  */
-public class FilterSpellOrPermanent extends FilterImpl<Object> implements FilterInPlay<Object> {
+public class FilterSpellOrPermanent extends FilterImpl<MageObject> implements FilterInPlay<MageObject> {
 
     protected FilterPermanent permanentFilter;
     protected FilterSpell spellFilter;
@@ -65,11 +69,11 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
 
     @Override
     public boolean checkObjectClass(Object object) {
-        return true;
+        return object instanceof MageObject;
     }
 
     @Override
-    public boolean match(Object o, Game game) {
+    public boolean match(MageObject o, Game game) {
         if (o instanceof Spell) {
             return spellFilter.match((Spell) o, game);
         } else if (o instanceof Permanent) {
@@ -79,7 +83,7 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
     }
 
     @Override
-    public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(MageObject o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Spell) {
             return spellFilter.match((Spell) o, sourceId, playerId, game);
         } else if (o instanceof Permanent) {
@@ -88,11 +92,19 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
         return false;
     }
 
+    public final void add(ObjectPlayerPredicate<? extends ObjectPlayer> predicate) {
+        if (isLockedFilter()) {
+            throw new UnsupportedOperationException("You may not modify a locked filter");
+        }
+        spellFilter.add(predicate);
+        permanentFilter.add(predicate);
+    }
+
     public FilterPermanent getPermanentFilter() {
         return this.permanentFilter;
     }
 
-    public FilterSpell getspellFilter() {
+    public FilterSpell getSpellFilter() {
         return this.spellFilter;
     }
 
