@@ -61,7 +61,7 @@ class EnchantersBaneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent == null) {
             return false;
         }
