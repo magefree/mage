@@ -25,6 +25,7 @@ Commander 2014 Edition|Commander2014|
 Commander 2015 Edition|Commander2015|
 Commander 2016 Edition|Commander2016|
 Commander 2017 Edition|Commander2017|
+Commander 2018|Commander2018|
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|
