@@ -8,7 +8,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -36,7 +38,8 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
     public SacrificeOpponentsEffect(DynamicValue amount, FilterPermanent filter) {
         super(Outcome.Sacrifice);
         this.amount = amount;
-        this.filter = filter;
+        this.filter = filter.copy();
+        this.filter.add(new ControllerPredicate(TargetController.YOU));
         setText();
     }
 
