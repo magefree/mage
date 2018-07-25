@@ -34,6 +34,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Echo Storm", 7, Rarity.RARE, mage.cards.e.EchoStorm.class));
         cards.add(new SetCardInfo("Eel Umbra", 89, Rarity.COMMON, mage.cards.e.EelUmbra.class));
         cards.add(new SetCardInfo("Eidolon of Blossoms", 140, Rarity.RARE, mage.cards.e.EidolonOfBlossoms.class));
+        cards.add(new SetCardInfo("Empyrial Storm", 2, Rarity.RARE, mage.cards.e.EmpyrialStorm.class));
         cards.add(new SetCardInfo("Enchanter's Bane", 21, Rarity.RARE, mage.cards.e.EnchantersBane.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 141, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
         cards.add(new SetCardInfo("Explosive Vegetation", 144, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
