@@ -30,6 +30,9 @@ public final class Lorado extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Regulator", 1, Rarity.RARE, mage.cards.a.AngelicRegulator.class));
         cards.add(new SetCardInfo("Arrest", 2, Rarity.UNCOMMON, mage.cards.a.Arrest.class));
         cards.add(new SetCardInfo("Back in the Saddle", 3, Rarity.UNCOMMON, mage.cards.b.BackInTheSaddle.class));
+        cards.add(new SetCardInfo("Cattle Drive", 4, Rarity.COMMON, mage.cards.c.CattleDrive.class));
+        cards.add(new SetCardInfo("Drag Behind", 5, Rarity.RARE, mage.cards.d.DragBehind.class));
+        cards.add(new SetCardInfo("Empty Night", 6, Rarity.RARE, mage.cards.e.EmptyNight.class));
     }
 
 
