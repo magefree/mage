@@ -1,6 +1,7 @@
 
 package mage.cards;
 
+import mage.ObjectColor;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -96,7 +97,11 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterRare;
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
     protected int ratioBoosterMythic;
-    protected boolean needsLegends = false;
+
+    protected boolean needsLegendCreature = false;
+    protected boolean validateBoosterColors = true;
+    protected double rejectMissingColorProbability = 0.8;
+    protected double rejectSameColorUncommonsProbability = 0.8;
 
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
@@ -186,17 +191,83 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public List<Card> createBooster() {
-        if (needsLegends) {
-            for (int i = 0; i < 100000; i++) {//don't want to somehow loop forever
-                List<Card> booster = tryBooster();
-                for (Card card : booster) {
-                    if (card.isLegendary() && card.isCreature()) {// Dominaria packs must contain at least one legendary creature.
-                        return booster;
+        for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
+            List<Card> booster = tryBooster();
+            if (boosterIsValid(booster)) {
+                return booster;
+            }
+        }
+        return tryBooster();
+    }
+
+    protected boolean boosterIsValid(List<Card> booster) {
+        if (validateBoosterColors) {
+            if (!validateColors(booster)) {
+                return false;
+            }
+        }
+
+        if (needsLegendCreature) {
+            if (booster.stream().noneMatch(card -> card.isLegendary() && card.isCreature())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    protected boolean validateColors(List<Card> booster) {
+        List<ObjectColor> magicColors =
+                Arrays.asList(ObjectColor.WHITE, ObjectColor.BLUE, ObjectColor.BLACK, ObjectColor.RED, ObjectColor.GREEN);
+
+        // all cards colors
+        Map<ObjectColor, Integer> colorWeight = new HashMap<>();
+        // uncommon/rare/mythic cards colors
+        Map<ObjectColor, Integer> uncommonWeight = new HashMap<>();
+
+        for (ObjectColor color : magicColors) {
+            colorWeight.put(color, 0);
+            uncommonWeight.put(color, 0);
+        }
+
+        // count colors in the booster
+        for (Card card : booster) {
+            ObjectColor cardColor = card.getColor(null);
+            if (cardColor != null) {
+                List<ObjectColor> colors = cardColor.getColors();
+                // todo: do we need gold color?
+                colors.remove(ObjectColor.GOLD);
+                if (!colors.isEmpty()) {
+                    // 60 - full card weight
+                    // multicolored cards add part of the weight to each color
+                    int cardColorWeight = 60 / colors.size();
+                    for (ObjectColor color : colors) {
+                        colorWeight.put(color, colorWeight.get(color) + cardColorWeight);
+                        if (card.getRarity() != Rarity.COMMON) {
+                            uncommonWeight.put(color, uncommonWeight.get(color) + cardColorWeight);
+                        }
                     }
                 }
             }
         }
-        return tryBooster();
+
+        // check that all colors are present
+        if (magicColors.stream().anyMatch(color -> colorWeight.get(color) < 60)) {
+            // reject only part of the boosters
+            if (RandomUtil.nextDouble() < rejectMissingColorProbability) {
+                return false;
+            }
+        }
+
+        // check that we don't have 3 or more uncommons/rares of the same color
+        if (magicColors.stream().anyMatch(color -> uncommonWeight.get(color) >= 180)) {
+            // reject only part of the boosters
+            if (RandomUtil.nextDouble() < rejectSameColorUncommonsProbability) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public List<Card> tryBooster() {

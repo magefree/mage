@@ -26,4 +26,8 @@ public final class RandomUtil {
     public static boolean nextBoolean() {
         return ThreadLocalRandom.current().nextBoolean();
     }
+
+    public static double nextDouble() {
+        return ThreadLocalRandom.current().nextDouble();
+    }
 }
