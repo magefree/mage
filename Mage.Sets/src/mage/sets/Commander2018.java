@@ -62,5 +62,6 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Tuvasa the Sunlit", 47, Rarity.MYTHIC, mage.cards.t.TuvasaTheSunlit.class));
         cards.add(new SetCardInfo("Varchild, Betrayer of Kjeldor", 28, Rarity.RARE, mage.cards.v.VarchildBetrayerOfKjeldor.class));
         cards.add(new SetCardInfo("Whiptongue Hydra", 36, Rarity.RARE, mage.cards.w.WhiptongueHydra.class));
+        cards.add(new SetCardInfo("Winds of Rath", 79, Rarity.RARE, mage.cards.w.WindsOfRath.class));
     }
 }
