@@ -260,6 +260,7 @@ public enum SubType {
     PRAETOR("Praetor", SubTypeSet.CreatureType),
     PRISM("Prism", SubTypeSet.CreatureType),
     PROCESSOR("Processor", SubTypeSet.CreatureType),
+    PROTOSS("Protoss", SubTypeSet.CreatureType, true), // Duel Decks: Starcraft
     PUREBLOOD("Pureblood", SubTypeSet.CreatureType, true),
     // Q
     QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
@@ -318,6 +319,7 @@ public enum SubType {
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
     // T
+    TERRAN("Terran", SubTypeSet.CreatureType, true), // Duel Decks: Starcraft
     TETRAVITE("Tetravite", SubTypeSet.CreatureType),
     THALAKOS("Thalakos", SubTypeSet.CreatureType),
     THOPTER("Thopter", SubTypeSet.CreatureType),
@@ -359,6 +361,7 @@ public enum SubType {
     YETI("Yeti", SubTypeSet.CreatureType),
     // Z
     ZABRAK("Zabrak", SubTypeSet.CreatureType, true), // Star Wars
+    ZERG("Zerg", SubTypeSet.CreatureType, true), // Duel Decks: Starcraft
     ZOMBIE("Zombie", SubTypeSet.CreatureType),
     ZUBERA("Zubera", SubTypeSet.CreatureType),
     // Planeswalker

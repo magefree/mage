@@ -97,6 +97,7 @@ public enum CounterType {
     POISON("poison"),
     PRESSURE("pressure"),
     PREY("prey"),
+    PSI("psi"), // Duel Decks: Starcraft
     REPAIR("repair"),
     RUST("rust"),
     QUEST("quest"),
