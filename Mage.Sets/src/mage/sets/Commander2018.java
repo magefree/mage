@@ -41,6 +41,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Finest Hour", 180, Rarity.RARE, mage.cards.f.FinestHour.class));
         cards.add(new SetCardInfo("Forge of Heroes", 58, Rarity.COMMON, mage.cards.f.ForgeOfHeroes.class));
         cards.add(new SetCardInfo("Fury Storm", 22, Rarity.RARE, mage.cards.f.FuryStorm.class));
+        cards.add(new SetCardInfo("Herald of the Pantheon", 151, Rarity.RARE, mage.cards.h.HeraldOfThePantheon.class));
         cards.add(new SetCardInfo("Hydra Omnivore", 153, Rarity.MYTHIC, mage.cards.h.HydraOmnivore.class));
         cards.add(new SetCardInfo("Kestia, the Cultivator", 42, Rarity.MYTHIC, mage.cards.k.KestiaTheCultivator.class));
         cards.add(new SetCardInfo("Lord Windgrace", 43, Rarity.MYTHIC, mage.cards.l.LordWindgrace.class));
@@ -55,6 +56,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Ruinous Path", 117, Rarity.RARE, mage.cards.r.RuinousPath.class));
         cards.add(new SetCardInfo("Saheeli's Directive", 26, Rarity.RARE, mage.cards.s.SaheelisDirective.class));
         cards.add(new SetCardInfo("Scute Mob", 161, Rarity.RARE, mage.cards.s.ScuteMob.class));
+        cards.add(new SetCardInfo("Sigil of the Empty Throne", 74, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
         cards.add(new SetCardInfo("Spawning Grounds", 163, Rarity.RARE, mage.cards.s.SpawningGrounds.class));
         cards.add(new SetCardInfo("Tawnos, Urza's Apprentice", 45, Rarity.MYTHIC, mage.cards.t.TawnosUrzasApprentice.class));
         cards.add(new SetCardInfo("Thantis the Warweaver", 46, Rarity.MYTHIC, mage.cards.t.ThantisTheWarweaver.class));
