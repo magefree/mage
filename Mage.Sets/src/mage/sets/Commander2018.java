@@ -42,6 +42,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Forge of Heroes", 58, Rarity.COMMON, mage.cards.f.ForgeOfHeroes.class));
         cards.add(new SetCardInfo("Fury Storm", 22, Rarity.RARE, mage.cards.f.FuryStorm.class));
         cards.add(new SetCardInfo("Hydra Omnivore", 153, Rarity.MYTHIC, mage.cards.h.HydraOmnivore.class));
+        cards.add(new SetCardInfo("Kestia, the Cultivator", 42, Rarity.MYTHIC, mage.cards.k.KestiaTheCultivator.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 23, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
         cards.add(new SetCardInfo("Loyal Drake", 10, Rarity.UNCOMMON, mage.cards.l.LoyalDrake.class));
         cards.add(new SetCardInfo("Loyal Guardian", 31, Rarity.UNCOMMON, mage.cards.l.LoyalGuardian.class));
