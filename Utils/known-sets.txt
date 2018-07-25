@@ -202,4 +202,4 @@ Worldwake|Worldwake|
 WPN Gateway|WPNGateway|
 Zendikar|Zendikar|
 Zendikar Expeditions|ZendikarExpeditions|
-Duel Decks: Starcraft|Starcraft|
+Duel Decks: StarCraft|StarCraft|

@@ -187,6 +187,7 @@ public enum SubType {
     KALEESH("Kaleesh", SubTypeSet.CreatureType, true), // Star Wars
     KAVU("Kavu", SubTypeSet.CreatureType),
     KELDOR("KelDor", SubTypeSet.CreatureType, true),
+    KERRIGAN("Kerrigan", SubTypeSet.CreatureType, true), // Duel Decks: StarCraft
     KILLBOT("Killbot", SubTypeSet.CreatureType, true), // Unstable
     KIRIN("Kirin", SubTypeSet.CreatureType),
     KITHKIN("Kithkin", SubTypeSet.CreatureType),
@@ -260,7 +261,7 @@ public enum SubType {
     PRAETOR("Praetor", SubTypeSet.CreatureType),
     PRISM("Prism", SubTypeSet.CreatureType),
     PROCESSOR("Processor", SubTypeSet.CreatureType),
-    PROTOSS("Protoss", SubTypeSet.CreatureType, true), // Duel Decks: Starcraft
+    PROTOSS("Protoss", SubTypeSet.CreatureType, true), // Duel Decks: StarCraft
     PUREBLOOD("Pureblood", SubTypeSet.CreatureType, true),
     // Q
     QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
@@ -319,7 +320,7 @@ public enum SubType {
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
     // T
-    TERRAN("Terran", SubTypeSet.CreatureType, true), // Duel Decks: Starcraft
+    TERRAN("Terran", SubTypeSet.CreatureType, true), // Duel Decks: StarCraft
     TETRAVITE("Tetravite", SubTypeSet.CreatureType),
     THALAKOS("Thalakos", SubTypeSet.CreatureType),
     THOPTER("Thopter", SubTypeSet.CreatureType),
@@ -361,7 +362,7 @@ public enum SubType {
     YETI("Yeti", SubTypeSet.CreatureType),
     // Z
     ZABRAK("Zabrak", SubTypeSet.CreatureType, true), // Star Wars
-    ZERG("Zerg", SubTypeSet.CreatureType, true), // Duel Decks: Starcraft
+    ZERG("Zerg", SubTypeSet.CreatureType, true), // Duel Decks: StarCraft
     ZOMBIE("Zombie", SubTypeSet.CreatureType),
     ZUBERA("Zubera", SubTypeSet.CreatureType),
     // Planeswalker
