@@ -9,10 +9,8 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.sets.CoreSet2019;
-import mage.sets.FateReforged;
-import mage.sets.MastersEditionII;
-import mage.sets.MastersEditionIV;
+import mage.sets.*;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -113,6 +111,15 @@ public class BoosterGenerationTest extends MageTestBase {
         }
         // check that some dual lands were generated
         assertTrue(allCards.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND) && card.getRarity().equals(Rarity.COMMON)));
+    }
+
+    @Test
+    public void testDominaria_EveryBoosterContainsLegendaryCreature() {
+        for (int i = 0; i < 10; i++) {
+            List<Card> booster = Dominaria.getInstance().createBooster();
+            // check that booster contains legendary creature
+            assertTrue(booster.stream().anyMatch(card -> card.isCreature() && card.isLegendary()));
+        }
     }
 
     private static String str(List<Card> cards) {
