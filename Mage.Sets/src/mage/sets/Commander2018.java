@@ -53,6 +53,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Nylea's Colossus", 33, Rarity.RARE, mage.cards.n.NyleasColossus.class));
         cards.add(new SetCardInfo("Octopus Umbra", 11, Rarity.RARE, mage.cards.o.OctopusUmbra.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 158, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
+        cards.add(new SetCardInfo("Ravenous Slime", 34, Rarity.RARE, mage.cards.r.RavenousSlime.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 57, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
         cards.add(new SetCardInfo("Ruinous Path", 117, Rarity.RARE, mage.cards.r.RuinousPath.class));
         cards.add(new SetCardInfo("Saheeli's Directive", 26, Rarity.RARE, mage.cards.s.SaheelisDirective.class));
