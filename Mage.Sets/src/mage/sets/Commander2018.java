@@ -43,6 +43,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Forge of Heroes", 58, Rarity.COMMON, mage.cards.f.ForgeOfHeroes.class));
         cards.add(new SetCardInfo("Fury Storm", 22, Rarity.RARE, mage.cards.f.FuryStorm.class));
         cards.add(new SetCardInfo("Genesis Storm", 30, Rarity.RARE, mage.cards.g.GenesisStorm.class));
+        cards.add(new SetCardInfo("Heavenly Blademaster", 3, Rarity.RARE, mage.cards.h.HeavenlyBlademaster.class));
         cards.add(new SetCardInfo("Herald of the Pantheon", 151, Rarity.RARE, mage.cards.h.HeraldOfThePantheon.class));
         cards.add(new SetCardInfo("Hydra Omnivore", 153, Rarity.MYTHIC, mage.cards.h.HydraOmnivore.class));
         cards.add(new SetCardInfo("Kestia, the Cultivator", 42, Rarity.MYTHIC, mage.cards.k.KestiaTheCultivator.class));
