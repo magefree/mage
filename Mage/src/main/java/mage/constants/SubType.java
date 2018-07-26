@@ -131,6 +131,7 @@ public enum SubType {
     EWOK("Ewok", SubTypeSet.CreatureType, true), // Star Wars
     // F
     FAERIE("Faerie", SubTypeSet.CreatureType),
+    FARMER("Farmer", SubTypeSet.CreatureType),
     FERRET("Ferret", SubTypeSet.CreatureType),
     FISH("Fish", SubTypeSet.CreatureType),
     FLAGBEARER("Flagbearer", SubTypeSet.CreatureType),

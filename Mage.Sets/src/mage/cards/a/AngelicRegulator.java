@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class AngelicRegulator extends CardImpl {
 
     public AngelicRegulator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

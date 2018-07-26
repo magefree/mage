@@ -34,7 +34,7 @@ public final class BackInTheSaddle extends CardImpl {
     public BackInTheSaddle(UUID ownerId, CardSetInfo setInfo){
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.getSpellAbility().addEffect(new BackInTheSaddleEffect());
-        getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
     }
 

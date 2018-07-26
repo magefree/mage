@@ -10,7 +10,7 @@ import mage.constants.TimingRule;
 
 /**
  *
- * @author LevelX2
+ * @author EikePeace
  */
 public class ReflexAbility extends SpellAbility {
 

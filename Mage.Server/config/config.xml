@@ -37,7 +37,7 @@
     mailFromAddress     - sender address
     -->
     <server serverAddress="0.0.0.0"
-            serverName="mage-server"
+            serverName="Eikes-Test-Server"
             port="17171"
             secondaryBindPort="17179"
             backlogSize="200"
