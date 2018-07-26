@@ -50,5 +50,4 @@ public final class Lorado extends ExpansionSet {
         cards.add(new SetCardInfo("Kill Shot", 21, Rarity.COMMON, mage.cards.k.KillShot.class));
         cards.add(new SetCardInfo("Manifestation of Destiny", 21, Rarity.RARE, mage.cards.m.ManifestationOfDestiny.class));
     }
-    
 }
