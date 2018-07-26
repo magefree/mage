@@ -46,6 +46,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Heavenly Blademaster", 3, Rarity.RARE, mage.cards.h.HeavenlyBlademaster.class));
         cards.add(new SetCardInfo("Herald of the Pantheon", 151, Rarity.RARE, mage.cards.h.HeraldOfThePantheon.class));
         cards.add(new SetCardInfo("Hydra Omnivore", 153, Rarity.MYTHIC, mage.cards.h.HydraOmnivore.class));
+        cards.add(new SetCardInfo("Isolated Watchtower", 59, Rarity.RARE, mage.cards.i.IsolatedWatchtower.class));
         cards.add(new SetCardInfo("Kestia, the Cultivator", 42, Rarity.MYTHIC, mage.cards.k.KestiaTheCultivator.class));
         cards.add(new SetCardInfo("Lord Windgrace", 43, Rarity.MYTHIC, mage.cards.l.LordWindgrace.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 23, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
