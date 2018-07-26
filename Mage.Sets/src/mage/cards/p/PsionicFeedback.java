@@ -1,13 +1,18 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author anonymous
+ * @author NinthWorld
  */
 public final class PsionicFeedback extends CardImpl {
 
@@ -16,6 +21,8 @@ public final class PsionicFeedback extends CardImpl {
         
 
         // Counter target spell unless its controller pays {3}.
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
     public PsionicFeedback(final PsionicFeedback card) {

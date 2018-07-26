@@ -2,15 +2,20 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.CantBlockAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author anonymous
+ * @author NinthWorld
  */
 public final class Mutalisk extends CardImpl {
 
@@ -25,7 +30,12 @@ public final class Mutalisk extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Mutalisk can't block.
+        this.addAbility(new CantBlockAbility());
+
         // When Mutalisk enters the battlefield, target player discards a card.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1));
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     public Mutalisk(final Mutalisk card) {

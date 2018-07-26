@@ -1,13 +1,17 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
+import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetAttackingCreature;
 
 /**
  *
- * @author anonymous
+ * @author NinthWorld
  */
 public final class PhotonOvercharge extends CardImpl {
 
@@ -16,6 +20,8 @@ public final class PhotonOvercharge extends CardImpl {
         
 
         // Photon Overcharge deals damage to target attacking creature equal to the number of cards in your hand.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerHandCount()));
+        this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
     public PhotonOvercharge(final PhotonOvercharge card) {
