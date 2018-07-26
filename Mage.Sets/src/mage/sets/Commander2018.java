@@ -37,10 +37,13 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Empyrial Storm", 2, Rarity.RARE, mage.cards.e.EmpyrialStorm.class));
         cards.add(new SetCardInfo("Enchanter's Bane", 21, Rarity.RARE, mage.cards.e.EnchantersBane.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 141, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
+        cards.add(new SetCardInfo("Estrid's Invocation", 8, Rarity.RARE, mage.cards.e.EstridsInvocation.class));
         cards.add(new SetCardInfo("Explosive Vegetation", 144, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
         cards.add(new SetCardInfo("Finest Hour", 180, Rarity.RARE, mage.cards.f.FinestHour.class));
         cards.add(new SetCardInfo("Forge of Heroes", 58, Rarity.COMMON, mage.cards.f.ForgeOfHeroes.class));
         cards.add(new SetCardInfo("Fury Storm", 22, Rarity.RARE, mage.cards.f.FuryStorm.class));
+        cards.add(new SetCardInfo("Genesis Storm", 30, Rarity.RARE, mage.cards.g.GenesisStorm.class));
+        cards.add(new SetCardInfo("Heavenly Blademaster", 3, Rarity.RARE, mage.cards.h.HeavenlyBlademaster.class));
         cards.add(new SetCardInfo("Herald of the Pantheon", 151, Rarity.RARE, mage.cards.h.HeraldOfThePantheon.class));
         cards.add(new SetCardInfo("Hydra Omnivore", 153, Rarity.MYTHIC, mage.cards.h.HydraOmnivore.class));
         cards.add(new SetCardInfo("Kestia, the Cultivator", 42, Rarity.MYTHIC, mage.cards.k.KestiaTheCultivator.class));
@@ -50,8 +53,10 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Guardian", 31, Rarity.UNCOMMON, mage.cards.l.LoyalGuardian.class));
         cards.add(new SetCardInfo("Loyal Subordinate", 16, Rarity.UNCOMMON, mage.cards.l.LoyalSubordinate.class));
         cards.add(new SetCardInfo("Nesting Dragon", 24, Rarity.RARE, mage.cards.n.NestingDragon.class));
+        cards.add(new SetCardInfo("Nylea's Colossus", 33, Rarity.RARE, mage.cards.n.NyleasColossus.class));
         cards.add(new SetCardInfo("Octopus Umbra", 11, Rarity.RARE, mage.cards.o.OctopusUmbra.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 158, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
+        cards.add(new SetCardInfo("Ravenous Slime", 34, Rarity.RARE, mage.cards.r.RavenousSlime.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 57, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
         cards.add(new SetCardInfo("Ruinous Path", 117, Rarity.RARE, mage.cards.r.RuinousPath.class));
         cards.add(new SetCardInfo("Saheeli's Directive", 26, Rarity.RARE, mage.cards.s.SaheelisDirective.class));
@@ -61,6 +66,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Tawnos, Urza's Apprentice", 45, Rarity.MYTHIC, mage.cards.t.TawnosUrzasApprentice.class));
         cards.add(new SetCardInfo("Thantis the Warweaver", 46, Rarity.MYTHIC, mage.cards.t.ThantisTheWarweaver.class));
         cards.add(new SetCardInfo("Thopter Spy Network", 107, Rarity.RARE, mage.cards.t.ThopterSpyNetwork.class));
+        cards.add(new SetCardInfo("Turntimber Sower", 35, Rarity.RARE, mage.cards.t.TurntimberSower.class));
         cards.add(new SetCardInfo("Tuvasa the Sunlit", 47, Rarity.MYTHIC, mage.cards.t.TuvasaTheSunlit.class));
         cards.add(new SetCardInfo("Varchild, Betrayer of Kjeldor", 28, Rarity.RARE, mage.cards.v.VarchildBetrayerOfKjeldor.class));
         cards.add(new SetCardInfo("Whiptongue Hydra", 36, Rarity.RARE, mage.cards.w.WhiptongueHydra.class));
