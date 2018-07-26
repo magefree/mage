@@ -1,8 +1,21 @@
-package mage.cards.b;
+package mage.cards.m;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.constants.SubType;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -14,36 +27,43 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public final class Balance extends CardImpl {
+public final class MagusOfTheBalance extends CardImpl {
 
-    public Balance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
+    public MagusOfTheBalance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
-        this.getSpellAbility().addEffect(new BalanceEffect());
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {4}{W}, {T}, Sacrifice Magus of the Balance: Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+        Ability ability = new SimpleActivatedAbility(
+                new MagusOfTheBalanceEffect(),
+                new ManaCostsImpl("{4}{W}")
+        );
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 
-    public Balance(final Balance card) {
+    public MagusOfTheBalance(final MagusOfTheBalance card) {
         super(card);
     }
 
     @Override
-    public Balance copy() {
-        return new Balance(this);
+    public MagusOfTheBalance copy() {
+        return new MagusOfTheBalance(this);
     }
 }
 
-class BalanceEffect extends OneShotEffect {
+class MagusOfTheBalanceEffect extends OneShotEffect {
 
-    BalanceEffect() {
+    MagusOfTheBalanceEffect() {
         super(Outcome.Sacrifice);
         staticText = "each player chooses a number of lands they control "
                 + "equal to the number of lands controlled by the player "
@@ -51,13 +71,13 @@ class BalanceEffect extends OneShotEffect {
                 + "Players discard cards and sacrifice creatures the same way";
     }
 
-    BalanceEffect(final BalanceEffect effect) {
+    MagusOfTheBalanceEffect(final MagusOfTheBalanceEffect effect) {
         super(effect);
     }
 
     @Override
-    public BalanceEffect copy() {
-        return new BalanceEffect(this);
+    public MagusOfTheBalanceEffect copy() {
+        return new MagusOfTheBalanceEffect(this);
     }
 
     @Override
