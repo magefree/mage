@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -68,7 +69,7 @@ class EMPRoundEffect extends OneShotEffect {
                 pred = Predicates.or(pred, new PermanentIdPredicate(targetId));
             }
         }
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        FilterPermanent filter = new FilterPermanent();
         filter.add(pred);
         game.addEffect(new BecomesFaceDownCreatureAllEffect(filter), source);
         return true;

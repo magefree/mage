@@ -2,14 +2,20 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
- * @author anonymous
+ * @author NinthWorld
  */
 public final class SCV extends CardImpl {
 
@@ -22,6 +28,9 @@ public final class SCV extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}, {T}: Add {C}{C}{C} to your mana pool.
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
     public SCV(final SCV card) {

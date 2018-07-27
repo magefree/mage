@@ -2,14 +2,19 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author anonymous
+ * @author NinthWorld
  */
 public final class Reaper extends CardImpl {
 
@@ -22,6 +27,10 @@ public final class Reaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Reaper attacks, target player draws a card, then discards a card at random.
+        Ability ability = new AttacksTriggeredAbility(new DrawCardTargetEffect(1), false);
+        ability.addEffect(new DiscardTargetEffect(1, true));
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     public Reaper(final Reaper card) {

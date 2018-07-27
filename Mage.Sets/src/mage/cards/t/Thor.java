@@ -2,15 +2,21 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
  *
- * @author anonymous
+ * @author NinthWorld
  */
 public final class Thor extends CardImpl {
 
@@ -25,6 +31,10 @@ public final class Thor extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // {2}{W}, {T}: Thor deals 3 damage to target attacking or blocking creature.
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new ManaCostsImpl("{2}{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetAttackingOrBlockingCreature());
+        this.addAbility(ability);
     }
 
     public Thor(final Thor card) {

@@ -269,6 +269,7 @@ public enum SubType {
     RABBIT("Rabbit", SubTypeSet.CreatureType),
     RAIDER("Raider", SubTypeSet.CreatureType, true), // Star Wars
     RAT("Rat", SubTypeSet.CreatureType),
+    RAYNOR("Raynor", SubTypeSet.CreatureType), // Duel Decks: StarCraft
     REBEL("Rebel", SubTypeSet.CreatureType),
     REFLECTION("Reflection", SubTypeSet.CreatureType),
     RHINO("Rhino", SubTypeSet.CreatureType),
