@@ -20,9 +20,11 @@ public final class Commander2018 extends ExpansionSet {
         super("Commander 2018 Edition", "C18", ExpansionSet.buildDate(2018, 8, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
 
+        cards.add(new SetCardInfo("Aethermage's Touch", 168, Rarity.RARE, mage.cards.a.AethermagesTouch.class));
         cards.add(new SetCardInfo("Ancient Stone Idol", 53, Rarity.RARE, mage.cards.a.AncientStoneIdol.class));
         cards.add(new SetCardInfo("Arixmethes, Slumbering Isle", 38, Rarity.RARE, mage.cards.a.ArixmethesSlumberingIsle.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 129, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
+        cards.add(new SetCardInfo("Banishing Stroke", 63, Rarity.UNCOMMON, mage.cards.b.BanishingStroke.class));
         cards.add(new SetCardInfo("Bear Umbra", 131, Rarity.RARE, mage.cards.b.BearUmbra.class));
         cards.add(new SetCardInfo("Bloodtracker", 14, Rarity.RARE, mage.cards.b.Bloodtracker.class));
         cards.add(new SetCardInfo("Brainstorm", 82, Rarity.UNCOMMON, mage.cards.b.Brainstorm.class));
@@ -32,6 +34,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Centaur Vinecrasher", 135, Rarity.RARE, mage.cards.c.CentaurVinecrasher.class));
         cards.add(new SetCardInfo("Chain Reaction", 121, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Chaos Warp", 122, Rarity.RARE, mage.cards.c.ChaosWarp.class));
+        cards.add(new SetCardInfo("Cloudform", 83, Rarity.UNCOMMON, mage.cards.c.Cloudform.class));
         cards.add(new SetCardInfo("Command Tower", 240, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 200, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Crash of Rhino Beetles", 29, Rarity.RARE, mage.cards.c.CrashOfRhinoBeetles.class));
@@ -63,6 +66,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Unicorn", 4, Rarity.UNCOMMON, mage.cards.l.LoyalUnicorn.class));
         cards.add(new SetCardInfo("Magus of the Balance", 5, Rarity.RARE, mage.cards.m.MagusOfTheBalance.class));
         cards.add(new SetCardInfo("Mountain Valley", 268, Rarity.UNCOMMON, mage.cards.m.MountainValley.class));
+        cards.add(new SetCardInfo("Mulldrifter", 94, Rarity.UNCOMMON, mage.cards.m.Mulldrifter.class));
         cards.add(new SetCardInfo("Myriad Landscape", 269, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Nesting Dragon", 24, Rarity.RARE, mage.cards.n.NestingDragon.class));
         cards.add(new SetCardInfo("Night Incarnate", 17, Rarity.RARE, mage.cards.n.NightIncarnate.class));
@@ -78,7 +82,9 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Ruinous Path", 117, Rarity.RARE, mage.cards.r.RuinousPath.class));
         cards.add(new SetCardInfo("Saheeli's Directive", 26, Rarity.RARE, mage.cards.s.SaheelisDirective.class));
         cards.add(new SetCardInfo("Scute Mob", 161, Rarity.RARE, mage.cards.s.ScuteMob.class));
+        cards.add(new SetCardInfo("Serra Avatar", 73, Rarity.MYTHIC, mage.cards.s.SerraAvatar.class));
         cards.add(new SetCardInfo("Sigil of the Empty Throne", 74, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
+        cards.add(new SetCardInfo("Silent-Blade Oni", 191, Rarity.RARE, mage.cards.s.SilentBladeOni.class));
         cards.add(new SetCardInfo("Sol Ring", 222, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Spawning Grounds", 163, Rarity.RARE, mage.cards.s.SpawningGrounds.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 225, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
