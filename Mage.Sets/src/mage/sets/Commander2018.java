@@ -49,6 +49,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Endless Atlas", 55, Rarity.RARE, mage.cards.e.EndlessAtlas.class));
         cards.add(new SetCardInfo("Entreat the Dead", 15, Rarity.RARE, mage.cards.e.EntreatTheDead.class));
         cards.add(new SetCardInfo("Estrid's Invocation", 8, Rarity.RARE, mage.cards.e.EstridsInvocation.class));
+        cards.add(new SetCardInfo("Ever-Watching Threshold", 9, Rarity.RARE, mage.cards.e.EverWatchingThreshold.class));
         cards.add(new SetCardInfo("Explosive Vegetation", 144, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
         cards.add(new SetCardInfo("Finest Hour", 180, Rarity.RARE, mage.cards.f.FinestHour.class));
         cards.add(new SetCardInfo("Forge of Heroes", 58, Rarity.COMMON, mage.cards.f.ForgeOfHeroes.class));
