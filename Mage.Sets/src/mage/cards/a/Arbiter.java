@@ -11,7 +11,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -20,6 +23,12 @@ import mage.target.common.TargetControlledPermanent;
  * @author NinthWorld
  */
 public final class Arbiter extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public Arbiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
@@ -32,8 +41,9 @@ public final class Arbiter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Arbitor enters the battlefield, return another target permanent you control and target permanent you don't control to their owners' hands.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetControlledPermanent());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
+                .setText("return another target permanent you control and target permanent you don't control to their owners' hands"));
+        ability.addTarget(new TargetControlledPermanent(filter));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT));
         this.addAbility(ability);
     }

@@ -23,8 +23,10 @@ public final class Stimpack extends CardImpl {
         
 
         // Target creature gets +2/+2 and gains haste until end of turn. Stimpack deals 2 damage to you.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn)
+                .setText("Target creature gets +2/+2"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains haste until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DamageControllerEffect(2));
     }

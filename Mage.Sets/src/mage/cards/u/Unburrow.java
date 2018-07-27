@@ -26,7 +26,8 @@ public final class Unburrow extends CardImpl {
 
         // Choose one -
         //   Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect()
+                .setText("Return target creature card from your graveyard to your hand"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
 
         //   Put two 1/1 green Zerg creature tokens onto the battlefield.

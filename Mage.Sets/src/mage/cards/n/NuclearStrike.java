@@ -55,6 +55,7 @@ class NuclearStrikeEffect extends SacrificeSourceEffect {
 
     public NuclearStrikeEffect() {
         super();
+        staticText = "sacrifice {this}. If you do, destroy enchanted permanent and each other nonland permanent with the same converted mana cost";
     }
 
     public NuclearStrikeEffect(final NuclearStrikeEffect effect) {

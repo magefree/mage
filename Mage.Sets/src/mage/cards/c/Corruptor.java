@@ -36,7 +36,9 @@ public final class Corruptor extends CardImpl {
 
         // {2}{B}, Discard Corruptor: When target creature is dealt damage this turn, destroy that creature.
         Ability ability1 = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), false);
-        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(ability1, Duration.EndOfTurn), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(ability1, Duration.EndOfTurn)
+                .setText("When target creature is dealt damage this turn, destroy that creature"),
+                new ManaCostsImpl("{2}{B}"));
         ability.addCost(new DiscardSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

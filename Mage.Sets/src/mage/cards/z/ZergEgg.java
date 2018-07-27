@@ -38,8 +38,9 @@ public final class ZergEgg extends CardImpl {
         Token token = new ZergToken();
         token.addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
-                new CreateTokenEffect(token, 2), new SacrificeSourceCost()),
-                TargetController.YOU, false));
+                new CreateTokenEffect(token, 2)
+                        .setText("put two 1/1 green Zerg creature tokens with haste onto the battlefield"),
+                new SacrificeSourceCost()), TargetController.YOU, false));
     }
 
     public ZergEgg(final ZergEgg card) {

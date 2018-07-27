@@ -35,7 +35,7 @@ public final class InfestedTerran extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Infested Terran dies during combat, if it was attacking, defending player loses 3 life.
-        this.addAbility(new HydraliskAbility());
+        this.addAbility(new InfestedTerranAbility());
     }
 
     public InfestedTerran(final InfestedTerran card) {
@@ -48,13 +48,13 @@ public final class InfestedTerran extends CardImpl {
     }
 }
 
-class HydraliskAbility extends ZoneChangeTriggeredAbility {
+class InfestedTerranAbility extends ZoneChangeTriggeredAbility {
 
-    public HydraliskAbility() {
-        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new LoseLifeDefendingPlayerEffect(3, false), "When {this} dies during combat, ", false);
+    public InfestedTerranAbility() {
+        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new LoseLifeDefendingPlayerEffect(3, false), "When {this} dies during combat, if it was attacking, ", false);
     }
 
-    public HydraliskAbility(final HydraliskAbility ability) {
+    public InfestedTerranAbility(final InfestedTerranAbility ability) {
         super(ability);
     }
 
@@ -71,7 +71,7 @@ class HydraliskAbility extends ZoneChangeTriggeredAbility {
     }
 
     @Override
-    public HydraliskAbility copy() {
-        return new HydraliskAbility(this);
+    public InfestedTerranAbility copy() {
+        return new InfestedTerranAbility(this);
     }
 }

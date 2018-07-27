@@ -100,6 +100,6 @@ class NydusWormTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When enchanted permanent becomes untapped, " + super.getRule();
+        return "Whenever enchanted land becomes untapped, " + super.getRule();
     }
 }

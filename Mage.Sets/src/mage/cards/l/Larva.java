@@ -40,7 +40,9 @@ public final class Larva extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{B}, {T}, Sacrifice Larva: Return target Zerg creature card from your graveyard to the battlefield. Activate this ability only any time you can cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{3}{B}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect()
+                .setText("Return target Zerg creature card from your graveyard to the battlefield"),
+                new ManaCostsImpl("{3}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));

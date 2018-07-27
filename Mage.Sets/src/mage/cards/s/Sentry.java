@@ -42,7 +42,7 @@ public final class Sentry extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {T}: Tap or untap another target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect().setText("Tap or untap"), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect().setText("Tap or untap another target creature"), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

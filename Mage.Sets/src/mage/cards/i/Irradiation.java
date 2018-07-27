@@ -53,6 +53,7 @@ class IrradiationEffect extends ContinuousEffectImpl {
 
     public IrradiationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        staticText = "If enchanted creature is an artifact, it gets +2/+0. Otherwise, it gets +2/-2";
     }
 
     public IrradiationEffect(final IrradiationEffect effect) {

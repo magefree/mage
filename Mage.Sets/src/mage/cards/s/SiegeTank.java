@@ -33,7 +33,8 @@ public final class SiegeTank extends CardImpl {
 
         // At the beginning of your end step, you may turn Siege Tank face down.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL),
+                new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL)
+                        .setText("you may turn {this} face down"),
                 TargetController.YOU, true));
     }
 

@@ -40,6 +40,7 @@ public final class Reaver extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.PSI.createInstance(1)));
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        this.addAbility(ability);
 
         // {T}: Put a psi counter on Reaver.
         this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.PSI.createInstance(1)), new TapSourceCost()));

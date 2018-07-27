@@ -78,4 +78,9 @@ class HydraliskAbility extends TriggeredAbilityImpl {
     public HydraliskAbility copy() {
         return new HydraliskAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} attacks and at least one attacking creature isn't blocked, {this} gets +1/+1 until end of turn";
+    }
 }

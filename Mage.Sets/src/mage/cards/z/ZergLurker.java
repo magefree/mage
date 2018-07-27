@@ -57,6 +57,7 @@ class ZergLurkerEffect extends OneShotEffect {
 
     public ZergLurkerEffect() {
         super(Outcome.LoseLife);
+        staticText = "if {this} is tapped, target opponent loses 2 life";
     }
 
     public ZergLurkerEffect(final ZergLurkerEffect effect) {

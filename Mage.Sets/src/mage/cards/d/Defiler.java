@@ -34,6 +34,7 @@ public final class Defiler extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public Defiler(final Defiler card) {

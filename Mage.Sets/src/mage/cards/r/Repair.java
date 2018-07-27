@@ -20,7 +20,8 @@ public final class Repair extends CardImpl {
         
 
         // Return up to two target artifact cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect()
+                .setText("Return up to two target artifact cards from your graveyard to your hand"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_ARTIFACT));
     }
 

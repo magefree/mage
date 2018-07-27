@@ -19,9 +19,9 @@ public final class ScannerSweep extends CardImpl {
         
 
         // Draw a card, then discard a card, then draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addEffect(new DiscardControllerEffect(1, false));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("Draw a card"));
+        this.getSpellAbility().addEffect(new DiscardControllerEffect(1, false).setText("then discard a card"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("then draw a card"));
     }
 
     public ScannerSweep(final ScannerSweep card) {

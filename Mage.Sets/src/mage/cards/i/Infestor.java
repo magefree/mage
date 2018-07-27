@@ -33,7 +33,7 @@ public final class Infestor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Infestor enters the battlefield, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. That creature's owner loses 2 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new InfestorEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }

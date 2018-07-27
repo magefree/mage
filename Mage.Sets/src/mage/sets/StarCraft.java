@@ -90,7 +90,7 @@ public final class StarCraft extends ExpansionSet {
         cards.add(new SetCardInfo("Mass Recall", 33, Rarity.UNCOMMON, mage.cards.m.MassRecall.class));
         cards.add(new SetCardInfo("Medic", 12, Rarity.UNCOMMON, mage.cards.m.Medic.class));
         cards.add(new SetCardInfo("Metabolic Boost", 77, Rarity.COMMON, mage.cards.m.MetabolicBoost.class));
-        cards.add(new SetCardInfo("Mind Control", 34, Rarity.COMMON, mage.cards.m.MineralField.class));
+        cards.add(new SetCardInfo("Mind Control", 34, Rarity.COMMON, mage.cards.m.MindControl.class));
         cards.add(new SetCardInfo("Mineral Field", 122, Rarity.COMMON, mage.cards.m.MineralField.class));
         cards.add(new SetCardInfo("Mothership", 91, Rarity.RARE, mage.cards.m.Mothership.class));
         cards.add(new SetCardInfo("Mountain", 167, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

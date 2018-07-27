@@ -33,7 +33,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class KerriganQueenOfBlades extends CardImpl {
 
-    private static final FilterPermanent filterAllZerg = new FilterPermanent("Zerg");
+    private static final FilterPermanent filterAllZerg = new FilterPermanent("all Zerg");
     private static final FilterControlledPermanent filterZergYouControlled = new FilterControlledPermanent("Zerg you control");
 
     static {
@@ -59,8 +59,10 @@ public final class KerriganQueenOfBlades extends CardImpl {
         this.addAbility(ability);
 
         // -7: Gain control of all Zerg, then each opponent sacrifices a permanent for each Zerg you control.
-        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfGame, filterAllZerg), -7);
-        ability.addEffect(new SacrificeOpponentsEffect(new PermanentsOnBattlefieldCount(filterZergYouControlled), StaticFilters.FILTER_PERMANENT));
+        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfGame, filterAllZerg)
+                .setText("Gain control of all Zerg, "), -7);
+        ability.addEffect(new SacrificeOpponentsEffect(new PermanentsOnBattlefieldCount(filterZergYouControlled), StaticFilters.FILTER_PERMANENT)
+                .setText("then each opponent sacrifices a permanent for each Zerg you control"));
         this.addAbility(ability);
     }
 
@@ -78,6 +80,7 @@ class KerriganQueenOfBladesFirstEffect extends OneShotEffect {
 
     public KerriganQueenOfBladesFirstEffect() {
         super(Outcome.BecomeCreature);
+        staticText = "Target permanent becomes a Zerg creature with base power and toughness 3/3 in addition to its other types";
     }
 
     public KerriganQueenOfBladesFirstEffect(final KerriganQueenOfBladesFirstEffect effect) {

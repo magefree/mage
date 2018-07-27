@@ -139,6 +139,6 @@ class SensorArrayTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When that opponent casts a card with the chosen name, sacrifice {this}";
+        return "When that opponent casts a card with the chosen name, sacrifice {this}. If you do, draw two cards.";
     }
 }

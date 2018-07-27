@@ -27,8 +27,8 @@ public final class Reaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Reaper attacks, target player draws a card, then discards a card at random.
-        Ability ability = new AttacksTriggeredAbility(new DrawCardTargetEffect(1), false);
-        ability.addEffect(new DiscardTargetEffect(1, true));
+        Ability ability = new AttacksTriggeredAbility(new DrawCardTargetEffect(1).setText("target player draws a card"), false);
+        ability.addEffect(new DiscardTargetEffect(1, true).setText("then discards a card at random"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

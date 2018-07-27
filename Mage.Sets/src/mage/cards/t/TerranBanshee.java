@@ -56,7 +56,7 @@ class TerranBansheeEffect extends PreventionEffectImpl {
 
     public TerranBansheeEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
-        staticText = "";
+        staticText = "Prevent all damage {this} would deal to creatures with flying";
     }
 
     public TerranBansheeEffect(final TerranBansheeEffect effect) {

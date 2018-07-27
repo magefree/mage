@@ -10,12 +10,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.FlashAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -39,7 +37,7 @@ public final class StasisWard extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Stasis Ward enters the battlefield, counter target spell. If that spell is countered this way, exile that card until Stasis Ward leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CounterTargetWithReplacementEffect(Zone.EXILED));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new StasisWardCounterEffect());
         ability.addTarget(new TargetSpell());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new StasisWardReturnExiledCardAbility()));
         this.addAbility(ability);
@@ -54,6 +52,36 @@ public final class StasisWard extends CardImpl {
         return new StasisWard(this);
     }
 }
+
+class StasisWardCounterEffect extends OneShotEffect {
+
+    public StasisWardCounterEffect() {
+        super(Outcome.Detriment);
+        staticText = "counter target spell. If that spell is countered this way, exile that card until Stasis Ward leaves the battlefield";
+    }
+
+    public StasisWardCounterEffect(final StasisWardCounterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public StasisWardCounterEffect copy() {
+        return new StasisWardCounterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.EXILED, false, ZoneDetail.NONE)) {
+                return controller.moveCardsToExile(card, source, game, false, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), "Stasis Ward Exile");
+            }
+        }
+        return false;
+    }
+}
+
 
 // From KitesailFreebooterReturnExiledCardAbility
 class StasisWardReturnExiledCardAbility extends DelayedTriggeredAbility {

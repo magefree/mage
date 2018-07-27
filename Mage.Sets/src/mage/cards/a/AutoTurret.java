@@ -32,7 +32,10 @@ public final class AutoTurret extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new TapSourceCost()));
 
         // {3}: Turn Auto-Turret face down.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL)
+                        .setText("Turn {this} face down"),
+                new GenericManaCost(3)));
     }
 
     public AutoTurret(final AutoTurret card) {

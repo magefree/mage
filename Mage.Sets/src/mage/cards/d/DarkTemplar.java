@@ -30,7 +30,7 @@ public final class DarkTemplar extends CardImpl {
         // Dark Templar is unblockable as long as it's attacking alone.
         this.addAbility(new AttacksAloneTriggeredAbility(
                 new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.EndOfCombat)
-                        .setText("{this} is unblockable as long as it's attacking alone")));
+                        .setText("{this} is unblockable")));
     }
 
     public DarkTemplar(final DarkTemplar card) {

@@ -36,7 +36,7 @@ public final class WarpGate extends CardImpl {
         // At the beginning of your upkeep, remove a psi counter from Warp Gate. Then if Warp Gate has no psi counters on it, sacrifice it and put a 3/3 blue Protoss creature token onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.PSI.createInstance()), TargetController.YOU, false));
         Ability ability = new WarpGateNoCountersAbilty();
-        ability.addEffect(new CreateTokenEffect(new ProtossToken()).setText("and put a 3/3 blue Protoss creature token onto the battlefield"));
+        ability.addEffect(new CreateTokenEffect(new ProtossToken()));
         this.addAbility(ability);
     }
 
@@ -77,6 +77,6 @@ class WarpGateNoCountersAbilty extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Then if {this} has no psi counters on it, sacrifice it";
+        return "Then if {this} has no psi counters on it, sacrifice it and put a 3/3 blue Protoss creature token onto the battlefield";
     }
 }
