@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -37,6 +38,8 @@ import mage.game.permanent.Permanent;
  */
 public final class ArixmethesSlumberingIsle extends CardImpl {
 
+    private static final FilterSpell filter = new FilterSpell("a spell");
+
     public ArixmethesSlumberingIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
@@ -46,6 +49,7 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
         this.toughness = new MageInt(12);
 
         // Arixmethes, Slumbering Isle enters the battlefield tapped with five slumber counters on it.
+        this.addAbility(new EntersBattlefieldTappedAbility());
         Effect effect = new AddCountersSourceEffect(CounterType.SLUMBER.createInstance(5));
         this.addAbility(new EntersBattlefieldAbility(effect, "with five slumber counters"));
 
@@ -56,7 +60,7 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
                 "As long as {this} has a slumber counter on it, it's a land")));
 
         // Whenever you cast a spell, you may remove a slumber counter from Arixmethes.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.SLUMBER.createInstance(1)), new FilterSpell("a spell"), true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.SLUMBER.createInstance(1)), true));
 
         // {T}: Add {G}{U}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0, 0), new TapSourceCost()));
