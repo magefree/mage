@@ -85,6 +85,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Serra Avatar", 73, Rarity.MYTHIC, mage.cards.s.SerraAvatar.class));
         cards.add(new SetCardInfo("Sigil of the Empty Throne", 74, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
         cards.add(new SetCardInfo("Silent-Blade Oni", 191, Rarity.RARE, mage.cards.s.SilentBladeOni.class));
+        cards.add(new SetCardInfo("Skull Storm", 18, Rarity.COMMON, mage.cards.s.SkullStorm.class));
         cards.add(new SetCardInfo("Sol Ring", 222, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Spawning Grounds", 163, Rarity.RARE, mage.cards.s.SpawningGrounds.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 225, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
