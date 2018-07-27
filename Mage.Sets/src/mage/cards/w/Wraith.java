@@ -2,6 +2,8 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,7 +14,7 @@ import mage.constants.CardType;
 
 /**
  *
- * @author anonymous
+ * @author NinthWorld
  */
 public final class Wraith extends CardImpl {
 
@@ -30,6 +32,7 @@ public final class Wraith extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
 
         // When Wraith is turned face up, you may return it to its owner's hand.
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new ReturnToHandSourceEffect(), false, true));
     }
 
     public Wraith(final Wraith card) {

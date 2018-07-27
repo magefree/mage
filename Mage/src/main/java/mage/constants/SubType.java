@@ -363,6 +363,7 @@ public enum SubType {
     YETI("Yeti", SubTypeSet.CreatureType),
     // Z
     ZABRAK("Zabrak", SubTypeSet.CreatureType, true), // Star Wars
+    ZERATUL("Zeratul", SubTypeSet.CreatureType, true), // Duel Decks: StarCraft
     ZERG("Zerg", SubTypeSet.CreatureType, true), // Duel Decks: StarCraft
     ZOMBIE("Zombie", SubTypeSet.CreatureType),
     ZUBERA("Zubera", SubTypeSet.CreatureType),
