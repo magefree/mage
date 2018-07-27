@@ -21,10 +21,12 @@ public final class Commander2018 extends ExpansionSet {
         this.blockName = "Command Zone";
 
         cards.add(new SetCardInfo("Ancient Stone Idol", 53, Rarity.RARE, mage.cards.a.AncientStoneIdol.class));
+        cards.add(new SetCardInfo("Arixmethes, Slumbering Isle", 38, Rarity.RARE, mage.cards.a.ArixmethesSlumberingIsle.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 129, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Bear Umbra", 131, Rarity.RARE, mage.cards.b.BearUmbra.class));
         cards.add(new SetCardInfo("Bloodtracker", 14, Rarity.RARE, mage.cards.b.Bloodtracker.class));
         cards.add(new SetCardInfo("Brainstorm", 82, Rarity.UNCOMMON, mage.cards.b.Brainstorm.class));
+        cards.add(new SetCardInfo("Brudiclad, Telchor Engineer", 39, Rarity.MYTHIC, mage.cards.b.BrudicladTelchorEngineer.class));
         cards.add(new SetCardInfo("Bruna, Light of Alabaster", 170, Rarity.MYTHIC, mage.cards.b.BrunaLightOfAlabaster.class));
         cards.add(new SetCardInfo("Budoka Gardener", 134, Rarity.RARE, mage.cards.b.BudokaGardener.class));
         cards.add(new SetCardInfo("Centaur Vinecrasher", 135, Rarity.RARE, mage.cards.c.CentaurVinecrasher.class));
