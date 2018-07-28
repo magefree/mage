@@ -233,6 +233,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Sage's Reverie", 72, Rarity.UNCOMMON, mage.cards.s.SagesReverie.class));
         cards.add(new SetCardInfo("Saheeli's Artistry", 100, Rarity.RARE, mage.cards.s.SaheelisArtistry.class));
         cards.add(new SetCardInfo("Saheeli's Directive", 26, Rarity.RARE, mage.cards.s.SaheelisDirective.class));
+        cards.add(new SetCardInfo("Saheeli, the Gifted", 44, Rarity.MYTHIC, mage.cards.s.SaheeliTheGifted.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 160, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Savage Lands", 275, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Savage Twister", 190, Rarity.UNCOMMON, mage.cards.s.SavageTwister.class));

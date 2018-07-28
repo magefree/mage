@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.ArrayList;
@@ -8,6 +7,8 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -17,6 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -122,14 +124,6 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.color = effect.color;
         this.useLKI = effect.useLKI;
         this.isntLegendary = effect.isntLegendary;
-    }
-
-    public void setBecomesArtifact(boolean becomesArtifact) {
-        this.becomesArtifact = becomesArtifact;
-    }
-
-    public void setIsntLegendary(boolean isntLegendary) {
-        this.isntLegendary = isntLegendary;
     }
 
     @Override
@@ -281,5 +275,34 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public void setUseLKI(boolean useLKI) {
         this.useLKI = useLKI;
+    }
+
+    public void setBecomesArtifact(boolean becomesArtifact) {
+        this.becomesArtifact = becomesArtifact;
+    }
+
+    public void setIsntLegendary(boolean isntLegendary) {
+        this.isntLegendary = isntLegendary;
+    }
+
+    public void setHasHaste(boolean hasHaste) {
+        this.hasHaste = hasHaste;
+    }
+
+    public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
+        for (Permanent tokenPermanent : addedTokenPermanents) {
+            ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+            exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+        }
+    }
+
+    public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
+        for (Permanent tokenPermanent : addedTokenPermanents) {
+
+            ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+            exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
+        }
     }
 }
