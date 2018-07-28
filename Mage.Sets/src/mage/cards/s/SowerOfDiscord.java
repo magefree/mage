@@ -40,7 +40,7 @@ public final class SowerOfDiscord extends CardImpl {
 
         // As Sower of Discord enters the battlefield, choose two players.
         this.addAbility(new AsEntersBattlefieldAbility(
-                new BitterFeudEntersBattlefieldEffect()
+                new SowerOfDiscordEntersBattlefieldEffect()
         ));
 
         // Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
@@ -57,14 +57,14 @@ public final class SowerOfDiscord extends CardImpl {
     }
 }
 
-class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
+class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
 
-    public BitterFeudEntersBattlefieldEffect() {
+    public SowerOfDiscordEntersBattlefieldEffect() {
         super(Outcome.Damage);
         staticText = "choose two players";
     }
 
-    public BitterFeudEntersBattlefieldEffect(final BitterFeudEntersBattlefieldEffect effect) {
+    public SowerOfDiscordEntersBattlefieldEffect(final SowerOfDiscordEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -101,8 +101,8 @@ class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
     }
 
     @Override
-    public BitterFeudEntersBattlefieldEffect copy() {
-        return new BitterFeudEntersBattlefieldEffect(this);
+    public SowerOfDiscordEntersBattlefieldEffect copy() {
+        return new SowerOfDiscordEntersBattlefieldEffect(this);
     }
 
 }
