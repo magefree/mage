@@ -295,6 +295,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Utter End", 193, Rarity.RARE, mage.cards.u.UtterEnd.class));
         cards.add(new SetCardInfo("Varchild, Betrayer of Kjeldor", 28, Rarity.RARE, mage.cards.v.VarchildBetrayerOfKjeldor.class));
         cards.add(new SetCardInfo("Varina, Lich Queen", 48, Rarity.MYTHIC, mage.cards.v.VarinaLichQueen.class));
+        cards.add(new SetCardInfo("Vedalken Humiliator", 13, Rarity.RARE, mage.cards.v.VedalkenHumiliator.class));
         cards.add(new SetCardInfo("Vessel of Endless Rest", 229, Rarity.UNCOMMON, mage.cards.v.VesselOfEndlessRest.class));
         cards.add(new SetCardInfo("Vow of Flight", 110, Rarity.UNCOMMON, mage.cards.v.VowOfFlight.class));
         cards.add(new SetCardInfo("Vow of Wildness", 164, Rarity.UNCOMMON, mage.cards.v.VowOfWildness.class));
