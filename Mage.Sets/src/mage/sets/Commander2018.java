@@ -261,6 +261,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Snare", 76, Rarity.UNCOMMON, mage.cards.s.SoulSnare.class));
         cards.add(new SetCardInfo("Soul of Innistrad", 118, Rarity.MYTHIC, mage.cards.s.SoulOfInnistrad.class));
         cards.add(new SetCardInfo("Soul of New Phyrexia", 223, Rarity.MYTHIC, mage.cards.s.SoulOfNewPhyrexia.class));
+        cards.add(new SetCardInfo("Sower of Discord", 19, Rarity.RARE, mage.cards.s.SowerOfDiscord.class));
         cards.add(new SetCardInfo("Spawning Grounds", 163, Rarity.RARE, mage.cards.s.SpawningGrounds.class));
         cards.add(new SetCardInfo("Sphinx of Jwar Isle", 103, Rarity.RARE, mage.cards.s.SphinxOfJwarIsle.class));
         cards.add(new SetCardInfo("Sphinx of Uthuun", 104, Rarity.RARE, mage.cards.s.SphinxOfUthuun.class));
