@@ -7,6 +7,7 @@ import mage.abilities.keyword.CommanderStormAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -62,7 +63,7 @@ class GenesisStormEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        CardsImpl toReveal = new CardsImpl();
+        Cards toReveal = new CardsImpl();
         Card nonLandCard = null;
         for (Card card : controller.getLibrary().getCards(game)) {
             toReveal.add(card);

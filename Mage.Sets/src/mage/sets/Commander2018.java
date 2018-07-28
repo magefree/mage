@@ -220,6 +220,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Rakdos Carnarium", 273, Rarity.COMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 158, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Ravenous Slime", 34, Rarity.RARE, mage.cards.r.RavenousSlime.class));
+        cards.add(new SetCardInfo("Reality Scramble", 25, Rarity.RARE, mage.cards.r.RealityScramble.class));
         cards.add(new SetCardInfo("Reclamation Sage", 159, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Retreat to Hagra", 116, Rarity.UNCOMMON, mage.cards.r.RetreatToHagra.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 57, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
