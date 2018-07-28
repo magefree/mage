@@ -50,6 +50,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Bojuka Bog", 238, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Boon Satyr", 132, Rarity.RARE, mage.cards.b.BoonSatyr.class));
         cards.add(new SetCardInfo("Borderland Explorer", 133, Rarity.COMMON, mage.cards.b.BorderlandExplorer.class));
+        cards.add(new SetCardInfo("Boreas Charger", 1, Rarity.RARE, mage.cards.b.BoreasCharger.class));
         cards.add(new SetCardInfo("Bosh, Iron Golem", 198, Rarity.RARE, mage.cards.b.BoshIronGolem.class));
         cards.add(new SetCardInfo("Brainstorm", 82, Rarity.UNCOMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brudiclad, Telchor Engineer", 39, Rarity.MYTHIC, mage.cards.b.BrudicladTelchorEngineer.class));
