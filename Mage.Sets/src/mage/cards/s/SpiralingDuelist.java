@@ -22,7 +22,7 @@ import mage.constants.Zone;
  */
 public final class SpiralingDuelist extends CardImpl {
 
-    private static final String effectText = "Metalcraft - Spiraling Duelist has double strike as long as you control three or more artifacts.";
+    private static final String effectText = "<i>Metalcraft</i> &mdash; Spiraling Duelist has double strike as long as you control three or more artifacts.";
 
     public SpiralingDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

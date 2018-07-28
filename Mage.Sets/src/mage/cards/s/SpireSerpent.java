@@ -25,7 +25,7 @@ import mage.constants.Zone;
  */
 public final class SpireSerpent extends CardImpl {
 
-    private static final String abilityText1 = "Metalcraft - As long as you control three or more artifacts, {this} gets +2/+2";
+    private static final String abilityText1 = "<i>Metalcraft</i> &mdash; As long as you control three or more artifacts, {this} gets +2/+2";
 
     public SpireSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

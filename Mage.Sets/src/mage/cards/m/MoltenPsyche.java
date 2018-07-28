@@ -29,7 +29,7 @@ public final class MoltenPsyche extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Each player shuffles the cards from their hand into their library, then draws that many cards.
-        // Metalcraft - If you control three or more artifacts, Molten Psyche deals damage to each opponent equal to the number of cards that player has drawn this turn.
+        // <i>Metalcraft</i> &mdash; If you control three or more artifacts, Molten Psyche deals damage to each opponent equal to the number of cards that player has drawn this turn.
         this.getSpellAbility().addEffect(new MoltenPsycheEffect());
         this.getSpellAbility().addWatcher(new MoltenPsycheWatcher());
     }

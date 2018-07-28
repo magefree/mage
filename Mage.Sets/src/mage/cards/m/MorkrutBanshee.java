@@ -20,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class MorkrutBanshee extends CardImpl {
 
-    private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
+    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
 
     public MorkrutBanshee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
@@ -30,7 +30,7 @@ public final class MorkrutBanshee extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Morbid - When Morkut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.
+        // <i>Morbid</i> &mdash; When Morkut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
         TriggeredAbility ability = new ConditionalInterveningIfTriggeredAbility(triggeredAbility, MorbidCondition.instance, staticText);
         ability.addTarget(new TargetCreaturePermanent());

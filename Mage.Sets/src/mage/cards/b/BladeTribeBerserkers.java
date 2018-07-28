@@ -22,7 +22,7 @@ import mage.constants.SubType;
  */
 public final class BladeTribeBerserkers extends CardImpl {
 
-    private static final String effectText = "Metalcraft - When Blade-Tribe Berserkers enters the battlefield, if you control three or more artifacts, Blade-Tribe Berserkers gets +3/+3 and gains haste until end of turn.";
+    private static final String effectText = "<i>Metalcraft</i> &mdash; When Blade-Tribe Berserkers enters the battlefield, if you control three or more artifacts, Blade-Tribe Berserkers gets +3/+3 and gains haste until end of turn.";
 
     public BladeTribeBerserkers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
@@ -31,7 +31,7 @@ public final class BladeTribeBerserkers extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        //Metalcraft - When Blade-Tribe Berserkers enters the battlefield, if you control three or more artifacts, Blade-Tribe Berserkers gets +3/+3 and gains haste until end of turn.
+        //<i>Metalcraft</i> &mdash; When Blade-Tribe Berserkers enters the battlefield, if you control three or more artifacts, Blade-Tribe Berserkers gets +3/+3 and gains haste until end of turn.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), false);
         ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MetalcraftCondition.instance, effectText));

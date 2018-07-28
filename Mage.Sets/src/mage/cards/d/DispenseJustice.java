@@ -43,7 +43,7 @@ public final class DispenseJustice extends CardImpl {
 class DispenseJusticeEffect extends OneShotEffect {
 
     private static final String effectText = "Target player sacrifices an attacking creature.\r\n\r\n"
-            + "Metalcraft - That player sacrifices two attacking creatures instead if you control three or more artifacts";
+            + "<i>Metalcraft</i> &mdash; That player sacrifices two attacking creatures instead if you control three or more artifacts";
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature();
 

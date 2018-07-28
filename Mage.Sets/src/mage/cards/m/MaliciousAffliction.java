@@ -38,7 +38,7 @@ public final class MaliciousAffliction extends CardImpl {
     public MaliciousAffliction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
-        // Morbid - When you cast Malicious Affliction, if a creature died this turn, you may copy Malicious Affliction and may choose a new target for the copy.
+        // <i>Morbid</i> &mdash; When you cast Malicious Affliction, if a creature died this turn, you may copy Malicious Affliction and may choose a new target for the copy.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new CastSourceTriggeredAbility(new CopySourceSpellEffect(), true),
                 new LockedInCondition(MorbidCondition.instance),

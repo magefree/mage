@@ -23,7 +23,7 @@ public class MetalcraftTest extends CardTestPlayerBase {
     public void testMetalcraftFromBlinkmoth() {
         addCard(Zone.BATTLEFIELD, playerA, "Darksteel Citadel",1); 
 
-        // Metalcraft - {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts
+        // <i>Metalcraft</i> &mdash; {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts
         addCard(Zone.BATTLEFIELD, playerA, "Rusted Relic", 1); 
 
         // {T}: Add {C}to your mana pool.
