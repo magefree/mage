@@ -62,7 +62,7 @@ class VortexEffect extends OneShotEffect {
         if (permanent != null && sourceObject != null) {
             if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
-                effect.setText("Return it to the battlefield under its owner's control at the beginning of the next end step");
+                effect.setText("Return exiled nonland permanent to the battlefield under its owner's control");
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                 return true;

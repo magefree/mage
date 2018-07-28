@@ -13,6 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterUntappedCreature;
 import mage.filter.predicate.Predicates;
@@ -21,6 +22,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -30,7 +32,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class Overlord extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Zerg creature spells");
-    private static final FilterControlledPermanent filterAnother = new FilterControlledPermanent("another untapped creature you control");
+    private static final FilterControlledCreaturePermanent filterAnother = new FilterControlledCreaturePermanent("another untapped creature you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
@@ -55,7 +57,7 @@ public final class Overlord extends CardImpl {
         // Tap another untapped creature you control: Overlord gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new TapTargetCost(new TargetControlledPermanent(filterAnother))));
+                new TapTargetCost(new TargetControlledCreaturePermanent(filterAnother))));
     }
 
     public Overlord(final Overlord card) {

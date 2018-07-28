@@ -49,7 +49,11 @@ public final class KerriganQueenOfBlades extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Target permanent becomes a Zerg creature with base power and toughness 3/3 in addition to its other types.
-        Ability ability = new LoyaltyAbility(new KerriganQueenOfBladesFirstEffect(), 1);
+        Ability ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(
+                new CreatureToken(3, 3, "3/3 Zerg creature in addition to its other types", SubType.ZERG),
+                false, true, Duration.WhileOnBattlefield)
+                .setText("Target permanent becomes a Zerg creature with base power and toughness 3/3 in addition to its other types"),
+                1);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
@@ -73,40 +77,5 @@ public final class KerriganQueenOfBlades extends CardImpl {
     @Override
     public KerriganQueenOfBlades copy() {
         return new KerriganQueenOfBlades(this);
-    }
-}
-
-class KerriganQueenOfBladesFirstEffect extends OneShotEffect {
-
-    public KerriganQueenOfBladesFirstEffect() {
-        super(Outcome.BecomeCreature);
-        staticText = "Target permanent becomes a Zerg creature with base power and toughness 3/3 in addition to its other types";
-    }
-
-    public KerriganQueenOfBladesFirstEffect(final KerriganQueenOfBladesFirstEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            // Target permanent becomes a Zerg creature with base power and toughness 3/3 in addition to its other types.
-            if (!permanent.isCreature()) {
-                permanent.addCardType(CardType.CREATURE);
-            }
-            if (!permanent.hasSubtype(SubType.ZERG, game)) {
-                permanent.getSubtype(game).add(SubType.ZERG);
-            }
-            permanent.getPower().modifyBaseValue(3);
-            permanent.getToughness().modifyBaseValue(3);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public KerriganQueenOfBladesFirstEffect copy() {
-        return new KerriganQueenOfBladesFirstEffect(this);
     }
 }

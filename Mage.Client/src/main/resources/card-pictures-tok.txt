@@ -73,6 +73,7 @@
 |Generate|EMBLEM!:ORI|Emblem Liliana|||LilianaDefiantNecromancerEmblem|
 |Generate|EMBLEM!:SOI|Emblem Arlinn|||ArlinnEmbracedByTheMoonEmblem|
 |Generate|EMBLEM!:SOI|Emblem Jace|||JaceUnravelerOfSecretsEmblem|
+|Generate|EMBLEM!:DDSC|Emblem Zeratul|||ZeratulNezarimPrelateEmblem|
 |Generate|EMBLEM:THS|Elspeth, Suns Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
 |Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
@@ -1181,3 +1182,6 @@
 |Generate|TOK:ZEN|Vampire||
 |Generate|TOK:ZEN|Wolf|||WolfToken|
 |Generate|TOK:ZEN|Zombie Giant|||QuestForTheGravelordZombieToken|
+|Generate|TOK:DDSC|Protoss|||ProtossToken|
+|Generate|TOK:DDSC|Terran Soldier|||TerranSoldierToken|
+|Generate|TOK:DDSC|Zerg|||ZergToken|

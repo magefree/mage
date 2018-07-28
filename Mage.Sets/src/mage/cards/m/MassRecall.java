@@ -1,22 +1,36 @@
 package mage.cards.m;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.DiscardXTargetCost;
+import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -30,7 +44,9 @@ public final class MassRecall extends CardImpl {
         
 
         // As an additional cost to cast Mass Recall, return X permanents you control to their owner's hands.
-        this.getSpellAbility().addCost(new ReturnToHandXTargetCost());
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new MassRecallRuleEffect());
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
         // Draw X cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new ManacostVariableValue()));
@@ -49,49 +65,89 @@ public final class MassRecall extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             int xValue = ability.getManaCostsToPay().getX();
-            Target target = new TargetControlledPermanent(xValue, xValue,
-                    new FilterControlledPermanent(xValue + " target controlled permanent(s)"), false);
-            ability.getTargets().clear();
-            ability.getTargets().add(target);
+            if(xValue > 0) {
+                ability.addCost(new ReturnToHandFromBattlefieldTargetCost(
+                        new TargetControlledPermanent(xValue, xValue,
+                                new FilterControlledPermanent(xValue + " target controlled permanent(s)"), false)));
+            }
         }
     }
 }
 
-class ReturnToHandXTargetCost extends CostImpl {
+class MassRecallRuleEffect extends OneShotEffect {
 
-    public ReturnToHandXTargetCost() {
-        this.text = "return X permanents you control to their owner's hands";
+    public MassRecallRuleEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "As an additional cost to cast {this}, return X permanents you control to their owner's hands";
     }
 
-    public ReturnToHandXTargetCost(ReturnToHandXTargetCost cost) {
+    public MassRecallRuleEffect(final MassRecallRuleEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MassRecallRuleEffect copy() {
+        return new MassRecallRuleEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+}
+
+// From DiscardTargetCost and ReturnToHandFromBattlefieldSourceCost
+class ReturnToHandFromBattlefieldTargetCost extends CostImpl {
+
+    List<Permanent> permanents = new ArrayList<>();
+
+    public ReturnToHandFromBattlefieldTargetCost(TargetPermanent target) {
+        this.addTarget(target);
+        this.text = "return " + target.getTargetName() + " to its owner's hand";
+    }
+
+    public ReturnToHandFromBattlefieldTargetCost(ReturnToHandFromBattlefieldTargetCost cost) {
         super(cost);
+        this.permanents.addAll(cost.permanents);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+        this.permanents.clear();
+        this.targets.clearChosen();
         Player controller = game.getPlayer(controllerId);
-        if(controller == null) {
+        if (controller == null) {
             return false;
         }
-
-        for (Target target : ability.getTargets()) {
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent == null) {
-                return false;
+        int amount = this.getTargets().get(0).getNumberOfTargets();
+        if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
+            for (UUID targetId : targets.get(0).getTargets()) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent == null) {
+                    return false;
+                }
+                controller.moveCards(permanent, Zone.HAND, ability, game);
+                this.permanents.add(permanent);
             }
-            controller.moveCards(permanent, Zone.HAND, ability, game);
         }
+        paid = (permanents.size() >= amount);
+        return paid;
+    }
 
-        return true;
+    @Override
+    public void clearPaid() {
+        super.clearPaid();
+        this.permanents.clear();
+        this.targets.clearChosen();
     }
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return ability.getTargets().canChoose(sourceId, controllerId, game);
+        return targets.canChoose(sourceId, controllerId, game);
     }
 
     @Override
-    public ReturnToHandXTargetCost copy() {
-        return new ReturnToHandXTargetCost(this);
+    public ReturnToHandFromBattlefieldTargetCost copy() {
+        return new ReturnToHandFromBattlefieldTargetCost(this);
     }
 }

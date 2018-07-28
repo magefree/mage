@@ -32,7 +32,7 @@ import mage.util.CardUtil;
  */
 public final class ZeratulNezarimPrelate extends CardImpl {
 
-    public static final String EXILE_KEY = "Zeratul, Nezarim Prelate Exile";
+    public static final String EXILE_KEY = "Zeratul, Nezarim Prelate";
 
     public ZeratulNezarimPrelate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
@@ -52,7 +52,7 @@ public final class ZeratulNezarimPrelate extends CardImpl {
         this.addAbility(ability);
 
         // -7: Exile all other nonland permanents. You gain an emblem with "You may play cards exiled with Zeratul, Nezarim Prelate."
-        ability = new LoyaltyAbility(new ZeratulNezarimPrelateThirdEffect(), -5);
+        ability = new LoyaltyAbility(new ZeratulNezarimPrelateThirdEffect(), -7);
         ability.addEffect(new GetEmblemEffect(new ZeratulNezarimPrelateEmblem()));
         this.addAbility(ability);
     }
@@ -158,14 +158,10 @@ class ZeratulNezarimPrelateThirdEffect extends OneShotEffect {
             FilterNonlandPermanent filter = new FilterNonlandPermanent();
             filter.add(Predicates.not(new CardIdPredicate(sourcePermanent.getId())));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-            Cards toExile = new CardsImpl();
-            for (Permanent permanent : permanents) {
-                if(permanent != null) {
-                    toExile.add(permanent);
-                }
-            }
             UUID exileId = CardUtil.getExileZoneId(ZeratulNezarimPrelate.EXILE_KEY, game);
-            controller.moveCardsToExile(toExile.getCards(game), source, game, false, exileId, CardUtil.createObjectRealtedWindowTitle(source, game, null));
+            for (Permanent permanent : permanents) {
+                controller.moveCardsToExile(permanent, source, game, false, exileId, CardUtil.createObjectRealtedWindowTitle(source, game, null));
+            }
             return true;
         }
         return false;

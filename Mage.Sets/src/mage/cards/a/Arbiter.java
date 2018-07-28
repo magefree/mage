@@ -41,7 +41,7 @@ public final class Arbiter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Arbitor enters the battlefield, return another target permanent you control and target permanent you don't control to their owners' hands.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(true)
                 .setText("return another target permanent you control and target permanent you don't control to their owners' hands"));
         ability.addTarget(new TargetControlledPermanent(filter));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT));

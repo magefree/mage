@@ -24,6 +24,7 @@ public enum GrabbagImageSource implements CardImageSource {
         {
             add("PTC");
             add("SWS");
+            add("DDSC");
         }
     };
 
@@ -372,6 +373,149 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Royal Guard", "9tqE8vL.png");
         singleLinks.put("SWS/Tusken Raider", "gPMiSmP.png");
         singleLinks.put("SWS/Droid", "4PRrWFF.png");
+
+        // Duel Decks: StarCraft
+        singleLinks.put("DDSC/Aggressive Mutation", "PQxO3eL.jpg");
+        singleLinks.put("DDSC/Baneling", "BAmTZI6.jpg");
+        singleLinks.put("DDSC/Brood Lord", "BuDGuJv.jpg");
+        singleLinks.put("DDSC/Changeling", "No69iVp.jpg");
+        singleLinks.put("DDSC/Consume", "sV52eeO.jpg");
+        singleLinks.put("DDSC/Contaminate", "z9YK5mS.jpg");
+        singleLinks.put("DDSC/Corruptor", "nYCuDmF.jpg");
+        singleLinks.put("DDSC/Creep Colony", "pJFYnnM.jpg");
+        singleLinks.put("DDSC/Dark Swarm", "XBXV1ws.jpg");
+        singleLinks.put("DDSC/Defiler", "2bSFc3B.jpg");
+        singleLinks.put("DDSC/Drone", "D6HPGl3.jpg");
+        singleLinks.put("DDSC/Evolution Chamber", "rGk08gP.jpg");
+        singleLinks.put("DDSC/Forest-a", "GG87THT.jpg");
+        singleLinks.put("DDSC/Forest-b", "Vk9fy1d.jpg");
+        singleLinks.put("DDSC/Forest-c", "bmvdFpy.jpg");
+        singleLinks.put("DDSC/Forest-d", "cOEslyA.jpg");
+        singleLinks.put("DDSC/Gamete Meiosis", "bIn7NdG.jpg");
+        singleLinks.put("DDSC/Hive Cluster", "5CFZef8.jpg");
+        singleLinks.put("DDSC/Hydralisk", "M4EMhwP.jpg");
+        singleLinks.put("DDSC/Infested Terran", "IKkM9uR.jpg");
+        singleLinks.put("DDSC/Infestor", "0BvPwPv.jpg");
+        singleLinks.put("DDSC/Kerrigan, Queen of Blades", "CWve1XR.jpg");
+        singleLinks.put("DDSC/Larva", "6TDAq0L.jpg");
+        singleLinks.put("DDSC/Metabolic Boost", "xHg5zto.jpg");
+        singleLinks.put("DDSC/Mutalisk", "VROPdgH.jpg");
+        singleLinks.put("DDSC/Nydus Network", "z09rjCo.jpg");
+        singleLinks.put("DDSC/Nydus Worm", "e4GPq4a.jpg");
+        singleLinks.put("DDSC/Overlord", "TyJ79Op.jpg");
+        singleLinks.put("DDSC/Parasite", "Qa29BZ6.jpg");
+        singleLinks.put("DDSC/Queen", "vyxpuHX.jpg");
+        singleLinks.put("DDSC/Roach", "XM6UZKc.jpg");
+        singleLinks.put("DDSC/Scourge", "46f6fwI.jpg");
+        singleLinks.put("DDSC/Spawn Broodling", "XyfsyrW.jpg");
+        singleLinks.put("DDSC/Spore Crawler", "9bQk32j.jpg");
+        singleLinks.put("DDSC/Swamp-a", "0OTWXTN.jpg");
+        singleLinks.put("DDSC/Swamp-b", "R7DgDYd.jpg");
+        singleLinks.put("DDSC/Swamp-c", "bWzi309.jpg");
+        singleLinks.put("DDSC/Swarm Host", "K8Ic7Pa.jpg");
+        singleLinks.put("DDSC/Ultralisk", "EbxD3Lw.jpg");
+        singleLinks.put("DDSC/Unburrow", "eY3gzVL.jpg");
+        singleLinks.put("DDSC/Viper", "bQ3tI0m.jpg");
+        singleLinks.put("DDSC/Volatile Burst", "0G7W0Vg.jpg");
+        singleLinks.put("DDSC/Zerg Egg", "ZFMVs4u.jpg");
+        singleLinks.put("DDSC/Zerg Lurker", "JjqLERW.jpg");
+        singleLinks.put("DDSC/Zergling", "Tti5XjV.jpg");
+        singleLinks.put("DDSC/Auto-Turret", "myKuM1r.jpg");
+        singleLinks.put("DDSC/Battlecruiser", "dV8iqZS.jpg");
+        singleLinks.put("DDSC/Bunker", "yTWGZEc.jpg");
+        singleLinks.put("DDSC/Calldown", "2y88QyC.jpg");
+        singleLinks.put("DDSC/Command Center", "uhS8XdY.jpg");
+        singleLinks.put("DDSC/Covert Ops", "VWPa6Cx.jpg");
+        singleLinks.put("DDSC/Defense Matrix", "gCpaNQa.jpg");
+        singleLinks.put("DDSC/EMP Round", "QVQuzf1.jpg");
+        singleLinks.put("DDSC/Firebat", "I7GfoED.jpg");
+        singleLinks.put("DDSC/Gauss Rifle", "NMwZuJ1.jpg");
+        singleLinks.put("DDSC/Ghost Academy", "9eEkHYw.jpg");
+        singleLinks.put("DDSC/Ghost", "byYwmDR.jpg");
+        singleLinks.put("DDSC/Hellbat", "u2bDlW7.jpg");
+        singleLinks.put("DDSC/Hellion", "3Cnxjfi.jpg");
+        singleLinks.put("DDSC/Irradiation", "V4hqDqO.jpg");
+        singleLinks.put("DDSC/Liftoff", "VAI9Gqf.jpg");
+        singleLinks.put("DDSC/Lockdown", "osZq2Th.jpg");
+        singleLinks.put("DDSC/Marauder", "amKHHXg.jpg");
+        singleLinks.put("DDSC/Marine", "ozAc6pG.jpg");
+        singleLinks.put("DDSC/Medic", "TR92u3w.jpg");
+        singleLinks.put("DDSC/Mountain-a", "bh9c1Xf.jpg");
+        singleLinks.put("DDSC/Mountain-b", "PEll2a4.jpg");
+        singleLinks.put("DDSC/Mountain-c", "WKRB3nn.jpg");
+        singleLinks.put("DDSC/Mountain-d", "5MjHURX.jpg");
+        singleLinks.put("DDSC/Nuclear Strike", "pPcwv1O.jpg");
+        singleLinks.put("DDSC/Plains-a", "sIFYF0Y.jpg");
+        singleLinks.put("DDSC/Plains-b", "bJQ4YdD.jpg");
+        singleLinks.put("DDSC/Plains-c", "YBjD4xd.jpg");
+        singleLinks.put("DDSC/Raven", "Q8ROLtP.jpg");
+        singleLinks.put("DDSC/Raynor, Rebel Commander", "WDg3G5k.jpg");
+        singleLinks.put("DDSC/Reaper", "fmGf0Xw.jpg");
+        singleLinks.put("DDSC/Repair", "X5qj8MQ.jpg");
+        singleLinks.put("DDSC/Scanner Sweep", "vdYRLwJ.jpg");
+        singleLinks.put("DDSC/SCV", "s0DirXH.jpg");
+        singleLinks.put("DDSC/Siege Tank", "azwzFiu.jpg");
+        singleLinks.put("DDSC/Stimpack", "BhwPDh4.jpg");
+        singleLinks.put("DDSC/Strike Cannon", "0wlKiEN.jpg");
+        singleLinks.put("DDSC/Supply Depot", "FGbjWF8.jpg");
+        singleLinks.put("DDSC/Terran Banshee", "aSY3vB3.jpg");
+        singleLinks.put("DDSC/Thor", "GxG0342.jpg");
+        singleLinks.put("DDSC/Viking", "buB9dT3.jpg");
+        singleLinks.put("DDSC/Vulture", "yLIbwwn.jpg");
+        singleLinks.put("DDSC/Widow Mine", "W0oXqxW.jpg");
+        singleLinks.put("DDSC/Wraith", "mGnXIJt.jpg");
+        singleLinks.put("DDSC/Arbiter", "b0d0d56.jpg");
+        singleLinks.put("DDSC/Archon", "KZI5hjy.jpg");
+        singleLinks.put("DDSC/Carrier", "UXium2U.jpg");
+        singleLinks.put("DDSC/Chrono Boost", "j0ei7KF.jpg");
+        singleLinks.put("DDSC/Corsair", "sojXtp3.jpg");
+        singleLinks.put("DDSC/Dark Templar", "SjwmjUv.jpg");
+        singleLinks.put("DDSC/Disruption Web", "GbSTfD1.jpg");
+        singleLinks.put("DDSC/Disruptor", "HmbM3gu.jpg");
+        singleLinks.put("DDSC/Dragoon", "rIsZH5w.jpg");
+        singleLinks.put("DDSC/Envision", "AtSrrza.jpg");
+        singleLinks.put("DDSC/Force Field", "DjzG7Ia.jpg");
+        singleLinks.put("DDSC/Hallucination", "2dcbZuo.jpg");
+        singleLinks.put("DDSC/High Templar", "8GhZML6.jpg");
+        singleLinks.put("DDSC/Immortal", "MdYxWvF.jpg");
+        singleLinks.put("DDSC/Island-a", "F0NUqFT.jpg");
+        singleLinks.put("DDSC/Island-b", "sSH04Ly.jpg");
+        singleLinks.put("DDSC/Island-c", "LUypLo3.jpg");
+        singleLinks.put("DDSC/Island-d", "ta3UEbT.jpg");
+        singleLinks.put("DDSC/Mass Recall", "wWTROHY.jpg");
+        singleLinks.put("DDSC/Mind Control", "pF7Vb31.jpg");
+        singleLinks.put("DDSC/Mothership", "ApxDV9w.jpg");
+        singleLinks.put("DDSC/Nexus", "Hi4nTR2.jpg");
+        singleLinks.put("DDSC/Observatory", "8u8pk5e.jpg");
+        singleLinks.put("DDSC/Photon Overcharge", "JTXanSD.jpg");
+        singleLinks.put("DDSC/Plains-d", "FPtBSMw.jpg");
+        singleLinks.put("DDSC/Plains-e", "WqWvLl1.jpg");
+        singleLinks.put("DDSC/Plains-f", "jLygP1t.jpg");
+        singleLinks.put("DDSC/Protoss Probe", "Xf83L01.jpg");
+        singleLinks.put("DDSC/Psionic Feedback", "PNxAmfI.jpg");
+        singleLinks.put("DDSC/Psionic Storm", "UhdAzje.jpg");
+        singleLinks.put("DDSC/Pylon", "wcNWmKb.jpg");
+        singleLinks.put("DDSC/Reaver", "ulcDJlj.jpg");
+        singleLinks.put("DDSC/Recharge", "n7fSE82.jpg");
+        singleLinks.put("DDSC/Sensor Array", "45YagzO.jpg");
+        singleLinks.put("DDSC/Sentry", "4none6Y.jpg");
+        singleLinks.put("DDSC/Stalker", "sBuWOOo.jpg");
+        singleLinks.put("DDSC/Stasis Ward", "GVEJoRe.jpg");
+        singleLinks.put("DDSC/Templar Archives", "BzZWxFS.jpg");
+        singleLinks.put("DDSC/Void Ray", "W1n4lJ6.jpg");
+        singleLinks.put("DDSC/Vortex", "d3VAL3L.jpg");
+        singleLinks.put("DDSC/Warp Gate", "u6cBL4C.jpg");
+        singleLinks.put("DDSC/Warp Prism", "nyTMa9O.jpg");
+        singleLinks.put("DDSC/Zealot", "yemVJoK.jpg");
+        singleLinks.put("DDSC/Zeratul, Nezarim Prelate", "7Fv5A2J.jpg");
+        singleLinks.put("DDSC/Mineral Field", "r8nIBdG.jpg");
+
+        // Emblems
+        singleLinks.put("DDSC/Emblem Zeratul", "B9ybuPh.png");
+        // Tokens
+        singleLinks.put("DDSC/Zerg", "uAkstaB.jpg");
+        singleLinks.put("DDSC/Terran Soldier", "pCMSeMJ.jpg");
+        singleLinks.put("DDSC/Protoss", "3GrmY63.jpg");
     }
 
     @Override
@@ -403,7 +547,7 @@ public enum GrabbagImageSource implements CardImageSource {
     private String getSourceName(CardDownloadData card, String httpImageUrl) {
         if (card.getSet().equals("MTG")) {
             return "http://static.starcitygames.com/sales/cardscans/";
-        } else if (card.getSet().equals("SWS")) {
+        } else if (card.getSet().equals("SWS") || card.getSet().equals("DDSC")) {
             return "http://i.imgur.com/";
         } else {
             return "http://magiccards.info/scans/en/";

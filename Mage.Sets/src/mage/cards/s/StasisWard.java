@@ -1,25 +1,31 @@
 package mage.cards.s;
 
-import java.util.UUID;
+import java.util.*;
 
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FlashAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.ZoneChangeInfo;
+import mage.game.ZonesHandler;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.SpellStack;
+import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
@@ -39,7 +45,10 @@ public final class StasisWard extends CardImpl {
         // When Stasis Ward enters the battlefield, counter target spell. If that spell is countered this way, exile that card until Stasis Ward leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new StasisWardCounterEffect());
         ability.addTarget(new TargetSpell());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new StasisWardReturnExiledCardAbility()));
+        this.addAbility(ability);
+
+        ability = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.GRAVEYARD), false);
+        ability.setRuleVisible(false);
         this.addAbility(ability);
     }
 
@@ -73,79 +82,19 @@ class StasisWardCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.EXILED, false, ZoneDetail.NONE)) {
-                return controller.moveCardsToExile(card, source, game, false, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), "Stasis Ward Exile");
+            Set<Card> cardsToExile = new HashSet<>();
+            for (Target target : source.getTargets()) {
+                UUID targetId = target.getFirstTarget();
+                Spell spell = game.getSpell(targetId);
+                if (spell != null) {
+                    Card card = spell.getCard();
+                    if(card != null && game.getStack().counter(card.getId(), source.getSourceId(), game, Zone.EXILED, false, ZoneDetail.NONE)) {
+                        cardsToExile.add(card);
+                    }
+                }
             }
-        }
-        return false;
-    }
-}
-
-
-// From KitesailFreebooterReturnExiledCardAbility
-class StasisWardReturnExiledCardAbility extends DelayedTriggeredAbility {
-
-    public StasisWardReturnExiledCardAbility() {
-        super(new StasisWardReturnExiledCardEffect(), Duration.OneUse);
-        this.usesStack = false;
-        this.setRuleVisible(false);
-    }
-
-    public StasisWardReturnExiledCardAbility(final StasisWardReturnExiledCardAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if(event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if(zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public StasisWardReturnExiledCardAbility copy() {
-        return new StasisWardReturnExiledCardAbility(this);
-    }
-}
-
-// Modified KitesailFreebooterReturnExiledCardEffect to send card to graveyard, as the spell was already cast and countered
-class StasisWardReturnExiledCardEffect extends OneShotEffect {
-
-    public StasisWardReturnExiledCardEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Return exiled card from exile";
-    }
-
-    public StasisWardReturnExiledCardEffect(final StasisWardReturnExiledCardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StasisWardReturnExiledCardEffect copy() {
-        return new StasisWardReturnExiledCardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null && controller != null) {
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (exile != null && sourcePermanent != null) {
-                controller.moveCards(exile, Zone.GRAVEYARD, source, game);
-                return true;
-            }
+            return controller.moveCardsToExile(cardsToExile, source, game, false,
+                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), "Stasis Ward");
         }
         return false;
     }

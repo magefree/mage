@@ -82,7 +82,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         TOKENS("2. tokens.mtg.onl - high quality TOKENS", TokensMtgImageSource.instance),
         SCRYFALL("3. scryfall.com - high quality CARDS, multi-language", ScryfallImageSource.instance),
         MAGIDEX("4. magidex.com - high quality CARDS", MagidexImageSource.instance),
-        GRAB_BAG("5. GrabBag - STAR WARS cards and tokens", GrabbagImageSource.instance),
+        GRAB_BAG("5. GrabBag - STAR WARS & STARCRAFT cards and tokens", GrabbagImageSource.instance),
         MYTHICSPOILER("6. mythicspoiler.com", MythicspoilerComSource.instance),
         ALTERNATIVE("7. alternative.mtg.onl", AltMtgOnlTokensImageSource.instance),
         COPYPASTE("8. Copy and Paste Image URLs", CopyPasteImageSource.instance);

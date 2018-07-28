@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public class ZeratulNezarimPrelateEmblem extends Emblem {
 
-    public static final String EXILE_KEY = "Zeratul, Nezarim Prelate Exile";
+    public static final String EXILE_KEY = "Zeratul, Nezarim Prelate";
 
     public ZeratulNezarimPrelateEmblem() {
         this.setName("Emblem Zeratul");

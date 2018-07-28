@@ -70,24 +70,22 @@ class NuclearStrikeEffect extends SacrificeSourceEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        sacrificed = super.apply(game, source);
-        if (sacrificed) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if(enchantment != null) {
-                Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-                if(enchanted != null) {
-                    int cmc = enchanted.getConvertedManaCost();
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if(enchantment != null) {
+            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+            sacrificed = super.apply(game, source);
+            if(enchanted != null && sacrificed) {
+                int cmc = enchanted.getConvertedManaCost();
 
-                    // destroy enchanted permanent
-                    enchanted.destroy(source.getSourceId(), game, false);
+                // destroy enchanted permanent
+                enchanted.destroy(source.getSourceId(), game, false);
 
-                    // each other nonland permanent with the same converted mana cost
-                    FilterNonlandPermanent filter = new FilterNonlandPermanent();
-                    filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
-                        if(permanent != null && permanent != enchanted) {
-                            permanent.destroy(source.getSourceId(), game, false);
-                        }
+                // each other nonland permanent with the same converted mana cost
+                FilterNonlandPermanent filter = new FilterNonlandPermanent();
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                    if(permanent != null && permanent != enchanted) {
+                        permanent.destroy(source.getSourceId(), game, false);
                     }
                 }
             }

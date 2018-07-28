@@ -3,9 +3,15 @@ package mage.cards.i;
 import java.util.UUID;
 
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.EquippedHasSubtypeCondition;
+import mage.abilities.condition.common.EquippedHasSupertypeCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -16,6 +22,7 @@ import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.util.SubTypeList;
 
 /**
  *
@@ -36,7 +43,15 @@ public final class Irradiation extends CardImpl {
         this.addAbility(ability);
 
         // If enchanted creature is an artifact, it gets +2/+0. Otherwise, it gets +2/-2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IrradiationEffect()));
+        Condition condition = new EquippedHasTypeCondition(CardType.ARTIFACT);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostEquippedEffect(2, 0),
+                condition,
+                "If enchanted creature is an artifact, it gets +2/+0")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostEquippedEffect(2, -2),
+                new InvertCondition(condition),
+                "Otherwise, it gets +2/-2")));
     }
 
     public Irradiation(final Irradiation card) {
@@ -49,35 +64,26 @@ public final class Irradiation extends CardImpl {
     }
 }
 
-class IrradiationEffect extends ContinuousEffectImpl {
+class EquippedHasTypeCondition implements Condition {
 
-    public IrradiationEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "If enchanted creature is an artifact, it gets +2/+0. Otherwise, it gets +2/-2";
-    }
+    private CardType type;
 
-    public IrradiationEffect(final IrradiationEffect effect) {
-        super(effect);
+    public EquippedHasTypeCondition(CardType type){
+        this.type = type;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if(enchantment != null) {
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if(enchanted != null) {
-                enchanted.addPower(2);
-                if(!enchanted.isArtifact()) {
-                    enchanted.addToughness(-2);
-                }
-                return true;
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        if (permanent != null && permanent.getAttachedTo() != null) {
+            Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
+            if (attachedTo == null) {
+                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
+            }
+            if (attachedTo != null) {
+                return attachedTo.getCardType().contains(type);
             }
         }
         return false;
-    }
-
-    @Override
-    public IrradiationEffect copy() {
-        return new IrradiationEffect(this);
     }
 }
