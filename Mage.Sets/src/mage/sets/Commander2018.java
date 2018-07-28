@@ -133,6 +133,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Grisly Salvage", 182, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Ground Seal", 149, Rarity.RARE, mage.cards.g.GroundSeal.class));
         cards.add(new SetCardInfo("Gruul Turf", 252, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
+        cards.add(new SetCardInfo("Gyrus, Waker of Corpses", 41, Rarity.MYTHIC, mage.cards.g.GyrusWakerOfCorpses.class));
         cards.add(new SetCardInfo("Halimar Depths", 253, Rarity.COMMON, mage.cards.h.HalimarDepths.class));
         cards.add(new SetCardInfo("Harrow", 150, Rarity.COMMON, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("Haunted Fengraf", 254, Rarity.COMMON, mage.cards.h.HauntedFengraf.class));
