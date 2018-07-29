@@ -195,6 +195,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Mulldrifter", 94, Rarity.UNCOMMON, mage.cards.m.Mulldrifter.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 212, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
         cards.add(new SetCardInfo("Myriad Landscape", 269, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
+        cards.add(new SetCardInfo("Myth Unbound", 32, Rarity.RARE, mage.cards.m.MythUnbound.class));
         cards.add(new SetCardInfo("Nesting Dragon", 24, Rarity.RARE, mage.cards.n.NestingDragon.class));
         cards.add(new SetCardInfo("New Benalia", 270, Rarity.UNCOMMON, mage.cards.n.NewBenalia.class));
         cards.add(new SetCardInfo("Night Incarnate", 17, Rarity.RARE, mage.cards.n.NightIncarnate.class));
