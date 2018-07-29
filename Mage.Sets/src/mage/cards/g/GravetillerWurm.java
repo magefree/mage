@@ -28,7 +28,7 @@ public final class GravetillerWurm extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.addAbility(TrampleAbility.getInstance());
-        // Morbid - Gravetiller Wurm enters the battlefield with four +1/+1 counters on it if a creature died this turn.
+        // <i>Morbid</i> &mdash; Gravetiller Wurm enters the battlefield with four +1/+1 counters on it if a creature died this turn.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)),
                 MorbidCondition.instance, ""), "with four +1/+1 counters on it if a creature died this turn"));
     }

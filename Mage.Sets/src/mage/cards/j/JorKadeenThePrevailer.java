@@ -23,7 +23,7 @@ import mage.filter.StaticFilters;
  */
 public final class JorKadeenThePrevailer extends CardImpl {
 
-    private static final String effectText = "Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.";
+    private static final String effectText = "<i>Metalcraft</i> &mdash; Creatures you control get +3/+0 as long as you control three or more artifacts.";
 
     public JorKadeenThePrevailer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
@@ -37,7 +37,7 @@ public final class JorKadeenThePrevailer extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
+        // <i>Metalcraft</i> &mdash; Creatures you control get +3/+0 as long as you control three or more artifacts.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false),
                 MetalcraftCondition.instance, effectText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

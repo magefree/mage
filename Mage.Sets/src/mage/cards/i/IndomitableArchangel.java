@@ -25,7 +25,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public final class IndomitableArchangel extends CardImpl {
 
-    private static final String rule = "Metalcraft - Artifacts you control have shroud as long as you control three or more artifacts.";
+    private static final String rule = "<i>Metalcraft</i> &mdash; Artifacts you control have shroud as long as you control three or more artifacts.";
 
     private static final FilterPermanent filter = new FilterPermanent("Artifacts");
 
