@@ -69,6 +69,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Sphere", 200, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Consign to Dust", 136, Rarity.UNCOMMON, mage.cards.c.ConsignToDust.class));
         cards.add(new SetCardInfo("Conundrum Sphinx", 84, Rarity.RARE, mage.cards.c.ConundrumSphinx.class));
+        cards.add(new SetCardInfo("Coveted Jewel", 54, Rarity.RARE, mage.cards.c.CovetedJewel.class));
         cards.add(new SetCardInfo("Crash of Rhino Beetles", 29, Rarity.RARE, mage.cards.c.CrashOfRhinoBeetles.class));
         cards.add(new SetCardInfo("Creeping Renaissance", 137, Rarity.RARE, mage.cards.c.CreepingRenaissance.class));
         cards.add(new SetCardInfo("Crib Swap", 65, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
