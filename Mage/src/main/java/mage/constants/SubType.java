@@ -131,6 +131,7 @@ public enum SubType {
     EWOK("Ewok", SubTypeSet.CreatureType, true), // Star Wars
     // F
     FAERIE("Faerie", SubTypeSet.CreatureType),
+    FARMER("Farmer", SubTypeSet.CreatureType),
     FERRET("Ferret", SubTypeSet.CreatureType),
     FISH("Fish", SubTypeSet.CreatureType),
     FLAGBEARER("Flagbearer", SubTypeSet.CreatureType),
@@ -375,6 +376,7 @@ public enum SubType {
     DOOKU("Dooku", SubTypeSet.PlaneswalkerType, true), // Star Wars
     DOVIN("Dovin", SubTypeSet.PlaneswalkerType),
     ELSPETH("Elspeth", SubTypeSet.PlaneswalkerType),
+    FARAJO("Farajo", SubTypeSet.PlaneswalkerType),
     FREYALISE("Freyalise", SubTypeSet.PlaneswalkerType),
     GARRUK("Garruk", SubTypeSet.PlaneswalkerType),
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType),
