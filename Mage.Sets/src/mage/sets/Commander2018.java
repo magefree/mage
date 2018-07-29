@@ -215,6 +215,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Ponder", 96, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Portent", 97, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Predict", 98, Rarity.UNCOMMON, mage.cards.p.Predict.class));
+        cards.add(new SetCardInfo("Primordial Mist", 12, Rarity.RARE, mage.cards.p.PrimordialMist.class));
         cards.add(new SetCardInfo("Prismatic Lens", 215, Rarity.UNCOMMON, mage.cards.p.PrismaticLens.class));
         cards.add(new SetCardInfo("Prototype Portal", 216, Rarity.RARE, mage.cards.p.PrototypePortal.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 217, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
