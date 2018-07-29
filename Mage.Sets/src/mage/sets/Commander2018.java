@@ -71,6 +71,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Delver", 115, Rarity.RARE, mage.cards.p.PhyrexianDelver.class));
         cards.add(new SetCardInfo("Portent", 97, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Predict", 98, Rarity.UNCOMMON, mage.cards.p.Predict.class));
+        cards.add(new SetCardInfo("Primordial Mist", 12, Rarity.RARE, mage.cards.p.PrimordialMist.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 158, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Ravenous Slime", 34, Rarity.RARE, mage.cards.r.RavenousSlime.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 57, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
