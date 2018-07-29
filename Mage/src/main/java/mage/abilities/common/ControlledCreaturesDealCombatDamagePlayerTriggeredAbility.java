@@ -69,11 +69,8 @@ public class ControlledCreaturesDealCombatDamagePlayerTriggeredAbility extends T
                 return true;
             }
         }
-        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRIORITY) {
-            damagedPlayerIds.clear();
-            return false;
-        }
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId())) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRIORITY ||
+                (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId()))) {
             damagedPlayerIds.clear();
         }
         return false;
