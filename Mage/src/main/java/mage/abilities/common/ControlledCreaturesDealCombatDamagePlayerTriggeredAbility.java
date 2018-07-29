@@ -62,7 +62,7 @@ public class ControlledCreaturesDealCombatDamagePlayerTriggeredAbility extends T
             if (damageEvent.isCombatDamage() && p != null && p.isControlledBy(this.getControllerId()) && !damagedPlayerIds.contains(event.getPlayerId())) {
                 damagedPlayerIds.add(event.getPlayerId());
                 if (setTargetPointer) {
-                    for (Effect effect : this.getAllEffects()) {
+                    for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                 }
