@@ -107,6 +107,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Epic Proportions", 142, Rarity.RARE, mage.cards.e.EpicProportions.class));
         cards.add(new SetCardInfo("Esper Charm", 179, Rarity.UNCOMMON, mage.cards.e.EsperCharm.class));
         cards.add(new SetCardInfo("Estrid's Invocation", 8, Rarity.RARE, mage.cards.e.EstridsInvocation.class));
+        cards.add(new SetCardInfo("Estrid, the Masked", 40, Rarity.MYTHIC, mage.cards.e.EstridTheMasked.class));
         cards.add(new SetCardInfo("Etherium Sculptor", 90, Rarity.COMMON, mage.cards.e.EtheriumSculptor.class));
         cards.add(new SetCardInfo("Ever-Watching Threshold", 9, Rarity.RARE, mage.cards.e.EverWatchingThreshold.class));
         cards.add(new SetCardInfo("Evolving Wilds", 245, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
