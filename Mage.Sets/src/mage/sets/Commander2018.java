@@ -293,6 +293,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Expanse", 289, Rarity.UNCOMMON, mage.cards.t.TranquilExpanse.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 290, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Treasure Hunt", 109, Rarity.COMMON, mage.cards.t.TreasureHunt.class));
+        cards.add(new SetCardInfo("Treasure Nabber", 27, Rarity.RARE, mage.cards.t.TreasureNabber.class));
         cards.add(new SetCardInfo("Turntimber Sower", 35, Rarity.RARE, mage.cards.t.TurntimberSower.class));
         cards.add(new SetCardInfo("Tuvasa the Sunlit", 47, Rarity.MYTHIC, mage.cards.t.TuvasaTheSunlit.class));
         cards.add(new SetCardInfo("Unflinching Courage", 192, Rarity.UNCOMMON, mage.cards.u.UnflinchingCourage.class));
