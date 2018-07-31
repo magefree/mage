@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class KeeperOfKeys extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
 
         // At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn.
-        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new CantBeBlockedAllEffect(new FilterControlledCreaturePermanent("creatures you control"), Duration.EndOfTurn),
                 TargetController.YOU, false), MonarchIsSourceControllerCondition.instance,
                 "At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn."));

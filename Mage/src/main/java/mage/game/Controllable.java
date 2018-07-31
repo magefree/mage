@@ -10,4 +10,8 @@ import java.util.UUID;
 public interface Controllable {
     UUID getControllerId();
     UUID getId();
+
+    default boolean isControlledBy(UUID controllerID){
+        return getControllerId().equals(controllerID);
+    }
 }

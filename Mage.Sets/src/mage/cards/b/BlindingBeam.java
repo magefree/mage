@@ -118,7 +118,7 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
     public boolean isInactive(Ability source, Game game) {
         // the PRE step part is directly after the UNTAP events for permanents
         if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE) {
-            if (game.getActivePlayerId().equals(targetPlayerId) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
+            if (game.isActivePlayer(targetPlayerId) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
                 return true;
             }
         }
@@ -135,7 +135,7 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
         // prevent untap event of creatures of target player
         if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(targetPlayerId) && filter.match(permanent, game)) {
+            if (permanent != null && permanent.isControlledBy(targetPlayerId) && filter.match(permanent, game)) {
                 return true;
             }
         }

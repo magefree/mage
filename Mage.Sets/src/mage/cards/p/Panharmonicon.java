@@ -66,7 +66,7 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
         if (event instanceof NumberOfTriggersEvent) {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
             // Only triggers of the controller of Panharmonicon
-            if (source.getControllerId().equals(event.getPlayerId())) {
+            if (source.isControlledBy(event.getPlayerId())) {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // Only EtB triggers
                 if (sourceEvent != null

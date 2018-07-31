@@ -375,6 +375,7 @@ public enum SubType {
     DOOKU("Dooku", SubTypeSet.PlaneswalkerType, true), // Star Wars
     DOVIN("Dovin", SubTypeSet.PlaneswalkerType),
     ELSPETH("Elspeth", SubTypeSet.PlaneswalkerType),
+    ESTRID("Estrid", SubTypeSet.PlaneswalkerType),
     FREYALISE("Freyalise", SubTypeSet.PlaneswalkerType),
     GARRUK("Garruk", SubTypeSet.PlaneswalkerType),
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType),
@@ -406,6 +407,7 @@ public enum SubType {
     VIVIEN("Vivien", SubTypeSet.PlaneswalkerType),
     VRASKA("Vraska", SubTypeSet.PlaneswalkerType),
     WILL("Will", SubTypeSet.PlaneswalkerType),
+    WINDGRACE("Windgrace", SubTypeSet.PlaneswalkerType),
     XENAGOS("Xenagos", SubTypeSet.PlaneswalkerType),
     YANGGU("Yanggu", SubTypeSet.PlaneswalkerType),
     YANLING("Yanling", SubTypeSet.PlaneswalkerType),
@@ -460,6 +462,16 @@ public enum SubType {
 
     public SubTypeSet getSubTypeSet() {
         return subTypeSet;
+    }
+
+    public static Set<SubType> getArtifactTypes(boolean withCustomSets) {
+        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
+        for (SubType subType : values()) {
+            if (subType.getSubTypeSet() == SubTypeSet.ArtifactType && (withCustomSets || !subType.customSet)) {
+                subTypes.add(subType);
+            }
+        }
+        return subTypes;
     }
 
     public static Set<SubType> getPlaneswalkerTypes(boolean withCustomSets) {

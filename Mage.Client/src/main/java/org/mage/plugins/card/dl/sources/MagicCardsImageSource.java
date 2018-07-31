@@ -6,12 +6,12 @@ import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
 import mage.client.dialog.PreferencesDialog;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
- *
  * @author North
  */
 public enum MagicCardsImageSource implements CardImageSource {
@@ -342,6 +342,7 @@ public enum MagicCardsImageSource implements CardImageSource {
             put("WWK", "worldwake");
             put("ZEN", "zendikar");
         }
+
         private static final long serialVersionUID = 1L;
     };
 
@@ -361,7 +362,7 @@ public enum MagicCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
@@ -389,11 +390,11 @@ public enum MagicCardsImageSource implements CardImageSource {
         }
         url.append(".jpg");
 
-        return url.toString();
+        return new CardImageUrls(url.toString());
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) {
         String name = card.getName();
         // add type to name if it's not 0
         if (card.getType() > 0) {
@@ -406,7 +407,7 @@ public enum MagicCardsImageSource implements CardImageSource {
         } else {
             set += '-' + card.getSet();
         }
-        return "http://magiccards.info/extras/token/" + set + '/' + name + ".jpg";
+        return new CardImageUrls("http://magiccards.info/extras/token/" + set + '/' + name + ".jpg");
     }
 
     @Override

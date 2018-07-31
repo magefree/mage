@@ -80,7 +80,7 @@ class BloodOathEffect extends OneShotEffect {
         if (player != null && opponent != null && sourceObject != null) {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);
-            if (!player.choose(Outcome.Neutral, choiceImpl, game)) {
+            if (player.choose(Outcome.Neutral, choiceImpl, game)) {
                 CardType type = null;
                 String choosenType = choiceImpl.getChoice();
 

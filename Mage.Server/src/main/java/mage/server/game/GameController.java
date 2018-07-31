@@ -1,4 +1,3 @@
-
 package mage.server.game;
 
 import java.io.*;
@@ -1149,7 +1148,7 @@ public class GameController implements GameCallback {
         sb.append(state.getTurnMods());
         sb.append("<br>getTurnNum: ");
         sb.append(state.getTurnNum());
-        
+
         sb.append("<br>Using plane chase?:" + state.isPlaneChase());
         if (state.isPlaneChase()) {
             Plane currentPlane = state.getCurrentPlane();
@@ -1157,7 +1156,7 @@ public class GameController implements GameCallback {
                 sb.append("<br>Current plane:" + currentPlane.getName());
             }
         }
-        
+
         sb.append("<br>Future Timeout:");
         if (futureTimeout != null) {
             sb.append("Cancelled?=");
@@ -1188,8 +1187,13 @@ public class GameController implements GameCallback {
 
         sb.append("<br>Active player is: ");
         sb.append(game.getPlayer(state.getActivePlayerId()).getName());
+
         PassAbility pass = new PassAbility();
         if (game.getPlayer(state.getActivePlayerId()).hasLeft()) {
+            Player p = game.getPlayer(state.getActivePlayerId());
+            if (p != null) {
+                p.concede(game);
+            }
             Phase currentPhase = game.getPhase();
             if (currentPhase != null) {
                 currentPhase.getStep().skipStep(game, state.getActivePlayerId());
@@ -1204,6 +1208,10 @@ public class GameController implements GameCallback {
         sb.append("<br>getChoosingPlayerId: ");
         if (state.getChoosingPlayerId() != null) {
             if (game.getPlayer(state.getChoosingPlayerId()).hasLeft()) {
+                Player p = game.getPlayer(state.getChoosingPlayerId());
+                if (p != null) {
+                    p.concede(game);
+                }
                 Phase currentPhase = game.getPhase();
                 if (currentPhase != null && !fixedAlready) {
                     currentPhase.getStep().endStep(game, state.getActivePlayerId());
@@ -1218,7 +1226,11 @@ public class GameController implements GameCallback {
 
         sb.append("<br><font color=orange>Player with Priority is: ");
         if (state.getPriorityPlayerId() != null) {
-            if (game.getPlayer(state.getPriorityPlayerId()).hasLeft()) {
+            if (game.getPlayer(state.getPriorityPlayerId()).hasLeft()) {                
+                Player p = game.getPlayer(state.getPriorityPlayerId());
+                if (p != null) {
+                    p.concede(game);
+                }
                 Phase currentPhase = game.getPhase();
                 if (currentPhase != null && !fixedAlready) {
                     currentPhase.getStep().skipStep(game, state.getActivePlayerId());
@@ -1228,7 +1240,7 @@ public class GameController implements GameCallback {
             }
             sb.append(game.getPlayer(state.getPriorityPlayerId()).getName());
             sb.append("</font>");
-        }        
+        }
 
         sb.append("<br>Future Timeout:");
         if (futureTimeout != null) {

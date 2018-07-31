@@ -21,7 +21,7 @@ import mage.constants.Zone;
  * @author Loki
  */
 public final class CarapaceForger extends CardImpl {
-    private static final String text = "Metalcraft - Carapace Forger gets +2/+2 as long as you control three or more artifacts";
+    private static final String text = "<i>Metalcraft</i> &mdash; Carapace Forger gets +2/+2 as long as you control three or more artifacts";
 
     public CarapaceForger (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

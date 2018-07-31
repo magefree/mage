@@ -74,7 +74,7 @@ class SakikoMotherOfSummerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.getControllerId().equals(controllerId)) {
+            if (creature != null && creature.isControlledBy(controllerId)) {
                 this.getEffects().clear();
                 Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(event.getAmount()), "that player", true);
                 effect.setTargetPointer(new FixedTarget(creature.getControllerId()));

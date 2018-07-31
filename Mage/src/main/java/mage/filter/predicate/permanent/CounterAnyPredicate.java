@@ -17,12 +17,8 @@ public class CounterAnyPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        for (Counter counter: input.getCounters(game).values()) {
-            if (counter.getCount()> 0) {
-                return true;
-            }
-        }
-        return false;
+        return input.getCounters(game).values().stream().anyMatch(counter -> counter.getCount() > 0);
+
     }
 
     @Override

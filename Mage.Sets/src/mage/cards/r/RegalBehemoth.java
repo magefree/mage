@@ -80,7 +80,7 @@ class RegalBehemothTriggeredManaAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(game.getMonarchId())) {
+        if (isControlledBy(game.getMonarchId())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
                 ManaEvent mEvent = (ManaEvent) event;

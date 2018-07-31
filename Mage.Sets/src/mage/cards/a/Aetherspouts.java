@@ -81,7 +81,7 @@ class AetherspoutsEffect extends OneShotEffect {
                 List<Permanent> permanentsToTop = new ArrayList<>();
                 List<Permanent> permanentsToBottom = new ArrayList<>();
                 for (Permanent permanent:game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source.getSourceId(), game)) {
-                    if (permanent.getOwnerId().equals(player.getId())) {
+                    if (permanent.isOwnedBy(player.getId())) {
                         if (player.chooseUse(outcome, "Put " + permanent.getLogName() + " to the top? (else it goes to bottom)", source, game)) {
                             permanentsToTop.add(permanent);
                             game.informPlayers(permanent.getLogName() + " goes to the top of " + player.getLogName() + "'s library");

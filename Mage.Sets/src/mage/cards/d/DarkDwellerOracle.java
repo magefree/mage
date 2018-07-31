@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -35,6 +36,8 @@ public final class DarkDwellerOracle extends CardImpl {
 
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         // {1}, Sacrifice a creature: Exile the top card of your library. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(
@@ -118,7 +121,7 @@ class DarkDwellerOracleCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId)
+        return source.isControlledBy(affectedControllerId)
                 && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

@@ -75,7 +75,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(source.getSourceId()) && source.getControllerId().equals(affectedControllerId)) {
+        if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
             Card card = game.getCard(source.getSourceId());
             if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {

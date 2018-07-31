@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,7 +35,7 @@ public final class ResplendentGriffin extends CardImpl {
         this.addAbility(new AscendAbility());
 
         // Whenever Resplendent Griffin attacks, if you have the city's blessing, put a +1/+1 counter on it.
-        this.addAbility(new ConditionalTriggeredAbility(new AttacksTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new AttacksTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false), CitysBlessingCondition.instance,
                 "Whenever {this} attacks, if you have the city's blessing, put a +1/+1 counter on it."));
     }

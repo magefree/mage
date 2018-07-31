@@ -51,7 +51,7 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID affectedSpellId, Ability source, UUID affectedControllerId, Game game) {
-        if (anyPlayer || source.getControllerId().equals(affectedControllerId)) {
+        if (anyPlayer || source.isControlledBy(affectedControllerId)) {
             Card card = game.getCard(affectedSpellId);
             return card != null && filter.match(card, game);
         }

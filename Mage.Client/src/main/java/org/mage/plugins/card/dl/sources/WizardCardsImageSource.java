@@ -1,13 +1,6 @@
-
 package org.mage.plugins.card.dl.sources;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -19,21 +12,17 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.prefs.Preferences;
 import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
-import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
 import org.apache.log4j.Logger;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mage.plugins.card.images.CardDownloadData;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  * @author North
@@ -233,7 +222,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("AKH");
         supportedSets.add("MPS");
         supportedSets.add("CMA");
-//        supportedSets.add("CM2"); // Commander Anthology, Vol. II
+        supportedSets.add("CM2"); // Commander Anthology, Vol. II
         supportedSets.add("E01");
         supportedSets.add("HOU");
         supportedSets.add("C17");
@@ -247,7 +236,10 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("RIX"); // Rivals of Ixalan
         supportedSets.add("A25"); // Masters 25
         supportedSets.add("DOM"); // Dominaria
-//        supportedSets.add("M19"); // Core 2019
+        supportedSets.add("M19"); // Core 2019
+//      supportedSets.add("GRN"); // Guilds of Ravnica
+//      supportedSets.add("RNA"); // Ravnica Allegiance
+//      supportedSets.add("C18"); // Commander 2018
 
         sets = new HashMap<>();
         setsAliases = new HashMap<>();
@@ -284,7 +276,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("C16", "Commander 2016");
         setsAliases.put("C17", "Commander 2017");
         setsAliases.put("CMA", "Commander Anthology");
-//        setsAliases.put("CM2", "Commander Anthology, Vol. II");
+        setsAliases.put("CM2", "Commander Anthology 2018");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
         setsAliases.put("CMD", "Magic: The Gathering-Commander");
@@ -462,7 +454,7 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
@@ -495,7 +487,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                         List<String> l = new ArrayList<>(setLinks.values());
                         if (l.size() >= number) {
                             link = l.get(number - 1);
-                        } else {;
+                        } else {
                             link = l.get(number - 21);
                             if (link != null) {
                                 link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + 'a'));
@@ -508,8 +500,12 @@ public enum WizardCardsImageSource implements CardImageSource {
         if (link != null && !link.startsWith("http://")) {
             link = "http://gatherer.wizards.com" + link;
         }
-        return link;
 
+        if (link != null) {
+            return new CardImageUrls(link);
+        } else {
+            return null;
+        }
     }
 
     private Map<String, String> getSetLinks(String cardSet) {
@@ -530,7 +526,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                 while (page < 999) {
                     String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&page=" + page + "&action=advanced&output=spoiler&method=visual&set=+%5B%22" + URLSetName + "%22%5D";
                     logger.debug("URL: " + searchUrl);
-                    Document doc = getDocument(searchUrl);
+                    Document doc = CardImageUtils.downloadHtmlDocument(searchUrl);
                     Elements cardsImages = doc.select("img[src^=../../Handlers/]");
                     if (cardsImages.isEmpty()) {
                         break;
@@ -582,33 +578,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         return setLinks;
     }
 
-    private Document getDocument(String urlString) throws NumberFormatException, IOException {
-        Preferences prefs = MageFrame.getPreferences();
-        Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
-        Document doc;
-        if (proxyType == ProxyType.NONE) {
-            doc = Jsoup.connect(urlString).timeout(60 * 1000).get();
-        } else {
-            String proxyServer = prefs.get("proxyAddress", "");
-            int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
-            URL url = new URL(urlString);
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
-            HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
-            uc.setConnectTimeout(10000);
-            uc.setReadTimeout(60000);
-            uc.connect();
-
-            String line;
-            StringBuffer tmp = new StringBuffer();
-            BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            while ((line = in.readLine()) != null) {
-                tmp.append(line);
-            }
-            doc = Jsoup.parse(String.valueOf(tmp));
-        }
-        return doc;
-    }
-
     private void getLandVariations(LinkedHashMap<String, String> setLinks, String cardSet, int multiverseId, String cardName) throws IOException, NumberFormatException {
         CardCriteria criteria = new CardCriteria();
         criteria.nameExact(cardName);
@@ -616,7 +585,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
-        Document landDoc = getDocument(urlLandDocument);
+        Document landDoc = CardImageUtils.downloadHtmlDocument(urlLandDocument);
         Elements variations = landDoc.select("a.variationlink");
         if (!variations.isEmpty()) {
             if (variations.size() > cards.size()) {
@@ -663,7 +632,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     private HashMap<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {
         String cardLanguagesUrl = "http://gatherer.wizards.com/Pages/Card/Languages.aspx?multiverseid=" + englishMultiverseId;
-        Document cardLanguagesDoc = getDocument(cardLanguagesUrl);
+        Document cardLanguagesDoc = CardImageUtils.downloadHtmlDocument(cardLanguagesUrl);
         Elements languageTableRows = cardLanguagesDoc.select("tr.cardItem");
         HashMap<String, Integer> localizedIds = new HashMap<>();
         if (!languageTableRows.isEmpty()) {
@@ -703,7 +672,7 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) {
         return null;
     }
 
@@ -712,7 +681,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         return 60.0f;
     }
 
-//    private final class GetImageLinkTask implements Runnable {
+    //    private final class GetImageLinkTask implements Runnable {
 //
 //        private int multiverseId;
 //        private String cardName;

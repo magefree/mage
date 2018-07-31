@@ -69,7 +69,7 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
         }
         if (permanent.isLand()
                 && player.getInRange().contains(permanent.getControllerId())
-                && !permanent.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause
+                && !permanent.isControlledBy(game.getActivePlayerId())) { // intervening if clause
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             return true;
         }
@@ -103,7 +103,7 @@ class PriceOfGloryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent land = game.getPermanentOrLKIBattlefield(this.targetPointer.getFirst(game, source));
-            if (land != null && !land.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause has to be checked again
+            if (land != null && !land.isControlledBy(game.getActivePlayerId())) { // intervening if clause has to be checked again
                 land.destroy(source.getSourceId(), game, false);
             }
             return true;

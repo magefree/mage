@@ -70,7 +70,7 @@ class MindswipeEffect extends OneShotEffect {
             if (object == null) {
                 object = game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
             }
-            if (object != null && object instanceof Spell) {
+            if (object instanceof Spell) {
                 Spell spell = (Spell) object;
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {

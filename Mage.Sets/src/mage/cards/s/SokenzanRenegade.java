@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -42,7 +42,7 @@ public final class SokenzanRenegade extends CardImpl {
         // Bushido 1
         this.addAbility(new BushidoAbility(1));
         // At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of Sokenzan Renegade.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SokenzanRenegadeEffect(), TargetController.YOU, false),
                 OnePlayerHasTheMostCards.instance,
                 "At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of {this}"
@@ -97,7 +97,7 @@ class SokenzanRenegadeEffect extends OneShotEffect {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
                 effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
                 game.addEffect(effect, source);
-                if (!source.getControllerId().equals(newController.getId())) {
+                if (!source.isControlledBy(newController.getId())) {
                     game.informPlayers(newController.getLogName() + " got control of " + sourcePermanent.getLogName());
                 }
                 return true;

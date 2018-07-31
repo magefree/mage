@@ -67,7 +67,7 @@ class ManaplasmAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());   
-        if (spell != null && spell.getControllerId().equals(controllerId)) {
+        if (spell != null && spell.isControlledBy(controllerId)) {
             this.getEffects().remove(0);
             int x = spell.getConvertedManaCost();
             this.addEffect(new BoostSourceEffect(x,x, Duration.EndOfTurn));

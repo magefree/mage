@@ -341,8 +341,18 @@ public class HumanPlayer extends PlayerImpl {
 
         replacementEffectChoice.getChoices().clear();
         replacementEffectChoice.setKeyChoices(rEffects);
+        
+        // Check if there are different ones
+        int differentChoices = 0;
+        String lastChoice = "";
+        for (String value : replacementEffectChoice.getKeyChoices().values()) {
+            if (!lastChoice.equalsIgnoreCase(value)) {
+                lastChoice = value;
+                differentChoices++;
+            }
+        }
 
-        while (!abort) {
+        while (!abort && differentChoices > 1) {
             updateGameStatePriority("chooseEffect", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
@@ -1943,7 +1953,7 @@ public class HumanPlayer extends PlayerImpl {
         if (userData.confirmEmptyManaPool()
                 && game.getStack().isEmpty() && getManaPool().count() > 0) {
             String activePlayerText;
-            if (game.getActivePlayerId().equals(playerId)) {
+            if (game.isActivePlayer(playerId)) {
                 activePlayerText = "Your turn";
             } else {
                 activePlayerText = game.getPlayer(game.getActivePlayerId()).getName() + "'s turn";

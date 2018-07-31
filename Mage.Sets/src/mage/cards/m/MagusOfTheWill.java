@@ -137,9 +137,9 @@ class MagusOfTheWillReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getOwnerId().equals(source.getControllerId())) {
+            if (card != null && card.isOwnedBy(source.getControllerId())) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (permanent == null || !(permanent instanceof PermanentToken)) {
+                if (!(permanent instanceof PermanentToken)) {
                     return true;
                 }
             }

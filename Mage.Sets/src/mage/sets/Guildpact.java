@@ -29,6 +29,7 @@ public final class Guildpact extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Absolver Thrull", 1, Rarity.COMMON, mage.cards.a.AbsolverThrull.class));
         cards.add(new SetCardInfo("Abyssal Nocturnus", 43, Rarity.RARE, mage.cards.a.AbyssalNocturnus.class));
+        cards.add(new SetCardInfo("Aetherplasm", 22, Rarity.UNCOMMON, mage.cards.a.Aetherplasm.class));
         cards.add(new SetCardInfo("Agent of Masks", 100, Rarity.UNCOMMON, mage.cards.a.AgentOfMasks.class));
         cards.add(new SetCardInfo("Angel of Despair", 101, Rarity.RARE, mage.cards.a.AngelOfDespair.class));
         cards.add(new SetCardInfo("Battering Wurm", 79, Rarity.UNCOMMON, mage.cards.b.BatteringWurm.class));
@@ -44,6 +45,7 @@ public final class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Castigate", 106, Rarity.COMMON, mage.cards.c.Castigate.class));
         cards.add(new SetCardInfo("Caustic Rain", 44, Rarity.UNCOMMON, mage.cards.c.CausticRain.class));
         cards.add(new SetCardInfo("Cerebral Vortex", 107, Rarity.RARE, mage.cards.c.CerebralVortex.class));
+        cards.add(new SetCardInfo("Conjurer's Ban", 108, Rarity.UNCOMMON, mage.cards.c.ConjurersBan.class));
         cards.add(new SetCardInfo("Crash Landing", 82, Rarity.UNCOMMON, mage.cards.c.CrashLanding.class));
         cards.add(new SetCardInfo("Cremate", 45, Rarity.COMMON, mage.cards.c.Cremate.class));
         cards.add(new SetCardInfo("Cry of Contrition", 46, Rarity.COMMON, mage.cards.c.CryOfContrition.class));
@@ -129,6 +131,7 @@ public final class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Pillory of the Sleepless", 125, Rarity.COMMON, mage.cards.p.PilloryOfTheSleepless.class));
         cards.add(new SetCardInfo("Plagued Rusalka", 56, Rarity.UNCOMMON, mage.cards.p.PlaguedRusalka.class));
         cards.add(new SetCardInfo("Poisonbelly Ogre", 57, Rarity.COMMON, mage.cards.p.PoisonbellyOgre.class));
+        cards.add(new SetCardInfo("Predatory Focus", 92, Rarity.UNCOMMON, mage.cards.p.PredatoryFocus.class));
         cards.add(new SetCardInfo("Primeval Light", 93, Rarity.UNCOMMON, mage.cards.p.PrimevalLight.class));
         cards.add(new SetCardInfo("Pyromatics", 72, Rarity.COMMON, mage.cards.p.Pyromatics.class));
         cards.add(new SetCardInfo("Quicken", 31, Rarity.RARE, mage.cards.q.Quicken.class));

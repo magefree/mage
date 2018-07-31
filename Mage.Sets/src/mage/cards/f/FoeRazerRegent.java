@@ -91,7 +91,7 @@ class FoeRazerRegentTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.getControllerId().equals(getControllerId())) {
+        if (permanent != null && permanent.isControlledBy(getControllerId())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(permanent, game));
             }

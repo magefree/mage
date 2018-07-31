@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -61,7 +60,7 @@ class UnexpectedlyAbsentEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                controller.putCardOnTopXOfLibrary(permanent, game, source, source.getManaCostsToPay().getX());
+                controller.putCardOnTopXOfLibrary(permanent, game, source, source.getManaCostsToPay().getX() + 1);
                 return true;
             }
         }

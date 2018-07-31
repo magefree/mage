@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
@@ -40,7 +40,7 @@ public final class LilianasContract extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if you control four or more Demons with different names, you win the game.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new WinGameSourceControllerEffect(),
                         TargetController.YOU, false
@@ -70,7 +70,7 @@ enum LilianasContractCondition implements Condition {
         Set<String> demonNames = new HashSet();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent == null
-                    || !permanent.getControllerId().equals(source.getControllerId())
+                    || !permanent.isControlledBy(source.getControllerId())
                     || !permanent.hasSubtype(SubType.DEMON, game)) {
                 continue;
             }

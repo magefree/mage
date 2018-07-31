@@ -985,7 +985,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int actualCount = 0;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if (card.getOwnerId().equals(owner.getId())) {
+                if (card.isOwnedBy(owner.getId())) {
                     actualCount++;
                 }
             }
@@ -1005,7 +1005,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int actualCount = 0;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if (card.getOwnerId().equals(owner.getId()) && card.getName().equals(cardName)) {
+                if (card.isOwnedBy(owner.getId()) && card.getName().equals(cardName)) {
                     actualCount++;
                 }
             }

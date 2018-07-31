@@ -83,7 +83,7 @@ class SparktongueDragonCreateReflexiveTriggerEffect extends OneShotEffect {
 class SparktongueDragonReflexiveTriggeredAbility extends DelayedTriggeredAbility {
 
     public SparktongueDragonReflexiveTriggeredAbility() {
-        super(new DamageTargetEffect(3), Duration.OneUse, false);
+        super(new DamageTargetEffect(3), Duration.OneUse, true);
         this.addTarget(new TargetAnyTarget());
     }
 

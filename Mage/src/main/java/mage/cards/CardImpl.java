@@ -59,7 +59,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     protected UUID ownerId;
     protected String cardNumber;
-    public String expansionSetCode;
+    protected String expansionSetCode;
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
@@ -779,7 +779,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         boolean returnCode = true;
-        UUID sourceId = (source == null ? getId() : source.getSourceId());
+        UUID sourceId = getId();
+        if (source != null) {
+            MageObject object = game.getObject(source.getId());
+            if (object instanceof StackObject) {
+                sourceId = source.getId();
+            } else {
+                sourceId = source.getSourceId();
+            }
+        }
         GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, sourceId, getControllerOrOwner(), counter.getName(), counter.getCount());
         countersEvent.setAppliedEffects(appliedEffects);
         countersEvent.setFlag(isEffect);

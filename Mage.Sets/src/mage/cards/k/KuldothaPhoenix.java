@@ -37,7 +37,7 @@ public final class KuldothaPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         
-        // Metalcraft - {4}: Return Kuldotha Phoenix from your graveyard to the battlefield.
+        // <i>Metalcraft</i> &mdash; {4}: Return Kuldotha Phoenix from your graveyard to the battlefield.
         // Activate this ability only during your upkeep and only if you control three or more artifacts.        
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
                 new ReturnSourceFromGraveyardToBattlefieldEffect(), 

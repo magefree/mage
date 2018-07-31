@@ -5,14 +5,15 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import mage.abilities.Ability;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
-import mage.sets.FateReforged;
-import mage.sets.Battlebond;
-import mage.abilities.keyword.PartnerWithAbility;
-import mage.sets.MastersEditionII;
-import mage.sets.MastersEditionIV;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+
+import mage.sets.*;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -120,6 +121,28 @@ public class BoosterGenerationTest extends MageTestBase {
             List<Card> booster = MastersEditionIV.getInstance().createBooster();
             assertTrue(str(booster), contains(booster, urzaLand, "ME4"));
             assertFalse(str(booster), contains(booster, basics, null));
+        }
+    }
+
+    @Test
+    public void testCoreSet2019_DualLandsAreGenerated() {
+        List<Card> allCards = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            List<Card> booster = CoreSet2019.getInstance().createBooster();
+            // check that booster contains a land card
+            assertTrue(booster.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND)));
+            allCards.addAll(booster);
+        }
+        // check that some dual lands were generated
+        assertTrue(allCards.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND) && card.getRarity().equals(Rarity.COMMON)));
+    }
+
+    @Test
+    public void testDominaria_EveryBoosterContainsLegendaryCreature() {
+        for (int i = 0; i < 10; i++) {
+            List<Card> booster = Dominaria.getInstance().createBooster();
+            // check that booster contains legendary creature
+            assertTrue(booster.stream().anyMatch(card -> card.isCreature() && card.isLegendary()));
         }
     }
 

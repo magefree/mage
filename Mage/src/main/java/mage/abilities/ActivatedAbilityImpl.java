@@ -178,7 +178,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 break;
             case OWNER:
                 Permanent permanent = game.getPermanent(getSourceId());
-                if (!permanent.getOwnerId().equals(playerId)) {
+                if (!permanent.isOwnedBy(playerId)) {
                     return ActivationStatus.getFalse();
                 }
                 break;
@@ -191,7 +191,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 Permanent enchantment = game.getPermanent(getSourceId());
                 if (enchantment != null && enchantment.getAttachedTo() != null) {
                     Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-                    if (enchanted != null && enchanted.getControllerId().equals(playerId)) {
+                    if (enchanted != null && enchanted.isControlledBy(playerId)) {
                         break;
                     }
                 }
@@ -223,7 +223,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             } else if (mageObject instanceof Plane) {
                 return ((Plane) mageObject).getControllerId().equals(playerId);
             } else if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
-                return ((Card) mageObject).getOwnerId().equals(playerId);
+                return ((Card) mageObject).isOwnedBy(playerId);
             }
         }
         return false;

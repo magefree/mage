@@ -114,6 +114,7 @@ public final class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Moonvessel", 133, Rarity.COMMON, mage.cards.m.MyrMoonvessel.class));
         cards.add(new SetCardInfo("Nemesis Mask", 134, Rarity.UNCOMMON, mage.cards.n.NemesisMask.class));
         cards.add(new SetCardInfo("Neurok Prodigy", 26, Rarity.COMMON, mage.cards.n.NeurokProdigy.class));
+        cards.add(new SetCardInfo("Neurok Transmuter", 27, Rarity.UNCOMMON, mage.cards.n.NeurokTransmuter.class));
         cards.add(new SetCardInfo("Nim Abomination", 49, Rarity.UNCOMMON, mage.cards.n.NimAbomination.class));
         cards.add(new SetCardInfo("Nourish", 78, Rarity.COMMON, mage.cards.n.Nourish.class));
         cards.add(new SetCardInfo("Oxidda Golem", 135, Rarity.COMMON, mage.cards.o.OxiddaGolem.class));
@@ -169,6 +170,7 @@ public final class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Tel-Jilad Outrider", 87, Rarity.COMMON, mage.cards.t.TelJiladOutrider.class));
         cards.add(new SetCardInfo("Tel-Jilad Wolf", 88, Rarity.COMMON, mage.cards.t.TelJiladWolf.class));
         cards.add(new SetCardInfo("Test of Faith", 17, Rarity.UNCOMMON, mage.cards.t.TestOfFaith.class));
+        cards.add(new SetCardInfo("Thought Dissector", 152, Rarity.RARE, mage.cards.t.ThoughtDissector.class));
         cards.add(new SetCardInfo("Thunderstaff", 153, Rarity.UNCOMMON, mage.cards.t.Thunderstaff.class));
         cards.add(new SetCardInfo("Trinisphere", 154, Rarity.RARE, mage.cards.t.Trinisphere.class));
         cards.add(new SetCardInfo("Turn the Tables", 18, Rarity.RARE, mage.cards.t.TurnTheTables.class));

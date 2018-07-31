@@ -70,7 +70,7 @@ class BecomesMonarchSourceControllerTriggeredAbility extends TriggeredAbilityImp
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return getControllerId().equals(event.getPlayerId());
+        return isControlledBy(event.getPlayerId());
     }
 
     @Override

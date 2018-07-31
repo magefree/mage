@@ -99,10 +99,10 @@ class LoamingShamanTargetCardsInGraveyard extends TargetCardInGraveyard {
         if (firstTarget != null) {
             Card card = game.getCard(firstTarget);
             if (card == null || targetCard == null
-                    || !card.getOwnerId().equals(targetCard.getOwnerId())) {
+                    || !card.isOwnedBy(targetCard.getOwnerId())) {
                 return false;
             }
-        } else if (targetCard == null || !targetCard.getOwnerId().equals(targetPlayerId)) {
+        } else if (targetCard == null || !targetCard.isOwnedBy(targetPlayerId)) {
             return false;
         }
         return super.canTarget(id, source, game);

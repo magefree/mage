@@ -72,7 +72,7 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null && equipment.getAttachedTo().equals(event.getSourceId())) {
+        if (equipment != null  && equipment.isAttachedTo(event.getSourceId())) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
             if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                 Effect effect = this.getEffects().get(0);

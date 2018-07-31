@@ -47,7 +47,9 @@ public final class SkyriderPatrol extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new DoIfCostPaid(
                         new SkyriderPatrolCreateReflexiveTriggerEffect(),
-                        new ManaCostsImpl("{G}{U}")
+                        new ManaCostsImpl("{G}{U}"),
+                        "Pay {G}{U} to put a +1/+1 counter on another"
+                        + " creature you control and give it flying?"
                 ).setText("you may pay {G}{U}. When you do, "
                         + "put a +1/+1 counter on another target creature you control, "
                         + "and that creature gains flying until end of turn."),
@@ -97,7 +99,7 @@ class SkyriderPatrolReflexiveTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     public SkyriderPatrolReflexiveTriggeredAbility() {
-        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.OneUse, false);
+        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.OneUse, true);
         this.addEffect(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(),
                 Duration.EndOfTurn

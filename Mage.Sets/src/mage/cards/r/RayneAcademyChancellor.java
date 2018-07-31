@@ -77,7 +77,7 @@ class RayneAcademyChancellorTriggeredAbility extends TriggeredAbilityImpl {
                 return true;
             }
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent != null && this.getControllerId().equals(permanent.getControllerId())) {
+            if (permanent != null && this.isControlledBy(permanent.getControllerId())) {
                 return true;
             }
         }

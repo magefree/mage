@@ -66,7 +66,7 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isCreature()
-                && permanent.getControllerId().equals(this.controllerId)) {
+                && permanent.isControlledBy(this.controllerId)) {
             Effect effect = this.getEffects().get(0);
             // Life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
             effect.setValue("lifeSource", event.getTargetId());

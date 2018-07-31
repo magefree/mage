@@ -83,7 +83,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
                     targetStillExists = true;
-                    if (!permanent.getControllerId().equals(controllingPlayerId)) {
+                    if (!permanent.isControlledBy(controllingPlayerId)) {
                         GameEvent loseControlEvent = GameEvent.getEvent(GameEvent.EventType.LOSE_CONTROL, permanentId, source.getId(), permanent.getControllerId());
                         if (game.replaceEvent(loseControlEvent)) {
                             return false;

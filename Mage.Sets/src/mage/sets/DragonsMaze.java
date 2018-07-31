@@ -202,10 +202,10 @@ public final class DragonsMaze extends ExpansionSet {
                 CardCriteria criteria = new CardCriteria();
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
                 criteria.rarities(rarity).doubleFaced(false);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    criteria.maxCardNumber(maxCardNumberInBooster);
-                }
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
+                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                }
                 savedCards.put(rarity, savedCardsInfos);
             }
             // Return a copy of the saved cards information, as not to modify the original.

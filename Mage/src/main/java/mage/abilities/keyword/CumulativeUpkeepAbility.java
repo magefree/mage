@@ -16,6 +16,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -84,7 +85,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
                 if (player.chooseUse(Outcome.Benefit, "Pay " + totalCost.getText() + '?', source, game)) {
                     totalCost.clearPaid();
                     if (totalCost.payOrRollback(source, game, source.getSourceId(), source.getControllerId())) {
-                        game.fireEvent(new GameEvent(EventType.PAID_CUMULATIVE_UPKEEP, permanent.getId(), permanent.getId(), player.getId(), ageCounter, false));
+                        game.fireEvent(new ManaEvent(EventType.PAID_CUMULATIVE_UPKEEP, permanent.getId(), permanent.getId(), player.getId(), totalCost.getUsedManaToPay()));
                         return true;
                     }
                 }

@@ -1,4 +1,3 @@
-
 package mage.abilities.mana;
 
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
             }
             return newNetMana;
         }
-        return netMana;
+        return new ArrayList<Mana>(netMana);
     }
 
     /**

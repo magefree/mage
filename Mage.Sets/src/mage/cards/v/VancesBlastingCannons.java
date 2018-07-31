@@ -120,7 +120,7 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (getTargetPointer().getTargets(game, source).contains(objectId)
-                && source.getControllerId().equals(affectedControllerId)) {
+                && source.isControlledBy(affectedControllerId)) {
             Card card = game.getCard(objectId);
             if (card != null) {
                 return true;

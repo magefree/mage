@@ -65,7 +65,7 @@ class RowenAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
-            if (game.getActivePlayerId().equals(this.getControllerId()) && this.lastTriggeredTurn != game.getTurnNum()) {
+            if (game.isActivePlayer(this.getControllerId()) && this.lastTriggeredTurn != game.getTurnNum()) {
                 Card card = game.getCard(event.getTargetId());
                 Player controller = game.getPlayer(this.getControllerId());
                 Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(this.getSourceId());

@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
+
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
@@ -33,6 +34,7 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
+
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
@@ -42,9 +44,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
 
-    public static final String ALL_IMAGES = "- All images from that source";
-    public static final String ALL_STANDARD_IMAGES = "- All images from standard from that source";
-    public static final String ALL_TOKENS = "- Only all token images from that source";
+    public static final String ALL_IMAGES = "- ALL images from selected source (CAN BE VERY SLOW)";
+    public static final String ALL_STANDARD_IMAGES = "- Only images from STANDARD sets";
+    public static final String ALL_TOKENS = "- Only token images from selected source";
 
     private JDialog dialog;
     private final JProgressBar bar;
@@ -76,14 +78,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     private Proxy p = Proxy.NO_PROXY;
 
     enum DownloadSources {
-        WIZARDS("wizards.com", WizardCardsImageSource.instance),
-        MYTHICSPOILER("mythicspoiler.com", MythicspoilerComSource.instance),
-        TOKENS("tokens.mtg.onl", TokensMtgImageSource.instance),
+        WIZARDS("1. wizards.com - low quality CARDS, multi-language, can be SLOW", WizardCardsImageSource.instance),
+        TOKENS("2. tokens.mtg.onl - high quality TOKENS", TokensMtgImageSource.instance),
+        SCRYFALL("3. scryfall.com - high quality CARDS, multi-language", ScryfallImageSource.instance),
+        MAGIDEX("4. magidex.com - high quality CARDS", MagidexImageSource.instance),
+        GRAB_BAG("5. GrabBag - STAR WARS cards and tokens", GrabbagImageSource.instance),
+        MYTHICSPOILER("6. mythicspoiler.com", MythicspoilerComSource.instance),
+        ALTERNATIVE("7. alternative.mtg.onl", AltMtgOnlTokensImageSource.instance),
+        COPYPASTE("8. Copy and Paste Image URLs", CopyPasteImageSource.instance);
         // MTG_ONL("mtg.onl", MtgOnlTokensImageSource.instance), Not working correctly yet
-        ALTERNATIVE("alternative.mtg.onl", AltMtgOnlTokensImageSource.instance),
-        GRAB_BAG("GrabBag", GrabbagImageSource.instance),
-        MAGIDEX("magidex.com", MagidexImageSource.instance),
-        SCRYFALL("scryfall.com", ScryfallImageSource.instance);
         // MAGICCARDS("magiccards.info", MagicCardsImageSource.instance)
 
         private final String text;
@@ -485,7 +488,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         }
 
         try (InputStreamReader input = new InputStreamReader(in);
-                BufferedReader reader = new BufferedReader(input)) {
+             BufferedReader reader = new BufferedReader(input)) {
 
             String line = reader.readLine();
             while (line != null) {
@@ -597,25 +600,25 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                     logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
 
-                    String url;
+                    CardImageUrls urls;
+
                     if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
                         if (!"0".equals(card.getCollectorId())) {
                             continue;
                         }
-                        url = cardImageSource.generateTokenUrl(card);
+                        urls = cardImageSource.generateTokenUrl(card);
                     } else {
-                        url = cardImageSource.generateURL(card);
+                        urls = cardImageSource.generateURL(card);
                     }
 
-                    if (url == null) {
+                    if (urls == null) {
                         String imageRef = cardImageSource.getNextHttpImageUrl();
                         String fileName = cardImageSource.getFileForHttpImage(imageRef);
                         if (imageRef != null && fileName != null) {
                             imageRef = cardImageSource.getSourceName() + imageRef;
                             try {
-                                URL imageUrl = new URL(imageRef);
                                 card.setToken(cardImageSource.isTokenSource());
-                                Runnable task = new DownloadTask(card, imageUrl, fileName, cardImageSource.getTotalImages());
+                                Runnable task = new DownloadTask(card, imageRef, fileName, cardImageSource.getTotalImages());
                                 executor.execute(task);
                             } catch (Exception ex) {
                             }
@@ -626,7 +629,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             }
                         }
                     } else {
-                        Runnable task = new DownloadTask(card, new URL(url), cardsToDownload.size());
+                        Runnable task = new DownloadTask(card, urls, cardsToDownload.size());
                         executor.execute(task);
                     }
 
@@ -662,22 +665,26 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     private final class DownloadTask implements Runnable {
 
         private final CardDownloadData card;
-        private final URL url;
+        private final CardImageUrls urls;
         private final int count;
         private final String actualFilename;
         private final boolean useSpecifiedPaths;
 
-        DownloadTask(CardDownloadData card, URL url, int count) {
+        DownloadTask(CardDownloadData card, String baseUrl, int count) {
+            this(card, new CardImageUrls(baseUrl, null), count);
+        }
+
+        DownloadTask(CardDownloadData card, CardImageUrls urls, int count) {
             this.card = card;
-            this.url = url;
+            this.urls = urls;
             this.count = count;
             this.actualFilename = "";
             useSpecifiedPaths = false;
         }
 
-        DownloadTask(CardDownloadData card, URL url, String actualFilename, int count) {
+        DownloadTask(CardDownloadData card, String baseUrl, String actualFilename, int count) {
             this.card = card;
-            this.url = url;
+            this.urls = new CardImageUrls(baseUrl, null);
             this.count = count;
             this.actualFilename = actualFilename;
             useSpecifiedPaths = true;
@@ -751,14 +758,55 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
                 }
 
-                cardImageSource.doPause(url.getPath());
-                URLConnection httpConn = url.openConnection(p);
-                httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-                httpConn.connect();
-                int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+                // can download images from many alternative urls
+                List<String> downloadUrls;
+                if (this.urls != null) {
+                    downloadUrls = this.urls.getDownloadList();
+                } else {
+                    downloadUrls = new ArrayList<>();
+                }
 
-                if (responseCode == 200) {
-                    // download OK
+                boolean isDownloadOK = false;
+                URLConnection httpConn = null;
+                List<String> errorsList = new ArrayList<>();
+                for (String currentUrl : downloadUrls) {
+                    URL url = new URL(currentUrl);
+
+                    // on download cancel need to stop
+                    if (cancel) {
+                        return;
+                    }
+
+                    // download
+                    cardImageSource.doPause(url.getPath());
+                    httpConn = url.openConnection(p);
+                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                    httpConn.connect();
+                    int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+
+                    // check result
+                    if (responseCode != 200) {
+                        // show errors only on full fail (all urls were not work)
+                        errorsList.add("Image download for " + card.getName()
+                                + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
+                                + " (" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+
+                        if (logger.isDebugEnabled()) {
+                            // Shows the returned html from the request to the web server
+                            logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                        }
+
+                        // go to next try
+                        continue;
+                    } else {
+                        // all fine
+                        isDownloadOK = true;
+                        break;
+                    }
+                }
+
+                // can save result
+                if (isDownloadOK & httpConn != null) {
                     // save data to temp
                     OutputStream out = null;
                     OutputStream tfileout = null;
@@ -792,8 +840,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             }
                             out.write(buf, 0, len);
                         }
-                    }
-                    finally {
+                    } finally {
                         StreamUtils.closeQuietly(in);
                         StreamUtils.closeQuietly(out);
                         StreamUtils.closeQuietly(tfileout);
@@ -815,15 +862,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                     }
                 } else {
-                    // download ERROR
-                    logger.warn("Image download for " + card.getName()
-                            + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                            + " (" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString()
-                    );
-
-                    if (logger.isDebugEnabled()) {
-                        // Shows the returned html from the request to the web server
-                        logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                    // download errors
+                    for (String err : errorsList) {
+                        logger.warn(err);
                     }
                 }
 

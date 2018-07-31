@@ -20,6 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.MageInt;
 
 /**
  *
@@ -38,6 +39,9 @@ public final class DepartedDeckhand extends CardImpl {
 
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.PIRATE);
+
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         // When Departed Deckhand becomes the target of a spell, sacrifice it.
         this.addAbility(new BecomesTargetTriggeredAbility(

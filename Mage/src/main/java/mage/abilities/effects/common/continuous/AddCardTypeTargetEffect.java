@@ -88,7 +88,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
             sb.append(cardType.toString().toLowerCase(Locale.ENGLISH)).append(" ");
         }
         sb.append("in addition to its other types");
-        if (getDuration().equals(Duration.EndOfTurn)) {
+        if (getDuration() == Duration.EndOfTurn) {
             sb.append(" until end of turn");
         }
         return sb.toString();

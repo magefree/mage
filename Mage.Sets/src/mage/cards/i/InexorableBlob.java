@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,9 +25,9 @@ public final class InexorableBlob extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // <i>Delirium</i> &mdash; Whenever Inexorable Blob attacks and there are at least four card types among cards in your graveyard,
-        // create a 3/3 green Ooze creature token tapped and attacking.
-        this.addAbility(new ConditionalTriggeredAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new InexorableBlobOozeToken(), 1, true, true), false),
+        // <i>Delirium</i> &mdash; Whenever Inexorable Blob attacks, if there are four or more card types among cards
+        // in your graveyard, create a 3/3 green Ooze creature token that’s tapped and attacking.
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new InexorableBlobOozeToken(), 1, true, true), false),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Whenever {this} attacks and there are at least four card types among cards in your graveyard, "
                 + "create a 3/3 green Ooze creature token tapped and attacking."));

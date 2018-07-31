@@ -7,7 +7,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -47,7 +47,8 @@ public final class LivingArtifact extends CardImpl {
         // Whenever you're dealt damage, put that many vitality counters on Living Artifact.
         this.addAbility(new LivingArtifactTriggeredAbility());
         // At the beginning of your upkeep, you may remove a vitality counter from Living Artifact. If you do, you gain 1 life.
-        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1),
+        //TODO make this a custom ability- it's really not intervening if because you should be able to add counters in response to this trigger
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1),
             new RemoveCountersSourceCost(CounterType.VITALITY.createInstance(1))), TargetController.YOU, false),
             new SourceHasCounterCondition(CounterType.VITALITY, 1), "At the beginning of your upkeep, you may remove a vitality counter from {this}. If you do, you gain 1 life"));
     }

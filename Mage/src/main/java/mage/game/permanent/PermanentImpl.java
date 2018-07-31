@@ -316,7 +316,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void beginningOfTurn(Game game) {
-        if (game.getActivePlayerId().equals(this.controllerId)) {
+        if (game.isActivePlayer(this.controllerId)) {
             this.controlledFromStartOfControllerTurn = true;
         }
     }
@@ -630,11 +630,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public List<UUID> getConnectedCards(String key) {
-        if (this.connectedCards.containsKey(key)) {
-            return this.connectedCards.get(key);
-        } else {
-            return emptyList;
-        }
+        return this.connectedCards.getOrDefault(key, emptyList);
     }
 
     @Override

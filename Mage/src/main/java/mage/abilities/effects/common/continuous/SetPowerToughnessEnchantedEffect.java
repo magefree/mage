@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -16,13 +15,24 @@ import mage.game.permanent.Permanent;
  */
 public class SetPowerToughnessEnchantedEffect extends ContinuousEffectImpl {
 
+    private final int power;
+    private final int toughness;
+
     public SetPowerToughnessEnchantedEffect() {
+        this(0, 2);
+    }
+
+    public SetPowerToughnessEnchantedEffect(int power, int toughness) {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        staticText = "Enchanted creature has base power and toughness 0/2";
+        staticText = "Enchanted creature has base power and toughness " + power + "/" + toughness;
+        this.power = power;
+        this.toughness = toughness;
     }
 
     public SetPowerToughnessEnchantedEffect(final SetPowerToughnessEnchantedEffect effect) {
         super(effect);
+        this.power = effect.power;
+        this.toughness = effect.toughness;
     }
 
     @Override
@@ -36,8 +46,8 @@ public class SetPowerToughnessEnchantedEffect extends ContinuousEffectImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
-                enchanted.getPower().setValue(0);
-                enchanted.getToughness().setValue(2);
+                enchanted.getPower().setValue(power);
+                enchanted.getToughness().setValue(toughness);
             }
             return true;
         }

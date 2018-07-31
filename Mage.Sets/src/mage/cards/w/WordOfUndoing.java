@@ -67,7 +67,7 @@ class WordOfUndoingReturnToHandEffect extends OneShotEffect {
         if (target != null) {
             for (UUID attachmentId : target.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getControllerId().equals(source.getControllerId())
+                if (attachment != null && attachment.isControlledBy(source.getControllerId())
                         && attachment.hasSubtype(SubType.AURA, game) && attachment.getColor(game).isWhite()) {
                     attachments.add(attachment);
                 }

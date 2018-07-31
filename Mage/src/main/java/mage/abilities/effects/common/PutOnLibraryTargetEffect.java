@@ -78,7 +78,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                     Cards cardsPlayer = new CardsImpl();
                     for (Iterator<Card> iterator = cards.iterator(); iterator.hasNext();) {
                         Card next = iterator.next();
-                        if (next.getOwnerId().equals(owner.getId())) {
+                        if (next.isOwnedBy(owner.getId())) {
                             cardsPlayer.add(next);
                             iterator.remove();
                         }
@@ -97,7 +97,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                     Cards cardsPlayer = new CardsImpl();
                     for (Iterator<Permanent> iterator = permanents.iterator(); iterator.hasNext();) {
                         Permanent next = iterator.next();
-                        if (next.getOwnerId().equals(owner.getId())) {
+                        if (next.isOwnedBy(owner.getId())) {
                             cardsPlayer.add(next);
                             iterator.remove();
                         }

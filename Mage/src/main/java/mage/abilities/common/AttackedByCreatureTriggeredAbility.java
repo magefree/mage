@@ -60,7 +60,7 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
         UUID defendingPlayer = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
         Permanent attackingCreature = game.getPermanent(event.getSourceId());
         if (filter.match(attackingCreature, game)
-                && getControllerId().equals(defendingPlayer)
+                && isControlledBy(defendingPlayer)
                 && attackingCreature != null) {
             switch (setTargetPointer) {
                 case PERMANENT:

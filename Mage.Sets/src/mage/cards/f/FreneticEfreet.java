@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -25,16 +24,20 @@ import mage.players.Player;
 public final class FreneticEfreet extends CardImpl {
 
     public FreneticEfreet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
         this.subtype.add(SubType.EFREET);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // {0}: Flip a coin. If you win the flip, Frenetic Efreet phases out. If you lose the flip, sacrifice Frenetic Efreet.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FreneticEfreetEffect(), new GenericManaCost(0)));
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new FreneticEfreetEffect(),
+                new GenericManaCost(0)
+        ));
     }
 
     public FreneticEfreet(final FreneticEfreet card) {
@@ -50,8 +53,9 @@ public final class FreneticEfreet extends CardImpl {
 class FreneticEfreetEffect extends OneShotEffect {
 
     public FreneticEfreetEffect() {
-        super(Outcome.Damage);
-        staticText = "Flip a coin. If you win the flip, {this} phases out. If you lose the flip, sacrifice {this}";
+        super(Outcome.Neutral);
+        staticText = "Flip a coin. If you win the flip, "
+                + "{this} phases out. If you lose the flip, sacrifice {this}";
     }
 
     public FreneticEfreetEffect(FreneticEfreetEffect effect) {
@@ -62,15 +66,19 @@ class FreneticEfreetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent != null) {
-            if (controller.flipCoin(game)) {
-                return permanent.phaseOut(game);
-            } else {
-                permanent.sacrifice(source.getSourceId(), game);
-                return true;
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
+        boolean flip = controller.flipCoin(game);
+        if (permanent == null) {
+            return false;
+        }
+        if (flip) {
+            return permanent.phaseOut(game);
+        } else {
+            permanent.sacrifice(source.getSourceId(), game);
+            return true;
+        }
     }
 
     @Override

@@ -53,7 +53,7 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            return permanent != null && permanent.getControllerId().equals(this.getControllerId());
+            return permanent != null && permanent.isControlledBy(this.getControllerId());
         }
         return false;
     }

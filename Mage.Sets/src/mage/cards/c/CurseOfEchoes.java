@@ -90,7 +90,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
             Permanent enchantment = game.getPermanent(sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
-                if (player != null && spell.getControllerId().equals(player.getId())) {
+                if (player != null && spell.isControlledBy(player.getId())) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
                     return true;
                 }

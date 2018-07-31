@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class AuroraChampion extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Aurora Champion attacks, if your team controls another Warrior, tap target creature.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new TapTargetEffect(), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "Whenever {this} attacks, if your team controls another Warrior, tap target creature."

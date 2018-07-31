@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -46,7 +46,7 @@ public final class AngelOfDeliverance extends CardImpl {
 
         // <i>Delirium</i> &mdash; Whenever Angel of Deliverance deals damage, if there are four or more card types among cards in your graveyard,
         // exile target creature an opponent controls.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AngelOfDeliveranceDealsDamageTriggeredAbility(),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Whenever {this} deals damage, if there are four or more card types among cards in your graveyard, exile target creature an opponent controls"

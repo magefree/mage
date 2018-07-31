@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.common.XorLessLifeCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -39,7 +39,7 @@ public final class CryptolithFragment extends CardImpl {
 
         // At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false),
                 new XorLessLifeCondition(XorLessLifeCondition.CheckType.EACH_PLAYER, 10),
                 "At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment."));

@@ -83,7 +83,7 @@ class TheFlameOfKeldDamageEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.getControllerId().equals(game.getControllerId(event.getSourceId()))) {
+        if (source.isControlledBy(game.getControllerId(event.getSourceId()))) {
             MageObject sourceObject;
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (sourcePermanent == null) {

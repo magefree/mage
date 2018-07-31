@@ -11,7 +11,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -59,7 +59,7 @@ public final class RavagerOfTheFells extends CardImpl {
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 TwoOrMoreSpellsWereCastLastTurnCondition.instance,
                 TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE
@@ -164,7 +164,7 @@ class RavagerOfTheFellsTarget extends TargetPermanent {
         }
         UUID firstTarget = player.getId();
         Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
+        if (firstTarget != null && permanent != null && permanent.isControlledBy(firstTarget)) {
             return super.canTarget(id, source, game);
         }
         return false;
@@ -191,7 +191,7 @@ class RavagerOfTheFellsTarget extends TargetPermanent {
             if (player != null) {
                 for (UUID targetId : availablePossibleTargets) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.getControllerId().equals(player.getId())) {
+                    if (permanent != null && permanent.isControlledBy(player.getId())) {
                         possibleTargets.add(targetId);
                     }
                 }

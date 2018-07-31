@@ -55,7 +55,7 @@ class OnceMoreWithFeelingEffect extends OneShotEffect {
 
     public OnceMoreWithFeelingEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile all permanents and all cards from all graveyards. Each player shuffles his or her hand into his or her library";
+        staticText = "Exile all permanents and all cards from all graveyards. Each player shuffles their hand into their library";
     }
 
     public OnceMoreWithFeelingEffect(final OnceMoreWithFeelingEffect effect) {

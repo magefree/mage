@@ -158,7 +158,7 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
             //   check permanent first
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                if (permanent.getControllerId().equals(source.getControllerId())) {
+                if (permanent.isControlledBy(source.getControllerId())) {
                     // it's your permanent
                     return true;
                 }

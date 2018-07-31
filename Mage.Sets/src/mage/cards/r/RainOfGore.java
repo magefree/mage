@@ -77,7 +77,7 @@ class RainOfGoreEffect extends ReplacementEffectImpl {
         if (!game.getStack().isEmpty()) {
             StackObject stackObject = game.getStack().getFirst();
             if (stackObject != null) {
-                return stackObject.getControllerId().equals(event.getPlayerId());
+                return stackObject.isControlledBy(event.getPlayerId());
             }
         }
         return false;

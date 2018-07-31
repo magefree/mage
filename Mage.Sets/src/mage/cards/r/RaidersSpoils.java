@@ -70,7 +70,7 @@ class RaidersSpoilsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (damageEvent.isCombatDamage() && permanent != null && permanent.hasSubtype(SubType.WARRIOR, game) && permanent.getControllerId().equals(controllerId)) {
+        if (damageEvent.isCombatDamage() && permanent != null && permanent.hasSubtype(SubType.WARRIOR, game) && permanent.isControlledBy(controllerId)) {
             return true;
         }
         return false;

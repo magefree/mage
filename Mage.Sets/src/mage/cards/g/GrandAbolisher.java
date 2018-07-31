@@ -85,7 +85,7 @@ class GrandAbolisherEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getActivePlayerId().equals(source.getControllerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (game.isActivePlayer(source.getControllerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             switch(event.getType()) {
                 case CAST_SPELL:
                     return true;

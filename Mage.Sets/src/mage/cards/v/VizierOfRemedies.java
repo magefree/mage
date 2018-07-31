@@ -76,7 +76,7 @@ class VizierOfRemediesReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (source != null && source.getControllerId() != null) {
-            if (source.getControllerId().equals(game.getControllerId(event.getTargetId()))
+            if (source.isControlledBy(game.getControllerId(event.getTargetId()))
                     && event.getData() != null && event.getData().equals(CounterType.M1M1.getName())
                     && event.getAmount() > 0) {
                 return true;

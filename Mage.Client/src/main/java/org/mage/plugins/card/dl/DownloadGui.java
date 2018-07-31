@@ -158,6 +158,7 @@ public class DownloadGui extends JPanel {
             b.addActionListener(e -> {
                 switch(this.job.getState()) {
                     case NEW:
+                    case PREPARING:
                     case WORKING:
                         this.job.setState(State.ABORTED);
                 }

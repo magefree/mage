@@ -85,13 +85,13 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
@@ -108,7 +108,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell
-                        && stackObject.getControllerId().equals(source.getControllerId())
+                        && stackObject.isControlledBy(source.getControllerId())
                         && stackObject.isCreature()) {
                     Card card = ((Spell) stackObject).getCard();
                     setCreatureSubtype(card, subType, game);

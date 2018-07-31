@@ -353,4 +353,11 @@ public interface Permanent extends Card, Controllable {
 
     void setCreateOrder(int createOrder);
 
+    default boolean isAttachedTo(UUID otherId){
+        if(getAttachedTo() == null){
+            return false;
+        }
+        return getAttachedTo().equals(otherId);
+    }
+
 }

@@ -48,8 +48,8 @@ public final class MinionReflector extends CardImpl {
                         "entered the battlefield?"),
                 filter, false, SetTargetPointer.PERMANENT,
                 "Whenever a nontoken creature enters the battlefield under your control, " +
-                "you may pay 2. If you do, create a token that's a copy of that creature. " +
-                "That token has haste and \"At the beginning of the end step, sacrifice this " +
+                "you may pay 2. If you do, create a token that's a copy of that creature, " +
+                "except it has haste and \"At the beginning of the end step, sacrifice this " +
                 "permanent.\"");
         this.addAbility(ability);
     }
@@ -69,7 +69,7 @@ class MinionReflectorEffect extends OneShotEffect {
 
     public MinionReflectorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "create a token that's a copy of that creature. That token has haste and \"At the beginning of the end step, sacrifice this permanent.";
+        this.staticText = "create a token that's a copy of that creature, except it has haste and \"At the beginning of the end step, sacrifice this permanent.";
     }
 
     public MinionReflectorEffect(final MinionReflectorEffect effect) {

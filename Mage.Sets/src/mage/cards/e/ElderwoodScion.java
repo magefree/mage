@@ -73,7 +73,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if (abilityToModify.getControllerId().equals(source.getControllerId())) {
+            if (abilityToModify.isControlledBy(source.getControllerId())) {
                 for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
                     Mode mode = abilityToModify.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {

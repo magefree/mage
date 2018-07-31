@@ -33,7 +33,7 @@ public class GoadAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
-            if (!creature.getControllerId().equals(source.getControllerId())) {
+            if (!creature.isControlledBy(source.getControllerId())) {
                 Effect effect = new GoadTargetEffect();
                 effect.setTargetPointer(new FixedTarget(creature, game));
                 effect.apply(game, source);

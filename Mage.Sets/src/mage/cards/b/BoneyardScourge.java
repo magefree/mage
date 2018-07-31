@@ -92,7 +92,7 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         for (Zone z : Zone.values()) {
-            if (game.getShortLivingLKI(sourceId, z) && !z.equals(Zone.GRAVEYARD)) {
+            if (game.getShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {
                 return false;
             }
         }

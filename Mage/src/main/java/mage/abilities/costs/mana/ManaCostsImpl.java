@@ -117,7 +117,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         Player player = game.getPlayer(controllerId);
-        assignPayment(game, ability, player.getManaPool(), this);
+        if (!player.getManaPool().isForcedToPay()) {
+            assignPayment(game, ability, player.getManaPool(), this);
+        }
         game.getState().getSpecialActions().removeManaActions();
         while (!isPaid()) {
             ManaCost unpaid = this.getUnpaid();
@@ -235,9 +237,14 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
-        if (!pool.isAutoPayment() && pool.getUnlockedManaType() == null) {
+        boolean wasUnlockedManaType = (pool.getUnlockedManaType() != null);
+        if (!pool.isAutoPayment() && !wasUnlockedManaType) {
             // if auto payment is inactive and no mana type was clicked manually - do nothing
             return;
+        }
+        ManaCosts referenceCosts = null;
+        if (pool.isForcedToPay()) {
+            referenceCosts = this.copy();
         }
         // attempt to pay colorless costs (not generic) mana costs first
         for (ManaCost cost : this) {
@@ -318,6 +325,31 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
         // stop using mana of the clicked mana type
         pool.lockManaType();
+        if (!wasUnlockedManaType) {
+            handleForcedToPayOnlyForCurrentPayment(game, pool, referenceCosts);
+        }
+    }
+
+    private void handleForcedToPayOnlyForCurrentPayment(Game game, ManaPool pool, ManaCosts referenceCosts) {
+        // for Word of Command
+        if (pool.isForcedToPay()) {
+            if (referenceCosts != null && this.getText().equals(referenceCosts.getText())) {
+                UUID playerId = pool.getPlayerId();
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    game.undo(playerId);
+                    this.clearPaid();
+                    this.setX(referenceCosts.getX());
+                    player.getManaPool().restoreMana(pool.getPoolBookmark());
+                    game.bookmarkState();
+                }
+            }
+        }
+    }
+
+    public void forceManaRollback(Game game, ManaPool pool) {
+        // for Word of Command
+        handleForcedToPayOnlyForCurrentPayment(game, pool, this);
     }
 
     @Override

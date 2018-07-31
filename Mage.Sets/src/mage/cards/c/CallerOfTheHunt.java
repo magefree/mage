@@ -49,7 +49,7 @@ public final class CallerOfTheHunt extends CardImpl {
         if (mageObject != null
                 && effect.apply(game, ability)) {
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new ChosenSubtypePredicate(mageObject.getId()));
+            filter.add(new ChosenSubtypePredicate());
             ContinuousEffect effectPower = new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.Custom);
             ContinuousEffect effectToughness = new SetToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.Custom);
             game.addEffect(effectPower, ability);

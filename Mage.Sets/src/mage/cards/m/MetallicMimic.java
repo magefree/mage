@@ -4,6 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.effects.common.continuous.AddChosenSubtypeEffect;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -32,10 +33,11 @@ public final class MetallicMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As Metallic Mimic enters the battlefield, choose a creature type.
-        AsEntersBattlefieldAbility ability = new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature), null, EnterEventType.SELF);
+        AsEntersBattlefieldAbility ability = new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature));
         // Metallic Mimic is the chosen type in addition to its other types.
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddChosenSubtypeEffect()));
 
         // Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MetallicMimicReplacementEffect()));
@@ -75,7 +77,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent enteringCreature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (enteringCreature != null && sourcePermanent != null
-                && enteringCreature.getControllerId().equals(source.getControllerId())
+                && enteringCreature.isControlledBy(source.getControllerId())
                 && enteringCreature.isCreature()
                 && !event.getTargetId().equals(source.getSourceId())) {
             SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);

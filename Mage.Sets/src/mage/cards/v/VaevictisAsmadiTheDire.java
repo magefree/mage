@@ -23,6 +23,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -79,6 +80,9 @@ class VaevictisAsmadiTheDireTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (!game.getCombat().getAttackers().contains(this.getSourceId())) {
+            return false;
+        }
         this.getTargets().clear();
         for (UUID playerId : game.getState().getPlayerList(this.getControllerId())) {
             Player player = game.getPlayer(playerId);
@@ -125,15 +129,17 @@ class VaevictisAsmadiTheDireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Player> playersToFlip = new ArrayList();
-        for (UUID permId : this.getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(permId);
-            if (permanent == null
-                    || !permanent.sacrifice(source.getSourceId(), game)) {
-                continue;
-            }
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                playersToFlip.add(player);
+        for (Target target : source.getTargets()) {
+            for (UUID permId : target.getTargets()) {
+                Permanent permanent = game.getPermanent(permId);
+                if (permanent == null
+                        || !permanent.sacrifice(source.getSourceId(), game)) {
+                    continue;
+                }
+                Player player = game.getPlayer(permanent.getControllerId());
+                if (player != null) {
+                    playersToFlip.add(player);
+                }
             }
         }
         for (Player player : playersToFlip) {

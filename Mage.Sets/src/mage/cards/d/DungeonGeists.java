@@ -89,7 +89,7 @@ class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (!(sourceObject instanceof Permanent) || !((Permanent) sourceObject).getControllerId().equals(source.getControllerId())) {
+        if (!(sourceObject instanceof Permanent) || !((Permanent) sourceObject).isControlledBy(source.getControllerId())) {
             discard();
             return false;
         }
@@ -109,7 +109,7 @@ class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
                 if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getTargetId().equals(targetPointer.getFirst(game, source))) {
                     Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
                     if (targetCreature != null) {
-                        return targetCreature.getControllerId().equals(game.getActivePlayerId());
+                        return targetCreature.isControlledBy(game.getActivePlayerId());
                     } else {
                         discard();
                         return false;

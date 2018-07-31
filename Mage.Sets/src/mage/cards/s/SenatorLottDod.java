@@ -75,7 +75,7 @@ class SenatorLottDodSpellsTargetingCreatureCostReductionEffect extends CostModif
                     for (Target target : mode.getTargets()) {
                         for (UUID targetUUID : target.getTargets()) {
                             Permanent permanent = game.getPermanent(targetUUID);
-                            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
+                            if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
                                 return true;
                             }
                         }

@@ -3,13 +3,14 @@ package mage.game.command.emblems;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.command.Emblem;
 import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author spjspj
+ * @author TheElk801
  */
 public class TezzeretArtificeMasterEmblem extends Emblem {
 
@@ -18,9 +19,10 @@ public class TezzeretArtificeMasterEmblem extends Emblem {
         this.setName("Emblem Tezzeret");
         this.setExpansionSetCodeForImage("M19");
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(
+                Zone.COMMAND,
                 new SearchLibraryPutInPlayEffect(
                         new TargetCardInLibrary(new FilterPermanentCard())
-                ), TargetController.YOU, false
+                ), TargetController.YOU, null, false
         ));
     }
 }

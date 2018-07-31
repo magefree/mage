@@ -89,7 +89,7 @@ class RootSliverEffect extends ContinuousRuleModifyingEffectImpl {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.hasSubtype(SubType.SLIVER, game)) {
             MageObject sourceObject = game.getObject(event.getSourceId());
-            if (sourceObject != null && sourceObject instanceof StackObject) {
+            if (sourceObject instanceof StackObject) {
                 return true;
             }
         }

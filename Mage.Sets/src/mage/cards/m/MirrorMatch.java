@@ -70,7 +70,7 @@ class MirrorMatchEffect extends OneShotEffect {
             for (UUID attackerId : game.getCombat().getAttackers()) {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null
-                        && source.getControllerId().equals(game.getCombat().getDefendingPlayerId(attackerId, game))) {
+                        && source.isControlledBy(game.getCombat().getDefendingPlayerId(attackerId, game))) {
                     CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false);
                     effect.setTargetPointer(new FixedTarget(attacker, game));
                     effect.apply(game, source);

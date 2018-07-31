@@ -18,6 +18,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
@@ -30,7 +32,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class BrineShaman extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("noncreature spell");
+    private static final FilterSpell filter = new FilterSpell("creature spell");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
@@ -54,7 +56,7 @@ public final class BrineShaman extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addCost(new ManaCostsImpl("{1}{U}{U}"));
-        ability.addTarget(new TargetSpell(filter));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
         this.addAbility(ability);
     }
 

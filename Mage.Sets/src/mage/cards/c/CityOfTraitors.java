@@ -62,7 +62,7 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
         return land.isLand()
-                && land.getControllerId().equals(this.controllerId)
+                && land.isControlledBy(this.controllerId)
                 && !Objects.equals(event.getTargetId(), this.getSourceId());
     }
 

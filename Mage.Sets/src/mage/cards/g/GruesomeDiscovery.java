@@ -31,12 +31,12 @@ public final class GruesomeDiscovery extends CardImpl {
 
 
         // Target player discards two cards.
-        // Morbid - If a creature died this turn, instead that player reveals their hand, you choose two cards from it, then that player discards those cards.
+        // <i>Morbid</i> &mdash; If a creature died this turn, instead that player reveals their hand, you choose two cards from it, then that player discards those cards.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GruesomeDiscoveryEffect(),
                 new DiscardTargetEffect(2),
                 MorbidCondition.instance,
-                "Target player discards two cards. Morbid - If a creature died this turn, instead that player reveals their hand, you choose two cards from it, then that player discards those cards"));
+                "Target player discards two cards. <i>Morbid</i> &mdash; If a creature died this turn, instead that player reveals their hand, you choose two cards from it, then that player discards those cards"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

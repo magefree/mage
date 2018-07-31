@@ -91,7 +91,7 @@ class RisenExecutionerCastEffect extends AsThoughEffectImpl {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
             if (card != null
-                    && card.getOwnerId().equals(affectedControllerId)
+                    && card.isOwnedBy(affectedControllerId)
                     && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 return true;
             }

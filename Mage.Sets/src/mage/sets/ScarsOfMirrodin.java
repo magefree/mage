@@ -244,7 +244,7 @@ public final class ScarsOfMirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Tel-Jilad Defiance", 129, Rarity.COMMON, mage.cards.t.TelJiladDefiance.class));
         cards.add(new SetCardInfo("Tel-Jilad Fallen", 130, Rarity.COMMON, mage.cards.t.TelJiladFallen.class));
         cards.add(new SetCardInfo("Tempered Steel", 24, Rarity.RARE, mage.cards.t.TemperedSteel.class));
-        cards.add(new SetCardInfo("Throne of Geth", 211, Rarity.UNCOMMON, mage.cards.t.ThroneofGeth.class));
+        cards.add(new SetCardInfo("Throne of Geth", 211, Rarity.UNCOMMON, mage.cards.t.ThroneOfGeth.class));
         cards.add(new SetCardInfo("Thrummingbird", 47, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Tower of Calamities", 212, Rarity.RARE, mage.cards.t.TowerOfCalamities.class));
         cards.add(new SetCardInfo("Trigon of Corruption", 213, Rarity.UNCOMMON, mage.cards.t.TrigonOfCorruption.class));

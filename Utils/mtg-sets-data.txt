@@ -32,10 +32,12 @@ Commander 2014 Edition|C14|
 Commander 2015 Edition|C15|
 Commander 2016 Edition|C16|
 Commander 2017 Edition|C17|
+Commander 2018 Edition|C18|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
 Commander Anthology|CMA|
+Commander Anthology 2018|CM2|
 Commander's Arsenal|CM1|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|

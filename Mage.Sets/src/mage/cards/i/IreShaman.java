@@ -115,7 +115,7 @@ class IreShamanCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId)
+        return source.isControlledBy(affectedControllerId)
                 && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

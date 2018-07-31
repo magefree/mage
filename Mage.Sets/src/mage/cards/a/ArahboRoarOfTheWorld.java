@@ -7,7 +7,7 @@ import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldOrCommandZoneCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -56,7 +56,7 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Eminence &mdash; At the beginning of combat on your turn, if Arahbo, Roar of the World is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(Zone.ALL, new BoostTargetEffect(3, 3, Duration.EndOfTurn), TargetController.YOU, false, false),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
                 "<i>Eminence</i> &mdash; At the beginning of combat on your turn, if Arahbo, Roar of the World is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.");

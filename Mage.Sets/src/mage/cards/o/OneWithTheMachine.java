@@ -6,6 +6,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -18,7 +19,7 @@ public final class OneWithTheMachine extends CardImpl {
 
         // Draw cards equal to the highest converted mana cost among artifacts you control.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                new HighestConvertedManaCostValue()
+                new HighestConvertedManaCostValue(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT)
         ).setText("Draw cards equal to the highest converted mana cost among artifacts you control"));
     }
 

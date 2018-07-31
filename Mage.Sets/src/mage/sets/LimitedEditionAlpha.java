@@ -309,6 +309,7 @@ public final class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Will-o'-the-Wisp", 135, Rarity.RARE, mage.cards.w.WillOTheWisp.class));
         cards.add(new SetCardInfo("Winter Orb", 275, Rarity.RARE, mage.cards.w.WinterOrb.class));
         cards.add(new SetCardInfo("Wooden Sphere", 276, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));
+        cards.add(new SetCardInfo("Word of Command", 136, Rarity.RARE, mage.cards.w.WordOfCommand.class));
         cards.add(new SetCardInfo("Wrath of God", 45, Rarity.RARE, mage.cards.w.WrathOfGod.class));
         cards.add(new SetCardInfo("Zombie Master", 137, Rarity.RARE, mage.cards.z.ZombieMaster.class));
     }

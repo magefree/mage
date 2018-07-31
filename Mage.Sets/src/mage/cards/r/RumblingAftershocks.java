@@ -78,7 +78,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.getControllerId().equals(controllerId)) {
+        if (spell != null && spell.isControlledBy(controllerId)) {
             int damageAmount = 0;
             for (Ability ability: spell.getAbilities()) {
                 if (ability instanceof KickerAbility) {

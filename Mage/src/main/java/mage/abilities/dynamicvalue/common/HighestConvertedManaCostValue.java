@@ -32,7 +32,7 @@ public class HighestConvertedManaCostValue implements DynamicValue {
             return 0;
         }
         int highCMC = 0;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
             int cmc = permanent.getConvertedManaCost();
             highCMC = Math.max(highCMC, cmc);
         }

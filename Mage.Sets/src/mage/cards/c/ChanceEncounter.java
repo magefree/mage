@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class ChanceEncounter extends CardImpl {
         
         // At the beginning of your upkeep, if Chance Encounter has ten or more luck counters on it, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.YOU, false);        
-        this.addAbility(new ConditionalTriggeredAbility(ability, new SourceHasCounterCondition(CounterType.LUCK, 10, Integer.MAX_VALUE),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceHasCounterCondition(CounterType.LUCK, 10, Integer.MAX_VALUE),
                 "At the beginning of your upkeep, if {this} has ten or more luck counters on it, you win the game"));
     }
 
@@ -68,7 +68,7 @@ class ChanceEncounterTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return this.getControllerId().equals(event.getPlayerId()) && event.getFlag();
+        return this.isControlledBy(event.getPlayerId()) && event.getFlag();
     }
     
     @Override

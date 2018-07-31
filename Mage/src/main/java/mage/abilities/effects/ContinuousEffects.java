@@ -465,7 +465,7 @@ public class ContinuousEffects implements Serializable {
         for (SpliceCardEffect effect : spliceCardEffects) {
             Set<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (ability.getControllerId().equals(playerId) && (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null))) {
+                if (ability.isControlledBy(playerId) && (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null))) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         spliceEffects.add(effect);
                         break;
@@ -543,7 +543,7 @@ public class ContinuousEffects implements Serializable {
      * @param game
      * @return
      */
-    private List<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
+    public List<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
         List<AsThoughEffect> asThoughEffectsList = new ArrayList<>();
         if (asThoughEffectsMap.containsKey(type)) {
             for (AsThoughEffect effect : asThoughEffectsMap.get(type)) {

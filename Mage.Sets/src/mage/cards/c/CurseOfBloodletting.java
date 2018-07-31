@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -16,14 +15,15 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class CurseOfBloodletting extends CardImpl {
 
     public CurseOfBloodletting(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
 
@@ -71,10 +71,9 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && 
-                enchantment.getAttachedTo() != null &&
-                event.getTargetId().equals(enchantment.getAttachedTo())) {
-                return true;
+        if (enchantment != null &&
+                enchantment.isAttachedTo(event.getTargetId())) {
+            return true;
         }
         return false;
     }

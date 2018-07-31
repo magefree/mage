@@ -79,7 +79,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                 Permanent attachment = game.getPermanent(sourceId);
                 if (attachment != null && attachment.getAttachedTo() != null) {
                     Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                    if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
+                    if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
                         if (getTargets().isEmpty()) {
                             for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

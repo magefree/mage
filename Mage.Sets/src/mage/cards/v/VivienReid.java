@@ -14,6 +14,7 @@ import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,12 +57,15 @@ public final class VivienReid extends CardImpl {
         // +1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new LoyaltyAbility(
                 new LookLibraryAndPickControllerEffect(
-                        new StaticValue(4), false, new StaticValue(1), filter, false
-                ), 1
+                        new StaticValue(4), false, new StaticValue(1), filter,
+                        Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false)
+                        .setBackInRandomOrder(true)
+                        .setText("Look at the top four cards of your library. You may reveal a creature or land card from among them"
+                                + " and put it into your hand. Put the rest on the bottom of your library in a random order."), 1
         ));
 
         // -3: Destroy target artifact, enchantment, or creature with flying.
-        Ability ability = new LoyaltyAbility(new DestroyTargetEffect());
+        Ability ability = new LoyaltyAbility(new DestroyTargetEffect(), -3);
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
 

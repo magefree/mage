@@ -58,7 +58,7 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent p = game.getPermanent(event.getTargetId());
-        if (p != null && p.isTapped() && p.getControllerId().equals(this.controllerId)) {
+        if (p != null && p.isTapped() && p.isControlledBy(this.controllerId)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }

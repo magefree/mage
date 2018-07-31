@@ -79,7 +79,7 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
                     && permanent.isLand());  // a played land is not an effect
         }
         return permanent != null
-                && permanent.getControllerId().equals(source.getControllerId())
+                && permanent.isControlledBy(source.getControllerId())
                 && !landPlayed;  // example: gemstone mine being played as a land drop
     }
 

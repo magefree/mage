@@ -182,7 +182,7 @@ class FlickerformReturnEffect extends OneShotEffect {
                 if (!toBattlefieldAttached.isEmpty()) {
                     controller.moveCards(toBattlefieldAttached, Zone.BATTLEFIELD, source, game);
                     for (Card card : toBattlefieldAttached) {
-                        if (game.getState().getZone(card.getId()).equals(Zone.BATTLEFIELD)) {
+                        if (game.getState().getZone(card.getId()) == Zone.BATTLEFIELD) {
                             newPermanent.addAttachment(card.getId(), game);
                         }
                     }

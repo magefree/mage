@@ -79,7 +79,7 @@ class LashknifeBarrierEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
-        return creature.getControllerId().equals(source.getControllerId());
+        return creature.isControlledBy(source.getControllerId());
     }
 
 }

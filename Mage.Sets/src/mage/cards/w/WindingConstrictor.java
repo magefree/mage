@@ -79,7 +79,7 @@ class WindingConstrictorPermanentEffect extends ReplacementEffectImpl {
         }
         return permanent != null
                 && (permanent.isCreature() || permanent.isArtifact())
-                && permanent.getControllerId().equals(source.getControllerId());
+                && permanent.isControlledBy(source.getControllerId());
     }
 
     @Override

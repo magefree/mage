@@ -8,10 +8,10 @@ import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- *
  * @author Pete Rossi
  */
 public enum MagidexImageSource implements CardImageSource {
@@ -233,7 +233,7 @@ public enum MagidexImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         String cardDownloadName = card.getDownloadName().toLowerCase(Locale.ENGLISH);
         String cardSet = card.getSet();
 
@@ -247,7 +247,7 @@ public enum MagidexImageSource implements CardImageSource {
 
         // This will properly escape the url
         URI uri = new URI("http", "magidex.com", "/extstatic/card/" + formatSetName(cardSet) + '/' + cardDownloadName + ".jpg", null, null);
-        return uri.toASCIIString();
+        return new CardImageUrls(uri.toASCIIString());
     }
 
     private String formatSetName(String setName) {
@@ -264,7 +264,7 @@ public enum MagidexImageSource implements CardImageSource {
     };
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) {
         return null;
     }
 

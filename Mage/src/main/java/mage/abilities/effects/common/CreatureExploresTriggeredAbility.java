@@ -26,7 +26,7 @@ public class CreatureExploresTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (creature != null) {
-            return creature.getControllerId().equals(getControllerId());
+            return creature.isControlledBy(getControllerId());
         }
         return false;
     }

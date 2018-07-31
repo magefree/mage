@@ -120,7 +120,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if (abilityToModify.getControllerId().equals(source.getControllerId())) {
+            if (abilityToModify.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
                     return spell.isCreature();

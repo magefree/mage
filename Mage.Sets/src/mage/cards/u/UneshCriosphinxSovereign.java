@@ -98,7 +98,7 @@ class UneshCriosphinxSovereignTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.getOwnerId().equals(controllerId)
+                && permanent.isOwnedBy(controllerId)
                 && permanent.isCreature()
                 && (event.getTargetId().equals(getSourceId()) || filter.match(permanent, game))) {
             return true;

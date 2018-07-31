@@ -29,7 +29,7 @@ import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
 
 
-//import mage.abilities.decorator.ConditionalTriggeredAbility;
+//import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 
 /**
  *

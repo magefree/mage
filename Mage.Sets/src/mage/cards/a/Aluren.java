@@ -74,7 +74,7 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
     
     public AlurenRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Any player may play creature cards with converted mana cost 3 or less without paying their mana cost";
+        staticText = "Any player may cast creature cards with converted mana cost 3 or less without paying their mana cost";
     }
 
     public AlurenRuleEffect(final AlurenRuleEffect effect) {

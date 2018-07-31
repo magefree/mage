@@ -8,7 +8,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.condition.OrCondition;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,7 +42,7 @@ public final class WretchedCamel extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Wretched Camel dies, if you control a Desert or there is a Desert card in your graveyard, target player discards a card.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new DiesTriggeredAbility(new DiscardTargetEffect(1)),
                 new OrCondition(
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),

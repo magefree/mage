@@ -3,6 +3,8 @@ package mage.game;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -119,15 +121,17 @@ public interface Game extends MageItem, Serializable {
      * @param playerId
      * @return
      */
-    default public Set<UUID> getOpponents(UUID playerId) {
-        Set<UUID> opponents = new HashSet<>();
+    default Set<UUID> getOpponents(UUID playerId) {
         Player player = getPlayer(playerId);
-        for (UUID opponentId : player.getInRange()) {
-            if (!opponentId.equals(playerId)) {
-                opponents.add(opponentId);
-            }
-        }
-        return opponents;
+        return player.getInRange().stream()
+                .filter(opponentId -> !opponentId.equals(playerId))
+                .collect(Collectors.toSet());
+
+    }
+
+
+    default boolean isActivePlayer(UUID playerId){
+        return getActivePlayerId().equals(playerId);
     }
 
     /**
@@ -141,7 +145,7 @@ public interface Game extends MageItem, Serializable {
      * @param playerToCheckId
      * @return
      */
-    default public boolean isOpponent(Player player, UUID playerToCheckId) {
+    default boolean isOpponent(Player player, UUID playerToCheckId) {
         return !player.getId().equals(playerToCheckId);
     }
 
@@ -393,6 +397,8 @@ public interface Game extends MageItem, Serializable {
     boolean checkStateAndTriggered();
 
     void playPriority(UUID activePlayerId, boolean resuming);
+
+    void resetControlAfterSpellResolve(UUID topId);
 
     boolean endTurn(Ability source);
 

@@ -86,8 +86,8 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
             // remove old control effects of the same player
             for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
                 if (effect instanceof GainControlTargetEffect) {
-                    UUID checkId = (UUID) ((GainControlTargetEffect) effect).getValue("KaronaFalseGodSourceId");
-                    UUID controllerId = (UUID) ((GainControlTargetEffect) effect).getValue("KaronaFalseGodControllerId");
+                    UUID checkId = (UUID) effect.getValue("KaronaFalseGodSourceId");
+                    UUID controllerId = (UUID) effect.getValue("KaronaFalseGodControllerId");
                     if (source.getSourceId().equals(checkId) && newController.getId().equals(controllerId)) {
                         effect.discard();
                     }
