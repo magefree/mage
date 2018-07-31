@@ -286,7 +286,7 @@ public abstract class ExpansionSet implements Serializable {
         }
         //Battlebond packs alway contain both partners
         if (hasPartnerMechanic){
-            List<Card> booster = createPartnerBooster();
+            booster = createPartnerBooster();
             return booster;
         }
         return tryBooster();
