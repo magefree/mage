@@ -231,7 +231,14 @@ public abstract class ExpansionSet implements Serializable {
                 return booster;
             }
         }
+        
+         //Battlebond packs alway contain both partners
+        if (hasPartnerMechanic){
+            booster = createPartnerBooster();
+            return booster;
+        }
         return tryBooster();
+        
     }
 
     protected boolean boosterIsValid(List<Card> booster) {
@@ -284,12 +291,6 @@ public abstract class ExpansionSet implements Serializable {
                 }
             }
         }
-        //Battlebond packs alway contain both partners
-        if (hasPartnerMechanic){
-            booster = createPartnerBooster();
-            return booster;
-        }
-        return tryBooster();
 
         // check that all colors are present
         if (magicColors.stream().anyMatch(color -> colorWeight.get(color) < 60)) {
