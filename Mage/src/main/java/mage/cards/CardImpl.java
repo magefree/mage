@@ -856,11 +856,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public FilterMana getColorIdentity() {
         FilterMana mana = new FilterMana();
-        mana.setBlack(getManaCost().getText().matches(regexBlack)||color.isBlack());
-        mana.setBlue(getManaCost().getText().matches(regexBlue)||color.isBlue());
-        mana.setGreen(getManaCost().getText().matches(regexGreen)||color.isGreen());
-        mana.setRed(getManaCost().getText().matches(regexRed)||color.isRed());
-        mana.setWhite(getManaCost().getText().matches(regexWhite)||color.isWhite());
+        mana.setBlack(getManaCost().getText().matches(regexBlack));
+        mana.setBlue(getManaCost().getText().matches(regexBlue));
+        mana.setGreen(getManaCost().getText().matches(regexGreen));
+        mana.setRed(getManaCost().getText().matches(regexRed));
+        mana.setWhite(getManaCost().getText().matches(regexWhite));
 
         for (String rule : getRules()) {
             rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
