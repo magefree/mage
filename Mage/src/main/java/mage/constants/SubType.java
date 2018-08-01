@@ -1,11 +1,11 @@
 package mage.constants;
 
+import mage.util.SubTypeList;
+
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import mage.util.SubTypeList;
 
 public enum SubType {
 
@@ -363,6 +363,7 @@ public enum SubType {
     ZUBERA("Zubera", SubTypeSet.CreatureType),
     // Planeswalker
     AJANI("Ajani", SubTypeSet.PlaneswalkerType),
+    AMINATOU("Aminatou", SubTypeSet.PlaneswalkerType),
     ANGRATH("Angrath", SubTypeSet.PlaneswalkerType),
     ARLINN("Arlinn", SubTypeSet.PlaneswalkerType),
     ASHIOK("Ashiok", SubTypeSet.PlaneswalkerType),
@@ -457,8 +458,6 @@ public enum SubType {
         org.apache.log4j.Logger.getLogger(SubType.class).error("no subtype for " + subType + " exists");
         return null;
     }
-
-    ;
 
     public SubTypeSet getSubTypeSet() {
         return subTypeSet;
