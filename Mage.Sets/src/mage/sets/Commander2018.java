@@ -129,6 +129,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Fury Storm", 22, Rarity.RARE, mage.cards.f.FuryStorm.class));
         cards.add(new SetCardInfo("Gaze of Granite", 181, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
         cards.add(new SetCardInfo("Genesis Storm", 30, Rarity.RARE, mage.cards.g.GenesisStorm.class));
+        cards.add(new SetCardInfo("Geode Golem", 56, Rarity.UNCOMMON, mage.cards.g.GeodeGolem.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 249, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Grapple with the Past", 148, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Great Furnace", 250, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
