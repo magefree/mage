@@ -7,6 +7,7 @@ import mage.abilities.common.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.LoseLifePermanentControllerEffect;
@@ -42,10 +43,13 @@ public final class XantchaSleeperAgent extends CardImpl {
         this.addAbility(ability);
 
         // Xantcha attacks each combat if able and can’t attack its owner or planeswalkers its owner controls.
-        this.addAbility(new AttacksEachCombatStaticAbility());
+        ability = new AttacksEachCombatStaticAbility();
+        Effect effect = new XantchaSleeperAgentAttackRestrictionEffect();
+        ability.addEffect(effect);
+        this.addAbility(ability);
 
         // {3}: Xantcha’s controller loses 2 life and you draw a card. Any player may activate this ability.
-        Effect effect = new LoseLifePermanentControllerEffect(2);
+        effect = new LoseLifePermanentControllerEffect(2);
         effect.setText("Xantcha’s controller loses 2 life");
         SimpleActivatedAbility simpleAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}"));
 
@@ -94,5 +98,45 @@ class XantchaSleeperAgentChangeControlEffect extends ContinuousEffectImpl {
             discard();
         }
         return false;
+    }
+}
+
+class XantchaSleeperAgentAttackRestrictionEffect extends RestrictionEffect {
+
+    XantchaSleeperAgentAttackRestrictionEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "and can't attack its owner or planeswalkers its owner controls.";
+    }
+
+    XantchaSleeperAgentAttackRestrictionEffect(final XantchaSleeperAgentAttackRestrictionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public XantchaSleeperAgentAttackRestrictionEffect copy() {
+        return new XantchaSleeperAgentAttackRestrictionEffect(this);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+
+        boolean allowAttack = true;
+        UUID ownerPlayerId = source.getSourcePermanentIfItStillExists(game).getOwnerId();
+
+        if (defenderId.equals(ownerPlayerId)) {
+            allowAttack = false;
+        }
+        else {
+            Permanent planeswalker = game.getPermanent(defenderId);
+            if (planeswalker != null && planeswalker.isControlledBy(ownerPlayerId)) {
+                allowAttack = false;
+            }
+        }
+        return allowAttack;
     }
 }
