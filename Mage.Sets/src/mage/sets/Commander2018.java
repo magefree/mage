@@ -318,6 +318,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Woodland Stream", 292, Rarity.COMMON, mage.cards.w.WoodlandStream.class));
         cards.add(new SetCardInfo("Worm Harvest", 194, Rarity.RARE, mage.cards.w.WormHarvest.class));
         cards.add(new SetCardInfo("Worn Powerstone", 230, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
+        cards.add(new SetCardInfo("Xantcha, Sleeper Agent", 50, Rarity.RARE, mage.cards.x.XantchaSleeperAgent.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 166, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Yavimaya Enchantress", 167, Rarity.COMMON, mage.cards.y.YavimayaEnchantress.class));
         cards.add(new SetCardInfo("Yennet, Crypt Sovereign", 51, Rarity.MYTHIC, mage.cards.y.YennetCryptSovereign.class));
