@@ -39,11 +39,11 @@ public final class PuresteelPaladin extends CardImpl {
 
         // Whenever an Equipment enters the battlefield under your control, you may draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
-        // Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts
+        // <i>Metalcraft</i> &mdash; Equipment you control have equip {0} as long as you control three or more artifacts
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)), Duration.WhileOnBattlefield, filter),
                 MetalcraftCondition.instance,
-                "Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts")));
+                "<i>Metalcraft</i> &mdash; Equipment you control have equip {0} as long as you control three or more artifacts")));
     }
 
     public PuresteelPaladin(final PuresteelPaladin card) {

@@ -127,7 +127,7 @@ public class CantCastTest extends CardTestPlayerBase {
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
 
-        // Metalcraft - {T}: Add one mana of any color. Activate this ability only if you control three or more artifacts.
+        // <i>Metalcraft</i> &mdash; {T}: Add one mana of any color. Activate this ability only if you control three or more artifacts.
         addCard(Zone.HAND, playerA, "Mox Opal", 1); // {0}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Opal");

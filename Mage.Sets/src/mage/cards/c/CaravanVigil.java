@@ -26,7 +26,7 @@ public final class CaravanVigil extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
-        // Morbid - You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.
+        // <i>Morbid</i> &mdash; You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.
         this.getSpellAbility().addEffect(new CaravanVigilEffect());
     }
 

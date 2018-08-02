@@ -21,7 +21,7 @@ public final class PredatorsHowl extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Create a 2/2 green Wolf creature token.
-        // Morbid - Create three 2/2 green Wolf creature tokens instead if a creature died this turn.
+        // <i>Morbid</i> &mdash; Create three 2/2 green Wolf creature tokens instead if a creature died this turn.
         Effect effect = new ConditionalOneShotEffect(
                 new CreateTokenEffect(new WolfToken(), 3),
                 new CreateTokenEffect(new WolfToken(), 1),

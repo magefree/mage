@@ -19,7 +19,7 @@ import mage.constants.SubType;
  */
 public final class HollowhengeScavenger extends CardImpl {
 
-    private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
+    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
 
     public HollowhengeScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
@@ -28,7 +28,7 @@ public final class HollowhengeScavenger extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // Morbid - When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.
+        // <i>Morbid</i> &mdash; When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }

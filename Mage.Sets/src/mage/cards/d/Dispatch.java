@@ -22,7 +22,7 @@ public final class Dispatch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.instance, "Metalcraft - If you control three or more artifacts, exile that creature"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.instance, "<i>Metalcraft</i> &mdash; If you control three or more artifacts, exile that creature"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

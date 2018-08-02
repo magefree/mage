@@ -23,8 +23,8 @@ import mage.constants.Zone;
  */
 public final class AuriokSunchaser extends CardImpl {
 
-    protected static String effect1Text = "Metalcraft - As long as you control three or more artifacts, Auriok Sunchaser gets +2/+2";
-    protected static String effect2Text = "Metalcraft - As long as you control three or more artifacts, Auriok Sunchaser has flying";
+    protected static String effect1Text = "<i>Metalcraft</i> &mdash; As long as you control three or more artifacts, Auriok Sunchaser gets +2/+2";
+    protected static String effect2Text = "<i>Metalcraft</i> &mdash; As long as you control three or more artifacts, Auriok Sunchaser has flying";
 
     public AuriokSunchaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

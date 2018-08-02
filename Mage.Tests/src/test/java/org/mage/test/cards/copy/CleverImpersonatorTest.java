@@ -191,4 +191,34 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         assertType(dReflection, CardType.ENCHANTMENT, true);
     }
 
+    @Test
+    public void testKindredDiscovery() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "Kindred Discovery");
+
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+        // Skip your draw step.
+        addCard(Zone.BATTLEFIELD, playerB, "Dragon Appeasement");
+        addCard(Zone.HAND, playerB, "Clever Impersonator");
+        addCard(Zone.HAND, playerB, "Ornithopter", 2);
+        addCard(Zone.HAND, playerB, "Memnite");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kindred Discovery");
+        setChoice(playerA, "Construct");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
+        setChoice(playerB, "Kindred Discovery");
+        setChoice(playerB, "Thopter");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Ornithopter");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Ornithopter");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Memnite");
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertHandCount(playerB, 2);
+    }
+
 }

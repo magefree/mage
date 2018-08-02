@@ -11,6 +11,8 @@ import mage.game.permanent.Permanent;
 
 /**
  *
+ * IMPORTANT: This only adds the chosen subtype while the source permanent is entering the battlefield.
+ * You should also use @link{mage.abilities.effects.common.continuous.AddChosenSubtypeEffect} to make the subtype persist.
  * @author LevelX2
  */
 public class EnterAttributeAddChosenSubtypeEffect extends OneShotEffect {
@@ -34,12 +36,8 @@ public class EnterAttributeAddChosenSubtypeEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
         if (permanent != null && subtype != null) {
-            MageObject mageObject = permanent.getBasicMageObject(game);
-            if (!mageObject.getSubtype(null).contains(subtype)) {
-                mageObject.getSubtype(null).add(subtype);
-            }
-            if (!permanent.getSubtype(null).contains(subtype)) {
-                permanent.getSubtype(null).add(subtype);
+            if (!permanent.getSubtype(game).contains(subtype)) {
+                permanent.getSubtype(game).add(subtype);
             }
             return true;
         }
