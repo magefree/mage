@@ -24,7 +24,7 @@ public final class BrimstoneVolley extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Brimstone Volley deals 3 damage to any target.
-        // Morbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.
+        // <i>Morbid</i> &mdash; Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.
         this.getSpellAbility().addEffect(new BrimstoneVolleyEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
@@ -43,7 +43,7 @@ class BrimstoneVolleyEffect extends OneShotEffect {
 
     public BrimstoneVolleyEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 3 damage to any target.\n Morbid - {this} deals 5 damage to that permanent or player instead if a creature died this turn";
+        staticText = "{this} deals 3 damage to any target.\n <i>Morbid</i> &mdash; {this} deals 5 damage to that permanent or player instead if a creature died this turn";
     }
 
     public BrimstoneVolleyEffect(final BrimstoneVolleyEffect effect) {

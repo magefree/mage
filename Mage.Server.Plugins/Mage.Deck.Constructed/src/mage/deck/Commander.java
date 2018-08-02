@@ -1,4 +1,3 @@
-
 package mage.deck;
 
 import java.util.*;
@@ -23,6 +22,7 @@ import mage.filter.FilterMana;
 public class Commander extends Constructed {
 
     protected List<String> bannedCommander = new ArrayList<>();
+    protected boolean partnerAllowed = true;
 
     public Commander() {
         this("Commander");
@@ -105,6 +105,9 @@ public class Commander extends Constructed {
         }
 
         if (deck.getSideboard().size() < 1 || deck.getSideboard().size() > 2) {
+            if ((deck.getSideboard().size() > 1 && !partnerAllowed)) {
+                invalid.put("Commander", "You may only have one commander");
+            }
             invalid.put("Commander", "Sideboard must contain only the commander(s)");
             valid = false;
         } else {

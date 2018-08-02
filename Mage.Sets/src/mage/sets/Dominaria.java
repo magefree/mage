@@ -26,7 +26,7 @@ public final class Dominaria extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.needsLegends = true;
+        this.needsLegendCreature = true;
         this.maxCardNumberInBooster = 269;
 
         cards.add(new SetCardInfo("Academy Drake", 40, Rarity.COMMON, mage.cards.a.AcademyDrake.class));

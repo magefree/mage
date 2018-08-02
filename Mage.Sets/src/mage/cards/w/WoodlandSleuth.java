@@ -27,7 +27,7 @@ import mage.util.RandomUtil;
  */
 public final class WoodlandSleuth extends CardImpl {
 
-    private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.";
+    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.";
 
     public WoodlandSleuth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
@@ -38,7 +38,7 @@ public final class WoodlandSleuth extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Morbid - When Woodland Sleuth enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.
+        // <i>Morbid</i> &mdash; When Woodland Sleuth enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new WoodlandSleuthEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }
