@@ -18,7 +18,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -219,18 +221,24 @@ class ConsumeCardTypeCost extends CostImpl{
         if (isPaid()){
             return true;
         }
-        Choice choice = new CardTypeChoice(exileHandler.availableTypes(types));
-        if (!game.getPlayer(controllerId).choose(Outcome.Neutral, choice, game)) {
-            return false;
-        }
-        CardType choiceType = null;
-            for (CardType type:EnumSet.allOf(CardType.class)){
-                if (type.toString().equals(choice.getChoice())){
-                    choiceType = type;
-                    break;
-                }
+        CardType choiceType;
+        EnumSet<CardType> availableChoices = exileHandler.availableTypes(types);
+        if (availableChoices.size()==1){
+            // if there is only one possibility, don't need to prompt for a choice
+            choiceType = availableChoices.iterator().next();
+        }else {
+            Choice choice = new CardTypeChoice(availableChoices);
+            if (!game.getPlayer(controllerId).choose(Outcome.Neutral, choice, game)) {
+                return false;
             }
-            paid = exileHandler.useCardType(choiceType);
+            Optional<CardType> optionalChoice = Arrays.stream(CardType.values()).filter(type -> type.toString().equals(choice.getChoice())).findAny();
+            if (optionalChoice.isPresent()){
+                choiceType = optionalChoice.get();
+            }else{
+                return false;
+            }
+        }
+        paid = exileHandler.useCardType(choiceType);
         return paid;
     }
 
