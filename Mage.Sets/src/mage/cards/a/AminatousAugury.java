@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -75,7 +76,7 @@ class AminatousAuguryEffect extends OneShotEffect{
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             // move cards from library to exile
-            controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, source.getSourceId(), sourceObject.getIdName());
+            controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
             ExileZone auguryExileZone = game.getExile().getExileZone(source.getSourceId());
             if (auguryExileZone == null) {
                 return true;
@@ -87,11 +88,13 @@ class AminatousAuguryEffect extends OneShotEffect{
                     Zone.EXILED,
                     StaticFilters.FILTER_CARD_LAND_A
             );
-            if (controller.choose(Outcome.PutCardInPlay, cardsToCast, target, game)) {
-                Card card = cardsToCast.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cardsToCast.remove(card);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            if (controller.chooseUse(Outcome.PutLandInPlay, "Put a land from among the exiled cards into play?", source, game)) {
+                if (controller.choose(Outcome.PutLandInPlay, cardsToCast, target, game)) {
+                    Card card = cardsToCast.get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        cardsToCast.remove(card);
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+                    }
                 }
             }
             AminatousAuguryExileHandler exileHandler = new AminatousAuguryExileHandler(cardsToCast, source, game);
