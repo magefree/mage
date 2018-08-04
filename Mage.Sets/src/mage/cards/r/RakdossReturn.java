@@ -15,6 +15,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -29,7 +30,7 @@ public final class RakdossReturn extends CardImpl {
         // Rakdos's Return deals X damage to target opponent. That player discards X cards.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new RakdossReturnEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
     public RakdossReturn(final RakdossReturn card) {
