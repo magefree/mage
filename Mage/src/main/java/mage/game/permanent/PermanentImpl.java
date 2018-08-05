@@ -1,7 +1,6 @@
 
 package mage.game.permanent;
 
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -35,6 +34,8 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -493,6 +494,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         attachedPerm.phaseOut(game, true);
                     }
                 }
+                this.removeFromCombat(game);
                 this.phasedIn = false;
                 this.indirectPhase = indirectPhase;
                 if (!game.isSimulation()) {
