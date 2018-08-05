@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -32,7 +32,7 @@ public final class EternalFlame extends CardImpl {
         // Eternal Flame deals X damage to target opponent, where X is the number of Mountains you control. It deals half X damage, rounded up, to you.);
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)).setText("{this} deals X damage to target opponent, where X is the number of Mountains you control"));
         this.getSpellAbility().addEffect(new DamageControllerEffect(new HalfValue(new PermanentsOnBattlefieldCount(filter), true)).setText("It deals half X damage, rounded up, to you"));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
     public EternalFlame(final EternalFlame card) {
