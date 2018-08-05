@@ -1,19 +1,10 @@
 
 package mage.game.combat;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Stream;
-
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
-import mage.abilities.keyword.BandingAbility;
-import mage.abilities.keyword.CantBlockAloneAbility;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.*;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
@@ -22,6 +13,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  *
@@ -743,6 +738,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * @return
      */
     private int getDamageValueFromPermanent(Permanent permanent, Game game) {
+        if(!permanent.isPhasedIn()){
+            return 0;
+        }
         if (game.getCombat().useToughnessForDamage(permanent, game)) {
             return permanent.getToughness().getValue();
         } else {
