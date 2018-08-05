@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 /**
@@ -86,7 +85,7 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
-                Card spell = ((SpellAbility) abilityToModify).getCharachteristics(game);
+                Card spell = ((SpellAbility) abilityToModify).getCharacteristics(game);
                 if (spell != null) {
                     return spell.isCreature();
                 }

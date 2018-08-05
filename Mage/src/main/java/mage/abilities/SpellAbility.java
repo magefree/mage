@@ -212,7 +212,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return this;
     }
 
-    public Card getCharachteristics(Game game) {
+    public Card getCharacteristics(Game game) {
         Spell spell = game.getSpell(this.getId());
         if (spell != null) {
             return spell;
