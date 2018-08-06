@@ -239,7 +239,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("M19"); // Core 2019
 //      supportedSets.add("GRN"); // Guilds of Ravnica
 //      supportedSets.add("RNA"); // Ravnica Allegiance
-//      supportedSets.add("C18"); // Commander 2018
+        supportedSets.add("C18"); // Commander 2018
 
         sets = new HashMap<>();
         setsAliases = new HashMap<>();
