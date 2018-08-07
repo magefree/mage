@@ -46,6 +46,7 @@ public final class UrzasLegacy extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud of Faeries", 29, Rarity.COMMON, mage.cards.c.CloudOfFaeries.class));
         cards.add(new SetCardInfo("Crawlspace", 123, Rarity.RARE, mage.cards.c.Crawlspace.class));
         cards.add(new SetCardInfo("Crop Rotation", 98, Rarity.COMMON, mage.cards.c.CropRotation.class));
+        cards.add(new SetCardInfo("Damping Engine", 124, Rarity.RARE, mage.cards.d.DampingEngine.class));
         cards.add(new SetCardInfo("Darkwatch Elves", 99, Rarity.UNCOMMON, mage.cards.d.DarkwatchElves.class));
         cards.add(new SetCardInfo("Defender of Chaos", 75, Rarity.COMMON, mage.cards.d.DefenderOfChaos.class));
         cards.add(new SetCardInfo("Defender of Law", 5, Rarity.COMMON, mage.cards.d.DefenderOfLaw.class));
