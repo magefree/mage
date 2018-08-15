@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -13,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -24,14 +24,15 @@ import mage.target.common.TargetCreatureOrPlayer;
 public final class ThermalDetonator extends CardImpl {
 
     private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("creature without spaceflight or target player");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(new AbilityPredicate(SpaceflightAbility.class)));
+        filterCreature.add(Predicates.not(new AbilityPredicate(SpaceflightAbility.class)));
+        filter.setCreatureFilter(filterCreature);
     }
 
     public ThermalDetonator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        
 
         // {2}, Sacrifice Thermal Detonator: Thermal Detonator deals 2 damage to target creature without spaceflight or target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}"));
