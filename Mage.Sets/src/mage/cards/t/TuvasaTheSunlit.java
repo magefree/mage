@@ -4,20 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -37,13 +36,6 @@ import mage.watchers.Watcher;
  */
 public final class TuvasaTheSunlit extends CardImpl {
 
-    private static final FilterEnchantmentPermanent filter
-            = new FilterEnchantmentPermanent("enchantment you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public TuvasaTheSunlit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
 
@@ -54,6 +46,9 @@ public final class TuvasaTheSunlit extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Tuvasa the Sunlit gets +1/+1 for each enchantment you control.
+        FilterEnchantmentPermanent filter
+                = new FilterEnchantmentPermanent("enchantment you control");
+        filter.add(new ControllerPredicate(TargetController.YOU));
         DynamicValue value
                 = new PermanentsOnBattlefieldCount(new FilterPermanent(filter));
         Ability ability = new SimpleStaticAbility(
@@ -81,23 +76,15 @@ public final class TuvasaTheSunlit extends CardImpl {
     }
 }
 
-class TuvasaTheSunlitTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static FilterSpell filter = new FilterSpell("an enchantment spell");
-    protected String rule;
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
+class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
     public TuvasaTheSunlitTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.rule = "Whenever you cast your first enchantment spell each turn, draw a card.";
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+                (FilterSpell) new FilterSpell("an enchantment spell").add(new CardTypePredicate(CardType.ENCHANTMENT)), false, true);
     }
 
     public TuvasaTheSunlitTriggeredAbility(final TuvasaTheSunlitTriggeredAbility ability) {
         super(ability);
-        this.rule = ability.rule;
     }
 
     @Override
@@ -107,25 +94,18 @@ class TuvasaTheSunlitTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
-                TuvasaTheSunlitWatcher watcher = (TuvasaTheSunlitWatcher) game.getState().getWatchers().get(
-                        TuvasaTheSunlitWatcher.class.getSimpleName()
-                );
-                MageObjectReference mor = watcher.getFirstEnchantmentThisTurn(this.getControllerId());
-                return mor.getSourceId().equals(event.getTargetId());
-            }
+        if (super.checkTrigger(event, game)) {
+            TuvasaTheSunlitWatcher watcher = (TuvasaTheSunlitWatcher) game.getState().getWatchers().get(
+                    TuvasaTheSunlitWatcher.class.getSimpleName()
+            );
+            return event.getTargetId().equals(watcher.getFirstEnchantmentThisTurn(this.getControllerId()));
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        if (rule != null && !rule.isEmpty()) {
-            return rule;
-        }
-        return "Whenever you cast " + filter.getMessage() + ", " + super.getRule();
+        return "Whenever you cast your first enchantment spell each turn, draw a card.";
     }
 
     @Override
@@ -136,7 +116,7 @@ class TuvasaTheSunlitTriggeredAbility extends TriggeredAbilityImpl {
 
 class TuvasaTheSunlitWatcher extends Watcher {
 
-    private final Map<UUID, MageObjectReference> firstEnchantmentThisTurn = new HashMap();
+    private final Map<UUID, UUID> firstEnchantmentThisTurn = new HashMap();
 
     public TuvasaTheSunlitWatcher() {
         super(TuvasaTheSunlitWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -154,7 +134,7 @@ class TuvasaTheSunlitWatcher extends Watcher {
             if (spell != null && spell.isEnchantment()) {
                 firstEnchantmentThisTurn.putIfAbsent(
                         event.getPlayerId(),
-                        new MageObjectReference(spell, game)
+                        spell.getId()
                 );
             }
         }
@@ -165,7 +145,7 @@ class TuvasaTheSunlitWatcher extends Watcher {
         firstEnchantmentThisTurn.clear();
     }
 
-    public MageObjectReference getFirstEnchantmentThisTurn(UUID playerId) {
+    public UUID getFirstEnchantmentThisTurn(UUID playerId) {
         return firstEnchantmentThisTurn.get(playerId);
     }
 
