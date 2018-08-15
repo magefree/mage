@@ -19,6 +19,7 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -44,9 +45,9 @@ public final class RelicBind extends CardImpl {
         this.addAbility(ability);
         
         // Whenever enchanted artifact becomes tapped, choose one
-        // — Relic Bind deals 1 damage to target player.
+        // — Relic Bind deals 1 damage to target player or planeswalker.
         Ability ability2 = new BecomesTappedAttachedTriggeredAbility(new DamageTargetEffect(1), "enchanted artifact");
-        ability2.addTarget(new TargetPlayer());
+        ability2.addTarget(new TargetPlayerOrPlaneswalker());
         // — Target player gains 1 life.
         Mode mode = new Mode();
         mode.getEffects().add(new GainLifeTargetEffect(1));

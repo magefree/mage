@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import mage.abilities.Ability;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+
 import mage.sets.*;
 
 import static org.junit.Assert.assertFalse;
@@ -29,11 +32,33 @@ public class BoosterGenerationTest extends MageTestBase {
     public void setUp() {
         CardScanner.scan();
     }
-
+    
     private static final List<String> basics = Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest");
+    
+    @Test
+    public void testBattlebond(){
+        List<Card> booster = Battlebond.getInstance().createBooster();
+        boolean foundPartner = false;
+	    String Partner = "";
+		
+        for (Card card : booster){
+            for (Ability ability : card.getAbilities()){
+                if (ability instanceof PartnerWithAbility) {
+                    if (foundPartner){
+			            Assert.assertEquals(Partner, card.getName());
+                    }
+                    else{
+                        foundPartner = true;
+                        Partner = ((PartnerWithAbility) ability).getPartnerName();
+                    }
+		        }
+            }
+        }
+    }  
 
     @Test
     public void testFateReforged() {
+        
         List<String> tapland = Arrays.asList(
                 "Bloodfell Caves", "Blossoming Sands", "Dismal Backwater", "Jungle Hollow", "Rugged Highlands",
                 "Scoured Barrens", "Swiftwater Cliffs", "Thornwood Falls", "Tranquil Cove", "Wind-Scarred Crag");
@@ -45,7 +70,6 @@ public class BoosterGenerationTest extends MageTestBase {
                 || contains(booster, basics, null));
         // assertFalse(str(booster), contains(booster, basics, null));
     }
-
     @Test
     public void testMastersEditionII() {
         List<String> snowCoveredLand = Arrays.asList(

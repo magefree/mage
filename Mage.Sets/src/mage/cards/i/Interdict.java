@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.target.common.TargetActivatedAbility;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 import mage.target.targetpointer.FixedTarget;
 
@@ -39,7 +40,7 @@ public final class Interdict extends CardImpl {
 
         // Counter target activated ability from an artifact, creature, enchantment, or land. That permanent's activated abilities can't be activated this turn.
         this.getSpellAbility().addEffect(new InterdictCounterEffect());
-        this.getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
+        this.getSpellAbility().addTarget(new TargetActivatedAbility(filter));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
@@ -55,15 +56,15 @@ public final class Interdict extends CardImpl {
     }
 }
 
-class InterdictPredicate implements Predicate<Ability> {
+class InterdictPredicate implements Predicate<StackObject> {
 
     public InterdictPredicate() {
     }
 
     @Override
-    public boolean apply(Ability input, Game game) {
-        if (input instanceof StackAbility && input.getAbilityType() == AbilityType.ACTIVATED) {
-            MageObject sourceObject = input.getSourceObject(game);
+    public boolean apply(StackObject input, Game game) {
+        if (input instanceof StackAbility && ((StackAbility) input).getAbilityType() == AbilityType.ACTIVATED) {
+            MageObject sourceObject = ((StackAbility) input).getSourceObject(game);
             if (sourceObject != null) {
                 return (sourceObject.isArtifact()
                         || sourceObject.isEnchantment()

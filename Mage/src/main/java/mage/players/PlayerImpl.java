@@ -1045,6 +1045,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game == null || ability == null) {
             return false;
         }
+
+        // Use ability copy to avoid problems with targets and costs on recast (issue https://github.com/magefree/mage/issues/5189).
+        ability = ability.copy();
+
         ability.setControllerId(getId());
         if (ability.getSpellAbilityType() != SpellAbilityType.BASE) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
@@ -1267,7 +1271,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     result = playManaAbility((ActivatedManaAbilityImpl) ability.copy(), game);
                     break;
                 case SPELL:
-                    result = cast((SpellAbility) ability.copy(), game, false, activationStatus.getPermittingObject());
+                    result = cast((SpellAbility) ability, game, false, activationStatus.getPermittingObject());
                     break;
                 default:
                     result = playAbility(ability.copy(), game);

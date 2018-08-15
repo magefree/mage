@@ -66,7 +66,7 @@ class FumbleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || permanent == null) {
             return false;
@@ -75,24 +75,30 @@ class FumbleEffect extends OneShotEffect {
         for (UUID permId : permanent.getAttachments()) {
             Permanent attachment = game.getPermanent(permId);
             if (attachment != null) {
-                attachments.add(permanent);
+                if (attachment.hasSubtype(SubType.AURA, game) || attachment.hasSubtype(SubType.EQUIPMENT, game)) {
+                    attachments.add(attachment);
+                }
             }
         }
+        
         new ReturnToHandTargetEffect().apply(game, source);
-        Target target = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, true);
-        Permanent newCreature = null;
-        if (player.choose(Outcome.BoostCreature, target, source.getSourceId(), game)) {
-            newCreature = game.getPermanent(target.getFirstTarget());
-        }
-        for (Permanent attachment : attachments) {
-            if (!attachment.hasSubtype(SubType.AURA, game) && !attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                continue;
+
+        if (!attachments.isEmpty()) {
+            Target target = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, true);
+            Permanent newCreature = null;
+            if (player.choose(Outcome.BoostCreature, target, source.getSourceId(), game)) {
+                newCreature = game.getPermanent(target.getFirstTarget());
             }
-            ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, player.getId());
-            effect.setTargetPointer(new FixedTarget(attachment, game));
-            game.addEffect(effect, source);
-            if (newCreature != null) {
-                attachment.attachTo(newCreature.getId(), game);
+            for (Permanent attachment : attachments) {
+                if (!attachment.hasSubtype(SubType.AURA, game) && !attachment.hasSubtype(SubType.EQUIPMENT, game)) {
+                    continue;
+                }
+                ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, player.getId());
+                effect.setTargetPointer(new FixedTarget(attachment, game));
+                game.addEffect(effect, source);
+                if (newCreature != null) {
+                    attachment.attachTo(newCreature.getId(), game);
+                }
             }
         }
         return true;

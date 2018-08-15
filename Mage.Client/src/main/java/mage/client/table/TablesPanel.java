@@ -9,6 +9,8 @@ package mage.client.table;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.text.DateFormat;
@@ -316,6 +318,20 @@ public class TablesPanel extends javax.swing.JPanel {
         actionButton1 = new ButtonColumn(tableTables, openTableAction, tableTables.convertColumnIndexToView(TableTableModel.ACTION_COLUMN));
         actionButton2 = new ButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.COLUMN_ACTION));
         // !!!!
+        addTableDoubleClickListener(tableTables, openTableAction);
+        addTableDoubleClickListener(tableCompleted, closedTableAction);
+    }
+
+    private void addTableDoubleClickListener(JTable table, Action action) {
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = table.rowAtPoint(e.getPoint());
+                if (e.getClickCount() == 2 && row != -1) {
+                    action.actionPerformed(new ActionEvent(e.getSource(), e.getID(), "" + row));
+                }
+            }
+        });
     }
 
     public void cleanUp() {

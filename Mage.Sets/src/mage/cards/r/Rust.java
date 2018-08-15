@@ -7,6 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterAbility;
+import mage.filter.FilterStackObject;
 import mage.filter.predicate.ability.ArtifactSourcePredicate;
 import mage.target.common.TargetActivatedAbility;
 
@@ -16,7 +17,7 @@ import mage.target.common.TargetActivatedAbility;
  */
 public final class Rust extends CardImpl {
 
-    private final static FilterAbility filter = new FilterAbility("activated ability from an artifact source");
+    private final static FilterStackObject filter = new FilterStackObject("activated ability from an artifact source");
 
     static {
         filter.add(new ArtifactSourcePredicate());
