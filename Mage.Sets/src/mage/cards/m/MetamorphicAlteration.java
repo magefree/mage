@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -18,8 +19,6 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author noahg
@@ -28,7 +27,7 @@ public final class MetamorphicAlteration extends CardImpl {
 
     public MetamorphicAlteration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        
+
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -81,8 +80,11 @@ class ChooseACreature extends OneShotEffect {
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
                 controller.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
-                game.getState().setValue(source.getSourceId().toString() + INFO_KEY, chosenPermanent.copy());
+                if (chosenPermanent != null) {
+                    game.getState().setValue(source.getSourceId().toString() + INFO_KEY, chosenPermanent.copy());
+                }
             }
+            return true;
         }
         return false;
     }

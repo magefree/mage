@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -14,6 +13,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -75,17 +75,21 @@ class StormEffect extends OneShotEffect {
         MageObjectReference spellRef = (MageObjectReference) this.getValue("StormSpellRef");
         if (spellRef != null) {
             CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
-            int stormCount = watcher.getSpellOrder(spellRef, game) - 1;
-            if (stormCount > 0) {
-                Spell spell = (Spell) this.getValue("StormSpell");
-                if (spell != null) {
-                    if (!game.isSimulation()) {
-                        game.informPlayers("Storm: " + spell.getLogName() + " will be copied " + stormCount + " time" + (stormCount > 1 ? "s" : ""));
-                    }
-                    for (int i = 0; i < stormCount; i++) {
-                        spell.createCopyOnStack(game, source, source.getControllerId(), true);
+            if (watcher != null) {
+                int stormCount = watcher.getSpellOrder(spellRef, game) - 1;
+                if (stormCount > 0) {
+                    Spell spell = (Spell) this.getValue("StormSpell");
+                    if (spell != null) {
+                        if (!game.isSimulation()) {
+                            game.informPlayers("Storm: " + spell.getLogName() + " will be copied " + stormCount + " time" + (stormCount > 1 ? "s" : ""));
+                        }
+                        for (int i = 0; i < stormCount; i++) {
+                            spell.createCopyOnStack(game, source, source.getControllerId(), true);
+                        }
                     }
                 }
+            } else {
+                Logger.getLogger(StormEffect.class).fatal("CastSpellLastTurnWatcher not found. game = " + game == null ? "NULL" : game.getGameType().toString());
             }
             return true;
         }

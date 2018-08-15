@@ -131,9 +131,11 @@ class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
         filter.add(new CounterPredicate(CounterType.AIM));
         filter.add(Predicates.not(new AbilityPredicate(IndestructibleAbility.class)));
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        Permanent permanent = permanents.get(RandomUtil.nextInt(permanents.size()));
-        if (permanent != null) {
-            permanent.destroy(source.getSourceId(), game, false);
+        if (!permanents.isEmpty()) {
+            Permanent permanent = permanents.get(RandomUtil.nextInt(permanents.size()));
+            if (permanent != null) {
+                permanent.destroy(source.getSourceId(), game, false);
+            }
         }
         return true;
     }

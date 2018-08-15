@@ -248,10 +248,12 @@ public class TargetSpellOrPermanent extends TargetImpl {
                 sb.append(permanent.getLogName()).append(' ');
             } else {
                 Spell spell = game.getStack().getSpell(targetId);
-                if (spell.isFaceDown(game)) {
-                    sb.append(GameLog.getNeutralColoredText("face down spell"));
-                } else {
-                    sb.append(spell.getLogName()).append(' ');
+                if (spell != null) {
+                    if (spell.isFaceDown(game)) {
+                        sb.append(GameLog.getNeutralColoredText("face down spell"));
+                    } else {
+                        sb.append(spell.getLogName()).append(' ');
+                    }
                 }
             }
         }
