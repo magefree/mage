@@ -1,9 +1,6 @@
 
 package mage.filter.predicate.ability;
 
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.constants.AbilityType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
@@ -22,7 +19,7 @@ public class ArtifactSourcePredicate implements Predicate<StackObject> {
     public boolean apply(StackObject input, Game game) {
         if (input instanceof StackAbility) {
             StackAbility ability = (StackAbility) input;
-            return ability.getSourceObject(game).isArtifact() && ability.getAbilityType() == AbilityType.ACTIVATED;
+            return ability.getSourceObject(game).isArtifact();
         }
         return false;
     }
