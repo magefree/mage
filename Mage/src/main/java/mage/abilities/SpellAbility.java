@@ -1,6 +1,7 @@
 
 package mage.abilities;
 
+import java.util.Optional;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -19,6 +20,7 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -208,6 +210,26 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     public SpellAbility getSpellAbilityToResolve(Game game) {
         return this;
+    }
+
+    public Card getCharacteristics(Game game) {
+        Spell spell = game.getSpell(this.getId());
+        if (spell != null) {
+            return spell;
+        }
+        return game.getCard(this.getSourceId());
+    }
+
+    public static SpellAbility getSpellAbilityFromEvent(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.CAST_SPELL) {
+            return null;
+        }
+        Card card = game.getCard(event.getSourceId());
+        Optional<Ability> ability = card.getAbilities(game).get(event.getTargetId());
+        if (ability.isPresent() && ability.get() instanceof SpellAbility) {
+            return (SpellAbility) ability.get();
+        }
+        return card.getSpellAbility();
     }
 
     public void setId(UUID idToUse) {

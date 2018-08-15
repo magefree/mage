@@ -2,6 +2,7 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -29,6 +30,10 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
+/**
+ *
+ * @author Colin Redman
+ */
 public class AminatouTheFateShifter extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you own");
@@ -59,6 +64,9 @@ public class AminatouTheFateShifter extends CardImpl {
         // Fateshifter controlled by the next player in the chosen direction.
         ability = new LoyaltyAbility(new AminatouUltimateEffect(), -6);
         this.addAbility(ability);
+
+        // Aminatou, the Fateshifter can be your commander.
+        this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
     public AminatouTheFateShifter(final AminatouTheFateShifter card) {
         super(card);

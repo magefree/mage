@@ -6,7 +6,6 @@ import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
 import mage.client.dialog.PreferencesDialog;
 import org.mage.plugins.card.images.CardDownloadData;
 
@@ -227,7 +226,8 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("A25");
         supportedSets.add("DOM");
         supportedSets.add("BBD");
-//        supportedSets.add("CM2");
+        supportedSets.add("C18");
+        supportedSets.add("CM2");
         supportedSets.add("M19");
     }
 
@@ -240,7 +240,6 @@ public enum ScryfallImageSource implements CardImageSource {
         // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
 
         // TODO: do not use API at all? It's can help with scryfall request limits (1 request instead 2)
-
         String baseUrl = null;
         String alternativeUrl = null;
 

@@ -14,9 +14,9 @@ import mage.game.Game;
  */
 public abstract class FilterImpl<E> implements Filter<E> {
 
-    protected List<Predicate<Object>> predicates = new ArrayList<>();
+    protected List<Predicate<? super E>> predicates = new ArrayList<>();
     protected String message;
-    protected boolean lockedFilter; // Helps to prevent to "accidently" modify the StaticFilters objects
+    protected boolean lockedFilter; // Helps to prevent "accidentally" modifying the StaticFilters objects
 
     @Override
     public abstract FilterImpl<E> copy();
@@ -41,7 +41,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
     }
 
     @Override
-    public final Filter add(Predicate predicate) {
+    public final Filter add(Predicate<? super E> predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }

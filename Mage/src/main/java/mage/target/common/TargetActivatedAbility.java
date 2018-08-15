@@ -10,6 +10,7 @@ import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterAbility;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -21,13 +22,13 @@ import mage.target.TargetObject;
  */
 public class TargetActivatedAbility extends TargetObject {
 
-    protected final FilterAbility filter;
+    protected final FilterStackObject filter;
 
     public TargetActivatedAbility() {
-        this(new FilterAbility("activated ability"));
+        this(new FilterStackObject("activated ability"));
     }
 
-    public TargetActivatedAbility(FilterAbility filter) {
+    public TargetActivatedAbility(FilterStackObject filter) {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
@@ -46,8 +47,10 @@ public class TargetActivatedAbility extends TargetObject {
             return false;
         }
         StackObject stackObject = game.getStack().getStackObject(id);
-        return stackObject != null && stackObject.getStackAbility() != null && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
-                && filter.match(((ActivatedAbility) stackObject.getStackAbility()), game);
+        return stackObject != null
+                && stackObject.getStackAbility() != null
+                && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
+                && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
