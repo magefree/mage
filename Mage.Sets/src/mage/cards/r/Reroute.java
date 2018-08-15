@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterAbility;
+import mage.filter.FilterStackObject;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.target.common.TargetActivatedAbility;
 
@@ -17,7 +18,7 @@ import mage.target.common.TargetActivatedAbility;
  */
 public final class Reroute extends CardImpl {
 
-    private static final FilterAbility filter = new FilterAbility("activated ability with a single target");
+    private static final FilterStackObject filter = new FilterStackObject("activated ability with a single target");
 
     static {
         filter.add(new NumberOfTargetsPredicate(1));

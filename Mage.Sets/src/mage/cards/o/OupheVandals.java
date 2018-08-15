@@ -18,10 +18,12 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.ability.ArtifactSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.target.common.TargetActivatedAbility;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 /**
@@ -47,7 +49,7 @@ public final class OupheVandals extends CardImpl {
         // {G}, Sacrifice Ouphe Vandals: Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OupheVandalsEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
+        ability.addTarget(new TargetActivatedAbility(filter));
         this.addAbility(ability);
     }
 
@@ -58,26 +60,6 @@ public final class OupheVandals extends CardImpl {
     @Override
     public OupheVandals copy() {
         return new OupheVandals(this);
-    }
-}
-
-class ArtifactSourcePredicate implements Predicate<StackObject> {
-
-    public ArtifactSourcePredicate() {
-    }
-
-    @Override
-    public boolean apply(StackObject input, Game game) {
-        if (input instanceof StackAbility) {
-            StackAbility ability = (StackAbility) input;
-            return ability.getSourceObject(game).isArtifact() && ability.getAbilityType() == AbilityType.ACTIVATED;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Source(Artifact)";
     }
 }
 
