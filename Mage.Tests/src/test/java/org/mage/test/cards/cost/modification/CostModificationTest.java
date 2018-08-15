@@ -219,8 +219,7 @@ public class CostModificationTest extends CardTestPlayerBase {
     }
 
     /**
-     * Zoetic Cavern's cast as creature cost is not modified as Animar, Soul of
-     * Elements gains counters.
+     * Confirm that Animar's cost reduction allows you to play spells that you wouldn't have enough mana for without it.
      */
     @Test
     public void AnimarSoulOfElementsTest() {
