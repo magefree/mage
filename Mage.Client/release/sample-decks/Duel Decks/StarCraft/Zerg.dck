@@ -1,0 +1,49 @@
+NAME:DDSC - Zerg
+1 [DDSC:97] Spawn Broodling
+1 [DDSC:53] Volatile Burst
+3 [DDSC:154a] Swamp
+1 [DDSC:76] Larva
+1 [DDSC:54] Zerg Lurker
+1 [DDSC:73] Evolution Chamber
+1 [DDSC:51] Roach
+2 [DDSC:154c] Swamp
+2 [DDSC:74] Hydralisk
+1 [DDSC:52] Scourge
+1 [DDSC:100] Viper
+2 [DDSC:122] Mineral Field
+3 [DDSC:154b] Swamp
+1 [DDSC:71] Dark Swarm
+1 [DDSC:50] Parasite
+1 [DDSC:72] Drone
+1 [DDSC:70] Contaminate
+2 [DDSC:180b] Forest
+2 [DDSC:109] Creep Colony
+1 [DDSC:90] Kerrigan, Queen of Blades
+3 [DDSC:180a] Forest
+2 [DDSC:180d] Forest
+2 [DDSC:180c] Forest
+1 [DDSC:79] Queen
+1 [DDSC:77] Metabolic Boost
+1 [DDSC:99] Unburrow
+1 [DDSC:78] Nydus Worm
+1 [DDSC:42] Changeling
+1 [DDSC:112] Hive Cluster
+1 [DDSC:87] Brood Lord
+1 [DDSC:43] Corruptor
+1 [DDSC:41] Baneling
+1 [DDSC:82] Zerg Egg
+2 [DDSC:83] Zergling
+1 [DDSC:80] Swarm Host
+1 [DDSC:114] Nydus Network
+1 [DDSC:81] Ultralisk
+1 [DDSC:118] Spore Crawler
+1 [DDSC:48] Mutalisk
+1 [DDSC:49] Overlord
+1 [DDSC:68] Aggressive Mutation
+1 [DDSC:46] Infested Terran
+1 [DDSC:69] Consume
+1 [DDSC:47] Infestor
+1 [DDSC:44] Defiler
+1 [DDSC:45] Gamete Meiosis
+LAYOUT MAIN:(1,6)(CARD_TYPE,false,75)|([DDSC:41],[DDSC:87],[DDSC:42],[DDSC:43],[DDSC:44],[DDSC:72],[DDSC:74],[DDSC:74],[DDSC:46],[DDSC:47],[DDSC:76],[DDSC:48],[DDSC:49],[DDSC:79],[DDSC:51],[DDSC:52],[DDSC:80],[DDSC:81],[DDSC:100],[DDSC:82],[DDSC:54],[DDSC:83],[DDSC:83])([DDSC:73],[DDSC:45],[DDSC:78],[DDSC:50])([DDSC:71],[DDSC:77],[DDSC:97],[DDSC:99])([DDSC:180a],[DDSC:180a],[DDSC:180a],[DDSC:180b],[DDSC:180b],[DDSC:180c],[DDSC:180c],[DDSC:180d],[DDSC:180d],[DDSC:112],[DDSC:122],[DDSC:122],[DDSC:114],[DDSC:118],[DDSC:109],[DDSC:109],[DDSC:154a],[DDSC:154a],[DDSC:154a],[DDSC:154b],[DDSC:154b],[DDSC:154b],[DDSC:154c],[DDSC:154c])([DDSC:90])([DDSC:68],[DDSC:69],[DDSC:70],[DDSC:53])
+LAYOUT SIDEBOARD:(0,0)(CARD_TYPE,false,50)|

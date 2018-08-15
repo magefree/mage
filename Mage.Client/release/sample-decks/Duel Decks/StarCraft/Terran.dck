@@ -1,0 +1,48 @@
+NAME:DDSC - Terran
+1 [DDSC:10] Lockdown
+3 [DDSC:130a] Plains
+2 [DDSC:96] Siege Tank
+2 [DDSC:122] Mineral Field
+2 [DDSC:130c] Plains
+1 [DDSC:106] Widow Mine
+3 [DDSC:130b] Plains
+1 [DDSC:104] Covert Ops
+1 [DDSC:92] Raynor, Rebel Commander
+1 [DDSC:107] Auto-Turret
+1 [DDSC:108] Command Center
+1 [DDSC:19] SCV
+1 [DDSC:18] Repair
+1 [DDSC:59] Hellion
+1 [DDSC:16] Raven
+1 [DDSC:57] Gauss Rifle
+1 [DDSC:13] Nuclear Strike
+1 [DDSC:58] Hellbat
+1 [DDSC:55] Battlecruiser
+1 [DDSC:11] Marauder
+3 [DDSC:167a] Mountain
+1 [DDSC:56] Firebat
+1 [DDSC:12] Medic
+1 [DDSC:64] Scanner Sweep
+1 [DDSC:20] Thor
+2 [DDSC:167c] Mountain
+1 [DDSC:65] Stimpack
+1 [DDSC:21] Viking
+3 [DDSC:167b] Mountain
+1 [DDSC:63] Reaper
+1 [DDSC:111] Ghost Academy
+2 [DDSC:167d] Mountain
+1 [DDSC:60] Irradiation
+2 [DDSC:61] Marine
+2 [DDSC:119] Supply Depot
+1 [DDSC:9] Liftoff
+1 [DDSC:6] Ghost
+1 [DDSC:5] EMP Round
+1 [DDSC:2] Defense Matrix
+1 [DDSC:24] Vulture
+1 [DDSC:25] Wraith
+1 [DDSC:88] Calldown
+1 [DDSC:66] Strike Cannon
+1 [DDSC:1] Bunker
+1 [DDSC:67] Terran Banshee
+LAYOUT MAIN:(1,8)(CARD_TYPE,false,75)|([DDSC:55],[DDSC:1],[DDSC:58],[DDSC:59],[DDSC:16],[DDSC:96],[DDSC:96],[DDSC:67],[DDSC:20],[DDSC:21],[DDSC:25])([DDSC:104],[DDSC:106])([DDSC:56],[DDSC:6],[DDSC:11],[DDSC:61],[DDSC:61],[DDSC:12],[DDSC:63],[DDSC:19],[DDSC:24])([DDSC:60],[DDSC:13])([DDSC:88],[DDSC:2],[DDSC:5],[DDSC:57],[DDSC:9],[DDSC:65])([DDSC:107],[DDSC:108],[DDSC:111],[DDSC:122],[DDSC:122],[DDSC:167a],[DDSC:167a],[DDSC:167a],[DDSC:167b],[DDSC:167b],[DDSC:167b],[DDSC:167c],[DDSC:167c],[DDSC:167d],[DDSC:167d],[DDSC:130a],[DDSC:130a],[DDSC:130a],[DDSC:130b],[DDSC:130b],[DDSC:130b],[DDSC:130c],[DDSC:130c],[DDSC:119],[DDSC:119])([DDSC:92])([DDSC:10],[DDSC:18],[DDSC:64],[DDSC:66])
+LAYOUT SIDEBOARD:(0,0)(CARD_TYPE,false,50)|

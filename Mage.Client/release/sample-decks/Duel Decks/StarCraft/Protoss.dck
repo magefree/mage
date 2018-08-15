@@ -1,0 +1,48 @@
+NAME:DDSC - Protoss
+1 [DDSC:31] Force Field
+1 [DDSC:98] Stasis Ward
+1 [DDSC:32] Hallucination
+2 [DDSC:102] Zealot
+1 [DDSC:121] Templar Archives
+1 [DDSC:30] Envision
+2 [DDSC:122] Mineral Field
+1 [DDSC:93] Recharge
+1 [DDSC:105] Warp Prism
+1 [DDSC:94] Sensor Array
+1 [DDSC:103] Zeratul, Nezarim Prelate
+1 [DDSC:91] Mothership
+2 [DDSC:130e] Plains
+3 [DDSC:130d] Plains
+2 [DDSC:130f] Plains
+1 [DDSC:17] Reaver
+1 [DDSC:39] Void Ray
+1 [DDSC:15] Psionic Storm
+1 [DDSC:37] Sentry
+1 [DDSC:38] Stalker
+1 [DDSC:35] Protoss Probe
+1 [DDSC:14] Photon Overcharge
+1 [DDSC:36] Psionic Feedback
+1 [DDSC:33] Mass Recall
+1 [DDSC:34] Mind Control
+1 [DDSC:86] Archon
+3 [DDSC:143a] Island
+1 [DDSC:113] Nexus
+1 [DDSC:40] Warp Gate
+3 [DDSC:143c] Island
+1 [DDSC:85] Arbiter
+3 [DDSC:143b] Island
+2 [DDSC:116] Pylon
+2 [DDSC:143d] Island
+1 [DDSC:115] Observatory
+1 [DDSC:8] Immortal
+1 [DDSC:28] Corsair
+1 [DDSC:29] Dark Templar
+1 [DDSC:7] High Templar
+1 [DDSC:26] Carrier
+1 [DDSC:4] Disruptor
+1 [DDSC:27] Chrono Boost
+1 [DDSC:3] Disruption Web
+2 [DDSC:22] Vortex
+1 [DDSC:89] Dragoon
+LAYOUT MAIN:(1,8)(CARD_TYPE,false,75)|([DDSC:4],[DDSC:35],[DDSC:17],[DDSC:37])([DDSC:105])([DDSC:85],[DDSC:86],[DDSC:26],[DDSC:28],[DDSC:29],[DDSC:89],[DDSC:32],[DDSC:7],[DDSC:8],[DDSC:91],[DDSC:38],[DDSC:39],[DDSC:102],[DDSC:102])([DDSC:27],[DDSC:3],[DDSC:34],[DDSC:94],[DDSC:98],[DDSC:40])([DDSC:31],[DDSC:33],[DDSC:14],[DDSC:36],[DDSC:93],[DDSC:22],[DDSC:22])([DDSC:143a],[DDSC:143a],[DDSC:143a],[DDSC:143b],[DDSC:143b],[DDSC:143b],[DDSC:143c],[DDSC:143c],[DDSC:143c],[DDSC:143d],[DDSC:143d],[DDSC:122],[DDSC:122],[DDSC:115],[DDSC:130d],[DDSC:130d],[DDSC:130d],[DDSC:130e],[DDSC:130e],[DDSC:130f],[DDSC:130f],[DDSC:113],[DDSC:116],[DDSC:116],[DDSC:121])([DDSC:103])([DDSC:30],[DDSC:15])
+LAYOUT SIDEBOARD:(0,0)(CARD_TYPE,false,50)|
