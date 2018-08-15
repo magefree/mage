@@ -205,7 +205,7 @@ public final class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Jandor's Saddlebags", 330, Rarity.RARE, mage.cards.j.JandorsSaddlebags.class));
         cards.add(new SetCardInfo("Jayemdae Tome", 331, Rarity.RARE, mage.cards.j.JayemdaeTome.class));
         cards.add(new SetCardInfo("Jump", 79, Rarity.COMMON, mage.cards.j.Jump.class));
-        cards.add(new SetCardInfo("Jun?n Efreet", 143, Rarity.UNCOMMON, mage.cards.j.JununEfreet.class));
+        cards.add(new SetCardInfo("Junun Efreet", 143, Rarity.UNCOMMON, mage.cards.j.JununEfreet.class));
         cards.add(new SetCardInfo("Karma", 32, Rarity.UNCOMMON, mage.cards.k.Karma.class));
         cards.add(new SetCardInfo("Keldon Warlord", 207, Rarity.UNCOMMON, mage.cards.k.KeldonWarlord.class));
         cards.add(new SetCardInfo("Killer Bees", 254, Rarity.UNCOMMON, mage.cards.k.KillerBees.class));

@@ -27,7 +27,8 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani's Chosen", 61, Rarity.RARE, mage.cards.a.AjanisChosen.class));
         cards.add(new SetCardInfo("Akoum Refuge", 231, Rarity.UNCOMMON, mage.cards.a.AkoumRefuge.class));
         cards.add(new SetCardInfo("Akroma's Vengeance", 62, Rarity.RARE, mage.cards.a.AkromasVengeance.class));
-        cards.add(new SetCardInfo("Amninatou, the Fateshifter", 37, Rarity.MYTHIC, mage.cards.a.AminatouTheFateShifter.class));
+        cards.add(new SetCardInfo("Aminatou's Augury", 6, Rarity.RARE, mage.cards.a.AminatousAugury.class));
+        cards.add(new SetCardInfo("Aminatou, the Fateshifter", 37, Rarity.MYTHIC, mage.cards.a.AminatouTheFateShifter.class));
         cards.add(new SetCardInfo("Ancient Stone Idol", 53, Rarity.RARE, mage.cards.a.AncientStoneIdol.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 232, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Archetype of Imagination", 81, Rarity.UNCOMMON, mage.cards.a.ArchetypeOfImagination.class));
@@ -37,7 +38,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Avenger of Zendikar", 129, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Azorius Chancery", 233, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Guildgate", 234, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class));
-        cards.add(new SetCardInfo("Azorius Signet", 196, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
+        cards.add(new SetCardInfo("Azorius Signet", 196, Rarity.COMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Baloth Woodcrasher", 130, Rarity.UNCOMMON, mage.cards.b.BalothWoodcrasher.class));
         cards.add(new SetCardInfo("Banishing Stroke", 63, Rarity.UNCOMMON, mage.cards.b.BanishingStroke.class));
         cards.add(new SetCardInfo("Bant Charm", 169, Rarity.UNCOMMON, mage.cards.b.BantCharm.class));
@@ -86,7 +87,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Dictate of Kruphix", 86, Rarity.RARE, mage.cards.d.DictateOfKruphix.class));
         cards.add(new SetCardInfo("Dimir Aqueduct", 242, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
         cards.add(new SetCardInfo("Dimir Guildgate", 243, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
-        cards.add(new SetCardInfo("Dimir Signet", 203, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class));
+        cards.add(new SetCardInfo("Dimir Signet", 203, Rarity.COMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Dismal Backwater", 244, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Dismantling Blow", 66, Rarity.COMMON, mage.cards.d.DismantlingBlow.class));
         cards.add(new SetCardInfo("Djinn of Wishes", 87, Rarity.RARE, mage.cards.d.DjinnOfWishes.class));
@@ -98,6 +99,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Eel Umbra", 89, Rarity.COMMON, mage.cards.e.EelUmbra.class));
         cards.add(new SetCardInfo("Eidolon of Blossoms", 140, Rarity.RARE, mage.cards.e.EidolonOfBlossoms.class));
         cards.add(new SetCardInfo("Elderwood Scion", 177, Rarity.RARE, mage.cards.e.ElderwoodScion.class));
+        cards.add(new SetCardInfo("Emissary of Grudges", 20, Rarity.RARE, mage.cards.e.EmissaryOfGrudges.class));
         cards.add(new SetCardInfo("Empyrial Storm", 2, Rarity.RARE, mage.cards.e.EmpyrialStorm.class));
         cards.add(new SetCardInfo("Enchanter's Bane", 21, Rarity.RARE, mage.cards.e.EnchantersBane.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 141, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
@@ -129,6 +131,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Fury Storm", 22, Rarity.RARE, mage.cards.f.FuryStorm.class));
         cards.add(new SetCardInfo("Gaze of Granite", 181, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
         cards.add(new SetCardInfo("Genesis Storm", 30, Rarity.RARE, mage.cards.g.GenesisStorm.class));
+        cards.add(new SetCardInfo("Geode Golem", 56, Rarity.UNCOMMON, mage.cards.g.GeodeGolem.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 249, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Grapple with the Past", 148, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Great Furnace", 250, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
@@ -156,7 +159,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Isolated Watchtower", 59, Rarity.RARE, mage.cards.i.IsolatedWatchtower.class));
         cards.add(new SetCardInfo("Izzet Boilerworks", 256, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Guildgate", 257, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
-        cards.add(new SetCardInfo("Izzet Signet", 207, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Izzet Signet", 207, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jeskai Infiltrator", 93, Rarity.RARE, mage.cards.j.JeskaiInfiltrator.class));
         cards.add(new SetCardInfo("Jund Panorama", 258, Rarity.COMMON, mage.cards.j.JundPanorama.class));
         cards.add(new SetCardInfo("Jungle Hollow", 259, Rarity.COMMON, mage.cards.j.JungleHollow.class));
@@ -206,7 +209,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Octopus Umbra", 11, Rarity.RARE, mage.cards.o.OctopusUmbra.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 271, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Guildgate", 272, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class));
-        cards.add(new SetCardInfo("Orzhov Signet", 213, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Orzhov Signet", 213, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Overgrowth", 157, Rarity.COMMON, mage.cards.o.Overgrowth.class));
         cards.add(new SetCardInfo("Phyrexian Delver", 115, Rarity.RARE, mage.cards.p.PhyrexianDelver.class));
         cards.add(new SetCardInfo("Phyrexian Rebirth", 70, Rarity.RARE, mage.cards.p.PhyrexianRebirth.class));
@@ -322,6 +325,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Elder", 166, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Yavimaya Enchantress", 167, Rarity.COMMON, mage.cards.y.YavimayaEnchantress.class));
         cards.add(new SetCardInfo("Yennet, Crypt Sovereign", 51, Rarity.MYTHIC, mage.cards.y.YennetCryptSovereign.class));
+        cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 52, Rarity.RARE, mage.cards.y.YurikoTheTigersShadow.class));
         cards.add(new SetCardInfo("Zendikar Incarnate", 195, Rarity.UNCOMMON, mage.cards.z.ZendikarIncarnate.class));
     }
 }

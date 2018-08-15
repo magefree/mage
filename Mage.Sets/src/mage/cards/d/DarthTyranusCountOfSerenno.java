@@ -31,9 +31,9 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public final class DarthTyranus extends CardImpl {
+public final class DarthTyranusCountOfSerenno extends CardImpl {
 
-    public DarthTyranus(UUID ownerId, CardSetInfo setInfo) {
+    public DarthTyranusCountOfSerenno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{U}{B}");
         this.subtype.add(SubType.DOOKU);
 
@@ -55,13 +55,13 @@ public final class DarthTyranus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarthTyranus(final DarthTyranus card) {
+    public DarthTyranusCountOfSerenno(final DarthTyranusCountOfSerenno card) {
         super(card);
     }
 
     @Override
-    public DarthTyranus copy() {
-        return new DarthTyranus(this);
+    public DarthTyranusCountOfSerenno copy() {
+        return new DarthTyranusCountOfSerenno(this);
     }
 }
 

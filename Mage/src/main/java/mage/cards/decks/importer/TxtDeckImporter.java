@@ -92,6 +92,7 @@ public class TxtDeckImporter extends DeckImporter {
                 .replace("í", "i")
                 .replace("â", "a")
                 .replace("á", "a")
+                .replace("ú", "u")
                 .replace("\"", "'");
         if (lineName.contains("//") && !lineName.contains(" // ")) {
             lineName = lineName.replace("//", " // ");
