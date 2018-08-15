@@ -119,7 +119,11 @@ class XantchaSleeperAgentAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
+        boolean apply = false;
+        if (permanent.getId().equals(source.getSourceId())) {
+            apply = true;
+        }
+        return apply;
     }
 
     @Override
