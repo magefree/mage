@@ -94,7 +94,6 @@ class SalvageTraderEffect extends ContinuousEffectImpl {
         if(you != null && permanent1 != null) {
             FilterArtifactCard filterArtifactCard = new FilterArtifactCard();
             filterArtifactCard.add(new ControllerPredicate(TargetController.OPPONENT));
-            filterArtifactCard.add(new SpellZonePredicate(Zone.BATTLEFIELD));
             filterArtifactCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, permanent1.getConvertedManaCost()));
 
             FilterArtifactPermanent filterArtifactPermanent = new FilterArtifactPermanent();
