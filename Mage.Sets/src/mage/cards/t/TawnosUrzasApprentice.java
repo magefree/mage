@@ -17,7 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.ability.ArtifactSourcePredicate;
+import mage.filter.predicate.other.StackObjectWithArtifactSourcePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,7 +34,7 @@ public final class TawnosUrzasApprentice extends CardImpl {
     private final static FilterStackObject filter = new FilterStackObject("activated or triggered ability you control from an artifact source");
 
     static {
-        filter.add(new ArtifactSourcePredicate());
+        filter.add(new StackObjectWithArtifactSourcePredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
