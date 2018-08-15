@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.filter.predicate.Predicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.Target;
@@ -13,7 +14,7 @@ import mage.target.Target;
  *
  * @author jeffwadsworth
  */
-public class NumberOfTargetsPredicate implements Predicate<MageObject> {
+public class NumberOfTargetsPredicate implements Predicate<Controllable> {
 
     private final int targets;
 
@@ -22,7 +23,7 @@ public class NumberOfTargetsPredicate implements Predicate<MageObject> {
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
+    public boolean apply(Controllable input, Game game) {
         StackObject stackObject = game.getState().getStack().getStackObject(input.getId());
         if (stackObject != null) {
             int numberOfTargets = 0;

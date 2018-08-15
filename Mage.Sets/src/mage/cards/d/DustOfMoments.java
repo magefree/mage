@@ -18,6 +18,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.CardCounterPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
@@ -59,13 +60,13 @@ public final class DustOfMoments extends CardImpl {
     public abstract static class DustOfMomentsEffect extends OneShotEffect {
 
         private final Counter counter;
-        private final Filter<Card> permFilter;
+        private final Filter<Permanent> permFilter;
         private final Filter<Card> exiledFilter;
 
         public DustOfMomentsEffect() {
             super(Outcome.Benefit);
             this.counter = new Counter(CounterType.TIME.getName(), 2);
-            this.permFilter = new FilterCard("permanent and each suspended card");
+            this.permFilter = new FilterPermanent("permanent and each suspended card");
             permFilter.add(new CounterPredicate(CounterType.TIME));
 
             this.exiledFilter = new FilterCard("permanent and each suspended card");

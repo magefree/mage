@@ -55,15 +55,15 @@ public final class Interdict extends CardImpl {
     }
 }
 
-class InterdictPredicate implements Predicate<Ability> {
+class InterdictPredicate implements Predicate<StackObject> {
 
     public InterdictPredicate() {
     }
 
     @Override
-    public boolean apply(Ability input, Game game) {
-        if (input instanceof StackAbility && input.getAbilityType() == AbilityType.ACTIVATED) {
-            MageObject sourceObject = input.getSourceObject(game);
+    public boolean apply(StackObject input, Game game) {
+        if (input instanceof StackAbility && ((StackAbility) input).getAbilityType() == AbilityType.ACTIVATED) {
+            MageObject sourceObject = ((StackAbility) input).getSourceObject(game);
             if (sourceObject != null) {
                 return (sourceObject.isArtifact()
                         || sourceObject.isEnchantment()
