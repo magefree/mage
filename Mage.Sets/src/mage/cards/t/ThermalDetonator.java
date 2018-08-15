@@ -27,8 +27,7 @@ public final class ThermalDetonator extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent();
 
     static {
-        filterCreature.add(Predicates.not(new AbilityPredicate(SpaceflightAbility.class)));
-        filter.setCreatureFilter(filterCreature);
+        filter.getCreatureFilter().add(Predicates.not(new AbilityPredicate(SpaceflightAbility.class)));
     }
 
     public ThermalDetonator(UUID ownerId, CardSetInfo setInfo) {
