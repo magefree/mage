@@ -9,14 +9,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,7 +47,7 @@ public final class YurikoTheTigersShadow extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Commander ninjutsu {U}{B}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{U}{B}")));
+        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{U}{B}"), true));
 
         // Whenever a Ninja you control deals combat damage to a player, reveal the top card of your library and put that card into your hand. Each opponent loses life equal to that card's converted mana cost.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
