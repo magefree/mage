@@ -286,7 +286,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of the False God", 285, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terminus", 77, Rarity.RARE, mage.cards.t.Terminus.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 286, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
-        cards.add(new SetCardInfo("Thantis the Warweaver", 46, Rarity.MYTHIC, mage.cards.t.ThantisTheWarweaver.class));
+        cards.add(new SetCardInfo("Thantis, the Warweaver", 46, Rarity.MYTHIC, mage.cards.t.ThantisTheWarweaver.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 106, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thopter Assembly", 226, Rarity.RARE, mage.cards.t.ThopterAssembly.class));
         cards.add(new SetCardInfo("Thopter Engineer", 126, Rarity.UNCOMMON, mage.cards.t.ThopterEngineer.class));
@@ -324,7 +324,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Xantcha, Sleeper Agent", 50, Rarity.RARE, mage.cards.x.XantchaSleeperAgent.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 166, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Yavimaya Enchantress", 167, Rarity.COMMON, mage.cards.y.YavimayaEnchantress.class));
-        cards.add(new SetCardInfo("Yennet, Crypt Sovereign", 51, Rarity.MYTHIC, mage.cards.y.YennetCryptSovereign.class));
+        cards.add(new SetCardInfo("Yennett, Cryptic Sovereign", 51, Rarity.MYTHIC, mage.cards.y.YennetCryptSovereign.class));
         cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 52, Rarity.RARE, mage.cards.y.YurikoTheTigersShadow.class));
         cards.add(new SetCardInfo("Zendikar Incarnate", 195, Rarity.UNCOMMON, mage.cards.z.ZendikarIncarnate.class));
     }
