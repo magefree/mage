@@ -56,7 +56,7 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SenTripletsRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "At the beginning of your upkeep, choose target opponent. This turn, that player can't cast spells or activate abilities";        
+        staticText = "choose target opponent. This turn, that player can't cast spells or activate abilities";        
     }
 
     public SenTripletsRuleModifyingEffect(final SenTripletsRuleModifyingEffect effect) {
