@@ -11,14 +11,14 @@ import mage.abilities.dynamicvalue.common.AuraAttachedCount;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.constants.SubType;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -65,7 +65,7 @@ public final class HeavenlyBlademaster extends CardImpl {
                 new BoostControlledEffect(
                         totalAmount, totalAmount, Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURES, true
-                )
+                ).setText("Other creatures you control get +1/+1 for each Aura and Equipment attached to {this}")
         ));
     }
 
@@ -93,8 +93,7 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
 
     public HeavenlyBlademasterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may attach any number "
-                + "of Auras and Equipment you control to it";
+        staticText = "you may attach any number of Auras and Equipment you control to it";
     }
 
     public HeavenlyBlademasterEffect(final HeavenlyBlademasterEffect effect) {
@@ -108,9 +107,9 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
-        if (permanent == null || player == null) {
+        if (sourcePermanent == null || player == null) {
             return false;
         }
         Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
@@ -122,7 +121,18 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
         ).filter(
                 attachment -> attachment != null
         ).forEachOrdered((attachment) -> {
-            attachment.attachTo(permanent.getId(), game);
+            if (!sourcePermanent.cantBeAttachedBy(attachment, game)) {
+                if (attachment.getAttachedTo() != sourcePermanent.getId()) {
+                    if (attachment.getAttachedTo() != null) {
+                        Permanent fromPermanent = game.getPermanent(attachment.getAttachedTo());
+                        if (fromPermanent != null) {
+                            fromPermanent.removeAttachment(attachment.getId(), game);
+                        }
+                    }
+                }
+                sourcePermanent.addAttachment(attachment.getId(), game);
+                game.informPlayers(attachment.getLogName() + " was attached to " + sourcePermanent.getLogName());
+            }
         });
         return true;
     }
