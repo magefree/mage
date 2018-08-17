@@ -94,7 +94,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public IsperiaTheInscrutableEffect copy() {
         return new IsperiaTheInscrutableEffect(this);
     }
 }
