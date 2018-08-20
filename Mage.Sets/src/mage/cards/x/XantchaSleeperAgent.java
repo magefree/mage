@@ -1,5 +1,6 @@
 package mage.cards.x;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -119,7 +120,7 @@ class XantchaSleeperAgentAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
+        return Objects.equals(permanent.getId(), source.getSourceId());
     }
 
     @Override
