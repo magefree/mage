@@ -325,6 +325,7 @@ public class DeckGeneratorDialog {
             // Generated deck has a nice unique name which corresponds to the timestamp at which it was created.
             String deckName = "Generated-Deck-" + dateFormat.format(new Date());
             File tmp = new File(tempDir + File.separator + deckName + ".dck");
+            tmp.getParentFile().mkdirs();
             tmp.createNewFile();
             deck.setName(deckName);
             Sets.saveDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());

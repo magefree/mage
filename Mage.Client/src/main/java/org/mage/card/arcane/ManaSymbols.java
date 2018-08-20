@@ -56,6 +56,8 @@ import org.apache.batik.util.SVGConstants;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.CardImageUtils;
 
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
+
 public final class ManaSymbols {
 
     private static final Logger LOGGER = Logger.getLogger(ManaSymbols.class);
@@ -93,6 +95,41 @@ public final class ManaSymbols {
 
     private static final JLabel labelRender = new JLabel(); // render mana text
 
+    private static String getSvgPathToCss() {
+        return getImagesDir() + File.separator + "temp" + File.separator + "batic-svg-settings.css";
+    }
+    private static void prepareSvg(Boolean forceToCreateCss) {
+        File f = new File(getSvgPathToCss());
+
+        if (forceToCreateCss || !f.exists()) {
+
+            // Rendering hints can't be set programatically, so
+            // we override defaults with a temporary stylesheet.
+            // These defaults emphasize quality and precision, and
+            // are more similar to the defaults of other SVG viewers.
+            // SVG documents can still override these defaults.
+            String css = "svg {"
+                    + "shape-rendering: geometricPrecision;"
+                    + "text-rendering:  geometricPrecision;"
+                    + "color-rendering: optimizeQuality;"
+                    + "image-rendering: optimizeQuality;"
+                    + "}";
+
+            FileWriter w = null;
+            try {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+                w = new FileWriter(f);
+                w.write(css);
+            } catch (Throwable e) {
+                LOGGER.error("Can't create css file for svg", e);
+            }
+            finally {
+                StreamUtils.closeQuietly(w);
+            }
+        }
+    }
+
     public static void loadImages() {
         // TODO: delete files rename jpg->gif (it was for backward compatibility for one of the old version?)
         renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.SMALL));
@@ -100,6 +137,9 @@ public final class ManaSymbols {
         renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.LARGE));
         //renameSymbols(getSymbolsPath(ResourceSymbolSize.SVG)); // not need
         // TODO: remove medium sets files to "medium" folder like symbols above?
+
+        // prepare svg settings
+        prepareSvg(true);
 
         // preload symbol images
         loadSymbolImages(15);
@@ -243,26 +283,9 @@ public final class ManaSymbols {
 
         final BufferedImage[] imagePointer = new BufferedImage[1];
 
-        // Rendering hints can't be set programatically, so
-        // we override defaults with a temporary stylesheet.
-        // These defaults emphasize quality and precision, and
-        // are more similar to the defaults of other SVG viewers.
-        // SVG documents can still override these defaults.
-        String css = "svg {"
-                + "shape-rendering: geometricPrecision;"
-                + "text-rendering:  geometricPrecision;"
-                + "color-rendering: optimizeQuality;"
-                + "image-rendering: optimizeQuality;"
-                + "}";
-
-        File cssFile = File.createTempFile("batik-default-override-", ".css");
-        FileWriter w = null;
-        try {
-            w = new FileWriter(cssFile);
-            w.write(css);
-        } finally {
-            StreamUtils.closeQuietly(w);
-        }
+        // css settings for svg
+        prepareSvg(false);
+        File cssFile = new File(getSvgPathToCss());
 
         TranscodingHints transcoderHints = new TranscodingHints();
 
@@ -311,8 +334,6 @@ public final class ManaSymbols {
             t.transcode(input, null);
         } catch (Exception e) {
             throw new IOException("Couldn't convert svg file: " + svgFile + " , reason: " + e.getMessage());
-        } finally {
-            cssFile.delete();
         }
 
         BufferedImage originImage = imagePointer[0];
