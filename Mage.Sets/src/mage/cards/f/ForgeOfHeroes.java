@@ -86,11 +86,12 @@ class ForgeOfHeroesEffect extends OneShotEffect {
             new AddCountersTargetEffect(
                     CounterType.P1P1.createInstance()
             ).apply(game, source);
-        }
-        if (permanent.isPlaneswalker()) {
+        } else if (permanent.isPlaneswalker()) {
             new AddCountersTargetEffect(
                     CounterType.LOYALTY.createInstance()
             ).apply(game, source);
+        } else {
+            return false;
         }
         return true;
     }
