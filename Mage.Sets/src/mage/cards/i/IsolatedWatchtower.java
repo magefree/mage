@@ -102,7 +102,7 @@ class IsolatedWatchtowerCondition implements Condition {
                 StaticFilters.FILTER_LAND, source.getControllerId(), game
         );
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            if (numLands < 1 + game.getBattlefield().countAll(
+            if (numLands + 2 <= game.getBattlefield().countAll(
                     StaticFilters.FILTER_LAND, opponentId, game
             )) {
                 return true;
