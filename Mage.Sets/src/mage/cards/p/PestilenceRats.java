@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public final class PestilenceRats extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rats on the battlefield");
+    private static final FilterPermanent filter = new FilterPermanent("other Rats on the battlefield");
     static{
         filter.add(new SubtypePredicate(SubType.RAT));
         filter.add(new AnotherCardPredicate());
