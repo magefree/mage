@@ -74,7 +74,7 @@ class PatronOfTheNezumiTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
             if (permanent != null && game.getOpponents(controllerId).contains(permanent.getOwnerId())) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(zEvent.getPlayerId()));
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getOwnerId()));
                 return true;
             }
         }
