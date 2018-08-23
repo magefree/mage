@@ -156,8 +156,9 @@ class FlickerformReturnEffect extends OneShotEffect {
         }
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         Card enchantedCard = exileZone.get(enchantedCardId, game);
+        Player owner = game.getPlayer(enchantedCard.getOwnerId());
         if (enchantedCard != null) {
-            controller.moveCards(enchantedCard, Zone.BATTLEFIELD, source, game);
+            owner.moveCards(enchantedCard, Zone.BATTLEFIELD, source, game);
             Permanent newPermanent = game.getPermanent(enchantedCardId);
             if (newPermanent != null) {
                 Set<Card> toBattlefieldAttached = new HashSet<Card>();
