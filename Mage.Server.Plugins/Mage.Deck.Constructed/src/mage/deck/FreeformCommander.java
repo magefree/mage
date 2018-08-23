@@ -20,7 +20,6 @@ public class FreeformCommander extends Constructed {
 
     protected List<String> bannedCommander = new ArrayList<>();
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
-    private static boolean setupAllowed = false;
 
     public FreeformCommander() {
         this("Freeform Commander");
@@ -43,7 +42,6 @@ public class FreeformCommander extends Constructed {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
