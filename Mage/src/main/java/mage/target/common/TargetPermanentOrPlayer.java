@@ -99,8 +99,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
             }
             if (player != null) {
                 if (!isNotTarget()) {
-                    if (!player.canBeTargetedBy(targetSource, source.getControllerId(), game)
-                            || !filter.match(player, source.getSourceId(), source.getControllerId(), game)) {
+                    if (!player.canBeTargetedBy(targetSource, source.getControllerId(), game)) {
                         return false;
                     }
                 }
