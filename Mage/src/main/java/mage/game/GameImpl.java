@@ -1410,7 +1410,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
     }
-    
+
     @Override
     public void resetControlAfterSpellResolve(UUID topId) {
         // for Word of Command
@@ -1958,7 +1958,12 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                 } else {
-                    SpellAbility spellAbility = perm.getSpellAbility();
+                    Ability spellAbility = perm.getSpellAbility();
+                    if (spellAbility == null) {
+                        if (!perm.getAbilities().isEmpty()) {
+                            spellAbility = perm.getAbilities().get(0); // Can happen for created tokens (e.g. Estrid, the Masked)
+                        }
+                    }
                     if (spellAbility.getTargets().isEmpty()) {
                         for (Ability ability : perm.getAbilities(this)) {
                             if ((ability instanceof SpellAbility)

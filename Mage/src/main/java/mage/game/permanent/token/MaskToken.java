@@ -1,12 +1,12 @@
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TotemArmorAbility;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,6 +27,7 @@ public final class MaskToken extends TokenImpl {
 
         TargetPermanent auraTarget = new TargetPermanent();
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        ability.addTarget(auraTarget);
         ability.addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(ability);
 
