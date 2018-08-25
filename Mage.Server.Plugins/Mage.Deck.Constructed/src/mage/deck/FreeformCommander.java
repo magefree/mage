@@ -42,6 +42,19 @@ public class FreeformCommander extends Constructed {
             valid = false;
         }
 
+        Map<String, Integer> counts = new HashMap<>();
+        countCards(counts, deck.getCards());
+        countCards(counts, deck.getSideboard());
+
+        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
+            if (entry.getValue() > 1) {
+                if (!basicLandNames.contains(entry.getKey())) {
+                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
+                    valid = false;
+                }
+            }
+        }
+
         generateFreeformHash();
 
         if (deck.getSideboard().size() < 1 || deck.getSideboard().size() > 2) {
