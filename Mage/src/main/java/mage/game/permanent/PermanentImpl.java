@@ -1437,6 +1437,26 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return color;
     }
 
+    //20180810 - 701.3d
+    //If an object leaves the zone it's in, all attached permanents become unattached
+    public void detachAllAttachments(Game game) {
+        for(UUID attachmentId : getAttachments()) {
+            Permanent attachment = game.getPermanent(attachmentId);
+            Card attachmentCard = game.getCard(attachmentId);
+            if(attachment != null && attachmentCard != null) {
+                attachment.attachTo(null, game);
+                
+                //make bestow cards and licids into creatures
+                if(attachmentCard.isCreature()) {
+                    BestowAbility.becomeCreature(attachment, game);
+                }
+                
+                game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED,
+                        getId(), attachment.getId(), attachment.getControllerId()));
+            }
+        }
+    }
+    
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
@@ -1449,7 +1469,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             } else {
                 zoneChangeInfo = new ZoneChangeInfo(event);
             }
-            return ZonesHandler.moveCard(zoneChangeInfo, game);
+            boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game);
+            detachAllAttachments(game);
+            return successfullyMoved;
         }
         return false;
     }
@@ -1459,7 +1481,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
         ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
-        return ZonesHandler.moveCard(info, game);
+        
+        boolean successfullyMoved = ZonesHandler.moveCard(info, game);
+        detachAllAttachments(game);
+        return successfullyMoved;
     }
 
 }
