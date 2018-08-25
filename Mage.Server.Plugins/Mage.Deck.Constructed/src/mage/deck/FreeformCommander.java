@@ -20,7 +20,6 @@ public class FreeformCommander extends Constructed {
 
     protected List<String> bannedCommander = new ArrayList<>();
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
-    private static boolean setupAllowed = false;
 
     public FreeformCommander() {
         this("Freeform Commander");
@@ -41,20 +40,6 @@ public class FreeformCommander extends Constructed {
         if (deck.getCards().size() + deck.getSideboard().size() != 100) {
             invalid.put("Deck", "Must contain 100 cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
-        }
-
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes"));
-        Map<String, Integer> counts = new HashMap<>();
-        countCards(counts, deck.getCards());
-        countCards(counts, deck.getSideboard());
-
-        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey())) {
-                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
-                    valid = false;
-                }
-            }
         }
 
         generateFreeformHash();
