@@ -2,6 +2,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
+
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
@@ -17,19 +18,22 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
 /**
- *
  * @author North
  */
 public final class Bonehoard extends CardImpl {
 
     public Bonehoard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
-
+        // Living weapon (When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)
         this.addAbility(new LivingWeaponAbility());
+
+        // Equipped creature gets +X/+X, where X is the number of creature cards in all graveyards.
         CardsInAllGraveyardsCount value = new CardsInAllGraveyardsCount(new FilterCreatureCard());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
+
+        // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
