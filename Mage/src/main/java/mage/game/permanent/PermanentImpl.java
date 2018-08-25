@@ -1470,6 +1470,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 zoneChangeInfo = new ZoneChangeInfo(event);
             }
             boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game);
+            //20180810 - 701.3d
             detachAllAttachments(game);
             return successfullyMoved;
         }
@@ -1483,6 +1484,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
         
         boolean successfullyMoved = ZonesHandler.moveCard(info, game);
+        //20180810 - 701.3d
         detachAllAttachments(game);
         return successfullyMoved;
     }
