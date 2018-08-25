@@ -64,7 +64,7 @@ class CovetedJewelTriggeredAbility extends TriggeredAbilityImpl {
 
     public CovetedJewelTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), false);
-        this.addEffect(new CovetedJewelEffect());
+        this.addEffect(new CovetedJewelControlEffect());
         this.addEffect(new UntapSourceEffect());
     }
 
@@ -79,22 +79,22 @@ class CovetedJewelTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP;
+        return event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP; // this won't work correctly if multiple players can attack at the same time (what's currently not possible)
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player player = game.getPlayer(this.getControllerId());
-        if (player == null) {
+        Player currentController = game.getPlayer(getControllerId());
+        if (currentController == null) {
             return false;
         }
         for (UUID attacker : game.getCombat().getAttackers()) {
-            Permanent creature = game.getPermanent(attacker);
-            if (creature != null
-                    && player.hasOpponent(creature.getControllerId(), game)
-                    && player.getId().equals(game.getCombat().getDefendingPlayerId(attacker, game))
-                    && !creature.isBlocked(game)) {
-                this.getEffects().setTargetPointer(new FixedTarget(this.getControllerId(), game));
+            Permanent attackingCreature = game.getPermanent(attacker);
+            if (attackingCreature != null
+                    && currentController.hasOpponent(attackingCreature.getControllerId(), game)
+                    && getControllerId().equals(game.getCombat().getDefenderId(attacker)) // does not trigger if planeswalker is attacked
+                    && !attackingCreature.isBlocked(game)) {
+                this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId(), game));
                 return true;
             }
         }
@@ -109,27 +109,30 @@ class CovetedJewelTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class CovetedJewelEffect extends ContinuousEffectImpl {
+class CovetedJewelControlEffect extends ContinuousEffectImpl {
 
-    public CovetedJewelEffect() {
+    public CovetedJewelControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public CovetedJewelEffect(final CovetedJewelEffect effect) {
+    public CovetedJewelControlEffect(final CovetedJewelControlEffect effect) {
         super(effect);
     }
 
     @Override
-    public CovetedJewelEffect copy() {
-        return new CovetedJewelEffect(this);
+    public CovetedJewelControlEffect copy() {
+        return new CovetedJewelControlEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
+        Player newControllingPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (permanent == null || newControllingPlayer == null || !newControllingPlayer.isInGame()) {
+            this.discard();
+            return true;
         }
-        return permanent.changeControllerId(source.getFirstTarget(), game);
+        permanent.changeControllerId(getTargetPointer().getFirst(game, source), game);
+        return true;
     }
 }
