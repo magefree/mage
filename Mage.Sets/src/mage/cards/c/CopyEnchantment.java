@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,7 +31,8 @@ public final class CopyEnchantment extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // You may have Copy Enchantment enter the battlefield as a copy of any enchantment on the battlefield.
-        this.addAbility(new EntersBattlefieldAbility(new CopyEnchantmentEffect(new FilterEnchantmentPermanent("any enchantment")), true));
+        //this.addAbility(new EntersBattlefieldAbility(new CopyEnchantmentEffect(new FilterEnchantmentPermanent("any enchantment")), true));
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT), true));
     }
 
     public CopyEnchantment(final CopyEnchantment card) {
