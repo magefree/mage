@@ -14,17 +14,20 @@ import mage.util.RandomUtil;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
+
 import mage.abilities.keyword.PartnerWithAbility;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
 
+    private static final Logger logger = Logger.getLogger(ExpansionSet.class);
     public final static CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
     public final static CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
-   
-    
+
+
     public class SetCardInfo implements Serializable {
 
         private final String name;
@@ -181,36 +184,33 @@ public abstract class ExpansionSet implements Serializable {
 
         return theBooster;
     }
-    
-    protected int PartnerCheck(List<Card> booster, boolean partnerAllowed, int max, int i){
 
-        for (Ability ability:booster.get(booster.size() - 1).getAbilities()){
-                    //Check if fetched card has the PartnerWithAbility
-                    if (ability instanceof PartnerWithAbility) {               
-                        //Check if the pack already contains a partner pair
-                        if (partnerAllowed){
-                            //Added card always replaces an uncommon card
-                            Card card = CardRepository.instance.findCard(((PartnerWithAbility) ability).getPartnerName()).getCard();
-                            if (i<max){
-                                booster.add(card);
-                            }
-                            else{
-                                booster.set(0, card);
-                            }
-                            //2 return value indicates found partner
-                            return 2;
-                        }
+    protected int AddMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
 
-                        else{
-                            //If partner already exists, remove card and loop again
-                            booster.remove(booster.size() - 1);
-                            return 0;
-                        }
+        for (Ability ability : booster.get(booster.size() - 1).getAbilities()) {
+            //Check if fetched card has the PartnerWithAbility
+            if (ability instanceof PartnerWithAbility) {
+                //Check if the pack already contains a partner pair
+                if (partnerAllowed) {
+                    //Added card always replaces an uncommon card
+                    Card card = CardRepository.instance.findCard(((PartnerWithAbility) ability).getPartnerName()).getCard();
+                    if (i < max) {
+                        booster.add(card);
+                    } else {
+                        booster.set(0, card);
                     }
+                    //2 return value indicates found partner
+                    return 2;
+                } else {
+                    //If partner already exists, remove card and loop again
+                    booster.remove(booster.size() - 1);
+                    return 0;
+                }
             }
+        }
         return 1;
     }
-    
+
     protected void addToBooster(List<Card> booster, List<CardInfo> cards) {
         if (!cards.isEmpty()) {
             CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
@@ -226,19 +226,24 @@ public abstract class ExpansionSet implements Serializable {
     public List<Card> createBooster() {
 
         for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
-            List<Card> booster = tryBooster();
+
+            List<Card> booster;
+            if (hasPartnerMechanic) {
+                // battlebond's partners cards
+                booster = createPartnerBooster();
+            } else {
+                // all other sets
+                booster = tryBooster();
+            }
+
             if (boosterIsValid(booster)) {
                 return booster;
             }
         }
-        
-         //Battlebond packs alway contain both partners
-        if (hasPartnerMechanic){
-            List<Card> booster = createPartnerBooster();
-            return booster;
-        }
+
+        // return random booster if can't do valid
+        logger.error(String.format("Can't generate valid booster for set [%s - %s]", this.getCode(), this.getName()));
         return tryBooster();
-        
     }
 
     protected boolean boosterIsValid(List<Card> booster) {
@@ -254,6 +259,8 @@ public abstract class ExpansionSet implements Serializable {
             }
         }
 
+        // TODO: add partner check
+        // TODO: add booster size check?
         return true;
     }
 
@@ -310,60 +317,73 @@ public abstract class ExpansionSet implements Serializable {
 
         return true;
     }
-    
-    public List<Card> createPartnerBooster(){
-        
+
+    public List<Card> createPartnerBooster() {
+
         List<Card> booster = new ArrayList<>();
-        
-        boolean partnerAllowed = true; 
-        
+
+        boolean partnerAllowed = true;
+
         List<CardInfo> uncommons = getCardsByRarity(Rarity.UNCOMMON);
         for (int i = 0; i < numBoosterUncommon; i++) {
-            while (true){
+            while (true) {
                 addToBooster(booster, uncommons);
-                int check = PartnerCheck(booster, partnerAllowed, numBoosterUncommon - 1, i);
-                if (check == 1){break;}
-                if (check == 2){
+                int check = AddMissingPartner(booster, partnerAllowed, numBoosterUncommon - 1, i);
+                if (check == 1) {
+                    break;
+                }
+                if (check == 2) {
                     partnerAllowed = false;
                     //Be sure to account for the added card
-                    if (i != numBoosterUncommon - 1){i+=1;}
-                    break;}
+                    if (i != numBoosterUncommon - 1) {
+                        i += 1;
+                    }
+                    break;
                 }
+            }
         }
-        
+
         int numSpecialCommons = getNumberOfSpecialCommons();
         int numCommonsToGenerate = numBoosterCommon - numSpecialCommons;
-        
+
         List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
         for (int i = 0; i < numCommonsToGenerate; i++) {
             addToBooster(booster, commons);
-            }
-        
+        }
+
 
         List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
         List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
         for (int i = 0; i < numBoosterRare; i++) {
             if (ratioBoosterMythic > 0 && RandomUtil.nextInt(ratioBoosterMythic) == 0) {
-                while (true){
+                while (true) {
                     addToBooster(booster, mythics);
-                    int check = PartnerCheck(booster, partnerAllowed, -1, 1);
-                    if (check == 1){break;}
-                    if (check == 2){partnerAllowed = false; break;}
+                    int check = AddMissingPartner(booster, partnerAllowed, -1, 1);
+                    if (check == 1) {
+                        break;
+                    }
+                    if (check == 2) {
+                        partnerAllowed = false;
+                        break;
+                    }
                 }
-            }
-            
-            else {
-                while (true){
+            } else {
+                while (true) {
                     addToBooster(booster, rares);
-                    int check = PartnerCheck(booster, partnerAllowed, -1, 1);
-                    if (check == 1){break;}
-                    if (check == 2){partnerAllowed = false; break;}
+                    int check = AddMissingPartner(booster, partnerAllowed, -1, 1);
+                    if (check == 1) {
+                        break;
+                    }
+                    if (check == 2) {
+                        partnerAllowed = false;
+                        break;
+                    }
                 }
             }
         }
         return booster;
     }
-    
+
     public List<Card> tryBooster() {
         List<Card> booster = new ArrayList<>();
         if (!hasBoosters) {
