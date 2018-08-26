@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -17,8 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,7 +25,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 public final class ScrapyardMongrel extends CardImpl {
 
     public ScrapyardMongrel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.HOUND);
 
         this.color.setRed(true);
@@ -35,14 +33,13 @@ public final class ScrapyardMongrel extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as you control an artifact, Scrapyard Mongrel gets +2/+0 and has trample.
-        FilterPermanent filter = new FilterControlledArtifactPermanent();
         Effect boostEffect = new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
-                new PermanentsOnTheBattlefieldCondition(filter),
+                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
                 "As long as you control an artifact, {this} gets +2/+0");
         Effect gainAbilityEffect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                new PermanentsOnTheBattlefieldCondition(filter),
+                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
                 "and has trample");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
         ability.addEffect(gainAbilityEffect);

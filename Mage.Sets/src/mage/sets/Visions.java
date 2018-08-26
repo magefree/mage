@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -34,6 +33,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Army Ants", 126, Rarity.UNCOMMON, mage.cards.a.ArmyAnts.class));
         cards.add(new SetCardInfo("Betrayal", 26, Rarity.COMMON, mage.cards.b.Betrayal.class));
         cards.add(new SetCardInfo("Blanket of Night", 52, Rarity.UNCOMMON, mage.cards.b.BlanketOfNight.class));
+        cards.add(new SetCardInfo("Bogardan Phoenix", 76, Rarity.RARE, mage.cards.b.BogardanPhoenix.class));
         cards.add(new SetCardInfo("Brass-Talon Chimera", 142, Rarity.UNCOMMON, mage.cards.b.BrassTalonChimera.class));
         cards.add(new SetCardInfo("Breathstealer's Crypt", 127, Rarity.RARE, mage.cards.b.BreathstealersCrypt.class));
         cards.add(new SetCardInfo("Breezekeeper", 27, Rarity.COMMON, mage.cards.b.Breezekeeper.class));
@@ -117,6 +117,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Parapet", 14, Rarity.COMMON, mage.cards.p.Parapet.class));
         cards.add(new SetCardInfo("Phyrexian Marauder", 151, Rarity.RARE, mage.cards.p.PhyrexianMarauder.class));
         cards.add(new SetCardInfo("Phyrexian Walker", 152, Rarity.COMMON, mage.cards.p.PhyrexianWalker.class));
+        cards.add(new SetCardInfo("Pillar Tombs of Aku", 67, Rarity.RARE, mage.cards.p.PillarTombsOfAku.class));
         cards.add(new SetCardInfo("Prosperity", 40, Rarity.UNCOMMON, mage.cards.p.Prosperity.class));
         cards.add(new SetCardInfo("Python", 68, Rarity.COMMON, mage.cards.p.Python.class));
         cards.add(new SetCardInfo("Quicksand", 166, Rarity.UNCOMMON, mage.cards.q.Quicksand.class));

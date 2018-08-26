@@ -18,7 +18,7 @@ public class FadingTest extends CardTestPlayerBase {
      * 702.31. Fading
      * 702.31a Fading is a keyword that represents two abilities. “Fading N” means “This permanent
      * enters the battlefield with N fade counters on it” and “At the beginning of your upkeep, remove
-     * a fade counter from this permanent. If you can’t, sacrifice the permanent.”
+     * a fade counter from this permanent. If you can't, sacrifice the permanent.”
      */
 
     /** 

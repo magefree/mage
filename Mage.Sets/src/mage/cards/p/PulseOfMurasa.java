@@ -18,7 +18,7 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public final class PulseOfMurasa extends CardImpl {
 
-    private static final FilterCard FILTER = new FilterCard("creature or land card in a graveyard");
+    private static final FilterCard FILTER = new FilterCard("creature or land card from a graveyard");
 
     static {
         FILTER.add(Predicates.or(

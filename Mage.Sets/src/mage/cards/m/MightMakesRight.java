@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -47,7 +47,7 @@ public final class MightMakesRight extends CardImpl {
         gainControlAbility.addEffect(new UntapTargetEffect());
         gainControlAbility.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         gainControlAbility.addTarget(new TargetCreaturePermanent(filter));
-        Ability conditionalAbility = new ConditionalTriggeredAbility(gainControlAbility, ControlsEachCreatureWithGreatestPowerCondition.instance, ruleText);
+        Ability conditionalAbility = new ConditionalInterveningIfTriggeredAbility(gainControlAbility, ControlsEachCreatureWithGreatestPowerCondition.instance, ruleText);
         this.addAbility(conditionalAbility);
     }
 
@@ -82,7 +82,7 @@ enum ControlsEachCreatureWithGreatestPowerCondition implements Condition {
                 result = true;
             }
             if (power == maxPower) {
-                result &= permanent.getControllerId().equals(source.getControllerId());
+                result &= permanent.isControlledBy(source.getControllerId());
             }
         }
         return result;

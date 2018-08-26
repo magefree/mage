@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import java.util.HashMap;
@@ -15,13 +13,12 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.TargetAmount;
 
 /**
  *
  * @author LevelX2
  */
-
 public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl {
 
     private final Map<UUID, Integer> targetAmountMap = new HashMap<>();
@@ -44,9 +41,9 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
         super.init(source, game);
         Target target = source.getTargets().get(0);
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (target instanceof TargetCreatureOrPlayerAmount && sourceObject != null) {
-            TargetCreatureOrPlayerAmount multiTarget = (TargetCreatureOrPlayerAmount) target;
-            for (UUID targetId: multiTarget.getTargets()) {
+        if (target instanceof TargetAmount && sourceObject != null) {
+            TargetAmount multiTarget = (TargetAmount) target;
+            for (UUID targetId : multiTarget.getTargets()) {
                 Player player = null;
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -107,7 +104,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
         if (duration == Duration.EndOfTurn) {
             sb.append("this turn ");
         }
-        sb.append("to any number of target creatures and/or players, divided as you choose");
+        sb.append("to any number of targets, divided as you choose");
         return sb.toString();
     }
 

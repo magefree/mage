@@ -28,7 +28,7 @@ public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<C
 
         switch (controller) {
             case YOU:
-                if (object.getControllerId().equals(playerId)) {
+                if (object.isControlledBy(playerId)) {
                     return true;
                 }
                 break;
@@ -38,18 +38,18 @@ public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<C
                 }
                 break;
             case OPPONENT:
-                if (!object.getControllerId().equals(playerId)
+                if (!object.isControlledBy(playerId)
                         && game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
                     return true;
                 }
                 break;
             case NOT_YOU:
-                if (!object.getControllerId().equals(playerId)) {
+                if (!object.isControlledBy(playerId)) {
                     return true;
                 }
                 break;
             case ACTIVE:
-                if (object.getControllerId().equals(game.getActivePlayerId())) {
+                if (object.isControlledBy(game.getActivePlayerId())) {
                     return true;
                 }
                 break;

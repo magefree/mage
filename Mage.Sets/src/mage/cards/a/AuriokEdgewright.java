@@ -22,7 +22,7 @@ import mage.constants.Zone;
  */
 public final class AuriokEdgewright extends CardImpl {
 
-    protected static String effectText = "Metalcraft - Auriok Edgewright has double strike as long as you control three or more artifacts.";
+    protected static String effectText = "<i>Metalcraft</i> &mdash; Auriok Edgewright has double strike as long as you control three or more artifacts.";
 
     public AuriokEdgewright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

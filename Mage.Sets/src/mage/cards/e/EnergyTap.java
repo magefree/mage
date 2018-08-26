@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class EnergyTap extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you crontrol");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

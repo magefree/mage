@@ -138,7 +138,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         if (targetPermanent == null) {
             return true;
         }
-        if (nextTurnTargetController == 0 && startingTurn != game.getTurnNum() && game.getActivePlayerId().equals(targetPermanent.getControllerId())) {
+        if (nextTurnTargetController == 0 && startingTurn != game.getTurnNum() && game.isActivePlayer(targetPermanent.getControllerId())) {
             nextTurnTargetController = game.getTurnNum();
         }
         return game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController;
@@ -157,7 +157,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
-            if (game.getActivePlayerId().equals(permanent.getControllerId())) {
+            if (game.isActivePlayer(permanent.getControllerId())) {
                 Permanent planeswalker = game.getPermanent(source.getSourceId());
                 if (planeswalker != null) {
                     return true;

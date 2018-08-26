@@ -82,7 +82,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
         Permanent ally = game.getPermanent(event.getTargetId());
         if (ally != null) {
             if (ally.hasSubtype(SubType.ALLY, game)
-                    && ally.getControllerId().equals(this.getControllerId())) {
+                    && ally.isControlledBy(this.getControllerId())) {
                 if (event.getTargetId().equals(this.getSourceId())
                         || event.getTargetId().equals(ally.getId())) {
                     return true;

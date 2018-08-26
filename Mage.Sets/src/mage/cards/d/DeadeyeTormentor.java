@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class DeadeyeTormentor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Raid</i> &mdash; When Deadeye Tormentor enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1)), RaidCondition.instance,
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1)), RaidCondition.instance,
                 "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new PlayerAttackedWatcher());

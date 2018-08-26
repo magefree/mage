@@ -149,7 +149,7 @@ class ConquerorsFlailEffect extends ContinuousRuleModifyingEffectImpl {
             }
         }
 
-        if (isAttached && game.getActivePlayerId().equals(source.getControllerId())
+        if (isAttached && game.isActivePlayer(source.getControllerId())
                 && game.getPlayer(source.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             return true;
         }

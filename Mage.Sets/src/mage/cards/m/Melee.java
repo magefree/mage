@@ -41,7 +41,7 @@ public final class Melee extends CardImpl {
         Condition condition = new CompoundCondition(BeforeBlockersAreDeclaredCondition.instance,
                 new IsPhaseCondition(TurnPhase.COMBAT),
                 MyTurnCondition.instance);
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, condition, "Cast {this} only during your turn and only during combat before blockers are declared"));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, condition, "Cast this spell only during your turn and only during combat before blockers are declared"));
 
         // You choose which creatures block this combat and how those creatures block.
         // (only the last resolved Melee spell's blocking effect applies)

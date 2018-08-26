@@ -138,16 +138,16 @@ public class CopySpellTest extends CardTestPlayerBase {
      *
      * 702.46a Splice is a static ability that functions while a card is in your
      * hand. “Splice onto [subtype] [cost]” means “You may reveal this card from
-     * your hand as you cast a [subtype] spell. If you do, copy this card’s text
+     * your hand as you cast a [subtype] spell. If you do, copy this card's text
      * box onto that spell and pay [cost] as an additional cost to cast that
-     * spell.” Paying a card’s splice cost follows the rules for paying
+     * spell.” Paying a card's splice cost follows the rules for paying
      * additional costs in rules 601.2b and 601.2e–g. 601.2b If the spell is
      * modal the player announces the mode choice (see rule 700.2). If the
      * player wishes to splice any cards onto the spell (see rule 702.46), he or
      * she reveals those cards in their hand. 706.10. To copy a spell,
      * activated ability, or triggered ability means to put a copy of it onto
-     * the stack; a copy of a spell isn’t cast and a copy of an activated
-     * ability isn’t activated. A copy of a spell or ability copies both the
+     * the stack; a copy of a spell isn't cast and a copy of an activated
+     * ability isn't activated. A copy of a spell or ability copies both the
      * characteristics of the spell or ability and all decisions made for it,
      * including modes, targets, the value of X, and additional or alternative
      * costs. (See rule 601, “Casting Spells.”)

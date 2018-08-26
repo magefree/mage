@@ -37,10 +37,11 @@ public class SpellStack extends ArrayDeque<StackObject> {
         try {
             top = this.peek();
             top.resolve(game);
+            game.resetControlAfterSpellResolve(top.getId());
         } finally {
             if (top != null) {
                 if (contains(top)) {
-                    logger.warn("StackObject was still on the stack after resoving" + top.getName());
+                    logger.warn("StackObject was still on the stack after resolving" + top.getName());
                     this.remove(top, game);
                 }
             }
@@ -89,10 +90,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
                     game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
+                return true;
             } else if (!game.isSimulation()) {
                 game.informPlayers(counteredObjectName + " could not be countered by " + sourceObject.getLogName());
             }
-            return true;
         }
         return false;
     }

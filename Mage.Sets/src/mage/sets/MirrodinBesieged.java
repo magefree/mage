@@ -38,7 +38,7 @@ public final class MirrodinBesieged extends ExpansionSet {
         cards.add(new SetCardInfo("Blue Sun's Zenith", 20, Rarity.RARE, mage.cards.b.BlueSunsZenith.class));
         cards.add(new SetCardInfo("Bonehoard", 100, Rarity.RARE, mage.cards.b.Bonehoard.class));
         cards.add(new SetCardInfo("Brass Squire", 101, Rarity.UNCOMMON, mage.cards.b.BrassSquire.class));
-        cards.add(new SetCardInfo("Burn the Impure", 59, Rarity.COMMON, mage.cards.b.BurntheImpure.class));
+        cards.add(new SetCardInfo("Burn the Impure", 59, Rarity.COMMON, mage.cards.b.BurnTheImpure.class));
         cards.add(new SetCardInfo("Caustic Hound", 40, Rarity.COMMON, mage.cards.c.CausticHound.class));
         cards.add(new SetCardInfo("Choking Fumes", 4, Rarity.UNCOMMON, mage.cards.c.ChokingFumes.class));
         cards.add(new SetCardInfo("Concussive Bolt", 60, Rarity.COMMON, mage.cards.c.ConcussiveBolt.class));

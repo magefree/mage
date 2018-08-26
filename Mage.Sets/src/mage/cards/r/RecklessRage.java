@@ -20,8 +20,8 @@ public final class RecklessRage extends CardImpl {
     public RecklessRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
-        // Reckless Rage deals 4 damage to target creature you don’t control and 2 damage to target creature you control.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don’t control");
+        // Reckless Rage deals 4 damage to target creature you don't control and 2 damage to target creature you control.
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DamageTargetEffect(4).setUseOnlyTargetPointer(true));

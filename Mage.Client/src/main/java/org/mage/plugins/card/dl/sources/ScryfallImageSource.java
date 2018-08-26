@@ -6,19 +6,33 @@ import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import mage.client.dialog.PreferencesDialog;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
  * @author Quercitron, JayDi85
- *
  */
 public enum ScryfallImageSource implements CardImageSource {
 
     instance;
 
     private final Set<String> supportedSets;
+    private final Map<String, String> languageAliases;
 
     ScryfallImageSource() {
+        // https://scryfall.com/docs/api/languages
+        languageAliases = new HashMap<>();
+        languageAliases.put("en", "en");
+        languageAliases.put("es", "es");
+        languageAliases.put("jp", "ja");
+        languageAliases.put("it", "it");
+        languageAliases.put("fr", "fr");
+        languageAliases.put("cn", "zhs"); // Simplified Chinese
+        languageAliases.put("de", "de");
+        languageAliases.put("ko", "ko");
+        languageAliases.put("pt", "pt");
+        languageAliases.put("ru", "ru");
+
         supportedSets = new LinkedHashSet<>();
         // supportedSets.add("PTC"); //
         supportedSets.add("LEA");
@@ -205,40 +219,62 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("E02");
         supportedSets.add("V17");
         supportedSets.add("UST");
+        supportedSets.add("DDU");
         supportedSets.add("RIX");
         supportedSets.add("WMCQ");
         supportedSets.add("PPRO");
         supportedSets.add("A25");
         supportedSets.add("DOM");
         supportedSets.add("BBD");
-//        supportedSets.add("M19");
-
+        supportedSets.add("C18");
+        supportedSets.add("CM2");
+        supportedSets.add("M19");
+        supportedSets.add("GS1");
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
+
+        String preferredLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
+        String defaultCode = "en";
+        String localizedCode = languageAliases.getOrDefault(preferredLanguage, defaultCode);
+        // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
+
+        // TODO: do not use API at all? It's can help with scryfall request limits (1 request instead 2)
+        String baseUrl = null;
+        String alternativeUrl = null;
 
         // special card number like "103a" already compatible
-        if (card.isCollectorIdWithStr()) {
-            return "https://img.scryfall.com/cards/large/en/" + formatSetName(card.getSet()) + "/"
+        if (baseUrl == null && card.isCollectorIdWithStr()) {
+            baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet()) + "/"
+                    + card.getCollectorId() + ".jpg";
+            alternativeUrl = "https://img.scryfall.com/cards/large/" + defaultCode + "/" + formatSetName(card.getSet()) + "/"
                     + card.getCollectorId() + ".jpg";
         }
 
-        // double faced cards do not supporte by API (need direct link for img)
+        // double faced cards do not supports by API (need direct link for img)
         // example: https://img.scryfall.com/cards/large/en/xln/173b.jpg
-        if (card.isTwoFacedCard()) {
-            return "https://img.scryfall.com/cards/large/en/" + formatSetName(card.getSet()) + "/"
+        if (baseUrl == null && card.isTwoFacedCard()) {
+            baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet()) + "/"
+                    + card.getCollectorId() + (card.isSecondSide() ? "b" : "a") + ".jpg";
+            alternativeUrl = "https://img.scryfall.com/cards/large/" + defaultCode + "/" + formatSetName(card.getSet()) + "/"
                     + card.getCollectorId() + (card.isSecondSide() ? "b" : "a") + ".jpg";
         }
 
         // basic cards by api call (redirect to img link)
-        // example: https://api.scryfall.com/cards/xln/121?format=image
-        return "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
-                + card.getCollectorId() + "?format=image";
+        // example: https://api.scryfall.com/cards/xln/121/en?format=image
+        if (baseUrl == null) {
+            baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
+                    + card.getCollectorId() + "/" + localizedCode + "?format=image";
+            alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
+                    + card.getCollectorId() + "/" + defaultCode + "?format=image";
+        }
+
+        return new CardImageUrls(baseUrl, alternativeUrl);
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) throws Exception {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) throws Exception {
         return null;
     }
 

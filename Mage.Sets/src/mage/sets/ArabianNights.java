@@ -82,7 +82,7 @@ public final class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Jandor's Ring", 64, Rarity.RARE, mage.cards.j.JandorsRing.class));
         cards.add(new SetCardInfo("Jandor's Saddlebags", 65, Rarity.RARE, mage.cards.j.JandorsSaddlebags.class));
         cards.add(new SetCardInfo("Jihad", 5, Rarity.RARE, mage.cards.j.Jihad.class));
-        cards.add(new SetCardInfo("Junún Efreet", 28, Rarity.RARE, mage.cards.j.JununEfreet.class));
+        cards.add(new SetCardInfo("Junun Efreet", 28, Rarity.RARE, mage.cards.j.JununEfreet.class));
         cards.add(new SetCardInfo("Juzam Djinn", 29, Rarity.RARE, mage.cards.j.JuzamDjinn.class));
         cards.add(new SetCardInfo("Khabal Ghoul", 30, Rarity.UNCOMMON, mage.cards.k.KhabalGhoul.class));
         cards.add(new SetCardInfo("King Suleiman", 6, Rarity.RARE, mage.cards.k.KingSuleiman.class));

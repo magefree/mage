@@ -17,7 +17,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class SkyshroudClaim extends CardImpl {
 
-    private static final FilterLandCard filter = new FilterLandCard("Forest");
+    private static final FilterLandCard filter = new FilterLandCard("Forest cards");
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));
     }

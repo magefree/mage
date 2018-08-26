@@ -111,7 +111,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
             Card card = spell.getCard();
             if (spellController == null
                     || card == null
-                    || !StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL.match(spell, game)) {
+                    || !StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY.match(spell, game)) {
                 return false;
             }
             if (!noLongerOnStack) {// the spell is still on the stack, so exile it

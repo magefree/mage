@@ -66,7 +66,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     BerserkReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only before the combat damage step";
+        staticText = "Cast this spell only before the combat damage step";
     }
 
     BerserkReplacementEffect(final BerserkReplacementEffect effect) {

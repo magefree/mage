@@ -84,7 +84,7 @@ class AnimationModuleTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            return permanent != null && permanent.getControllerId().equals(this.getControllerId());
+            return permanent != null && permanent.isControlledBy(this.getControllerId());
         }
         return false;
     }

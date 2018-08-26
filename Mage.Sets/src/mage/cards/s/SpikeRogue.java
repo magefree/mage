@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,7 +43,7 @@ public final class SpikeRogue extends CardImpl {
 
         // {2}, Remove a +1/+1 counter from a creature you control: Put a +1/+1 counter on Spike Rogue.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(2));
-        ability2.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true), CounterType.P1P1));
+        ability2.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, true), CounterType.P1P1));
         this.addAbility(ability2);
     }
 

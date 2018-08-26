@@ -88,7 +88,7 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
         if (((DamagedCreatureEvent) event).isCombatDamage()) {
             Permanent sourceCreature = game.getPermanent(event.getSourceId());
             Permanent targetCreature = game.getPermanent(event.getTargetId());
-            if (sourceCreature != null && sourceCreature.getControllerId().equals(this.getControllerId()) 
+            if (sourceCreature != null && sourceCreature.isControlledBy(this.getControllerId())
                 && targetCreature != null && sourceCreature.hasSubtype(SubType.WARRIOR, game)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
                     return true;

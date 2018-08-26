@@ -46,7 +46,7 @@ public final class SentinelTower extends CardImpl {
 class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
 
     SentinelTowerTriggeredAbility() {
-        super(new DamageTargetEffect(0), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false);
+        super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false);
         this.addTarget(new TargetAnyTarget());
     }
 
@@ -61,7 +61,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(getControllerId())
+        if (game.isActivePlayer(getControllerId())
                 && super.checkTrigger(event, game)) {
             SentinelTowerWatcher watcher = (SentinelTowerWatcher) game.getState().getWatchers().get(SentinelTowerWatcher.class.getSimpleName());
             if (watcher == null) {

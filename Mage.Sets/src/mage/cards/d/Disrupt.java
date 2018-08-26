@@ -22,7 +22,7 @@ public final class Disrupt extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target instant or sorcery spell unless its controller pays {1}.
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

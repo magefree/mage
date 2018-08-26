@@ -26,9 +26,9 @@ public final class SpectralSearchlight extends CardImpl {
     public SpectralSearchlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {T}: Choose a player. That player adds one mana of any color he or she chooses.
+        // {T}: Choose a player. That player adds one mana of any color they chooses.
         ManaEffect effect = new SpectralSearchlightManaEffect("chosen player");
-        effect.setText("That player adds one mana of any color he or she chooses");
+        effect.setText("That player adds one mana of any color they choose");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         // choosing player as first effect, before adding mana effect
         ability.getEffects().add(0, new ChoosePlayerEffect(Outcome.PutManaInPool));

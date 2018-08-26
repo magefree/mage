@@ -59,7 +59,7 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 if (event.getTargetId().equals(targetId)) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                    if (permanent != null && game.isActivePlayer(permanent.getControllerId())) {
                         return true;
                     }
                 }

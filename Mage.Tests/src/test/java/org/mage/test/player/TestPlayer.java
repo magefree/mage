@@ -1,4 +1,3 @@
-
 package org.mage.test.player;
 
 import java.io.Serializable;
@@ -557,6 +556,13 @@ public class TestPlayer implements Player {
                             actions.remove(action);
                             checkProccessed = true;
                         }
+
+                        // check mana pool: colors, amount
+                        if (params[0].equals(CHECK_COMMAND_MANA_POOL) && params.length == 3) {
+                            assertManaPool(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            checkProccessed = true;
+                        }
                     }
 
                     if (!checkProccessed) {
@@ -679,6 +685,49 @@ public class TestPlayer implements Player {
         }
     }
 
+    private void assertManaPoolInner(PlayerAction action, Player player, ManaType manaType, Integer amount) {
+        Integer current = player.getManaPool().get(manaType);
+        Assert.assertEquals(action.getActionName() + " - mana pool must contain [" + amount.toString() + " " + manaType.toString() + "], but found [" + current.toString() + "]", amount, current);
+    }
+
+    private void assertManaPool(PlayerAction action, Game game, Player player, String colors, Integer amount) {
+        Assert.assertNotEquals(action.getActionName() + " - must setup color", "", colors);
+
+        // Can't use ObjectColor -- it's doesn't contain colorless -- need to use custom parse
+        for (int i = 0; i < colors.length(); i++) {
+            switch (colors.charAt(i)) {
+                case 'W':
+                    assertManaPoolInner(action, player, ManaType.WHITE, amount);
+                    break;
+
+                case 'U':
+                    assertManaPoolInner(action, player, ManaType.BLUE, amount);
+                    break;
+
+                case 'B':
+                    assertManaPoolInner(action, player, ManaType.BLACK, amount);
+                    break;
+
+                case 'R':
+                    assertManaPoolInner(action, player, ManaType.RED, amount);
+                    break;
+
+                case 'G':
+                    assertManaPoolInner(action, player, ManaType.GREEN, amount);
+                    break;
+
+                case 'C':
+                    assertManaPoolInner(action, player, ManaType.COLORLESS, amount);
+                    break;
+
+                default:
+                    Assert.fail(action.getActionName() + " - unknown color char [" + colors.charAt(i) + "]");
+                    break;
+            }
+        }
+    }
+
+
     /*
      *  Iterates through each player on the current turn and asserts if they can attack or block legally this turn
      */
@@ -772,6 +821,11 @@ public class TestPlayer implements Player {
             }
 
         }
+    }
+
+    @Override
+    public List<UUID> getTurnControllers() {
+        return computerPlayer.getTurnControllers();
     }
 
     @Override
@@ -1437,6 +1491,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void setGameUnderYourControl(boolean value, boolean fullRestore) {
+        computerPlayer.setGameUnderYourControl(value, fullRestore);
+    }
+
+    @Override
     public void endOfTurn(Game game) {
         computerPlayer.endOfTurn(game);
     }
@@ -1992,8 +2051,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
+        return computerPlayer.searchLibrary(target, game, triggerEvents);
+    }
+
+    @Override
     public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
         return computerPlayer.searchLibrary(target, game, targetPlayerId);
+    }
+
+    @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
+        return computerPlayer.searchLibrary(target, game, targetPlayerId, triggerEvents);
     }
 
     @Override
@@ -2133,6 +2202,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean canPlayCardsFromGraveyard() {
         return computerPlayer.canPlayCardsFromGraveyard();
+    }
+
+    @Override
+    public void setPayManaMode(boolean payManaMode) {
+        computerPlayer.setPayManaMode(payManaMode);
     }
 
     @Override

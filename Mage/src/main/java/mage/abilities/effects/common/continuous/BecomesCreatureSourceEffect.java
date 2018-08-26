@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.FlyingAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -19,6 +18,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected Token token;
     protected String theyAreStillType;
     protected boolean losePreviousTypes;
+    protected boolean loseAbilities;
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
 
@@ -31,13 +31,16 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness) {
+        this(token, theyAreStillType,duration,losePreviousTypes,characterDefining,power,toughness,false);
+    }
+    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness, boolean loseAbilities) {
         super(duration, Outcome.BecomeCreature);
         this.characterDefining = characterDefining;
         this.token = token;
         this.theyAreStillType = theyAreStillType;
         this.losePreviousTypes = losePreviousTypes;
         this.power = power;
-        this.toughness = toughness;
+        this.toughness = toughness;this.loseAbilities=loseAbilities;
         setText();
 
         this.addDependencyType(DependencyType.BecomeCreature);
@@ -47,7 +50,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         super(effect);
         this.token = effect.token.copy();
         this.theyAreStillType = effect.theyAreStillType;
-        this.losePreviousTypes = effect.losePreviousTypes;
+        this.losePreviousTypes = effect.losePreviousTypes;this.loseAbilities=effect.loseAbilities;
         if (effect.power != null) {
             this.power = effect.power.copy();
         }
@@ -108,6 +111,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
 
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
+                        if(loseAbilities){
+                        permanent.removeAllAbilities(source.getSourceId(), game);}
                         for (Ability ability : token.getAbilities()) {
                             permanent.addAbility(ability, source.getSourceId(), game);
                         }

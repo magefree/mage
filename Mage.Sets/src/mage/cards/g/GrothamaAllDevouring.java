@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.HashMap;
@@ -196,14 +195,15 @@ class GrothamaAllDevouringWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.DAMAGED_CREATURE) {
             return;
         }
+        UUID damageControllerId = game.getControllerId(event.getSourceId());
         Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (damaged == null) {
+        if (damaged == null || damageControllerId == null) {
             return;
         }
         MageObjectReference mor = new MageObjectReference(damaged, game);
         damageMap.putIfAbsent(mor, new HashMap<>());
-        damageMap.get(mor).putIfAbsent(event.getPlayerId(), 0);
-        damageMap.get(mor).compute(event.getPlayerId(), (k, damage) -> damage + event.getAmount());
+        damageMap.get(mor).putIfAbsent(damageControllerId, 0);
+        damageMap.get(mor).compute(damageControllerId, (k, damage) -> damage + event.getAmount());
     }
 
     @Override

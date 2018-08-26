@@ -102,9 +102,9 @@ class EarthshakerKhenraEffect extends OneShotEffect {
         if (sourceObject != null) {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             /*
-            27.06.2017 	The target creature’s power is checked when you target it with Earthshaker Khenra’s ability
-                        and when that ability resolves. Once the ability resolves, if the creature’s power increases
-                        or Earthshaker Khenra’s power decreases, the target creature will still be unable to block.
+            27.06.2017 	The target creature's power is checked when you target it with Earthshaker Khenra's ability
+                        and when that ability resolves. Once the ability resolves, if the creature's power increases
+                        or Earthshaker Khenra's power decreases, the target creature will still be unable to block.
              */
             if (targetCreature != null && targetCreature.getPower().getValue() <= sourceObject.getPower().getValue()) {
                 ContinuousEffect effect = new CantBlockTargetEffect(Duration.EndOfTurn);

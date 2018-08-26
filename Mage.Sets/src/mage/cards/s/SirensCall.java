@@ -35,7 +35,7 @@ public final class SirensCall extends CardImpl {
         // Cast Siren's Call only during an opponent's turn, before attackers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
                 new CompoundCondition(OnOpponentsTurnCondition.instance, BeforeAttackersAreDeclaredCondition.instance),
-                "Cast {this} only during an opponent's turn, before attackers are declared"));
+                "Cast this spell only during an opponent's turn, before attackers are declared"));
 
         // Creatures the active player controls attack this turn if able.
         this.getSpellAbility().addEffect(new SirensCallMustAttackEffect());
@@ -73,7 +73,7 @@ class SirensCallMustAttackEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return game.getActivePlayerId().equals(permanent.getControllerId());
+        return game.isActivePlayer(permanent.getControllerId());
     }
 
     @Override

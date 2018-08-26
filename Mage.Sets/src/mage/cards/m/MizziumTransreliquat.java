@@ -31,7 +31,7 @@ public final class MizziumTransreliquat extends CardImpl {
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
 
-        // {1}{U}{R}: Mizzium Transreliquat becomes a copy of target artifact and gains this ability.
+        // {1}{U}{R}: Mizzium Transreliquat becomes a copy of target artifact, except it has this ability.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MizziumTransreliquatCopyAndGainAbilityEffect(), new ManaCostsImpl("{1}{U}{R}"));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
@@ -79,7 +79,7 @@ class MizziumTransreliquatCopyAndGainAbilityEffect extends OneShotEffect {
 
     public MizziumTransreliquatCopyAndGainAbilityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} becomes a copy of target artifact and gains this ability";
+        this.staticText = "{this} becomes a copy of target artifact, except it has this ability";
     }
 
     public MizziumTransreliquatCopyAndGainAbilityEffect(final MizziumTransreliquatCopyAndGainAbilityEffect effect) {

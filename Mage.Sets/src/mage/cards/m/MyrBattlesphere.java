@@ -96,7 +96,7 @@ class MyrBattlesphereTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks, you may tap X untapped Myr you control. If you do, {this} gets +X/+0 until end of turn and deals X damage to the player or planeswalker it’s attacking.";
+        return "Whenever {this} attacks, you may tap X untapped Myr you control. If you do, {this} gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.";
     }
 }
 
@@ -111,7 +111,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
 
     public MyrBattlesphereEffect() {
         super(Outcome.Damage);
-        staticText = "you may tap X untapped Myr you control. If you do, {this} gets +X/+0 until end of turn and deals X damage to the player or planeswalker it’s attacking.";
+        staticText = "you may tap X untapped Myr you control. If you do, {this} gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.";
     }
 
     public MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {

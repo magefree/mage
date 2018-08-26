@@ -71,7 +71,7 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.getControllerId().equals(controllerId)) {
+        if (spell != null && spell.isControlledBy(controllerId)) {
             for (Ability ability : spell.getAbilities()) {
                 if (ability instanceof KickerAbility && ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility()) > 0) {
                     return true;

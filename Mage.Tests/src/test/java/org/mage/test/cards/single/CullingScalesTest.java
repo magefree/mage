@@ -41,8 +41,8 @@ public class CullingScalesTest extends CardTestPlayerBase {
     
     @Test
     public void testCullingScalesFizzleByMakingLowerCostedPermanent() {
-        // Gatherer ruling: If the targeted permanent doesn’t have the lowest converted mana cost
-        // when the ability resolves, the ability is countered and the permanent isn’t destroyed.
+        // Gatherer ruling: If the targeted permanent doesn't have the lowest converted mana cost
+        // when the ability resolves, the ability is countered and the permanent isn't destroyed.
         
         addCard(Zone.HAND, playerB, "Raise the Alarm"); // Make 2 tokens
         addCard(Zone.BATTLEFIELD, playerB, "Elvish Visionary"); // CMC = 2

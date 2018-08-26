@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
- *
  * @author spjspj
  */
 public enum AltMtgOnlTokensImageSource implements CardImageSource {
@@ -60,7 +59,7 @@ public enum AltMtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         return null;
     }
 
@@ -122,7 +121,7 @@ public enum AltMtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) throws IOException {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) throws IOException {
         if (copyUrlToImage == null) {
             setupLinks();
         }
@@ -139,12 +138,12 @@ public enum AltMtgOnlTokensImageSource implements CardImageSource {
         }
         return -1;
     }
-    
+
     @Override
     public boolean isTokenSource() {
         return true;
     }
-    
+
     @Override
     public void doPause(String httpImageUrl) {
     }

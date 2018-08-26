@@ -11,6 +11,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -18,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 /**
@@ -84,8 +84,8 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if (abilityToModify.getControllerId().equals(source.getControllerId())) {
-                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+            if (abilityToModify.isControlledBy(source.getControllerId())) {
+                Card spell = ((SpellAbility) abilityToModify).getCharacteristics(game);
                 if (spell != null) {
                     return spell.isCreature();
                 }

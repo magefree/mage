@@ -41,6 +41,7 @@ public class CounterPluginImpl implements CounterPlugin {
         File data = new File(PLUGIN_DATA_FOLDER_PATH + File.separator + DATA_STORAGE_FILE);
         if (!data.exists()) {
             try {
+                data.getParentFile().mkdirs();
                 data.createNewFile();
             } catch (IOException e) {
                 log.error(e.getMessage(), e);

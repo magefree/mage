@@ -1,5 +1,3 @@
-
-
 package mage.abilities.mana;
 
 import java.util.ArrayList;
@@ -14,7 +12,6 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-
 public class ConditionalManaAbility extends ActivatedManaAbilityImpl {
 
     ConditionalManaEffect conditionalManaEffect;
@@ -36,8 +33,6 @@ public class ConditionalManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        List<Mana> newNetMana = new ArrayList<>();
-        newNetMana.add(conditionalManaEffect.getMana(game, this));
-        return newNetMana;
+        return new ArrayList<>(conditionalManaEffect.getNetMana(game, this));
     }
 }

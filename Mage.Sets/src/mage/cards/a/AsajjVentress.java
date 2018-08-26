@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
@@ -45,7 +45,7 @@ public final class AsajjVentress extends CardImpl {
         this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
 
         // <i>Hate</i> &mdash; Whenever Asajj Ventress attacks, if an opponent lost life from a source other than combat damage this turn, target creature blocks this turn if able.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new BlocksIfAbleTargetEffect(Duration.EndOfTurn), false),
                 HateCondition.instance,
                 "<i>Hate</i> &mdash; Whenever Asajj Ventress attacks, if an opponent lost life from a source other than combat damage this turn, target creature blocks this turn if able");

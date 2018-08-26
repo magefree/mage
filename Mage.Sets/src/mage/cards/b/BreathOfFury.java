@@ -80,7 +80,7 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
         Permanent enchantment = game.getPermanent(getSourceId());
         if (damageEvent.isCombatDamage()
                 && enchantment != null
-                && enchantment.getAttachedTo().equals(event.getSourceId())) {
+                && enchantment.isAttachedTo(event.getSourceId())) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
                 for (Effect effect : getEffects()) {

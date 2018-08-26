@@ -32,14 +32,14 @@ public final class FalkenrathGorger extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         /**
-         * 4/8/2016 Falkenrath Gorger’s ability only applies while it’s on the
-         * battlefield. If you discard it, it won’t give itself madness.
+         * 4/8/2016 Falkenrath Gorger's ability only applies while it's on the
+         * battlefield. If you discard it, it won't give itself madness.
          * 4/8/2016 If Falkenrath Gorger leaves the battlefield before the
          * madness trigger has resolved for a Vampire card that gained madness
          * with its ability, the madness ability will still let you cast that
          * Vampire card for the appropriate cost even though it no longer has
          * madness. 4/8/2016 If you discard a Vampire creature card that already
-         * has a madness ability, you’ll choose which madness ability exiles it.
+         * has a madness ability, you'll choose which madness ability exiles it.
          * You may choose either the one it normally has or the one it gains
          * from Falkenrath Gorger.
          */
@@ -99,7 +99,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
                 if (filter.match(card, source.getSourceId(), controller.getId(), game)) {
-                    if (card.getOwnerId().equals(controller.getId())) {
+                    if (card.isOwnedBy(controller.getId())) {
                         addMadnessToCard(game, card, usedMadnessAbilities);
                     }
                 }

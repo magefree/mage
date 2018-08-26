@@ -18,7 +18,7 @@ import mage.players.Player;
 
 /**
  * 702.58a Recover is a triggered ability that functions only while the card
- * with recover is in a player’s graveyard. “Recover [cost]” means “When a
+ * with recover is in a player's graveyard. “Recover [cost]” means “When a
  * creature is put into your graveyard from the battlefield, you may pay [cost].
  * If you do, return this card from your graveyard to your hand. Otherwise,
  * exile this card.”
@@ -49,7 +49,7 @@ public class RecoverAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-            if (zEvent.getTarget().getOwnerId().equals(getControllerId())
+            if (zEvent.getTarget().isOwnedBy(getControllerId())
                     && zEvent.getTarget().isCreature()
                     && !zEvent.getTarget().getId().equals(getSourceId())) {
                 return true;

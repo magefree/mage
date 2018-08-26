@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -44,7 +44,7 @@ public final class InstigatorGang extends CardImpl {
         // At the beginning of each upkeep, if no spells were cast last turn, transform Instigator Gang.
         this.addAbility(new TransformAbility());
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
     public InstigatorGang(final InstigatorGang card) {

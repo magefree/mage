@@ -1,11 +1,10 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +26,7 @@ public final class SpoilsOfTheVault extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.
-        this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
+        this.getSpellAbility().addEffect(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new SpoilsOfTheVaultEffect());
     }
 
@@ -45,7 +44,8 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
 
     public SpoilsOfTheVaultEffect() {
         super(Outcome.Damage);
-        this.staticText = "Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
+        this.staticText = "Reveal cards from the top of your library until you reveal a card with that name, "
+                + "then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
     }
 
     public SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
@@ -61,7 +61,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (sourceObject == null || controller == null || cardName == null || cardName.isEmpty()) {
             return false;
         }

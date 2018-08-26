@@ -1,4 +1,3 @@
-
 package mage.game.events;
 
 import java.io.Serializable;
@@ -72,6 +71,7 @@ public class GameEvent implements Serializable {
         MIRACLE_CARD_REVEALED,
         MADNESS_CARD_EXILED,
         INVESTIGATED,
+        KICKED,
         DISCARD_CARD,
         DISCARDED_CARD,
         CYCLE_CARD, CYCLED_CARD,
@@ -198,6 +198,10 @@ public class GameEvent implements Serializable {
          */
         DECLARING_BLOCKERS,
         DECLARED_BLOCKERS,
+        /* DECLARING_BLOCKERS
+         targetId    id of the blocking player
+         sourceId    id of the blocking player
+         */
         DECLARE_BLOCKER, BLOCKER_DECLARED,
         CREATURE_BLOCKED,
         UNBLOCKED_ATTACKER,

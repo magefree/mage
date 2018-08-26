@@ -25,7 +25,7 @@ public final class BloodFeud extends CardImpl {
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new AnotherTargetPredicate(2));
         TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
         target2.setTargetTag(2);

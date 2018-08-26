@@ -8,7 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -59,7 +59,7 @@ public final class DarigaazReincarnated extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DarigaazReincarnatedDiesEffect()));
 
         // At the beginning of your upkeep, if Darigaaz is exiled with an egg counter on it, remove an egg counter from it. Then if Darigaaz has no egg counters on it, return it to the battlefield.
-        this.addAbility(new DarigaazReincarnatedTriggeredAbility());
+        this.addAbility(new DarigaazReincarnatedInterveningIfTriggeredAbility());
     }
 
     public DarigaazReincarnated(final DarigaazReincarnated card) {
@@ -119,22 +119,22 @@ class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
 
 }
 
-class DarigaazReincarnatedTriggeredAbility extends ConditionalTriggeredAbility {
+class DarigaazReincarnatedInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
-    public DarigaazReincarnatedTriggeredAbility() {
+    public DarigaazReincarnatedInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new DarigaazReincarnatedReturnEffect(), TargetController.YOU, false),
                 DarigaazReincarnatedCondition.instance,
                 "At the beginning of your upkeep, if {this} is exiled with an egg counter on it, "
                 + "remove an egg counter from it. Then if {this} has no egg counters on it, return it to the battlefield");
     }
 
-    public DarigaazReincarnatedTriggeredAbility(final DarigaazReincarnatedTriggeredAbility effect) {
+    public DarigaazReincarnatedInterveningIfTriggeredAbility(final DarigaazReincarnatedInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
     @Override
-    public DarigaazReincarnatedTriggeredAbility copy() {
-        return new DarigaazReincarnatedTriggeredAbility(this);
+    public DarigaazReincarnatedInterveningIfTriggeredAbility copy() {
+        return new DarigaazReincarnatedInterveningIfTriggeredAbility(this);
     }
 }
 
@@ -161,7 +161,7 @@ class DarigaazReincarnatedReturnEffect extends OneShotEffect {
             return false;
         }
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (sourceObject != null && sourceObject instanceof Card) {
+        if (sourceObject instanceof Card) {
             Card card = (Card) sourceObject;
             new RemoveCounterSourceEffect(CounterType.EGG.createInstance()).apply(game, source);
             if (card.getCounters(game).getCount(CounterType.EGG) == 0) {

@@ -1,9 +1,6 @@
 
 package mage.cards;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -12,7 +9,7 @@ import mage.abilities.*;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -45,6 +42,13 @@ import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +63,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     protected UUID ownerId;
     protected String cardNumber;
-    public String expansionSetCode;
+    protected String expansionSetCode;
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
@@ -401,7 +405,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             case CHOSEN_NAME: //Declaration of Naught only
                 ability.getTargets().clear();
                 FilterSpell filterSpell = new FilterSpell("spell with the chosen name");
-                filterSpell.add(new NamePredicate((String) game.getState().getValue(ability.getSourceId().toString() + NameACardEffect.INFO_KEY)));
+                filterSpell.add(new NamePredicate((String) game.getState().getValue(ability.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY)));
                 TargetSpell target = new TargetSpell(1, filterSpell);
                 ability.addTarget(target);
                 break;
@@ -779,7 +783,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         boolean returnCode = true;
-        UUID sourceId = (source == null ? getId() : source.getSourceId());
+        UUID sourceId = getId();
+        if (source != null) {
+            MageObject object = game.getObject(source.getId());
+            if (object instanceof StackObject) {
+                sourceId = source.getId();
+            } else {
+                sourceId = source.getSourceId();
+            }
+        }
         GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, sourceId, getControllerOrOwner(), counter.getName(), counter.getCount());
         countersEvent.setAppliedEffects(appliedEffects);
         countersEvent.setFlag(isEffect);

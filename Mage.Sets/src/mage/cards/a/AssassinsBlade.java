@@ -38,7 +38,7 @@ public final class AssassinsBlade extends CardImpl {
         // Cast Assassin's Blade only during the declare attackers step and only if you've been attacked this step.
         Ability ability = new CastOnlyDuringPhaseStepSourceAbility(
                 TurnPhase.COMBAT, PhaseStep.DECLARE_ATTACKERS, AttackedThisStepCondition.instance,
-                "Cast {this} only during the declare attackers step and only if you've been attacked this step."
+                "Cast this spell only during the declare attackers step and only if you've been attacked this step."
         );
         ability.addWatcher(new PlayerAttackedStepWatcher());
         this.addAbility(ability);

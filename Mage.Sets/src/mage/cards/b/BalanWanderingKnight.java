@@ -84,7 +84,7 @@ public final class BalanWanderingKnight extends CardImpl {
                 filter.add(new SubtypePredicate(SubType.EQUIPMENT));
                 for (Permanent equipment : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(),game)) {
                     if (equipment != null) {
-                        //If an Equipment can’t equip, it isn’t attached, and it doesn’t become unattached (if it’s attached to a creature).
+                        //If an Equipment can't equip, it isn't attached, and it doesn't become unattached (if it's attached to a creature).
                         if (!balan.cantBeAttachedBy(equipment, game)) {
                             balan.addAttachment(equipment.getId(), game);
                         }

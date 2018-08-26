@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ import mage.target.TargetPlayer;
  */
 public final class BleakCovenVampires extends CardImpl {
 
-    private static final String effectText = "Metalcraft - When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
+    private static final String effectText = "<i>Metalcraft</i> &mdash; When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
 
     public BleakCovenVampires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
@@ -31,12 +31,13 @@ public final class BleakCovenVampires extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
+        //<i>Metalcraft</i> &mdash; When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(4), false);
         ability.addEffect(new GainLifeEffect(4));
         Target target = new TargetPlayer();
         ability.addTarget(target);
 
-        this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.instance, effectText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MetalcraftCondition.instance, effectText));
     }
 
     public BleakCovenVampires(final BleakCovenVampires card) {

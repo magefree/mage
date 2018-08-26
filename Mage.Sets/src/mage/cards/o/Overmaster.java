@@ -28,7 +28,7 @@ public final class Overmaster extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
-        // The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
+        // The next instant or sorcery spell you cast this turn can't be countered.
         this.getSpellAbility().addEffect(new OvermasterEffect());
         this.getSpellAbility().addWatcher(new OvermasterWatcher());
         
@@ -52,7 +52,7 @@ class OvermasterEffect extends ContinuousRuleModifyingEffectImpl {
     
     OvermasterEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "The next instant or sorcery spell you cast this turn can't be countered by spells or abilities";
+        staticText = "The next instant or sorcery spell you cast this turn can't be countered";
     }
 
     OvermasterEffect(final OvermasterEffect effect) {

@@ -36,7 +36,7 @@ public class CantBeBlockedAttachedEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent attachment = game.getPermanent(source.getSourceId());
-        return attachment != null && attachment.getAttachedTo() != null
-                && attachment.getAttachedTo().equals(permanent.getId());
+        return attachment != null
+                && attachment.isAttachedTo(permanent.getId());
     }
 }

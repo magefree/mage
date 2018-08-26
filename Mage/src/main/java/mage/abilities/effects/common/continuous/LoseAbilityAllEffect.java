@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import java.util.HashMap;
@@ -15,6 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -28,11 +28,11 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
 
     public LoseAbilityAllEffect(Ability ability, Duration duration) {
-        this(ability, duration, new FilterPermanent("permanents"));
+        this(ability, duration, StaticFilters.FILTER_PERMANENT);
     }
 
     public LoseAbilityAllEffect(CompoundAbility ability, Duration duration) {
-        this(ability, duration, new FilterPermanent("permanents"));
+        this(ability, duration, StaticFilters.FILTER_PERMANENT);
     }
 
     public LoseAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter) {

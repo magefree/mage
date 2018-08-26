@@ -35,7 +35,7 @@ public final class SakikoMotherOfSummer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end.
+        // Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as steps and phases end.
         this.addAbility(new SakikoMotherOfSummerTriggeredAbility());
 
     }
@@ -74,11 +74,11 @@ class SakikoMotherOfSummerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.getControllerId().equals(controllerId)) {
+            if (creature != null && creature.isControlledBy(controllerId)) {
                 this.getEffects().clear();
                 Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(event.getAmount()), "that player", true);
                 effect.setTargetPointer(new FixedTarget(creature.getControllerId()));
-                effect.setText("add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end");
+                effect.setText("add that much {G}. Until end of turn, you don't lose this mana as steps and phases end");
                 this.addEffect(effect);
                 return true;
             }
@@ -88,6 +88,6 @@ class SakikoMotherOfSummerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end.";
+        return "Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as steps and phases end.";
     }
 }

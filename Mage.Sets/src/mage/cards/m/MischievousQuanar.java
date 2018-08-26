@@ -44,7 +44,7 @@ public final class MischievousQuanar extends CardImpl {
         Effect effect2 = new CopyTargetSpellEffect();
         effect2.setText("copy target instant or sorcery spell. You may choose new targets for that copy");
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect2);
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
     }
 

@@ -110,7 +110,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
             if (source.getTargets().size() > 1) {
                 toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             }
-            if (fromPermanent == null || toPermanent == null || !fromPermanent.getControllerId().equals(toPermanent.getControllerId())) {
+            if (fromPermanent == null || toPermanent == null || !fromPermanent.isControlledBy(toPermanent.getControllerId())) {
                 return false;
             }
             fromPermanent.removeCounters(CounterType.P1P1.createInstance(1), game);
@@ -136,7 +136,7 @@ class SameControllerPredicate implements ObjectSourcePlayerPredicate<ObjectSourc
                     source.getStackAbility().getTargets().get(0).getTargets().get(0));
             Permanent inputPermanent = game.getPermanent(input.getObject().getId());
             if (firstTarget != null && inputPermanent != null) {
-                return firstTarget.getControllerId().equals(inputPermanent.getControllerId());
+                return firstTarget.isControlledBy(inputPermanent.getControllerId());
             }
         }
         return true;
@@ -171,9 +171,9 @@ class MoveAuraEffect extends OneShotEffect {
             5/1/2006
             For the second ability, only the Aura is targeted.
             When the ability resolves, you choose a permanent to move the Aura onto.
-            It can’t be the permanent the Aura is already attached to, it must be controlled by the player who controls the permanent the Aura is attached to, and it must be able to be enchanted by the Aura.
-            (It doesn’t matter who controls the Aura or who controls Simic Guildmage.)
-            If no such permanent exists, the Aura doesn’t move.
+            It can't be the permanent the Aura is already attached to, it must be controlled by the player who controls the permanent the Aura is attached to, and it must be able to be enchanted by the Aura.
+            (It doesn't matter who controls the Aura or who controls Simic Guildmage.)
+            If no such permanent exists, the Aura doesn't move.
          */
 
         Player controller = game.getPlayer(source.getControllerId());

@@ -53,7 +53,7 @@ public final class ConsecrateLand extends CardImpl {
     }
 }
 
-// 9/25/2006 ruling: If Consecrate Land enters the battlefield attached to a land that’s enchanted by other Auras, those Auras are put into their owners’ graveyards.
+// 9/25/2006 ruling: If Consecrate Land enters the battlefield attached to a land that's enchanted by other Auras, those Auras are put into their owners' graveyards.
 class ConsecrateLandRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
     public ConsecrateLandRuleEffect() {

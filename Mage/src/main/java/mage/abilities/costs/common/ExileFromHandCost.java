@@ -1,4 +1,3 @@
-
 package mage.abilities.costs.common;
 
 import java.util.ArrayList;

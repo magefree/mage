@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -17,6 +16,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -37,7 +37,7 @@ public final class InfernalTutor extends CardImpl {
         this.getSpellAbility().addEffect(new InfernalTutorEffect());
         // Hellbent - If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle your library.
         Effect effect = new ConditionalOneShotEffect(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard()), false, true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD), false, true),
                 HellbentCondition.instance,
                 "<br/><br/><i>Hellbent</i> &mdash; If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle your library");
         this.getSpellAbility().addEffect(effect);
@@ -78,7 +78,7 @@ class InfernalTutorEffect extends OneShotEffect {
             if (!controller.getHand().isEmpty()) {
                 Card cardToReveal = null;
                 if (controller.getHand().size() > 1) {
-                    Target target = new TargetCardInHand(new FilterCard());
+                    Target target = new TargetCardInHand(StaticFilters.FILTER_CARD);
                     target.setNotTarget(true);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         cardToReveal = game.getCard(target.getFirstTarget());

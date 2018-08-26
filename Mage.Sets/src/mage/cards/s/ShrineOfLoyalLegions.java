@@ -13,6 +13,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,9 +39,12 @@ public final class ShrineOfLoyalLegions extends CardImpl {
     public ShrineOfLoyalLegions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, false));
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false));
+        //At the beginning of your upkeep or whenever you cast a white spell, put a charge counter on Shrine of Loyal Legions.
+        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
+                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false),
+                new SpellCastControllerTriggeredAbility(null, filter, false)));
 
+        //{3}, {T}, Sacrifice Shrine of Loyal Legions: Create a 1/1 colorless Myr artifact creature token for each charge counter on Shrine of Loyal Legions.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new MyrToken("NPH"), new CountersSourceCount(CounterType.CHARGE)),
                 new GenericManaCost(3));

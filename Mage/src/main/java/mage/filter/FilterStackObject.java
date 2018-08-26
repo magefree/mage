@@ -1,4 +1,3 @@
-
 package mage.filter;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class FilterStackObject extends FilterObject<StackObject> {
     protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<>();
 
     public FilterStackObject() {
-        super("spell or ability");
+        this("spell or ability");
     }
 
     public FilterStackObject(String name) {
@@ -41,7 +40,10 @@ public class FilterStackObject extends FilterObject<StackObject> {
         return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(stackObject, sourceId, playerId), game);
     }
 
-    public void add(ObjectPlayerPredicate predicate) {
+    public final void add(ObjectPlayerPredicate predicate) {
+        if (isLockedFilter()) {
+            throw new UnsupportedOperationException("You may not modify a locked filter");
+        }
         extraPredicates.add(predicate);
     }
 

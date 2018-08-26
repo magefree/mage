@@ -39,7 +39,7 @@ public final class FerocityOfTheUnderworld extends CardImpl {
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
         Mode mode = new Mode();
         mode.getEffects().add(new CopyTargetSpellEffect());
-        mode.getTargets().add(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        mode.getTargets().add(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.getSpellAbility().addMode(mode);
 
         // Return target card from your graveyard to your hand.

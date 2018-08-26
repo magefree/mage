@@ -168,4 +168,8 @@ public interface Card extends MageObject {
     boolean addAttachment(UUID permanentId, Game game);
 
     boolean removeAttachment(UUID permanentId, Game game);
+
+    default boolean isOwnedBy(UUID controllerId){
+        return getOwnerId().equals(controllerId);
+    }
 }

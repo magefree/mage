@@ -29,7 +29,7 @@ public final class Fluxcharger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast an instant or sorcery spell, you may switch Fluxcharger's power and toughness until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, true));
 
     }
 

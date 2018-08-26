@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -9,9 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.filter.predicate.other.SpellZonePredicate;
 
 /**
  *
@@ -26,8 +23,7 @@ public final class SecretsOfTheDead extends CardImpl {
     }
 
     public SecretsOfTheDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Whenever you cast a spell from your graveyard, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
@@ -40,24 +36,5 @@ public final class SecretsOfTheDead extends CardImpl {
     @Override
     public SecretsOfTheDead copy() {
         return new SecretsOfTheDead(this);
-    }
-}
-
-class SpellZonePredicate implements Predicate<Spell> {
-
-    private final Zone zone;
-
-    public SpellZonePredicate(Zone zone) {
-        this.zone = zone;
-    }
-
-    @Override
-    public boolean apply(Spell input, Game game) {
-        return input.getFromZone().match(zone);
-    }
-
-    @Override
-    public String toString() {
-        return "SpellZone(" + zone + ')';
     }
 }

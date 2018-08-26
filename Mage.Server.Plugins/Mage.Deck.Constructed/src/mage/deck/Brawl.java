@@ -1,14 +1,10 @@
-
 package mage.deck;
 
 import java.util.*;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 
 /**
@@ -23,41 +19,11 @@ public class Brawl extends Constructed {
         super("Brawl");
 
         // Copy of standard sets
-        GregorianCalendar current = new GregorianCalendar();
-        List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());
-        Collections.sort(sets, new Comparator<ExpansionSet>() {
-            @Override
-            public int compare(final ExpansionSet lhs, ExpansionSet rhs) {
-                return lhs.getReleaseDate().after(rhs.getReleaseDate()) ? -1 : 1;
-            }
-        });
-        int blocksAdded = 0;
-        int blocksToAdd = 3;
-        for (Iterator<ExpansionSet> iter = sets.iterator(); iter.hasNext() && blocksAdded < blocksToAdd;) {
-            ExpansionSet set = iter.next();
-            if (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION || set.getSetType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL) {    // Still adding core sets because of Magic Origins
+        setCodes.addAll(Standard.makeLegalSets());
 
-                setCodes.add(set.getCode());
-                if (set.getReleaseDate().before(current.getTime()) // This stops spoiled sets from counting as "new" blocks
-                        && set.getParentSet() == null
-                        && set.getSetType() == SetType.EXPANSION) {
-                    if (blocksAdded == 0 && !isFallBlock(set)) { // if the most current block is no fall block, 4 blocks are added
-                        blocksToAdd++;
-                    }
-                    blocksAdded++;
-                }
-            }
-        }
         banned.add("Baral, Chief of Compliance");
         banned.add("Smuggler's Copter");
-        banned.add("Sorcerers' Spyglass");
-    }
-
-    private static boolean isFallBlock(ExpansionSet set) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(set.getReleaseDate());
-        // Sets from fall block are normally released in September and January
-        return cal.get(Calendar.MONTH) > 7 || cal.get(Calendar.MONTH) < 2;
+        banned.add("Sorcerous Spyglass");
     }
 
     public Brawl(String name) {

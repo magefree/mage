@@ -87,7 +87,7 @@ class KazarovSengirPurebloodTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null) {
             return false;
         }
-        if (permanent.getControllerId().equals(this.getControllerId())) {
+        if (permanent.isControlledBy(this.getControllerId())) {
             return false;
         }
         return true;

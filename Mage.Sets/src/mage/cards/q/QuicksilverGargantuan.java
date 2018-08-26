@@ -28,7 +28,7 @@ public final class QuicksilverGargantuan extends CardImpl {
         this.toughness = new MageInt(7);
 
         Ability ability = new EntersBattlefieldAbility(new CopyPermanentEffect(new QuicksilverGargantuanApplyToPermanent()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7");
+                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's 7/7");
         this.addAbility(ability);
     }
 

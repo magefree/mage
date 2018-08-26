@@ -43,7 +43,7 @@ public final class SigilTracer extends CardImpl {
 
         // {1}{U}, Tap two untapped Wizards you control: Copy target instant or sorcery spell. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{1}{U}"));
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
         this.addAbility(ability);
     }

@@ -16,7 +16,7 @@ import mage.constants.SubType;
  */
 public final class ShamblingGhoul extends CardImpl {
     
-    private static final String staticText = "{this} enters the battlefield tapped";
+    private static final String staticText = "tapped";
 
     public ShamblingGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -17,6 +17,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -32,7 +33,12 @@ public final class DimirKeyrune extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {U}{B}: Dimir Keyrune becomes a 2/2 blue and black Horror and can't be blocked this turn
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DimirKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{U}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(2, 2, "2/2 blue and black Horror creature that can't be blocked")
+                .withColor("UB")
+                .withSubType(SubType.HORROR)
+                .withAbility(new CantBeBlockedSourceAbility()),
+                "", Duration.EndOfTurn), new ManaCostsImpl("{U}{B}")));
     }
 
     public DimirKeyrune(final DimirKeyrune card) {
@@ -42,26 +48,5 @@ public final class DimirKeyrune extends CardImpl {
     @Override
     public DimirKeyrune copy() {
         return new DimirKeyrune(this);
-    }
-
-    private static class DimirKeyruneToken extends TokenImpl {
-        DimirKeyruneToken() {
-            super("Horror", "2/2 blue and black Horror until end of turn and can't be blocked this turn");
-            cardType.add(CardType.ARTIFACT);
-            cardType.add(CardType.CREATURE);
-            color.setBlue(true);
-            color.setBlack(true);
-            subtype.add(SubType.HORROR);
-            power = new MageInt(2);
-            toughness = new MageInt(2);
-            this.addAbility(new CantBeBlockedSourceAbility());
-        }
-        public DimirKeyruneToken(final DimirKeyruneToken token) {
-            super(token);
-        }
-
-        public DimirKeyruneToken copy() {
-            return new DimirKeyruneToken(this);
-        }
     }
 }

@@ -81,7 +81,7 @@ class CurseOfThePiercedHeartAbility extends TriggeredAbilityImpl {
         Permanent enchantment = game.getPermanent(this.sourceId);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player player = game.getPlayer(enchantment.getAttachedTo());
-            if (player != null && game.getActivePlayerId().equals(player.getId())) {
+            if (player != null && game.isActivePlayer(player.getId())) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
                 return true;
             }

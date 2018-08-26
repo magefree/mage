@@ -75,7 +75,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
         if (subType != null) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
-                    && spell.getControllerId().equals(getControllerId())
+                    && spell.isControlledBy(getControllerId())
                     && spell.hasSubtype(subType, game)) {
                 return true;
             }

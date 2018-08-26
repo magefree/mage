@@ -7,7 +7,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,7 +35,7 @@ public final class OsaiVultures extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of each end step, if a creature died this turn, put a carrion counter on Osai Vultures.
-        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
             new AddCountersSourceEffect(CounterType.CARRION.createInstance()), TargetController.ANY, false), MorbidCondition.instance,
             "At the beginning of each end step, if a creature died this turn, put a carrion counter on {this}."));
         // Remove two carrion counters from Osai Vultures: Osai Vultures gets +1/+1 until end of turn.

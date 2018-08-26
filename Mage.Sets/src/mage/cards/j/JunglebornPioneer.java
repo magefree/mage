@@ -25,7 +25,7 @@ public final class JunglebornPioneer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Jungleborn Pioneer enters the battlefield, create a 1/1 blue Merfolk creature token with hexproof. (It can’t be the target of spells or abilities your opponents control.)
+        // When Jungleborn Pioneer enters the battlefield, create a 1/1 blue Merfolk creature token with hexproof. (It can't be the target of spells or abilities your opponents control.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkHexproofToken()),false);
         this.addAbility(ability);
     }

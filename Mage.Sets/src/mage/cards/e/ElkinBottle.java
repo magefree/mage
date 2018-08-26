@@ -97,7 +97,7 @@ class ElkinBottleCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (!sameStep && game.getActivePlayerId().equals(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
+            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
                 return true;
             }
         } else {
@@ -113,7 +113,7 @@ class ElkinBottleCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId)
+        return source.isControlledBy(affectedControllerId)
                 && sourceId.equals(getTargetPointer().getFirst(game, source));
     }
 

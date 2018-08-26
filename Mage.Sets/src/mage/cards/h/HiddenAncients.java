@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class HiddenAncients extends CardImpl {
         // When an opponent casts an enchantment spell, if Hidden Ancients is an enchantment, Hidden Ancients becomes a 5/5 Treefolk creature.
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenAncientsTreefolkToken(), "", Duration.WhileOnBattlefield, true, false),
                 filter, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
                 "When an opponent casts an enchantment spell, if {this} is an enchantment, {this} becomes a 5/5 Treefolk creature."));
     }
 

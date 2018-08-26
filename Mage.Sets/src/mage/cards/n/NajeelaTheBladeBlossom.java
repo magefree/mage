@@ -35,7 +35,7 @@ import mage.game.permanent.token.WarriorToken;
  */
 public final class NajeelaTheBladeBlossom extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "a Warrior");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "Warrior");
 
     public NajeelaTheBladeBlossom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

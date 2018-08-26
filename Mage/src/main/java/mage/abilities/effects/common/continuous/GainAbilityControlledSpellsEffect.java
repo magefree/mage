@@ -48,7 +48,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         if (player != null && permanent != null) {
             for (StackObject stackObject : game.getStack()) {
                 // only spells cast, so no copies of spells
-                if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
+                if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.isControlledBy(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
                     if (filter.match(spell, game)) {
                         if (!spell.getAbilities().contains(ability)) {

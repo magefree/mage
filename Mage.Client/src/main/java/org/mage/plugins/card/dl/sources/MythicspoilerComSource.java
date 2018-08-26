@@ -1,4 +1,3 @@
-
 package org.mage.plugins.card.dl.sources;
 
 import java.io.BufferedReader;
@@ -28,7 +27,6 @@ import org.jsoup.select.Elements;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- *
  * @author LevelX2
  */
 public enum MythicspoilerComSource implements CardImageSource {
@@ -232,6 +230,9 @@ public enum MythicspoilerComSource implements CardImageSource {
         supportedSets.add("RIX");
         supportedSets.add("DOM");
         supportedSets.add("BBD");
+        supportedSets.add("M19");
+//        supportedSets.add("C18");
+//        supportedSets.add("CM2");
 
         sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();
@@ -390,7 +391,7 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
@@ -409,11 +410,11 @@ public enum MythicspoilerComSource implements CardImageSource {
                 .replaceAll(",", "")
                 .replaceAll("/", "");
         String link = setLinks.get(searchName);
-        return link;
+        return new CardImageUrls(link);
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card
+    public CardImageUrls generateTokenUrl(CardDownloadData card
     ) {
         return null;
     }

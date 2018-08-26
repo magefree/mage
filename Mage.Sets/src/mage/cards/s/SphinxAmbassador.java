@@ -81,7 +81,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
                 TreeSet<String> choices = new TreeSet<>();
                 Collection<Card> cards = game.getCards();
                 for (Card gameCard : cards) {
-                    if (gameCard.getOwnerId().equals(targetPlayer.getId())) {
+                    if (gameCard.isOwnedBy(targetPlayer.getId())) {
                         choices.add(gameCard.getName());
                     }
                 }

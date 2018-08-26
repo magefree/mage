@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ import mage.watchers.common.CreatureWasCastWatcher;
 public final class ContainmentPriest extends CardImpl {
 
     public ContainmentPriest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -76,11 +75,10 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, zEvent.getFromZone(), true);
+                controller.moveCardsToExile(card, source, game, true, null, null);
             }
             return true;
 

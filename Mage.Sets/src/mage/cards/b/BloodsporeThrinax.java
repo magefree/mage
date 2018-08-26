@@ -66,7 +66,7 @@ class BloodsporeThrinaxEntersBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return creature != null && creature.getControllerId().equals(source.getControllerId())
+        return creature != null && creature.isControlledBy(source.getControllerId())
                 && creature.isCreature()
                 && !event.getTargetId().equals(source.getSourceId());
     }

@@ -48,7 +48,7 @@ public final class FalseOrders extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Cast False Orders only during the declare blockers step.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.DECLARE_BLOCKERS, null, "Cast {this} only during the declare blockers step"));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.DECLARE_BLOCKERS, null, "Cast this spell only during the declare blockers step"));
 
         // Remove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. You may have it block an attacking creature of your choice.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
@@ -156,7 +156,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
         if (chosenGroup != null) {
             // Relevant ruling for Balduvian Warlord:
             // 7/15/2006 	If an attacking creature has an ability that triggers “When this creature becomes blocked,” 
-            // it triggers when a creature blocks it due to the Warlord’s ability only if it was unblocked at that point.
+            // it triggers when a creature blocks it due to the Warlord's ability only if it was unblocked at that point.
             boolean notYetBlocked = chosenGroup.getBlockers().isEmpty();
             chosenGroup.addBlockerToGroup(permanent.getId(), controller.getId(), game);
             game.getCombat().addBlockingGroup(permanent.getId(), chosenPermanent.getId(), controller.getId(), game); // 702.21h

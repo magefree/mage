@@ -42,9 +42,9 @@ public final class Counterflux extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}{R}");
 
 
-        // Counterflux can't be countered by spells or abilities.
+        // Counterflux can't be countered.
         Effect effect =  new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
+        effect.setText("this spell can't be countered");
         Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
@@ -84,7 +84,7 @@ class CounterfluxEffect extends OneShotEffect {
 
         List<Spell> spellsToCounter = new LinkedList<>();
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject instanceof Spell && !stackObject.getControllerId().equals(source.getControllerId())) {
+            if (stackObject instanceof Spell && !stackObject.isControlledBy(source.getControllerId())) {
                 spellsToCounter.add((Spell) stackObject);
             }
         }

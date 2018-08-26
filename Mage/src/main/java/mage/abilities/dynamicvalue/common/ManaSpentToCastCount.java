@@ -29,7 +29,7 @@ public class ManaSpentToCastCount implements DynamicValue {
         }
         if (spell != null) {
             // NOT the cmc of the spell on the stack
-            return spell.getSpellAbility().getManaCostsToPay().convertedManaCost() + spell.getSpellAbility().getManaCostsToPay().getX();
+            return spell.getSpellAbility().getManaCostsToPay().convertedManaCost();
         }
         return 0;
     }

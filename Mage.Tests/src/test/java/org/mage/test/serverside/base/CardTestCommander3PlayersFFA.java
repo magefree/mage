@@ -1,4 +1,3 @@
-
 package org.mage.test.serverside.base;
 
 import java.io.FileNotFoundException;
@@ -25,9 +24,9 @@ public abstract class CardTestCommander3PlayersFFA extends CardTestPlayerAPIImpl
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         Game game = new CommanderFreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, 0, 40);
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
+        playerA = createPlayer(game, playerA, "PlayerA", deckNameA);
+        playerB = createPlayer(game, playerB, "PlayerB", deckNameB);
+        playerC = createPlayer(game, playerC, "PlayerC", deckNameC);
         return game;
     }
 

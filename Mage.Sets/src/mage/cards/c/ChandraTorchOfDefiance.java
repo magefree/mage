@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -22,7 +21,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.emblems.ChandraTorchOfDefianceEmblem;
 import mage.players.Library;
@@ -92,10 +90,10 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
             Card card = library.getFromTop(game);
             if (card != null) {
                 boolean exiledCardWasCast = false;
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                if (!card.getManaCost().isEmpty()) {
-                    if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.isLand()) {
-                        exiledCardWasCast = controller.cast(card.getSpellAbility(), game, false, new MageObjectReference(source.getSourceObject(game), game));
+                controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
+                if (!card.getManaCost().isEmpty() && !card.isLand()) {
+                    if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getName() + "? (You still pay the costs)", source, game)) {
+                        exiledCardWasCast = controller.cast(card.getSpellAbility(), game, false, new MageObjectReference(sourceObject, game));
                     }
                 }
                 if (!exiledCardWasCast) {

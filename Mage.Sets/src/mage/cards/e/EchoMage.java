@@ -46,7 +46,7 @@ public final class EchoMage extends LevelerCard {
         // {U}{U}, {tap}: Copy target instant or sorcery spell. You may choose new targets for the copy.
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{U}{U}"));
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         ability.addCost(new TapSourceCost());
         abilities1.add(ability);
         // LEVEL 4+
@@ -54,7 +54,7 @@ public final class EchoMage extends LevelerCard {
         // {U}{U}, {tap}: Copy target instant or sorcery spell twice. You may choose new targets for the copies.
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EchoMageEffect(), new ManaCostsImpl("{U}{U}"));
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         ability.addCost(new TapSourceCost());
         abilities2.add(ability);
 

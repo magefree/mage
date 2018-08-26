@@ -3,11 +3,11 @@ package org.mage.plugins.card.dl.sources;
 
 import java.io.IOException;
 import java.util.HashMap;
+
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- *
  * @author spjspj
  */
 public enum MtgOnlTokensImageSource implements CardImageSource {
@@ -59,7 +59,7 @@ public enum MtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         return null;
     }
 
@@ -324,7 +324,7 @@ public enum MtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) throws IOException {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) throws IOException {
         if (copyUrlToImage == null) {
             setupLinks();
         }

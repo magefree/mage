@@ -158,7 +158,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Island Sanctuary", 15, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
         cards.add(new SetCardInfo("Jade Monolith", 208, Rarity.RARE, mage.cards.j.JadeMonolith.class));
         cards.add(new SetCardInfo("Juggernaut", 209, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
-        cards.add(new SetCardInfo("Junún Efreet", 88, Rarity.UNCOMMON, mage.cards.j.JununEfreet.class));
+        cards.add(new SetCardInfo("Junun Efreet", 88, Rarity.UNCOMMON, mage.cards.j.JununEfreet.class));
         cards.add(new SetCardInfo("Just Fate", 16, Rarity.COMMON, mage.cards.j.JustFate.class));
         cards.add(new SetCardInfo("Kismet", 17, Rarity.RARE, mage.cards.k.Kismet.class));
         cards.add(new SetCardInfo("Kormus Bell", 210, Rarity.RARE, mage.cards.k.KormusBell.class));
@@ -298,6 +298,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Griffin", 35, Rarity.COMMON, mage.cards.w.WildGriffin.class));
         cards.add(new SetCardInfo("Wild Ox", 174, Rarity.UNCOMMON, mage.cards.w.WildOx.class));
         cards.add(new SetCardInfo("Wood Elemental", 175, Rarity.RARE, mage.cards.w.WoodElemental.class));
+        cards.add(new SetCardInfo("Word of Command", 103, Rarity.RARE, mage.cards.w.WordOfCommand.class));
         cards.add(new SetCardInfo("Xenic Poltergeist", 104, Rarity.UNCOMMON, mage.cards.x.XenicPoltergeist.class));
         cards.add(new SetCardInfo("Yotian Soldier", 240, Rarity.COMMON, mage.cards.y.YotianSoldier.class));
         cards.add(new SetCardInfo("Zombie Master", 105, Rarity.UNCOMMON, mage.cards.z.ZombieMaster.class));

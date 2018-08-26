@@ -64,7 +64,7 @@ class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.getOwnerId().equals(this.getControllerId())) {
+            if (permanent != null && permanent.isOwnedBy(this.getControllerId())) {
                 if (StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.match(permanent, sourceId, controllerId, game)) {
                     return true;
                 }

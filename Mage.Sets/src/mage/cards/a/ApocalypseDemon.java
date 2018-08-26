@@ -35,7 +35,7 @@ public final class ApocalypseDemon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Apocalypse Demon’s power and toughness are each equal to the number of cards in your graveyard.
+        // Apocalypse Demon's power and toughness are each equal to the number of cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerGraveyardCount(), Duration.EndOfGame)));
 
         // At the beginning of your upkeep, tap Apocalypse Demon unless you sacrifice another creature.

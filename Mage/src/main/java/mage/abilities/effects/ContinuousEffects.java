@@ -465,7 +465,7 @@ public class ContinuousEffects implements Serializable {
         for (SpliceCardEffect effect : spliceCardEffects) {
             Set<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (ability.getControllerId().equals(playerId) && (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null))) {
+                if (ability.isControlledBy(playerId) && (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null))) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         spliceEffects.add(effect);
                         break;
@@ -543,7 +543,7 @@ public class ContinuousEffects implements Serializable {
      * @param game
      * @return
      */
-    private List<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
+    public List<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
         List<AsThoughEffect> asThoughEffectsList = new ArrayList<>();
         if (asThoughEffectsMap.containsKey(type)) {
             for (AsThoughEffect effect : asThoughEffectsMap.get(type)) {
@@ -570,7 +570,7 @@ public class ContinuousEffects implements Serializable {
      * the mana cost or alternative cost (as determined in rule 601.2b), plus
      * all additional costs and cost increases, and minus all cost reductions.
      * If the mana component of the total cost is reduced to nothing by cost
-     * reduction effects, it is considered to be {0}. It can’t be reduced to
+     * reduction effects, it is considered to be {0}. It can't be reduced to
      * less than {0}. Once the total cost is determined, any effects that
      * directly affect the total cost are applied. Then the resulting total cost
      * becomes “locked in.” If effects would change the total cost after this

@@ -74,7 +74,7 @@ class ReparationsTriggeredAbility extends TriggeredAbilityImpl {
             }
             if (targetPermanent != null
                     && targetPermanent.isCreature()
-                    && targetPermanent.getControllerId().equals(controllerId)) {
+                    && targetPermanent.isControlledBy(controllerId)) {
                 return true;
             }
         }

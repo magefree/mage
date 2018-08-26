@@ -28,13 +28,8 @@ public class AbilityPredicate implements Predicate<MageObject> {
         } else {
             abilities = input.getAbilities();
         }
-        
-        for (Ability ability : abilities) {
-            if (abilityClass.equals(ability.getClass())) {
-                return true;
-            }
-        }
-        return false;
+        return abilities.stream().anyMatch(ability -> ability.getClass().equals(abilityClass));
+
     }
 
     @Override

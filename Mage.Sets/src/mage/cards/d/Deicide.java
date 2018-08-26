@@ -63,7 +63,7 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
                 controller.moveCardToExileWithInfo(targetEnchantment, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 // 4/26/2014 	
                 // Deicide looks at the card in exile, not the permanent that was exiled, to determine 
-                // if it is a God. For each of the Gods in the Theros block, it won’t matter what your 
+                // if it is a God. For each of the Gods in the Theros block, it won't matter what your 
                 // devotion to its color(s) was. The card is a God card when not on the battlefield.
                 Card cardInExile = game.getExile().getCard(targetEnchantment.getId(), game);
                 if (cardInExile != null && cardInExile.hasSubtype(SubType.GOD, game)) {

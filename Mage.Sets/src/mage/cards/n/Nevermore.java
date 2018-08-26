@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,10 +24,10 @@ import mage.game.events.GameEvent.EventType;
 public final class Nevermore extends CardImpl {
 
     public Nevermore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
         // As Nevermore enters the battlefield, name a nonland card.
-        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
 
         // The named card can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NevermoreEffect2()));
@@ -50,7 +49,7 @@ class NevermoreEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public NevermoreEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "The named card can't be cast";
+        staticText = "Spells with the chosen name can't be cast";
     }
 
     public NevermoreEffect2(final NevermoreEffect2 effect) {
@@ -71,7 +70,7 @@ class NevermoreEffect2 extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
+            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))) {
                 return true;
             }
         }

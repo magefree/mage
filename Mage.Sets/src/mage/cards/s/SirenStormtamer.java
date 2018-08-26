@@ -96,7 +96,7 @@ class SirenStormtamerTargetObject extends TargetObject {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
                             if (targetedPermanent != null
-                                    && targetedPermanent.getControllerId().equals(sourceControllerId)
+                                    && targetedPermanent.isControlledBy(sourceControllerId)
                                     && targetedPermanent.isCreature()) {
                                 return true;
                             }
@@ -130,7 +130,7 @@ class SirenStormtamerTargetObject extends TargetObject {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
                             if (targetedPermanent != null
-                                    && targetedPermanent.getControllerId().equals(sourceControllerId)
+                                    && targetedPermanent.isControlledBy(sourceControllerId)
                                     && targetedPermanent.isCreature()) {
                                 possibleTargets.add(stackObject.getId());
                             }

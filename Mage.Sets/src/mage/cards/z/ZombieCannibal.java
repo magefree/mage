@@ -1,21 +1,20 @@
-
 package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -25,15 +24,14 @@ import mage.target.common.TargetCardInGraveyard;
 public final class ZombieCannibal extends CardImpl {
 
     public ZombieCannibal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever Zombie Cannibal deals combat damage to a player, you may exile target card from that player's graveyard.
-    this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ZombieCannibalEffect(), true, true));
-    
+        this.addAbility(new ZombieCannibalTriggeredAbility());
     }
 
     public ZombieCannibal(final ZombieCannibal card) {
@@ -46,32 +44,46 @@ public final class ZombieCannibal extends CardImpl {
     }
 }
 
-class ZombieCannibalEffect extends OneShotEffect {
-    
-    public ZombieCannibalEffect() {
-        super(Outcome.Exile);
-        staticText = "you may exile target card from that player's graveyard.";
+class ZombieCannibalTriggeredAbility extends TriggeredAbilityImpl {
+
+    public ZombieCannibalTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new ExileTargetEffect(null, "", Zone.GRAVEYARD), true);
     }
-    
-    public ZombieCannibalEffect(final ZombieCannibalEffect effect) {
-        super(effect);
+
+    public ZombieCannibalTriggeredAbility(final ZombieCannibalTriggeredAbility ability) {
+        super(ability);
     }
-    
+
     @Override
-    public ZombieCannibalEffect copy() {
-        return new ZombieCannibalEffect(this);
+    public ZombieCannibalTriggeredAbility copy() {
+        return new ZombieCannibalTriggeredAbility(this);
     }
-    
+
     @Override
-    public boolean apply(Game game, Ability source) {
-        FilterCard filter = new FilterCard();
-        Player player = game.getPlayer(source.getTargets().getFirstTarget());
-        if (player != null) {
-            filter.add(new OwnerIdPredicate(player.getId()));
-            Target target = new TargetCardInGraveyard(filter);
-            game.getPermanent(target.getFirstTarget()).moveToExile(null, null, source.getSourceId(), game);
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getSourceId().equals(this.sourceId) || !((DamagedPlayerEvent) event).isCombatDamage()) {
+            return false;
         }
-        return false;
+        Player damagedPlayer = game.getPlayer(event.getTargetId());
+        if (damagedPlayer == null) {
+            return false;
+        }
+        FilterCard filter = new FilterCard("card in " + damagedPlayer.getName() + "'s graveyard");
+        filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
+        TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
+        this.getTargets().clear();
+        this.addTarget(target);
+        return true;
     }
-    
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player, "
+                + "you may exile target card from that player's graveyard";
+    }
 }

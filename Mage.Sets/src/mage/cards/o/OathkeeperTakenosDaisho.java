@@ -8,7 +8,7 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
@@ -41,7 +41,7 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
         // Equipped creature gets +3/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3,1, Duration.WhileOnBattlefield)));
         // Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect(),"equipped creature", false),
                 new OathkeeperEquippedMatchesFilterCondition(filter),
                 ""));

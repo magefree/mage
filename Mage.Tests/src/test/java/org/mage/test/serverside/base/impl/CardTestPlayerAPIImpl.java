@@ -54,6 +54,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
     public static final String CHECK_COMMAND_COLOR = "COLOR";
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
+    public static final String CHECK_COMMAND_MANA_POOL = "MANA_POOL";
 
     protected GameOptions gameOptions;
 
@@ -257,6 +258,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void checkSubType(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, SubType subType, Boolean mustHave) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_SUBTYPE, permanentName, subType.toString(), mustHave.toString());
+    }
+
+    public void checkManaPool(String checkName, int turnNum, PhaseStep step, TestPlayer player, String colors, Integer amount) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_MANA_POOL, colors, amount.toString());
     }
 
     /**
@@ -980,7 +985,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int actualCount = 0;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if (card.getOwnerId().equals(owner.getId())) {
+                if (card.isOwnedBy(owner.getId())) {
                     actualCount++;
                 }
             }
@@ -1000,7 +1005,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int actualCount = 0;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if (card.getOwnerId().equals(owner.getId()) && card.getName().equals(cardName)) {
+                if (card.isOwnedBy(owner.getId()) && card.getName().equals(cardName)) {
                     actualCount++;
                 }
             }

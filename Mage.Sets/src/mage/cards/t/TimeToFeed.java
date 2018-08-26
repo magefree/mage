@@ -31,11 +31,11 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * Time to Feed has two targets: a creature an opponent controls and a creature you control.
  * If only one of those creatures is a legal target when Time to Feed tries to resolve, the
- * creatures won’t fight and neither will deal or be dealt damage. However, you’ll still gain
- * 3 life when the creature you don’t control dies that turn, even if it was the illegal target as Time to Feed resolved.
+ * creatures won't fight and neither will deal or be dealt damage. However, you'll still gain
+ * 3 life when the creature you don't control dies that turn, even if it was the illegal target as Time to Feed resolved.
  * If neither creature is a legal target when Time to Feed tries to resolve, the spell will
  * be countered and none of its effects will happen.
- * If the first target creature dies that turn, you’ll gain 3 life no matter what caused the creature to die or who controls the creature at that time.
+ * If the first target creature dies that turn, you'll gain 3 life no matter what caused the creature to die or who controls the creature at that time.
  *
  * @author LevelX2
  */

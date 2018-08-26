@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -44,7 +44,7 @@ public final class KeldonOverseer extends CardImpl {
         ability.addEffect(new UntapTargetEffect());
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
                 "When {this} enters the battlefield, if it was kicked, gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn."));
     }
 

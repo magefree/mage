@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -53,7 +52,10 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
 
     public SagesOfTheAnimaReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order";
+        staticText = "If you would draw a card, instead "
+                + "reveal the top three cards of your library. "
+                + "Put all creature cards revealed this way into your hand "
+                + "and the rest on the bottom of your library in any order";
     }
 
     public SagesOfTheAnimaReplacementEffect(final SagesOfTheAnimaReplacementEffect effect) {
@@ -77,7 +79,7 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
             Cards revealedCards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
             player.revealCards(source, revealedCards, game);
             Cards creatures = new CardsImpl(revealedCards.getCards(StaticFilters.FILTER_CARD_CREATURE, game));
-            player.moveCards(creatures, Zone.BATTLEFIELD, source, game);
+            player.moveCards(creatures, Zone.HAND, source, game);
             revealedCards.removeAll(creatures);
             player.putCardsOnBottomOfLibrary(revealedCards, game, source, true);
             return true;

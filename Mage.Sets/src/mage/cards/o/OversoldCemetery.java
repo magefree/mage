@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class OversoldCemetery extends CardImpl {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, true);
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
         CardsInControllerGraveCondition condition = new CardsInControllerGraveCondition(4, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
     }
 
     public OversoldCemetery(final OversoldCemetery card) {

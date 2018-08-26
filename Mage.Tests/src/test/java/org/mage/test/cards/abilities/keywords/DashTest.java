@@ -19,10 +19,10 @@ public class DashTest extends CardTestPlayerBase {
      * which may create a delayed triggered ability, and a static ability that
      * functions while the object with dash is on the battlefield. “Dash [cost]”
      * means “You may cast this card by paying [cost] rather that its mana
-     * cost,” “If this spell’s dash cost was paid, return the permanent this
-     * spell becomes to its owner’s hand at the beginning of the next end step,”
-     * and “As long as this permanent’s dash cost was paid, it has haste.”
-     * Paying a card’s dash cost follows the rules for paying alternative costs
+     * cost,” “If this spell's dash cost was paid, return the permanent this
+     * spell becomes to its owner's hand at the beginning of the next end step,”
+     * and “As long as this permanent's dash cost was paid, it has haste.”
+     * Paying a card's dash cost follows the rules for paying alternative costs
      * in rules 601.2b and 601.2e–g.
      *
      */

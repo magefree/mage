@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -164,7 +163,8 @@ class TapForManaAllTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever " + filter.getMessage() + " for mana, " + super.getRule();
+        return "Whenever a basic land is tapped for mana of the chosen color, "
+                + "its controller adds an additional one mana of that color.";
     }
 }
 
@@ -172,7 +172,7 @@ class GauntletOfPowerEffectEffect2 extends ManaEffect {
 
     public GauntletOfPowerEffectEffect2() {
         super();
-        staticText = "its controller adds one mana of that color";
+        staticText = "its controller adds one additional mana of that color";
     }
 
     public GauntletOfPowerEffectEffect2(final GauntletOfPowerEffectEffect2 effect) {

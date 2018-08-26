@@ -127,7 +127,7 @@ public class CantCastTest extends CardTestPlayerBase {
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
 
-        // Metalcraft - {T}: Add one mana of any color. Activate this ability only if you control three or more artifacts.
+        // <i>Metalcraft</i> &mdash; {T}: Add one mana of any color. Activate this ability only if you control three or more artifacts.
         addCard(Zone.HAND, playerA, "Mox Opal", 1); // {0}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Opal");
@@ -191,7 +191,7 @@ public class CantCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Llanowar Elves", 1); // Creature {G}
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
-        // Abrupt Decay can't be countered by spells or abilities.
+        // Abrupt Decay can't be countered.
         // Destroy target nonland permanent with converted mana cost 3 or less.
         addCard(Zone.HAND, playerB, "Abrupt Decay", 1); // {B}{G}
 

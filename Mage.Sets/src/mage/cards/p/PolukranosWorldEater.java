@@ -25,20 +25,20 @@ import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
- * * The value of X in Polukranos’s last ability is equal to the value chosen
+ * * The value of X in Polukranos's last ability is equal to the value chosen
  *   for X when its activated ability was activated.
  *
  * * The number of targets chosen for the triggered ability must be at least one
- *   (if X wasn’t 0) and at most X. You choose the division of damage as you put
+ *   (if X wasn't 0) and at most X. You choose the division of damage as you put
  *   the ability on the stack, not as it resolves. Each target must be assigned
  *   at least 1 damage. In multiplayer games, you may choose creatures controlled
  *   by different opponents.
  *
- * * If some, but not all, of the ability’s targets become illegal, you can’t change
- *   the division of damage. Damage that would’ve been dealt to illegal targets
- *   simply isn’t dealt.
+ * * If some, but not all, of the ability's targets become illegal, you can't change
+ *   the division of damage. Damage that would've been dealt to illegal targets
+ *   simply isn't dealt.
  *
- * * As Polukranos’s triggered ability resolves, Polukranos deals damage first, then
+ * * As Polukranos's triggered ability resolves, Polukranos deals damage first, then
  *   the target creatures do. Although no creature will die until after the ability
  *   finishes resolving, the order could matter if Polukranos has wither or infect.
  *

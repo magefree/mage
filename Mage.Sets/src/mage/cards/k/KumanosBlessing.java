@@ -1,9 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -24,15 +21,18 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 
 /**
- *
  * @author LevelX2
  */
 public final class KumanosBlessing extends CardImpl {
 
     public KumanosBlessing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.subtype.add(SubType.AURA);
 
         // Flash
@@ -77,7 +77,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null) {
             return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
@@ -89,10 +89,10 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+        ZoneChangeEvent zce = (ZoneChangeEvent) event;
         if (zce.isDiesEvent()) {
             DamagedByEnchantedWatcher watcher = (DamagedByEnchantedWatcher) game.getState().getWatchers().get(DamagedByEnchantedWatcher.class.getSimpleName(), source.getSourceId());
             if (watcher != null) {
@@ -126,15 +126,14 @@ class DamagedByEnchantedWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_CREATURE) {
             Permanent enchantment = game.getPermanent(this.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (enchantment.getAttachedTo().equals(event.getSourceId())) {
-                    MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
-                        damagedCreatures.add(mor);
+            if (enchantment != null && enchantment.isAttachedTo(event.getSourceId())) {
+                MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
+                damagedCreatures.add(mor);
 
-                }
             }
         }
     }
+
 
     @Override
     public void reset() {

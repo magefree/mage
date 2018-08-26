@@ -29,7 +29,7 @@ public final class MercurialGeists extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast an instant or sorcery spell, Mercurial Geists gets +3/+0 until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false));
     }
 
     public MercurialGeists(final MercurialGeists card) {

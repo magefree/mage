@@ -38,7 +38,7 @@ public final class EnergyStorm extends CardImpl {
 
         // Prevent all damage that would be dealt by instant and sorcery spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new PreventAllDamageByAllObjectsEffect(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELLS, Duration.WhileOnBattlefield, false)
+                new PreventAllDamageByAllObjectsEffect(StaticFilters.FILTER_SPELLS_INSTANT_OR_SORCERY, Duration.WhileOnBattlefield, false)
         ));
 
         // Creatures with flying don't untap during their controllers' untap steps.

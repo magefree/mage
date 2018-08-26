@@ -21,7 +21,7 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
      * This includes true vanilla creatures (such as Grizzly Bears), face-down creatures,
      * many tokens, and creatures that have lost their abilities (due to Ovinize, for example).
      * Any ability of any kind, whether or not the ability functions in the on the battlefield zone,
-     * including things like “Cycling 2” means the creature doesn’t get the bonus.
+     * including things like “Cycling 2” means the creature doesn't get the bonus.
      */
     @Test
     public void trueVanillaCardsTest() {
@@ -116,7 +116,7 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Animated basic lands have mana abilities, so they won’t get the bonus.
+     * Animated basic lands have mana abilities, so they won't get the bonus.
      */
 
     @Test
@@ -139,8 +139,8 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
      * Some Auras and Equipment grant abilities to creatures, meaning the affected creature would no longer
      * get the +2/+2 bonus. For example, Flight grants flying to the enchanted creature. Other Auras and Equipment
      * do not, meaning the affected creature would continue to get the +2/+2 bonus. For example, Dehydration states
-     * something now true about the enchanted creature, but doesn’t give it any abilities. Auras and Equipment that
-     * grant abilities will use the words “gains” or “has,” and they’ll list a keyword ability or an ability in
+     * something now true about the enchanted creature, but doesn't give it any abilities. Auras and Equipment that
+     * grant abilities will use the words “gains” or “has,” and they'll list a keyword ability or an ability in
      * quotation marks.
      */
     @Test

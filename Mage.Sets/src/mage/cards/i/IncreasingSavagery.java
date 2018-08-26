@@ -25,7 +25,7 @@ public final class IncreasingSavagery extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
 
-        // Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead.
+        // Put five +1/+1 counters on target creature. If this spell was cast from a graveyard, put ten +1/+1 counters on that creature instead.
         this.getSpellAbility().addEffect(new IncreasingSavageryEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
@@ -47,7 +47,7 @@ class IncreasingSavageryEffect extends OneShotEffect {
 
     public IncreasingSavageryEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead";
+        staticText = "Put five +1/+1 counters on target creature. If this spell was cast from a graveyard, put ten +1/+1 counters on that creature instead";
     }
 
     public IncreasingSavageryEffect(final IncreasingSavageryEffect effect) {

@@ -80,7 +80,7 @@ class DefiantGreatmawTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean weAreDoingIt = getControllerId().equals(game.getControllerId(event.getSourceId()));
+        boolean weAreDoingIt = isControlledBy(game.getControllerId(event.getSourceId()));
         boolean isM1M1Counters = event.getData().equals(CounterType.M1M1.getName());
         if (weAreDoingIt && isM1M1Counters && event.getTargetId().equals(this.getSourceId())) {
                 return true;

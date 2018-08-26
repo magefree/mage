@@ -48,7 +48,7 @@ public final class AdelizTheCinderWind extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, Wizards you control get +1/+1 until end of turn.
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter);
-        Ability ability = new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false);
         this.addAbility(ability);
     }
 

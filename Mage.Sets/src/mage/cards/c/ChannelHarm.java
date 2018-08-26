@@ -82,14 +82,14 @@ class ChannelHarmEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
-            if ((targetPermanent != null && targetPermanent.getControllerId().equals(source.getControllerId()))
+            if ((targetPermanent != null && targetPermanent.isControlledBy(source.getControllerId()))
                     || event.getTargetId().equals(source.getControllerId())) {
                 MageObject damageSource = game.getObject(event.getSourceId());
                 if (damageSource instanceof Controllable) {
-                    return !((Controllable) damageSource).getControllerId().equals(source.getControllerId());
+                    return !((Controllable) damageSource).isControlledBy(source.getControllerId());
                 }
                 else if (damageSource instanceof Card) {
-                    return !((Card) damageSource).getOwnerId().equals(source.getControllerId());
+                    return !((Card) damageSource).isOwnedBy(source.getControllerId());
                 }
             }
         }

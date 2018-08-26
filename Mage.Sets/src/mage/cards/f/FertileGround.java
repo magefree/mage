@@ -86,6 +86,6 @@ class FertileGroundTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color";
+        return "Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.";
     }
 }

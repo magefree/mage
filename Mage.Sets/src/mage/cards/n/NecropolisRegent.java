@@ -76,7 +76,7 @@ class NecropolisRegentTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.getControllerId().equals(controllerId)) {
+            if (creature != null && creature.isControlledBy(controllerId)) {
                 this.getEffects().clear();
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(event.getAmount()));
                 effect.setTargetPointer(new FixedTarget(creature.getId()));

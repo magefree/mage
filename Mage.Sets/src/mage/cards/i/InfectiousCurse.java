@@ -87,7 +87,7 @@ class InfectiousCurseAbility extends TriggeredAbilityImpl {
         Permanent enchantment = game.getPermanent(this.sourceId);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player player = game.getPlayer(enchantment.getAttachedTo());
-            if (player != null && game.getActivePlayerId().equals(player.getId())) {
+            if (player != null && game.isActivePlayer(player.getId())) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
                 return true;
             }
@@ -122,7 +122,7 @@ class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if (source.getControllerId().equals(abilityToModify.getControllerId())) {
+            if (source.isControlledBy(abilityToModify.getControllerId())) {
                 for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
                     Mode mode = abilityToModify.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {

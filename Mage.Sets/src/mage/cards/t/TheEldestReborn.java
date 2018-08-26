@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInGraveyard;
@@ -33,6 +34,15 @@ public final class TheEldestReborn extends CardImpl {
         ));
     }
 
+    private static final FilterControlledPermanent filterSacrifice = new FilterControlledPermanent("creature or planeswalker");
+    static {
+        filterSacrifice.add(Predicates.or(
+                        new CardTypePredicate(CardType.CREATURE),
+                        new CardTypePredicate(CardType.PLANESWALKER)
+                ));
+
+    }
+
     public TheEldestReborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
 
@@ -42,7 +52,7 @@ public final class TheEldestReborn extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
         // I — Each opponent sacrifices a creature or planeswalker.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
-                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A)
+                new SacrificeOpponentsEffect(filterSacrifice)
         );
 
         // II — Each opponent discards a card.

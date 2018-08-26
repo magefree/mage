@@ -36,7 +36,7 @@ public final class DimirDoppelganger extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
-        // {1}{U}{B}: Exile target creature card from a graveyard. Dimir Doppelganger becomes a copy of that card and gains this ability.
+        // {1}{U}{B}: Exile target creature card from a graveyard. Dimir Doppelganger becomes a copy of that card, except it has this ability.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         this.addAbility(ability);
@@ -57,7 +57,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
 
     DimirDoppelgangerEffect() {
         super(Outcome.Copy);
-        staticText = "Exile target creature card from a graveyard. {this} becomes a copy of that card and gains this ability";
+        staticText = "Exile target creature card from a graveyard. {this} becomes a copy of that card, except it has this ability";
     }
 
     DimirDoppelgangerEffect(final DimirDoppelgangerEffect effect) {

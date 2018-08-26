@@ -23,7 +23,7 @@ public final class Necrologia extends CardImpl {
 
         // Cast Necrologia only during your end step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.END_TURN, MyTurnCondition.instance,
-                "Cast {this} only during your end step"));
+                "Cast this spell only during your end step"));
 
         // As an additional cost to cast to Necrologia, pay X life.
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));

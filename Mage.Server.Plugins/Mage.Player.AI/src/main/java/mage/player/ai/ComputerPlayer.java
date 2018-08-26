@@ -987,7 +987,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     private boolean priorityPlay(Game game) {
         UUID opponentId = game.getOpponents(playerId).iterator().next();
-        if (game.getActivePlayerId().equals(playerId)) {
+        if (game.isActivePlayer(playerId)) {
             if (game.isMainPhase() && game.getStack().isEmpty()) {
                 playLand(game);
             }

@@ -18,11 +18,14 @@ public class PlayerCanGainLifePredicate implements ObjectSourcePlayerPredicate<O
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player player = input.getObject();
-        return player.isCanGainLife();
+        if(player != null) {
+            return player.isCanGainLife();
+        }
+        return false;
     }
 
     @Override
     public String toString() {
-        return "Player can gain live";
+        return "Player can gain life";
     }
 }

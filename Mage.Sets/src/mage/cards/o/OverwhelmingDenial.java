@@ -25,7 +25,7 @@ public final class OverwhelmingDenial extends CardImpl {
 
         // Overwhelming Denial can't be countered by spell or abilities.
         Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
+        effect.setText("this spell can't be countered");
         Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);

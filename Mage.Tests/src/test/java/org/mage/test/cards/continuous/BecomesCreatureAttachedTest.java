@@ -41,7 +41,7 @@ public class BecomesCreatureAttachedTest extends CardTestPlayerBase {
 
     @Test
     public void test_AttachToLandWithColorReplace() {
-        // Enchanted land is a 2/2 blue Elemental creature with flying. It’s still a land.
+        // Enchanted land is a 2/2 blue Elemental creature with flying. It's still a land.
         addCard(Zone.HAND, playerA, "Wind Zendikon", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
 
@@ -64,7 +64,7 @@ public class BecomesCreatureAttachedTest extends CardTestPlayerBase {
 
     @Test
     public void test_AttachToLandWithColorAdd() {
-        // Enchanted land is a 2/2 blue Elemental creature with flying. It’s still a land.
+        // Enchanted land is a 2/2 blue Elemental creature with flying. It's still a land.
         addCard(Zone.HAND, playerA, "Deep Freeze", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -25,7 +24,6 @@ public final class CapitalPunishment extends CardImpl {
 
     public CapitalPunishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        
 
         // <i>Council's dilemma</i> &mdash; Starting with you, each player votes for death or taxes. Each opponent sacrifices a creature for each death vote and discards a card for each taxes vote.
         this.getSpellAbility().addEffect(new CapitalPunishmentDilemmaEffect());
@@ -57,13 +55,15 @@ class CapitalPunishmentDilemmaEffect extends CouncilsDilemmaVoteEffect {
         Player controller = game.getPlayer(source.getControllerId());
 
         //If no controller, exit out here and do not vote.
-        if (controller == null) return false;
+        if (controller == null) {
+            return false;
+        }
 
         this.vote("death", "taxes", controller, game, source);
 
         //Death Votes
         if (voteOneCount > 0) {
-            Effect sacrificeEffect = new SacrificeOpponentsEffect(voteOneCount, new FilterControlledCreaturePermanent());
+            Effect sacrificeEffect = new SacrificeOpponentsEffect(voteOneCount, StaticFilters.FILTER_CONTROLLED_CREATURE);
             sacrificeEffect.apply(game, source);
         }
 

@@ -87,6 +87,6 @@ class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Morbid - At the beginning of each end step, if a creature died this turn, destroy target non-demon creature.";
+        return "<i>Morbid</i> &mdash; At the beginning of each end step, if a creature died this turn, destroy target non-demon creature.";
     }
 }

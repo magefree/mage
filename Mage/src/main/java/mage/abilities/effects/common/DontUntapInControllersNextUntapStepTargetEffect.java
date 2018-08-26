@@ -101,8 +101,8 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    if (game.getActivePlayerId().equals(permanent.getControllerId())
-                            && ((onlyIfControlledByPlayer == null) || (game.getActivePlayerId().equals(onlyIfControlledByPlayer)))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
+                    if (game.isActivePlayer(permanent.getControllerId())
+                            && ((onlyIfControlledByPlayer == null) || (game.isActivePlayer(onlyIfControlledByPlayer)))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
                         if (!handledTargetsDuringTurn.containsKey(targetId)) {
                             // it's the untep step of the current controller and the effect was not handled for this target yet, so do it now
                             handledTargetsDuringTurn.put(targetId, false);
@@ -127,8 +127,8 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
                     && !handledTargetsDuringTurn.get(event.getTargetId())
                     && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
-                    if ((onlyIfControlledByPlayer == null) || game.getActivePlayerId().equals(onlyIfControlledByPlayer)) { // If onlyIfControlledByPlayer is set, then don't apply unless we're currently controlled by the specified player.
+                if (permanent != null && game.isActivePlayer(permanent.getControllerId())) {
+                    if ((onlyIfControlledByPlayer == null) || game.isActivePlayer(onlyIfControlledByPlayer)) { // If onlyIfControlledByPlayer is set, then don't apply unless we're currently controlled by the specified player.
                         handledTargetsDuringTurn.put(event.getTargetId(), !twoSteps);
                         return true;
                     }

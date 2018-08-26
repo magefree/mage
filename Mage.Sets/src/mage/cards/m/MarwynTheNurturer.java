@@ -39,7 +39,7 @@ public final class MarwynTheNurturer extends CardImpl {
         // Whenever another Elf enters the battlefield under your control, put a +1/+1 counter on Marwyn, the Nurturer.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
 
-        // {T}: Add an amount of {G} equal to Marwyn’s power.
+        // {T}: Add an amount of {G} equal to Marwyn's power.
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new SourcePermanentPowerCount(), "Add an amount of {G} equal to {this}'s power"));
     }
 

@@ -101,7 +101,7 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (damagedPlayer != null && permanent != null
                 && ((DamagedEvent) event).isCombatDamage()
-                && getControllerId().equals(permanent.getControllerId())) {
+                && isControlledBy(permanent.getControllerId())) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + damagedPlayer.getLogName() + " controls");
             filter.add(new ControllerIdPredicate(damagedPlayer.getId()));
             this.getTargets().clear();
@@ -198,7 +198,7 @@ class GrenzoHavocRaiserCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(cardId) && source.getControllerId().equals(affectedControllerId)) {
+        if (sourceId.equals(cardId) && source.isControlledBy(affectedControllerId)) {
             ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
             return exileZone != null && exileZone.contains(cardId);
         }
@@ -229,7 +229,7 @@ class GrenzoHavocRaiserSpendAnyManaEffect extends AsThoughEffectImpl implements 
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId)
+        return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
                 && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))

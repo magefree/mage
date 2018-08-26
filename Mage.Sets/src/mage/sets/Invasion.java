@@ -88,6 +88,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Darigaaz's Attendant", 301, Rarity.UNCOMMON, mage.cards.d.DarigaazsAttendant.class));
         cards.add(new SetCardInfo("Darigaaz, the Igniter", 243, Rarity.RARE, mage.cards.d.DarigaazTheIgniter.class));
         cards.add(new SetCardInfo("Defiling Tears", 99, Rarity.UNCOMMON, mage.cards.d.DefilingTears.class));
+        cards.add(new SetCardInfo("Desperate Research", 100, Rarity.RARE, mage.cards.d.DesperateResearch.class));
         cards.add(new SetCardInfo("Devouring Strossus", 101, Rarity.RARE, mage.cards.d.DevouringStrossus.class));
         cards.add(new SetCardInfo("Dismantling Blow", 14, Rarity.COMMON, mage.cards.d.DismantlingBlow.class));
         cards.add(new SetCardInfo("Disrupt", 51, Rarity.UNCOMMON, mage.cards.d.Disrupt.class));
@@ -105,6 +106,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Elfhame Sanctuary", 185, Rarity.UNCOMMON, mage.cards.e.ElfhameSanctuary.class));
         cards.add(new SetCardInfo("Elvish Champion", 186, Rarity.RARE, mage.cards.e.ElvishChampion.class));
         cards.add(new SetCardInfo("Empress Galina", 54, Rarity.RARE, mage.cards.e.EmpressGalina.class));
+        cards.add(new SetCardInfo("Essence Leak", 55, Rarity.UNCOMMON, mage.cards.e.EssenceLeak.class));
         cards.add(new SetCardInfo("Exclude", 56, Rarity.COMMON, mage.cards.e.Exclude.class));
         cards.add(new SetCardInfo("Exotic Curse", 105, Rarity.COMMON, mage.cards.e.ExoticCurse.class));
         cards.add(new SetCardInfo("Explosive Growth", 187, Rarity.COMMON, mage.cards.e.ExplosiveGrowth.class));
@@ -160,6 +162,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Llanowar Elite", 196, Rarity.COMMON, mage.cards.l.LlanowarElite.class));
         cards.add(new SetCardInfo("Llanowar Knight", 254, Rarity.COMMON, mage.cards.l.LlanowarKnight.class));
         cards.add(new SetCardInfo("Llanowar Vanguard", 197, Rarity.COMMON, mage.cards.l.LlanowarVanguard.class));
+        cards.add(new SetCardInfo("Loafing Giant", 153, Rarity.RARE, mage.cards.l.LoafingGiant.class));
         cards.add(new SetCardInfo("Lobotomy", 255, Rarity.UNCOMMON, mage.cards.l.Lobotomy.class));
         cards.add(new SetCardInfo("Lotus Guardian", 305, Rarity.RARE, mage.cards.l.LotusGuardian.class));
         cards.add(new SetCardInfo("Mana Maze", 59, Rarity.RARE, mage.cards.m.ManaMaze.class));
@@ -205,6 +208,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Portal", 308, Rarity.RARE, mage.cards.p.PlanarPortal.class));
+        cards.add(new SetCardInfo("Pledge of Loyalty", 24, Rarity.UNCOMMON, mage.cards.p.PledgeOfLoyalty.class));
         cards.add(new SetCardInfo("Pouncing Kavu", 158, Rarity.COMMON, mage.cards.p.PouncingKavu.class));
         cards.add(new SetCardInfo("Power Armor", 309, Rarity.UNCOMMON, mage.cards.p.PowerArmor.class));
         cards.add(new SetCardInfo("Prison Barricade", 25, Rarity.COMMON, mage.cards.p.PrisonBarricade.class));
@@ -246,12 +250,14 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Salt Marsh", 326, Rarity.UNCOMMON, mage.cards.s.SaltMarsh.class));
         cards.add(new SetCardInfo("Samite Archer", 269, Rarity.UNCOMMON, mage.cards.s.SamiteArcher.class));
         cards.add(new SetCardInfo("Sapphire Leech", 71, Rarity.RARE, mage.cards.s.SapphireLeech.class));
+        cards.add(new SetCardInfo("Saproling Infestation", 208, Rarity.RARE, mage.cards.s.SaprolingInfestation.class));
         cards.add(new SetCardInfo("Saproling Symbiosis", 209, Rarity.RARE, mage.cards.s.SaprolingSymbiosis.class));
         cards.add(new SetCardInfo("Savage Offensive", 162, Rarity.COMMON, mage.cards.s.SavageOffensive.class));
         cards.add(new SetCardInfo("Scarred Puma", 163, Rarity.COMMON, mage.cards.s.ScarredPuma.class));
         cards.add(new SetCardInfo("Scavenged Weaponry", 123, Rarity.COMMON, mage.cards.s.ScavengedWeaponry.class));
         cards.add(new SetCardInfo("Scorching Lava", 164, Rarity.COMMON, mage.cards.s.ScorchingLava.class));
         cards.add(new SetCardInfo("Scouting Trek", 210, Rarity.UNCOMMON, mage.cards.s.ScoutingTrek.class));
+        cards.add(new SetCardInfo("Searing Rays", 165, Rarity.UNCOMMON, mage.cards.s.SearingRays.class));
         cards.add(new SetCardInfo("Seashell Cameo", 311, Rarity.UNCOMMON, mage.cards.s.SeashellCameo.class));
         cards.add(new SetCardInfo("Seer's Vision", 270, Rarity.UNCOMMON, mage.cards.s.SeersVision.class));
         cards.add(new SetCardInfo("Serpentine Kavu", 211, Rarity.COMMON, mage.cards.s.SerpentineKavu.class));

@@ -66,7 +66,7 @@ public class EndStepTriggerTest extends CardTestPlayerBase {
         // Bound
         // Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.
         // Determined
-        // Other spells you control can't be countered by spells or abilities this turn.
+        // Other spells you control can't be countered this turn.
         // Draw a card.
         addCard(Zone.HAND, playerB, "Bound // Determined"); // Instant {3}{B}{G} // {G}{U}
 

@@ -92,12 +92,12 @@ class OrzhovCharmReturnToHandEffect extends OneShotEffect {
             attachments.addAll(target.getAttachments());
             for (UUID attachmentId : attachments) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getControllerId().equals(source.getControllerId())
+                if (attachment != null && attachment.isControlledBy(source.getControllerId())
                         && attachment.hasSubtype(SubType.AURA, game)) {
                     attachment.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
             }
-            if (target.getControllerId().equals(source.getControllerId())) {
+            if (target.isControlledBy(source.getControllerId())) {
                 target.moveToZone(Zone.HAND, source.getSourceId(), game, false);
             }
             return true;

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
+import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -23,10 +21,14 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SidarJabari extends CardImpl {
 
-    private final UUID originalId;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+
+    static {
+        filter.add(new DefendingPlayerControlsPredicate());
+    }
 
     public SidarJabari(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
@@ -38,26 +40,12 @@ public final class SidarJabari extends CardImpl {
 
         // Whenever Sidar Jabari attacks, tap target creature defending player controls.
         Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
-        originalId = ability.getOriginalId();
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
     public SidarJabari(final SidarJabari card) {
         super(card);
-        this.originalId = card.originalId;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            ability.getTargets().clear();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
-            filter.add(new ControllerIdPredicate(defenderId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            ability.addTarget(target);
-        }
     }
 
     @Override

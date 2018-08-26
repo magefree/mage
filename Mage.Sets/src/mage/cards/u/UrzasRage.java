@@ -28,9 +28,9 @@ public final class UrzasRage extends CardImpl {
         // Kicker {8}{R}
         this.addAbility(new KickerAbility("{8}{R}"));
 
-        // Urza's Rage can't be countered by spells or abilities.
+        // Urza's Rage can't be countered.
         Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
+        effect.setText("this spell can't be countered");
         Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);

@@ -19,7 +19,7 @@ public class MetallicMiminTest extends CardTestPlayerBase {
      * be getting a counter as long as you name the same type as the first one.
      *
      * 611.3c Continuous effects that modify characteristics of permanents do so
-     * simultaneously with the permanent entering the battlefield. They don’t
+     * simultaneously with the permanent entering the battlefield. They don't
      * wait until the permanent is on the battlefield and then change it.
      * Because such effects apply as the permanent enters the battlefield, they
      * are applied before determining whether the permanent will cause an
@@ -28,7 +28,7 @@ public class MetallicMiminTest extends CardTestPlayerBase {
      * Example: A permanent with the static ability “All white creatures get
      * +1/+1” is on the battlefield. A creature spell that would normally create
      * a 1/1 white creature instead creates a 2/2 white creature. The creature
-     * doesn’t enter the battlefield as 1/1 and then change to 2/2.
+     * doesn't enter the battlefield as 1/1 and then change to 2/2.
      *
      */
     @Test

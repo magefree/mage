@@ -32,9 +32,9 @@ public final class DacksDuplicate extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // You may have Dack's Duplicate enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone.
+        // You may have Dack's Duplicate enter the battlefield as a copy of any creature on the battlefield except it has haste and dethrone.
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new DacksDuplicateApplyToPermanent());
-        effect.setText("as a copy of any creature on the battlefield except it gains haste and dethrone");
+        effect.setText("as a copy of any creature on the battlefield except it has haste and dethrone");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
@@ -53,7 +53,7 @@ class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         /**
-         * 29/05/2014	The ability of Dack’s Duplicate doesn’t target the
+         * 29/05/2014	The ability of Dack's Duplicate doesn't target the
          * creature.
          */
         permanent.addAbility(new DethroneAbility(), game);

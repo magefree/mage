@@ -48,9 +48,9 @@ import mage.util.GameLog;
  * 702.94d A creature can be paired with only one other creature.
  *
  * 702.94e A paired creature becomes unpaired if any of the following occur:
- * another player gains control of it or the creature it’s paired with; it or
- * the creature it’s paired with stops being a creature; or it or the creature
- * it’s paired with leaves the battlefield.
+ * another player gains control of it or the creature it's paired with; it or
+ * the creature it's paired with stops being a creature; or it or the creature
+ * it's paired with leaves the battlefield.
  *
  * @author LevelX2
  */
@@ -78,7 +78,7 @@ public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(getControllerId())) {
             if (permanent.isCreature()) {
                 if (permanent.getId().equals(getSourceId())) {
-                    if (permanent.getControllerId().equals(getControllerId())) {
+                    if (permanent.isControlledBy(getControllerId())) {
                         self = true;
                         if (other) {
                             return true;
@@ -195,7 +195,7 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
         // if you control both this creature and another creature and both are unpaired
         if (game.getBattlefield().countAll(filter, getControllerId(), game) > 0) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent != null && sourcePermanent.getControllerId().equals(getControllerId()) && sourcePermanent.getPairedCard() == null) {
+            if (sourcePermanent != null && sourcePermanent.isControlledBy(getControllerId()) && sourcePermanent.getPairedCard() == null) {
                 return true;
             }
         }

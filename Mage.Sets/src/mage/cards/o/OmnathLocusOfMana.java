@@ -52,7 +52,7 @@ class OmnathRuleEffect extends ContinuousEffectImpl {
 
     public OmnathRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You don’t lose unspent green mana as steps and phases end";
+        staticText = "You don't lose unspent green mana as steps and phases end";
     }
 
     public OmnathRuleEffect(final OmnathRuleEffect effect) {

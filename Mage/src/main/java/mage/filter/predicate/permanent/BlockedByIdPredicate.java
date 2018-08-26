@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.permanent;
 
 import java.util.UUID;
@@ -6,6 +5,7 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
  *
@@ -24,6 +24,13 @@ public class BlockedByIdPredicate implements Predicate<Permanent> {
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
             if (combatGroup.getBlockers().contains(blockerId) && combatGroup.getAttackers().contains(input.getId())) {
                 return true;
+            }
+        } // Check if the blockerId was blocked before, if it does no longer exists now but so the target attacking is still valid
+        Permanent blocker = game.getPermanentOrLKIBattlefield(blockerId);
+        if (blocker != null) {
+            BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
+            if (watcher != null) {
+                return watcher.creatureHasBlockedAttacker(input, blocker, game);
             }
         }
         return false;

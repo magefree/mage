@@ -120,7 +120,7 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
             Permanent creature = game.getPermanent(attacker);
             if (creature != null
                     && creature.getControllerId() != null
-                    && creature.getControllerId().equals(this.getControllerId())) {
+                    && creature.isControlledBy(this.getControllerId())) {
                 return true;
             }
         }
@@ -157,7 +157,7 @@ class GrandWarlordRadhaEffect extends OneShotEffect {
             if (watcher != null) {
                 int attackingCreatures = 0;
                 for (MageObjectReference attacker : watcher.getAttackedThisTurnCreatures()) {
-                    if (attacker.getPermanentOrLKIBattlefield(game).getControllerId().equals(controller.getId())) {
+                    if (attacker.getPermanentOrLKIBattlefield(game).isControlledBy(controller.getId())) {
                         attackingCreatures++;
                     }
                 }

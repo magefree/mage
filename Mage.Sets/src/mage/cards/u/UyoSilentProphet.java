@@ -40,7 +40,7 @@ public final class UyoSilentProphet extends CardImpl {
         // {2}, Return two lands you control to their owner's hand: Copy target instant or sorcery spell. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), false)));
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
     }
 

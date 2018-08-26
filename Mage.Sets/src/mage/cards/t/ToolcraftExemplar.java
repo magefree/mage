@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -40,7 +40,7 @@ public final class ToolcraftExemplar extends CardImpl {
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 2)), null);
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn), TargetController.YOU, false),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()),
                 "At the beginning of combat on your turn, if you control an artifact, {this} gets +2/+1 until end of turn."

@@ -64,7 +64,7 @@ class LarcenyTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.getControllerId().equals(controllerId)) {
+            if (creature != null && creature.isControlledBy(controllerId)) {
                 for(Effect effect : this.getEffects())
                 {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

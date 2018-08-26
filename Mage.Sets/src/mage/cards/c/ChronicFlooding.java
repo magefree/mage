@@ -72,10 +72,9 @@ class ChronicFloodingAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = game.getPermanent(this.sourceId);
-        if (source != null && source.getAttachedTo().equals(event.getTargetId())) {
+        if (source != null && source.isAttachedTo(event.getTargetId())) {
             Permanent attached = game.getPermanent(source.getAttachedTo());
             if (attached != null) {
-
                 for (Effect e : getEffects()) {
                     e.setTargetPointer(new FixedTarget(attached.getControllerId()));
                 }

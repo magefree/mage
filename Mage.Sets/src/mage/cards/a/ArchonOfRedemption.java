@@ -66,7 +66,7 @@ class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.getControllerId().equals(getControllerId())
+        if (permanent.isControlledBy(getControllerId())
                 && permanent.isCreature()
                 && (permanent.getId().equals(getSourceId())
                 || (permanent.getAbilities().contains(FlyingAbility.getInstance())))) {

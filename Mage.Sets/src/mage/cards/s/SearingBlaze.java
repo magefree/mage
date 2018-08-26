@@ -53,7 +53,7 @@ class SearingBlazeEffect extends OneShotEffect {
 
     public SearingBlazeEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to target creature that player or that planeswalker’s controller controls.  \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player or planeswalker and 3 damage to that creature instead.";
+        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to target creature that player or that planeswalker's controller controls.  \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player or planeswalker and 3 damage to that creature instead.";
     }
 
     public SearingBlazeEffect(final SearingBlazeEffect effect) {
@@ -100,7 +100,7 @@ class SearingBlazeTarget extends TargetPermanent {
         }
         UUID firstTarget = player.getId();
         Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
+        if (firstTarget != null && permanent != null && permanent.isControlledBy(firstTarget)) {
             return super.canTarget(id, source, game);
         }
         return false;
@@ -117,7 +117,7 @@ class SearingBlazeTarget extends TargetPermanent {
             if (player != null) {
                 for (UUID targetId : availablePossibleTargets) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.getControllerId().equals(player.getId())) {
+                    if (permanent != null && permanent.isControlledBy(player.getId())) {
                         possibleTargets.add(targetId);
                     }
                 }

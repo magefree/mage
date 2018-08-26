@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.Card;
@@ -32,7 +32,7 @@ public final class GraveScrabbler extends CardImpl {
         //you may return target creature card from a graveyard to its owner's hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
-        this.addAbility(new ConditionalTriggeredAbility(ability, MadnessAbility.GetCondition(),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MadnessAbility.GetCondition(),
                 "When {this} enters the battlefield, if its madness cost was paid, you may return target creature card from a graveyard to its owner's hand."));
     }
 

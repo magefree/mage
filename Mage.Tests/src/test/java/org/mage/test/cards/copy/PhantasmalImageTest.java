@@ -450,8 +450,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      * Example: Two creatures are on the battlefield along with an artifact that
      * has the ability “Whenever a creature dies, you gain 1 life.” Someone
      * plays a spell that destroys all artifacts, creatures, and enchantments.
-     * The artifact’s ability triggers twice, even though the artifact goes to
-     * its owner’s graveyard at the same time as the creatures.
+     * The artifact's ability triggers twice, even though the artifact goes to
+     * its owner's graveyard at the same time as the creatures.
      *
      */
     @Test

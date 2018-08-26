@@ -21,7 +21,7 @@ public class CantBeCounteredSourceEffect extends ContinuousRuleModifyingEffectIm
 
     public CantBeCounteredSourceEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, false, true);
-        staticText = "{this} can't be countered";
+        staticText = "this spell can't be countered";
     }
 
     public CantBeCounteredSourceEffect(final CantBeCounteredSourceEffect effect) {

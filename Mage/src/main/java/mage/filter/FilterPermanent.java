@@ -1,4 +1,3 @@
-
 package mage.filter;
 
 import java.util.ArrayList;
@@ -27,11 +26,6 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         super("permanent");
     }
 
-    public FilterPermanent(final FilterPermanent filter) {
-        super(filter);
-        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
-    }
-
     public FilterPermanent(String name) {
         super(name);
     }
@@ -43,9 +37,14 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
 
     public FilterPermanent(Set<SubType> subtypesList, String name) {
         super(name);
-        for (SubType subtype: subtypesList) {
+        for (SubType subtype : subtypesList) {
             this.add(new SubtypePredicate(subtype));
         }
+    }
+
+    public FilterPermanent(final FilterPermanent filter) {
+        super(filter);
+        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
     }
 
     @Override
@@ -62,7 +61,10 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(permanent, sourceId, playerId), game);
     }
 
-    public void add(ObjectPlayerPredicate predicate) {
+    public final void add(ObjectPlayerPredicate predicate) {
+        if (isLockedFilter()) {
+            throw new UnsupportedOperationException("You may not modify a locked filter");
+        }
         extraPredicates.add(predicate);
     }
 

@@ -75,13 +75,13 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         /**
          * 04.11.2015 If any opponent has a creature card in their
-         * graveyard as Dawnbreak Reclaimer’s ability resolves, then you must
-         * choose one of those cards. You can’t choose a different opponent with
+         * graveyard as Dawnbreak Reclaimer's ability resolves, then you must
+         * choose one of those cards. You can't choose a different opponent with
          * no creature cards in their graveyard to avoid returning one of
          * those cards.
          *
-         * 04.11.2015 If there are no creature cards in any opponent’s graveyard
-         * as Dawnbreak Reclaimer’s ability resolves, you’ll still have the
+         * 04.11.2015 If there are no creature cards in any opponent's graveyard
+         * as Dawnbreak Reclaimer's ability resolves, you'll still have the
          * option to return a creature card from your graveyard to the
          * battlefield. You choose which opponent will choose a creature card in
          * your graveyard.

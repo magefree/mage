@@ -8,10 +8,10 @@ import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- *
  * @author Pete Rossi
  */
 public enum MagidexImageSource implements CardImageSource {
@@ -189,7 +189,6 @@ public enum MagidexImageSource implements CardImageSource {
         supportedSets.add("CN2");
         supportedSets.add("DDR");
         supportedSets.add("KLD");
-        supportedSets.add("MPS");
         // supportedSets.add("PZ2"); // Treasure Chests
         supportedSets.add("C16");
         supportedSets.add("PCA");
@@ -208,11 +207,15 @@ public enum MagidexImageSource implements CardImageSource {
         supportedSets.add("IMA");
         supportedSets.add("E02");
         supportedSets.add("V17");
-//        supportedSets.add("UST");
-//        supportedSets.add("RIX");
-//        supportedSets.add("A25");
-//        supportedSets.add("DOM");
-//        supportedSets.add("M19");
+        supportedSets.add("UST");
+        supportedSets.add("DDU");
+        supportedSets.add("RIX");
+        supportedSets.add("A25");
+        supportedSets.add("DOM");
+        supportedSets.add("CM2");
+        supportedSets.add("M19");
+        //supportedSets.add("BBD");
+        //supportedSets.add("C18");
     }
 
     @Override
@@ -231,7 +234,7 @@ public enum MagidexImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         String cardDownloadName = card.getDownloadName().toLowerCase(Locale.ENGLISH);
         String cardSet = card.getSet();
 
@@ -245,7 +248,7 @@ public enum MagidexImageSource implements CardImageSource {
 
         // This will properly escape the url
         URI uri = new URI("http", "magidex.com", "/extstatic/card/" + formatSetName(cardSet) + '/' + cardDownloadName + ".jpg", null, null);
-        return uri.toASCIIString();
+        return new CardImageUrls(uri.toASCIIString());
     }
 
     private String formatSetName(String setName) {
@@ -262,7 +265,7 @@ public enum MagidexImageSource implements CardImageSource {
     };
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) {
         return null;
     }
 

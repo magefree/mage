@@ -17,10 +17,10 @@ public class InfectTest extends CardTestPlayerBase {
     /**
      *
      * 702.89. Infect 702.89a Infect is a static ability. 702.89b Damage dealt
-     * to a player by a source with infect doesn’t cause that player to lose
+     * to a player by a source with infect doesn't cause that player to lose
      * life. Rather, it causes the player to get that many poison counters. See
      * rule 119.3. 702.89c Damage dealt to a creature by a source with infect
-     * isn’t marked on that creature. Rather, it causes that many -1/-1 counters
+     * isn't marked on that creature. Rather, it causes that many -1/-1 counters
      * to be put on that creature. See rule 119.3. 702.89d If a permanent leaves
      * the battlefield before an effect causes it to deal damage, its last known
      * information is used to determine whether it had infect. 702.89e The

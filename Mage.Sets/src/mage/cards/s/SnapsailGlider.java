@@ -23,7 +23,7 @@ import mage.constants.Zone;
  */
 public final class SnapsailGlider extends CardImpl {
 
-    protected static String rule = "Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts";
+    protected static String rule = "<i>Metalcraft</i> &mdash; Snapsail Glider has flying as long as you control three or more artifacts";
 
     public SnapsailGlider (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

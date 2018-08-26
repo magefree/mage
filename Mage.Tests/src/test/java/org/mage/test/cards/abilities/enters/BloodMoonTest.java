@@ -315,8 +315,8 @@ public class BloodMoonTest extends CardTestPlayerBase {
      * If Blood Moon is on the battlefield, Flagstones of Trokair will enter the
      * battlefield as a legendary non-basic Mountain. If Flagstones of Trokair
      * is put into the graveyard due to “Legends rule” or because it was
-     * destroyed, its ability doesn’t trigger, because it doesn’t exist: it
-     * won’t fetch you a Plains.
+     * destroyed, its ability doesn't trigger, because it doesn't exist: it
+     * won't fetch you a Plains.
      */
     @Test
     public void testBloodMoonFlagstonesOfTrokair() {
@@ -350,13 +350,13 @@ public class BloodMoonTest extends CardTestPlayerBase {
     }
 
     /**
-     * Because Blood Moon’s static ability operates only when it’s on the
+     * Because Blood Moon's static ability operates only when it's on the
      * battlefield and begins affecting any nonbasic lands immediately. In fact,
-     * Blood Moon’s effect is so quick that once a non-basic land hits the
-     * battlefield it’s going to be affected. Therefore:
+     * Blood Moon's effect is so quick that once a non-basic land hits the
+     * battlefield it's going to be affected. Therefore:
      *
-     * If a nonbasic land’s has EtB triggered abilities, these will not trigger
-     * because the ability isn’t there (it’s gone). Effects that modify the way
+     * If a nonbasic land's has EtB triggered abilities, these will not trigger
+     * because the ability isn't there (it's gone). Effects that modify the way
      * the land enters the battlefield are replacement effects. They are applied
      * before the permanent enters the battlefield and taking into account
      * continuous effects that already exist and would apply to the permanent.

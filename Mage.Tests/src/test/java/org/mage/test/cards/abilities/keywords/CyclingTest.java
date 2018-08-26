@@ -14,16 +14,16 @@ public class CyclingTest extends CardTestPlayerBase {
 
     /**
      * 702.28. Cycling 702.28a Cycling is an activated ability that functions
-     * only while the card with cycling is in a player’s hand. “Cycling [cost]”
+     * only while the card with cycling is in a player's hand. “Cycling [cost]”
      * means “[Cost], Discard this card: Draw a card.” 702.28b Although the
-     * cycling ability is playable only if the card is in a player’s hand, it
+     * cycling ability is playable only if the card is in a player's hand, it
      * continues to exist while the object is in play and in all other zones.
      * Therefore objects with cycling will be affected by effects that depend on
      * objects having one or more activated abilities. 702.28c Some cards with
-     * cycling have abilities that trigger when they’re cycled. “When you cycle
+     * cycling have abilities that trigger when they're cycled. “When you cycle
      * [this card]” means “When you discard [this card] to pay a cycling cost.”
      * These abilities trigger from whatever zone the card winds up in after
-     * it’s cycled. 702.28d Typecycling is a variant of the cycling ability.
+     * it's cycled. 702.28d Typecycling is a variant of the cycling ability.
      * “[Type]cycling [cost]” means “[Cost], Discard this card: Search your
      * library for a [type] card, reveal it, and put it into your hand. Then
      * shuffle your library.” This type is usually a subtype (as in
@@ -32,7 +32,7 @@ public class CyclingTest extends CardTestPlayerBase {
      * abilities are cycling abilities, and typecycling costs are cycling costs.
      * Any cards that trigger when a player cycles a card will trigger when a
      * card is discarded to pay a typecycling cost. Any effect that stops
-     * players from cycling cards will stop players from activating cards’
+     * players from cycling cards will stop players from activating cards'
      * typecycling abilities. Any effect that increases or reduces a cycling
      * cost will increase or reduce a typecycling cost.
      */

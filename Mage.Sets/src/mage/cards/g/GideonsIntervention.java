@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +31,7 @@ public final class GideonsIntervention extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // As Gideon's Intervention enters the battlefield, choose a card name.
-        Effect effect = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
+        Effect effect = new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL);
         effect.setText("choose a card name");
         this.addAbility(new AsEntersBattlefieldAbility(effect));
 
@@ -72,7 +72,7 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
             return "You may not cast a card named " + cardName + " (" + mageObject.getIdName() + ").";
         }
         return null;
@@ -85,7 +85,7 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(cardName)) {
@@ -137,9 +137,9 @@ class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
         if (object != null && (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
                 || targetPerm != null && (event.getType() == GameEvent.EventType.DAMAGE_CREATURE
                 || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER))) {
-            if (object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))
+            if (object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))
                     && (event.getTargetId().equals(source.getControllerId())
-                    || targetPerm != null && targetPerm.getControllerId().equals(source.getControllerId()))) {
+                    || targetPerm != null && targetPerm.isControlledBy(source.getControllerId()))) {
                 return super.applies(event, source, game);
             }
         }

@@ -55,14 +55,14 @@ class TauntEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getControllerId().equals(this.getTargetPointer().getFirst(game, source));
+        return permanent.isControlledBy(this.getTargetPointer().getFirst(game, source));
     }
 
     @Override
     public boolean isInactive(Ability source, Game game) {
         return startingTurn != game.getTurnNum() &&
                 (game.getPhase().getType() == TurnPhase.END &&
-                game.getActivePlayerId().equals(this.getTargetPointer().getFirst(game, source)));
+                game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
     }
 
     @Override

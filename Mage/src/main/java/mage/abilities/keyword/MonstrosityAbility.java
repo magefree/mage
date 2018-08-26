@@ -21,23 +21,23 @@ import mage.util.CardUtil;
  *
  * 701.28. Monstrosity
  *
- * 701.28a “Monstrosity N” means “If this permanent isn’t monstrous, put N +1/+1 counters on it
+ * 701.28a “Monstrosity N” means “If this permanent isn't monstrous, put N +1/+1 counters on it
  *         and it becomes monstrous.” Monstrous is a condition of that permanent that can be
  *         referred to by other abilities.
  *
- * 701.28b If a permanent’s ability instructs a player to “monstrosity X,” other abilities of
+ * 701.28b If a permanent's ability instructs a player to “monstrosity X,” other abilities of
  *         that permanent may also refer to X. The value of X in those abilities is equal to
  *         the value of X as that permanent became monstrous.
  *
- * * Once a creature becomes monstrous, it can’t become monstrous again. If the creature
+ * * Once a creature becomes monstrous, it can't become monstrous again. If the creature
  *   is already monstrous when the monstrosity ability resolves, nothing happens.
  *
- * * Monstrous isn’t an ability that a creature has. It’s just something true about that
+ * * Monstrous isn't an ability that a creature has. It's just something true about that
  *   creature. If the creature stops being a creature or loses its abilities, it will
  *   continue to be monstrous.
  *
- * * An ability that triggers when a creature becomes monstrous won’t trigger if that creature
- *   isn’t on the battlefield when its monstrosity ability resolves.
+ * * An ability that triggers when a creature becomes monstrous won't trigger if that creature
+ *   isn't on the battlefield when its monstrosity ability resolves.
  *
  * @author LevelX2
  */

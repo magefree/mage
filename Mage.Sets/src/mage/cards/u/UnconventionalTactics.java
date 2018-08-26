@@ -92,7 +92,7 @@ class UnconventionalTacticsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent.isCreature()
-                && permanent.getControllerId().equals(this.controllerId)
+                && permanent.isControlledBy(this.controllerId)
                 && filter.match(permanent, game)) {
             return true;
         }

@@ -341,7 +341,7 @@
           <Image iconType="3" name="/flags/us.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="W"/>
-        <Property name="toolTipText" type="java.lang.String" value="Connect to xmage.us (USA)"/>
+        <Property name="toolTipText" type="java.lang.String" value="Connect to vaporservermtg.com (USA)"/>
         <Property name="actionCommand" type="java.lang.String" value="connectXmageus"/>
         <Property name="alignmentY" type="float" value="0.0"/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">

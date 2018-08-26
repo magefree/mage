@@ -56,7 +56,7 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SenTripletsRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "At the beginning of your upkeep, choose target opponent. This turn, that player can't cast spells or activate abilities";        
+        staticText = "choose target opponent. This turn, that player can't cast spells or activate abilities";        
     }
 
     public SenTripletsRuleModifyingEffect(final SenTripletsRuleModifyingEffect effect) {
@@ -147,7 +147,7 @@ class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(objectId);
         return card != null &&
-                card.getOwnerId().equals(getTargetPointer().getFirst(game, source)) &&
+                card.isOwnedBy(getTargetPointer().getFirst(game, source)) &&
                 game.getState().getZone(objectId) == Zone.HAND &&
                 affectedControllerId.equals(source.getControllerId());
     }

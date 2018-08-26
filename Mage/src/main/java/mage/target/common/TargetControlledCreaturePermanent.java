@@ -1,6 +1,6 @@
-
 package mage.target.common;
 
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -10,19 +10,19 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public class TargetControlledCreaturePermanent extends TargetControlledPermanent {
 
     public TargetControlledCreaturePermanent() {
-        this(1, 1, new FilterControlledCreaturePermanent(), false);
+        this(1);
     }
 
     public TargetControlledCreaturePermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterControlledCreaturePermanent(), false);
+        this(numTargets, numTargets);
     }
 
     public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, new FilterControlledCreaturePermanent(), false);
+        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_CONTROLLED_CREATURE, false);
     }
 
     public TargetControlledCreaturePermanent(FilterControlledCreaturePermanent filter) {
-        super(1, 1, filter, false);
+        this(1, 1, filter, false);
     }
 
     public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets, FilterControlledCreaturePermanent filter, boolean notTarget) {

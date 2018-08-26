@@ -178,7 +178,7 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public int getConvertedManaCost() {
         if (isTransformed()) {
-            // 711.4b While a double-faced permanent’s back face is up, it has only the characteristics of its back face.
+            // 711.4b While a double-faced permanent's back face is up, it has only the characteristics of its back face.
             // However, its converted mana cost is calculated using the mana cost of its front face. This is a change from previous rules.
             // If a permanent is copying the back face of a double-faced card (even if the card representing that copy
             // is itself a double-faced card), the converted mana cost of that permanent is 0.

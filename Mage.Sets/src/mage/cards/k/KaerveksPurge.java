@@ -76,7 +76,7 @@ class KaerveksPurgeEffect extends OneShotEffect {
         if (targetCreature != null && targetCreature.destroy(source.getSourceId(), game, false)) {
             game.applyEffects();
             if (targetCreature.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(targetCreature.getId())
-                    && !game.getState().getZone(targetCreature.getId()).equals(Zone.GRAVEYARD)) {
+                    && game.getState().getZone(targetCreature.getId()) != Zone.GRAVEYARD) {
                 // A replacement effect has moved the card to another zone as graveyard
                 return true;
             }

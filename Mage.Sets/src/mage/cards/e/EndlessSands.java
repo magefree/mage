@@ -32,8 +32,8 @@ public final class EndlessSands extends CardImpl {
         exileAbility.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(exileAbility);
         
-        // {4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner’s control.
-        ReturnCreaturesFromExileEffect returnFromExileEffect = new ReturnCreaturesFromExileEffect(this.getId(), true, "Return each creature card exiled with {this} to the battlefield under its owner’s control.");
+        // {4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner's control.
+        ReturnCreaturesFromExileEffect returnFromExileEffect = new ReturnCreaturesFromExileEffect(this.getId(), true, "Return each creature card exiled with {this} to the battlefield under its owner's control.");
         Ability returnAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, returnFromExileEffect,  new ManaCostsImpl("{4}"));
         returnAbility.addCost(new TapSourceCost());
         returnAbility.addCost(new SacrificeSourceCost());

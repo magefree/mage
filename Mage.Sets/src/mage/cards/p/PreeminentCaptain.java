@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -72,12 +71,13 @@ class PreeminentCaptainEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (target.canChoose(controller.getId(), game) && target.choose(getOutcome(), controller.getId(), source.getSourceId(), game)) {
+        if (target.canChoose(controller.getId(), game)
+                && target.choose(getOutcome(), controller.getId(), source.getSourceId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getFirstTarget();
                 Card card = controller.getHand().get(cardId, game);
                 if (card != null) {
-                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null)) {
                         Permanent permanent = game.getPermanent(card.getId());
                         if (permanent != null) {
                             game.getCombat().addAttackingCreature(permanent.getId(), game);

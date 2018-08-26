@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.mana.ManaOptions;
@@ -163,8 +162,8 @@ public class BestowTest extends CardTestPlayerBase {
      * Bestowed creature can be used to sacrifice a creature for the Away part.
      * http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513828-bestow-far-away
      */
+    @Ignore // TODO: make fused targeting support
     @Test
-    @Ignore  // Handling of targets of Fused spells is not handled yet in TestPlayer class
     public void bestowWithFusedSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         /**
@@ -183,22 +182,22 @@ public class BestowTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
-        /**
-         * Far {1}{U} Instant Return target creature to its owner's hand. Away
-         * {2}{B} Instant Target player sacrifices a creature. Fuse (You may
-         * cast one or both halves of this card from your hand.)
-         */
+        // Instant
+        // Far {1}{U} Return target creature to its owner's hand.
+        // Away {2}{B} Target player sacrifices a creature.
+        // Fuse (You may cast one or both halves of this card from your hand.)
         addCard(Zone.HAND, playerB, "Far // Away");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nyxborn Rollicker using bestow", "Cyclops of One-Eyed Pass");
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "fused Far // Away", "Cyclops of One-Eyed Pass^targetPlayer=PlayerA");
-        playerA.addTarget("Nyxborn Rollicker");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "fused Far // Away", "Cyclops of One-Eyed Pass");
+        addTarget(playerB, playerA);
+        addTarget(playerA, "Nyxborn Rollicker");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertHandCount(playerA, 0);
+        assertHandCount(playerA, "Cyclops of One-Eyed Pass", 1);
         assertHandCount(playerB, 0);
 
         assertGraveyardCount(playerB, "Far // Away", 1);

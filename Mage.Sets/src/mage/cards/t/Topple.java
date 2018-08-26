@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.HashSet;
@@ -11,10 +10,9 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -40,11 +38,10 @@ public final class Topple extends CardImpl {
     }
 }
 
-class ToppleTargetCreature extends TargetPermanent {
+class ToppleTargetCreature extends TargetCreaturePermanent {
 
     public ToppleTargetCreature() {
         super();
-        filter.add(new CardTypePredicate(CardType.CREATURE));
         setTargetName("creature with the greatest power among creatures on the battlefield");
     }
 

@@ -1,4 +1,3 @@
-
 package mage.players;
 
 import java.io.Serializable;
@@ -156,6 +155,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected boolean isGameUnderControl = true;
     protected UUID turnController;
+    protected List<UUID> turnControllers = new ArrayList<>();
     protected Set<UUID> playersUnderYourControl = new HashSet<>();
 
     protected Set<UUID> usersAllowedToSeeHandCards = new HashSet<>();
@@ -263,6 +263,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.isGameUnderControl = player.isGameUnderControl;
 
         this.turnController = player.turnController;
+        this.turnControllers.clear();
+        this.turnControllers.addAll(player.turnControllers);
 
         this.passed = player.passed;
         this.passedTurn = player.passedTurn;
@@ -343,6 +345,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.isGameUnderControl = player.isGameUnderControl();
 
         this.turnController = player.getTurnControlledBy();
+        this.turnControllers.clear();
+        this.turnControllers.addAll(player.getTurnControllers());
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
         this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
         this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
@@ -390,7 +394,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.draws = false;
         this.loses = false;
         this.left = false;
-        // reset is neccessary because in tournament player will be used for each round
+        // reset is necessary because in tournament player will be used for each round
         this.quit = false;
         this.timerTimeout = false;
         this.idleTimeout = false;
@@ -398,6 +402,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.turns = 0;
         this.isGameUnderControl = true;
         this.turnController = this.getId();
+        this.turnControllers.clear();
         this.playersUnderYourControl.clear();
 
         this.passed = false;
@@ -492,18 +497,22 @@ public abstract class PlayerImpl implements Player, Serializable {
             PlayerList players = game.getState().getPlayerList(playerId);
             for (int i = 0; i < range.getRange(); i++) {
                 Player player = players.getNext(game);
-                while (player.hasLeft()) {
-                    player = players.getNext(game);
+                if (player != null) {
+                    while (player.hasLeft()) {
+                        player = players.getNext(game);
+                    }
+                    inRange.add(player.getId());
                 }
-                inRange.add(player.getId());
             }
             players = game.getState().getPlayerList(playerId);
             for (int i = 0; i < range.getRange(); i++) {
                 Player player = players.getPrevious(game);
-                while (player.hasLeft()) {
-                    player = players.getPrevious(game);
+                if (player != null) {
+                    while (player.hasLeft()) {
+                        player = players.getPrevious(game);
+                    }
+                    inRange.add(player.getId());
                 }
-                inRange.add(player.getId());
             }
         }
     }
@@ -520,13 +529,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void controlPlayersTurn(Game game, UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        player.setTurnControlledBy(this.getId());
+        game.informPlayers(getLogName() + " controls the turn of " + player.getLogName());
         if (!playerId.equals(this.getId())) {
             this.playersUnderYourControl.add(playerId);
-            Player player = game.getPlayer(playerId);
             if (!player.hasLeft() && !player.hasLost()) {
                 player.setGameUnderYourControl(false);
-                player.setTurnControlledBy(this.getId());
-                game.informPlayers(getLogName() + " controls the turn of " + player.getLogName());
             }
             DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), player.getLogName()));
             ability.setSourceId(getId());
@@ -538,6 +547,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setTurnControlledBy(UUID playerId) {
         this.turnController = playerId;
+        this.turnControllers.add(playerId);
+    }
+
+    @Override
+    public List<UUID> getTurnControllers() {
+        return this.turnControllers;
     }
 
     @Override
@@ -563,9 +578,27 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void setGameUnderYourControl(boolean value) {
+        setGameUnderYourControl(value, true);
+    }
+
+    @Override
+    public void setGameUnderYourControl(boolean value, boolean fullRestore) {
         this.isGameUnderControl = value;
         if (isGameUnderControl) {
-            this.turnController = getId();
+            if (fullRestore) {
+                this.turnControllers.clear();
+                this.turnController = getId();
+            } else {
+                if (turnControllers.size() > 0) {
+                    this.turnControllers.remove(turnControllers.size() - 1);
+                }
+                if (turnControllers.isEmpty()) {
+                    this.turnController = getId();
+                } else {
+                    this.turnController = turnControllers.get(turnControllers.size() - 1);
+                    isGameUnderControl = false;
+                }
+            }
         }
     }
 
@@ -642,7 +675,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public boolean putInHand(Card card, Game game) {
-        if (card.getOwnerId().equals(playerId)) {
+        if (card.isOwnedBy(playerId)) {
             card.setZone(Zone.HAND, game);
             this.hand.add(card);
         } else {
@@ -831,7 +864,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean putInGraveyard(Card card, Game game) {
-        if (card.getOwnerId().equals(playerId)) {
+        if (card.isOwnedBy(playerId)) {
             this.graveyard.add(card);
         } else {
             return game.getPlayer(card.getOwnerId()).putInGraveyard(card, game);
@@ -882,7 +915,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop) {
-        if (card.getOwnerId().equals(getId())) {
+        if (card.isOwnedBy(getId())) {
             if (library.size() + 1 < xFromTheTop) {
                 putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, true);
             } else {
@@ -981,6 +1014,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void setPayManaMode(boolean payManaMode) {
+        this.payManaMode = payManaMode;
+    }
+
+    @Override
     public boolean isInPayManaMode() {
         return payManaMode;
     }
@@ -1007,6 +1045,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game == null || ability == null) {
             return false;
         }
+
+        // Use ability copy to avoid problems with targets and costs on recast (issue https://github.com/magefree/mage/issues/5189).
+        ability = ability.copy();
+
         ability.setControllerId(getId());
         if (ability.getSpellAbilityType() != SpellAbilityType.BASE) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
@@ -1117,12 +1159,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game); // prevent undo after playing a land
                 return true;
             }
-            // putOntoBattlefield retured false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldorian Outpost).
+            // putOntoBattlefield returned false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldoran Outpost).
             // But that would undo the effect completely,
-            // what makes no real sense. So it makes no sense to generally do a restorState here.
+            // what makes no real sense. So it makes no sense to generally do a restoreState here.
             // restoreState(bookmark, card.getName(), game);
         }
-        // if the to play the land is replaced (e.g. Kjeldoran Outpos and don't sacrificing a Plains) it's a valid state so returning true here
+        // if the to play the land is replaced (e.g. Kjeldoran Outpost and don't sacrificing a Plains) it's a valid state so returning true here
         return true;
     }
 
@@ -1132,7 +1174,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (ability.activate(game, false)) {
                 if (ability.resolve(game)) {
                     if (ability.isUndoPossible()) {
-                        if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. usefull for undo Nykthos, Shrine to Nyx
+                        if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx
                             setStoredBookmark(bookmark);
                         }
                     } else {
@@ -1229,7 +1271,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     result = playManaAbility((ActivatedManaAbilityImpl) ability.copy(), game);
                     break;
                 case SPELL:
-                    result = cast((SpellAbility) ability.copy(), game, false, activationStatus.getPermittingObject());
+                    result = cast((SpellAbility) ability, game, false, activationStatus.getPermittingObject());
                     break;
                 default:
                     result = playAbility(ability.copy(), game);
@@ -1381,7 +1423,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
-        if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack actilities
+        if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack abilities
             return useable;
         }
         if (object instanceof SplitCard) {
@@ -1397,7 +1439,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return useable;
     }
 
-    // Adds special abilities that are given to non permanants by continuous effects
+    // Adds special abilities that are given to non permanents by continuous effects
     private void getOtherUseableActivatedAbilities(MageObject object, Zone zone, Game game, Map<UUID, ActivatedAbility> useable) {
         Abilities<ActivatedAbility> otherAbilities = game.getState().getActivatedOtherAbilities(object.getId(), zone);
         if (otherAbilities != null) {
@@ -1467,7 +1509,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected boolean isActivePlayer(Game game) {
-        return game.getActivePlayerId().equals(this.playerId);
+        return game.isActivePlayer(this.playerId);
     }
 
     @Override
@@ -1553,7 +1595,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // that phased out indirectly won't phase in by itself, but instead phases in
             // along with the card it's attached to.
             Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
-            if (!(attachedTo != null && attachedTo.getControllerId().equals(this.getId()))) {
+            if (!(attachedTo != null && attachedTo.isControlledBy(this.getId()))) {
                 permanent.phaseOut(game, false);
             }
         }
@@ -1587,7 +1629,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // selected permanents to untap
             List<Permanent> selectedToUntap = new ArrayList<>();
 
-            // player can cancel the seletion of an effect to use a prefered order of restriction effects
+            // player can cancel the selection of an effect to use a preferred order of restriction effects
             boolean playerCanceledSelection;
             do {
                 playerCanceledSelection = false;
@@ -1601,7 +1643,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                         FilterControlledPermanent filter = handledEntry.getKey().getKey().getFilter().copy();
                         String message = filter.getMessage();
-                        // omitt already from other untap effects selected permanents
+                        // omit already from other untap effects selected permanents
                         for (Permanent permanent : selectedToUntap) {
                             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
                         }
@@ -1702,7 +1744,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Permanent permanent : canBeUntapped) {
             if (handledEffect.getFilter().match(permanent, game)) { // matches the restricted permanents of handled entry
                 boolean canBeSelected = true;
-                // check if the permanent is restriced by another restriction that has left no permanent
+                // check if the permanent is restricted by another restriction that has left no permanent
                 for (Entry<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
                     if (notMoreThanEffect.getKey().getKey().getFilter().match(permanent, game) && notMoreThanEffect.getValue() == 0) {
                         canBeSelected = false;
@@ -1815,7 +1857,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int loseLife(int amount, Game game, boolean atCombat) {
-        if (!canLoseLife) {
+        if (!canLoseLife || !this.isInGame()) {
             return 0;
         }
         GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, atCombat);
@@ -1850,7 +1892,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int gainLife(int amount, Game game, UUID sourceId) {
-        if (!canGainLife || amount == 0) {
+        if (!canGainLife || amount <= 0) {
             return 0;
         }
         GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
@@ -2322,7 +2364,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         }
         Permanent attacker = game.getPermanent(attackerId);
-        if (attacker != null && attacker.canAttack(defenderId, game) && attacker.getControllerId().equals(playerId)) {
+        if (attacker != null && attacker.canAttack(defenderId, game) && attacker.isControlledBy(playerId)) {
             if (!game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
                 game.undo(playerId);
             }
@@ -2351,11 +2393,21 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Game game) {
-        return searchLibrary(target, game, playerId);
+        return searchLibrary(target, game, playerId, true);
+    }
+
+    @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
+        return searchLibrary(target, game, playerId, triggerEvents);
     }
 
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
+        return searchLibrary(target, game, targetPlayerId, true);
+    }
+
+    @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
         //20091005 - 701.14c
         Library searchedLibrary = null;
         String searchInfo = null;
@@ -2411,7 +2463,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     for (UUID targetId : newTarget.getTargets()) {
                         target.add(targetId, game);
                     }
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
+                    if (triggerEvents) {
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
+                    }
                 } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library, game, targetPlayerId)) { // for handling Panglacial Wurm
                     newTarget.clearChosen();
                     continue;
@@ -2632,10 +2686,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             available.addMana(manaAbilities, game);
         }
         for (Abilities<ActivatedManaAbilityImpl> manaAbilities : sourceWithCosts) {
+            available.removeDuplicated();
             available.addManaWithCost(manaAbilities, game);
         }
 
-        // remove duplicated variants (see ManaOptionsTest for info - when thats rises)
+        // remove duplicated variants (see ManaOptionsTest for info - when that rises)
         available.removeDuplicated();
 
         return available;
@@ -2940,9 +2995,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // Other activated abilities
                 LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
                 getOtherUseableActivatedAbilities(card, Zone.GRAVEYARD, game, useable);
-                for (Ability ability : useable.values()) {
-                    playable.add(ability);
-                }
+                playable.addAll(useable.values());
             }
             for (ExileZone exile : game.getExile().getExileZones()) {
                 for (Card card : exile.getCards(game)) {
@@ -3009,7 +3062,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // activated abilities from objects in the command zone (emblems or commanders)
             for (CommandObject commandObject : game.getState().getCommand()) {
                 for (ActivatedAbility ability : commandObject.getAbilities().getActivatedAbilities(Zone.COMMAND)) {
-                    if (ability.getControllerId().equals(getId()) && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
+                    if (ability.isControlledBy(getId()) && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
                         playableActivated.put(ability.toString(), ability);
                     }
 
@@ -3564,7 +3617,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(getLogName() + " puts "
                         + (withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"))
                         + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' '
-                        + (card.getOwnerId().equals(this.getId()) ? "into their hand" : "into its owner's hand")
+                        + (card.isOwnedBy(this.getId()) ? "into their hand" : "into its owner's hand")
                 );
             }
             result = true;
@@ -3587,7 +3640,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (cards.isEmpty()) {
                     ownerId = card.getOwnerId();
                 }
-                if (card.getOwnerId().equals(ownerId)) {
+                if (card.isOwnedBy(ownerId)) {
                     it.remove();
                     cards.add(card);
                 }
@@ -3658,7 +3711,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 StringBuilder sb = new StringBuilder(this.getLogName())
                         .append(" puts ").append(card.getLogName()).append(' ').append(card.isCopy() ? "(Copy) " : "")
                         .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "");
-                if (card.getOwnerId().equals(getId())) {
+                if (card.isOwnedBy(getId())) {
                     sb.append("into their graveyard");
                 } else {
                     sb.append("it into its owner's graveyard");
@@ -3690,7 +3743,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(' ');
                 }
                 sb.append("to the ").append(toTop ? "top" : "bottom");
-                if (card.getOwnerId().equals(getId())) {
+                if (card.isOwnedBy(getId())) {
                     sb.append(" of their library");
                 } else {
                     Player player = game.getPlayer(card.getOwnerId());

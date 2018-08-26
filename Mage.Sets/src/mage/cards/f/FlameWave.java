@@ -23,7 +23,7 @@ public final class FlameWave extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(4, new FilterCreaturePermanent())
-                .setText("and each creature that player or that planeswalker’s controller controls")
+                .setText("and each creature that player or that planeswalker's controller controls")
         );
     }
 

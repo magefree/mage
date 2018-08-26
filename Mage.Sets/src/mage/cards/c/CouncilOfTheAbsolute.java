@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -35,7 +34,7 @@ public final class CouncilOfTheAbsolute extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As Council of the Absolute enters the battlefield, name a card other than a creature or a land card.
-        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_AND_NON_CREATURE_NAME)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_AND_NON_CREATURE_NAME)));
         // Your opponents can't cast the chosen card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CouncilOfTheAbsoluteReplacementEffect()));
         // Spells with the chosen name cost 2 less for you to cast.
@@ -58,7 +57,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
 
     public CouncilOfTheAbsoluteReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Your opponents can't cast the chosen card";
+        staticText = "Your opponents can't cast spells with the chosen name";
     }
 
     public CouncilOfTheAbsoluteReplacementEffect(final CouncilOfTheAbsoluteReplacementEffect effect) {
@@ -79,7 +78,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast a card with that name (" + mageObject.getLogName() + " in play).";
+            return "You can't cast a spell with that name (" + mageObject.getLogName() + " in play).";
         }
         return null;
     }
@@ -93,7 +92,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
+            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))) {
                 return true;
             }
         }
@@ -105,7 +104,7 @@ class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl
 
     public CouncilOfTheAbsoluteCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Spells with the chosen name cost 2 less for you to cast";
+        this.staticText = "Spells with the chosen name you cast cost 2 less to cast";
     }
 
     protected CouncilOfTheAbsoluteCostReductionEffect(CouncilOfTheAbsoluteCostReductionEffect effect) {
@@ -121,9 +120,9 @@ class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if ((abilityToModify instanceof SpellAbility)
-                && abilityToModify.getControllerId().equals(source.getControllerId())) {
+                && abilityToModify.isControlledBy(source.getControllerId())) {
             Card card = game.getCard(abilityToModify.getSourceId());
-            return card.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY));
+            return card.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
         }
         return false;
     }

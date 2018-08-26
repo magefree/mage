@@ -29,7 +29,7 @@ public final class RustedRelic extends CardImpl {
                         new ConditionalContinuousEffect(
                                 new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.WhileOnBattlefield),
                                 MetalcraftCondition.instance,
-                                "Metalcraft - {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts")));
+                                "<i>Metalcraft</i> &mdash; {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts")));
     }
 
     public RustedRelic (final RustedRelic card) {

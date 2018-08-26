@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +40,7 @@ public final class DwynensElite extends CardImpl {
 
         // When Dwynen's Elite enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken()));
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "When {this} enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token."));

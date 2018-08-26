@@ -75,7 +75,7 @@ class AmbuscadeShamanTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent.getControllerId().equals(this.controllerId)
+        if (permanent.isControlledBy(this.controllerId)
                 && permanent.isCreature()) {
             this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
             return true;

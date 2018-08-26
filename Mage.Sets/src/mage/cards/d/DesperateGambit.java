@@ -156,7 +156,7 @@ class TargetControlledSource extends TargetSource {
                         return true;
                     }
                 }
-                // 108.4a If anything asks for the controller of a card that doesn’t have one (because it’s not a permanent or spell), use its owner instead.
+                // 108.4a If anything asks for the controller of a card that doesn't have one (because it's not a permanent or spell), use its owner instead.
                 for (Card card : game.getExile().getAllCards(game)) {
                     if (Objects.equals(card.getOwnerId(), sourceControllerId)) {
                         count++;
@@ -189,7 +189,7 @@ class TargetControlledSource extends TargetSource {
                 for (Card card : player.getGraveyard().getCards(game)) {
                     possibleTargets.add(card.getId());
                 }
-                // 108.4a If anything asks for the controller of a card that doesn’t have one (because it’s not a permanent or spell), use its owner instead.
+                // 108.4a If anything asks for the controller of a card that doesn't have one (because it's not a permanent or spell), use its owner instead.
                 for (Card card : game.getExile().getAllCards(game)) {
                     if (Objects.equals(card.getOwnerId(), sourceControllerId)) {
                         possibleTargets.add(card.getId());

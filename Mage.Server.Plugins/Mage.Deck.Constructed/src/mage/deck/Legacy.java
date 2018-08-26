@@ -1,4 +1,3 @@
-
 package mage.deck;
 
 import mage.cards.ExpansionSet;
@@ -32,6 +31,7 @@ public class Legacy extends Constructed {
         banned.add("Chaos Orb");
         banned.add("Contract from Below");
         banned.add("Darkpact");
+        banned.add("Deathrite Shaman");
         banned.add("Demonic Attorney");
         banned.add("Demonic Consultation");
         banned.add("Demonic Tutor");
@@ -42,6 +42,7 @@ public class Legacy extends Constructed {
         banned.add("Fastbond");
         banned.add("Flash");
         banned.add("Frantic Search");
+        banned.add("Gitaxian Probe");
         banned.add("Goblin Recruiter");
         banned.add("Gush");
         banned.add("Hermit Druid");

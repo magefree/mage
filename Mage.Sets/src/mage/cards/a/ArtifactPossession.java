@@ -74,7 +74,7 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent aura = game.getPermanent(this.getSourceId());
-        return aura != null && aura.getAttachedTo() != null && aura.getAttachedTo().equals(event.getSourceId());
+        return aura != null &&  aura.isAttachedTo(event.getSourceId());
         
     }
 

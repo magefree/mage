@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class BonfireOfTheDamned extends CardImpl {
 
         // Bonfire of the Damned deals X damage to target player and each creature he or she controls.
         this.getSpellAbility().addEffect(new BonfireOfTheDamnedEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 
         // Miracle {X}{R}
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{X}{R}")));
@@ -50,7 +51,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
 
     public BonfireOfTheDamnedEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker’s controller controls";
+        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls";
     }
 
     public BonfireOfTheDamnedEffect(final BonfireOfTheDamnedEffect effect) {

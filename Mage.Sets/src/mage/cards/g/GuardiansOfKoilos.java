@@ -36,7 +36,7 @@ public final class GuardiansOfKoilos extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Guardians of Koilos enters the battlefield, you may return another target historic permanent you control to its owner’s hand.
+        // When Guardians of Koilos enters the battlefield, you may return another target historic permanent you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter)
                 .setText("you may return another target historic permanent you control to its owner's hand. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"), true));
     }

@@ -1,7 +1,7 @@
-
 package mage.abilities.keyword;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -14,6 +14,7 @@ import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
@@ -51,7 +52,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     protected static final String KICKER_REMINDER_MANA = "You may pay an additional {cost} as you cast this spell.";
     protected static final String KICKER_REMINDER_COST = "You may {cost} in addition to any other costs as you cast this spell.";
 
-    protected Map<String, Integer> activations = new HashMap<>(); // zoneChangeCounter, activations
+    protected Map<String, Integer> activations = new ConcurrentHashMap<>(); // zoneChangeCounter, activations
 
     protected String keywordText;
     protected String reminderText;
@@ -152,6 +153,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             amount += activations.get(key);
         }
         activations.put(key, amount);
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.KICKED, source.getSourceId(), source.getSourceId(), source.getControllerId()));
     }
 
     private String getActivationKey(Ability source, String costText, Game game) {

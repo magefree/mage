@@ -45,7 +45,7 @@ public final class AngrathMinotaurPirate extends CardImpl {
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(1));
         effects1.add(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent())
-                .setText("and each creature that player or that planeswalker’s controller controls")
+                .setText("and each creature that player or that planeswalker's controller controls")
         );
         LoyaltyAbility ability1 = new LoyaltyAbility(effects1, +2);
         ability1.addTarget(new TargetOpponentOrPlaneswalker());

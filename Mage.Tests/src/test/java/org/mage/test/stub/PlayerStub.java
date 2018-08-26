@@ -1,4 +1,3 @@
-
 package org.mage.test.stub;
 
 import java.io.Serializable;
@@ -584,7 +583,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
+        return false;
+    }
+
+    @Override
     public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
+        return false;
+    }
+
+    @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
         return false;
     }
 
@@ -1299,6 +1308,21 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public List<UUID> getTurnControllers() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setGameUnderYourControl(boolean value, boolean fullRestore) {
+
+    }
+
+    @Override
+    public void setPayManaMode(boolean payManaMode) {
+
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -1314,6 +1338,13 @@ public class PlayerStub implements Player {
         }
 
         return this.getId().equals(obj.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
 }

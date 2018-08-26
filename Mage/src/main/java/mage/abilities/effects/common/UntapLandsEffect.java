@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -47,7 +46,12 @@ public class UntapLandsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int tappedLands = game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game).size();
+            int tappedLands;
+            if (upTo) {
+                tappedLands = game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game).size();
+            } else {
+                tappedLands = game.getBattlefield().getAllActivePermanents(filter, game).size();
+            }
             TargetLandPermanent target = new TargetLandPermanent(upTo ? 0 : Math.min(tappedLands, amount), amount, filter, true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
 

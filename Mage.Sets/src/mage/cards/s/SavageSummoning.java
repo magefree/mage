@@ -103,9 +103,9 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
                 if (commander.isCreature() && commander.getControllerId().equals(source.getControllerId())) {
                     return true;
                 }
-            } else if (mageObject != null && mageObject instanceof Card) {
+            } else if (mageObject instanceof Card) {
                 Card card = (Card) mageObject;
-                if (card.isCreature() && card.getOwnerId().equals(source.getControllerId())) {
+                if (card.isCreature() && card.isOwnedBy(source.getControllerId())) {
                     return true;
                 }
             }

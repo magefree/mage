@@ -83,7 +83,7 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
                     UUID cardOwnerId = card.getOwnerId();
                     Set<CardType> cardType = card.getCardType();
                     if (cardOwnerId != null
-                            && card.getOwnerId().equals(getControllerId())
+                            && card.isOwnedBy(getControllerId())
                             && cardType != null
                             && card.isLand()) {
                         return true;

@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class MagusOfTheScroll extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}, {tap}: Name a card. Reveal a card at random from your hand. If it's the named card, Magus of the Scroll deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));
         ability.addEffect(new MagusOfTheScrollEffect());
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
@@ -59,7 +59,7 @@ class MagusOfTheScrollEffect extends OneShotEffect {
 
     public MagusOfTheScrollEffect() {
         super(Outcome.Neutral);
-        staticText = ", then reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to any target";
+        staticText = ", then reveal a card at random from your hand. If that card has the chosen name, {this} deals 2 damage to any target";
     }
 
     public MagusOfTheScrollEffect(final MagusOfTheScrollEffect effect) {
@@ -70,7 +70,7 @@ class MagusOfTheScrollEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (sourceObject != null && you != null && cardName != null && !cardName.isEmpty()) {
             if (!you.getHand().isEmpty()) {
                 Cards revealed = new CardsImpl();

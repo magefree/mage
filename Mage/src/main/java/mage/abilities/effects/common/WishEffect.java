@@ -86,7 +86,7 @@ public class WishEffect extends OneShotEffect {
                 }
                 if (alsoFromExile) {
                     for (Card exileCard : exile) {
-                        if (exileCard.getOwnerId().equals(source.getControllerId()) && filter.match(exileCard, game)) {
+                        if (exileCard.isOwnedBy(source.getControllerId()) && filter.match(exileCard, game)) {
                             filteredCards.add(exileCard);
                         }
                     }

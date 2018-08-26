@@ -43,7 +43,7 @@ public class SacrificeIfCastAtInstantTimeTriggeredAbility extends TriggeredAbili
         // CHECK
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.getSourceId().equals(getSourceId())) {
-            return !(game.isMainPhase() && game.getActivePlayerId().equals(event.getPlayerId()) && game.getStack().size() == 1);
+            return !(game.isMainPhase() && game.isActivePlayer(event.getPlayerId()) && game.getStack().size() == 1);
         }
         return false;
     }

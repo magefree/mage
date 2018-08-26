@@ -43,7 +43,7 @@ public final class NiblisOfFrost extends CardImpl {
         this.addAbility(new ProwessAbility());
 
         // Whenever you cast an instant or sorcery spell, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
-        Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false);
         ability.addTarget(new TargetCreaturePermanent(filterCreature));
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("That creature"));
         this.addAbility(ability);

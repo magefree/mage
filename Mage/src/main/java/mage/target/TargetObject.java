@@ -1,13 +1,10 @@
-
-
 package mage.target;
 
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.Zone;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  *
@@ -15,7 +12,8 @@ import java.util.UUID;
  */
 public abstract class TargetObject extends TargetImpl {
 
-    protected TargetObject() {}
+    protected TargetObject() {
+    }
 
     public TargetObject(Zone zone) {
         this(1, 1, zone, false);
@@ -40,7 +38,7 @@ public abstract class TargetObject extends TargetImpl {
     @Override
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder();
-        for (UUID targetId: getTargets()) {
+        for (UUID targetId : getTargets()) {
             MageObject object = game.getObject(targetId);
             if (object != null) {
                 sb.append(object.getLogName()).append(' ');
@@ -52,7 +50,9 @@ public abstract class TargetObject extends TargetImpl {
     @Override
     public boolean canTarget(UUID id, Game game) {
         MageObject object = game.getObject(id);
-        return object != null && game.getState().getZone(id).match(zone) && getFilter().match(object, game);
+        return object != null
+                && zone != null && zone.match(game.getState().getZone(id))
+                && getFilter() != null && getFilter().match(object, game);
     }
 
     @Override

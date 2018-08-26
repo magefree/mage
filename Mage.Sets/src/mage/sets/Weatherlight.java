@@ -44,6 +44,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Argivian Restoration", 34, Rarity.UNCOMMON, mage.cards.a.ArgivianRestoration.class));
         cards.add(new SetCardInfo("Aura of Silence", 7, Rarity.UNCOMMON, mage.cards.a.AuraOfSilence.class));
         cards.add(new SetCardInfo("Avizoa", 35, Rarity.RARE, mage.cards.a.Avizoa.class));
+        cards.add(new SetCardInfo("Barishi", 119, Rarity.UNCOMMON, mage.cards.b.Barishi.class));
         cards.add(new SetCardInfo("Barrow Ghoul", 61, Rarity.COMMON, mage.cards.b.BarrowGhoul.class));
         cards.add(new SetCardInfo("Benalish Infantry", 8, Rarity.COMMON, mage.cards.b.BenalishInfantry.class));
         cards.add(new SetCardInfo("Benalish Knight", 9, Rarity.COMMON, mage.cards.b.BenalishKnight.class));

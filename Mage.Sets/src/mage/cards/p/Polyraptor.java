@@ -26,7 +26,7 @@ public final class Polyraptor extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Enrage - Whenever Polyraptor is dealt damage, create a token that’s a copy of Polyraptor.
+        // Enrage - Whenever Polyraptor is dealt damage, create a token that's a copy of Polyraptor.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenCopySourceEffect(),

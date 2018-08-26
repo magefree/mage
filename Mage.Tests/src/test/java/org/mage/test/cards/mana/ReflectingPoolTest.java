@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.mana;
 
 import mage.abilities.mana.ManaOptions;
@@ -6,6 +5,7 @@ import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -133,6 +133,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
      * producing mana
      */
     @Test
+    @Ignore
     public void testWithDifferentLands() {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
@@ -160,7 +161,6 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         assertManaOptions("{W}{G}", options);
         assertManaOptions("{W}{W}", options);
     }
-
 
     @Test
     public void testReflectingPoolGiveNonMana() {
@@ -215,6 +215,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     }
 
     @Test
+    @Ignore
     public void testReflectingPoolAnyManaNeedWithoutCondition() {
         // any mana source without conditions (use any mana at any time)
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -232,6 +233,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     }
 
     @Test
+    @Ignore
     public void testReflectingPoolAnyManaNeedWithCondition() {
         // any mana source have condition to use (Reflecting Pool must ignore that condition)
         addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1); // {C} or {any}
@@ -256,7 +258,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add one mana of any");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
-        setChoice(playerA,"Black");
+        setChoice(playerA, "Black");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();

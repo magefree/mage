@@ -80,7 +80,7 @@ class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         Card card = game.getCard(zEvent.getTargetId());
 
         if (card != null && LKIpermanent != null
-                && card.getOwnerId().equals(this.controllerId)
+                && card.isOwnedBy(this.controllerId)
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && card.isCreature()

@@ -15,8 +15,8 @@ public class WorldEnchantmentsRuleTest extends CardTestPlayerBase {
 
     /**
      * 704.5m If two or more permanents have the supertype world, all except the one that has had 
-     * the world supertype for the shortest amount of time are put into their owners’ graveyards. 
-     * In the event of a tie for the shortest amount of time, all are put into their owners’ graveyards. 
+     * the world supertype for the shortest amount of time are put into their owners' graveyards. 
+     * In the event of a tie for the shortest amount of time, all are put into their owners' graveyards. 
      * This is called the “world rule.
      * 
      */

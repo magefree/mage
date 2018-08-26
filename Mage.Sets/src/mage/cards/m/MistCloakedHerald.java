@@ -22,7 +22,7 @@ public final class MistCloakedHerald extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Mist-Cloaked Herald can’t be blocked.
+        // Mist-Cloaked Herald can't be blocked.
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 

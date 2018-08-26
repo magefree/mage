@@ -59,7 +59,7 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("cast {this} only during ");
+        StringBuilder sb = new StringBuilder("cast this spell only during ");
         if (turnPhase != null) {
             sb.append(turnPhase.toString());
         }

@@ -14,7 +14,7 @@ import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -82,7 +82,7 @@ import mage.target.targetpointer.FixedTarget;
  * play the spell if possible, even if that player doesn't want to. Normal
  * timing considerations for the spell are ignored (for example, if the
  * suspended card is a creature and this ability resolves during your upkeep,
- * you’re able to play the card), but other play restrictions are not ignored.
+ * you're able to play the card), but other play restrictions are not ignored.
  *
  * If the second triggered ability of suspend resolves and the suspended card
  * can't be played due to a lack of legal targets or a play restriction, for
@@ -154,7 +154,7 @@ public class SuspendAbility extends SpecialAction {
             if (card.getManaCost().isEmpty()) {
                 setRuleAtTheTop(true);
             }
-            addSubAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
+            addSubAbility(new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility());
             addSubAbility(new SuspendPlayCardAbility());
         }
         ruleText = sb.toString();
@@ -174,7 +174,7 @@ public class SuspendAbility extends SpecialAction {
         ability.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability);
 
-        SuspendBeginningOfUpkeepTriggeredAbility ability1 = new SuspendBeginningOfUpkeepTriggeredAbility();
+        SuspendBeginningOfUpkeepInterveningIfTriggeredAbility ability1 = new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility();
         ability1.setSourceId(card.getId());
         ability1.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability1);
@@ -343,7 +343,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
             }
             if (!abilitiesToRemove.isEmpty()) {
                 for (Ability ability : card.getAbilities()) {
-                    if (ability instanceof SuspendBeginningOfUpkeepTriggeredAbility || ability instanceof SuspendPlayCardAbility) {
+                    if (ability instanceof SuspendBeginningOfUpkeepInterveningIfTriggeredAbility || ability instanceof SuspendPlayCardAbility) {
                         abilitiesToRemove.add(ability);
                     }
                 }
@@ -405,9 +405,9 @@ class GainHasteEffect extends ContinuousEffectImpl {
 
 }
 
-class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbility {
+class SuspendBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
-    public SuspendBeginningOfUpkeepTriggeredAbility() {
+    public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
                 SuspendedCondition.instance,
                 "At the beginning of your upkeep, if this card ({this}) is suspended, remove a time counter from it.");
@@ -415,12 +415,12 @@ class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbili
 
     }
 
-    public SuspendBeginningOfUpkeepTriggeredAbility(final SuspendBeginningOfUpkeepTriggeredAbility effect) {
+    public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility(final SuspendBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
     @Override
-    public SuspendBeginningOfUpkeepTriggeredAbility copy() {
-        return new SuspendBeginningOfUpkeepTriggeredAbility(this);
+    public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility copy() {
+        return new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility(this);
     }
 }

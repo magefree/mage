@@ -59,7 +59,7 @@ class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(this.controllerId)) {
+        if (game.isActivePlayer(this.controllerId)) {
             Permanent attacker = game.getPermanent(event.getSourceId());
             if (attacker != null) {
                 if (attacker.getPower().getValue() <= 2) {

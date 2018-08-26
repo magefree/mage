@@ -34,7 +34,7 @@ public final class Massacre extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
 
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
+        // If an opponent controls a Plains and you control a Swamp, you may cast this spell without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
                 new OpponentControlsPermanentCondition(filterPlains),
                 new PermanentsOnTheBattlefieldCondition(filterSwamp));

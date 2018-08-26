@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -31,9 +31,9 @@ public final class CragganwickCremator extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // When Cragganwick Cremator enters the battlefield, discard a card at random. If you discard a creature card this way, Cragganwick Cremator deals damage equal to that card's power to target player.
+        // When Cragganwick Cremator enters the battlefield, discard a card at random. If you discard a creature card this way, Cragganwick Cremator deals damage equal to that card's power to target player or planeswalker.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CragganwickCrematorEffect(), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
 
     }

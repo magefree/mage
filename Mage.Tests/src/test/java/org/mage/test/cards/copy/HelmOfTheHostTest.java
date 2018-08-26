@@ -27,7 +27,7 @@ public class HelmOfTheHostTest extends CardTestPlayerBase {
         // 0: Until end of turn, Gideon of the Trials becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         // 0: You get an emblem with "As long as you control a Gideon planeswalker, you can't lose the game and your opponent can't win the game."
         addCard(Zone.BATTLEFIELD, playerA, "Gideon of the Trials", 1);
-        // At the beginning of combat on your turn, create a token that’s a copy of equipped creature, except the token isn’t legendary if equipped creature is legendary. That token gains haste.
+        // At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.
         // Equip {5}
         addCard(Zone.BATTLEFIELD, playerA, "Helm of the Host", 1);
 

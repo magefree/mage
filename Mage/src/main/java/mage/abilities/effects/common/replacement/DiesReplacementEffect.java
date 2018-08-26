@@ -29,7 +29,7 @@ public class DiesReplacementEffect extends ReplacementEffectImpl {
     public DiesReplacementEffect(MageObjectReference objectRef, Duration duration) {
         super(duration, Outcome.Exile);
         this.objectRef = objectRef;
-        staticText = "If that creature would die " + (duration.equals(Duration.EndOfTurn) ? "this turn" : "") + ", exile it instead";
+        staticText = "If that creature would die " + (duration == Duration.EndOfTurn ? "this turn" : "") + ", exile it instead";
     }
 
     public DiesReplacementEffect(final DiesReplacementEffect effect) {

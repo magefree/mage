@@ -6,7 +6,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class FailureComply extends SplitCard {
         // Comply
         // Choose a card name.  Until your next turn, your opponents can't cast spells with the chosen name
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        Effect effect = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
+        Effect effect = new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL);
         effect.setText("Choose a card name");
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addEffect(new ComplyCantCastEffect());
@@ -74,7 +74,7 @@ class ComplyCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
             return "You may not cast a card named " + cardName + " (" + mageObject.getIdName() + ").";
         }
         return null;
@@ -87,7 +87,7 @@ class ComplyCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(cardName)) {

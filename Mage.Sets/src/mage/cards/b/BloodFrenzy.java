@@ -48,7 +48,7 @@ class BloodFrenzyCastRestriction extends ContinuousRuleModifyingEffectImpl {
 
     BloodFrenzyCastRestriction() {
         super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only before the combat damage step";
+        staticText = "Cast this spell only before the combat damage step";
     }
 
     BloodFrenzyCastRestriction(final BloodFrenzyCastRestriction effect) {

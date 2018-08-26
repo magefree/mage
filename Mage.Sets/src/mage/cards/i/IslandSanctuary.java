@@ -81,7 +81,7 @@ class IslandSanctuaryEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getControllerId().equals(event.getPlayerId()) && game.getTurn().getStepType() == PhaseStep.DRAW;
+        return source.isControlledBy(event.getPlayerId()) && game.getTurn().getStepType() == PhaseStep.DRAW;
     }
 
     @Override

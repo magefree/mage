@@ -57,7 +57,7 @@ public final class InnerDemon extends CardImpl {
         effect.setText(", has flying");
         ability.addEffect(effect);
         effect = new AddCardSubtypeAttachedEffect(SubType.DEMON, Duration.WhileOnBattlefield, AttachmentType.AURA);
-        effect.setText(", and is an Demon in addition to its other types");
+        effect.setText(", and is a Demon in addition to its other types");
         ability.addEffect(effect);
         this.addAbility(ability);
 

@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -31,6 +30,8 @@ public final class WearTear extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         target = new TargetEnchantmentPermanent();
         getRightHalfCard().getSpellAbility().addTarget(target);
+
+        // Fuse (You may cast one or both halves of this card from your hand.)
     }
 
     public WearTear(final WearTear card) {

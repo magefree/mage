@@ -217,4 +217,33 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertTappedCount("Plains", false, 2); // 2 for 1st Lion 1 for 2nd lion and only 1 mana needed to cast face down Zoetic
 
     }
+
+    /**
+     * Confirm that Animar's cost reduction allows you to play spells that you wouldn't have enough mana for without it.
+     */
+    @Test
+    public void AnimarSoulOfElementsTest() {
+
+        // Protection from white and from black
+        // Whenever you cast a creature spell, put a +1/+1 counter on Animar, Soul of Elements.
+        // Creature spells you cast cost {1} less to cast for each +1/+1 counter on Animar.
+        addCard(Zone.BATTLEFIELD, playerA, "Animar, Soul of Elements");
+
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        addCard(Zone.HAND, playerA, "Zoetic Cavern");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
+        assertCounterCount(playerA, "Animar, Soul of Elements", CounterType.P1P1, 2);
+
+        assertTappedCount("Plains", true, 3);
+
+    }
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ public final class Revitalize extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // You gain 3 life.
-        this.getSpellAbility().addEffect(new GainLifeEffect(4));
+        this.getSpellAbility().addEffect(new GainLifeEffect(3));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

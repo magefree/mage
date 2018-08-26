@@ -49,7 +49,7 @@ public final class Aetherspouts extends CardImpl {
             of their library. The active player (the player whose turn it is) makes all of
             their choices first, followed by each other player in turn order.
 7/18/2014 	If an effect puts two or more cards on the top or bottom of a library at the same time,
-            the owner of those cards may arrange them in any order. That library’s owner doesn’t reveal
+            the owner of those cards may arrange them in any order. That library's owner doesn't reveal
             the order in which the cards go into their library.
 */
 class AetherspoutsEffect extends OneShotEffect {
@@ -81,7 +81,7 @@ class AetherspoutsEffect extends OneShotEffect {
                 List<Permanent> permanentsToTop = new ArrayList<>();
                 List<Permanent> permanentsToBottom = new ArrayList<>();
                 for (Permanent permanent:game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source.getSourceId(), game)) {
-                    if (permanent.getOwnerId().equals(player.getId())) {
+                    if (permanent.isOwnedBy(player.getId())) {
                         if (player.chooseUse(outcome, "Put " + permanent.getLogName() + " to the top? (else it goes to bottom)", source, game)) {
                             permanentsToTop.add(permanent);
                             game.informPlayers(permanent.getLogName() + " goes to the top of " + player.getLogName() + "'s library");

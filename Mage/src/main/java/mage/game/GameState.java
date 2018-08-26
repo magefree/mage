@@ -1,4 +1,3 @@
-
 package mage.game;
 
 import java.io.Serializable;
@@ -911,7 +910,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<TriggeredAbility> getTriggered(UUID controllerId) {
-        return triggered.stream().filter(triggeredAbility -> triggeredAbility.getControllerId().equals(controllerId))
+        return triggered.stream().filter(triggeredAbility -> controllerId.equals(triggeredAbility.getControllerId()))
                 .collect(Collectors.toList());
     }
 

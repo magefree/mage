@@ -1,7 +1,6 @@
 
 package mage.game.permanent;
 
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -35,6 +34,8 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -316,7 +317,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void beginningOfTurn(Game game) {
-        if (game.getActivePlayerId().equals(this.controllerId)) {
+        if (game.isActivePlayer(this.controllerId)) {
             this.controlledFromStartOfControllerTurn = true;
         }
     }
@@ -493,6 +494,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         attachedPerm.phaseOut(game, true);
                     }
                 }
+                this.removeFromCombat(game);
                 this.phasedIn = false;
                 this.indirectPhase = indirectPhase;
                 if (!game.isSimulation()) {
@@ -630,11 +632,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public List<UUID> getConnectedCards(String key) {
-        if (this.connectedCards.containsKey(key)) {
-            return this.connectedCards.get(key);
-        } else {
-            return emptyList;
-        }
+        return this.connectedCards.getOrDefault(key, emptyList);
     }
 
     @Override

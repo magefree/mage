@@ -1,12 +1,14 @@
 package org.mage.test.cards.mana;
 
+import mage.abilities.mana.ManaOptions;
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-import static org.mage.test.utils.ManaOptionsTestUtils.manaOptionsContain;
+import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
+import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
  *
@@ -47,7 +49,14 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        Assert.assertTrue("playerA must cast {Any}{Any}", manaOptionsContain(playerA.getManaAvailable(currentGame), "{Any}{Any}"));
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+        Assert.assertEquals("mana variations don't fit", 5, manaOptions.size());
+        assertManaOptions("{B}{B}", manaOptions);
+        assertManaOptions("{W}{W}", manaOptions);
+        assertManaOptions("{U}{U}", manaOptions);
+        assertManaOptions("{R}{R}", manaOptions);
+        assertManaOptions("{G}{G}", manaOptions);
     }
 
     public void nagaVitalist_GiftOfParadisesLandCanGiveAnyColorToNaga_Setup(int giftCastTurn, int nagaManaTapTurn, String nagaManaTapColor) {

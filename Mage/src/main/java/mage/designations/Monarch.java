@@ -27,7 +27,7 @@ public class Monarch extends Designation {
     }
 }
 
-// At the beginning of the monarch’s end step, that player draws a card
+// At the beginning of the monarch's end step, that player draws a card
 class MonarchDrawTriggeredAbility extends BeginningOfEndStepTriggeredAbility {
 
     public MonarchDrawTriggeredAbility() {
@@ -60,7 +60,7 @@ class MonarchDrawTriggeredAbility extends BeginningOfEndStepTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "At the beginning of the monarch’s end step, that player draws a card.";
+        return "At the beginning of the monarch's end step, that player draws a card.";
     }
 }
 
@@ -84,8 +84,7 @@ class MonarchDealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             MageObject damagingObject = game.getObject(event.getSourceId());
-            if (damagingObject != null
-                    && damagingObject instanceof Permanent
+            if (damagingObject instanceof Permanent
                     && damagingObject.isCreature()
                     && event.getTargetId().equals(game.getMonarchId())) {
                 setControllerId(event.getPlayerId());

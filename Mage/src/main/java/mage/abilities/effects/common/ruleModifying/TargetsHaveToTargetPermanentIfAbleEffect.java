@@ -23,8 +23,8 @@ import mage.players.Player;
 import mage.target.Target;
 
 /**
- * 6/8/2016 If a spell or ability’s targets are changed, or if a copy of a spell
- * or ability is put onto the stack and has new targets chosen, it doesn’t have
+ * 6/8/2016 If a spell or ability's targets are changed, or if a copy of a spell
+ * or ability is put onto the stack and has new targets chosen, it doesn't have
  * to target a Flagbearer.
  * 
  * 3/16/2017 A Flagbearer only requires targeting of itself when choosing targets

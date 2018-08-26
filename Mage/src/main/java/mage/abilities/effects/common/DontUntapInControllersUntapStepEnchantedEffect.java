@@ -60,7 +60,7 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
                 Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-                if (permanent != null &&  permanent.getControllerId().equals(game.getActivePlayerId())) {
+                if (permanent != null &&  permanent.isControlledBy(game.getActivePlayerId())) {
                     return true;
                 }
             }

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.abilities.Ability;
@@ -57,7 +56,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl {
 
     public StoneIdolTrapCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each attacking creature";
+        staticText = "This spell costs {1} less to cast for each attacking creature";
     }
 
     protected StoneIdolTrapCostReductionEffect(StoneIdolTrapCostReductionEffect effect) {

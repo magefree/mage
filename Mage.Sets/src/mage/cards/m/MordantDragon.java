@@ -1,13 +1,14 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -16,8 +17,11 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -26,7 +30,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class MordantDragon extends CardImpl {
 
     public MordantDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(5);
@@ -39,7 +43,7 @@ public final class MordantDragon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
 
         // Whenever Mordant Dragon deals combat damage to a player, you may have it deal that much damage to target creature that player controls.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MordantDragonEffect(), true, true));
+        this.addAbility(new MordantDragonTriggeredAbility());
     }
 
     public MordantDragon(final MordantDragon card) {
@@ -49,6 +53,53 @@ public final class MordantDragon extends CardImpl {
     @Override
     public MordantDragon copy() {
         return new MordantDragon(this);
+    }
+}
+
+class MordantDragonTriggeredAbility extends TriggeredAbilityImpl {
+
+    public MordantDragonTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new MordantDragonEffect(), true);
+    }
+
+    public MordantDragonTriggeredAbility(final MordantDragonTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public MordantDragonTriggeredAbility copy() {
+        return new MordantDragonTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        Player opponent = game.getPlayer(event.getPlayerId());
+        if (!damageEvent.isCombatDamage()
+                || !event.getSourceId().equals(this.getSourceId())
+                || opponent == null) {
+            return false;
+        }
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
+        filter.add(new ControllerIdPredicate(opponent.getId()));
+        this.getTargets().clear();
+        this.addTarget(new TargetCreaturePermanent(filter));
+        for (Effect effect : this.getAllEffects()) {
+            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            effect.setValue("damage", event.getAmount());
+        }
+        return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player, "
+                + "you may have it deal that much damage to target creature that player controls";
     }
 }
 
@@ -65,23 +116,7 @@ class MordantDragonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            int amount = (Integer) getValue("damage");
-            if (amount > 0) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + player.getLogName() + " controls");
-                filter.add(new ControllerIdPredicate(player.getId()));
-                TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-                if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Damage, source.getControllerId(), source.getSourceId(), game)) {
-                    UUID creature = target.getFirstTarget();
-                    if (creature != null) {
-                        game.getPermanent(creature).damage(amount, source.getSourceId(), game, false, true);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return new DamageTargetEffect((Integer) getValue("damage")).apply(game, source);
     }
 
     @Override

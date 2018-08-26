@@ -1,10 +1,14 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,25 +65,64 @@ public class CopyPermanentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
-        if (sourceObject == null) {
-            sourceObject = game.getObject(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourcePermanent = game.getPermanentEntering(source.getSourceId());
+        if (sourcePermanent == null) {
+            sourcePermanent = game.getObject(source.getSourceId());
         }
-        if (player != null && sourceObject != null) {
+        if (controller != null && sourcePermanent != null) {
             Permanent copyFromPermanent = null;
             if (useTargetOfAbility) {
                 copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             } else {
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                    player.choose(Outcome.Copy, target, source.getSourceId(), game);
+                if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                    controller.choose(Outcome.Copy, target, source.getSourceId(), game);
                     copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 }
             }
             if (copyFromPermanent != null) {
-                bluePrintPermanent = game.copyPermanent(copyFromPermanent, sourceObject.getId(), source, applier);
+                bluePrintPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, applier);
+                
+                //if object is a copy of an aura, it needs to attach
+                if (bluePrintPermanent.hasSubtype(SubType.AURA, game)){
+                    //copied from mage.cards.c.CopyEnchantment.java
+                    Target target = bluePrintPermanent.getSpellAbility().getTargets().get(0);
+                    Outcome auraOutcome = Outcome.BoostCreature;
+                    for (Ability ability : bluePrintPermanent.getAbilities()) {
+                        if (ability instanceof SpellAbility) {
+                            for (Effect effect : ability.getEffects()) {
+                                if (effect instanceof AttachEffect) {
+                                    auraOutcome = effect.getOutcome();
+                                }
+                            }
+                        }
+                    }
+                    
+                    /*if this is a copy of a copy, the copy's target has been
+                     *copied and needs to be cleared
+                     */
+                    {
+                        UUID targetId = target.getFirstTarget();
+                        if(targetId != null)
+                            target.remove(targetId);
+                    }
+                    
+                    target.setNotTarget(true);
+                    if (controller.choose(auraOutcome, target, source.getSourceId(), game)) {
+                        UUID targetId = target.getFirstTarget();
+                        Permanent targetPermanent = game.getPermanent(targetId);
+                        Player targetPlayer = game.getPlayer(targetId);
+                        if (targetPermanent != null) {
+                            targetPermanent.addAttachment(sourcePermanent.getId(), game);
+                        } else if (targetPlayer != null) {
+                            targetPlayer.addAttachment(sourcePermanent.getId(), game);
+                        } else {
+                            return false;
+                        }
+                    }
+                }
             }
             return true;
         }

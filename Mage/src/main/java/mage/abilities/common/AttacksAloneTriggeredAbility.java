@@ -37,7 +37,7 @@ public class AttacksAloneTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if(game.getActivePlayerId().equals(this.controllerId) ) {
+        if(game.isActivePlayer(this.controllerId) ) {
             UUID creatureId = this.getSourceId();
             if(creatureId != null) {
                 if(game.getCombat().attacksAlone() && Objects.equals(creatureId, game.getCombat().getAttackers().get(0))) {

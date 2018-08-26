@@ -121,7 +121,7 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
             if (perm == null) {
                 perm = game.getPermanentEntering(event.getTargetId());
             }
-            if (perm != null && perm.isCreature() && perm.getControllerId().equals(source.getControllerId())) {
+            if (perm != null && perm.isCreature() && perm.isControlledBy(source.getControllerId())) {
                 return true;
             }
         }

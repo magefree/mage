@@ -1,4 +1,3 @@
-
 package mage.players;
 
 import java.io.Serializable;
@@ -279,6 +278,8 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void setTurnControlledBy(UUID playerId);
 
+    List<UUID> getTurnControllers();
+
     UUID getTurnControlledBy();
 
     /**
@@ -305,6 +306,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param value
      */
     void setGameUnderYourControl(boolean value);
+
+    void setGameUnderYourControl(boolean value, boolean fullRestore);
 
     boolean isTestMode();
 
@@ -352,14 +355,19 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean searchLibrary(TargetCardInLibrary target, Game game);
 
+    boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents);
+
+    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId);
+
     /**
      *
      * @param target
      * @param game
      * @param targetPlayerId player whose library will be searched
+     * @param triggerEvents whether searching will trigger any game events
      * @return true if search was successful
      */
-    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId);
+    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents);
 
     boolean canPlayLand();
 
@@ -851,6 +859,8 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isRequestToShowHandCardsAllowed();
 
     Set<UUID> getUsersAllowedToSeeHandCards();
+
+    void setPayManaMode(boolean payManaMode);
 
     boolean isInPayManaMode();
 

@@ -34,7 +34,7 @@ import mage.util.CardUtil;
 public final class ArchonOfValorsReach extends CardImpl {
 
     public ArchonOfValorsReach(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
 
         this.subtype.add(SubType.ARCHON);
         this.power = new MageInt(5);
@@ -133,7 +133,7 @@ class ArchonOfValorsReachChoice extends ChoiceImpl {
                 return CardType.INSTANT;
             case "Sorcery":
                 return CardType.SORCERY;
-            case "Planewswalker":
+            case "Planeswalker":
                 return CardType.PLANESWALKER;
             default:
                 return null;

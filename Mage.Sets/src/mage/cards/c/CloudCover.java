@@ -63,7 +63,7 @@ class CloudCoverAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         Player controller = game.getPlayer(this.getControllerId());
         if (permanent != null
-                && permanent.getControllerId().equals(getControllerId())
+                && permanent.isControlledBy(getControllerId())
                 && !permanent.getId().equals(this.getSourceId())
                 && controller != null
                 && controller.hasOpponent(event.getPlayerId(), game)) {

@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -36,9 +35,9 @@ public final class ChandraNalaar extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
-        // +1: Chandra Nalaar deals 1 damage to target player.
+        // +1: Chandra Nalaar deals 1 damage to target player or planeswalker.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
-        ability1.addTarget(new TargetPlayer());
+        ability1.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability1);
 
         // -X: Chandra Nalaar deals X damage to target creature.
@@ -46,11 +45,11 @@ public final class ChandraNalaar extends CardImpl {
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
 
-        // -8: Chandra Nalaar deals 10 damage to target player and each creature he or she controls.
+        // -8: Chandra Nalaar deals 10 damage to target player or planeswalker and each creature that player or that planeswalker’s controller controls.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(10));
         effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent())
-                .setText("and each creature that player or that planeswalker’s controller controls")
+                .setText("and each creature that player or that planeswalker's controller controls")
         );
         LoyaltyAbility ability3 = new LoyaltyAbility(effects1, -8);
         ability3.addTarget(new TargetPlayerOrPlaneswalker());

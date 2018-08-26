@@ -187,7 +187,7 @@ class ThreeWishesPlayFromExileEffect extends AsThoughEffectImpl {
         return exile != null
                 && getTargetPointer().getFirst(game, source) != null
                 && getTargetPointer().getFirst(game, source).equals(sourceId)
-                && source.getControllerId().equals(affectedControllerId)
+                && source.isControlledBy(affectedControllerId)
                 && game.getState().getZone(sourceId) == Zone.EXILED
                 && exile.contains(sourceId);
     }

@@ -28,7 +28,7 @@ public final class PrescientChimera extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast an instant or sorcery spell, scry 1.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false));
     }
 
     public PrescientChimera(final PrescientChimera card) {

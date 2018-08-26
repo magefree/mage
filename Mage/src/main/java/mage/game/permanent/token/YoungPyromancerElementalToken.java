@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -13,7 +12,7 @@ import mage.util.RandomUtil;
 public final class YoungPyromancerElementalToken extends TokenImpl {
 
     public YoungPyromancerElementalToken() {
-        super("Elemental", "1/1 red Elemental creature");
+        super("Elemental", "1/1 red Elemental creature token");
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M14")) {
             setTokenType(RandomUtil.nextInt(2) + 1);
         }

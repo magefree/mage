@@ -89,7 +89,7 @@ class MarangRiverProwlerCastEffect extends AsThoughEffectImpl {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
             if (card != null 
-                    && card.getOwnerId().equals(affectedControllerId) 
+                    && card.isOwnedBy(affectedControllerId)
                     && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
                     && game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
                 return true;

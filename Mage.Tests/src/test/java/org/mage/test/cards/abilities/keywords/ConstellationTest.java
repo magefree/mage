@@ -15,8 +15,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ConstellationTest extends CardTestPlayerBase {
 
     /**
-     * Daxos's Torment {3}{B} Constellation — Whenever Daxos’s Torment or
-     * another enchantment enters the battlefield under your control, Daxos’s
+     * Daxos's Torment {3}{B} Constellation — Whenever Daxos's Torment or
+     * another enchantment enters the battlefield under your control, Daxos's
      * Torment becomes a 5/5 Demon creature with flying and haste in addition to
      * its other types until end of turn.
      */
@@ -135,10 +135,11 @@ public class ConstellationTest extends CardTestPlayerBase {
     @Test
     public void test_DaxosGotBoostWithLoseFlyAndGotItAgain() {
         // 112.10c  If two or more effects add and remove the same ability, in general the most recent one prevails.
-        addCard(Zone.HAND, playerA, daxosCard, 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        addCard(Zone.HAND, playerA, "Gravity Sphere", 1); // All creatures lose flying.
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, daxosCard, 1); // {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        // All creatures lose flying.
+        addCard(Zone.HAND, playerA, "Gravity Sphere", 1); // World Enchantment {2}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
 
         // got fly on enter, lose on gravity, got fly on gravity enter
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, daxosCard);
@@ -192,12 +193,12 @@ public class ConstellationTest extends CardTestPlayerBase {
         // 613.7 -- dependacy effects (Mephidross Vampire must ALWAYS wait Daxos effect, not timestamp)
         addCard(Zone.HAND, playerA, daxosCard, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        // Each creature you control is a Vampire in addition to its other creature types
+        addCard(Zone.HAND, playerA, "Mephidross Vampire", 1); // {4}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
         //
-        addCard(Zone.HAND, playerA, "Mephidross Vampire", 1); // Each creature you control is a Vampire in addition to its other creature types
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
-        //
-        addCard(Zone.HAND, playerA, "Archetype of Courage", 1); // Enchantment to trigger Daxos
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Archetype of Courage", 1); // Enchantment {1}{W}{W} to trigger Daxos
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
         // dax cast
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, daxosCard);
@@ -208,6 +209,15 @@ public class ConstellationTest extends CardTestPlayerBase {
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Archetype of Courage"); // make dax to creature
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mephidross Vampire"); // give vampire to creatures
         } else {
+            // Make sure not white mana is used here to cast the vampire
+            checkManaPool("before B mana", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "B", 0);
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+            activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+            checkManaPool("after B mana", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "B", 6);
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mephidross Vampire"); // give vampire to creatures
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Archetype of Courage"); // make dax to creature
         }

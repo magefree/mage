@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.d.Delirium;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -44,6 +45,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Barbed Foliage", 207, Rarity.UNCOMMON, mage.cards.b.BarbedFoliage.class));
         cards.add(new SetCardInfo("Barbed-Back Wurm", 105, Rarity.UNCOMMON, mage.cards.b.BarbedBackWurm.class));
         cards.add(new SetCardInfo("Bay Falcon", 54, Rarity.COMMON, mage.cards.b.BayFalcon.class));
+        cards.add(new SetCardInfo("Bazaar of Wonders", 55, Rarity.RARE, mage.cards.b.BazaarOfWonders.class));
         cards.add(new SetCardInfo("Benthic Djinn", 257, Rarity.RARE, mage.cards.b.BenthicDjinn.class));
         cards.add(new SetCardInfo("Binding Agony", 106, Rarity.COMMON, mage.cards.b.BindingAgony.class));
         cards.add(new SetCardInfo("Blighted Shaman", 107, Rarity.UNCOMMON, mage.cards.b.BlightedShaman.class));
@@ -65,6 +67,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos Charm", 163, Rarity.COMMON, mage.cards.c.ChaosCharm.class));
         cards.add(new SetCardInfo("Chaosphere", 164, Rarity.RARE, mage.cards.c.Chaosphere.class));
         cards.add(new SetCardInfo("Charcoal Diamond", 296, Rarity.UNCOMMON, mage.cards.c.CharcoalDiamond.class));
+        cards.add(new SetCardInfo("Chariot of the Sun", 262, Rarity.UNCOMMON, mage.cards.c.ChariotOfTheSun.class));
         cards.add(new SetCardInfo("Choking Sands", 113, Rarity.COMMON, mage.cards.c.ChokingSands.class));
         cards.add(new SetCardInfo("Cinder Cloud", 165, Rarity.UNCOMMON, mage.cards.c.CinderCloud.class));
         cards.add(new SetCardInfo("Civic Guildmage", 7, Rarity.COMMON, mage.cards.c.CivicGuildmage.class));
@@ -81,6 +84,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Banishing", 115, Rarity.COMMON, mage.cards.d.DarkBanishing.class));
         cards.add(new SetCardInfo("Dark Ritual", 116, Rarity.COMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Dazzling Beauty", 8, Rarity.COMMON, mage.cards.d.DazzlingBeauty.class));
+        cards.add(new SetCardInfo("Delirium", 260, Rarity.UNCOMMON, Delirium.class));
         cards.add(new SetCardInfo("Dirtwater Wraith", 117, Rarity.COMMON, mage.cards.d.DirtwaterWraith.class));
         cards.add(new SetCardInfo("Disempower", 9, Rarity.COMMON, mage.cards.d.Disempower.class));
         cards.add(new SetCardInfo("Disenchant", 10, Rarity.COMMON, mage.cards.d.Disenchant.class));
@@ -137,6 +141,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Grasslands", 327, Rarity.UNCOMMON, mage.cards.g.Grasslands.class));
         cards.add(new SetCardInfo("Grave Servitude", 126, Rarity.COMMON, mage.cards.g.GraveServitude.class));
         cards.add(new SetCardInfo("Gravebane Zombie", 127, Rarity.COMMON, mage.cards.g.GravebaneZombie.class));
+        cards.add(new SetCardInfo("Grim Feast", 265, Rarity.RARE, mage.cards.g.GrimFeast.class));
         cards.add(new SetCardInfo("Grinning Totem", 303, Rarity.RARE, mage.cards.g.GrinningTotem.class));
         cards.add(new SetCardInfo("Hakim, Loreweaver", 68, Rarity.RARE, mage.cards.h.HakimLoreweaver.class));
         cards.add(new SetCardInfo("Hall of Gemstone", 221, Rarity.RARE, mage.cards.h.HallOfGemstone.class));
@@ -175,6 +180,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Reflexes", 186, Rarity.COMMON, mage.cards.l.LightningReflexes.class));
         cards.add(new SetCardInfo("Lion's Eye Diamond", 307, Rarity.RARE, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Locust Swarm", 226, Rarity.UNCOMMON, mage.cards.l.LocustSwarm.class));
+        cards.add(new SetCardInfo("Lure of Prey", 227, Rarity.RARE, mage.cards.l.LureOfPrey.class));
         cards.add(new SetCardInfo("Mana Prism", 308, Rarity.UNCOMMON, mage.cards.m.ManaPrism.class));
         cards.add(new SetCardInfo("Mangara's Tome", 309, Rarity.RARE, mage.cards.m.MangarasTome.class));
         cards.add(new SetCardInfo("Marble Diamond", 310, Rarity.UNCOMMON, mage.cards.m.MarbleDiamond.class));

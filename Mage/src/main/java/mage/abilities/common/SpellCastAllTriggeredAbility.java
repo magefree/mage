@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -6,6 +5,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -17,13 +17,12 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
     protected String rule;
     protected SetTargetPointer setTargetPointer;
 
     public SpellCastAllTriggeredAbility(Effect effect, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, spellCard, optional, SetTargetPointer.NONE);
+        this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A, optional, SetTargetPointer.NONE);
     }
 
     public SpellCastAllTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {

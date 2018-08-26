@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -48,7 +48,7 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
         this.addAbility(new KickerAbility("{1}{U}"));
 
         // When Slinn Voda, the Rising Deep enters the battlefield, if it was kicked, return all creatures to their owners' hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)),
                 KickedCondition.instance,
                 "when {this} enters the battlefield, if it was kicked, "

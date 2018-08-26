@@ -111,7 +111,7 @@ class BottledCloisterReturnEffect extends OneShotEffect {
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null) {
                 for (Card card:  exileZone.getCards(game)) {
-                    if (card.getOwnerId().equals(controller.getId())) {
+                    if (card.isOwnedBy(controller.getId())) {
                         numberOfCards++;
                         card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                         card.setFaceDown(false, game);

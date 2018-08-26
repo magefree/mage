@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.abilities.Ability;
@@ -26,7 +25,7 @@ import java.util.UUID;
 public final class Balance extends CardImpl {
 
     public Balance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
 
         // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
         this.getSpellAbility().addEffect(new BalanceEffect());
@@ -46,7 +45,10 @@ class BalanceEffect extends OneShotEffect {
 
     BalanceEffect() {
         super(Outcome.Sacrifice);
-        staticText = "Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
+        staticText = "each player chooses a number of lands they control "
+                + "equal to the number of lands controlled by the player "
+                + "who controls the fewest, then sacrifices the rest. "
+                + "Players discard cards and sacrifice creatures the same way";
     }
 
     BalanceEffect(final BalanceEffect effect) {

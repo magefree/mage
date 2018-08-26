@@ -106,7 +106,7 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             if (fixedTarget.getFirst(game, this).equals(event.getTargetId())) {
-                if (this.getControllerId().equals(event.getPlayerId())) {
+                if (this.isControlledBy(event.getPlayerId())) {
                     return true;
                 }
             }

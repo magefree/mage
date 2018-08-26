@@ -45,7 +45,7 @@ public final class AvariceAmulet extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
 
-        // When equipped creature dies, target opponent gains control of Avarice Amulet.
+        // Whenever equipped creature dies, target opponent gains control of Avarice Amulet.
         ability = new DiesAttachedTriggeredAbility(new AvariceAmuletChangeControlEffect(), "equipped creature", false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

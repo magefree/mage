@@ -339,7 +339,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
      * of the end step even if Flickerwisp is no longer on the battlefield.
      * 8/1/2008 If the permanent that returns to the battlefield has any
      * abilities that trigger at the beginning of the end step, those abilities
-     * won’t trigger that turn.
+     * won't trigger that turn.
      */
     @Test
     public void testDoubleFlickerwisp() {

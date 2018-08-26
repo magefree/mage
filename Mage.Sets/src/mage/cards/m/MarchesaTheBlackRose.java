@@ -89,7 +89,7 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null
-                    && permanent.getControllerId().equals(this.getControllerId())
+                    && permanent.isControlledBy(this.getControllerId())
                     && permanent.isCreature()
                     && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 for (Effect effect : this.getEffects()) {

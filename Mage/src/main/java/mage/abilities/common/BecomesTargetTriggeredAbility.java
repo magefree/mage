@@ -5,6 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
@@ -18,7 +19,7 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
     private final FilterStackObject filter;
 
     public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, new FilterStackObject("a spell or ability"));
+        this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY);
     }
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {

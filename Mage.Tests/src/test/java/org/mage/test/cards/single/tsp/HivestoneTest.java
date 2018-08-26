@@ -40,14 +40,14 @@ public class HivestoneTest extends CardTestPlayerBase {
 
     /**
      * Turns only your creatures on the battlefield, not in other zones, into
-     * Slivers. It won’t allow you to have Root Sliver on the battlefield and
+     * Slivers. It won't allow you to have Root Sliver on the battlefield and
      * make your Grizzly Bears uncounterable, for example.
      */
     @Test
     public void rootSliverTest() {
         addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Hivestone", 1);
-        // Root Sliver can't be countered. Sliver spells can't be countered by spells or abilities.
+        // Root Sliver can't be countered. Sliver spells can't be countered.
         addCard(Zone.BATTLEFIELD, playerA, "Root Sliver", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 

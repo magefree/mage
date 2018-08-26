@@ -137,6 +137,12 @@ public final class StaticFilters {
         FILTER_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENTS = new FilterPermanent("permanents");
+
+    static {
+        FILTER_PERMANENTS.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_AN = new FilterArtifactPermanent("an artifact");
 
     static {
@@ -382,6 +388,17 @@ public final class StaticFilters {
     static {
         FILTER_PERMANENTS_NON_LAND.setLockedFilter(true);
     }
+    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS = new FilterStackObject("spell or ability and opponent controls");
+
+    static {
+        FILTER_SPELL_OR_ABILITY_OPPONENTS.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_SPELL_OR_ABILITY_OPPONENTS.setLockedFilter(true);
+    }
+    public static final FilterStackObject FILTER_SPELL_OR_ABILITY = new FilterStackObject();
+
+    static {
+        FILTER_SPELL_OR_ABILITY.setLockedFilter(true);
+    }
 
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");
 
@@ -418,26 +435,35 @@ public final class StaticFilters {
         FILTER_SPELL_A_MULTICOLORED.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");
+    public static final FilterSpell FILTER_SPELL_AN_INSTANT_OR_SORCERY = new FilterSpell("an instant or sorcery spell");
 
     static {
-        FILTER_INSTANT_OR_SORCERY_SPELL.add(Predicates.or(
+        FILTER_SPELL_AN_INSTANT_OR_SORCERY.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)
         ));
-        FILTER_INSTANT_OR_SORCERY_SPELL.setLockedFilter(true);
+        FILTER_SPELL_AN_INSTANT_OR_SORCERY.setLockedFilter(true);
     }
-
-    public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELLS = new FilterSpell("instant or sorcery spells");
+    public static final FilterSpell FILTER_SPELL_INSTANT_OR_SORCERY = new FilterSpell("instant or sorcery spell");
 
     static {
-        FILTER_INSTANT_OR_SORCERY_SPELLS.add(Predicates.or(
+        FILTER_SPELL_INSTANT_OR_SORCERY.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)
         ));
-        FILTER_INSTANT_OR_SORCERY_SPELLS.setLockedFilter(true);
+        FILTER_SPELL_INSTANT_OR_SORCERY.setLockedFilter(true);
     }
-    public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
+
+    public static final FilterSpell FILTER_SPELLS_INSTANT_OR_SORCERY = new FilterSpell("instant or sorcery spells");
+
+    static {
+        FILTER_SPELLS_INSTANT_OR_SORCERY.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)
+        ));
+        FILTER_SPELLS_INSTANT_OR_SORCERY.setLockedFilter(true);
+    }
+    public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
     static {
         FILTER_CREATURE_TOKENS.add(new TokenPredicate());

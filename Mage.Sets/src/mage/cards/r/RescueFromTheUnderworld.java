@@ -31,19 +31,19 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * Once you announce you’re casting Rescue from the Underworld, no player may
+ * Once you announce you're casting Rescue from the Underworld, no player may
  * attempt to stop you from casting the spell by removing the creature you want
  * to sacrifice.
  *
  * If you sacrifice a creature token to cast Rescue from the Underworld, it
- * won’t return to the battlefield, although the target creature card will.
+ * won't return to the battlefield, although the target creature card will.
  *
  * If either the sacrificed creature or the target creature card leaves the
  * graveyard before the delayed triggered ability resolves during your next
- * upkeep, it won’t return.
+ * upkeep, it won't return.
  *
  * However, if the sacrificed creature is put into another public zone instead
- * of the graveyard, perhaps because it’s your commander or because of another
+ * of the graveyard, perhaps because it's your commander or because of another
  * replacement effect, it will return to the battlefield from the zone it went
  * to.
  *
@@ -212,7 +212,7 @@ class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
                 }
             }
             // However, if the sacrificed creature is put into another public zone instead of the graveyard,
-            // perhaps because it’s your commander or because of another replacement effect, it will return
+            // perhaps because it's your commander or because of another replacement effect, it will return
             // to the battlefield from the zone it went to.
             if (source.getTargets().get(1) != null) {
                 for (UUID targetId : source.getTargets().get(1).getTargets()) {

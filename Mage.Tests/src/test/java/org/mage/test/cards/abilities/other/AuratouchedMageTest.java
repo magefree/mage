@@ -25,7 +25,7 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
     //If someone knows the way to elegantly handle the test mechanism in regards to no valid targets, please modify.  The test works fine in practice.
     @Ignore
     public void testAuratouchedMageEffectHasMadeIntoTypeArtifact() {
-        //Any Aura card you find must be able to enchant Auratouched Mage as it currently exists, or as it most recently existed on the battlefield if it’s no 
+        //Any Aura card you find must be able to enchant Auratouched Mage as it currently exists, or as it most recently existed on the battlefield if it's no 
         //longer on the battlefield. If an effect has made the Mage an artifact, for example, you could search for an Aura with “enchant artifact.”
         //Expected result: An effect has made Auratouched Mage into an artifact upon entering the battlefield.  An aura that only works on artifacts should work.
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);

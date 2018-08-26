@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -8,7 +7,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
 /**
@@ -16,16 +15,24 @@ import mage.game.command.Emblem;
  * @author spjspj
  */
 public class ElspethSunsChampionEmblem extends Emblem {
+
     // -7: You get an emblem with "Creatures you control get +2/+2 and have flying."
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
-
     public ElspethSunsChampionEmblem() {
         this.setName("Emblem Elspeth");
         this.setExpansionSetCodeForImage("THS");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(2, 2, Duration.EndOfGame, filter, false));
-        ability.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfGame, filter));
+        Ability ability = new SimpleStaticAbility(
+                Zone.COMMAND,
+                new BoostControlledEffect(
+                        2, 2, Duration.EndOfGame,
+                        StaticFilters.FILTER_PERMANENT_CREATURES,
+                        false
+                ).setText("creatures you control get +2/+2")
+        );
+        ability.addEffect(new GainAbilityControlledEffect(
+                FlyingAbility.getInstance(),
+                Duration.EndOfGame,
+                StaticFilters.FILTER_PERMANENT_CREATURES
+        ).setText("and have flying"));
         this.getAbilities().add(ability);
-
     }
 }

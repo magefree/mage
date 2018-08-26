@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class SithInquisitor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Hate</i> &mdash; When Sith Assassin enters the battlefield, if opponent lost life from source other than combat damage this turn, target player discard a card at random.
-        Ability ability = new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1, true)),
                 HateCondition.instance,
                 "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other then combat damage this turn, target player discard a card at random.");

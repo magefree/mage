@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -67,7 +67,7 @@ class VirtussManeuverEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
         ChooseFriendsAndFoes choice = new ChooseFriendsAndFoes();
         if (!choice.chooseFriendOrFoe(controller, source, game)) {
             return false;
@@ -77,7 +77,7 @@ class VirtussManeuverEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            FilterCard filter = new FilterCard("card in your graveyard");
+            FilterCard filter = new FilterCreatureCard("creature card in your graveyard");
             filter.add(new OwnerIdPredicate(player.getId()));
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             getBackMap.put(player.getId(), null);

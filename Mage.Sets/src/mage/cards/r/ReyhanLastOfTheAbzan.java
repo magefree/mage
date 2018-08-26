@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -91,25 +90,25 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
         if (zcEvent.getToZone() != Zone.GRAVEYARD && zcEvent.getToZone() != Zone.COMMAND) {
             return false;
         }
-        
-        // A creature 
+
+        // A creature
         Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
         if (permanent == null || !permanent.isCreature()) {
             return false;
         }
-        
+
         // You control
         Player player = game.getPlayer(this.getControllerId());
-        if (player == null || !player.getId().equals(this.getControllerId())) {
+        if (player == null || !permanent.isControlledBy(getControllerId())) {
             return false;
         }
-        
+
         // If it had one or more +1/+1 counters on it
         int countersOn = permanent.getCounters(game).getCount(CounterType.P1P1);
         if (countersOn == 0) {
             return false;
         }
-        
+
         // You may put that may +1/+1 counters on target creature
         this.getEffects().clear();
         this.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(countersOn)));

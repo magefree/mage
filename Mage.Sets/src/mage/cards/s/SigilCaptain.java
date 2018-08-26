@@ -69,7 +69,7 @@ class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null) {
             return false;
         }
-        if (permanent.getControllerId().equals(controllerId)
+        if (permanent.isControlledBy(controllerId)
                 && permanent.getPower().getValue() == 1
                 && permanent.getToughness().getValue() == 1) {
             for (Effect effect : this.getEffects()) {

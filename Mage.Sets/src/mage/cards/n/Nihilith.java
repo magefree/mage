@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.SuspendAbility;
@@ -39,7 +39,7 @@ public final class Nihilith extends CardImpl {
         this.addAbility(new SuspendAbility(7, new ManaCostsImpl("{1}{B}"), this, false));
         
         // Whenever a card is put into an opponent's graveyard from anywhere, if Nihilith is suspended, you may remove a time counter from Nihilith.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new PutCardIntoGraveFromAnywhereAllTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), true, 
                         new FilterCard(), TargetController.OPPONENT, SetTargetPointer.NONE),
                 SuspendedCondition.instance,

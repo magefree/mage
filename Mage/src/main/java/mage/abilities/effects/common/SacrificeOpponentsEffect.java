@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.ArrayList;
@@ -39,7 +38,8 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
     public SacrificeOpponentsEffect(DynamicValue amount, FilterPermanent filter) {
         super(Outcome.Sacrifice);
         this.amount = amount;
-        this.filter = filter;
+        this.filter = filter.copy();
+        this.filter.add(new ControllerPredicate(TargetController.YOU));
         setText();
     }
 
@@ -57,7 +57,6 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<UUID> perms = new ArrayList<>();
-        filter.add(new ControllerPredicate(TargetController.YOU));
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

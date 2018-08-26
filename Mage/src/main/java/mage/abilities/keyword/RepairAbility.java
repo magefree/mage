@@ -11,7 +11,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -36,7 +36,7 @@ public class RepairAbility extends DiesTriggeredAbility {
 
     public RepairAbility(int count) {
         super(new AddCountersSourceEffect(CounterType.REPAIR.createInstance(), new StaticValue(count), false, true));
-        addSubAbility(new RepairBeginningOfUpkeepTriggeredAbility());
+        addSubAbility(new RepairBeginningOfUpkeepInterveningIfTriggeredAbility());
         addSubAbility(new RepairCastFromGraveyardTriggeredAbility());
 
         ruleText = "Repair " + count + " <i>(When this creature dies, put " + count
@@ -84,7 +84,7 @@ class RepairCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId);
+        return source.isControlledBy(affectedControllerId);
     }
 }
 
@@ -127,9 +127,9 @@ class RepairCastFromGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class RepairBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbility {
+class RepairBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
-    public RepairBeginningOfUpkeepTriggeredAbility() {
+    public RepairBeginningOfUpkeepInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()), TargetController.YOU, false),
                 new SourceHasCounterCondition(CounterType.REPAIR),
                 "At the beginning of your upkeep, remove a repair counter from {this}");
@@ -137,12 +137,12 @@ class RepairBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbilit
 
     }
 
-    public RepairBeginningOfUpkeepTriggeredAbility(final RepairBeginningOfUpkeepTriggeredAbility effect) {
+    public RepairBeginningOfUpkeepInterveningIfTriggeredAbility(final RepairBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
     @Override
-    public RepairBeginningOfUpkeepTriggeredAbility copy() {
-        return new RepairBeginningOfUpkeepTriggeredAbility(this);
+    public RepairBeginningOfUpkeepInterveningIfTriggeredAbility copy() {
+        return new RepairBeginningOfUpkeepInterveningIfTriggeredAbility(this);
     }
 }

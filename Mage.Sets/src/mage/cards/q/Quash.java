@@ -21,7 +21,7 @@ public final class Quash extends CardImpl {
 
         // Counter target instant or sorcery spell. 
         // Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles their library.
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.getSpellAbility().addEffect(new CounterTargetAndSearchGraveyardHandLibraryEffect());
     }
 

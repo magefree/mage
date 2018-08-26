@@ -18,12 +18,12 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
      * activated it on response, seas resolves but the manland loses creature
      * type what should not happened.
      *
-     * 305.7. If an effect changes a land’s subtype to one or more of the basic
+     * 305.7. If an effect changes a land's subtype to one or more of the basic
      * land types, the land no longer has its old land type. It loses all
      * abilities generated from its rules text and its old land types, and it
      * gains the appropriate mana ability for each new basic land type. Note
-     * that this doesn’t remove any abilities that were granted to the land by
-     * other effects. Changing a land’s subtype doesn’t add or remove any card
+     * that this doesn't remove any abilities that were granted to the land by
+     * other effects. Changing a land's subtype doesn't add or remove any card
      * types (such as creature) or supertypes (such as basic, legendary, and
      * snow) the land may have. If a land gains one or more land types in
      * addition to its own, it keeps its land types and rules text, and it gains

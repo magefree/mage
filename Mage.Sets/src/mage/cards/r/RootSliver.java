@@ -43,7 +43,7 @@ public final class RootSliver extends CardImpl {
 
         // Root Sliver can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
-        // Sliver spells can't be countered by spells or abilities.
+        // Sliver spells can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RootSliverEffect()));
 
     }
@@ -62,7 +62,7 @@ class RootSliverEffect extends ContinuousRuleModifyingEffectImpl {
 
     public RootSliverEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Sliver spells can't be countered by spells or abilities";
+        staticText = "Sliver spells can't be countered";
     }
 
     public RootSliverEffect(final RootSliverEffect effect) {
@@ -89,7 +89,7 @@ class RootSliverEffect extends ContinuousRuleModifyingEffectImpl {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.hasSubtype(SubType.SLIVER, game)) {
             MageObject sourceObject = game.getObject(event.getSourceId());
-            if (sourceObject != null && sourceObject instanceof StackObject) {
+            if (sourceObject instanceof StackObject) {
                 return true;
             }
         }

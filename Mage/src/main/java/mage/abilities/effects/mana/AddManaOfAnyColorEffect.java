@@ -1,6 +1,7 @@
-
 package mage.abilities.effects.mana;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.choices.ChoiceColor;
@@ -13,25 +14,28 @@ import mage.util.CardUtil;
  */
 public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
-    protected int amount;
+    protected final int amount;
+    protected final ArrayList<Mana> netMana = new ArrayList<>();
 
     public AddManaOfAnyColorEffect() {
         this(1);
     }
 
-    public AddManaOfAnyColorEffect(final int amount) {
+    public AddManaOfAnyColorEffect(int amount) {
         super(new Mana(0, 0, 0, 0, 0, 0, amount, 0));
         this.amount = amount;
-        this.staticText = new StringBuilder("add ")
-                .append(CardUtil.numberToText(amount))
-                .append(" mana of any ")
-                .append(amount > 1 ? "one " : "")
-                .append("color").toString();
+        netMana.add(Mana.GreenMana(amount));
+        netMana.add(Mana.BlueMana(amount));
+        netMana.add(Mana.BlackMana(amount));
+        netMana.add(Mana.WhiteMana(amount));
+        netMana.add(Mana.RedMana(amount));
+        this.staticText = "add " + CardUtil.numberToText(amount) + " mana of any " + (amount > 1 ? "one " : "") + "color";
     }
 
     public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.netMana.addAll(effect.netMana);
     }
 
     @Override
@@ -43,21 +47,30 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return netMana;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             String mes = String.format("Select color of %d mana to add it", this.amount);
             ChoiceColor choice = new ChoiceColor(true, mes, game.getObject(source.getSourceId()));
             if (controller.choose(outcome, choice, game)) {
-                if (choice.getColor() == null) {
-                    return false;
+                if (choice.getColor() != null) {
+                    return choice.getMana(amount);
                 }
-                Mana createdMana = choice.getMana(amount);
-                if (createdMana != null) {
-                    checkToFirePossibleEvents(createdMana, game, source);
-                    controller.getManaPool().addMana(createdMana, game, source);
-                }
-                return true;
             }
         }
-        return false;
+        return null;
     }
 
     public int getAmount() {

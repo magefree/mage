@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -38,6 +37,9 @@ public class TapSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(source.getSourceId());
+        }
         if (permanent != null) {
             if (withoutTrigger) {
                 permanent.setTapped(true);

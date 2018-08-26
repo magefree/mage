@@ -29,7 +29,7 @@ public final class LudevicsTestSubject extends CardImpl {
 
     public LudevicsTestSubject(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.LIZARD);
+        this.subtype.add(SubType.LIZARD, SubType.EGG);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

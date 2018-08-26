@@ -49,7 +49,7 @@ public final class KikiJikiMirrorBreaker extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        // {tap}: Create a token that's a copy of target nonlegendary creature you control . That token has haste. Sacrifice it at the beginning of the next end step.
+        // {T}: Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KikiJikiMirrorBreakerEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
         this.addAbility(ability);
@@ -70,7 +70,7 @@ class KikiJikiMirrorBreakerEffect extends OneShotEffect {
 
     public KikiJikiMirrorBreakerEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step";
+        this.staticText = "Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step";
     }
 
     public KikiJikiMirrorBreakerEffect(final KikiJikiMirrorBreakerEffect effect) {

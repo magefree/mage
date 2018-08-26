@@ -15,7 +15,7 @@ import mage.game.permanent.Permanent;
 /*
  * 702.31. Fading
  *
- * 702.31a Fading is a keyword that represents two abilities. “Fading N” means “This permanent enters the battlefield with N fade counters on it” and “At the beginning of your upkeep, remove a fade counter from this permanent. If you can’t, sacrifice the permanent.”
+ * 702.31a Fading is a keyword that represents two abilities. “Fading N” means “This permanent enters the battlefield with N fade counters on it” and “At the beginning of your upkeep, remove a fade counter from this permanent. If you can't, sacrifice the permanent.”
  *
  */
 public class FadingAbility extends EntersBattlefieldAbility {
@@ -28,7 +28,7 @@ public class FadingAbility extends EntersBattlefieldAbility {
         ability.setRuleVisible(false);
         addSubAbility(ability);
         ruleText = "Fading " + fadeCounter + " <i>(This permanent enters the battlefield with " + fadeCounter + " fade counters on it."
-                + " At the beginning of your upkeep, remove a fade counter from this permanent. If you can’t, sacrifice the permanent.</i>";
+                + " At the beginning of your upkeep, remove a fade counter from this permanent. If you can't, sacrifice the permanent.</i>";
     }
 
     public FadingAbility(final FadingAbility ability) {
@@ -51,7 +51,7 @@ class FadingEffect extends OneShotEffect {
 
     FadingEffect() {
         super(Outcome.Sacrifice);
-        staticText = "remove a fade counter from this permanent. If you can’t, sacrifice the permanent";
+        staticText = "remove a fade counter from this permanent. If you can't, sacrifice the permanent";
     }
 
     FadingEffect(final FadingEffect effect) {

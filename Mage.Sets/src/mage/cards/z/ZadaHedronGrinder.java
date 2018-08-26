@@ -100,7 +100,7 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean isControlledInstantOrSorcery(Spell spell) {
         return spell != null
-                && (spell.getControllerId().equals(this.getControllerId()))
+                && (spell.isControlledBy(this.getControllerId()))
                 && (spell.isInstant() || spell.isSorcery());
     }
 

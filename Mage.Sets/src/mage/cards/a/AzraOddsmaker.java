@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -7,9 +6,9 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -18,9 +17,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -41,7 +39,12 @@ public final class AzraOddsmaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of combat on your turn, you may discard a card. If you do, choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new AzraOddsmakerEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                new DoIfCostPaid(
+                        new AzraOddsmakerEffect(),
+                        new DiscardCardCost()
+                ), TargetController.YOU, false
+        ));
     }
 
     public AzraOddsmaker(final AzraOddsmaker card) {
@@ -56,12 +59,12 @@ public final class AzraOddsmaker extends CardImpl {
 
 class AzraOddsmakerEffect extends OneShotEffect {
 
-    AzraOddsmakerEffect() {
+    public AzraOddsmakerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "discard a card. If you do, choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards";
+        this.staticText = "choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards";
     }
 
-    AzraOddsmakerEffect(final AzraOddsmakerEffect effect) {
+    public AzraOddsmakerEffect(final AzraOddsmakerEffect effect) {
         super(effect);
     }
 
@@ -76,40 +79,37 @@ class AzraOddsmakerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cost cost = new DiscardCardCost();
         Permanent permanent = null;
-        if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
-                && cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
-            TargetCreaturePermanent target = new TargetCreaturePermanent();
-            target.setNotTarget(true);
-            if (player.choose(Outcome.DrawCard, target, source.getSourceId(), game)) {
-                permanent = game.getPermanent(target.getFirstTarget());
-            }
+        TargetCreaturePermanent target = new TargetCreaturePermanent();
+        target.setNotTarget(true);
+        if (player.choose(Outcome.DrawCard, target, source.getSourceId(), game)) {
+            permanent = game.getPermanent(target.getFirstTarget());
         }
         if (permanent == null) {
             return false;
         }
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new MageObjectReferencePredicate(new MageObjectReference(permanent, game)));
-        game.addDelayedTriggeredAbility(new AzraOddsmakerDelayedTriggeredAbility(filter, permanent.getName()), source);
+        game.addDelayedTriggeredAbility(new AzraOddsmakerDelayedTriggeredAbility(
+                new MageObjectReference(permanent, game),
+                permanent.getName()
+        ), source);
         return true;
     }
 }
 
 class AzraOddsmakerDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final FilterCreaturePermanent filter;
+    private final MageObjectReference mor;
     private final String creatureName;
 
-    AzraOddsmakerDelayedTriggeredAbility(FilterCreaturePermanent filter, String creatureName) {
-        super(new DrawCardSourceControllerEffect(2), Duration.EndOfTurn, false);
-        this.filter = filter;
+    public AzraOddsmakerDelayedTriggeredAbility(MageObjectReference mor, String creatureName) {
+        super(new DrawCardSourceControllerEffect(2), Duration.EndOfTurn, false, false);
+        this.mor = mor;
         this.creatureName = creatureName;
     }
 
-    AzraOddsmakerDelayedTriggeredAbility(final AzraOddsmakerDelayedTriggeredAbility ability) {
+    public AzraOddsmakerDelayedTriggeredAbility(final AzraOddsmakerDelayedTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
+        this.mor = ability.mor;
         this.creatureName = ability.creatureName;
     }
 
@@ -125,17 +125,15 @@ class AzraOddsmakerDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getFlag()) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && filter.match(permanent, game)) {
-                return true;
-            }
+        if (((DamagedPlayerEvent) event).isCombatDamage()) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            return mor.refersTo(permanent, game);
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever " + creatureName + " deals damage to a player this turn, you draw two cards";
+        return "Whenever " + creatureName + " deals combat damage to a player this turn, you draw two cards";
     }
 }

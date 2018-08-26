@@ -42,7 +42,7 @@ public final class AzorTheLawbringer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Azor, the Lawbringer enters the battlefield, each opponent can’t cast instant or sorcery spells during that player’s next turn.
+        // When Azor, the Lawbringer enters the battlefield, each opponent can't cast instant or sorcery spells during that player's next turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AzorTheLawbringerEntersBattlefieldEffect(), false));
 
         // Whenever Azor attacks, you may pay {X}{W}{U}{U}. If you do, you gain X life and draw X cards.
@@ -123,7 +123,7 @@ class AzorTheLawbringerCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         UUID opponentId = getTargetPointer().getFirst(game, source);
-        if (game.getActivePlayerId().equals(opponentId)) {
+        if (game.isActivePlayer(opponentId)) {
             if (playersNextTurn == 0) {
                 playersNextTurn = game.getTurnNum();
             }

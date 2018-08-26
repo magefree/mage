@@ -93,7 +93,7 @@ class KopalaWardenOfWavesCostReductionEffect extends CostModificationEffectImpl 
                             Permanent creature = game.getPermanent(targetUUID);
                             if (creature != null
                                     && filter.match(creature, game)
-                                    && creature.getControllerId().equals(source.getControllerId())) {
+                                    && creature.isControlledBy(source.getControllerId())) {
                                 return true;
                             }
                         }
@@ -144,7 +144,7 @@ class KopalaWardenOfWavesCostReductionEffect2 extends CostModificationEffectImpl
                         Permanent creature = game.getPermanent(targetUUID);
                         if (creature != null
                                 && filter.match(creature, game)
-                                && creature.getControllerId().equals(source.getControllerId())) {
+                                && creature.isControlledBy(source.getControllerId())) {
                             return true;
                         }
                     }

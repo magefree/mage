@@ -3,6 +3,8 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Stream;
+
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
@@ -12,6 +14,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -60,19 +63,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean hasFirstOrDoubleStrike(Game game) {
-        for (UUID permId : attackers) {
-            Permanent attacker = game.getPermanent(permId);
-            if (attacker != null && hasFirstOrDoubleStrike(attacker)) {
-                return true;
-            }
-        }
-        for (UUID permId : blockers) {
-            Permanent blocker = game.getPermanent(permId);
-            if (blocker != null && hasFirstOrDoubleStrike(blocker)) {
-                return true;
-            }
-        }
-        return false;
+        return Stream.concat(attackers.stream(), blockers.stream())
+                .map(id -> game.getPermanent(id))
+                .filter(Objects::nonNull)
+                .anyMatch(this::hasFirstOrDoubleStrike);
+
     }
 
     public UUID getDefenderId() {
@@ -124,11 +119,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     return;
                 } else {
                     Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : attacker.getControllerId());
-                    if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) { // for handling creatures like Thorn Elemental
-                        if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", null, game)) {
-                            blocked = false;
-                            unblockedDamage(first, game);
-                        }
+                    if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
+                            player.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
+                            + attacker.getLogName() + " as though it weren't blocked?", null, game)) ||
+                            game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED
+                                    , null, attacker.getControllerId(), game) != null) {
+                        // for handling creatures like Thorn Elemental
+                        blocked = false;
+                        unblockedDamage(first, game);
                     }
                     if (blockers.size() == 1) {
                         singleBlockerDamage(player, first, game);
@@ -869,7 +867,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         // for handling Butcher Orgg
         if (creature.getAbilities().containsKey(ControllerDivideCombatDamageAbility.getInstance().getId())) {
             Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : (!isAttacking && attackerAssignsCombatDamage(game) ? game.getCombat().getAttackingPlayerId() : playerId));
-            // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won’t be able to deal combat damage and you won’t be able to use its ability.
+            // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won't be able to deal combat damage and you won't be able to use its ability.
             // (same principle should apply if it's blocking and its blocked attacker is removed from combat)
             if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking)) && canDamage(creature, first)) {
                 if (player.chooseUse(Outcome.Damage, "Do you wish to assign " + creature.getLogName() + "'s combat damage divided among defending player and/or any number of defending creatures?", null, game)) {

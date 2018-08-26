@@ -1,10 +1,9 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +28,7 @@ public final class TunnelVision extends CardImpl {
         // Name a card. Target player reveals cards from the top of their library until the named card is revealed.
         // If it is, that player puts the rest of the revealed cards into their graveyard and puts the named card on top of their library.
         // Otherwise, the player shuffles their library.
-        this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
+        this.getSpellAbility().addEffect(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new TunnelVisionEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -48,7 +47,11 @@ class TunnelVisionEffect extends OneShotEffect {
 
     public TunnelVisionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player reveals cards from the top of their library until the named card is revealed. If it is, that player puts the rest of the revealed cards into their graveyard and puts the named card on top of their library. Otherwise, the player shuffles their library.";
+        this.staticText = "Target player reveals cards from the top of their library "
+                + "until a card with that name is revealed. If it is, that player puts "
+                + "the rest of the revealed cards into their graveyard and "
+                + "puts the card with the chosen name on top of their library. "
+                + "Otherwise, the player shuffles their library";
     }
 
     public TunnelVisionEffect(final TunnelVisionEffect effect) {
@@ -63,7 +66,7 @@ class TunnelVisionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (targetPlayer == null || cardName == null || cardName.isEmpty()) {
             return false;
         }

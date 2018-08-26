@@ -107,7 +107,7 @@ class MizzixOfTheIzmagnusCostReductionEffect extends CostModificationEffectImpl 
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility && abilityToModify.getControllerId().equals(source.getControllerId())) {
+        if (abilityToModify instanceof SpellAbility && abilityToModify.isControlledBy(source.getControllerId())) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
                 return StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(spell, source.getSourceId(), source.getControllerId(), game);

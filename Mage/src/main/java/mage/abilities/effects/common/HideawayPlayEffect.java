@@ -51,7 +51,7 @@ public class HideawayPlayEffect extends OneShotEffect {
                  */
                 if (card.isLand()) {
                     UUID playerId = controller.getId();
-                    if (!game.getActivePlayerId().equals(playerId) || !game.getPlayer(playerId).canPlayLand()) {
+                    if (!game.isActivePlayer(playerId) || !game.getPlayer(playerId).canPlayLand()) {
                         return false;
                     }
                 }

@@ -43,9 +43,9 @@ public final class TetsukoUmezawaFugitive extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Creatures you control with power or toughness 1 or less can’t be blocked.
+        // Creatures you control with power or toughness 1 or less can't be blocked.
         Effect effect = new CantBeBlockedAllEffect(filter, Duration.Custom);
-        effect.setText("Creatures you control with power or toughness 1 or less can’t be blocked");
+        effect.setText("Creatures you control with power or toughness 1 or less can't be blocked");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

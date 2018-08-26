@@ -57,7 +57,7 @@ class DefenseGridCostModificationEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if (!abilityToModify.getControllerId().equals(game.getActivePlayerId())) {
+            if (!abilityToModify.isControlledBy(game.getActivePlayerId())) {
                 return true;
             }
         }

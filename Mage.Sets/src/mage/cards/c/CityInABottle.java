@@ -97,7 +97,7 @@ public final class CityInABottle extends CardImpl {
         namePredicatesArabianNights.add(new NamePredicate("Jandor's Saddlebags"));
         namePredicatesArabianNights.add(new NamePredicate("Jeweled Bird"));
         namePredicatesArabianNights.add(new NamePredicate("Jihad"));
-        namePredicatesArabianNights.add(new NamePredicate("Junún Efreet"));
+        namePredicatesArabianNights.add(new NamePredicate("Junun Efreet"));
         namePredicatesArabianNights.add(new NamePredicate("Juzam Djinn"));
         namePredicatesArabianNights.add(new NamePredicate("Khabal Ghoul"));
         namePredicatesArabianNights.add(new NamePredicate("King Suleiman"));

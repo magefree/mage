@@ -23,7 +23,8 @@ public final class RukhEgg extends CardImpl {
 
     public RukhEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.BIRD, SubType.EGG);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

@@ -59,11 +59,11 @@ class TeferisProtectionEffect extends OneShotEffect {
      *
      * 25.08.2017 If a player has protection from everything, it means three
      * things: 1) All damage that would be dealt to that player is prevented. 2)
-     * Auras can’t be attached to that player. 3) That player can’t be the
+     * Auras can't be attached to that player. 3) That player can't be the
      * target of spells or abilities.
      *
      * 25.08.2017 Nothing other than the specified events are prevented or
-     * illegal. An effect that doesn’t target you could still cause you to
+     * illegal. An effect that doesn't target you could still cause you to
      * discard cards, for example. Creatures can still attack you while you have
      * protection from everything, although combat damage that they would deal
      * to you will be prevented.

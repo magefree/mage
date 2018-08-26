@@ -45,12 +45,12 @@ public final class RadiantDestiny extends CardImpl {
         // As Radiant Destiny enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
 
-        // Creatures you control of the chosen type get +1/+1. As long as you have the city’s blessing, they also have vigilance.
+        // Creatures you control of the chosen type get +1/+1. As long as you have the city's blessing, they also have vigilance.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
         ContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainAbilityAllOfChosenSubtypeEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES_CONTROLLED),
                 CitysBlessingCondition.instance,
-                "As long as you have the city’s blessing, they also have vigilance.");
+                "As long as you have the city's blessing, they also have vigilance.");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

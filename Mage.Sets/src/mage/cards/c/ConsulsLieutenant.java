@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.RenownAbility;
@@ -34,7 +34,7 @@ public final class ConsulsLieutenant extends CardImpl {
         // Renown 1
         this.addAbility(new RenownAbility(1));
         // Whenever Consul's Lieutenant attacks, if it's renowned, other attacking creatures you control get +1/+1 until end of turn.
-        this.addAbility(new ConditionalTriggeredAbility(new AttacksTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new AttacksTriggeredAbility(
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterAttackingCreature("other attacking creatures you control"), true), false),
                 RenownedSourceCondition.instance,
                 "Whenever Consul's Lieutenant attacks, if it's renowned, other attacking creatures you control get +1/+1 until end of turn."));

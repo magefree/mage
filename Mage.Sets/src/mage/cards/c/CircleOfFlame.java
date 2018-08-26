@@ -77,7 +77,7 @@ class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = game.getPermanent(event.getTargetId());
             youOrYourPlaneswalker = permanent != null
                     && permanent.isPlaneswalker()
-                    && permanent.getControllerId().equals(this.getControllerId());
+                    && permanent.isControlledBy(this.getControllerId());
         }
         if (youOrYourPlaneswalker) {
             for (Effect effect : this.getEffects()) {

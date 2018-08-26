@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -62,7 +61,7 @@ class OustEffect extends OneShotEffect {
             if (owner == null || controller == null) {
                 return false;
             }
-            owner.getLibrary().putCardToTopXPos(permanent, 2, game);
+            owner.putCardOnTopXOfLibrary(permanent, game, source, 2);
             controller.gainLife(3, game, source);
         }
         return true;

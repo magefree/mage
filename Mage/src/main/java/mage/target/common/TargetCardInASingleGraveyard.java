@@ -34,7 +34,7 @@ public class TargetCardInASingleGraveyard extends TargetCard {
             Card card = game.getCard(firstTarget);
             Card targetCard = game.getCard(id);
             if (card == null || targetCard == null
-                    || !card.getOwnerId().equals(targetCard.getOwnerId())) {
+                    || !card.isOwnedBy(targetCard.getOwnerId())) {
                 return false;
             }
         }

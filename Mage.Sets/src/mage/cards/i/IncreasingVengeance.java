@@ -38,7 +38,7 @@ public final class IncreasingVengeance extends CardImpl {
     public IncreasingVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
 
-        // Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
+        // Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
         this.getSpellAbility().addEffect(new IncreasingVengeanceEffect());
         Target target = new TargetSpell(filter);
         this.getSpellAbility().addTarget(target);
@@ -61,7 +61,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
 
     public IncreasingVengeanceEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies";
+        staticText = "Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies";
     }
 
     public IncreasingVengeanceEffect(final IncreasingVengeanceEffect effect) {
@@ -75,14 +75,14 @@ class IncreasingVengeanceEffect extends OneShotEffect {
             Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
             if (spell != null) {
                 StackObject stackObjectCopy = spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                if (stackObjectCopy != null && stackObjectCopy instanceof Spell) {
+                if (stackObjectCopy instanceof Spell) {
                     game.informPlayers(new StringBuilder(controller.getLogName()).append(((Spell) stackObjectCopy).getActivatedMessage(game)).toString());
                 }
                 Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
                 if (sourceSpell != null) {
                     if (sourceSpell.getFromZone() == Zone.GRAVEYARD) {
                         stackObjectCopy = spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                        if (stackObjectCopy != null && stackObjectCopy instanceof Spell) {
+                        if (stackObjectCopy instanceof Spell) {
                             game.informPlayers(new StringBuilder(controller.getLogName()).append(((Spell) stackObjectCopy).getActivatedMessage(game)).toString());
                         }
                     }

@@ -1,14 +1,11 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -16,17 +13,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -47,7 +40,6 @@ public final class RiptideEntrancer extends CardImpl {
 
         // Morph {U}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}{U}")));
-
     }
 
     public RiptideEntrancer(final RiptideEntrancer card) {
@@ -63,7 +55,10 @@ public final class RiptideEntrancer extends CardImpl {
 class RiptideEntrancerTriggeredAbility extends TriggeredAbilityImpl {
 
     public RiptideEntrancerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RiptideEntrancerEffect(), true);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(
+                new GainControlTargetEffect(Duration.Custom),
+                new SacrificeSourceCost()
+        ), true);
     }
 
     public RiptideEntrancerTriggeredAbility(final RiptideEntrancerTriggeredAbility ability) {
@@ -95,48 +90,7 @@ class RiptideEntrancerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, you may sacrifice it. If you do, gain control of target creature that player controls";
-    }
-}
-
-class RiptideEntrancerEffect extends OneShotEffect {
-
-    public RiptideEntrancerEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "sacrifice {this}";
-    }
-
-    public RiptideEntrancerEffect(final RiptideEntrancerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RiptideEntrancerEffect copy() {
-        return new RiptideEntrancerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (sourceObject == null) {
-            if (source.getSourceObject(game) instanceof Spell) {
-                sourceObject = game.getPermanent(source.getSourceId());
-                if (sourceObject != null && sourceObject.getZoneChangeCounter(game) > source.getSourceObjectZoneChangeCounter() + 1) {
-                    return false;
-                }
-            }
-        }
-        if (sourceObject instanceof Permanent) {
-            Permanent permanent = (Permanent) sourceObject;
-            if (source.getControllerId().equals(permanent.getControllerId())) {
-                ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom);
-                effect.setTargetPointer(new FixedTarget(targetPermanent.getId()));
-                game.addEffect(effect, source);
-                return permanent.sacrifice(source.getSourceId(), game);
-            }
-            return true;
-        }
-        return false;
+        return "Whenever {this} deals combat damage to a player, you may sacrifice it. "
+                + "If you do, gain control of target creature that player controls";
     }
 }

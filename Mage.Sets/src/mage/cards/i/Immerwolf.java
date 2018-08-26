@@ -90,7 +90,7 @@ class ImmerwolfEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && 
-                permanent.getControllerId().equals(source.getControllerId()) && 
+                permanent.isControlledBy(source.getControllerId()) &&
                 filter.match(permanent, game) ;
     }
 }

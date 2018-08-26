@@ -26,6 +26,7 @@ public final class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Impersonators", 56, Rarity.COMMON, mage.cards.e.ElvishImpersonators.class));
         cards.add(new SetCardInfo("Forest", 88, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Fowl Play", 24, Rarity.COMMON, mage.cards.f.FowlPlay.class));
+        cards.add(new SetCardInfo("Gerrymandering", 59, Rarity.UNCOMMON, mage.cards.g.Gerrymandering.class));
         cards.add(new SetCardInfo("Goblin Tutor", 45, Rarity.UNCOMMON, mage.cards.g.GoblinTutor.class));
         cards.add(new SetCardInfo("Growth Spurt", 61, Rarity.COMMON, mage.cards.g.GrowthSpurt.class));
         cards.add(new SetCardInfo("Hungry Hungry Heifer", 63, Rarity.UNCOMMON, mage.cards.h.HungryHungryHeifer.class));
@@ -42,6 +43,7 @@ public final class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Poultrygeist", 37, Rarity.COMMON, mage.cards.p.Poultrygeist.class));
         cards.add(new SetCardInfo("Rock Lobster", 79, Rarity.COMMON, mage.cards.r.RockLobster.class));
         cards.add(new SetCardInfo("Scissors Lizard", 80, Rarity.COMMON, mage.cards.s.ScissorsLizard.class));
+        cards.add(new SetCardInfo("Spark Fiend", 51, Rarity.RARE, mage.cards.s.SparkFiend.class));
         cards.add(new SetCardInfo("Strategy, Schmategy", 52, Rarity.RARE, mage.cards.s.StrategySchmategy.class));
         cards.add(new SetCardInfo("Swamp", 86, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("The Cheese Stands Alone", 2, Rarity.RARE, mage.cards.t.TheCheeseStandsAlone.class));

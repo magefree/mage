@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -23,7 +22,9 @@ public final class SupernaturalStamina extends CardImpl {
 
         // Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."
         getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn)
+                .setText("Until end of turn, target creature gets +2/+0")
+        );
         getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 new DiesTriggeredAbility(
                         new ReturnSourceFromGraveyardToBattlefieldEffect(true, true),
