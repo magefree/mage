@@ -220,7 +220,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("DDS");
         supportedSets.add("W17");
         supportedSets.add("AKH");
-        supportedSets.add("MPS");
         supportedSets.add("CMA");
         supportedSets.add("CM2"); // Commander Anthology, Vol. II
         supportedSets.add("E01");
@@ -236,10 +235,12 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("RIX"); // Rivals of Ixalan
         supportedSets.add("A25"); // Masters 25
         supportedSets.add("DOM"); // Dominaria
+        supportedSets.add("BBD"); // Battlebond
+        supportedSets.add("GS1"); // Global Series: Jiang Yanggu and Mu Yanling
         supportedSets.add("M19"); // Core 2019
+        supportedSets.add("C18"); // Commander 2018
 //      supportedSets.add("GRN"); // Guilds of Ravnica
 //      supportedSets.add("RNA"); // Ravnica Allegiance
-        supportedSets.add("C18"); // Commander 2018
 
         sets = new HashMap<>();
         setsAliases = new HashMap<>();

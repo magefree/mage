@@ -189,7 +189,6 @@ public enum MagidexImageSource implements CardImageSource {
         supportedSets.add("CN2");
         supportedSets.add("DDR");
         supportedSets.add("KLD");
-        supportedSets.add("MPS");
         // supportedSets.add("PZ2"); // Treasure Chests
         supportedSets.add("C16");
         supportedSets.add("PCA");
@@ -213,8 +212,10 @@ public enum MagidexImageSource implements CardImageSource {
         supportedSets.add("RIX");
         supportedSets.add("A25");
         supportedSets.add("DOM");
-//        supportedSets.add("CM2");
-//        supportedSets.add("M19");
+        supportedSets.add("CM2");
+        supportedSets.add("M19");
+        //supportedSets.add("BBD");
+        //supportedSets.add("C18");
     }
 
     @Override
