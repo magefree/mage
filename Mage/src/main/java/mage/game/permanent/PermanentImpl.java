@@ -1439,20 +1439,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     //20180810 - 701.3d
     //If an object leaves the zone it's in, all attached permanents become unattached
+    //note that this code doesn't actually detach anything, and is a bit of a bandaid
     public void detachAllAttachments(Game game) {
         for(UUID attachmentId : getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
             Card attachmentCard = game.getCard(attachmentId);
             if(attachment != null && attachmentCard != null) {
-                attachment.attachTo(null, game);
-                
                 //make bestow cards and licids into creatures
-                if(attachmentCard.isCreature()) {
+                //aura test to stop bludgeon brawl shenanigans from using this code
+                //consider adding code to handle that case?
+                if(attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature()) {
                     BestowAbility.becomeCreature(attachment, game);
                 }
-                
-                game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED,
-                        getId(), attachment.getId(), attachment.getControllerId()));
             }
         }
     }
