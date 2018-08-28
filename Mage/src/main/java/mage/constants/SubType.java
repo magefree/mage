@@ -93,6 +93,7 @@ public enum SubType {
     CHIMERA("Chimera", SubTypeSet.CreatureType),
     CHISS("Chiss", SubTypeSet.CreatureType, true),
     CITIZEN("Citizen", SubTypeSet.CreatureType),
+    CLAMFOLK("Clamfolk", SubTypeSet.CreatureType, true), // Unglued
     CLERIC("Cleric", SubTypeSet.CreatureType),
     COCKATRICE("Cockatrice", SubTypeSet.CreatureType),
     CONSTRUCT("Construct", SubTypeSet.CreatureType),
