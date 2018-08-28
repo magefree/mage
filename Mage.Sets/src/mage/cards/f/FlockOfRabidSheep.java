@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.SoldierToken;
+import mage.game.permanent.token.RabidSheepToken;
 import mage.players.Player;
 
 /**
