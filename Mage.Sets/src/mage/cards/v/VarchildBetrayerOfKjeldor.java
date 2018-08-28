@@ -108,9 +108,12 @@ class VarchildBetrayerOfKjeldorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damage = (int) this.getValue("damage");
         if (damage > 0) {
-            return new CreateTokenTargetEffect(
+            CreateTokenTargetEffect createToken = new CreateTokenTargetEffect(
                     new SurvivorToken(), damage
-            ).apply(game, source);
+            );
+            //copy the target from this effect to other effect (actually a direct reference)
+            createToken.setTargetPointer(targetPointer);
+            return createToken.apply(game, source);
         }
         return false;
     }
