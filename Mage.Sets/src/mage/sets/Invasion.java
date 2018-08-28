@@ -165,6 +165,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Loafing Giant", 153, Rarity.RARE, mage.cards.l.LoafingGiant.class));
         cards.add(new SetCardInfo("Lobotomy", 255, Rarity.UNCOMMON, mage.cards.l.Lobotomy.class));
         cards.add(new SetCardInfo("Lotus Guardian", 305, Rarity.RARE, mage.cards.l.LotusGuardian.class));
+        cards.add(new SetCardInfo("Mages' Contest", 154, Rarity.RARE, mage.cards.m.MagesContest.class));
         cards.add(new SetCardInfo("Mana Maze", 59, Rarity.RARE, mage.cards.m.ManaMaze.class));
         cards.add(new SetCardInfo("Maniacal Rage", 155, Rarity.COMMON, mage.cards.m.ManiacalRage.class));
         cards.add(new SetCardInfo("Manipulate Fate", 60, Rarity.UNCOMMON, mage.cards.m.ManipulateFate.class));
