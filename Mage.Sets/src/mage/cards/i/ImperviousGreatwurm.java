@@ -20,7 +20,6 @@ public final class ImperviousGreatwurm extends CardImpl {
     public ImperviousGreatwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{G}{G}{G}");
         this.subtype.add(SubType.WURM);
-        this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(16);
         this.toughness = new MageInt(16);
