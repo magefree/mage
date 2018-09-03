@@ -75,7 +75,7 @@ class BrudicladTelchorCombatffect extends OneShotEffect {
 
     public BrudicladTelchorCombatffect() {
         super(Outcome.Sacrifice);
-        this.staticText = " you may choose a token you control. If you do, each other token you control becomes a copy of that token";
+        this.staticText = " create a 2/1 blue Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token";
     }
 
     public BrudicladTelchorCombatffect(final BrudicladTelchorCombatffect effect) {
