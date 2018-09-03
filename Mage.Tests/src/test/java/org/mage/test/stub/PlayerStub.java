@@ -1258,6 +1258,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean surveil(int value, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
     public boolean addTargets(Ability ability, Game game) {
         return false;
     }

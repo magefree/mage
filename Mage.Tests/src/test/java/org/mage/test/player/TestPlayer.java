@@ -2573,6 +2573,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean surveil(int value, Ability source,
+            Game game
+    ) {
+        return computerPlayer.surveil(value, source, game);
+    }
+
+    @Override
     public boolean moveCards(Card card, Zone toZone,
             Ability source, Game game
     ) {
