@@ -24,9 +24,9 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public final class YennetCryptSovereign extends CardImpl {
+public final class YennettCrypticSovereign extends CardImpl {
 
-    public YennetCryptSovereign(UUID ownerId, CardSetInfo setInfo) {
+    public YennettCrypticSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -43,25 +43,25 @@ public final class YennetCryptSovereign extends CardImpl {
         // Menace
         this.addAbility(new MenaceAbility());
 
-        // Whenever Yennet, Crypt Sovereign attacks, reveal the top card of your library. If that card's converted mana cost is odd, you may cast it without paying its mana cost. Otherwise, draw a card.
+        // Whenever Yennett, Cryptic Sovereign attacks, reveal the top card of your library. If that card's converted mana cost is odd, you may cast it without paying its mana cost. Otherwise, draw a card.
         this.addAbility(new AttacksTriggeredAbility(
-                new YennetCryptSovereignEffect(), false
+                new YennettCrypticSovereignEffect(), false
         ));
     }
 
-    public YennetCryptSovereign(final YennetCryptSovereign card) {
+    public YennettCrypticSovereign(final YennettCrypticSovereign card) {
         super(card);
     }
 
     @Override
-    public YennetCryptSovereign copy() {
-        return new YennetCryptSovereign(this);
+    public YennettCrypticSovereign copy() {
+        return new YennettCrypticSovereign(this);
     }
 }
 
-class YennetCryptSovereignEffect extends OneShotEffect {
+class YennettCrypticSovereignEffect extends OneShotEffect {
 
-    public YennetCryptSovereignEffect() {
+    public YennettCrypticSovereignEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal the top card of your library. "
                 + "If that card's converted mana cost is odd, "
@@ -69,13 +69,13 @@ class YennetCryptSovereignEffect extends OneShotEffect {
                 + "Otherwise, draw a card";
     }
 
-    public YennetCryptSovereignEffect(final YennetCryptSovereignEffect effect) {
+    public YennettCrypticSovereignEffect(final YennettCrypticSovereignEffect effect) {
         super(effect);
     }
 
     @Override
-    public YennetCryptSovereignEffect copy() {
-        return new YennetCryptSovereignEffect(this);
+    public YennettCrypticSovereignEffect copy() {
+        return new YennettCrypticSovereignEffect(this);
     }
 
     @Override
