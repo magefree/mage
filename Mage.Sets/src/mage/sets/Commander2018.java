@@ -324,7 +324,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Xantcha, Sleeper Agent", 50, Rarity.RARE, mage.cards.x.XantchaSleeperAgent.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 166, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Yavimaya Enchantress", 167, Rarity.COMMON, mage.cards.y.YavimayaEnchantress.class));
-        cards.add(new SetCardInfo("Yennett, Cryptic Sovereign", 51, Rarity.MYTHIC, mage.cards.y.YennetCryptSovereign.class));
+        cards.add(new SetCardInfo("Yennett, Cryptic Sovereign", 51, Rarity.MYTHIC, mage.cards.y.YennettCrypticSovereign.class));
         cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 52, Rarity.RARE, mage.cards.y.YurikoTheTigersShadow.class));
         cards.add(new SetCardInfo("Zendikar Incarnate", 195, Rarity.UNCOMMON, mage.cards.z.ZendikarIncarnate.class));
     }
