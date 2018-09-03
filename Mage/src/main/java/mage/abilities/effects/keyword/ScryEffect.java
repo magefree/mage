@@ -1,10 +1,8 @@
-
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -14,8 +12,6 @@ import mage.util.CardUtil;
  * @author BetaSteward_at_googlemail.com
  */
 public class ScryEffect extends OneShotEffect {
-
-    protected static FilterCard filter1 = new FilterCard("card to put on the bottom of your library");
 
     protected int scryNumber;
 

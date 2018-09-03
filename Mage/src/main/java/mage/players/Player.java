@@ -870,6 +870,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean scry(int value, Ability source, Game game);
 
+    boolean surveil(int value, Ability source, Game game);
+
     /**
      * Only used for test player for pre-setting targets
      *

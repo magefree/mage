@@ -3898,7 +3898,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!cards.isEmpty()) {
             String text;
             if (cards.size() == 1) {
-                text = "card if you want to put it to the bottom of your library (Scry)";
+                text = "card if you want to put it on the bottom of your library (Scry)";
             } else {
                 text = "cards you want to put on the bottom of your library (Scry)";
             }
@@ -3909,6 +3909,29 @@ public abstract class PlayerImpl implements Player, Serializable {
             putCardsOnTopOfLibrary(cards, game, source, true);
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, getId(), source == null ? null : source.getSourceId(), getId(), value, true));
+        return true;
+    }
+
+    @Override
+    public boolean surveil(int value, Ability source, Game game) {
+        game.informPlayers(getLogName() + " surveils " + value);
+        Cards cards = new CardsImpl();
+        cards.addAll(getLibrary().getTopCards(game, value));
+        if (!cards.isEmpty()) {
+            String text;
+            if (cards.size() == 1) {
+                text = "card if you want to put it into your graveyard (Surveil)";
+            } else {
+                text = "cards you want to put into your graveyard (Surveil)";
+            }
+            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard(text));
+            chooseTarget(Outcome.Benefit, cards, target, source, game);
+            moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
+            cards.removeAll(target.getTargets());
+            putCardsOnTopOfLibrary(cards, game, source, true);
+        }
+//        Waiting to see if this event is needed - TheElk801
+//        game.fireEvent(new GameEvent(GameEvent.EventType.SURVEIL, getId(), source == null ? null : source.getSourceId(), getId(), value, true));
         return true;
     }
 
