@@ -19,7 +19,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
 public class JumpStartAbility extends SpellAbility {
 
