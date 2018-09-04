@@ -82,6 +82,9 @@ public class VerifyCardDataTest {
 
         // number
         skipListCreate("NUMBER");
+
+        // missing abilities
+        skipListCreate("MISSING_ABILITIES");
     }
 
     public static List<Card> allCards() {
@@ -440,6 +443,7 @@ public class VerifyCardDataTest {
         checkColors(card, ref);
         //checkNumbers(card, ref); // TODO: load data from allsets.json and check it (allcards.json do not have card numbers)
         checkBasicLands(card, ref);
+        checkMissingAbilities(card, ref);
     }
 
     private void checkColors(Card card, JsonCard ref) {
@@ -472,7 +476,7 @@ public class VerifyCardDataTest {
         // fix names (e.g. Urza’s to Urza's)
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
+            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
                 if (it.next().equals("Urza’s")) {
                     it.set("Urza's");
                 }
@@ -507,6 +511,33 @@ public class VerifyCardDataTest {
         }
         if (!eqSet(type, expected)) {
             fail(card, "types", type + " != " + expected);
+        }
+    }
+
+    private void checkMissingAbilities(Card card, JsonCard ref) {
+        if (skipListHaveName("MISSING_ABILITIES", card.getName())) {
+            return;
+        }
+
+        // search missing abilities from card source
+
+        if (ref.text == null || ref.text.isEmpty()) {
+            return;
+        }
+
+        // spells have only 1 abilities
+        if (card.isSorcery() || card.isInstant()) {
+            return;
+        }
+
+        // additional cost go to 1 ability
+        if (ref.text.startsWith("As an additional cost to cast")) {
+            return;
+        }
+
+        // always 1 ability (to cast)
+        if (card.getAbilities().toArray().length == 1) { // all cards have 1 inner ability to cast
+            fail(card, "abilities", "card's abilities is empty, but ref have text");
         }
     }
 
