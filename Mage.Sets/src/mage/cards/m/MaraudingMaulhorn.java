@@ -2,22 +2,20 @@
 package mage.cards.m;
 
 import java.util.UUID;
+
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MaraudingMaulhorn extends CardImpl {
@@ -29,7 +27,7 @@ public final class MaraudingMaulhorn extends CardImpl {
     }
 
     public MaraudingMaulhorn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(5);
@@ -40,6 +38,7 @@ public final class MaraudingMaulhorn extends CardImpl {
                 new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control a creature named Advocate of the Beast");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public MaraudingMaulhorn(final MaraudingMaulhorn card) {

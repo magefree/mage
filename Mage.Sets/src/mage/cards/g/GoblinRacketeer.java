@@ -2,6 +2,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -16,7 +17,6 @@ import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author TheElk801
  */
 public final class GoblinRacketeer extends CardImpl {
@@ -35,6 +35,7 @@ public final class GoblinRacketeer extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(new GoadTargetEffect(), true, "Whenever {this} attacks, you may goad target creature defending player controls");
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
         originalId = ability.getOriginalId();
+        this.addAbility(ability);
     }
 
     public GoblinRacketeer(final GoblinRacketeer card) {
