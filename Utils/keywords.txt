@@ -51,7 +51,7 @@ Intimidate|instance|
 Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
-Kick-start|card|
+Jump-start|card|
 Level up|cost|
 Lifelink|instance|
 Living weapon|new|
