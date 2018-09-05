@@ -22,6 +22,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
 
+        cards.add(new SetCardInfo("Arboretum Elemental", 122, Rarity.UNCOMMON, mage.cards.a.ArboretumElemental.class));
         cards.add(new SetCardInfo("Blade Instructor", 1, Rarity.COMMON, mage.cards.b.BladeInstructor.class));
         cards.add(new SetCardInfo("Barging Sergeant", 92, Rarity.COMMON, mage.cards.b.BargingSergeant.class));
         cards.add(new SetCardInfo("Boros Challenger", 156, Rarity.UNCOMMON, mage.cards.b.BorosChallenger.class));
