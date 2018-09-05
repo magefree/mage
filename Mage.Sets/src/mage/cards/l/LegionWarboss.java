@@ -106,8 +106,8 @@ class LegionWarbossAbility extends StaticAbility {
 
     public LegionWarbossAbility() {
         super(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(
-                Duration.WhileOnBattlefield, false
-        ));
+                Duration.WhileOnBattlefield, true
+        ).setText("this creature attacks this combat if able"));
     }
 
     public LegionWarbossAbility(LegionWarbossAbility ability) {
