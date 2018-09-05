@@ -19,9 +19,9 @@ import mage.game.Game;
  */
 public class MostCommonColorCondition implements Condition {
 
-    protected ObjectColor compareColor;
-    protected boolean isMono;
-    protected Predicate predicate;
+    protected final ObjectColor compareColor;
+    protected final boolean isMono;
+    protected final Predicate predicate;
 
     public MostCommonColorCondition(ObjectColor color) {
         this(color, false, null);
@@ -31,6 +31,7 @@ public class MostCommonColorCondition implements Condition {
     public MostCommonColorCondition(ObjectColor color, boolean isMono, Predicate predicate) {
         this.compareColor = color;
         this.isMono = isMono;
+        this.predicate = predicate;
     }
 
     @Override
