@@ -59,6 +59,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Thought Erasure", 206, Rarity.UNCOMMON, mage.cards.t.ThoughtErasure.class));
         cards.add(new SetCardInfo("Underrealm Lich", 211, Rarity.MYTHIC, mage.cards.u.UnderrealmLich.class));
         cards.add(new SetCardInfo("Unexplained Disappearance", 56, Rarity.COMMON, mage.cards.u.UnexplainedDisappearance.class));
+        cards.add(new SetCardInfo("Wary Okapi", 149, Rarity.COMMON, mage.cards.w.WaryOkapi.class));
         cards.add(new SetCardInfo("Watery Grave", 259, Rarity.RARE, mage.cards.w.WateryGrave.class));
     }
 }
