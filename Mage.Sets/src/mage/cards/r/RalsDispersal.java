@@ -19,7 +19,7 @@ public final class RalsDispersal extends CardImpl {
     private final static FilterCard filter = new FilterCard("Ral, Caller of Storms");
 
     static {
-        filter.add(new NamePredicate("Ral, Caller of Stormss"));
+        filter.add(new NamePredicate("Ral, Caller of Storms"));
     }
 
     public RalsDispersal(UUID ownerId, CardSetInfo setInfo) {
