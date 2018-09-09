@@ -72,13 +72,6 @@ public class VerifyCardDataTest {
 
         // subtype
         skipListCreate("SUBTYPE");
-        skipListAddName("SUBTYPE", "Dragon Egg"); // remove when MTGJSON is updated with M19
-        skipListAddName("SUBTYPE", "Rukh Egg"); // remove when MTGJSON is updated with M19
-        skipListAddName("SUBTYPE", "Roc Egg"); // remove when MTGJSON is updated with M19
-        skipListAddName("SUBTYPE", "Summoner's Egg"); // remove when MTGJSON is updated with M19
-        skipListAddName("SUBTYPE", "Ludevic's Test Subject"); // remove when MTGJSON is updated with M19
-        skipListAddName("SUBTYPE", "Prowling Pangolin"); // remove when MTGJSON is updated with M19
-        skipListAddName("SUBTYPE", "Electryte"); // remove when MTGJSON is updated with M19
 
         // number
         skipListCreate("NUMBER");
@@ -476,7 +469,7 @@ public class VerifyCardDataTest {
         // fix names (e.g. Urza’s to Urza's)
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
+            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
                 if (it.next().equals("Urza’s")) {
                     it.set("Urza's");
                 }
@@ -520,7 +513,6 @@ public class VerifyCardDataTest {
         }
 
         // search missing abilities from card source
-
         if (ref.text == null || ref.text.isEmpty()) {
             return;
         }
