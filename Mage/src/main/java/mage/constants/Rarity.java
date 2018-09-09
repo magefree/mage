@@ -6,7 +6,6 @@ package mage.constants;
  */
 public enum Rarity {
 
-    NA ("na", "na", "N", 0),
     LAND ("Land", "common", "C", 1),
     COMMON ("Common", "common", "C", 1),
     UNCOMMON ("Uncommon", "uncommon", "U", 2),
