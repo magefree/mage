@@ -64,6 +64,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Sonic Assault", 199, Rarity.COMMON, mage.cards.s.SonicAssault.class));
         cards.add(new SetCardInfo("Status // Statue", 230, Rarity.UNCOMMON, mage.cards.s.StatusStatue.class));
         cards.add(new SetCardInfo("Steam Vents", 257, Rarity.RARE, mage.cards.s.SteamVents.class));
+        cards.add(new SetCardInfo("Sumala Woodshaper", 200, Rarity.COMMON, mage.cards.s.SumalaWoodshaper.class));
         cards.add(new SetCardInfo("Sunhome Stalwart", 26, Rarity.UNCOMMON, mage.cards.s.SunhomeStalwart.class));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 258, Rarity.RARE, mage.cards.t.TempleGarden.class));
