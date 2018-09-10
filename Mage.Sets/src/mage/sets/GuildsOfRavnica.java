@@ -58,6 +58,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ral's Staticaster", 268, Rarity.UNCOMMON, mage.cards.r.RalsStaticaster.class));
         cards.add(new SetCardInfo("Ral, Caller of Storms", 265, Rarity.MYTHIC, mage.cards.r.RalCallerOfStorms.class));
         cards.add(new SetCardInfo("Ral, Izzet Viceroy", 195, Rarity.MYTHIC, mage.cards.r.RalIzzetViceroy.class));
+        cards.add(new SetCardInfo("Response // Resurgence", 229, Rarity.RARE, mage.cards.r.ResponseResurgence.class));
         cards.add(new SetCardInfo("Rosemane Centaur", 197, Rarity.COMMON, mage.cards.r.RosemaneCentaur.class));
         cards.add(new SetCardInfo("Sacred Foundry", 254, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Sinister Sabotage", 54, Rarity.UNCOMMON, mage.cards.s.SinisterSabotage.class));
