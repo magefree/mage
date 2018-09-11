@@ -71,6 +71,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Murmuring Mystic", 45, Rarity.UNCOMMON, mage.cards.m.MurmuringMystic.class));
         cards.add(new SetCardInfo("Narcomoeba", 47, Rarity.RARE, mage.cards.n.Narcomoeba.class));
         cards.add(new SetCardInfo("Necrotic Wound", 79, Rarity.UNCOMMON, mage.cards.n.NecroticWound.class));
+        cards.add(new SetCardInfo("Nightveil Faerie", 48, Rarity.UNCOMMON, mage.cards.n.NightveilFaerie.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Parun", 192, Rarity.RARE, mage.cards.n.NivMizzetParun.class));
         cards.add(new SetCardInfo("Nullhide Ferox", 138, Rarity.MYTHIC, mage.cards.n.NullhideFerox.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 253, Rarity.RARE, mage.cards.o.OvergrownTomb.class));
