@@ -78,6 +78,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quasiduplicate", 51, Rarity.RARE, mage.cards.q.Quasiduplicate.class));
         cards.add(new SetCardInfo("Radical Idea", 52, Rarity.COMMON, mage.cards.r.RadicalIdea.class));
+        cards.add(new SetCardInfo("Rain of Notions", 193, Rarity.COMMON, mage.cards.r.RainOfNotions.class));
         cards.add(new SetCardInfo("Ral's Dispersal", 266, Rarity.RARE, mage.cards.r.RalsDispersal.class));
         cards.add(new SetCardInfo("Ral's Staticaster", 268, Rarity.UNCOMMON, mage.cards.r.RalsStaticaster.class));
         cards.add(new SetCardInfo("Ral, Caller of Storms", 265, Rarity.MYTHIC, mage.cards.r.RalCallerOfStorms.class));
