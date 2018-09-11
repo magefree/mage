@@ -42,6 +42,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Guildgate", 248, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
         cards.add(new SetCardInfo("Hammer Dropper", 176, Rarity.COMMON, mage.cards.h.HammerDropper.class));
         cards.add(new SetCardInfo("Healer's Hawk", 14, Rarity.COMMON, mage.cards.h.HealersHawk.class));
+        cards.add(new SetCardInfo("Hypothesizzle", 178, Rarity.COMMON, mage.cards.h.Hypothesizzle.class));
         cards.add(new SetCardInfo("Impervious Greatwurm", 273, Rarity.MYTHIC, mage.cards.i.ImperviousGreatwurm.class));
         cards.add(new SetCardInfo("Island", 261, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Legion Warboss", 109, Rarity.RARE, mage.cards.l.LegionWarboss.class));
