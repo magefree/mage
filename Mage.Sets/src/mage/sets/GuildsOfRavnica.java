@@ -87,6 +87,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Rosemane Centaur", 197, Rarity.COMMON, mage.cards.r.RosemaneCentaur.class));
         cards.add(new SetCardInfo("Runaway Steam-Kin", 115, Rarity.RARE, mage.cards.r.RunawaySteamKin.class));
         cards.add(new SetCardInfo("Sacred Foundry", 254, Rarity.RARE, mage.cards.s.SacredFoundry.class));
+        cards.add(new SetCardInfo("Secrets of the Mausoleum", 75, Rarity.RARE, mage.cards.s.SecretsOfTheMausoleum.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 255, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 256, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Sinister Sabotage", 54, Rarity.UNCOMMON, mage.cards.s.SinisterSabotage.class));
