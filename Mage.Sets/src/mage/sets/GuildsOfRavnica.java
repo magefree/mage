@@ -68,6 +68,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Izoni, Thousand-Eyed", 180, Rarity.RARE, mage.cards.i.IzoniThousandEyed.class));
         cards.add(new SetCardInfo("Izzet Guildgate", 251, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
         cards.add(new SetCardInfo("Izzet Guildgate", 252, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
+        cards.add(new SetCardInfo("Izzet Locket", 238, Rarity.COMMON, mage.cards.i.IzzetLocket.class));
         cards.add(new SetCardInfo("Legion Warboss", 109, Rarity.RARE, mage.cards.l.LegionWarboss.class));
         cards.add(new SetCardInfo("March of the Multitudes", 188, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Moodmark Painter", 78, Rarity.COMMON, mage.cards.m.MoodmarkPainter.class));
