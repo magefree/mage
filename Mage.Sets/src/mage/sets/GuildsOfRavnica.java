@@ -87,6 +87,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Notion Rain", 193, Rarity.COMMON, mage.cards.n.NotionRain.class));
         cards.add(new SetCardInfo("Nullhide Ferox", 138, Rarity.MYTHIC, mage.cards.n.NullhideFerox.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 253, Rarity.RARE, mage.cards.o.OvergrownTomb.class));
+        cards.add(new SetCardInfo("Passwall Adept", 50, Rarity.COMMON, mage.cards.p.PasswallAdept.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quasiduplicate", 51, Rarity.RARE, mage.cards.q.Quasiduplicate.class));
         cards.add(new SetCardInfo("Radical Idea", 52, Rarity.COMMON, mage.cards.r.RadicalIdea.class));
