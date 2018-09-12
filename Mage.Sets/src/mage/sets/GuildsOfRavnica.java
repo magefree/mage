@@ -48,6 +48,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("District Guide", 128, Rarity.UNCOMMON, mage.cards.d.DistrictGuide.class));
         cards.add(new SetCardInfo("Dream Eater", 38, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
         cards.add(new SetCardInfo("Emmara, Soul of the Accord", 168, Rarity.RARE, mage.cards.e.EmmaraSoulOfTheAccord.class));
+        cards.add(new SetCardInfo("Expansion // Explosion", 224, Rarity.RARE, mage.cards.e.ExpansionExplosion.class));
         cards.add(new SetCardInfo("Find // Finality", 225, Rarity.RARE, mage.cards.f.FindFinality.class));
         cards.add(new SetCardInfo("Firemind's Research", 171, Rarity.RARE, mage.cards.f.FiremindsResearch.class));
         cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
