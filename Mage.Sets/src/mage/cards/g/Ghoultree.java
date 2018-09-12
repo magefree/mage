@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class Ghoultree extends CardImpl {
         this.toughness = new MageInt(10);
 
         // Ghoultree costs {1} less to cast for each creature card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(new FilterCreatureCard())));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(StaticFilters.FILTER_CARD_CREATURE)));
     }
 
     public Ghoultree(final Ghoultree card) {
