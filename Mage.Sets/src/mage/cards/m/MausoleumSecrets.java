@@ -1,4 +1,4 @@
-package mage.cards.s;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -22,22 +22,22 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public final class SecretsOfTheMausoleum extends CardImpl {
+public final class MausoleumSecrets extends CardImpl {
 
-    public SecretsOfTheMausoleum(UUID ownerId, CardSetInfo setInfo) {
+    public MausoleumSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Undergrowth — Search your library for a black card with converted mana cost equal to or less than the number of creature cards in your graveyard, reveal it, put it into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new SecretsOfTheMausoleumEffect());
     }
 
-    public SecretsOfTheMausoleum(final SecretsOfTheMausoleum card) {
+    public MausoleumSecrets(final MausoleumSecrets card) {
         super(card);
     }
 
     @Override
-    public SecretsOfTheMausoleum copy() {
-        return new SecretsOfTheMausoleum(this);
+    public MausoleumSecrets copy() {
+        return new MausoleumSecrets(this);
     }
 }
 

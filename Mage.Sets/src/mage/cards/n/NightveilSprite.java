@@ -14,9 +14,9 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public final class NightveilFaerie extends CardImpl {
+public final class NightveilSprite extends CardImpl {
 
-    public NightveilFaerie(UUID ownerId, CardSetInfo setInfo) {
+    public NightveilSprite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
         this.subtype.add(SubType.FAERIE);
@@ -31,12 +31,12 @@ public final class NightveilFaerie extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new SurveilEffect(1), false));
     }
 
-    public NightveilFaerie(final NightveilFaerie card) {
+    public NightveilSprite(final NightveilSprite card) {
         super(card);
     }
 
     @Override
-    public NightveilFaerie copy() {
-        return new NightveilFaerie(this);
+    public NightveilSprite copy() {
+        return new NightveilSprite(this);
     }
 }

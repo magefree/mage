@@ -22,9 +22,9 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public final class WhisperingSpy extends CardImpl {
+public final class WhisperingSnitch extends CardImpl {
 
-    public WhisperingSpy(UUID ownerId, CardSetInfo setInfo) {
+    public WhisperingSnitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
         this.subtype.add(SubType.VAMPIRE);
@@ -36,13 +36,13 @@ public final class WhisperingSpy extends CardImpl {
         this.addAbility(new WhisperingSpyTriggeredAbility());
     }
 
-    public WhisperingSpy(final WhisperingSpy card) {
+    public WhisperingSnitch(final WhisperingSnitch card) {
         super(card);
     }
 
     @Override
-    public WhisperingSpy copy() {
-        return new WhisperingSpy(this);
+    public WhisperingSnitch copy() {
+        return new WhisperingSnitch(this);
     }
 }
 

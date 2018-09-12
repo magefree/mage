@@ -1,4 +1,4 @@
-package mage.cards.r;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -12,9 +12,9 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public final class RainOfNotions extends CardImpl {
+public final class NotionRain extends CardImpl {
 
-    public RainOfNotions(UUID ownerId, CardSetInfo setInfo) {
+    public NotionRain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");
 
         // Surveil 2, then draw two cards. Rain of Notions deals 2 damage to you.
@@ -28,12 +28,12 @@ public final class RainOfNotions extends CardImpl {
         this.getSpellAbility().addEffect(new DamageControllerEffect(2));
     }
 
-    public RainOfNotions(final RainOfNotions card) {
+    public NotionRain(final NotionRain card) {
         super(card);
     }
 
     @Override
-    public RainOfNotions copy() {
-        return new RainOfNotions(this);
+    public NotionRain copy() {
+        return new NotionRain(this);
     }
 }

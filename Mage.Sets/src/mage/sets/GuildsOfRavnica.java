@@ -77,14 +77,14 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Murmuring Mystic", 45, Rarity.UNCOMMON, mage.cards.m.MurmuringMystic.class));
         cards.add(new SetCardInfo("Narcomoeba", 47, Rarity.RARE, mage.cards.n.Narcomoeba.class));
         cards.add(new SetCardInfo("Necrotic Wound", 79, Rarity.UNCOMMON, mage.cards.n.NecroticWound.class));
-        cards.add(new SetCardInfo("Nightveil Faerie", 48, Rarity.UNCOMMON, mage.cards.n.NightveilFaerie.class));
+        cards.add(new SetCardInfo("Nightveil Sprite", 48, Rarity.UNCOMMON, mage.cards.n.NightveilSprite.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Parun", 192, Rarity.RARE, mage.cards.n.NivMizzetParun.class));
         cards.add(new SetCardInfo("Nullhide Ferox", 138, Rarity.MYTHIC, mage.cards.n.NullhideFerox.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 253, Rarity.RARE, mage.cards.o.OvergrownTomb.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quasiduplicate", 51, Rarity.RARE, mage.cards.q.Quasiduplicate.class));
         cards.add(new SetCardInfo("Radical Idea", 52, Rarity.COMMON, mage.cards.r.RadicalIdea.class));
-        cards.add(new SetCardInfo("Rain of Notions", 193, Rarity.COMMON, mage.cards.r.RainOfNotions.class));
+        cards.add(new SetCardInfo("Notion Rain", 193, Rarity.COMMON, mage.cards.n.NotionRain.class));
         cards.add(new SetCardInfo("Ral's Dispersal", 266, Rarity.RARE, mage.cards.r.RalsDispersal.class));
         cards.add(new SetCardInfo("Ral's Staticaster", 268, Rarity.UNCOMMON, mage.cards.r.RalsStaticaster.class));
         cards.add(new SetCardInfo("Ral, Caller of Storms", 265, Rarity.MYTHIC, mage.cards.r.RalCallerOfStorms.class));
@@ -93,7 +93,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Rosemane Centaur", 197, Rarity.COMMON, mage.cards.r.RosemaneCentaur.class));
         cards.add(new SetCardInfo("Runaway Steam-Kin", 115, Rarity.RARE, mage.cards.r.RunawaySteamKin.class));
         cards.add(new SetCardInfo("Sacred Foundry", 254, Rarity.RARE, mage.cards.s.SacredFoundry.class));
-        cards.add(new SetCardInfo("Secrets of the Mausoleum", 75, Rarity.RARE, mage.cards.s.SecretsOfTheMausoleum.class));
+        cards.add(new SetCardInfo("Mausoleum Secrets", 75, Rarity.RARE, mage.cards.m.MausoleumSecrets.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 255, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 256, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Locket", 240, Rarity.COMMON, mage.cards.s.SelesnyaLocket.class));
@@ -114,6 +114,6 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Wary Okapi", 149, Rarity.COMMON, mage.cards.w.WaryOkapi.class));
         cards.add(new SetCardInfo("Watery Grave", 259, Rarity.RARE, mage.cards.w.WateryGrave.class));
         cards.add(new SetCardInfo("Whisper Agent", 220, Rarity.COMMON, mage.cards.w.WhisperAgent.class));
-        cards.add(new SetCardInfo("Whispering Spy", 90, Rarity.UNCOMMON, mage.cards.w.WhisperingSpy.class));
+        cards.add(new SetCardInfo("Whispering Snitch", 90, Rarity.UNCOMMON, mage.cards.w.WhisperingSnitch.class));
     }
 }
