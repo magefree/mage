@@ -50,7 +50,7 @@ public final class ArclightPhoenix extends CardImpl {
                 "At the beginning of combat on your turn, "
                 + "if you cast 3 or more instants and/or sorceries this turn, "
                 + "you may return {this} from your graveyard to the battlefield."
-        ));
+        ), new ArclightPhoenixWatcher());
     }
 
     public ArclightPhoenix(final ArclightPhoenix card) {
