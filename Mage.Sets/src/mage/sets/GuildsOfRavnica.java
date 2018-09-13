@@ -38,6 +38,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Chemister's Insight", 32, Rarity.UNCOMMON, mage.cards.c.ChemistersInsight.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 233, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Citywatch Sphinx", 33, Rarity.UNCOMMON, mage.cards.c.CitywatchSphinx.class));
+        cards.add(new SetCardInfo("Command the Storm", 94, Rarity.COMMON, mage.cards.c.CommandTheStorm.class));
         cards.add(new SetCardInfo("Conclave Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ConclaveGuildmage.class));
         cards.add(new SetCardInfo("Conclave Tribunal", 6, Rarity.UNCOMMON, mage.cards.c.ConclaveTribunal.class));
         cards.add(new SetCardInfo("Darkblade Agent", 164, Rarity.COMMON, mage.cards.d.DarkbladeAgent.class));
@@ -68,8 +69,6 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Guildgate", 249, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
         cards.add(new SetCardInfo("Golgari Locket", 237, Rarity.COMMON, mage.cards.g.GolgariLocket.class));
         cards.add(new SetCardInfo("Golgari Raiders", 130, Rarity.UNCOMMON, mage.cards.g.GolgariRaiders.class));
-        cards.add(new SetCardInfo("Command the Storm", 94, Rarity.COMMON, mage.cards.c.CommandTheStorm.class));
-        cards.add(new SetCardInfo("Doom Whisperer", 69, Rarity.MYTHIC, mage.cards.d.DoomWhisperer.class));
         cards.add(new SetCardInfo("Guild Summit", 41, Rarity.UNCOMMON, mage.cards.g.GuildSummit.class));
         cards.add(new SetCardInfo("Hammer Dropper", 176, Rarity.COMMON, mage.cards.h.HammerDropper.class));
         cards.add(new SetCardInfo("Healer's Hawk", 14, Rarity.COMMON, mage.cards.h.HealersHawk.class));
