@@ -84,6 +84,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Guildgate", 252, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
         cards.add(new SetCardInfo("Izzet Locket", 238, Rarity.COMMON, mage.cards.i.IzzetLocket.class));
         cards.add(new SetCardInfo("Lava Coil", 108, Rarity.UNCOMMON, mage.cards.l.LavaCoil.class));
+        cards.add(new SetCardInfo("Legion Guildmage", 187, Rarity.MYTHIC, mage.cards.l.LegionGuildmage.class));
         cards.add(new SetCardInfo("Legion Warboss", 109, Rarity.RARE, mage.cards.l.LegionWarboss.class));
         cards.add(new SetCardInfo("March of the Multitudes", 188, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Mausoleum Secrets", 75, Rarity.RARE, mage.cards.m.MausoleumSecrets.class));
