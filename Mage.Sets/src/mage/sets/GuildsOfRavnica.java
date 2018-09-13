@@ -48,6 +48,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Direct Current", 96, Rarity.COMMON, mage.cards.d.DirectCurrent.class));
         cards.add(new SetCardInfo("Disdainful Stroke", 37, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("District Guide", 128, Rarity.UNCOMMON, mage.cards.d.DistrictGuide.class));
+        cards.add(new SetCardInfo("Doom Whisperer", 69, Rarity.MYTHIC, mage.cards.d.DoomWhisperer.class));
         cards.add(new SetCardInfo("Dream Eater", 38, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
         cards.add(new SetCardInfo("Emmara, Soul of the Accord", 168, Rarity.RARE, mage.cards.e.EmmaraSoulOfTheAccord.class));
         cards.add(new SetCardInfo("Erratic Cyclops", 98, Rarity.RARE, mage.cards.e.ErraticCyclops.class));
@@ -66,6 +67,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Locket", 237, Rarity.COMMON, mage.cards.g.GolgariLocket.class));
         cards.add(new SetCardInfo("Golgari Raiders", 130, Rarity.UNCOMMON, mage.cards.g.GolgariRaiders.class));
         cards.add(new SetCardInfo("Command the Storm", 94, Rarity.COMMON, mage.cards.c.CommandTheStorm.class));
+        cards.add(new SetCardInfo("Doom Whisperer", 69, Rarity.MYTHIC, mage.cards.d.DoomWhisperer.class));
         cards.add(new SetCardInfo("Guild Summit", 41, Rarity.UNCOMMON, mage.cards.g.GuildSummit.class));
         cards.add(new SetCardInfo("Hammer Dropper", 176, Rarity.COMMON, mage.cards.h.HammerDropper.class));
         cards.add(new SetCardInfo("Healer's Hawk", 14, Rarity.COMMON, mage.cards.h.HealersHawk.class));
