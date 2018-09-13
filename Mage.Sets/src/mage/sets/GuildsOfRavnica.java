@@ -70,6 +70,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Hypothesizzle", 178, Rarity.COMMON, mage.cards.h.Hypothesizzle.class));
         cards.add(new SetCardInfo("Impervious Greatwurm", 273, Rarity.MYTHIC, mage.cards.i.ImperviousGreatwurm.class));
         cards.add(new SetCardInfo("Inescapable Flame", 107, Rarity.UNCOMMON, mage.cards.i.InescapableFlame.class));
+        cards.add(new SetCardInfo("Integrity // Intervention", 227, Rarity.UNCOMMON, mage.cards.i.IntegrityIntervention.class));
         cards.add(new SetCardInfo("Invert // Invent", 228, Rarity.UNCOMMON, mage.cards.i.InvertInvent.class));
         cards.add(new SetCardInfo("Ionize", 179, Rarity.RARE, mage.cards.i.Ionize.class));
         cards.add(new SetCardInfo("Island", 261, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
