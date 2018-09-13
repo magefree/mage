@@ -38,7 +38,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Avenger of Zendikar", 129, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Azorius Chancery", 233, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Guildgate", 234, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class));
-        cards.add(new SetCardInfo("Azorius Signet", 196, Rarity.COMMON, mage.cards.a.AzoriusSignet.class));
+        cards.add(new SetCardInfo("Azorius Signet", 196, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Baloth Woodcrasher", 130, Rarity.UNCOMMON, mage.cards.b.BalothWoodcrasher.class));
         cards.add(new SetCardInfo("Banishing Stroke", 63, Rarity.UNCOMMON, mage.cards.b.BanishingStroke.class));
         cards.add(new SetCardInfo("Bant Charm", 169, Rarity.UNCOMMON, mage.cards.b.BantCharm.class));
@@ -87,7 +87,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Dictate of Kruphix", 86, Rarity.RARE, mage.cards.d.DictateOfKruphix.class));
         cards.add(new SetCardInfo("Dimir Aqueduct", 242, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
         cards.add(new SetCardInfo("Dimir Guildgate", 243, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
-        cards.add(new SetCardInfo("Dimir Signet", 203, Rarity.COMMON, mage.cards.d.DimirSignet.class));
+        cards.add(new SetCardInfo("Dimir Signet", 203, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Dismal Backwater", 244, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Dismantling Blow", 66, Rarity.COMMON, mage.cards.d.DismantlingBlow.class));
         cards.add(new SetCardInfo("Djinn of Wishes", 87, Rarity.RARE, mage.cards.d.DjinnOfWishes.class));
@@ -159,7 +159,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Isolated Watchtower", 59, Rarity.RARE, mage.cards.i.IsolatedWatchtower.class));
         cards.add(new SetCardInfo("Izzet Boilerworks", 256, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Guildgate", 257, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
-        cards.add(new SetCardInfo("Izzet Signet", 207, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Izzet Signet", 207, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jeskai Infiltrator", 93, Rarity.RARE, mage.cards.j.JeskaiInfiltrator.class));
         cards.add(new SetCardInfo("Jund Panorama", 258, Rarity.COMMON, mage.cards.j.JundPanorama.class));
         cards.add(new SetCardInfo("Jungle Hollow", 259, Rarity.COMMON, mage.cards.j.JungleHollow.class));
@@ -259,7 +259,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Serra Avatar", 73, Rarity.MYTHIC, mage.cards.s.SerraAvatar.class));
         cards.add(new SetCardInfo("Sharding Sphinx", 101, Rarity.RARE, mage.cards.s.ShardingSphinx.class));
         cards.add(new SetCardInfo("Sigil of the Empty Throne", 74, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
-        cards.add(new SetCardInfo("Sigiled Starfish", 102, Rarity.COMMON, mage.cards.s.SigiledStarfish.class));
+        cards.add(new SetCardInfo("Sigiled Starfish", 102, Rarity.UNCOMMON, mage.cards.s.SigiledStarfish.class));
         cards.add(new SetCardInfo("Silent Sentinel", 75, Rarity.RARE, mage.cards.s.SilentSentinel.class));
         cards.add(new SetCardInfo("Silent-Blade Oni", 191, Rarity.RARE, mage.cards.s.SilentBladeOni.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 282, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
