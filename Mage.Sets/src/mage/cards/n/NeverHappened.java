@@ -8,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -68,12 +69,12 @@ class NeverHappenedEffect extends OneShotEffect {
         opponent.revealCards(source, opponent.getHand(), game);
         Target target;
         if (controller.chooseUse(outcome, "Exile a card from hand or graveyard?", null, "Hand", "Graveyard", source, game)) {
-            FilterCard filter = new FilterCard("card in " + opponent.getName() + "'s hand");
+            FilterCard filter = new FilterNonlandCard("nonland card in " + opponent.getName() + "'s hand");
             filter.add(new OwnerIdPredicate(opponent.getId()));
             target = new TargetCardInHand(filter);
             target.setNotTarget(true);
         } else {
-            FilterCard filter = new FilterCard("card in " + opponent.getName() + "'s graveyard");
+            FilterCard filter = new FilterNonlandCard("nonland card in " + opponent.getName() + "'s graveyard");
             filter.add(new OwnerIdPredicate(opponent.getId()));
             target = new TargetCardInGraveyard(filter);
             target.setNotTarget(true);
