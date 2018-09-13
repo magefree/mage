@@ -86,10 +86,10 @@ public interface MageObject extends MageItem, Serializable {
 
     void setZoneChangeCounter(int value, Game game);
 
-    default boolean isHistoric(){
+    default boolean isHistoric() {
         return getCardType().contains(CardType.ARTIFACT)
                 || getSuperType().contains(SuperType.LEGENDARY)
-                || hasSubtype(SubType.SAGA, null );
+                || hasSubtype(SubType.SAGA, null);
     }
 
     default boolean isCreature() {
@@ -114,6 +114,10 @@ public interface MageObject extends MageItem, Serializable {
 
     default boolean isSorcery() {
         return getCardType().contains(CardType.SORCERY);
+    }
+
+    default boolean isInstantOrSorcery() {
+        return this.isInstant() || this.isSorcery();
     }
 
     default boolean isPlaneswalker() {
