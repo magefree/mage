@@ -65,14 +65,14 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Guildgate", 249, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
         cards.add(new SetCardInfo("Golgari Locket", 237, Rarity.COMMON, mage.cards.g.GolgariLocket.class));
         cards.add(new SetCardInfo("Golgari Raiders", 130, Rarity.UNCOMMON, mage.cards.g.GolgariRaiders.class));
-        cards.add(new SetCardInfo("Govern the Storm", 94, Rarity.COMMON, mage.cards.g.GovernTheStorm.class));
+        cards.add(new SetCardInfo("Command the Storm", 94, Rarity.COMMON, mage.cards.c.CommandTheStorm.class));
         cards.add(new SetCardInfo("Guild Summit", 41, Rarity.UNCOMMON, mage.cards.g.GuildSummit.class));
         cards.add(new SetCardInfo("Hammer Dropper", 176, Rarity.COMMON, mage.cards.h.HammerDropper.class));
         cards.add(new SetCardInfo("Healer's Hawk", 14, Rarity.COMMON, mage.cards.h.HealersHawk.class));
         cards.add(new SetCardInfo("House Guildmage", 177, Rarity.UNCOMMON, mage.cards.h.HouseGuildmage.class));
         cards.add(new SetCardInfo("Hypothesizzle", 178, Rarity.COMMON, mage.cards.h.Hypothesizzle.class));
         cards.add(new SetCardInfo("Impervious Greatwurm", 273, Rarity.MYTHIC, mage.cards.i.ImperviousGreatwurm.class));
-        cards.add(new SetCardInfo("Inescapable Flame", 107, Rarity.UNCOMMON, mage.cards.i.InescapableFlame.class));
+        cards.add(new SetCardInfo("Inescapable Blaze", 107, Rarity.UNCOMMON, mage.cards.i.InescapableBlaze.class));
         cards.add(new SetCardInfo("Integrity // Intervention", 227, Rarity.UNCOMMON, mage.cards.i.IntegrityIntervention.class));
         cards.add(new SetCardInfo("Invert // Invent", 228, Rarity.UNCOMMON, mage.cards.i.InvertInvent.class));
         cards.add(new SetCardInfo("Ionize", 179, Rarity.RARE, mage.cards.i.Ionize.class));

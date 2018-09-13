@@ -1,4 +1,4 @@
-package mage.cards.g;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -11,9 +11,9 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public final class GovernTheStorm extends CardImpl {
+public final class CommandTheStorm extends CardImpl {
 
-    public GovernTheStorm(UUID ownerId, CardSetInfo setInfo) {
+    public CommandTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
         // Govern the Storm deals 5 damage to target creature.
@@ -21,12 +21,12 @@ public final class GovernTheStorm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GovernTheStorm(final GovernTheStorm card) {
+    public CommandTheStorm(final CommandTheStorm card) {
         super(card);
     }
 
     @Override
-    public GovernTheStorm copy() {
-        return new GovernTheStorm(this);
+    public CommandTheStorm copy() {
+        return new CommandTheStorm(this);
     }
 }

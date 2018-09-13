@@ -12,9 +12,9 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public final class InescapableFlame extends CardImpl {
+public final class InescapableBlaze extends CardImpl {
 
-    public InescapableFlame(UUID ownerId, CardSetInfo setInfo) {
+    public InescapableBlaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
 
         // This spell can't be countered.
@@ -25,12 +25,12 @@ public final class InescapableFlame extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public InescapableFlame(final InescapableFlame card) {
+    public InescapableBlaze(final InescapableBlaze card) {
         super(card);
     }
 
     @Override
-    public InescapableFlame copy() {
-        return new InescapableFlame(this);
+    public InescapableBlaze copy() {
+        return new InescapableBlaze(this);
     }
 }
