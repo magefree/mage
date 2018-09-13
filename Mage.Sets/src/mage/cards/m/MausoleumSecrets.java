@@ -28,7 +28,7 @@ public final class MausoleumSecrets extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Undergrowth — Search your library for a black card with converted mana cost equal to or less than the number of creature cards in your graveyard, reveal it, put it into your hand, then shuffle your library.
-        this.getSpellAbility().addEffect(new SecretsOfTheMausoleumEffect());
+        this.getSpellAbility().addEffect(new MausoleumSecretsEffect());
     }
 
     public MausoleumSecrets(final MausoleumSecrets card) {
@@ -41,9 +41,9 @@ public final class MausoleumSecrets extends CardImpl {
     }
 }
 
-class SecretsOfTheMausoleumEffect extends OneShotEffect {
+class MausoleumSecretsEffect extends OneShotEffect {
 
-    public SecretsOfTheMausoleumEffect() {
+    public MausoleumSecretsEffect() {
         super(Outcome.Benefit);
         this.staticText = "<i>Undergrowth</i> &mdash; Search your library "
                 + "for a black card with converted mana cost less than "
@@ -51,13 +51,13 @@ class SecretsOfTheMausoleumEffect extends OneShotEffect {
                 + "reveal it, put it into your hand, then shuffle your library.";
     }
 
-    public SecretsOfTheMausoleumEffect(final SecretsOfTheMausoleumEffect effect) {
+    public MausoleumSecretsEffect(final MausoleumSecretsEffect effect) {
         super(effect);
     }
 
     @Override
-    public SecretsOfTheMausoleumEffect copy() {
-        return new SecretsOfTheMausoleumEffect(this);
+    public MausoleumSecretsEffect copy() {
+        return new MausoleumSecretsEffect(this);
     }
 
     @Override

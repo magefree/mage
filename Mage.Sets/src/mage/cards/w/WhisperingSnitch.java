@@ -33,7 +33,7 @@ public final class WhisperingSnitch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When you surveil for the first time in a turn, Whispering Spy deals 1 damage to each opponent and you gain 1 life.
-        this.addAbility(new WhisperingSpyTriggeredAbility());
+        this.addAbility(new WhisperingSnitchTriggeredAbility());
     }
 
     public WhisperingSnitch(final WhisperingSnitch card) {
@@ -46,15 +46,15 @@ public final class WhisperingSnitch extends CardImpl {
     }
 }
 
-class WhisperingSpyTriggeredAbility extends TriggeredAbilityImpl {
+class WhisperingSnitchTriggeredAbility extends TriggeredAbilityImpl {
 
-    public WhisperingSpyTriggeredAbility() {
+    public WhisperingSnitchTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), false);
         this.addEffect(new GainLifeEffect(1));
-        this.addWatcher(new WhisperingSpyWatcher());
+        this.addWatcher(new WhisperingSnitchWatcher());
     }
 
-    public WhisperingSpyTriggeredAbility(final WhisperingSpyTriggeredAbility ability) {
+    public WhisperingSnitchTriggeredAbility(final WhisperingSnitchTriggeredAbility ability) {
         super(ability);
     }
 
@@ -65,13 +65,13 @@ class WhisperingSpyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        WhisperingSpyWatcher watcher = (WhisperingSpyWatcher) game.getState().getWatchers().get(WhisperingSpyWatcher.class.getSimpleName());
+        WhisperingSnitchWatcher watcher = (WhisperingSnitchWatcher) game.getState().getWatchers().get(WhisperingSnitchWatcher.class.getSimpleName());
         return watcher != null && watcher.getTimesSurveiled(getControllerId()) == 1;
     }
 
     @Override
-    public WhisperingSpyTriggeredAbility copy() {
-        return new WhisperingSpyTriggeredAbility(this);
+    public WhisperingSnitchTriggeredAbility copy() {
+        return new WhisperingSnitchTriggeredAbility(this);
     }
 
     @Override
@@ -81,21 +81,21 @@ class WhisperingSpyTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class WhisperingSpyWatcher extends Watcher {
+class WhisperingSnitchWatcher extends Watcher {
 
     private final Map<UUID, Integer> timesSurveiled = new HashMap<>();
 
-    public WhisperingSpyWatcher() {
-        super(WhisperingSpyWatcher.class.getSimpleName(), WatcherScope.GAME);
+    public WhisperingSnitchWatcher() {
+        super(WhisperingSnitchWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    public WhisperingSpyWatcher(final WhisperingSpyWatcher watcher) {
+    public WhisperingSnitchWatcher(final WhisperingSnitchWatcher watcher) {
         super(watcher);
     }
 
     @Override
-    public WhisperingSpyWatcher copy() {
-        return new WhisperingSpyWatcher(this);
+    public WhisperingSnitchWatcher copy() {
+        return new WhisperingSnitchWatcher(this);
     }
 
     @Override
