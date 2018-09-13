@@ -72,7 +72,7 @@ enum ArclightPhoenixCondition implements Condition {
                 = (ArclightPhoenixWatcher) game.getState().getWatchers().get(
                         ArclightPhoenixWatcher.class.getSimpleName()
                 );
-        return watcher.getInstantSorceryCount(source.getControllerId()) > 2;
+        return watcher != null && watcher.getInstantSorceryCount(source.getControllerId()) > 2;
     }
 }
 
@@ -106,6 +106,12 @@ class ArclightPhoenixWatcher extends Watcher {
                     spell.getControllerId(), (k, a) -> a + 1
             );
         }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.instantSorceryCount.clear();
     }
 
     public int getInstantSorceryCount(UUID playerId) {
