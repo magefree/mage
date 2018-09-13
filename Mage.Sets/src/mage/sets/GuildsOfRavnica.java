@@ -36,6 +36,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Bounty Agent", 2, Rarity.RARE, mage.cards.b.BountyAgent.class));
         cards.add(new SetCardInfo("Chemister's Insight", 32, Rarity.UNCOMMON, mage.cards.c.ChemistersInsight.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 233, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
+        cards.add(new SetCardInfo("Conclave Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ConclaveGuildmage.class));
         cards.add(new SetCardInfo("Conclave Tribunal", 6, Rarity.UNCOMMON, mage.cards.c.ConclaveTribunal.class));
         cards.add(new SetCardInfo("Deadly Visit", 68, Rarity.COMMON, mage.cards.d.DeadlyVisit.class));
         cards.add(new SetCardInfo("Deafening Clarion", 165, Rarity.RARE, mage.cards.d.DeafeningClarion.class));
