@@ -103,6 +103,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ledev Guardian", 18, Rarity.COMMON, mage.cards.l.LedevGuardian.class));
         cards.add(new SetCardInfo("Legion Guildmage", 187, Rarity.MYTHIC, mage.cards.l.LegionGuildmage.class));
         cards.add(new SetCardInfo("Legion Warboss", 109, Rarity.RARE, mage.cards.l.LegionWarboss.class));
+        cards.add(new SetCardInfo("Loxodon Restorer", 20, Rarity.COMMON, mage.cards.l.LoxodonRestorer.class));
         cards.add(new SetCardInfo("March of the Multitudes", 188, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Mausoleum Secrets", 75, Rarity.RARE, mage.cards.m.MausoleumSecrets.class));
         cards.add(new SetCardInfo("Maximize Altitude", 43, Rarity.COMMON, mage.cards.m.MaximizeAltitude.class));
