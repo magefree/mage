@@ -1,4 +1,3 @@
-
 package mage.cards;
 
 import mage.MageObject;
@@ -21,6 +20,8 @@ import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -453,6 +454,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 filterCreaturePermanent.add(new PowerPredicate(ComparisonType.FEWER_THAN, value + 1));
                 ability.getTargets().clear();
                 ability.addTarget(new TargetCreaturePermanent(filterCreaturePermanent));
+                break;
+            case X_CMC_EQUAL_SPELL_CONTROLLED: // League Guildmage
+                xValue = ability.getManaCostsToPay().getX();
+                FilterSpell spellFilter = new FilterInstantOrSorcerySpell("instant or sorcery you control with converted mana cost " + xValue);
+                spellFilter.add(new ControllerPredicate(TargetController.YOU));
+                spellFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+                ability.getTargets().clear();
+                ability.addTarget(new TargetSpell(spellFilter));
                 break;
         }
     }
