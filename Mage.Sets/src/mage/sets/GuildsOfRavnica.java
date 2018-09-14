@@ -150,6 +150,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Vraska, Golgari Queen", 213, Rarity.MYTHIC, mage.cards.v.VraskaGolgariQueen.class));
         cards.add(new SetCardInfo("Vraska, Regal Gorgon", 269, Rarity.MYTHIC, mage.cards.v.VraskaRegalGorgon.class));
         cards.add(new SetCardInfo("Wary Okapi", 149, Rarity.COMMON, mage.cards.w.WaryOkapi.class));
+        cards.add(new SetCardInfo("Watcher in the Mist", 59, Rarity.COMMON, mage.cards.w.WatcherInTheMist.class));
         cards.add(new SetCardInfo("Watery Grave", 259, Rarity.RARE, mage.cards.w.WateryGrave.class));
         cards.add(new SetCardInfo("Whisper Agent", 220, Rarity.COMMON, mage.cards.w.WhisperAgent.class));
         cards.add(new SetCardInfo("Whispering Snitch", 90, Rarity.UNCOMMON, mage.cards.w.WhisperingSnitch.class));
