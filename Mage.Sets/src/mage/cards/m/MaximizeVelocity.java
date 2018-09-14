@@ -15,9 +15,9 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public final class MaximumVelocity extends CardImpl {
+public final class MaximizeVelocity extends CardImpl {
 
-    public MaximumVelocity(UUID ownerId, CardSetInfo setInfo) {
+    public MaximizeVelocity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Target creature gets +1/+1 and gains haste until end of turn.
@@ -34,12 +34,12 @@ public final class MaximumVelocity extends CardImpl {
 
     }
 
-    public MaximumVelocity(final MaximumVelocity card) {
+    public MaximizeVelocity(final MaximizeVelocity card) {
         super(card);
     }
 
     @Override
-    public MaximumVelocity copy() {
-        return new MaximumVelocity(this);
+    public MaximizeVelocity copy() {
+        return new MaximizeVelocity(this);
     }
 }

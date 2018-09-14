@@ -99,7 +99,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("March of the Multitudes", 188, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Mausoleum Secrets", 75, Rarity.RARE, mage.cards.m.MausoleumSecrets.class));
         cards.add(new SetCardInfo("Maximize Altitude", 43, Rarity.COMMON, mage.cards.m.MaximizeAltitude.class));
-        cards.add(new SetCardInfo("Maximum Velocity", 111, Rarity.COMMON, mage.cards.m.MaximumVelocity.class));
+        cards.add(new SetCardInfo("Maximize Velocity", 111, Rarity.COMMON, mage.cards.m.MaximizeVelocity.class));
         cards.add(new SetCardInfo("Midnight Reaper", 77, Rarity.RARE, mage.cards.m.MidnightReaper.class));
         cards.add(new SetCardInfo("Molderhulk", 190, Rarity.UNCOMMON, mage.cards.m.Molderhulk.class));
         cards.add(new SetCardInfo("Moodmark Painter", 78, Rarity.COMMON, mage.cards.m.MoodmarkPainter.class));
