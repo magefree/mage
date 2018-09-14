@@ -60,7 +60,7 @@ class WhisperingSnitchTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SURVEIL;
+        return event.getType() == GameEvent.EventType.SURVEILED;
     }
 
     @Override
@@ -100,7 +100,7 @@ class WhisperingSnitchWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SURVEIL) {
+        if (event.getType() == GameEvent.EventType.SURVEILED) {
             timesSurveiled.put(event.getPlayerId(), getTimesSurveiled(event.getPlayerId()) + 1);
         }
     }

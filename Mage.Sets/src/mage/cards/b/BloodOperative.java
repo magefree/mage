@@ -73,7 +73,7 @@ class BloodOperativeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SURVEIL;
+        return event.getType() == GameEvent.EventType.SURVEILED;
     }
 
     @Override

@@ -106,7 +106,7 @@ class DarkbladeAgentWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SURVEIL) {
+        if (event.getType() == GameEvent.EventType.SURVEILED) {
             this.surveiledThisTurn.add(event.getPlayerId());
         }
     }
