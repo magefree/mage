@@ -65,6 +65,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Firemind's Research", 171, Rarity.RARE, mage.cards.f.FiremindsResearch.class));
         cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fresh-Faced Recruit", 216, Rarity.COMMON, mage.cards.f.FreshFacedRecruit.class));
+        cards.add(new SetCardInfo("Garrison Sergeant", 172, Rarity.COMMON, mage.cards.g.GarrisonSergeant.class));
         cards.add(new SetCardInfo("Gateway Plaza", 247, Rarity.COMMON, mage.cards.g.GatewayPlaza.class));
         cards.add(new SetCardInfo("Glowspore Shaman", 173, Rarity.UNCOMMON, mage.cards.g.GlowsporeShaman.class));
         cards.add(new SetCardInfo("Goblin Banneret", 102, Rarity.UNCOMMON, mage.cards.g.GoblinBanneret.class));
