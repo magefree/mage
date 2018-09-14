@@ -32,6 +32,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Barging Sergeant", 92, Rarity.COMMON, mage.cards.b.BargingSergeant.class));
         cards.add(new SetCardInfo("Beast Whisperer", 123, Rarity.RARE, mage.cards.b.BeastWhisperer.class));
         cards.add(new SetCardInfo("Blade Instructor", 1, Rarity.COMMON, mage.cards.b.BladeInstructor.class));
+        cards.add(new SetCardInfo("Blood Operative", 63, Rarity.RARE, mage.cards.b.BloodOperative.class));
         cards.add(new SetCardInfo("Boros Challenger", 156, Rarity.UNCOMMON, mage.cards.b.BorosChallenger.class));
         cards.add(new SetCardInfo("Boros Guildgate", 243, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
         cards.add(new SetCardInfo("Boros Guildgate", 244, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
