@@ -150,5 +150,6 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Watery Grave", 259, Rarity.RARE, mage.cards.w.WateryGrave.class));
         cards.add(new SetCardInfo("Whisper Agent", 220, Rarity.COMMON, mage.cards.w.WhisperAgent.class));
         cards.add(new SetCardInfo("Whispering Snitch", 90, Rarity.UNCOMMON, mage.cards.w.WhisperingSnitch.class));
+        cards.add(new SetCardInfo("Wojek Bodyguard", 120, Rarity.COMMON, mage.cards.w.WojekBodyguard.class));
     }
 }
