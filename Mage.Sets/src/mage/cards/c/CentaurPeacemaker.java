@@ -15,9 +15,9 @@ import mage.game.Game;
  *
  * @author TheElk801
  */
-public final class CentaurMediator extends CardImpl {
+public final class CentaurPeacemaker extends CardImpl {
 
-    public CentaurMediator(UUID ownerId, CardSetInfo setInfo) {
+    public CentaurPeacemaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
         this.subtype.add(SubType.CENTAUR);
@@ -29,13 +29,13 @@ public final class CentaurMediator extends CardImpl {
         ));
     }
 
-    public CentaurMediator(final CentaurMediator card) {
+    public CentaurPeacemaker(final CentaurPeacemaker card) {
         super(card);
     }
 
     @Override
-    public CentaurMediator copy() {
-        return new CentaurMediator(this);
+    public CentaurPeacemaker copy() {
+        return new CentaurPeacemaker(this);
     }
 }
 
