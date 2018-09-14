@@ -54,8 +54,9 @@ public class DoIfCostPaid extends OneShotEffect {
         this.optional = effect.optional;
     }
 
-    public void addEffect(Effect effect) {
+    public DoIfCostPaid addEffect(Effect effect) {
         executingEffects.add(effect);
+        return this;
     }
 
     @Override
