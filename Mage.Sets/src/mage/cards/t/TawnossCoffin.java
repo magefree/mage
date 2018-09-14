@@ -171,12 +171,27 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
-        ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
-        if (exileZone == null) {
-            return true;
+        
+        /*The way to get the related exilezone for a permanent differs based on
+         *whether the permanent is still on the battlefield. Here we test both.
+         */
+        ExileZone exileZone;
+        {
+            ExileZone currentExileZone = game.getExile()
+                    .getExileZone(CardUtil.getCardExileZoneId(
+                            game, source.getSourceId(), false));
+            ExileZone previousExileZone = game.getExile()
+                    .getExileZone(CardUtil.getCardExileZoneId(
+                            game, source.getSourceId(), true));
+            if (currentExileZone != null)
+                exileZone = currentExileZone;
+            else if (previousExileZone != null)
+                exileZone = previousExileZone;
+            else
+                return true;
         }
-        UUID enchantedCreatureId = (UUID) game.getState().getValue(exileZoneId.toString() + "EnchantedCreature");
+        
+        UUID enchantedCreatureId = (UUID) game.getState().getValue(exileZone.getId().toString() + "EnchantedCreature");
         if (enchantedCreatureId == null) {
             return false;
         }
@@ -191,7 +206,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
         Permanent newPermanent = game.getPermanent(enchantedCreature.getId());
         if (newPermanent != null) {
             // Add the noted counters
-            Counters notedCounters = (Counters) game.getState().getValue(exileZoneId.toString() + "NotedCounters");
+            Counters notedCounters = (Counters) game.getState().getValue(exileZone.getId().toString() + "NotedCounters");
             if (notedCounters != null) {
                 for (Counter c : notedCounters.values()) { //would be nice if could just use that copy function to set the whole field
                     if (c != null) {
