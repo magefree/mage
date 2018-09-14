@@ -22,6 +22,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
 
+        cards.add(new SetCardInfo("Affectionate Indrik", 121, Rarity.UNCOMMON, mage.cards.a.AffectionateIndrik.class));
         cards.add(new SetCardInfo("Arboretum Elemental", 122, Rarity.UNCOMMON, mage.cards.a.ArboretumElemental.class));
         cards.add(new SetCardInfo("Arclight Phoenix", 91, Rarity.MYTHIC, mage.cards.a.ArclightPhoenix.class));
         cards.add(new SetCardInfo("Artful Takedown", 151, Rarity.COMMON, mage.cards.a.ArtfulTakedown.class));
