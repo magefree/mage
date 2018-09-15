@@ -74,6 +74,7 @@ class MissionBriefingEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+        player.surveil(2, source, game);
         Target target = new TargetCardInYourGraveyard(filter);
         if (!player.choose(outcome, target, source.getSourceId(), game)) {
             return false;
