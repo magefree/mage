@@ -72,6 +72,12 @@ public class GameEvent implements Serializable {
         MADNESS_CARD_EXILED,
         INVESTIGATED,
         KICKED,
+        /* CONVOKED
+         targetId    id of the creature that was taped to convoke the sourceId
+         sourceId    sourceId of the convoked spell
+         playerId    controller of the convoked spell
+         */
+        CONVOKED,
         DISCARD_CARD,
         DISCARDED_CARD,
         CYCLE_CARD, CYCLED_CARD,

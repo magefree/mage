@@ -163,6 +163,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Truefire Captain", 209, Rarity.UNCOMMON, mage.cards.t.TruefireCaptain.class));
         cards.add(new SetCardInfo("Underrealm Lich", 211, Rarity.MYTHIC, mage.cards.u.UnderrealmLich.class));
         cards.add(new SetCardInfo("Unexplained Disappearance", 56, Rarity.COMMON, mage.cards.u.UnexplainedDisappearance.class));
+        cards.add(new SetCardInfo("Venerated Loxodon", 30, Rarity.RARE, mage.cards.v.VeneratedLoxodon.class));
         cards.add(new SetCardInfo("Vivid Revival", 148, Rarity.RARE, mage.cards.v.VividRevival.class));
         cards.add(new SetCardInfo("Vraska's Stoneglare", 272, Rarity.RARE, mage.cards.v.VraskasStoneglare.class));
         cards.add(new SetCardInfo("Vraska, Golgari Queen", 213, Rarity.MYTHIC, mage.cards.v.VraskaGolgariQueen.class));
