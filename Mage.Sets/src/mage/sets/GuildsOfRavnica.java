@@ -27,6 +27,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Arclight Phoenix", 91, Rarity.MYTHIC, mage.cards.a.ArclightPhoenix.class));
         cards.add(new SetCardInfo("Artful Takedown", 151, Rarity.COMMON, mage.cards.a.ArtfulTakedown.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 152, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
+        cards.add(new SetCardInfo("Assurance // Association", 221, Rarity.RARE, mage.cards.a.AssuranceAssociation.class));
         cards.add(new SetCardInfo("Attendant of Vraska", 271, Rarity.UNCOMMON, mage.cards.a.AttendantOfVraska.class));
         cards.add(new SetCardInfo("Aurelia, Exemplar of Justice", 153, Rarity.MYTHIC, mage.cards.a.AureliaExemplarOfJustice.class));
         cards.add(new SetCardInfo("Barging Sergeant", 92, Rarity.COMMON, mage.cards.b.BargingSergeant.class));
