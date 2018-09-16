@@ -36,7 +36,6 @@ import mage.game.stack.StackObject;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
@@ -49,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import mage.target.common.TargetCardInGraveyard;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -395,13 +395,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     ability.addTarget(new TargetPermanent(0, xValue, permanentFilter, false));
                 }
                 break;
-            case X_CMC_EQUAL_GY_CARD: //Geth, Lord of the Vault only
+            case X_CMC_EQUAL_GY_CARD:
                 xValue = ability.getManaCostsToPay().getX();
-                TargetCard oldTarget = (TargetCard) ability.getTargets().get(0);
-                FilterCard filterCard = oldTarget.getFilter().copy();
+                FilterCard filterCard = ((TargetCard) ability.getTargets().get(0)).getFilter().copy();
                 filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+                filterCard.setMessage(filterCard.getMessage().replace('X', (char) xValue));
                 ability.getTargets().clear();
-                ability.getTargets().add(new TargetCardInOpponentsGraveyard(filterCard));
+                ability.getTargets().add(new TargetCardInGraveyard(filterCard));
                 break;
             case CHOSEN_NAME: //Declaration of Naught only
                 ability.getTargets().clear();

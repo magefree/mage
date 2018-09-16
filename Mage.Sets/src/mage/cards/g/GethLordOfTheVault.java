@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -16,13 +15,15 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetAdjustment;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  * @author nantuko
@@ -32,6 +33,7 @@ public final class GethLordOfTheVault extends CardImpl {
     private static final FilterCard filter = new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard");
 
     static {
+        filter.add(new OwnerPredicate(TargetController.OPPONENT));
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)));
@@ -51,7 +53,7 @@ public final class GethLordOfTheVault extends CardImpl {
         // Then that player puts the top X cards of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
         ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_GY_CARD);
-        ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
     }
 
