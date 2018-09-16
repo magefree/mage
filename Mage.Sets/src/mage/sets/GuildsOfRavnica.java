@@ -104,7 +104,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Lava Coil", 108, Rarity.UNCOMMON, mage.cards.l.LavaCoil.class));
         cards.add(new SetCardInfo("League Guildmage", 185, Rarity.UNCOMMON, mage.cards.l.LeagueGuildmage.class));
         cards.add(new SetCardInfo("Ledev Guardian", 18, Rarity.COMMON, mage.cards.l.LedevGuardian.class));
-        cards.add(new SetCardInfo("Legion Guildmage", 187, Rarity.MYTHIC, mage.cards.l.LegionGuildmage.class));
+        cards.add(new SetCardInfo("Legion Guildmage", 187, Rarity.UNCOMMON, mage.cards.l.LegionGuildmage.class));
         cards.add(new SetCardInfo("Legion Warboss", 109, Rarity.RARE, mage.cards.l.LegionWarboss.class));
         cards.add(new SetCardInfo("Lotleth Giant", 74, Rarity.UNCOMMON, mage.cards.l.LotlethGiant.class));
         cards.add(new SetCardInfo("Loxodon Restorer", 20, Rarity.COMMON, mage.cards.l.LoxodonRestorer.class));
@@ -148,6 +148,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Selesnya Guildgate", 255, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 256, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Locket", 240, Rarity.COMMON, mage.cards.s.SelesnyaLocket.class));
+        cards.add(new SetCardInfo("Siege Wurm", 144, Rarity.COMMON, mage.cards.s.SiegeWurm.class));
         cards.add(new SetCardInfo("Sinister Sabotage", 54, Rarity.UNCOMMON, mage.cards.s.SinisterSabotage.class));
         cards.add(new SetCardInfo("Skyknight Legionnaire", 198, Rarity.COMMON, mage.cards.s.SkyknightLegionnaire.class));
         cards.add(new SetCardInfo("Sonic Assault", 199, Rarity.COMMON, mage.cards.s.SonicAssault.class));
