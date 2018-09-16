@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -22,6 +23,8 @@ public final class CentaurPeacemaker extends CardImpl {
 
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.CLERIC);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
         // When Centaur Mediator enters the battlefield, each player gains 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
