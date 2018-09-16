@@ -39,17 +39,14 @@ public final class KnightOfAutumn extends CardImpl {
         );
 
         // • Destroy target artifact or enchantment.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(
+        Mode mode = new Mode(new DestroyTargetEffect());
+        mode.addTarget(new TargetPermanent(
                 StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT
         ));
         ability.addMode(mode);
 
         // • You gain 4 life.
-        mode = new Mode();
-        mode.getEffects().add(new GainLifeEffect(4));
-        ability.addMode(mode);
+        ability.addMode(new Mode(new GainLifeEffect(4)));
         this.addAbility(ability);
     }
 
