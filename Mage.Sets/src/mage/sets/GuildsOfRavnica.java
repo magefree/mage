@@ -89,6 +89,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Locket", 237, Rarity.COMMON, mage.cards.g.GolgariLocket.class));
         cards.add(new SetCardInfo("Golgari Raiders", 130, Rarity.UNCOMMON, mage.cards.g.GolgariRaiders.class));
         cards.add(new SetCardInfo("Guild Summit", 41, Rarity.UNCOMMON, mage.cards.g.GuildSummit.class));
+        cards.add(new SetCardInfo("Haazda Marshal", 13, Rarity.UNCOMMON, mage.cards.h.HaazdaMarshal.class));
         cards.add(new SetCardInfo("Hammer Dropper", 176, Rarity.COMMON, mage.cards.h.HammerDropper.class));
         cards.add(new SetCardInfo("Healer's Hawk", 14, Rarity.COMMON, mage.cards.h.HealersHawk.class));
         cards.add(new SetCardInfo("House Guildmage", 177, Rarity.UNCOMMON, mage.cards.h.HouseGuildmage.class));
