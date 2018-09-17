@@ -9,5 +9,5 @@ import mage.game.Game;
  */
 public interface TargetAdjuster {
 
-    public void adjustTargets(Ability ability, Game game);
+    void adjustTargets(Ability ability, Game game);
 }

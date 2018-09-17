@@ -11,7 +11,8 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class XCMCPermanentAdjuster implements TargetAdjuster {
+public enum XCMCPermanentAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

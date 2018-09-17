@@ -361,16 +361,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         switch (ability.getTargetAdjustment()) {
             case NONE:
                 break;
-            case X_CMC_EQUAL_PERM:
-//                xValue = ability.getManaCostsToPay().getX();
-//                oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
-//                minTargets = oldTargetPermanent.getMinNumberOfTargets();
-//                maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
-//                permanentFilter = oldTargetPermanent.getFilter().copy();
-//                permanentFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-//                ability.getTargets().clear();
-//                ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
-                break;
             case X_TARGETS:
                 xValue = ability.getManaCostsToPay().getX();
                 permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
