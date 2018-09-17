@@ -352,6 +352,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 //    }
     @Override
     public void adjustTargets(Ability ability, Game game) {
+        ability.adjustTargets(game);
         int xValue;
         TargetPermanent oldTargetPermanent;
         FilterPermanent permanentFilter;
@@ -361,14 +362,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             case NONE:
                 break;
             case X_CMC_EQUAL_PERM:
-                xValue = ability.getManaCostsToPay().getX();
-                oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
-                minTargets = oldTargetPermanent.getMinNumberOfTargets();
-                maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
-                permanentFilter = oldTargetPermanent.getFilter().copy();
-                permanentFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-                ability.getTargets().clear();
-                ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
+//                xValue = ability.getManaCostsToPay().getX();
+//                oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
+//                minTargets = oldTargetPermanent.getMinNumberOfTargets();
+//                maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
+//                permanentFilter = oldTargetPermanent.getFilter().copy();
+//                permanentFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+//                ability.getTargets().clear();
+//                ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
                 break;
             case X_TARGETS:
                 xValue = ability.getManaCostsToPay().getX();
