@@ -13,7 +13,6 @@ import mage.abilities.effects.Effects;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.EffectType;
-import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -532,8 +531,4 @@ public interface Ability extends Controllable, Serializable {
     TargetAdjuster getTargetAdjuster();
 
     void adjustTargets(Game game);
-
-    void setTargetAdjustment(TargetAdjustment targetAdjustment);
-
-    TargetAdjustment getTargetAdjustment();
 }
