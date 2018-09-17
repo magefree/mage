@@ -1,5 +1,8 @@
 package mage.target.targetadjustment;
 
+import mage.abilities.Ability;
+import mage.game.Game;
+
 /**
  *
  * @author TheElk801

@@ -1,4 +1,3 @@
-
 package mage.abilities;
 
 import java.io.Serializable;
@@ -23,6 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
 
 /**
@@ -526,6 +526,12 @@ public interface Ability extends Controllable, Serializable {
     void setCanFizzle(boolean canFizzle);
 
     boolean canFizzle();
+
+    void setTargetAdjuster(TargetAdjuster targetAdjuster);
+
+    TargetAdjuster getTargetAdjuster();
+
+    void adjustTargets(Game game);
 
     void setTargetAdjustment(TargetAdjustment targetAdjustment);
 
