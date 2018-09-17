@@ -1,4 +1,4 @@
-package mage.cards.d;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -18,7 +18,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public final class Detour extends CardImpl {
+public final class CircuitousRoute extends CardImpl {
 
     private static final FilterCard filter
             = new FilterCard("basic land cards and/or Gate cards");
@@ -32,7 +32,7 @@ public final class Detour extends CardImpl {
         ));
     }
 
-    public Detour(UUID ownerId, CardSetInfo setInfo) {
+    public CircuitousRoute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Search your library for up to two basic lands and/or Gates and put them onto the battlefield tapped.
@@ -41,12 +41,12 @@ public final class Detour extends CardImpl {
         ));
     }
 
-    public Detour(final Detour card) {
+    public CircuitousRoute(final CircuitousRoute card) {
         super(card);
     }
 
     @Override
-    public Detour copy() {
-        return new Detour(this);
+    public CircuitousRoute copy() {
+        return new CircuitousRoute(this);
     }
 }

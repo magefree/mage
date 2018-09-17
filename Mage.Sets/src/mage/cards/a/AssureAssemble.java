@@ -18,12 +18,12 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public final class AssuranceAssociation extends SplitCard {
+public final class AssureAssemble extends SplitCard {
 
-    public AssuranceAssociation(UUID ownerId, CardSetInfo setInfo) {
+    public AssureAssemble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G/W}{G/W}", "{4}{G}{W}", SpellAbilityType.SPLIT);
 
-        // Assurance
+        // Assure
         // Put a +1/+1 counter on target creature. It gains indestructible until end of turn.
         this.getLeftHalfCard().getSpellAbility().addEffect(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
@@ -38,19 +38,19 @@ public final class AssuranceAssociation extends SplitCard {
                 new TargetCreaturePermanent()
         );
 
-        // Association
+        // Assemble
         // Create three 2/2 green and white Elf Knight creature tokens with vigilance.
         this.getRightHalfCard().getSpellAbility().addEffect(
                 new CreateTokenEffect(new ElfKnightToken(), 3)
         );
     }
 
-    public AssuranceAssociation(final AssuranceAssociation card) {
+    public AssureAssemble(final AssureAssemble card) {
         super(card);
     }
 
     @Override
-    public AssuranceAssociation copy() {
-        return new AssuranceAssociation(this);
+    public AssureAssemble copy() {
+        return new AssureAssemble(this);
     }
 }

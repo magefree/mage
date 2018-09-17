@@ -27,7 +27,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Arclight Phoenix", 91, Rarity.MYTHIC, mage.cards.a.ArclightPhoenix.class));
         cards.add(new SetCardInfo("Artful Takedown", 151, Rarity.COMMON, mage.cards.a.ArtfulTakedown.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 152, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
-        cards.add(new SetCardInfo("Assurance // Association", 221, Rarity.RARE, mage.cards.a.AssuranceAssociation.class));
+        cards.add(new SetCardInfo("Assure // Assemble", 221, Rarity.RARE, mage.cards.a.AssureAssemble.class));
         cards.add(new SetCardInfo("Attendant of Vraska", 271, Rarity.UNCOMMON, mage.cards.a.AttendantOfVraska.class));
         cards.add(new SetCardInfo("Aurelia, Exemplar of Justice", 153, Rarity.MYTHIC, mage.cards.a.AureliaExemplarOfJustice.class));
         cards.add(new SetCardInfo("Barging Sergeant", 92, Rarity.COMMON, mage.cards.b.BargingSergeant.class));
@@ -43,6 +43,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Centaur Peacemaker", 158, Rarity.COMMON, mage.cards.c.CentaurPeacemaker.class));
         cards.add(new SetCardInfo("Chemister's Insight", 32, Rarity.UNCOMMON, mage.cards.c.ChemistersInsight.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 233, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
+        cards.add(new SetCardInfo("Circuitous Route", 125, Rarity.UNCOMMON, mage.cards.c.CircuitousRoute.class));
         cards.add(new SetCardInfo("Citywatch Sphinx", 33, Rarity.UNCOMMON, mage.cards.c.CitywatchSphinx.class));
         cards.add(new SetCardInfo("Command the Storm", 94, Rarity.COMMON, mage.cards.c.CommandTheStorm.class));
         cards.add(new SetCardInfo("Conclave Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ConclaveGuildmage.class));
@@ -53,7 +54,6 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Darkblade Agent", 164, Rarity.COMMON, mage.cards.d.DarkbladeAgent.class));
         cards.add(new SetCardInfo("Deadly Visit", 68, Rarity.COMMON, mage.cards.d.DeadlyVisit.class));
         cards.add(new SetCardInfo("Deafening Clarion", 165, Rarity.RARE, mage.cards.d.DeafeningClarion.class));
-        cards.add(new SetCardInfo("Detour", 125, Rarity.UNCOMMON, mage.cards.d.Detour.class));
         cards.add(new SetCardInfo("Dimir Guildgate", 245, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
         cards.add(new SetCardInfo("Dimir Guildgate", 246, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
         cards.add(new SetCardInfo("Dimir Informant", 36, Rarity.COMMON, mage.cards.d.DimirInformant.class));
@@ -176,6 +176,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Wary Okapi", 149, Rarity.COMMON, mage.cards.w.WaryOkapi.class));
         cards.add(new SetCardInfo("Watcher in the Mist", 59, Rarity.COMMON, mage.cards.w.WatcherInTheMist.class));
         cards.add(new SetCardInfo("Watery Grave", 259, Rarity.RARE, mage.cards.w.WateryGrave.class));
+        cards.add(new SetCardInfo("Wee Dragonauts", 214, Rarity.UNCOMMON, mage.cards.w.WeeDragonauts.class));
         cards.add(new SetCardInfo("Whisper Agent", 220, Rarity.COMMON, mage.cards.w.WhisperAgent.class));
         cards.add(new SetCardInfo("Whispering Snitch", 90, Rarity.UNCOMMON, mage.cards.w.WhisperingSnitch.class));
         cards.add(new SetCardInfo("Wojek Bodyguard", 120, Rarity.COMMON, mage.cards.w.WojekBodyguard.class));
