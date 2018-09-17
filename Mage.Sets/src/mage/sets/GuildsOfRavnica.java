@@ -47,6 +47,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Citywatch Sphinx", 33, Rarity.UNCOMMON, mage.cards.c.CitywatchSphinx.class));
         cards.add(new SetCardInfo("Citywide Bust", 4, Rarity.RARE, mage.cards.c.CitywideBust.class));
         cards.add(new SetCardInfo("Command the Storm", 94, Rarity.COMMON, mage.cards.c.CommandTheStorm.class));
+        cards.add(new SetCardInfo("Conclave Cavalier", 161, Rarity.UNCOMMON, mage.cards.c.ConclaveCavalier.class));
         cards.add(new SetCardInfo("Conclave Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ConclaveGuildmage.class));
         cards.add(new SetCardInfo("Conclave Tribunal", 6, Rarity.UNCOMMON, mage.cards.c.ConclaveTribunal.class));
         cards.add(new SetCardInfo("Connive // Concoct", 222, Rarity.RARE, mage.cards.c.ConniveConcoct.class));
