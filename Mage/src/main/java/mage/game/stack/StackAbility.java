@@ -607,6 +607,8 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public void adjustTargets(Game game) {
-        this.targetAdjuster.adjustTargets(this, game);
+        if (targetAdjuster != null) {
+            targetAdjuster.adjustTargets(this, game);
+        }
     }
 }
