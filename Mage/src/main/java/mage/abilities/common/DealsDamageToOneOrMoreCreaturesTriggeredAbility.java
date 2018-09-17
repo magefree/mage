@@ -31,7 +31,7 @@ public class DealsDamageToOneOrMoreCreaturesTriggeredAbility extends DealsDamage
                     || game.getTurn().getStepType() == PhaseStep.FIRST_COMBAT_DAMAGE) {
                 String stepHash = (String) game.getState().getValue("damageStep" + getOriginalId());
                 String newStepHash = game.getStep().getType().toString() + game.getTurnNum();
-                if (stepHash == null || !newStepHash.equals(stepHash)) {
+                if (!newStepHash.equals(stepHash)) {
                     // this ability did not trigger during this damage step
                     game.getState().setValue("damageStep" + getOriginalId(), game.getStep().getType().toString() + game.getTurnNum());
                     return true;

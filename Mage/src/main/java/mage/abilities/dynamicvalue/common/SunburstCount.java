@@ -24,7 +24,7 @@ public class SunburstCount implements DynamicValue {
         int count = 0;
         if (!game.getStack().isEmpty()) {
             StackObject spell = game.getStack().getFirst();
-            if (spell != null && spell instanceof Spell && ((Spell) spell).getSourceId().equals(source.getSourceId())) {
+            if (spell instanceof Spell && ((Spell) spell).getSourceId().equals(source.getSourceId())) {
                 Mana mana = ((Spell) spell).getSpellAbility().getManaCostsToPay().getPayment();
                 if (mana.getBlack() > 0) {
                     count++;

@@ -136,7 +136,7 @@ class WhackCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         Object object = game.getState().getValue("whack" + source.getSourceId());
-        if (object != null && object instanceof Boolean && (Boolean) object) {
+        if (object instanceof Boolean && (Boolean) object) {
             return 1;
         }
         return 0;
@@ -157,7 +157,7 @@ class DoodleCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         Object object = game.getState().getValue("doodle" + source.getSourceId());
-        if (object != null && object instanceof Boolean && (Boolean) object) {
+        if (object instanceof Boolean && (Boolean) object) {
             return 1;
         }
         return 0;
@@ -178,7 +178,7 @@ class BuzzCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         Object object = game.getState().getValue("buzz" + source.getSourceId());
-        if (object != null && object instanceof Boolean && (Boolean) object) {
+        if (object instanceof Boolean && (Boolean) object) {
             return 1;
         }
         return 0;

@@ -73,7 +73,7 @@ class ForsakenWastesTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject eventSourceObject = game.getObject(event.getSourceId());
-        if (eventSourceObject != null && event.getTargetId().equals(this.getSourceId())&& eventSourceObject instanceof Spell ) {
+        if (event.getTargetId().equals(this.getSourceId()) && eventSourceObject instanceof Spell) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }

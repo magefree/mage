@@ -66,7 +66,7 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
                             }
                             else {
                                 Card card = game.getCard(targetId);
-                                if (card != null && card instanceof MeldCard) {
+                                if (card instanceof MeldCard) {
                                     MeldCard meldCard = (MeldCard) card;
                                     Card topCard = meldCard.getTopHalfCard();
                                     Card bottomCard = meldCard.getBottomHalfCard();

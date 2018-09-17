@@ -286,7 +286,7 @@ public class Plane implements CommandObject {
             Class<?> c = Class.forName(planeName);
             Constructor<?> cons = c.getConstructor();
             Object plane = cons.newInstance();
-            if (plane != null && plane instanceof mage.game.command.Plane) {
+            if (plane instanceof Plane) {
                 return (Plane) plane;
             }
         } catch (Exception ex) {            

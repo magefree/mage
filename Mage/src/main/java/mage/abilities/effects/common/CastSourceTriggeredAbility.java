@@ -44,7 +44,7 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {
             MageObject spellObject = game.getObject(sourceId);
-            if (spellObject != null && (spellObject instanceof Spell)) {
+            if ((spellObject instanceof Spell)) {
                 Spell spell = (Spell) spellObject;
                 if (spell.getSpellAbility() != null) {
                     for (Effect effect : getEffects()) {

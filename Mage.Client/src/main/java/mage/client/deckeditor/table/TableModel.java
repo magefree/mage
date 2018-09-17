@@ -369,7 +369,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         if (!card.getId().equals(bigCard.getCardId())) {
             if (!MageFrame.isLite()) {
                 Image image = Plugins.instance.getOriginalImage(card);
-                if (image != null && image instanceof BufferedImage) {
+                if (image instanceof BufferedImage) {
                     // XXX: scaled to fit width
                     bigCard.setCard(card.getId(), EnlargeMode.NORMAL, image, new ArrayList<>(), false);
                 } else {

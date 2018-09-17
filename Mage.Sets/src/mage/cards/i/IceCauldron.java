@@ -265,7 +265,7 @@ class IceCauldronManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && exiledCard != null && card.equals(exiledCard)) {
+            if (card != null && card.equals(exiledCard)) {
                 return true;
             }
         }

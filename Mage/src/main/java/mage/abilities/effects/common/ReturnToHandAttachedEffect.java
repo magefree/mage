@@ -33,7 +33,7 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Object object = getValue("attachedTo");
-        if (object != null && object instanceof Permanent) {
+        if (object instanceof Permanent) {
             Card card = game.getCard(((Permanent)object).getId());
             if (card != null) {
                 if (card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
