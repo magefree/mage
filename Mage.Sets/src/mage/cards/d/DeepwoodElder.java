@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -17,12 +16,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetAdjustment;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.XTargetsAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -44,7 +43,7 @@ public final class DeepwoodElder extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
-        ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
+        ability.setTargetAdjuster(XTargetsAdjuster.instance);
         this.addAbility(ability);
     }
 

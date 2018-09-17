@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -13,10 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.XTargetsAdjuster;
 
 /**
  * @author duncant
@@ -37,7 +36,7 @@ public final class MagusOfTheCandelabra extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
-        ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
+        ability.setTargetAdjuster(XTargetsAdjuster.instance);
         this.addAbility(ability);
     }
 

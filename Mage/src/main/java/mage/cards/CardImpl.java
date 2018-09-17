@@ -361,12 +361,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         switch (ability.getTargetAdjustment()) {
             case NONE:
                 break;
-            case X_TARGETS:
-                xValue = ability.getManaCostsToPay().getX();
-                permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-                ability.getTargets().clear();
-                ability.addTarget(new TargetPermanent(xValue, permanentFilter));
-                break;
             case X_POWER_LEQ:// Minamo Sightbender only
                 xValue = ability.getManaCostsToPay().getX();
                 oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
