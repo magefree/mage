@@ -48,8 +48,9 @@ public final class ArclightPhoenix extends CardImpl {
                         TargetController.YOU, true
                 ), ArclightPhoenixCondition.instance,
                 "At the beginning of combat on your turn, "
-                + "if you cast 3 or more instants and/or sorceries this turn, "
-                + "you may return {this} from your graveyard to the battlefield."
+                + "if you've cast three or more instant "
+                + "and sorcery spells this turn, you may return {this} "
+                + "from your graveyard to the battlefield."
         ), new ArclightPhoenixWatcher());
     }
 
