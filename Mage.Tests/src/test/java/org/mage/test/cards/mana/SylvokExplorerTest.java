@@ -32,7 +32,6 @@ public class SylvokExplorerTest extends CardTestPlayerBase {
      * mage.abilities.mana.AnyColorLandsProduceManaEffect.getNetMana(AnyColorLandsProduceManaAbility.java:181)
      */
     @Test
-    @Ignore
     public void testOneInstance() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
