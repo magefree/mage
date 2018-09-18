@@ -6,9 +6,9 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public final class AngelToken2 extends TokenImpl {
+public final class AngelVigilanceToken extends TokenImpl {
 
-    public AngelToken2() {
+    public AngelVigilanceToken() {
         super("Angel", "4/4 white Angel creature token with flying and vigilance");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -19,11 +19,11 @@ public final class AngelToken2 extends TokenImpl {
         addAbility(VigilanceAbility.getInstance());
     }
 
-    public AngelToken2(final AngelToken2 token) {
+    public AngelVigilanceToken(final AngelVigilanceToken token) {
         super(token);
     }
 
-    public AngelToken2 copy() {
-        return new AngelToken2(this);
+    public AngelVigilanceToken copy() {
+        return new AngelVigilanceToken(this);
     }
 }

@@ -68,6 +68,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Disdainful Stroke", 37, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Disinformation Campaign", 167, Rarity.UNCOMMON, mage.cards.d.DisinformationCampaign.class));
         cards.add(new SetCardInfo("District Guide", 128, Rarity.UNCOMMON, mage.cards.d.DistrictGuide.class));
+        cards.add(new SetCardInfo("Divine Visitation", 10, Rarity.MYTHIC, mage.cards.d.DivineVisitation.class));
         cards.add(new SetCardInfo("Doom Whisperer", 69, Rarity.MYTHIC, mage.cards.d.DoomWhisperer.class));
         cards.add(new SetCardInfo("Dream Eater", 38, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
         cards.add(new SetCardInfo("Emmara, Soul of the Accord", 168, Rarity.RARE, mage.cards.e.EmmaraSoulOfTheAccord.class));
