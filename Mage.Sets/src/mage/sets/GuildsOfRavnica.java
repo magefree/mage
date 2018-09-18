@@ -106,6 +106,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Guildgate", 252, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
         cards.add(new SetCardInfo("Izzet Locket", 238, Rarity.COMMON, mage.cards.i.IzzetLocket.class));
         cards.add(new SetCardInfo("Join Shields", 181, Rarity.UNCOMMON, mage.cards.j.JoinShields.class));
+        cards.add(new SetCardInfo("Justice Strike", 182, Rarity.UNCOMMON, mage.cards.j.JusticeStrike.class));
         cards.add(new SetCardInfo("Knight of Autumn", 183, Rarity.RARE, mage.cards.k.KnightOfAutumn.class));
         cards.add(new SetCardInfo("Lava Coil", 108, Rarity.UNCOMMON, mage.cards.l.LavaCoil.class));
         cards.add(new SetCardInfo("Lazav, the Multifarious", 184, Rarity.MYTHIC, mage.cards.l.LazavTheMultifarious.class));
