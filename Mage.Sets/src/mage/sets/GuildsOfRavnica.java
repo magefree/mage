@@ -155,6 +155,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ral, Izzet Viceroy", 195, Rarity.MYTHIC, mage.cards.r.RalIzzetViceroy.class));
         cards.add(new SetCardInfo("Response // Resurgence", 229, Rarity.RARE, mage.cards.r.ResponseResurgence.class));
         cards.add(new SetCardInfo("Rhizome Lurcher", 196, Rarity.COMMON, mage.cards.r.RhizomeLurcher.class));
+        cards.add(new SetCardInfo("Risk Factor", 113, Rarity.RARE, mage.cards.r.RiskFactor.class));
         cards.add(new SetCardInfo("Ritual of Soot", 84, Rarity.RARE, mage.cards.r.RitualOfSoot.class));
         cards.add(new SetCardInfo("Roc Charger", 24, Rarity.UNCOMMON, mage.cards.r.RocCharger.class));
         cards.add(new SetCardInfo("Rosemane Centaur", 197, Rarity.COMMON, mage.cards.r.RosemaneCentaur.class));
