@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -16,18 +15,25 @@ import mage.game.stack.Spell;
 public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
+    private final String rulePrefix;
 
     public CastSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public CastSourceTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, "");
+    }
+
+    public CastSourceTriggeredAbility(Effect effect, boolean optional, String rulePrefix) {
         super(Zone.STACK, effect, optional);
         this.ruleAtTheTop = true;
+        this.rulePrefix = rulePrefix;
     }
 
     public CastSourceTriggeredAbility(final CastSourceTriggeredAbility ability) {
         super(ability);
+        this.rulePrefix = ability.rulePrefix;
     }
 
     @Override
@@ -59,6 +65,6 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you cast {source}, " + super.getRule();
+        return rulePrefix + "When you cast this spell, " + super.getRule();
     }
 }
