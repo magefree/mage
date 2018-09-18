@@ -1,4 +1,4 @@
-package mage.cards.m;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -27,9 +27,9 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public final class MorgueTroll extends CardImpl {
+public final class CharnelTroll extends CardImpl {
 
-    public MorgueTroll(UUID ownerId, CardSetInfo setInfo) {
+    public CharnelTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
         this.subtype.add(SubType.TROLL);
@@ -65,12 +65,12 @@ public final class MorgueTroll extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MorgueTroll(final MorgueTroll card) {
+    public CharnelTroll(final CharnelTroll card) {
         super(card);
     }
 
     @Override
-    public MorgueTroll copy() {
-        return new MorgueTroll(this);
+    public CharnelTroll copy() {
+        return new CharnelTroll(this);
     }
 }

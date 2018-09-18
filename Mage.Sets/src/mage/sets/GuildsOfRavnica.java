@@ -42,6 +42,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Boros Locket", 231, Rarity.COMMON, mage.cards.b.BorosLocket.class));
         cards.add(new SetCardInfo("Bounty Agent", 2, Rarity.RARE, mage.cards.b.BountyAgent.class));
         cards.add(new SetCardInfo("Centaur Peacemaker", 158, Rarity.COMMON, mage.cards.c.CentaurPeacemaker.class));
+        cards.add(new SetCardInfo("Charnel Troll", 160, Rarity.RARE, mage.cards.c.CharnelTroll.class));
         cards.add(new SetCardInfo("Chemister's Insight", 32, Rarity.UNCOMMON, mage.cards.c.ChemistersInsight.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 233, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Circuitous Route", 125, Rarity.UNCOMMON, mage.cards.c.CircuitousRoute.class));
@@ -130,7 +131,6 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Mission Briefing", 44, Rarity.RARE, mage.cards.m.MissionBriefing.class));
         cards.add(new SetCardInfo("Molderhulk", 190, Rarity.UNCOMMON, mage.cards.m.Molderhulk.class));
         cards.add(new SetCardInfo("Moodmark Painter", 78, Rarity.COMMON, mage.cards.m.MoodmarkPainter.class));
-        cards.add(new SetCardInfo("Morgue Troll", 160, Rarity.RARE, mage.cards.m.MorgueTroll.class));
         cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murmuring Mystic", 45, Rarity.UNCOMMON, mage.cards.m.MurmuringMystic.class));
         cards.add(new SetCardInfo("Narcomoeba", 47, Rarity.RARE, mage.cards.n.Narcomoeba.class));
