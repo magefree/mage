@@ -189,6 +189,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Swarm Guildmage", 201, Rarity.UNCOMMON, mage.cards.s.SwarmGuildmage.class));
         cards.add(new SetCardInfo("Swathcutter Giant", 202, Rarity.UNCOMMON, mage.cards.s.SwathcutterGiant.class));
         cards.add(new SetCardInfo("Swiftblade Vindicator", 203, Rarity.RARE, mage.cards.s.SwiftbladeVindicator.class));
+        cards.add(new SetCardInfo("Tajic, Legion's Edge", 204, Rarity.RARE, mage.cards.t.TajicLegionsEdge.class));
         cards.add(new SetCardInfo("Temple Garden", 258, Rarity.RARE, mage.cards.t.TempleGarden.class));
         cards.add(new SetCardInfo("Thought Erasure", 206, Rarity.UNCOMMON, mage.cards.t.ThoughtErasure.class));
         cards.add(new SetCardInfo("Thoughtbound Phantasm", 55, Rarity.UNCOMMON, mage.cards.t.ThoughtboundPhantasm.class));
