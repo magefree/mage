@@ -73,6 +73,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Doom Whisperer", 69, Rarity.MYTHIC, mage.cards.d.DoomWhisperer.class));
         cards.add(new SetCardInfo("Dream Eater", 38, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
         cards.add(new SetCardInfo("Drowned Secrets", 39, Rarity.RARE, mage.cards.d.DrownedSecrets.class));
+        cards.add(new SetCardInfo("Electrostatic Field", 97, Rarity.COMMON, mage.cards.e.ElectrostaticField.class));
         cards.add(new SetCardInfo("Emmara, Soul of the Accord", 168, Rarity.RARE, mage.cards.e.EmmaraSoulOfTheAccord.class));
         cards.add(new SetCardInfo("Enhanced Surveillance", 40, Rarity.UNCOMMON, mage.cards.e.EnhancedSurveillance.class));
         cards.add(new SetCardInfo("Erratic Cyclops", 98, Rarity.RARE, mage.cards.e.ErraticCyclops.class));
