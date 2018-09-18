@@ -113,6 +113,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ledev Guardian", 18, Rarity.COMMON, mage.cards.l.LedevGuardian.class));
         cards.add(new SetCardInfo("Legion Guildmage", 187, Rarity.UNCOMMON, mage.cards.l.LegionGuildmage.class));
         cards.add(new SetCardInfo("Legion Warboss", 109, Rarity.RARE, mage.cards.l.LegionWarboss.class));
+        cards.add(new SetCardInfo("Light of the Legion", 19, Rarity.RARE, mage.cards.l.LightOfTheLegion.class));
         cards.add(new SetCardInfo("Lotleth Giant", 74, Rarity.UNCOMMON, mage.cards.l.LotlethGiant.class));
         cards.add(new SetCardInfo("Loxodon Restorer", 20, Rarity.COMMON, mage.cards.l.LoxodonRestorer.class));
         cards.add(new SetCardInfo("March of the Multitudes", 188, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
