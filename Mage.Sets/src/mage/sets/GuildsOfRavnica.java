@@ -31,6 +31,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Attendant of Vraska", 271, Rarity.UNCOMMON, mage.cards.a.AttendantOfVraska.class));
         cards.add(new SetCardInfo("Aurelia, Exemplar of Justice", 153, Rarity.MYTHIC, mage.cards.a.AureliaExemplarOfJustice.class));
         cards.add(new SetCardInfo("Barging Sergeant", 92, Rarity.COMMON, mage.cards.b.BargingSergeant.class));
+        cards.add(new SetCardInfo("Barrier of Bones", 61, Rarity.COMMON, mage.cards.b.BarrierOfBones.class));
         cards.add(new SetCardInfo("Beacon Bolt", 154, Rarity.UNCOMMON, mage.cards.b.BeaconBolt.class));
         cards.add(new SetCardInfo("Beast Whisperer", 123, Rarity.RARE, mage.cards.b.BeastWhisperer.class));
         cards.add(new SetCardInfo("Blade Instructor", 1, Rarity.COMMON, mage.cards.b.BladeInstructor.class));
