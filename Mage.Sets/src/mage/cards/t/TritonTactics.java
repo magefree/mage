@@ -89,7 +89,7 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect {
             // save the targets for the watcher in a map with zone change counter (as the card is recast during combat it's neccessary to save with zone change counter)
             Map<Integer, Set<String>> targetMap;
             Object object = game.getState().getValue("targets" + source.getSourceId());
-            if (object != null && object instanceof Map) {
+            if (object instanceof Map) {
                 targetMap = (Map<Integer, Set<String>>) object;
             } else {
                 targetMap = new HashMap<>();
@@ -155,7 +155,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Map<Integer, Set<String>> attackerMap = null;
         Object object = game.getState().getValue("blockedAttackers" + source.getSourceId());
-        if (object != null && object instanceof Map) {
+        if (object instanceof Map) {
             attackerMap = (Map<Integer, Set<String>>) object;
             for (Set<String> attackerSet : attackerMap.values()) {
                 List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
@@ -197,7 +197,7 @@ class BlockedCreaturesWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             Map<Integer, Set<String>> targetMap;
             Object object = game.getState().getValue("targets" + this.getSourceId().toString());
-            if (object != null && object instanceof Map) {
+            if (object instanceof Map) {
                 Permanent blocker = game.getPermanent(event.getSourceId());
                 if (blocker != null) {
                     targetMap = (Map<Integer, Set<String>>) object;
@@ -217,7 +217,7 @@ class BlockedCreaturesWatcher extends Watcher {
         Set<String> attackers;
         Map<Integer, Set<String>> attackerMap;
         Object object = game.getState().getValue("blockedAttackers" + getSourceId());
-        if (object != null && object instanceof Map) {
+        if (object instanceof Map) {
             attackerMap = (Map<Integer, Set<String>>) object;
         } else {
             attackerMap = new HashMap<>();

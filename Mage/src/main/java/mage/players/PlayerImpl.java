@@ -3914,9 +3914,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean surveil(int value, Ability source, Game game) {
-        game.informPlayers(getLogName() + " surveils " + value);
+        GameEvent event = new GameEvent(GameEvent.EventType.SURVEIL, getId(), source == null ? null : source.getSourceId(), getId(), value, true);
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+        game.informPlayers(getLogName() + " surveils " + event.getAmount());
         Cards cards = new CardsImpl();
-        cards.addAll(getLibrary().getTopCards(game, value));
+        cards.addAll(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
             String text;
             if (cards.size() == 1) {
@@ -3930,7 +3934,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             cards.removeAll(target.getTargets());
             putCardsOnTopOfLibrary(cards, game, source, true);
         }
-        game.fireEvent(new GameEvent(GameEvent.EventType.SURVEIL, getId(), source == null ? null : source.getSourceId(), getId(), value, true));
+        game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source == null ? null : source.getSourceId(), getId(), event.getAmount(), true));
         return true;
     }
 

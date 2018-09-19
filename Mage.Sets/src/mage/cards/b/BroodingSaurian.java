@@ -55,7 +55,7 @@ class BroodingSaurianControlEffect extends ContinuousEffectImpl {
 
     public BroodingSaurianControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.staticText = "each player gains control of all nontoken permanents he or she owns";
+        this.staticText = "each player gains control of all nontoken permanents they own";
     }
 
     public BroodingSaurianControlEffect(final BroodingSaurianControlEffect effect) {

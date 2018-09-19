@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.oneshot.exile;
 
 import mage.abilities.keyword.ReachAbility;
@@ -115,5 +114,37 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
         assertAbility(playerB, "Bramble Elemental", ReachAbility.getInstance(), true);
 
         assertHandCount(playerB, 3); // 1 from Turn 2 and 2 from Frog Tongue
+    }
+
+    @Test
+    public void testExileAndReturnIfTawnosLeftBattlefield() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        // You may choose not to untap Tawnos's Coffin during your untap step.
+        // {3}, {T}: Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
+        // When Tawnos's Coffin leaves the battlefield or becomes untapped, return the exiled card to the battlefield under
+        //   its owner's control tapped with the noted number and kind of counters on it, and if you do, return the exiled Aura
+        //   cards to the battlefield under their owner's control attached to that permanent.
+        addCard(Zone.HAND, playerA, "Tawnos's Coffin"); // Artifact {4}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Disenchant");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}", "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Disenchant", "Tawnos's Coffin");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Disenchant", 1);
+
+        assertPermanentCount(playerA, "Tawnos's Coffin", 0);
+        assertGraveyardCount(playerA, "Tawnos's Coffin", 1);
+
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+
     }
 }

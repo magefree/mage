@@ -98,7 +98,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
                 // save the x value to be available for ETB replacement effect
                 Object object = game.getState().getValue("spellX" + source.getSourceId());
                 Map<String, Integer> spellX;
-                if (object != null && object instanceof Map) {
+                if (object instanceof Map) {
                     spellX = (Map<String, Integer>) object;
                 } else {
                     spellX = new HashMap<>();

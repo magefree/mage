@@ -121,7 +121,7 @@ class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
 
     public PrimordialMistCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Exile a face-down permanent you control face-up.  You may play the card from exile";
+        staticText = "Exile a face-down permanent you control face up: You may play that card this turn.";
     }
 
     public PrimordialMistCastFromExileEffect(final PrimordialMistCastFromExileEffect effect) {

@@ -71,6 +71,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
                     toReveal.add(card);
                     if (!card.isLand()) {
                         nonLandCard = card;
+                        break;
                     }
                 }
                 // reveal cards

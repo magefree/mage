@@ -171,7 +171,7 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
-                if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
+                if (watcher instanceof AttackedThisTurnWatcher) {
                     if (((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                         return permanent.destroy(source.getSourceId(), game, false);
                     }

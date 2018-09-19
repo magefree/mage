@@ -123,7 +123,7 @@ class SolemnityEffect2 extends ReplacementEffectImpl {
         Permanent permanent2 = game.getPermanent(event.getTargetId());
         Permanent permanent3 = game.getPermanentEntering(event.getTargetId());
 
-        if (object != null && object instanceof Permanent) {
+        if (object instanceof Permanent) {
             if (filter.match((Permanent) object, game)) {
                 return true;
             }

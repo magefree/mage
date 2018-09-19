@@ -319,7 +319,7 @@ public class DialogManager extends JComponent implements MouseListener,
         if (e.getButton() == MouseEvent.BUTTON1) {
             j = (JComponent) getComponentAt(e.getX(), e.getY());
 
-            if (j != null && j instanceof DialogContainer) {
+            if (j instanceof DialogContainer) {
                 rec = j.getBounds();
                 bDragged = true;
                 mx = e.getX();

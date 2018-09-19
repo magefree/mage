@@ -149,7 +149,7 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
             // wants to do that in the future.
             UUID sourceId = source.getSourceId();
             Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard != null && sourceCard instanceof SplitCardHalf) {
+            if (sourceCard instanceof SplitCardHalf) {
                 sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
                 sourceId = sourceCard.getId();
             }
@@ -170,7 +170,7 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         UUID sourceId = source.getSourceId();
         Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard != null && sourceCard instanceof SplitCardHalf) {
+        if (sourceCard instanceof SplitCardHalf) {
             sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
             sourceId = sourceCard.getId();
         }

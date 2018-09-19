@@ -149,7 +149,7 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean isRequired(UUID sourceId, Game game) {
         MageObject object = game.getObject(sourceId);
-        if (!requiredExplicitlySet && object != null && object instanceof Ability) {
+        if (!requiredExplicitlySet && object instanceof Ability) {
             return isRequired((Ability) object);
         } else {
             return isRequired();

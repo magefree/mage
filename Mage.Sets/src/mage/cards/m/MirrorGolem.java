@@ -9,11 +9,10 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -30,7 +29,7 @@ public final class MirrorGolem extends CardImpl {
 
     public MirrorGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        
+
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -109,18 +108,18 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        for (UUID imprinted : sourceObject.getImprinted()){
-            if (imprinted != null && exileZone.contains(imprinted)){
+        for (UUID imprinted : sourceObject.getImprinted()) {
+            if (imprinted != null && exileZone.contains(imprinted)) {
                 Card card = game.getCard(imprinted);
                 if (card != null) {
-                    for (CardType cardType : card.getCardType()){
+                    for (CardType cardType : card.getCardType()) {
                         FilterCard filterCard;
-                        if (cardType.equals(CardType.SORCERY)){
+                        if (cardType.equals(CardType.SORCERY)) {
                             filterCard = new FilterCard("sorceries");
-                        } else if (cardType.equals(CardType.TRIBAL)){
+                        } else if (cardType.equals(CardType.TRIBAL)) {
                             filterCard = new FilterCard("tribal");
                         } else {
-                            filterCard = new FilterCard(cardType.toString()+"s");
+                            filterCard = new FilterCard(cardType.toString() + "s");
                         }
                         filterCard.add(new CardTypePredicate(cardType));
                         sourceObject.addAbility(new ProtectionAbility(filterCard));

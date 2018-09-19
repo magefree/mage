@@ -83,7 +83,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
                         if (card != null) {
                             String key = new StringBuilder("Haunting_").append(getSourceId().toString()).append('_').append(card.getZoneChangeCounter(game)).toString();
                             Object object = game.getState().getValue(key);
-                            if (object != null && object instanceof FixedTarget) {
+                            if (object instanceof FixedTarget) {
                                 FixedTarget target = (FixedTarget) object;
                                 if (target.getTarget() != null &&  target.getTarget().equals(event.getTargetId())) {
                                     usedFromExile = true;
