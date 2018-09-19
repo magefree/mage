@@ -31,7 +31,7 @@ import mage.target.TargetPermanent;
  */
 public final class KraulHarpooner extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature without flying you don't control");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying you don't control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
