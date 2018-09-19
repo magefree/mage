@@ -82,7 +82,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Douser of Lights", 70, Rarity.COMMON, mage.cards.d.DouserOfLights.class));
         cards.add(new SetCardInfo("Dream Eater", 38, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
         cards.add(new SetCardInfo("Drowned Secrets", 39, Rarity.RARE, mage.cards.d.DrownedSecrets.class));
-        cards.add(new SetCardInfo("Electrostatic Field", 97, Rarity.COMMON, mage.cards.e.ElectrostaticField.class));
+        cards.add(new SetCardInfo("Electrostatic Field", 97, Rarity.UNCOMMON, mage.cards.e.ElectrostaticField.class));
         cards.add(new SetCardInfo("Emmara, Soul of the Accord", 168, Rarity.RARE, mage.cards.e.EmmaraSoulOfTheAccord.class));
         cards.add(new SetCardInfo("Enhanced Surveillance", 40, Rarity.UNCOMMON, mage.cards.e.EnhancedSurveillance.class));
         cards.add(new SetCardInfo("Erratic Cyclops", 98, Rarity.RARE, mage.cards.e.ErraticCyclops.class));
@@ -118,15 +118,17 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Hatchery Spider", 132, Rarity.RARE, mage.cards.h.HatcherySpider.class));
         cards.add(new SetCardInfo("Healer's Hawk", 14, Rarity.COMMON, mage.cards.h.HealersHawk.class));
         cards.add(new SetCardInfo("Hired Poisoner", 72, Rarity.COMMON, mage.cards.h.HiredPoisoner.class));
+        cards.add(new SetCardInfo("Hitchclaw Recluse", 133, Rarity.COMMON, mage.cards.h.HitchclawRecluse.class));
         cards.add(new SetCardInfo("House Guildmage", 177, Rarity.UNCOMMON, mage.cards.h.HouseGuildmage.class));
         cards.add(new SetCardInfo("Hunted Witness", 15, Rarity.COMMON, mage.cards.h.HuntedWitness.class));
         cards.add(new SetCardInfo("Hypothesizzle", 178, Rarity.COMMON, mage.cards.h.Hypothesizzle.class));
         cards.add(new SetCardInfo("Impervious Greatwurm", 273, Rarity.MYTHIC, mage.cards.i.ImperviousGreatwurm.class));
         cards.add(new SetCardInfo("Inescapable Blaze", 107, Rarity.UNCOMMON, mage.cards.i.InescapableBlaze.class));
-        cards.add(new SetCardInfo("Inspiring Unicorn", 16, Rarity.COMMON, mage.cards.i.InspiringUnicorn.class));
         cards.add(new SetCardInfo("Integrity // Intervention", 227, Rarity.UNCOMMON, mage.cards.i.IntegrityIntervention.class));
         cards.add(new SetCardInfo("Invert // Invent", 228, Rarity.UNCOMMON, mage.cards.i.InvertInvent.class));
+        cards.add(new SetCardInfo("Inspiring Unicorn", 16, Rarity.UNCOMMON, mage.cards.i.InspiringUnicorn.class));
         cards.add(new SetCardInfo("Ionize", 179, Rarity.RARE, mage.cards.i.Ionize.class));
+        cards.add(new SetCardInfo("Ironshell Beetle", 134, Rarity.COMMON, mage.cards.i.IronshellBeetle.class));
         cards.add(new SetCardInfo("Island", 261, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izoni, Thousand-Eyed", 180, Rarity.RARE, mage.cards.i.IzoniThousandEyed.class));
         cards.add(new SetCardInfo("Izzet Guildgate", 251, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
@@ -135,7 +137,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Join Shields", 181, Rarity.UNCOMMON, mage.cards.j.JoinShields.class));
         cards.add(new SetCardInfo("Justice Strike", 182, Rarity.UNCOMMON, mage.cards.j.JusticeStrike.class));
         cards.add(new SetCardInfo("Knight of Autumn", 183, Rarity.RARE, mage.cards.k.KnightOfAutumn.class));
-        cards.add(new SetCardInfo("Kraul Foragers", 134, Rarity.COMMON, mage.cards.k.KraulForagers.class));
+        cards.add(new SetCardInfo("Kraul Foragers", 135, Rarity.COMMON, mage.cards.k.KraulForagers.class));
         cards.add(new SetCardInfo("Kraul Harpooner", 136, Rarity.UNCOMMON, mage.cards.k.KraulHarpooner.class));
         cards.add(new SetCardInfo("Lava Coil", 108, Rarity.UNCOMMON, mage.cards.l.LavaCoil.class));
         cards.add(new SetCardInfo("Lazav, the Multifarious", 184, Rarity.MYTHIC, mage.cards.l.LazavTheMultifarious.class));
@@ -148,6 +150,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Lotleth Giant", 74, Rarity.UNCOMMON, mage.cards.l.LotlethGiant.class));
         cards.add(new SetCardInfo("Loxodon Restorer", 20, Rarity.COMMON, mage.cards.l.LoxodonRestorer.class));
         cards.add(new SetCardInfo("Luminous Bonds", 21, Rarity.COMMON, mage.cards.l.LuminousBonds.class));
+        cards.add(new SetCardInfo("Maniacal Rage", 110, Rarity.COMMON, mage.cards.m.ManiacalRage.class));
         cards.add(new SetCardInfo("March of the Multitudes", 188, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Mausoleum Secrets", 75, Rarity.RARE, mage.cards.m.MausoleumSecrets.class));
         cards.add(new SetCardInfo("Maximize Altitude", 43, Rarity.COMMON, mage.cards.m.MaximizeAltitude.class));
@@ -175,6 +178,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Passwall Adept", 50, Rarity.COMMON, mage.cards.p.PasswallAdept.class));
         cards.add(new SetCardInfo("Piston-Fist Cyclops", 217, Rarity.COMMON, mage.cards.p.PistonFistCyclops.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Prey Upon", 143, Rarity.COMMON, mage.cards.p.PreyUpon.class));
         cards.add(new SetCardInfo("Price of Fame", 83, Rarity.UNCOMMON, mage.cards.p.PriceOfFame.class));
         cards.add(new SetCardInfo("Quasiduplicate", 51, Rarity.RARE, mage.cards.q.Quasiduplicate.class));
         cards.add(new SetCardInfo("Radical Idea", 52, Rarity.COMMON, mage.cards.r.RadicalIdea.class));
@@ -204,6 +208,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Steam Vents", 257, Rarity.RARE, mage.cards.s.SteamVents.class));
         cards.add(new SetCardInfo("Sumala Woodshaper", 200, Rarity.COMMON, mage.cards.s.SumalaWoodshaper.class));
         cards.add(new SetCardInfo("Sunhome Stalwart", 26, Rarity.UNCOMMON, mage.cards.s.SunhomeStalwart.class));
+        cards.add(new SetCardInfo("Sure Strike", 118, Rarity.COMMON, mage.cards.s.SureStrike.class));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm Guildmage", 201, Rarity.UNCOMMON, mage.cards.s.SwarmGuildmage.class));
         cards.add(new SetCardInfo("Swathcutter Giant", 202, Rarity.UNCOMMON, mage.cards.s.SwathcutterGiant.class));
