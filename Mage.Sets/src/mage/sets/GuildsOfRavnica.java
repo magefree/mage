@@ -202,12 +202,14 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ritual of Soot", 84, Rarity.RARE, mage.cards.r.RitualOfSoot.class));
         cards.add(new SetCardInfo("Roc Charger", 24, Rarity.UNCOMMON, mage.cards.r.RocCharger.class));
         cards.add(new SetCardInfo("Rosemane Centaur", 197, Rarity.COMMON, mage.cards.r.RosemaneCentaur.class));
+        cards.add(new SetCardInfo("Rubblebelt Boar", 114, Rarity.COMMON, mage.cards.r.RubblebeltBoar.class));
         cards.add(new SetCardInfo("Runaway Steam-Kin", 115, Rarity.RARE, mage.cards.r.RunawaySteamKin.class));
         cards.add(new SetCardInfo("Sacred Foundry", 254, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 255, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 256, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Locket", 240, Rarity.COMMON, mage.cards.s.SelesnyaLocket.class));
         cards.add(new SetCardInfo("Siege Wurm", 144, Rarity.COMMON, mage.cards.s.SiegeWurm.class));
+        cards.add(new SetCardInfo("Silent Dart", 241, Rarity.UNCOMMON, mage.cards.s.SilentDart.class));
         cards.add(new SetCardInfo("Sinister Sabotage", 54, Rarity.UNCOMMON, mage.cards.s.SinisterSabotage.class));
         cards.add(new SetCardInfo("Skyknight Legionnaire", 198, Rarity.COMMON, mage.cards.s.SkyknightLegionnaire.class));
         cards.add(new SetCardInfo("Sonic Assault", 199, Rarity.COMMON, mage.cards.s.SonicAssault.class));
