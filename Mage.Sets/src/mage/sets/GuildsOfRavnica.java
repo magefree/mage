@@ -232,6 +232,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Wee Dragonauts", 214, Rarity.UNCOMMON, mage.cards.w.WeeDragonauts.class));
         cards.add(new SetCardInfo("Whisper Agent", 220, Rarity.COMMON, mage.cards.w.WhisperAgent.class));
         cards.add(new SetCardInfo("Whispering Snitch", 90, Rarity.UNCOMMON, mage.cards.w.WhisperingSnitch.class));
+        cards.add(new SetCardInfo("Wishcoin Crab", 60, Rarity.COMMON, mage.cards.w.WishcoinCrab.class));
         cards.add(new SetCardInfo("Wojek Bodyguard", 120, Rarity.COMMON, mage.cards.w.WojekBodyguard.class));
         cards.add(new SetCardInfo("Worldsoul Colossus", 215, Rarity.UNCOMMON, mage.cards.w.WorldsoulColossus.class));
     }
