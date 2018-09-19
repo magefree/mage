@@ -202,6 +202,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ral's Staticaster", 268, Rarity.UNCOMMON, mage.cards.r.RalsStaticaster.class));
         cards.add(new SetCardInfo("Ral, Caller of Storms", 265, Rarity.MYTHIC, mage.cards.r.RalCallerOfStorms.class));
         cards.add(new SetCardInfo("Ral, Izzet Viceroy", 195, Rarity.MYTHIC, mage.cards.r.RalIzzetViceroy.class));
+        cards.add(new SetCardInfo("Rampaging Monument", 239, Rarity.UNCOMMON, mage.cards.r.RampagingMonument.class));
         cards.add(new SetCardInfo("Response // Resurgence", 229, Rarity.RARE, mage.cards.r.ResponseResurgence.class));
         cards.add(new SetCardInfo("Rhizome Lurcher", 196, Rarity.COMMON, mage.cards.r.RhizomeLurcher.class));
         cards.add(new SetCardInfo("Righteous Blow", 23, Rarity.COMMON, mage.cards.r.RighteousBlow.class));
@@ -219,6 +220,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Silent Dart", 241, Rarity.UNCOMMON, mage.cards.s.SilentDart.class));
         cards.add(new SetCardInfo("Sinister Sabotage", 54, Rarity.UNCOMMON, mage.cards.s.SinisterSabotage.class));
         cards.add(new SetCardInfo("Skyknight Legionnaire", 198, Rarity.COMMON, mage.cards.s.SkyknightLegionnaire.class));
+        cards.add(new SetCardInfo("Skyline Scout", 25, Rarity.COMMON, mage.cards.s.SkylineScout.class));
         cards.add(new SetCardInfo("Sonic Assault", 199, Rarity.COMMON, mage.cards.s.SonicAssault.class));
         cards.add(new SetCardInfo("Spinal Centipede", 86, Rarity.COMMON, mage.cards.s.SpinalCentipede.class));
         cards.add(new SetCardInfo("Sprouting Renewal", 145, Rarity.UNCOMMON, mage.cards.s.SproutingRenewal.class));
