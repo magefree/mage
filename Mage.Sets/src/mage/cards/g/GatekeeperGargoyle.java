@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public final class GargoyleGuardian extends CardImpl {
+public final class GatekeeperGargoyle extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
@@ -27,7 +27,7 @@ public final class GargoyleGuardian extends CardImpl {
         filter.add(new SubtypePredicate(SubType.GATE));
     }
 
-    public GargoyleGuardian(UUID ownerId, CardSetInfo setInfo) {
+    public GatekeeperGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
 
         this.subtype.add(SubType.GARGOYLE);
@@ -46,12 +46,12 @@ public final class GargoyleGuardian extends CardImpl {
         ));
     }
 
-    public GargoyleGuardian(final GargoyleGuardian card) {
+    public GatekeeperGargoyle(final GatekeeperGargoyle card) {
         super(card);
     }
 
     @Override
-    public GargoyleGuardian copy() {
-        return new GargoyleGuardian(this);
+    public GatekeeperGargoyle copy() {
+        return new GatekeeperGargoyle(this);
     }
 }
