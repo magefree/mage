@@ -46,6 +46,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Chance for Glory", 159, Rarity.MYTHIC, mage.cards.c.ChanceForGlory.class));
         cards.add(new SetCardInfo("Charnel Troll", 160, Rarity.RARE, mage.cards.c.CharnelTroll.class));
         cards.add(new SetCardInfo("Chemister's Insight", 32, Rarity.UNCOMMON, mage.cards.c.ChemistersInsight.class));
+        cards.add(new SetCardInfo("Child of Night", 65, Rarity.COMMON, mage.cards.c.ChildOfNight.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 233, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Circuitous Route", 125, Rarity.UNCOMMON, mage.cards.c.CircuitousRoute.class));
         cards.add(new SetCardInfo("Citywatch Sphinx", 33, Rarity.UNCOMMON, mage.cards.c.CitywatchSphinx.class));
@@ -57,8 +58,10 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Connive // Concoct", 222, Rarity.RARE, mage.cards.c.ConniveConcoct.class));
         cards.add(new SetCardInfo("Crackling Drake", 163, Rarity.UNCOMMON, mage.cards.c.CracklingDrake.class));
         cards.add(new SetCardInfo("Creeping Chill", 66, Rarity.UNCOMMON, mage.cards.c.CreepingChill.class));
+        cards.add(new SetCardInfo("Crushing Canopy", 126, Rarity.COMMON, mage.cards.c.CrushingCanopy.class));
         cards.add(new SetCardInfo("Darkblade Agent", 164, Rarity.COMMON, mage.cards.d.DarkbladeAgent.class));
         cards.add(new SetCardInfo("Dawn of Hope", 8, Rarity.RARE, mage.cards.d.DawnOfHope.class));
+        cards.add(new SetCardInfo("Dead Weight", 67, Rarity.COMMON, mage.cards.d.DeadWeight.class));
         cards.add(new SetCardInfo("Deadly Visit", 68, Rarity.COMMON, mage.cards.d.DeadlyVisit.class));
         cards.add(new SetCardInfo("Deafening Clarion", 165, Rarity.RARE, mage.cards.d.DeafeningClarion.class));
         cards.add(new SetCardInfo("Dimir Guildgate", 245, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
@@ -139,6 +142,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Light of the Legion", 19, Rarity.RARE, mage.cards.l.LightOfTheLegion.class));
         cards.add(new SetCardInfo("Lotleth Giant", 74, Rarity.UNCOMMON, mage.cards.l.LotlethGiant.class));
         cards.add(new SetCardInfo("Loxodon Restorer", 20, Rarity.COMMON, mage.cards.l.LoxodonRestorer.class));
+        cards.add(new SetCardInfo("Luminous Bonds", 21, Rarity.COMMON, mage.cards.l.LuminousBonds.class));
         cards.add(new SetCardInfo("March of the Multitudes", 188, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Mausoleum Secrets", 75, Rarity.RARE, mage.cards.m.MausoleumSecrets.class));
         cards.add(new SetCardInfo("Maximize Altitude", 43, Rarity.COMMON, mage.cards.m.MaximizeAltitude.class));
@@ -174,6 +178,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ral, Izzet Viceroy", 195, Rarity.MYTHIC, mage.cards.r.RalIzzetViceroy.class));
         cards.add(new SetCardInfo("Response // Resurgence", 229, Rarity.RARE, mage.cards.r.ResponseResurgence.class));
         cards.add(new SetCardInfo("Rhizome Lurcher", 196, Rarity.COMMON, mage.cards.r.RhizomeLurcher.class));
+        cards.add(new SetCardInfo("Righteous Blow", 23, Rarity.COMMON, mage.cards.r.RighteousBlow.class));
         cards.add(new SetCardInfo("Risk Factor", 113, Rarity.RARE, mage.cards.r.RiskFactor.class));
         cards.add(new SetCardInfo("Ritual of Soot", 84, Rarity.RARE, mage.cards.r.RitualOfSoot.class));
         cards.add(new SetCardInfo("Roc Charger", 24, Rarity.UNCOMMON, mage.cards.r.RocCharger.class));
@@ -210,6 +215,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Vraska's Stoneglare", 272, Rarity.RARE, mage.cards.v.VraskasStoneglare.class));
         cards.add(new SetCardInfo("Vraska, Golgari Queen", 213, Rarity.MYTHIC, mage.cards.v.VraskaGolgariQueen.class));
         cards.add(new SetCardInfo("Vraska, Regal Gorgon", 269, Rarity.MYTHIC, mage.cards.v.VraskaRegalGorgon.class));
+        cards.add(new SetCardInfo("Wall of Mist", 58, Rarity.COMMON, mage.cards.w.WallOfMist.class));
         cards.add(new SetCardInfo("Wand of Vertebrae", 242, Rarity.UNCOMMON, mage.cards.w.WandOfVertebrae.class));
         cards.add(new SetCardInfo("Wary Okapi", 149, Rarity.COMMON, mage.cards.w.WaryOkapi.class));
         cards.add(new SetCardInfo("Watcher in the Mist", 59, Rarity.COMMON, mage.cards.w.WatcherInTheMist.class));
