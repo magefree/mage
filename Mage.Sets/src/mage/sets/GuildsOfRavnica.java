@@ -79,6 +79,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("District Guide", 128, Rarity.UNCOMMON, mage.cards.d.DistrictGuide.class));
         cards.add(new SetCardInfo("Divine Visitation", 10, Rarity.MYTHIC, mage.cards.d.DivineVisitation.class));
         cards.add(new SetCardInfo("Doom Whisperer", 69, Rarity.MYTHIC, mage.cards.d.DoomWhisperer.class));
+        cards.add(new SetCardInfo("Douser of Lights", 70, Rarity.COMMON, mage.cards.d.DouserOfLights.class));
         cards.add(new SetCardInfo("Dream Eater", 38, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
         cards.add(new SetCardInfo("Drowned Secrets", 39, Rarity.RARE, mage.cards.d.DrownedSecrets.class));
         cards.add(new SetCardInfo("Electrostatic Field", 97, Rarity.COMMON, mage.cards.e.ElectrostaticField.class));
