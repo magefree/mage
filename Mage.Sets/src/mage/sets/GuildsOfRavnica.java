@@ -64,6 +64,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Crushing Canopy", 126, Rarity.COMMON, mage.cards.c.CrushingCanopy.class));
         cards.add(new SetCardInfo("Darkblade Agent", 164, Rarity.COMMON, mage.cards.d.DarkbladeAgent.class));
         cards.add(new SetCardInfo("Dawn of Hope", 8, Rarity.RARE, mage.cards.d.DawnOfHope.class));
+        cards.add(new SetCardInfo("Dazzling Lights", 34, Rarity.COMMON, mage.cards.d.DazzlingLights.class));
         cards.add(new SetCardInfo("Dead Weight", 67, Rarity.COMMON, mage.cards.d.DeadWeight.class));
         cards.add(new SetCardInfo("Deadly Visit", 68, Rarity.COMMON, mage.cards.d.DeadlyVisit.class));
         cards.add(new SetCardInfo("Deafening Clarion", 165, Rarity.RARE, mage.cards.d.DeafeningClarion.class));
