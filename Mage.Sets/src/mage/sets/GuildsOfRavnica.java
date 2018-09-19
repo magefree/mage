@@ -176,6 +176,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ochran Assassin", 194, Rarity.UNCOMMON, mage.cards.o.OchranAssassin.class));
         cards.add(new SetCardInfo("Omnispell Adept", 49, Rarity.RARE, mage.cards.o.OmnispellAdept.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 253, Rarity.RARE, mage.cards.o.OvergrownTomb.class));
+        cards.add(new SetCardInfo("Pack's Favor", 139, Rarity.COMMON, mage.cards.p.PacksFavor.class));
         cards.add(new SetCardInfo("Parhelion Patrol", 22, Rarity.COMMON, mage.cards.p.ParhelionPatrol.class));
         cards.add(new SetCardInfo("Passwall Adept", 50, Rarity.COMMON, mage.cards.p.PasswallAdept.class));
         cards.add(new SetCardInfo("Piston-Fist Cyclops", 217, Rarity.COMMON, mage.cards.p.PistonFistCyclops.class));
