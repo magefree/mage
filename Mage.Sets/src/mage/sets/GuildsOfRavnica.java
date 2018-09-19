@@ -117,6 +117,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Hammer Dropper", 176, Rarity.COMMON, mage.cards.h.HammerDropper.class));
         cards.add(new SetCardInfo("Hatchery Spider", 132, Rarity.RARE, mage.cards.h.HatcherySpider.class));
         cards.add(new SetCardInfo("Healer's Hawk", 14, Rarity.COMMON, mage.cards.h.HealersHawk.class));
+        cards.add(new SetCardInfo("Hired Poisoner", 72, Rarity.COMMON, mage.cards.h.HiredPoisoner.class));
         cards.add(new SetCardInfo("House Guildmage", 177, Rarity.UNCOMMON, mage.cards.h.HouseGuildmage.class));
         cards.add(new SetCardInfo("Hunted Witness", 15, Rarity.COMMON, mage.cards.h.HuntedWitness.class));
         cards.add(new SetCardInfo("Hypothesizzle", 178, Rarity.COMMON, mage.cards.h.Hypothesizzle.class));
