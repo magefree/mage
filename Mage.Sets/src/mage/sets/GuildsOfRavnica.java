@@ -98,6 +98,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Banneret", 102, Rarity.UNCOMMON, mage.cards.g.GoblinBanneret.class));
         cards.add(new SetCardInfo("Goblin Cratermaker", 103, Rarity.UNCOMMON, mage.cards.g.GoblinCratermaker.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 174, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
+        cards.add(new SetCardInfo("Goblin Locksmith", 104, Rarity.COMMON, mage.cards.g.GoblinLocksmith.class));
         cards.add(new SetCardInfo("Golgari Findbroker", 175, Rarity.UNCOMMON, mage.cards.g.GolgariFindbroker.class));
         cards.add(new SetCardInfo("Golgari Guildgate", 248, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
         cards.add(new SetCardInfo("Golgari Guildgate", 249, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
