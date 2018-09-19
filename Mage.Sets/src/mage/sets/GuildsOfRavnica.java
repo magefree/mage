@@ -221,6 +221,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Sinister Sabotage", 54, Rarity.UNCOMMON, mage.cards.s.SinisterSabotage.class));
         cards.add(new SetCardInfo("Skyknight Legionnaire", 198, Rarity.COMMON, mage.cards.s.SkyknightLegionnaire.class));
         cards.add(new SetCardInfo("Skyline Scout", 25, Rarity.COMMON, mage.cards.s.SkylineScout.class));
+        cards.add(new SetCardInfo("Smelt-War Minotaur", 116, Rarity.UNCOMMON, mage.cards.s.SmeltWarMinotaur.class));
         cards.add(new SetCardInfo("Sonic Assault", 199, Rarity.COMMON, mage.cards.s.SonicAssault.class));
         cards.add(new SetCardInfo("Spinal Centipede", 86, Rarity.COMMON, mage.cards.s.SpinalCentipede.class));
         cards.add(new SetCardInfo("Sprouting Renewal", 145, Rarity.UNCOMMON, mage.cards.s.SproutingRenewal.class));
