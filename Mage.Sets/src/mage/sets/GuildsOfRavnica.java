@@ -90,6 +90,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Erstwhile Trooper", 169, Rarity.COMMON, mage.cards.e.ErstwhileTrooper.class));
         cards.add(new SetCardInfo("Etrata, the Silencer", 170, Rarity.RARE, mage.cards.e.EtrataTheSilencer.class));
         cards.add(new SetCardInfo("Expansion // Explosion", 224, Rarity.RARE, mage.cards.e.ExpansionExplosion.class));
+        cards.add(new SetCardInfo("Fearless Halberdier", 100, Rarity.COMMON, mage.cards.f.FearlessHalberdier.class));
         cards.add(new SetCardInfo("Find // Finality", 225, Rarity.RARE, mage.cards.f.FindFinality.class));
         cards.add(new SetCardInfo("Firemind's Research", 171, Rarity.RARE, mage.cards.f.FiremindsResearch.class));
         cards.add(new SetCardInfo("Flight of Equenauts", 11, Rarity.UNCOMMON, mage.cards.f.FlightOfEquenauts.class));
