@@ -232,6 +232,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Sworn Companions", 27, Rarity.COMMON, mage.cards.s.SwornCompanions.class));
         cards.add(new SetCardInfo("Tajic, Legion's Edge", 204, Rarity.RARE, mage.cards.t.TajicLegionsEdge.class));
         cards.add(new SetCardInfo("Temple Garden", 258, Rarity.RARE, mage.cards.t.TempleGarden.class));
+        cards.add(new SetCardInfo("Tenth District Guard", 29, Rarity.COMMON, mage.cards.t.TenthDistrictGuard.class));
         cards.add(new SetCardInfo("Thought Erasure", 206, Rarity.UNCOMMON, mage.cards.t.ThoughtErasure.class));
         cards.add(new SetCardInfo("Thoughtbound Phantasm", 55, Rarity.UNCOMMON, mage.cards.t.ThoughtboundPhantasm.class));
         cards.add(new SetCardInfo("Trostani Discordant", 208, Rarity.MYTHIC, mage.cards.t.TrostaniDiscordant.class));
