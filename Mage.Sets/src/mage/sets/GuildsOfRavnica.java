@@ -45,6 +45,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Bounty Agent", 2, Rarity.RARE, mage.cards.b.BountyAgent.class));
         cards.add(new SetCardInfo("Burglar Rat", 64, Rarity.COMMON, mage.cards.b.BurglarRat.class));
         cards.add(new SetCardInfo("Camaraderie", 157, Rarity.RARE, mage.cards.c.Camaraderie.class));
+        cards.add(new SetCardInfo("Capture Sphere", 31, Rarity.COMMON, mage.cards.c.CaptureSphere.class));
         cards.add(new SetCardInfo("Centaur Peacemaker", 158, Rarity.COMMON, mage.cards.c.CentaurPeacemaker.class));
         cards.add(new SetCardInfo("Chance for Glory", 159, Rarity.MYTHIC, mage.cards.c.ChanceForGlory.class));
         cards.add(new SetCardInfo("Charnel Troll", 160, Rarity.RARE, mage.cards.c.CharnelTroll.class));
