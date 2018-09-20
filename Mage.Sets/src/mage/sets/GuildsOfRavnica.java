@@ -220,6 +220,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Selesnya Guildgate", 255, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 256, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Locket", 240, Rarity.COMMON, mage.cards.s.SelesnyaLocket.class));
+        cards.add(new SetCardInfo("Severed Strands", 85, Rarity.COMMON, mage.cards.s.SeveredStrands.class));
         cards.add(new SetCardInfo("Siege Wurm", 144, Rarity.COMMON, mage.cards.s.SiegeWurm.class));
         cards.add(new SetCardInfo("Silent Dart", 241, Rarity.UNCOMMON, mage.cards.s.SilentDart.class));
         cards.add(new SetCardInfo("Sinister Sabotage", 54, Rarity.UNCOMMON, mage.cards.s.SinisterSabotage.class));
