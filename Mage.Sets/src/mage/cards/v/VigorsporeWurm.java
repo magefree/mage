@@ -45,7 +45,7 @@ public final class VigorsporeWurm extends CardImpl {
                 false, "<i>Undergrowth</i> &mdash; "
         );
         ability.addEffect(new BoostTargetEffect(
-                xValue, xValue, Duration.EndOfTurn
+                xValue, xValue, Duration.EndOfTurn, true
         ).setText("and gets +X/+X until end of turn, "
                 + "where X is the number of creature cards in your graveyard."));
         ability.addTarget(new TargetCreaturePermanent());
