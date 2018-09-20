@@ -134,10 +134,9 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Hypothesizzle", 178, Rarity.COMMON, mage.cards.h.Hypothesizzle.class));
         cards.add(new SetCardInfo("Impervious Greatwurm", 273, Rarity.MYTHIC, mage.cards.i.ImperviousGreatwurm.class));
         cards.add(new SetCardInfo("Inescapable Blaze", 107, Rarity.UNCOMMON, mage.cards.i.InescapableBlaze.class));
-        cards.add(new SetCardInfo("Integrity // Intervention", 227, Rarity.UNCOMMON, mage.cards.i.IntegrityIntervention.class));
-        cards.add(new SetCardInfo("Intrusive Packbeast", 17, Rarity.COMMON, mage.cards.i.IntrusivePackbeast.class));
         cards.add(new SetCardInfo("Invert // Invent", 228, Rarity.UNCOMMON, mage.cards.i.InvertInvent.class));
         cards.add(new SetCardInfo("Inspiring Unicorn", 16, Rarity.UNCOMMON, mage.cards.i.InspiringUnicorn.class));
+        cards.add(new SetCardInfo("Integrity // Intervention", 227, Rarity.UNCOMMON, mage.cards.i.IntegrityIntervention.class));
         cards.add(new SetCardInfo("Intrusive Packbeast", 17, Rarity.COMMON, mage.cards.i.IntrusivePackbeast.class));
         cards.add(new SetCardInfo("Ionize", 179, Rarity.RARE, mage.cards.i.Ionize.class));
         cards.add(new SetCardInfo("Ironshell Beetle", 134, Rarity.COMMON, mage.cards.i.IronshellBeetle.class));
