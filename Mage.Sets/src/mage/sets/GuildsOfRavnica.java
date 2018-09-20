@@ -151,6 +151,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Autumn", 183, Rarity.RARE, mage.cards.k.KnightOfAutumn.class));
         cards.add(new SetCardInfo("Kraul Foragers", 135, Rarity.COMMON, mage.cards.k.KraulForagers.class));
         cards.add(new SetCardInfo("Kraul Harpooner", 136, Rarity.UNCOMMON, mage.cards.k.KraulHarpooner.class));
+        cards.add(new SetCardInfo("Kraul Swarm", 73, Rarity.UNCOMMON, mage.cards.k.KraulSwarm.class));
         cards.add(new SetCardInfo("Lava Coil", 108, Rarity.UNCOMMON, mage.cards.l.LavaCoil.class));
         cards.add(new SetCardInfo("Lazav, the Multifarious", 184, Rarity.MYTHIC, mage.cards.l.LazavTheMultifarious.class));
         cards.add(new SetCardInfo("League Guildmage", 185, Rarity.UNCOMMON, mage.cards.l.LeagueGuildmage.class));
