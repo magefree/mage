@@ -61,6 +61,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Conclave Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ConclaveGuildmage.class));
         cards.add(new SetCardInfo("Conclave Tribunal", 6, Rarity.UNCOMMON, mage.cards.c.ConclaveTribunal.class));
         cards.add(new SetCardInfo("Connive // Concoct", 222, Rarity.RARE, mage.cards.c.ConniveConcoct.class));
+        cards.add(new SetCardInfo("Cosmotronic Wave", 95, Rarity.COMMON, mage.cards.c.CosmotronicWave.class));
         cards.add(new SetCardInfo("Crackling Drake", 163, Rarity.UNCOMMON, mage.cards.c.CracklingDrake.class));
         cards.add(new SetCardInfo("Creeping Chill", 66, Rarity.UNCOMMON, mage.cards.c.CreepingChill.class));
         cards.add(new SetCardInfo("Crushing Canopy", 126, Rarity.COMMON, mage.cards.c.CrushingCanopy.class));
