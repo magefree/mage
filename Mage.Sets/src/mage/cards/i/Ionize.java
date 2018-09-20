@@ -9,7 +9,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.TargetSpell;
 
 /**
  *
@@ -21,6 +23,7 @@ public final class Ionize extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
 
         // Counter target spell. Ionize deals 2 damage to that spell's controller.
+        this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new IonizeEffect());
     }
 
@@ -53,11 +56,16 @@ class IonizeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getControllerId(source.getSourceId()));
-        new CounterTargetEffect().apply(game, source);
-        if (player == null) {
-            return false;
+        boolean result = false;
+        Spell spell = game.getStack().getSpell(source.getFirstTarget());
+        if (spell != null) {
+            Player spellController = game.getPlayer(spell.getControllerId());
+
+            result = game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            if (spellController != null) {
+                spellController.damage(2, source.getSourceId(), game, false, true);
+            }
         }
-        return player.damage(2, source.getSourceId(), game, false, true) > 0;
+        return result;
     }
 }
