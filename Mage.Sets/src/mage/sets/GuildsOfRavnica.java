@@ -43,8 +43,10 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Boros Guildgate", 244, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
         cards.add(new SetCardInfo("Boros Locket", 231, Rarity.COMMON, mage.cards.b.BorosLocket.class));
         cards.add(new SetCardInfo("Bounty Agent", 2, Rarity.RARE, mage.cards.b.BountyAgent.class));
+        cards.add(new SetCardInfo("Bounty of Might", 124, Rarity.RARE, mage.cards.b.BountyOfMight.class));
         cards.add(new SetCardInfo("Burglar Rat", 64, Rarity.COMMON, mage.cards.b.BurglarRat.class));
         cards.add(new SetCardInfo("Camaraderie", 157, Rarity.RARE, mage.cards.c.Camaraderie.class));
+        cards.add(new SetCardInfo("Candlelight Vigil", 3, Rarity.COMMON, mage.cards.c.CandlelightVigil.class));
         cards.add(new SetCardInfo("Capture Sphere", 31, Rarity.COMMON, mage.cards.c.CaptureSphere.class));
         cards.add(new SetCardInfo("Centaur Peacemaker", 158, Rarity.COMMON, mage.cards.c.CentaurPeacemaker.class));
         cards.add(new SetCardInfo("Chamber Sentry", 232, Rarity.RARE, mage.cards.c.ChamberSentry.class));
@@ -56,6 +58,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Circuitous Route", 125, Rarity.UNCOMMON, mage.cards.c.CircuitousRoute.class));
         cards.add(new SetCardInfo("Citywatch Sphinx", 33, Rarity.UNCOMMON, mage.cards.c.CitywatchSphinx.class));
         cards.add(new SetCardInfo("Citywide Bust", 4, Rarity.RARE, mage.cards.c.CitywideBust.class));
+        cards.add(new SetCardInfo("Collar the Culprit", 5, Rarity.COMMON, mage.cards.c.CollarTheCulprit.class));
         cards.add(new SetCardInfo("Command the Storm", 94, Rarity.COMMON, mage.cards.c.CommandTheStorm.class));
         cards.add(new SetCardInfo("Conclave Cavalier", 161, Rarity.UNCOMMON, mage.cards.c.ConclaveCavalier.class));
         cards.add(new SetCardInfo("Conclave Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ConclaveGuildmage.class));
@@ -64,6 +67,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Cosmotronic Wave", 95, Rarity.COMMON, mage.cards.c.CosmotronicWave.class));
         cards.add(new SetCardInfo("Crackling Drake", 163, Rarity.UNCOMMON, mage.cards.c.CracklingDrake.class));
         cards.add(new SetCardInfo("Creeping Chill", 66, Rarity.UNCOMMON, mage.cards.c.CreepingChill.class));
+        cards.add(new SetCardInfo("Crush Contraband", 7, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
         cards.add(new SetCardInfo("Crushing Canopy", 126, Rarity.COMMON, mage.cards.c.CrushingCanopy.class));
         cards.add(new SetCardInfo("Darkblade Agent", 164, Rarity.COMMON, mage.cards.d.DarkbladeAgent.class));
         cards.add(new SetCardInfo("Dawn of Hope", 8, Rarity.RARE, mage.cards.d.DawnOfHope.class));
@@ -71,6 +75,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Dead Weight", 67, Rarity.COMMON, mage.cards.d.DeadWeight.class));
         cards.add(new SetCardInfo("Deadly Visit", 68, Rarity.COMMON, mage.cards.d.DeadlyVisit.class));
         cards.add(new SetCardInfo("Deafening Clarion", 165, Rarity.RARE, mage.cards.d.DeafeningClarion.class));
+        cards.add(new SetCardInfo("Demotion", 9, Rarity.UNCOMMON, mage.cards.d.Demotion.class));
         cards.add(new SetCardInfo("Devious Cover-up", 35, Rarity.COMMON, mage.cards.d.DeviousCoverUp.class));
         cards.add(new SetCardInfo("Devkarin Dissident", 127, Rarity.COMMON, mage.cards.d.DevkarinDissident.class));
         cards.add(new SetCardInfo("Dimir Guildgate", 245, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -25,13 +24,11 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Ryan-Saklad
  */
+public final class CandlelightVigil extends CardImpl {
 
-public final class Candlelight Vigil extends CardImpl {
-
-    public Candlelight Vigil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+    public CandlelightVigil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -51,12 +48,12 @@ public final class Candlelight Vigil extends CardImpl {
 
     }
 
-    public Candlelight Vigil(final Candlelight Vigil card) {
+    public CandlelightVigil(final CandlelightVigil card) {
         super(card);
     }
 
     @Override
-    public Candlelight Vigil copy() {
-        return new Candlelight Vigil(this);
+    public CandlelightVigil copy() {
+        return new CandlelightVigil(this);
     }
 }
