@@ -40,7 +40,7 @@ public final class ExpansionExplosion extends SplitCard {
         // Expansion
         // Copy target instant or sorcery spell with converted mana cost 4 or less. You may choose new targets for the copy.
         this.getLeftHalfCard().getSpellAbility().addEffect(new CopyTargetSpellEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(filter));
 
         // Explosion
         // Explosion deals X damage to any target. Target player draws X cards.
