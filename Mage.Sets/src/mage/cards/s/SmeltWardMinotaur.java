@@ -17,9 +17,9 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author TheElk801
  */
-public final class SmeltWarMinotaur extends CardImpl {
+public final class SmeltWardMinotaur extends CardImpl {
 
-    public SmeltWarMinotaur(UUID ownerId, CardSetInfo setInfo) {
+    public SmeltWardMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
         this.subtype.add(SubType.MINOTAUR);
@@ -36,12 +36,12 @@ public final class SmeltWarMinotaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SmeltWarMinotaur(final SmeltWarMinotaur card) {
+    public SmeltWardMinotaur(final SmeltWardMinotaur card) {
         super(card);
     }
 
     @Override
-    public SmeltWarMinotaur copy() {
-        return new SmeltWarMinotaur(this);
+    public SmeltWardMinotaur copy() {
+        return new SmeltWardMinotaur(this);
     }
 }
