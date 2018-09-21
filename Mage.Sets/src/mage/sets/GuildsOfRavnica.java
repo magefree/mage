@@ -196,6 +196,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Parhelion Patrol", 22, Rarity.COMMON, mage.cards.p.ParhelionPatrol.class));
         cards.add(new SetCardInfo("Passwall Adept", 50, Rarity.COMMON, mage.cards.p.PasswallAdept.class));
         cards.add(new SetCardInfo("Pause for Reflection", 140, Rarity.COMMON, mage.cards.p.PauseForReflection.class));
+        cards.add(new SetCardInfo("Pelt Collector", 141, Rarity.RARE, mage.cards.p.PeltCollector.class));
         cards.add(new SetCardInfo("Pilfering Imp", 81, Rarity.UNCOMMON, mage.cards.p.PilferingImp.class));
         cards.add(new SetCardInfo("Piston-Fist Cyclops", 217, Rarity.COMMON, mage.cards.p.PistonFistCyclops.class));
         cards.add(new SetCardInfo("Pitiless Gorgon", 218, Rarity.COMMON, mage.cards.p.PitilessGorgon.class));
