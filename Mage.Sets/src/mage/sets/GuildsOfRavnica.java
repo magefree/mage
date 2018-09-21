@@ -258,6 +258,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Undercity Uprising", 210, Rarity.COMMON, mage.cards.u.UndercityUprising.class));
         cards.add(new SetCardInfo("Underrealm Lich", 211, Rarity.MYTHIC, mage.cards.u.UnderrealmLich.class));
         cards.add(new SetCardInfo("Unexplained Disappearance", 56, Rarity.COMMON, mage.cards.u.UnexplainedDisappearance.class));
+        cards.add(new SetCardInfo("Unmoored Ego", 212, Rarity.RARE, mage.cards.u.UnmooredEgo.class));
         cards.add(new SetCardInfo("Urban Utopia", 146, Rarity.COMMON, mage.cards.u.UrbanUtopia.class));
         cards.add(new SetCardInfo("Vedalken Mesmerist", 57, Rarity.COMMON, mage.cards.v.VedalkenMesmerist.class));
         cards.add(new SetCardInfo("Veiled Shade", 88, Rarity.COMMON, mage.cards.v.VeiledShade.class));
