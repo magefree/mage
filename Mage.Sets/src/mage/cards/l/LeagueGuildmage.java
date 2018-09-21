@@ -12,11 +12,15 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.Game;
 import mage.target.TargetSpell;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  *
@@ -53,6 +57,7 @@ public final class LeagueGuildmage extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
+        ability.setTargetAdjuster(LeagueGuildmageAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -63,5 +68,19 @@ public final class LeagueGuildmage extends CardImpl {
     @Override
     public LeagueGuildmage copy() {
         return new LeagueGuildmage(this);
+    }
+}
+
+enum LeagueGuildmageAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = ability.getManaCostsToPay().getX();
+        FilterSpell spellFilter = new FilterInstantOrSorcerySpell("instant or sorcery you control with converted mana cost " + xValue);
+        spellFilter.add(new ControllerPredicate(TargetController.YOU));
+        spellFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        ability.getTargets().clear();
+        ability.addTarget(new TargetSpell(spellFilter));
     }
 }

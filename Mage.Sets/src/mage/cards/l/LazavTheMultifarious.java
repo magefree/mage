@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetAdjustment;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -28,6 +27,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.targetadjustment.XCMCGraveyardAdjuster;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.ApplyToPermanent;
 
@@ -62,7 +62,7 @@ public final class LazavTheMultifarious extends CardImpl {
                 new ManaCostsImpl("{X}")
         );
         ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_GY_CARD);
+        ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -137,7 +137,7 @@ class LazavTheMultifariousApplier extends ApplyToPermanent {
                 new ManaCostsImpl("{X}")
         );
         ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_GY_CARD);
+        ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
         permanent.getAbilities().add(ability);
         permanent.setName("Lazav, the Multifarious");
         permanent.addSuperType(SuperType.LEGENDARY);
@@ -151,7 +151,7 @@ class LazavTheMultifariousApplier extends ApplyToPermanent {
                 new ManaCostsImpl("{X}")
         );
         ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_GY_CARD);
+        ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
         mageObject.getAbilities().add(ability);
         mageObject.setName("Lazav, the Multifarious");
         mageObject.addSuperType(SuperType.LEGENDARY);

@@ -1,4 +1,3 @@
-
 package mage.game.stack;
 
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
@@ -49,7 +49,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     private UUID controllerId;
     private String name;
     private String expansionSetCode;
-    private TargetAdjustment targetAdjustment = TargetAdjustment.NONE;
+    private TargetAdjuster targetAdjuster = null;
 
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
@@ -62,7 +62,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         this.controllerId = stackAbility.controllerId;
         this.name = stackAbility.name;
         this.expansionSetCode = stackAbility.expansionSetCode;
-        this.targetAdjustment = stackAbility.targetAdjustment;
+        this.targetAdjuster = stackAbility.targetAdjuster;
         this.targetChanged = stackAbility.targetChanged;
     }
 
@@ -596,12 +596,19 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void setTargetAdjustment(TargetAdjustment targetAdjustment) {
-        this.targetAdjustment = targetAdjustment;
+    public void setTargetAdjuster(TargetAdjuster targetAdjuster) {
+        this.targetAdjuster = targetAdjuster;
     }
 
     @Override
-    public TargetAdjustment getTargetAdjustment() {
-        return targetAdjustment;
+    public TargetAdjuster getTargetAdjuster() {
+        return targetAdjuster;
+    }
+
+    @Override
+    public void adjustTargets(Game game) {
+        if (targetAdjuster != null) {
+            targetAdjuster.adjustTargets(this, game);
+        }
     }
 }
