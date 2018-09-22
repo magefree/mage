@@ -12,7 +12,6 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DiscardOntoBattlefieldEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -20,6 +19,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -106,7 +106,7 @@ class NullhideFeroxLoseAbilitiesEffect extends OneShotEffect {
 
     public NullhideFeroxLoseAbilitiesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} loses all abilities until end of turn";
+        this.staticText = "{this} loses all abilities until end of turn. Any player may activate this ability";
     }
 
     public NullhideFeroxLoseAbilitiesEffect(final NullhideFeroxLoseAbilitiesEffect effect) {
