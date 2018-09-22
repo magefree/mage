@@ -4,12 +4,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -67,7 +67,7 @@ class DimirSpybugTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SURVEIL;
+        return event.getType() == GameEvent.EventType.SURVEILED;
     }
 
     @Override
