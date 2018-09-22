@@ -130,6 +130,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Gravitic Punch", 105, Rarity.COMMON, mage.cards.g.GraviticPunch.class));
         cards.add(new SetCardInfo("Gruesome Menagerie", 71, Rarity.RARE, mage.cards.g.GruesomeMenagerie.class));
         cards.add(new SetCardInfo("Guild Summit", 41, Rarity.UNCOMMON, mage.cards.g.GuildSummit.class));
+        cards.add(new SetCardInfo("Guildmages' Forum", 250, Rarity.RARE, mage.cards.g.GuildmagesForum.class));
         cards.add(new SetCardInfo("Haazda Marshal", 13, Rarity.UNCOMMON, mage.cards.h.HaazdaMarshal.class));
         cards.add(new SetCardInfo("Hammer Dropper", 176, Rarity.COMMON, mage.cards.h.HammerDropper.class));
         cards.add(new SetCardInfo("Hatchery Spider", 132, Rarity.RARE, mage.cards.h.HatcherySpider.class));

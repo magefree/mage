@@ -16,12 +16,17 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
     protected final int amount;
     protected final ArrayList<Mana> netMana = new ArrayList<>();
+    protected final boolean setFlag;
 
     public AddManaOfAnyColorEffect() {
         this(1);
     }
 
     public AddManaOfAnyColorEffect(int amount) {
+        this(amount, false);
+    }
+
+    public AddManaOfAnyColorEffect(int amount, boolean setFlag) {
         super(new Mana(0, 0, 0, 0, 0, 0, amount, 0));
         this.amount = amount;
         netMana.add(Mana.GreenMana(amount));
@@ -30,12 +35,14 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
         netMana.add(Mana.WhiteMana(amount));
         netMana.add(Mana.RedMana(amount));
         this.staticText = "add " + CardUtil.numberToText(amount) + " mana of any " + (amount > 1 ? "one " : "") + "color";
+        this.setFlag = setFlag;
     }
 
     public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.netMana.addAll(effect.netMana);
+        this.setFlag = effect.setFlag;
     }
 
     @Override
@@ -66,7 +73,9 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
             ChoiceColor choice = new ChoiceColor(true, mes, game.getObject(source.getSourceId()));
             if (controller.choose(outcome, choice, game)) {
                 if (choice.getColor() != null) {
-                    return choice.getMana(amount);
+                    Mana mana = choice.getMana(amount);
+                    mana.setFlag(setFlag);
+                    return mana;
                 }
             }
         }
