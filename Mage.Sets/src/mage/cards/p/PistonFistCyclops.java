@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.DefenderAbility;
@@ -38,14 +38,14 @@ public final class PistonFistCyclops extends CardImpl {
         // As long as you've cast an instant or sorcery spell this turn, Piston-Fist Cyclops can attack as though it didn't have defender.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(
+                new ConditionalAsThoughEffect(
                         new CanAttackAsThoughItDidntHaveDefenderSourceEffect(
                                 Duration.WhileOnBattlefield
-                        ), PistonFistCyclopsCondition.instance,
-                        "As long as you've cast an instant or sorcery spell this turn, "
-                        + "{this} can attack as though it didn't have defender."
-                )
-        ), new SpellsCastWatcher());
+                        ), PistonFistCyclopsCondition.instance)
+                        .setText("As long as you've cast an instant or sorcery spell this turn, "
+                                + "{this} can attack as though it didn't have defender")
+        ),
+                 new SpellsCastWatcher());
     }
 
     public PistonFistCyclops(final PistonFistCyclops card) {
