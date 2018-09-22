@@ -1,4 +1,3 @@
-
 package mage.abilities.effects;
 
 import java.io.Serializable;
@@ -496,7 +495,7 @@ public class ContinuousEffects implements Serializable {
                     if (effect.applies(objectId, ability, controllerId, game)) {
                         return new MageObjectReference(ability.getSourceObject(game), game);
                     }
-                } else if (effect.applies(objectId, affectedAbility, ability, game)) {
+                } else if (effect.applies(objectId, affectedAbility, ability, game, controllerId)) {
                     return new MageObjectReference(ability.getSourceObject(game), game);
                 }
             }
@@ -512,7 +511,7 @@ public class ContinuousEffects implements Serializable {
             Set<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_ONLY_MANA).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
-                        || effect.applies(objectId, affectedAbility, ability, game)) {
+                        || effect.applies(objectId, affectedAbility, ability, game, controllerId)) {
                     if (((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game) == null) {
                         return null;
                     }
@@ -525,7 +524,7 @@ public class ContinuousEffects implements Serializable {
             Set<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_OTHER_MANA).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
-                        || effect.applies(objectId, affectedAbility, ability, game)) {
+                        || effect.applies(objectId, affectedAbility, ability, game, controllerId)) {
                     ManaType usableManaType = ((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game);
                     if (usableManaType != null) {
                         return usableManaType;

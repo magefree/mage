@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
@@ -15,13 +14,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -32,7 +29,6 @@ public final class ForceProjection extends CardImpl {
 
     public ForceProjection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
-        
 
         // Create a token that is a copy of target creature you control except that it is an Illusion in addition to its other types and gains "When this creature becomes the target of a spell, sacrifice it."
         this.getSpellAbility().addEffect(new ForceProjectionEffect());
@@ -56,8 +52,8 @@ class ForceProjectionEffect extends OneShotEffect {
 
     public ForceProjectionEffect() {
         super(Outcome.Copy);
-        this.staticText = "Create a token that is a copy of target creature you control except that it is an Illusion " +
-                "in addition to its other types and gains \"When this creature becomes the target of a spell, sacrifice it.\"";
+        this.staticText = "Create a token that is a copy of target creature you control except that it is an Illusion "
+                + "in addition to its other types and gains \"When this creature becomes the target of a spell, sacrifice it.\"";
     }
 
     public ForceProjectionEffect(final ForceProjectionEffect effect) {
