@@ -538,7 +538,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         // Always hide not hidden popup window or enlarged card view if a frame is set to active
         try {
             ActionCallback callback = Plugins.instance.getActionCallback();
-            if (callback != null && callback instanceof MageActionCallback) {
+            if (callback instanceof MageActionCallback) {
                 ((MageActionCallback) callback).hideEnlargedCard();
             }
             Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);

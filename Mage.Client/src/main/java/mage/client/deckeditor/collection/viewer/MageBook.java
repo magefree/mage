@@ -530,7 +530,7 @@ public class MageBook extends JComponent {
                     Class<?> c = Class.forName(className);
                     Constructor<?> cons = c.getConstructor();
                     Object newToken = cons.newInstance();
-                    if (newToken != null && newToken instanceof mage.game.permanent.token.Token) {
+                    if (newToken instanceof Token) {
                         ((Token) newToken).setExpansionSetCodeForImage(set);
                         ((Token) newToken).setOriginalExpansionSetCode(set);
                         ((Token) newToken).setTokenType(token.getType());
@@ -580,7 +580,7 @@ public class MageBook extends JComponent {
                     Class<?> c = Class.forName(className);
                     Constructor<?> cons = c.getConstructor();
                     Object newEmblem = cons.newInstance();
-                    if (newEmblem != null && newEmblem instanceof mage.game.command.Emblem) {
+                    if (newEmblem instanceof Emblem) {
                         ((Emblem) newEmblem).setExpansionSetCodeForImage(set);
 
                         emblems.add((Emblem) newEmblem);
@@ -637,7 +637,7 @@ public class MageBook extends JComponent {
                     Class<?> c = Class.forName(className);
                     Constructor<?> cons = c.getConstructor();
                     Object newPlane = cons.newInstance();
-                    if (newPlane != null && newPlane instanceof mage.game.command.Plane) {
+                    if (newPlane instanceof Plane) {
                         ((Plane) newPlane).setExpansionSetCodeForImage(set);
 
                         planes.add((Plane) newPlane);

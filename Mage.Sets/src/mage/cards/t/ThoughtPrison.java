@@ -137,7 +137,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
         Spell spell = (Spell) game.getObject(event.getTargetId());
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
 
-        if (spell != null && spell instanceof Spell) {
+        if (spell instanceof Spell) {
             if (sourcePermanent == null) {
                 sourcePermanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
             }

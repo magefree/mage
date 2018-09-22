@@ -61,7 +61,7 @@ class SyncopateCounterUnlessPaysEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
-        if (spell != null && (spell instanceof Spell) && sourceObject != null) {
+        if ((spell instanceof Spell) && sourceObject != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 int amount = source.getManaCostsToPay().getX();

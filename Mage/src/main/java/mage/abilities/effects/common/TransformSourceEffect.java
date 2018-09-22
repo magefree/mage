@@ -47,7 +47,7 @@ public class TransformSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game); // Transform only if it's the same object as the effect was put on the stack
-        if (sourceObject != null && sourceObject instanceof Permanent) {
+        if (sourceObject instanceof Permanent) {
             Permanent sourcePermanent = (Permanent) sourceObject;
             if (sourcePermanent.canTransform(source, game)) {
                 // check not to transform twice the same side

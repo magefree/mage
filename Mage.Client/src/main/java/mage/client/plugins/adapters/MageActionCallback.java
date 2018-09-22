@@ -617,7 +617,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     private void displayCardInfo(MageCard mageCard, Image image, BigCard bigCard) {
-        if (image != null && image instanceof BufferedImage) {
+        if (image instanceof BufferedImage) {
             // XXX: scaled to fit width
             bigCard.setCard(mageCard.getOriginal().getId(), enlargeMode, image, mageCard.getOriginal().getRules(), mageCard.getOriginal().isToRotate());
             // if it's an ability, show only the ability text as overlay

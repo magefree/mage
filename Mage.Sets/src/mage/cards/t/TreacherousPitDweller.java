@@ -102,8 +102,7 @@ class TreacherousPitDwellerEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         MageObject permanent = source.getSourceObjectIfItStillExists(game); // it can also return Card object
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        if (permanent != null
-                && (permanent instanceof Permanent)
+        if ((permanent instanceof Permanent)
                 && targetOpponent != null) {
             return ((Permanent) permanent).changeControllerId(targetOpponent.getId(), game);
         } else {

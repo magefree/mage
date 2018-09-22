@@ -184,7 +184,7 @@ class HopeOfGhirapurCombatDamageWatcher extends Watcher {
     public boolean playerGotCombatDamage(UUID objectId, UUID playerId, Game game) {
         StackObject stackObject = game.getState().getStack().getStackObject(objectId);
         MageObjectReference mor;
-        if (stackObject != null && stackObject instanceof StackAbility) {
+        if (stackObject instanceof StackAbility) {
             // This is neccessary because the source object was sacrificed as cost and the correct zone change counter for target calid check can only be get from stack
             mor = new MageObjectReference(objectId, ((StackAbility) stackObject).getSourceObjectZoneChangeCounter(), game);
         } else {

@@ -34,7 +34,7 @@ public final class VraskasStoneglare extends CardImpl {
         this.getSpellAbility().addEffect(new VraskasStoneglareEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(
-                new SearchLibraryGraveyardPutInHandEffect(filter, false, false)
+                new SearchLibraryGraveyardPutInHandEffect(filter, false, true)
         );
     }
 
@@ -53,7 +53,7 @@ class VraskasStoneglareEffect extends OneShotEffect {
     public VraskasStoneglareEffect() {
         super(Outcome.Benefit);
         this.staticText = "Destroy target creature. "
-                + "You gain life equal to its toughness.";
+                + "You gain life equal to its toughness";
     }
 
     public VraskasStoneglareEffect(final VraskasStoneglareEffect effect) {

@@ -150,7 +150,7 @@ class GoToJailUpkeepEffect extends OneShotEffect {
         Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
 
 
-        if (sourceObject != null && sourceObject instanceof Permanent && permanent != null) {
+        if (sourceObject instanceof Permanent && permanent != null) {
             UUID opponentId = (UUID) game.getState().getValue(sourceObject.getId().toString() + ChooseOpponentEffect.VALUE_KEY);
             Player opponent = game.getPlayer(opponentId);
 

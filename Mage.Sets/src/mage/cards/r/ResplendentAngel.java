@@ -20,7 +20,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.permanent.token.AngelToken2;
+import mage.game.permanent.token.AngelVigilanceToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
@@ -42,7 +42,7 @@ public final class ResplendentAngel extends CardImpl {
         // At the beginning of each end step, if you gained 5 or more life this turn, create a 4/4 white Angel creature token with flying and vigilance.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new CreateTokenEffect(new AngelToken2()),
+                new CreateTokenEffect(new AngelVigilanceToken()),
                 TargetController.ANY,
                 new YouGainedLifeCondition(ComparisonType.MORE_THAN, 4),
                 false

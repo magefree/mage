@@ -78,7 +78,7 @@ class ChainOfVaporEffect extends OneShotEffect {
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {
                             StackObject newStackObject = spell.createCopyOnStack(game, source, player.getId(), true);
-                            if (newStackObject != null && newStackObject instanceof Spell) {
+                            if (newStackObject instanceof Spell) {
                                 String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
                                 if (activateMessage.startsWith(" casts ")) {
                                     activateMessage = activateMessage.substring(6);
