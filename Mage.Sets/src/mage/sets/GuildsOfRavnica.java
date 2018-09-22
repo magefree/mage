@@ -180,6 +180,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Reaper", 77, Rarity.RARE, mage.cards.m.MidnightReaper.class));
         cards.add(new SetCardInfo("Might of the Masses", 137, Rarity.UNCOMMON, mage.cards.m.MightOfTheMasses.class));
         cards.add(new SetCardInfo("Mission Briefing", 44, Rarity.RARE, mage.cards.m.MissionBriefing.class));
+        cards.add(new SetCardInfo("Mnemonic Betrayal", 189, Rarity.MYTHIC, mage.cards.m.MnemonicBetrayal.class));
         cards.add(new SetCardInfo("Molderhulk", 190, Rarity.UNCOMMON, mage.cards.m.Molderhulk.class));
         cards.add(new SetCardInfo("Moodmark Painter", 78, Rarity.COMMON, mage.cards.m.MoodmarkPainter.class));
         cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
