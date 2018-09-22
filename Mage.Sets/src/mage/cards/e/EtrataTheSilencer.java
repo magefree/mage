@@ -8,12 +8,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -102,7 +102,7 @@ class EtrataTheSilencerTriggeredAbility extends TriggeredAbilityImpl {
                 + "and put a hit counter on that card. "
                 + "That player loses the game if they own three or more "
                 + "exiled cards with hit counters on them. "
-                + "{this}'s owner shuffles {this} into their library.";
+                + "{this}'s owner shuffles {this} into their library";
     }
 }
 
@@ -143,7 +143,13 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         if (card != null) {
             card.addCounters(CounterType.HIT.createInstance(), source, game);
         }
-        if (game.getExile().getExileZone(player.getId()).count(filter, game) > 2) {
+        int cardsFound = 0;
+        for (Card exiledCard : game.getExile().getAllCards(game)) {
+            if (exiledCard.getCounters(game).getCount(CounterType.HIT) > 1 && exiledCard.getOwnerId().equals(player.getId())) {
+                cardsFound++;
+            }
+        }
+        if (cardsFound > 2) {
             player.lost(game);
         }
         return new ShuffleIntoLibrarySourceEffect().apply(game, source);

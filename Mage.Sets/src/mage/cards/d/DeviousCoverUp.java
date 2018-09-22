@@ -65,8 +65,8 @@ class DeviousCoverUpEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player == null || !player.chooseUse(outcome, "Shuffle the targeted cards into your library?", source, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || !controller.chooseUse(outcome, "Shuffle the targeted cards into your library?", source, game)) {
             return false;
         }
         Cards cards = new CardsImpl();
@@ -76,8 +76,8 @@ class DeviousCoverUpEffect extends OneShotEffect {
                 cards.add(card);
             }
         }
-        player.getLibrary().addAll(cards.getCards(game), game);
-        player.shuffleLibrary(source, game);
+        controller.putCardsOnTopOfLibrary(cards, game, source, false);
+        controller.shuffleLibrary(source, game);
         return true;
     }
 }
