@@ -21,7 +21,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Balance", 1);
         pointMap.put("Birthing Pod", 3);
         pointMap.put("Black Lotus", 7);
-        pointMap.put("Demonic Tutor", 4);
+        pointMap.put("Demonic Tutor", 3);
         pointMap.put("Dig Through Time", 1);
         pointMap.put("Enlightened Tutor", 1);
         pointMap.put("Fastbond", 1);
