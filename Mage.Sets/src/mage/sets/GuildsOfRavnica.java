@@ -34,6 +34,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Barrier of Bones", 61, Rarity.COMMON, mage.cards.b.BarrierOfBones.class));
         cards.add(new SetCardInfo("Bartizan Bats", 62, Rarity.COMMON, mage.cards.b.BartizanBats.class));
         cards.add(new SetCardInfo("Beacon Bolt", 154, Rarity.UNCOMMON, mage.cards.b.BeaconBolt.class));
+        cards.add(new SetCardInfo("Beamsplitter Mage", 155, Rarity.UNCOMMON, mage.cards.b.BeamsplitterMage.class));
         cards.add(new SetCardInfo("Beast Whisperer", 123, Rarity.RARE, mage.cards.b.BeastWhisperer.class));
         cards.add(new SetCardInfo("Blade Instructor", 1, Rarity.COMMON, mage.cards.b.BladeInstructor.class));
         cards.add(new SetCardInfo("Blood Operative", 63, Rarity.RARE, mage.cards.b.BloodOperative.class));
