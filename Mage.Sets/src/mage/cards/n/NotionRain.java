@@ -19,11 +19,11 @@ public final class NotionRain extends CardImpl {
 
         // Surveil 2, then draw two cards. Rain of Notions deals 2 damage to you.
         this.getSpellAbility().addEffect(
-                new SurveilEffect(2).setText("Surveil 2,")
+                new SurveilEffect(2).setText("Surveil 2")
         );
         this.getSpellAbility().addEffect(
                 new DrawCardSourceControllerEffect(2)
-                        .setText("then draw two cards.")
+                        .setText(", then draw two cards")
         );
         this.getSpellAbility().addEffect(new DamageControllerEffect(2));
     }

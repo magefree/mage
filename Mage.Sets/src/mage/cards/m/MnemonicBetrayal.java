@@ -57,7 +57,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
                 + "and you may spend mana as though it were mana of any type "
                 + "to cast those spells. At the beginning of the next end step, "
                 + "if any of those cards remain exiled, "
-                + "return them to their owner's graveyards.";
+                + "return them to their owner's graveyards";
     }
 
     public MnemonicBetrayalExileEffect(final MnemonicBetrayalExileEffect effect) {

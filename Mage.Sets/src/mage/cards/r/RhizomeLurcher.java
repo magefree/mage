@@ -9,7 +9,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -35,10 +34,9 @@ public final class RhizomeLurcher extends CardImpl {
                         new CardsInControllerGraveyardCount(
                                 StaticFilters.FILTER_CARD_CREATURE
                         ), true
-                ), "with a number of +1/+1 counters on it equal to "
-                + "the number of creature cards in your graveyard"
+                ), null, "<i>Undergrowth</i> — {this} enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in your graveyard.",
+                null
         );
-        ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);
     }
 
