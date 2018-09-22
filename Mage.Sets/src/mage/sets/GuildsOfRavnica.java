@@ -259,6 +259,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Take Heart", 28, Rarity.COMMON, mage.cards.t.TakeHeart.class));
         cards.add(new SetCardInfo("Temple Garden", 258, Rarity.RARE, mage.cards.t.TempleGarden.class));
         cards.add(new SetCardInfo("Tenth District Guard", 29, Rarity.COMMON, mage.cards.t.TenthDistrictGuard.class));
+        cards.add(new SetCardInfo("Thief of Sanity", 205, Rarity.RARE, mage.cards.t.ThiefOfSanity.class));
         cards.add(new SetCardInfo("Thought Erasure", 206, Rarity.UNCOMMON, mage.cards.t.ThoughtErasure.class));
         cards.add(new SetCardInfo("Thoughtbound Phantasm", 55, Rarity.UNCOMMON, mage.cards.t.ThoughtboundPhantasm.class));
         cards.add(new SetCardInfo("Torch Courier", 119, Rarity.COMMON, mage.cards.t.TorchCourier.class));
