@@ -1,10 +1,12 @@
 package mage.cards.p;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
@@ -13,11 +15,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -70,25 +74,45 @@ class PlaguecrafterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getPlayers().forEach((playerId, player) -> {
-            if (!(player == null)) {
-                FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
-                filter.add(new ControllerIdPredicate(playerId));
-                if (game.getBattlefield().getActivePermanents(
-                        filter, source.getControllerId(), game
-                ).isEmpty()) {
-                    Effect discardEffect = new DiscardTargetEffect(1);
-                    discardEffect.setTargetPointer(new FixedTarget(playerId, game));
-                    discardEffect.apply(game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        
+        List<UUID> perms = new ArrayList<>();
+        List<UUID> cantSac = new ArrayList<>();
+        
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                FilterControlledPermanent filter = new FilterControlledPermanent();
+                filter.add(Predicates.or(
+                        new CardTypePredicate(CardType.CREATURE),
+                        new CardTypePredicate(CardType.PLANESWALKER)));
+                TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+                if (target.canChoose(player.getId(), game)) {
+                    while (!target.isChosen() && player.canRespond()) {
+                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                    }
+                    perms.addAll(target.getTargets());
                 } else {
-                    Effect effect = new SacrificeEffect(
-                            StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A, 1, null
-                    );
-                    effect.setTargetPointer(new FixedTarget(playerId, game));
-                    effect.apply(game, source);
+                    cantSac.add(playerId);
                 }
             }
-        });
+        }
+        
+        for (UUID permID : perms) {
+            Permanent permanent = game.getPermanent(permID);
+            if (permanent != null) {
+                permanent.sacrifice(source.getSourceId(), game);
+            }
+        }
+        
+        for (UUID playerId : cantSac) {
+            Effect discardEffect = new DiscardTargetEffect(1);
+            discardEffect.setTargetPointer(new FixedTarget(playerId, game));
+            discardEffect.apply(game, source);
+        }
         return true;
     }
 }
