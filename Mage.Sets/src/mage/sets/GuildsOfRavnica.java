@@ -205,6 +205,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Pilfering Imp", 81, Rarity.UNCOMMON, mage.cards.p.PilferingImp.class));
         cards.add(new SetCardInfo("Piston-Fist Cyclops", 217, Rarity.COMMON, mage.cards.p.PistonFistCyclops.class));
         cards.add(new SetCardInfo("Pitiless Gorgon", 218, Rarity.COMMON, mage.cards.p.PitilessGorgon.class));
+        cards.add(new SetCardInfo("Plaguecrafter", 82, Rarity.UNCOMMON, mage.cards.p.Plaguecrafter.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Portcullis Vine", 142, Rarity.COMMON, mage.cards.p.PortcullisVine.class));
         cards.add(new SetCardInfo("Precision Bolt", 267, Rarity.COMMON, mage.cards.p.PrecisionBolt.class));
