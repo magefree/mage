@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -10,10 +9,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -23,13 +21,13 @@ import mage.target.common.TargetCardInYourGraveyard;
 public final class MiraculousRecovery extends CardImpl {
 
     public MiraculousRecovery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");
 
         // Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        Target target = new TargetCardInYourGraveyard(new FilterCreatureCard());
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
+                StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
+        ));
         this.getSpellAbility().addEffect(new MiraculousRecoveryEffect());
     }
 
@@ -64,7 +62,7 @@ class MiraculousRecoveryEffect extends OneShotEffect {
         // targetPointer can't be used because target moved from graveyard to battlefield
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
         }
         return false;
     }
