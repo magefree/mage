@@ -33,7 +33,7 @@ public final class DeviousCoverUp extends CardImpl {
 
         // You may shuffle up to four target cards from your graveyard into your library.
         this.getSpellAbility().addEffect(new DeviousCoverUpEffect().setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 5));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 4));
     }
 
     public DeviousCoverUp(final DeviousCoverUp card) {
@@ -50,7 +50,7 @@ class DeviousCoverUpEffect extends OneShotEffect {
 
     public DeviousCoverUpEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You may shuffle up to five target cards "
+        this.staticText = "You may shuffle up to four target cards "
                 + "from your graveyard into your library.";
     }
 

@@ -28,7 +28,7 @@ public final class RalsDispersal extends CardImpl {
         // Return target creature to its owner's hand. You may search you library and/or graveyard for a card named Ral, Caller of Storms, reveal it, and put it in to your hand. If you search your library this way, shuffle it.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(
-                new SearchLibraryGraveyardPutInHandEffect(filter, false, false)
+                new SearchLibraryGraveyardPutInHandEffect(filter, false, true)
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
