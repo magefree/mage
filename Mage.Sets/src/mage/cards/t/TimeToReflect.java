@@ -1,9 +1,7 @@
-
 package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,8 +17,8 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
-
 import java.util.*;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  * @author jeffwadsworth
@@ -34,27 +32,7 @@ public final class TimeToReflect extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterCreaturePermanent("creature that blocked or was blocked by a Zombie this turn.")));
         this.getSpellAbility().addWatcher(new BlockedOrWasBlockedByAZombieWatcher());
-
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            List<PermanentIdPredicate> creaturesThatBlockedOrWereBlockedByAZombie = new ArrayList<>();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that blocked or was blocked by a Zombie this turn.").copy();
-            BlockedOrWasBlockedByAZombieWatcher watcher = (BlockedOrWasBlockedByAZombieWatcher) game.getState().getWatchers().get(BlockedOrWasBlockedByAZombieWatcher.class.getSimpleName());
-            if (watcher != null) {
-                for (MageObjectReference mor : watcher.getBlockedThisTurnCreatures()) {
-                    Permanent permanent = mor.getPermanent(game);
-                    if (permanent != null) {
-                        creaturesThatBlockedOrWereBlockedByAZombie.add(new PermanentIdPredicate(permanent.getId()));
-                    }
-                }
-            }
-            filter.add(Predicates.or(creaturesThatBlockedOrWereBlockedByAZombie));
-            ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanent(filter));
-        }
+        this.getSpellAbility().setTargetAdjuster(TimeToReflectAdjuster.instance);
     }
 
     public TimeToReflect(final TimeToReflect card) {
@@ -64,6 +42,28 @@ public final class TimeToReflect extends CardImpl {
     @Override
     public TimeToReflect copy() {
         return new TimeToReflect(this);
+    }
+}
+
+enum TimeToReflectAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        List<PermanentIdPredicate> creaturesThatBlockedOrWereBlockedByAZombie = new ArrayList<>();
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that blocked or was blocked by a Zombie this turn.").copy();
+        BlockedOrWasBlockedByAZombieWatcher watcher = (BlockedOrWasBlockedByAZombieWatcher) game.getState().getWatchers().get(BlockedOrWasBlockedByAZombieWatcher.class.getSimpleName());
+        if (watcher != null) {
+            for (MageObjectReference mor : watcher.getBlockedThisTurnCreatures()) {
+                Permanent permanent = mor.getPermanent(game);
+                if (permanent != null) {
+                    creaturesThatBlockedOrWereBlockedByAZombie.add(new PermanentIdPredicate(permanent.getId()));
+                }
+            }
+        }
+        filter.add(Predicates.or(creaturesThatBlockedOrWereBlockedByAZombie));
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCreaturePermanent(filter));
     }
 }
 

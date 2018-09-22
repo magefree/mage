@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -22,14 +21,13 @@ import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author LevelX2
  */
 public final class SkyfireKirin extends CardImpl {
-
-    private final UUID originalId;
 
     public SkyfireKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -43,35 +41,38 @@ public final class SkyfireKirin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new SkyfireKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, true, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                Zone.BATTLEFIELD, new SkyfireKirinEffect(),
+                StaticFilters.SPIRIT_OR_ARCANE_CARD, true, true
+        );
         ability.addTarget(new TargetCreaturePermanent());
-        originalId = ability.getOriginalId();
+        ability.setTargetAdjuster(SkyfireKirinAdjuster.instance);
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            Spell spell = game.getStack().getSpell(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
-            if (spell != null) {
-                int cmc = spell.getConvertedManaCost();
-                ability.getTargets().clear();
-                FilterPermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with converted mana costs of ").append(cmc).toString());
-                filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
-                Target target = new TargetPermanent(filter);
-                ability.addTarget(target);
-            }
-        }
     }
 
     public SkyfireKirin(final SkyfireKirin card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
     public SkyfireKirin copy() {
         return new SkyfireKirin(this);
+    }
+}
+
+enum SkyfireKirinAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        Spell spell = game.getStack().getSpell(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
+        if (spell != null) {
+            int cmc = spell.getConvertedManaCost();
+            ability.getTargets().clear();
+            FilterPermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + cmc);
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+            ability.addTarget(new TargetPermanent(filter));
+        }
     }
 }
 

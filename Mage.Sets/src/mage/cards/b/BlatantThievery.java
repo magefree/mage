@@ -1,9 +1,7 @@
-
 package mage.cards.b;
 
 import java.util.*;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -18,6 +16,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -31,6 +30,7 @@ public final class BlatantThievery extends CardImpl {
 
         // For each opponent, gain control of target permanent that player controls.
         this.getSpellAbility().addEffect(new BlatantThieveryEffect());
+        this.getSpellAbility().setTargetAdjuster(BlatantThieveryEffect.class);
     }
 
     public BlatantThievery(final BlatantThievery card) {
@@ -38,24 +38,26 @@ public final class BlatantThievery extends CardImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    FilterPermanent filter = new FilterPermanent("Permanent of player " + opponent.getName());
-                    filter.add(new ControllerIdPredicate(opponentId));
-                    TargetPermanent targetPermanent = new TargetPermanent(filter);
-                    ability.addTarget(targetPermanent);
-                }
-            }
-        }
-    }
-
-    @Override
     public BlatantThievery copy() {
         return new BlatantThievery(this);
+    }
+}
+
+enum BlatantThieveryAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null) {
+                FilterPermanent filter = new FilterPermanent("Permanent of player " + opponent.getName());
+                filter.add(new ControllerIdPredicate(opponentId));
+                TargetPermanent targetPermanent = new TargetPermanent(filter);
+                ability.addTarget(targetPermanent);
+            }
+        }
     }
 }
 
