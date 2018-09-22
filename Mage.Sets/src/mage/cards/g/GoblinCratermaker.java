@@ -9,10 +9,10 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -40,7 +40,7 @@ public final class GoblinCratermaker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {1}, Sacrifice Goblin Cratermaker: Choose one —        
+        // {1}, Sacrifice Goblin Cratermaker: Choose one —
         // • Goblin Cratermaker deals 2 damage to target creature.
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(2), new GenericManaCost(1)
@@ -51,7 +51,7 @@ public final class GoblinCratermaker extends CardImpl {
         // • Destroy target colorless nonland permanent.
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent());
+        mode.getTargets().add(new TargetPermanent(filter));
 
         ability.addMode(mode);
         this.addAbility(ability);

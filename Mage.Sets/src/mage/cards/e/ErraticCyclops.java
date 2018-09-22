@@ -4,12 +4,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -78,7 +78,7 @@ class ErraticCyclopsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever you cast an instant or sorcery spell, "
-                + "{this} gets +X/+X until end of turn, "
+                + "{this} gets +X/+0 until end of turn, "
                 + "where X is that spell's converted mana cost";
     }
 

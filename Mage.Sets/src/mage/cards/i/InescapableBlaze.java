@@ -17,8 +17,8 @@ public final class InescapableBlaze extends CardImpl {
     public InescapableBlaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
 
-        // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        // This spell can't be countered.        
+        this.addAbility(new CantBeCounteredAbility().setRuleAtTheTop(true));
 
         // Inescapable Flame deals 6 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6));
