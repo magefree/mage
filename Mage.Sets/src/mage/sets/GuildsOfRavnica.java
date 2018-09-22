@@ -1,6 +1,12 @@
 package mage.sets;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -16,11 +22,13 @@ public final class GuildsOfRavnica extends ExpansionSet {
         super("Guilds of Ravnica", "GRN", ExpansionSet.buildDate(2018, 10, 5), SetType.EXPANSION);
         this.blockName = "Guilds of Ravnica";
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
+        this.numBoosterSpecial = 1;
+        this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.maxCardNumberInBooster = 259;
 
         cards.add(new SetCardInfo("Affectionate Indrik", 121, Rarity.UNCOMMON, mage.cards.a.AffectionateIndrik.class));
         cards.add(new SetCardInfo("Arboretum Elemental", 122, Rarity.UNCOMMON, mage.cards.a.ArboretumElemental.class));
@@ -295,5 +303,37 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Wishcoin Crab", 60, Rarity.COMMON, mage.cards.w.WishcoinCrab.class));
         cards.add(new SetCardInfo("Wojek Bodyguard", 120, Rarity.COMMON, mage.cards.w.WojekBodyguard.class));
         cards.add(new SetCardInfo("Worldsoul Colossus", 215, Rarity.UNCOMMON, mage.cards.w.WorldsoulColossus.class));
+    }
+
+    @Override
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        if (rarity == Rarity.COMMON) {
+            List<CardInfo> savedCardsInfos = savedCards.get(rarity);
+            if (savedCardsInfos == null) {
+                CardCriteria criteria = new CardCriteria();
+                criteria.setCodes(this.code).notTypes(CardType.LAND);
+                criteria.rarities(rarity).doubleFaced(false);
+                savedCardsInfos = CardRepository.instance.findCards(criteria);
+                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
+                }
+                criteria = new CardCriteria();
+                // Gateway Plaza is a normal common: https://twitter.com/EliShffrn/status/1043156989218414593s
+                criteria.setCodes(this.code).nameExact("Gateway Plaza");
+                savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
+                savedCards.put(rarity, savedCardsInfos);
+            }
+            // Return a copy of the saved cards information, as not to modify the original.
+            return new ArrayList<>(savedCardsInfos);
+        } else {
+            return super.getCardsByRarity(rarity);
+        }
+    }
+
+    @Override
+    public List<CardInfo> getSpecialCommon() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.COMMON).setCodes(this.code).name("Guildgate");
+        return CardRepository.instance.findCards(criteria);
     }
 }
