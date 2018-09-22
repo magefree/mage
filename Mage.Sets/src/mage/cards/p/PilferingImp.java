@@ -8,11 +8,11 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -39,7 +39,7 @@ public final class PilferingImp extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DiscardCardYouChooseTargetEffect(
                         StaticFilters.FILTER_CARD_NON_LAND,
-                        TargetController.ANY
+                        TargetController.OPPONENT
                 ), new ManaCostsImpl("{1}{B}")
         );
         ability.addCost(new TapSourceCost());

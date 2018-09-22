@@ -32,7 +32,7 @@ public final class ViciousRumors extends CardImpl {
                 new PutTopCardOfLibraryIntoGraveEachPlayerEffect(
                         1, TargetController.OPPONENT
                 ).setText(", then puts the top card of their library "
-                        + "into their graveyard.")
+                        + "into their graveyard")
         );
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
     }
