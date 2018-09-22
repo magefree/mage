@@ -76,8 +76,6 @@ public class AusHighlander extends Constructed {
         pointMap.put("True-Name Nemesis", 1);
         pointMap.put("Umezawa’s Jitte", 1);
         pointMap.put("Wasteland", 1);
-        pointMap.put("Wheel of Fortune", 1);
-        pointMap.put("Worldly Tutor", 1);
         pointMap.put("Yawgmoth’s Bargain", 1);
     }
 
