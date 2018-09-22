@@ -15,7 +15,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -106,9 +105,7 @@ class JumpStartReplacementEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-
-            int zcc = game.getState().getZoneChangeCounter(source.getSourceId());
-            if (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == zcc) {
+            if (game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter()) {
                 return true;
             }
 
