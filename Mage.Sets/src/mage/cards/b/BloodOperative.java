@@ -59,7 +59,7 @@ public final class BloodOperative extends CardImpl {
 class BloodOperativeTriggeredAbility extends TriggeredAbilityImpl {
 
     public BloodOperativeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new PayLifeCost(3)), false);
+        super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new PayLifeCost(3)), false);
     }
 
     public BloodOperativeTriggeredAbility(final BloodOperativeTriggeredAbility ability) {
