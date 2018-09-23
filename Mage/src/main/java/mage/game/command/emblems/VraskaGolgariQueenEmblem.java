@@ -19,7 +19,7 @@ public class VraskaGolgariQueenEmblem extends Emblem {
         this.getAbilities().add(new DealsDamageToAPlayerAllTriggeredAbility(
                 new LoseGameTargetPlayerEffect(),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE,
-                false, SetTargetPointer.NONE, true
+                false, SetTargetPointer.PLAYER, true
         ));
     }
 }
