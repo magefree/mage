@@ -30,7 +30,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class Plaguecrafter extends CardImpl {
 
     public Plaguecrafter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -53,12 +53,11 @@ public final class Plaguecrafter extends CardImpl {
     }
 }
 
-
 class PlaguecrafterEffect extends OneShotEffect {
 
     public PlaguecrafterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player sacrifices a creature or planeswalker. "
+        this.staticText = "each player sacrifices a creature or planeswalker. "
                 + "Each player who can't discards a card.";
     }
 
@@ -77,10 +76,10 @@ class PlaguecrafterEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        
+
         List<UUID> perms = new ArrayList<>();
         List<UUID> cantSac = new ArrayList<>();
-        
+
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
@@ -99,14 +98,14 @@ class PlaguecrafterEffect extends OneShotEffect {
                 }
             }
         }
-        
+
         for (UUID permID : perms) {
             Permanent permanent = game.getPermanent(permID);
             if (permanent != null) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
         }
-        
+
         for (UUID playerId : cantSac) {
             Effect discardEffect = new DiscardTargetEffect(1);
             discardEffect.setTargetPointer(new FixedTarget(playerId, game));
