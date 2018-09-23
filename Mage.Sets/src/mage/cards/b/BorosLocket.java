@@ -23,8 +23,8 @@ public final class BorosLocket extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Add {R} or {W}.
-        this.addAbility(new WhiteManaAbility());
         this.addAbility(new RedManaAbility());
+        this.addAbility(new WhiteManaAbility());
 
         // {R/W}{R/W}{R/W}{R/W}, {T}, Sacrifice Boros Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(
