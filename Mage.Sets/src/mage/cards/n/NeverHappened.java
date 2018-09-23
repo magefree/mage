@@ -3,18 +3,18 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
+import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -67,20 +67,24 @@ class NeverHappenedEffect extends OneShotEffect {
             return false;
         }
         opponent.revealCards(source, opponent.getHand(), game);
-        Target target;
+        TargetCard target;
+        Cards cards;
         if (controller.chooseUse(outcome, "Exile a card from hand or graveyard?", null, "Hand", "Graveyard", source, game)) {
             FilterCard filter = new FilterNonlandCard("nonland card in " + opponent.getName() + "'s hand");
-            filter.add(new OwnerIdPredicate(opponent.getId()));
-            target = new TargetCardInHand(filter);
+            target = new TargetCard(Zone.HAND, filter);
             target.setNotTarget(true);
+            cards = opponent.getHand();
         } else {
             FilterCard filter = new FilterNonlandCard("nonland card in " + opponent.getName() + "'s graveyard");
-            filter.add(new OwnerIdPredicate(opponent.getId()));
-            target = new TargetCardInGraveyard(filter);
+            target = new TargetCard(Zone.GRAVEYARD, filter);
             target.setNotTarget(true);
+            cards = opponent.getGraveyard();
         }
-        if (controller.choose(outcome, target, source.getSourceId(), game)) {
-            controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, false, null, null);
+        if (controller.choose(outcome, cards, target, game)) {
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                controller.moveCards(card, Zone.EXILED, source, game);
+            }
         }
         return true;
     }
