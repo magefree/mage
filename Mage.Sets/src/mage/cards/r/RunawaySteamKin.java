@@ -43,7 +43,7 @@ public final class RunawaySteamKin extends CardImpl {
                 new SpellCastControllerTriggeredAbility(
                         new AddCountersSourceEffect(
                                 CounterType.P1P1.createInstance()
-                        ), false
+                        ), filter, false
                 ), new SourceHasCounterCondition(CounterType.P1P1, 0, 2),
                 "Whenever you cast a red spell, "
                 + "if {this} has fewer than three +1/+1 counters on it, "
