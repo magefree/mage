@@ -16,18 +16,18 @@ import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.other.OwnerPredicate;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.XCMCGraveyardAdjuster;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.ApplyToPermanent;
 
@@ -36,12 +36,6 @@ import mage.util.functions.ApplyToPermanent;
  * @author TheElk801
  */
 public final class LazavTheMultifarious extends CardImpl {
-
-    private static final FilterCard filter = new FilterCreatureCard("creature card in your graveyard with converted mana cost X");
-
-    static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
-    }
 
     public LazavTheMultifarious(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
@@ -61,8 +55,7 @@ public final class LazavTheMultifarious extends CardImpl {
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl("{X}")
         );
-        ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
+        ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -73,6 +66,19 @@ public final class LazavTheMultifarious extends CardImpl {
     @Override
     public LazavTheMultifarious copy() {
         return new LazavTheMultifarious(this);
+    }
+}
+
+enum LazavTheMultifariousAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = ability.getManaCostsToPay().getX();
+        FilterCard filterCard = new FilterCreatureCard("creature card with converted mana cost " + xValue + " in your graveyard");
+        filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        ability.getTargets().clear();
+        ability.getTargets().add(new TargetCardInYourGraveyard(filterCard));
     }
 }
 
@@ -124,20 +130,13 @@ class LazavTheMultifariousEffect extends OneShotEffect {
 
 class LazavTheMultifariousApplier extends ApplyToPermanent {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card in your graveyard with converted mana cost X");
-
-    static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
-    }
-
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl("{X}")
         );
-        ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
+        ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
         permanent.getAbilities().add(ability);
         permanent.setName("Lazav, the Multifarious");
         permanent.addSuperType(SuperType.LEGENDARY);
@@ -150,8 +149,7 @@ class LazavTheMultifariousApplier extends ApplyToPermanent {
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl("{X}")
         );
-        ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
+        ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
         mageObject.getAbilities().add(ability);
         mageObject.setName("Lazav, the Multifarious");
         mageObject.addSuperType(SuperType.LEGENDARY);

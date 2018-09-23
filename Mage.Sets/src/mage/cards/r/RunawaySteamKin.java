@@ -52,8 +52,7 @@ public final class RunawaySteamKin extends CardImpl {
 
         // Remove three +1/+1 counters from Runaway Steam-Kin: Add {R}{R}{R}.
         this.addAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD,
-                Mana.RedMana(3),
+                Zone.BATTLEFIELD, Mana.RedMana(3),
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance(3))
         ));
     }
