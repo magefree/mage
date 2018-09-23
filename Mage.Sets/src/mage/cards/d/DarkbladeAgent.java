@@ -22,7 +22,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
-import mage.watchers.common.SpellsCastWatcher;
 
 /**
  *
@@ -59,7 +58,7 @@ public final class DarkbladeAgent extends CardImpl {
                 "and \"Whenever this creature deals "
                 + "combat damage to a player, draw a card.\""
         ));
-        this.addAbility(ability, new SpellsCastWatcher());
+        this.addAbility(ability, new DarkbladeAgentWatcher());
     }
 
     public DarkbladeAgent(final DarkbladeAgent card) {
