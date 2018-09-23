@@ -72,7 +72,7 @@ class EnhancedSurveillanceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
+        return event.getPlayerId().equals(source.getControllerId());
     }
 
     @Override
