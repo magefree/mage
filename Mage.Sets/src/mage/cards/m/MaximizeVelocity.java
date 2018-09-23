@@ -26,7 +26,7 @@ public final class MaximizeVelocity extends CardImpl {
         ).setText("Target creature gets +1/+1"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains flying until end of turn"));
+        ).setText("and gains haste until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Jump-start
