@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -17,11 +16,10 @@ import mage.target.targetpointer.ThirdTargetPointer;
  *
  * @author Ryan-Saklad
  */
-
 public final class BountyOfMight extends CardImpl {
 
     public BountyOfMight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
 
         // Target creature gets +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
