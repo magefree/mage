@@ -71,7 +71,7 @@ class InvertEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetId : source.getTargets().get(0).getTargets()) {
+        for (UUID targetId : targetPointer.getTargets(game, source)) {
             ContinuousEffect effect = new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(targetId, game));
             game.addEffect(effect, source);
