@@ -88,7 +88,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
             game.addEffect(new MnemonicBetrayalCastFromExileEffect(card, game), source);
         }
         controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), source.getSourceObjectIfItStillExists(game).getName());
-        game.addDelayedTriggeredAbility(new MnemonicBetrayalDelayedTriggeredAbility(cards, cardMap));
+        game.addDelayedTriggeredAbility(new MnemonicBetrayalDelayedTriggeredAbility(cards, cardMap), source);
         return true;
     }
 }
