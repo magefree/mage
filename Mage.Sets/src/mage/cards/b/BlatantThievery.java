@@ -30,7 +30,7 @@ public final class BlatantThievery extends CardImpl {
 
         // For each opponent, gain control of target permanent that player controls.
         this.getSpellAbility().addEffect(new BlatantThieveryEffect());
-        this.getSpellAbility().setTargetAdjuster(BlatantThieveryEffect.class);
+        this.getSpellAbility().setTargetAdjuster(BlatantThieveryAdjuster.instance);
     }
 
     public BlatantThievery(final BlatantThievery card) {
