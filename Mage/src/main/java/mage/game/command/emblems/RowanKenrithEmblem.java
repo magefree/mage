@@ -18,7 +18,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class RowanKenrithEmblem extends Emblem {
+public final class RowanKenrithEmblem extends Emblem {
     // Target player gets an emblem with "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy."
 
     public RowanKenrithEmblem() {

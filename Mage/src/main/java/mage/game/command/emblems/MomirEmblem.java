@@ -28,7 +28,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class MomirEmblem extends Emblem {
+public final class MomirEmblem extends Emblem {
     // Faking Vanguard as an Emblem; need to come back to this and add a new type of CommandObject
 
     public MomirEmblem() {

@@ -12,7 +12,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class SorinLordOfInnistradEmblem extends Emblem {
+public final class SorinLordOfInnistradEmblem extends Emblem {
 
     public SorinLordOfInnistradEmblem() {
         this.setName("Emblem Sorin");

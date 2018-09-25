@@ -10,7 +10,7 @@ import mage.game.command.Emblem;
  *
  * Author: spjspj
  */
-public class TamiyoFieldResearcherEmblem extends Emblem {
+public final class TamiyoFieldResearcherEmblem extends Emblem {
     // You may cast nonland cards from your hand without paying their mana costs.
 
     public TamiyoFieldResearcherEmblem() {

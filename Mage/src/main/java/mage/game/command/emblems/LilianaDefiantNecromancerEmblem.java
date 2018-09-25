@@ -20,7 +20,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class LilianaDefiantNecromancerEmblem extends Emblem {
+public final class LilianaDefiantNecromancerEmblem extends Emblem {
     // You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step."
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");

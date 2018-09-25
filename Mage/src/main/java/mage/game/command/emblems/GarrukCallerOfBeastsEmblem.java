@@ -16,7 +16,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class GarrukCallerOfBeastsEmblem extends Emblem {
+public final class GarrukCallerOfBeastsEmblem extends Emblem {
 
     /**
      * Emblem: "Whenever you cast a creature spell, you may search your library

@@ -11,7 +11,7 @@ import mage.game.permanent.token.CatToken2;
  *
  * @author TheElk801
  */
-public class AjaniAdversaryOfTyrantsEmblem extends Emblem {
+public final class AjaniAdversaryOfTyrantsEmblem extends Emblem {
 
     // −7: You get an emblem with "At the beginning of your end step, create three 1/1 white Cat creature tokens with lifelink."
     public AjaniAdversaryOfTyrantsEmblem() {

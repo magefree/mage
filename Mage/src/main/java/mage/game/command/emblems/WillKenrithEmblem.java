@@ -11,7 +11,7 @@ import mage.game.command.Emblem;
  *
  * @author TheElk801
  */
-public class WillKenrithEmblem extends Emblem {
+public final class WillKenrithEmblem extends Emblem {
     // Target player gets an emblem with "Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy."
 
     public WillKenrithEmblem() {
