@@ -1,10 +1,9 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -12,18 +11,15 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -31,7 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class GarrukRelentless extends CardImpl {
 
     public GarrukRelentless(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
@@ -42,7 +38,7 @@ public final class GarrukRelentless extends CardImpl {
 
         // When Garruk Relentless has two or fewer loyalty counters on him, transform him.
         this.addAbility(new TransformAbility());
-        this.addAbility(new GarrukRelentlessTriggeredAbility());
+        this.addAbility(new GarrukRelentlessStateTrigger());
 
         // 0: Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him
         LoyaltyAbility ability1 = new LoyaltyAbility(new GarrukRelentlessDamageEffect(), 0);
@@ -64,40 +60,30 @@ public final class GarrukRelentless extends CardImpl {
     }
 }
 
-class GarrukRelentlessTriggeredAbility extends TriggeredAbilityImpl {
+class GarrukRelentlessStateTrigger extends StateTriggeredAbility {
 
-    public GarrukRelentlessTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
+    public GarrukRelentlessStateTrigger() {
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
     }
 
-    public GarrukRelentlessTriggeredAbility(GarrukRelentlessTriggeredAbility ability) {
+    public GarrukRelentlessStateTrigger(final GarrukRelentlessStateTrigger ability) {
         super(ability);
     }
 
     @Override
-    public GarrukRelentlessTriggeredAbility copy() {
-        return new GarrukRelentlessTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLANESWALKER;
+    public GarrukRelentlessStateTrigger copy() {
+        return new GarrukRelentlessStateTrigger(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && !permanent.isTransformed() && permanent.getCounters(game).getCount(CounterType.LOYALTY) <= 2) {
-                return true;
-            }
-        }
-        return false;
+        Permanent permanent = game.getPermanent(getSourceId());
+        return permanent != null && permanent.getCounters(game).getCount(CounterType.LOYALTY) < 3;
     }
 
     @Override
     public String getRule() {
-        return "When Garruk Relentless has two or fewer loyalty counters on him, transform him.";
+        return "When {this} has two or fewer loyalty counters on him, transform him.";
     }
 }
 
@@ -105,7 +91,7 @@ class GarrukRelentlessDamageEffect extends OneShotEffect {
 
     public GarrukRelentlessDamageEffect() {
         super(Outcome.Damage);
-        staticText = "Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him";
+        staticText = "{this} deals 3 damage to target creature. That creature deals damage equal to its power to him";
     }
 
     public GarrukRelentlessDamageEffect(GarrukRelentlessDamageEffect effect) {
