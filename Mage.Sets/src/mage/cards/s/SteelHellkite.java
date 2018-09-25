@@ -114,9 +114,10 @@ class SteelHellkiteWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER && ((DamageEvent) event).isCombatDamage()) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                && ((DamageEvent) event).isCombatDamage()) {
             damageMap.putIfAbsent(event.getSourceId(), new HashSet<>());
-            damageMap.get(event.getSourceId()).add(event.getTargetId());
+            damageMap.get(event.getSourceId()).add(event.getPlayerId());
         }
     }
 
