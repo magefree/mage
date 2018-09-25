@@ -21,7 +21,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
@@ -115,7 +115,7 @@ class SteelHellkiteWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                && ((DamageEvent) event).isCombatDamage()) {
+                && ((DamagedEvent) event).isCombatDamage()) {
             damageMap.putIfAbsent(event.getSourceId(), new HashSet<>());
             damageMap.get(event.getSourceId()).add(event.getPlayerId());
         }
