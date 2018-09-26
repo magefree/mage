@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -243,7 +242,7 @@ public final class ModernMasters2015 extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Bounty", 164, Rarity.COMMON, mage.cards.s.SylvanBounty.class));
         cards.add(new SetCardInfo("Taj-Nar Swordsmith", 36, Rarity.UNCOMMON, mage.cards.t.TajNarSwordsmith.class));
         cards.add(new SetCardInfo("Tarmogoyf", 165, Rarity.MYTHIC, mage.cards.t.Tarmogoyf.class));
-        cards.add(new SetCardInfo("Telling Time", 61, Rarity.UNCOMMON, mage.cards.t.TellingTime.class));
+        cards.add(new SetCardInfo("Telling Time", 61, Rarity.COMMON, mage.cards.t.TellingTime.class));
         cards.add(new SetCardInfo("Terashi's Grasp", 37, Rarity.COMMON, mage.cards.t.TerashisGrasp.class));
         cards.add(new SetCardInfo("Tezzeret's Gambit", 63, Rarity.UNCOMMON, mage.cards.t.TezzeretsGambit.class));
         cards.add(new SetCardInfo("Tezzeret the Seeker", 62, Rarity.MYTHIC, mage.cards.t.TezzeretTheSeeker.class));

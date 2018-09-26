@@ -50,7 +50,7 @@ public final class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Cremate", 45, Rarity.COMMON, mage.cards.c.Cremate.class));
         cards.add(new SetCardInfo("Cry of Contrition", 46, Rarity.COMMON, mage.cards.c.CryOfContrition.class));
         cards.add(new SetCardInfo("Cryptwailing", 47, Rarity.UNCOMMON, mage.cards.c.Cryptwailing.class));
-        cards.add(new SetCardInfo("Crystal Seer", 23, Rarity.UNCOMMON, mage.cards.c.CrystalSeer.class));
+        cards.add(new SetCardInfo("Crystal Seer", 23, Rarity.COMMON, mage.cards.c.CrystalSeer.class));
         cards.add(new SetCardInfo("Culling Sun", 109, Rarity.RARE, mage.cards.c.CullingSun.class));
         cards.add(new SetCardInfo("Daggerclaw Imp", 48, Rarity.UNCOMMON, mage.cards.d.DaggerclawImp.class));
         cards.add(new SetCardInfo("Debtors' Knell", 141, Rarity.RARE, mage.cards.d.DebtorsKnell.class));

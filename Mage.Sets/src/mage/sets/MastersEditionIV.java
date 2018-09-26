@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -269,19 +268,19 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Two-Headed Giant of Foriys", 139, Rarity.UNCOMMON, mage.cards.t.TwoHeadedGiantOfForiys.class));
         cards.add(new SetCardInfo("Underground Sea", 256, Rarity.RARE, mage.cards.u.UndergroundSea.class));
         cards.add(new SetCardInfo("Urza's Chalice", 236, Rarity.COMMON, mage.cards.u.UrzasChalice.class));
-        cards.add(new SetCardInfo("Urza's Mine", "257a", Rarity.COMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Mine", "257b", Rarity.COMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Mine", "257c", Rarity.COMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Mine", "257d", Rarity.COMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", "257a", Rarity.LAND, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", "257b", Rarity.LAND, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", "257c", Rarity.LAND, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", "257d", Rarity.LAND, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Miter", 237, Rarity.RARE, mage.cards.u.UrzasMiter.class));
-        cards.add(new SetCardInfo("Urza's Power Plant", "258a", Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Power Plant", "258b", Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Power Plant", "258c", Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Power Plant", "258d", Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Tower", "259a", Rarity.COMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Tower", "259b", Rarity.COMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Tower", "259c", Rarity.COMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Tower", "259d", Rarity.COMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", "258a", Rarity.LAND, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", "258b", Rarity.LAND, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", "258c", Rarity.LAND, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", "258d", Rarity.LAND, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", "259a", Rarity.LAND, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", "259b", Rarity.LAND, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", "259c", Rarity.LAND, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", "259d", Rarity.LAND, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veteran Bodyguard", 32, Rarity.RARE, mage.cards.v.VeteranBodyguard.class));
         cards.add(new SetCardInfo("Vibrating Sphere", 238, Rarity.RARE, mage.cards.v.VibratingSphere.class));
         cards.add(new SetCardInfo("Volcanic Island", 260, Rarity.RARE, mage.cards.v.VolcanicIsland.class));

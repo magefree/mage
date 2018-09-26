@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -36,7 +31,7 @@ public final class MindVsMight extends ExpansionSet {
         cards.add(new SetCardInfo("Coat of Arms", 58, Rarity.RARE, mage.cards.c.CoatOfArms.class));
         cards.add(new SetCardInfo("Deep-Sea Kraken", 3, Rarity.RARE, mage.cards.d.DeepSeaKraken.class));
         cards.add(new SetCardInfo("Desperate Ritual", 14, Rarity.UNCOMMON, mage.cards.d.DesperateRitual.class));
-        cards.add(new SetCardInfo("Empty the Warrens", 15, Rarity.RARE, mage.cards.e.EmptyTheWarrens.class));
+        cards.add(new SetCardInfo("Empty the Warrens", 15, Rarity.COMMON, mage.cards.e.EmptyTheWarrens.class));
         cards.add(new SetCardInfo("Firebolt", 37, Rarity.COMMON, mage.cards.f.Firebolt.class));
         cards.add(new SetCardInfo("Firemind's Foresight", 21, Rarity.RARE, mage.cards.f.FiremindsForesight.class));
         cards.add(new SetCardInfo("Forest", 63, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

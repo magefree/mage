@@ -1,10 +1,7 @@
-
 package mage.sets;
 
 import java.util.List;
 import mage.cards.ExpansionSet;
-import mage.cards.h.HighTide;
-import mage.cards.h.HymnToTourach;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -115,7 +112,7 @@ public final class VintageMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Desert Twister", 203, Rarity.UNCOMMON, mage.cards.d.DesertTwister.class));
         cards.add(new SetCardInfo("Devout Witness", 24, Rarity.UNCOMMON, mage.cards.d.DevoutWitness.class));
         cards.add(new SetCardInfo("Drakestown Forgotten", 117, Rarity.RARE, mage.cards.d.DrakestownForgotten.class));
-        cards.add(new SetCardInfo("Dreampod Druid", 204, Rarity.RARE, mage.cards.d.DreampodDruid.class));
+        cards.add(new SetCardInfo("Dreampod Druid", 204, Rarity.UNCOMMON, mage.cards.d.DreampodDruid.class));
         cards.add(new SetCardInfo("Edric, Spymaster of Trest", 251, Rarity.RARE, mage.cards.e.EdricSpymasterOfTrest.class));
         cards.add(new SetCardInfo("Elephant Guide", 205, Rarity.COMMON, mage.cards.e.ElephantGuide.class));
         cards.add(new SetCardInfo("Elvish Aberration", 206, Rarity.COMMON, mage.cards.e.ElvishAberration.class));
@@ -169,9 +166,9 @@ public final class VintageMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Gush", 72, Rarity.UNCOMMON, mage.cards.g.Gush.class));
         cards.add(new SetCardInfo("Gustcloak Harrier", 30, Rarity.COMMON, mage.cards.g.GustcloakHarrier.class));
         cards.add(new SetCardInfo("Hermit Druid", 216, Rarity.RARE, mage.cards.h.HermitDruid.class));
-        cards.add(new SetCardInfo("High Tide", 73, Rarity.UNCOMMON, HighTide.class));
+        cards.add(new SetCardInfo("High Tide", 73, Rarity.UNCOMMON, mage.cards.h.HighTide.class));
         cards.add(new SetCardInfo("Hulking Goblin", 174, Rarity.COMMON, mage.cards.h.HulkingGoblin.class));
-        cards.add(new SetCardInfo("Hymn to Tourach", 122, Rarity.UNCOMMON, HymnToTourach.class));
+        cards.add(new SetCardInfo("Hymn to Tourach", 122, Rarity.UNCOMMON, mage.cards.h.HymnToTourach.class));
         cards.add(new SetCardInfo("Ichorid", 123, Rarity.RARE, mage.cards.i.Ichorid.class));
         cards.add(new SetCardInfo("Ivory Tower", 269, Rarity.UNCOMMON, mage.cards.i.IvoryTower.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 74, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));
