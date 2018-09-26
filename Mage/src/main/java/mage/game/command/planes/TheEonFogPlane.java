@@ -87,10 +87,8 @@ class TheEonFogSkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
         if (cPlane == null) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - The Eon Fog")) {
-                return false;
-            }
+        if (!cPlane.getName().equalsIgnoreCase("Plane - The Eon Fog")) {
+            return false;
         }
         return event.getType() == GameEvent.EventType.UNTAP_STEP;
     }

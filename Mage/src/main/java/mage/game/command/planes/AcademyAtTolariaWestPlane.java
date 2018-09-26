@@ -88,10 +88,8 @@ class DrawCardsActivePlayerEffect extends OneShotEffect {
         if (cPlane == null) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Academy at Tolaria West")) {
-                return false;
-            }
+        if (!cPlane.getName().equalsIgnoreCase("Plane - Academy at Tolaria West")) {
+            return false;
         }
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {

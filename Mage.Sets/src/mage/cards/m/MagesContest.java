@@ -68,7 +68,7 @@ class MagesContestEffect extends OneShotEffect {
                 Player winner = you;
                 Player currentPlayer = spellController;
                 do {
-                    if (currentPlayer != null && currentPlayer.canRespond()) {
+                    if (currentPlayer.canRespond()) {
                         int newBid = 0;
                         if (!currentPlayer.isHuman()) {
                             // make AI evaluate value of the spell to decide on bidding, should be reworked
