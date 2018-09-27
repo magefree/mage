@@ -129,7 +129,9 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("WWK");
         supportedSets.add("DDE");
         supportedSets.add("ROE");
+        // duels of the planewalkers:
         supportedSets.add("DPA");
+        //
         supportedSets.add("ARC");
         supportedSets.add("M11");
         supportedSets.add("V10");
@@ -231,9 +233,6 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("M19");
         supportedSets.add("GS1");
         supportedSets.add("GRN");
-        // duels of the planewalkers:
-        supportedSets.add("DPA");
-        //
     }
 
     @Override
