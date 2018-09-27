@@ -153,15 +153,15 @@ public final class Main {
 
         for (ExtensionPackage pkg : extensions) {
             Map<String, Class> draftCubes = pkg.getDraftCubes();
-            for (String name : draftCubes.keySet()) {
-                logger.info("Loading extension: [" + name + "] " + draftCubes.get(name).toString());
-                CubeFactory.instance.addDraftCube(name, draftCubes.get(name));
-            }
+            draftCubes.forEach((name, draftCube) -> {
+                logger.info("Loading extension: [" + name + "] " + draftCube.toString());
+                CubeFactory.instance.addDraftCube(name, draftCube);
+            });
             Map<String, Class> deckTypes = pkg.getDeckTypes();
-            for (String name : deckTypes.keySet()) {
-                logger.info("Loading extension: [" + name + "] " + deckTypes.get(name));
-                DeckValidatorFactory.instance.addDeckType(name, deckTypes.get(name));
-            }
+            deckTypes.forEach((name, deckType) -> {
+                logger.info("Loading extension: [" + name + "] " + deckType);
+                DeckValidatorFactory.instance.addDeckType(name, deckType);
+            });
         }
 
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
