@@ -234,6 +234,9 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("M19");
         supportedSets.add("GS1");
         supportedSets.add("GRN");
+        //
+        supportedSets.add("EURO");
+        supportedSets.add("GPX");
     }
 
     @Override
@@ -342,6 +345,8 @@ public enum ScryfallImageSource implements CardImageSource {
             put("MPS-AKH", "mp2");
             put("MBP", "pmei");
             put("WMCQ", "pwcq");
+            put("EURO", "pelp");
+            put("GPX", "pgpx");
         }
     };
 
@@ -349,7 +354,7 @@ public enum ScryfallImageSource implements CardImageSource {
         {
             // direct links to download images for special cards
 
-            // Duels of the Planeswalkers Promos -- xmage uses one set (DPA), but scryfall store it by years
+            // Duels of the Planeswalkers Promos -- xmage uses one set (DPAP), but scryfall store it by years
             // 2009 - https://scryfall.com/sets/pdtp
             put("DPAP/Garruk Wildspeaker", "https://img.scryfall.com/cards/large/en/pdtp/1.jpg");
             // 2010 - https://scryfall.com/sets/pdp10
@@ -370,6 +375,10 @@ public enum ScryfallImageSource implements CardImageSource {
             // 2014 - https://scryfall.com/sets/pdp14
             put("DPAP/Soul of Ravnica", "https://img.scryfall.com/cards/large/en/pdp14/1.jpg");
             put("DPAP/Soul of Zendikar", "https://img.scryfall.com/cards/large/en/pdp14/2.jpg");
+
+
+            // TODO: remove Grand Prix fix after scryfall fix image's link (that's link must be work: https://img.scryfall.com/cards/large/en/pgpx/2016b.jpg )
+            put("GPX/Sword of Feast and Famine", "https://img.scryfall.com/cards/large/en/pgpx/1%E2%98%85.jpg");
         }
     };
 
