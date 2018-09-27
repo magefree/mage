@@ -360,9 +360,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public List<Mana> getMana() {
         List<Mana> mana = new ArrayList<>();
         for (ActivatedManaAbilityImpl ability : this.abilities.getActivatedManaAbilities(Zone.BATTLEFIELD)) {
-            for (Mana netMana : ability.getNetMana(null)) {
-                mana.add(netMana);
-            }
+            mana.addAll(ability.getNetMana(null));
         }
         return mana;
     }
