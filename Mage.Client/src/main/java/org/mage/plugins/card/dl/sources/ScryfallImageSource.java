@@ -131,6 +131,7 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("ROE");
         // duels of the planewalkers:
         supportedSets.add("DPA");
+        supportedSets.add("DPAP");
         //
         supportedSets.add("ARC");
         supportedSets.add("M11");
@@ -247,6 +248,15 @@ public enum ScryfallImageSource implements CardImageSource {
         String baseUrl = null;
         String alternativeUrl = null;
 
+        // direct links to images (non localization)
+        if (baseUrl == null) {
+            String linkCode = card.getSet() + "/" + card.getName();
+            if (directDownloadLinks.containsKey(linkCode)) {
+                baseUrl = directDownloadLinks.get(linkCode);
+                alternativeUrl = null;
+            }
+        }
+
         // special card number like "103a" already compatible
         if (baseUrl == null && card.isCollectorIdWithStr()) {
             baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet()) + "/"
@@ -332,6 +342,34 @@ public enum ScryfallImageSource implements CardImageSource {
             put("MPS-AKH", "mp2");
             put("MBP", "pmei");
             put("WMCQ", "pwcq");
+        }
+    };
+
+    private static final Map<String, String> directDownloadLinks = new HashMap<String, String>() {
+        {
+            // direct links to download images for special cards
+
+            // Duels of the Planeswalkers Promos -- xmage uses one set (DPA), but scryfall store it by years
+            // 2009 - https://scryfall.com/sets/pdtp
+            put("DPAP/Garruk Wildspeaker", "https://img.scryfall.com/cards/large/en/pdtp/1.jpg");
+            // 2010 - https://scryfall.com/sets/pdp10
+            put("DPAP/Liliana Vess", "https://img.scryfall.com/cards/large/en/pdp10/1.jpg");
+            put("DPAP/Nissa Revane", "https://img.scryfall.com/cards/large/en/pdp10/2.jpg");
+            // 2011 - https://scryfall.com/sets/pdp11
+            put("DPAP/Frost Titan", "https://img.scryfall.com/cards/large/en/pdp11/1.jpg");
+            put("DPAP/Grave Titan", "https://img.scryfall.com/cards/large/en/pdp11/2.jpg");
+            put("DPAP/Inferno Titan", "https://img.scryfall.com/cards/large/en/pdp11/3.jpg");
+            // 2012 - https://scryfall.com/sets/pdp12
+            put("DPAP/Primordial Hydra", "https://img.scryfall.com/cards/large/en/pdp12/1.jpg");
+            put("DPAP/Serra Avatar", "https://img.scryfall.com/cards/large/en/pdp12/2.jpg");
+            put("DPAP/Vampire Nocturnus", "https://img.scryfall.com/cards/large/en/pdp12/3.jpg");
+            // 2013 - https://scryfall.com/sets/pdp13
+            put("DPAP/Bonescythe Sliver", "https://img.scryfall.com/cards/large/en/pdp13/1.jpg");
+            put("DPAP/Ogre Battledriver", "https://img.scryfall.com/cards/large/en/pdp13/2.jpg");
+            put("DPAP/Scavenging Ooze", "https://img.scryfall.com/cards/large/en/pdp13/3.jpg");
+            // 2014 - https://scryfall.com/sets/pdp14
+            put("DPAP/Soul of Ravnica", "https://img.scryfall.com/cards/large/en/pdp14/1.jpg");
+            put("DPAP/Soul of Zendikar", "https://img.scryfall.com/cards/large/en/pdp14/2.jpg");
         }
     };
 
