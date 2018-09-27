@@ -231,6 +231,9 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("M19");
         supportedSets.add("GS1");
         supportedSets.add("GRN");
+        // duels of the planewalkers:
+        supportedSets.add("DPA");
+        //
     }
 
     @Override
