@@ -332,8 +332,14 @@ public final class GuildsOfRavnica extends ExpansionSet {
 
     @Override
     public List<CardInfo> getSpecialCommon() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.COMMON).setCodes(this.code).name("Guildgate");
-        return CardRepository.instance.findCards(criteria);
+        List<CardInfo> specialCards = getCardsByRarity(Rarity.SPECIAL);
+        if (specialCards.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.rarities(Rarity.COMMON).setCodes(this.code).name("Guildgate");
+            List<CardInfo> specialCardsSave = CardRepository.instance.findCards(criteria);
+            savedCards.put(Rarity.SPECIAL, specialCardsSave);
+            specialCards.addAll(specialCardsSave);
+        }
+        return specialCards;
     }
 }
