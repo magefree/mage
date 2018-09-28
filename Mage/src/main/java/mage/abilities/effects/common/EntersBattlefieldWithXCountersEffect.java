@@ -39,7 +39,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
-            if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
+            if (source.getAbilityType() == AbilityType.STATIC) {
                 permanent = game.getPermanentEntering(source.getSourceId());
             }
         }
