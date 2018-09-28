@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -13,8 +12,9 @@ import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroyTargetEffect extends OneShotEffect {
@@ -27,12 +27,16 @@ public class DestroyTargetEffect extends OneShotEffect {
     }
 
     public DestroyTargetEffect(String ruleText) {
-        this(false);
-        staticText = ruleText;
+        this(ruleText, false);
     }
 
     public DestroyTargetEffect(boolean noRegen) {
         this(noRegen, false);
+    }
+
+    public DestroyTargetEffect(String ruleText, boolean noRegen) {
+        this(noRegen, false);
+        staticText = ruleText;
     }
 
     public DestroyTargetEffect(boolean noRegen, boolean multitargetHandling) {
