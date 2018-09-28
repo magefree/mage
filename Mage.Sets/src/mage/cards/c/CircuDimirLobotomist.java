@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -13,13 +12,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.FilterPlayer;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.ExileZone;
@@ -31,8 +24,9 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CircuDimirLobotomist extends CardImpl {
@@ -54,16 +48,16 @@ public final class CircuDimirLobotomist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // 10/1/2005 	The first two abilities target libraries, not players.
-        // Target Library not supported yet - used as workaround target player
         // Whenever you cast a blue spell, exile the top card of target library.
         Ability ability = new SpellCastControllerTriggeredAbility(new CircuDimirLobotomistEffect(), filterBlue, false);
-        ability.addTarget(new TargetPlayer(1, 1, true, new FilterPlayer("target library")));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+
         // Whenever you cast a black spell, exile the top card of target library.
         ability = new SpellCastControllerTriggeredAbility(new CircuDimirLobotomistEffect(), filterBlack, false);
-        ability.addTarget(new TargetPlayer(1, 1, true, new FilterPlayer("target library")));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+
         // Your opponents can't cast nonland cards with the same name as a card exiled with Circu, Dimir Lobotomist.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CircuDimirLobotomistRuleModifyingEffect()));
     }
@@ -82,7 +76,7 @@ class CircuDimirLobotomistEffect extends OneShotEffect {
 
     public CircuDimirLobotomistEffect() {
         super(Outcome.Detriment);
-        this.staticText = "exile the top card of target library";
+        this.staticText = "exile the top card of target player's library";
     }
 
     public CircuDimirLobotomistEffect(final CircuDimirLobotomistEffect effect) {

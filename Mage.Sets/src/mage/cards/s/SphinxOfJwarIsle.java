@@ -73,7 +73,7 @@ class SphinxOfJwarIsleEffect extends OneShotEffect {
 
     public SphinxOfJwarIsleEffect() {
         super(Outcome.Neutral);        
-        this.staticText = "You may look at the top card of your library";
+        this.staticText = "You may look at the top card of your library any time";
     }
 
     public SphinxOfJwarIsleEffect(final SphinxOfJwarIsleEffect effect) {

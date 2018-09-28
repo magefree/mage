@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -12,21 +11,14 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class VizierOfTheMenagerie extends CardImpl {
@@ -63,7 +55,7 @@ class VizierOfTheMenagerieTopCardRevealedEffect extends ContinuousEffectImpl {
 
     public VizierOfTheMenagerieTopCardRevealedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "You may look at the top card of your library. (You may do this at any time.)";
+        staticText = "You may look at the top card of your library any time";
     }
 
     public VizierOfTheMenagerieTopCardRevealedEffect(final VizierOfTheMenagerieTopCardRevealedEffect effect) {

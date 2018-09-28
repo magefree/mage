@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -12,11 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -25,21 +20,22 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KeeperOfTheLens extends CardImpl {
 
     public KeeperOfTheLens(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // You may look at face-down creatures you don't control.
         // TODO: this should be a static abilitie and not use activated abilities (because it could than be restriced)
-        this.addAbility(new KeeperOfTheLensLookFaceDownAbility());        
+        this.addAbility(new KeeperOfTheLensLookFaceDownAbility());
     }
 
     public KeeperOfTheLens(final KeeperOfTheLens card) {
@@ -82,7 +78,7 @@ class KeeperOfTheLensLookFaceDownEffect extends OneShotEffect {
 
     public KeeperOfTheLensLookFaceDownEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You may look at face-down creatures you don't control";
+        this.staticText = "You may look at face-down creatures you don't control any time";
     }
 
     public KeeperOfTheLensLookFaceDownEffect(final KeeperOfTheLensLookFaceDownEffect effect) {
@@ -96,7 +92,7 @@ class KeeperOfTheLensLookFaceDownEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller=  game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller == null || mageObject == null) {
             return false;
