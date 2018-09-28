@@ -1,15 +1,10 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -21,19 +16,14 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class OathOfDruids extends CardImpl {
-
-    private final UUID originalId;
-    private static final FilterPlayer filter = new FilterPlayer();
-
-    static {
-        filter.add(new OathOfDruidsPredicate());
-    }
 
     public OathOfDruids(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
@@ -42,32 +32,37 @@ public final class OathOfDruids extends CardImpl {
         // The first player may reveal cards from the top of their library until he or she reveals a creature card.
         // If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, false);
-        ability.addTarget(new TargetPlayer(1, 1, false, filter));
-        originalId = ability.getOriginalId();
+        ability.setTargetAdjuster(OathOfDruidsAdjuster.instance);
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            Player activePlayer = game.getPlayer(game.getActivePlayerId());
-            if (activePlayer != null) {
-                ability.getTargets().clear();
-                TargetPlayer target = new TargetPlayer(1, 1, false, filter);
-                target.setTargetController(activePlayer.getId());
-                ability.getTargets().add(target);
-            }
-        }
     }
 
     public OathOfDruids(final OathOfDruids card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
     public OathOfDruids copy() {
         return new OathOfDruids(this);
+    }
+}
+
+enum OathOfDruidsAdjuster implements TargetAdjuster {
+    instance;
+    private static final FilterPlayer filter = new FilterPlayer();
+
+    static {
+        filter.add(new OathOfDruidsPredicate());
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        Player activePlayer = game.getPlayer(game.getActivePlayerId());
+        if (activePlayer != null) {
+            ability.getTargets().clear();
+            TargetPlayer target = new TargetPlayer(1, 1, false, filter);
+            target.setTargetController(activePlayer.getId());
+            ability.getTargets().add(target);
+        }
     }
 }
 
