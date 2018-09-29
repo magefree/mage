@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -21,7 +20,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author North
@@ -34,6 +36,7 @@ public final class PostmortemLunge extends CardImpl {
         // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().setTargetAdjuster(PostmortemLungeAdjuster.instance);
     }
 
     public PostmortemLunge(final PostmortemLunge card) {
@@ -44,16 +47,18 @@ public final class PostmortemLunge extends CardImpl {
     public PostmortemLunge copy() {
         return new PostmortemLunge(this);
     }
+}
+
+enum PostmortemLungeAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getAbilityType() == AbilityType.SPELL) { // otherwise the target is also added to the delayed triggered ability
-            ability.getTargets().clear();
-            int xValue = ability.getManaCostsToPay().getX();
-            FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-            ability.getTargets().add(new TargetCardInYourGraveyard(filter));
-        }
+        ability.getTargets().clear();
+        int xValue = ability.getManaCostsToPay().getX();
+        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        ability.getTargets().add(new TargetCardInYourGraveyard(filter));
     }
 }
 

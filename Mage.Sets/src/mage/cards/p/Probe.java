@@ -1,9 +1,7 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -14,9 +12,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.TargetPlayer;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class Probe extends CardImpl {
@@ -33,16 +33,7 @@ public final class Probe extends CardImpl {
                 new DiscardTargetEffect(2),
                 KickedCondition.instance,
                 "<br><br>if this spell was kicked, target player discards two cards"));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            if (KickedCondition.instance.apply(game, ability)) {
-                ability.addTarget(new TargetPlayer());
-            }
-        }
+        this.getSpellAbility().setTargetAdjuster(ProbeAdjuster.instance);
     }
 
     public Probe(final Probe card) {
@@ -52,5 +43,17 @@ public final class Probe extends CardImpl {
     @Override
     public Probe copy() {
         return new Probe(this);
+    }
+}
+
+enum ProbeAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        if (KickedCondition.instance.apply(game, ability)) {
+            ability.addTarget(new TargetPlayer());
+        }
     }
 }
