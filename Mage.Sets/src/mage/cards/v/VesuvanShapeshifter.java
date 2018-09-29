@@ -33,8 +33,6 @@ import java.util.UUID;
  */
 public final class VesuvanShapeshifter extends CardImpl {
 
-    private static final String effectText = "as a copy of any creature on the battlefield until {this} is turned faced down";
-
     public VesuvanShapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
@@ -48,7 +46,7 @@ public final class VesuvanShapeshifter extends CardImpl {
 
         // As Vesuvan Shapeshifter etbs, you may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new VesuvanShapeShifterFaceUpApplier());
-        effect.setText(effectText);
+        effect.setText("as a copy of any creature on the battlefield until {this} is turned faced down");
         ability = new EntersBattlefieldAbility(effect, true);
         ability.setWorksFaceDown(false);
         this.addAbility(ability);
