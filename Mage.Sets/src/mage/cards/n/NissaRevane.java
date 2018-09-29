@@ -4,7 +4,7 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class NissaRevane extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(2));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, nissasChosenFilter)), 1);
         this.addAbility(ability1);

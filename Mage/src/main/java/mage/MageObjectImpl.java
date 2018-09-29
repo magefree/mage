@@ -9,7 +9,7 @@ import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -158,8 +158,8 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public int getStartingLoyalty() {
         for (Ability ab : getAbilities()) {
-            if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {
-                return ((PlanswalkerEntersWithLoyalityCountersAbility) ab).getStartingLoyalty();
+            if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
+                return ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).getStartingLoyalty();
             }
         }
         return 0;

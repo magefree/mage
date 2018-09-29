@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -40,7 +40,7 @@ public final class WillKenrith extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.WILL);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +2: Until your next turn, up to two target creatures each have base power and toughness 0/3 and lose all abilities.
         Ability ability = new LoyaltyAbility(

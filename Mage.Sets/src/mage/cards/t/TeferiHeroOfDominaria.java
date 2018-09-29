@@ -4,7 +4,7 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -36,7 +36,7 @@ public final class TeferiHeroOfDominaria extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +1: Draw a card. At the beginning of the next end step, untap up to two lands.
         LoyaltyAbility ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);

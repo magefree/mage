@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
@@ -48,7 +48,7 @@ public class AminatouTheFateShifter extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AMINATOU);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +1: Draw a card, then put a card from your hand on top of your library.
         Ability ability = new LoyaltyAbility(new AminatouPlusEffect(), +1);

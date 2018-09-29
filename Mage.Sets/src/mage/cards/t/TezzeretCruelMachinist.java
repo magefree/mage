@@ -3,7 +3,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -40,7 +40,7 @@ public final class TezzeretCruelMachinist extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +1: Draw a card.
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1));

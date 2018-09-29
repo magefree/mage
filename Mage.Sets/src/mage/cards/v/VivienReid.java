@@ -3,7 +3,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -52,7 +52,7 @@ public final class VivienReid extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new LoyaltyAbility(

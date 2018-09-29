@@ -4,7 +4,7 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -31,7 +31,7 @@ public final class JaceUnravelerOfSecrets extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: Scry 1, then draw a card.
         Ability ability = new LoyaltyAbility(new ScryEffect(1), 1);

@@ -3,7 +3,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -46,7 +46,7 @@ public final class VraskaGolgariQueen extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +2: You may sacrifice another permanent. If you do, you gain 1 life and draw a card.
         DoIfCostPaid effect = new DoIfCostPaid(

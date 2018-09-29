@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
@@ -32,7 +32,7 @@ public final class VraskaSchemingGorgon extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +2: Creatures you control get +1/+0 until end of turn.
         Effect effect = new BoostControlledEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE);
