@@ -23,7 +23,6 @@ public final class Unglued extends ExpansionSet {
 
         cards.add(new SetCardInfo("Burning Cinder Fury of Crimson Chaos Fire", 40, Rarity.RARE, mage.cards.b.BurningCinderFuryOfCrimsonChaosFire.class));
         cards.add(new SetCardInfo("Checks and Balances", 16, Rarity.UNCOMMON, mage.cards.c.ChecksAndBalances.class));
-        cards.add(new SetCardInfo("Chicken Egg", 41, Rarity.COMMON, mage.cards.c.ChickenEgg.class));
         cards.add(new SetCardInfo("Chicken a la King", 17, Rarity.RARE, mage.cards.c.ChickenALaKing.class));
         cards.add(new SetCardInfo("Chicken Egg", 41, Rarity.COMMON, mage.cards.c.ChickenEgg.class));
         cards.add(new SetCardInfo("Clambassadors", 18, Rarity.COMMON, mage.cards.c.Clambassadors.class));
