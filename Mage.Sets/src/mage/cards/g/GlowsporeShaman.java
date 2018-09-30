@@ -1,15 +1,14 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -18,10 +17,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class GlowsporeShaman extends CardImpl {
@@ -81,9 +80,10 @@ class GlowsporeShamanEffect extends OneShotEffect {
         Target target = new TargetCardInYourGraveyard(0, 1, filter, true);
         if (player.chooseUse(outcome, "Put a land card on top of your library?", source, game)
                 && player.choose(outcome, target, source.getSourceId(), game)) {
-            Effect effect = new PutOnLibraryTargetEffect(true);
-            effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
-            effect.apply(game, source);
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                return player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false);
+            }
         }
         return true;
     }
