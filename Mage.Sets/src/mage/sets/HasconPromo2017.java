@@ -9,15 +9,15 @@ import mage.constants.SetType;
  *
  * @author Saga
  */
-public final class HasconPromo2017 extends ExpansionSet {
+public final class HASCONPromo2017 extends ExpansionSet {
 
-    private static final HasconPromo2017 instance = new HasconPromo2017();
+    private static final HASCONPromo2017 instance = new HASCONPromo2017();
 
-    public static HasconPromo2017 getInstance() {
+    public static HASCONPromo2017 getInstance() {
         return instance;
     }
 
-    private HasconPromo2017() {
+    private HASCONPromo2017() {
         super("HASCON Promo 2017", "H17", ExpansionSet.buildDate(2017, 9, 8), SetType.JOKESET);
         cards.add(new ExpansionSet.SetCardInfo("Grimlock, Dinobot Leader", "1a", Rarity.MYTHIC, mage.cards.g.GrimlockDinobotLeader.class));
         cards.add(new ExpansionSet.SetCardInfo("Grimlock, Ferocious King", "1b", Rarity.MYTHIC, mage.cards.g.GrimlockFerociousKing.class));
