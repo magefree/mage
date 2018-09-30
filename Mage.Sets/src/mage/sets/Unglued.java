@@ -7,7 +7,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author lopho
  */
 public final class Unglued extends ExpansionSet {
@@ -25,8 +24,9 @@ public final class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Checks and Balances", 16, Rarity.UNCOMMON, mage.cards.c.ChecksAndBalances.class));
         cards.add(new SetCardInfo("Chicken a la King", 17, Rarity.RARE, mage.cards.c.ChickenALaKing.class));
         cards.add(new SetCardInfo("Chicken Egg", 41, Rarity.COMMON, mage.cards.c.ChickenEgg.class));
-        cards.add(new SetCardInfo("Clambassadors", 18, Rarity.COMMON, mage.cards.c.Clambassadors.class));
+        cards.add(new SetCardInfo("Chicken Egg", 41, Rarity.COMMON, mage.cards.c.ChickenEgg.class));
         cards.add(new SetCardInfo("Clam-I-Am", 19, Rarity.COMMON, mage.cards.c.ClamIAm.class));
+        cards.add(new SetCardInfo("Clambassadors", 18, Rarity.COMMON, mage.cards.c.Clambassadors.class));
         cards.add(new SetCardInfo("Denied!", 22, Rarity.COMMON, mage.cards.d.Denied.class));
         cards.add(new SetCardInfo("Elvish Impersonators", 56, Rarity.COMMON, mage.cards.e.ElvishImpersonators.class));
         cards.add(new SetCardInfo("Flock of Rabid Sheep", 57, Rarity.UNCOMMON, mage.cards.f.FlockOfRabidSheep.class));
@@ -47,7 +47,7 @@ public final class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Krazy Kow", 48, Rarity.COMMON, mage.cards.k.KrazyKow.class));
         cards.add(new SetCardInfo("Mine, Mine, Mine!", 65, Rarity.RARE, mage.cards.m.MineMineMine.class));
         cards.add(new SetCardInfo("Mountain", 87, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
-        cards.add(new SetCardInfo("Once More With Feeling", 11, Rarity.RARE, mage.cards.o.OnceMoreWithFeeling.class));
+        cards.add(new SetCardInfo("Once More with Feeling", 11, Rarity.RARE, mage.cards.o.OnceMoreWithFeeling.class));
         cards.add(new SetCardInfo("Paper Tiger", 78, Rarity.COMMON, mage.cards.p.PaperTiger.class));
         cards.add(new SetCardInfo("Plains", 84, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Poultrygeist", 37, Rarity.COMMON, mage.cards.p.Poultrygeist.class));
