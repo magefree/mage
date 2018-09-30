@@ -34,8 +34,8 @@ public final class DoubleHeader extends CardImpl {
     }
 
     public DoubleHeader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.subtype.add(SubType.JELLYFISH);
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
