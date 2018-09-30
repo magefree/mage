@@ -27,7 +27,7 @@ import mage.game.permanent.Permanent;
 public final class Bloodletter extends CardImpl {
 
     public Bloodletter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
