@@ -23,7 +23,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author spjspj
  */
-public class KothOfTheHammerEmblem extends Emblem {
+public final class KothOfTheHammerEmblem extends Emblem {
     // "Mountains you control have '{T}: This land deals 1 damage to any target.'"
 
     public KothOfTheHammerEmblem() {

@@ -76,7 +76,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Stasis", 23, Rarity.RARE, mage.cards.c.ChainStasis.class));
         cards.add(new SetCardInfo("Chandler", 69, Rarity.COMMON, mage.cards.c.Chandler.class));
         cards.add(new SetCardInfo("Clockwork Gnomes", 102, Rarity.COMMON, mage.cards.c.ClockworkGnomes.class));
-        cards.add(new SetCardInfo("Clockwork Steed", 103, Rarity.UNCOMMON, mage.cards.c.ClockworkSteed.class));
+        cards.add(new SetCardInfo("Clockwork Steed", 103, Rarity.COMMON, mage.cards.c.ClockworkSteed.class));
         cards.add(new SetCardInfo("Clockwork Swarm", 104, Rarity.COMMON, mage.cards.c.ClockworkSwarm.class));
         cards.add(new SetCardInfo("Coral Reef", 24, Rarity.COMMON, mage.cards.c.CoralReef.class));
         cards.add(new SetCardInfo("Dark Maze", "25a", Rarity.COMMON, mage.cards.d.DarkMaze.class, NON_FULL_USE_VARIOUS));
@@ -101,13 +101,13 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Folk of An-Havva", "87a", Rarity.COMMON, FolkOfAnHavva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Folk of An-Havva", "87b", Rarity.COMMON, FolkOfAnHavva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forget", 26, Rarity.RARE, mage.cards.f.Forget.class));
-        cards.add(new SetCardInfo("Funeral March", 48, Rarity.UNCOMMON, mage.cards.f.FuneralMarch.class));
+        cards.add(new SetCardInfo("Funeral March", 48, Rarity.COMMON, mage.cards.f.FuneralMarch.class));
         cards.add(new SetCardInfo("Ghost Hounds", 49, Rarity.UNCOMMON, mage.cards.g.GhostHounds.class));
         cards.add(new SetCardInfo("Giant Oyster", 28, Rarity.UNCOMMON, mage.cards.g.GiantOyster.class));
         cards.add(new SetCardInfo("Giant Albatross", "27a", Rarity.COMMON, mage.cards.g.GiantAlbatross.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Albatross", "27b", Rarity.COMMON, mage.cards.g.GiantAlbatross.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grandmother Sengir", 50, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
-        cards.add(new SetCardInfo("Greater Werewolf", 51, Rarity.UNCOMMON, mage.cards.g.GreaterWerewolf.class));
+        cards.add(new SetCardInfo("Greater Werewolf", 51, Rarity.COMMON, mage.cards.g.GreaterWerewolf.class));
         cards.add(new SetCardInfo("Hazduhr the Abbot", 8, Rarity.RARE, mage.cards.h.HazduhrTheAbbot.class));
         cards.add(new SetCardInfo("Headstone", 52, Rarity.COMMON, mage.cards.h.Headstone.class));
         cards.add(new SetCardInfo("Heart Wolf", 75, Rarity.RARE, mage.cards.h.HeartWolf.class));
@@ -137,7 +137,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Mine", 78, Rarity.UNCOMMON, mage.cards.o.OrcishMine.class));
         cards.add(new SetCardInfo("Primal Order", 92, Rarity.RARE, mage.cards.p.PrimalOrder.class));
         cards.add(new SetCardInfo("Prophecy", 11, Rarity.COMMON, mage.cards.p.Prophecy.class));
-        cards.add(new SetCardInfo("Rashka the Slayer", 12, Rarity.RARE, mage.cards.r.RashkaTheSlayer.class));
+        cards.add(new SetCardInfo("Rashka the Slayer", 12, Rarity.UNCOMMON, mage.cards.r.RashkaTheSlayer.class));
         cards.add(new SetCardInfo("Reef Pirates", "36a", Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reef Pirates", "36b", Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Renewal", 93, Rarity.COMMON, mage.cards.r.Renewal.class));
@@ -154,7 +154,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Sengir Bats", "57a", Rarity.COMMON, SengirBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sengir Bats", "57b", Rarity.COMMON, SengirBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serra Aviary", 14, Rarity.RARE, mage.cards.s.SerraAviary.class));
-        cards.add(new SetCardInfo("Serra Bestiary", 15, Rarity.UNCOMMON, mage.cards.s.SerraBestiary.class));
+        cards.add(new SetCardInfo("Serra Bestiary", 15, Rarity.COMMON, mage.cards.s.SerraBestiary.class));
         cards.add(new SetCardInfo("Serra Inquisitors", 16, Rarity.UNCOMMON, mage.cards.s.SerraInquisitors.class));
         cards.add(new SetCardInfo("Serra Paladin", 17, Rarity.COMMON, mage.cards.s.SerraPaladin.class));
         cards.add(new SetCardInfo("Serrated Arrows", 110, Rarity.COMMON, mage.cards.s.SerratedArrows.class));

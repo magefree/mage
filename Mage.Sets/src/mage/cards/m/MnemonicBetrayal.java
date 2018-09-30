@@ -1,29 +1,21 @@
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MnemonicBetrayal extends CardImpl {
@@ -86,9 +78,10 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
         for (Card card : cards.getCards(game)) {
             cardMap.put(card.getId(), card.getZoneChangeCounter(game));
             game.addEffect(new MnemonicBetrayalCastFromExileEffect(card, game), source);
+            game.addEffect(new MnemonicBetrayalAnyColorEffect(card, game), source);
         }
         controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), source.getSourceObjectIfItStillExists(game).getName());
-        game.addDelayedTriggeredAbility(new MnemonicBetrayalDelayedTriggeredAbility(cards, cardMap));
+        game.addDelayedTriggeredAbility(new MnemonicBetrayalDelayedTriggeredAbility(cards, cardMap), source);
         return true;
     }
 }
@@ -118,6 +111,45 @@ class MnemonicBetrayalCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public MnemonicBetrayalCastFromExileEffect copy() {
         return new MnemonicBetrayalCastFromExileEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (card.getZoneChangeCounter(game) != zoneCounter) {
+            this.discard();
+            return false;
+        }
+        return objectId.equals(card.getId())
+                && card.getZoneChangeCounter(game) == zoneCounter
+                && affectedControllerId.equals(source.getControllerId());
+    }
+}
+
+class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl {
+
+    private final Card card;
+    private final int zoneCounter;
+
+    public MnemonicBetrayalAnyColorEffect(Card card, Game game) {
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
+        this.card = card;
+        this.zoneCounter = card.getZoneChangeCounter(game) + 1;
+    }
+
+    public MnemonicBetrayalAnyColorEffect(final MnemonicBetrayalAnyColorEffect effect) {
+        super(effect);
+        this.card = effect.card;
+        this.zoneCounter = effect.zoneCounter;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public MnemonicBetrayalAnyColorEffect copy() {
+        return new MnemonicBetrayalAnyColorEffect(this);
     }
 
     @Override

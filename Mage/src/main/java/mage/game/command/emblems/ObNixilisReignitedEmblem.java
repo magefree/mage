@@ -14,7 +14,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author spjspj
  */
-public class ObNixilisReignitedEmblem extends Emblem {
+public final class ObNixilisReignitedEmblem extends Emblem {
 
     public ObNixilisReignitedEmblem() {
         setName("Emblem Nixilis");

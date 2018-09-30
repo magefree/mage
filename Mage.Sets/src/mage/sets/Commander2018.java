@@ -159,7 +159,7 @@ public final class Commander2018 extends ExpansionSet {
         cards.add(new SetCardInfo("Isolated Watchtower", 59, Rarity.RARE, mage.cards.i.IsolatedWatchtower.class));
         cards.add(new SetCardInfo("Izzet Boilerworks", 256, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Guildgate", 257, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
-        cards.add(new SetCardInfo("Izzet Signet", 207, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Izzet Signet", 207, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jeskai Infiltrator", 93, Rarity.RARE, mage.cards.j.JeskaiInfiltrator.class));
         cards.add(new SetCardInfo("Jund Panorama", 258, Rarity.COMMON, mage.cards.j.JundPanorama.class));
         cards.add(new SetCardInfo("Jungle Hollow", 259, Rarity.COMMON, mage.cards.j.JungleHollow.class));

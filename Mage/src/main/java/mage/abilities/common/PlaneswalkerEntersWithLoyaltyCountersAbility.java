@@ -12,17 +12,17 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class PlanswalkerEntersWithLoyalityCountersAbility extends EntersBattlefieldAbility {
+public class PlaneswalkerEntersWithLoyaltyCountersAbility extends EntersBattlefieldAbility {
 
     private final int startingLoyalty; 
     
-    public PlanswalkerEntersWithLoyalityCountersAbility(int loyalty) {
+    public PlaneswalkerEntersWithLoyaltyCountersAbility(int loyalty) {
         super(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(loyalty)));
         startingLoyalty = loyalty;
         setRuleVisible(false);
     }
 
-    public PlanswalkerEntersWithLoyalityCountersAbility(final PlanswalkerEntersWithLoyalityCountersAbility ability) {
+    public PlaneswalkerEntersWithLoyaltyCountersAbility(final PlaneswalkerEntersWithLoyaltyCountersAbility ability) {
         super(ability);
         startingLoyalty = ability.startingLoyalty;
     }
@@ -32,7 +32,7 @@ public class PlanswalkerEntersWithLoyalityCountersAbility extends EntersBattlefi
     }
 
     @Override
-    public PlanswalkerEntersWithLoyalityCountersAbility copy() {
-        return new PlanswalkerEntersWithLoyalityCountersAbility(this);
+    public PlaneswalkerEntersWithLoyaltyCountersAbility copy() {
+        return new PlaneswalkerEntersWithLoyaltyCountersAbility(this);
     }
 }

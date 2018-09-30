@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.command.emblems.LukeSkywalkerEmblem;
@@ -40,7 +39,7 @@ public final class LukeSkywalkerTheLastJedi extends CardImpl {
         
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LUKE);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +1: Put two +1/+1 counters on up to one target creature.
         Ability ability1 = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), 2);

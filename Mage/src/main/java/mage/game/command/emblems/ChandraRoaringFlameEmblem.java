@@ -12,7 +12,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class ChandraRoaringFlameEmblem extends Emblem {
+public final class ChandraRoaringFlameEmblem extends Emblem {
 
     /**
      * Emblem with "At the beginning of your upkeep, this emblem deals 3 damage

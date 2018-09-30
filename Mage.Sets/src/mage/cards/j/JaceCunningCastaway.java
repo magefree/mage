@@ -7,7 +7,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -38,7 +38,7 @@ public final class JaceCunningCastaway extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +1: Whenever one or more creatures you control deal combat damage to a player this turn, draw a card, then discard a card.
         this.addAbility(new LoyaltyAbility(new JaceCunningCastawayEffect1(), 1));

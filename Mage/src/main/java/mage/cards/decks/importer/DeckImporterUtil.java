@@ -12,7 +12,7 @@ import mage.cards.decks.DeckCardLists;
  */
 public final class DeckImporterUtil {
 
-    public static final String[] SIDEBOARD_MARKS = new String[]{"//sideboard", "sb: "};
+    private static final String[] SIDEBOARD_MARKS = new String[]{"//sideboard", "sb: "};
 
     public static boolean haveSideboardSection(String file) {
         // search for sideboard section:

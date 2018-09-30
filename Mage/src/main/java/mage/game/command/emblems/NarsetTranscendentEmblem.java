@@ -18,7 +18,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class NarsetTranscendentEmblem extends Emblem {
+public final class NarsetTranscendentEmblem extends Emblem {
     
     // "Your opponents can't cast noncreature spells.
     public NarsetTranscendentEmblem() {

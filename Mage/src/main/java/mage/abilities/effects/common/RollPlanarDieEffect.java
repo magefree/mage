@@ -76,7 +76,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                 for (int i = 0; i < chaosEffects.size(); i++) {
                     Effect effect = chaosEffects.get(i);
                     Target target = null;
-                    if (chaosTargets != null && chaosTargets.size() > i) {
+                    if (chaosTargets.size() > i) {
                         target = chaosTargets.get(i);
                     }
                     boolean done = false;

@@ -19,7 +19,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author spjspj
  */
-public class LilianaTheLastHopeEmblem extends Emblem {
+public final class LilianaTheLastHopeEmblem extends Emblem {
 
     // "At the beginning of your end step, create X 2/2 black Zombie creature tokens, where X is two plus the number of Zombies you control."
     public LilianaTheLastHopeEmblem() {

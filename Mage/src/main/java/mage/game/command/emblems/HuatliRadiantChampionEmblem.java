@@ -12,7 +12,7 @@ import mage.game.command.Emblem;
  *
  * @author LevelX2
  */
-public class HuatliRadiantChampionEmblem extends Emblem {
+public final class HuatliRadiantChampionEmblem extends Emblem {
 
     public HuatliRadiantChampionEmblem() {
         this.setName("Emblem Huatli");

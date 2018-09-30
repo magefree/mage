@@ -8,7 +8,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.cards.Card;
@@ -44,7 +44,7 @@ public final class KarnLiberated extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{7}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KARN);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
 
         // +4: Target player exiles a card from their hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new KarnPlayerExileEffect(), 4);

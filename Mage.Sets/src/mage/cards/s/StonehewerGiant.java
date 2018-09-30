@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,8 +24,9 @@ import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class StonehewerGiant extends CardImpl {
@@ -42,7 +42,11 @@ public final class StonehewerGiant extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {1}{W}, {tap}: Search your library for an Equipment card and put it onto the battlefield. Attach it to a creature you control. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StonehewerGiantEffect(), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new StonehewerGiantEffect(),
+                new ManaCostsImpl("{1}{W}")
+        );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -90,6 +94,7 @@ class StonehewerGiantEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent equipment = game.getPermanent(card.getId());
                 Target targetCreature = new TargetControlledCreaturePermanent();
+                targetCreature.setNotTarget(true);
                 if (equipment != null && controller.choose(Outcome.BoostCreature, targetCreature, source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
                     permanent.addAttachment(equipment.getId(), game);

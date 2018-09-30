@@ -17,7 +17,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class ElspethKnightErrantEmblem extends Emblem {
+public final class ElspethKnightErrantEmblem extends Emblem {
 
     public ElspethKnightErrantEmblem() {
         this.setName("Emblem Elspeth");

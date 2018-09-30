@@ -476,7 +476,7 @@ public abstract class TournamentImpl implements Tournament {
     @Override
     public void cleanUpOnTournamentEnd() {
         for (TournamentPlayer tournamentPlayer : players.values()) {
-            tournamentPlayer.CleanUpOnTournamentEnd();
+            tournamentPlayer.cleanUpOnTournamentEnd();
         }
     }
 

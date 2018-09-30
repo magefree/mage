@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -44,7 +44,7 @@ public final class TibaltTheFiendBlooded extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIBALT);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(2));
 
         // +1: Draw a card, then discard a card at random.
         LoyaltyAbility ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);

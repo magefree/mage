@@ -3,7 +3,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -30,7 +30,7 @@ public final class HuatliRadiantChampion extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +1: Put a loyalty counter on Huatli, Radiant Champion for each creature you control.
         this.addAbility(new LoyaltyAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0),

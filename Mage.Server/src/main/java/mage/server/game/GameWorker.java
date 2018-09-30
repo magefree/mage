@@ -3,14 +3,14 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.concurrent.Callable;
+
 import mage.MageException;
 import mage.game.Game;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
  * @param <T>
+ * @author BetaSteward_at_googlemail.com
  */
 public class GameWorker<T> implements Callable {
 
@@ -40,12 +40,7 @@ public class GameWorker<T> implements Callable {
         } catch (Exception e) {
             LOGGER.fatal("GameWorker general exception [" + game.getId() + "] " + e.getMessage(), e);
             if (e instanceof NullPointerException) {
-                if (e.getStackTrace() == null) {
-                    LOGGER.info("Stack trace is null");
-                } else {
-                    LOGGER.info("Null-Pointer-Exception: Stack trace");
-                    LOGGER.info(e.getStackTrace());
-                }
+                LOGGER.info(e.getStackTrace());
             }
         } catch (Error err) {
             LOGGER.fatal("GameWorker general error [" + game.getId() + "] " + err, err);

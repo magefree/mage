@@ -101,10 +101,8 @@ class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
             if (cPlane == null) {
                 return false;
             }
-            if (cPlane != null) {
-                if (!cPlane.getName().equalsIgnoreCase("Plane - Edge of Malacol")) {
-                    return false;
-                }
+            if (!cPlane.getName().equalsIgnoreCase("Plane - Edge of Malacol")) {
+                return false;
             }
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && filter.match(permanent, game) && Objects.equals(permanent.getControllerId(), game.getActivePlayerId())) {

@@ -62,7 +62,7 @@ class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEff
         if (super.applies(event, source, game)) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                if (permanent.hasSubtype(ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game), game)) {
+                if (permanent.hasSubtype(ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game), game)) {
                     return true;
                 }
             }

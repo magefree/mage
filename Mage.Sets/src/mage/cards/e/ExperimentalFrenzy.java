@@ -128,6 +128,6 @@ class ExperimentalFrenzyRestrictionEffect extends ContinuousRuleModifyingEffectI
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId())
-                && event.getZone() == Zone.HAND;
+                && game.getState().getZone(event.getSourceId()) == Zone.HAND;
     }
 }

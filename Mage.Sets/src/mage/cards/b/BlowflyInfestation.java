@@ -55,7 +55,7 @@ public final class BlowflyInfestation extends CardImpl {
 
 class BlowflyInfestationCondition implements Condition {
 
-    private static Permanent permanent;
+    private Permanent permanent;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -73,6 +73,6 @@ enum HadAnotherCreatureEnterTheBattlefieldCondition implements Condition {
         PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getSimpleName());
         return sourcePermanent != null
                 && watcher != null
-                && watcher.AnotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(sourcePermanent, game);
+                && watcher.anotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(sourcePermanent, game);
     }
 }

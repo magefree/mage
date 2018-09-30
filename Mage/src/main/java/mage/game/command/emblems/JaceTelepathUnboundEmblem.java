@@ -14,7 +14,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author spjspj
  */
-public class JaceTelepathUnboundEmblem extends Emblem {
+public final class JaceTelepathUnboundEmblem extends Emblem {
     // You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of their library into their graveyard".
 
     public JaceTelepathUnboundEmblem() {

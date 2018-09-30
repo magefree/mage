@@ -10,7 +10,7 @@ public class CryptRatsTest extends CardTestPlayerBase {
     String cRats = "Crypt Rats";
 
     @Test
-    public void damageOnlyCreatureAndPlayers(){
+    public void damageOnlyCreatureAndPlayers() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
         addCard(Zone.BATTLEFIELD, playerA, cRats, 1);
         addCard(Zone.BATTLEFIELD, playerB, "Shivan Dragon", 1);
@@ -20,6 +20,7 @@ public class CryptRatsTest extends CardTestPlayerBase {
         setChoice(playerA, "X=4");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+
         assertLife(playerA, 16);
         assertLife(playerB, 16);
         assertGraveyardCount(playerA, cRats, 1);

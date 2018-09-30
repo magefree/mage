@@ -24,7 +24,7 @@ import mage.util.CardUtil;
 
 public class FatesealEffect extends OneShotEffect {
 
-    protected static FilterCard filter1 = new FilterCard("card to put on the bottom of opponent's library");
+    protected static final FilterCard filter1 = new FilterCard("card to put on the bottom of opponent's library");
 
     protected int fatesealNumber;
 

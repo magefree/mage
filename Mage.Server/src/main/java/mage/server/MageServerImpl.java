@@ -686,7 +686,7 @@ public class MageServerImpl implements MageServer {
         } catch (Exception ex) {
             handleException(ex);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class ChandraRoaringFlame extends CardImpl {
         this.nightCard = true;
         this.transformable = true;
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +1: Chandra, Roaring Flame deals 2 damage to target player.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DamageTargetEffect(2), 1);

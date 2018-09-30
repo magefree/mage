@@ -179,7 +179,7 @@ public class TournamentPlayer {
      * Free resources no longer needed if tournament has ended
      *
      */
-    public void CleanUpOnTournamentEnd() {
+    public void cleanUpOnTournamentEnd() {
         this.deck = null;
     }
 

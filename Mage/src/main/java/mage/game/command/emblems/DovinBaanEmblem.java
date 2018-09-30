@@ -15,7 +15,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class DovinBaanEmblem extends Emblem {
+public final class DovinBaanEmblem extends Emblem {
 
     public DovinBaanEmblem() {
         this.setName("Emblem Dovin");

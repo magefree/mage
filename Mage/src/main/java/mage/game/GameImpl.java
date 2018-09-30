@@ -1191,7 +1191,7 @@ public abstract class GameImpl implements Game, Serializable {
         player.shuffleLibrary(null, this);
         int deduction = 1;
         if (freeMulligans > 0) {
-            if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
+            if (usedFreeMulligans.containsKey(player.getId())) {
                 int used = usedFreeMulligans.get(player.getId());
                 if (used < freeMulligans) {
                     deduction = 0;
@@ -1424,7 +1424,7 @@ public abstract class GameImpl implements Game, Serializable {
                 } else {
                     spellControllerId = spell.getControllerId(); // i.e. resolved spell is the target opponent's spell
                 }
-                if (commandedBy != null && spellControllerId != null) {
+                if (spellControllerId != null) {
                     Player turnController = getPlayer(commandedBy);
                     if (turnController != null) {
                         Player targetPlayer = getPlayer(spellControllerId);

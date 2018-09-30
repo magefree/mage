@@ -13,7 +13,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class RalIzzetViceroyEmblem extends Emblem {
+public final class RalIzzetViceroyEmblem extends Emblem {
 
     // You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."
     public RalIzzetViceroyEmblem() {

@@ -33,8 +33,8 @@ public final class Config {
 
     static {
         Properties p = new Properties();
-        try {
-            p.load(new FileInputStream(new File("config/config.properties")));
+        try(FileInputStream fis =new FileInputStream(new File("config/config.properties"))) {
+            p.load(fis);
         } catch (IOException ex) {
             logger.fatal("Config error ", ex);
         }

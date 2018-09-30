@@ -37,7 +37,7 @@ public final class NissaVsObNixilis extends ExpansionSet {
         cards.add(new SetCardInfo("Desecration Demon", 44, Rarity.RARE, mage.cards.d.DesecrationDemon.class));
         cards.add(new SetCardInfo("Despoiler of Souls", 45, Rarity.RARE, mage.cards.d.DespoilerOfSouls.class));
         cards.add(new SetCardInfo("Disfigure", 46, Rarity.COMMON, mage.cards.d.Disfigure.class));
-        cards.add(new SetCardInfo("Doom Blade", 47, Rarity.COMMON, mage.cards.d.DoomBlade.class));
+        cards.add(new SetCardInfo("Doom Blade", 47, Rarity.UNCOMMON, mage.cards.d.DoomBlade.class));
         cards.add(new SetCardInfo("Elvish Visionary", 8, Rarity.COMMON, mage.cards.e.ElvishVisionary.class));
         cards.add(new SetCardInfo("Fertile Thicket", 27, Rarity.COMMON, mage.cards.f.FertileThicket.class));
         cards.add(new SetCardInfo("Fertilid", 9, Rarity.COMMON, mage.cards.f.Fertilid.class));
@@ -88,7 +88,7 @@ public final class NissaVsObNixilis extends ExpansionSet {
         cards.add(new SetCardInfo("Treetop Village", 30, Rarity.UNCOMMON, mage.cards.t.TreetopVillage.class));
         cards.add(new SetCardInfo("Unhallowed Pact", 64, Rarity.COMMON, mage.cards.u.UnhallowedPact.class));
         cards.add(new SetCardInfo("Vines of the Recluse", 23, Rarity.COMMON, mage.cards.v.VinesOfTheRecluse.class));
-        cards.add(new SetCardInfo("Walker of the Grove", 24, Rarity.COMMON, mage.cards.w.WalkerOfTheGrove.class));
+        cards.add(new SetCardInfo("Walker of the Grove", 24, Rarity.UNCOMMON, mage.cards.w.WalkerOfTheGrove.class));
         cards.add(new SetCardInfo("Woodborn Behemoth", 26, Rarity.UNCOMMON, mage.cards.w.WoodbornBehemoth.class));
         cards.add(new SetCardInfo("Wood Elves", 25, Rarity.COMMON, mage.cards.w.WoodElves.class));
     }

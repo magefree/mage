@@ -101,10 +101,8 @@ class TrailOfTheMageRingsReboundEffect extends ContinuousEffectImpl {
         if (cPlane == null) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Trail of the Mage-Rings")) {
-                return false;
-            }
+        if (!cPlane.getName().equalsIgnoreCase("Plane - Trail of the Mage-Rings")) {
+            return false;
         }
 
         for (UUID playerId : game.getPlayers().keySet()) {

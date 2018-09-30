@@ -4,7 +4,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.DamageWithPowerTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -45,7 +45,7 @@ public final class HuatliDinosaurKnight extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +2: Put two +1/+1 counters on up to one target Dinosaur you control.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2))

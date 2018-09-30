@@ -1,9 +1,6 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.n.NafsAsp;
-import mage.cards.p.Piety;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -79,7 +76,7 @@ public final class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Celestial Prism", 304, Rarity.UNCOMMON, mage.cards.c.CelestialPrism.class));
         cards.add(new SetCardInfo("Channel", 236, Rarity.UNCOMMON, mage.cards.c.Channel.class));
         cards.add(new SetCardInfo("Chaoslace", 182, Rarity.RARE, mage.cards.c.Chaoslace.class));
-        cards.add(new SetCardInfo("Circle of Protection: Artifacts", 13, Rarity.COMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
+        cards.add(new SetCardInfo("Circle of Protection: Artifacts", 13, Rarity.UNCOMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
         cards.add(new SetCardInfo("Circle of Protection: Black", 14, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlack.class));
         cards.add(new SetCardInfo("Circle of Protection: Blue", 15, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlue.class));
         cards.add(new SetCardInfo("Circle of Protection: Green", 16, Rarity.COMMON, mage.cards.c.CircleOfProtectionGreen.class));
@@ -250,7 +247,7 @@ public final class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 374, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 375, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murk Dwellers", 148, Rarity.COMMON, mage.cards.m.MurkDwellers.class));
-        cards.add(new SetCardInfo("Nafs Asp", 264, Rarity.COMMON, NafsAsp.class));
+        cards.add(new SetCardInfo("Nafs Asp", 264, Rarity.COMMON, mage.cards.n.NafsAsp.class));
         cards.add(new SetCardInfo("Nether Shadow", 149, Rarity.RARE, mage.cards.n.NetherShadow.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 338, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("Nightmare", 150, Rarity.RARE, mage.cards.n.Nightmare.class));
@@ -269,7 +266,7 @@ public final class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Phantasmal Forces", 88, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 89, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
         cards.add(new SetCardInfo("Phantom Monster", 90, Rarity.UNCOMMON, mage.cards.p.PhantomMonster.class));
-        cards.add(new SetCardInfo("Piety", 41, Rarity.COMMON, Piety.class));
+        cards.add(new SetCardInfo("Piety", 41, Rarity.COMMON, mage.cards.p.Piety.class));
         cards.add(new SetCardInfo("Pikemen", 42, Rarity.COMMON, mage.cards.p.Pikemen.class));
         cards.add(new SetCardInfo("Pirate Ship", 91, Rarity.RARE, mage.cards.p.PirateShip.class));
         cards.add(new SetCardInfo("Pit Scorpion", 153, Rarity.COMMON, mage.cards.p.PitScorpion.class));
