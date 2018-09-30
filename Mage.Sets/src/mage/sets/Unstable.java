@@ -21,16 +21,17 @@ public final class Unstable extends ExpansionSet {
 
     private Unstable() {
         super("Unstable", "UST", ExpansionSet.buildDate(2017, 12, 8), SetType.JOKESET);
-        cards.add(new SetCardInfo("Amateur Auteur", "3a", Rarity.COMMON, mage.cards.a.AmateurAuteur.class));
-        cards.add(new SetCardInfo("Amateur Auteur", "3b", Rarity.COMMON, mage.cards.a.AmateurAuteur.class));
-        cards.add(new SetCardInfo("Amateur Auteur", "3c", Rarity.COMMON, mage.cards.a.AmateurAuteur.class));
-        cards.add(new SetCardInfo("Amateur Auteur", "3d", Rarity.COMMON, mage.cards.a.AmateurAuteur.class));
+
+        cards.add(new SetCardInfo("Amateur Auteur", "3a", Rarity.COMMON, mage.cards.a.AmateurAuteur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Amateur Auteur", "3b", Rarity.COMMON, mage.cards.a.AmateurAuteur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Amateur Auteur", "3c", Rarity.COMMON, mage.cards.a.AmateurAuteur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Amateur Auteur", "3d", Rarity.COMMON, mage.cards.a.AmateurAuteur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("As Luck Would Have It", 102, Rarity.RARE, mage.cards.a.AsLuckWouldHaveIt.class));
         cards.add(new SetCardInfo("Baron Von Count", 127, Rarity.MYTHIC, mage.cards.b.BaronVonCount.class));
-        cards.add(new SetCardInfo("Beast in Show", "103a", Rarity.COMMON, mage.cards.b.BeastInShow.class));
-        cards.add(new SetCardInfo("Beast in Show", "103b", Rarity.COMMON, mage.cards.b.BeastInShow.class));
-        cards.add(new SetCardInfo("Beast in Show", "103c", Rarity.COMMON, mage.cards.b.BeastInShow.class));
-        cards.add(new SetCardInfo("Beast in Show", "103d", Rarity.COMMON, mage.cards.b.BeastInShow.class));
+        cards.add(new SetCardInfo("Beast in Show", "103a", Rarity.COMMON, mage.cards.b.BeastInShow.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beast in Show", "103b", Rarity.COMMON, mage.cards.b.BeastInShow.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beast in Show", "103c", Rarity.COMMON, mage.cards.b.BeastInShow.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beast in Show", "103d", Rarity.COMMON, mage.cards.b.BeastInShow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Box of Free-Range Goblins", 77, Rarity.COMMON, mage.cards.b.BoxOfFreerangeGoblins.class));
         cards.add(new SetCardInfo("Buzzing Whack-a-Doodle", 141, Rarity.UNCOMMON, mage.cards.b.BuzzingWhackADoodle.class));
         cards.add(new SetCardInfo("Chittering Doom", 104, Rarity.UNCOMMON, mage.cards.c.ChitteringDoom.class));
@@ -54,10 +55,10 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Lobe Lobber", 153, Rarity.UNCOMMON, mage.cards.l.LobeLobber.class));
         cards.add(new SetCardInfo("Mad Science Fair Project", 154, Rarity.COMMON, mage.cards.m.MadScienceFairProject.class));
         cards.add(new SetCardInfo("Mountain", 215, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, false)));
-        cards.add(new SetCardInfo("Novellamental", "41a", Rarity.COMMON, mage.cards.n.Novellamental.class));
-        cards.add(new SetCardInfo("Novellamental", "41b", Rarity.COMMON, mage.cards.n.Novellamental.class));
-        cards.add(new SetCardInfo("Novellamental", "41c", Rarity.COMMON, mage.cards.n.Novellamental.class));
-        cards.add(new SetCardInfo("Novellamental", "41d", Rarity.COMMON, mage.cards.n.Novellamental.class));
+        cards.add(new SetCardInfo("Novellamental", "41a", Rarity.COMMON, mage.cards.n.Novellamental.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Novellamental", "41b", Rarity.COMMON, mage.cards.n.Novellamental.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Novellamental", "41c", Rarity.COMMON, mage.cards.n.Novellamental.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Novellamental", "41d", Rarity.COMMON, mage.cards.n.Novellamental.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oddly Uneven", 15, Rarity.RARE, mage.cards.o.OddlyUneven.class));
         cards.add(new SetCardInfo("Painiac", 91, Rarity.COMMON, mage.cards.p.Painiac.class));
         cards.add(new SetCardInfo("Plains", 212, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, false)));
@@ -69,10 +70,10 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Summon the Pack", 74, Rarity.MYTHIC, mage.cards.s.SummonThePack.class));
         cards.add(new SetCardInfo("Swamp", 214, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Sword of Dungeons & Dragons", 163, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
-        cards.add(new SetCardInfo("Target Minotaur", "98a", Rarity.COMMON, mage.cards.t.TargetMinotaur.class));
-        cards.add(new SetCardInfo("Target Minotaur", "98b", Rarity.COMMON, mage.cards.t.TargetMinotaur.class));
-        cards.add(new SetCardInfo("Target Minotaur", "98c", Rarity.COMMON, mage.cards.t.TargetMinotaur.class));
-        cards.add(new SetCardInfo("Target Minotaur", "98d", Rarity.COMMON, mage.cards.t.TargetMinotaur.class));
+        cards.add(new SetCardInfo("Target Minotaur", "98a", Rarity.COMMON, mage.cards.t.TargetMinotaur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Target Minotaur", "98b", Rarity.COMMON, mage.cards.t.TargetMinotaur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Target Minotaur", "98c", Rarity.COMMON, mage.cards.t.TargetMinotaur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Target Minotaur", "98d", Rarity.COMMON, mage.cards.t.TargetMinotaur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Big Idea", 76, Rarity.RARE, mage.cards.t.TheBigIdea.class));
         cards.add(new SetCardInfo("Time Out", 48, Rarity.COMMON, mage.cards.t.TimeOut.class));
         cards.add(new SetCardInfo("Very Cryptic Command", "49d", Rarity.RARE, mage.cards.v.VeryCrypticCommandD.class));
