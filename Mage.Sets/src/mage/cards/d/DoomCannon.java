@@ -70,7 +70,7 @@ class DoomCannonFilter extends FilterControlledCreaturePermanent {
     @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
         if (super.match(permanent, sourceId, playerId, game)) {
-            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(sourceId, game);
+            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(sourceId, game);
             if (subType != null && permanent.hasSubtype(subType, game)) {
                 return true;
             }

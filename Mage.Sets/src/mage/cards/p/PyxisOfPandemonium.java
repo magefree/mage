@@ -73,7 +73,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
             Map<String, UUID> exileIds;
             String valueKey = CardUtil.getObjectZoneString("exileIds", sourceObject, game);
             Object object = game.getState().getValue(valueKey);
-            if (object != null && object instanceof Map) {
+            if (object instanceof Map) {
                 exileIds = (Map<String, UUID>) object;
             } else {
                 exileIds = new HashMap<>();
@@ -123,7 +123,7 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
             Map<String, UUID> exileIds;
             String valueKey = CardUtil.getObjectZoneString("exileIds", sourceObject, game);
             Object object = game.getState().getValue(valueKey);
-            if (object != null && object instanceof Map) {
+            if (object instanceof Map) {
                 exileIds = (Map<String, UUID>) object;
             } else {
                 return true;

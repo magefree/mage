@@ -38,7 +38,9 @@ public final class RealityScramble extends CardImpl {
     public RealityScramble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
-        // Put target permanent you own on the bottom of your library. Reveal cards from the top of your library until you reveal a card that shares a card type with that permanent. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+        // Put target permanent you own on the bottom of your library. Reveal cards from the top of your library
+        // until you reveal a card that shares a card type with that permanent. Put that card onto the battlefield
+        // and the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new RealityScrambleEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
@@ -98,6 +100,9 @@ class RealityScrambleEffect extends OneShotEffect {
                     cardToPlay = card;
                     break;
                 }
+            }
+            if (cardToPlay != null) {
+                break;
             }
         }
         controller.revealCards(source, toReveal, game);

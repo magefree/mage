@@ -81,10 +81,8 @@ class AstralArenaAttackRestrictionEffect extends RestrictionEffect {
         if (cPlane == null) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Astral Arena")) {
-                return false;
-            }
+        if (!cPlane.getName().equalsIgnoreCase("Plane - Astral Arena")) {
+            return false;
         }
 
         return true;
@@ -118,10 +116,8 @@ class AstralArenaBlockRestrictionEffect extends RestrictionEffect {
         if (cPlane == null) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Astral Arena")) {
-                return false;
-            }
+        if (!cPlane.getName().equalsIgnoreCase("Plane - Astral Arena")) {
+            return false;
         }
         return true;
     }

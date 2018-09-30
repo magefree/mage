@@ -99,7 +99,7 @@ class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         String key = CardUtil.getCardZoneString("lifePaid", source.getSourceId(), game);
         Object object = game.getState().getValue(key);
-        if(object != null && object instanceof Integer) {
+        if(object instanceof Integer) {
             int lifePaid = (int) object;
             MinionToken token = new MinionToken();
             token.getPower().modifyBaseValue(lifePaid);

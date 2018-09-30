@@ -100,6 +100,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Ebony Charm", 120, Rarity.COMMON, mage.cards.e.EbonyCharm.class));
         cards.add(new SetCardInfo("Ekundu Griffin", 13, Rarity.COMMON, mage.cards.e.EkunduGriffin.class));
         cards.add(new SetCardInfo("Elixir of Vitality", 300, Rarity.UNCOMMON, mage.cards.e.ElixirOfVitality.class));
+        cards.add(new SetCardInfo("Emberwilde Caliph", 322, Rarity.RARE, mage.cards.e.EmberwildeCaliph.class));
         cards.add(new SetCardInfo("Emberwilde Djinn", 172, Rarity.RARE, mage.cards.e.EmberwildeDjinn.class));
         cards.add(new SetCardInfo("Energy Bolt", 263, Rarity.RARE, mage.cards.e.EnergyBolt.class));
         cards.add(new SetCardInfo("Enfeeblement", 121, Rarity.COMMON, mage.cards.e.Enfeeblement.class));
@@ -244,6 +245,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Ritual of Steel", 36, Rarity.COMMON, mage.cards.r.RitualOfSteel.class));
         cards.add(new SetCardInfo("Rock Basilisk", 279, Rarity.RARE, mage.cards.r.RockBasilisk.class));
         cards.add(new SetCardInfo("Rocky Tar Pit", 329, Rarity.UNCOMMON, mage.cards.r.RockyTarPit.class));
+        cards.add(new SetCardInfo("Roots of Life", 237, Rarity.UNCOMMON, mage.cards.r.RootsOfLife.class));
         cards.add(new SetCardInfo("Sabertooth Cobra", 238, Rarity.COMMON, mage.cards.s.SabertoothCobra.class));
         cards.add(new SetCardInfo("Sacred Mesa", 37, Rarity.RARE, mage.cards.s.SacredMesa.class));
         cards.add(new SetCardInfo("Sandbar Crocodile", 88, Rarity.COMMON, mage.cards.s.SandbarCrocodile.class));

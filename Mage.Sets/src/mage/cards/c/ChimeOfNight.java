@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -46,6 +45,7 @@ public final class ChimeOfNight extends CardImpl {
         // When Chime of Night is put into a graveyard from the battlefield, destroy target nonblack creature.
         ability = new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
     public ChimeOfNight(final ChimeOfNight card) {

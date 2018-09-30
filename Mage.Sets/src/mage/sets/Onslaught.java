@@ -350,7 +350,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Windswept Heath", 328, Rarity.RARE, mage.cards.w.WindsweptHeath.class, new CardGraphicInfo(new ObjectColor("GW"), null, false)));
         cards.add(new SetCardInfo("Wirewood Elf", 301, Rarity.COMMON, mage.cards.w.WirewoodElf.class));
         cards.add(new SetCardInfo("Wirewood Herald", 302, Rarity.COMMON, mage.cards.w.WirewoodHerald.class));
-        cards.add(new SetCardInfo("Wirewood Lodge", 329, Rarity.RARE, mage.cards.w.WirewoodLodge.class));
+        cards.add(new SetCardInfo("Wirewood Lodge", 329, Rarity.UNCOMMON, mage.cards.w.WirewoodLodge.class));
         cards.add(new SetCardInfo("Wirewood Pride", 303, Rarity.COMMON, mage.cards.w.WirewoodPride.class));
         cards.add(new SetCardInfo("Wirewood Savage", 304, Rarity.COMMON, mage.cards.w.WirewoodSavage.class));
         cards.add(new SetCardInfo("Withering Hex", 181, Rarity.UNCOMMON, mage.cards.w.WitheringHex.class));

@@ -18,7 +18,7 @@ import mage.util.CardUtil;
  */
 public class ChooseACardNameEffect extends OneShotEffect {
 
-    public static String INFO_KEY = "NAMED_CARD";
+    public static final String INFO_KEY = "NAMED_CARD";
 
     public enum TypeOfName {
 

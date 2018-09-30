@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -25,14 +24,15 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class ObNixilisUnshackled extends CardImpl {
 
     public ObNixilisUnshackled(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
 
@@ -41,13 +41,13 @@ public final class ObNixilisUnshackled extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Whenever an opponent searches their library, that player sacrifices a creature and loses 10 life.
         this.addAbility(new ObNixilisUnshackledTriggeredAbility());
-        
+
         // Whenever another creature dies, put at +1/+1 counter on Ob Nixilis, Unshackled.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
     }
@@ -63,15 +63,15 @@ public final class ObNixilisUnshackled extends CardImpl {
 }
 
 class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
-    
-    ObNixilisUnshackledTriggeredAbility() {
+
+    public ObNixilisUnshackledTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ObNixilisUnshackledEffect(), false);
     }
-    
-    ObNixilisUnshackledTriggeredAbility(final ObNixilisUnshackledTriggeredAbility ability) {
+
+    public ObNixilisUnshackledTriggeredAbility(final ObNixilisUnshackledTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public ObNixilisUnshackledTriggeredAbility copy() {
         return new ObNixilisUnshackledTriggeredAbility(this);
@@ -81,17 +81,18 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.LIBRARY_SEARCHED;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Player controller = game.getPlayer(this.getControllerId());
-        if (controller != null && game.isOpponent(controller, event.getTargetId())) {
+        if (controller != null && game.isOpponent(controller, event.getTargetId())
+                && event.getTargetId().equals(event.getPlayerId())) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever an opponent searches their library, that player sacrifices a creature and loses 10 life.";
@@ -99,23 +100,23 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class ObNixilisUnshackledEffect extends SacrificeEffect {
-    
+
     static private final FilterPermanent filter = new FilterControlledCreaturePermanent("creature");
-    
-    ObNixilisUnshackledEffect() {
+
+    public ObNixilisUnshackledEffect() {
         super(filter, 1, "that player");
         this.staticText = "that player sacrifices a creature and loses 10 life";
     }
-    
-    ObNixilisUnshackledEffect(final ObNixilisUnshackledEffect effect) {
+
+    public ObNixilisUnshackledEffect(final ObNixilisUnshackledEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ObNixilisUnshackledEffect copy() {
         return new ObNixilisUnshackledEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));

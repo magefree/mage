@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
@@ -36,7 +36,7 @@ public final class LilianaVess extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
         // +1: Target player discards a card.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DiscardTargetEffect(1), 1);
         ability1.addTarget(new TargetPlayer());

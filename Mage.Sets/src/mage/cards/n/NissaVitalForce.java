@@ -4,7 +4,7 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -22,7 +22,6 @@ import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.emblems.NissaVitalForceEmblem;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetLandPermanent;
 
@@ -43,7 +42,7 @@ public final class NissaVitalForce extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: Untap target land you control. Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land.
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);

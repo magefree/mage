@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -14,11 +13,13 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class NullstoneGargoyle extends CardImpl {
@@ -53,7 +54,7 @@ class NullstoneGargoyleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
     }
 
-    public NullstoneGargoyleTriggeredAbility(NullstoneGargoyleTriggeredAbility ability) {
+    public NullstoneGargoyleTriggeredAbility(final NullstoneGargoyleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -69,6 +70,10 @@ class NullstoneGargoyleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        Spell spell = game.getSpell(event.getTargetId());
+        if (spell.isCreature()) {
+            return false;
+        }
         SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
         if (watcher != null && watcher.getNumberOfNonCreatureSpells() == 1) {
             for (Effect effect : getEffects()) {

@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -31,10 +30,10 @@ public final class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Apprentice Wizard", 21, Rarity.RARE, mage.cards.a.ApprenticeWizard.class));
         cards.add(new SetCardInfo("Ashes to Ashes", 39, Rarity.COMMON, mage.cards.a.AshesToAshes.class));
         cards.add(new SetCardInfo("Ball Lightning", 57, Rarity.RARE, mage.cards.b.BallLightning.class));
-        cards.add(new SetCardInfo("Banshee", 40, Rarity.RARE, mage.cards.b.Banshee.class));
+        cards.add(new SetCardInfo("Banshee", 40, Rarity.UNCOMMON, mage.cards.b.Banshee.class));
         cards.add(new SetCardInfo("Barl's Cage", 96, Rarity.RARE, mage.cards.b.BarlsCage.class));
         cards.add(new SetCardInfo("Blood Moon", 58, Rarity.RARE, mage.cards.b.BloodMoon.class));
-        cards.add(new SetCardInfo("Blood of the Martyr", 2, Rarity.RARE, mage.cards.b.BloodOfTheMartyr.class));
+        cards.add(new SetCardInfo("Blood of the Martyr", 2, Rarity.UNCOMMON, mage.cards.b.BloodOfTheMartyr.class));
         cards.add(new SetCardInfo("Bog Imp", 41, Rarity.COMMON, mage.cards.b.BogImp.class));
         cards.add(new SetCardInfo("Bog Rats", 42, Rarity.COMMON, mage.cards.b.BogRats.class));
         cards.add(new SetCardInfo("Bone Flute", 97, Rarity.UNCOMMON, mage.cards.b.BoneFlute.class));
@@ -46,10 +45,10 @@ public final class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("City of Shadows", 116, Rarity.RARE, mage.cards.c.CityOfShadows.class));
         cards.add(new SetCardInfo("Cleansing", 4, Rarity.RARE, mage.cards.c.Cleansing.class));
         cards.add(new SetCardInfo("Coal Golem", 99, Rarity.UNCOMMON, mage.cards.c.CoalGolem.class));
-        cards.add(new SetCardInfo("Curse Artifact", 43, Rarity.RARE, mage.cards.c.CurseArtifact.class));
+        cards.add(new SetCardInfo("Curse Artifact", 43, Rarity.UNCOMMON, mage.cards.c.CurseArtifact.class));
         cards.add(new SetCardInfo("Dance of Many", 22, Rarity.RARE, mage.cards.d.DanceOfMany.class));
         cards.add(new SetCardInfo("Dark Heart of the Wood", 95, Rarity.COMMON, mage.cards.d.DarkHeartOfTheWood.class));
-        cards.add(new SetCardInfo("Dark Sphere", 100, Rarity.RARE, mage.cards.d.DarkSphere.class));
+        cards.add(new SetCardInfo("Dark Sphere", 100, Rarity.UNCOMMON, mage.cards.d.DarkSphere.class));
         cards.add(new SetCardInfo("Deep Water", 23, Rarity.COMMON, mage.cards.d.DeepWater.class));
         cards.add(new SetCardInfo("Diabolic Machine", 101, Rarity.UNCOMMON, mage.cards.d.DiabolicMachine.class));
         cards.add(new SetCardInfo("Drowned", 24, Rarity.COMMON, mage.cards.d.Drowned.class));
@@ -60,11 +59,11 @@ public final class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Erosion", 26, Rarity.COMMON, mage.cards.e.Erosion.class));
         cards.add(new SetCardInfo("Eternal Flame", 61, Rarity.RARE, mage.cards.e.EternalFlame.class));
         cards.add(new SetCardInfo("Exorcist", 6, Rarity.RARE, mage.cards.e.Exorcist.class));
-        cards.add(new SetCardInfo("Fasting", 7, Rarity.RARE, mage.cards.f.Fasting.class));
+        cards.add(new SetCardInfo("Fasting", 7, Rarity.UNCOMMON, mage.cards.f.Fasting.class));
         cards.add(new SetCardInfo("Fellwar Stone", 102, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Festival", 8, Rarity.COMMON, mage.cards.f.Festival.class));
-        cards.add(new SetCardInfo("Fire and Brimstone", 9, Rarity.RARE, mage.cards.f.FireAndBrimstone.class));
         cards.add(new SetCardInfo("Fire Drake", 62, Rarity.UNCOMMON, mage.cards.f.FireDrake.class));
+        cards.add(new SetCardInfo("Fire and Brimstone", 9, Rarity.UNCOMMON, mage.cards.f.FireAndBrimstone.class));
         cards.add(new SetCardInfo("Fissure", 63, Rarity.COMMON, mage.cards.f.Fissure.class));
         cards.add(new SetCardInfo("Flood", 27, Rarity.UNCOMMON, mage.cards.f.Flood.class));
         cards.add(new SetCardInfo("Fountain of Youth", 103, Rarity.UNCOMMON, mage.cards.f.FountainOfYouth.class));
@@ -101,7 +100,7 @@ public final class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Morale", 14, Rarity.COMMON, mage.cards.m.Morale.class));
         cards.add(new SetCardInfo("Murk Dwellers", 49, Rarity.COMMON, mage.cards.m.MurkDwellers.class));
         cards.add(new SetCardInfo("Nameless Race", 50, Rarity.RARE, mage.cards.n.NamelessRace.class));
-        cards.add(new SetCardInfo("Necropolis", 105, Rarity.RARE, mage.cards.n.Necropolis.class));
+        cards.add(new SetCardInfo("Necropolis", 105, Rarity.UNCOMMON, mage.cards.n.Necropolis.class));
         cards.add(new SetCardInfo("Niall Silvain", 82, Rarity.RARE, mage.cards.n.NiallSilvain.class));
         cards.add(new SetCardInfo("Orc General", 73, Rarity.UNCOMMON, mage.cards.o.OrcGeneral.class));
         cards.add(new SetCardInfo("People of the Woods", 83, Rarity.UNCOMMON, mage.cards.p.PeopleOfTheWoods.class));
@@ -110,10 +109,10 @@ public final class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Allergy", 34, Rarity.RARE, mage.cards.p.PsychicAllergy.class));
         cards.add(new SetCardInfo("Rag Man", 51, Rarity.RARE, mage.cards.r.RagMan.class));
         cards.add(new SetCardInfo("Riptide", 35, Rarity.COMMON, mage.cards.r.Riptide.class));
-        cards.add(new SetCardInfo("Runesword", 107, Rarity.RARE, mage.cards.r.Runesword.class));
+        cards.add(new SetCardInfo("Runesword", 107, Rarity.UNCOMMON, mage.cards.r.Runesword.class));
         cards.add(new SetCardInfo("Safe Haven", 118, Rarity.RARE, mage.cards.s.SafeHaven.class));
         cards.add(new SetCardInfo("Savaen Elves", 84, Rarity.COMMON, mage.cards.s.SavaenElves.class));
-        cards.add(new SetCardInfo("Scarecrow", 108, Rarity.RARE, mage.cards.s.Scarecrow.class));
+        cards.add(new SetCardInfo("Scarecrow", 108, Rarity.UNCOMMON, mage.cards.s.Scarecrow.class));
         cards.add(new SetCardInfo("Scarwood Bandits", 85, Rarity.RARE, mage.cards.s.ScarwoodBandits.class));
         cards.add(new SetCardInfo("Scarwood Goblins", 94, Rarity.COMMON, mage.cards.s.ScarwoodGoblins.class));
         cards.add(new SetCardInfo("Scarwood Hag", 86, Rarity.UNCOMMON, mage.cards.s.ScarwoodHag.class));
@@ -122,21 +121,21 @@ public final class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Sisters of the Flame", 74, Rarity.UNCOMMON, mage.cards.s.SistersOfTheFlame.class));
         cards.add(new SetCardInfo("Skull of Orm", 109, Rarity.UNCOMMON, mage.cards.s.SkullOfOrm.class));
         cards.add(new SetCardInfo("Sorrow's Path", 119, Rarity.RARE, mage.cards.s.SorrowsPath.class));
-        cards.add(new SetCardInfo("Spitting Slug", 88, Rarity.RARE, mage.cards.s.SpittingSlug.class));
+        cards.add(new SetCardInfo("Spitting Slug", 88, Rarity.UNCOMMON, mage.cards.s.SpittingSlug.class));
         cards.add(new SetCardInfo("Squire", 17, Rarity.COMMON, mage.cards.s.Squire.class));
         cards.add(new SetCardInfo("Standing Stones", 110, Rarity.UNCOMMON, mage.cards.s.StandingStones.class));
         cards.add(new SetCardInfo("Stone Calendar", 111, Rarity.RARE, mage.cards.s.StoneCalendar.class));
         cards.add(new SetCardInfo("Sunken City", 36, Rarity.COMMON, mage.cards.s.SunkenCity.class));
-        cards.add(new SetCardInfo("Tangle Kelp", 37, Rarity.RARE, mage.cards.t.TangleKelp.class));
-        cards.add(new SetCardInfo("The Fallen", 53, Rarity.RARE, mage.cards.t.TheFallen.class));
+        cards.add(new SetCardInfo("Tangle Kelp", 37, Rarity.UNCOMMON, mage.cards.t.TangleKelp.class));
+        cards.add(new SetCardInfo("The Fallen", 53, Rarity.UNCOMMON, mage.cards.t.TheFallen.class));
         cards.add(new SetCardInfo("Tivadar's Crusade", 18, Rarity.UNCOMMON, mage.cards.t.TivadarsCrusade.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 112, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
-        cards.add(new SetCardInfo("Tower of Coireall", 113, Rarity.RARE, mage.cards.t.TowerOfCoireall.class));
+        cards.add(new SetCardInfo("Tower of Coireall", 113, Rarity.UNCOMMON, mage.cards.t.TowerOfCoireall.class));
         cards.add(new SetCardInfo("Tracker", 89, Rarity.RARE, mage.cards.t.Tracker.class));
         cards.add(new SetCardInfo("Uncle Istvan", 54, Rarity.UNCOMMON, mage.cards.u.UncleIstvan.class));
         cards.add(new SetCardInfo("Venom", 90, Rarity.COMMON, mage.cards.v.Venom.class));
-        cards.add(new SetCardInfo("Wand of Ith", 114, Rarity.RARE, mage.cards.w.WandOfIth.class));
-        cards.add(new SetCardInfo("War Barge", 115, Rarity.RARE, mage.cards.w.WarBarge.class));
+        cards.add(new SetCardInfo("Wand of Ith", 114, Rarity.UNCOMMON, mage.cards.w.WandOfIth.class));
+        cards.add(new SetCardInfo("War Barge", 115, Rarity.UNCOMMON, mage.cards.w.WarBarge.class));
         cards.add(new SetCardInfo("Water Wurm", 38, Rarity.COMMON, mage.cards.w.WaterWurm.class));
         cards.add(new SetCardInfo("Witch Hunter", 19, Rarity.RARE, mage.cards.w.WitchHunter.class));
         cards.add(new SetCardInfo("Word of Binding", 55, Rarity.COMMON, mage.cards.w.WordOfBinding.class));

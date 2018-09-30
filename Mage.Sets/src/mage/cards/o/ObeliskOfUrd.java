@@ -66,7 +66,7 @@ class ObeliskOfUrdBoostEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             if (subType != null) {
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (perm.hasSubtype(subType, game)) {

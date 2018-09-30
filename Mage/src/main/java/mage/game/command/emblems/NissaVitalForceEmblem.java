@@ -12,7 +12,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class NissaVitalForceEmblem extends Emblem {
+public final class NissaVitalForceEmblem extends Emblem {
     // You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
 
     public NissaVitalForceEmblem() {

@@ -47,6 +47,7 @@ public final class KnightOfTheMists extends CardImpl {
         // When Knight of the Mists enters the battlefield, you may pay {U}. If you don't, destroy target Knight and it can't be regenerated.
         Ability ability = new EntersBattlefieldTriggeredAbility(new KnightOfTheMistsEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
+        addAbility(ability);
     }
 
     public KnightOfTheMists(final KnightOfTheMists card) {

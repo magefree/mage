@@ -71,7 +71,7 @@ public class MadnessAbility extends StaticAbility {
         return new MadnessAbility(this);
     }
 
-    public static Condition GetCondition() {
+    public static Condition getCondition() {
         return MadnessCondition.instance;
     }
 

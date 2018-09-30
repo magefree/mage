@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import java.util.Locale;
@@ -68,6 +67,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 break;
             case ANY:
+            case EACH_PLAYER:
             case NEXT:
                 if (getTargets().isEmpty()) {
                     for (Effect effect : this.getEffects()) {
@@ -123,6 +123,8 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each opponent's end step, ").toString();
             case ANY:
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each end step, ").toString();
+            case EACH_PLAYER:
+                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each player's end step, ").toString();
             case CONTROLLER_ATTACHED_TO:
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of the end step of enchanted permanent's controller, ").toString();
         }

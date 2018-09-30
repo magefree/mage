@@ -6,6 +6,7 @@ import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.filter.FilterInPlay;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -18,9 +19,9 @@ import mage.players.Player;
  */
 public class PreventAllNonCombatDamageToAllEffect extends PreventionEffectImpl {
 
-    protected FilterInPlay filter;
+    protected final FilterPermanent filter;
 
-    public PreventAllNonCombatDamageToAllEffect(Duration duration, FilterInPlay filter) {
+    public PreventAllNonCombatDamageToAllEffect(Duration duration, FilterPermanent filter) {
         super(duration, Integer.MAX_VALUE, false);
         this.filter = filter;
         staticText = "Prevent all non combat damage that would be dealt to " + filter.getMessage() + ' ' + duration.toString();
@@ -42,15 +43,7 @@ public class PreventAllNonCombatDamageToAllEffect extends PreventionEffectImpl {
                 && !((DamageEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                    return true;
-                }
-            }
-            else {
-                Player player = game.getPlayer(event.getTargetId());
-                if (player != null && filter.match(player, source.getSourceId(), source.getControllerId(), game)) {
-                    return true;
-                }
+                return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
             }
         }
         return false;

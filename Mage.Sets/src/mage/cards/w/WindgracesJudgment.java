@@ -24,7 +24,7 @@ public final class WindgracesJudgment extends CardImpl {
 
         // For any number of opponents, destroy target nonland permanent that player controls.
         this.getSpellAbility().addEffect(
-                new DestroyTargetEffect().
+                new DestroyTargetEffect(false, true).
                         setText("For any number of opponents, "
                                 + "destroy target nonland permanent "
                                 + "that player controls")

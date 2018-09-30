@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -41,7 +40,7 @@ public final class Antiquities extends ExpansionSet {
         cards.add(new SetCardInfo("Atog", 23, Rarity.COMMON, mage.cards.a.Atog.class));
         cards.add(new SetCardInfo("Battering Ram", 41, Rarity.COMMON, mage.cards.b.BatteringRam.class));
         cards.add(new SetCardInfo("Candelabra of Tawnos", 43, Rarity.RARE, mage.cards.c.CandelabraOfTawnos.class));
-        cards.add(new SetCardInfo("Circle of Protection: Artifacts", 4, Rarity.COMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
+        cards.add(new SetCardInfo("Circle of Protection: Artifacts", 4, Rarity.UNCOMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
         cards.add(new SetCardInfo("Citanul Druid", 31, Rarity.UNCOMMON, mage.cards.c.CitanulDruid.class));
         cards.add(new SetCardInfo("Clay Statue", 44, Rarity.COMMON, mage.cards.c.ClayStatue.class));
         cards.add(new SetCardInfo("Clockwork Avian", 45, Rarity.RARE, mage.cards.c.ClockworkAvian.class));

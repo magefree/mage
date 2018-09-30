@@ -57,7 +57,7 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(permanent.getId(), game);
+            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
             if (subType != null) {
                 for (UUID cardId : controller.getGraveyard()) {
                     Card card = game.getCard(cardId);

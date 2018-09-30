@@ -10,7 +10,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
@@ -37,15 +36,12 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
         } else {
             sb.append(" Activate this ability only ");
         }
-        if (condition.toString() != null) {
-            if (!condition.toString().startsWith("during")
-                    && !condition.toString().startsWith("before")) {
-                sb.append("if ");
-            }
-            sb.append(condition.toString()).append('.');
-        } else {
-            sb.append(" [Condition toString() == null] ");
+        if (!condition.toString().startsWith("during")
+                && !condition.toString().startsWith("before")) {
+            sb.append("if ");
         }
+        sb.append(condition.toString()).append('.');
+
         return sb.toString();
     }
 

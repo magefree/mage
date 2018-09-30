@@ -14,7 +14,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class ElspethSunsChampionEmblem extends Emblem {
+public final class ElspethSunsChampionEmblem extends Emblem {
 
     // -7: You get an emblem with "Creatures you control get +2/+2 and have flying."
     public ElspethSunsChampionEmblem() {

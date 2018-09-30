@@ -4,7 +4,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -44,7 +44,7 @@ public final class LilianaDefiantNecromancer extends CardImpl {
 
         this.nightCard = true;
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +2: Each player discards a card.
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(1, false), 2));

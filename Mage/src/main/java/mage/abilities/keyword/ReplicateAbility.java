@@ -222,7 +222,7 @@ class ReplicateCopyEffect extends OneShotEffect {
                 // create the copies
                 for (int i = 0; i < replicateCount; i++) {
                     StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                    if (newStackObject != null && newStackObject instanceof Spell && !game.isSimulation()) {
+                    if (newStackObject instanceof Spell && !game.isSimulation()) {
                         game.informPlayers(controller.getLogName() + ((Spell) newStackObject).getActivatedMessage(game));
                     }
                 }

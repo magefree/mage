@@ -185,7 +185,7 @@ public abstract class ExpansionSet implements Serializable {
         return theBooster;
     }
 
-    protected int AddMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
+    protected int addMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
 
         for (Ability ability : booster.get(booster.size() - 1).getAbilities()) {
             //Check if fetched card has the PartnerWithAbility
@@ -328,7 +328,7 @@ public abstract class ExpansionSet implements Serializable {
         for (int i = 0; i < numBoosterUncommon; i++) {
             while (true) {
                 addToBooster(booster, uncommons);
-                int check = AddMissingPartner(booster, partnerAllowed, numBoosterUncommon - 1, i);
+                int check = addMissingPartner(booster, partnerAllowed, numBoosterUncommon - 1, i);
                 if (check == 1) {
                     break;
                 }
@@ -358,7 +358,7 @@ public abstract class ExpansionSet implements Serializable {
             if (ratioBoosterMythic > 0 && RandomUtil.nextInt(ratioBoosterMythic) == 0) {
                 while (true) {
                     addToBooster(booster, mythics);
-                    int check = AddMissingPartner(booster, partnerAllowed, -1, 1);
+                    int check = addMissingPartner(booster, partnerAllowed, -1, 1);
                     if (check == 1) {
                         break;
                     }
@@ -370,7 +370,7 @@ public abstract class ExpansionSet implements Serializable {
             } else {
                 while (true) {
                     addToBooster(booster, rares);
-                    int check = AddMissingPartner(booster, partnerAllowed, -1, 1);
+                    int check = addMissingPartner(booster, partnerAllowed, -1, 1);
                     if (check == 1) {
                         break;
                     }

@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -20,19 +19,18 @@ import mage.target.TargetSpell;
  * @author Plopman
  */
 public final class Pyroblast extends CardImpl {
-    
-    public Pyroblast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
+    public Pyroblast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Choose one - Counter target spell if it's blue; or destroy target permanent if it's blue.
         this.getSpellAbility().addEffect(new PyroblastCounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        
+
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
+        mode.getEffects().add(new PyroblastDestroyTargetEffect());
         mode.getTargets().add(new TargetPermanent());
-        
+
         this.getSpellAbility().addMode(mode);
     }
 
@@ -64,7 +62,7 @@ class PyroblastCounterTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
-        if(targetSpell != null && targetSpell.getColor(game).isBlue()){
+        if (targetSpell != null && targetSpell.getColor(game).isBlue()) {
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
         }
         return true;
@@ -77,21 +75,19 @@ class PyroblastCounterTargetEffect extends OneShotEffect {
 
 }
 
+class PyroblastDestroyTargetEffect extends OneShotEffect {
 
-class DestroyTargetEffect extends OneShotEffect {
-
-
-    public DestroyTargetEffect() {
+    public PyroblastDestroyTargetEffect() {
         super(Outcome.DestroyPermanent);
     }
 
-    public DestroyTargetEffect(final DestroyTargetEffect effect) {
+    public PyroblastDestroyTargetEffect(final PyroblastDestroyTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public DestroyTargetEffect copy() {
-        return new DestroyTargetEffect(this);
+    public PyroblastDestroyTargetEffect copy() {
+        return new PyroblastDestroyTargetEffect(this);
     }
 
     @Override

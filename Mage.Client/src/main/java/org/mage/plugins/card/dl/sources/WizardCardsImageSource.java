@@ -140,7 +140,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("WWK");
         supportedSets.add("DDE");
         supportedSets.add("ROE");
-        supportedSets.add("DPA");
+        //supportedSets.add("DPA");
         supportedSets.add("ARC");
         supportedSets.add("M11");
         supportedSets.add("V10");

@@ -1,4 +1,3 @@
-
 package mage.abilities;
 
 import java.util.ArrayList;
@@ -33,6 +32,7 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
@@ -72,7 +72,7 @@ public abstract class AbilityImpl implements Ability {
     protected List<Watcher> watchers = new ArrayList<>();
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
-    protected TargetAdjustment targetAdjustment = TargetAdjustment.NONE;
+    protected TargetAdjuster targetAdjuster = null;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -119,7 +119,7 @@ public abstract class AbilityImpl implements Ability {
         this.sourceObject = ability.sourceObject;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
-        this.targetAdjustment = ability.targetAdjustment;
+        this.targetAdjuster = ability.targetAdjuster;
     }
 
     @Override
@@ -1225,12 +1225,19 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void setTargetAdjustment(TargetAdjustment targetAdjustment) {
-        this.targetAdjustment = targetAdjustment;
+    public void setTargetAdjuster(TargetAdjuster targetAdjuster) {
+        this.targetAdjuster = targetAdjuster;
     }
 
     @Override
-    public TargetAdjustment getTargetAdjustment() {
-        return targetAdjustment;
+    public TargetAdjuster getTargetAdjuster() {
+        return targetAdjuster;
+    }
+
+    @Override
+    public void adjustTargets(Game game) {
+        if (targetAdjuster != null) {
+            targetAdjuster.adjustTargets(this, game);
+        }
     }
 }

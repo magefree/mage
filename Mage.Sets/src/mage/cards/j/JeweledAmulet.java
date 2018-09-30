@@ -60,7 +60,7 @@ public final class JeweledAmulet extends CardImpl {
 
 class JeweledAmuletAddCounterEffect extends OneShotEffect {
 
-    private static String manaUsedString;
+    private String manaUsedString;
 
     public JeweledAmuletAddCounterEffect() {
         super(Outcome.Benefit);
@@ -69,6 +69,7 @@ class JeweledAmuletAddCounterEffect extends OneShotEffect {
 
     public JeweledAmuletAddCounterEffect(final JeweledAmuletAddCounterEffect effect) {
         super(effect);
+        manaUsedString = effect.manaUsedString;
     }
 
     @Override
@@ -93,7 +94,7 @@ class JeweledAmuletAddCounterEffect extends OneShotEffect {
 
 class JeweledAmuletAddManaEffect extends ManaEffect {
 
-    private static Mana storedMana;
+    private Mana storedMana;
 
     JeweledAmuletAddManaEffect() {
         super();
@@ -102,6 +103,7 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
 
     JeweledAmuletAddManaEffect(JeweledAmuletAddManaEffect effect) {
         super(effect);
+        storedMana = effect.storedMana;
     }
 
     @Override

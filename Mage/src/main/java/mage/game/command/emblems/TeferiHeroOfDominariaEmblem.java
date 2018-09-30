@@ -19,7 +19,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TeferiHeroOfDominariaEmblem extends Emblem {
+public final class TeferiHeroOfDominariaEmblem extends Emblem {
 
     // Whenever you draw a card, exile target permanent an opponent controls.
     public TeferiHeroOfDominariaEmblem() {

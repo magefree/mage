@@ -15,8 +15,8 @@ import mage.game.permanent.Permanent;
 
 public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
-    private static FilterPermanent filter;
-    private static SubType addedSubtype;
+    private FilterPermanent filter;
+    private SubType addedSubtype;
 
     public AddCardSubtypeAllEffect(FilterPermanent _filter, SubType _addedSubtype, DependencyType _dependency) {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
@@ -28,6 +28,8 @@ public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
     public AddCardSubtypeAllEffect(final AddCardSubtypeAllEffect effect) {
         super(effect);
+        filter = effect.filter.copy();
+        addedSubtype = effect.addedSubtype;
     }
 
     @Override

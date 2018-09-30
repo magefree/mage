@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author rscoates
@@ -50,7 +51,7 @@ class PrecognitionFieldTopCardRevealedEffect extends ContinuousEffectImpl {
 
     public PrecognitionFieldTopCardRevealedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "You may look at the top card of your library. (You may do this at any time.)";
+        staticText = "You may look at the top card of your library any time.";
     }
 
     public PrecognitionFieldTopCardRevealedEffect(final PrecognitionFieldTopCardRevealedEffect effect) {

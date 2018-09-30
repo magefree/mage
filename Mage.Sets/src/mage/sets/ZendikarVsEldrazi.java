@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -38,7 +37,7 @@ public final class ZendikarVsEldrazi extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Temple", 68, Rarity.UNCOMMON, mage.cards.e.EldraziTemple.class));
         cards.add(new SetCardInfo("Emrakul's Hatcher", 59, Rarity.COMMON, mage.cards.e.EmrakulsHatcher.class));
         cards.add(new SetCardInfo("Evolving Wilds", 31, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
-        cards.add(new SetCardInfo("Explorer's Scope", 28, Rarity.UNCOMMON, mage.cards.e.ExplorersScope.class));
+        cards.add(new SetCardInfo("Explorer's Scope", 28, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
         cards.add(new SetCardInfo("Forerunner of Slaughter", 64, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfSlaughter.class));
         cards.add(new SetCardInfo("Forest", 38, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 39, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

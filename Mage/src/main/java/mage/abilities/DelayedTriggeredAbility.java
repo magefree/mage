@@ -13,7 +13,7 @@ import mage.game.Game;
 public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
 
     private Duration duration;
-    private boolean triggerOnlyOnce;
+    protected boolean triggerOnlyOnce;
 
     public DelayedTriggeredAbility(Effect effect) {
         this(effect, Duration.EndOfGame);

@@ -250,7 +250,7 @@ public final class ClassicSixthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pearl Dragon", 34, Rarity.RARE, mage.cards.p.PearlDragon.class));
         cards.add(new SetCardInfo("Pentagram of the Ages", 306, Rarity.RARE, mage.cards.p.PentagramOfTheAges.class));
         cards.add(new SetCardInfo("Perish", 148, Rarity.UNCOMMON, mage.cards.p.Perish.class));
-        cards.add(new SetCardInfo("Pestilence", 149, Rarity.COMMON, mage.cards.p.Pestilence.class));
+        cards.add(new SetCardInfo("Pestilence", 149, Rarity.UNCOMMON, mage.cards.p.Pestilence.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 84, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
         cards.add(new SetCardInfo("Phantom Warrior", 85, Rarity.UNCOMMON, mage.cards.p.PhantomWarrior.class));
         cards.add(new SetCardInfo("Phyrexian Vault", 307, Rarity.UNCOMMON, mage.cards.p.PhyrexianVault.class));

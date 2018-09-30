@@ -1,9 +1,7 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -13,12 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -28,12 +22,12 @@ import mage.game.permanent.Permanent;
 public final class BladeOfTheBloodchief extends CardImpl {
 
     public BladeOfTheBloodchief(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever a creature dies, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.
         this.addAbility(new DiesCreatureTriggeredAbility(new BladeOfTheBloodchiefEffect(), false));
-        
+
         //Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
@@ -50,11 +44,14 @@ public final class BladeOfTheBloodchief extends CardImpl {
 
 class BladeOfTheBloodchiefEffect extends OneShotEffect {
 
-    BladeOfTheBloodchiefEffect() {
+    public BladeOfTheBloodchiefEffect() {
         super(Outcome.BoostCreature);
+        staticText = "put a +1/+1 counter on equipped creature. "
+                + "If equipped creature is a Vampire, "
+                + "put two +1/+1 counters on it instead.";
     }
 
-    BladeOfTheBloodchiefEffect(final BladeOfTheBloodchiefEffect ability) {
+    public BladeOfTheBloodchiefEffect(final BladeOfTheBloodchiefEffect ability) {
         super(ability);
     }
 

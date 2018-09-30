@@ -129,7 +129,10 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("WWK");
         supportedSets.add("DDE");
         supportedSets.add("ROE");
+        // duels of the planewalkers:
         supportedSets.add("DPA");
+        supportedSets.add("DPAP");
+        //
         supportedSets.add("ARC");
         supportedSets.add("M11");
         supportedSets.add("V10");
@@ -230,6 +233,10 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("CM2");
         supportedSets.add("M19");
         supportedSets.add("GS1");
+        supportedSets.add("GRN");
+        //
+        supportedSets.add("EURO");
+        supportedSets.add("GPX");
     }
 
     @Override
@@ -243,6 +250,15 @@ public enum ScryfallImageSource implements CardImageSource {
         // TODO: do not use API at all? It's can help with scryfall request limits (1 request instead 2)
         String baseUrl = null;
         String alternativeUrl = null;
+
+        // direct links to images (non localization)
+        if (baseUrl == null) {
+            String linkCode = card.getSet() + "/" + card.getName();
+            if (directDownloadLinks.containsKey(linkCode)) {
+                baseUrl = directDownloadLinks.get(linkCode);
+                alternativeUrl = null;
+            }
+        }
 
         // special card number like "103a" already compatible
         if (baseUrl == null && card.isCollectorIdWithStr()) {
@@ -329,6 +345,40 @@ public enum ScryfallImageSource implements CardImageSource {
             put("MPS-AKH", "mp2");
             put("MBP", "pmei");
             put("WMCQ", "pwcq");
+            put("EURO", "pelp");
+            put("GPX", "pgpx");
+        }
+    };
+
+    private static final Map<String, String> directDownloadLinks = new HashMap<String, String>() {
+        {
+            // direct links to download images for special cards
+
+            // Duels of the Planeswalkers Promos -- xmage uses one set (DPAP), but scryfall store it by years
+            // 2009 - https://scryfall.com/sets/pdtp
+            put("DPAP/Garruk Wildspeaker", "https://img.scryfall.com/cards/large/en/pdtp/1.jpg");
+            // 2010 - https://scryfall.com/sets/pdp10
+            put("DPAP/Liliana Vess", "https://img.scryfall.com/cards/large/en/pdp10/1.jpg");
+            put("DPAP/Nissa Revane", "https://img.scryfall.com/cards/large/en/pdp10/2.jpg");
+            // 2011 - https://scryfall.com/sets/pdp11
+            put("DPAP/Frost Titan", "https://img.scryfall.com/cards/large/en/pdp11/1.jpg");
+            put("DPAP/Grave Titan", "https://img.scryfall.com/cards/large/en/pdp11/2.jpg");
+            put("DPAP/Inferno Titan", "https://img.scryfall.com/cards/large/en/pdp11/3.jpg");
+            // 2012 - https://scryfall.com/sets/pdp12
+            put("DPAP/Primordial Hydra", "https://img.scryfall.com/cards/large/en/pdp12/1.jpg");
+            put("DPAP/Serra Avatar", "https://img.scryfall.com/cards/large/en/pdp12/2.jpg");
+            put("DPAP/Vampire Nocturnus", "https://img.scryfall.com/cards/large/en/pdp12/3.jpg");
+            // 2013 - https://scryfall.com/sets/pdp13
+            put("DPAP/Bonescythe Sliver", "https://img.scryfall.com/cards/large/en/pdp13/1.jpg");
+            put("DPAP/Ogre Battledriver", "https://img.scryfall.com/cards/large/en/pdp13/2.jpg");
+            put("DPAP/Scavenging Ooze", "https://img.scryfall.com/cards/large/en/pdp13/3.jpg");
+            // 2014 - https://scryfall.com/sets/pdp14
+            put("DPAP/Soul of Ravnica", "https://img.scryfall.com/cards/large/en/pdp14/1.jpg");
+            put("DPAP/Soul of Zendikar", "https://img.scryfall.com/cards/large/en/pdp14/2.jpg");
+
+
+            // TODO: remove Grand Prix fix after scryfall fix image's link (that's link must be work: https://img.scryfall.com/cards/large/en/pgpx/2016b.jpg )
+            put("GPX/Sword of Feast and Famine", "https://img.scryfall.com/cards/large/en/pgpx/1%E2%98%85.jpg");
         }
     };
 

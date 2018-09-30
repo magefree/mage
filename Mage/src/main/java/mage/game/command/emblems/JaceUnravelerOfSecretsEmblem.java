@@ -18,7 +18,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author spjspj
  */
-public class JaceUnravelerOfSecretsEmblem extends Emblem {
+public final class JaceUnravelerOfSecretsEmblem extends Emblem {
 
     /**
      * Emblem: "Whenever an opponent casts their first spell each turn,

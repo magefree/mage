@@ -1,4 +1,3 @@
-
 package mage.cards.q;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class QuestForTheGoblinLord extends CardImpl {
 
     private static final String rule = "As long as {this} has five or more quest counters on it, creatures you control get +2/+0";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    private static final FilterPermanent goblinFilter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent goblinFilter = new FilterControlledCreaturePermanent("a Goblin");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -34,7 +33,7 @@ public final class QuestForTheGoblinLord extends CardImpl {
     }
 
     public QuestForTheGoblinLord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
 
         // Whenever a Goblin enters the battlefield under your control, you may put a quest counter on Quest for the Goblin Lord.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -70,6 +69,9 @@ public class DamageMultiEffect extends OneShotEffect {
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
+        }
+        if (amount.toString().equals("3")) {
+            return this.sourceName + " deals 3 damage divided as you choose among one, two, or three targets";
         }
         return this.sourceName + " deals " + amount.toString() + " damage divided as you choose among any number of " + mode.getTargets().get(0).getTargetName();
     }

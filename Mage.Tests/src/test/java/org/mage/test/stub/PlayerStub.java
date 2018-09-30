@@ -1,7 +1,5 @@
 package org.mage.test.stub;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -40,8 +38,10 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.io.Serializable;
+import java.util.*;
+
 /**
- *
  * @author Quercitron
  */
 public class PlayerStub implements Player {
@@ -883,6 +883,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
+        return false;
+    }
+
+    @Override
     public boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
         return false;
     }
@@ -1254,6 +1259,11 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean scry(int value, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean surveil(int value, Ability source, Game game) {
         return false;
     }
 

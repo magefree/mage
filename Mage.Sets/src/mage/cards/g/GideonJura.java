@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -43,7 +43,7 @@ public final class GideonJura extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
 
         // +2: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.
         LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);

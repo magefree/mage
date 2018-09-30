@@ -37,7 +37,7 @@ public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotE
             return false;
         }
         Object object = getValue("attachedTo");
-        if (object != null && object instanceof Permanent) {
+        if (object instanceof Permanent) {
             Card card = game.getCard(((Permanent) object).getId());
             if (card != null) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null)) {

@@ -266,13 +266,13 @@ public class GameController implements GameCallback {
 
     public void join(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
-        Optional<User> user = UserManager.instance.getUser(userId);
-        if (userId == null || playerId == null) {
+        if (playerId == null) {
             logger.fatal("Join game failed!");
             logger.fatal("- gameId: " + game.getId());
             logger.fatal("- userId: " + userId);
             return;
         }
+        Optional<User> user = UserManager.instance.getUser(userId);
         if (!user.isPresent()) {
             logger.fatal("User not found : " + userId);
             return;

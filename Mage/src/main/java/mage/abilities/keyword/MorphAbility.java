@@ -283,7 +283,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         mageObject.getManaCost().clear();
         if (mageObject instanceof Permanent) {
             ((Permanent) mageObject).setExpansionSetCode("");
-            ((Permanent) mageObject).setRarity(Rarity.NA);
+            ((Permanent) mageObject).setRarity(Rarity.SPECIAL);
         }
 
     }

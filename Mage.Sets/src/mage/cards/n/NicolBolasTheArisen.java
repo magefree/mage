@@ -3,7 +3,7 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -51,7 +51,7 @@ public final class NicolBolasTheArisen extends CardImpl {
         this.nightCard = true;
         this.transformable = true;
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
 
         // +2: Draw two cards.
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(2), 2));

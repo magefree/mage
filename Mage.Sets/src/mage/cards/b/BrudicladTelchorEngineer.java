@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -11,13 +10,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -28,8 +21,9 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class BrudicladTelchorEngineer extends CardImpl {
@@ -52,7 +46,7 @@ public final class BrudicladTelchorEngineer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
 
         // At the beginning of combat on your turn, create a 2/1 blue Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new BrudicladTelchorCombatffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new BrudicladTelchorEngineerEffect(), TargetController.YOU, false));
     }
 
     public BrudicladTelchorEngineer(final BrudicladTelchorEngineer card) {
@@ -65,26 +59,26 @@ public final class BrudicladTelchorEngineer extends CardImpl {
     }
 }
 
-class BrudicladTelchorCombatffect extends OneShotEffect {
+class BrudicladTelchorEngineerEffect extends OneShotEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(" token you control. If you do, each other token you control becomes a copy of that token");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("token you control");
 
     static {
         filter.add(new TokenPredicate());
     }
 
-    public BrudicladTelchorCombatffect() {
+    public BrudicladTelchorEngineerEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = " you may choose a token you control. If you do, each other token you control becomes a copy of that token";
+        this.staticText = " create a 2/1 blue Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token";
     }
 
-    public BrudicladTelchorCombatffect(final BrudicladTelchorCombatffect effect) {
+    public BrudicladTelchorEngineerEffect(final BrudicladTelchorEngineerEffect effect) {
         super(effect);
     }
 
     @Override
-    public BrudicladTelchorCombatffect copy() {
-        return new BrudicladTelchorCombatffect(this);
+    public BrudicladTelchorEngineerEffect copy() {
+        return new BrudicladTelchorEngineerEffect(this);
     }
 
     @Override
@@ -95,7 +89,8 @@ class BrudicladTelchorCombatffect extends OneShotEffect {
         if (effect.apply(game, source)) {
             TargetControlledPermanent target = new TargetControlledPermanent(0, 1, filter, true);
             target.setNotTarget(true);
-            if (controller.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
+            if (controller.chooseUse(outcome, "Select a token to copy?", source, game)
+                    && controller.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
                 Permanent toCopyFromPermanent = game.getPermanent(target.getFirstTarget());
 
                 if (toCopyFromPermanent != null) {

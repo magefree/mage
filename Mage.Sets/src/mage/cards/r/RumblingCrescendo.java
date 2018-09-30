@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -13,13 +12,13 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetAdjustment;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.VerseCounterAdjuster;
 
 /**
  *
@@ -46,7 +45,7 @@ public final class RumblingCrescendo extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(0, 0, filter, false));
-        ability.setTargetAdjustment(TargetAdjustment.VERSE_COUNTER_TARGETS);
+        ability.setTargetAdjuster(VerseCounterAdjuster.instance);
         this.addAbility(ability);
     }
 

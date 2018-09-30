@@ -1,4 +1,3 @@
-
 package mage.target.common;
 
 import java.util.HashSet;
@@ -31,6 +30,10 @@ public class TargetCardInYourGraveyard extends TargetCard {
 
     public TargetCardInYourGraveyard(int numTargets, FilterCard filter) {
         this(numTargets, numTargets, filter);
+    }
+
+    public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD);
     }
 
     public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {

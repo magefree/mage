@@ -41,7 +41,7 @@ public final class TitaniaProtectorOfArgoth extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Titania, Protector of Argoth enters the battlefield, return target land card from your graveyard to the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterLandCard("land card from your graveyard")));
         this.addAbility(ability);
 

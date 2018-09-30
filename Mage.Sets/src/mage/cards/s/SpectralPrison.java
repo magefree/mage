@@ -80,7 +80,7 @@ class SpectralPrisonAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject eventSourceObject = game.getObject(event.getSourceId());
-        if (eventSourceObject != null && eventSourceObject instanceof Spell) {
+        if (eventSourceObject instanceof Spell) {
             Permanent enchantment = game.getPermanent(sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 if (event.getTargetId().equals(enchantment.getAttachedTo())) {

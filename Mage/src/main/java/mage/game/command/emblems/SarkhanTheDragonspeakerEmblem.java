@@ -13,7 +13,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class SarkhanTheDragonspeakerEmblem extends Emblem {
+public final class SarkhanTheDragonspeakerEmblem extends Emblem {
 
     public SarkhanTheDragonspeakerEmblem() {
         setName("Emblem Sarkhan");

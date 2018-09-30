@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -35,7 +35,7 @@ public final class ArlinnKord extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = ArlinnEmbracedByTheMoon.class;
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +1: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);

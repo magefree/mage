@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -14,11 +13,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
-import mage.constants.TargetAdjustment;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.XTargetsAdjuster;
 
 /**
  *
@@ -48,7 +47,7 @@ public final class RunedArch extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
+        ability.setTargetAdjuster(XTargetsAdjuster.instance);
         this.addAbility(ability);
     }
 

@@ -17,7 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class KioraMasterOfTheDepthsEmblem extends Emblem {
+public final class KioraMasterOfTheDepthsEmblem extends Emblem {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 

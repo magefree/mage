@@ -81,7 +81,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
         if (protectionFilter == null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(permanent.getId(), game);
+                SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
                 if (subType != null) {
                     protectionFilter = new FilterPermanent(subType.getDescription() + 's');
                     protectionFilter.add(new SubtypePredicate(subType));

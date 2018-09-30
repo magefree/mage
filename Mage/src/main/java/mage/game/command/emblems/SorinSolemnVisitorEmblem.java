@@ -13,7 +13,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class SorinSolemnVisitorEmblem extends Emblem {
+public final class SorinSolemnVisitorEmblem extends Emblem {
 
     /**
      * Emblem: "At the beginning of each opponent's upkeep, that player

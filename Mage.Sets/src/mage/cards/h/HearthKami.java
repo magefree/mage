@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -12,11 +11,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.XCMCPermanentAdjuster;
 
 /**
  * @author Loki
@@ -40,7 +39,7 @@ public final class HearthKami extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_PERM);
+        ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);
         this.addAbility(ability);
     }
 

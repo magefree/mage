@@ -90,8 +90,7 @@ class SummoningTrapWatcher extends Watcher {
             if (counteredSpell == null) {
                 counteredSpell = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
             }
-            if (counteredSpell != null
-                    && counteredSpell instanceof Spell
+            if (counteredSpell instanceof Spell
                     && !players.contains(counteredSpell.getControllerId())
                     && counteredSpell.isCreature()) {
                 StackObject counteringStackObject = game.getStack().getStackObject(event.getSourceId());
