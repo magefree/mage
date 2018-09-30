@@ -37,7 +37,7 @@ Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
 Commander Anthology|CMA|
-Commander Anthology Volume II|CM2|
+Commander Anthology 2018|CM2|
 Commander's Arsenal|CM1|
 Commander|CMD|
 Conspiracy|CNS|
@@ -97,7 +97,7 @@ Future Sight|FUT|
 Global Series: Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
 Guilds of Ravnica|GRN|
-Grand Prix Promos|GPX|
+Grand Prix|GPX|
 WPN Gateway|GRC|
 Gatecrash|GTC|
 Guru|GUR|
