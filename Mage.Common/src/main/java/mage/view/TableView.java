@@ -36,6 +36,7 @@ public class TableView implements Serializable {
     private List<SeatView> seats = new ArrayList<>();
     private List<UUID> games = new ArrayList<>();
     private final String quitRatio;
+    private final String minimumRating;
     private final boolean limited;
     private final boolean rated;
     private final boolean passworded;
@@ -111,6 +112,7 @@ public class TableView implements Serializable {
             this.additionalInfo = addInfo.toString();
             this.skillLevel = table.getMatch().getOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getMatch().getOptions().getQuitRatio());
+            this.minimumRating = Integer.toString(table.getMatch().getOptions().getMinimumRating());
             this.limited = table.getMatch().getOptions().isLimited();
             this.rated = table.getMatch().getOptions().isRated();
             this.passworded = !table.getMatch().getOptions().getPassword().isEmpty();
@@ -159,6 +161,7 @@ public class TableView implements Serializable {
             this.deckType = table.getDeckType() + ' ' + table.getTournament().getBoosterInfo() + (tableNameInfo != null ? tableNameInfo : "");
             this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getTournament().getOptions().getQuitRatio());
+            this.minimumRating = Integer.toString(table.getTournament().getOptions().getMinimumRating());
             this.limited = table.getTournament().getOptions().getMatchOptions().isLimited();
             this.rated = table.getTournament().getOptions().getMatchOptions().isRated();
             this.passworded = !table.getTournament().getOptions().getPassword().isEmpty();
@@ -223,9 +226,9 @@ public class TableView implements Serializable {
         return skillLevel;
     }
 
-    public String getQuitRatio() {
-        return quitRatio;
-    }
+    public String getQuitRatio() { return quitRatio; }
+
+    public String getMinimumRating() { return minimumRating; }
 
     public boolean isLimited() {
         return limited;

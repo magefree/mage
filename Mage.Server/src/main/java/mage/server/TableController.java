@@ -172,6 +172,21 @@ public class TableController {
             return false;
         }
 
+        // Check minimum rating.
+        int minimumRating = table.getTournament().getOptions().getMinimumRating();
+        int userRating;
+        if (table.getTournament().getOptions().getMatchOptions().isLimited()) {
+            userRating = user.getUserData().getLimitedRating();
+        } else {
+            userRating = user.getUserData().getConstructedRating();
+        }
+        if (userRating < minimumRating) {
+            String message = new StringBuilder("Your rating ").append(userRating)
+                    .append(" is lower than the table requirement ").append(minimumRating).toString();
+            user.showUserMessage("Join Table", message);
+            return false;
+        }
+
         Optional<Player> playerOptional = createPlayer(name, seat.getPlayerType(), skill);
         if (playerOptional.isPresent()) {
             Player player = playerOptional.get();
@@ -268,6 +283,21 @@ public class TableController {
         if (quitRatio < user.getMatchQuitRatio()) {
             String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
                     .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
+            user.showUserMessage("Join Table", message);
+            return false;
+        }
+
+        // Check minimum rating.
+        int minimumRating = table.getMatch().getOptions().getMinimumRating();
+        int userRating;
+        if (table.getMatch().getOptions().isLimited()) {
+            userRating = user.getUserData().getLimitedRating();
+        } else {
+            userRating = user.getUserData().getConstructedRating();
+        }
+        if (userRating < minimumRating) {
+            String message = new StringBuilder("Your rating ").append(userRating)
+                    .append(" is lower than the table requirement ").append(minimumRating).toString();
             user.showUserMessage("Join Table", message);
             return false;
         }

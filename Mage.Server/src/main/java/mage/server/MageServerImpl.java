@@ -227,6 +227,20 @@ public class MageServerImpl implements MageServer {
                         user.showUserMessage("Create tournament", message);
                         throw new MageException("No message");
                     }
+                    // check if the user satisfies the minimumRating requirement.
+                    int minimumRating = options.getMinimumRating();
+                    int userRating;
+                    if (options.getMatchOptions().isLimited()) {
+                        userRating = user.getUserData().getLimitedRating();
+                    } else {
+                        userRating = user.getUserData().getConstructedRating();
+                    }
+                    if (userRating < minimumRating) {
+                        String message = new StringBuilder("Your rating ").append(userRating)
+                                .append(" is lower than the table requirement ").append(minimumRating).toString();
+                        user.showUserMessage("Create tournament", message);
+                        throw new MageException("No message");
+                    }
                     Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(roomId);
                     if (!room.isPresent()) {
 
@@ -1386,7 +1400,19 @@ public class MageServerImpl implements MageServer {
                 user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + '%');
                 throw new MageException("No message");
             }
-
+            // check if the user satisfies the minimumRating requirement.
+            int minimumRating = options.getMinimumRating();
+            int userRating;
+            if (options.isLimited()) {
+                userRating = user.getUserData().getLimitedRating();
+            } else {
+                userRating = user.getUserData().getConstructedRating();
+            }
+            if (userRating < minimumRating) {
+                String message = new StringBuilder("Your rating ").append(userRating).append(" is lower than the table requirement ").append(minimumRating).toString();
+                user.showUserMessage("Create table", message);
+                throw new MageException("No message");
+            }
             Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(roomId);
             if (room.isPresent()) {
                 TableView table = room.get().createTable(userId, options);

@@ -1221,6 +1221,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setSkillLevel(SkillLevel.CASUAL);
             options.setRollbackTurnsAllowed(true);
             options.setQuitRatio(100);
+            options.setMinimumRating(0);
             String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
             options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
             table = SessionHandler.createTable(roomId, options);
@@ -1335,14 +1336,15 @@ class TableTableModel extends AbstractTableModel {
     public static final int COLUMN_SKILL = 8;
     public static final int COLUMN_RATING = 9;
     public static final int COLUMN_QUIT_RATIO = 10;
-    public static final int ACTION_COLUMN = 11; // column the action is located (starting with 0)
+    public static final int COLUMN_MINIMUM_RATING = 11;
+    public static final int ACTION_COLUMN = 12; // column the action is located (starting with 0)
 
     public static final String RATED_VALUE_YES = "YES";
     public static final String RATED_VALUE_NO = "";
 
     public static final String PASSWORD_VALUE_YES = "YES";
 
-    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Password", "Created / Started", "Skill Level", "Rating", "Quit %", "Action"};
+    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Password", "Created / Started", "Skill Level", "Rated", "Quit %", "Min Rating", "Action"};
 
     private TableView[] tables = new TableView[0];
 
@@ -1390,6 +1392,8 @@ class TableTableModel extends AbstractTableModel {
             case 10:
                 return tables[arg0].getQuitRatio();
             case 11:
+                return tables[arg0].getMinimumRating();
+            case 12:
                 switch (tables[arg0].getTableState()) {
 
                     case WAITING:
@@ -1419,14 +1423,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 12:
-                return tables[arg0].isTournament();
             case 13:
+                return tables[arg0].isTournament();
+            case 14:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 14:
+            case 15:
                 return tables[arg0].getTableId();
         }
         return "";

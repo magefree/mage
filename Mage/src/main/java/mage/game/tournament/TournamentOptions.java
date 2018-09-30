@@ -24,6 +24,7 @@ public class TournamentOptions implements Serializable {
     protected int numberRounds;
     protected String password;
     protected int quitRatio;
+    protected int minimumRating;
 
     public TournamentOptions(String name, String matchType, int numSeats) {
         this.name = name;
@@ -98,4 +99,8 @@ public class TournamentOptions implements Serializable {
     public void setQuitRatio(int quitRatio) {
         this.quitRatio = quitRatio;
     }
+
+    public int getMinimumRating() { return minimumRating; }
+
+    public void setMinimumRating(int minimumRating) { this.minimumRating = minimumRating; }
 }
