@@ -9,13 +9,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -25,6 +26,15 @@ import java.util.UUID;
  */
 public final class NoxiousGhoul extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter2 = new FilterPermanent();
+
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
+        filter2.add(NoxiousGhoulPredicate.instance);
+    }
+
     public NoxiousGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
@@ -33,7 +43,11 @@ public final class NoxiousGhoul extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Noxious Ghoul or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.
-        this.addAbility(new NoxiousGhoulTriggeredAbility());
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false),
+                filter2, "Whenever {this} or another Zombie enters the battlefield, " +
+                "all non-Zombie creatures get -1/-1 until end of turn."
+        ));
     }
 
     public NoxiousGhoul(final NoxiousGhoul card) {
@@ -46,33 +60,12 @@ public final class NoxiousGhoul extends CardImpl {
     }
 }
 
-class NoxiousGhoulTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(Predicates.not(
-                new SubtypePredicate(SubType.ZOMBIE)));
-    }
-
-    NoxiousGhoulTriggeredAbility() {
-        super(
-                new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false),
-                StaticFilters.FILTER_PERMANENT, "Whenever {this} or another Zombie enters the battlefield, " +
-                        "all non-Zombie creatures get -1/-1 until end of turn."
-        );
-    }
+enum NoxiousGhoulPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+    instance;
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                return permanent.hasSubtype(SubType.ZOMBIE, game)
-                        || permanent.getId().equals(sourceId);
-            }
-        }
-        return false;
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return input.getObject().hasSubtype(SubType.ZOMBIE, game)
+                || input.getObject().getId().equals(input.getSourceId());
     }
 }
