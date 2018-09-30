@@ -52,8 +52,8 @@ public final class ProtectiveSphere extends CardImpl {
 class ProtectiveSphereEffect extends PreventionEffectImpl {
 
     private final TargetSource target;
-    private static Mana manaUsed;
-    private static List<ObjectColor> colorsOfChosenSource = new ArrayList<>();
+    private Mana manaUsed;
+    private List<ObjectColor> colorsOfChosenSource = new ArrayList<>();
 
     public ProtectiveSphereEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
@@ -64,6 +64,8 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
     public ProtectiveSphereEffect(final ProtectiveSphereEffect effect) {
         super(effect);
         this.target = effect.target.copy();
+        manaUsed = effect.manaUsed.copy();
+        colorsOfChosenSource = effect.colorsOfChosenSource;
     }
 
     @Override

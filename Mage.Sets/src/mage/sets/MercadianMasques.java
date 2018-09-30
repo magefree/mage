@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -309,7 +308,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Stinging Barrier", 107, Rarity.COMMON, mage.cards.s.StingingBarrier.class));
         cards.add(new SetCardInfo("Stone Rain", 215, Rarity.COMMON, mage.cards.s.StoneRain.class));
         cards.add(new SetCardInfo("Story Circle", 51, Rarity.UNCOMMON, mage.cards.s.StoryCircle.class));
-        cards.add(new SetCardInfo("Strongarm Thug", 165, Rarity.COMMON, mage.cards.s.StrongarmThug.class));
+        cards.add(new SetCardInfo("Strongarm Thug", 165, Rarity.UNCOMMON, mage.cards.s.StrongarmThug.class));
         cards.add(new SetCardInfo("Subterranean Hangar", 329, Rarity.UNCOMMON, mage.cards.s.SubterraneanHangar.class));
         cards.add(new SetCardInfo("Sustenance", 278, Rarity.UNCOMMON, mage.cards.s.Sustenance.class));
         cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));

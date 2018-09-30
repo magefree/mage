@@ -51,12 +51,14 @@ Intimidate|instance|
 Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
+Jump-start|card|
 Level up|cost|
 Lifelink|instance|
 Living weapon|new|
 Madness|card, cost|
 Melee|new|
 Menace|new|
+Mentor|new|
 Miracle|cost|
 Mountaincycling|cost|
 Mountainwalk|new|

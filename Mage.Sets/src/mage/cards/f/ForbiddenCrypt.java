@@ -151,7 +151,7 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.isOwnedBy(source.getControllerId())) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (permanent == null || !(permanent instanceof PermanentToken)) {
+                if (!(permanent instanceof PermanentToken)) {
                     return true;
                 }
             }

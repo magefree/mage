@@ -54,7 +54,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         if (spell != null) {
             StackObject newStackObject = spell.createCopyOnStack(game, source, useController ? spell.getControllerId() : source.getControllerId(), true);
             Player player = game.getPlayer(source.getControllerId());
-            if (player != null && newStackObject != null && newStackObject instanceof Spell) {
+            if (player != null && newStackObject instanceof Spell) {
                 String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
                 if (activateMessage.startsWith(" casts ")) {
                     activateMessage = activateMessage.substring(6);

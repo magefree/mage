@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -291,7 +290,7 @@ public final class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of the Animist", 227, Rarity.RARE, mage.cards.s.SwordOfTheAnimist.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 76, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Syphon Mind", 127, Rarity.COMMON, mage.cards.s.SyphonMind.class));
-        cards.add(new SetCardInfo("Taigam, Ojutai Master", 46, Rarity.MYTHIC, mage.cards.t.TaigamOjutaiMaster.class));
+        cards.add(new SetCardInfo("Taigam, Ojutai Master", 46, Rarity.RARE, mage.cards.t.TaigamOjutaiMaster.class));
         cards.add(new SetCardInfo("Taigam, Sidisi's Hand", 47, Rarity.RARE, mage.cards.t.TaigamSidisisHand.class));
         cards.add(new SetCardInfo("Taj-Nar Swordsmith", 77, Rarity.UNCOMMON, mage.cards.t.TajNarSwordsmith.class));
         cards.add(new SetCardInfo("Teferi's Protection", 8, Rarity.RARE, mage.cards.t.TeferisProtection.class));
@@ -320,7 +319,7 @@ public final class Commander2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Vivid Grove", 291, Rarity.UNCOMMON, mage.cards.v.VividGrove.class));
         cards.add(new SetCardInfo("Vivid Marsh", 292, Rarity.UNCOMMON, mage.cards.v.VividMarsh.class));
         cards.add(new SetCardInfo("Vivid Meadow", 293, Rarity.UNCOMMON, mage.cards.v.VividMeadow.class));
-        cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.MYTHIC, mage.cards.w.WasitoraNekoruQueen.class));
+        cards.add(new SetCardInfo("Wasitora, Nekoru Queen", 49, Rarity.RARE, mage.cards.w.WasitoraNekoruQueen.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 230, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Well of Lost Dreams", 231, Rarity.RARE, mage.cards.w.WellOfLostDreams.class));
         cards.add(new SetCardInfo("White Sun's Zenith", 78, Rarity.RARE, mage.cards.w.WhiteSunsZenith.class));

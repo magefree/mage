@@ -37,7 +37,7 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
         lastActivePlayer = game.getActivePlayerId();
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             UUID playerId = event.getPlayerId();
-            if (playerId != null && lastActivePlayer != null && playerId.equals(lastActivePlayer)) {
+            if (playerId != null && playerId.equals(lastActivePlayer)) {
                 amountOfSpellsCastOnCurrentTurn.putIfAbsent(playerId, 0);
                 amountOfSpellsCastOnCurrentTurn.compute(playerId, (k, a) -> a + 1);
             }

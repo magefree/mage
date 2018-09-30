@@ -62,7 +62,7 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
      * @param game
      * @return
      */
-    public static SubType getChoosenCreatureType(UUID objectId, Game game) {
+    public static SubType getChosenCreatureType(UUID objectId, Game game) {
         SubType creatureType = null;
         Object savedCreatureType = game.getState().getValue(objectId + "_type");
         if (savedCreatureType != null) {

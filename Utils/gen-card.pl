@@ -242,6 +242,8 @@ foreach my $ability (@abilities) {
                         $vars{'abilities'} .= "\n        this.addAbility(" . $kw . "Ability.getInstance());";
                     } elsif ($keywords{$kw} eq 'new') {
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . "Ability());";
+                    } elsif ($keywords{$kw} eq 'card') {
+                        $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . "Ability(this));";
                     } elsif ($keywords{$kw} eq 'color') {
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . "Ability(this.color));";
                     } elsif ($keywords{$kw} eq 'number') {

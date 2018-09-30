@@ -18,7 +18,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class TezzeretTheSchemerEmblem extends Emblem {
+public final class TezzeretTheSchemerEmblem extends Emblem {
 
     public TezzeretTheSchemerEmblem() {
         this.setName("Emblem Tezzeret");

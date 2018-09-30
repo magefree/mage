@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -33,7 +33,7 @@ public final class ChandraNalaar extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
 
         // +1: Chandra Nalaar deals 1 damage to target player or planeswalker.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);

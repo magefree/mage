@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import java.util.ArrayList;
@@ -191,7 +190,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 this.lastAddedTokenIds.add(permanent.getId());
                 this.lastAddedTokenId = permanent.getId();
                 game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
-                if (attacking && game.getCombat() != null) {
+                if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
                     game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
                 }
                 if (!game.isSimulation()) {

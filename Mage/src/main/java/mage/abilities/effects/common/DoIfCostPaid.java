@@ -27,7 +27,10 @@ public class DoIfCostPaid extends OneShotEffect {
     }
 
     public DoIfCostPaid(Effect effect, Effect effect2, Cost cost) {
-        this(effect, cost, null, true);
+        this(effect,effect2,cost,true);
+    }
+    public DoIfCostPaid(Effect effect, Effect effect2, Cost cost,boolean optional) {
+        this(effect, cost, null, optional);
         this.otherwiseEffects.add(effect2);
     }
 
@@ -54,8 +57,9 @@ public class DoIfCostPaid extends OneShotEffect {
         this.optional = effect.optional;
     }
 
-    public void addEffect(Effect effect) {
+    public DoIfCostPaid addEffect(Effect effect) {
         executingEffects.add(effect);
+        return this;
     }
 
     @Override

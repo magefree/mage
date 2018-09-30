@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.UUID;
@@ -158,7 +157,7 @@ public class FlashbackAbility extends SpellAbility {
     }
 
     /**
-     * Used for split card sin PlayerImpl method:
+     * Used for split card in PlayerImpl method:
      * getOtherUseableActivatedAbilities
      *
      * @param abilityName

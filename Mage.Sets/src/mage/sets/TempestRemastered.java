@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -85,7 +84,7 @@ public final class TempestRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Dream Prowler", 47, Rarity.UNCOMMON, mage.cards.d.DreamProwler.class));
         cards.add(new SetCardInfo("Dungeon Shade", 103, Rarity.COMMON, mage.cards.d.DungeonShade.class));
         cards.add(new SetCardInfo("Elven Rite", 169, Rarity.COMMON, mage.cards.e.ElvenRite.class));
-        cards.add(new SetCardInfo("Elvish Fury", 170, Rarity.UNCOMMON, mage.cards.e.ElvishFury.class));
+        cards.add(new SetCardInfo("Elvish Fury", 170, Rarity.COMMON, mage.cards.e.ElvishFury.class));
         cards.add(new SetCardInfo("Emmessi Tome", 221, Rarity.UNCOMMON, mage.cards.e.EmmessiTome.class));
         cards.add(new SetCardInfo("Endangered Armodon", 171, Rarity.COMMON, mage.cards.e.EndangeredArmodon.class));
         cards.add(new SetCardInfo("Ephemeron", 48, Rarity.RARE, mage.cards.e.Ephemeron.class));

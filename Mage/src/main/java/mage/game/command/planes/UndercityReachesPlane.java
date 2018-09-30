@@ -96,10 +96,8 @@ class UndercityReachesTriggeredAbility extends TriggeredAbilityImpl {
         if (cPlane == null) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Undercity Reaches")) {
-                return false;
-            }
+        if (!cPlane.getName().equalsIgnoreCase("Plane - Undercity Reaches")) {
+            return false;
         }
 
         if (((DamagedPlayerEvent) event).isCombatDamage()) {

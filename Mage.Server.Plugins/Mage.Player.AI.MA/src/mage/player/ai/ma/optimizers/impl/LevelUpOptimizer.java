@@ -27,7 +27,7 @@ public class LevelUpOptimizer extends BaseTreeOptimizer {
         for (Ability ability : actions) {
             if (ability instanceof LevelUpAbility) {
                 Permanent permanent = game.getPermanent(ability.getSourceId());
-                if (permanent != null && permanent instanceof PermanentCard) {
+                if (permanent instanceof PermanentCard) {
                     PermanentCard leveler = (PermanentCard) permanent;
                     // check already existing Level counters and compare to maximum that make sense
                     if (permanent.getCounters(game).getCount(CounterType.LEVEL) >= leveler.getMaxLevelCounters()) {

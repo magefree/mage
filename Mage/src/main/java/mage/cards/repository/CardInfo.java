@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
@@ -181,8 +181,8 @@ public class CardInfo {
         // Starting loyalty
         if (card.isPlaneswalker()) {
             for (Ability ab : card.getAbilities()) {
-                if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {
-                    this.startingLoyalty = "" + ((PlanswalkerEntersWithLoyalityCountersAbility) ab).getStartingLoyalty();
+                if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
+                    this.startingLoyalty = "" + ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).getStartingLoyalty();
                 }
             }
             if (this.startingLoyalty == null) {

@@ -13,7 +13,7 @@ import mage.game.permanent.token.KioraKrakenToken;
  *
  * @author spjspj
  */
-public class KioraEmblem extends Emblem {
+public final class KioraEmblem extends Emblem {
 
     /**
      * Emblem: "At the beginning of your end step, create a 9/9 blue Kraken

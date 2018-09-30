@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -30,7 +29,7 @@ public final class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Abu Ja'far", 57, Rarity.UNCOMMON, mage.cards.a.AbuJafar.class));
         cards.add(new SetCardInfo("Active Volcano", 43, Rarity.COMMON, mage.cards.a.ActiveVolcano.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 58, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
-        cards.add(new SetCardInfo("Aladdin", 44, Rarity.RARE, mage.cards.a.Aladdin.class));
+        cards.add(new SetCardInfo("Aladdin", 44, Rarity.UNCOMMON, mage.cards.a.Aladdin.class));
         cards.add(new SetCardInfo("Angelic Voices", 59, Rarity.RARE, mage.cards.a.AngelicVoices.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 106, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
         cards.add(new SetCardInfo("Arena of the Ancients", 71, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));

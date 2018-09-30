@@ -11,7 +11,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class TeferiTemporalArchmageEmblem extends Emblem {
+public final class TeferiTemporalArchmageEmblem extends Emblem {
     // "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
 
     public TeferiTemporalArchmageEmblem() {

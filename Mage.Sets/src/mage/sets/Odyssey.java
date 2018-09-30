@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -297,7 +296,7 @@ public final class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Second Thoughts", 45, Rarity.COMMON, mage.cards.s.SecondThoughts.class));
         cards.add(new SetCardInfo("Seize the Day", 220, Rarity.RARE, mage.cards.s.SeizeTheDay.class));
         cards.add(new SetCardInfo("Seton, Krosan Protector", 267, Rarity.RARE, mage.cards.s.SetonKrosanProtector.class));
-        cards.add(new SetCardInfo("Seton's Desire", 268, Rarity.UNCOMMON, mage.cards.s.SetonsDesire.class));
+        cards.add(new SetCardInfo("Seton's Desire", 268, Rarity.COMMON, mage.cards.s.SetonsDesire.class));
         cards.add(new SetCardInfo("Shadowblood Egg", 308, Rarity.UNCOMMON, mage.cards.s.ShadowbloodEgg.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 326, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shadowmage Infiltrator", 294, Rarity.RARE, mage.cards.s.ShadowmageInfiltrator.class));

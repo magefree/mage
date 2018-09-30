@@ -17,7 +17,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class ObiWanKenobiEmblem extends Emblem {
+public final class ObiWanKenobiEmblem extends Emblem {
 
     // Creatures you control get +1/+1 and have vigilance, first strike, and lifelink
     public ObiWanKenobiEmblem() {

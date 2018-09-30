@@ -21,7 +21,7 @@ import mage.util.CardUtil;
  */
 public class ChooseOpponentEffect extends OneShotEffect {
 
-    public static String VALUE_KEY = "_opponent";
+    public static final String VALUE_KEY = "_opponent";
 
     public ChooseOpponentEffect(Outcome outcome) {
         super(outcome);

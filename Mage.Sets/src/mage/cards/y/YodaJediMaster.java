@@ -4,7 +4,7 @@ package mage.cards.y;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -46,7 +46,7 @@ public final class YodaJediMaster extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{U}");
         this.subtype.add(SubType.YODA);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +1: Look at the top two cards of your library. Put one on the bottom of your library.
         Effect effect = new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1),

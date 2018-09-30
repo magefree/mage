@@ -70,7 +70,7 @@ class KindredSummonsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             if (subType == null) {
                 return false;
             }

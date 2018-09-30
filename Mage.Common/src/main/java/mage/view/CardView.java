@@ -512,7 +512,7 @@ public class CardView extends SimpleCardView {
         }
         if (this.rarity == null && object instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) object;
-            this.rarity = Rarity.NA;
+            this.rarity = Rarity.SPECIAL;
             this.rules = new ArrayList<>();
             this.rules.add(stackAbility.getRule());
             if (stackAbility.getZone() == Zone.COMMAND) {
@@ -644,7 +644,7 @@ public class CardView extends SimpleCardView {
         this.frameColor = token.getFrameColor(null);
         this.frameStyle = token.getFrameStyle();
         this.manaCost = token.getManaCost().getSymbols();
-        this.rarity = Rarity.NA;
+        this.rarity = Rarity.SPECIAL;
         this.type = token.getTokenType();
         this.tokenDescriptor = token.getTokenDescriptor();
         this.tokenSetCode = token.getOriginalExpansionSetCode();

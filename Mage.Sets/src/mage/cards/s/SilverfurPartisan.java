@@ -77,7 +77,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isControlledBy(this.controllerId) && (permanent.hasSubtype(SubType.WOLF, game) || permanent.hasSubtype(SubType.WEREWOLF, game))) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object instanceof Spell) {
+            if (object instanceof Spell) {
                 Card c = (Spell) object;
                 if (c.isInstant() || c.isSorcery()) {
                     if (getTargets().isEmpty()) {

@@ -14,7 +14,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author spjspj
  */
-public class ChandraTorchOfDefianceEmblem extends Emblem {
+public final class ChandraTorchOfDefianceEmblem extends Emblem {
     
     // You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to any target."
     public ChandraTorchOfDefianceEmblem() {

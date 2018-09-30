@@ -91,7 +91,7 @@ class MetzaliTowerOfTriumphEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
-        if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
+        if (watcher instanceof AttackedThisTurnWatcher) {
             Set<MageObjectReference> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
             List<Permanent> available = new ArrayList<>();
             for (MageObjectReference mor : attackedThisTurn) {

@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -40,7 +40,7 @@ public final class SorinGrimNemesis extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
 
         // +1: Reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its converted mana cost.
         this.addAbility(new LoyaltyAbility(new SorinGrimNemesisRevealEffect(), 1));

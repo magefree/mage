@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.search;
 
 import mage.MageObject;
@@ -28,10 +27,14 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
     }
 
     public SearchLibraryGraveyardPutInHandEffect(FilterCard filter, boolean forceToSearchBoth) {
+        this(filter, forceToSearchBoth, false);
+    }
+
+    public SearchLibraryGraveyardPutInHandEffect(FilterCard filter, boolean forceToSearchBoth, boolean youMay) {
         super(Outcome.Benefit);
         this.filter = filter;
         this.forceToSearchBoth = forceToSearchBoth;
-        staticText = "search your library and" + (forceToSearchBoth ? "" : "/or") + " graveyard for a card named " + filter.getMessage()
+        staticText = (youMay ? "You may" : "") + "search your library and" + (forceToSearchBoth ? "" : "/or") + " graveyard for a card named " + filter.getMessage()
                 + ", reveal it, and put it into your hand. " + (forceToSearchBoth ? "Then shuffle your library" : "If you search your library this way, shuffle it");
     }
 

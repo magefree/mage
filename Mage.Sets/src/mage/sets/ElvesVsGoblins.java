@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -83,7 +78,7 @@ public final class ElvesVsGoblins extends ExpansionSet {
         cards.add(new SetCardInfo("Wellwisher", 15, Rarity.COMMON, mage.cards.w.Wellwisher.class));
         cards.add(new SetCardInfo("Wildsize", 23, Rarity.COMMON, mage.cards.w.Wildsize.class));
         cards.add(new SetCardInfo("Wirewood Herald", 16, Rarity.COMMON, mage.cards.w.WirewoodHerald.class));
-        cards.add(new SetCardInfo("Wirewood Lodge", 26, Rarity.RARE, mage.cards.w.WirewoodLodge.class));
+        cards.add(new SetCardInfo("Wirewood Lodge", 26, Rarity.UNCOMMON, mage.cards.w.WirewoodLodge.class));
         cards.add(new SetCardInfo("Wirewood Symbiote", 17, Rarity.UNCOMMON, mage.cards.w.WirewoodSymbiote.class));
         cards.add(new SetCardInfo("Wood Elves", 18, Rarity.COMMON, mage.cards.w.WoodElves.class));
         cards.add(new SetCardInfo("Wren's Run Vanquisher", 19, Rarity.UNCOMMON, mage.cards.w.WrensRunVanquisher.class));

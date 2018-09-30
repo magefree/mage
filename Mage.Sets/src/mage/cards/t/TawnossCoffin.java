@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.HashSet;
@@ -171,7 +170,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
+        UUID exileZoneId = CardUtil.getCardExileZoneId(game, source.getSourceId(), source.getSourcePermanentIfItStillExists(game) == null);
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         if (exileZone == null) {
             return true;

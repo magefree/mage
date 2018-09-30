@@ -28,7 +28,7 @@ import mage.watchers.common.CastFromGraveyardWatcher;
  *
  * @author LevelX2
  */
-public class JayaBallardEmblem extends Emblem {
+public final class JayaBallardEmblem extends Emblem {
     // You get an emblem with "You may cast instant and sorcery cards from your graveyard. If a card cast this way would be put into your graveyard, exile it instead."
 
     public JayaBallardEmblem() {

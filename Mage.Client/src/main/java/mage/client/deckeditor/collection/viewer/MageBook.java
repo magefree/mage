@@ -398,18 +398,6 @@ public class MageBook extends JComponent {
 
         cardImg.setCardCaptionTopOffset(8); // card caption below real card caption to see full name even with mana icons
 
-        boolean implemented = card.getRarity() != Rarity.NA;
-
-        // implemented label
-        // old code, nowadays app load only implemented cards (JayDi85, 23.11.2017)
-        /*
-        GlowText label = new GlowText();
-        label.setGlow(implemented ? Color.green : NOT_IMPLEMENTED, 12, 0.0f);
-        label.setText(implemented ? "Implemented" : "Not implemented");
-        int dx = implemented ? 15 : 5;
-        label.setBounds(rectangle.x + dx, rectangle.y + cardDimensions.frameHeight + 7, 110, 30);
-        jLayeredPane.add(label);
-         */
         // card number label
         JLabel cardNumber = new JLabel();
         int dy = -5; // image panel have empty space in bottom (bug?), need to move label up
@@ -542,7 +530,7 @@ public class MageBook extends JComponent {
                     Class<?> c = Class.forName(className);
                     Constructor<?> cons = c.getConstructor();
                     Object newToken = cons.newInstance();
-                    if (newToken != null && newToken instanceof mage.game.permanent.token.Token) {
+                    if (newToken instanceof Token) {
                         ((Token) newToken).setExpansionSetCodeForImage(set);
                         ((Token) newToken).setOriginalExpansionSetCode(set);
                         ((Token) newToken).setTokenType(token.getType());
@@ -592,7 +580,7 @@ public class MageBook extends JComponent {
                     Class<?> c = Class.forName(className);
                     Constructor<?> cons = c.getConstructor();
                     Object newEmblem = cons.newInstance();
-                    if (newEmblem != null && newEmblem instanceof mage.game.command.Emblem) {
+                    if (newEmblem instanceof Emblem) {
                         ((Emblem) newEmblem).setExpansionSetCodeForImage(set);
 
                         emblems.add((Emblem) newEmblem);
@@ -649,7 +637,7 @@ public class MageBook extends JComponent {
                     Class<?> c = Class.forName(className);
                     Constructor<?> cons = c.getConstructor();
                     Object newPlane = cons.newInstance();
-                    if (newPlane != null && newPlane instanceof mage.game.command.Plane) {
+                    if (newPlane instanceof Plane) {
                         ((Plane) newPlane).setExpansionSetCodeForImage(set);
 
                         planes.add((Plane) newPlane);

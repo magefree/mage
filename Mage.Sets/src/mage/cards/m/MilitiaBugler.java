@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  */
 public final class MilitiaBugler extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with power 2 or less");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with power 2 or less");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));

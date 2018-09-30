@@ -12,7 +12,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class TezzeretArtificeMasterEmblem extends Emblem {
+public final class TezzeretArtificeMasterEmblem extends Emblem {
 
     // −9: You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it into the battlefield, then shuffle your library."
     public TezzeretArtificeMasterEmblem() {

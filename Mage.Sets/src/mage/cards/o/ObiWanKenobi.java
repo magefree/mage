@@ -4,7 +4,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -29,7 +29,7 @@ public final class ObiWanKenobi extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
         this.subtype.add(SubType.OBI_WAN);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1:Up to one target creature you control gains vigilance and protection from color of your choice until end of turn.
         Effect effect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);

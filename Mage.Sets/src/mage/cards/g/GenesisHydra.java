@@ -71,7 +71,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Object obj = getValue(CastSourceTriggeredAbility.SOURCE_CAST_SPELL_ABILITY);
-        if (controller != null && obj != null && obj instanceof SpellAbility) {
+        if (controller != null && obj instanceof SpellAbility) {
             int count = ((SpellAbility) obj).getManaCostsToPay().getX();
             if (count > 0) {
                 Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));

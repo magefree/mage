@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -6,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
@@ -16,17 +16,21 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  *
@@ -57,9 +61,8 @@ public final class AryelKnightOfWindgrace extends CardImpl {
                 .setText("Destroy target creature with power X or less"), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new AryelTapXTargetCost());
-        ability.setTargetAdjustment(TargetAdjustment.CREATURE_POWER_X_OR_LESS);
+        ability.setTargetAdjuster(AryelKnightOfWindgraceAdjuster.instance);
         this.addAbility(ability);
-        ability.getOriginalId();
     }
 
     public AryelKnightOfWindgrace(final AryelKnightOfWindgrace card) {
@@ -104,5 +107,21 @@ class AryelTapXTargetCost extends VariableCostImpl {
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
         TargetControlledPermanent target = new TargetControlledPermanent(xValue, xValue, filter, true);
         return new TapTargetCost(target);
+    }
+}
+
+enum AryelKnightOfWindgraceAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int value = 0;
+        for (VariableCost cost : ability.getCosts().getVariableCosts()) {
+            value = cost.getAmount();
+        }
+        FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent("creature with power " + value + " or less");
+        filterCreaturePermanent.add(new PowerPredicate(ComparisonType.FEWER_THAN, value + 1));
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCreaturePermanent(filterCreaturePermanent));
     }
 }

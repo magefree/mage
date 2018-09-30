@@ -7,7 +7,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -162,7 +161,6 @@ public class BestowTest extends CardTestPlayerBase {
      * Bestowed creature can be used to sacrifice a creature for the Away part.
      * http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513828-bestow-far-away
      */
-    @Ignore // TODO: make fused targeting support
     @Test
     public void bestowWithFusedSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);

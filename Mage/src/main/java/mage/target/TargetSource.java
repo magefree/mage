@@ -60,7 +60,7 @@ public class TargetSource extends TargetObject {
     public void addTarget(UUID id, Ability source, Game game) {
         if (targets.size() < maxNumberOfTargets) {
             MageObject object = game.getObject(id);
-            if (object != null && object instanceof StackObject) {
+            if (object instanceof StackObject) {
                 addTarget(((StackObject) object).getSourceId(), source, game, notTarget);
             }
             else {

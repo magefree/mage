@@ -18,7 +18,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class DomriRadeEmblem extends Emblem {
+public final class DomriRadeEmblem extends Emblem {
     // "Creatures you control have double strike, trample, hexproof and haste."
 
     public DomriRadeEmblem() {

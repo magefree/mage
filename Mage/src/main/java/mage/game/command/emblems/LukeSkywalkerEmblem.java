@@ -20,7 +20,7 @@ import mage.players.Player;
  *
  * @author NinthWorld
  */
-public class LukeSkywalkerEmblem extends Emblem {
+public final class LukeSkywalkerEmblem extends Emblem {
 
     // -6: You get an emblem with "Prevent all damage that would be dealt to you during combat." Exile Luke Skywalker, the Last Jedi.
     public LukeSkywalkerEmblem() {

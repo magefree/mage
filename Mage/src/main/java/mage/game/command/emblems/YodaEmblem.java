@@ -16,7 +16,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class YodaEmblem extends Emblem {
+public final class YodaEmblem extends Emblem {
     // You get an emblem with "Hexproof, you and your creatures have."
 
     public YodaEmblem() {

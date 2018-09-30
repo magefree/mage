@@ -70,7 +70,7 @@ class ElvishRejuvenatorEffect extends OneShotEffect {
         cards.addAll(controller.getLibrary().getTopCards(game, 5));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(
-                    Zone.LIBRARY,
+                    0, 1, Zone.LIBRARY,
                     new FilterLandCard("land card to put on the battlefield")
             );
             if (controller.choose(Outcome.PutCardInPlay, cards, target, game)) {

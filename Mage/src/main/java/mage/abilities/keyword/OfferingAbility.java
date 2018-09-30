@@ -104,7 +104,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(sourceId);
             if (!card.isOwnedBy(source.getControllerId())) {

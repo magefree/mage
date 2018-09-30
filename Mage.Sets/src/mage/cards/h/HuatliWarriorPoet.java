@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -26,7 +26,6 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DinosaurToken;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.targetpointer.FixedTarget;
@@ -43,7 +42,7 @@ public final class HuatliWarriorPoet extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +2: You gain life equal to the greatest power among creatures you control.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(new GreatestPowerAmongControlledCreaturesValue(), "You gain life equal to the greatest power among creatures you control"), 2));

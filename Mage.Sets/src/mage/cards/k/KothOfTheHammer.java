@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -24,7 +24,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.emblems.KothOfTheHammerEmblem;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -46,7 +45,7 @@ public final class KothOfTheHammer extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOTH);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +1: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);

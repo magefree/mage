@@ -81,7 +81,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             FilterCard pickFilter, Zone targetZoneLookedCards,
             boolean putOnTop, boolean reveal) {
         this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter,
-                targetZoneLookedCards, putOnTop, reveal, false);
+                targetZoneLookedCards, putOnTop, reveal, reveal);
     }
 
     public LookLibraryAndPickControllerEffect(int numberOfCards,

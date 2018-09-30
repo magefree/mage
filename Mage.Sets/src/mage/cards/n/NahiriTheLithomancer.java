@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -24,7 +24,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KorSoldierToken;
 import mage.game.permanent.token.NahiriTheLithomancerEquipmentToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
@@ -43,7 +42,7 @@ public final class NahiriTheLithomancer extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +2: Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it.
         this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerFirstAbilityEffect(), 2));

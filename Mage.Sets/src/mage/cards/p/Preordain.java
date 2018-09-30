@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -18,8 +17,17 @@ public final class Preordain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
         // Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-        this.getSpellAbility().addEffect(new ScryEffect(2));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(
+                new ScryEffect(2).setText("Scry 2, ")
+        );
+        this.getSpellAbility().addEffect(
+                new DrawCardSourceControllerEffect(1)
+                        .setText("then draw a card. <i>(To scry 2, "
+                                + "look at the top two cards of your library, "
+                                + "then put any number of them on the "
+                                + "bottom of your library and the rest on "
+                                + "top in any order.)</i>")
+        );
     }
 
     public Preordain(final Preordain card) {

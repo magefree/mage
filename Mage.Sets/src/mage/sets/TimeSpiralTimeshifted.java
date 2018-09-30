@@ -1,9 +1,6 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.i.IcatianJavelineers;
-import mage.cards.s.SwampMosquito;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -24,7 +21,7 @@ public final class TimeSpiralTimeshifted extends ExpansionSet {
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;
-        cards.add(new SetCardInfo("Akroma, Angel of Wrath", 1, Rarity.COMMON, mage.cards.a.AkromaAngelOfWrath.class));
+        cards.add(new SetCardInfo("Akroma, Angel of Wrath", 1, Rarity.SPECIAL, mage.cards.a.AkromaAngelOfWrath.class));
         cards.add(new SetCardInfo("Arena", 117, Rarity.SPECIAL, mage.cards.a.Arena.class));
         cards.add(new SetCardInfo("Assault // Battery", 106, Rarity.SPECIAL, mage.cards.a.AssaultBattery.class));
         cards.add(new SetCardInfo("Auratog", 2, Rarity.COMMON, mage.cards.a.Auratog.class));
@@ -73,7 +70,7 @@ public final class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Hail Storm", 79, Rarity.SPECIAL, mage.cards.h.HailStorm.class));
         cards.add(new SetCardInfo("Honorable Passage", 9, Rarity.SPECIAL, mage.cards.h.HonorablePassage.class));
         cards.add(new SetCardInfo("Hunting Moa", 80, Rarity.COMMON, mage.cards.h.HuntingMoa.class));
-        cards.add(new SetCardInfo("Icatian Javelineers", 10, Rarity.SPECIAL, IcatianJavelineers.class));
+        cards.add(new SetCardInfo("Icatian Javelineers", 10, Rarity.SPECIAL, mage.cards.i.IcatianJavelineers.class));
         cards.add(new SetCardInfo("Jasmine Boreal", 93, Rarity.COMMON, mage.cards.j.JasmineBoreal.class));
         cards.add(new SetCardInfo("Jolrael, Empress of Beasts", 81, Rarity.SPECIAL, mage.cards.j.JolraelEmpressOfBeasts.class));
         cards.add(new SetCardInfo("Kobold Taskmaster", 65, Rarity.SPECIAL, mage.cards.k.KoboldTaskmaster.class));
@@ -118,7 +115,7 @@ public final class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Stormscape Familiar", 32, Rarity.COMMON, mage.cards.s.StormscapeFamiliar.class));
         cards.add(new SetCardInfo("Stupor", 48, Rarity.COMMON, mage.cards.s.Stupor.class));
         cards.add(new SetCardInfo("Suq'Ata Lancer", 69, Rarity.COMMON, mage.cards.s.SuqAtaLancer.class));
-        cards.add(new SetCardInfo("Swamp Mosquito", 49, Rarity.SPECIAL, SwampMosquito.class));
+        cards.add(new SetCardInfo("Swamp Mosquito", 49, Rarity.SPECIAL, mage.cards.s.SwampMosquito.class));
         cards.add(new SetCardInfo("Teferi's Moat", 103, Rarity.SPECIAL, mage.cards.t.TeferisMoat.class));
         cards.add(new SetCardInfo("Thallid", 86, Rarity.COMMON, mage.cards.t.Thallid.class));
         cards.add(new SetCardInfo("The Rack", 113, Rarity.SPECIAL, mage.cards.t.TheRack.class));

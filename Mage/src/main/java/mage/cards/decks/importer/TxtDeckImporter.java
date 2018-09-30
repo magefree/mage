@@ -16,9 +16,9 @@ import mage.cards.repository.CardRepository;
  */
 public class TxtDeckImporter extends DeckImporter {
 
-    public static final String[] SET_VALUES = new String[]{"lands", "creatures", "planeswalkers", "other spells", "sideboard cards",
+    private static final String[] SET_VALUES = new String[]{"lands", "creatures", "planeswalkers", "other spells", "sideboard cards",
         "Instant", "Land", "Enchantment", "Artifact", "Sorcery", "Planeswalker", "Creature"};
-    public static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
+    private static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
 
     private boolean sideboard = false;
     private boolean switchSideboardByEmptyLine = true; // all cards after first empty line will be sideboard (like mtgo format)

@@ -80,7 +80,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
                 && enteringCreature.isControlledBy(source.getControllerId())
                 && enteringCreature.isCreature()
                 && !event.getTargetId().equals(source.getSourceId())) {
-            SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             return subType != null && enteringCreature.hasSubtype(subType, game);
         }
         return false;

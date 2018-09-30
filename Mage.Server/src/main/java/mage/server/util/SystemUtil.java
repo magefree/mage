@@ -408,7 +408,7 @@ public final class SystemUtil {
                     Class<?> c = Class.forName("mage.game.permanent.token." + command.cardName);
                     Constructor<?> cons = c.getConstructor();
                     Object token = cons.newInstance();
-                    if (token != null && token instanceof mage.game.permanent.token.Token) {
+                    if (token instanceof mage.game.permanent.token.Token) {
                         ((mage.game.permanent.token.Token) token).putOntoBattlefield(command.Amount, game, null, player.getId(), false, false);
                         continue;
                     }
@@ -417,7 +417,7 @@ public final class SystemUtil {
                     Class<?> c = Class.forName("mage.game.command.emblems." + command.cardName);
                     Constructor<?> cons = c.getConstructor();
                     Object emblem = cons.newInstance();
-                    if (emblem != null && emblem instanceof mage.game.command.Emblem) {
+                    if (emblem instanceof mage.game.command.Emblem) {
                         ((mage.game.command.Emblem) emblem).setControllerId(player.getId());
                         game.addEmblem((mage.game.command.Emblem) emblem, null, player.getId());
                         continue;
@@ -427,7 +427,7 @@ public final class SystemUtil {
                     Class<?> c = Class.forName("mage.game.command.planes." + command.cardName);
                     Constructor<?> cons = c.getConstructor();
                     Object plane = cons.newInstance();
-                    if (plane != null && plane instanceof mage.game.command.Plane) {
+                    if (plane instanceof mage.game.command.Plane) {
                         ((mage.game.command.Plane) plane).setControllerId(player.getId());
                         game.addPlane((mage.game.command.Plane) plane, null, player.getId());
                         continue;

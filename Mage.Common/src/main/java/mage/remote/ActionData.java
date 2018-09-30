@@ -39,7 +39,7 @@ public class ActionData {
         this.gameId = gameId;
     }
 
-    public class CustomExclusionStrategy implements ExclusionStrategy {
+    static class CustomExclusionStrategy implements ExclusionStrategy {
 
         // FIXME: Very crude way of whitelisting, as it applies to all levels of the JSON tree.
         private final java.util.Set<String> KEEP = new java.util.HashSet<>(

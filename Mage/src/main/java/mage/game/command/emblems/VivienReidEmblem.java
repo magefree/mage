@@ -16,7 +16,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class VivienReidEmblem extends Emblem {
+public final class VivienReidEmblem extends Emblem {
     // -8: You get an emblem with "Creatures you control get +2/+2 and have vigilance, trample, and indestructible.
 
     public VivienReidEmblem() {

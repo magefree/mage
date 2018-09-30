@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -36,7 +35,7 @@ public final class VenserVsKoth extends ExpansionSet {
         cards.add(new SetCardInfo("Cosi's Ravager", 52, Rarity.COMMON, mage.cards.c.CosisRavager.class));
         cards.add(new SetCardInfo("Cryptic Annelid", 15, Rarity.UNCOMMON, mage.cards.c.CrypticAnnelid.class));
         cards.add(new SetCardInfo("Downhill Charge", 69, Rarity.COMMON, mage.cards.d.DownhillCharge.class));
-        cards.add(new SetCardInfo("Earth Servant", 60, Rarity.COMMON, mage.cards.e.EarthServant.class));
+        cards.add(new SetCardInfo("Earth Servant", 60, Rarity.UNCOMMON, mage.cards.e.EarthServant.class));
         cards.add(new SetCardInfo("Fiery Hellhound", 49, Rarity.COMMON, mage.cards.f.FieryHellhound.class));
         cards.add(new SetCardInfo("Flood Plain", 34, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
         cards.add(new SetCardInfo("Galepowder Mage", 12, Rarity.RARE, mage.cards.g.GalepowderMage.class));

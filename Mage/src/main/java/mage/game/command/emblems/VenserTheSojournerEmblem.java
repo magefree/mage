@@ -20,7 +20,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class VenserTheSojournerEmblem extends Emblem {
+public final class VenserTheSojournerEmblem extends Emblem {
 
     /**
      * Emblem: "Whenever you cast a spell, exile target permanent."

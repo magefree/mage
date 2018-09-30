@@ -225,7 +225,7 @@ public class Connection {
             for (InterfaceAddress addr : iface.getInterfaceAddresses()) {
                 if (addr != null) {
                     InetAddress iaddr = addr.getAddress();
-                    if (iaddr != null && iaddr instanceof Inet4Address) {
+                    if (iaddr instanceof Inet4Address) {
                         return iaddr;
                     }
                 }

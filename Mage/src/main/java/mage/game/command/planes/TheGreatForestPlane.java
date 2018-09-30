@@ -86,10 +86,8 @@ class TheGreatForestCombatDamageRuleEffect extends ContinuousEffectImpl {
         if (cPlane == null) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - The Great Forest")) {
-                return false;
-            }
+        if (!cPlane.getName().equalsIgnoreCase("Plane - The Great Forest")) {
+            return false;
         }
 
         // Change the rule

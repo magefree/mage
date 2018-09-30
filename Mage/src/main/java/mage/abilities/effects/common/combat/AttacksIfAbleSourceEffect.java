@@ -25,7 +25,7 @@ public class AttacksIfAbleSourceEffect extends RequirementEffect {
         super(duration);
         this.eachCombat = eachCombat;
         if (this.duration == Duration.EndOfTurn) {
-            staticText = "{this} attacks " + (eachCombat ? "each combat" : "this turn") + " if able";
+            staticText = "{this} attacks " + (eachCombat ? "each combat" : "this combat") + " if able";
         } else {
             staticText = "{this} attacks each " + (eachCombat ? "combat" : "turn") + " if able";
         }

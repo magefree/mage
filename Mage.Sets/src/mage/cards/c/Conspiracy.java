@@ -66,7 +66,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         if (controller != null && subType != null) {
             // Creature cards you own that aren't on the battlefield
             // in graveyard

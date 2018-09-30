@@ -47,7 +47,7 @@ public class CountryItemEditor extends BasicComboBoxEditor {
 
     @Override
     public void setItem(Object item) {
-        if (item == null || !(item instanceof String[])) {
+        if (!(item instanceof String[])) {
             return;
         }
 

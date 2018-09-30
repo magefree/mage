@@ -29,7 +29,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author spjspj
  */
-public class DackFaydenEmblem extends Emblem {
+public final class DackFaydenEmblem extends Emblem {
 
     public DackFaydenEmblem() {
         this.setName("Emblem Dack");

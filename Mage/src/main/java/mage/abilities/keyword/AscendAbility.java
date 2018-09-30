@@ -22,7 +22,7 @@ import mage.players.Player;
  */
 public class AscendAbility extends SimpleStaticAbility {
 
-    public static String ASCEND_RULE = "Ascend <i>(If you control ten or more permanents, you get the city's blessing for the rest of the game.)</i>";
+    public static final String ASCEND_RULE = "Ascend <i>(If you control ten or more permanents, you get the city's blessing for the rest of the game.)</i>";
 
     public AscendAbility() {
         super(Zone.BATTLEFIELD, new AscendContinuousEffect());

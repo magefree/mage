@@ -1,4 +1,3 @@
-
 package mage.counters;
 
 /**
@@ -55,6 +54,7 @@ public enum CounterType {
     GROWTH("growth"),
     HATCHLING("hatchling"),
     HEALING("healing"),
+    HIT("hit"),
     HOOFPRINT("hoofprint"),
     HOUR("hour"),
     HOURGLASS("hourglass"),

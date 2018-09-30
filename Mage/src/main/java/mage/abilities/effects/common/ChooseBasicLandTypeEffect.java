@@ -22,7 +22,7 @@ import mage.util.CardUtil;
  */
 public class ChooseBasicLandTypeEffect extends OneShotEffect {
 
-    public static String VALUE_KEY = "BasicLandType";
+    public static final String VALUE_KEY = "BasicLandType";
 
     public ChooseBasicLandTypeEffect(Outcome outcome) {
         super(outcome);

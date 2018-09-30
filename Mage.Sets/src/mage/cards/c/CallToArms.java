@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -41,19 +40,22 @@ public final class CallToArms extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // As Call to Arms enters the battlefield, choose a color and an opponent.
-        Effect effect = new ChooseColorEffect(Outcome.Detriment);
-//        effect.setText("choose a color and an opponent");
-        Ability ability = new AsEntersBattlefieldAbility(effect);
-        effect = new ChooseOpponentEffect(Outcome.Benefit);
-        effect.setText("then choose an opponent");
-        ability.addEffect(effect);
+        Ability ability = new AsEntersBattlefieldAbility(
+                new ChooseColorEffect(Outcome.Detriment)
+        );
+        ability.addEffect(new ChooseOpponentEffect(
+                Outcome.Benefit
+        ).setText("and an opponent"));
         this.addAbility(ability);
 
         // White creatures get +1/+1 as long as the chosen color is the most common color among nontoken permanents the chosen player controls but isn't tied for most common.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CallToArmsEffect()));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new CallToArmsEffect()
+        ));
 
         // When the chosen color isn't the most common color among nontoken permanents the chosen player controls or is tied for most common, sacrifice Call to Arms.
-        this.addAbility(new SacAbility());
+        this.addAbility(new CallToArmsStateTriggeredAbility());
     }
 
     public CallToArms(final CallToArms card) {
@@ -76,7 +78,9 @@ class CallToArmsEffect extends ContinuousEffectImpl {
 
     public CallToArmsEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.Benefit);
-        staticText = "The chosen player's maximum hand size is four";
+        staticText = "White creatures get +1/+1 as long as the chosen color "
+                + "is the most common color among nontoken permanents "
+                + "the chosen player controls but isn't tied for most common.";
     }
 
     public CallToArmsEffect(final CallToArmsEffect effect) {
@@ -107,19 +111,19 @@ class CallToArmsEffect extends ContinuousEffectImpl {
     }
 }
 
-class SacAbility extends StateTriggeredAbility {
+class CallToArmsStateTriggeredAbility extends StateTriggeredAbility {
 
-    public SacAbility() {
+    public CallToArmsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public SacAbility(final SacAbility ability) {
+    public CallToArmsStateTriggeredAbility(final CallToArmsStateTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public SacAbility copy() {
-        return new SacAbility(this);
+    public CallToArmsStateTriggeredAbility copy() {
+        return new CallToArmsStateTriggeredAbility(this);
     }
 
     @Override
@@ -139,7 +143,9 @@ class SacAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When the chosen color isn't the most common color among nontoken permanents the chosen player controls or is tied for most common, sacrifice {this}";
+        return "When the chosen color isn't the most common color "
+                + "among nontoken permanents the chosen player controls "
+                + "or is tied for most common, sacrifice {this}";
     }
 
 }

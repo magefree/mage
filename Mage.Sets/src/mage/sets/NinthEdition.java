@@ -338,9 +338,9 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Underworld Dreams", 167, Rarity.RARE, mage.cards.u.UnderworldDreams.class));
         cards.add(new SetCardInfo("Unholy Strength", 168, Rarity.COMMON, mage.cards.u.UnholyStrength.class));
         cards.add(new SetCardInfo("Ur-Golem's Eye", 314, Rarity.UNCOMMON, mage.cards.u.UrGolemsEye.class));
-        cards.add(new SetCardInfo("Urza's Mine", 327, Rarity.COMMON, mage.cards.u.UrzasMine.class));
-        cards.add(new SetCardInfo("Urza's Power Plant", 328, Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class));
-        cards.add(new SetCardInfo("Urza's Tower", 329, Rarity.COMMON, mage.cards.u.UrzasTower.class));
+        cards.add(new SetCardInfo("Urza's Mine", 327, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class));
+        cards.add(new SetCardInfo("Urza's Power Plant", 328, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class));
+        cards.add(new SetCardInfo("Urza's Tower", 329, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class));
         cards.add(new SetCardInfo("Utopia Tree", 277, Rarity.RARE, mage.cards.u.UtopiaTree.class));
         cards.add(new SetCardInfo("Venerable Monk", 51, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
         cards.add(new SetCardInfo("Verdant Force", 278, Rarity.RARE, mage.cards.v.VerdantForce.class));

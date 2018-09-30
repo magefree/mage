@@ -53,7 +53,7 @@ class PillarOfOriginsManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
-        creatureType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        creatureType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {

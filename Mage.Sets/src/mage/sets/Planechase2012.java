@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -50,7 +49,7 @@ public final class Planechase2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Infiltrator", 86, Rarity.COMMON, mage.cards.d.DimirInfiltrator.class));
         cards.add(new SetCardInfo("Dowsing Shaman", 63, Rarity.UNCOMMON, mage.cards.d.DowsingShaman.class));
         cards.add(new SetCardInfo("Dragonlair Spider", 87, Rarity.RARE, mage.cards.d.DragonlairSpider.class));
-        cards.add(new SetCardInfo("Dreampod Druid", 64, Rarity.RARE, mage.cards.d.DreampodDruid.class));
+        cards.add(new SetCardInfo("Dreampod Druid", 64, Rarity.UNCOMMON, mage.cards.d.DreampodDruid.class));
         cards.add(new SetCardInfo("Elderwood Scion", 88, Rarity.RARE, mage.cards.e.ElderwoodScion.class));
         cards.add(new SetCardInfo("Enigma Sphinx", 89, Rarity.RARE, mage.cards.e.EnigmaSphinx.class));
         cards.add(new SetCardInfo("Enlisted Wurm", 90, Rarity.UNCOMMON, mage.cards.e.EnlistedWurm.class));

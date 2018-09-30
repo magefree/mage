@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.VolrathsLaboratoryToken;
 
@@ -74,7 +73,7 @@ class VolrathsLaboratoryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         Token token = new VolrathsLaboratoryToken(color, subType);
         return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
     }

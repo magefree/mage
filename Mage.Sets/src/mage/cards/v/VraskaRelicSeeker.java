@@ -4,7 +4,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.SubType;
@@ -34,7 +34,7 @@ public final class VraskaRelicSeeker extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
 
         //+2: Create a 2/2 black Pirate creature token with menace.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new PirateToken()), 2));

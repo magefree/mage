@@ -61,7 +61,7 @@ class FilterCoverOfDarkness extends FilterCreaturePermanent {
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
         if (super.match(permanent, sourceId, playerId, game)) {
             if (subType == null) {
-                subType = ChooseCreatureTypeEffect.getChoosenCreatureType(sourceId, game);
+                subType = ChooseCreatureTypeEffect.getChosenCreatureType(sourceId, game);
                 if (subType == null) {
                     return false;
                 }
