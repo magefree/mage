@@ -1,7 +1,8 @@
-
 package mage.cards.b;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -16,12 +17,15 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPlayer;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetOpponent;
+import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
@@ -38,7 +42,7 @@ public final class BurningCinderFuryOfCrimsonChaosFire extends CardImpl {
         this.addAbility(new BurningCinderFuryOfCrimsonChaosFireAbility());
 
         // At the beginning of each player’s end step, if that player didn’t tap any nonland permanents that turn, Burning Cinder Fury of Crimson Chaos Fire deals 3 damage to that player.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3).setText("{this} deals 3 damage to that player"), 
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3).setText("{this} deals 3 damage to that player"),
                 TargetController.ANY, new BurningCinderFuryOfCrimsonChaosFireCondition(), false), new BurningCinderFuryOfCrimsonChaosFireWatcher());
     }
 
@@ -72,8 +76,8 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
             BurningCinderFuryOfCrimsonChaosFireEffect effect = (BurningCinderFuryOfCrimsonChaosFireEffect) this.getEffects().get(0);
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
-            effect.setFirstController(permanent.getControllerId()); // it's necessary to remember the original controller, as the controller might change by the time the trigger resolves
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            effect.setFirstControllerId(permanent.getControllerId()); // it's necessary to remember the original controller, as the controller might change by the time the trigger resolves
             return true;
         }
         return false;
@@ -92,7 +96,7 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
 
 class BurningCinderFuryOfCrimsonChaosFireEffect extends OneShotEffect {
 
-    private UUID firstController = null;
+    private UUID firstControllerId = null;
 
     public BurningCinderFuryOfCrimsonChaosFireEffect() {
         super(Outcome.Detriment);
@@ -101,37 +105,42 @@ class BurningCinderFuryOfCrimsonChaosFireEffect extends OneShotEffect {
 
     public BurningCinderFuryOfCrimsonChaosFireEffect(final BurningCinderFuryOfCrimsonChaosFireEffect effect) {
         super(effect);
-        this.firstController = effect.firstController;
+        this.firstControllerId = effect.firstControllerId;
     }
 
     @Override
     public BurningCinderFuryOfCrimsonChaosFireEffect copy() {
         return new BurningCinderFuryOfCrimsonChaosFireEffect(this);
     }
-    
-    public void setFirstController(UUID newId) {
-        this.firstController = newId;
+
+    public void setFirstControllerId(UUID newId) {
+        this.firstControllerId = newId;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(firstController);
-        if (player != null) {
-            Target target = new TargetOpponent(true);
-            if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
-                    player.chooseTarget(outcome, target, source, game);
-                }
+        Player tappingPlayer = game.getPlayer(firstControllerId);
+        Permanent permanentToControl = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (tappingPlayer != null && permanentToControl != null) {
+            // Create opponent filter list manually because otherwise opponent check prevents controller of this to be valid
+            FilterPlayer filter = new FilterPlayer("opponent to control " + permanentToControl.getIdName());
+            List<PlayerIdPredicate> opponentPredicates = new ArrayList<>();
+            for (UUID opponentId : game.getOpponents(firstControllerId)) {
+                opponentPredicates.add(new PlayerIdPredicate(opponentId));
             }
-            Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            Player chosenOpponent = game.getPlayer(target.getFirstTarget());
-            
-            if (permanent != null && chosenOpponent != null) {
-                game.informPlayers(player.getLogName() + " chose " + chosenOpponent.getLogName() + " to gain control of " + permanent.getLogName() + " at the beginning of the next end step");
-                ContinuousEffect effect = new BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect(Duration.Custom, chosenOpponent.getId());
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-                return true;
+            filter.add(Predicates.or(opponentPredicates));
+            Target target = new TargetPlayer(1, 1, true, filter);
+            target.setTargetController(firstControllerId);
+            target.setAbilityController(source.getControllerId());
+            if (tappingPlayer.chooseTarget(outcome, target, source, game)) {
+                Player chosenOpponent = game.getPlayer(target.getFirstTarget());
+                if (chosenOpponent != null) {
+                    game.informPlayers(tappingPlayer.getLogName() + " chose " + chosenOpponent.getLogName() + " to gain control of " + permanentToControl.getLogName() + " at the beginning of the next end step");
+                    ContinuousEffect effect = new BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect(Duration.Custom, chosenOpponent.getId());
+                    effect.setTargetPointer(new FixedTarget(permanentToControl.getId()));
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+                    return true;
+                }
             }
         }
         return false;
