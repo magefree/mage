@@ -1,14 +1,11 @@
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCost;
@@ -32,8 +29,12 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class StackAbility extends StackObjImpl implements Ability {
@@ -50,6 +51,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     private String name;
     private String expansionSetCode;
     private TargetAdjuster targetAdjuster = null;
+    private CostAdjuster costAdjuster = null;
 
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
@@ -609,6 +611,23 @@ public class StackAbility extends StackObjImpl implements Ability {
     public void adjustTargets(Game game) {
         if (targetAdjuster != null) {
             targetAdjuster.adjustTargets(this, game);
+        }
+    }
+
+    @Override
+    public void setCostAdjuster(CostAdjuster costAdjuster) {
+        this.costAdjuster = costAdjuster;
+    }
+
+    @Override
+    public CostAdjuster getCostAdjuster() {
+        return costAdjuster;
+    }
+
+    @Override
+    public void adjustCosts(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.adjustCosts(this, game);
         }
     }
 }
