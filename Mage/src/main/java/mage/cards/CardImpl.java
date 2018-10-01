@@ -327,9 +327,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return spellAbility;
     }
 
-//    @Override
-//    public void adjustCosts(Ability ability, Game game) {
-//    }
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        ability.adjustCosts(game);
+    }
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.adjustTargets(game);

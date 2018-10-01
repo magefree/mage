@@ -1,10 +1,8 @@
 package mage.abilities;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -23,6 +21,10 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Practically everything in the game is started from an Ability. This interface
@@ -44,10 +46,8 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see
-     * mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
-     * @see
-     * mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newId();
 
@@ -56,10 +56,8 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see
-     * mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
-     * @see
-     * mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newOriginalId();
 
@@ -143,7 +141,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * TODO Method is unused, keep it around?
-     *
+     * <p>
      * Gets all costs that are optional to this ability. These costs can be paid
      * in addition to other costs to have other effects put into place.
      *
@@ -208,7 +206,6 @@ public interface Ability extends Controllable, Serializable {
      *
      * @return The {@link java.util.UUID} of the first target within the targets
      * list.
-     *
      * @see mage.target.Target
      */
     UUID getFirstTarget();
@@ -266,17 +263,15 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Activates this ability prompting the controller to pay any mandatory
      *
-     * @param game A reference the {@link Game} for which this ability should be
-     * activated within.
+     * @param game   A reference the {@link Game} for which this ability should be
+     *               activated within.
      * @param noMana Whether or not {@link ManaCosts} have to be paid.
      * @return True if this ability was successfully activated.
-     *
      * @see mage.players.PlayerImpl#cast(mage.abilities.SpellAbility,
      * mage.game.Game, boolean)
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see
-     * mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility,
+     * @see mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility,
      * mage.game.Game)
      */
     boolean activate(Game game, boolean noMana);
@@ -290,9 +285,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param game The {@link Game} for which this ability resolves within.
      * @return Whether or not this ability successfully resolved.
-     *
-     * @see
-     * mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility,
+     * @see mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility,
      * mage.game.Game)
      * @see mage.players.PlayerImpl#specialAction(mage.abilities.SpecialAction,
      * mage.game.Game)
@@ -380,7 +373,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Sets the value for the ruleAtTheTop attribute
-     *
+     * <p>
      * true = show the rule at the top position of the rules
      *
      * @param ruleAtTheTop
@@ -398,7 +391,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Sets the value for the worksFaceDown flag
-     *
+     * <p>
      * true = the ability works also if the object is face down
      *
      * @param worksFaceDown
@@ -414,7 +407,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Sets the value for the ruleVisible attribute
-     *
+     * <p>
      * true = rule will be shown for the card / permanent false = rule won't be
      * shown
      *
@@ -432,7 +425,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Sets the value for the additional costs rule attribute
-     *
+     * <p>
      * true = rule will be shown for the card / permanent false = rule won't be
      * shown
      *
@@ -451,7 +444,7 @@ public interface Ability extends Controllable, Serializable {
      * Sets the ability word for the given ability. An ability word is a word
      * that, in essence, groups, and reminds players of, cards that have a
      * common functionality and does not imply any particular rules.
-     *
+     * <p>
      * --- Not usable yet for rule text generation of triggered abilities ---
      *
      * @param abilityWord
@@ -531,4 +524,10 @@ public interface Ability extends Controllable, Serializable {
     TargetAdjuster getTargetAdjuster();
 
     void adjustTargets(Game game);
+
+    void setCostAdjuster(CostAdjuster costAdjuster);
+
+    CostAdjuster getCostAdjuster();
+
+    void adjustCosts(Game game);
 }

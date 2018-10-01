@@ -1,9 +1,5 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -15,8 +11,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -37,6 +33,11 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -73,6 +74,7 @@ public abstract class AbilityImpl implements Ability {
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
     protected TargetAdjuster targetAdjuster = null;
+    protected CostAdjuster costAdjuster = null;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -1238,6 +1240,23 @@ public abstract class AbilityImpl implements Ability {
     public void adjustTargets(Game game) {
         if (targetAdjuster != null) {
             targetAdjuster.adjustTargets(this, game);
+        }
+    }
+
+    @Override
+    public void setCostAdjuster(CostAdjuster costAdjuster) {
+        this.costAdjuster = costAdjuster;
+    }
+
+    @Override
+    public CostAdjuster getCostAdjuster() {
+        return costAdjuster;
+    }
+
+    @Override
+    public void adjustCosts(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.adjustCosts(this, game);
         }
     }
 }
