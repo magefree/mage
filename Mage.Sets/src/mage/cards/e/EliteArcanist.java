@@ -1,12 +1,12 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -25,8 +25,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EliteArcanist extends CardImpl {
@@ -45,6 +46,7 @@ public final class EliteArcanist extends CardImpl {
         // {X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EliteArcanistCopyEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
+        ability.setCostAdjuster(EliteArcanistAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -53,25 +55,31 @@ public final class EliteArcanist extends CardImpl {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
-            Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
-            if (sourcePermanent != null && sourcePermanent.getImprinted() != null && !sourcePermanent.getImprinted().isEmpty()) {
-                Card imprintedInstant = game.getCard(sourcePermanent.getImprinted().get(0));
-                if (imprintedInstant != null) {
-                    int cmc = imprintedInstant.getConvertedManaCost();
-                    if (cmc > 0) {
-                        ability.getManaCostsToPay().clear();
-                        ability.getManaCostsToPay().add(new GenericManaCost(cmc));
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
     public EliteArcanist copy() {
         return new EliteArcanist(this);
+    }
+}
+
+enum EliteArcanistAdjuster implements CostAdjuster {
+    instance;
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
+        if (sourcePermanent == null
+                || sourcePermanent.getImprinted() == null
+                || sourcePermanent.getImprinted().isEmpty()) {
+            return;
+        }
+        Card imprintedInstant = game.getCard(sourcePermanent.getImprinted().get(0));
+        if (imprintedInstant == null) {
+            return;
+        }
+        int cmc = imprintedInstant.getConvertedManaCost();
+        if (cmc > 0) {
+            ability.getManaCostsToPay().clear();
+            ability.getManaCostsToPay().add(new GenericManaCost(cmc));
+        }
     }
 }
 
