@@ -17,7 +17,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Homelands extends ExpansionSet {
@@ -37,6 +36,7 @@ public final class Homelands extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Abbey Gargoyles", 1, Rarity.UNCOMMON, mage.cards.a.AbbeyGargoyles.class));
         cards.add(new SetCardInfo("Abbey Matron", "2a", Rarity.COMMON, AbbeyMatron.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abbey Matron", "2b", Rarity.COMMON, AbbeyMatron.class, NON_FULL_USE_VARIOUS));
@@ -122,7 +122,8 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Joven's Tools", 108, Rarity.UNCOMMON, mage.cards.j.JovensTools.class));
         cards.add(new SetCardInfo("Koskun Falls", 55, Rarity.RARE, mage.cards.k.KoskunFalls.class));
         cards.add(new SetCardInfo("Koskun Keep", 114, Rarity.UNCOMMON, mage.cards.k.KoskunKeep.class));
-        cards.add(new SetCardInfo("Labyrinth Minotaur", "30a", Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class));
+        cards.add(new SetCardInfo("Labyrinth Minotaur", "30a", Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Labyrinth Minotaur", "30b", Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leaping Lizard", 90, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Leeches", 9, Rarity.RARE, mage.cards.l.Leeches.class));
         cards.add(new SetCardInfo("Mammoth Harness", 91, Rarity.RARE, mage.cards.m.MammothHarness.class));
