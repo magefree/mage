@@ -19,7 +19,7 @@ public final class DuelDecksSpeedVsCunning extends ExpansionSet {
     private DuelDecksSpeedVsCunning() {
         super("Duel Decks: Speed vs. Cunning", "DDN", ExpansionSet.buildDate(2014, 9, 5), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Act of Treason", 26, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Aquamorph Entity", 54, Rarity.COMMON, mage.cards.a.AquamorphEntity.class));

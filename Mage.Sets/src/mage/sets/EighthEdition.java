@@ -370,6 +370,7 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Zombify", 174, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
         cards.add(new SetCardInfo("Zur's Weirding", 116, Rarity.RARE, mage.cards.z.ZursWeirding.class));
         // 8ed Edition Box Set (we need to create own set)
+        // http://www.magiclibrarities.net/540-rarities-eighth-edition-box-set-cards-english-cards-index.html
         // cards.add(new SetCardInfo("Eager Cadet", 1, Rarity.COMMON, mage.cards.e.EagerCadet.class));
         // cards.add(new SetCardInfo("Vengeance", 2, Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
         // cards.add(new SetCardInfo("Sea Eagle", 4, Rarity.COMMON, mage.cards.s.SeaEagle.class));

@@ -18,7 +18,7 @@ public final class PremiumDeckSeriesGraveborn extends ExpansionSet {
 
     private PremiumDeckSeriesGraveborn() {
         super("Premium Deck Series: Graveborn", "PD3", ExpansionSet.buildDate(2011, 11, 1), SetType.SUPPLEMENTAL);
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Animate Dead", 16, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Avatar of Woe", 6, Rarity.RARE, mage.cards.a.AvatarOfWoe.class));

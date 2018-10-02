@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class DuelDecksBlessedVsCursed extends ExpansionSet {
@@ -20,7 +19,8 @@ public final class DuelDecksBlessedVsCursed extends ExpansionSet {
     private DuelDecksBlessedVsCursed() {
         super("Duel Decks: Blessed vs. Cursed", "DDQ", ExpansionSet.buildDate(2016, 2, 26), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Abattoir Ghoul", 50, Rarity.UNCOMMON, mage.cards.a.AbattoirGhoul.class));
         cards.add(new SetCardInfo("Appetite for Brains", 51, Rarity.UNCOMMON, mage.cards.a.AppetiteForBrains.class));
         cards.add(new SetCardInfo("Barter in Blood", 52, Rarity.UNCOMMON, mage.cards.b.BarterInBlood.class));

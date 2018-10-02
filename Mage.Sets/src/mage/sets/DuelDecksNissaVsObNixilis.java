@@ -18,7 +18,7 @@ public final class DuelDecksNissaVsObNixilis extends ExpansionSet {
     private DuelDecksNissaVsObNixilis() {
         super("Duel Decks: Nissa vs. Ob Nixilis", "DDR", ExpansionSet.buildDate(2016, 9, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abundance", 2, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Altar's Reap", 37, Rarity.COMMON, mage.cards.a.AltarsReap.class));

@@ -19,7 +19,7 @@ public final class DuelDecksKnightsVsDragons extends ExpansionSet {
     private DuelDecksKnightsVsDragons() {
         super("Duel Decks: Knights vs. Dragons", "DDG", ExpansionSet.buildDate(2011, 4, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Alaborn Cavalier", 18, Rarity.UNCOMMON, mage.cards.a.AlabornCavalier.class));
         cards.add(new SetCardInfo("Armillary Sphere", 62, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));

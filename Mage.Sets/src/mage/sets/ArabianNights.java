@@ -13,7 +13,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class ArabianNights extends ExpansionSet {
@@ -26,13 +25,14 @@ public final class ArabianNights extends ExpansionSet {
 
     private ArabianNights() {
         super("Arabian Nights", "ARN", ExpansionSet.buildDate(1993, 11, 1), SetType.EXPANSION);
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Abu Ja'far", 1, Rarity.UNCOMMON, mage.cards.a.AbuJafar.class));
         cards.add(new SetCardInfo("Aladdin", 34, Rarity.RARE, mage.cards.a.Aladdin.class));
         cards.add(new SetCardInfo("Aladdin's Lamp", 56, Rarity.RARE, mage.cards.a.AladdinsLamp.class));

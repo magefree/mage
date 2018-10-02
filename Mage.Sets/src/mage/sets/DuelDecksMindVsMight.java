@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class DuelDecksMindVsMight extends ExpansionSet {
@@ -19,7 +18,7 @@ public final class DuelDecksMindVsMight extends ExpansionSet {
     private DuelDecksMindVsMight() {
         super("Duel Decks: Mind vs. Might", "DDS", ExpansionSet.buildDate(2017, 3, 31), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Ambassador Oak", 42, Rarity.COMMON, mage.cards.a.AmbassadorOak.class));
         cards.add(new SetCardInfo("Beacon of Destruction", 35, Rarity.RARE, mage.cards.b.BeaconOfDestruction.class));

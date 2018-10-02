@@ -15,7 +15,7 @@ public final class DuelDecksElspethVsTezzeret extends ExpansionSet {
     private DuelDecksElspethVsTezzeret() {
         super("Duel Decks: Elspeth vs. Tezzeret", "DDF", ExpansionSet.buildDate(2010, 8, 3), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abolish", 29, Rarity.UNCOMMON, mage.cards.a.Abolish.class));
         cards.add(new SetCardInfo("Aether Spellbomb", 61, Rarity.COMMON, mage.cards.a.AetherSpellbomb.class));

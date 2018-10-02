@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author fireshoes
  */
 public final class OathOfTheGatewatch extends ExpansionSet {
@@ -35,7 +34,7 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         this.blockName = "Battle for Zendikar";
         this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = true;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

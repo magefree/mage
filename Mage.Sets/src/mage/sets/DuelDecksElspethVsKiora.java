@@ -20,7 +20,7 @@ public final class DuelDecksElspethVsKiora extends ExpansionSet {
     private DuelDecksElspethVsKiora() {
         super("Duel Decks: Elspeth vs. Kiora", "DDO", ExpansionSet.buildDate(2015, 2, 27), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Accumulated Knowledge", 35, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));
         cards.add(new SetCardInfo("Aetherize", 36, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));

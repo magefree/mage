@@ -18,7 +18,7 @@ public class CommanderAnthologyVolumeII extends ExpansionSet {
     private CommanderAnthologyVolumeII() {
         super("Commander Anthology Volume II", "CM2", ExpansionSet.buildDate(2018, 6, 8), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abzan Falconer", 15, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Acidic Slime", 132, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));

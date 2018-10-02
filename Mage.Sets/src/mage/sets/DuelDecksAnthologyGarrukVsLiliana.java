@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class DuelDecksAnthologyGarrukVsLiliana extends ExpansionSet {
@@ -21,7 +20,8 @@ public final class DuelDecksAnthologyGarrukVsLiliana extends ExpansionSet {
         super("Duel Decks: Anthology, Garruk vs. Liliana", "DD3GVL", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Albino Troll", 3, Rarity.UNCOMMON, mage.cards.a.AlbinoTroll.class));
         cards.add(new SetCardInfo("Bad Moon", 48, Rarity.RARE, mage.cards.b.BadMoon.class));
         cards.add(new SetCardInfo("Basking Rootwalla", 2, Rarity.COMMON, mage.cards.b.BaskingRootwalla.class));

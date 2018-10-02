@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class DuelDecksAnthologyElvesVsGoblins extends ExpansionSet {
@@ -21,7 +20,8 @@ public final class DuelDecksAnthologyElvesVsGoblins extends ExpansionSet {
         super("Duel Decks: Anthology, Elves vs. Goblins", "DD3EVG", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Akki Coalflinger", 33, Rarity.UNCOMMON, mage.cards.a.AkkiCoalflinger.class));
         cards.add(new SetCardInfo("Allosaurus Rider", 2, Rarity.RARE, mage.cards.a.AllosaurusRider.class));
         cards.add(new SetCardInfo("Ambush Commander", 1, Rarity.RARE, mage.cards.a.AmbushCommander.class));

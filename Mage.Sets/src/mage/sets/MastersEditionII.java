@@ -18,7 +18,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
 public final class MastersEditionII extends ExpansionSet {
@@ -31,13 +30,14 @@ public final class MastersEditionII extends ExpansionSet {
 
     private MastersEditionII() {
         super("Masters Edition II", "ME2", ExpansionSet.buildDate(2008, 9, 22), SetType.MAGIC_ONLINE);
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Aether Storm", 39, Rarity.UNCOMMON, mage.cards.a.AetherStorm.class));
         cards.add(new SetCardInfo("Abbey Gargoyles", 1, Rarity.UNCOMMON, mage.cards.a.AbbeyGargoyles.class));
         cards.add(new SetCardInfo("Adarkar Sentinel", 201, Rarity.COMMON, mage.cards.a.AdarkarSentinel.class));
