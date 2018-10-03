@@ -8,18 +8,19 @@ import mage.constants.SetType;
 /**
  * @author TheElk801
  */
-public final class GuildKit1 extends ExpansionSet {
+public final class GuildsOfRavnicaGuildKits extends ExpansionSet {
 
-    private static final GuildKit1 instance = new GuildKit1();
+    private static final GuildsOfRavnicaGuildKits instance = new GuildsOfRavnicaGuildKits();
 
-    public static GuildKit1 getInstance() {
+    public static GuildsOfRavnicaGuildKits getInstance() {
         return instance;
     }
 
-    private GuildKit1() {
+    private GuildsOfRavnicaGuildKits() {
         super("Guilds of Ravnica Guild Kits", "GK1", ExpansionSet.buildDate(2018, 11, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Guild Kits";
         this.hasBasicLands = true;
+        
         cards.add(new SetCardInfo("Abrupt Decay", 57, Rarity.RARE, mage.cards.a.AbruptDecay.class));
         cards.add(new SetCardInfo("Advent of the Wurm", 107, Rarity.RARE, mage.cards.a.AdventOfTheWurm.class));
         cards.add(new SetCardInfo("Agrus Kos, Wojek Veteran", 83, Rarity.RARE, mage.cards.a.AgrusKosWojekVeteran.class));
