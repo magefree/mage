@@ -21,6 +21,12 @@ public class FixedTarget implements TargetPointer {
         this.initialized = false;
     }
 
+    public FixedTarget(Card card, Game game) {
+        this.targetId = card.getId();
+        this.zoneChangeCounter = card.getZoneChangeCounter(game);
+        this.initialized = true;
+    }
+
     public FixedTarget(Permanent permanent, Game game) {
         this.targetId = permanent.getId();
         this.zoneChangeCounter = permanent.getZoneChangeCounter(game);

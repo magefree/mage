@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.Set;
@@ -10,6 +9,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,9 +20,9 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.filter.FilterCard;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.RandomUtil;
@@ -81,8 +81,8 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
                     String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled";
                     player.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
                     if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-                        ContinuousEffect effect = new ElkinLairPlayExiledEffect(Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
+                        effect.setTargetPointer(new FixedTarget(card, game));
                         game.addEffect(effect, source);
 
                         DelayedTriggeredAbility delayed = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ElkinLairPutIntoGraveyardEffect());
