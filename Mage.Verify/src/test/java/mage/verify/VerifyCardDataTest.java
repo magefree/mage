@@ -277,7 +277,7 @@ public class VerifyCardDataTest {
         printMessages(list, true);
     }
 
-    private String extractShortClass(Class<? extends TokenImpl> tokenClass) {
+    private String extractShortClass(Class<? extends Object> tokenClass) {
         String origin = tokenClass.getName();
         if (origin.contains("$")) {
             // inner classes, example: mage.cards.f.FigureOfDestiny$FigureOfDestinyToken3
