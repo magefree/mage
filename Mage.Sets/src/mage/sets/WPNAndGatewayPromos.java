@@ -63,14 +63,14 @@ public final class WPNAndGatewayPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Nighthawk", 33, Rarity.RARE, mage.cards.v.VampireNighthawk.class));
         // 2010 - https://scryfall.com/sets/pwp10
         cards.add(new SetCardInfo("Curse of Wizardry", 47, Rarity.RARE, mage.cards.c.CurseOfWizardry.class));
-        cards.add(new SetCardInfo("Fling", 50, Rarity.RARE, mage.cards.f.Fling.class));
+        cards.add(new SetCardInfo("Fling", 50, Rarity.RARE, mage.cards.f.Fling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Golem's Heart", 60, Rarity.RARE, mage.cards.g.GolemsHeart.class));
         cards.add(new SetCardInfo("Kor Firewalker", 36, Rarity.RARE, mage.cards.k.KorFirewalker.class));
         cards.add(new SetCardInfo("Leatherback Baloth", 37, Rarity.RARE, mage.cards.l.LeatherbackBaloth.class));
         cards.add(new SetCardInfo("Pathrazer of Ulamog", 46, Rarity.RARE, mage.cards.p.PathrazerOfUlamog.class));
         cards.add(new SetCardInfo("Plague Stinger", 59, Rarity.RARE, mage.cards.p.PlagueStinger.class));
         cards.add(new SetCardInfo("Skinrender", 63, Rarity.RARE, mage.cards.s.Skinrender.class));
-        cards.add(new SetCardInfo("Sylvan Ranger", 51, Rarity.RARE, mage.cards.s.SylvanRanger.class));
+        cards.add(new SetCardInfo("Sylvan Ranger", 51, Rarity.RARE, mage.cards.s.SylvanRanger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syphon Mind", 40, Rarity.RARE, mage.cards.s.SyphonMind.class));
         // 2011 - https://scryfall.com/sets/pwp11
         cards.add(new SetCardInfo("Auramancer", 77, Rarity.RARE, mage.cards.a.Auramancer.class));
@@ -78,13 +78,13 @@ public final class WPNAndGatewayPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Boneyard Wurm", 84, Rarity.RARE, mage.cards.b.BoneyardWurm.class));
         cards.add(new SetCardInfo("Circle of Flame", 78, Rarity.RARE, mage.cards.c.CircleOfFlame.class));
         cards.add(new SetCardInfo("Curse of the Bloody Tome", 80, Rarity.RARE, mage.cards.c.CurseOfTheBloodyTome.class));
-        cards.add(new SetCardInfo("Fling", 69, Rarity.RARE, mage.cards.f.Fling.class));
+        cards.add(new SetCardInfo("Fling", 69, Rarity.RARE, mage.cards.f.Fling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Master's Call", 64, Rarity.RARE, mage.cards.m.MastersCall.class));
         cards.add(new SetCardInfo("Maul Splicer", 72, Rarity.RARE, mage.cards.m.MaulSplicer.class));
         cards.add(new SetCardInfo("Plague Myr", 65, Rarity.RARE, mage.cards.p.PlagueMyr.class));
         cards.add(new SetCardInfo("Shrine of Burning Rage", 73, Rarity.RARE, mage.cards.s.ShrineOfBurningRage.class));
         cards.add(new SetCardInfo("Signal Pest", 66, Rarity.RARE, mage.cards.s.SignalPest.class));
-        cards.add(new SetCardInfo("Sylvan Ranger", 70, Rarity.RARE, mage.cards.s.SylvanRanger.class));
+        cards.add(new SetCardInfo("Sylvan Ranger", 70, Rarity.RARE, mage.cards.s.SylvanRanger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tormented Soul", 76, Rarity.RARE, mage.cards.t.TormentedSoul.class));
         cards.add(new SetCardInfo("Vault Skirge", 71, Rarity.RARE, mage.cards.v.VaultSkirge.class));
         // 2012 - https://scryfall.com/sets/pwp12

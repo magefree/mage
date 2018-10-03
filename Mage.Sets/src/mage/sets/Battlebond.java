@@ -212,8 +212,8 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Rhox Brute", 227, Rarity.COMMON, mage.cards.r.RhoxBrute.class));
         cards.add(new SetCardInfo("Riptide Crab", 228, Rarity.COMMON, mage.cards.r.RiptideCrab.class));
         cards.add(new SetCardInfo("Rotfeaster Maggot", 157, Rarity.COMMON, mage.cards.r.RotfeasterMaggot.class));
-        cards.add(new SetCardInfo("Rowan Kenrith", 2, Rarity.MYTHIC, mage.cards.r.RowanKenrith.class));
-        cards.add(new SetCardInfo("Rowan Kenrith", 256, Rarity.MYTHIC, mage.cards.r.RowanKenrith.class));
+        cards.add(new SetCardInfo("Rowan Kenrith", 2, Rarity.MYTHIC, mage.cards.r.RowanKenrith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rowan Kenrith", 256, Rarity.MYTHIC, mage.cards.r.RowanKenrith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Royal Trooper", 104, Rarity.COMMON, mage.cards.r.RoyalTrooper.class));
         cards.add(new SetCardInfo("Rushblade Commander", 77, Rarity.UNCOMMON, mage.cards.r.RushbladeCommander.class));
         cards.add(new SetCardInfo("Saddleback Lagac", 211, Rarity.COMMON, mage.cards.s.SaddlebackLagac.class));
@@ -279,8 +279,8 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Wandering Wolf", 216, Rarity.COMMON, mage.cards.w.WanderingWolf.class));
         cards.add(new SetCardInfo("War's Toll", 187, Rarity.RARE, mage.cards.w.WarsToll.class));
         cards.add(new SetCardInfo("Watercourser", 137, Rarity.COMMON, mage.cards.w.Watercourser.class));
-        cards.add(new SetCardInfo("Will Kenrith", 1, Rarity.MYTHIC, mage.cards.w.WillKenrith.class));
-        cards.add(new SetCardInfo("Will Kenrith", 255, Rarity.MYTHIC, mage.cards.w.WillKenrith.class));
+        cards.add(new SetCardInfo("Will Kenrith", 1, Rarity.MYTHIC, mage.cards.w.WillKenrith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Will Kenrith", 255, Rarity.MYTHIC, mage.cards.w.WillKenrith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrap in Flames", 188, Rarity.COMMON, mage.cards.w.WrapInFlames.class));
         cards.add(new SetCardInfo("Yotian Soldier", 249, Rarity.COMMON, mage.cards.y.YotianSoldier.class));
         cards.add(new SetCardInfo("Zndrsplt's Judgment", 43, Rarity.RARE, mage.cards.z.ZndrspltsJudgment.class));

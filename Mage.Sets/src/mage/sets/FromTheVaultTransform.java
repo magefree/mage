@@ -29,8 +29,8 @@ public final class FromTheVaultTransform extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodline Keeper", 4, Rarity.MYTHIC, mage.cards.b.BloodlineKeeper.class));
         cards.add(new SetCardInfo("Lord of Lineage", 1004, Rarity.MYTHIC, mage.cards.l.LordOfLineage.class));
         cards.add(new SetCardInfo("Bruna, the Fading Light", 5, Rarity.MYTHIC, mage.cards.b.BrunaTheFadingLight.class));
-        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", 1005, Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
-        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", 1005, Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
+        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", 1005, Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", 1005, Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", 6, Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
         cards.add(new SetCardInfo("Chandra, Roaring Flame", 1006, Rarity.MYTHIC, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Delver of Secrets", 7, Rarity.MYTHIC, mage.cards.d.DelverOfSecrets.class));
