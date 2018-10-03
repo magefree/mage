@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.HashSet;
@@ -6,9 +5,9 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,7 +43,7 @@ class ActOnImpulseExileEffect extends OneShotEffect {
 
     public ActOnImpulseExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile the top three cards of your library. Until end of turn, you may play cards exiled this way.";
+        this.staticText = "Exile the top three cards of your library. Until end of turn, you may play cards exiled this way";
     }
 
     public ActOnImpulseExileEffect(final ActOnImpulseExileEffect effect) {
@@ -71,7 +70,7 @@ class ActOnImpulseExileEffect extends OneShotEffect {
                     }
                 }
                 if (!cards.isEmpty()) {
-                    ContinuousEffect effect = new ActOnImpulseMayPlayExiledEffect();
+                    ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
                     effect.setTargetPointer(new FixedTargets(cards, game));
                     game.addEffect(effect, source);
                 }
@@ -79,34 +78,6 @@ class ActOnImpulseExileEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-}
-
-class ActOnImpulseMayPlayExiledEffect extends AsThoughEffectImpl {
-
-    public ActOnImpulseMayPlayExiledEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-    }
-
-    public ActOnImpulseMayPlayExiledEffect(final ActOnImpulseMayPlayExiledEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ActOnImpulseMayPlayExiledEffect copy() {
-        return new ActOnImpulseMayPlayExiledEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return affectedControllerId.equals(source.getControllerId())
-                && getTargetPointer().getTargets(game, source).contains(objectId);
     }
 
 }

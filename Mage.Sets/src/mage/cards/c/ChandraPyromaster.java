@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.HashSet;
@@ -9,9 +8,9 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -20,7 +19,6 @@ import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
@@ -177,53 +175,15 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
-            Library library = controller.getLibrary();
-            Card card = library.getFromTop(game);
+        if (controller != null && sourceObject != null) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
-                game.addEffect(new ChandraPyromasterPlayEffect(new MageObjectReference(card, game)), source);
+                controller.moveCards(card, Zone.EXILED, source, game);
+                ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(card, game));
+                game.addEffect(effect, source);
             }
             return true;
-        }
-        return false;
-    }
-}
-
-class ChandraPyromasterPlayEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference objectReference;
-
-    public ChandraPyromasterPlayEffect(MageObjectReference objectReference) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.objectReference = objectReference;
-        staticText = "you may play that card until end of turn";
-    }
-
-    public ChandraPyromasterPlayEffect(final ChandraPyromasterPlayEffect effect) {
-        super(effect);
-        this.objectReference = effect.objectReference;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ChandraPyromasterPlayEffect copy() {
-        return new ChandraPyromasterPlayEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectReference.refersTo(objectId, game) && affectedControllerId.equals(source.getControllerId())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                return true;
-            } else {
-                discard();
-            }
         }
         return false;
     }

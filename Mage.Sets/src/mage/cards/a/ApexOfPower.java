@@ -4,14 +4,13 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -79,39 +78,11 @@ class ApexOfPowerSpellEffect extends OneShotEffect {
             if (card.isLand()) {
                 continue;
             }
-            ContinuousEffect effect = new ApexOfPowerCastFromExileEffect();
+            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             game.addEffect(effect, source);
         }
         return true;
-    }
-}
-
-class ApexOfPowerCastFromExileEffect extends AsThoughEffectImpl {
-
-    public ApexOfPowerCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play the card from exile";
-    }
-
-    public ApexOfPowerCastFromExileEffect(final ApexOfPowerCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ApexOfPowerCastFromExileEffect copy() {
-        return new ApexOfPowerCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }
 

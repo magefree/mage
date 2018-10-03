@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.asthough;
 
 import mage.constants.PhaseStep;
@@ -99,14 +98,17 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
 
         assertExileCount("Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Abzan Banner", 1);
-        assertPermanentCount(playerB, "Dragon Grip", 1);
         assertGraveyardCount(playerB, "Peach Garden Oath", 1);
+        assertExileCount(playerB, "Dragon Grip", 0);
+        assertGraveyardCount(playerB, "Dragon Grip", 0);
 
         assertPowerToughness(playerB, "Narset, Enlightened Master", 5, 2);
 
         assertHandCount(playerB, "Plains", 1);
         assertLife(playerA, 17);
         assertLife(playerB, 22);
+
+        assertPermanentCount(playerB, "Dragon Grip", 1);
 
     }
 
@@ -139,7 +141,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, 3);
         assertExileCount(playerB, "Plains", 3);
         assertExileCount(playerB, 3);
-
 
     }
 

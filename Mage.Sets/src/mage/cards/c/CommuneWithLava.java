@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.Set;
@@ -23,7 +22,7 @@ import mage.util.CardUtil;
 public final class CommuneWithLava extends CardImpl {
 
     public CommuneWithLava(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
 
         // Exile the top X cards of your library. Until the end of your next turn, you may play those cards.
         this.getSpellAbility().addEffect(new CommuneWithLavaEffect());

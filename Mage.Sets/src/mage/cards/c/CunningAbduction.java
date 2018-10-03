@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -8,6 +7,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ import mage.util.CardUtil;
 public final class CunningAbduction extends CardImpl {
 
     public CunningAbduction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");
 
         // Target opponent reveals their hand. You choose a nonland card from that player's hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -82,10 +82,10 @@ class CunningAbductionExileEffect extends OneShotEffect {
                 if (card != null) {
                     // move card to exile
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.HAND, true);
+                    controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
                     // allow to cast the card
-                    ContinuousEffect effect = new CunningAbductionCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.Custom);
+                    effect.setTargetPointer(new FixedTarget(card, game));
                     game.addEffect(effect, source);
                     // and you may spend mana as though it were mana of any color to cast it
                     effect = new CunningAbductionSpendAnyManaEffect();
@@ -94,41 +94,6 @@ class CunningAbductionExileEffect extends OneShotEffect {
                 }
                 return true;
             }
-        }
-        return false;
-    }
-}
-
-class CunningAbductionCastFromExileEffect extends AsThoughEffectImpl {
-
-    public CunningAbductionCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
-    }
-
-    public CunningAbductionCastFromExileEffect(final CunningAbductionCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public CunningAbductionCastFromExileEffect copy() {
-        return new CunningAbductionCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
-            if (affectedControllerId.equals(source.getControllerId())) {
-                return true;
-            }
-        } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-            // object has moved zone so effect can be discarted
-            this.discard();
         }
         return false;
     }

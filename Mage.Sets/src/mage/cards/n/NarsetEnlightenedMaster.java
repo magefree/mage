@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.Set;
@@ -77,7 +76,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
                         && !card.isCreature()
                         && !card.isLand()) {
                     ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    effect.setTargetPointer(new FixedTarget(card, game));
                     game.addEffect(effect, source);
                 }
             }
@@ -115,7 +114,8 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId())) {
+        if (objectId.equals(getTargetPointer().getFirst(game, source))
+                && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             if (card != null) {
                 Player player = game.getPlayer(affectedControllerId);

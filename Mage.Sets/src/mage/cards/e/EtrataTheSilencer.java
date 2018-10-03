@@ -145,7 +145,7 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         }
         int cardsFound = 0;
         for (Card exiledCard : game.getExile().getAllCards(game)) {
-            if (exiledCard.getCounters(game).getCount(CounterType.HIT) > 1 && exiledCard.getOwnerId().equals(player.getId())) {
+            if (exiledCard.getCounters(game).getCount(CounterType.HIT) >= 1 && exiledCard.getOwnerId().equals(player.getId())) {
                 cardsFound++;
             }
         }
