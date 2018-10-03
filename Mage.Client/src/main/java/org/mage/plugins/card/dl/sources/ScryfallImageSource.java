@@ -1,13 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 import mage.client.dialog.PreferencesDialog;
 import org.mage.plugins.card.images.CardDownloadData;
+
+import java.util.*;
 
 /**
  * @author Quercitron, JayDi85
@@ -234,6 +230,7 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("M19");
         supportedSets.add("GS1");
         supportedSets.add("GRN");
+        supportedSets.add("GK1");
         //
         supportedSets.add("EURO");
         supportedSets.add("GPX");
