@@ -2,6 +2,7 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -13,7 +14,6 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.u.UnhallowedCathar;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -23,7 +23,6 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author BetaSteward
  */
 public final class LoyalCathar extends CardImpl {
@@ -34,7 +33,7 @@ public final class LoyalCathar extends CardImpl {
         this.subtype.add(SubType.SOLDIER);
 
         this.transformable = true;
-        this.secondSideCardClazz = UnhallowedCathar.class;
+        this.secondSideCardClazz = mage.cards.u.UnhallowedCathar.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -116,5 +115,4 @@ class ReturnLoyalCatharEffect extends OneShotEffect {
         }
         return true;
     }
-
 }

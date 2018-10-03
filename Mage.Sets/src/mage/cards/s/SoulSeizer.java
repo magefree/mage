@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,7 +11,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.g.GhastlyHaunting;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -26,17 +26,16 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author BetaSteward
  */
 public final class SoulSeizer extends CardImpl {
 
     public SoulSeizer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.SPIRIT);
 
         this.transformable = true;
-        this.secondSideCardClazz = GhastlyHaunting.class;
+        this.secondSideCardClazz = mage.cards.g.GhastlyHaunting.class;
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -80,7 +79,7 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
             Player opponent = game.getPlayer(event.getPlayerId());
             if (opponent != null) {
@@ -116,7 +115,7 @@ class SoulSeizerEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.isTransformable()) {
             if (permanent.transform(game)) {
-                game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());                    
+                game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());
                 Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));
                 if (attachTo != null) {
                     return attachTo.addAttachment(source.getSourceId(), game);

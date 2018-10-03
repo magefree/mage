@@ -2,6 +2,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -15,7 +16,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.l.LordOfLineage;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
@@ -25,7 +25,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.VampireToken;
 
 /**
- *
  * @author Loki
  */
 public final class BloodlineKeeper extends CardImpl {
@@ -44,7 +43,7 @@ public final class BloodlineKeeper extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCardClazz = LordOfLineage.class;
+        this.secondSideCardClazz = mage.cards.l.LordOfLineage.class;
 
         this.addAbility(FlyingAbility.getInstance());
         // {T}: Create a 2/2 black Vampire creature token with flying.

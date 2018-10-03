@@ -2,6 +2,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -13,7 +14,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.f.FinalIteration;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -29,7 +29,6 @@ import mage.game.permanent.token.HumanWizardToken;
 import mage.players.Player;
 
 /**
- *
  * @author fireshoes
  */
 public final class DocentOfPerfection extends CardImpl {
@@ -43,14 +42,14 @@ public final class DocentOfPerfection extends CardImpl {
     }
 
     public DocentOfPerfection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCardClazz = FinalIteration.class;
+        this.secondSideCardClazz = mage.cards.f.FinalIteration.class;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
@@ -108,4 +107,3 @@ class DocentOfPerfectionEffect extends OneShotEffect {
         return false;
     }
 }
-

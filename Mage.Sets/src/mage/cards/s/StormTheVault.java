@@ -15,7 +15,6 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.v.VaultOfCatlacan;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
@@ -25,7 +24,6 @@ import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 
 /**
- *
  * @author LevelX2
  */
 public final class StormTheVault extends CardImpl {
@@ -36,7 +34,7 @@ public final class StormTheVault extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         this.transformable = true;
-        this.secondSideCardClazz = VaultOfCatlacan.class;
+        this.secondSideCardClazz = mage.cards.v.VaultOfCatlacan.class;
 
         // Whenever one or more creatures you control deal combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
@@ -49,7 +47,6 @@ public final class StormTheVault extends CardImpl {
                 "At the beginning of your end step, if you control five or more artifacts, transform {this}"));
 
     }
-
 
 
     public StormTheVault(final StormTheVault card) {

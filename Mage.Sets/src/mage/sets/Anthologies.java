@@ -19,7 +19,7 @@ public final class Anthologies extends ExpansionSet {
     private Anthologies() {
         super("Anthologies", "ATH", ExpansionSet.buildDate(1998, 11, 01), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Aesthir Glider", 67, Rarity.COMMON, mage.cards.a.AesthirGlider.class));
         cards.add(new SetCardInfo("Armageddon", 1, Rarity.RARE, mage.cards.a.Armageddon.class));

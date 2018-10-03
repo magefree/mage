@@ -2,6 +2,7 @@
 package mage.cards.v;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -12,7 +13,6 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.a.AbolisherOfBloodlines;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -21,7 +21,6 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
- *
  * @author fireshoes
  */
 public final class VoldarenPariah extends CardImpl {
@@ -33,14 +32,14 @@ public final class VoldarenPariah extends CardImpl {
     }
 
     public VoldarenPariah(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCardClazz = AbolisherOfBloodlines.class;
+        this.secondSideCardClazz = mage.cards.a.AbolisherOfBloodlines.class;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

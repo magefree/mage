@@ -4,6 +4,7 @@ package mage.cards.a;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,7 +17,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.s.SanctumOfTheSun;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -28,7 +28,6 @@ import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public final class AzorsGateway extends CardImpl {
@@ -38,7 +37,7 @@ public final class AzorsGateway extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.transformable = true;
-        this.secondSideCardClazz = SanctumOfTheSun.class;
+        this.secondSideCardClazz = mage.cards.s.SanctumOfTheSun.class;
 
         // {1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different converted mana costs are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it.
         this.addAbility(new TransformAbility());

@@ -2,7 +2,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.i.IcatianJavelineers;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -45,7 +44,7 @@ public final class DuelDecksElspethVsKiora extends ExpansionSet {
         cards.add(new SetCardInfo("Gustcloak Savior", 11, Rarity.RARE, mage.cards.g.GustcloakSavior.class));
         cards.add(new SetCardInfo("Gustcloak Sentinel", 12, Rarity.UNCOMMON, mage.cards.g.GustcloakSentinel.class));
         cards.add(new SetCardInfo("Gustcloak Skirmisher", 13, Rarity.UNCOMMON, mage.cards.g.GustcloakSkirmisher.class));
-        cards.add(new SetCardInfo("Icatian Javelineers", 14, Rarity.COMMON, IcatianJavelineers.class));
+        cards.add(new SetCardInfo("Icatian Javelineers", 14, Rarity.COMMON, mage.cards.i.IcatianJavelineers.class));
         cards.add(new SetCardInfo("Inkwell Leviathan", 37, Rarity.RARE, mage.cards.i.InkwellLeviathan.class));
         cards.add(new SetCardInfo("Island", 60, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 61, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));

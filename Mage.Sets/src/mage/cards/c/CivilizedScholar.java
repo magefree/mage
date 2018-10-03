@@ -2,6 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,7 +12,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.h.HomicidalBrute;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -29,12 +29,12 @@ import mage.watchers.Watcher;
 public final class CivilizedScholar extends CardImpl {
 
     public CivilizedScholar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 
         this.transformable = true;
-        this.secondSideCardClazz = HomicidalBrute.class;
+        this.secondSideCardClazz = mage.cards.h.HomicidalBrute.class;
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

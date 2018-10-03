@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -15,20 +16,18 @@ import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.y.YixlidJailer;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class NecroticOoze extends CardImpl {
 
     public NecroticOoze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add(SubType.OOZE);
 
         this.power = new MageInt(4);
@@ -90,7 +89,7 @@ public final class NecroticOoze extends CardImpl {
         public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
             // the dependent classes needs to be an enclosed class for dependent check of continuous effects
             return allEffectsInLayer.stream()
-                    .filter(effect -> YixlidJailer.class.equals(effect.getClass().getEnclosingClass()))
+                    .filter(effect -> mage.cards.y.YixlidJailer.class.equals(effect.getClass().getEnclosingClass()))
                     .map(Effect::getId)
                     .collect(Collectors.toSet());
 

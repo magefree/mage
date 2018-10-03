@@ -7,7 +7,6 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.b.BearerOfOverwhelmingTruths;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -18,20 +17,19 @@ import mage.game.events.GameEvent.EventType;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class DaringSleuth extends CardImpl {
 
     public DaringSleuth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        
+
         this.transformable = true;
-        this.secondSideCardClazz = BearerOfOverwhelmingTruths.class;
+        this.secondSideCardClazz = mage.cards.b.BearerOfOverwhelmingTruths.class;
 
         // When you sacrifice a Clue, transform Daring Sleuth.
         this.addAbility(new TransformAbility());

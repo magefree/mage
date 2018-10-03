@@ -2,6 +2,7 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -11,7 +12,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.a.AdantoTheFirstFort;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -19,7 +19,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.IxalanVampireToken;
 
 /**
- *
  * @author TheElk801
  */
 public final class LegionsLanding extends CardImpl {
@@ -30,7 +29,7 @@ public final class LegionsLanding extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         this.transformable = true;
-        this.secondSideCardClazz = AdantoTheFirstFort.class;
+        this.secondSideCardClazz = mage.cards.a.AdantoTheFirstFort.class;
 
         // When Legion's Landing enters the battlefield, create a 1/1 white Vampire creature token with lifelink.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken())));

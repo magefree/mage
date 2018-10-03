@@ -2,6 +2,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -14,7 +15,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.i.InfectiousCurse;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -23,7 +23,6 @@ import mage.target.Target;
 import mage.util.CardUtil;
 
 /**
- *
  * @author halljared
  */
 public final class AccursedWitch extends CardImpl {
@@ -36,7 +35,7 @@ public final class AccursedWitch extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCardClazz = InfectiousCurse.class;
+        this.secondSideCardClazz = mage.cards.i.InfectiousCurse.class;
 
         // Spells your opponents cast that target Accursed Witch cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AccursedWitchSpellsCostReductionEffect()));

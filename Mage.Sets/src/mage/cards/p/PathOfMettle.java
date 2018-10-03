@@ -2,6 +2,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -13,7 +14,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.m.MetzaliTowerOfTriumph;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -24,7 +24,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public final class PathOfMettle extends CardImpl {
@@ -46,7 +45,7 @@ public final class PathOfMettle extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         this.transformable = true;
-        this.secondSideCardClazz = MetzaliTowerOfTriumph.class;
+        this.secondSideCardClazz = mage.cards.m.MetzaliTowerOfTriumph.class;
 
         // When Path of Mettle enters the battlefield, it deals 1 damage to each creature that doesn't have first strike, double strike, vigilance, or haste.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(1, filter)));
@@ -118,5 +117,4 @@ class PathOfMettleTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever you attack with at least two creatures that have first strike, double strike, vigilance, and/or haste, transform Path of Mettle";
     }
-
 }

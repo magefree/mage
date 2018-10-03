@@ -2,7 +2,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.h.HighTide;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -18,6 +17,7 @@ public final class MediaInserts extends ExpansionSet {
         super("Media Inserts", "MBP", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Acquire", 83, Rarity.RARE, mage.cards.a.Acquire.class));
         cards.add(new SetCardInfo("Aeronaut Tinkerer", 118, Rarity.COMMON, mage.cards.a.AeronautTinkerer.class));
         cards.add(new SetCardInfo("Ajani, Caller of the Pride", 72, Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
@@ -102,7 +102,7 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Hamletback Goliath", 71, Rarity.RARE, mage.cards.h.HamletbackGoliath.class));
         cards.add(new SetCardInfo("Harbinger of the Hunt", 116, Rarity.SPECIAL, mage.cards.h.HarbingerOfTheHunt.class));
         cards.add(new SetCardInfo("Hero of Goma Fada", 136, Rarity.SPECIAL, mage.cards.h.HeroOfGomaFada.class));
-        cards.add(new SetCardInfo("High Tide", 80, Rarity.COMMON, HighTide.class));
+        cards.add(new SetCardInfo("High Tide", 80, Rarity.COMMON, mage.cards.h.HighTide.class));
         cards.add(new SetCardInfo("Hixus, Prison Warden", 126, Rarity.SPECIAL, mage.cards.h.HixusPrisonWarden.class));
         cards.add(new SetCardInfo("Honored Hierarch", 129, Rarity.SPECIAL, mage.cards.h.HonoredHierarch.class));
         cards.add(new SetCardInfo("Honor of the Pure", 20, Rarity.RARE, mage.cards.h.HonorOfThePure.class));
