@@ -239,12 +239,14 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         if (controller == null || sourcePermanent == null) {
             return false;
         }
+        controller.lookAtAllLibraries(source, game);
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
             if (source.isControlledBy(player.getId())) {
                 playerName = "your";
             }
+
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
             if (controller.searchLibrary(target, game, playerId)) {
                 UUID targetId = target.getFirstTarget();

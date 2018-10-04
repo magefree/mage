@@ -350,6 +350,15 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents);
 
+    /**
+     * Reveals all players' libraries. Useful for abilities like Jace, Architect of Thought's -8
+     * that have effects that require information from all libraries.
+     * @param source
+     * @param game
+     * @return
+     */
+    boolean lookAtAllLibraries(Ability source, Game game);
+
     boolean canPlayLand();
 
     /**
