@@ -266,15 +266,19 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                     }
                     TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
                     if (controller.searchLibrary(target, game, playerId)) {
+                        checkList.add(playerId);
                         UUID targetId = target.getFirstTarget();
                         Card card = player.getLibrary().remove(targetId, game);
                         if (card != null) {
                             controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                             playerList.remove(playerId);
                         }
+                    } else {
+                        playerList.remove(playerId);
                     }
+                } else {
+                    playerList.remove(playerId);
                 }
-                checkList.add(playerId);
             } else {
                 break;
             }
