@@ -2478,7 +2478,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean lookAtAllLibraries(Ability source, Game game) {
+    public void lookAtAllLibraries(Ability source, Game game) {
         for(UUID playerId : game.getState().getPlayersInRange(this.getId(), game)){
             Player player = game.getPlayer(playerId);
             String playerName = this.getName().equals(player.getName()) ? "Your " : player.getName() + "'s ";
@@ -2486,7 +2486,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             Cards cardsInLibrary = new CardsImpl(player.getLibrary().getTopCards(game, player.getLibrary().size()));
             lookAtCards(playerName, cardsInLibrary, game);
         }
-        return true;
     }
 
     private boolean handleLibraryCastableCards(Library library, Game game, UUID targetPlayerId) {

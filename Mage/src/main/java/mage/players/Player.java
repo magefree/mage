@@ -357,7 +357,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @return
      */
-    boolean lookAtAllLibraries(Ability source, Game game);
+    void lookAtAllLibraries(Ability source, Game game);
 
     boolean canPlayLand();
 
