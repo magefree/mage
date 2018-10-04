@@ -273,9 +273,6 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                             playerList.remove(playerId);
                         }
                     }
-                    if (!checkList.contains(playerId)) {
-                        player.shuffleLibrary(source, game); // only one shuffle per library (to prevent bad interactions with Psychogenic Probe etc.)
-                    }
                 }
                 checkList.add(playerId);
             } else {
@@ -288,7 +285,12 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                 }
             }
         }
-
+        for (UUID playerId : checkList) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.shuffleLibrary(source, game);
+            }
+        }
         ExileZone jaceExileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (jaceExileZone == null) {
             return true;
