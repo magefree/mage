@@ -1,6 +1,8 @@
 
 package mage.cards.j;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
@@ -34,9 +36,12 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import javax.swing.*;
 
 /**
  *
@@ -239,23 +244,21 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         if (controller == null || sourcePermanent == null) {
             return false;
         }
+        ArrayList<JaceArchitectOfThoughtEffect3Helper> threads = new ArrayList<>();
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
-            if (source.isControlledBy(player.getId())) {
-                playerName = "your";
-            }
-            TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
-            if (controller.searchLibrary(target, game, playerId)) {
-                UUID targetId = target.getFirstTarget();
-                Card card = player.getLibrary().remove(targetId, game);
-                if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+            JaceArchitectOfThoughtEffect3Helper thread = new JaceArchitectOfThoughtEffect3Helper(playerId, game, source, sourcePermanent, controller);
+            thread.execute();
+            thread.addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if("state".equals(evt.getPropertyName()) && SwingWorker.StateValue.DONE.equals(evt.getNewValue())){
+                        threads.remove(evt.getSource());
+                    }
                 }
-            }
-            player.shuffleLibrary(source, game);
+            });
+            threads.add(thread);
         }
-
+        while(threads.size() > 0) {}
         ExileZone jaceExileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (jaceExileZone == null) {
             return true;
@@ -273,4 +276,41 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         }
         return true;
     }
+}
+
+class JaceArchitectOfThoughtEffect3Helper extends SwingWorker<Boolean, Void> {
+
+    UUID playerId;
+    Game game;
+    Ability source;
+    Permanent sourcePermanent;
+    Player controller;
+
+    public JaceArchitectOfThoughtEffect3Helper (UUID playerId, Game game, Ability source, Permanent sourcePermanent, Player controller) {
+        this.playerId = playerId;
+        this.game = game;
+        this.source = source;
+        this.sourcePermanent = sourcePermanent;
+        this.controller = controller;
+    }
+
+    @Override
+    protected Boolean doInBackground() throws Exception {
+        Player player = this.game.getPlayer(this.playerId);
+        String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
+        if (this.source.isControlledBy(player.getId())) {
+            playerName = "your";
+        }
+        TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
+        if (this.controller.searchLibrary(target, this.game, this.playerId)) {
+            UUID targetId = target.getFirstTarget();
+            Card card = player.getLibrary().remove(targetId, this.game);
+            if (card != null) {
+                this.controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(this.game, this.source), this.sourcePermanent.getIdName(), this.source.getSourceId(), this.game, Zone.LIBRARY, true);
+            }
+            player.shuffleLibrary(this.source, this.game);
+        }
+        return true;
+    }
+
 }
