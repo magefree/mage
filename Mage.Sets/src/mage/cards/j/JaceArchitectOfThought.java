@@ -239,7 +239,10 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         if (controller == null || sourcePermanent == null) {
             return false;
         }
-        controller.lookAtAllLibraries(source, game);
+        if(controller.chooseUse(Outcome.Benefit, "Look at all players' libraries before card select?", null, game)) {
+            game.informPlayers(controller.getLogName() + " is looking at all players' libraries.");
+            controller.lookAtAllLibraries(source, game);
+        }
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             String playerName = new StringBuilder(player.getLogName()).append("'s").toString();

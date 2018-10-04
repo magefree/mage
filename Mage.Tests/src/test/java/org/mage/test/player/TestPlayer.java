@@ -2072,6 +2072,7 @@ public class TestPlayer implements Player {
         return computerPlayer.searchLibrary(target, game, targetPlayerId, triggerEvents);
     }
 
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
         computerPlayer.lookAtAllLibraries(source, game);
     }
