@@ -76,6 +76,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Hermit Druid", 108, Rarity.RARE, mage.cards.h.HermitDruid.class));
         cards.add(new SetCardInfo("Hesitation", 33, Rarity.UNCOMMON, mage.cards.h.Hesitation.class));
         cards.add(new SetCardInfo("Hibernation Sliver", 128, Rarity.UNCOMMON, mage.cards.h.HibernationSliver.class));
+        cards.add(new SetCardInfo("Hidden Retreat", -1, Rarity.RARE, mage.cards.h.HiddenRetreat.class));
         cards.add(new SetCardInfo("Honor Guard", 7, Rarity.COMMON, mage.cards.h.HonorGuard.class));
         cards.add(new SetCardInfo("Horn of Greed", 135, Rarity.RARE, mage.cards.h.HornOfGreed.class));
         cards.add(new SetCardInfo("Hornet Cannon", 136, Rarity.UNCOMMON, mage.cards.h.HornetCannon.class));
