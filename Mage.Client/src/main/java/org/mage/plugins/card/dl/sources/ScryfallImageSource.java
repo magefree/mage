@@ -236,6 +236,7 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("GPX");
         supportedSets.add("ATH");
         supportedSets.add("GRC");
+        supportedSets.add("ANA");
     }
 
     @Override

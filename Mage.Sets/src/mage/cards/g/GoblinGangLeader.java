@@ -25,7 +25,7 @@ public final class GoblinGangLeader extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Goblin Gang Leader enters the battlefield, create two 1/1 red Goblin creature tokens.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken("ANA"), 2)));
     }
 
     public GoblinGangLeader(final GoblinGangLeader card) {
