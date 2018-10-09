@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SosukesSummons extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken Snake");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken Snake");
 
     static {
         filter.add(new SubtypePredicate(SubType.SNAKE));
@@ -43,8 +43,6 @@ public final class SosukesSummons extends CardImpl {
                 filter,
                 true)
         );
-
-
     }
 
     public SosukesSummons(final SosukesSummons card) {
