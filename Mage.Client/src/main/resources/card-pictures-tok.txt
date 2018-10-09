@@ -105,6 +105,7 @@
 |Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
 |Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
 |Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
+|Generate|TOK:ANA|Goblin|||GoblinToken|
 |Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
