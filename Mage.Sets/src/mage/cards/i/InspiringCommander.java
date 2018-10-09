@@ -44,7 +44,7 @@ public final class InspiringCommander extends CardImpl {
         Effect effect2 = new DrawCardSourceControllerEffect(1);
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, effect1, filter, false);
-        ability.addEffect(effect2);
+        ability.addEffect(effect2.setText("and draw a card"));
         this.addAbility(ability);
     }
 
