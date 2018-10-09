@@ -29,7 +29,7 @@ public final class SoulhunterRakshasa extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // When Soulhunter Rakshasa enters the battlefield, it deals 5 damage to target opponent.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(5, "it"), false);
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }
