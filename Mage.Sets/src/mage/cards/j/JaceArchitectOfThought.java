@@ -2,6 +2,7 @@
 package mage.cards.j;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -246,7 +247,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         }
         List<UUID> playerList = new ArrayList<>();
         playerList.addAll(game.getState().getPlayersInRange(controller.getId(), game));
-        List<UUID> checkList = new ArrayList<>();
+        Set<UUID> checkList = new HashSet<>();
         while (!playerList.isEmpty()) {
             FilterPlayer filter = new FilterPlayer();
             List<PlayerIdPredicate> playerPredicates = new ArrayList<>();
