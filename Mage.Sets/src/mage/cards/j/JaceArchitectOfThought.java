@@ -265,7 +265,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                         playerName = "your";
                     }
                     TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
-                    if (controller.searchLibrary(target, game, playerId)) {
+                    if (controller.searchLibrary(target, game, playerId, !checkList.contains(playerId))) {
                         checkList.add(playerId);
                         UUID targetId = target.getFirstTarget();
                         Card card = player.getLibrary().remove(targetId, game);
