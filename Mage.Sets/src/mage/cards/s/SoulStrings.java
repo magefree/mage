@@ -27,7 +27,7 @@ public final class SoulStrings extends CardImpl {
                 new ReturnFromGraveyardToHandTargetEffect(), new VariableManaCost()
         );
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(2, new FilterCreatureCard("creature cards from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
     public SoulStrings(final SoulStrings card) {
