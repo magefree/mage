@@ -2,6 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -13,21 +14,19 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.a.AuroraOfEmrakul;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 
 /**
- *
  * @author fireshoes
  */
 public final class CryptolithFragment extends CardImpl {
 
     public CryptolithFragment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         this.transformable = true;
-        this.secondSideCardClazz = AuroraOfEmrakul.class;
+        this.secondSideCardClazz = mage.cards.a.AuroraOfEmrakul.class;
 
         // Cryptolith Fragment enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

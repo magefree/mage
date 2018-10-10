@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -14,12 +13,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
+import mage.target.targetadjustment.XTargetsAdjuster;
 
 /**
  *
@@ -40,7 +39,7 @@ public final class AlexiZephyrMage extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURES));
-        ability.setTargetAdjustment(TargetAdjustment.X_TARGETS);
+        ability.setTargetAdjuster(XTargetsAdjuster.instance);
         this.addAbility(ability);
     }
 

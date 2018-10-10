@@ -21,7 +21,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author spjspj
  */
-public class ArlinnEmbracedByTheMoonEmblem extends Emblem {
+public final class ArlinnEmbracedByTheMoonEmblem extends Emblem {
     // "Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'"
 
     public ArlinnEmbracedByTheMoonEmblem() {

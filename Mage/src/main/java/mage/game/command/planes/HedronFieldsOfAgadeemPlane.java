@@ -95,10 +95,8 @@ class HedronFieldsOfAgadeemRestrictionEffect extends RestrictionEffect {
         if (cPlane == null) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Hedron Fields of Agadeem")) {
-                return false;
-            }
+        if (!cPlane.getName().equalsIgnoreCase("Plane - Hedron Fields of Agadeem")) {
+            return false;
         }
         return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }

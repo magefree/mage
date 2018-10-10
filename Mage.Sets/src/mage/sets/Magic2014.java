@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -77,7 +76,7 @@ public final class Magic2014 extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Favor", 92, Rarity.COMMON, mage.cards.d.DarkFavor.class));
         cards.add(new SetCardInfo("Dark Prophecy", 93, Rarity.RARE, mage.cards.d.DarkProphecy.class));
         cards.add(new SetCardInfo("Darksteel Forge", 206, Rarity.MYTHIC, mage.cards.d.DarksteelForge.class));
-        cards.add(new SetCardInfo("Darksteel Ingot", 207, Rarity.COMMON, mage.cards.d.DarksteelIngot.class));
+        cards.add(new SetCardInfo("Darksteel Ingot", 207, Rarity.UNCOMMON, mage.cards.d.DarksteelIngot.class));
         cards.add(new SetCardInfo("Dawnstrike Paladin", 15, Rarity.COMMON, mage.cards.d.DawnstrikePaladin.class));
         cards.add(new SetCardInfo("Deadly Recluse", 168, Rarity.COMMON, mage.cards.d.DeadlyRecluse.class));
         cards.add(new SetCardInfo("Deathgaze Cockatrice", 94, Rarity.COMMON, mage.cards.d.DeathgazeCockatrice.class));
@@ -213,7 +212,7 @@ public final class Magic2014 extends ExpansionSet {
         cards.add(new SetCardInfo("Serra Angel", 32, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Shadowborn Apostle", 114, Rarity.COMMON, mage.cards.s.ShadowbornApostle.class));
         cards.add(new SetCardInfo("Shadowborn Demon", 115, Rarity.MYTHIC, mage.cards.s.ShadowbornDemon.class));
-        cards.add(new SetCardInfo("Shimmering Grotto", 229, Rarity.COMMON, mage.cards.s.ShimmeringGrotto.class));
+        cards.add(new SetCardInfo("Shimmering Grotto", 229, Rarity.UNCOMMON, mage.cards.s.ShimmeringGrotto.class));
         cards.add(new SetCardInfo("Shivan Dragon", 154, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Shiv's Embrace", 153, Rarity.UNCOMMON, mage.cards.s.ShivsEmbrace.class));
         cards.add(new SetCardInfo("Shock", 155, Rarity.COMMON, mage.cards.s.Shock.class));

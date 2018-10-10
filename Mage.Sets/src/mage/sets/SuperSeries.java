@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class SuperSeries extends ExpansionSet {
@@ -20,6 +19,8 @@ public final class SuperSeries extends ExpansionSet {
     private SuperSeries() {
         super("Super Series", "SUS", ExpansionSet.buildDate(1996, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
+        this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("City of Brass", 6, Rarity.SPECIAL, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Crusade", 4, Rarity.SPECIAL, mage.cards.c.Crusade.class));
         cards.add(new SetCardInfo("Elvish Champion", 17, Rarity.SPECIAL, mage.cards.e.ElvishChampion.class, NON_FULL_USE_VARIOUS));

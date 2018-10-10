@@ -1,4 +1,3 @@
-
 package mage.abilities.effects;
 
 import java.io.Serializable;
@@ -14,6 +13,7 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.SplitCardHalf;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -489,15 +489,23 @@ public class ContinuousEffects implements Serializable {
      */
     public MageObjectReference asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
-        for (AsThoughEffect effect : asThoughEffectsList) {
-            Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                if (affectedAbility == null) {
-                    if (effect.applies(objectId, ability, controllerId, game)) {
+        if (!asThoughEffectsList.isEmpty()) {
+            UUID idToCheck;
+            if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof SplitCardHalf) {
+                idToCheck = ((SplitCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
+            } else {
+                idToCheck = objectId;
+            }
+            for (AsThoughEffect effect : asThoughEffectsList) {
+                Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if (affectedAbility == null) {
+                        if (effect.applies(idToCheck, ability, controllerId, game)) {
+                            return new MageObjectReference(ability.getSourceObject(game), game);
+                        }
+                    } else if (effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
                         return new MageObjectReference(ability.getSourceObject(game), game);
                     }
-                } else if (effect.applies(objectId, affectedAbility, ability, game)) {
-                    return new MageObjectReference(ability.getSourceObject(game), game);
                 }
             }
         }
@@ -512,7 +520,7 @@ public class ContinuousEffects implements Serializable {
             Set<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_ONLY_MANA).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
-                        || effect.applies(objectId, affectedAbility, ability, game)) {
+                        || effect.applies(objectId, affectedAbility, ability, game, controllerId)) {
                     if (((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game) == null) {
                         return null;
                     }
@@ -525,7 +533,7 @@ public class ContinuousEffects implements Serializable {
             Set<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_OTHER_MANA).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
-                        || effect.applies(objectId, affectedAbility, ability, game)) {
+                        || effect.applies(objectId, affectedAbility, ability, game, controllerId)) {
                     ManaType usableManaType = ((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game);
                     if (usableManaType != null) {
                         return usableManaType;

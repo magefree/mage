@@ -2,7 +2,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.h.HighTide;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -18,6 +17,7 @@ public final class MediaInserts extends ExpansionSet {
         super("Media Inserts", "MBP", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Acquire", 83, Rarity.RARE, mage.cards.a.Acquire.class));
         cards.add(new SetCardInfo("Aeronaut Tinkerer", 118, Rarity.COMMON, mage.cards.a.AeronautTinkerer.class));
         cards.add(new SetCardInfo("Ajani, Caller of the Pride", 72, Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
@@ -48,7 +48,7 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Celestial Colonnade", 23, Rarity.SPECIAL, mage.cards.c.CelestialColonnade.class));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", 997, Rarity.SPECIAL, mage.cards.c.ChandraFireOfKaladesh.class));
         cards.add(new SetCardInfo("Chandra, Flamecaller", 175, Rarity.MYTHIC, mage.cards.c.ChandraFlamecaller.class));
-        cards.add(new SetCardInfo("Chandra, Pyromaster", 75, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class));
+        cards.add(new SetCardInfo("Chandra, Pyromaster", 75, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Pyromaster", 102, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Roaring Flame", 997, Rarity.SPECIAL, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Chandra, Torch of Defiance", 180, Rarity.MYTHIC, mage.cards.c.ChandraTorchOfDefiance.class));
@@ -102,7 +102,7 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Hamletback Goliath", 71, Rarity.RARE, mage.cards.h.HamletbackGoliath.class));
         cards.add(new SetCardInfo("Harbinger of the Hunt", 116, Rarity.SPECIAL, mage.cards.h.HarbingerOfTheHunt.class));
         cards.add(new SetCardInfo("Hero of Goma Fada", 136, Rarity.SPECIAL, mage.cards.h.HeroOfGomaFada.class));
-        cards.add(new SetCardInfo("High Tide", 80, Rarity.COMMON, HighTide.class));
+        cards.add(new SetCardInfo("High Tide", 80, Rarity.COMMON, mage.cards.h.HighTide.class));
         cards.add(new SetCardInfo("Hixus, Prison Warden", 126, Rarity.SPECIAL, mage.cards.h.HixusPrisonWarden.class));
         cards.add(new SetCardInfo("Honored Hierarch", 129, Rarity.SPECIAL, mage.cards.h.HonoredHierarch.class));
         cards.add(new SetCardInfo("Honor of the Pure", 20, Rarity.RARE, mage.cards.h.HonorOfThePure.class));
@@ -113,8 +113,8 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Jace, Memory Adept", 73, Rarity.MYTHIC, mage.cards.j.JaceMemoryAdept.class));
         cards.add(new SetCardInfo("Jace, Telepath Unbound", 995, Rarity.SPECIAL, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Jace, the Living Guildpact", 100, Rarity.MYTHIC, mage.cards.j.JaceTheLivingGuildpact.class));
-        cards.add(new SetCardInfo("Jace, Unraveler of Secrets", 173, Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class));
-        cards.add(new SetCardInfo("Jace, Unraveler of Secrets", 178, Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class));
+        cards.add(new SetCardInfo("Jace, Unraveler of Secrets", 173, Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jace, Unraveler of Secrets", 178, Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 995, Rarity.SPECIAL, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Jaya Ballard, Task Mage", 18, Rarity.RARE, mage.cards.j.JayaBallardTaskMage.class));
         cards.add(new SetCardInfo("Karametra's Acolyte", 78, Rarity.UNCOMMON, mage.cards.k.KarametrasAcolyte.class));
@@ -127,7 +127,7 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana, Death's Majesty", 179, Rarity.MYTHIC, mage.cards.l.LilianaDeathsMajesty.class));
         cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 996, Rarity.SPECIAL, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, the Last Hope", 174, Rarity.MYTHIC, mage.cards.l.LilianaTheLastHope.class));
-        cards.add(new SetCardInfo("Liliana Vess", 30, Rarity.RARE, mage.cards.l.LilianaVess.class));
+        cards.add(new SetCardInfo("Liliana Vess", 30, Rarity.RARE, mage.cards.l.LilianaVess.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana Vess", 101, Rarity.MYTHIC, mage.cards.l.LilianaVess.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Magister of Worth", 86, Rarity.SPECIAL, mage.cards.m.MagisterOfWorth.class));
         cards.add(new SetCardInfo("Mana Crypt", 6, Rarity.RARE, mage.cards.m.ManaCrypt.class));

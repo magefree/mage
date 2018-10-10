@@ -18,7 +18,7 @@ import mage.game.events.GameEvent;
  *
  * @author spjspj
  */
-public class GideonOfTheTrialsEmblem extends Emblem {
+public final class GideonOfTheTrialsEmblem extends Emblem {
 
     public GideonOfTheTrialsEmblem() {
         this.setName("Emblem - Gideon");

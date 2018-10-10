@@ -15,7 +15,7 @@ import mage.game.permanent.Permanent;
  *
  * @author spjspj
  */
-public class AjaniSteadfastEmblem extends Emblem {
+public final class AjaniSteadfastEmblem extends Emblem {
 
     public AjaniSteadfastEmblem() {
         setName("Emblem Ajani");

@@ -79,7 +79,7 @@ class FeedingGroundsEffect extends CostModificationEffectImpl {
                 new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    private static final String rule = "Red spells cost {1} less to cast.  Green spells cost {1} less to cast.";
+    private static final String rule = "Red spells cost {1} less to cast. Green spells cost {1} less to cast.";
     private int amount = 1;
 
     public FeedingGroundsEffect() {
@@ -133,19 +133,17 @@ class FeedingGroundsEffect extends CostModificationEffectImpl {
             if (cPlane == null) {
                 return false;
             }
-            if (cPlane != null) {
-                if (!cPlane.getName().equalsIgnoreCase("Plane - Feeding Grounds")) {
-                    return false;
-                }
+            if (!cPlane.getName().equalsIgnoreCase("Plane - Feeding Grounds")) {
+                return false;
             }
 
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
-                return this.filter.match(spell, game) && selectedByRuntimeData(spell, source, game);
+                return filter.match(spell, game) && selectedByRuntimeData(spell, source, game);
             } else {
                 // used at least for flashback ability because Flashback ability doesn't use stack
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && this.filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
+                return sourceCard != null && filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
             }
         }
         return false;

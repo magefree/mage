@@ -54,7 +54,7 @@ public final class DiscoveryDispersal extends SplitCard {
 
         // Dispersal
         // Each opponent returns a nonland permanent they control with the highest converted mana cost among permanents they control to its owner’s hand, then discards a card.
-        this.getLeftHalfCard().getSpellAbility().addEffect(new DispersalEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new DispersalEffect());
     }
 
     public DiscoveryDispersal(final DiscoveryDispersal card) {

@@ -16,7 +16,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class VividRevival extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("multicolored cards");
+    private static final FilterCard filter = new FilterCard("multicolored cards from your graveyard");
 
     static {
         filter.add(new MulticoloredPredicate());

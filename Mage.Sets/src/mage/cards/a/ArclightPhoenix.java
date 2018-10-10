@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -44,8 +45,9 @@ public final class ArclightPhoenix extends CardImpl {
         // At the beginning of combat on your turn, if you cast 3 or more instants and/or sorceries this turn, you may return Arclight Phoenix from your graveyard to the battlefield.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
+                        Zone.GRAVEYARD,
                         new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                        TargetController.YOU, true
+                        TargetController.YOU, true, false
                 ), ArclightPhoenixCondition.instance,
                 "At the beginning of combat on your turn, "
                 + "if you've cast three or more instant "
@@ -79,7 +81,7 @@ enum ArclightPhoenixCondition implements Condition {
 
 class ArclightPhoenixWatcher extends Watcher {
 
-    private Map<UUID, Integer> instantSorceryCount = new HashMap();
+    private final Map<UUID, Integer> instantSorceryCount = new HashMap();
 
     public ArclightPhoenixWatcher() {
         super(ArclightPhoenixWatcher.class.getSimpleName(), WatcherScope.GAME);

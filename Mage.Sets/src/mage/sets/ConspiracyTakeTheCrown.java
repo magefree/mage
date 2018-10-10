@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -150,7 +149,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Mnemonic Wall", 116, Rarity.COMMON, mage.cards.m.MnemonicWall.class));
         cards.add(new SetCardInfo("Murder", 143, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Negate", 117, Rarity.COMMON, mage.cards.n.Negate.class));
-        cards.add(new SetCardInfo("Nessian Asp", 187, Rarity.COMMON, mage.cards.n.NessianAsp.class));
+        cards.add(new SetCardInfo("Nessian Asp", 187, Rarity.UNCOMMON, mage.cards.n.NessianAsp.class));
         cards.add(new SetCardInfo("Netcaster Spider", 188, Rarity.COMMON, mage.cards.n.NetcasterSpider.class));
         cards.add(new SetCardInfo("Ogre Sentry", 168, Rarity.COMMON, mage.cards.o.OgreSentry.class));
         cards.add(new SetCardInfo("Omenspeaker", 118, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
@@ -184,7 +183,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Selvala, Heart of the Wilds", 70, Rarity.MYTHIC, mage.cards.s.SelvalaHeartOfTheWilds.class));
         cards.add(new SetCardInfo("Serum Visions", 120, Rarity.UNCOMMON, mage.cards.s.SerumVisions.class));
         cards.add(new SetCardInfo("Shambling Goblin", 148, Rarity.COMMON, mage.cards.s.ShamblingGoblin.class));
-        cards.add(new SetCardInfo("Shimmering Grotto", 221, Rarity.COMMON, mage.cards.s.ShimmeringGrotto.class));
+        cards.add(new SetCardInfo("Shimmering Grotto", 221, Rarity.UNCOMMON, mage.cards.s.ShimmeringGrotto.class));
         cards.add(new SetCardInfo("Shipwreck Singer", 206, Rarity.UNCOMMON, mage.cards.s.ShipwreckSinger.class));
         cards.add(new SetCardInfo("Show and Tell", 121, Rarity.MYTHIC, mage.cards.s.ShowAndTell.class));
         cards.add(new SetCardInfo("Sinuous Vermin", 46, Rarity.COMMON, mage.cards.s.SinuousVermin.class));

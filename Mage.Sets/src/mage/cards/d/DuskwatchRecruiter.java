@@ -2,6 +2,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,7 +15,6 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.k.KrallenhordeHowler;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
@@ -35,7 +35,7 @@ public final class DuskwatchRecruiter extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
-        this.secondSideCardClazz = KrallenhordeHowler.class;
+        this.secondSideCardClazz = mage.cards.k.KrallenhordeHowler.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

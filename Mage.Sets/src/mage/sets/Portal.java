@@ -2,14 +2,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.d.DrySpell;
-import mage.cards.e.EliteCatWarrior;
-import mage.cards.w.WarriorsCharge;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author Plopman
  */
 public final class Portal extends ExpansionSet {
@@ -17,7 +13,6 @@ public final class Portal extends ExpansionSet {
     private static final Portal instance = new Portal();
 
     /**
-     *
      * @return
      */
     public static Portal getInstance() {
@@ -34,6 +29,7 @@ public final class Portal extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Alabaster Dragon", 1, Rarity.RARE, mage.cards.a.AlabasterDragon.class));
         cards.add(new SetCardInfo("Alluring Scent", 157, Rarity.RARE, mage.cards.a.AlluringScent.class));
         cards.add(new SetCardInfo("Anaconda", "158a", Rarity.UNCOMMON, mage.cards.a.Anaconda.class, NON_FULL_USE_VARIOUS));
@@ -86,11 +82,11 @@ public final class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Djinn of the Lamp", 52, Rarity.RARE, mage.cards.d.DjinnOfTheLamp.class));
         cards.add(new SetCardInfo("Dread Charge", 88, Rarity.RARE, mage.cards.d.DreadCharge.class));
         cards.add(new SetCardInfo("Dread Reaper", 89, Rarity.RARE, mage.cards.d.DreadReaper.class));
-        cards.add(new SetCardInfo("Dry Spell", 90, Rarity.UNCOMMON, DrySpell.class));
+        cards.add(new SetCardInfo("Dry Spell", 90, Rarity.UNCOMMON, mage.cards.d.DrySpell.class));
         cards.add(new SetCardInfo("Earthquake", 124, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Ebon Dragon", 91, Rarity.RARE, mage.cards.e.EbonDragon.class));
-        cards.add(new SetCardInfo("Elite Cat Warrior", "163a", Rarity.COMMON, EliteCatWarrior.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Elite Cat Warrior", "163b", Rarity.COMMON, EliteCatWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elite Cat Warrior", "163a", Rarity.COMMON, mage.cards.e.EliteCatWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elite Cat Warrior", "163b", Rarity.COMMON, mage.cards.e.EliteCatWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elven Cache", 164, Rarity.COMMON, mage.cards.e.ElvenCache.class));
         cards.add(new SetCardInfo("Elvish Ranger", 165, Rarity.COMMON, mage.cards.e.ElvishRanger.class));
         cards.add(new SetCardInfo("Endless Cockroaches", 92, Rarity.RARE, mage.cards.e.EndlessCockroaches.class));
@@ -244,8 +240,8 @@ public final class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Volcanic Hammer", 154, Rarity.COMMON, mage.cards.v.VolcanicHammer.class));
         cards.add(new SetCardInfo("Wall of Granite", 155, Rarity.UNCOMMON, mage.cards.w.WallOfGranite.class));
         cards.add(new SetCardInfo("Wall of Swords", 37, Rarity.UNCOMMON, mage.cards.w.WallOfSwords.class));
-        cards.add(new SetCardInfo("Warrior's Charge", "38a", Rarity.COMMON, WarriorsCharge.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Warrior's Charge", "38b", Rarity.COMMON, WarriorsCharge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warrior's Charge", "38a", Rarity.COMMON, mage.cards.w.WarriorsCharge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warrior's Charge", "38b", Rarity.COMMON, mage.cards.w.WarriorsCharge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whiptail Wurm", 192, Rarity.UNCOMMON, mage.cards.w.WhiptailWurm.class));
         cards.add(new SetCardInfo("Wicked Pact", 117, Rarity.RARE, mage.cards.w.WickedPact.class));
         cards.add(new SetCardInfo("Willow Dryad", 193, Rarity.COMMON, mage.cards.w.WillowDryad.class));

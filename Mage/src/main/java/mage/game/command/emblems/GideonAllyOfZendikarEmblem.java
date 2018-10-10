@@ -12,7 +12,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class GideonAllyOfZendikarEmblem extends Emblem {
+public final class GideonAllyOfZendikarEmblem extends Emblem {
 
     public GideonAllyOfZendikarEmblem() {
         this.setName("Emblem Gideon");

@@ -16,7 +16,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class GarrukApexPredatorEmblem extends Emblem {
+public final class GarrukApexPredatorEmblem extends Emblem {
 
     /**
      * Emblem with "Whenever a creature attacks you, it gets +5/+5 and gains

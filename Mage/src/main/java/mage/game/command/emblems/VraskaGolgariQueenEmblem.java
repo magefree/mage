@@ -10,7 +10,7 @@ import mage.game.command.Emblem;
  *
  * @author TheElk801
  */
-public class VraskaGolgariQueenEmblem extends Emblem {
+public final class VraskaGolgariQueenEmblem extends Emblem {
 
     // -9: You get an emblem with "Whenever a creature you control deals combat damage to a player, that player loses the game."
     public VraskaGolgariQueenEmblem() {
@@ -19,7 +19,7 @@ public class VraskaGolgariQueenEmblem extends Emblem {
         this.getAbilities().add(new DealsDamageToAPlayerAllTriggeredAbility(
                 new LoseGameTargetPlayerEffect(),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE,
-                false, SetTargetPointer.NONE, true
+                false, SetTargetPointer.PLAYER, true
         ));
     }
 }

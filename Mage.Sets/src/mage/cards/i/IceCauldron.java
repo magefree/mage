@@ -158,7 +158,7 @@ class IceCauldronCastFromExileEffect extends AsThoughEffectImpl {
 
 class IceCauldronNoteManaEffect extends OneShotEffect {
 
-    private static String manaUsedString;
+    private String manaUsedString;
 
     public IceCauldronNoteManaEffect() {
         super(Outcome.Benefit);
@@ -167,6 +167,7 @@ class IceCauldronNoteManaEffect extends OneShotEffect {
 
     public IceCauldronNoteManaEffect(final IceCauldronNoteManaEffect effect) {
         super(effect);
+        manaUsedString = effect.manaUsedString;
     }
 
     @Override
@@ -190,8 +191,8 @@ class IceCauldronNoteManaEffect extends OneShotEffect {
 
 class IceCauldronAddManaEffect extends ManaEffect {
 
-    private static Mana storedMana;
-    private static MageObjectReference exiledCardMor;
+    private Mana storedMana;
+    private MageObjectReference exiledCardMor;
 
     IceCauldronAddManaEffect() {
         super();
@@ -200,6 +201,8 @@ class IceCauldronAddManaEffect extends ManaEffect {
 
     IceCauldronAddManaEffect(IceCauldronAddManaEffect effect) {
         super(effect);
+        storedMana = effect.storedMana.copy();
+        exiledCardMor = effect.exiledCardMor;
     }
 
     @Override

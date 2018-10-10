@@ -1,18 +1,17 @@
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class ElfKnightToken extends TokenImpl {
 
     public ElfKnightToken() {
-        super("Knight Ally", "2/2 green and white Elf Knight creature token with vigilance");
+        super("Elf Knight", "2/2 green and white Elf Knight creature token with vigilance");
         this.setExpansionSetCodeForImage("GRN");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

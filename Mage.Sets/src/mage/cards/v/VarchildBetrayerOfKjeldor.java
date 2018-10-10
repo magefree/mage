@@ -6,18 +6,19 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.combat.CantAttackYouOrPlaneswalkerAllEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.continuous.GainControlAllEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -108,9 +109,9 @@ class VarchildBetrayerOfKjeldorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damage = (int) this.getValue("damage");
         if (damage > 0) {
-            return new CreateTokenTargetEffect(
-                    new SurvivorToken(), damage
-            ).apply(game, source);
+            Effect effect = new CreateTokenTargetEffect(new SurvivorToken(), damage);
+            effect.setTargetPointer(getTargetPointer());
+            return effect.apply(game, source);
         }
         return false;
     }

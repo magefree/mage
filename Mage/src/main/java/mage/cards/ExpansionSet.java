@@ -88,6 +88,8 @@ public abstract class ExpansionSet implements Serializable {
     protected Date releaseDate;
     protected ExpansionSet parentSet;
     protected SetType setType;
+
+    // TODO: 03.10.2018, hasBasicLands can be removed someday -- it's uses to optimize lands search in deck generation and lands adding (search all available lands from sets)
     protected boolean hasBasicLands = true;
 
     protected String blockName;
@@ -185,7 +187,7 @@ public abstract class ExpansionSet implements Serializable {
         return theBooster;
     }
 
-    protected int AddMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
+    protected int addMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
 
         for (Ability ability : booster.get(booster.size() - 1).getAbilities()) {
             //Check if fetched card has the PartnerWithAbility
@@ -328,7 +330,7 @@ public abstract class ExpansionSet implements Serializable {
         for (int i = 0; i < numBoosterUncommon; i++) {
             while (true) {
                 addToBooster(booster, uncommons);
-                int check = AddMissingPartner(booster, partnerAllowed, numBoosterUncommon - 1, i);
+                int check = addMissingPartner(booster, partnerAllowed, numBoosterUncommon - 1, i);
                 if (check == 1) {
                     break;
                 }
@@ -358,7 +360,7 @@ public abstract class ExpansionSet implements Serializable {
             if (ratioBoosterMythic > 0 && RandomUtil.nextInt(ratioBoosterMythic) == 0) {
                 while (true) {
                     addToBooster(booster, mythics);
-                    int check = AddMissingPartner(booster, partnerAllowed, -1, 1);
+                    int check = addMissingPartner(booster, partnerAllowed, -1, 1);
                     if (check == 1) {
                         break;
                     }
@@ -370,7 +372,7 @@ public abstract class ExpansionSet implements Serializable {
             } else {
                 while (true) {
                     addToBooster(booster, rares);
-                    int check = AddMissingPartner(booster, partnerAllowed, -1, 1);
+                    int check = addMissingPartner(booster, partnerAllowed, -1, 1);
                     if (check == 1) {
                         break;
                     }
@@ -559,6 +561,7 @@ public abstract class ExpansionSet implements Serializable {
         if (savedCardsInfos == null) {
             CardCriteria criteria = new CardCriteria();
             if (rarity == Rarity.LAND) {
+                // get basic lands from parent set if current haven't it
                 criteria.setCodes(!hasBasicLands && parentSet != null ? parentSet.code : this.code);
             } else {
                 criteria.setCodes(this.code);

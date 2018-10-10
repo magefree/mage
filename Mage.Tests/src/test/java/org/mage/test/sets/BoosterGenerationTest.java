@@ -152,6 +152,30 @@ public class BoosterGenerationTest extends MageTestBase {
         }
     }
 
+    @Test
+    public void testColdSnap_BoosterMustHaveOneSnowLand() {
+        for (int i = 0; i < 10; i++) {
+            List<Card> booster = Coldsnap.getInstance().createBooster();
+            assertTrue("coldsnap's booster must contain 1 snow covered land", booster.stream().anyMatch(card -> card.isBasic() && card.getName().startsWith("Snow-Covered ")));
+        }
+    }
+
+    @Test
+    public void testMastersEditionII_BoosterMustHaveOneSnowLand() {
+        for (int i = 0; i < 10; i++) {
+            List<Card> booster = MastersEditionII.getInstance().createBooster();
+            assertTrue("Master Editions II's booster must contain 1 snow covered land", booster.stream().anyMatch(card -> card.isBasic() && card.getName().startsWith("Snow-Covered ")));
+        }
+    }
+
+    @Test
+    public void testBattlebond_BoosterMustHaveOneLand() {
+        for (int i = 0; i < 10; i++) {
+            List<Card> booster = Coldsnap.getInstance().createBooster();
+            assertTrue("battlebond's booster must contain 1 land", booster.stream().anyMatch(card -> card.isBasic() && card.isLand()));
+        }
+    }
+
     private static String str(List<Card> cards) {
         StringBuilder sb = new StringBuilder("[");
         Iterator<Card> iterator = cards.iterator();

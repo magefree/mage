@@ -19,7 +19,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class ObNixilisOfTheBlackOathEmblem extends Emblem {
+public final class ObNixilisOfTheBlackOathEmblem extends Emblem {
 
     // You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
     public ObNixilisOfTheBlackOathEmblem() {

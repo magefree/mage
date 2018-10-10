@@ -8,7 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ public final class SelesnyaLocket extends CardImpl {
 
         // {T}: Add {G} or {W}.
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new RedManaAbility());
+        this.addAbility(new WhiteManaAbility());
 
         // {G/W}{G/W}{G/W}{G/W}, {T}, Sacrifice Selesnya Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(

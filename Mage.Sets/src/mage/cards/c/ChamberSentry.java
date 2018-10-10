@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -25,27 +26,27 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author jmharmon
  */
-
 public final class ChamberSentry extends CardImpl {
 
     public ChamberSentry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{X}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{X}");
 
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Chamber Sentry enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true)));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
+                "with a +1/+1 counter on it for each color of mana spent to cast it"));
 
         // {X}, {T}, Remove X +1/+1 counters from Chamber Sentry: It deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue())
+                .setText("It deals X damage to any target"),
+                new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ChamberSentryRemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetAnyTarget());
@@ -55,7 +56,7 @@ public final class ChamberSentry extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
     }
 
-    public ChamberSentry(final  ChamberSentry card) {
+    public ChamberSentry(final ChamberSentry card) {
         super(card);
     }
 
@@ -75,7 +76,7 @@ class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
     }
 
     public ChamberSentryRemoveVariableCountersSourceCost(Counter counter, String text) {
-        this(counter, 0,text);
+        this(counter, 0, text);
     }
 
     public ChamberSentryRemoveVariableCountersSourceCost(Counter counter, int minimalCountersToPay) {

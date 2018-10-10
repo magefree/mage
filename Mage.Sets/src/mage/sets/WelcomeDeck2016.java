@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -32,7 +31,7 @@ public final class WelcomeDeck2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Nightmare", 8, Rarity.RARE, mage.cards.n.Nightmare.class));
         cards.add(new SetCardInfo("Oakenform", 15, Rarity.COMMON, mage.cards.o.Oakenform.class));
         cards.add(new SetCardInfo("Sengir Vampire", 9, Rarity.UNCOMMON, mage.cards.s.SengirVampire.class));
-        cards.add(new SetCardInfo("Serra Angel", 3, Rarity.RARE, mage.cards.s.SerraAngel.class));
+        cards.add(new SetCardInfo("Serra Angel", 3, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Shivan Dragon", 13, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Soul of the Harvest", 16, Rarity.RARE, mage.cards.s.SoulOfTheHarvest.class));
         cards.add(new SetCardInfo("Sphinx of Magosi", 6, Rarity.RARE, mage.cards.s.SphinxOfMagosi.class));

@@ -22,7 +22,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class DarettiScrapSavantEmblem extends Emblem {
+public final class DarettiScrapSavantEmblem extends Emblem {
     // You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
 
     public DarettiScrapSavantEmblem() {

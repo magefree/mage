@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -15,6 +16,11 @@ import mage.target.common.TargetCreaturePermanent;
  * @author TheElk801
  */
 public final class ArtfulTakedown extends CardImpl {
+
+    private static final FilterCreaturePermanent filter1
+            = new FilterCreaturePermanent("creature (to tap)");
+    private static final FilterCreaturePermanent filter2
+            = new FilterCreaturePermanent("creature (to shrink)");
 
     public ArtfulTakedown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{B}");
@@ -24,13 +30,17 @@ public final class ArtfulTakedown extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Tap target creature.
-        this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(
+                new TapTargetEffect().setText("target creature")
+        );
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter1));
 
         // • Target creature gets -2/-4 until end of turn.
-        Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(-2, -4, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        Mode mode = new Mode(
+                new BoostTargetEffect(-2, -4, Duration.EndOfTurn)
+                        .setText("target creature gets -2/-4 until end of turn")
+        );
+        mode.addTarget(new TargetCreaturePermanent(filter2));
         this.getSpellAbility().addMode(mode);
     }
 

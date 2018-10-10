@@ -33,7 +33,7 @@ public final class IntegrityIntervention extends SplitCard {
         // Intervention
         // Intervention deals 3 damage to any target and you gain 3 life.
         this.getRightHalfCard().getSpellAbility().addEffect(
-                new DamageTargetEffect(3)
+                new DamageTargetEffect(3).setText("Intervention deals 3 damage to any target")
         );
         this.getRightHalfCard().getSpellAbility().addEffect(
                 new GainLifeEffect(3).setText("and you gain 3 life")

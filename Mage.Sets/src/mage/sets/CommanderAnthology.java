@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -6,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class CommanderAnthology extends ExpansionSet {
@@ -19,8 +17,9 @@ public final class CommanderAnthology extends ExpansionSet {
 
     private CommanderAnthology() {
         super("Commander Anthology", "CMA", ExpansionSet.buildDate(2017, 6, 9), SetType.SUPPLEMENTAL);
-        this.blockName = "Commander Anthology";
-        this.hasBasicLands = false;
+        this.blockName = "Command Zone";
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Acidic Slime", 90, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Aerie Mystics", 1, Rarity.UNCOMMON, mage.cards.a.AerieMystics.class));
         cards.add(new SetCardInfo("Aethermage's Touch", 172, Rarity.RARE, mage.cards.a.AethermagesTouch.class));
@@ -151,7 +150,7 @@ public final class CommanderAnthology extends ExpansionSet {
         cards.add(new SetCardInfo("High Market", 257, Rarity.RARE, mage.cards.h.HighMarket.class));
         cards.add(new SetCardInfo("Hunting Triad", 116, Rarity.UNCOMMON, mage.cards.h.HuntingTriad.class));
         cards.add(new SetCardInfo("Immaculate Magistrate", 117, Rarity.RARE, mage.cards.i.ImmaculateMagistrate.class));
-        cards.add(new SetCardInfo("Imperious Perfect", 118, Rarity.RARE, mage.cards.i.ImperiousPerfect.class));
+        cards.add(new SetCardInfo("Imperious Perfect", 118, Rarity.UNCOMMON, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Indrik Stomphowler", 119, Rarity.UNCOMMON, mage.cards.i.IndrikStomphowler.class));
         cards.add(new SetCardInfo("Island", 293, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 294, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -180,7 +179,7 @@ public final class CommanderAnthology extends ExpansionSet {
         cards.add(new SetCardInfo("Lys Alana Huntmaster", 126, Rarity.COMMON, mage.cards.l.LysAlanaHuntmaster.class));
         cards.add(new SetCardInfo("Malfegor", 184, Rarity.MYTHIC, mage.cards.m.Malfegor.class));
         cards.add(new SetCardInfo("Mana-Charged Dragon", 84, Rarity.RARE, mage.cards.m.ManaChargedDragon.class));
-        cards.add(new SetCardInfo("Masked Admirers", 127, Rarity.UNCOMMON, mage.cards.m.MaskedAdmirers.class));
+        cards.add(new SetCardInfo("Masked Admirers", 127, Rarity.RARE, mage.cards.m.MaskedAdmirers.class));
         cards.add(new SetCardInfo("Master Warcraft", 202, Rarity.RARE, mage.cards.m.MasterWarcraft.class));
         cards.add(new SetCardInfo("Mazirek, Kraul Death Priest", 185, Rarity.MYTHIC, mage.cards.m.MazirekKraulDeathPriest.class));
         cards.add(new SetCardInfo("Meren of Clan Nel Toth", 186, Rarity.MYTHIC, mage.cards.m.MerenOfClanNelToth.class));

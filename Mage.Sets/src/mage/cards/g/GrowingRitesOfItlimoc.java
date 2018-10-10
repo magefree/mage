@@ -12,7 +12,6 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.i.ItlimocCradleOfTheSun;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
@@ -23,7 +22,6 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
- *
  * @author JRHerlehy
  */
 public final class GrowingRitesOfItlimoc extends CardImpl {
@@ -40,7 +38,7 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         this.transformable = true;
-        this.secondSideCardClazz = ItlimocCradleOfTheSun.class;
+        this.secondSideCardClazz = mage.cards.i.ItlimocCradleOfTheSun.class;
 
         // When Growing Rites of Itlimoc enters the battlefield, look at the top four cards of your library.
         // You may reveal a creature card from among them and put it into your hand.

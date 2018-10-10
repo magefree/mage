@@ -39,6 +39,8 @@ Clash Pack|CLASH|
 Commander Anthology|CMA|
 Commander Anthology 2018|CM2|
 Commander's Arsenal|CM1|
+Commander|CMD|
+Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
 Champs|CP|
@@ -83,6 +85,9 @@ Eldritch Moon|EMN|
 European Land Program|EURO|
 Eventide|EVE|
 Duel Decks: Elves vs. Goblins|EVG|
+Duel Decks: Elves vs. Inventors|DDU|
+Duels of the Planeswalkers Promos|DPAP|
+Pro Tour Promos|PPRO|
 Exodus|EXO|
 Zendikar Expeditions|EXP|
 Fallen Empires|FEM|
@@ -153,7 +158,7 @@ Portal Second Age|P02|
 Planechase 2012 Edition|PC2|
 Planechase Anthology|PCA|
 Prophecy|PCY|
-Premium Deck Series: Fire & Lightning|PD2|
+Premium Deck Series: Fire and Lightning|PD2|
 Premium Deck Series: Graveborn|PD3|
 Planar Chaos|PLC|
 Planeshift|PLS|

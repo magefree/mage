@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.OneShotEffect;
@@ -42,7 +42,7 @@ public final class UginTheSpiritDragon extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.UGIN);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
 
         // +2: Ugin, the Spirit Dragon deals 3 damage to any target.
         LoyaltyAbility ability = new LoyaltyAbility(new DamageTargetEffect(3), 2);

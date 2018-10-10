@@ -34,21 +34,21 @@ public final class ResponseResurgence extends SplitCard {
 
         // Resurgence
         // Creatures you control gain first strike and vigilance until end of turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-        this.getLeftHalfCard().getSpellAbility().addEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(
                 new GainAbilityControlledEffect(
                         FirstStrikeAbility.getInstance(),
                         Duration.EndOfTurn,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
                 ).setText("Creatures you control gain first strike")
         );
-        this.getLeftHalfCard().getSpellAbility().addEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(
                 new GainAbilityControlledEffect(
                         VigilanceAbility.getInstance(),
                         Duration.EndOfTurn,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
                 ).setText("and vigilance until end of turn")
         );
-        this.getLeftHalfCard().getSpellAbility().addEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(
                 new AddCombatAndMainPhaseEffect()
         );
     }

@@ -135,7 +135,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
                 if (onlyBasicLands) {
                     // lands is colorless
                     // discard not needed color by mana produce
-                    Assert.assertEquals("only basic lands allow", 1, card.getMana().size());
+                    Assert.assertEquals("only basic lands allow, but found " + card.getName(), 1, card.getMana().size());
                     for (Mana manaLand : card.getMana()) {
                         if (manaLand.getWhite() > 0 && !manaNeed.isWhite()) { cardManaOK = false; }
                         if (manaLand.getBlue() > 0 && !manaNeed.isBlue()) { cardManaOK = false; }

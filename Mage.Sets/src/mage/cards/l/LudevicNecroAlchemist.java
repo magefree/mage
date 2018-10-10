@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.Objects;
@@ -33,7 +32,8 @@ public final class LudevicNecroAlchemist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of each player's end step, that player may draw a card if a player other than you lost life this turn.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new LudevicNecroAlchemistEffect(), TargetController.ANY, new LudevicNecroAlchemistCondition(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
+                new LudevicNecroAlchemistEffect(), TargetController.EACH_PLAYER, new LudevicNecroAlchemistCondition(), false));
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
@@ -54,11 +54,10 @@ class LudevicNecroAlchemistCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
-        UUID player = game.getActivePlayerId();
         PlayerList playerList = game.getState().getPlayerList().copy();
-        Player currentPlayer = null;
+        Player currentPlayer;
         UUID sourcePlayerId = source.getControllerId();
-        Player firstPlayer = null;
+        Player firstPlayer;
         if (playerList == null) {
             return false;
         }
@@ -77,6 +76,7 @@ class LudevicNecroAlchemistCondition implements Condition {
         return false;
     }
 
+    @Override
     public String toString() {
         return "if a player other than you lost life this turn";
     }
@@ -86,7 +86,7 @@ class LudevicNecroAlchemistEffect extends OneShotEffect {
 
     public LudevicNecroAlchemistEffect() {
         super(Outcome.DrawCard);
-        staticText = "that player may draw a card if a player other than you lost life this turn";
+        staticText = "that player may draw a card";
     }
 
     public LudevicNecroAlchemistEffect(final LudevicNecroAlchemistEffect effect) {

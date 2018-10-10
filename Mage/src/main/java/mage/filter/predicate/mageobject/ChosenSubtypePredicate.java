@@ -19,7 +19,7 @@ public class ChosenSubtypePredicate implements ObjectPlayerPredicate<ObjectSourc
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(input.getSourceId(), game);
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(input.getSourceId(), game);
         return input.getObject().hasSubtype(subType, game);
     }
 

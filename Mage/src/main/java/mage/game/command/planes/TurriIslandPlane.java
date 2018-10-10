@@ -114,19 +114,17 @@ class TurriIslandEffect extends CostModificationEffectImpl {
             if (cPlane == null) {
                 return false;
             }
-            if (cPlane != null) {
-                if (!cPlane.getName().equalsIgnoreCase("Plane - Turri Island")) {
-                    return false;
-                }
+            if (!cPlane.getName().equalsIgnoreCase("Plane - Turri Island")) {
+                return false;
             }
-            
+
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
-                return this.filter.match(spell, game) && selectedByRuntimeData(spell, source, game);
+                return filter.match(spell, game) && selectedByRuntimeData(spell, source, game);
             } else {
                 // used at least for flashback ability because Flashback ability doesn't use stack
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && this.filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
+                return sourceCard != null && filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
             }
         }
         return false;

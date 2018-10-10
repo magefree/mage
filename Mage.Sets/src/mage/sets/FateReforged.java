@@ -13,7 +13,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class FateReforged extends ExpansionSet {
@@ -31,7 +30,7 @@ public final class FateReforged extends ExpansionSet {
         super("Fate Reforged", "FRF", ExpansionSet.buildDate(2015, 1, 23), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.parentSet = KhansOfTarkir.getInstance();
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
@@ -40,6 +39,7 @@ public final class FateReforged extends ExpansionSet {
         this.numBoosterRare = 1;
         this.numBoosterDoubleFaced = -1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abzan Advantage", 2, Rarity.COMMON, mage.cards.a.AbzanAdvantage.class));
         cards.add(new SetCardInfo("Abzan Beastmaster", 119, Rarity.UNCOMMON, mage.cards.a.AbzanBeastmaster.class));
         cards.add(new SetCardInfo("Abzan Kin-Guard", 120, Rarity.UNCOMMON, mage.cards.a.AbzanKinGuard.class));

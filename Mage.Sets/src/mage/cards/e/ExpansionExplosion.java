@@ -2,6 +2,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -40,7 +41,7 @@ public final class ExpansionExplosion extends SplitCard {
         // Expansion
         // Copy target instant or sorcery spell with converted mana cost 4 or less. You may choose new targets for the copy.
         this.getLeftHalfCard().getSpellAbility().addEffect(new CopyTargetSpellEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(filter));
 
         // Explosion
         // Explosion deals X damage to any target. Target player draws X cards.
@@ -79,7 +80,7 @@ class ExplosionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
-        Effect effect = new DamageTargetEffect(xValue);
+        Effect effect = new DamageTargetEffect(new StaticValue(xValue), true, "", true);
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         effect.apply(game, source);
         Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());

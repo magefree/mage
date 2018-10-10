@@ -2,6 +2,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -19,15 +20,13 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author Loki
  */
 public final class ElandUmbra extends CardImpl {
 
     public ElandUmbra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -35,8 +34,11 @@ public final class ElandUmbra extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Enchanted creature gets +0/+4.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 4, Duration.WhileOnBattlefield)));
+
+        // Totem armor
         this.addAbility(new TotemArmorAbility());
     }
 

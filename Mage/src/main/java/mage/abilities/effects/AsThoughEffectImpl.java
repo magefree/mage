@@ -1,4 +1,3 @@
-
 package mage.abilities.effects;
 
 import java.util.UUID;
@@ -29,8 +28,12 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game) {
-        return applies(objectId, source, affectedAbility.getControllerId(), game);
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        if (getAsThoughEffectType().equals(AsThoughEffectType.LOOK_AT_FACE_DOWN)) {
+            return applies(objectId, source, playerId, game);
+        } else {
+            return applies(objectId, source, affectedAbility.getControllerId(), game);
+        }
     }
 
     @Override

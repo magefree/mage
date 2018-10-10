@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.HashMap;
@@ -7,18 +6,18 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -42,7 +41,14 @@ public final class AbandonedSarcophagus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // You may cast nonland cards with cycling from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbandonedSarcophagusCastFromGraveyardEffect()));
+        FilterCard filter = new FilterCard("nonland cards with cycling");
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(new AbilityPredicate(CyclingAbility.class));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new PlayFromNotOwnHandZoneAllEffect(filter,
+                        Zone.GRAVEYARD, true, TargetController.YOU, Duration.WhileOnBattlefield)
+                        .setText("You may cast nonland cards with cycling from your graveyard"))
+        );
 
         // If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbandonedSarcophagusReplacementEffect()), new AbandonedSarcophagusWatcher());
@@ -56,46 +62,6 @@ public final class AbandonedSarcophagus extends CardImpl {
     @Override
     public AbandonedSarcophagus copy() {
         return new AbandonedSarcophagus(this);
-    }
-}
-
-class AbandonedSarcophagusCastFromGraveyardEffect extends AsThoughEffectImpl {
-
-    private static final FilterCard filter = new FilterCard("nonland cards with cycling");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(new AbilityPredicate(CyclingAbility.class));
-    }
-
-    AbandonedSarcophagusCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast nonland cards with cycling from your graveyard";
-    }
-
-    AbandonedSarcophagusCastFromGraveyardEffect(final AbandonedSarcophagusCastFromGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public AbandonedSarcophagusCastFromGraveyardEffect copy() {
-        return new AbandonedSarcophagusCastFromGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(objectId);
-        if (card != null) {
-            return (affectedControllerId.equals(source.getControllerId())
-                    && filter.match(card, game)
-                    && game.getState().getZone(card.getId()) == Zone.GRAVEYARD);
-        }
-        return false;
     }
 }
 

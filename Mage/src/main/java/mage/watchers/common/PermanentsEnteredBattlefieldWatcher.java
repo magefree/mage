@@ -71,7 +71,7 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
         return enteringBattlefield.get(playerId);
     }
 
-    public boolean AnotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(Permanent sourcePermanent, Game game) {
+    public boolean anotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(Permanent sourcePermanent, Game game) {
         if (enteringBattlefieldLastTurn.containsKey(sourcePermanent.getControllerId())) {
             for (Permanent permanent : enteringBattlefieldLastTurn.get(sourcePermanent.getControllerId())) {
                 if (!permanent.getId().equals(sourcePermanent.getId())

@@ -21,7 +21,7 @@ public final class ChanceForGlory extends CardImpl {
         // Creatures you control gain indestructible. Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfGame
-        ).setText("Creatures you control gain indestructible."));
+        ).setText("Creatures you control gain indestructible"));
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
     }
 

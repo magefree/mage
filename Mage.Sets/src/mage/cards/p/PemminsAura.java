@@ -100,7 +100,7 @@ class PemminsAuraBoostEnchantedEffect extends OneShotEffect {
             choice.setMessage("Select how to boost");
             choice.getChoices().add(CHOICE_1);
             choice.getChoices().add(CHOICE_2);
-            if (!controller.choose(outcome, choice, game)) {
+            if (controller.choose(outcome, choice, game)) {
                 if (choice.getChoice().equals(CHOICE_1)) {
                     game.addEffect(new BoostEnchantedEffect(+1, -1, Duration.EndOfTurn), source);
                 } else {

@@ -19,7 +19,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class TamiyoTheMoonSageEmblem extends Emblem {
+public final class TamiyoTheMoonSageEmblem extends Emblem {
 
     /**
      * Emblem with "You have no maximum hand size" and "Whenever a card is put

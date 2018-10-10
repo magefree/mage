@@ -18,7 +18,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class LilianaOfTheDarkRealmsEmblem extends Emblem {
+public final class LilianaOfTheDarkRealmsEmblem extends Emblem {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamps");
 

@@ -43,7 +43,7 @@ public final class RunawaySteamKin extends CardImpl {
                 new SpellCastControllerTriggeredAbility(
                         new AddCountersSourceEffect(
                                 CounterType.P1P1.createInstance()
-                        ), false
+                        ), filter, false
                 ), new SourceHasCounterCondition(CounterType.P1P1, 0, 2),
                 "Whenever you cast a red spell, "
                 + "if {this} has fewer than three +1/+1 counters on it, "
@@ -52,8 +52,7 @@ public final class RunawaySteamKin extends CardImpl {
 
         // Remove three +1/+1 counters from Runaway Steam-Kin: Add {R}{R}{R}.
         this.addAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD,
-                Mana.RedMana(3),
+                Zone.BATTLEFIELD, Mana.RedMana(3),
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance(3))
         ));
     }

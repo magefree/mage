@@ -2,12 +2,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.h.HymnToTourach;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class EternalMasters extends ExpansionSet {
@@ -28,6 +26,7 @@ public final class EternalMasters extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abundant Growth", 156, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Ancestral Mask", 157, Rarity.UNCOMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Animate Dead", 78, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
@@ -128,7 +127,7 @@ public final class EternalMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Honden of Seeing Winds", 54, Rarity.UNCOMMON, mage.cards.h.HondenOfSeeingWinds.class));
         cards.add(new SetCardInfo("Humble", 14, Rarity.COMMON, mage.cards.h.Humble.class));
         cards.add(new SetCardInfo("Hydroblast", 55, Rarity.UNCOMMON, mage.cards.h.Hydroblast.class));
-        cards.add(new SetCardInfo("Hymn to Tourach", 92, Rarity.UNCOMMON, HymnToTourach.class));
+        cards.add(new SetCardInfo("Hymn to Tourach", 92, Rarity.UNCOMMON, mage.cards.h.HymnToTourach.class));
         cards.add(new SetCardInfo("Ichorid", 93, Rarity.RARE, mage.cards.i.Ichorid.class));
         cards.add(new SetCardInfo("Imperious Perfect", 173, Rarity.RARE, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Inkwell Leviathan", 56, Rarity.RARE, mage.cards.i.InkwellLeviathan.class));
@@ -278,5 +277,4 @@ public final class EternalMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Young Pyromancer", 155, Rarity.UNCOMMON, mage.cards.y.YoungPyromancer.class));
         cards.add(new SetCardInfo("Zealous Persecution", 213, Rarity.UNCOMMON, mage.cards.z.ZealousPersecution.class));
     }
-
 }

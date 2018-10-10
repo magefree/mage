@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.constants.Duration;
@@ -18,10 +19,21 @@ import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
 
 /**
+ * Jump-start is found on instants and sorceries. You can cast a card with
+ * jump-start from your graveyard by paying all its regular costs and one
+ * additional cost: discarding a card from your hand. Casting a spell with
+ * jump-start follows all the normal timing rules, so sorceries with jump-start
+ * are still limited to your main phases. A spell with jump-start that was cast
+ * from your graveyard can still be countered, and if it has targets, it won't
+ * do anything if all its targets disappear or otherwise become illegal. After a
+ * spell with jump-start cast from your graveyard resolves, is countered, or
+ * leaves the stack in any way, it's exiled.
  *
  * @author TheElk801
  */
 public class JumpStartAbility extends SpellAbility {
+
+    private boolean replacementEffectAdded = false;
 
     public JumpStartAbility(Card card) {
         super(card.getManaCost(), card.getName() + " with jump-start", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE);
@@ -30,7 +42,6 @@ public class JumpStartAbility extends SpellAbility {
         cost.setText("");
         this.addCost(cost);
         this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
-        this.addEffect(new JumpStartReplacementEffect());
         this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
@@ -39,6 +50,21 @@ public class JumpStartAbility extends SpellAbility {
 
     public JumpStartAbility(final JumpStartAbility ability) {
         super(ability);
+        this.replacementEffectAdded = ability.replacementEffectAdded;
+    }
+
+    @Override
+    public SpellAbility getSpellAbilityToResolve(Game game) {
+        Card card = game.getCard(getSourceId());
+        if (card != null) {
+            if (!replacementEffectAdded) {
+                replacementEffectAdded = true;
+                ContinuousEffect effect = new JumpStartReplacementEffect();
+                effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));
+                game.addEffect(effect, this);
+            }
+        }
+        return this;
     }
 
     @Override
@@ -106,9 +132,7 @@ class JumpStartReplacementEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-
-            int zcc = game.getState().getZoneChangeCounter(source.getSourceId());
-            if (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == zcc) {
+            if (game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1) {
                 return true;
             }
 

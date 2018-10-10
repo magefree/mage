@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Coldsnap extends ExpansionSet {
@@ -21,13 +20,14 @@ public final class Coldsnap extends ExpansionSet {
         super("Coldsnap", "CSP", ExpansionSet.buildDate(2006, 6, 21), SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.hasBoosters = true;
-        this.numBoosterLands = 0;
+        this.numBoosterLands = 1;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         this.parentSet = IceAge.getInstance();
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Adarkar Valkyrie", 1, Rarity.RARE, mage.cards.a.AdarkarValkyrie.class));
         cards.add(new SetCardInfo("Adarkar Windform", 26, Rarity.UNCOMMON, mage.cards.a.AdarkarWindform.class));
         cards.add(new SetCardInfo("Allosaurus Rider", 101, Rarity.RARE, mage.cards.a.AllosaurusRider.class));

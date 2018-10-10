@@ -1,8 +1,6 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.g.GoblinGrenade;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -70,7 +68,7 @@ public final class Magic2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Chasm Drake", 48, Rarity.COMMON, mage.cards.c.ChasmDrake.class));
         cards.add(new SetCardInfo("Child of Night", 87, Rarity.COMMON, mage.cards.c.ChildOfNight.class));
         cards.add(new SetCardInfo("Circle of Flame", 127, Rarity.UNCOMMON, mage.cards.c.CircleOfFlame.class));
-        cards.add(new SetCardInfo("Combust", 128, Rarity.COMMON, mage.cards.c.Combust.class));
+        cards.add(new SetCardInfo("Combust", 128, Rarity.UNCOMMON, mage.cards.c.Combust.class));
         cards.add(new SetCardInfo("Consume Spirit", 88, Rarity.UNCOMMON, mage.cards.c.ConsumeSpirit.class));
         cards.add(new SetCardInfo("Coral Merfolk", 49, Rarity.COMMON, mage.cards.c.CoralMerfolk.class));
         cards.add(new SetCardInfo("Crimson Mage", 129, Rarity.UNCOMMON, mage.cards.c.CrimsonMage.class));
@@ -129,7 +127,7 @@ public final class Magic2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Bangchuckers", 137, Rarity.UNCOMMON, mage.cards.g.GoblinBangchuckers.class));
         cards.add(new SetCardInfo("Goblin Chieftain", 138, Rarity.RARE, mage.cards.g.GoblinChieftain.class));
         cards.add(new SetCardInfo("Goblin Fireslinger", 139, Rarity.COMMON, mage.cards.g.GoblinFireslinger.class));
-        cards.add(new SetCardInfo("Goblin Grenade", 140, Rarity.UNCOMMON, GoblinGrenade.class));
+        cards.add(new SetCardInfo("Goblin Grenade", 140, Rarity.UNCOMMON, mage.cards.g.GoblinGrenade.class));
         cards.add(new SetCardInfo("Goblin Piker", 141, Rarity.COMMON, mage.cards.g.GoblinPiker.class));
         cards.add(new SetCardInfo("Goblin Tunneler", 142, Rarity.COMMON, mage.cards.g.GoblinTunneler.class));
         cards.add(new SetCardInfo("Goblin War Paint", 143, Rarity.COMMON, mage.cards.g.GoblinWarPaint.class));

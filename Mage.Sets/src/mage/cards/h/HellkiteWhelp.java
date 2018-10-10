@@ -33,7 +33,7 @@ public final class HellkiteWhelp extends CardImpl {
 
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
-        this.toughness = new MageInt(34);
+        this.toughness = new MageInt(3);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

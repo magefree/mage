@@ -2,6 +2,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -15,7 +16,6 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.s.SpiresOfOrazca;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
@@ -25,7 +25,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author TheElk801
  */
 public final class ThaumaticCompass extends CardImpl {
@@ -33,7 +32,7 @@ public final class ThaumaticCompass extends CardImpl {
     public ThaumaticCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.transformable = true;
-        this.secondSideCardClazz = SpiresOfOrazca.class;
+        this.secondSideCardClazz = mage.cards.s.SpiresOfOrazca.class;
 
         // {3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

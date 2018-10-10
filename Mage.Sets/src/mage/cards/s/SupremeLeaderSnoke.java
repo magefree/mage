@@ -1,39 +1,32 @@
 package mage.cards.s;
 
-import java.util.Iterator;
 import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.players.PlayerList;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlayerLostLifeNonCombatWatcher;
-import mage.watchers.common.PlayerLostLifeWatcher;
 
 /**
  *
@@ -48,7 +41,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
         
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNOKE);
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +1: Put a loyalty counter on Supreme Leader Snoke for each life lost by all opponents from noncombat sources this turn.
         Ability ability1 = new LoyaltyAbility(new SupremeLeaderSnokeCounterEffect(CounterType.LOYALTY.createInstance()), 1);

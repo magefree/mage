@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -70,7 +69,7 @@ public final class Magic2011 extends ExpansionSet {
         cards.add(new SetCardInfo("Clone", 49, Rarity.RARE, mage.cards.c.Clone.class));
         cards.add(new SetCardInfo("Cloud Crusader", 10, Rarity.COMMON, mage.cards.c.CloudCrusader.class));
         cards.add(new SetCardInfo("Cloud Elemental", 50, Rarity.COMMON, mage.cards.c.CloudElemental.class));
-        cards.add(new SetCardInfo("Combust", 130, Rarity.COMMON, mage.cards.c.Combust.class));
+        cards.add(new SetCardInfo("Combust", 130, Rarity.UNCOMMON, mage.cards.c.Combust.class));
         cards.add(new SetCardInfo("Condemn", 11, Rarity.UNCOMMON, mage.cards.c.Condemn.class));
         cards.add(new SetCardInfo("Conundrum Sphinx", 51, Rarity.RARE, mage.cards.c.ConundrumSphinx.class));
         cards.add(new SetCardInfo("Corrupt", 89, Rarity.UNCOMMON, mage.cards.c.Corrupt.class));
@@ -95,7 +94,7 @@ public final class Magic2011 extends ExpansionSet {
         cards.add(new SetCardInfo("Dryad's Favor", 169, Rarity.COMMON, mage.cards.d.DryadsFavor.class));
         cards.add(new SetCardInfo("Duress", 96, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Duskdale Wurm", 170, Rarity.UNCOMMON, mage.cards.d.DuskdaleWurm.class));
-        cards.add(new SetCardInfo("Earth Servant", 134, Rarity.COMMON, mage.cards.e.EarthServant.class));
+        cards.add(new SetCardInfo("Earth Servant", 134, Rarity.UNCOMMON, mage.cards.e.EarthServant.class));
         cards.add(new SetCardInfo("Elite Vanguard", 13, Rarity.UNCOMMON, mage.cards.e.EliteVanguard.class));
         cards.add(new SetCardInfo("Elixir of Immortality", 206, Rarity.UNCOMMON, mage.cards.e.ElixirOfImmortality.class));
         cards.add(new SetCardInfo("Elvish Archdruid", 171, Rarity.RARE, mage.cards.e.ElvishArchdruid.class));

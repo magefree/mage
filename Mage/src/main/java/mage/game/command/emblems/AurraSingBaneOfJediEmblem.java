@@ -13,7 +13,7 @@ import mage.game.command.Emblem;
  *
  * @author spjspj
  */
-public class AurraSingBaneOfJediEmblem extends Emblem {
+public final class AurraSingBaneOfJediEmblem extends Emblem {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a nontoken creature you control");
 

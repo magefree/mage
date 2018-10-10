@@ -62,41 +62,40 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             boolean triggered = false;
-            if (zEvent != null) {
-                if (zEvent.getTarget() != null && zEvent.getTarget().getAttachments() != null && zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
-                    triggered = true;
-                } else {
-                    // If both (attachment and attached went to graveyard at the same time, the attachemnets can be already removed from the attached object.)
-                    // So check here with the LKI of the enchantment
-                    Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
-                    if (attachment != null
-                            && zEvent.getTargetId() != null && attachment.getAttachedTo() != null
-                            && zEvent.getTargetId().equals(attachment.getAttachedTo())) {
-                        Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
-                        if (attachedTo != null
-                                && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)) {  // zoneChangeCounter is stored in Permanent
-                            triggered = true;
+            if (zEvent.getTarget() != null && zEvent.getTarget().getAttachments() != null && zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
+                triggered = true;
+            } else {
+                // If both (attachment and attached went to graveyard at the same time, the attachemnets can be already removed from the attached object.)
+                // So check here with the LKI of the enchantment
+                Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
+                if (attachment != null
+                        && zEvent.getTargetId() != null && attachment.getAttachedTo() != null
+                        && zEvent.getTargetId().equals(attachment.getAttachedTo())) {
+                    Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
+                    if (attachedTo != null
+                            && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)) {  // zoneChangeCounter is stored in Permanent
+                        triggered = true;
+                    }
+                }
+            }
+            if (triggered) {
+                for (Effect effect : getEffects()) {
+                    if (zEvent.getTarget() != null) {
+                        effect.setValue("attachedTo", zEvent.getTarget());
+                        if (setTargetPointer == SetTargetPointer.ATTACHED_TO_CONTROLLER) {
+                            Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
+                            if (attachment != null && attachment.getAttachedTo() != null) {
+                                Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(), Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
+                                if (attachedTo != null) {
+                                    effect.setTargetPointer(new FixedTarget(attachedTo.getControllerId()));
+                                }
+                            }
                         }
                     }
                 }
-                if (triggered) {
-                    for (Effect effect : getEffects()) {
-                        if (zEvent.getTarget() != null) {
-                            effect.setValue("attachedTo", zEvent.getTarget());
-                            if (setTargetPointer == SetTargetPointer.ATTACHED_TO_CONTROLLER) {
-                                Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
-                                if (attachment != null && attachment.getAttachedTo() != null) {
-                                    Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(), Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
-                                    if (attachedTo != null) {
-                                        effect.setTargetPointer(new FixedTarget(attachedTo.getControllerId()));
-                                    }
-                                }
-                            }
-                        }  
-                    }
-                    return true;
-                }
+                return true;
             }
+
         }
         return false;
     }

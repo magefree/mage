@@ -32,7 +32,7 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
+        Permanent target = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (target != null) {
             int power = target.getPower().getValue();
             target.getPower().setValue(target.getToughness().getValue());

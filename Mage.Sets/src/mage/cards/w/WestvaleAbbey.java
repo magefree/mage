@@ -2,6 +2,7 @@
 package mage.cards.w;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
@@ -15,7 +16,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.o.OrmendahlProfanePrince;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -23,7 +23,6 @@ import mage.game.permanent.token.HumanClericToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
- *
  * @author fireshoes
  */
 public final class WestvaleAbbey extends CardImpl {
@@ -32,7 +31,7 @@ public final class WestvaleAbbey extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.transformable = true;
-        this.secondSideCardClazz = OrmendahlProfanePrince.class;
+        this.secondSideCardClazz = mage.cards.o.OrmendahlProfanePrince.class;
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
