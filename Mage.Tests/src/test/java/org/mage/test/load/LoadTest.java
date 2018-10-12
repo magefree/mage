@@ -10,6 +10,7 @@ import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.player.ai.ComputerPlayer;
@@ -21,9 +22,7 @@ import mage.remote.SessionImpl;
 import mage.util.RandomUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -44,6 +43,12 @@ public class LoadTest {
     private static final int TEST_PORT = 17171;
     private static final String TEST_PROXY_TYPE = "None";
     private static final String TEST_USER_NAME = "user";
+
+    @BeforeClass
+    public static void initDatabase() {
+        // recreate missing cards db
+        CardScanner.scan();
+    }
 
     @Test
     public void test_CreateRandomDeck() {
