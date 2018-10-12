@@ -326,7 +326,7 @@ public class TablesPanel extends javax.swing.JPanel {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int row = table.rowAtPoint(e.getPoint());
+                int row = table.convertRowIndexToModel(table.getSelectedRow());
                 if (e.getClickCount() == 2 && row != -1) {
                     action.actionPerformed(new ActionEvent(e.getSource(), e.getID(), "" + row));
                 }
