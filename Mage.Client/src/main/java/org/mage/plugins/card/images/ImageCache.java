@@ -409,6 +409,7 @@ public final class ImageCache {
             // legitimate, happens when a card has no image
             return null;
         } catch (ComputationException ex) {
+            // too low memory
             if (ex.getCause() instanceof NullPointerException) {
                 return null;
             }

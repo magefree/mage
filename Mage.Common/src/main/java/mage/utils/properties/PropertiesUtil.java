@@ -21,7 +21,11 @@ public final class PropertiesUtil {
 
     static {
         try (InputStream in = PropertiesUtil.class.getResourceAsStream("/xmage.properties")) {
-            properties.load(in);
+            if(in != null) {
+                properties.load(in);
+            } else {
+                logger.warn("No xmage.properties were found");
+            }
         } catch (FileNotFoundException fnfe) {
             logger.warn("No xmage.properties were found on classpath");
         } catch (IOException e) {

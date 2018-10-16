@@ -215,6 +215,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Warp", 148, Rarity.UNCOMMON, mage.cards.m.MindWarp.class));
         cards.add(new SetCardInfo("Minion of Leshrac", 150, Rarity.RARE, mage.cards.m.MinionOfLeshrac.class));
         cards.add(new SetCardInfo("Minion of Tevesh Szat", 151, Rarity.RARE, mage.cards.m.MinionOfTeveshSzat.class));
+        cards.add(new SetCardInfo("Mistfolk", 84, Rarity.COMMON, mage.cards.m.Mistfolk.class));
         cards.add(new SetCardInfo("Mole Worms", 152, Rarity.UNCOMMON, mage.cards.m.MoleWorms.class));
         cards.add(new SetCardInfo("Monsoon", 298, Rarity.RARE, mage.cards.m.Monsoon.class));
         cards.add(new SetCardInfo("Moor Fiend", 153, Rarity.COMMON, mage.cards.m.MoorFiend.class));

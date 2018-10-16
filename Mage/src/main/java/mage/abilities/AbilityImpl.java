@@ -15,8 +15,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -116,7 +116,7 @@ public abstract class AbilityImpl implements Ability {
         this.costModificationActive = ability.costModificationActive;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
-        this.sourceObject = ability.sourceObject;
+        this.sourceObject = null; // you may not copy this because otherwise simulation may modify real game object
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
