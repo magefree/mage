@@ -1,6 +1,7 @@
 package mage.cards.s;
 
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoUnlessAnyPlayerPaysEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -22,9 +23,7 @@ public final class SoulStrings extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}");
 
         // Return two target creature cards from your graveyard to your hand unless any player pays {X}.
-        Effect effect = new DoUnlessAnyPlayerPaysEffect(
-                new ReturnFromGraveyardToHandTargetEffect(), new VariableManaCost()
-        );
+        Effect effect = new DoUnlessAnyPlayerPaysEffect(new ReturnFromGraveyardToHandTargetEffect(), new SoulStringsPayXCost());
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCreatureCard("creature cards from your graveyard")));
     }
@@ -36,5 +35,27 @@ public final class SoulStrings extends CardImpl {
     @Override
     public SoulStrings copy() {
         return new SoulStrings(this);
+    }
+}
+
+class SoulStringsPayXCost extends VariableCostImpl {
+
+    public SoulStringsPayXCost() {
+        super("X mana to pay");
+        this.text = "pay to prevent effect";
+    }
+
+    public SoulStringsPayXCost(final SoulStringsPayXCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public SoulStringsPayXCost copy() {
+        return new SoulStringsPayXCost(this);
+    }
+
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+
     }
 }
