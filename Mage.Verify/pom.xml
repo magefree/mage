@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.6.3</version>
+            <version>2.9.7</version>
         </dependency>
 
         <dependency>
@@ -67,7 +67,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-<!--                    <configuration>
+                    <!--                    <configuration>
                         <compilerArgument>-Xlint:unchecked</compilerArgument>
                     </configuration> -->
                 </plugin>
