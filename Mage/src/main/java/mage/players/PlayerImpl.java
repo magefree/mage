@@ -1041,15 +1041,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference permittingObject) {
-        if (game == null || ability == null) {
+    public boolean cast(SpellAbility originalAbility, Game game, boolean noMana, MageObjectReference permittingObject) {
+        if (game == null || originalAbility == null) {
             return false;
         }
 
         // Use ability copy to avoid problems with targets and costs on recast (issue https://github.com/magefree/mage/issues/5189).
-        ability = ability.copy();
-
+        SpellAbility ability = originalAbility.copy();
         ability.setControllerId(getId());
+        ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
         if (ability.getSpellAbilityType() != SpellAbilityType.BASE) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
             if (ability == null) {
@@ -1073,6 +1073,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     logger.error("Got no spell from stack. ability: " + ability.getRule());
                     return false;
                 }
+                // Update the zcc to the stack
+                ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
                 // some effects set sourceId to cast without paying mana costs or other costs
                 if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
                     Ability spellAbility = spell.getSpellAbility();

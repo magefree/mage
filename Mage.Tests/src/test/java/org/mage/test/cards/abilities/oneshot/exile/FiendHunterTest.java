@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.oneshot.exile;
 
 import mage.constants.PhaseStep;
@@ -70,10 +69,9 @@ public class FiendHunterTest extends CardTestPlayerBase {
         execute();
 
         assertExileCount("Silvercoat Lion", 1);
-        assertPermanentCount(playerB, "Primeval Titan", 1);
-
         assertPermanentCount(playerA, "Fiend Hunter", 1);
         assertPermanentCount(playerA, "Restoration Angel", 1);
+        assertPermanentCount(playerB, "Primeval Titan", 1);
 
     }
 

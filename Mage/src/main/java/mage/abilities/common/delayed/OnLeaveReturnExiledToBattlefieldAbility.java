@@ -1,4 +1,3 @@
-
 package mage.abilities.common.delayed;
 
 import java.util.LinkedHashSet;

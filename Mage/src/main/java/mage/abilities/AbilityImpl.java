@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
@@ -67,7 +66,6 @@ public abstract class AbilityImpl implements Ability {
     protected boolean costModificationActive = true;
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
-    protected MageObject sourceObject;
     protected int sourceObjectZoneChangeCounter;
     protected List<Watcher> watchers = new ArrayList<>();
     protected List<Ability> subAbilities = null;
@@ -116,7 +114,6 @@ public abstract class AbilityImpl implements Ability {
         this.costModificationActive = ability.costModificationActive;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
-        this.sourceObject = null; // you may not copy this because otherwise simulation may modify real game object
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
@@ -131,8 +128,6 @@ public abstract class AbilityImpl implements Ability {
     public void newId() {
         if (!(this instanceof MageSingleton)) {
             this.id = UUID.randomUUID();
-//            this.sourceObject = null;
-//            this.sourceObjectZoneChangeCounter = -1;
         }
         getEffects().newId();
     }
@@ -226,8 +221,10 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
-        getSourceObject(game);
-
+        MageObject sourceObject = getSourceObject(game);
+        if (getSourceObjectZoneChangeCounter() == 0) {
+            setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(getSourceId()));
+        }
         if (controller.isTestMode()) {
             if (!controller.addTargets(this, game)) {
                 return false;
@@ -1160,58 +1157,44 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        if (sourceObject == null) {
-            setSourceObject(null, game);
-            if (sourceObject == null) {
-                logger.warn("Source object could not be retrieved: " + this.getRule());
-            }
-        }
-        return sourceObject;
+        return game.getObject(getSourceId());
     }
 
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
-        MageObject currentObject = game.getObject(getSourceId());
-        if (currentObject != null) {
-            if (sourceObject == null) {
-                setSourceObject(currentObject, game);
-            }
-            MageObjectReference mor = new MageObjectReference(currentObject, game);
-            if (mor.getZoneChangeCounter() == getSourceObjectZoneChangeCounter()) {
-                // source object has meanwhile not changed zone
-                return currentObject;
-            }
+        if (getSourceObjectZoneChangeCounter() == 0
+                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+            return game.getObject(getSourceId());
         }
         return null;
     }
 
     @Override
     public Permanent getSourcePermanentIfItStillExists(Game game) {
-        if (sourceObject == null || !sourceObject.getId().equals(getSourceId())) {
-            setSourceObject(game.getObject(getSourceId()), game);
-        }
-        if (sourceObject instanceof Permanent) {
-            if (game.getState().getZoneChangeCounter(getSourceId()) == getSourceObjectZoneChangeCounter()) {
-                return (Permanent) sourceObject;
-            }
+        MageObject mageObject = getSourceObjectIfItStillExists(game);
+        if (mageObject instanceof Permanent) {
+            return (Permanent) mageObject;
         }
         return null;
     }
 
     @Override
-    public int getSourceObjectZoneChangeCounter() {
-        return sourceObjectZoneChangeCounter;
+    public Permanent getSourcePermanentOrLKI(Game game) {
+        if (getSourceObjectZoneChangeCounter() == 0
+                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+            return game.getPermanent(getSourceId());
+        }
+        return (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject, Game game) {
-        if (sourceObject == null) {
-            this.sourceObject = game.getObject(sourceId);
-            this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
-        } else {
-            this.sourceObject = sourceObject;
-            this.sourceObjectZoneChangeCounter = this.sourceObject.getZoneChangeCounter(game);
-        }
+    public void setSourceObjectZoneChangeCounter(int sourceObjectZoneChangeCounter) {
+        this.sourceObjectZoneChangeCounter = sourceObjectZoneChangeCounter;
+    }
+
+    @Override
+    public int getSourceObjectZoneChangeCounter() {
+        return sourceObjectZoneChangeCounter;
     }
 
     @Override

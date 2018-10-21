@@ -39,9 +39,11 @@ public class SpitefulShadowsTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm"); // Creature 6/4
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        // Enchant creature
+        // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
         addCard(Zone.HAND, playerA, "Spiteful Shadows");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 

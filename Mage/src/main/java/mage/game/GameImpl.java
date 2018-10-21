@@ -1527,7 +1527,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
-        newAbility.setSourceObject(null, this); // Update the source object to the currently existing Object
+        newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
         ContinuousEffect newEffect = continuousEffect.copy();
 
         newEffect.newId();
@@ -1698,11 +1698,17 @@ public abstract class GameImpl implements Game, Serializable {
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
             Ability manaAbiltiy = ability.copy();
+            if (manaAbiltiy.getSourceObjectZoneChangeCounter() == 0) {
+                manaAbiltiy.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
+            }
             manaAbiltiy.activate(this, false);
             manaAbiltiy.resolve(this);
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
+            if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
+                newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
+            }
             state.addTriggeredAbility(newAbility);
         }
     }
@@ -1711,10 +1717,10 @@ public abstract class GameImpl implements Game, Serializable {
     public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source) {
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(this), this);
         // return addDelayedTriggeredAbility(delayedAbility);
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
+        newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
         newAbility.initOnAdding(this);
         // ability.init is called as the ability triggeres not now.
         // If a FixedTarget pointer is already set from the effect setting up this delayed ability
