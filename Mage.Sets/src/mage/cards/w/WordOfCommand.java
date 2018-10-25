@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -14,8 +13,8 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -37,7 +36,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class WordOfCommand extends CardImpl {
 
     public WordOfCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
 
         // Look at target opponent's hand and choose a card from it. You control that player until Word of Command finishes resolving. The player plays that card if able. While doing so, the player can activate mana abilities only if they're from lands that player controls and only if mana they produce is spent to activate other mana abilities of lands the player controls and/or to play that card. If the chosen card is cast as a spell, you control the player while that spell is resolving.
         this.getSpellAbility().addEffect(new WordOfCommandEffect());
@@ -58,7 +57,7 @@ class WordOfCommandEffect extends OneShotEffect {
 
     public WordOfCommandEffect() {
         super(Outcome.GainControl);
-        this.staticText = "Look at target opponent's hand and choose a card from it. You control that player until Word of Command finishes resolving. The player plays that card if able. While doing so, the player can activate mana abilities only if they're from lands that player controls and only if mana they produce is spent to activate other mana abilities of lands the player controls and/or to play that card. If the chosen card is cast as a spell, you control the player while that spell is resolving";
+        this.staticText = "Look at target opponent's hand and choose a card from it. You control that player until {this} finishes resolving. The player plays that card if able. While doing so, the player can activate mana abilities only if they're from lands that player controls and only if mana they produce is spent to activate other mana abilities of lands the player controls and/or to play that card. If the chosen card is cast as a spell, you control the player while that spell is resolving";
     }
 
     public WordOfCommandEffect(final WordOfCommandEffect effect) {

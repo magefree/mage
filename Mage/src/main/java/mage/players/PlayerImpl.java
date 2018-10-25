@@ -1145,8 +1145,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         //20091005 - 114.2a
         ActivationStatus activationStatus = playLandAbility.canActivate(this.playerId, game);
-        if (!ignoreTiming && !activationStatus.canActivate()) {
-            return false;
+        if (ignoreTiming) {
+            if (!canPlayLand()) {
+                return false; // ignore timing does not mean that more lands than normal can be played
+            }
+        } else {
+            if (!activationStatus.canActivate()) {
+                return false;
+            }
         }
 
         //20091005 - 305.1
