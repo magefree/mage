@@ -204,9 +204,11 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("No Rest for the Wicked", 142, Rarity.UNCOMMON, mage.cards.n.NoRestForTheWicked.class));
         cards.add(new SetCardInfo("Noetic Scales", 304, Rarity.RARE, mage.cards.n.NoeticScales.class));
         cards.add(new SetCardInfo("Okk", 204, Rarity.RARE, mage.cards.o.Okk.class));
+        cards.add(new SetCardInfo("Opal Acrolith", 22, Rarity.UNCOMMON, mage.cards.o.OpalAcrolith.class));
         cards.add(new SetCardInfo("Opal Archangel", 23, Rarity.RARE, mage.cards.o.OpalArchangel.class));
         cards.add(new SetCardInfo("Opal Caryatid", 24, Rarity.COMMON, mage.cards.o.OpalCaryatid.class));
         cards.add(new SetCardInfo("Opal Gargoyle", 25, Rarity.COMMON, mage.cards.o.OpalGargoyle.class));
+        cards.add(new SetCardInfo("Opal Titan", 26, Rarity.RARE, mage.cards.o.OpalTitan.class));
         cards.add(new SetCardInfo("Oppression", 143, Rarity.RARE, mage.cards.o.Oppression.class));
         cards.add(new SetCardInfo("Order of Yawgmoth", 144, Rarity.UNCOMMON, mage.cards.o.OrderOfYawgmoth.class));
         cards.add(new SetCardInfo("Pacifism", 27, Rarity.COMMON, mage.cards.p.Pacifism.class));
