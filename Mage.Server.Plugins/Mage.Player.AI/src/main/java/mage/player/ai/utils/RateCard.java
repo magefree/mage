@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import java.io.InputStream;
 import java.util.*;
+import mage.constants.Rarity;
 import mage.constants.SubType;
 
 /**
@@ -71,7 +72,7 @@ public final class RateCard {
             type = 6;
         }
         int score = 10 * getCardRating(card) + 2 * type + getManaCostScore(card, allowedColors)
-                + 40 * isRemoval(card);
+                + 40 * isRemoval(card) + getRarityScore(card);
         if (allowedColors == null)
             rated.put(card.getName(), score);
         return score;
@@ -218,6 +219,26 @@ public final class RateCard {
         return 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/);
     }
 
+    /**
+     * Get rarity score.
+     * nowadays, cards that are more rare are more powerful, lets
+     * trust that and play the shiny cards.
+     *
+     * @param card
+     * @return integer rating value
+     */
+    private static int getRarityScore(Card card) {
+        Rarity r = card.getRarity();
+        if (Rarity.MYTHIC == r){
+            return 80;
+        }else if (Rarity.RARE == r){
+            return 50;
+        }else if (Rarity.UNCOMMON == r){
+            return 25;
+        }else{
+            return 1;
+        }
+    }
     /**
      * Determines whether mana symbol is color.
      *
