@@ -27,17 +27,16 @@ public class SummonersEggTest extends CardTestPlayerBase {
     @Test
     public void testSummonersEggImprint() {
         addCard(Zone.HAND, playerA, "Summoner's Egg");
-        addCard(Zone.HAND, playerA, "Sejiri Merfolk");
+        addCard(Zone.HAND, playerA, "Maritime Guard");
         addCard(Zone.HAND, playerA, "Goblin Roughrider");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Summoner's Egg");
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Summoner's Egg");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertHandCount(playerA, 1);
-        assertHandCount(playerA, "Sejiri Merfolk", 1);
+        assertHandCount(playerA, "Maritime Guard", 1);
         assertHandCount(playerA, "Goblin Roughrider", 0);
 
         assertExileCount("Goblin Roughrider", 1);
@@ -53,7 +52,7 @@ public class SummonersEggTest extends CardTestPlayerBase {
     @Test
     public void testSummonersEggDies() {
         addCard(Zone.HAND, playerA, "Summoner's Egg");
-        addCard(Zone.HAND, playerA, "Sejiri Merfolk");
+        addCard(Zone.HAND, playerA, "Maritime Guard");
         addCard(Zone.HAND, playerA, "Goblin Roughrider");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.HAND, playerB, "Char");
@@ -67,7 +66,7 @@ public class SummonersEggTest extends CardTestPlayerBase {
         execute();
         
         assertHandCount(playerA, 1);
-        assertHandCount(playerA, "Sejiri Merfolk", 1);
+        assertHandCount(playerA, "Maritime Guard", 1);
         assertHandCount(playerA, "Goblin Roughrider", 0);
         
         assertGraveyardCount(playerA, "Summoner's Egg", 1);
