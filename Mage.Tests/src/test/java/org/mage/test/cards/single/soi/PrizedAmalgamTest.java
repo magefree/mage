@@ -26,8 +26,7 @@ public class PrizedAmalgamTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Prized Amalgam", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate");
-        addTarget(playerA, "Bronze Sable");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Bronze Sable");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -72,8 +71,7 @@ public class PrizedAmalgamTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.GRAVEYARD, playerB, "Prized Amalgam", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate");
-        addTarget(playerA, "Hill Giant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Hill Giant");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -95,8 +93,7 @@ public class PrizedAmalgamTest extends CardTestPlayerBase {
         // Whenever a creature enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, return Prized Amalgam from your graveyard to the battlefield tapped at the beginning of the next end step.
         addCard(Zone.GRAVEYARD, playerB, "Prized Amalgam", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromantic Summons");
-        addTarget(playerA, "Merfolk Looter");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromantic Summons", "Merfolk Looter");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
