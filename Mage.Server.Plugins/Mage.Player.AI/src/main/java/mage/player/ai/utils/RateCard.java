@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import java.io.InputStream;
 import java.util.*;
+import mage.constants.Rarity;
 import mage.constants.SubType;
 
 /**
@@ -71,7 +72,7 @@ public final class RateCard {
             type = 6;
         }
         int score = 10 * getCardRating(card) + 2 * type + getManaCostScore(card, allowedColors)
-                + 40 * isRemoval(card);
+                + 40 * isRemoval(card) + getRarityScore(card);
         if (allowedColors == null)
             rated.put(card.getName(), score);
         return score;
@@ -168,11 +169,13 @@ public final class RateCard {
     }
 
     private static final int SINGLE_PENALTY[] = {0, 1, 1, 3, 6, 9};
+    private static final int MULTICOLOR_BONUS = 15;
 
     /**
      * Get manacost score.
      * Depends on chosen colors. Returns negative score for those cards that doesn't fit allowed colors.
      * If allowed colors are not chosen, then score based on converted cost is returned with penalty for heavy colored cards.
+     * gives bonus to multicolor cards that fit within allowed colors and if allowed colors is <5
      *
      *
      * @param card
@@ -215,9 +218,34 @@ public final class RateCard {
         }
         if (maxSingleCount > 5)
             maxSingleCount = 5;
-        return 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/);
+
+        int rate = 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]);
+        if( singleCount.size() > 1 && singleCount.size() < 5){
+            rate += MULTICOLOR_BONUS;
+        }
+        return rate;
     }
 
+    /**
+     * Get rarity score.
+     * nowadays, cards that are more rare are more powerful, lets
+     * trust that and play the shiny cards.
+     *
+     * @param card
+     * @return integer rating value
+     */
+    private static int getRarityScore(Card card) {
+        Rarity r = card.getRarity();
+        if (Rarity.MYTHIC == r){
+            return 60;
+        }else if (Rarity.RARE == r){
+            return 40;
+        }else if (Rarity.UNCOMMON == r){
+            return 20;
+        }else{
+            return 0;
+        }
+    }
     /**
      * Determines whether mana symbol is color.
      *
