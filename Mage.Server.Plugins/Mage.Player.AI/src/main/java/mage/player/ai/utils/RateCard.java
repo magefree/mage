@@ -36,14 +36,19 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public final class RateCard {
 
     private static Map<String, Integer> ratings;
+    private static List<String> setsWithRatingsToBeLoaded;
     private static final Map<String, Integer> rated = new HashMap<>();
-    private static Integer min = Integer.MAX_VALUE, max = 0;
 
     /**
      * Rating that is given for new cards.
      * Ratings are in [1,10] range, so setting it high will make new cards appear more often.
+     * nowadays, cards that are more rare are more powerful, lets trust that and play the shiny cards.
+     *
      */
-    private static final int DEFAULT_NOT_RATED_CARD_RATING = 4;
+    private static final int DEFAULT_NOT_RATED_CARD_RATING = 40;
+    private static final int DEFAULT_NOT_RATED_UNCOMMON_RATING = 60;
+    private static final int DEFAULT_NOT_RATED_RARE_RATING = 75;
+    private static final int DEFAULT_NOT_RATED_MYTHIC_RATING = 90;
 
     private static final Logger log = Logger.getLogger(RateCard.class);
 
@@ -81,8 +86,8 @@ public final class RateCard {
         } else {
             type = 6;
         }
-        int score = 10 * getCardRating(card) + 2 * type + getManaCostScore(card, allowedColors)
-                + 40 * isRemoval(card) + getRarityScore(card);
+        int score = getCardRating(card) + 2 * type + getManaCostScore(card, allowedColors)
+                + 40 * isRemoval(card);
         if (allowedColors == null)
             rated.put(card.getName(), score);
         return score;
@@ -148,7 +153,6 @@ public final class RateCard {
                 }
             }
         }
-        
         return 0;
     }
 
@@ -156,17 +160,36 @@ public final class RateCard {
      * Return rating of the card.
      *
      * @param card Card to rate.
-     * @return Rating number from [1;10].
+     * @return Rating number from [1:100].
      */
     public static int getCardRating(Card card) {
-        if (ratings == null) {
-            readRatings();
+        if (setsWithRatingsToBeLoaded == null){
+            setsWithRatingsToBeLoaded = new LinkedList<>();
+            InputStream is = RateCard.class.getResourceAsStream("/setsWithRatings.csv");
+            Scanner scanner = new Scanner(is);
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    if (line.substring(0,1) != "#"){
+                        setsWithRatingsToBeLoaded.add(line);
+                    }
+                }
         }
-        if (ratings.containsKey(card.getName())) {
-            int r = ratings.get(card.getName());
-            // normalize to [1..10]
-            float f = 10.0f * (r - min) / (max - min);
-            return (int) Math.round(f);
+        String exp = card.getExpansionSetCode().toLowerCase();
+        readRatings(exp);
+
+        if (ratings != null && ratings.containsKey(card.getName())) {
+            return ratings.get(card.getName());
+        }
+
+        Rarity r = card.getRarity();
+        if (Rarity.COMMON == r){
+            return DEFAULT_NOT_RATED_CARD_RATING;
+        }else if (Rarity.UNCOMMON == r){
+            return DEFAULT_NOT_RATED_UNCOMMON_RATING;
+        }else if (Rarity.RARE == r){
+            return DEFAULT_NOT_RATED_RARE_RATING;
+        }else if (Rarity.MYTHIC == r){
+            return DEFAULT_NOT_RATED_MYTHIC_RATING;
         }
         return DEFAULT_NOT_RATED_CARD_RATING;
     }
@@ -174,14 +197,20 @@ public final class RateCard {
     /**
      * Reads ratings from resources.
      */
-    private synchronized static void readRatings() {
+    private synchronized static void readRatings(String expCode) {
         if (ratings == null) {
             ratings = new HashMap<>();
-            readFromFile("/m13.csv");
+        }
+        if (setsWithRatingsToBeLoaded.contains(expCode)){
+            System.out.println("reading draftbot ratings for the set" + expCode);
+            readFromFile("/" + expCode + ".csv");            
+            setsWithRatingsToBeLoaded.remove(expCode);
         }
     }
-    
+
     private static void readFromFile(String path) {
+        Integer min = Integer.MAX_VALUE, max = 0;
+        Map<String, Integer> thisFileRatings = new HashMap<>();
         try {
             InputStream is = RateCard.class.getResourceAsStream(path);
             Scanner scanner = new Scanner(is);
@@ -197,12 +226,17 @@ public final class RateCard {
                     if (rating < min) {
                         min = rating;
                     }
-                    ratings.put(name, rating);
+                    thisFileRatings.put(name, rating);
                 }
+            }
+            // normalize for the file to [1..100]
+            for (String name: thisFileRatings.keySet()){
+                int r = thisFileRatings.get(name);
+                int newrating = (int)(100.0f * (r - min) / (max - min));
+                ratings.put(name, newrating);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            ratings.clear(); // no rating available on exception
         }
     }
 
@@ -263,27 +297,7 @@ public final class RateCard {
         }
         return rate;
     }
-
-    /**
-     * Get rarity score.
-     * nowadays, cards that are more rare are more powerful, lets
-     * trust that and play the shiny cards.
-     *
-     * @param card
-     * @return integer rating value
-     */
-    private static int getRarityScore(Card card) {
-        Rarity r = card.getRarity();
-        if (Rarity.MYTHIC == r){
-            return 60;
-        }else if (Rarity.RARE == r){
-            return 40;
-        }else if (Rarity.UNCOMMON == r){
-            return 20;
-        }else{
-            return 0;
-        }
-    }
+  
     /**
      * Determines whether mana symbol is color.
      *
