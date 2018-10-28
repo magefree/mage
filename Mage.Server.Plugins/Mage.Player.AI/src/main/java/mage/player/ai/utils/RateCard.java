@@ -7,14 +7,25 @@ import mage.cards.Card;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.target.Target;
-import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 import org.apache.log4j.Logger;
 
 import java.io.InputStream;
 import java.util.*;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
+import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.Rarity;
 import mage.constants.SubType;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetAttackingCreature;
+import mage.target.common.TargetAttackingOrBlockingCreature;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  * Class responsible for reading ratings from resources and rating given cards.
@@ -54,7 +65,6 @@ public final class RateCard {
     public static int rateCard(Card card, List<ColoredManaSymbol> allowedColors) {
         if (allowedColors == null && rated.containsKey(card.getName())) {
             int rate = rated.get(card.getName());
-//            log.info(card.getName() + " rate: " + rate);
             return rate;
         }
         int type;
@@ -79,38 +89,66 @@ public final class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.getSubtype(null).contains(SubType.AURA) || card.isInstant() || card.isSorcery()) {
+        if (card.isEnchantment() || card.isInstant() || card.isSorcery()) {
 
             for (Ability ability : card.getAbilities()) {
-                for (Effect effect : ability.getEffects()) {
-                    if (effect.getOutcome() == Outcome.Removal) {
-                        log.debug("Found removal: " + card.getName());
+                for (Effect effect : ability.getEffects()) { 
+                    if (isEffectRemoval(card, ability, effect) == 1){
                         return 1;
                     }
-                    if (effect.getOutcome() == Outcome.Damage) {
-                        if (effect instanceof DamageTargetEffect) {
-                            DamageTargetEffect damageEffect = (DamageTargetEffect) effect;
-                            if (damageEffect.getAmount() > 1) {
-                                for (Target target : ability.getTargets()) {
-                                    if (target instanceof TargetCreaturePermanent || target instanceof TargetAnyTarget) {
-                                        log.debug("Found damage dealer: " + card.getName());
-                                        return 1;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (effect.getOutcome() == Outcome.DestroyPermanent) {
-                        for (Target target : ability.getTargets()) {
-                            if (target instanceof TargetCreaturePermanent) {
-                                log.debug("Found destroyer: " + card.getName());
-                                return 1;
-                            }
+                }
+                for (Mode mode: ability.getModes().values() ){
+                    for (Effect effect: mode.getEffects()){
+                        if (isEffectRemoval(card, ability, effect) == 1){
+                            return 1;
                         }
                     }
                 }
             }
+           
         }
+        return 0;
+    }
+    
+    private static int isEffectRemoval(Card card, Ability ability, Effect effect){
+        if (effect.getOutcome() == Outcome.Removal) {
+            log.debug("Found removal: " + card.getName());
+            return 1;
+        }
+        //static List<Effect> removalEffects =[BoostTargetEffect,BoostEnchantedEffect]
+        if (effect instanceof BoostTargetEffect || effect instanceof BoostEnchantedEffect){
+            String text = effect.getText(null);
+            if (text.contains("/-")){
+                // toughness reducer, aka removal
+                return 1;
+            }
+        }
+        if (effect instanceof FightTargetsEffect || effect instanceof DamageWithPowerTargetEffect){
+            return 1;
+        }
+        if (effect.getOutcome() == Outcome.Damage || effect instanceof DamageTargetEffect) {
+            for (Target target : ability.getTargets()) {
+                if (!(target instanceof TargetPlayerOrPlaneswalker)){
+                    log.debug("Found damage dealer: " + card.getName());
+                    return 1;
+                }
+            }
+        }
+        if (effect.getOutcome() == Outcome.DestroyPermanent || 
+                effect instanceof DestroyTargetEffect || 
+                effect instanceof ExileTargetEffect || 
+                effect instanceof ExileUntilSourceLeavesEffect) {
+            for (Target target : ability.getTargets()) {
+                if (target instanceof TargetCreaturePermanent || 
+                        target instanceof TargetAttackingCreature ||
+                        target instanceof TargetAttackingOrBlockingCreature ||
+                        target instanceof TargetPermanent) {
+                    log.debug("Found destroyer/exiler: " + card.getName());
+                    return 1;
+                }
+            }
+        }
+        
         return 0;
     }
 

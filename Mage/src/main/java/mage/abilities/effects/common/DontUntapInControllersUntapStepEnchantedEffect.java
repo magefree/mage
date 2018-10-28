@@ -19,7 +19,7 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
     }
 
     public DontUntapInControllersUntapStepEnchantedEffect(String description) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
+        super(Duration.WhileOnBattlefield, Outcome.Removal, false, true);
         staticText = "Enchanted " + description + " doesn't untap during its controller's untap step";
     }
 
