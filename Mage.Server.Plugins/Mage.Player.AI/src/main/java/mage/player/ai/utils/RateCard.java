@@ -49,6 +49,9 @@ public final class RateCard {
     private static final int DEFAULT_NOT_RATED_UNCOMMON_RATING = 60;
     private static final int DEFAULT_NOT_RATED_RARE_RATING = 75;
     private static final int DEFAULT_NOT_RATED_MYTHIC_RATING = 90;
+    
+    private static String RATINGS_DIR = "/ratings/";
+    private static String RATINGS_SET_LIST = RATINGS_DIR + "setsWithRatings.csv";
 
     private static final Logger log = Logger.getLogger(RateCard.class);
 
@@ -163,17 +166,7 @@ public final class RateCard {
      * @return Rating number from [1:100].
      */
     public static int getCardRating(Card card) {
-        if (setsWithRatingsToBeLoaded == null){
-            setsWithRatingsToBeLoaded = new LinkedList<>();
-            InputStream is = RateCard.class.getResourceAsStream("/setsWithRatings.csv");
-            Scanner scanner = new Scanner(is);
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    if (line.substring(0,1) != "#"){
-                        setsWithRatingsToBeLoaded.add(line);
-                    }
-                }
-        }
+        readRatingSetList();
         String exp = card.getExpansionSetCode().toLowerCase();
         readRatings(exp);
 
@@ -193,22 +186,47 @@ public final class RateCard {
         }
         return DEFAULT_NOT_RATED_CARD_RATING;
     }
+    
+    /**
+     * reads the list of sets that have ratings csv files
+     * populates the setsWithRatingsToBeLoaded
+     */
+    private synchronized static void readRatingSetList(){
+        try {
+            if (setsWithRatingsToBeLoaded == null){
+                setsWithRatingsToBeLoaded = new LinkedList<>();
+                InputStream is = RateCard.class.getResourceAsStream(RATINGS_SET_LIST);
+                Scanner scanner = new Scanner(is);
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        if (!line.substring(0,1).equals("#")){
+                            setsWithRatingsToBeLoaded.add(line);
+                        }
+                    }
+            }
+        }catch (Exception e) {
+            log.info("failed to read ratings set list file: " + RATINGS_SET_LIST );
+            e.printStackTrace();
+        }
+    }
 
     /**
-     * Reads ratings from resources.
+     * Reads ratings from resources and loads them into ratings map
      */
     private synchronized static void readRatings(String expCode) {
         if (ratings == null) {
             ratings = new HashMap<>();
         }
         if (setsWithRatingsToBeLoaded.contains(expCode)){
-            System.out.println("reading draftbot ratings for the set" + expCode);
-            readFromFile("/" + expCode + ".csv");            
+            log.info("reading draftbot ratings for the set" + expCode);
+            readFromFile(RATINGS_DIR + expCode + ".csv");            
             setsWithRatingsToBeLoaded.remove(expCode);
         }
     }
-
-    private static void readFromFile(String path) {
+    /**
+    * reads ratings from the file
+    */
+    private synchronized static void readFromFile(String path) {
         Integer min = Integer.MAX_VALUE, max = 0;
         Map<String, Integer> thisFileRatings = new HashMap<>();
         try {
@@ -233,9 +251,13 @@ public final class RateCard {
             for (String name: thisFileRatings.keySet()){
                 int r = thisFileRatings.get(name);
                 int newrating = (int)(100.0f * (r - min) / (max - min));
-                ratings.put(name, newrating);
+                if (!ratings.containsKey(name) || 
+                    (ratings.containsKey(name) && newrating > ratings.get(name)) ){
+                        ratings.put(name, newrating);
+                }
             }
         } catch (Exception e) {
+            log.info("failed to read ratings file: " + path );
             e.printStackTrace();
         }
     }
