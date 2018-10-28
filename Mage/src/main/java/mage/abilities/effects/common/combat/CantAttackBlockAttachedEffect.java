@@ -5,6 +5,7 @@ import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -14,7 +15,7 @@ import mage.game.permanent.Permanent;
 public class CantAttackBlockAttachedEffect extends RestrictionEffect {
 
     public CantAttackBlockAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, Outcome.Removal);
         this.staticText = attachmentType.verb() + " creature can't attack or block";
     }
 
