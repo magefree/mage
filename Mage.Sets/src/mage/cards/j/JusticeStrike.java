@@ -38,7 +38,7 @@ public final class JusticeStrike extends CardImpl {
 class JusticeStrikeEffect extends OneShotEffect {
 
     public JusticeStrikeEffect() {
-        super(Outcome.Removal);
+        super(Outcome.Damage);
         this.staticText = "Target creature deals damage to itself equal to its power.";
     }
 
