@@ -2074,14 +2074,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             int maxScore = RateCard.rateCard(bestCard, chosenColors);
             int pickedCardRate = RateCard.getCardRating(bestCard);
 
-            if (pickedCardRate <= 3) {
+            if (pickedCardRate <= 30) {
                 // if card is bad
                 // try to counter pick without any color restriction
                 Card counterPick = pickBestCard(cards, null);
                 int counterPickScore = RateCard.getCardRating(counterPick);
                 // card is really good
                 // take it!
-                if (counterPickScore >= 8) {
+                if (counterPickScore >= 80) {
                     bestCard = counterPick;
                     maxScore = RateCard.rateCard(bestCard, chosenColors);
                 }
