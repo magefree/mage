@@ -164,6 +164,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Guerrillas", 261, Rarity.UNCOMMON, mage.cards.h.HiddenGuerrillas.class));
         cards.add(new SetCardInfo("Hidden Herd", 262, Rarity.RARE, mage.cards.h.HiddenHerd.class));
         cards.add(new SetCardInfo("Hidden Spider", 264, Rarity.COMMON, mage.cards.h.HiddenSpider.class));
+        cards.add(new SetCardInfo("Hidden Stag", 265, Rarity.RARE, mage.cards.h.HiddenStag.class));
         cards.add(new SetCardInfo("Hollow Dogs", 137, Rarity.COMMON, mage.cards.h.HollowDogs.class));
         cards.add(new SetCardInfo("Hopping Automaton", 297, Rarity.UNCOMMON, mage.cards.h.HoppingAutomaton.class));
         cards.add(new SetCardInfo("Horseshoe Crab", 80, Rarity.COMMON, mage.cards.h.HorseshoeCrab.class));
@@ -295,6 +296,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Sneak Attack", 218, Rarity.RARE, mage.cards.s.SneakAttack.class));
         cards.add(new SetCardInfo("Somnophore", 97, Rarity.RARE, mage.cards.s.Somnophore.class));
         cards.add(new SetCardInfo("Songstitcher", 52, Rarity.UNCOMMON, mage.cards.s.Songstitcher.class));
+        cards.add(new SetCardInfo("Soul Sculptor", 53, Rarity.RARE, mage.cards.s.SoulSculptor.class));
         cards.add(new SetCardInfo("Spined Fluke", 160, Rarity.UNCOMMON, mage.cards.s.SpinedFluke.class));
         cards.add(new SetCardInfo("Spire Owl", 98, Rarity.COMMON, mage.cards.s.SpireOwl.class));
         cards.add(new SetCardInfo("Sporogenesis", 273, Rarity.RARE, mage.cards.s.Sporogenesis.class));
