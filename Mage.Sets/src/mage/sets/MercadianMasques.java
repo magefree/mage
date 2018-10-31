@@ -75,6 +75,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cho-Manno, Revolutionary", 11, Rarity.RARE, mage.cards.c.ChoMannoRevolutionary.class));
         cards.add(new SetCardInfo("Cho-Manno's Blessing", 12, Rarity.COMMON, mage.cards.c.ChoMannosBlessing.class));
         cards.add(new SetCardInfo("Cinder Elemental", 183, Rarity.UNCOMMON, mage.cards.c.CinderElemental.class));
+        cards.add(new SetCardInfo("Clear the Land", 235, Rarity.RARE, mage.cards.c.ClearTheLand.class));
         cards.add(new SetCardInfo("Close Quarters", 184, Rarity.UNCOMMON, mage.cards.c.CloseQuarters.class));
         cards.add(new SetCardInfo("Cloud Sprite", 67, Rarity.COMMON, mage.cards.c.CloudSprite.class));
         cards.add(new SetCardInfo("Coastal Piracy", 68, Rarity.UNCOMMON, mage.cards.c.CoastalPiracy.class));
