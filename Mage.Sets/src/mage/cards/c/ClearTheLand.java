@@ -71,14 +71,15 @@ class ClearTheLandEffect extends OneShotEffect {
                     Library library = player.getLibrary();
                     Cards cardsToReveal = new CardsImpl();
                     for (int i = 0; i < numOfCardsToReveal; i++) {
-                        if (library.hasCards()) {
-                            Card card = library.getFromTop(game);
-                            cardsToReveal.add(card);
-                            if (card.isLand()) {
-                                player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
-                            } else {
-                                player.moveCards(card, Zone.EXILED, source, game);
-                            }
+                        if (!library.hasCards()) {
+                            break;
+                        }
+                        Card card = library.getFromTop(game);
+                        cardsToReveal.add(card);
+                        if (card.isLand()) {
+                            player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
+                        } else {
+                            player.moveCards(card, Zone.EXILED, source, game);
                         }
                     }
                     player.revealCards(source, "Revealed cards for " + player.getName(), cardsToReveal, game);
