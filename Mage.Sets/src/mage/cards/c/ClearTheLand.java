@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
-import mage.players.Players;
 
 /**
  *
@@ -59,30 +58,27 @@ class ClearTheLandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         
-        int numOfCardsToReveal = 5;
         boolean tapped = true;
         
         Player controller = game.getPlayer(source.getControllerId());
         
         if (controller != null) {
-            Players allPlayers = game.getPlayers();
-            for (Player player : allPlayers.values()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Library library = player.getLibrary();
                     Cards cardsToReveal = new CardsImpl();
-                    for (int i = 0; i < numOfCardsToReveal; i++) {
-                        if (!library.hasCards()) {
-                            break;
-                        }
-                        Card card = library.getFromTop(game);
-                        cardsToReveal.add(card);
-                        if (card.isLand()) {
-                            player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
-                        } else {
-                            player.moveCards(card, Zone.EXILED, source, game);
+                    cardsToReveal.addAll(library.getTopCards(game, 5));
+                    if (!cardsToReveal.isEmpty()) {
+                        player.revealCards(source, "Revealed cards for " + player.getName(), cardsToReveal, game);
+                        for (Card card : cardsToReveal.getCards(game)) {
+                            if (card.isLand()) {
+                                player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
+                            } else {
+                                player.moveCards(card, Zone.EXILED, source, game);
+                            }
                         }
                     }
-                    player.revealCards(source, "Revealed cards for " + player.getName(), cardsToReveal, game);
                 }
             }
             return true;
