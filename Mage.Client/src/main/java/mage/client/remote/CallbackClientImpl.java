@@ -214,7 +214,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case GAME_CHOOSE_ABILITY: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            appendJsonEvent("GAME_CHOOSE_PILE", callback.getObjectId(), callback.getData());
+                            appendJsonEvent("GAME_CHOOSE_ABILITY", callback.getObjectId(), callback.getData());
                             panel.pickAbility((AbilityPickerView) callback.getData());
                         }
                         break;
