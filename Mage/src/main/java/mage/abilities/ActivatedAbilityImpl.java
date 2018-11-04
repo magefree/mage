@@ -219,9 +219,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         } else {
             MageObject mageObject = game.getObject(this.sourceId);
             if (mageObject instanceof Emblem) {
-                return ((Emblem) mageObject).getControllerId().equals(playerId);
+                return ((Emblem) mageObject).isControlledBy(playerId);
             } else if (mageObject instanceof Plane) {
-                return ((Plane) mageObject).getControllerId().equals(playerId);
+                return ((Plane) mageObject).isControlledBy(playerId);
             } else if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
                 return ((Card) mageObject).isOwnedBy(playerId);
             }
