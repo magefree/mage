@@ -2,24 +2,30 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -34,14 +40,14 @@ public final class Portcullis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.
-        String rule = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature";
-        TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PortcullisExileEffect(), filter, false, SetTargetPointer.PERMANENT, rule);
-        MoreThanXCreaturesOnBFCondition condition = new MoreThanXCreaturesOnBFCondition(2);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, rule));
-
         // Return that card to the battlefield under its owner's control when Portcullis leaves the battlefield.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
-        this.addAbility(ability2);
+        String rule = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.";
+        String rule2 = " Return that card to the battlefield under its owner's control when {this} leaves the battlefield.";
+        TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PortcullisExileEffect(), 
+                filter, false, SetTargetPointer.PERMANENT, rule);
+        MoreThanXCreaturesOnBFCondition condition = new MoreThanXCreaturesOnBFCondition(2);
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, rule + rule2));
+
     }
 
     public Portcullis(final Portcullis card) {
@@ -74,8 +80,8 @@ class MoreThanXCreaturesOnBFCondition implements Condition {
 class PortcullisExileEffect extends OneShotEffect {
 
     public PortcullisExileEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.";
+        super(Outcome.Exile);
+        this.staticText = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature";
     }
 
     public PortcullisExileEffect(final PortcullisExileEffect effect) {
@@ -89,20 +95,58 @@ class PortcullisExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
-
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        Permanent creatureToExile = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent portcullis = game.getPermanent(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (portcullis != null
+                && creatureToExile != null
+                && controller != null) {
+            UUID exileZoneId = CardUtil.getExileZoneId(game, creatureToExile.getId(), creatureToExile.getZoneChangeCounter(game));
+            controller.moveCardsToExile(creatureToExile, source, game, true, exileZoneId, portcullis.getName());
+            FixedTarget fixedTarget = new FixedTarget(portcullis, game);
+            Effect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+            returnEffect.setTargetPointer(new FixedTarget(creatureToExile.getId(), game.getState().getZoneChangeCounter(creatureToExile.getId())));
+            DelayedTriggeredAbility delayedAbility = new PortcullisReturnToBattlefieldTriggeredAbility(fixedTarget, returnEffect);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
         }
-        if (permanent != null && creature != null) {
-            Player controller = game.getPlayer(creature.getControllerId());
-            Zone currentZone = game.getState().getZone(creature.getId());
-            if (currentZone == Zone.BATTLEFIELD) {
-                controller.moveCardsToExile(creature, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
-                return true;
-            }
+        return true;
+    }
+}
+
+class PortcullisReturnToBattlefieldTriggeredAbility extends DelayedTriggeredAbility {
+
+    protected FixedTarget fixedTarget;
+
+    public PortcullisReturnToBattlefieldTriggeredAbility(FixedTarget fixedTarget, Effect effect) {
+        super(effect, Duration.OneUse);
+        this.fixedTarget = fixedTarget;
+    }
+
+    public PortcullisReturnToBattlefieldTriggeredAbility(final PortcullisReturnToBattlefieldTriggeredAbility ability) {
+        super(ability);
+        this.fixedTarget = ability.fixedTarget;
+    }
+
+    @Override
+    public PortcullisReturnToBattlefieldTriggeredAbility copy() {
+        return new PortcullisReturnToBattlefieldTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (((ZoneChangeEvent) event).getFromZone().match(Zone.BATTLEFIELD)) {
+            return (fixedTarget.getTarget().equals(event.getTargetId()));
         }
         return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Return this card to the battlefield under its owner's control when Portcullis leaves the battlefield.";
     }
 }
