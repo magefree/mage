@@ -3,11 +3,15 @@ package mage.client.deckeditor;
 import mage.util.StreamUtils;
 
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Optional;
+
 import javax.swing.*;
 
 public class DeckImportFromClipboardDialog extends JDialog {
@@ -38,6 +42,17 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
         // Close on "ESC"
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        getClipboardStringData().ifPresent(content -> txtDeckList.setText(content));
+    }
+
+    private Optional<String> getClipboardStringData() {
+        try {
+            return Optional.of((String)Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor));
+        } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     private void onOK() {
