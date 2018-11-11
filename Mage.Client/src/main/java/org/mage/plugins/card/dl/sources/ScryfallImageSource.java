@@ -231,6 +231,9 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("GS1");
         supportedSets.add("GRN");
         supportedSets.add("GK1");
+        supportedSets.add("GNT");
+        supportedSets.add("UMA");
+        supportedSets.add("PUMA");
         //
         supportedSets.add("EURO");
         supportedSets.add("GPX");
