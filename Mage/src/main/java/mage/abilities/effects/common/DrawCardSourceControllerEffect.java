@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -51,7 +52,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         boolean oneCard = (amount instanceof StaticValue && amount.calculate(null, null, this) == 1)
-                || amount instanceof PermanentsOnBattlefieldCount || amount.toString().equals("1");
+                || amount instanceof PermanentsOnBattlefieldCount || amount.toString().equals("1") || amount.toString().equals("a");
         sb.append("draw ").append(oneCard ? "a" : CardUtil.numberToText(amount.toString())).append(" card");
         if (!oneCard) {
             sb.append('s');

@@ -1,15 +1,17 @@
 package mage.verify;
 
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
-import mage.constants.Constants;
 import mage.constants.Rarity;
 import mage.constants.SuperType;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
-import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -381,9 +383,9 @@ public class VerifyCardDataTest {
             // check
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
-                boolean cardHaveVariousSetting = card.getGraphicInfo() == null ?  false : card.getGraphicInfo().getUsesVariousArt();
+                boolean cardHaveVariousSetting = card.getGraphicInfo() == null ? false : card.getGraphicInfo().getUsesVariousArt();
 
-                if(cardHaveDoubleName && !cardHaveVariousSetting) {
+                if (cardHaveDoubleName && !cardHaveVariousSetting) {
                     errorsList.add("error, founded double card names, but UsesVariousArt is not true: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
@@ -623,6 +625,11 @@ public class VerifyCardDataTest {
         // search missing abilities from card source
         if (ref.text == null || ref.text.isEmpty()) {
             return;
+        }
+
+        // special check: kicker ability must be in rules
+        if (card.getAbilities().containsClass(MultikickerAbility.class) && !card.getRules().stream().anyMatch(rule -> rule.contains("Multikicker"))) {
+            fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
         }
 
         // spells have only 1 abilities
