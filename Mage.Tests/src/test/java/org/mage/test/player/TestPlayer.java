@@ -43,9 +43,11 @@ import mage.player.ai.ComputerPlayer;
 import mage.players.Library;
 import mage.players.ManaPool;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 
@@ -63,6 +65,8 @@ import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
  */
 @Ignore
 public class TestPlayer implements Player {
+
+    private static final Logger logger = Logger.getLogger(TestPlayer.class);
 
     private int maxCallsWithoutAction = 100;
     private int foundNoAction = 0;
@@ -524,6 +528,13 @@ public class TestPlayer implements Player {
                             checkProccessed = true;
                         }
 
+                        // check PT: life
+                        if (params[0].equals(CHECK_COMMAND_LIFE) && params.length == 2) {
+                            assertLife(action, game, computerPlayer, Integer.parseInt(params[1]));
+                            actions.remove(action);
+                            checkProccessed = true;
+                        }
+
                         // check ability: card name, ability class, must have
                         if (params[0].equals(CHECK_COMMAND_ABILITY) && params.length == 4) {
                             assertAbility(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
@@ -534,6 +545,13 @@ public class TestPlayer implements Player {
                         // check battlefield count: card name, count
                         if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 3) {
                             assertPermanentCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            checkProccessed = true;
+                        }
+
+                        // check exile count: card name, count
+                        if (params[0].equals(CHECK_COMMAND_EXILE_COUNT) && params.length == 3) {
+                            assertExileCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
                             actions.remove(action);
                             checkProccessed = true;
                         }
@@ -610,6 +628,11 @@ public class TestPlayer implements Player {
                 Toughness, perm.getToughness().getValue());
     }
 
+    private void assertLife(PlayerAction action, Game game, Player player, int Life) {
+        Assert.assertEquals(action.getActionName() + " - " + player.getName() + " have wrong life: " + player.getLife() + " <> " + Life,
+                Life, player.getLife());
+    }
+
     private void assertAbility(PlayerAction action, Game game, Player player, String permanentName, String abilityClass, boolean mustHave) {
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
@@ -637,6 +660,17 @@ public class TestPlayer implements Player {
         }
 
         Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances", count, foundedCount);
+    }
+
+    private void assertExileCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
+        int foundedCount = 0;
+        for (Card card : game.getExile().getAllCards(game)) {
+            if (card.getName().equals(permanentName) && card.isOwnedBy(player.getId())) {
+                foundedCount++;
+            }
+        }
+
+        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in exile zone with " + count + " instances", count, foundedCount);
     }
 
     private void assertHandCount(PlayerAction action, Game game, Player player, int count) {
@@ -1092,6 +1126,7 @@ public class TestPlayer implements Player {
                 }
             }
         }
+
         return computerPlayer.choose(outcome, target, sourceId, game, options);
     }
 

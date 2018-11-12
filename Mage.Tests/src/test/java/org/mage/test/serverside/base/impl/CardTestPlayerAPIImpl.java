@@ -49,8 +49,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String NO_TARGET = "NO_TARGET";
 
     public static final String CHECK_COMMAND_PT = "PT";
+    public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
+    public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
     public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
     public static final String CHECK_COMMAND_COLOR = "COLOR";
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
@@ -240,12 +242,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_PT, permanentName, power.toString(), toughness.toString());
     }
 
+    public void checkLife(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer life) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_LIFE, life.toString());
+    }
+
     public void checkAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Class<?> abilityClass, Boolean mustHave) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_ABILITY, permanentName, abilityClass.getName(), mustHave.toString());
     }
 
     public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNT, permanentName, count.toString());
+    }
+
+    public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, permanentName, count.toString());
     }
 
     public void checkHandCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer count) {
