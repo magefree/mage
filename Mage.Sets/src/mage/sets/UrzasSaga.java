@@ -237,6 +237,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Polluted Mire", 323, Rarity.COMMON, mage.cards.p.PollutedMire.class));
         cards.add(new SetCardInfo("Pouncing Jaguar", 269, Rarity.COMMON, mage.cards.p.PouncingJaguar.class));
         cards.add(new SetCardInfo("Power Sink", 89, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Power Taint", 90, Rarity.COMMON, mage.cards.p.PowerTaint.class));
         cards.add(new SetCardInfo("Presence of the Master", 32, Rarity.UNCOMMON, mage.cards.p.PresenceOfTheMaster.class));
         cards.add(new SetCardInfo("Priest of Gix", 150, Rarity.UNCOMMON, mage.cards.p.PriestOfGix.class));
         cards.add(new SetCardInfo("Priest of Titania", 270, Rarity.COMMON, mage.cards.p.PriestOfTitania.class));
