@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -43,7 +42,7 @@ public final class GameNight extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 67, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 68, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 44, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
-        // TODO: cards.add(new SetCardInfo("Goblin Goliath", 4, Rarity.MYTHIC, mage.cards.g.GoblinGoliath.class));
+        cards.add(new SetCardInfo("Goblin Goliath", 4, Rarity.MYTHIC, mage.cards.g.GoblinGoliath.class));
         cards.add(new SetCardInfo("Gruesome Fate", 30, Rarity.COMMON, mage.cards.g.GruesomeFate.class));
         cards.add(new SetCardInfo("Howling Golem", 53, Rarity.UNCOMMON, mage.cards.h.HowlingGolem.class));
         cards.add(new SetCardInfo("Hydrolash", 22, Rarity.UNCOMMON, mage.cards.h.Hydrolash.class));
