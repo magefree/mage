@@ -24,7 +24,7 @@ public final class GameNight extends ExpansionSet {
         cards.add(new SetCardInfo("Aerial Responder", 6, Rarity.UNCOMMON, mage.cards.a.AerialResponder.class));
         cards.add(new SetCardInfo("Air Elemental", 19, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Always Watching", 7, Rarity.RARE, mage.cards.a.AlwaysWatching.class));
-        // TODO: cards.add(new SetCardInfo("Avatar of Growth", 5, Rarity.MYTHIC, mage.cards.a.AvatarOfGrowth.class));
+        cards.add(new SetCardInfo("Avatar of Growth", 5, Rarity.MYTHIC, mage.cards.a.AvatarOfGrowth.class));
         cards.add(new SetCardInfo("Benalish Marshal", 8, Rarity.RARE, mage.cards.b.BenalishMarshal.class));
         cards.add(new SetCardInfo("Bombard", 37, Rarity.COMMON, mage.cards.b.Bombard.class));
         cards.add(new SetCardInfo("Bone Splinters", 27, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
