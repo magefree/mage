@@ -48,7 +48,7 @@ public final class GameNight extends ExpansionSet {
         cards.add(new SetCardInfo("Howling Golem", 53, Rarity.UNCOMMON, mage.cards.h.HowlingGolem.class));
         cards.add(new SetCardInfo("Hydrolash", 22, Rarity.UNCOMMON, mage.cards.h.Hydrolash.class));
         cards.add(new SetCardInfo("Inspired Charge", 13, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
-        // TODO: cards.add(new SetCardInfo("Inspired Sphinx", 2, Rarity.MYTHIC, mage.cards.i.InspiredSphinx.class));
+        cards.add(new SetCardInfo("Inspired Sphinx", 2, Rarity.MYTHIC, mage.cards.i.InspiredSphinx.class));
         cards.add(new SetCardInfo("Inspiring Captain", 14, Rarity.COMMON, mage.cards.i.InspiringCaptain.class));
         cards.add(new SetCardInfo("Island", 61, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 62, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
