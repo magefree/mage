@@ -7,15 +7,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.OpponentsCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ThopterColorlessToken;
 
 import java.util.UUID;
@@ -24,12 +21,6 @@ import java.util.UUID;
  * @author JayDi85
  */
 public final class InspiredSphinx extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("Wizard");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
-    }
 
     public InspiredSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

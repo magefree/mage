@@ -59,7 +59,7 @@ public final class GameNight extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of the Accursed", 33, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
         cards.add(new SetCardInfo("Manalith", 54, Rarity.COMMON, mage.cards.m.Manalith.class));
         cards.add(new SetCardInfo("Mesa Unicorn", 15, Rarity.COMMON, mage.cards.m.MesaUnicorn.class));
-        // TODO: cards.add(new SetCardInfo("Militant Angel", 1, Rarity.MYTHIC, mage.cards.m.MilitantAngel.class));
+        cards.add(new SetCardInfo("Militant Angel", 1, Rarity.MYTHIC, mage.cards.m.MilitantAngel.class));
         cards.add(new SetCardInfo("Mountain", 65, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 66, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nissa's Revelation", 47, Rarity.RARE, mage.cards.n.NissasRevelation.class));
