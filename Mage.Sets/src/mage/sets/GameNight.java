@@ -70,7 +70,7 @@ public final class GameNight extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Scholar", 23, Rarity.UNCOMMON, mage.cards.r.RecklessScholar.class));
         cards.add(new SetCardInfo("Rhonas's Monument", 56, Rarity.UNCOMMON, mage.cards.r.RhonassMonument.class));
         cards.add(new SetCardInfo("Rolling Thunder", 40, Rarity.UNCOMMON, mage.cards.r.RollingThunder.class));
-        // TODO: cards.add(new SetCardInfo("Rot Hulk", 3, Rarity.MYTHIC, mage.cards.r.RotHulk.class));
+        cards.add(new SetCardInfo("Rot Hulk", 3, Rarity.MYTHIC, mage.cards.r.RotHulk.class));
         cards.add(new SetCardInfo("Seek the Wilds", 49, Rarity.COMMON, mage.cards.s.SeekTheWilds.class));
         cards.add(new SetCardInfo("Seismic Elemental", 41, Rarity.UNCOMMON, mage.cards.s.SeismicElemental.class));
         cards.add(new SetCardInfo("Serra Angel", 16, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
