@@ -90,6 +90,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Elder Land Wurm", 11, Rarity.RARE, mage.cards.e.ElderLandWurm.class));
         cards.add(new SetCardInfo("Elven Riders", 183, Rarity.RARE, mage.cards.e.ElvenRiders.class));
         cards.add(new SetCardInfo("Emerald Dragonfly", 184, Rarity.COMMON, mage.cards.e.EmeraldDragonfly.class));
+        cards.add(new SetCardInfo("Enchantment Alteration", 53, Rarity.COMMON, mage.cards.e.EnchantmentAlteration.class));
         cards.add(new SetCardInfo("Energy Tap", 54, Rarity.COMMON, mage.cards.e.EnergyTap.class));
         cards.add(new SetCardInfo("Eternal Warrior", 144, Rarity.UNCOMMON, mage.cards.e.EternalWarrior.class));
         cards.add(new SetCardInfo("Eureka", 185, Rarity.RARE, mage.cards.e.Eureka.class));

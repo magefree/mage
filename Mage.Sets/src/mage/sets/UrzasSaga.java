@@ -111,6 +111,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Elite Archers", 13, Rarity.RARE, mage.cards.e.EliteArchers.class));
         cards.add(new SetCardInfo("Elvish Herder", 247, Rarity.COMMON, mage.cards.e.ElvishHerder.class));
         cards.add(new SetCardInfo("Elvish Lyrist", 248, Rarity.COMMON, mage.cards.e.ElvishLyrist.class));
+        cards.add(new SetCardInfo("Enchantment Alteration", 72, Rarity.UNCOMMON, mage.cards.e.EnchantmentAlteration.class));
         cards.add(new SetCardInfo("Endless Wurm", 249, Rarity.RARE, mage.cards.e.EndlessWurm.class));
         cards.add(new SetCardInfo("Endoskeleton", 294, Rarity.UNCOMMON, mage.cards.e.Endoskeleton.class));
         cards.add(new SetCardInfo("Energy Field", 73, Rarity.RARE, mage.cards.e.EnergyField.class));
@@ -236,6 +237,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Polluted Mire", 323, Rarity.COMMON, mage.cards.p.PollutedMire.class));
         cards.add(new SetCardInfo("Pouncing Jaguar", 269, Rarity.COMMON, mage.cards.p.PouncingJaguar.class));
         cards.add(new SetCardInfo("Power Sink", 89, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Power Taint", 90, Rarity.COMMON, mage.cards.p.PowerTaint.class));
         cards.add(new SetCardInfo("Presence of the Master", 32, Rarity.UNCOMMON, mage.cards.p.PresenceOfTheMaster.class));
         cards.add(new SetCardInfo("Priest of Gix", 150, Rarity.UNCOMMON, mage.cards.p.PriestOfGix.class));
         cards.add(new SetCardInfo("Priest of Titania", 270, Rarity.COMMON, mage.cards.p.PriestOfTitania.class));
@@ -275,6 +277,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Seasoned Marshal", 44, Rarity.UNCOMMON, mage.cards.s.SeasonedMarshal.class));
         cards.add(new SetCardInfo("Serra Avatar", 45, Rarity.RARE, mage.cards.s.SerraAvatar.class));
         cards.add(new SetCardInfo("Serra's Embrace", 47, Rarity.UNCOMMON, mage.cards.s.SerrasEmbrace.class));
+        cards.add(new SetCardInfo("Serra's Hymn", 48, Rarity.UNCOMMON, mage.cards.s.SerrasHymn.class));
         cards.add(new SetCardInfo("Serra's Liturgy", 49, Rarity.RARE, mage.cards.s.SerrasLiturgy.class));
         cards.add(new SetCardInfo("Serra's Sanctum", 325, Rarity.RARE, mage.cards.s.SerrasSanctum.class));
         cards.add(new SetCardInfo("Serra Zealot", 46, Rarity.COMMON, mage.cards.s.SerraZealot.class));
@@ -332,6 +335,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Armor", 313, Rarity.UNCOMMON, mage.cards.u.UrzasArmor.class));
         cards.add(new SetCardInfo("Vampiric Embrace", 164, Rarity.UNCOMMON, mage.cards.v.VampiricEmbrace.class));
         cards.add(new SetCardInfo("Vebulid", 165, Rarity.RARE, mage.cards.v.Vebulid.class));
+        cards.add(new SetCardInfo("Venomous Fangs", 280, Rarity.COMMON, mage.cards.v.VenomousFangs.class));
         cards.add(new SetCardInfo("Vernal Bloom", 281, Rarity.RARE, mage.cards.v.VernalBloom.class));
         cards.add(new SetCardInfo("Viashino Outrider", 223, Rarity.COMMON, mage.cards.v.ViashinoOutrider.class));
         cards.add(new SetCardInfo("Viashino Runner", 224, Rarity.COMMON, mage.cards.v.ViashinoRunner.class));
