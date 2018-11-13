@@ -335,6 +335,8 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Armor", 313, Rarity.UNCOMMON, mage.cards.u.UrzasArmor.class));
         cards.add(new SetCardInfo("Vampiric Embrace", 164, Rarity.UNCOMMON, mage.cards.v.VampiricEmbrace.class));
         cards.add(new SetCardInfo("Vebulid", 165, Rarity.RARE, mage.cards.v.Vebulid.class));
+        cards.add(new SetCardInfo("Veil of Birds", 106, Rarity.COMMON, mage.cards.v.VeilOfBirds.class));
+        cards.add(new SetCardInfo("Veiled Apparition", 107, Rarity.UNCOMMON, mage.cards.v.VeiledApparition.class));
         cards.add(new SetCardInfo("Venomous Fangs", 280, Rarity.COMMON, mage.cards.v.VenomousFangs.class));
         cards.add(new SetCardInfo("Vernal Bloom", 281, Rarity.RARE, mage.cards.v.VernalBloom.class));
         cards.add(new SetCardInfo("Viashino Outrider", 223, Rarity.COMMON, mage.cards.v.ViashinoOutrider.class));
