@@ -37,6 +37,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Chorus", 3, Rarity.RARE, mage.cards.a.AngelicChorus.class));
         cards.add(new SetCardInfo("Angelic Page", 4, Rarity.COMMON, mage.cards.a.AngelicPage.class));
         cards.add(new SetCardInfo("Annul", 59, Rarity.COMMON, mage.cards.a.Annul.class));
+        cards.add(new SetCardInfo("Antagonism", 173, Rarity.RARE, mage.cards.a.Antagonism.class));
         cards.add(new SetCardInfo("Arcane Laboratory", 60, Rarity.UNCOMMON, mage.cards.a.ArcaneLaboratory.class));
         cards.add(new SetCardInfo("Arc Lightning", 174, Rarity.COMMON, mage.cards.a.ArcLightning.class));
         cards.add(new SetCardInfo("Argothian Elder", 233, Rarity.UNCOMMON, mage.cards.a.ArgothianElder.class));
@@ -214,6 +215,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Opal Titan", 26, Rarity.RARE, mage.cards.o.OpalTitan.class));
         cards.add(new SetCardInfo("Oppression", 143, Rarity.RARE, mage.cards.o.Oppression.class));
         cards.add(new SetCardInfo("Order of Yawgmoth", 144, Rarity.UNCOMMON, mage.cards.o.OrderOfYawgmoth.class));
+        cards.add(new SetCardInfo("Outmaneuver", 205, Rarity.UNCOMMON, mage.cards.o.Outmaneuver.class));
         cards.add(new SetCardInfo("Pacifism", 27, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Parasitic Bond", 145, Rarity.UNCOMMON, mage.cards.p.ParasiticBond.class));
         cards.add(new SetCardInfo("Pariah", 28, Rarity.RARE, mage.cards.p.Pariah.class));
