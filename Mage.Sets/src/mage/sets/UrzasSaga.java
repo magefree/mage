@@ -98,6 +98,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Servitude", 130, Rarity.UNCOMMON, mage.cards.d.DiabolicServitude.class));
         cards.add(new SetCardInfo("Disciple of Grace", 10, Rarity.COMMON, mage.cards.d.DiscipleOfGrace.class));
         cards.add(new SetCardInfo("Disciple of Law", 11, Rarity.COMMON, mage.cards.d.DiscipleOfLaw.class));
+        cards.add(new SetCardInfo("Discordant Dirge", 131, Rarity.RARE, mage.cards.d.DiscordantDirge.class));
         cards.add(new SetCardInfo("Disenchant", 12, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Disorder", 181, Rarity.UNCOMMON, mage.cards.d.Disorder.class));
         cards.add(new SetCardInfo("Disruptive Student", 69, Rarity.COMMON, mage.cards.d.DisruptiveStudent.class));
