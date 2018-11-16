@@ -98,6 +98,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Masticore", 134, Rarity.RARE, mage.cards.m.Masticore.class));
         cards.add(new SetCardInfo("Mental Discipline", 37, Rarity.COMMON, mage.cards.m.MentalDiscipline.class));
         cards.add(new SetCardInfo("Metalworker", 135, Rarity.RARE, mage.cards.m.Metalworker.class));
+        cards.add(new SetCardInfo("Metathran Elite", 38, Rarity.UNCOMMON, mage.cards.m.MetathranElite.class));
         cards.add(new SetCardInfo("Metathran Soldier", 39, Rarity.COMMON, mage.cards.m.MetathranSoldier.class));
         cards.add(new SetCardInfo("Momentum", 113, Rarity.UNCOMMON, mage.cards.m.Momentum.class));
         cards.add(new SetCardInfo("Multani's Decree", 114, Rarity.COMMON, mage.cards.m.MultanisDecree.class));
@@ -129,6 +130,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Scent of Jasmine", 17, Rarity.COMMON, mage.cards.s.ScentOfJasmine.class));
         cards.add(new SetCardInfo("Scent of Nightshade", 69, Rarity.COMMON, mage.cards.s.ScentOfNightshade.class));
         cards.add(new SetCardInfo("Scour", 18, Rarity.UNCOMMON, mage.cards.s.Scour.class));
+        cards.add(new SetCardInfo("Scrying Glass", 137, Rarity.RARE, mage.cards.s.ScryingGlass.class));
         cards.add(new SetCardInfo("Serra Advocate", 19, Rarity.UNCOMMON, mage.cards.s.SerraAdvocate.class));
         cards.add(new SetCardInfo("Sigil of Sleep", 46, Rarity.COMMON, mage.cards.s.SigilOfSleep.class));
         cards.add(new SetCardInfo("Skittering Horror", 70, Rarity.COMMON, mage.cards.s.SkitteringHorror.class));
