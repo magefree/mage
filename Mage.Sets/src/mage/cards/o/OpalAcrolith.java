@@ -37,7 +37,7 @@ public final class OpalAcrolith extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Whenever an opponent casts a creature spell, if Opal Acrolith is an enchantment, Opal Acrolith becomes a 2/4 Soldier creature.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalAcrolithSoldier(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalAcrolithToken(), "", Duration.WhileOnBattlefield, true, false),
                 filter, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
                 "Whenever an opponent casts a creature spell, if Opal Acrolith is an enchantment, Opal Acrolith becomes a 2/4 Soldier creature."));
@@ -57,21 +57,21 @@ public final class OpalAcrolith extends CardImpl {
     }
 }
 
-class OpalAcrolithSoldier extends TokenImpl {
+class OpalAcrolithToken extends TokenImpl {
 
-    public OpalAcrolithSoldier() {
-        super("Soldier", "2/4 Ape creature");
+    public OpalAcrolithToken() {
+        super("Soldier", "2/4 Soldier creature");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SOLDIER);
         power = new MageInt(2);
         toughness = new MageInt(4);
     }
 
-    public OpalAcrolithSoldier(final OpalAcrolithSoldier token) {
+    public OpalAcrolithToken(final OpalAcrolithToken token) {
         super(token);
     }
 
-    public OpalAcrolithSoldier copy() {
-        return new OpalAcrolithSoldier(this);
+    public OpalAcrolithToken copy() {
+        return new OpalAcrolithToken(this);
     }
 }
