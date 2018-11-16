@@ -80,6 +80,7 @@ class VeiledSentryEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
+                    veiledSentry.getCardType().clear();
                     if (!veiledSentry.isCreature()) {
                         veiledSentry.addCardType(CardType.CREATURE);
                     }
