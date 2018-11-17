@@ -60,7 +60,7 @@ public class DeckImportFromClipboardDialog extends JDialog {
         try {
             return Optional.of((String)Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor));
         } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return Optional.empty();
     }
