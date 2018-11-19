@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.Ability;
@@ -138,7 +137,8 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(getSourceId()) && event.getData().equals(CounterType.LORE.getName())) {
             int amountAdded = event.getAmount();
             int loreCounters = amountAdded;
-            Permanent sourceSaga = game.getPermanentOrLKIBattlefield(getSourceId());
+            //Permanent sourceSaga = game.getPermanentOrLKIBattlefield(getSourceId());  BUG #5393
+            Permanent sourceSaga = game.getPermanent(getSourceId());
             if (sourceSaga == null) {
                 sourceSaga = game.getPermanentEntering(getSourceId());
             }
