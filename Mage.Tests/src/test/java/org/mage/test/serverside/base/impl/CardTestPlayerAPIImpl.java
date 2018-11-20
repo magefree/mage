@@ -1,11 +1,11 @@
 package org.mage.test.serverside.base.impl;
 
-import mage.MageInt;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -66,7 +66,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected String deckNameD;
 
     protected enum ExpectedType {
-
         TURN_NUMBER,
         RESULT,
         LIFE,
@@ -167,12 +166,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected TestPlayer createPlayer(Game game, TestPlayer player, String name, String deckName) throws GameException {
         player = createNewPlayer(name, game.getRangeOfInfluence());
         player.setTestMode(true);
+
         logger.debug("Loading deck...");
-        Deck deck = Deck.load(DeckImporterUtil.importDeck(deckName), false, false);
+        DeckCardLists list;
+        if (loadedDeckCardLists.containsKey(deckName)) {
+            list = loadedDeckCardLists.get(deckName);
+        } else {
+            list = DeckImporterUtil.importDeck(deckName);
+            loadedDeckCardLists.put(deckName, list);
+        }
+        Deck deck = Deck.load(list, false, false);
         logger.debug("Done!");
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
         }
+
         game.loadCards(deck.getCards(), player.getId());
         game.loadCards(deck.getSideboard(), player.getId());
         game.addPlayer(player, deck);
