@@ -2372,7 +2372,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         }
         Permanent attacker = game.getPermanent(attackerId);
-        if (attacker != null && attacker.canAttack(defenderId, game) && attacker.isControlledBy(playerId)) {
+        if (attacker != null
+                && attacker.canAttack(defenderId, game)
+                && attacker.isControlledBy(playerId)) {
             if (!game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
                 game.undo(playerId);
             }
