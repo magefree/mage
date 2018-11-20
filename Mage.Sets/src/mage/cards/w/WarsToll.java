@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -103,7 +102,9 @@ class WarsTollEffect extends OneShotEffect {
             filterOpponentCreatures.add(new ControllerIdPredicate(opponent.getId()));
             game.getBattlefield().getAllActivePermanents(CardType.CREATURE).stream().filter((permanent) -> (filterOpponentCreatures.match(permanent, source.getSourceId(), source.getControllerId(), game))).forEachOrdered((permanent) -> {
                 //TODO: allow the player to choose between a planeswalker and player
-                opponent.declareAttacker(permanent.getId(), source.getControllerId(), game, false);
+                if (permanent.canAttack(source.getControllerId(), game)) {
+                    opponent.declareAttacker(permanent.getId(), source.getControllerId(), game, false);
+                }
             });
             return true;
         }
