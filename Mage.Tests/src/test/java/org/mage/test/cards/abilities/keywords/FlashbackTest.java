@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.TrampleAbility;
@@ -9,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class FlashbackTest extends CardTestPlayerBase {
@@ -71,10 +69,9 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     *
      * Test Granting Flashback to spells with X in manacost which have targeting
      * requirements depending on the choice of X
-     *
+     * <p>
      * Specific instance: Snapcaster Mage granting Flashback to Repeal
      */
     @Test
@@ -84,7 +81,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Repeal", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Repeal");
+        addTarget(playerA, "Repeal");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
         setChoice(playerA, "X=2");
@@ -100,10 +97,9 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     *
      * Test Granting Flashback to spells with X in mana cost, where X has no
      * influence on targeting requirements
-     *
+     * <p>
      * Specific instance: Snapcaster Mage granting Flashback to Blaze
      */
     @Test
@@ -115,7 +111,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Blaze");
+        addTarget(playerA, "Blaze");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
         setChoice(playerA, "X=1");
@@ -133,7 +129,6 @@ public class FlashbackTest extends CardTestPlayerBase {
     /**
      * My opponent put Iona on the battlefield using Unburial Rites, but my game
      * log didn't show me the color he has chosen.
-     *
      */
     @Test
     public void testUnburialRites() {
@@ -238,7 +233,7 @@ public class FlashbackTest extends CardTestPlayerBase {
      * Ancestral Vision has no casting cost (this is different to a casting cost
      * of {0}). Snapcaster Mage, for example, is able to give it flashback
      * whilst it is in the graveyard.
-     *
+     * <p>
      * However the controller should not be able to cast Ancestral Visions from
      * the graveyard for {0} mana.
      */
@@ -348,7 +343,7 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Terminate");
+        addTarget(playerA, "Terminate");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback"); // Flashback Terminate
         addTarget(playerA, "Icefall Regent");
@@ -537,7 +532,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Force of Will");
+        addTarget(playerA, "Force of Will");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Snapcaster Mage");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback", null, "Lightning Bolt");

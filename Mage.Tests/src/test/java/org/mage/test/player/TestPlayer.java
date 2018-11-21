@@ -1335,7 +1335,7 @@ public class TestPlayer implements Player {
                     Assert.assertTrue(needPlayers.contains(getId()));
                     needPlayers.clear();
                     needPlayers.add(getId());
-                    Assert.assertFalse(needPlayers.contains(getId()));
+                    Assert.assertEquals(1, needPlayers.size());
                 }
 
                 for (String targetDefinition : targets) {
