@@ -47,6 +47,14 @@ public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> {
         this.playerFilter = filter.playerFilter.copy();
     }
 
+    public FilterPlaneswalkerPermanent getFilterPermanent() {
+        return this.planeswalkerFilter;
+    }
+
+    public FilterPlayer getFilterPlayer() {
+        return this.playerFilter;
+    }
+
     @Override
     public boolean checkObjectClass(Object object) {
         return true;

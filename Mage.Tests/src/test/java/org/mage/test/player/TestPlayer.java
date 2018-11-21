@@ -1263,17 +1263,18 @@ public class TestPlayer implements Player {
                 }
             }
 
-            }
-            if (target instanceof TargetCardInYourGraveyard) {
+            // card in exile
+            if (target instanceof TargetCardInExile) {
+                TargetCardInExile targetFull = (TargetCardInExile) target;
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
-                        for (Card card : computerPlayer.getGraveyard().getCards(((TargetCardInYourGraveyard) target).getFilter(), game)) {
+                        for (Card card : game.getExile().getCards(targetFull.getFilter(), game)) {
                             if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
-                                if (((TargetCardInYourGraveyard) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
-                                    target.add(card.getId(), game);
+                                if (targetFull.canTarget(abilityControllerId, card.getId(), source, game) && !targetFull.getTargets().contains(card.getId())) {
+                                    targetFull.add(card.getId(), game);
                                     targetFound = true;
                                     break;
                                 }
@@ -1285,32 +1286,80 @@ public class TestPlayer implements Player {
                         return true;
                     }
                 }
-
             }
-            if (target instanceof TargetCardInOpponentsGraveyard) {
+
+            // card in battlefield
+            if (target instanceof TargetCardInGraveyardOrBattlefield) {
+                TargetCard targetFull = (TargetCard) target;
+                for (String targetDefinition : targets) {
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
+                    String[] targetList = targetDefinition.split("\\^");
+                    boolean targetFound = false;
+                    for (String targetName : targetList) {
+                        for (Card card : game.getBattlefield().getAllActivePermanents()) {
+                            if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
+                                if (targetFull.canTarget(abilityControllerId, card.getId(), source, game) && !targetFull.getTargets().contains(card.getId())) {
+                                    targetFull.add(card.getId(), game);
+                                    targetFound = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (targetFound) {
+                        targets.remove(targetDefinition);
+                        return true;
+                    }
+                }
+            }
+
+
+            // card in graveyard
+            if (target instanceof TargetCardInOpponentsGraveyard
+                    || target instanceof TargetCardInYourGraveyard
+                    || target instanceof TargetCardInGraveyard
+                    || target instanceof TargetCardInGraveyardOrBattlefield) {
+                TargetCard targetFull = (TargetCard) target;
+
+                List<UUID> needPlayers = game.getState().getPlayersInRange(getId(), game).toList();
+                // fix for opponent graveyard
+                if(target instanceof TargetCardInOpponentsGraveyard) {
+                    // current player remove
+                    Assert.assertTrue(needPlayers.contains(getId()));
+                    needPlayers.remove(getId());
+                    Assert.assertFalse(needPlayers.contains(getId()));
+                }
+                // fix for your graveyard
+                if(target instanceof TargetCardInYourGraveyard) {
+                    // only current player
+                    Assert.assertTrue(needPlayers.contains(getId()));
+                    needPlayers.clear();
+                    needPlayers.add(getId());
+                    Assert.assertFalse(needPlayers.contains(getId()));
+                }
+
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
 
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
-
                     for (String targetName : targetList) {
-                        IterateOpponentsGraveyards:
-                        for (UUID opponentId : game.getState().getPlayersInRange(getId(), game)) {
-                            if (computerPlayer.hasOpponent(opponentId, game)) {
-                                Player opponent = game.getPlayer(opponentId);
-                                for (Card card : opponent.getGraveyard().getCards(((TargetCardInOpponentsGraveyard) target).getFilter(), game)) {
-                                    if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
-                                        if (((TargetCardInOpponentsGraveyard) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
-                                            target.add(card.getId(), game);
-                                            targetFound = true;
-                                            break IterateOpponentsGraveyards;
-                                        }
+                        IterateGraveyards:
+                        for (UUID playerId : needPlayers) {
+                            Player player = game.getPlayer(playerId);
+                            for (Card card : player.getGraveyard().getCards(targetFull.getFilter(), game)) {
+                                if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
+                                    if (targetFull.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                        target.add(card.getId(), game);
+                                        targetFound = true;
+                                        break IterateGraveyards;
                                     }
                                 }
                             }
+
                         }
                     }
+
                     if (targetFound) {
                         targets.remove(targetDefinition);
                         return true;
