@@ -72,8 +72,8 @@ public class TestPlayer implements Player {
     private int foundNoAction = 0;
     private boolean AIPlayer;
     private final List<PlayerAction> actions = new ArrayList<>();
-    private final List<String> choices = new ArrayList<>();
-    private final List<String> targets = new ArrayList<>();
+    private final List<String> choices = new ArrayList<>(); // choices stack for choice
+    private final List<String> targets = new ArrayList<>(); // targets stack for choose (it's uses on empty direct target by cast command)
     private final List<String> modesSet = new ArrayList<>();
 
     private final ComputerPlayer computerPlayer;
@@ -528,7 +528,7 @@ public class TestPlayer implements Player {
                             checkProccessed = true;
                         }
 
-                        // check PT: life
+                        // check life: life
                         if (params[0].equals(CHECK_COMMAND_LIFE) && params.length == 2) {
                             assertLife(action, game, computerPlayer, Integer.parseInt(params[1]));
                             actions.remove(action);
@@ -1130,6 +1130,28 @@ public class TestPlayer implements Player {
         return computerPlayer.choose(outcome, target, sourceId, game, options);
     }
 
+    private void checkTargetDefinitionMarksSupport(Target needTarget, String targetDefinition, String canSupportChars) {
+        // fail on wrong chars in definition
+        // ^ - multiple targets
+        // [] - special option like [no copy]
+        // = - target type like targetPlayer=PlayerA
+        Boolean foundMulti = targetDefinition.contains("^");
+        Boolean foundSpecialStart = targetDefinition.contains("[");
+        Boolean foundSpecialClose = targetDefinition.contains("]");
+        Boolean foundEquals = targetDefinition.contains("=");
+
+        Boolean canMulti = canSupportChars.contains("^");
+        Boolean canSpecialStart = canSupportChars.contains("[");
+        Boolean canSpecialClose = canSupportChars.contains("]");
+        Boolean canEquals = canSupportChars.contains("=");
+
+        // how to fix: change target definition for addTarget in test's code or update choose from targets implementation in TestPlayer
+        if((foundMulti && !canMulti) || (foundSpecialStart && !canSpecialStart) || (foundSpecialClose && !canSpecialClose)|| (foundEquals && !canEquals)) {
+            Assert.fail("Targets list was setup by addTarget with " + targets + ", but target definition [" + targetDefinition + "]"
+                    + " is not supported by ["+ canSupportChars + "] for target class " + needTarget.getClass().getSimpleName());
+        }
+    }
+
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (!targets.isEmpty()) {
@@ -1142,6 +1164,7 @@ public class TestPlayer implements Player {
                     || target instanceof TargetCreatureOrPlayer
                     || target instanceof TargetPermanentOrPlayer) {
                 for (String targetDefinition : targets) {
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "=");
                     if (targetDefinition.startsWith("targetPlayer=")) {
                         String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
                         for (Player player : game.getPlayers().values()) {
@@ -1161,6 +1184,7 @@ public class TestPlayer implements Player {
                     || (target instanceof TargetAnyTarget)
                     || (target instanceof TargetCreatureOrPlayer)) {
                 for (String targetDefinition : targets) {
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^[]");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
@@ -1208,6 +1232,7 @@ public class TestPlayer implements Player {
 
             if (target instanceof TargetCardInHand) {
                 for (String targetDefinition : targets) {
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
@@ -1230,6 +1255,7 @@ public class TestPlayer implements Player {
             }
             if (target instanceof TargetCardInYourGraveyard) {
                 for (String targetDefinition : targets) {
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
@@ -1252,6 +1278,8 @@ public class TestPlayer implements Player {
             }
             if (target instanceof TargetCardInOpponentsGraveyard) {
                 for (String targetDefinition : targets) {
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
+
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
 
@@ -1281,6 +1309,7 @@ public class TestPlayer implements Player {
             }
             if (target instanceof TargetSpell) {
                 for (String targetDefinition : targets) {
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
@@ -1299,7 +1328,26 @@ public class TestPlayer implements Player {
                 }
             }
 
+        // wrong target settings by addTarget
+        // how to fix: implement target class processing above
+        if(!targets.isEmpty()) {
+            String message;
+
+            if(source != null) {
+                message = "Targets list was setup by addTarget with " + targets + ", but not used in ["
+                        + "card " + source.getSourceObject(game)
+                        + " -> ability " + source.getClass().getSimpleName() + " (" + source.getRule().substring(0, Math.min(20, source.getRule().length()) - 1) + "..." + ")"
+                        + " -> target " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
+                        + "]";
+            } else {
+                message = "Targets list was setup by addTarget with " + targets + ", but not used in ["
+                        + "card XXX"
+                        + " -> target " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
+                        + "]";
+            }
+            Assert.fail(message);
         }
+
         return computerPlayer.chooseTarget(outcome, target, source, game);
     }
 
