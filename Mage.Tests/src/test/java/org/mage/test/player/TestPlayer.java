@@ -1159,10 +1159,13 @@ public class TestPlayer implements Player {
             if (target.getTargetController() != null && target.getAbilityController() != null) {
                 abilityControllerId = target.getAbilityController();
             }
+
+            // player
             if (target instanceof TargetPlayer
                     || target instanceof TargetAnyTarget
                     || target instanceof TargetCreatureOrPlayer
-                    || target instanceof TargetPermanentOrPlayer) {
+                    || target instanceof TargetPermanentOrPlayer
+                    || target instanceof TargetDefender) {
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "=");
                     if (targetDefinition.startsWith("targetPlayer=")) {
@@ -1179,10 +1182,13 @@ public class TestPlayer implements Player {
                 }
 
             }
+
+            // permanent in battlefield
             if ((target instanceof TargetPermanent)
                     || (target instanceof TargetPermanentOrPlayer)
                     || (target instanceof TargetAnyTarget)
-                    || (target instanceof TargetCreatureOrPlayer)) {
+                    || (target instanceof TargetCreatureOrPlayer)
+                    || (target instanceof TargetDefender)) {
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^[]");
                     String[] targetList = targetDefinition.split("\\^");
@@ -1207,8 +1213,11 @@ public class TestPlayer implements Player {
                         if (filter instanceof FilterCreaturePlayerOrPlaneswalker) {
                             filter = ((FilterCreaturePlayerOrPlaneswalker) filter).getCreatureFilter();
                         }
-                        if (filter instanceof TargetPermanentOrPlayer) {
-                            filter = ((TargetPermanentOrPlayer) filter).getFilterPermanent();
+                        if (filter instanceof FilterPermanentOrPlayer) {
+                            filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
+                        }
+                        if (filter instanceof FilterPlaneswalkerOrPlayer) {
+                            filter = ((FilterPlaneswalkerOrPlayer) filter).getFilterPermanent();
                         }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent) filter, game)) {
                             if (permanent.getName().equals(targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) {
@@ -1230,6 +1239,7 @@ public class TestPlayer implements Player {
                 }
             }
 
+            // card in hand
             if (target instanceof TargetCardInHand) {
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
@@ -1251,6 +1261,7 @@ public class TestPlayer implements Player {
                         return true;
                     }
                 }
+            }
 
             }
             if (target instanceof TargetCardInYourGraveyard) {
@@ -1307,6 +1318,8 @@ public class TestPlayer implements Player {
                 }
 
             }
+
+            // stack
             if (target instanceof TargetSpell) {
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
@@ -1327,6 +1340,7 @@ public class TestPlayer implements Player {
                     }
                 }
             }
+        }
 
         // wrong target settings by addTarget
         // how to fix: implement target class processing above
