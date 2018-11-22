@@ -1,8 +1,8 @@
-
 package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -48,6 +48,7 @@ public class SpelltwineTest extends CardTestPlayerBase {
      * after this, failing to be in the stack box or resolve all.
      */
     @Test
+    @Ignore // TODO: test is wrong -- mirari exile cards and must cast their copies, on copies cast mirari triggers again (two times).
     public void testCopyCardsMirari() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
         // Exile target instant or sorcery card from your graveyard and target instant or sorcery card from an opponent's graveyard.
@@ -66,9 +67,13 @@ public class SpelltwineTest extends CardTestPlayerBase {
         // Whenever you cast an instant or sorcery spell, you may pay {3}. If you do, copy that spell. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Mirari", 1);
 
+        // cast spellwin
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spelltwine");
-        addTarget(playerA, "Impulse");
-        addTarget(playerA, "Blasphemous Act");
+        addTarget(playerA, "Impulse"); // target 1 to excile
+        addTarget(playerA, "Blasphemous Act"); // target 2 to excile
+
+
+
         setChoice(playerA, "Yes"); //  pay {3} and copy spell
         setChoice(playerA, "Yes"); // Change targets
         addTarget(playerA, "Night's Whisper");
