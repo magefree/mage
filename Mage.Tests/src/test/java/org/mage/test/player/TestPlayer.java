@@ -1160,6 +1160,13 @@ public class TestPlayer implements Player {
                 abilityControllerId = target.getAbilityController();
             }
 
+            // do not select
+            if (targets.get(0).equals("")) {
+                Assert.assertEquals("found empty choice, but target is not support 0 choice", 0, target.getMinNumberOfTargets());
+                targets.remove(0);
+                return true;
+            }
+
             // player
             if (target instanceof TargetPlayer
                     || target instanceof TargetAnyTarget

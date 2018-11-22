@@ -24,9 +24,15 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
 
+        // start chain from A - return pillar to hand
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chain of Vapor", "Pillarfield Ox");
-        setChoice(playerB, "Yes");
-        addTarget(playerB, "Silvercoat Lion");
+        //setChoice(playerB, "Yes"); // want to sacrifice
+        addTarget(playerB, "Island"); // select a land to sacrifice
+        setChoice(playerB, "Yes"); // want to copy spell
+        setChoice(playerB, "Yes"); // want to change target
+        addTarget(playerB, "Silvercoat Lion"); // new target after copy
+        // stop the chain on 0 land
+        addTarget(playerB, "");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
