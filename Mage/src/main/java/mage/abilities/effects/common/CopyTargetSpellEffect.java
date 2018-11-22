@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -13,7 +12,6 @@ import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
- *
  */
 public class CopyTargetSpellEffect extends OneShotEffect {
 
@@ -79,7 +77,14 @@ public class CopyTargetSpellEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("copy target ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
+        sb.append("copy ");
+        if (!mode.getTargets().isEmpty()) {
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+        } else {
+            sb.append("that spell");
+        }
+        sb.append(". You may choose new targets for the copy");
+
         return sb.toString();
     }
 }
