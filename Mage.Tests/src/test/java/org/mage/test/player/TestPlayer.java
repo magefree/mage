@@ -43,7 +43,6 @@ import mage.player.ai.ComputerPlayer;
 import mage.players.Library;
 import mage.players.ManaPool;
 import mage.players.Player;
-import mage.players.PlayerList;
 import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
@@ -84,9 +83,16 @@ public class TestPlayer implements Player {
     // Before actual turns start. Needed for checking attacker/blocker legality in the tests
     private static int initialTurns = 0;
 
-    public TestPlayer(ComputerPlayer computerPlayer) {
+    public TestPlayer(TestComputerPlayer computerPlayer) {
         this.computerPlayer = computerPlayer;
         AIPlayer = false;
+        computerPlayer.setTestPlayerLink(this);
+    }
+
+    public TestPlayer(TestComputerPlayer7 computerPlayer) {
+        this.computerPlayer = computerPlayer;
+        AIPlayer = false;
+        computerPlayer.setTestPlayerLink(this);
     }
 
     public TestPlayer(final TestPlayer testPlayer) {
@@ -104,6 +110,10 @@ public class TestPlayer implements Player {
 
     public void addChoice(String choice) {
         choices.add(choice);
+    }
+
+    public List<String> getChoices() {
+        return this.choices;
     }
 
     public void addModeChoice(String mode) {
@@ -1146,9 +1156,9 @@ public class TestPlayer implements Player {
         Boolean canEquals = canSupportChars.contains("=");
 
         // how to fix: change target definition for addTarget in test's code or update choose from targets implementation in TestPlayer
-        if((foundMulti && !canMulti) || (foundSpecialStart && !canSpecialStart) || (foundSpecialClose && !canSpecialClose)|| (foundEquals && !canEquals)) {
+        if ((foundMulti && !canMulti) || (foundSpecialStart && !canSpecialStart) || (foundSpecialClose && !canSpecialClose) || (foundEquals && !canEquals)) {
             Assert.fail("Targets list was setup by addTarget with " + targets + ", but target definition [" + targetDefinition + "]"
-                    + " is not supported by ["+ canSupportChars + "] for target class " + needTarget.getClass().getSimpleName());
+                    + " is not supported by [" + canSupportChars + "] for target class " + needTarget.getClass().getSimpleName());
         }
     }
 
@@ -1330,14 +1340,14 @@ public class TestPlayer implements Player {
 
                 List<UUID> needPlayers = game.getState().getPlayersInRange(getId(), game).toList();
                 // fix for opponent graveyard
-                if(target instanceof TargetCardInOpponentsGraveyard) {
+                if (target instanceof TargetCardInOpponentsGraveyard) {
                     // current player remove
                     Assert.assertTrue(needPlayers.contains(getId()));
                     needPlayers.remove(getId());
                     Assert.assertFalse(needPlayers.contains(getId()));
                 }
                 // fix for your graveyard
-                if(target instanceof TargetCardInYourGraveyard) {
+                if (target instanceof TargetCardInYourGraveyard) {
                     // only current player
                     Assert.assertTrue(needPlayers.contains(getId()));
                     needPlayers.clear();
@@ -1400,10 +1410,10 @@ public class TestPlayer implements Player {
 
         // wrong target settings by addTarget
         // how to fix: implement target class processing above
-        if(!targets.isEmpty()) {
+        if (!targets.isEmpty()) {
             String message;
 
-            if(source != null) {
+            if (source != null) {
                 message = "Targets list was setup by addTarget with " + targets + ", but not used in ["
                         + "card " + source.getSourceObject(game)
                         + " -> ability " + source.getClass().getSimpleName() + " (" + source.getRule().substring(0, Math.min(20, source.getRule().length()) - 1) + "..." + ")"
@@ -1792,6 +1802,8 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference) {
+        // TestPlayer, ComputerPlayer always call inherited cast() from PlayerImpl
+        // that's why chooseSpellAbilityForCast will be ignored in TestPlayer, see workaround with TestComputerPlayerXXX
         return computerPlayer.cast(ability, game, noMana, reference);
     }
 
@@ -2586,24 +2598,7 @@ public class TestPlayer implements Player {
 
     @Override
     public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT:
-            case SPLIT_FUSED:
-            case SPLIT_AFTERMATH:
-                if (!choices.isEmpty()) {
-                    MageObject object = game.getObject(ability.getSourceId());
-                    if (object != null) {
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = computerPlayer.getSpellAbilities(object, game.getState().getZone(object.getId()), game);
-                        for (String choose : choices) {
-                            for (ActivatedAbility actiavtedAbility : useableAbilities.values()) {
-                                if (actiavtedAbility.getRule().startsWith(choose)) {
-                                    return (SpellAbility) actiavtedAbility;
-                                }
-                            }
-                        }
-                    }
-                }
-        }
+        Assert.fail("That's method calls only from computerPlayer->cast(), see TestComputerPlayerXXX");
         return computerPlayer.chooseSpellAbilityForCast(ability, game, noMana);
     }
 
