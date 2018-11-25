@@ -85,6 +85,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Hunting Moa", 109, Rarity.UNCOMMON, mage.cards.h.HuntingMoa.class));
         cards.add(new SetCardInfo("Illuminated Wings", 34, Rarity.COMMON, mage.cards.i.IlluminatedWings.class));
         cards.add(new SetCardInfo("Impatience", 88, Rarity.RARE, mage.cards.i.Impatience.class));
+        cards.add(new SetCardInfo("Incendiary", 89, Rarity.UNCOMMON, mage.cards.i.Incendiary.class));
         cards.add(new SetCardInfo("Iridescent Drake", 35, Rarity.UNCOMMON, mage.cards.i.IridescentDrake.class));
         cards.add(new SetCardInfo("Ivy Seer", 110, Rarity.UNCOMMON, mage.cards.i.IvySeer.class));
         cards.add(new SetCardInfo("Jasmine Seer", 10, Rarity.UNCOMMON, mage.cards.j.JasmineSeer.class));
@@ -93,6 +94,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Vandals", 91, Rarity.COMMON, mage.cards.k.KeldonVandals.class));
         cards.add(new SetCardInfo("Kingfisher", 36, Rarity.COMMON, mage.cards.k.Kingfisher.class));
         cards.add(new SetCardInfo("Landslide", 92, Rarity.UNCOMMON, mage.cards.l.Landslide.class));
+        cards.add(new SetCardInfo("Lurking Jackals", 62, Rarity.UNCOMMON, mage.cards.l.LurkingJackals.class));
         cards.add(new SetCardInfo("Magnify", 111, Rarity.COMMON, mage.cards.m.Magnify.class));
         cards.add(new SetCardInfo("Mantis Engine", 133, Rarity.UNCOMMON, mage.cards.m.MantisEngine.class));
         cards.add(new SetCardInfo("Marker Beetles", 112, Rarity.COMMON, mage.cards.m.MarkerBeetles.class));
@@ -116,6 +118,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Plated Spider", 116, Rarity.COMMON, mage.cards.p.PlatedSpider.class));
         cards.add(new SetCardInfo("Plow Under", 117, Rarity.RARE, mage.cards.p.PlowUnder.class));
         cards.add(new SetCardInfo("Powder Keg", 136, Rarity.RARE, mage.cards.p.PowderKeg.class));
+        cards.add(new SetCardInfo("Private Research", 41, Rarity.UNCOMMON, mage.cards.p.PrivateResearch.class));
         cards.add(new SetCardInfo("Quash", 42, Rarity.UNCOMMON, mage.cards.q.Quash.class));
         cards.add(new SetCardInfo("Rapid Decay", 67, Rarity.RARE, mage.cards.r.RapidDecay.class));
         cards.add(new SetCardInfo("Ravenous Rats", 68, Rarity.COMMON, mage.cards.r.RavenousRats.class));
