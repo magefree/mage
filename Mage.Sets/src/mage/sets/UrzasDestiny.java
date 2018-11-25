@@ -54,6 +54,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Colos Yearling", 79, Rarity.COMMON, mage.cards.c.ColosYearling.class));
         cards.add(new SetCardInfo("Compost", 102, Rarity.UNCOMMON, mage.cards.c.Compost.class));
         cards.add(new SetCardInfo("Covetous Dragon", 80, Rarity.RARE, mage.cards.c.CovetousDragon.class));
+        cards.add(new SetCardInfo("Disappear", 30, Rarity.UNCOMMON, mage.cards.d.Disappear.class));
         cards.add(new SetCardInfo("Disease Carriers", 57, Rarity.COMMON, mage.cards.d.DiseaseCarriers.class));
         cards.add(new SetCardInfo("Donate", 31, Rarity.RARE, mage.cards.d.Donate.class));
         cards.add(new SetCardInfo("Dying Wail", 58, Rarity.COMMON, mage.cards.d.DyingWail.class));
@@ -64,6 +65,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Eradicate", 60, Rarity.UNCOMMON, mage.cards.e.Eradicate.class));
         cards.add(new SetCardInfo("Extruder", 130, Rarity.UNCOMMON, mage.cards.e.Extruder.class));
         cards.add(new SetCardInfo("False Prophet", 6, Rarity.RARE, mage.cards.f.FalseProphet.class));
+        cards.add(new SetCardInfo("Fatigue", 32, Rarity.COMMON, mage.cards.f.Fatigue.class));
         cards.add(new SetCardInfo("Fend Off", 7, Rarity.COMMON, mage.cards.f.FendOff.class));
         cards.add(new SetCardInfo("Festering Wound", 61, Rarity.UNCOMMON, mage.cards.f.FesteringWound.class));
         cards.add(new SetCardInfo("Field Surgeon", 8, Rarity.COMMON, mage.cards.f.FieldSurgeon.class));
