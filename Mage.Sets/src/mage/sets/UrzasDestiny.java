@@ -32,6 +32,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Sting", 76, Rarity.UNCOMMON, mage.cards.a.AetherSting.class));
         cards.add(new SetCardInfo("Ancient Silverback", 101, Rarity.RARE, mage.cards.a.AncientSilverback.class));
         cards.add(new SetCardInfo("Apprentice Necromancer", 51, Rarity.RARE, mage.cards.a.ApprenticeNecromancer.class));
+        cards.add(new SetCardInfo("Archery Training", 2, Rarity.UNCOMMON, mage.cards.a.ArcheryTraining.class));
         cards.add(new SetCardInfo("Attrition", 52, Rarity.RARE, mage.cards.a.Attrition.class));
         cards.add(new SetCardInfo("Aura Thief", 26, Rarity.RARE, mage.cards.a.AuraThief.class));
         cards.add(new SetCardInfo("Blizzard Elemental", 27, Rarity.RARE, mage.cards.b.BlizzardElemental.class));
@@ -63,6 +64,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Eradicate", 60, Rarity.UNCOMMON, mage.cards.e.Eradicate.class));
         cards.add(new SetCardInfo("Extruder", 130, Rarity.UNCOMMON, mage.cards.e.Extruder.class));
         cards.add(new SetCardInfo("False Prophet", 6, Rarity.RARE, mage.cards.f.FalseProphet.class));
+        cards.add(new SetCardInfo("Fend Off", 7, Rarity.COMMON, mage.cards.f.FendOff.class));
         cards.add(new SetCardInfo("Festering Wound", 61, Rarity.UNCOMMON, mage.cards.f.FesteringWound.class));
         cards.add(new SetCardInfo("Field Surgeon", 8, Rarity.COMMON, mage.cards.f.FieldSurgeon.class));
         cards.add(new SetCardInfo("Flame Jet", 81, Rarity.COMMON, mage.cards.f.FlameJet.class));
