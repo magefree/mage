@@ -54,12 +54,18 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getState().getPlayer(getControllerId()).getLife() <= 10;
+        if (game.getState().getPlayer(getControllerId()) != null) {
+            return game.getState().getPlayer(getControllerId()).getLife() <= 10;
+        }
+        return false;
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return this.getSourcePermanentIfItStillExists(game).getCardType().contains(CardType.ENCHANTMENT);
+        if (getSourcePermanentIfItStillExists(game) != null) {
+            return getSourcePermanentIfItStillExists(game).isEnchantment();
+        }
+        return false;
     }
 
     @Override

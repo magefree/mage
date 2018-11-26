@@ -54,15 +54,22 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(getControllerId()).stream().anyMatch((playerId) -> (game.getPlayer(playerId).getLife() <= 10))) {
-            return true;
+        if (game.getOpponents(getControllerId()) != null) {
+            for (UUID opponentId : game.getOpponents(getControllerId())) {
+                if (game.getPlayer(opponentId).getLife() <= 10) {
+                    return true;
+                }
+            }
         }
         return false;
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return this.getSourcePermanentIfItStillExists(game).getCardType().contains(CardType.ENCHANTMENT);
+        if (getSourcePermanentIfItStillExists(game) != null) {
+            return getSourcePermanentIfItStillExists(game).isEnchantment();
+        }
+        return false;
     }
 
     @Override
