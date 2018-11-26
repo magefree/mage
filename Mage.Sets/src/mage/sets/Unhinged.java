@@ -39,6 +39,7 @@ public final class Unhinged extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 139, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Mox Lotus", 124, Rarity.RARE, mage.cards.m.MoxLotus.class));
         cards.add(new SetCardInfo("Now I Know My ABC's", 41, Rarity.RARE, mage.cards.n.NowIKnowMyABCs.class));
+        cards.add(new SetCardInfo("Old Fogey", 106, Rarity.RARE, mage.cards.o.OldFogey.class));
         cards.add(new SetCardInfo("Plains", 136, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Rare-B-Gone", 119, Rarity.RARE, mage.cards.r.RareBGone.class));
         cards.add(new SetCardInfo("Six-y Beast", 89, Rarity.UNCOMMON, mage.cards.s.SixyBeast.class));

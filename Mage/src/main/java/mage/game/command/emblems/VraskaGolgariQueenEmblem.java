@@ -3,11 +3,11 @@ package mage.game.command.emblems;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author TheElk801
  */
 public final class VraskaGolgariQueenEmblem extends Emblem {
@@ -17,9 +17,9 @@ public final class VraskaGolgariQueenEmblem extends Emblem {
         this.setName("Emblem Vraska");
         this.setExpansionSetCodeForImage("GRN");
         this.getAbilities().add(new DealsDamageToAPlayerAllTriggeredAbility(
-                new LoseGameTargetPlayerEffect(),
+                Zone.COMMAND, new LoseGameTargetPlayerEffect(),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE,
-                false, SetTargetPointer.PLAYER, true
+                false, SetTargetPointer.NONE, true, true
         ));
     }
 }

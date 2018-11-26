@@ -1,4 +1,3 @@
-
 package mage.client.util;
 
 import java.io.File;
@@ -33,38 +32,41 @@ public final class Config {
 
     static {
         Properties p = new Properties();
-        try(FileInputStream fis =new FileInputStream(new File("config/config.properties"))) {
+        boolean fileFound = true;
+        try (FileInputStream fis = new FileInputStream(new File("config/config.properties"))) {
             p.load(fis);
         } catch (IOException ex) {
-            logger.fatal("Config error ", ex);
+            fileFound = false;
         }
-        serverName = p.getProperty("server-name");
-        port = Integer.parseInt(p.getProperty("port"));
-        remoteServer = p.getProperty("remote-server");
-        cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
-        cardScalingFactorEnlarged = Double.valueOf(p.getProperty("card-scaling-factor-enlarged"));
-        handScalingFactor = Double.valueOf(p.getProperty("hand-scaling-factor"));
-        defaultGameType = p.getProperty("default-game-type", "Human");
-        defaultDeckPath = p.getProperty("default-deck-path");
-        defaultOtherPlayerIndex = p.getProperty("default-other-player-index");
-        defaultComputerName = p.getProperty("default-computer-name");
+        if (fileFound) {
+            serverName = p.getProperty("server-name");
+            port = Integer.parseInt(p.getProperty("port"));
+            remoteServer = p.getProperty("remote-server");
+            cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
+            cardScalingFactorEnlarged = Double.valueOf(p.getProperty("card-scaling-factor-enlarged"));
+            handScalingFactor = Double.valueOf(p.getProperty("hand-scaling-factor"));
+            defaultGameType = p.getProperty("default-game-type", "Human");
+            defaultDeckPath = p.getProperty("default-deck-path");
+            defaultOtherPlayerIndex = p.getProperty("default-other-player-index");
+            defaultComputerName = p.getProperty("default-computer-name");
 
-        dimensions = new CardDimensions(cardScalingFactor);
-        dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
-// activate instead this part, to run the UI editor for some panels without error
-//        serverName = "localhost";
-//        port = 17171;
-//        remoteServer = "mage-server";
-//        cardScalingFactor = 0.4;
-//        cardScalingFactorEnlarged = 0.5;
-//        handScalingFactor = 1.3;
-//        defaultGameType = p.getProperty("default-game-type", "Human");
-//        defaultDeckPath = "";
-//        defaultOtherPlayerIndex = "1";
-//        defaultComputerName = "Computer";
-//
-//        dimensions = new CardDimensions(cardScalingFactor);
-//        dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
+            dimensions = new CardDimensions(cardScalingFactor);
+            dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
+        } else { // Take some default valies for netbeans design view
+            serverName = "localhost";
+            port = 17171;
+            remoteServer = "mage-server";
+            cardScalingFactor = 0.4;
+            cardScalingFactorEnlarged = 0.5;
+            handScalingFactor = 1.3;
+            defaultGameType = p.getProperty("default-game-type", "Human");
+            defaultDeckPath = "";
+            defaultOtherPlayerIndex = "1";
+            defaultComputerName = "AI Computer";
+
+            dimensions = new CardDimensions(cardScalingFactor);
+            dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
+        }
 
     }
 

@@ -22,8 +22,8 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.3.2</version>
-        </dependency>     
+            <version>3.8.1</version>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-common</artifactId>
@@ -76,16 +76,16 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-brawlduel</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-       <dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.16.1</version>
+            <version>1.18</version>
         </dependency>
 
         <dependency>
@@ -194,58 +194,58 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
-            <version>1.2.4</version>
+            <version>1.4.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
-            <version>1.21.0</version>
+            <version>1.25.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-gmail</artifactId>
-            <version>v1-rev35-1.21.0</version>
+            <version>v1-rev82-1.23.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-java6</artifactId>
-            <version>1.19.0</version>
+            <version>1.25.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-jetty</artifactId>
-            <version>1.19.0</version>
+            <version>1.25.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.4.2</version>
+            <version>1.4.7</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-core</artifactId>
-            <version>1.19</version>
+            <version>1.19.4</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>1.19</version>
+            <version>1.19.4</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey.contribs</groupId>
             <artifactId>jersey-multipart</artifactId>
-            <version>1.19</version>
+            <version>1.19.4</version>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.7.2</version>
+            <version>3.25.2</version>
         </dependency>
     </dependencies>
 
@@ -254,7 +254,7 @@
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.12.3</version>
+                <version>0.14.0</version>
                 <configuration>
                     <generatePackage>mage.server.util.config</generatePackage>
                     <schemaDirectory>./src/main/xml-resources/jaxb/Config/</schemaDirectory>
@@ -320,7 +320,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>            
+            </plugin>
         </plugins>
 
         <finalName>mage-server</finalName>

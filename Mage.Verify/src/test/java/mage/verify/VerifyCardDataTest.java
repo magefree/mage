@@ -1,15 +1,16 @@
 package mage.verify;
 
 import mage.ObjectColor;
+import mage.abilities.keyword.DevoidAbility;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
 import mage.constants.CardType;
-import mage.constants.Constants;
 import mage.constants.Rarity;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
-import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -230,7 +231,7 @@ public class VerifyCardDataTest {
             // replace codes for aliases
             String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
 
-            ExpansionSet mageSet = Sets.findSet(searchSet);
+            ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase());
             if (mageSet == null) {
                 totalMissingSets = totalMissingSets + 1;
                 totalMissingCards = totalMissingCards + refSet.cards.size();
@@ -381,9 +382,9 @@ public class VerifyCardDataTest {
             // check
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
-                boolean cardHaveVariousSetting = card.getGraphicInfo() == null ?  false : card.getGraphicInfo().getUsesVariousArt();
+                boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
-                if(cardHaveDoubleName && !cardHaveVariousSetting) {
+                if (cardHaveDoubleName && !cardHaveVariousSetting) {
                     errorsList.add("error, founded double card names, but UsesVariousArt is not true: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
@@ -567,17 +568,22 @@ public class VerifyCardDataTest {
             return;
         }
 
-        Collection<String> expected = ref.colors;
-        ObjectColor color = card.getColor(null);
-        if (expected == null) {
-            expected = Collections.emptyList();
+        Set<String> expected = new HashSet<>();
+        if (ref.colors != null) {
+            expected.addAll(ref.colors);
         }
+        if(card.isFlipCard()){
+            expected.addAll(ref.colorIdentity);
+        }
+
+        ObjectColor color = card.getColor(null);
+
         if (expected.size() != color.getColorCount()
-                || (color.isBlack() && !expected.contains("Black"))
-                || (color.isBlue() && !expected.contains("Blue"))
-                || (color.isGreen() && !expected.contains("Green"))
-                || (color.isRed() && !expected.contains("Red"))
-                || (color.isWhite() && !expected.contains("White"))) {
+                || (color.isBlack() && !expected.contains("B"))
+                || (color.isBlue() && !expected.contains("U"))
+                || (color.isGreen() && !expected.contains("G"))
+                || (color.isRed() && !expected.contains("R"))
+                || (color.isWhite() && !expected.contains("W"))) {
             fail(card, "colors", color + " != " + expected);
         }
     }
@@ -599,7 +605,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        if (!eqSet(card.getSubtype(null).stream().map(p -> p.toString()).collect(Collectors.toSet()), expected)) {
+        if (!eqSet(card.getSubtype(null).stream().map(SubType::toString).collect(Collectors.toSet()), expected)) {
             fail(card, "subtypes", card.getSubtype(null) + " != " + expected);
         }
     }
@@ -625,7 +631,12 @@ public class VerifyCardDataTest {
             return;
         }
 
-        // spells have only 1 abilities
+        // special check: kicker ability must be in rules
+        if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
+            fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
+        }
+
+        // spells have only 1 ability
         if (card.isSorcery() || card.isInstant()) {
             return;
         }
@@ -690,7 +701,7 @@ public class VerifyCardDataTest {
 
         String expected = ref.manaCost;
         String cost = join(card.getManaCost().getSymbols());
-        if (cost != null && cost.isEmpty()) {
+        if (cost.isEmpty()) {
             cost = null;
         }
         if (cost != null) {

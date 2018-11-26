@@ -1,12 +1,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
@@ -24,7 +20,6 @@ public final class PredatoryFocus extends CardImpl {
 
     public PredatoryFocus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        
 
         // You may have creatures you control assign their combat damage this turn as though they weren't blocked.
         this.getSpellAbility().addEffect(new PredatoryFocusEffect());
@@ -58,10 +53,10 @@ class PredatoryFocusEffect extends AsThoughEffectImpl {
         super.init(source, game);
         Player controller = game.getPlayer(source.getControllerId());
         String sourceName = source.getSourceObject(game).getLogName();
-        choseUse = controller.chooseUse(Outcome.Damage, "Have creatures you control deal combat damage this turn" +
-                " as though they weren't blocked?", source, game);
-        game.informPlayers(choseUse ? controller.getName()+" chose to use "+sourceName+"'s effect" :
-                controller.getName()+" chose not to use "+sourceName+"'s effect.");
+        choseUse = controller.chooseUse(Outcome.Damage, "Have creatures you control deal combat damage this turn"
+                + " as though they weren't blocked?", source, game);
+        game.informPlayers(choseUse ? controller.getName() + " chose to use " + sourceName + "'s effect"
+                : controller.getName() + " chose not to use " + sourceName + "'s effect.");
     }
 
     @Override

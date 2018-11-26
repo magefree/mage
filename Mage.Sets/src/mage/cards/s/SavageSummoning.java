@@ -100,7 +100,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
             MageObject mageObject = game.getBaseObject(objectId);
             if (mageObject instanceof Commander) {
                 Commander commander = (Commander) mageObject;
-                if (commander.isCreature() && commander.getControllerId().equals(source.getControllerId())) {
+                if (commander.isCreature() && commander.isControlledBy(source.getControllerId())) {
                     return true;
                 }
             } else if (mageObject instanceof Card) {

@@ -2,6 +2,8 @@
 package mage.cards.j;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -24,7 +26,10 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.FilterPlayer;
 import mage.filter.common.FilterNonlandCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -32,6 +37,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
@@ -239,28 +245,61 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         if (controller == null || sourcePermanent == null) {
             return false;
         }
-        if(controller.chooseUse(Outcome.Benefit, "Look at all players' libraries before card select?", null, game)) {
+        if (controller.chooseUse(Outcome.Benefit, "Look at all players' libraries before card select?", null, game)) {
             game.informPlayers(controller.getLogName() + " is looking at all players' libraries.");
             controller.lookAtAllLibraries(source, game);
         }
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
-            if (source.isControlledBy(player.getId())) {
-                playerName = "your";
+        List<UUID> playerList = new ArrayList<>();
+        playerList.addAll(game.getState().getPlayersInRange(controller.getId(), game));
+        Set<UUID> checkList = new HashSet<>();
+        while (!playerList.isEmpty()) {
+            FilterPlayer filter = new FilterPlayer();
+            List<PlayerIdPredicate> playerPredicates = new ArrayList<>();
+            for (UUID playerId : playerList) {
+                playerPredicates.add(new PlayerIdPredicate(playerId));
             }
-
-            TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
-            if (controller.searchLibrary(target, game, playerId)) {
-                UUID targetId = target.getFirstTarget();
-                Card card = player.getLibrary().remove(targetId, game);
-                if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+            filter.add(Predicates.or(playerPredicates));
+            TargetPlayer targetPlayer = new TargetPlayer(1, 1, true, filter);
+            targetPlayer.setRequired(!checkList.containsAll(playerList));
+            if (controller.chooseTarget(outcome, targetPlayer, source, game)) {
+                UUID playerId = targetPlayer.getFirstTarget();
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
+                    if (source.isControlledBy(player.getId())) {
+                        playerName = "your";
+                    }
+                    TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
+                    if (controller.searchLibrary(target, game, playerId, !checkList.contains(playerId))) {
+                        checkList.add(playerId);
+                        UUID targetId = target.getFirstTarget();
+                        Card card = player.getLibrary().remove(targetId, game);
+                        if (card != null) {
+                            controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                            playerList.remove(playerId);
+                        }
+                    } else {
+                        playerList.remove(playerId);
+                    }
+                } else {
+                    playerList.remove(playerId);
+                }
+            } else {
+                break;
+            }
+            for (UUID playerId : playerList) {
+                Player player = game.getPlayer(playerId);
+                if (player == null || !player.canRespond()) {
+                    playerList.remove(player);
                 }
             }
-            player.shuffleLibrary(source, game);
         }
-
+        for (UUID playerId : checkList) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.shuffleLibrary(source, game);
+            }
+        }
         ExileZone jaceExileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (jaceExileZone == null) {
             return true;

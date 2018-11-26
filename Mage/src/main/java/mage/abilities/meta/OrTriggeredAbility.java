@@ -1,6 +1,5 @@
 package mage.abilities.meta;
 
-import mage.MageObject;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -14,9 +13,12 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * A triggered ability that combines several others and triggers whenever one or more of them would. The abilities
- * passed in should have null as their effect, and should have their own targets set if necessary. All other information
- * will be passed in from changes to this Ability. Note: this does NOT work with abilities that have intervening if clauses.
+ * A triggered ability that combines several others and triggers whenever one or
+ * more of them would. The abilities passed in should have null as their effect,
+ * and should have their own targets set if necessary. All other information
+ * will be passed in from changes to this Ability. Note: this does NOT work with
+ * abilities that have intervening if clauses.
+ *
  * @author noahg
  */
 public class OrTriggeredAbility extends TriggeredAbilityImpl {
@@ -43,18 +45,17 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public OrTriggeredAbility(OrTriggeredAbility ability) {
         super(ability);
         this.triggeredAbilities = new TriggeredAbility[ability.triggeredAbilities.length];
-        for (int i = 0; i < this.triggeredAbilities.length; i++){
+        for (int i = 0; i < this.triggeredAbilities.length; i++) {
             this.triggeredAbilities[i] = ability.triggeredAbilities[i].copy();
         }
         this.triggeringAbilities = new ArrayList<>(ability.triggeringAbilities);
         this.ruleTrigger = ability.ruleTrigger;
     }
 
-
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         for (TriggeredAbility ability : triggeredAbilities) {
-            if (ability.checkEventType(event, game)){
+            if (ability.checkEventType(event, game)) {
                 System.out.println("Correct event type (" + event.getType() + ")");
                 return true;
             }
@@ -101,7 +102,6 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         return sb.toString() + super.getRule();
     }
 
-
     @Override
     public void setControllerId(UUID controllerId) {
         super.setControllerId(controllerId);
@@ -126,11 +126,4 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         }
     }
 
-    @Override
-    public void setSourceObject(MageObject sourceObject, Game game) {
-        super.setSourceObject(sourceObject, game);
-        for (TriggeredAbility ability : triggeredAbilities) {
-            ability.setSourceObject(sourceObject, game);
-        }
-    }
 }

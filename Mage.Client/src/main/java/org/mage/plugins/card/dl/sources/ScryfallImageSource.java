@@ -231,11 +231,15 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("GS1");
         supportedSets.add("GRN");
         supportedSets.add("GK1");
+        supportedSets.add("GNT");
+        supportedSets.add("UMA");
+        supportedSets.add("PUMA");
         //
         supportedSets.add("EURO");
         supportedSets.add("GPX");
         supportedSets.add("ATH");
         supportedSets.add("GRC");
+        supportedSets.add("ANA");
     }
 
     @Override
@@ -246,7 +250,9 @@ public enum ScryfallImageSource implements CardImageSource {
         String localizedCode = languageAliases.getOrDefault(preferredLanguage, defaultCode);
         // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
 
-        // TODO: do not use API at all? It's can help with scryfall request limits (1 request instead 2)
+        // WARNING, some cards haven't direct images and uses random GUID:
+        // As example: Raging Ravine - https://scryfall.com/card/uma/249/raging-ravine
+        // https://img.scryfall.com/cards/large/front/5/4/54f41726-e0bb-4154-a2db-4b68b50f5032.jpg
         String baseUrl = null;
         String alternativeUrl = null;
 
@@ -268,12 +274,19 @@ public enum ScryfallImageSource implements CardImageSource {
             }
         }
 
-        // special card number like "103a" already compatible
+        // special card number like "103a" and "U123" already compatible
         if (baseUrl == null && card.isCollectorIdWithStr()) {
-            baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet()) + "/"
-                    + card.getCollectorId() + ".jpg";
-            alternativeUrl = "https://img.scryfall.com/cards/large/" + defaultCode + "/" + formatSetName(card.getSet()) + "/"
-                    + card.getCollectorId() + ".jpg";
+            // WARNING, after 2018 it's not compatible and some new sets have GUID files instead card numbers
+            // TODO: replace card number links to API calls (need test with lands, alternative images and double faces), replace not working images by direct links
+            if (card.getCollectorId().startsWith("U")) {
+                // fix for Ultimate Box Topper (PUMA) -- need to use API
+                // ignored and go to API call at the end
+            } else {
+                baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet()) + "/"
+                        + card.getCollectorId() + ".jpg";
+                alternativeUrl = "https://img.scryfall.com/cards/large/" + defaultCode + "/" + formatSetName(card.getSet()) + "/"
+                        + card.getCollectorId() + ".jpg";
+            }
         }
 
         // double faced cards do not supports by API (need direct link for img)

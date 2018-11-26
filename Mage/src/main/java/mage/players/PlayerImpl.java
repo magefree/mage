@@ -1041,15 +1041,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference permittingObject) {
-        if (game == null || ability == null) {
+    public boolean cast(SpellAbility originalAbility, Game game, boolean noMana, MageObjectReference permittingObject) {
+        if (game == null || originalAbility == null) {
             return false;
         }
 
         // Use ability copy to avoid problems with targets and costs on recast (issue https://github.com/magefree/mage/issues/5189).
-        ability = ability.copy();
-
+        SpellAbility ability = originalAbility.copy();
         ability.setControllerId(getId());
+        ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
         if (ability.getSpellAbilityType() != SpellAbilityType.BASE) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
             if (ability == null) {
@@ -1073,6 +1073,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     logger.error("Got no spell from stack. ability: " + ability.getRule());
                     return false;
                 }
+                // Update the zcc to the stack
+                ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
                 // some effects set sourceId to cast without paying mana costs or other costs
                 if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
                     Ability spellAbility = spell.getSpellAbility();
@@ -1143,8 +1145,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         //20091005 - 114.2a
         ActivationStatus activationStatus = playLandAbility.canActivate(this.playerId, game);
-        if (!ignoreTiming && !activationStatus.canActivate()) {
-            return false;
+        if (ignoreTiming) {
+            if (!canPlayLand()) {
+                return false; // ignore timing does not mean that more lands than normal can be played
+            }
+        } else {
+            if (!activationStatus.canActivate()) {
+                return false;
+            }
         }
 
         //20091005 - 305.1
@@ -2364,7 +2372,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         }
         Permanent attacker = game.getPermanent(attackerId);
-        if (attacker != null && attacker.canAttack(defenderId, game) && attacker.isControlledBy(playerId)) {
+        if (attacker != null
+                && attacker.canAttack(defenderId, game)
+                && attacker.isControlledBy(playerId)) {
             if (!game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
                 game.undo(playerId);
             }
@@ -2463,12 +2473,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                     for (UUID targetId : newTarget.getTargets()) {
                         target.add(targetId, game);
                     }
-                    if (triggerEvents) {
-                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
-                    }
+
                 } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library, game, targetPlayerId)) { // for handling Panglacial Wurm
                     newTarget.clearChosen();
                     continue;
+                }
+                if (triggerEvents) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
                 }
                 break;
             } while (true);

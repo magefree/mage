@@ -1,19 +1,19 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -23,8 +23,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BeamsplitterMage extends CardImpl {
@@ -156,7 +157,7 @@ class BeamsplitterMageEffect extends OneShotEffect {
             if (usedTarget == null) {
                 return false;
             }
-            FilterPermanent filter = new BeamsplitterMageFilter(usedTarget, source.getSourceId());
+            FilterPermanent filter = new BeamsplitterMageFilter(usedTarget, source.getSourceId(), source.getControllerId());
             Target target1 = new TargetPermanent(filter);
             target1.setNotTarget(true);
             if (controller.choose(outcome, target1, source.getSourceId(), game)) {
@@ -199,10 +200,11 @@ class BeamsplitterMageFilter extends FilterControlledPermanent {
     private final Target target;
     private final UUID notId;
 
-    public BeamsplitterMageFilter(Target target, UUID notId) {
+    public BeamsplitterMageFilter(Target target, UUID notId, UUID controllerId) {
         super("creature this spell could target");
         this.target = target;
         this.notId = notId;
+        this.add(new ControllerIdPredicate(controllerId));
     }
 
     public BeamsplitterMageFilter(final BeamsplitterMageFilter filter) {

@@ -105,6 +105,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Magma Mine", 149, Rarity.UNCOMMON, mage.cards.m.MagmaMine.class));
         cards.add(new SetCardInfo("Man-o'-War", 37, Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Miraculous Recovery", 13, Rarity.UNCOMMON, mage.cards.m.MiraculousRecovery.class));
+        cards.add(new SetCardInfo("Mob Mentality", 88, Rarity.UNCOMMON, mage.cards.m.MobMentality.class));
         cards.add(new SetCardInfo("Mortal Wound", 113, Rarity.COMMON, mage.cards.m.MortalWound.class));
         cards.add(new SetCardInfo("Mundungu", 132, Rarity.UNCOMMON, mage.cards.m.Mundungu.class));
         cards.add(new SetCardInfo("Mystic Veil", 38, Rarity.COMMON, mage.cards.m.MysticVeil.class));

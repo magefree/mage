@@ -126,7 +126,10 @@ class GripOfChaosEffect extends OneShotEffect {
                 Mode mode = stackObject.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     UUID oldTargetId = target.getFirstTarget();
-                    Set<UUID> possibleTargets = target.possibleTargets(stackObject.getSourceId(), stackObject.getControllerId(), game);
+                    Set<UUID> possibleTargets = target.possibleTargets(stackObject.getId(), stackObject.getControllerId(), game);
+                    if (possibleTargets.contains(stackObject.getId())) { // The stackObject can't target itself
+                        possibleTargets.remove(stackObject.getId());
+                    }
                     if (!possibleTargets.isEmpty()) {
                         int i = 0;
                         int rnd = RandomUtil.nextInt(possibleTargets.size());

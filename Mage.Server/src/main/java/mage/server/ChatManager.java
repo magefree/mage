@@ -172,8 +172,8 @@ public enum ChatManager {
             + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name"
             + "<br/>\\card Card Name - Print oracle text for card"
             + "<br/>[Card Name] - Show a highlighted card name"
-            + "<br/>\\ignore - shows current ignore list on this server."
-            + "<br/>\\ignore [username] - add a username to your ignore list on this server."
+            + "<br/>\\ignore - shows your ignore list on this server."
+            + "<br/>\\ignore [username] - add username to ignore list (they won't be able to chat or join to your game)."
             + "<br/>\\unignore [username] - remove a username from your ignore list on this server.";
 
     final Pattern getCardTextPattern = Pattern.compile("^.card *(.*)");

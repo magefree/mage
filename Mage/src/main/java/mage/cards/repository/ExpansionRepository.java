@@ -33,6 +33,8 @@ public enum ExpansionRepository {
 
     private Dao<ExpansionInfo, Object> expansionDao;
 
+    public boolean instanceInitialized = false;
+
     ExpansionRepository() {
         File file = new File("db");
         if (!file.exists()) {
@@ -48,9 +50,11 @@ public enum ExpansionRepository {
 
             TableUtils.createTableIfNotExists(connectionSource, ExpansionInfo.class);
             expansionDao = DaoManager.createDao(connectionSource, ExpansionInfo.class);
+            instanceInitialized = true;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
     }
 
     public void add(ExpansionInfo expansion) {

@@ -52,6 +52,7 @@ public class BlatantThieveryTest extends CardTestMultiPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertGraveyardCount(playerA, "Blatant Thievery", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Walking Corpse", 1);
         assertPermanentCount(playerA, "Pillarfield Ox", 1);

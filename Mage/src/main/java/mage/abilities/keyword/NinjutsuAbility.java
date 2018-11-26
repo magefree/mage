@@ -199,8 +199,8 @@ class RevealNinjutsuCardCost extends CostImpl {
             for (CommandObject coj : game.getState().getCommand()) {
                 if (coj != null && coj.getId().equals(ability.getSourceId())) {
                     card = game.getCard(ability.getSourceId());
+                    break;
                 }
-                break;
             }
         }
         if (card != null) {

@@ -1,19 +1,13 @@
 package mage.deck;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.constants.SetType;
 
+import java.util.*;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Standard extends Constructed {
@@ -23,13 +17,7 @@ public class Standard extends Constructed {
 
         setCodes.addAll(makeLegalSets());
 
-        banned.add("Attune with Aether"); // since 2018-01-15
-        banned.add("Aetherworks Marvel");
-        banned.add("Felidar Guardian");
         banned.add("Rampaging Ferocidon"); // since 2018-01-15
-        banned.add("Ramunap Ruins"); // since 2018-01-15
-        banned.add("Rogue Refiner"); // since 2018-01-15
-        banned.add("Smuggler's Copter");
     }
 
     private static boolean isFallSet(ExpansionSet set) {

@@ -1,4 +1,3 @@
-
 package mage.game.command;
 
 import java.util.EnumSet;

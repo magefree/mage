@@ -1,11 +1,11 @@
 package org.mage.test.serverside.base.impl;
 
-import mage.MageInt;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -49,8 +49,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String NO_TARGET = "NO_TARGET";
 
     public static final String CHECK_COMMAND_PT = "PT";
+    public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
+    public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
     public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
     public static final String CHECK_COMMAND_COLOR = "COLOR";
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
@@ -64,7 +66,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected String deckNameD;
 
     protected enum ExpectedType {
-
         TURN_NUMBER,
         RESULT,
         LIFE,
@@ -165,12 +166,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected TestPlayer createPlayer(Game game, TestPlayer player, String name, String deckName) throws GameException {
         player = createNewPlayer(name, game.getRangeOfInfluence());
         player.setTestMode(true);
+
         logger.debug("Loading deck...");
-        Deck deck = Deck.load(DeckImporterUtil.importDeck(deckName), false, false);
+        DeckCardLists list;
+        if (loadedDeckCardLists.containsKey(deckName)) {
+            list = loadedDeckCardLists.get(deckName);
+        } else {
+            list = DeckImporterUtil.importDeck(deckName);
+            loadedDeckCardLists.put(deckName, list);
+        }
+        Deck deck = Deck.load(list, false, false);
         logger.debug("Done!");
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
         }
+
         game.loadCards(deck.getCards(), player.getId());
         game.loadCards(deck.getSideboard(), player.getId());
         game.addPlayer(player, deck);
@@ -240,12 +250,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_PT, permanentName, power.toString(), toughness.toString());
     }
 
+    public void checkLife(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer life) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_LIFE, life.toString());
+    }
+
     public void checkAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Class<?> abilityClass, Boolean mustHave) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_ABILITY, permanentName, abilityClass.getName(), mustHave.toString());
     }
 
     public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNT, permanentName, count.toString());
+    }
+
+    public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, permanentName, count.toString());
     }
 
     public void checkHandCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer count) {

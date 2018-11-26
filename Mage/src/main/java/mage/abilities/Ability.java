@@ -479,16 +479,7 @@ public interface Ability extends Controllable, Serializable {
     boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
 
     /**
-     * Sets the object that actually existed while a ability triggerd or an
-     * ability was activated.
-     *
-     * @param mageObject
-     * @param game
-     */
-    void setSourceObject(MageObject mageObject, Game game);
-
-    /**
-     * Returns the object that actually existed while a ability triggerd or an
+     * Returns the object that actually existed while a ability triggered or an
      * ability was activated. If not set yet, the current object will be
      * retrieved from the game.
      *
@@ -496,6 +487,8 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     MageObject getSourceObject(Game game);
+
+    void setSourceObjectZoneChangeCounter(int zoneChangeCounter);
 
     int getSourceObjectZoneChangeCounter();
 
@@ -519,6 +512,8 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     Permanent getSourcePermanentIfItStillExists(Game game);
+
+    Permanent getSourcePermanentOrLKI(Game game);
 
     String getTargetDescription(Targets targets, Game game);
 

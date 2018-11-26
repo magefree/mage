@@ -1,0 +1,19 @@
+# this file specifies which sets have set files.
+# each line must be exactly the 3 letter expansion code. this corresponds to a csv resource file in the same directory
+# The <set>.csv files have a strict format:
+# each line must be:
+# cardname : integer rating
+# each set's ratings are post-processed to have a normalized score [1..100], so the files don't need to have the same rating system.
+# I created the first few files with draftaholicsanonymous but you can use any integer rating system you want
+grn
+m19
+dom
+rix
+xln
+hou
+akh
+aer
+kld
+mm3
+ima
+m13
