@@ -2,6 +2,7 @@
 package mage.cards.n;
 
 import java.util.UUID;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -11,7 +12,6 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.a.AshmouthBlade;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -20,17 +20,16 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author halljared
  */
 public final class NeglectedHeirloom extends CardImpl {
 
     public NeglectedHeirloom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
         this.transformable = true;
-        this.secondSideCardClazz = AshmouthBlade.class;
+        this.secondSideCardClazz = mage.cards.a.AshmouthBlade.class;
 
         // Equipped creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));

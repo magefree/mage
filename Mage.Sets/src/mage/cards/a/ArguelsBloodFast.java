@@ -2,6 +2,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,14 +15,12 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.t.TempleOfAclazotz;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
- *
  * @author TheElk801
  */
 public final class ArguelsBloodFast extends CardImpl {
@@ -31,7 +30,7 @@ public final class ArguelsBloodFast extends CardImpl {
 
         addSuperType(SuperType.LEGENDARY);
         this.transformable = true;
-        this.secondSideCardClazz = TempleOfAclazotz.class;
+        this.secondSideCardClazz = mage.cards.t.TempleOfAclazotz.class;
 
         // {1}{B}, Pay 2 life: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));

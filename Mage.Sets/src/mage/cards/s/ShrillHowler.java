@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,26 +12,24 @@ import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowe
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.h.HowlingChorus;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public final class ShrillHowler extends CardImpl {
 
     public ShrillHowler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.WEREWOLF);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCardClazz = HowlingChorus.class;
+        this.secondSideCardClazz = mage.cards.h.HowlingChorus.class;
 
         // Creatures with power less than Shrill Howler's power can't block it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));

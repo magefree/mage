@@ -200,6 +200,6 @@ Welcome Deck 2016|WelcomeDeck2016|
 Welcome Deck 2017|WelcomeDeck2017|
 World Magic Cup Qualifier|WorldMagicCupQualifier|
 Worldwake|Worldwake|
-WPN Gateway|WPNGateway|
+WPN Gateway|WPNAndGatewayPromos|
 Zendikar|Zendikar|
 Zendikar Expeditions|ZendikarExpeditions|

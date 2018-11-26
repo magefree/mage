@@ -19,7 +19,7 @@ public final class PremiumDeckSeriesFireAndLightning extends ExpansionSet {
     private PremiumDeckSeriesFireAndLightning() {
         super("Premium Deck Series: Fire and Lightning", "PD2", ExpansionSet.buildDate(2010, 11, 1),
                 SetType.SUPPLEMENTAL);
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Ball Lightning", 12, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Barbarian Ring", 28, Rarity.UNCOMMON, mage.cards.b.BarbarianRing.class));

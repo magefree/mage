@@ -10,6 +10,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mage.cards.Card;
+import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
@@ -53,6 +55,8 @@ public abstract class MageTestPlayerBase {
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
 
     protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
+
+    protected static Map<String, DeckCardLists> loadedDeckCardLists = new HashMap<>(); // test decks buffer
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;

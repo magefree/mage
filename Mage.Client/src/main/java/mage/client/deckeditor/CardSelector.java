@@ -1,6 +1,4 @@
-
-
- /*
+/*
  * CardSelector.java
  *
  * Created on Feb 18, 2010, 2:49:03 PM

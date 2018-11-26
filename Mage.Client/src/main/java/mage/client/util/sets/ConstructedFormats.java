@@ -9,6 +9,8 @@ import java.util.Map;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.constants.SetType;
+import static mage.constants.SetType.EXPANSION;
+import static mage.constants.SetType.SUPPLEMENTAL;
 import mage.deck.Standard;
 
 /**
@@ -64,6 +66,13 @@ public final class ConstructedFormats {
         underlyingSetCodesPerFormat.put(CUSTOM, new ArrayList<>());
         final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
         formats.clear(); // prevent NPE on sorting if this is not the first try
+
+        // Because this is also called in Netbeans Design view, but the object does not exist in that case,
+        // we have to return here to prevent exception in design view. (Does not hurt at design time)
+        if (!ExpansionRepository.instance.instanceInitialized) {
+            return;
+        }
+
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
             expansionInfo.put(set.getName(), set);
             formats.add(set.getName());

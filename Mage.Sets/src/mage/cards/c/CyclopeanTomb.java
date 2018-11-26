@@ -1,6 +1,9 @@
-
 package mage.cards.c;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -30,11 +33,6 @@ import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -123,7 +121,6 @@ class CyclopeanTombCreateTriggeredEffect extends OneShotEffect {
         if (controller != null) {
             Permanent tomb = game.getPermanentOrLKIBattlefield(source.getSourceId()); // we need to set the correct source object
             DelayedTriggeredAbility ability = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new CyclopeanTombEffect(), Duration.EndOfGame, false);
-            ability.setSourceObject(tomb, game);
             ability.setControllerId(source.getControllerId());
             ability.setSourceId(source.getSourceId());
             game.addDelayedTriggeredAbility(ability);

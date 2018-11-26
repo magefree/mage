@@ -2,6 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,7 +15,6 @@ import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.common.InstantOrSorcerySpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.v.VoraciousReader;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
@@ -23,7 +23,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author fireshoes
  */
 public final class CuriousHomunculus extends CardImpl {
@@ -35,7 +34,7 @@ public final class CuriousHomunculus extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCardClazz = VoraciousReader.class;
+        this.secondSideCardClazz = mage.cards.v.VoraciousReader.class;
 
         // {T}: Add {C}. Spend this mana only to cast an instant or sorcery spell.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 1, new InstantOrSorcerySpellManaBuilder()));

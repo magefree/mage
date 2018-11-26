@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.UUID;
@@ -68,16 +67,19 @@ class AftermathCastFromGraveyard extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(source.getSourceId())
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID affectedControllerId) {
+        if (affectedAbility != null && affectedAbility.getSourceId().equals(source.getSourceId())
                 && affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                return true;
-            }
+            return game.getState().getZone(objectId).equals(Zone.GRAVEYARD);
         }
         return false;
     }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return false;
+    }
+
 }
 
 class AftermathCantCastFromHand extends ContinuousRuleModifyingEffectImpl {
@@ -168,17 +170,14 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        UUID sourceId = source.getSourceId();
         Card sourceCard = game.getCard(source.getSourceId());
         if (sourceCard instanceof SplitCardHalf) {
             sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
-            sourceId = sourceCard.getId();
         }
-
         if (sourceCard != null) {
             Player player = game.getPlayer(sourceCard.getOwnerId());
             if (player != null) {
-                return player.moveCardToExileWithInfo(sourceCard, null, "", sourceId, game, ((ZoneChangeEvent) event).getFromZone(), true);
+                return player.moveCards(sourceCard, Zone.EXILED, source, game);
             }
         }
         return false;

@@ -9,7 +9,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.m.MuscleBurst;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -19,13 +18,12 @@ import mage.target.common.TargetCardInLibrary;
 import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class DiligentFarmhand extends CardImpl {
 
     public DiligentFarmhand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
 
@@ -37,7 +35,7 @@ public final class DiligentFarmhand extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // If Diligent Farmhand is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.
-        this.addAbility(MuscleBurst.getCountAsAbility());
+        this.addAbility(mage.cards.m.MuscleBurst.getCountAsAbility());
     }
 
     public DiligentFarmhand(final DiligentFarmhand card) {

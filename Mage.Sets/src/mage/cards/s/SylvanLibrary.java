@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.HashMap;
@@ -106,7 +105,7 @@ class SylvanLibraryEffect extends OneShotEffect {
                             }
                         }
                     }
-                    controller.putCardsOnTopOfLibrary(cardsPutBack, game, source, false);
+                    controller.putCardsOnTopOfLibrary(cardsPutBack, game, source, true);
                 }
             }
             return true;

@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.Set;
@@ -11,6 +10,7 @@ import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -22,6 +22,7 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -101,11 +102,11 @@ class DeadMansChestEffect extends OneShotEffect {
                     controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getLogName());
                     for (Card card : cards) {
                         if (!card.isLand()) {
-                            ContinuousEffect effect = new DeadMansChestCastFromExileEffect();
-                            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.Custom);
+                            effect.setTargetPointer(new FixedTarget(card, game));
                             game.addEffect(effect, source);
                             effect = new DeadMansChestSpendManaEffect();
-                            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                            effect.setTargetPointer(new FixedTarget(card, game));
                             game.addEffect(effect, source);
                         }
                     }

@@ -19,7 +19,7 @@ public final class GrandPrixPromos extends ExpansionSet {
     private GrandPrixPromos() {
         super("Grand Prix Promos", "GPX", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("All Is Dust", "2013b", Rarity.RARE, mage.cards.a.AllIsDust.class));
         cards.add(new SetCardInfo("Batterskull", 2014, Rarity.MYTHIC, mage.cards.b.Batterskull.class));

@@ -18,7 +18,7 @@ public final class DuelDecksDivineVsDemonic extends ExpansionSet {
     private DuelDecksDivineVsDemonic() {
         super("Duel Decks: Divine vs. Demonic", "DDC", ExpansionSet.buildDate(2009, 04, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abyssal Gatekeeper", 31, Rarity.COMMON, mage.cards.a.AbyssalGatekeeper.class));
         cards.add(new SetCardInfo("Abyssal Specter", 40, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));

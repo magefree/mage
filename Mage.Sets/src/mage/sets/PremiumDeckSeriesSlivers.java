@@ -18,7 +18,7 @@ public final class PremiumDeckSeriesSlivers extends ExpansionSet {
 
     private PremiumDeckSeriesSlivers() {
         super("Premium Deck Series: Slivers", "H09", ExpansionSet.buildDate(2009, 11, 1), SetType.SUPPLEMENTAL);
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Acidic Sliver", 13, Rarity.UNCOMMON, mage.cards.a.AcidicSliver.class));
         cards.add(new SetCardInfo("Amoeboid Changeling", 3, Rarity.COMMON, mage.cards.a.AmoeboidChangeling.class));

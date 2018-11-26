@@ -2,6 +2,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -16,7 +17,6 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.a.AwokenHorror;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -25,7 +25,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
- *
  * @author fireshoes
  */
 public final class ThingInTheIce extends CardImpl {
@@ -39,13 +38,13 @@ public final class ThingInTheIce extends CardImpl {
     }
 
     public ThingInTheIce(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCardClazz = AwokenHorror.class;
+        this.secondSideCardClazz = mage.cards.a.AwokenHorror.class;
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());

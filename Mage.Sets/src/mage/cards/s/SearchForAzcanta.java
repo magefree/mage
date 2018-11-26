@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,7 +13,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.a.AzcantaTheSunkenRuin;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -22,7 +22,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public final class SearchForAzcanta extends CardImpl {
@@ -31,7 +30,7 @@ public final class SearchForAzcanta extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         this.transformable = true;
-        this.secondSideCardClazz = AzcantaTheSunkenRuin.class;
+        this.secondSideCardClazz = mage.cards.a.AzcantaTheSunkenRuin.class;
 
         this.addSuperType(SuperType.LEGENDARY);
 

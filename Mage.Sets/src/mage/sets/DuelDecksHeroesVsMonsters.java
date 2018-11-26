@@ -19,7 +19,7 @@ public final class DuelDecksHeroesVsMonsters extends ExpansionSet {
     private DuelDecksHeroesVsMonsters() {
         super("Duel Decks: Heroes vs. Monsters", "DDL", ExpansionSet.buildDate(2013, 9, 6), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Anax and Cymede", 11, Rarity.RARE, mage.cards.a.AnaxAndCymede.class));
         cards.add(new SetCardInfo("Armory Guard", 12, Rarity.COMMON, mage.cards.a.ArmoryGuard.class));

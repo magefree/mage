@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.card.arcane;
 
 import java.awt.*;
@@ -63,26 +58,26 @@ public final class CardRendererUtils {
         int plus_b = (int) ((255 - b) / 2);
 
         return new Color(r + plus_r,
-                         g + plus_g,
-                         b + plus_b,
-                         alpha);
+                g + plus_g,
+                b + plus_b,
+                alpha);
     }
-    
+
     public static Color abitdarker(Color c) {
         int r = c.getRed();
         int g = c.getGreen();
         int b = c.getBlue();
         int alpha = c.getAlpha();
 
-        int plus_r = (int) (Math.min (255 - r, r) / 2);
-        int plus_g = (int) (Math.min (255 - g, g) / 2);
-        int plus_b = (int) (Math.min (255 - b, b) / 2);
+        int plus_r = (int) (Math.min(255 - r, r) / 2);
+        int plus_g = (int) (Math.min(255 - g, g) / 2);
+        int plus_b = (int) (Math.min(255 - b, b) / 2);
 
         return new Color(r - plus_r,
-                         g - plus_g,
-                         b - plus_b,
-                         alpha);
-    }    
+                g - plus_g,
+                b - plus_b,
+                alpha);
+    }
 
     // Draw a rounded box with a 2-pixel border
     // Used on various card parts.
@@ -191,5 +186,13 @@ public final class CardRendererUtils {
         return killReminderTextPattern.matcher(rule).replaceAll("")
                 .replaceAll("<i>", "")
                 .replaceAll("</i>", "");
+    }
+
+    public static Color copyColor(Color color) {
+        if (color != null) {
+            return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+        } else {
+            return null;
+        }
     }
 }

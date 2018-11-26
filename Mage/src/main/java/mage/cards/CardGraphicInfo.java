@@ -6,7 +6,7 @@ public final class CardGraphicInfo {
 
     private final ObjectColor frameColor;
     private final FrameStyle frameStyle;
-    private final boolean useVariousArt;
+    private final boolean useVariousArt; // card in set have multiple images (use to store images files)
 
     public CardGraphicInfo(FrameStyle frameStyle, boolean useVariousArt) {
         this(null, frameStyle, useVariousArt);

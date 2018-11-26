@@ -2,19 +2,17 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,14 +47,12 @@ public final class MissionBriefing extends CardImpl {
 
 class MissionBriefingEffect extends OneShotEffect {
 
-    public static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
-
     public MissionBriefingEffect() {
         super(Outcome.Benefit);
         this.staticText = "Surveil 2, then choose an instant or sorcery card "
                 + "in your graveyard. You may cast that card this turn. "
                 + "If that card would be put into your graveyard this turn, "
-                + "exile it instead.";
+                + "exile it instead";
     }
 
     public MissionBriefingEffect(final MissionBriefingEffect effect) {
@@ -75,47 +71,21 @@ class MissionBriefingEffect extends OneShotEffect {
             return false;
         }
         player.surveil(2, source, game);
-        Target target = new TargetCardInYourGraveyard(filter);
+        Target target = new TargetCardInYourGraveyard(
+                new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard"));
         if (!player.choose(outcome, target, source.getSourceId(), game)) {
-            return false;
+            return true;
         }
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
-            ContinuousEffect effect = new MissionBriefingCastFromGraveyardEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect();
+            effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
             effect = new MissionBriefingReplacementEffect(card.getId());
             game.addEffect(effect, source);
             return true;
         }
         return false;
-    }
-}
-
-class MissionBriefingCastFromGraveyardEffect extends AsThoughEffectImpl {
-
-    public MissionBriefingCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-    }
-
-    public MissionBriefingCastFromGraveyardEffect(final MissionBriefingCastFromGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public MissionBriefingCastFromGraveyardEffect copy() {
-        return new MissionBriefingCastFromGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(this.getTargetPointer().getFirst(game, source))
-                && affectedControllerId.equals(source.getControllerId());
     }
 }
 

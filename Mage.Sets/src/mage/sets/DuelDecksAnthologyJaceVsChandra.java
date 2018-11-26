@@ -20,7 +20,7 @@ public final class DuelDecksAnthologyJaceVsChandra extends ExpansionSet {
         super("Duel Decks: Anthology, Jace vs. Chandra", "DD3JVC", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Aethersnipe", 17, Rarity.COMMON, mage.cards.a.Aethersnipe.class));
         cards.add(new SetCardInfo("Air Elemental", 13, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));

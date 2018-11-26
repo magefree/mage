@@ -1,15 +1,15 @@
 package mage.deck;
 
-import java.util.HashMap;
-import java.util.Map;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.constants.SetType;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author spjspj
  */
 public class AusHighlander extends Constructed {
@@ -36,9 +36,9 @@ public class AusHighlander extends Constructed {
         pointMap.put("Dig Through Time", 2);
         pointMap.put("Library of Alexandria", 2);
         pointMap.put("Mana Crypt", 2);
+        pointMap.put("Mind Twist", 2);
         pointMap.put("Mystical Tutor", 2);
         pointMap.put("Protean Hulk", 2);
-        pointMap.put("Skullclamp", 2);
         pointMap.put("Strip Mine", 2);
         pointMap.put("Tolarian Academy", 2);
         pointMap.put("Treasure Cruise", 2);
@@ -61,12 +61,12 @@ public class AusHighlander extends Constructed {
         pointMap.put("Mana Vault", 1);
         pointMap.put("Memory Jar", 1);
         pointMap.put("Merchant Scroll", 1);
-        pointMap.put("Mind Twist", 1);
         pointMap.put("Mishra’s Workshop", 1);
         pointMap.put("Natural Order", 1);
         pointMap.put("Oath of Druids", 1);
         pointMap.put("Personal Tutor", 1);
         pointMap.put("Sensei’s Divining Top", 1);
+        pointMap.put("Skullclamp", 1);
         pointMap.put("Snapcaster Mage", 1);
         pointMap.put("Stoneforge Mystic", 1);
         pointMap.put("Survival of the Fittest", 1);

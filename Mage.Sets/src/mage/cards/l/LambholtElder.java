@@ -2,6 +2,7 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -11,19 +12,17 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.s.SilverpeltWerewolf;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
- *
  * @author Loki
  */
 public final class LambholtElder extends CardImpl {
 
     public LambholtElder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
 
@@ -31,7 +30,7 @@ public final class LambholtElder extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCardClazz = SilverpeltWerewolf.class;
+        this.secondSideCardClazz = mage.cards.s.SilverpeltWerewolf.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Elder.
         this.addAbility(new TransformAbility());

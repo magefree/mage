@@ -19,7 +19,7 @@ public final class DuelDecksAnthologyDivineVsDemonic extends ExpansionSet {
         super("Duel Decks: Anthology, Divine vs. Demonic", "DD3DVD", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abyssal Gatekeeper", 31, Rarity.COMMON, mage.cards.a.AbyssalGatekeeper.class));
         cards.add(new SetCardInfo("Abyssal Specter", 40, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));

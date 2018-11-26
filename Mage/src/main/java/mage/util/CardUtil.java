@@ -362,7 +362,7 @@ public final class CardUtil {
 
     /**
      * Parse card number as int (support base [123] and alternative numbers
-     * [123b]).
+     * [123b], [U123]).
      *
      * @param cardNumber origin card number
      * @return int
@@ -373,10 +373,15 @@ public final class CardUtil {
             throw new IllegalArgumentException("Card number is empty.");
         }
 
-        if (Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
-            return Integer.parseInt(cardNumber);
-        } else {
+        if (!Character.isDigit(cardNumber.charAt(0))) {
+            // U123
+            return Integer.parseInt(cardNumber.substring(1, cardNumber.length()));
+        } else if (!Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
+            // 123b
             return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+        } else {
+            // 123
+            return Integer.parseInt(cardNumber);
         }
     }
 

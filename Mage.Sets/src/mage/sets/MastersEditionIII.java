@@ -2,12 +2,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.f.FeveredStrength;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
 public final class MastersEditionIII extends ExpansionSet {
@@ -27,6 +25,7 @@ public final class MastersEditionIII extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Active Volcano", 85, Rarity.UNCOMMON, mage.cards.a.ActiveVolcano.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 1, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
         cards.add(new SetCardInfo("Alabaster Potion", 2, Rarity.UNCOMMON, mage.cards.a.AlabasterPotion.class));
@@ -87,7 +86,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("False Defeat", 11, Rarity.UNCOMMON, mage.cards.f.FalseDefeat.class));
         cards.add(new SetCardInfo("Famine", 65, Rarity.UNCOMMON, mage.cards.f.Famine.class));
         cards.add(new SetCardInfo("Fellwar Stone", 195, Rarity.COMMON, mage.cards.f.FellwarStone.class));
-        cards.add(new SetCardInfo("Fevered Strength", 66, Rarity.COMMON, FeveredStrength.class));
+        cards.add(new SetCardInfo("Fevered Strength", 66, Rarity.COMMON, mage.cards.f.FeveredStrength.class));
         cards.add(new SetCardInfo("Fire Ambush", 97, Rarity.COMMON, mage.cards.f.FireAmbush.class));
         cards.add(new SetCardInfo("Fire Drake", 98, Rarity.COMMON, mage.cards.f.FireDrake.class));
         cards.add(new SetCardInfo("Fire Sprites", 118, Rarity.COMMON, mage.cards.f.FireSprites.class));
@@ -247,5 +246,4 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Zhang Fei, Fierce Warrior", 28, Rarity.UNCOMMON, mage.cards.z.ZhangFeiFierceWarrior.class));
         cards.add(new SetCardInfo("Zodiac Dragon", 112, Rarity.RARE, mage.cards.z.ZodiacDragon.class));
     }
-
 }

@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -19,7 +20,6 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.w.WerewolfOfAncientHunger;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
@@ -27,13 +27,12 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
- *
  * @author fireshoes
  */
 public final class SageOfAncientLore extends CardImpl {
 
     public SageOfAncientLore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.subtype.add(SubType.WEREWOLF);
@@ -41,13 +40,13 @@ public final class SageOfAncientLore extends CardImpl {
         this.toughness = new MageInt(0);
 
         this.transformable = true;
-        this.secondSideCardClazz = WerewolfOfAncientHunger.class;
+        this.secondSideCardClazz = mage.cards.w.WerewolfOfAncientHunger.class;
 
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue xValue= new CardsInControllerHandCount();
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, 
+        DynamicValue xValue = new CardsInControllerHandCount();
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 new ConditionalContinuousEffect(new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame),
-                new TransformedCondition(true), "{this}'s power and toughness are each equal to the total number of cards in your hand")));
+                        new TransformedCondition(true), "{this}'s power and toughness are each equal to the total number of cards in your hand")));
 
         // When Sage of Ancient Lore enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));

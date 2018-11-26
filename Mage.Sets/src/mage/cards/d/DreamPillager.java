@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.Set;
@@ -7,21 +6,23 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -30,7 +31,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class DreamPillager extends CardImpl {
 
     public DreamPillager(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -114,46 +115,20 @@ class DreamPillagerEffect extends OneShotEffect {
                 Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
                 if (!cards.isEmpty()) {
                     controller.moveCards(cards, Zone.EXILED, source, game);
+                    Cards canBeCast = new CardsImpl();
                     for (Card card : cards) {
                         if (!card.isLand()) {
-                            ContinuousEffect effect = new DreamPillagerCastFromExileEffect();
-                            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-                            game.addEffect(effect, source);
+                            canBeCast.add(card);
                         }
                     }
+                    ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
+                    effect.setTargetPointer(new FixedTargets(canBeCast, game));
+                    game.addEffect(effect, source);
                 }
                 return true;
             }
             return true;
         }
         return false;
-    }
-}
-
-class DreamPillagerCastFromExileEffect extends AsThoughEffectImpl {
-
-    public DreamPillagerCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play the card from exile";
-    }
-
-    public DreamPillagerCastFromExileEffect(final DreamPillagerCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public DreamPillagerCastFromExileEffect copy() {
-        return new DreamPillagerCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

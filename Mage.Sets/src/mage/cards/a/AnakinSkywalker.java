@@ -2,6 +2,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -15,7 +16,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.d.DarthVader;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -27,7 +27,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author Styxo
  */
 public final class AnakinSkywalker extends CardImpl {
@@ -41,7 +40,7 @@ public final class AnakinSkywalker extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCardClazz = DarthVader.class;
+        this.secondSideCardClazz = mage.cards.d.DarthVader.class;
 
         // Whenever another creature dies, put a +1/+1 counter on Anakin Skywalker.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));

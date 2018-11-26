@@ -3,6 +3,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
@@ -13,10 +14,10 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public final class ThousandleggedKami extends CardImpl {
+public final class ThousandLeggedKami extends CardImpl {
 
-    public ThousandleggedKami(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
+    public ThousandLeggedKami(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(6);
@@ -24,13 +25,13 @@ public final class ThousandleggedKami extends CardImpl {
         this.addAbility(new SoulshiftAbility(7));
     }
 
-    public ThousandleggedKami(final ThousandleggedKami card) {
+    public ThousandLeggedKami(final ThousandLeggedKami card) {
         super(card);
     }
 
     @Override
-    public ThousandleggedKami copy() {
-        return new ThousandleggedKami(this);
+    public ThousandLeggedKami copy() {
+        return new ThousandLeggedKami(this);
     }
 
 }

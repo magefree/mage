@@ -2,6 +2,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -17,13 +18,11 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.h.HowlpackAlpha;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
- *
  * @author North, noxx
  */
 public final class MayorOfAvabruck extends CardImpl {
@@ -37,13 +36,13 @@ public final class MayorOfAvabruck extends CardImpl {
     }
 
     public MayorOfAvabruck(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
-        this.secondSideCardClazz = HowlpackAlpha.class;
+        this.secondSideCardClazz = mage.cards.h.HowlpackAlpha.class;
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

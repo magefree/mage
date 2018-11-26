@@ -20,7 +20,7 @@ public final class DuelDecksPhyrexiaVsTheCoalition extends ExpansionSet {
         super("Duel Decks: Phyrexia vs. the Coalition", "DDE", ExpansionSet.buildDate(2010, 3, 19),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Allied Strategies", 63, Rarity.UNCOMMON, mage.cards.a.AlliedStrategies.class));
         cards.add(new SetCardInfo("Armadillo Cloak", 58, Rarity.COMMON, mage.cards.a.ArmadilloCloak.class));

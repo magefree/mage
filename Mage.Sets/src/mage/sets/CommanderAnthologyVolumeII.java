@@ -18,7 +18,7 @@ public class CommanderAnthologyVolumeII extends ExpansionSet {
     private CommanderAnthologyVolumeII() {
         super("Commander Anthology Volume II", "CM2", ExpansionSet.buildDate(2018, 6, 8), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abzan Falconer", 15, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Acidic Slime", 132, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
@@ -136,8 +136,8 @@ public class CommanderAnthologyVolumeII extends ExpansionSet {
         cards.add(new SetCardInfo("Gisela, Blade of Goldnight", 9, Rarity.MYTHIC, mage.cards.g.GiselaBladeOfGoldnight.class));
         cards.add(new SetCardInfo("Goblin Welder", 101, Rarity.RARE, mage.cards.g.GoblinWelder.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 254, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
-        cards.add(new SetCardInfo("Golgari Signet", 191, Rarity.COMMON, mage.cards.g.GolgariSignet.class));
-        cards.add(new SetCardInfo("Golgari Signet", 192, Rarity.COMMON, mage.cards.g.GolgariSignet.class));
+        cards.add(new SetCardInfo("Golgari Signet", 191, Rarity.COMMON, mage.cards.g.GolgariSignet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Golgari Signet", 192, Rarity.COMMON, mage.cards.g.GolgariSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grave Pact", 65, Rarity.RARE, mage.cards.g.GravePact.class));
         cards.add(new SetCardInfo("Gravedigger", 66, Rarity.COMMON, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Great Furnace", 255, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
@@ -251,14 +251,14 @@ public class CommanderAnthologyVolumeII extends ExpansionSet {
         cards.add(new SetCardInfo("Shared Trauma", 76, Rarity.RARE, mage.cards.s.SharedTrauma.class));
         cards.add(new SetCardInfo("Sign in Blood", 77, Rarity.COMMON, mage.cards.s.SignInBlood.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 267, Rarity.COMMON, mage.cards.s.SimicGrowthChamber.class));
-        cards.add(new SetCardInfo("Simic Signet", 215, Rarity.COMMON, mage.cards.s.SimicSignet.class));
-        cards.add(new SetCardInfo("Simic Signet", 216, Rarity.COMMON, mage.cards.s.SimicSignet.class));
+        cards.add(new SetCardInfo("Simic Signet", 215, Rarity.COMMON, mage.cards.s.SimicSignet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Simic Signet", 216, Rarity.COMMON, mage.cards.s.SimicSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullbriar, the Walking Grave", 165, Rarity.RARE, mage.cards.s.SkullbriarTheWalkingGrave.class));
         cards.add(new SetCardInfo("Slipstream Eel", 49, Rarity.COMMON, mage.cards.s.SlipstreamEel.class));
         cards.add(new SetCardInfo("Smoldering Crater", 268, Rarity.COMMON, mage.cards.s.SmolderingCrater.class));
         cards.add(new SetCardInfo("Sol Ring", 217, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
-        cards.add(new SetCardInfo("Solemn Simulacrum", 218, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
-        cards.add(new SetCardInfo("Solemn Simulacrum", 219, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Solemn Simulacrum", 218, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Solemn Simulacrum", 219, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solidarity of Heroes", 144, Rarity.UNCOMMON, mage.cards.s.SolidarityOfHeroes.class));
         cards.add(new SetCardInfo("Spell Crumple", 50, Rarity.UNCOMMON, mage.cards.s.SpellCrumple.class));
         cards.add(new SetCardInfo("Spine of Ish Sah", 220, Rarity.RARE, mage.cards.s.SpineOfIshSah.class));
@@ -288,8 +288,8 @@ public class CommanderAnthologyVolumeII extends ExpansionSet {
         cards.add(new SetCardInfo("Syphon Mind", 80, Rarity.COMMON, mage.cards.s.SyphonMind.class));
         cards.add(new SetCardInfo("Szadek, Lord of Secrets", 168, Rarity.RARE, mage.cards.s.SzadekLordOfSecrets.class));
         cards.add(new SetCardInfo("Taurean Mauler", 122, Rarity.RARE, mage.cards.t.TaureanMauler.class));
-        cards.add(new SetCardInfo("Temple of the False God", 271, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
-        cards.add(new SetCardInfo("Temple of the False God", 272, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
+        cards.add(new SetCardInfo("Temple of the False God", 271, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of the False God", 272, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terramorphic Expanse", 273, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tezzeret's Gambit", 51, Rarity.UNCOMMON, mage.cards.t.TezzeretsGambit.class));
         cards.add(new SetCardInfo("The Mimeoplasm", 1, Rarity.MYTHIC, mage.cards.t.TheMimeoplasm.class));

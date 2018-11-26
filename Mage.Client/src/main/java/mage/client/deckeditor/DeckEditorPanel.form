@@ -192,6 +192,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddLandActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="btnGenDeck">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Generate"/>
+            <Property name="name" type="java.lang.String" value="btnGenDeck" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenDeckActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JButton" name="btnSubmit">
           <Properties>
             <Property name="text" type="java.lang.String" value="Submit"/>
@@ -210,7 +219,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubmitTimerActionPerformed"/>
           </Events>
         </Component>
-         <Component class="JComponent" name="cardInfoPane">
+         <Component class="org.mage.plugins.card.info.CardInfoPaneImpl" name="cardInfoPane">
         </Component>
         <Component class="javax.swing.JTextField" name="txtTimeRemaining">
         </Component>

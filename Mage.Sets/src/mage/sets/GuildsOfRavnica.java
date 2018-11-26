@@ -2,6 +2,7 @@ package mage.sets;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -48,8 +49,8 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Operative", 63, Rarity.RARE, mage.cards.b.BloodOperative.class));
         cards.add(new SetCardInfo("Book Devourer", 93, Rarity.UNCOMMON, mage.cards.b.BookDevourer.class));
         cards.add(new SetCardInfo("Boros Challenger", 156, Rarity.UNCOMMON, mage.cards.b.BorosChallenger.class));
-        cards.add(new SetCardInfo("Boros Guildgate", 243, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
-        cards.add(new SetCardInfo("Boros Guildgate", 244, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
+        cards.add(new SetCardInfo("Boros Guildgate", 243, Rarity.COMMON, mage.cards.b.BorosGuildgate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Boros Guildgate", 244, Rarity.COMMON, mage.cards.b.BorosGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Boros Locket", 231, Rarity.COMMON, mage.cards.b.BorosLocket.class));
         cards.add(new SetCardInfo("Bounty Agent", 2, Rarity.RARE, mage.cards.b.BountyAgent.class));
         cards.add(new SetCardInfo("Bounty of Might", 124, Rarity.RARE, mage.cards.b.BountyOfMight.class));
@@ -87,8 +88,8 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Demotion", 9, Rarity.UNCOMMON, mage.cards.d.Demotion.class));
         cards.add(new SetCardInfo("Devious Cover-up", 35, Rarity.COMMON, mage.cards.d.DeviousCoverUp.class));
         cards.add(new SetCardInfo("Devkarin Dissident", 127, Rarity.COMMON, mage.cards.d.DevkarinDissident.class));
-        cards.add(new SetCardInfo("Dimir Guildgate", 245, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
-        cards.add(new SetCardInfo("Dimir Guildgate", 246, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
+        cards.add(new SetCardInfo("Dimir Guildgate", 245, Rarity.COMMON, mage.cards.d.DimirGuildgate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dimir Guildgate", 246, Rarity.COMMON, mage.cards.d.DimirGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dimir Informant", 36, Rarity.COMMON, mage.cards.d.DimirInformant.class));
         cards.add(new SetCardInfo("Dimir Locket", 234, Rarity.COMMON, mage.cards.d.DimirLocket.class));
         cards.add(new SetCardInfo("Dimir Spybug", 166, Rarity.UNCOMMON, mage.cards.d.DimirSpybug.class));
@@ -130,8 +131,8 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Electromancer", 174, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
         cards.add(new SetCardInfo("Goblin Locksmith", 104, Rarity.COMMON, mage.cards.g.GoblinLocksmith.class));
         cards.add(new SetCardInfo("Golgari Findbroker", 175, Rarity.UNCOMMON, mage.cards.g.GolgariFindbroker.class));
-        cards.add(new SetCardInfo("Golgari Guildgate", 248, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
-        cards.add(new SetCardInfo("Golgari Guildgate", 249, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
+        cards.add(new SetCardInfo("Golgari Guildgate", 248, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Golgari Guildgate", 249, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Golgari Locket", 237, Rarity.COMMON, mage.cards.g.GolgariLocket.class));
         cards.add(new SetCardInfo("Golgari Raiders", 130, Rarity.UNCOMMON, mage.cards.g.GolgariRaiders.class));
         cards.add(new SetCardInfo("Grappling Sundew", 131, Rarity.UNCOMMON, mage.cards.g.GrapplingSundew.class));
@@ -159,8 +160,8 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Ironshell Beetle", 134, Rarity.COMMON, mage.cards.i.IronshellBeetle.class));
         cards.add(new SetCardInfo("Island", 261, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izoni, Thousand-Eyed", 180, Rarity.RARE, mage.cards.i.IzoniThousandEyed.class));
-        cards.add(new SetCardInfo("Izzet Guildgate", 251, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
-        cards.add(new SetCardInfo("Izzet Guildgate", 252, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
+        cards.add(new SetCardInfo("Izzet Guildgate", 251, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Izzet Guildgate", 252, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izzet Locket", 238, Rarity.COMMON, mage.cards.i.IzzetLocket.class));
         cards.add(new SetCardInfo("Join Shields", 181, Rarity.UNCOMMON, mage.cards.j.JoinShields.class));
         cards.add(new SetCardInfo("Justice Strike", 182, Rarity.UNCOMMON, mage.cards.j.JusticeStrike.class));
@@ -240,8 +241,8 @@ public final class GuildsOfRavnica extends ExpansionSet {
         cards.add(new SetCardInfo("Runaway Steam-Kin", 115, Rarity.RARE, mage.cards.r.RunawaySteamKin.class));
         cards.add(new SetCardInfo("Sacred Foundry", 254, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Selective Snare", 53, Rarity.UNCOMMON, mage.cards.s.SelectiveSnare.class));
-        cards.add(new SetCardInfo("Selesnya Guildgate", 255, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
-        cards.add(new SetCardInfo("Selesnya Guildgate", 256, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
+        cards.add(new SetCardInfo("Selesnya Guildgate", 255, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Selesnya Guildgate", 256, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Selesnya Locket", 240, Rarity.COMMON, mage.cards.s.SelesnyaLocket.class));
         cards.add(new SetCardInfo("Severed Strands", 85, Rarity.COMMON, mage.cards.s.SeveredStrands.class));
         cards.add(new SetCardInfo("Siege Wurm", 144, Rarity.COMMON, mage.cards.s.SiegeWurm.class));

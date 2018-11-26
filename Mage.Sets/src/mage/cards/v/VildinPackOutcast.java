@@ -2,6 +2,7 @@
 package mage.cards.v;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,27 +12,25 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.d.DronepackKindred;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
 /**
- *
  * @author fireshoes
  */
 public final class VildinPackOutcast extends CardImpl {
 
     public VildinPackOutcast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add(SubType.WEREWOLF);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCardClazz = DronepackKindred.class;
+        this.secondSideCardClazz = mage.cards.d.DronepackKindred.class;
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

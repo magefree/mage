@@ -55,6 +55,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Benalish Heralds", 6, Rarity.UNCOMMON, mage.cards.b.BenalishHeralds.class));
         cards.add(new SetCardInfo("Benalish Lancer", 7, Rarity.COMMON, mage.cards.b.BenalishLancer.class));
         cards.add(new SetCardInfo("Benalish Trapper", 8, Rarity.COMMON, mage.cards.b.BenalishTrapper.class));
+        cards.add(new SetCardInfo("Bend or Break", 137, Rarity.RARE, mage.cards.b.BendOrBreak.class));
         cards.add(new SetCardInfo("Bind", 182, Rarity.RARE, mage.cards.b.Bind.class));
         cards.add(new SetCardInfo("Blazing Specter", 236, Rarity.RARE, mage.cards.b.BlazingSpecter.class));
         cards.add(new SetCardInfo("Blinding Light", 9, Rarity.UNCOMMON, mage.cards.b.BlindingLight.class));
@@ -88,6 +89,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Darigaaz's Attendant", 301, Rarity.UNCOMMON, mage.cards.d.DarigaazsAttendant.class));
         cards.add(new SetCardInfo("Darigaaz, the Igniter", 243, Rarity.RARE, mage.cards.d.DarigaazTheIgniter.class));
         cards.add(new SetCardInfo("Defiling Tears", 99, Rarity.UNCOMMON, mage.cards.d.DefilingTears.class));
+        cards.add(new SetCardInfo("Death or Glory", 13, Rarity.RARE, mage.cards.d.DeathOrGlory.class));
         cards.add(new SetCardInfo("Desperate Research", 100, Rarity.RARE, mage.cards.d.DesperateResearch.class));
         cards.add(new SetCardInfo("Devouring Strossus", 101, Rarity.RARE, mage.cards.d.DevouringStrossus.class));
         cards.add(new SetCardInfo("Dismantling Blow", 14, Rarity.COMMON, mage.cards.d.DismantlingBlow.class));
@@ -113,6 +115,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Fact or Fiction", 57, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Faerie Squadron", 58, Rarity.COMMON, mage.cards.f.FaerieSquadron.class));
         cards.add(new SetCardInfo("Fertile Ground", 188, Rarity.COMMON, mage.cards.f.FertileGround.class));
+        cards.add(new SetCardInfo("Fight or Flight", 16, Rarity.RARE, mage.cards.f.FightOrFlight.class));
         cards.add(new SetCardInfo("Firebrand Ranger", 143, Rarity.UNCOMMON, mage.cards.f.FirebrandRanger.class));
         cards.add(new SetCardInfo("Firescreamer", 106, Rarity.COMMON, mage.cards.f.Firescreamer.class));
         cards.add(new SetCardInfo("Fires of Yavimaya", 246, Rarity.UNCOMMON, mage.cards.f.FiresOfYavimaya.class));
@@ -217,6 +220,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Prohibit", 67, Rarity.COMMON, mage.cards.p.Prohibit.class));
         cards.add(new SetCardInfo("Protective Sphere", 26, Rarity.COMMON, mage.cards.p.ProtectiveSphere.class));
         cards.add(new SetCardInfo("Psychic Battle", 68, Rarity.RARE, mage.cards.p.PsychicBattle.class));
+        cards.add(new SetCardInfo("Pulse of Llanowar", 202, Rarity.UNCOMMON, mage.cards.p.PulseOfLlanowar.class));
         cards.add(new SetCardInfo("Pure Reflection", 27, Rarity.RARE, mage.cards.p.PureReflection.class));
         cards.add(new SetCardInfo("Pyre Zombie", 261, Rarity.RARE, mage.cards.p.PyreZombie.class));
         cards.add(new SetCardInfo("Quirion Elves", 203, Rarity.COMMON, mage.cards.q.QuirionElves.class));
@@ -250,6 +254,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Sabertooth Nishoba", 268, Rarity.RARE, mage.cards.s.SabertoothNishoba.class));
         cards.add(new SetCardInfo("Salt Marsh", 326, Rarity.UNCOMMON, mage.cards.s.SaltMarsh.class));
         cards.add(new SetCardInfo("Samite Archer", 269, Rarity.UNCOMMON, mage.cards.s.SamiteArcher.class));
+        cards.add(new SetCardInfo("Samite Ministration", 36, Rarity.UNCOMMON, mage.cards.s.SamiteMinistration.class));
         cards.add(new SetCardInfo("Sapphire Leech", 71, Rarity.RARE, mage.cards.s.SapphireLeech.class));
         cards.add(new SetCardInfo("Saproling Infestation", 208, Rarity.RARE, mage.cards.s.SaprolingInfestation.class));
         cards.add(new SetCardInfo("Saproling Symbiosis", 209, Rarity.RARE, mage.cards.s.SaprolingSymbiosis.class));
@@ -286,6 +291,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Spreading Plague", 125, Rarity.RARE, mage.cards.s.SpreadingPlague.class));
         cards.add(new SetCardInfo("Stalking Assassin", 277, Rarity.RARE, mage.cards.s.StalkingAssassin.class));
         cards.add(new SetCardInfo("Stand // Deliver", 292, Rarity.UNCOMMON, mage.cards.s.StandDeliver.class));
+        cards.add(new SetCardInfo("Stand or Fall", 171, Rarity.RARE, mage.cards.s.StandOrFall.class));
         cards.add(new SetCardInfo("Sterling Grove", 278, Rarity.UNCOMMON, mage.cards.s.SterlingGrove.class));
         cards.add(new SetCardInfo("Stormscape Apprentice", 75, Rarity.COMMON, mage.cards.s.StormscapeApprentice.class));
         cards.add(new SetCardInfo("Stormscape Master", 76, Rarity.RARE, mage.cards.s.StormscapeMaster.class));
@@ -346,6 +352,7 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Verduran Emissary", 221, Rarity.UNCOMMON, mage.cards.v.VerduranEmissary.class));
         cards.add(new SetCardInfo("Viashino Grappler", 179, Rarity.COMMON, mage.cards.v.ViashinoGrappler.class));
         cards.add(new SetCardInfo("Vicious Kavu", 284, Rarity.UNCOMMON, mage.cards.v.ViciousKavu.class));
+        cards.add(new SetCardInfo("Vigorous Charge", 222, Rarity.COMMON, mage.cards.v.VigorousCharge.class));
         cards.add(new SetCardInfo("Vile Consumption", 285, Rarity.RARE, mage.cards.v.VileConsumption.class));
         cards.add(new SetCardInfo("Vodalian Hypnotist", 84, Rarity.UNCOMMON, mage.cards.v.VodalianHypnotist.class));
         cards.add(new SetCardInfo("Vodalian Merchant", 85, Rarity.COMMON, mage.cards.v.VodalianMerchant.class));

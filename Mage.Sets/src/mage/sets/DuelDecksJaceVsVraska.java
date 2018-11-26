@@ -19,7 +19,7 @@ public final class DuelDecksJaceVsVraska extends ExpansionSet {
     private DuelDecksJaceVsVraska() {
         super("Duel Decks: Jace vs. Vraska", "DDM", ExpansionSet.buildDate(2014, 3, 14), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Acidic Slime", 64, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Aeon Chronicler", 17, Rarity.RARE, mage.cards.a.AeonChronicler.class));

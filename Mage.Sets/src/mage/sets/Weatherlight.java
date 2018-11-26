@@ -49,6 +49,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Benalish Infantry", 8, Rarity.COMMON, mage.cards.b.BenalishInfantry.class));
         cards.add(new SetCardInfo("Benalish Knight", 9, Rarity.COMMON, mage.cards.b.BenalishKnight.class));
         cards.add(new SetCardInfo("Benalish Missionary", 10, Rarity.COMMON, mage.cards.b.BenalishMissionary.class));
+        cards.add(new SetCardInfo("Betrothed of Fire", 89, Rarity.COMMON, mage.cards.b.BetrothedOfFire.class));
         cards.add(new SetCardInfo("Bloodrock Cyclops", 90, Rarity.COMMON, mage.cards.b.BloodrockCyclops.class));
         cards.add(new SetCardInfo("Blossoming Wreath", 120, Rarity.COMMON, mage.cards.b.BlossomingWreath.class));
         cards.add(new SetCardInfo("Bogardan Firefiend", 91, Rarity.COMMON, mage.cards.b.BogardanFirefiend.class));

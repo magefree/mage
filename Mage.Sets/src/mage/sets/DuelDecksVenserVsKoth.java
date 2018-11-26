@@ -18,7 +18,7 @@ public final class DuelDecksVenserVsKoth extends ExpansionSet {
     private DuelDecksVenserVsKoth() {
         super("Duel Decks: Venser vs. Koth", "DDI", ExpansionSet.buildDate(2012, 3, 30), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Aether Membrane", 48, Rarity.UNCOMMON, mage.cards.a.AetherMembrane.class));
         cards.add(new SetCardInfo("Angelic Shield", 27, Rarity.UNCOMMON, mage.cards.a.AngelicShield.class));

@@ -2,8 +2,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.a.AesthirGlider;
-import mage.cards.e.EliteCatWarrior;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -14,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
 public final class MastersEditionIV extends ExpansionSet {
@@ -37,8 +34,9 @@ public final class MastersEditionIV extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         this.ratioBoosterSpecialLand = 1; // replace all basic lands
+
         cards.add(new SetCardInfo("Acid Rain", 36, Rarity.RARE, mage.cards.a.AcidRain.class));
-        cards.add(new SetCardInfo("Aesthir Glider", 176, Rarity.COMMON, AesthirGlider.class));
+        cards.add(new SetCardInfo("Aesthir Glider", 176, Rarity.COMMON, mage.cards.a.AesthirGlider.class));
         cards.add(new SetCardInfo("Air Elemental", 37, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Al-abara's Carpet", 177, Rarity.RARE, mage.cards.a.AlAbarasCarpet.class));
         cards.add(new SetCardInfo("Alaborn Musketeer", 1, Rarity.COMMON, mage.cards.a.AlabornMusketeer.class));
@@ -113,7 +111,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Ebony Horse", 198, Rarity.COMMON, mage.cards.e.EbonyHorse.class));
         cards.add(new SetCardInfo("Ebony Rhino", 199, Rarity.COMMON, mage.cards.e.EbonyRhino.class));
         cards.add(new SetCardInfo("Elephant Graveyard", 244, Rarity.UNCOMMON, mage.cards.e.ElephantGraveyard.class));
-        cards.add(new SetCardInfo("Elite Cat Warrior", 151, Rarity.COMMON, EliteCatWarrior.class));
+        cards.add(new SetCardInfo("Elite Cat Warrior", 151, Rarity.COMMON, mage.cards.e.EliteCatWarrior.class));
         cards.add(new SetCardInfo("Energy Flux", 48, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
         cards.add(new SetCardInfo("Eye for an Eye", 12, Rarity.RARE, mage.cards.e.EyeForAnEye.class));
         cards.add(new SetCardInfo("False Summoning", 49, Rarity.COMMON, mage.cards.f.FalseSummoning.class));
@@ -317,5 +315,4 @@ public final class MastersEditionIV extends ExpansionSet {
 
         return new ArrayList<>(savedSpecialLand);
     }
-
 }

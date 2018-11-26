@@ -6,6 +6,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.game.Game;
@@ -25,6 +26,10 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
 
     public PreventDamageToTargetMultiAmountEffect(Duration duration, int amount) {
         super(duration, amount, false);
+    }
+
+    public PreventDamageToTargetMultiAmountEffect(Duration duration, int amount, boolean onlyCombat, boolean consumable, DynamicValue dynamicValue) {
+        super(duration, amount, onlyCombat, consumable, dynamicValue);
     }
 
     public PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
@@ -100,12 +105,15 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
-        if (duration == Duration.EndOfTurn) {
-            sb.append("this turn ");
+        if (staticText.isEmpty()) {
+            sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
+            if (duration == Duration.EndOfTurn) {
+                sb.append("this turn ");
+            }
+            sb.append("to any number of targets, divided as you choose");
+            return sb.toString();
         }
-        sb.append("to any number of targets, divided as you choose");
-        return sb.toString();
+        return staticText;
     }
 
 }
