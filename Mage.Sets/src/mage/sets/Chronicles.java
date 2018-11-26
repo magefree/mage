@@ -47,6 +47,7 @@ public final class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Rats", 2, Rarity.COMMON, mage.cards.b.BogRats.class));
         cards.add(new SetCardInfo("Book of Rass", 75, Rarity.RARE, mage.cards.b.BookOfRass.class));
         cards.add(new SetCardInfo("Boomerang", 16, Rarity.COMMON, mage.cards.b.Boomerang.class));
+        cards.add(new SetCardInfo("Bronze Horse", 76, Rarity.RARE, mage.cards.b.BronzeHorse.class));
         cards.add(new SetCardInfo("Cat Warriors", 30, Rarity.COMMON, mage.cards.c.CatWarriors.class));
         cards.add(new SetCardInfo("Chromium", 109, Rarity.RARE, mage.cards.c.Chromium.class));
         cards.add(new SetCardInfo("City of Brass", 92, Rarity.RARE, mage.cards.c.CityOfBrass.class));
