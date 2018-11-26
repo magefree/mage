@@ -31,7 +31,7 @@ import mage.util.CardUtil;
 public final class Duplicity extends CardImpl {
 
     public Duplicity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // When Duplicity enters the battlefield, exile the top five cards of your library face down.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DuplicityEffect(), false));
