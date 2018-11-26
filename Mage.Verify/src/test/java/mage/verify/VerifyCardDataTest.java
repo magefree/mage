@@ -1,7 +1,18 @@
 package mage.verify;
 
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import mage.ObjectColor;
-import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
@@ -17,19 +28,6 @@ import org.junit.Test;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.DownloadPictures;
 import org.reflections.Reflections;
-
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -108,7 +106,7 @@ public class VerifyCardDataTest {
     }
 
     private int failed = 0;
-    private ArrayList<String> outputMessages = new ArrayList<>();
+    private final ArrayList<String> outputMessages = new ArrayList<>();
 
     @Test
     public void verifyCards() throws IOException {
@@ -353,7 +351,6 @@ public class VerifyCardDataTest {
         }
 
         // TODO: add test to check num cards for rarity (rarityStats > 0 and numRarity > 0)
-
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
@@ -367,7 +364,6 @@ public class VerifyCardDataTest {
         Collection<String> warningsList = new ArrayList<>();
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
-
 
         // 1. wrong UsesVariousArt settings (set have duplicated card name without that setting -- e.g. cards will have same image)
         for (ExpansionSet set : sets) {
@@ -572,18 +568,18 @@ public class VerifyCardDataTest {
         if (ref.colors != null) {
             expected.addAll(ref.colors);
         }
-        if(card.isFlipCard()){
+        if (card.isFlipCard()) {
             expected.addAll(ref.colorIdentity);
         }
 
         ObjectColor color = card.getColor(null);
 
         if (expected.size() != color.getColorCount()
-                || (color.isBlack() && !expected.contains("B"))
-                || (color.isBlue() && !expected.contains("U"))
-                || (color.isGreen() && !expected.contains("G"))
-                || (color.isRed() && !expected.contains("R"))
-                || (color.isWhite() && !expected.contains("W"))) {
+                || (color.isBlack() && !expected.contains("Black"))
+                || (color.isBlue() && !expected.contains("Blue"))
+                || (color.isGreen() && !expected.contains("Green"))
+                || (color.isRed() && !expected.contains("Red"))
+                || (color.isWhite() && !expected.contains("White"))) {
             fail(card, "colors", color + " != " + expected);
         }
     }
@@ -598,7 +594,7 @@ public class VerifyCardDataTest {
         // fix names (e.g. Urza’s to Urza's)
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
+            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
                 if (it.next().equals("Urza’s")) {
                     it.set("Urza's");
                 }
