@@ -2488,6 +2488,17 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
+    @Override
+    public void lookAtAllLibraries(Ability source, Game game) {
+        for(UUID playerId : game.getState().getPlayersInRange(this.getId(), game)){
+            Player player = game.getPlayer(playerId);
+            String playerName = this.getName().equals(player.getName()) ? "Your " : player.getName() + "'s ";
+            playerName += "library";
+            Cards cardsInLibrary = new CardsImpl(player.getLibrary().getTopCards(game, player.getLibrary().size()));
+            lookAtCards(playerName, cardsInLibrary, game);
+        }
+    }
+
     private boolean handleLibraryCastableCards(Library library, Game game, UUID targetPlayerId) {
         // for handling Panglacial Wurm
         boolean alreadyChosenUse = false;

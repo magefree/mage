@@ -245,6 +245,10 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         if (controller == null || sourcePermanent == null) {
             return false;
         }
+        if (controller.chooseUse(Outcome.Benefit, "Look at all players' libraries before card select?", null, game)) {
+            game.informPlayers(controller.getLogName() + " is looking at all players' libraries.");
+            controller.lookAtAllLibraries(source, game);
+        }
         List<UUID> playerList = new ArrayList<>();
         playerList.addAll(game.getState().getPlayersInRange(controller.getId(), game));
         Set<UUID> checkList = new HashSet<>();

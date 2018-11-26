@@ -2309,8 +2309,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean flipCoin(Game game
-    ) {
+    public void lookAtAllLibraries(Ability source, Game game) {
+        computerPlayer.lookAtAllLibraries(source, game);
+    }
+
+    @Override
+    public boolean flipCoin(Game game) {
         return computerPlayer.flipCoin(game);
     }
 

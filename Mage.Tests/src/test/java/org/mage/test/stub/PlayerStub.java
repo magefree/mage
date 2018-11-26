@@ -598,6 +598,9 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void lookAtAllLibraries(Ability source, Game game) {}
+
+    @Override
     public boolean canPlayLand() {
         return false;
     }
