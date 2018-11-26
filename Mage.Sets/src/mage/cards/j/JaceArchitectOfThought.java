@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
@@ -125,9 +123,9 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
-            for (Effect effect : getEffects()) {
+            getEffects().forEach((effect) -> {
                 effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-            }
+            });
             return true;
         }
         return false;
@@ -186,7 +184,6 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             if (opponent == null) {
                 opponent = game.getPlayer(opponents.iterator().next());
             }
-
             TargetCard target = new TargetCard(0, allCards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             target.setNotTarget(true);
             opponent.choose(Outcome.Neutral, allCards, target, game);
@@ -212,9 +209,9 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
 
     private void postPileToLog(String pileName, Set<Card> cards, Game game) {
         StringBuilder message = new StringBuilder(pileName).append(": ");
-        for (Card card : cards) {
+        cards.forEach((card) -> {
             message.append(card.getName()).append(' ');
-        }
+        });
         if (cards.isEmpty()) {
             message.append(" (empty)");
         }
@@ -255,9 +252,9 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         while (!playerList.isEmpty()) {
             FilterPlayer filter = new FilterPlayer();
             List<PlayerIdPredicate> playerPredicates = new ArrayList<>();
-            for (UUID playerId : playerList) {
+            playerList.forEach((playerId) -> {
                 playerPredicates.add(new PlayerIdPredicate(playerId));
-            }
+            });
             filter.add(Predicates.or(playerPredicates));
             TargetPlayer targetPlayer = new TargetPlayer(1, 1, true, filter);
             targetPlayer.setRequired(!checkList.containsAll(playerList));
@@ -275,7 +272,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                         UUID targetId = target.getFirstTarget();
                         Card card = player.getLibrary().remove(targetId, game);
                         if (card != null) {
-                            controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                            controller.moveCardsToExile(card, source, game, true, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName());
                             playerList.remove(playerId);
                         }
                     } else {
@@ -287,26 +284,23 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
             } else {
                 break;
             }
-            for (UUID playerId : playerList) {
-                Player player = game.getPlayer(playerId);
-                if (player == null || !player.canRespond()) {
-                    playerList.remove(player);
-                }
-            }
+            playerList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player == null
+                    || !player.canRespond())).forEachOrdered((player) -> {
+                playerList.remove(player.getId());
+            });
         }
-        for (UUID playerId : checkList) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.shuffleLibrary(source, game);
-            }
-        }
+        checkList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player != null)).forEachOrdered((player) -> {
+            player.shuffleLibrary(source, game);
+        });
         ExileZone jaceExileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (jaceExileZone == null) {
             return true;
         }
         FilterCard filter = new FilterCard("card to cast without mana costs");
         TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-        while (jaceExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, jaceExileZone, target, game)) {
+        while (jaceExileZone.count(filter, game) > 0
+                && controller.chooseUse(Outcome.Benefit, "Cast another spell from exile zone for free?", source, game)) {
+            controller.choose(Outcome.PlayForFree, jaceExileZone, target, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
