@@ -2,6 +2,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -11,7 +12,6 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.k.KrallenhordeWantons;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
@@ -22,12 +22,12 @@ import mage.constants.TargetController;
 public final class GrizzledOutcasts extends CardImpl {
 
     public GrizzledOutcasts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
-        this.secondSideCardClazz = KrallenhordeWantons.class;
+        this.secondSideCardClazz = mage.cards.k.KrallenhordeWantons.class;
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

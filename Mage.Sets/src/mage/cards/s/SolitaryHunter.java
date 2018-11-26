@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -11,19 +12,17 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.o.OneOfThePack;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
- *
  * @author LevelX2
  */
 public final class SolitaryHunter extends CardImpl {
 
     public SolitaryHunter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.subtype.add(SubType.WEREWOLF);
@@ -32,7 +31,7 @@ public final class SolitaryHunter extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCardClazz = OneOfThePack.class;
+        this.secondSideCardClazz = mage.cards.o.OneOfThePack.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Solitary Hunter.
         this.addAbility(new TransformAbility());

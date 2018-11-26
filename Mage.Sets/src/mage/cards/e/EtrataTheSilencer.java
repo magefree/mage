@@ -144,14 +144,18 @@ class EtrataTheSilencerEffect extends OneShotEffect {
             card.addCounters(CounterType.HIT.createInstance(), source, game);
         }
         int cardsFound = 0;
-        for (Card exiledCard : game.getExile().getAllCards(game)) {
-            if (exiledCard.getCounters(game).getCount(CounterType.HIT) > 1 && exiledCard.getOwnerId().equals(player.getId())) {
-                cardsFound++;
-            }
-        }
+        cardsFound = game.getExile().getAllCards(game).stream().filter((exiledCard) -> (exiledCard.getCounters(game).getCount(CounterType.HIT) >= 1
+                && exiledCard.getOwnerId().equals(player.getId()))).map((_item) -> 1).reduce(cardsFound, Integer::sum);
         if (cardsFound > 2) {
             player.lost(game);
         }
-        return new ShuffleIntoLibrarySourceEffect().apply(game, source);
+        Permanent etrataTheSilencer = game.getPermanent(source.getSourceId());
+        if (etrataTheSilencer != null) {
+            if (etrataTheSilencer.isPhasedIn()) {
+                return new ShuffleIntoLibrarySourceEffect().apply(game, source);
+            }
+        }
+        controller.shuffleLibrary(source, game);
+        return true;
     }
 }

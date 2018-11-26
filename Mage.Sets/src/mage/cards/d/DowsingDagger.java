@@ -2,6 +2,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,7 +16,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.l.LostVale;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -24,7 +24,6 @@ import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
 /**
- *
  * @author TheElk801
  */
 public final class DowsingDagger extends CardImpl {
@@ -35,7 +34,7 @@ public final class DowsingDagger extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         this.transformable = true;
-        this.secondSideCardClazz = LostVale.class;
+        this.secondSideCardClazz = mage.cards.l.LostVale.class;
 
         // When Dowsing Dagger enters the battlefield, target opponent creates two 0/2 green Plant creature tokens with defender.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new DefenderPlantToken(), 2), false);

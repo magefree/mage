@@ -519,13 +519,18 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
+    public void setSourceObjectZoneChangeCounter(int zoneChangeCounter) {
+        ability.setSourceObjectZoneChangeCounter(zoneChangeCounter);
+    }
+
+    @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject, Game game) {
-        throw new UnsupportedOperationException("Not supported.");
+    public Permanent getSourcePermanentOrLKI(Game game) {
+        return ability.getSourcePermanentOrLKI(game);
     }
 
     @Override

@@ -2,6 +2,7 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -13,7 +14,6 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.i.ItThatRidesAsOne;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
@@ -21,7 +21,6 @@ import mage.game.events.GameEvent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
- *
  * @author fireshoes
  */
 public final class LoneRider extends CardImpl {
@@ -36,7 +35,7 @@ public final class LoneRider extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCardClazz = ItThatRidesAsOne.class;
+        this.secondSideCardClazz = mage.cards.i.ItThatRidesAsOne.class;
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());

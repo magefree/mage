@@ -59,14 +59,16 @@ class IcequakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null && controller != null) {
-            permanent.destroy(source.getSourceId(), game, false);
-            if (permanent.isSnow()) {
-                controller.damage(1, source.getSourceId(), game, false, true);
+        if (permanent != null) {
+            Player controller = game.getPlayer(permanent.getControllerId());
+            if(controller != null) {
+                permanent.destroy(source.getSourceId(), game, false);
+                if (permanent.isSnow()) {
+                    controller.damage(1, source.getSourceId(), game, false, true);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

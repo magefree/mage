@@ -2,6 +2,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -10,7 +11,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.s.ScroungedScythe;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -19,19 +19,18 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author halljared
  */
 public final class HarvestHand extends CardImpl {
 
     public HarvestHand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add(SubType.SCARECROW);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCardClazz = ScroungedScythe.class;
+        this.secondSideCardClazz = mage.cards.s.ScroungedScythe.class;
 
         // When Harvest Hand dies, return it to the battlefield transformed under your control.
         this.addAbility(new TransformAbility());

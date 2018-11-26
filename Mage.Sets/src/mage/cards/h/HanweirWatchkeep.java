@@ -2,6 +2,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,7 +13,6 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.b.BaneOfHanweir;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
@@ -23,13 +23,13 @@ import mage.constants.TargetController;
 public final class HanweirWatchkeep extends CardImpl {
 
     public HanweirWatchkeep(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
-        this.secondSideCardClazz = BaneOfHanweir.class;
+        this.secondSideCardClazz = mage.cards.b.BaneOfHanweir.class;
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);

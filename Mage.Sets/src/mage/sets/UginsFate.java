@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class UginsFate extends ExpansionSet {
@@ -20,6 +19,8 @@ public final class UginsFate extends ExpansionSet {
     private UginsFate() {
         super("Ugin's Fate", "UGIN", ExpansionSet.buildDate(2015, 1, 16), SetType.PROMOTIONAL);
         this.hasBoosters = false;
+        this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Ainok Tracker", 96, Rarity.COMMON, mage.cards.a.AinokTracker.class));
         cards.add(new SetCardInfo("Altar of the Brood", 216, Rarity.RARE, mage.cards.a.AltarOfTheBrood.class));
         cards.add(new SetCardInfo("Arashin War Beast", 123, Rarity.UNCOMMON, mage.cards.a.ArashinWarBeast.class));

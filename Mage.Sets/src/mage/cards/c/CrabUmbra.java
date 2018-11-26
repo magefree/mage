@@ -2,6 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -19,13 +20,12 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author Loki
  */
 public final class CrabUmbra extends CardImpl {
 
     public CrabUmbra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.subtype.add(SubType.AURA);
 
 
@@ -35,8 +35,11 @@ public final class CrabUmbra extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // {2}{U}: Untap enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl("{2}{U}")));
+
+        // Totem armor
         this.addAbility(new TotemArmorAbility());
     }
 

@@ -2,6 +2,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,26 +13,24 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.p.PerfectedForm;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author fireshoes
  */
 public final class AberrantResearcher extends CardImpl {
 
     public AberrantResearcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCardClazz = PerfectedForm.class;
+        this.secondSideCardClazz = mage.cards.p.PerfectedForm.class;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

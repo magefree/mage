@@ -12,8 +12,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.Normalizer;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.zip.ZipInputStream;
 
 public final class MtgJson {
@@ -27,7 +26,8 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("pPRE", "PTC");
         mtgJsonToXMageCodes.put("pMPR", "MPRP");
         mtgJsonToXMageCodes.put("pMEI", "MBP");
-        mtgJsonToXMageCodes.put("pGTW", "GRC"); // pGTW - Gateway = GRC - WPN Gateway ???
+        mtgJsonToXMageCodes.put("pGTW", "GRC"); // pGTW - Gateway = GRC (WPN + Gateway in one inner set)
+        mtgJsonToXMageCodes.put("pWPN", "GRC"); // pWPN - Wizards Play Network = GRC (WPN + Gateway in one inner set)
         mtgJsonToXMageCodes.put("pGRU", "GUR");
         mtgJsonToXMageCodes.put("pGPX", "GPX");
         mtgJsonToXMageCodes.put("pFNM", "FNMP");
@@ -41,21 +41,35 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("DD3_DVD", "DDC");
         mtgJsonToXMageCodes.put("NMS", "NEM");
         mtgJsonToXMageCodes.put("MPS_AKH", "MPS-AKH");
+        mtgJsonToXMageCodes.put("FRF_UGIN", "UGIN");
+        mtgJsonToXMageCodes.put("pCMP", "CP");
 
 
         // revert search
-        for(Map.Entry<String, String> entry: mtgJsonToXMageCodes.entrySet()){
+        for (Map.Entry<String, String> entry : mtgJsonToXMageCodes.entrySet()) {
             xMageToMtgJsonCodes.put(entry.getValue(), entry.getKey());
         }
     }
 
-    private MtgJson() {}
+    private MtgJson() {
+    }
 
     private static final class CardHolder {
         private static final Map<String, JsonCard> cards;
+
         static {
             try {
                 cards = loadAllCards();
+                List<String> oldKeys = new ArrayList<>();
+                Map<String, JsonCard> newKeys = new HashMap<>();
+                for (String key : cards.keySet()) {
+                    if (key.contains("(")) {
+                        newKeys.put(key.replaceAll("\\(.*\\)", "").trim(), cards.get(key));
+                        oldKeys.add(key);
+                    }
+                }
+                cards.putAll(newKeys);
+                cards.keySet().removeAll(oldKeys);
                 addAliases(cards);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -65,6 +79,7 @@ public final class MtgJson {
 
     private static final class SetHolder {
         private static final Map<String, JsonSet> sets;
+
         static {
             try {
                 sets = loadAllSets();
@@ -75,11 +90,13 @@ public final class MtgJson {
     }
 
     private static Map<String, JsonCard> loadAllCards() throws IOException {
-        return readFromZip("AllCards.json.zip", new TypeReference<Map<String, JsonCard>>() {});
+        return readFromZip("AllCards.json.zip", new TypeReference<Map<String, JsonCard>>() {
+        });
     }
 
     private static Map<String, JsonSet> loadAllSets() throws IOException {
-        return readFromZip("AllSets.json.zip", new TypeReference<Map<String, JsonSet>>() {});
+        return readFromZip("AllSets.json.zip", new TypeReference<Map<String, JsonSet>>() {
+        });
     }
 
     private static <T> T readFromZip(String filename, TypeReference<T> ref) throws IOException {
@@ -87,7 +104,7 @@ public final class MtgJson {
         if (stream == null) {
             File file = new File(filename);
             if (!file.exists()) {
-                InputStream download = new URL("http://mtgjson.com/json/" + filename).openStream();
+                InputStream download = new URL("http://mtgjson.com/v4/json/" + filename).openStream();
                 Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Downloaded " + filename + " to " + file.getAbsolutePath());
             } else {
@@ -125,6 +142,7 @@ public final class MtgJson {
             name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
             ref = reference.get(name);
         }
+
         return ref;
     }
 

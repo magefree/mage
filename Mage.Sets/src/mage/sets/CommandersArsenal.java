@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class CommandersArsenal extends ExpansionSet {
@@ -20,6 +19,8 @@ public final class CommandersArsenal extends ExpansionSet {
     private CommandersArsenal() {
         super("Commander's Arsenal", "CM1", ExpansionSet.buildDate(2012, 11, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Chaos Warp", 1, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Command Tower", 2, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Decree of Pain", 3, Rarity.RARE, mage.cards.d.DecreeOfPain.class));

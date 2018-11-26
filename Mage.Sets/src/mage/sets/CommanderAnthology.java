@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class CommanderAnthology extends ExpansionSet {
@@ -18,8 +17,9 @@ public final class CommanderAnthology extends ExpansionSet {
 
     private CommanderAnthology() {
         super("Commander Anthology", "CMA", ExpansionSet.buildDate(2017, 6, 9), SetType.SUPPLEMENTAL);
-        this.blockName = "Commander Anthology";
-        this.hasBasicLands = false;
+        this.blockName = "Command Zone";
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Acidic Slime", 90, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Aerie Mystics", 1, Rarity.UNCOMMON, mage.cards.a.AerieMystics.class));
         cards.add(new SetCardInfo("Aethermage's Touch", 172, Rarity.RARE, mage.cards.a.AethermagesTouch.class));

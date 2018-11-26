@@ -2,6 +2,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,7 +13,6 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.t.TombOfTheDuskRose;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -24,7 +24,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public final class ProfaneProcession extends CardImpl {
@@ -35,7 +34,7 @@ public final class ProfaneProcession extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         this.transformable = true;
-        this.secondSideCardClazz = TombOfTheDuskRose.class;
+        this.secondSideCardClazz = mage.cards.t.TombOfTheDuskRose.class;
 
         // {3}{W}{B}: Exile target creature. Then if there are three or more cards exiled with Profane Procession, transform it.
         this.addAbility(new TransformAbility());

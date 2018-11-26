@@ -7,10 +7,10 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -65,8 +65,11 @@ class WhisperingSnitchTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        WhisperingSnitchWatcher watcher = (WhisperingSnitchWatcher) game.getState().getWatchers().get(WhisperingSnitchWatcher.class.getSimpleName());
-        return watcher != null && watcher.getTimesSurveiled(getControllerId()) == 1;
+        if (event.getPlayerId().equals(getControllerId())) {
+            WhisperingSnitchWatcher watcher = (WhisperingSnitchWatcher) game.getState().getWatchers().get(WhisperingSnitchWatcher.class.getSimpleName());
+            return watcher != null && watcher.getTimesSurveiled(getControllerId()) == 1;
+        }
+        return false;
     }
 
     @Override

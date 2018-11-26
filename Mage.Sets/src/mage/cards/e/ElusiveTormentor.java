@@ -2,6 +2,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,26 +12,24 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.i.InsidiousMist;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
- *
  * @author fireshoes
  */
 public final class ElusiveTormentor extends CardImpl {
 
     public ElusiveTormentor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCardClazz = InsidiousMist.class;
+        this.secondSideCardClazz = mage.cards.i.InsidiousMist.class;
 
         // {1}, Discard a card: Transform Elusive Tormentor.
         this.addAbility(new TransformAbility());

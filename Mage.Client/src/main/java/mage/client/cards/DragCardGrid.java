@@ -1,5 +1,15 @@
 package mage.client.cards;
 
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import javax.swing.*;
 import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
@@ -19,17 +29,6 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRenderer;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Created by StravantUser on 2016-09-20.
@@ -1408,13 +1407,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     while (regexMatcher.find()) {
                         String val = regexMatcher.group(1);
                         int colorless_val = Integer.parseInt(val);
-                        
+
                         int total_c_pip = 0;
-                        if (pips.get("#c}") != null) { 
+                        if (pips.get("#c}") != null) {
                             total_c_pip = pips.get("#c}");
                         }
                         pips.put("#c}", colorless_val + total_c_pip);
-                        
+
                         int cmc_pip_value = 0;
                         if (pips_at_cmcs.get(cmc + "##c}") != null) {
                             cmc_pip_value = pips_at_cmcs.get(cmc + "##c}");
@@ -2032,6 +2031,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     private int getCardWidth() {
+        if (GUISizeHelper.editorCardDimension == null) {
+            return 200;
+        }
         return (int) (GUISizeHelper.editorCardDimension.width * cardSizeMod);
     }
 

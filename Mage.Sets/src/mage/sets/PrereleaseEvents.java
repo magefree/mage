@@ -15,7 +15,8 @@ public final class PrereleaseEvents extends ExpansionSet {
     private PrereleaseEvents() {
         super("Prerelease Events", "PTC", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Abbot of Keral Keep", 198, Rarity.RARE, mage.cards.a.AbbotOfKeralKeep.class));
         cards.add(new SetCardInfo("Abhorrent Overlord", 70, Rarity.SPECIAL, mage.cards.a.AbhorrentOverlord.class));
         cards.add(new SetCardInfo("Abzan Ascendancy", 88, Rarity.SPECIAL, mage.cards.a.AbzanAscendancy.class));

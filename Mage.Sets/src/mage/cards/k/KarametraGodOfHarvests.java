@@ -25,7 +25,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class KarametraGodOfHarvests extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a Forest or Plains card");
+    private static final FilterCard filter = new FilterCard("Forest or Plains card");
 
     static {
         filter.add(Predicates.or(

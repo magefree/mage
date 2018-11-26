@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,7 +12,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.p.PersistentNightmare;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -20,16 +20,15 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 /**
- *
  * @author LevelX2
  */
 public final class StartledAwake extends CardImpl {
 
     public StartledAwake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
         this.transformable = true;
-        this.secondSideCardClazz = PersistentNightmare.class;
+        this.secondSideCardClazz = mage.cards.p.PersistentNightmare.class;
 
         // Target opponent puts the top thirteen cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());

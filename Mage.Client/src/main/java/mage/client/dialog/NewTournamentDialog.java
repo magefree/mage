@@ -24,6 +24,7 @@ import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.table.TournamentPlayerPanel;
+import mage.client.util.IgnoreList;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
@@ -606,6 +607,9 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getMatchOptions().setGameType(((GameTypeView) this.cbGameType.getSelectedItem()).getName());
             tOptions.getMatchOptions().setLimited(false);
         }
+
+        String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+        tOptions.getMatchOptions().setBannedUsers(IgnoreList.ignoreList(serverAddress));
 
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
         tOptions.getMatchOptions().setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());

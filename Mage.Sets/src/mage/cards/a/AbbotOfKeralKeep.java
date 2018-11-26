@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -8,6 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -75,7 +75,7 @@ class AbbotOfKeralKeepExileEffect extends OneShotEffect {
             if (card != null) {
                 String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled>";
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
-                ContinuousEffect effect = new AbbotOfKeralKeepCastFromExileEffect();
+                ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                 game.addEffect(effect, source);
             }

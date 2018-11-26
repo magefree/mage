@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class RivalsOfIxalan extends ExpansionSet {
@@ -22,7 +21,7 @@ public final class RivalsOfIxalan extends ExpansionSet {
         this.blockName = "Ixalan";
         this.parentSet = Ixalan.getInstance();
         this.hasBoosters = true;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

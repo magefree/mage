@@ -9,6 +9,7 @@ public enum CounterType {
 
     AGE("age"),
     AIM("aim"),
+    ARROW("arrow"),
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),
@@ -19,6 +20,7 @@ public enum CounterType {
     CAGE("cage"),
     CARRION("carrion"),
     CHARGE("charge"),
+    CHIP("chip"),
     CORPSE("corpse"),
     CREDIT("credit"),
     CRYSTAL("crystal"),
@@ -44,6 +46,7 @@ public enum CounterType {
     FEATHER("feather"),
     FILIBUSTER("filibuster"),
     FLOOD("flood"),
+    FUNK("funk"),
     FURY("fury"),
     FUNGUS("fungus"),
     FUSE("fuse"),

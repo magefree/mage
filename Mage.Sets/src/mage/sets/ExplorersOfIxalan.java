@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author JayDi85
  */
 public final class ExplorersOfIxalan extends ExpansionSet {
@@ -20,6 +19,7 @@ public final class ExplorersOfIxalan extends ExpansionSet {
     private ExplorersOfIxalan() {
         super("Explorers of Ixalan", "E02", ExpansionSet.buildDate(2017, 11, 24), SetType.SUPPLEMENTAL);
         this.blockName = "Explorers of Ixalan";
+        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Adaptive Automaton", 42, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class));
         cards.add(new SetCardInfo("Aether Gale", 7, Rarity.RARE, mage.cards.a.AetherGale.class));

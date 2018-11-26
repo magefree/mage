@@ -88,6 +88,8 @@ public abstract class ExpansionSet implements Serializable {
     protected Date releaseDate;
     protected ExpansionSet parentSet;
     protected SetType setType;
+
+    // TODO: 03.10.2018, hasBasicLands can be removed someday -- it's uses to optimize lands search in deck generation and lands adding (search all available lands from sets)
     protected boolean hasBasicLands = true;
 
     protected String blockName;
@@ -559,6 +561,7 @@ public abstract class ExpansionSet implements Serializable {
         if (savedCardsInfos == null) {
             CardCriteria criteria = new CardCriteria();
             if (rarity == Rarity.LAND) {
+                // get basic lands from parent set if current haven't it
                 criteria.setCodes(!hasBasicLands && parentSet != null ? parentSet.code : this.code);
             } else {
                 criteria.setCodes(this.code);

@@ -39,7 +39,9 @@ public final class DeckImporterUtil {
     }
 
     public static DeckImporter getDeckImporter(String file) {
-        if (file.toLowerCase(Locale.ENGLISH).endsWith("dec")) {
+        if (file == null) {
+            return null;
+        } if (file.toLowerCase(Locale.ENGLISH).endsWith("dec")) {
             return new DecDeckImporter();
         } else if (file.toLowerCase(Locale.ENGLISH).endsWith("mwdeck")) {
             return new MWSDeckImporter();

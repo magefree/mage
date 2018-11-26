@@ -27,6 +27,7 @@
 package mage.client.deckeditor.table;
 
 import java.util.Comparator;
+
 import mage.cards.MageCard;
 import mage.view.CardView;
 
@@ -94,8 +95,8 @@ public class MageCardComparator implements Comparator<CardView> {
                 break;
             // Rarity
             case 6:
-                aCom = a.getRarity().toString();
-                bCom = b.getRarity().toString();
+                aCom = a.getRarity().getSorting();
+                bCom = b.getRarity().getSorting();
                 break;
             // Set name
             case 7:

@@ -1,6 +1,6 @@
-
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -19,8 +19,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -86,8 +84,8 @@ class MistveilPlainsGraveyardToLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
-        if (card == null || player == null ||
-                game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+        if (card == null || player == null
+                || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
         return player.putCardsOnBottomOfLibrary(card, game, source, false);
