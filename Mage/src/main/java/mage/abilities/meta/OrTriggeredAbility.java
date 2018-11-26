@@ -67,11 +67,9 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (int i = 0; i < triggeredAbilities.length; i++) {
             TriggeredAbility ability = triggeredAbilities[i];
             if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)) {
-                System.out.println("Triggered from " + ability.getRule());
                 triggeringAbilities.add(i);
                 toRet = true;
             }
-            System.out.println("Checked " + ability.getRule());
         }
         return toRet;
     }
