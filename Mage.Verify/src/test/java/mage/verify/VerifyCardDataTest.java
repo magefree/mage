@@ -575,11 +575,11 @@ public class VerifyCardDataTest {
         ObjectColor color = card.getColor(null);
 
         if (expected.size() != color.getColorCount()
-                || (color.isBlack() && !expected.contains("Black"))
-                || (color.isBlue() && !expected.contains("Blue"))
-                || (color.isGreen() && !expected.contains("Green"))
-                || (color.isRed() && !expected.contains("Red"))
-                || (color.isWhite() && !expected.contains("White"))) {
+                || (color.isBlack() && !expected.contains("B"))
+                || (color.isBlue() && !expected.contains("U"))
+                || (color.isGreen() && !expected.contains("G"))
+                || (color.isRed() && !expected.contains("R"))
+                || (color.isWhite() && !expected.contains("W"))) {
             fail(card, "colors", color + " != " + expected);
         }
     }

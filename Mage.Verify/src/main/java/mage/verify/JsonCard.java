@@ -3,6 +3,7 @@ package mage.verify;
 import java.util.List;
 
 class JsonCard {
+
     public String uuid;
     public String convertedManaCost;
     public List<ForeignData> foreignData;
@@ -56,4 +57,5 @@ class JsonCard {
     public boolean timeshifted;
     public String borderColor;
     public boolean isOversized;
+    public String faceConvertedManaCost;
 }
