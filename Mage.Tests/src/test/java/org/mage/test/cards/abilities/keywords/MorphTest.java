@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.cards.Card;
@@ -13,7 +12,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author levelX2
  */
 public class MorphTest extends CardTestPlayerBase {
@@ -21,7 +19,6 @@ public class MorphTest extends CardTestPlayerBase {
     /**
      * Tests if a creature with Morph is cast normal, it behaves as normal
      * creature
-     *
      */
     @Test
     public void testCastMorphCreatureWithoutMorph() {
@@ -94,7 +91,6 @@ public class MorphTest extends CardTestPlayerBase {
     /**
      * Test that the triggered "turned face up" ability of Pine Walker does not
      * trigger as long as Pine Walker is not turned face up.
-     *
      */
     @Test
     public void testDoesNotTriggerFaceDown() {
@@ -132,7 +128,6 @@ public class MorphTest extends CardTestPlayerBase {
     /**
      * Test that Morph creature do not trigger abilities with their face up
      * attributes
-     *
      */
     @Test
     public void testMorphedRemovesAttributesCreature() {
@@ -163,7 +158,6 @@ public class MorphTest extends CardTestPlayerBase {
 
     /**
      * Test to copy a morphed 2/2 creature
-     *
      */
     @Test
     public void testCopyAMorphedCreature() {
@@ -241,7 +235,6 @@ public class MorphTest extends CardTestPlayerBase {
      * morph goes down to 1/1 correctly. If you unmorph the 2/2 and is also a
      * 2/2 after umorphing, the morph will be erroneously reduced to 0/0 and
      * die.
-     *
      */
     @Test
     public void testDoomwakeGiantEffect() {
@@ -283,7 +276,6 @@ public class MorphTest extends CardTestPlayerBase {
     /**
      * Clone a Morph creature that was cast face down and meanwhile was turned
      * face up
-     *
      */
     @Test
     public void testCloneFaceUpMorphEffect() {
@@ -317,7 +309,6 @@ public class MorphTest extends CardTestPlayerBase {
     /**
      * Check that you can't counter a creature cast for it morph costs with
      * Disdainful Stroke if it's normal cmc > 3
-     *
      */
     @Test
     public void testCounterCastWithMorphEffect() {
@@ -355,7 +346,6 @@ public class MorphTest extends CardTestPlayerBase {
      * the same name" does only effect one face down creature, also if multiple
      * on the battlefield. Because they have no name, they don't have the same
      * name.
-     *
      */
     @Test
     public void testEchoingDecaySameNameEffect() {
@@ -631,7 +621,7 @@ public class MorphTest extends CardTestPlayerBase {
      * Reflector Mage bouncing a creature that can be played as a morph should
      * not prevent the card from being replayed as a morph. Morph creatures are
      * nameless.
-     *
+     * <p>
      * Reported bug: Face-up morph creatures that are bounced by Reflector Mage
      * should be able to be replayed as morphs without the "until the next turn"
      * restriction."
@@ -673,11 +663,11 @@ public class MorphTest extends CardTestPlayerBase {
      * Reflector Mage bouncing a creature that can be played as a morph should
      * not prevent the card from being replayed as a morph. Morph creatures are
      * nameless.
-     *
+     * <p>
      * Reported bug: Face-up morph creatures that are bounced by Reflector Mage
      * should be able to be replayed as morphs without the "until the next turn"
      * restriction."
-     *
+     * <p>
      * Testing bouncing a face-down creature played next turn face-up.
      */
     @Test
@@ -701,7 +691,6 @@ public class MorphTest extends CardTestPlayerBase {
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Reflector Mage");
-        addTarget(playerB, "");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Rattleclaw Mystic");
         setChoice(playerA, "No"); // cast it face down as 2/2 creature
