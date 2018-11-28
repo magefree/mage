@@ -42,6 +42,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud Spirit", 26, Rarity.COMMON, mage.cards.c.CloudSpirit.class));
         cards.add(new SetCardInfo("Constant Mists", 104, Rarity.UNCOMMON, mage.cards.c.ConstantMists.class));
         cards.add(new SetCardInfo("Contemplation", 4, Rarity.UNCOMMON, mage.cards.c.Contemplation.class));
+        cards.add(new SetCardInfo("Contempt", 27, Rarity.COMMON, mage.cards.c.Contempt.class));
         cards.add(new SetCardInfo("Conviction", 5, Rarity.COMMON, mage.cards.c.Conviction.class));
         cards.add(new SetCardInfo("Convulsing Licid", 77, Rarity.UNCOMMON, mage.cards.c.ConvulsingLicid.class));
         cards.add(new SetCardInfo("Corrupting Licid", 54, Rarity.UNCOMMON, mage.cards.c.CorruptingLicid.class));
@@ -122,6 +123,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Shock", 98, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Sift", 42, Rarity.COMMON, mage.cards.s.Sift.class));
         cards.add(new SetCardInfo("Silver Wyvern", 43, Rarity.RARE, mage.cards.s.SilverWyvern.class));
+        cards.add(new SetCardInfo("Skeleton Scavengers", 20, Rarity.RARE, mage.cards.s.SkeletonScavengers.class));
         cards.add(new SetCardInfo("Skyshroud Archer", 114, Rarity.COMMON, mage.cards.s.SkyshroudArcher.class));
         cards.add(new SetCardInfo("Skyshroud Falcon", 16, Rarity.COMMON, mage.cards.s.SkyshroudFalcon.class));
         cards.add(new SetCardInfo("Skyshroud Troopers", 115, Rarity.COMMON, mage.cards.s.SkyshroudTroopers.class));
