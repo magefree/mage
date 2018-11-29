@@ -26,6 +26,7 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Before;
+import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestPlayerBase;
@@ -48,6 +49,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // Defines the constant if for activate ability is not target but a ability on the stack to define
     public static final String NO_TARGET = "NO_TARGET";
 
+    // TODO: add target player param to commands
     public static final String CHECK_COMMAND_PT = "PT";
     public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
@@ -57,6 +59,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_COLOR = "COLOR";
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
     public static final String CHECK_COMMAND_MANA_POOL = "MANA_POOL";
+
+    // TODO: add target player param to commands
+    public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
+    public static final String SHOW_COMMAND_HAND = "HAND";
+    public static final String SHOW_COMMAND_BATTLEFIELD = "BATTLEFIELD";
+    public static final String SHOW_COMMAND_GRAVEYEARD = "GRAVEYARD";
+    public static final String SHOW_COMMAND_EXILE = "EXILE";
+    public static final String SHOW_COMMAND_AVAILABLE_ABILITIES = "AVAILABLE_ABILITIES";
 
     protected GameOptions gameOptions;
 
@@ -238,6 +248,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         return player;
     }
 
+    // check commands
+
     private void check(String checkName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
         String res = "check:" + command;
         for (String param : params) {
@@ -280,6 +292,40 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void checkManaPool(String checkName, int turnNum, PhaseStep step, TestPlayer player, String colors, Integer amount) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_MANA_POOL, colors, amount.toString());
+    }
+
+    // show commands
+
+    private void show(String showName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
+        String res = "show:" + command;
+        for (String param : params) {
+            res += "@" + param;
+        }
+        player.addAction(showName, turnNum, step, res);
+    }
+
+    public void showLibrary(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_LIBRARY);
+    }
+
+    public void showHand(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_HAND);
+    }
+
+    public void showBattlefield(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_BATTLEFIELD);
+    }
+
+    public void showGraveyard(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_GRAVEYEARD);
+    }
+
+    public void showExile(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_EXILE);
+    }
+
+    public void showAvaileableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES);
     }
 
     /**
@@ -1080,15 +1126,27 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("(Library " + player.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
-    /**
-     * Asserts added actions count. Useful to make sure that all actions were
-     * executed.
-     *
-     * @param player
-     * @param count
-     */
-    public void assertActionCount(TestPlayer player, int count) {
-        Assert.assertEquals("Actions left are not equal: ", count, player.getActionCount());
+    public void assertActionsCount(TestPlayer player, int count) throws AssertionError {
+        Assert.assertEquals("(Actions " + player.getName() + ") Count are not equel (founded ["
+                + player.getActions().stream().map(PlayerAction::getAction).collect(Collectors.joining(", "))
+                + "])", count, player.getActions().size());
+    }
+
+    public void assertChoicesCount(TestPlayer player, int count) throws AssertionError {
+        Assert.assertEquals("(Choices " + player.getName() + ") Count are not equel (founded " + player.getChoices() + ")", count, player.getChoices().size());
+    }
+
+    public void assertTargetsCount(TestPlayer player, int count) throws AssertionError {
+        Assert.assertEquals("(Targets " + player.getName() + ") Count are not equel (founded " + player.getTargets() + ")", count, player.getTargets().size());
+    }
+
+    public void assertAllCommandsUsed() throws AssertionError {
+        for(Player player : currentGame.getPlayers().values()) {
+            TestPlayer testPlayer = (TestPlayer) player;
+            assertActionsCount(testPlayer, 0);
+            assertChoicesCount(testPlayer, 0);
+            assertTargetsCount(testPlayer, 0);
+        }
     }
 
     public void assertActivePlayer(TestPlayer player) {
@@ -1243,18 +1301,22 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
+        // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         player.addAction(turnNum, step, "activate:" + ability);
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, Player target) {
+        // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         player.addAction(turnNum, step, "activate:" + ability + "$targetPlayer=" + target.getName());
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String... targetNames) {
+        // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         player.addAction(turnNum, step, "activate:" + ability + "$target=" + String.join("^", targetNames));
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
+        // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         this.activateAbility(turnNum, step, player, ability, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
     }
 

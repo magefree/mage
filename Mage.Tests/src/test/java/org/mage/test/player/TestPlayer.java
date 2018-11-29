@@ -54,6 +54,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
@@ -114,6 +115,10 @@ public class TestPlayer implements Player {
 
     public List<String> getChoices() {
         return this.choices;
+    }
+
+    public List<String> getTargets() {
+        return this.targets;
     }
 
     public void addModeChoice(String mode) {
@@ -445,6 +450,8 @@ public class TestPlayer implements Player {
                             groupsForTargetHandling = null;
                         }
                     }
+                    // TODO: fix wrong commands (on non existing card), it's HUGE (350+ failed tests with wrong commands)
+                    //Assert.fail("Can't find ability to activate command: " + command);
                 } else if (action.getAction().startsWith("manaActivate:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("manaActivate:") + 13);
@@ -525,78 +532,143 @@ public class TestPlayer implements Player {
                     }
                 } else if (action.getAction().startsWith("check:")) {
                     String command = action.getAction();
-                    command = command.substring(command.indexOf("check:") + 6);
+                    command = command.substring(command.indexOf("check:") + "check:".length());
 
                     String[] params = command.split("@");
-                    boolean checkProccessed = false;
+                    boolean wasProccessed = false;
                     if (params.length > 0) {
 
                         // check PT: card name, P, T
                         if (params[0].equals(CHECK_COMMAND_PT) && params.length == 4) {
                             assertPT(action, game, computerPlayer, params[1], Integer.parseInt(params[2]), Integer.parseInt(params[3]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
                         }
 
                         // check life: life
                         if (params[0].equals(CHECK_COMMAND_LIFE) && params.length == 2) {
                             assertLife(action, game, computerPlayer, Integer.parseInt(params[1]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
                         }
 
                         // check ability: card name, ability class, must have
                         if (params[0].equals(CHECK_COMMAND_ABILITY) && params.length == 4) {
                             assertAbility(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
                         }
 
                         // check battlefield count: card name, count
                         if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 3) {
                             assertPermanentCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
                         }
 
                         // check exile count: card name, count
                         if (params[0].equals(CHECK_COMMAND_EXILE_COUNT) && params.length == 3) {
                             assertExileCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
                         }
 
                         // check hand count: count
                         if (params[0].equals(CHECK_COMMAND_HAND_COUNT) && params.length == 2) {
                             assertHandCount(action, game, computerPlayer, Integer.parseInt(params[1]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
                         }
 
                         // check color: card name, colors, must have
                         if (params[0].equals(CHECK_COMMAND_COLOR) && params.length == 4) {
                             assertColor(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
                         }
 
                         // check subtype: card name, subtype, must have
                         if (params[0].equals(CHECK_COMMAND_SUBTYPE) && params.length == 4) {
                             assertSubType(action, game, computerPlayer, params[1], SubType.fromString(params[2]), Boolean.parseBoolean(params[3]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
                         }
 
                         // check mana pool: colors, amount
                         if (params[0].equals(CHECK_COMMAND_MANA_POOL) && params.length == 3) {
                             assertManaPool(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
                             actions.remove(action);
-                            checkProccessed = true;
+                            wasProccessed = true;
+                        }
+                    }
+                    if (!wasProccessed) {
+                        Assert.fail("Unknow check command or params: " + command);
+                    }
+                } else if (action.getAction().startsWith("show:")) {
+                    String command = action.getAction();
+                    command = command.substring(command.indexOf("show:") + "show:".length());
+
+                    String[] params = command.split("@");
+                    boolean wasProccessed = false;
+                    if (params.length > 0) {
+
+                        // show library
+                        if (params[0].equals(SHOW_COMMAND_LIBRARY) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printCards(computerPlayer.getLibrary().getCards(game));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show hand
+                        if (params[0].equals(SHOW_COMMAND_HAND) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printCards(computerPlayer.getHand().getCards(game));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show battlefield
+                        if (params[0].equals(SHOW_COMMAND_BATTLEFIELD) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printPermanents(game.getBattlefield().getAllActivePermanents(computerPlayer.getId()));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show graveyard
+                        if (params[0].equals(SHOW_COMMAND_GRAVEYEARD) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printCards(computerPlayer.getGraveyard().getCards(game));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show exile
+                        if (params[0].equals(SHOW_COMMAND_EXILE) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printCards(game.getExile().getAllCards(game));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show available abilities
+                        if (params[0].equals(SHOW_COMMAND_AVAILABLE_ABILITIES) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printAbilities(game, computerPlayer.getPlayable(game, true));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
                         }
                     }
 
-                    if (!checkProccessed) {
-                        Assert.fail("Unknow check command or params: " + command);
+                    if (!wasProccessed) {
+                        Assert.fail("Unknow show command or params: " + command);
                     }
                 }
             }
@@ -627,6 +699,73 @@ public class TestPlayer implements Player {
         }
         Assert.assertNotNull(action.getActionName() + " - can''t find permanent to check PT: " + cardName, founded);
         return null;
+    }
+
+    private void printStart(String name) {
+        System.out.println("\n" + name + ":");
+    }
+
+    private void printEnd() {
+        System.out.println();
+    }
+
+    private void printCards(Set<Card> cards) {
+        printCards(cards.stream().collect(Collectors.toList()));
+    }
+
+    private void printCards(List<Card> cards) {
+        System.out.println("Total cards: " + cards.size());
+
+        List<String> data = cards.stream()
+                .map(Card::getIdName)
+                .sorted()
+                .collect(Collectors.toList());
+
+        for (String s : data) {
+            System.out.println(s);
+        }
+    }
+
+    private void printPermanents(List<Permanent> cards) {
+        System.out.println("Total permanents: " + cards.size());
+
+        List<String> data = cards.stream()
+                .map(c -> (c.getIdName()
+                        + " - " + c.getPower().getValue()
+                        + "/" + c.getToughness().getValue()
+                        + ", " + (c.isTapped() ? "Tapped" : "Untapped")
+                ))
+                .sorted()
+                .collect(Collectors.toList());
+
+        for (String s : data) {
+            System.out.println(s);
+        }
+    }
+
+    private void printAbilities(Game game, List<Ability> abilities) {
+
+
+        System.out.println("Total abilities: " + (abilities != null ? abilities.size() : 0));
+        if (abilities == null) {
+            return;
+        }
+
+        List<String> data = abilities.stream()
+                .map(a -> (
+                        a.getZone() + " -> "
+                        + a.getSourceObject(game).getIdName() + " -> "
+                        + (a.getRule().length() > 0
+                                ? a.getRule().substring(0, Math.min(20, a.getRule().length()) - 1)
+                                : a.getClass().getSimpleName())
+                                + "..."
+                        ))
+                .sorted()
+                .collect(Collectors.toList());
+
+        for (String s : data) {
+            System.out.println(s);
+        }
     }
 
     private void assertPT(PlayerAction action, Game game, Player player, String permanentName, int Power, int Toughness) {
@@ -976,6 +1115,8 @@ public class TestPlayer implements Player {
             if (choice.setChoiceByAnswers(choices, true)) {
                 return true;
             }
+            // TODO: enable fail checks and fix tests
+            //Assert.fail("Wrong choice");
         }
         return computerPlayer.choose(outcome, choice, game);
     }
@@ -991,6 +1132,8 @@ public class TestPlayer implements Player {
                     }
                 }
             }
+            // TODO: enable fail checks and fix tests
+            //Assert.fail("wrong choice");
         }
         return computerPlayer.chooseReplacementEffect(rEffects, game);
     }
@@ -1135,6 +1278,13 @@ public class TestPlayer implements Player {
                     }
                 }
             }
+
+            // TODO: enable fail checks and fix tests
+            /*
+            if (!target.getTargetName().equals("starting player")) {
+                Assert.fail("Wrong choice");
+            }
+            */
         }
 
         return computerPlayer.choose(outcome, target, sourceId, game, options);
@@ -1451,6 +1601,9 @@ public class TestPlayer implements Player {
                     return true;
                 }
             }
+
+            // TODO: enable fail checks and fix tests
+            //Assert.fail("Wrong target");
         }
         return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
@@ -1464,6 +1617,8 @@ public class TestPlayer implements Player {
                     return ability;
                 }
             }
+            // TODO: enable fail checks and fix tests
+            //Assert.fail("Wrong choice");
         }
         return computerPlayer.chooseTriggeredAbility(abilities, game);
     }
@@ -1487,6 +1642,8 @@ public class TestPlayer implements Player {
                 choices.remove(0);
                 return true;
             }
+            // TODO: enable fail checks and fix tests
+            //Assert.fail("Wrong choice");
         }
         return computerPlayer.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
     }
@@ -2643,6 +2800,8 @@ public class TestPlayer implements Player {
                     return true;
                 }
             }
+            // TODO: enable fail checks and fix tests
+            //Assert.fail("Wrong choice");
         }
         return computerPlayer.choose(outcome, cards, target, game);
     }
