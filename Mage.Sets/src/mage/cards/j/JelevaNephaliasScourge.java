@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.HashMap;
@@ -130,7 +129,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
                     if (controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            return controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            controller.playCard(card, game, true, false, new MageObjectReference(source.getSourceId(), game));
                         }
                     }
                 }
