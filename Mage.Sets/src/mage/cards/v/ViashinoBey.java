@@ -79,7 +79,9 @@ class ViashinoBeyEffect extends OneShotEffect {
                 } else {
                     targetDefender.add(game.getOpponents(controller.getId()).iterator().next(), game);
                 }
-                controller.declareAttacker(permanent.getId(), targetDefender.getFirstTarget(), game, false);
+                if (permanent.canAttack(targetDefender.getFirstTarget(), game)) {
+                    controller.declareAttacker(permanent.getId(), targetDefender.getFirstTarget(), game, false);
+                }
             });
         }
         return false;

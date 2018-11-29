@@ -2372,7 +2372,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         }
         Permanent attacker = game.getPermanent(attackerId);
-        if (attacker != null && attacker.canAttack(defenderId, game) && attacker.isControlledBy(playerId)) {
+        if (attacker != null
+                && attacker.canAttack(defenderId, game)
+                && attacker.isControlledBy(playerId)) {
             if (!game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
                 game.undo(playerId);
             }
@@ -2484,6 +2486,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void lookAtAllLibraries(Ability source, Game game) {
+        for(UUID playerId : game.getState().getPlayersInRange(this.getId(), game)){
+            Player player = game.getPlayer(playerId);
+            String playerName = this.getName().equals(player.getName()) ? "Your " : player.getName() + "'s ";
+            playerName += "library";
+            Cards cardsInLibrary = new CardsImpl(player.getLibrary().getTopCards(game, player.getLibrary().size()));
+            lookAtCards(playerName, cardsInLibrary, game);
+        }
     }
 
     private boolean handleLibraryCastableCards(Library library, Game game, UUID targetPlayerId) {

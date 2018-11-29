@@ -1,4 +1,3 @@
-
 package mage.client.deck.generator;
 
 import java.util.ArrayList;
@@ -7,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
@@ -123,9 +123,9 @@ public final class DeckGenerator {
      * non-creatures, lands (including non-basic). Fixes the deck, adjusting for
      * size and color of the cards retrieved.
      *
-     * @param deckSize how big the deck is to generate.
+     * @param deckSize      how big the deck is to generate.
      * @param allowedColors which colors are allowed in the deck.
-     * @param setsToUse which sets to use to retrieve cards for this deck.
+     * @param setsToUse     which sets to use to retrieve cards for this deck.
      * @return the final deck to use.
      */
     private static Deck generateDeck(int deckSize, List<ColoredManaSymbol> allowedColors, List<String> setsToUse) {
@@ -180,9 +180,9 @@ public final class DeckGenerator {
      * non-creatures are retrieved separately to ensure the deck contains a
      * reasonable mix of both.
      *
-     * @param criteria the criteria to search for in the database.
+     * @param criteria   the criteria to search for in the database.
      * @param spellCount the number of spells that match the criteria needed in
-     * the deck.
+     *                   the deck.
      */
     private static void generateSpells(CardCriteria criteria, int spellCount) {
         List<CardInfo> cardPool = CardRepository.instance.findCards(criteria);
@@ -233,7 +233,7 @@ public final class DeckGenerator {
      * in this deck. Usually the lands will be well balanced relative to the
      * color of cards.
      *
-     * @param criteria the criteria of the lands to search for in the database.
+     * @param criteria   the criteria of the lands to search for in the database.
      * @param landsCount the amount of lands required for this deck.
      * @param basicLands information about the basic lands from the sets used.
      */
@@ -310,10 +310,10 @@ public final class DeckGenerator {
      * filled.
      *
      * @param landsNeeded how many remaining lands are needed.
-     * @param percentage the percentage needed for each color in the final deck.
-     * @param count how many of each color can be produced by non-basic lands.
-     * @param basicLands list of information about basic lands from the
-     * database.
+     * @param percentage  the percentage needed for each color in the final deck.
+     * @param count       how many of each color can be produced by non-basic lands.
+     * @param basicLands  list of information about basic lands from the
+     *                    database.
      */
     private static void addBasicLands(int landsNeeded, Map<String, Double> percentage, Map<String, Integer> count, Map<String, List<CardInfo>> basicLands) {
 
@@ -360,15 +360,14 @@ public final class DeckGenerator {
     /**
      * Return a random basic land of the chosen color.
      *
-     * @param color the color the basic land should produce.
+     * @param color      the color the basic land should produce.
      * @param basicLands list of information about basic lands from the
-     * database.
+     *                   database.
      * @return a single basic land that produces the color needed.
      */
     private static Card getBasicLand(ColoredManaSymbol color, Map<String, List<CardInfo>> basicLands) {
         String landName = DeckGeneratorPool.getBasicLandName(color.toString());
         List<CardInfo> basicLandsInfo = basicLands.get(landName);
-        return basicLandsInfo.get(RandomUtil.nextInt(basicLandsInfo.size() - 1)).getMockCard().copy();
+        return basicLandsInfo.get(RandomUtil.nextInt(basicLandsInfo.size())).getMockCard().copy();
     }
-
 }

@@ -270,8 +270,8 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnFind3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/us.png"))); // NOI18N
-        btnFind3.setText("W");
-        btnFind3.setToolTipText("Connect to vaporservermtg.com (USA)");
+        btnFind3.setText("P");
+        btnFind3.setToolTipText("Connect to mtg.powersofwar.com (USA)");
         btnFind3.setActionCommand("connectXmageus");
         btnFind3.setAlignmentY(0.0F);
         btnFind3.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -688,7 +688,7 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_btnFind2findPublicServerActionPerformed
 
     private void connectXmageus(java.awt.event.ActionEvent evt) {
-        String serverAddress = "vapormtgserver.com";
+        String serverAddress = "mtg.powersofwar.com";
         this.txtServer.setText(serverAddress);
         this.txtPort.setText("17171");
         // Update userName and password according to the chosen server.
