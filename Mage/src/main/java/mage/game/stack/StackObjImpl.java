@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.game.stack;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -21,8 +14,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public abstract class StackObjImpl implements StackObject {
@@ -44,47 +39,47 @@ public abstract class StackObjImpl implements StackObject {
      * 114.6. Some effects allow a player to change the target(s) of a spell or
      * ability, and other effects allow a player to choose new targets for a
      * spell or ability.
-     *
+     * <p>
      * 114.6a If an effect allows a player to "change the target(s)" of a spell
      * or ability, each target can be changed only to another legal target. If a
      * target can't be changed to another legal target, the original target is
      * unchanged, even if the original target is itself illegal by then. If all
      * the targets aren't changed to other legal targets, none of them are
      * changed.
-     *
+     * <p>
      * 114.6b If an effect allows a player to "change a target" of a spell or
      * ability, the process described in rule 114.6a is followed, except that
      * only one of those targets may be changed (rather than all of them or none
      * of them).
-     *
+     * <p>
      * 114.6c If an effect allows a player to "change any targets" of a spell or
      * ability, the process described in rule 114.6a is followed, except that
      * any number of those targets may be changed (rather than all of them or
      * none of them).
-     *
+     * <p>
      * 114.6d If an effect allows a player to "choose new targets" for a spell
      * or ability, the player may leave any number of the targets unchanged,
      * even if those targets would be illegal. If the player chooses to change
      * some or all of the targets, the new targets must be legal and must not
      * cause any unchanged targets to become illegal.
-     *
+     * <p>
      * 114.6e When changing targets or choosing new targets for a spell or
      * ability, only the final set of targets is evaluated to determine whether
      * the change is legal.
-     *
+     * <p>
      * Example: Arc Trail is a sorcery that reads "Arc Trail deals 2 damage to
      * any target and 1 damage to another target creature or player." The
      * current targets of Arc Trail are Runeclaw Bear and Llanowar Elves, in
      * that order. You cast Redirect, an instant that reads "You may choose new
      * targets for target spell," targeting Arc Trail. You can change the first
      * target to Llanowar Elves and change the second target to Runeclaw Bear.
-     *
+     * <p>
      * 114.7. Modal spells and abilities may have different targeting
      * requirements for each mode. An effect that allows a player to change the
      * target(s) of a modal spell or ability, or to choose new targets for a
      * modal spell or ability, doesn't allow that player to change its mode.
      * (See rule 700.2.)
-     *
+     * <p>
      * 706.10c Some effects copy a spell or ability and state that its
      * controller may choose new targets for the copy. The player may leave any
      * number of the targets unchanged, even if those targets would be illegal.
@@ -94,13 +89,13 @@ public abstract class StackObjImpl implements StackObject {
      *
      * @param game
      * @param targetControllerId - player that can/has to change the target of
-     * the spell
-     * @param forceChange - does only work for targets with maximum of one
-     * targetId
-     * @param onlyOneTarget - 114.6b one target must be changed to another
-     * target
-     * @param filterNewTarget restriction for the new target, if null nothing is
-     * cheched
+     *                           the spell
+     * @param forceChange        - does only work for targets with maximum of one
+     *                           targetId
+     * @param onlyOneTarget      - 114.6b one target must be changed to another
+     *                           target
+     * @param filterNewTarget    restriction for the new target, if null nothing is
+     *                           cheched
      * @return
      */
     @Override
@@ -163,10 +158,15 @@ public abstract class StackObjImpl implements StackObject {
         newTarget.clearChosen();
         for (UUID targetId : target.getTargets()) {
             String targetNames = getNamesOftargets(targetId, game);
+            String targetAmount = "";
+            if (target.getTargetAmount(targetId) > 0) {
+                targetAmount = " (amount: " + target.getTargetAmount(targetId) + ")";
+            }
             // change the target?
             Outcome outcome = mode.getEffects().isEmpty() ? Outcome.Detriment : mode.getEffects().get(0).getOutcome();
+
             if (targetNames != null
-                    && (forceChange || targetController.chooseUse(outcome, "Change this target: " + targetNames + '?', ability, game))) {
+                    && (forceChange || targetController.chooseUse(outcome, "Change this target: " + targetNames + targetAmount + '?', ability, game))) {
                 Set<UUID> possibleTargets = target.possibleTargets(this.getSourceId(), getControllerId(), game);
                 // choose exactly one other target - already targeted objects are not counted
                 if (forceChange && possibleTargets != null && possibleTargets.size() > 1) { // controller of spell must be used (e.g. TargetOpponent)
@@ -179,7 +179,8 @@ public abstract class StackObjImpl implements StackObject {
                         newTarget.clearChosen();
 
                         newTarget.chooseTarget(outcome, getControllerId(), ability, game);
-                        // check target restriction
+
+                        // check target restriction TODO: add multiple target checks
                         if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
                             Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
                             if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
@@ -187,7 +188,8 @@ public abstract class StackObjImpl implements StackObject {
                                 newTarget.clearChosen();
                             }
                         }
-                    } while (targetController.canRespond() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
+                    }
+                    while (targetController.canRespond() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                     // choose a new target
                 } else {
                     // build a target definition with exactly one possible target to select that replaces old target
