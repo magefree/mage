@@ -1,5 +1,9 @@
 package org.mage.test.player;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -43,19 +47,12 @@ import mage.player.ai.ComputerPlayer;
 import mage.players.Library;
 import mage.players.ManaPool;
 import mage.players.Player;
-import mage.players.PlayerList;
 import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
@@ -132,7 +129,7 @@ public class TestPlayer implements Player {
 
     /**
      * @param maxCallsWithoutAction max number of priority passes a player may
-     *                              have for this test (default = 100)
+     * have for this test (default = 100)
      */
     public void setMaxCallsWithoutAction(int maxCallsWithoutAction) {
         this.maxCallsWithoutAction = maxCallsWithoutAction;
@@ -807,7 +804,7 @@ public class TestPlayer implements Player {
         // Loop through players and validate can attack/block this turn
         UUID defenderId = null;
         //List<PlayerAction>
-        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
+        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext();) {
             PlayerAction action = it.next();
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
                 String command = action.getAction();
@@ -1137,6 +1134,62 @@ public class TestPlayer implements Player {
             if (target.getTargetController() != null && target.getAbilityController() != null) {
                 abilityControllerId = target.getAbilityController();
             }
+            if (target instanceof TargetCardInGraveyardOrBattlefield) {
+                boolean removeTargetDefinition = false;
+                Filter filter = target.getFilter();
+                for (String targetDefinition : targets) {
+                    String[] targetList = targetDefinition.split("\\^");
+                    boolean targetFound = false;
+                    for (String targetName : targetList) {
+                        boolean originOnly = false;
+                        boolean copyOnly = false;
+                        if (targetName.endsWith("]")) {
+                            if (targetName.endsWith("[no copy]")) {
+                                originOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 9);
+                            }
+                            if (targetName.endsWith("[only copy]")) {
+                                copyOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 11);
+                            }
+                        }
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+                            if (permanent.getName().equals(targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) {
+                                if (filter.match(permanent, game) && target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
+                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
+                                        target.add(permanent.getId(), game);
+                                        targetFound = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if (!targetFound) {
+                            for (UUID playerId : game.getState().getPlayersInRange(this.getId(), game)) {
+                                Player player = game.getPlayer(playerId);
+                                for (Card card : player.getGraveyard().getCards(((TargetCardInGraveyardOrBattlefield) target).getFilter(), game)) {
+                                    if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
+                                        if (((TargetCardInYourGraveyard) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                            target.add(card.getId(), game);
+                                            targetFound = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (targetFound) {
+                            targetFound = false;
+                            removeTargetDefinition = true;
+                        }
+
+                    }
+                    if (removeTargetDefinition) {
+                        targets.remove(targetDefinition);
+                        return true;
+                    }
+                }
+            }
             if (target instanceof TargetPlayer
                     || target instanceof TargetAnyTarget
                     || target instanceof TargetCreatureOrPlayer
@@ -1304,7 +1357,10 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+    public boolean chooseTarget(Outcome outcome, Cards cards,
+            TargetCard target, Ability source,
+            Game game
+    ) {
         if (!targets.isEmpty()) {
             for (String targetDefinition : targets) {
                 String[] targetList = targetDefinition.split("\\^");
@@ -1328,7 +1384,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game
+    ) {
         if (!choices.isEmpty()) {
             for (TriggeredAbility ability : abilities) {
                 if (ability.toString().startsWith(choices.get(0))) {
@@ -1341,12 +1398,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+    public boolean chooseUse(Outcome outcome, String message,
+            Ability source, Game game
+    ) {
         return this.chooseUse(outcome, message, null, null, null, source, game);
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+    public boolean chooseUse(Outcome outcome, String message,
+            String secondMessage, String trueText,
+            String falseText, Ability source,
+            Game game
+    ) {
         if (message.equals("Scry 1?")) {
             return false;
         }
@@ -1364,7 +1427,9 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message,
+            Game game, Ability ability
+    ) {
         if (!choices.isEmpty()) {
             for (String choice : choices) {
                 if (choice.startsWith("X=")) {
@@ -1378,7 +1443,10 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
+    public int announceXCost(int min, int max, String message,
+            Game game, Ability ability,
+            VariableCost variablCost
+    ) {
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
@@ -1390,7 +1458,9 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int getAmount(int min, int max, String message, Game game) {
+    public int getAmount(int min, int max, String message,
+            Game game
+    ) {
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
@@ -1402,12 +1472,14 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void addAbility(Ability ability) {
+    public void addAbility(Ability ability
+    ) {
         computerPlayer.addAbility(ability);
     }
 
     @Override
-    public boolean activateAbility(ActivatedAbility ability, Game game) {
+    public boolean activateAbility(ActivatedAbility ability, Game game
+    ) {
         return computerPlayer.activateAbility(ability, game);
     }
 
@@ -1427,12 +1499,14 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void won(Game game) {
+    public void won(Game game
+    ) {
         computerPlayer.won(game);
     }
 
     @Override
-    public void restore(Player player) {
+    public void restore(Player player
+    ) {
         this.modesSet.clear();
         this.modesSet.addAll(((TestPlayer) player).modesSet);
         this.actions.clear();
@@ -1445,18 +1519,21 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void useDeck(Deck deck, Game game) {
+    public void useDeck(Deck deck, Game game
+    ) {
         computerPlayer.useDeck(deck, game);
     }
 
     @Override
-    public void init(Game game) {
+    public void init(Game game
+    ) {
         initialTurns = 0;
         computerPlayer.init(game);
     }
 
     @Override
-    public void init(Game game, boolean testMode) {
+    public void init(Game game, boolean testMode
+    ) {
         initialTurns = 0;
         computerPlayer.init(game, testMode);
     }
@@ -1472,12 +1549,14 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void otherPlayerLeftGame(Game game) {
+    public void otherPlayerLeftGame(Game game
+    ) {
         computerPlayer.otherPlayerLeftGame(game);
     }
 
     @Override
-    public void beginTurn(Game game) {
+    public void beginTurn(Game game
+    ) {
         checkLegalMovesThisTurn(game);
         computerPlayer.beginTurn(game);
     }
@@ -1498,12 +1577,14 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
+    public void controlPlayersTurn(Game game, UUID playerId
+    ) {
         computerPlayer.controlPlayersTurn(game, playerId);
     }
 
     @Override
-    public void setTurnControlledBy(UUID playerId) {
+    public void setTurnControlledBy(UUID playerId
+    ) {
         computerPlayer.setTurnControlledBy(playerId);
     }
 
@@ -1523,77 +1604,98 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setGameUnderYourControl(boolean value) {
+    public void setGameUnderYourControl(boolean value
+    ) {
         computerPlayer.setGameUnderYourControl(value);
     }
 
     @Override
-    public void setGameUnderYourControl(boolean value, boolean fullRestore) {
+    public void setGameUnderYourControl(boolean value, boolean fullRestore
+    ) {
         computerPlayer.setGameUnderYourControl(value, fullRestore);
     }
 
     @Override
-    public void endOfTurn(Game game) {
+    public void endOfTurn(Game game
+    ) {
         computerPlayer.endOfTurn(game);
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
+    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId,
+            Game game
+    ) {
         return computerPlayer.canBeTargetedBy(source, sourceControllerId, game);
     }
 
     @Override
-    public boolean hasProtectionFrom(MageObject source, Game game) {
+    public boolean hasProtectionFrom(MageObject source, Game game
+    ) {
         return computerPlayer.hasProtectionFrom(source, game);
     }
 
     @Override
-    public int drawCards(int num, Game game) {
+    public int drawCards(int num, Game game
+    ) {
         return computerPlayer.drawCards(num, game);
     }
 
     @Override
-    public int drawCards(int num, Game game, List<UUID> appliedEffects) {
+    public int drawCards(int num, Game game,
+            List<UUID> appliedEffects
+    ) {
         return computerPlayer.drawCards(num, game, appliedEffects);
     }
 
     @Override
-    public void discardToMax(Game game) {
+    public void discardToMax(Game game
+    ) {
         computerPlayer.discardToMax(game);
     }
 
     @Override
-    public boolean putInHand(Card card, Game game) {
+    public boolean putInHand(Card card, Game game
+    ) {
         return computerPlayer.putInHand(card, game);
     }
 
     @Override
-    public boolean removeFromHand(Card card, Game game) {
+    public boolean removeFromHand(Card card, Game game
+    ) {
         return computerPlayer.removeFromHand(card, game);
     }
 
     @Override
-    public boolean removeFromLibrary(Card card, Game game) {
+    public boolean removeFromLibrary(Card card, Game game
+    ) {
         return computerPlayer.removeFromLibrary(card, game);
     }
 
     @Override
-    public void discard(int amount, Ability source, Game game) {
+    public void discard(int amount, Ability source,
+            Game game
+    ) {
         computerPlayer.discard(amount, source, game);
     }
 
     @Override
-    public Card discardOne(boolean random, Ability source, Game game) {
+    public Card discardOne(boolean random, Ability source,
+            Game game
+    ) {
         return computerPlayer.discardOne(random, source, game);
     }
 
     @Override
-    public Cards discard(int amount, boolean random, Ability source, Game game) {
+    public Cards discard(int amount, boolean random, Ability source,
+            Game game
+    ) {
         return computerPlayer.discard(amount, random, source, game);
     }
 
     @Override
-    public boolean discard(Card card, Ability source, Game game) {
+    public boolean discard(Card card, Ability source,
+            Game game
+    ) {
         return computerPlayer.discard(card, source, game);
     }
 
@@ -1603,52 +1705,67 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean addAttachment(UUID permanentId, Game game) {
+    public boolean addAttachment(UUID permanentId, Game game
+    ) {
         return computerPlayer.addAttachment(permanentId, game);
     }
 
     @Override
-    public boolean removeAttachment(Permanent attachment, Game game) {
+    public boolean removeAttachment(Permanent attachment, Game game
+    ) {
         return computerPlayer.removeAttachment(attachment, game);
     }
 
     @Override
-    public boolean removeFromBattlefield(Permanent permanent, Game game) {
+    public boolean removeFromBattlefield(Permanent permanent, Game game
+    ) {
         return computerPlayer.removeFromBattlefield(permanent, game);
     }
 
     @Override
-    public boolean putInGraveyard(Card card, Game game) {
+    public boolean putInGraveyard(Card card, Game game
+    ) {
         return computerPlayer.putInGraveyard(card, game);
     }
 
     @Override
-    public boolean removeFromGraveyard(Card card, Game game) {
+    public boolean removeFromGraveyard(Card card, Game game
+    ) {
         return computerPlayer.removeFromGraveyard(card, game);
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
+    public boolean putCardsOnBottomOfLibrary(Card card, Game game,
+            Ability source, boolean anyOrder
+    ) {
         return computerPlayer.putCardsOnBottomOfLibrary(card, game, source, anyOrder);
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
+    public boolean putCardsOnBottomOfLibrary(Cards cards, Game game,
+            Ability source, boolean anyOrder
+    ) {
         return computerPlayer.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
     }
 
     @Override
-    public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop) {
+    public boolean putCardOnTopXOfLibrary(Card card, Game game,
+            Ability source, int xFromTheTop
+    ) {
         return computerPlayer.putCardOnTopXOfLibrary(card, game, source, xFromTheTop);
     }
 
     @Override
-    public boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
+    public boolean putCardsOnTopOfLibrary(Cards cards, Game game,
+            Ability source, boolean anyOrder
+    ) {
         return computerPlayer.putCardsOnTopOfLibrary(cards, game, source, anyOrder);
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs) {
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts,
+            Costs costs
+    ) {
         computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs);
     }
 
@@ -1673,27 +1790,36 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference) {
+    public boolean cast(SpellAbility ability, Game game,
+            boolean noMana, MageObjectReference reference
+    ) {
         return computerPlayer.cast(ability, game, noMana, reference);
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference) {
+    public boolean playCard(Card card, Game game,
+            boolean noMana, boolean ignoreTiming, MageObjectReference reference
+    ) {
         return computerPlayer.playCard(card, game, noMana, ignoreTiming, reference);
     }
 
     @Override
-    public boolean playLand(Card card, Game game, boolean ignoreTiming) {
+    public boolean playLand(Card card, Game game,
+            boolean ignoreTiming
+    ) {
         return computerPlayer.playLand(card, game, ignoreTiming);
     }
 
     @Override
-    public boolean triggerAbility(TriggeredAbility source, Game game) {
+    public boolean triggerAbility(TriggeredAbility source, Game game
+    ) {
         return computerPlayer.triggerAbility(source, game);
     }
 
     @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
+    public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone,
+            Game game
+    ) {
         return computerPlayer.getUseableActivatedAbilities(object, zone, game);
     }
 
@@ -1708,57 +1834,77 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void shuffleLibrary(Ability source, Game game) {
+    public void shuffleLibrary(Ability source, Game game
+    ) {
         computerPlayer.shuffleLibrary(source, game);
     }
 
     @Override
-    public void revealCards(Ability source, Cards cards, Game game) {
+    public void revealCards(Ability source, Cards cards,
+            Game game
+    ) {
         computerPlayer.revealCards(source, cards, game);
     }
 
     @Override
-    public void revealCards(String name, Cards cards, Game game) {
+    public void revealCards(String name, Cards cards,
+            Game game
+    ) {
         computerPlayer.revealCards(name, cards, game);
     }
 
     @Override
-    public void revealCards(Ability source, String name, Cards cards, Game game) {
+    public void revealCards(Ability source, String name,
+            Cards cards, Game game
+    ) {
         computerPlayer.revealCards(name, cards, game);
     }
 
     @Override
-    public void revealCards(String name, Cards cards, Game game, boolean postToLog) {
+    public void revealCards(String name, Cards cards,
+            Game game, boolean postToLog
+    ) {
         computerPlayer.revealCards(name, cards, game, postToLog);
     }
 
     @Override
-    public void revealCards(Ability source, String name, Cards cards, Game game, boolean postToLog) {
+    public void revealCards(Ability source, String name,
+            Cards cards, Game game,
+            boolean postToLog
+    ) {
         computerPlayer.revealCards(name, cards, game, postToLog);
     }
 
     @Override
-    public void lookAtCards(String name, Cards cards, Game game) {
+    public void lookAtCards(String name, Cards cards,
+            Game game
+    ) {
         computerPlayer.lookAtCards(name, cards, game);
     }
 
     @Override
-    public void lookAtCards(Ability source, String name, Cards cards, Game game) {
+    public void lookAtCards(Ability source, String name,
+            Cards cards, Game game
+    ) {
         computerPlayer.lookAtCards(source, name, cards, game);
     }
 
     @Override
-    public void lookAtCards(String name, Card card, Game game) {
+    public void lookAtCards(String name, Card card,
+            Game game
+    ) {
         computerPlayer.lookAtCards(name, card, game);
     }
 
     @Override
-    public void phasing(Game game) {
+    public void phasing(Game game
+    ) {
         computerPlayer.phasing(game);
     }
 
     @Override
-    public void untap(Game game) {
+    public void untap(Game game
+    ) {
         computerPlayer.untap(game);
     }
 
@@ -1813,22 +1959,28 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void initLife(int life) {
+    public void initLife(int life
+    ) {
         computerPlayer.initLife(life);
     }
 
     @Override
-    public void setLife(int life, Game game, UUID sourceId) {
+    public void setLife(int life, Game game,
+            UUID sourceId
+    ) {
         computerPlayer.setLife(life, game, sourceId);
     }
 
     @Override
-    public void setLife(int life, Game game, Ability source) {
+    public void setLife(int life, Game game,
+            Ability source
+    ) {
         computerPlayer.setLife(life, game, source);
     }
 
     @Override
-    public void setLifeTotalCanChange(boolean lifeTotalCanChange) {
+    public void setLifeTotalCanChange(boolean lifeTotalCanChange
+    ) {
         computerPlayer.setLifeTotalCanChange(lifeTotalCanChange);
     }
 
@@ -1848,12 +2000,15 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setCanLoseLife(boolean canLoseLife) {
+    public void setCanLoseLife(boolean canLoseLife
+    ) {
         computerPlayer.setCanLoseLife(canLoseLife);
     }
 
     @Override
-    public int loseLife(int amount, Game game, boolean atCombat) {
+    public int loseLife(int amount, Game game,
+            boolean atCombat
+    ) {
         return computerPlayer.loseLife(amount, game, atCombat);
     }
 
@@ -1863,37 +2018,49 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setCanGainLife(boolean canGainLife) {
+    public void setCanGainLife(boolean canGainLife
+    ) {
         computerPlayer.setCanGainLife(canGainLife);
     }
 
     @Override
-    public int gainLife(int amount, Game game, Ability source) {
+    public int gainLife(int amount, Game game,
+            Ability source
+    ) {
         return computerPlayer.gainLife(amount, game, source);
     }
 
     @Override
-    public int gainLife(int amount, Game game, UUID sourceId) {
+    public int gainLife(int amount, Game game,
+            UUID sourceId
+    ) {
         return computerPlayer.gainLife(amount, game, sourceId);
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
+    public int damage(int damage, UUID sourceId,
+            Game game, boolean combatDamage, boolean preventable
+    ) {
         return computerPlayer.damage(damage, sourceId, game, combatDamage, preventable);
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+    public int damage(int damage, UUID sourceId,
+            Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects
+    ) {
         return computerPlayer.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Game game) {
+    public boolean addCounters(Counter counter, Game game
+    ) {
         return computerPlayer.addCounters(counter, game);
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
+    public void removeCounters(String name, int amount, Ability source,
+            Game game
+    ) {
         computerPlayer.removeCounters(name, amount, source, game);
     }
 
@@ -1908,7 +2075,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setLandsPerTurn(int landsPerTurn) {
+    public void setLandsPerTurn(int landsPerTurn
+    ) {
         computerPlayer.setLandsPerTurn(landsPerTurn);
     }
 
@@ -1918,7 +2086,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
+    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn
+    ) {
         computerPlayer.setLoyaltyUsePerTurn(loyaltyUsePerTurn);
     }
 
@@ -1928,12 +2097,14 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setMaxHandSize(int maxHandSize) {
+    public void setMaxHandSize(int maxHandSize
+    ) {
         computerPlayer.setMaxHandSize(maxHandSize);
     }
 
     @Override
-    public void setMaxAttackedBy(int maxAttackedBy) {
+    public void setMaxAttackedBy(int maxAttackedBy
+    ) {
         computerPlayer.setMaxAttackedBy(maxAttackedBy);
     }
 
@@ -1943,27 +2114,32 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setResponseString(String responseString) {
+    public void setResponseString(String responseString
+    ) {
         computerPlayer.setResponseString(responseString);
     }
 
     @Override
-    public void setResponseManaType(UUID manaTypePlayerId, ManaType responseManaType) {
+    public void setResponseManaType(UUID manaTypePlayerId, ManaType responseManaType
+    ) {
         computerPlayer.setResponseManaType(manaTypePlayerId, responseManaType);
     }
 
     @Override
-    public void setResponseUUID(UUID responseUUID) {
+    public void setResponseUUID(UUID responseUUID
+    ) {
         computerPlayer.setResponseUUID(responseUUID);
     }
 
     @Override
-    public void setResponseBoolean(Boolean responseBoolean) {
+    public void setResponseBoolean(Boolean responseBoolean
+    ) {
         computerPlayer.setResponseBoolean(responseBoolean);
     }
 
     @Override
-    public void setResponseInteger(Integer responseInteger) {
+    public void setResponseInteger(Integer responseInteger
+    ) {
         computerPlayer.setResponseInteger(responseInteger);
     }
 
@@ -1973,7 +2149,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void pass(Game game) {
+    public void pass(Game game
+    ) {
         computerPlayer.pass(game);
     }
 
@@ -1993,27 +2170,33 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void quit(Game game) {
+    public void quit(Game game
+    ) {
         computerPlayer.quit(game);
     }
 
     @Override
-    public void timerTimeout(Game game) {
+    public void timerTimeout(Game game
+    ) {
         computerPlayer.timerTimeout(game);
     }
 
     @Override
-    public void idleTimeout(Game game) {
+    public void idleTimeout(Game game
+    ) {
         computerPlayer.idleTimeout(game);
     }
 
     @Override
-    public void concede(Game game) {
+    public void concede(Game game
+    ) {
         computerPlayer.concede(game);
     }
 
     @Override
-    public void sendPlayerAction(mage.constants.PlayerAction playerAction, Game game, Object data) {
+    public void sendPlayerAction(mage.constants.PlayerAction playerAction, Game game,
+            Object data
+    ) {
         computerPlayer.sendPlayerAction(playerAction, game, data);
     }
 
@@ -2028,7 +2211,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void lost(Game game) {
+    public void lost(Game game
+    ) {
         computerPlayer.lost(game);
     }
 
@@ -2038,17 +2222,20 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void drew(Game game) {
+    public void drew(Game game
+    ) {
         computerPlayer.drew(game);
     }
 
     @Override
-    public void lostForced(Game game) {
+    public void lostForced(Game game
+    ) {
         computerPlayer.lostForced(game);
     }
 
     @Override
-    public boolean canLose(Game game) {
+    public boolean canLose(Game game
+    ) {
         return computerPlayer.canLose(game);
     }
 
@@ -2073,38 +2260,57 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo) {
+    public void declareAttacker(UUID attackerId, UUID defenderId,
+            Game game, boolean allowUndo
+    ) {
         computerPlayer.declareAttacker(attackerId, defenderId, game, allowUndo);
     }
 
     @Override
-    public void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game) {
+    public void declareBlocker(UUID defenderId, UUID blockerId,
+            UUID attackerId, Game game
+    ) {
         computerPlayer.declareBlocker(defenderId, blockerId, attackerId, game);
     }
 
     @Override
-    public void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game, boolean allowUndo) {
+    public void declareBlocker(UUID defenderId, UUID blockerId,
+            UUID attackerId, Game game,
+            boolean allowUndo
+    ) {
         computerPlayer.declareBlocker(defenderId, blockerId, attackerId, game, allowUndo);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game) {
+    public boolean searchLibrary(TargetCardInLibrary target, Game game
+    ) {
         return computerPlayer.searchLibrary(target, game);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
+    public boolean searchLibrary(TargetCardInLibrary target, Game game,
+            boolean triggerEvents
+    ) {
         return computerPlayer.searchLibrary(target, game, triggerEvents);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
+    public boolean searchLibrary(TargetCardInLibrary target, Game game,
+            UUID targetPlayerId
+    ) {
         return computerPlayer.searchLibrary(target, game, targetPlayerId);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
+    public boolean searchLibrary(TargetCardInLibrary target, Game game,
+            UUID targetPlayerId, boolean triggerEvents
+    ) {
         return computerPlayer.searchLibrary(target, game, targetPlayerId, triggerEvents);
+    }
+
+    @Override
+    public void lookAtAllLibraries(Ability source, Game game) {
+        computerPlayer.lookAtAllLibraries(source, game);
     }
 
     @Override
@@ -2113,37 +2319,45 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
+    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects
+    ) {
         return computerPlayer.flipCoin(game, appliedEffects);
     }
 
     @Override
-    public int rollDice(Game game, int numSides) {
+    public int rollDice(Game game, int numSides
+    ) {
         return computerPlayer.rollDice(game, numSides);
     }
 
     @Override
-    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+    public int rollDice(Game game, ArrayList<UUID> appliedEffects,
+            int numSides
+    ) {
         return computerPlayer.rollDice(game, appliedEffects, numSides);
     }
 
     @Override
-    public List<Permanent> getAvailableAttackers(Game game) {
+    public List<Permanent> getAvailableAttackers(Game game
+    ) {
         return computerPlayer.getAvailableAttackers(game);
     }
 
     @Override
-    public List<Permanent> getAvailableAttackers(UUID defenderId, Game game) {
+    public List<Permanent> getAvailableAttackers(UUID defenderId, Game game
+    ) {
         return computerPlayer.getAvailableAttackers(defenderId, game);
     }
 
     @Override
-    public List<Permanent> getAvailableBlockers(Game game) {
+    public List<Permanent> getAvailableBlockers(Game game
+    ) {
         return computerPlayer.getAvailableBlockers(game);
     }
 
     @Override
-    public ManaOptions getManaAvailable(Game game) {
+    public ManaOptions getManaAvailable(Game game
+    ) {
         return computerPlayer.getManaAvailable(game);
     }
 
@@ -2496,7 +2710,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target,
-                          UUID sourceId, Game game
+            UUID sourceId, Game game
     ) {
         // needed to call here the TestPlayer because it's overwitten
         return choose(outcome, target, sourceId, game, null);
@@ -2504,7 +2718,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards,
-                          TargetCard target, Game game
+            TargetCard target, Game game
     ) {
         if (!choices.isEmpty()) {
             for (String choose2 : choices) {
@@ -2536,7 +2750,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target,
-                                      Ability source, Game game
+            Ability source, Game game
     ) {
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
@@ -2549,15 +2763,15 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choosePile(Outcome outcome, String message,
-                              List<? extends Card> pile1, List<? extends Card> pile2,
-                              Game game
+            List<? extends Card> pile1, List<? extends Card> pile2,
+            Game game
     ) {
         return computerPlayer.choosePile(outcome, message, pile1, pile2, game);
     }
 
     @Override
     public boolean playMana(Ability ability, ManaCost unpaid,
-                            String promptText, Game game
+            String promptText, Game game
     ) {
         groupsForTargetHandling = null;
         return computerPlayer.playMana(ability, unpaid, promptText, game);
@@ -2571,15 +2785,15 @@ public class TestPlayer implements Player {
 
     @Override
     public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup,
-                                   List<UUID> blockerOrder, Game game
+            List<UUID> blockerOrder, Game game
     ) {
         return computerPlayer.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
     }
 
     @Override
     public void assignDamage(int damage, List<UUID> targets,
-                             String singleTargetName, UUID sourceId,
-                             Game game
+            String singleTargetName, UUID sourceId,
+            Game game
     ) {
         computerPlayer.assignDamage(damage, targets, singleTargetName, sourceId, game);
     }
@@ -2598,14 +2812,14 @@ public class TestPlayer implements Player {
 
     @Override
     public void pickCard(List<Card> cards, Deck deck,
-                         Draft draft
+            Draft draft
     ) {
         computerPlayer.pickCard(cards, deck, draft);
     }
 
     @Override
     public boolean scry(int value, Ability source,
-                        Game game
+            Game game
     ) {
         // Don't scry at the start of the game.
         if (game.getTurnNum() == 1 && game.getStep() == null) {
@@ -2616,44 +2830,44 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean surveil(int value, Ability source,
-                           Game game
+            Game game
     ) {
         return computerPlayer.surveil(value, source, game);
     }
 
     @Override
     public boolean moveCards(Card card, Zone toZone,
-                             Ability source, Game game
+            Ability source, Game game
     ) {
         return computerPlayer.moveCards(card, toZone, source, game);
     }
 
     @Override
     public boolean moveCards(Card card, Zone toZone,
-                             Ability source, Game game,
-                             boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
+            Ability source, Game game,
+            boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
     ) {
         return computerPlayer.moveCards(card, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }
 
     @Override
     public boolean moveCards(Cards cards, Zone toZone,
-                             Ability source, Game game
+            Ability source, Game game
     ) {
         return computerPlayer.moveCards(cards, toZone, source, game);
     }
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone,
-                             Ability source, Game game
+            Ability source, Game game
     ) {
         return computerPlayer.moveCards(cards, toZone, source, game);
     }
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone,
-                             Ability source, Game game,
-                             boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
+            Ability source, Game game,
+            boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
     ) {
         return computerPlayer.moveCards(cards, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }

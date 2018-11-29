@@ -75,6 +75,7 @@ public class NewTournamentDialog extends MageDialog {
         this.spnConstructTime.setModel(new SpinnerNumberModel(10, CONSTRUCTION_TIME_MIN, CONSTRUCTION_TIME_MAX, 2));
         this.spnNumRounds.setModel(new SpinnerNumberModel(2, 2, 10, 1));
         this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));
+        this.spnMinimumRating.setModel(new SpinnerNumberModel(0, 0, 3000, 10));
     }
 
     public void showDialog(UUID roomId) {
@@ -165,6 +166,8 @@ public class NewTournamentDialog extends MageDialog {
         pnlRandomPacks = new javax.swing.JPanel();
         lblQuitRatio = new javax.swing.JLabel();
         spnQuitRatio = new javax.swing.JSpinner();
+        lblMinimumRating = new javax.swing.JLabel();
+        spnMinimumRating = new javax.swing.JSpinner();
 
         setTitle("New Tournament");
 
@@ -315,8 +318,10 @@ public class NewTournamentDialog extends MageDialog {
         pnlRandomPacks.setLayout(new javax.swing.BoxLayout(pnlRandomPacks, javax.swing.BoxLayout.Y_AXIS));
 
         lblQuitRatio.setText("Allowed quit %:");
+        lblMinimumRating.setText("Minimum rating:");
 
         spnQuitRatio.setToolTipText("Players with quit % more than this value can't join this table");
+        spnMinimumRating.setToolTipText("Players with rating less than this value can't join this table");
         spnNumSeats.setToolTipText("The number of seats for each duel. If more than 2, will set number of wins to 1");
         spnNumPlayers.setToolTipText("The total number of players who will draft");
 
@@ -386,10 +391,14 @@ public class NewTournamentDialog extends MageDialog {
                                                                                         .addComponent(lblNumWins)
                                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                         .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                                         .addComponent(lblQuitRatio)
                                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                         .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                        .addComponent(lblMinimumRating)
+                                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                        .addComponent(spnMinimumRating, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                                         .addComponent(chkRated))
                                                                                 .addComponent(cbTournamentType, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -444,6 +453,8 @@ public class NewTournamentDialog extends MageDialog {
                                         .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblQuitRatio)
                                         .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblMinimumRating)
+                                        .addComponent(spnMinimumRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(chkRated))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -522,6 +533,7 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.setWatchingAllowed(cbAllowSpectators.isSelected());
         tOptions.setPlaneChase(cbPlaneChase.isSelected());
         tOptions.setQuitRatio((Integer) spnQuitRatio.getValue());
+        tOptions.setMinimumRating((Integer) spnMinimumRating.getValue());
         for (TournamentPlayerPanel player : players) {
             tOptions.getPlayerTypes().add((PlayerType) player.getPlayerType().getSelectedItem());
         }
@@ -1065,6 +1077,7 @@ public class NewTournamentDialog extends MageDialog {
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
         this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS + versionStr, "2")));
         this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO + versionStr, "100")));
+        this.spnMinimumRating.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_MINIMUM_RATING + versionStr, "0")));
 
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         activatePanelElements(tournamentType);
@@ -1150,6 +1163,7 @@ public class NewTournamentDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(tOptions.getMatchOptions().getFreeMulligans()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS + versionStr, Integer.toString(tOptions.getMatchOptions().getWinsNeeded()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO + versionStr, Integer.toString(tOptions.getQuitRatio()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_MINIMUM_RATING + versionStr, Integer.toString(tOptions.getMinimumRating()));
 
         if (tOptions.getTournamentType().startsWith("Sealed")) {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED + versionStr, tOptions.getLimitedOptions().getSetCodes().toString());
@@ -1221,6 +1235,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPlayer1;
     private javax.swing.JLabel lblQuitRatio;
+    private javax.swing.JLabel lblMinimumRating;
     private javax.swing.JLabel lblTournamentType;
     private mage.client.table.NewPlayerPanel player1Panel;
     private javax.swing.JPanel pnlDraftOptions;
@@ -1235,6 +1250,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JSpinner spnNumRounds;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JSpinner spnQuitRatio;
+    private javax.swing.JSpinner spnMinimumRating;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

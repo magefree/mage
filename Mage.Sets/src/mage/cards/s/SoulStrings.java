@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoUnlessAnyPlayerPaysEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -11,6 +10,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 
 /**
  * @author jmharmon
@@ -23,8 +23,7 @@ public final class SoulStrings extends CardImpl {
 
         // Return two target creature cards from your graveyard to your hand unless any player pays {X}.
         Effect effect = new DoUnlessAnyPlayerPaysEffect(
-                new ReturnFromGraveyardToHandTargetEffect(), new VariableManaCost()
-        );
+                new ReturnFromGraveyardToHandTargetEffect(), new ManacostVariableValue());
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCreatureCard("creature cards from your graveyard")));
     }

@@ -42,6 +42,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud Spirit", 26, Rarity.COMMON, mage.cards.c.CloudSpirit.class));
         cards.add(new SetCardInfo("Constant Mists", 104, Rarity.UNCOMMON, mage.cards.c.ConstantMists.class));
         cards.add(new SetCardInfo("Contemplation", 4, Rarity.UNCOMMON, mage.cards.c.Contemplation.class));
+        cards.add(new SetCardInfo("Contempt", 27, Rarity.COMMON, mage.cards.c.Contempt.class));
         cards.add(new SetCardInfo("Conviction", 5, Rarity.COMMON, mage.cards.c.Conviction.class));
         cards.add(new SetCardInfo("Convulsing Licid", 77, Rarity.UNCOMMON, mage.cards.c.ConvulsingLicid.class));
         cards.add(new SetCardInfo("Corrupting Licid", 54, Rarity.UNCOMMON, mage.cards.c.CorruptingLicid.class));
@@ -93,6 +94,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Peel", 63, Rarity.UNCOMMON, mage.cards.m.MindPeel.class));
         cards.add(new SetCardInfo("Mindwarper", 64, Rarity.RARE, mage.cards.m.Mindwarper.class));
         cards.add(new SetCardInfo("Mob Justice", 90, Rarity.COMMON, mage.cards.m.MobJustice.class));
+        cards.add(new SetCardInfo("Mogg Bombers", 91, Rarity.COMMON, mage.cards.m.MoggBombers.class));
         cards.add(new SetCardInfo("Mogg Flunkies", 92, Rarity.COMMON, mage.cards.m.MoggFlunkies.class));
         cards.add(new SetCardInfo("Mogg Infestation", 93, Rarity.RARE, mage.cards.m.MoggInfestation.class));
         cards.add(new SetCardInfo("Mogg Maniac", 94, Rarity.UNCOMMON, mage.cards.m.MoggManiac.class));
@@ -121,6 +123,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Shock", 98, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Sift", 42, Rarity.COMMON, mage.cards.s.Sift.class));
         cards.add(new SetCardInfo("Silver Wyvern", 43, Rarity.RARE, mage.cards.s.SilverWyvern.class));
+        cards.add(new SetCardInfo("Skeleton Scavengers", 20, Rarity.RARE, mage.cards.s.SkeletonScavengers.class));
         cards.add(new SetCardInfo("Skyshroud Archer", 114, Rarity.COMMON, mage.cards.s.SkyshroudArcher.class));
         cards.add(new SetCardInfo("Skyshroud Falcon", 16, Rarity.COMMON, mage.cards.s.SkyshroudFalcon.class));
         cards.add(new SetCardInfo("Skyshroud Troopers", 115, Rarity.COMMON, mage.cards.s.SkyshroudTroopers.class));
@@ -154,6 +157,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Volrath's Laboratory", 142, Rarity.RARE, mage.cards.v.VolrathsLaboratory.class));
         cards.add(new SetCardInfo("Volrath's Shapeshifter", 48, Rarity.RARE, mage.cards.v.VolrathsShapeshifter.class));
         cards.add(new SetCardInfo("Volrath's Stronghold", 143, Rarity.RARE, mage.cards.v.VolrathsStronghold.class));
+        cards.add(new SetCardInfo("Walking Dream", 49, Rarity.UNCOMMON, mage.cards.w.WalkingDream.class));
         cards.add(new SetCardInfo("Wall of Blossoms", 125, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
         cards.add(new SetCardInfo("Wall of Essence", 22, Rarity.UNCOMMON, mage.cards.w.WallOfEssence.class));
         cards.add(new SetCardInfo("Wall of Razors", 100, Rarity.UNCOMMON, mage.cards.w.WallOfRazors.class));

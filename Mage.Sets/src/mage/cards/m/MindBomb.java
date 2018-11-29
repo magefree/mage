@@ -1,17 +1,10 @@
 
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -20,8 +13,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetDiscard;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MindBomb extends CardImpl {
@@ -67,6 +63,7 @@ class MindBombEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Map<UUID, Cards> cardsToDiscard = new HashMap<>();
 
+            // choose
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -77,6 +74,8 @@ class MindBombEffect extends OneShotEffect {
                     cardsToDiscard.put(playerId, cards);
                 }
             }
+
+            // discard
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -91,31 +90,17 @@ class MindBombEffect extends OneShotEffect {
                     }
                 }
             }
+
+            // damage
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Cards cardsPlayer = cardsToDiscard.get(playerId);
-                    if (cardsPlayer != null && !cardsPlayer.isEmpty()) {
+                    if (cardsPlayer != null) {
                         player.damage(3 - cardsPlayer.size(), source.getId(), game, false, true);
                     }
                 }
             }
-            // reveal the searched lands, put in hands, and shuffle
-//            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-//                Player player = game.getPlayer(playerId);
-//                if (player != null) {
-//                    Cards cardsPlayer = cardsToReveal.get(playerId);
-//                    if (cardsPlayer != null) {
-//                        for (UUID cardId : cardsPlayer) {
-//                            Cards cards = new CardsImpl(game.getCard(cardId));
-//                            Card card = game.getCard(cardId);
-//                            player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cards, game);
-//                            player.moveCards(card, Zone.HAND, source, game);
-//                            player.shuffleLibrary(source, game);
-//                        }
-//                    }
-//                }
-//            }
             return true;
         }
         return false;

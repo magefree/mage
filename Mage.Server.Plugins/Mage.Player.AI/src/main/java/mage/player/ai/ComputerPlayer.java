@@ -861,6 +861,19 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
+        
+        if (target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield) {
+            List<Card> cards = new ArrayList<>();
+            for (Player player : game.getPlayers().values()) {
+                cards.addAll(player.getGraveyard().getCards(game));
+                cards.addAll(game.getBattlefield().getAllActivePermanents(new FilterPermanent(), player.getId(), game));
+            }
+            Card card = pickTarget(cards, outcome, target, source, game);
+            if (card != null) {
+                target.addTarget(card.getId(), source, game);
+                return true;
+            }
+        }
 
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
     } //end of chooseTarget method
