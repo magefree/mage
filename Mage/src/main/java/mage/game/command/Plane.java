@@ -41,6 +41,8 @@ public class Plane implements CommandObject {
     private UUID id;
     private UUID controllerId;
     private MageObject sourceObject;
+    private boolean copy;
+    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = "";
@@ -56,6 +58,8 @@ public class Plane implements CommandObject {
         this.frameStyle = plane.frameStyle;
         this.controllerId = plane.controllerId;
         this.sourceObject = plane.sourceObject;
+        this.copy = plane.copy;
+        this.copyFrom = (plane.copyFrom != null ? plane.copyFrom.copy() : null);
         this.abilites = plane.abilites.copy();
         this.expansionSetCodeForImage = plane.expansionSetCodeForImage;
     }
@@ -103,6 +107,22 @@ public class Plane implements CommandObject {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         this.abilites.setControllerId(controllerId);
+    }
+
+    @Override
+    public void setCopy(boolean isCopy, MageObject copyFrom) {
+        this.copy = isCopy;
+        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
+    }
+
+    @Override
+    public boolean isCopy() {
+        return this.copy;
+    }
+
+    @Override
+    public MageObject getCopyFrom() {
+        return this.copyFrom;
     }
 
     @Override
@@ -206,15 +226,6 @@ public class Plane implements CommandObject {
     @Override
     public UUID getId() {
         return this.id;
-    }
-
-    @Override
-    public void setCopy(boolean isCopy) {
-    }
-
-    @Override
-    public boolean isCopy() {
-        return false;
     }
 
     @Override

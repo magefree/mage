@@ -1638,6 +1638,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (newBluePrint == null) {
             newBluePrint = copyFromPermanent.copy();
             newBluePrint.reset(this);
+
             //getState().addCard(permanent);
             if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()) {
                 MorphAbility.setPermanentToFaceDownCreature(newBluePrint);
@@ -1650,6 +1651,9 @@ public abstract class GameImpl implements Game, Serializable {
         if (applier != null) {
             applier.apply(this, newBluePrint, source, copyToPermanentId);
         }
+
+        // save original copy link (handle copy of copies too)
+        newBluePrint.setCopy(true, (copyFromPermanent.getCopyFrom() != null ? copyFromPermanent.getCopyFrom() : copyFromPermanent));
 
         CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
         newEffect.newId();

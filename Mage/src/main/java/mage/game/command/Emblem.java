@@ -1,8 +1,5 @@
 package mage.game.command;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -25,6 +22,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
@@ -38,6 +39,8 @@ public class Emblem implements CommandObject {
     private UUID id;
     private UUID controllerId;
     private MageObject sourceObject;
+    private boolean copy;
+    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = "";
@@ -52,6 +55,8 @@ public class Emblem implements CommandObject {
         this.frameStyle = emblem.frameStyle;
         this.controllerId = emblem.controllerId;
         this.sourceObject = emblem.sourceObject;
+        this.copy = emblem.copy;
+        this.copyFrom = (emblem.copyFrom != null ? emblem.copyFrom : null);
         this.abilites = emblem.abilites.copy();
         this.expansionSetCodeForImage = emblem.expansionSetCodeForImage;
     }
@@ -99,6 +104,22 @@ public class Emblem implements CommandObject {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         this.abilites.setControllerId(controllerId);
+    }
+
+    @Override
+    public void setCopy(boolean isCopy, MageObject copyFrom) {
+        this.copy = isCopy;
+        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
+    }
+
+    @Override
+    public boolean isCopy() {
+        return this.copy;
+    }
+
+    @Override
+    public MageObject getCopyFrom() {
+        return this.copyFrom;
     }
 
     @Override
@@ -202,15 +223,6 @@ public class Emblem implements CommandObject {
     @Override
     public UUID getId() {
         return this.id;
-    }
-
-    @Override
-    public void setCopy(boolean isCopy) {
-    }
-
-    @Override
-    public boolean isCopy() {
-        return false;
     }
 
     @Override

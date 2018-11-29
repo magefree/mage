@@ -1,14 +1,11 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.GainAbilitySpellsEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -16,13 +13,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
@@ -30,13 +21,12 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SoulfireGrandMaster extends CardImpl {
@@ -111,7 +101,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         MageObject mageObject = game.getObject(spellId);
-        if (!(mageObject instanceof Spell) || ((Spell) mageObject).isCopiedSpell()) {
+        if (!(mageObject instanceof Spell) || ((Spell) mageObject).isCopy()) {
             return false;
         } else {
             Card sourceCard = game.getCard(spellId);

@@ -64,20 +64,14 @@ public interface MageObject extends MageItem, Serializable {
 
     void adjustTargets(Ability ability, Game game);
 
+    // memory object copy (not mtg)
     MageObject copy();
 
-    /**
-     * Defines that MageObject is a copy of another object
-     *
-     * @param isCopy
-     */
-    void setCopy(boolean isCopy);
+    // copied card info (mtg)
+    void setCopy(boolean isCopy, MageObject copiedFrom);
 
-    /**
-     * Checks if current MageObject is a copy of another object
-     *
-     * @return
-     */
+    MageObject getCopyFrom();
+
     boolean isCopy();
 
     int getZoneChangeCounter(Game game);

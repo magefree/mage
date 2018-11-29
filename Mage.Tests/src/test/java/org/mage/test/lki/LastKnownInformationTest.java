@@ -58,7 +58,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Soldier", 2);
         assertGraveyardCount(playerB, "Lightning Bolt", 2);
 
-        assertActionCount(playerB, 0);
+        assertActionsCount(playerB, 0);
 
     }
 
