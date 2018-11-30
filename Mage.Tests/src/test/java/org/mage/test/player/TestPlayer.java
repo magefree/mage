@@ -580,6 +580,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check hand card count: card name, count
+                        if (params[0].equals(CHECK_COMMAND_HAND_CARD_COUNT) && params.length == 3) {
+                            assertHandCardCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check color: card name, colors, must have
                         if (params[0].equals(CHECK_COMMAND_COLOR) && params.length == 4) {
                             assertColor(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
@@ -754,12 +761,12 @@ public class TestPlayer implements Player {
         List<String> data = abilities.stream()
                 .map(a -> (
                         a.getZone() + " -> "
-                        + a.getSourceObject(game).getIdName() + " -> "
-                        + (a.getRule().length() > 0
+                                + a.getSourceObject(game).getIdName() + " -> "
+                                + (a.getRule().length() > 0
                                 ? a.getRule().substring(0, Math.min(20, a.getRule().length()) - 1)
                                 : a.getClass().getSimpleName())
                                 + "..."
-                        ))
+                ))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -824,6 +831,18 @@ public class TestPlayer implements Player {
 
     private void assertHandCount(PlayerAction action, Game game, Player player, int count) {
         Assert.assertEquals(action.getActionName() + " - hand must contain " + count, count, player.getHand().size());
+    }
+
+    private void assertHandCardCount(PlayerAction action, Game game, Player player, String cardName, int count) {
+        int realCount = 0;
+        for (UUID cardId : player.getHand()) {
+            Card card = game.getCard(cardId);
+            if (card != null && card.getName().equals(cardName)) {
+                realCount++;
+            }
+        }
+
+        Assert.assertEquals(action.getActionName() + " - hand must contain " + count + " cards of " + cardName, count, realCount);
     }
 
     private void assertColor(PlayerAction action, Game game, Player player, String permanentName, String colors, boolean mustHave) {
