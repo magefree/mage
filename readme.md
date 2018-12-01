@@ -12,6 +12,9 @@ XMage community:
 * [Reddit XMage group](https://www.reddit.com/r/XMage/);
 * [Reddit XMage discord channel](https://discord.gg/Pqf42yn).
 
+Servers status:
+* http://xmageservers.online/
+
 ## Features
 
 * Deck editor (load and save decks)
