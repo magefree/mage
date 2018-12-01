@@ -1160,11 +1160,16 @@ public class TestPlayer implements Player {
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         if (!choices.isEmpty()) {
+
+            List<String> usedChoices = new ArrayList<>();
+            List<UUID> usedTargets = new ArrayList<>();
+
             Ability source = null;
             StackObject stackObject = game.getStack().getStackObject(sourceId);
             if (stackObject != null) {
                 source = stackObject.getStackAbility();
             }
+
             if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer)) { // player target not implemted yet
                 FilterPermanent filterPermanent;
                 if (target instanceof TargetPermanentOrPlayer) {
@@ -1218,6 +1223,7 @@ public class TestPlayer implements Player {
                     }
                 }
             }
+
             if (target instanceof TargetPlayer) {
                 for (Player player : game.getPlayers().values()) {
                     for (String choose2 : choices) {
@@ -1231,42 +1237,74 @@ public class TestPlayer implements Player {
                     }
                 }
             }
+
+            // TODO: add same choices fixes for other target types (one choice must uses only one time for one target)
             if (target instanceof TargetCard) {
-                TargetCard targetCard = ((TargetCard) target);
-                Set<UUID> possibleTargets = targetCard.possibleTargets(sourceId, target.getTargetController() == null ? getId() : target.getTargetController(), game);
-                for (String choose2 : choices) {
-                    String[] targetList = choose2.split("\\^");
+                // one choice per target
+                // only unique targets
+                //TargetCard targetFull = ((TargetCard) target);
+
+                usedChoices.clear();
+                usedTargets.clear();
+                boolean targetCompleted = false;
+
+                CheckAllChoices:
+                for (String choiceRecord : choices) {
+                    if (targetCompleted) {
+                        break CheckAllChoices;
+                    }
+
                     boolean targetFound = false;
-                    Choice:
-                    for (String targetName : targetList) {
-                        for (UUID targetId : possibleTargets) {
+                    String[] possibleChoices = choiceRecord.split("\\^");
+
+                    CheckOneChoice:
+                    for (String possibleChoice : possibleChoices) {
+                        Set<UUID> possibleCards = target.possibleTargets(sourceId, target.getTargetController() == null ? getId() : target.getTargetController(), game);
+                        CheckTargetsList:
+                        for (UUID targetId : possibleCards) {
                             MageObject targetObject = game.getObject(targetId);
-                            if (targetObject != null) {
-                                if (targetObject.getName().equals(targetName)) {
-                                    if (targetCard.canTarget(targetObject.getId(), game)) {
-                                        if (targetCard.getTargets() != null && !targetCard.getTargets().contains(targetObject.getId())) {
-                                            targetCard.add(targetObject.getId(), game);
-                                            targetFound = true;
-                                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
-                                                break Choice;
-                                            }
-                                        }
+                            if (targetObject != null && targetObject.getName().equals(possibleChoice)) {
+                                if (target.canTarget(targetObject.getId(), game)) {
+                                    // only unique targets
+                                    if (usedTargets.contains(targetObject.getId())) {
+                                        continue;
                                     }
+
+                                    // OK, can use it
+                                    target.add(targetObject.getId(), game);
+                                    targetFound = true;
+                                    usedTargets.add(targetObject.getId());
+
+                                    // break on full targets list
+                                    if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                        targetCompleted = true;
+                                        break CheckOneChoice;
+                                    }
+
+                                    // restart search
+                                    break CheckTargetsList;
                                 }
                             }
-
                         }
                     }
+
                     if (targetFound) {
-                        if (targetCard.isChosen()) {
-                            choices.remove(choose2);
-                            return true;
-                        } else {
-                            target.clearChosen();
-                        }
+                        usedChoices.add(choiceRecord);
+                    }
+                }
+
+                // apply only on ALL targets or revert
+                if (usedChoices.size() > 0) {
+                    if (target.isChosen()) {
+                        choices.removeAll(usedChoices);
+                        return true;
+                    } else {
+                        Assert.fail("Not full targets list.");
+                        target.clearChosen();
                     }
                 }
             }
+
             if (target instanceof TargetSource) {
                 Set<UUID> possibleTargets;
                 TargetSource t = ((TargetSource) target);
@@ -2774,7 +2812,7 @@ public class TestPlayer implements Player {
 
     @Override
     public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        Assert.fail("That's method calls only from computerPlayer->cast(), see TestComputerPlayerXXX");
+        Assert.fail("That's method must calls only from computerPlayer->cast(), see TestComputerPlayerXXX");
         return computerPlayer.chooseSpellAbilityForCast(ability, game, noMana);
     }
 

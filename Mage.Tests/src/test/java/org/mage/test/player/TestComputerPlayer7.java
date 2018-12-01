@@ -3,9 +3,11 @@ package org.mage.test.player;
 import mage.MageObject;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
+import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.player.ai.ComputerPlayer7;
+import mage.target.Target;
 
 import java.util.LinkedHashMap;
 import java.util.UUID;
@@ -58,5 +60,14 @@ public class TestComputerPlayer7 extends ComputerPlayer7 {
 
         // default implementation by AI
         return super.chooseSpellAbilityForCast(ability, game, noMana);
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+        // copy-paste for TestComputerXXX
+
+        // workaround for discard spells
+        // reason: TestPlayer uses outer computerPlayer to discard but inner code uses choose
+        return testPlayerLink.choose(outcome, target, sourceId, game);
     }
 }
