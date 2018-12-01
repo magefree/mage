@@ -222,6 +222,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         logger.debug("Winner: " + currentGame.getWinner());
         logger.info("Test has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
 
+        // TODO: 01.12.2018, JayDi85 - uncomment and fix MANY broken tests with wrong commands
+        //assertAllCommandsUsed();
     }
 
     protected TestPlayer createNewPlayer(String playerName, RangeOfInfluence rangeOfInfluence) {

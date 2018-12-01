@@ -2867,6 +2867,51 @@ public class TestPlayer implements Player {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target,
                                       Ability source, Game game
     ) {
+        // command format: targetName^X=3
+
+        // chooseTargetAmount calls by TargetAmount for EACH target cycle
+        Assert.assertTrue("chooseTargetAmount supports only one target, but found " + target.getMaxNumberOfTargets(), target.getMaxNumberOfTargets() <= 1);
+        Assert.assertNotEquals("chooseTargetAmount need remaining > 0", 0, target.getAmountRemaining());
+
+        if (!targets.isEmpty()) {
+
+            boolean founded = false;
+            String foundedRecord = "";
+            CheckTargets:
+            for(String targetRecord : targets) {
+                String[] choiceSettings = targetRecord.split("\\^");
+                if (choiceSettings.length == 2 && choiceSettings[1].startsWith("X=")) {
+                    // can choice
+                    String choiceName = choiceSettings[0];
+                    int choiceAmount = Integer.parseInt(choiceSettings[1].substring(2));
+
+                    Assert.assertNotEquals("choice amount must be not zero", 0, choiceAmount);
+                    Assert.assertTrue("choice amount " + choiceAmount + "must be <= remaining " + target.getAmountRemaining(), choiceAmount <= target.getAmountRemaining());
+
+                    for(UUID possibleTarget : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+                        MageObject objectPermanent = game.getObject(possibleTarget);
+                        Player objectPlayer = game.getPlayer(possibleTarget);
+                        String objectName = objectPermanent != null ? objectPermanent.getName() : objectPlayer.getName();
+                        if (objectName.equals(choiceName)) {
+                            if (!target.getTargets().contains(possibleTarget) && target.canTarget(possibleTarget, source, game)) {
+                                // can select
+                                target.addTarget(possibleTarget, choiceAmount, source, game);
+                                founded = true;
+                                foundedRecord = targetRecord;
+                                break CheckTargets;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (founded) {
+                // all done
+                targets.remove(foundedRecord);
+                return true;
+            }
+        }
+
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
 
