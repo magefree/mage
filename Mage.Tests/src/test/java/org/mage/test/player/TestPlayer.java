@@ -658,7 +658,9 @@ public class TestPlayer implements Player {
                         // show exile
                         if (params[0].equals(SHOW_COMMAND_EXILE) && params.length == 1) {
                             printStart(action.getActionName());
-                            printCards(game.getExile().getAllCards(game));
+                            printCards(game.getExile().getAllCards(game).stream()
+                                    .filter(card -> card.isOwnedBy(computerPlayer.getId()))
+                                    .collect(Collectors.toList()));
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
