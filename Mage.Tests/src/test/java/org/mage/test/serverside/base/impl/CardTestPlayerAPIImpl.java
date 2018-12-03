@@ -60,6 +60,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_COLOR = "COLOR";
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
     public static final String CHECK_COMMAND_MANA_POOL = "MANA_POOL";
+    public static final String CHECK_COMMAND_ALIAS_ZONE = "ALIAS_ZONE";
 
     // TODO: add target player param to commands
     public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
@@ -68,6 +69,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String SHOW_COMMAND_GRAVEYEARD = "GRAVEYARD";
     public static final String SHOW_COMMAND_EXILE = "EXILE";
     public static final String SHOW_COMMAND_AVAILABLE_ABILITIES = "AVAILABLE_ABILITIES";
+    public static final String SHOW_COMMAND_ALIASES = "ALIASES";
+
+    // TODO: add target player param to commands
+    public static final String ALIAS_COMMAND_ADD = "ADD";
 
     protected GameOptions gameOptions;
 
@@ -301,6 +306,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_MANA_POOL, colors, amount.toString());
     }
 
+    public void checkAliasZone(String checkName, int turnNum, PhaseStep step, TestPlayer player, String alias, Zone zone) {
+        checkAliasZone(checkName, turnNum, step, player, alias, zone, true);
+    }
+
+    public void checkAliasZone(String checkName, int turnNum, PhaseStep step, TestPlayer player, String alias, Zone zone, Boolean mustHave) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_ALIAS_ZONE, alias, zone.toString(), mustHave.toString());
+    }
+
     // show commands
 
     private void show(String showName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
@@ -333,6 +346,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void showAvaileableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
         show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES);
+    }
+
+    public void showAliases(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_ALIASES);
     }
 
     /**
@@ -399,6 +416,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
+        // aliases for mage objects
+        String aliasName = "";
+        boolean useAliasMultiNames = (count != 1);
+        if (cardName.contains("@")) {
+            aliasName = cardName.substring(cardName.indexOf("@") + 1);
+            cardName = cardName.substring(0, cardName.indexOf("@"));
+        }
+
+        // one card = one aliase, massive adds can use auto-name
+        if (!useAliasMultiNames && !aliasName.isEmpty() && player.getAliasByName(aliasName) != null) {
+            Assert.fail("Can't add card " + cardName + " - alias " + aliasName + " already exists for " + player.getName());
+        }
+
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
@@ -409,6 +439,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 PermanentCard p = new PermanentCard(card.copy(), player.getId(), currentGame);
                 p.setTapped(tapped);
                 getBattlefieldCards(player).add(p);
+
+                if (!aliasName.isEmpty()) {
+                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), p.getId());
+                }
             }
         } else {
             if (tapped) {
@@ -422,6 +456,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                     throw new AssertionError("Couldn't find a card: " + cardName);
                 }
                 cards.add(card);
+
+                if (!aliasName.isEmpty()) {
+                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), card.getId());
+                }
             }
         }
     }
@@ -1246,7 +1284,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public enum StackClause {
-
         WHILE_ON_STACK,
         WHILE_COPY_ON_STACK,
         WHILE_NOT_ON_STACK

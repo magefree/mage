@@ -1,5 +1,6 @@
 package org.mage.test.player;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -74,6 +75,7 @@ public class TestPlayer implements Player {
     private final List<PlayerAction> actions = new ArrayList<>();
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
     private final List<String> targets = new ArrayList<>(); // targets stack for choose (it's uses on empty direct target by cast command)
+    private final Map<String, UUID> aliases = new HashMap<>(); // aliases for game objects/players (use it for cards with same name to save and use)
     private final List<String> modesSet = new ArrayList<>();
 
     private final ComputerPlayer computerPlayer;
@@ -102,6 +104,7 @@ public class TestPlayer implements Player {
         this.actions.addAll(testPlayer.actions);
         this.choices.addAll(testPlayer.choices);
         this.targets.addAll(testPlayer.targets);
+        this.aliases.putAll(testPlayer.aliases);
         this.modesSet.addAll(testPlayer.modesSet);
         this.computerPlayer = testPlayer.computerPlayer.copy();
         if (testPlayer.groupsForTargetHandling != null) {
@@ -121,12 +124,28 @@ public class TestPlayer implements Player {
         return this.targets;
     }
 
+    public Map<String, UUID> getAliases() {
+        return this.aliases;
+    }
+
+    public UUID getAliasByName(String searchName) {
+        if (searchName.startsWith("@")) {
+            return this.aliases.getOrDefault(searchName.substring(1), null);
+        } else {
+            return this.aliases.getOrDefault(searchName, null);
+        }
+    }
+
     public void addModeChoice(String mode) {
         modesSet.add(mode);
     }
 
     public void addTarget(String target) {
         targets.add(target);
+    }
+
+    public void addAlias(String name, UUID Id) {
+        aliases.put(name, Id);
     }
 
     public ManaOptions getAvailableManaTest(Game game) {
@@ -314,6 +333,30 @@ public class TestPlayer implements Player {
         return result;
     }
 
+    public String generateAliasName(String baseAlias, boolean useMiltiNames, int iteration) {
+        if (useMiltiNames) {
+            return baseAlias + "." + iteration;
+        } else {
+            return baseAlias;
+        }
+    }
+
+    private boolean isObjectHaveTargetNameOrAliase(MageObject object, String nameOrAliase) {
+        if (object == null || nameOrAliase == null) {
+            return false;
+        }
+
+        if (nameOrAliase.startsWith("@") && object.getId().equals(getAliasByName(nameOrAliase))) {
+            return true;
+        }
+
+        if (nameOrAliase.isEmpty() && object.getName().isEmpty()) {
+            return true;
+        }
+
+        return object.getName().startsWith(nameOrAliase);
+    }
+
     private boolean handleNonPlayerTargetTarget(String target, Ability ability, Game game) {
         boolean result = true;
         if (target == null) {
@@ -375,28 +418,46 @@ public class TestPlayer implements Player {
                 for (UUID id : currentTarget.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                     if (!currentTarget.getTargets().contains(id)) {
                         MageObject object = game.getObject(id);
-                        if (object != null
-                                && ((object.isCopy() && !originOnly) || (!object.isCopy() && !copyOnly))
-                                && ((!targetName.isEmpty() && object.getName().startsWith(targetName)) || (targetName.isEmpty() && object.getName().isEmpty()))) {
-                            if (currentTarget.getNumberOfTargets() == 1) {
-                                currentTarget.clearChosen();
-                            }
-                            if (currentTarget instanceof TargetCreaturePermanentAmount) {
-                                // supports only to set the complete amount to one target
-                                TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) currentTarget;
-                                targetAmount.setAmount(ability, game);
-                                int amount = targetAmount.getAmountRemaining();
-                                targetAmount.addTarget(id, amount, ability, game);
-                                targetsSet++;
-                            } else {
-                                currentTarget.addTarget(id, ability, game);
-                                targetsSet++;
-                            }
-                            if (currentTarget.getTargets().size() == currentTarget.getMaxNumberOfTargets()) {
-                                index++;
-                            }
-                            break;
+
+                        if (object == null) {
+                            continue;
                         }
+
+                        // only origin
+                        if (originOnly && object.isCopy()) {
+                            continue;
+                        }
+
+                        // only copy
+                        if (copyOnly && !object.isCopy()) {
+                            continue;
+                        }
+
+                        // need by alias or by name
+                        if (!isObjectHaveTargetNameOrAliase(object, targetName)) {
+                            continue;
+                        }
+
+                        // founded, can use as target
+
+                        if (currentTarget.getNumberOfTargets() == 1) {
+                            currentTarget.clearChosen();
+                        }
+                        if (currentTarget instanceof TargetCreaturePermanentAmount) {
+                            // supports only to set the complete amount to one target
+                            TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) currentTarget;
+                            targetAmount.setAmount(ability, game);
+                            int amount = targetAmount.getAmountRemaining();
+                            targetAmount.addTarget(id, amount, ability, game);
+                            targetsSet++;
+                        } else {
+                            currentTarget.addTarget(id, ability, game);
+                            targetsSet++;
+                        }
+                        if (currentTarget.getTargets().size() == currentTarget.getMaxNumberOfTargets()) {
+                            index++;
+                        }
+                        break;
                     }
                 }
             }
@@ -607,6 +668,13 @@ public class TestPlayer implements Player {
                             actions.remove(action);
                             wasProccessed = true;
                         }
+
+                        // check aliase at zone: alias name, zone, must have (only for TestPlayer)
+                        if (params[0].equals(CHECK_COMMAND_ALIAS_ZONE) && params.length == 4) {
+                            assertAliasZone(action, game, this, params[1], Zone.valueOf(params[2]), Boolean.parseBoolean(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
                     }
                     if (!wasProccessed) {
                         Assert.fail("Unknow check command or params: " + command);
@@ -670,6 +738,15 @@ public class TestPlayer implements Player {
                         if (params[0].equals(SHOW_COMMAND_AVAILABLE_ABILITIES) && params.length == 1) {
                             printStart(action.getActionName());
                             printAbilities(game, computerPlayer.getPlayable(game, true));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show aliases
+                        if (params[0].equals(SHOW_COMMAND_ALIASES) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printAliases(game, this);
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -769,6 +846,38 @@ public class TestPlayer implements Player {
                                 : a.getClass().getSimpleName())
                                 + "..."
                 ))
+                .sorted()
+                .collect(Collectors.toList());
+
+        for (String s : data) {
+            System.out.println(s);
+        }
+    }
+
+
+    private String getAliasInfo(Game game, TestPlayer player, String aliasName) {
+        MageItem item = findAliasObject(game, player, aliasName);
+        if (item == null) {
+            return aliasName + " [not exists]";
+        }
+
+        if (item instanceof MageObject) {
+            Zone zone = game.getState().getZone(item.getId());
+            return aliasName + " - " + ((MageObject) item).getIdName() + " - " + (zone != null ? zone.toString() : "null");
+        }
+
+        if (item instanceof Player) {
+            return aliasName + " - " + ((Player) item).getName();
+        }
+
+        return aliasName + " [unknown object " + item.getId() + "]";
+    }
+
+    private void printAliases(Game game, TestPlayer player) {
+        System.out.println("Total aliases: " + player.getAliases().size());
+
+        List<String> data = player.getAliases().entrySet().stream()
+                .map(entry -> (getAliasInfo(game, player, entry.getKey())))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -888,6 +997,36 @@ public class TestPlayer implements Player {
             Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have subtype " + subType, true, founded);
         } else {
             Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not subtype " + subType, false, founded);
+        }
+    }
+
+    private MageItem findAliasObject(Game game, TestPlayer player, String aliasName) {
+        UUID objectId = player.getAliasByName(aliasName);
+        if (objectId == null) {
+            return null;
+        }
+
+        MageObject itemObject = game.getObject(objectId);
+        if (itemObject != null) {
+            return itemObject;
+        }
+
+        Player itemPlayer = game.getPlayer(objectId);
+        if (itemPlayer != null) {
+            return itemPlayer;
+        }
+
+        return null;
+    }
+
+    private void assertAliasZone(PlayerAction action, Game game, TestPlayer player, String aliasName, Zone needZone, boolean mustHave) {
+        MageItem item = findAliasObject(game, player, aliasName);
+        Zone currentZone = (item == null ? null : game.getState().getZone(item.getId()));
+
+        if (mustHave) {
+            Assert.assertEquals(action.getActionName() + " - alias " + aliasName + " must have zone " + needZone.toString(), needZone, currentZone);
+        } else {
+            Assert.assertNotEquals(action.getActionName() + " - alias " + aliasName + " must have not zone " + needZone.toString(), needZone, currentZone);
         }
     }
 
@@ -1785,6 +1924,8 @@ public class TestPlayer implements Player {
         this.choices.addAll(((TestPlayer) player).choices);
         this.targets.clear();
         this.targets.addAll(((TestPlayer) player).targets);
+        this.aliases.clear();
+        this.aliases.putAll(((TestPlayer) player).aliases);
         computerPlayer.restore(player);
     }
 
@@ -2880,7 +3021,7 @@ public class TestPlayer implements Player {
             boolean founded = false;
             String foundedRecord = "";
             CheckTargets:
-            for(String targetRecord : targets) {
+            for (String targetRecord : targets) {
                 String[] choiceSettings = targetRecord.split("\\^");
                 if (choiceSettings.length == 2 && choiceSettings[1].startsWith("X=")) {
                     // can choice
@@ -2890,7 +3031,7 @@ public class TestPlayer implements Player {
                     Assert.assertNotEquals("choice amount must be not zero", 0, choiceAmount);
                     Assert.assertTrue("choice amount " + choiceAmount + "must be <= remaining " + target.getAmountRemaining(), choiceAmount <= target.getAmountRemaining());
 
-                    for(UUID possibleTarget : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+                    for (UUID possibleTarget : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                         MageObject objectPermanent = game.getObject(possibleTarget);
                         Player objectPlayer = game.getPlayer(possibleTarget);
                         String objectName = objectPermanent != null ? objectPermanent.getName() : objectPlayer.getName();
