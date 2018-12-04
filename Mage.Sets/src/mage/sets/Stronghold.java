@@ -77,6 +77,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Hermit Druid", 108, Rarity.RARE, mage.cards.h.HermitDruid.class));
         cards.add(new SetCardInfo("Hesitation", 33, Rarity.UNCOMMON, mage.cards.h.Hesitation.class));
         cards.add(new SetCardInfo("Hibernation Sliver", 128, Rarity.UNCOMMON, mage.cards.h.HibernationSliver.class));
+        cards.add(new SetCardInfo("Hidden Retreat", 106, Rarity.RARE, mage.cards.h.HiddenRetreat.class));
         cards.add(new SetCardInfo("Honor Guard", 7, Rarity.COMMON, mage.cards.h.HonorGuard.class));
         cards.add(new SetCardInfo("Horn of Greed", 135, Rarity.RARE, mage.cards.h.HornOfGreed.class));
         cards.add(new SetCardInfo("Hornet Cannon", 136, Rarity.UNCOMMON, mage.cards.h.HornetCannon.class));
@@ -109,11 +110,14 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Provoke", 113, Rarity.COMMON, mage.cards.p.Provoke.class));
         cards.add(new SetCardInfo("Pursuit of Knowledge", 10, Rarity.RARE, mage.cards.p.PursuitOfKnowledge.class));
         cards.add(new SetCardInfo("Rabid Rats", 67, Rarity.COMMON, mage.cards.r.RabidRats.class));
+        cards.add(new SetCardInfo("Ransack", 39, Rarity.UNCOMMON, mage.cards.r.Ransack.class));
+        cards.add(new SetCardInfo("Rebound", 40, Rarity.UNCOMMON, mage.cards.r.Rebound.class));
         cards.add(new SetCardInfo("Reins of Power", 41, Rarity.RARE, mage.cards.r.ReinsOfPower.class));
         cards.add(new SetCardInfo("Revenant", 68, Rarity.RARE, mage.cards.r.Revenant.class));
         cards.add(new SetCardInfo("Rolling Stones", 11, Rarity.RARE, mage.cards.r.RollingStones.class));
         cards.add(new SetCardInfo("Ruination", 95, Rarity.RARE, mage.cards.r.Ruination.class));
         cards.add(new SetCardInfo("Sacred Ground", 12, Rarity.RARE, mage.cards.s.SacredGround.class));
+        cards.add(new SetCardInfo("Samite Blessing", 113, Rarity.COMMON, mage.cards.s.SamiteBlessing.class));
         cards.add(new SetCardInfo("Scapegoat", 14, Rarity.UNCOMMON, mage.cards.s.Scapegoat.class));
         cards.add(new SetCardInfo("Seething Anger", 96, Rarity.COMMON, mage.cards.s.SeethingAnger.class));
         cards.add(new SetCardInfo("Serpent Warrior", 69, Rarity.COMMON, mage.cards.s.SerpentWarrior.class));
