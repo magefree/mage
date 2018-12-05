@@ -154,6 +154,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Treasure Hunter", 23, Rarity.UNCOMMON, mage.cards.t.TreasureHunter.class));
         cards.add(new SetCardInfo("Treasure Trove", 50, Rarity.UNCOMMON, mage.cards.t.TreasureTrove.class));
         cards.add(new SetCardInfo("Vampire Hounds", 77, Rarity.COMMON, mage.cards.v.VampireHounds.class));
+        cards.add(new SetCardInfo("Volrath's Dungeon", 78, Rarity.RARE, mage.cards.v.VolrathsDungeon.class));
         cards.add(new SetCardInfo("Wall of Nets", 24, Rarity.RARE, mage.cards.w.WallOfNets.class));
         cards.add(new SetCardInfo("Wayward Soul", 51, Rarity.COMMON, mage.cards.w.WaywardSoul.class));
         cards.add(new SetCardInfo("Welkin Hawk", 25, Rarity.COMMON, mage.cards.w.WelkinHawk.class));
