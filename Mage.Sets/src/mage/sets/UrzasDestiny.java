@@ -32,6 +32,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Sting", 76, Rarity.UNCOMMON, mage.cards.a.AetherSting.class));
         cards.add(new SetCardInfo("Ancient Silverback", 101, Rarity.RARE, mage.cards.a.AncientSilverback.class));
         cards.add(new SetCardInfo("Apprentice Necromancer", 51, Rarity.RARE, mage.cards.a.ApprenticeNecromancer.class));
+        cards.add(new SetCardInfo("Archery Training", 2, Rarity.UNCOMMON, mage.cards.a.ArcheryTraining.class));
         cards.add(new SetCardInfo("Attrition", 52, Rarity.RARE, mage.cards.a.Attrition.class));
         cards.add(new SetCardInfo("Aura Thief", 26, Rarity.RARE, mage.cards.a.AuraThief.class));
         cards.add(new SetCardInfo("Blizzard Elemental", 27, Rarity.RARE, mage.cards.b.BlizzardElemental.class));
@@ -53,6 +54,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Colos Yearling", 79, Rarity.COMMON, mage.cards.c.ColosYearling.class));
         cards.add(new SetCardInfo("Compost", 102, Rarity.UNCOMMON, mage.cards.c.Compost.class));
         cards.add(new SetCardInfo("Covetous Dragon", 80, Rarity.RARE, mage.cards.c.CovetousDragon.class));
+        cards.add(new SetCardInfo("Disappear", 30, Rarity.UNCOMMON, mage.cards.d.Disappear.class));
         cards.add(new SetCardInfo("Disease Carriers", 57, Rarity.COMMON, mage.cards.d.DiseaseCarriers.class));
         cards.add(new SetCardInfo("Donate", 31, Rarity.RARE, mage.cards.d.Donate.class));
         cards.add(new SetCardInfo("Dying Wail", 58, Rarity.COMMON, mage.cards.d.DyingWail.class));
@@ -63,6 +65,8 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Eradicate", 60, Rarity.UNCOMMON, mage.cards.e.Eradicate.class));
         cards.add(new SetCardInfo("Extruder", 130, Rarity.UNCOMMON, mage.cards.e.Extruder.class));
         cards.add(new SetCardInfo("False Prophet", 6, Rarity.RARE, mage.cards.f.FalseProphet.class));
+        cards.add(new SetCardInfo("Fatigue", 32, Rarity.COMMON, mage.cards.f.Fatigue.class));
+        cards.add(new SetCardInfo("Fend Off", 7, Rarity.COMMON, mage.cards.f.FendOff.class));
         cards.add(new SetCardInfo("Festering Wound", 61, Rarity.UNCOMMON, mage.cards.f.FesteringWound.class));
         cards.add(new SetCardInfo("Field Surgeon", 8, Rarity.COMMON, mage.cards.f.FieldSurgeon.class));
         cards.add(new SetCardInfo("Flame Jet", 81, Rarity.COMMON, mage.cards.f.FlameJet.class));
@@ -81,6 +85,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Hunting Moa", 109, Rarity.UNCOMMON, mage.cards.h.HuntingMoa.class));
         cards.add(new SetCardInfo("Illuminated Wings", 34, Rarity.COMMON, mage.cards.i.IlluminatedWings.class));
         cards.add(new SetCardInfo("Impatience", 88, Rarity.RARE, mage.cards.i.Impatience.class));
+        cards.add(new SetCardInfo("Incendiary", 89, Rarity.UNCOMMON, mage.cards.i.Incendiary.class));
         cards.add(new SetCardInfo("Iridescent Drake", 35, Rarity.UNCOMMON, mage.cards.i.IridescentDrake.class));
         cards.add(new SetCardInfo("Ivy Seer", 110, Rarity.UNCOMMON, mage.cards.i.IvySeer.class));
         cards.add(new SetCardInfo("Jasmine Seer", 10, Rarity.UNCOMMON, mage.cards.j.JasmineSeer.class));
@@ -89,6 +94,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Vandals", 91, Rarity.COMMON, mage.cards.k.KeldonVandals.class));
         cards.add(new SetCardInfo("Kingfisher", 36, Rarity.COMMON, mage.cards.k.Kingfisher.class));
         cards.add(new SetCardInfo("Landslide", 92, Rarity.UNCOMMON, mage.cards.l.Landslide.class));
+        cards.add(new SetCardInfo("Lurking Jackals", 62, Rarity.UNCOMMON, mage.cards.l.LurkingJackals.class));
         cards.add(new SetCardInfo("Magnify", 111, Rarity.COMMON, mage.cards.m.Magnify.class));
         cards.add(new SetCardInfo("Mantis Engine", 133, Rarity.UNCOMMON, mage.cards.m.MantisEngine.class));
         cards.add(new SetCardInfo("Marker Beetles", 112, Rarity.COMMON, mage.cards.m.MarkerBeetles.class));
@@ -112,6 +118,7 @@ public final class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Plated Spider", 116, Rarity.COMMON, mage.cards.p.PlatedSpider.class));
         cards.add(new SetCardInfo("Plow Under", 117, Rarity.RARE, mage.cards.p.PlowUnder.class));
         cards.add(new SetCardInfo("Powder Keg", 136, Rarity.RARE, mage.cards.p.PowderKeg.class));
+        cards.add(new SetCardInfo("Private Research", 41, Rarity.UNCOMMON, mage.cards.p.PrivateResearch.class));
         cards.add(new SetCardInfo("Quash", 42, Rarity.UNCOMMON, mage.cards.q.Quash.class));
         cards.add(new SetCardInfo("Rapid Decay", 67, Rarity.RARE, mage.cards.r.RapidDecay.class));
         cards.add(new SetCardInfo("Ravenous Rats", 68, Rarity.COMMON, mage.cards.r.RavenousRats.class));

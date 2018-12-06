@@ -43,6 +43,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Brainstorm", 91, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Breakthrough", 92, Rarity.UNCOMMON, mage.cards.b.Breakthrough.class));
         cards.add(new SetCardInfo("Brimstone Volley", 138, Rarity.COMMON, mage.cards.b.BrimstoneVolley.class));
+        cards.add(new SetCardInfo("Canal Dredger", 55, Rarity.RARE, mage.cards.c.CanalDredger.class));
         cards.add(new SetCardInfo("Charging Rhino", 159, Rarity.COMMON, mage.cards.c.ChargingRhino.class));
         cards.add(new SetCardInfo("Chartooth Cougar", 139, Rarity.COMMON, mage.cards.c.ChartoothCougar.class));
         cards.add(new SetCardInfo("Cinder Wall", 140, Rarity.COMMON, mage.cards.c.CinderWall.class));
@@ -57,6 +58,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Custodi Squire", 18, Rarity.COMMON, mage.cards.c.CustodiSquire.class));
         cards.add(new SetCardInfo("Dack Fayden", 42, Rarity.MYTHIC, mage.cards.d.DackFayden.class));
         cards.add(new SetCardInfo("Dack's Duplicate", 43, Rarity.RARE, mage.cards.d.DacksDuplicate.class));
+        cards.add(new SetCardInfo("Deal Broker", 61, Rarity.RARE, mage.cards.d.DealBroker.class));
         cards.add(new SetCardInfo("Deathforge Shaman", 141, Rarity.UNCOMMON, mage.cards.d.DeathforgeShaman.class));
         cards.add(new SetCardInfo("Deathreap Ritual", 44, Rarity.UNCOMMON, mage.cards.d.DeathreapRitual.class));
         cards.add(new SetCardInfo("Deathrender", 197, Rarity.RARE, mage.cards.d.Deathrender.class));

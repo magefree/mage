@@ -9,6 +9,7 @@ public enum CounterType {
 
     AGE("age"),
     AIM("aim"),
+    ARROW("arrow"),
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),

@@ -37,6 +37,7 @@ public class MatchOptions implements Serializable {
     protected boolean spectatorsAllowed;
     protected boolean planeChase;
     protected int quitRatio;
+    protected int minimumRating;
     protected int edhPowerLevel;
     protected boolean rated;
     protected int numSeatsForMatch;
@@ -204,6 +205,10 @@ public class MatchOptions implements Serializable {
     public void setQuitRatio(int quitRatio) {
         this.quitRatio = quitRatio;
     }
+
+    public int getMinimumRating() { return minimumRating; }
+
+    public void setMinimumRating(int minimumRating) { this.minimumRating = minimumRating; }
 
     public int getEdhPowerLevel() {
         return edhPowerLevel;

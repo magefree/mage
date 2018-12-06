@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.HashMap;
@@ -92,7 +91,6 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        //
                         player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue), source, game, true, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName());
                     }
                 }
@@ -130,7 +128,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
                     if (controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            return controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            return controller.playCard(card, game, true, false, new MageObjectReference(source.getSourceId(), game));
                         }
                     }
                 }

@@ -1,4 +1,3 @@
-
 package mage.abilities;
 
 import java.util.UUID;
@@ -154,13 +153,19 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         //20091005 - 602.2
-        if (!(hasMoreActivationsThisTurn(game) && (condition == null || condition.apply(game, this)))) {
+        if (!(hasMoreActivationsThisTurn(game)
+                && (condition == null
+                || condition.apply(game, this)))) {
             return ActivationStatus.getFalse();
         }
         switch (mayActivate) {
             case ANY:
                 break;
-
+            case ACTIVE:
+                if (game.getActivePlayerId() != playerId) {
+                    return ActivationStatus.getFalse();
+                }
+                break;
             case NOT_YOU:
                 if (controlsAbility(playerId, game)) {
                     return ActivationStatus.getFalse();
@@ -198,9 +203,17 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 return ActivationStatus.getFalse();
         }
         //20091005 - 602.5d/602.5e
-        MageObjectReference permittingObject = game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game);
-        if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId) || null != permittingObject) {
-            if (costs.canPay(this, sourceId, playerId, game) && canChooseTarget(game)) {
+        MageObjectReference permittingObject = game.getContinuousEffects()
+                .asThough(sourceId,
+                        AsThoughEffectType.ACTIVATE_AS_INSTANT,
+                        this,
+                        controllerId,
+                        game);
+        if (timing == TimingRule.INSTANT
+                || game.canPlaySorcery(playerId)
+                || null != permittingObject) {
+            if (costs.canPay(this, sourceId, playerId, game)
+                    && canChooseTarget(game)) {
                 this.activatorId = playerId;
                 return new ActivationStatus(true, permittingObject);
             }
@@ -297,8 +310,10 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected ActivationInfo getActivationInfo(Game game) {
-        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game));
-        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game));
+        Integer turnNum = (Integer) game.getState()
+                .getValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game));
+        Integer activationCount = (Integer) game.getState()
+                .getValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game));
         if (turnNum == null || activationCount == null) {
             return null;
         }
@@ -306,7 +321,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected void setActivationInfo(ActivationInfo activationInfo, Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
-        game.getState().setValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
+        game.getState().setValue(CardUtil
+                .getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
+        game.getState().setValue(CardUtil
+                .getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
     }
 }
