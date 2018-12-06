@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -18,9 +16,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class ConundrumSphinx extends CardImpl {
@@ -85,7 +85,7 @@ class ConundrumSphinxEffect extends OneShotEffect {
                         if (card != null) {
                             Cards cards = new CardsImpl(card);
                             player.revealCards(source, player.getName(), cards, game);
-                            if (card.getName().equals(cardName)) {
+                            if (CardUtil.haveSameNames(card.getName(), cardName)) {
                                 player.moveCards(cards, Zone.HAND, source, game);
                             } else {
                                 player.putCardsOnBottomOfLibrary(cards, game, source, false);

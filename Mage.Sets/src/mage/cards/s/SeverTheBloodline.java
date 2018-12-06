@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -19,15 +17,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class SeverTheBloodline extends CardImpl {
 
     public SeverTheBloodline(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
 
         // Exile target creature and all other creatures with the same name as that creature.
@@ -69,7 +69,7 @@ class SeverTheBloodlineEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (controller != null && targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            if (targetPermanent.getName().isEmpty()) {
+            if (CardUtil.haveEmptyName(targetPermanent)) {
                 filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
             } else {
                 filter.add(new NamePredicate(targetPermanent.getName()));

@@ -1,13 +1,5 @@
 package org.mage.test.clientside.base;
 
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.util.Date;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchOptions;
@@ -20,7 +12,15 @@ import mage.interfaces.callback.ClientCallback;
 import mage.server.Main;
 import mage.sets.Sets;
 import mage.util.Logging;
-import mage.view.*;
+
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Date;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Base for starting Mage server. Controls interactions between MageAPI and Mage
@@ -205,7 +205,7 @@ public class MageBase {
         }
         gameView = server.getGameView(gameId, sessionId, playerId);
         for (CardView card : gameView.getHand().values()) {
-            if (card.getName().equals(cardName)) {
+            if (CardUtil.haveSameNames(card.getName(), cardName)) {
                 return true;
             }
         }
@@ -224,7 +224,7 @@ public class MageBase {
         CardsView cards = gameView.getHand();
         CardView cardToPlay = null;
         for (CardView card : cards.values()) {
-            if (card.getName().equals(cardName)) {
+            if (CardUtil.haveSameNames(card.getName(), cardName)) {
                 cardToPlay = card;
             }
         }

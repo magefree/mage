@@ -3,6 +3,7 @@ package org.mage.test.cards.dynamicvalue;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -80,10 +81,11 @@ public class SweepTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plow Through Reito");
         addTarget(playerA, "Raging Goblin"); // target to boost
-        addTarget(playerA, ""); // targets to sweep (zero)
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // targets to sweep (zero)
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Raging Goblin", 1);
         assertPermanentCount(playerA, "Plains", 5);

@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,11 +15,12 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class CursedScroll extends CardImpl {
 
@@ -70,7 +70,7 @@ class CursedScrollEffect extends OneShotEffect {
                 }
                 revealed.add(card);
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName)) {
                     Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
                     if (creature != null) {
                         creature.damage(2, source.getSourceId(), game, false, true);

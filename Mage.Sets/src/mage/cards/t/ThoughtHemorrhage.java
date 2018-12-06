@@ -1,9 +1,5 @@
 package mage.cards.t;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -21,9 +17,14 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class ThoughtHemorrhage extends CardImpl {
@@ -74,7 +75,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 targetPlayer.revealCards("hand of " + targetPlayer.getName(), targetPlayer.getHand(), game);
                 int cardsFound = 0;
                 for (Card card : targetPlayer.getHand().getCards(game)) {
-                    if (card.getName().equals(cardName)) {
+                    if (CardUtil.haveSameNames(card.getName(), cardName)) {
                         cardsFound++;
                     }
                 }

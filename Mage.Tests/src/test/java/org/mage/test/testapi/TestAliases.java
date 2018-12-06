@@ -1,7 +1,10 @@
 package org.mage.test.testapi;
 
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.util.CardUtil;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -10,6 +13,39 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 
 public class TestAliases extends CardTestPlayerBase {
+
+    @Test
+    public void test_NamesEquals() {
+        // empty names for face down cards
+        Assert.assertTrue(CardUtil.haveEmptyName(""));
+        Assert.assertTrue(CardUtil.haveEmptyName(EmptyNames.FACE_DOWN_CREATURE.toString()));
+        Assert.assertFalse(CardUtil.haveEmptyName(" "));
+        Assert.assertFalse(CardUtil.haveEmptyName("123"));
+        Assert.assertFalse(CardUtil.haveEmptyName("Sample Name"));
+
+        // same names (empty names can't be same)
+        Assert.assertFalse(CardUtil.haveSameNames("", ""));
+        Assert.assertFalse(CardUtil.haveSameNames(EmptyNames.FACE_DOWN_CREATURE.toString(), ""));
+        Assert.assertFalse(CardUtil.haveSameNames(EmptyNames.FACE_DOWN_CREATURE.toString(), EmptyNames.FACE_DOWN_CREATURE.toString()));
+        Assert.assertFalse(CardUtil.haveSameNames(EmptyNames.FACE_DOWN_TOKEN.toString(), ""));
+        Assert.assertFalse(CardUtil.haveSameNames(EmptyNames.FACE_DOWN_TOKEN.toString(), EmptyNames.FACE_DOWN_CREATURE.toString()));
+        Assert.assertTrue(CardUtil.haveSameNames("Name", "Name"));
+        Assert.assertFalse(CardUtil.haveSameNames("Name", ""));
+        Assert.assertFalse(CardUtil.haveSameNames("Name", " "));
+        Assert.assertFalse(CardUtil.haveSameNames("Name", "123"));
+        Assert.assertFalse(CardUtil.haveSameNames("Name", EmptyNames.FACE_DOWN_CREATURE.toString()));
+        Assert.assertFalse(CardUtil.haveSameNames("Name1", "Name2"));
+
+        // ignore mtg rules (empty names must be same)
+        Assert.assertTrue(CardUtil.haveSameNames("", "", true));
+        Assert.assertTrue(CardUtil.haveSameNames(EmptyNames.FACE_DOWN_CREATURE.toString(), EmptyNames.FACE_DOWN_CREATURE.toString(), true));
+        Assert.assertTrue(CardUtil.haveSameNames("Name", "Name", true));
+        Assert.assertFalse(CardUtil.haveSameNames("Name", "", true));
+        Assert.assertFalse(CardUtil.haveSameNames("Name", " ", true));
+        Assert.assertFalse(CardUtil.haveSameNames("Name", "123", true));
+        Assert.assertFalse(CardUtil.haveSameNames("Name", EmptyNames.FACE_DOWN_CREATURE.toString(), true));
+        Assert.assertFalse(CardUtil.haveSameNames("Name1", "Name2", true));
+    }
 
     @Test
     public void test_DifferentZones() {

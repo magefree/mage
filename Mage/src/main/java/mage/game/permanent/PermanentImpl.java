@@ -1,4 +1,3 @@
-
 package mage.game.permanent;
 
 import mage.MageObject;
@@ -50,6 +49,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.counter = counter;
             this.sourceObject = sourceObject;
         }
+
         Counter counter;
         MageObject sourceObject;
     }
@@ -164,7 +164,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public String toString() {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append(this.name).append('-').append(this.expansionSetCode);
+        sb.append(this.getName()).append('-').append(this.expansionSetCode);
         if (copy) {
             sb.append(" [Copy]");
         }
@@ -196,9 +196,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public String getName() {
+        if (name.isEmpty()) {
+            if (faceDown) {
+                return EmptyNames.FACE_DOWN_CREATURE.toString();
+            } else {
+                return "";
+            }
+        } else {
+            return name;
+        }
+    }
+
+    @Override
     public String getValue(GameState state) {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append(controllerId).append(name).append(tapped).append(damage);
+        sb.append(controllerId).append(getName()).append(tapped).append(damage);
         sb.append(subtype).append(supertype).append(power.getValue()).append(toughness.getValue());
         sb.append(abilities.getValue());
         for (Counter counter : getCounters(state).values()) {
@@ -245,7 +258,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     /**
-     *
      * @param ability
      * @param game
      */
@@ -665,7 +677,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.attachedTo = attachToObjectId;
         this.attachedToZoneChangeCounter = game.getState().getZoneChangeCounter(attachToObjectId);
         for (Ability ability : this.getAbilities()) {
-            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
+            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext(); ) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
                 game.getContinuousEffects().setOrder(effect);
                 // It's important to update the timestamp of the copied effect in ContinuousEffects because it does the action
@@ -715,8 +727,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      * @param game
      * @param preventable
      * @param combat
-     * @param markDamage If true, damage will be dealt later in applyDamage
-     * method
+     * @param markDamage   If true, damage will be dealt later in applyDamage
+     *                     method
      * @return
      */
     private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, List<UUID> appliedEffects) {
@@ -1441,20 +1453,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     //If an object leaves the zone it's in, all attached permanents become unattached
     //note that this code doesn't actually detach anything, and is a bit of a bandaid
     public void detachAllAttachments(Game game) {
-        for(UUID attachmentId : getAttachments()) {
+        for (UUID attachmentId : getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
             Card attachmentCard = game.getCard(attachmentId);
-            if(attachment != null && attachmentCard != null) {
+            if (attachment != null && attachmentCard != null) {
                 //make bestow cards and licids into creatures
                 //aura test to stop bludgeon brawl shenanigans from using this code
                 //consider adding code to handle that case?
-                if(attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature()) {
+                if (attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature()) {
                     BestowAbility.becomeCreature(attachment, game);
                 }
             }
         }
     }
-    
+
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
@@ -1480,7 +1492,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
         ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
-        
+
         boolean successfullyMoved = ZonesHandler.moveCard(info, game);
         //20180810 - 701.3d
         detachAllAttachments(game);

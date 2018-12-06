@@ -1,5 +1,6 @@
 package org.mage.test.cards.facedown;
 
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -13,13 +14,12 @@ public class GhastlyConscriptionTest extends CardTestPlayerBase {
     /**
      * Ghastly Conscription
      * Sorcery, 5BB (7)
-     * Exile all creature cards from target player's graveyard in a face-down pile, 
-     * shuffle that pile, then manifest those cards. (To manifest a card, put it 
-     * onto the battlefield face down as a 2/2 creature. Turn it face up any time 
+     * Exile all creature cards from target player's graveyard in a face-down pile,
+     * shuffle that pile, then manifest those cards. (To manifest a card, put it
+     * onto the battlefield face down as a 2/2 creature. Turn it face up any time
      * for its mana cost if it's a creature card.)
-     * 
      */
-    
+
     // test that cards exiled using Ghastly Conscription return face down
     @Test
     public void testGhastlyConscription() {
@@ -36,9 +36,9 @@ public class GhastlyConscriptionTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        
+
         assertGraveyardCount(playerA, 2);
-        assertPermanentCount(playerA, "", 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
 
     }
 

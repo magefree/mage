@@ -47,6 +47,7 @@ import mage.players.Player;
 import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
+import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -68,6 +69,8 @@ import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 public class TestPlayer implements Player {
 
     private static final Logger logger = Logger.getLogger(TestPlayer.class);
+
+    public static final String TARGET_SKIP = "[skip]";
 
     private int maxCallsWithoutAction = 100;
     private int foundNoAction = 0;
@@ -218,7 +221,7 @@ public class TestPlayer implements Player {
             filteredName = indexedMatcher.group(1);
             index = Integer.valueOf(indexedMatcher.group(2));
         }
-        filter.add(new NamePredicate(filteredName));
+        filter.add(new NamePredicate(filteredName, true)); // must find any cards even without names
         List<Permanent> allPermanents = game.getBattlefield().getAllActivePermanents(filter, controllerID, game);
         if (allPermanents.isEmpty()) {
             if (failOnNotFound) {
@@ -350,7 +353,8 @@ public class TestPlayer implements Player {
             return true;
         }
 
-        if (nameOrAliase.isEmpty() && object.getName().isEmpty()) {
+        // must search any names, even empty
+        if (CardUtil.haveSameNames(nameOrAliase, object.getName(), true)) {
             return true;
         }
 
@@ -1519,7 +1523,7 @@ public class TestPlayer implements Player {
             }
 
             // do not select
-            if (targets.get(0).equals("")) {
+            if (targets.get(0).equals(TARGET_SKIP)) {
                 Assert.assertEquals("found empty choice, but target is not support 0 choice", 0, target.getMinNumberOfTargets());
                 targets.remove(0);
                 return true;

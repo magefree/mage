@@ -1,10 +1,9 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,9 +13,11 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class LammastideWeave extends CardImpl {
@@ -70,7 +71,7 @@ class LammastideWeaveEffect extends OneShotEffect {
             Card card = targetPlayer.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName)) {
                     controller.gainLife(card.getConvertedManaCost(), game, source);
                 }
             }
