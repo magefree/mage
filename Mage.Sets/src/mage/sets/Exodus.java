@@ -70,6 +70,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Jackalope Herd", 111, Rarity.COMMON, mage.cards.j.JackalopeHerd.class));
         cards.add(new SetCardInfo("Keeper of the Beasts", 112, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheBeasts.class));
         cards.add(new SetCardInfo("Keeper of the Dead", 65, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheDead.class));
+        cards.add(new SetCardInfo("Keeper of the Flame", 85, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheFlame.class));
 	cards.add(new SetCardInfo("Keeper of the Light", 8, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheLight.class));
         cards.add(new SetCardInfo("Keeper of the Mind", 36, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheMind.class));
         cards.add(new SetCardInfo("Killer Whale", 37, Rarity.UNCOMMON, mage.cards.k.KillerWhale.class));
@@ -86,6 +87,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Mirozel", 41, Rarity.UNCOMMON, mage.cards.m.Mirozel.class));
         cards.add(new SetCardInfo("Mirri, Cat Warrior", 114, Rarity.RARE, mage.cards.m.MirriCatWarrior.class));
         cards.add(new SetCardInfo("Mogg Assassin", 88, Rarity.UNCOMMON, mage.cards.m.MoggAssassin.class));
+        cards.add(new SetCardInfo("Monstrous Hound", 89, Rarity.RARE, mage.cards.m.MonstrousHound.class));
         cards.add(new SetCardInfo("Nausea", 67, Rarity.COMMON, mage.cards.n.Nausea.class));
         cards.add(new SetCardInfo("Necrologia", 68, Rarity.UNCOMMON, mage.cards.n.Necrologia.class));
         cards.add(new SetCardInfo("Null Brooch", 136, Rarity.RARE, mage.cards.n.NullBrooch.class));
