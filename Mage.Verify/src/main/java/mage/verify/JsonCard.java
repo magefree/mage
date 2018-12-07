@@ -34,6 +34,8 @@ class JsonCard {
     public List<String> printings;
     public String power;
     public String rarity;
+    public boolean starter;
+    public String side;
     public List<JsonRuling> rulings;
     public List<String> subtypes;
     public List<String> supertypes;
@@ -44,8 +46,4 @@ class JsonCard {
     public String uuid;
     public List<String> variations;
     public String watermark;
-
-    // unknown
-    public boolean starter;
-    public String side;
 }
