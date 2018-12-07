@@ -28,6 +28,7 @@ public final class Exodus extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        cards.add(new SetCardInfo("Aether Tide", 27, Rarity.COMMON, mage.cards.a.AetherTide.class));
         cards.add(new SetCardInfo("Allay", 1, Rarity.COMMON, mage.cards.a.Allay.class));
         cards.add(new SetCardInfo("Anarchist", 79, Rarity.COMMON, mage.cards.a.Anarchist.class));
         cards.add(new SetCardInfo("Angelic Blessing", 2, Rarity.COMMON, mage.cards.a.AngelicBlessing.class));
@@ -75,6 +76,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of the Mind", 36, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheMind.class));
         cards.add(new SetCardInfo("Killer Whale", 37, Rarity.UNCOMMON, mage.cards.k.KillerWhale.class));
         cards.add(new SetCardInfo("Kor Chant", 9, Rarity.COMMON, mage.cards.k.KorChant.class));
+        cards.add(new SetCardInfo("Limited Resources", 10, Rarity.RARE, mage.cards.l.LimitedResources.class));
         cards.add(new SetCardInfo("Mage il-Vec", 86, Rarity.COMMON, mage.cards.m.MageIlVec.class));
         cards.add(new SetCardInfo("Manabond", 113, Rarity.RARE, mage.cards.m.Manabond.class));
         cards.add(new SetCardInfo("Mana Breach", 38, Rarity.UNCOMMON, mage.cards.m.ManaBreach.class));

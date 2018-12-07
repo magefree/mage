@@ -2,20 +2,20 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentsComparedToOpponentsCondition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerSourceEffect;
-import mage.abilities.effects.common.combat.CantBlockSourceEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -31,23 +31,15 @@ public final class MonstrousHound extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Monstrous Hound can't attack unless you control more lands than defending player.
-        Effect effect = new ConditionalRestrictionEffect(
-                new CantAttackAnyPlayerSourceEffect(Duration.WhileOnBattlefield),
-                new ControlsPermanentsComparedToOpponentsCondition(
-                        ComparisonType.FEWER_THAN, 
-                        new FilterLandPermanent()));
+        Effect effect = new CantAttackUnlessControllerControlsMoreLandsEffect();
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, 
+                Zone.BATTLEFIELD,
                 effect.setText("{this} can't attack unless you control more lands than defending player")));
 
         // Monstrous Hound can't block unless you control more lands than attacking player.
-        Effect effect2 = new ConditionalRestrictionEffect(
-                new CantBlockSourceEffect(Duration.WhileOnBattlefield),
-                new ControlsPermanentsComparedToOpponentsCondition(
-                        ComparisonType.FEWER_THAN, 
-                        new FilterLandPermanent()));
+        Effect effect2 = new CantBlockUnlessControllerControlsMoreLandsEffect();
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, 
+                Zone.BATTLEFIELD,
                 effect2.setText("{this} can't block unless you control more lands than attacking player")));
 
     }
@@ -59,5 +51,81 @@ public final class MonstrousHound extends CardImpl {
     @Override
     public MonstrousHound copy() {
         return new MonstrousHound(this);
+    }
+}
+
+class CantAttackUnlessControllerControlsMoreLandsEffect extends RestrictionEffect {
+
+    CantAttackUnlessControllerControlsMoreLandsEffect() {
+        super(Duration.WhileOnBattlefield);
+    }
+
+    CantAttackUnlessControllerControlsMoreLandsEffect(final CantAttackUnlessControllerControlsMoreLandsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getSourceId());
+    }
+
+    @Override
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        UUID defendingPlayerId;
+        Player defender = game.getPlayer(defenderId);
+        if (defender == null) {
+            Permanent permanent = game.getPermanent(defenderId);
+            if (permanent != null) {
+                defendingPlayerId = permanent.getControllerId();
+            } else {
+                return false;
+            }
+        } else {
+            defendingPlayerId = defenderId;
+        }
+        if (defendingPlayerId != null) {
+            return game.getBattlefield().countAll(new FilterControlledLandPermanent(),
+                    source.getControllerId(), game) > game.getBattlefield().countAll(new FilterControlledLandPermanent(),
+                    defendingPlayerId, game);
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public CantAttackUnlessControllerControlsMoreLandsEffect copy() {
+        return new CantAttackUnlessControllerControlsMoreLandsEffect(this);
+    }
+}
+
+class CantBlockUnlessControllerControlsMoreLandsEffect extends RestrictionEffect {
+
+    CantBlockUnlessControllerControlsMoreLandsEffect() {
+        super(Duration.WhileOnBattlefield);
+    }
+
+    CantBlockUnlessControllerControlsMoreLandsEffect(final CantBlockUnlessControllerControlsMoreLandsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CantBlockUnlessControllerControlsMoreLandsEffect copy() {
+        return new CantBlockUnlessControllerControlsMoreLandsEffect(this);
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        UUID attackingPlayerId = attacker.getControllerId();
+        if (attackingPlayerId != null) {
+            return game.getBattlefield().countAll(new FilterControlledLandPermanent(),
+                    source.getControllerId(), game) > game.getBattlefield().countAll(new FilterControlledLandPermanent(),
+                    attackingPlayerId, game);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getSourceId());
     }
 }
