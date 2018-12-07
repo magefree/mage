@@ -45,6 +45,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Convalescence", 5, Rarity.RARE, mage.cards.c.Convalescence.class));
         cards.add(new SetCardInfo("Crashing Boars", 108, Rarity.UNCOMMON, mage.cards.c.CrashingBoars.class));
         cards.add(new SetCardInfo("Culling the Weak", 55, Rarity.COMMON, mage.cards.c.CullingTheWeak.class));
+        cards.add(new SetCardInfo("Cunning", 28, Rarity.COMMON, mage.cards.c.Cunning.class));
         cards.add(new SetCardInfo("Curiosity", 29, Rarity.UNCOMMON, mage.cards.c.Curiosity.class));
         cards.add(new SetCardInfo("Cursed Flesh", 56, Rarity.COMMON, mage.cards.c.CursedFlesh.class));
         cards.add(new SetCardInfo("Dauthi Cutthroat", 57, Rarity.UNCOMMON, mage.cards.d.DauthiCutthroat.class));
@@ -66,6 +67,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Forbid", 35, Rarity.UNCOMMON, mage.cards.f.Forbid.class));
         cards.add(new SetCardInfo("Fugue", 62, Rarity.UNCOMMON, mage.cards.f.Fugue.class));
         cards.add(new SetCardInfo("Furnace Brood", 84, Rarity.COMMON, mage.cards.f.FurnaceBrood.class));
+        cards.add(new SetCardInfo("Grollub", 63, Rarity.COMMON, mage.cards.g.Grollub.class));
         cards.add(new SetCardInfo("Hatred", 64, Rarity.RARE, mage.cards.h.Hatred.class));
         cards.add(new SetCardInfo("High Ground", 7, Rarity.UNCOMMON, mage.cards.h.HighGround.class));
         cards.add(new SetCardInfo("Jackalope Herd", 111, Rarity.COMMON, mage.cards.j.JackalopeHerd.class));
