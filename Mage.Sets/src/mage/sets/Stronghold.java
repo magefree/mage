@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -27,6 +26,7 @@ public final class Stronghold extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Acidic Sliver", 126, Rarity.UNCOMMON, mage.cards.a.AcidicSliver.class));
         cards.add(new SetCardInfo("Amok", 76, Rarity.RARE, mage.cards.a.Amok.class));
         cards.add(new SetCardInfo("Awakening", 101, Rarity.RARE, mage.cards.a.Awakening.class));
@@ -77,7 +77,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Hermit Druid", 108, Rarity.RARE, mage.cards.h.HermitDruid.class));
         cards.add(new SetCardInfo("Hesitation", 33, Rarity.UNCOMMON, mage.cards.h.Hesitation.class));
         cards.add(new SetCardInfo("Hibernation Sliver", 128, Rarity.UNCOMMON, mage.cards.h.HibernationSliver.class));
-        cards.add(new SetCardInfo("Hidden Retreat", 106, Rarity.RARE, mage.cards.h.HiddenRetreat.class));
+        cards.add(new SetCardInfo("Hidden Retreat", 6, Rarity.RARE, mage.cards.h.HiddenRetreat.class));
         cards.add(new SetCardInfo("Honor Guard", 7, Rarity.COMMON, mage.cards.h.HonorGuard.class));
         cards.add(new SetCardInfo("Horn of Greed", 135, Rarity.RARE, mage.cards.h.HornOfGreed.class));
         cards.add(new SetCardInfo("Hornet Cannon", 136, Rarity.UNCOMMON, mage.cards.h.HornetCannon.class));
@@ -117,7 +117,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Rolling Stones", 11, Rarity.RARE, mage.cards.r.RollingStones.class));
         cards.add(new SetCardInfo("Ruination", 95, Rarity.RARE, mage.cards.r.Ruination.class));
         cards.add(new SetCardInfo("Sacred Ground", 12, Rarity.RARE, mage.cards.s.SacredGround.class));
-        cards.add(new SetCardInfo("Samite Blessing", 113, Rarity.COMMON, mage.cards.s.SamiteBlessing.class));
+        cards.add(new SetCardInfo("Samite Blessing", 13, Rarity.COMMON, mage.cards.s.SamiteBlessing.class));
         cards.add(new SetCardInfo("Scapegoat", 14, Rarity.UNCOMMON, mage.cards.s.Scapegoat.class));
         cards.add(new SetCardInfo("Seething Anger", 96, Rarity.COMMON, mage.cards.s.SeethingAnger.class));
         cards.add(new SetCardInfo("Serpent Warrior", 69, Rarity.COMMON, mage.cards.s.SerpentWarrior.class));
@@ -127,7 +127,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Shock", 98, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Sift", 42, Rarity.COMMON, mage.cards.s.Sift.class));
         cards.add(new SetCardInfo("Silver Wyvern", 43, Rarity.RARE, mage.cards.s.SilverWyvern.class));
-        cards.add(new SetCardInfo("Skeleton Scavengers", 20, Rarity.RARE, mage.cards.s.SkeletonScavengers.class));
+        cards.add(new SetCardInfo("Skeleton Scavengers", 70, Rarity.RARE, mage.cards.s.SkeletonScavengers.class));
         cards.add(new SetCardInfo("Skyshroud Archer", 114, Rarity.COMMON, mage.cards.s.SkyshroudArcher.class));
         cards.add(new SetCardInfo("Skyshroud Falcon", 16, Rarity.COMMON, mage.cards.s.SkyshroudFalcon.class));
         cards.add(new SetCardInfo("Skyshroud Troopers", 115, Rarity.COMMON, mage.cards.s.SkyshroudTroopers.class));

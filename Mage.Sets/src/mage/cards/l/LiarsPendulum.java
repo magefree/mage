@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,9 +18,11 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class LiarsPendulum extends CardImpl {
@@ -93,7 +93,7 @@ class LiarsPendulumEffect extends OneShotEffect {
                         rightGuess = opponentGuess;
                     }
                 }
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName)) {
                     rightGuess = opponentGuess;
                 }
             }

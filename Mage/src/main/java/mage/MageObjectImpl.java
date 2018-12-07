@@ -1,11 +1,5 @@
-
 package mage;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -20,15 +14,13 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
 import mage.cards.FrameStyle;
-import mage.constants.CardType;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.SubTypeSet;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.*;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -48,6 +40,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected MageInt power;
     protected MageInt toughness;
     protected boolean copy;
+    protected MageObject copyFrom; // copied card INFO (used to call original adjusters)
     protected List<TextPart> textParts;
 
     public MageObjectImpl() {
@@ -82,6 +75,7 @@ public abstract class MageObjectImpl implements MageObject {
         isAllCreatureTypes = object.isAllCreatureTypes;
         supertype.addAll(object.supertype);
         this.copy = object.copy;
+        this.copyFrom = (object.copyFrom != null ? object.copyFrom.copy() : null);
         textParts = new ArrayList<>();
         textParts.addAll(object.textParts);
     }
@@ -263,8 +257,14 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public void setCopy(boolean isCopy) {
+    public void setCopy(boolean isCopy, MageObject copyFrom) {
         this.copy = isCopy;
+        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
+    }
+
+    @Override
+    public MageObject getCopyFrom() {
+        return this.copyFrom;
     }
 
     @Override
@@ -322,7 +322,7 @@ public abstract class MageObjectImpl implements MageObject {
      */
     @Override
     public void removePTCDA() {
-        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
+        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext(); ) {
             Ability ability = iter.next();
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {

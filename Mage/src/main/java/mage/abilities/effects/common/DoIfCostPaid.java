@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.Locale;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,6 +12,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Locale;
 
 public class DoIfCostPaid extends OneShotEffect {
 
@@ -27,9 +28,10 @@ public class DoIfCostPaid extends OneShotEffect {
     }
 
     public DoIfCostPaid(Effect effect, Effect effect2, Cost cost) {
-        this(effect,effect2,cost,true);
+        this(effect, effect2, cost, true);
     }
-    public DoIfCostPaid(Effect effect, Effect effect2, Cost cost,boolean optional) {
+
+    public DoIfCostPaid(Effect effect, Effect effect2, Cost cost, boolean optional) {
         this(effect, cost, null, optional);
         this.otherwiseEffects.add(effect2);
     }
@@ -60,6 +62,14 @@ public class DoIfCostPaid extends OneShotEffect {
     public DoIfCostPaid addEffect(Effect effect) {
         executingEffects.add(effect);
         return this;
+    }
+
+    public Effects getExecutingEffects() {
+        return this.executingEffects;
+    }
+
+    public Effects getOtherwiseEffects() {
+        return this.otherwiseEffects;
     }
 
     @Override

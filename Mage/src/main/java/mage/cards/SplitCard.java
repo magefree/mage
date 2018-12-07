@@ -1,9 +1,6 @@
-
 package mage.cards;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -13,8 +10,11 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public abstract class SplitCard extends CardImpl {
@@ -58,10 +58,10 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public void setCopy(boolean isCopy) {
-        super.setCopy(isCopy);
-        leftHalfCard.setCopy(isCopy);
-        rightHalfCard.setCopy(isCopy);
+    public void setCopy(boolean isCopy, MageObject copiedFrom) {
+        super.setCopy(isCopy, copiedFrom);
+        leftHalfCard.setCopy(isCopy, copiedFrom);
+        rightHalfCard.setCopy(isCopy, copiedFrom);
     }
 
     @Override

@@ -12,7 +12,10 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.Normalizer;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 public final class MtgJson {
@@ -60,16 +63,29 @@ public final class MtgJson {
         static {
             try {
                 cards = loadAllCards();
-                List<String> oldKeys = new ArrayList<>();
+
+                List<String> keysToDelete = new ArrayList<>();
+
+                // fix names
                 Map<String, JsonCard> newKeys = new HashMap<>();
                 for (String key : cards.keySet()) {
                     if (key.contains("(")) {
                         newKeys.put(key.replaceAll("\\(.*\\)", "").trim(), cards.get(key));
-                        oldKeys.add(key);
+                        keysToDelete.add(key);
                     }
                 }
                 cards.putAll(newKeys);
-                cards.keySet().removeAll(oldKeys);
+                cards.keySet().removeAll(keysToDelete);
+
+                // remove wrong data (tokens)
+                keysToDelete.clear();
+                for (Map.Entry<String, JsonCard> record : cards.entrySet()) {
+                    if (record.getValue().layout.equals("token") || record.getValue().layout.equals("double_faced_token")) {
+                        keysToDelete.add(record.getKey());
+                    }
+                }
+                cards.keySet().removeAll(keysToDelete);
+
                 addAliases(cards);
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -1,6 +1,6 @@
 package mage.verify;
 
-public class Meta {
+public class JsonMeta {
     public String date;
     public String version;
 }

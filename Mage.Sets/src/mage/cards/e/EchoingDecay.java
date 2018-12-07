@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -17,15 +15,17 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class EchoingDecay extends CardImpl {
 
     public EchoingDecay(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new EchoingDecayEffect());
@@ -63,12 +63,12 @@ class EchoingDecayEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            if (targetPermanent.getName().isEmpty()) {
+            if (CardUtil.haveEmptyName(targetPermanent)) {
                 filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
             } else {
                 filter.add(new NamePredicate(targetPermanent.getName()));
             }
-            ContinuousEffect effect = new BoostAllEffect(-2,-2, Duration.EndOfTurn, filter, false);
+            ContinuousEffect effect = new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false);
             game.addEffect(effect, source);
             return true;
         }

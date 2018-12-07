@@ -59,7 +59,7 @@ public class LicidAbilityTest extends CardTestPlayerBase {
         
         execute();
 
-        assertActionCount(playerA, 0);
+        assertActionsCount(playerA, 0);
         assertAbility(playerA, "Pillarfield Ox", HasteAbility.getInstance(), false);
         assertAbility(playerA, "Enraging Licid", new LicidAbility(new ColoredManaCost(ColoredManaSymbol.R), new ColoredManaCost(ColoredManaSymbol.R)), true);
         assertType("Enraging Licid", CardType.ENCHANTMENT, false);

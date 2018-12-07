@@ -44,12 +44,12 @@ public class FilterPlayer extends FilterImpl<Player> {
         return object instanceof Player;
     }
 
-    public boolean match(Player player, UUID sourceId, UUID playerId, Game game) {
-        if (!this.match(player, game)) {
+    public boolean match(Player checkPlayer, UUID sourceId, UUID sourceControllerId, Game game) {
+        if (!this.match(checkPlayer, game)) {
             return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(player, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(checkPlayer, sourceId, sourceControllerId), game);
     }
 
     @Override

@@ -15,11 +15,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author jonubuu
  */
 public final class CabalTherapy extends CardImpl {
@@ -71,13 +71,13 @@ class CabalTherapyEffect extends OneShotEffect {
             for (Card card : hand.getCards(game)) {
                 if (card.isSplitCard()) {
                     SplitCard splitCard = (SplitCard) card;
-                    if (splitCard.getLeftHalfCard().getName().equals(cardName)) {
+                    if (CardUtil.haveSameNames(splitCard.getLeftHalfCard().getName(), cardName)) {
                         targetPlayer.discard(card, source, game);
-                    } else if (splitCard.getRightHalfCard().getName().equals(cardName)) {
+                    } else if (CardUtil.haveSameNames(splitCard.getRightHalfCard().getName(), cardName)) {
                         targetPlayer.discard(card, source, game);
                     }
                 }
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName)) {
                     targetPlayer.discard(card, source, game);
                 }
             }

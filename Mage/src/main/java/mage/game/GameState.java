@@ -1,8 +1,5 @@
 package mage.game;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -35,15 +32,17 @@ import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
- *
+ * <p>
  * since at any time the game state may be copied and restored you cannot rely
  * on any object maintaining it's instance it then becomes necessary to only
  * refer to objects by their ids since these will always remain constant
  * throughout its lifetime
- *
  */
 public class GameState implements Serializable, Copyable<GameState> {
 
@@ -590,6 +589,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 //    public void addMessage(String message) {
 //        this.messages.add(message);
 //    }
+
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
@@ -758,7 +758,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
@@ -943,7 +943,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Other abilities are used to implement some special kind of continuous
      * effects that give abilities to non permanents.
-     *
+     * <p>
      * Crucible of Worlds - You may play land cards from your graveyard. Past in
      * Flames - Each instant and sorcery card in your graveyard gains flashback
      * until end of turn. The flashback cost is equal to its mana cost. Varolz,
@@ -984,7 +984,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     * state
+     *                    state
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         Ability newAbility;
@@ -1134,7 +1134,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         Card copiedCard = cardToCopy.copy();
         copiedCard.assignNewId();
         copiedCard.setOwnerId(source.getControllerId());
-        copiedCard.setCopy(true);
+        copiedCard.setCopy(true, cardToCopy);
         copiedCards.put(copiedCard.getId(), copiedCard);
         addCard(copiedCard);
         if (copiedCard.isSplitCard()) {

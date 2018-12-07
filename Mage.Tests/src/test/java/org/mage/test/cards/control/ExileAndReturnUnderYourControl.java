@@ -1,5 +1,6 @@
 package org.mage.test.cards.control;
 
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
@@ -9,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * Tests the effect: - Exile target creature you control, then return that card
  * to the battlefield under your control
- *
+ * <p>
  * This effect grants you permanent control over the returned creature. So you
  * mail steal opponent's creature with "Act of Treason" and then use this effect
  * for permanent control effect.
@@ -103,8 +104,8 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         assertExileCount("Secret Plans", 0);
         assertPermanentCount(playerA, "Secret Plans", 1);
 
-        assertPermanentCount(playerA, "", 1);
-        assertPowerToughness(playerA, "", 2, 3);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
     }
 
     /**
