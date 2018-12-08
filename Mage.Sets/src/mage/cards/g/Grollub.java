@@ -62,15 +62,12 @@ class EachOpponentGainsLifeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                int amount = (Integer) getValue("damage");
-                if (amount > 0) {
-                    opponent.gainLife(amount, game, source);
-                }
+        game.getOpponents(source.getControllerId()).stream().map((opponentId) -> game.getPlayer(opponentId)).filter((opponent) -> (opponent != null)).forEachOrdered((opponent) -> {
+            int amount = (Integer) getValue("damage");
+            if (amount > 0) {
+                opponent.gainLife(amount, game, source);
             }
-        }
-        return false;
+        });
+        return true;
     }
 }
