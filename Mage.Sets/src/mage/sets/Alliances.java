@@ -155,6 +155,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Steam Beast", "133a", Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Steam Beast", "133b", Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldier of Fortune", 80, Rarity.UNCOMMON, mage.cards.s.SoldierOfFortune.class));
+        cards.add(new SetCardInfo("Spiny Starfish", 35, Rarity.UNCOMMON, mage.cards.s.SpinyStarfish.class));
         cards.add(new SetCardInfo("Stench of Decay", "61a", Rarity.COMMON, mage.cards.s.StenchOfDecay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stench of Decay", "61b", Rarity.COMMON, mage.cards.s.StenchOfDecay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm Cauldron", 134, Rarity.RARE, mage.cards.s.StormCauldron.class));
