@@ -52,6 +52,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Dauthi Jackal", 58, Rarity.COMMON, mage.cards.d.DauthiJackal.class));
         cards.add(new SetCardInfo("Dauthi Warlord", 59, Rarity.UNCOMMON, mage.cards.d.DauthiWarlord.class));
         cards.add(new SetCardInfo("Death's Duet", 60, Rarity.COMMON, mage.cards.d.DeathsDuet.class));
+        cards.add(new SetCardInfo("Dizzying Gaze", 81, Rarity.COMMON, mage.cards.d.DizzyingGaze.class));
         cards.add(new SetCardInfo("Dominating Licid", 30, Rarity.RARE, mage.cards.d.DominatingLicid.class));
         cards.add(new SetCardInfo("Elven Palisade", 109, Rarity.UNCOMMON, mage.cards.e.ElvenPalisade.class));
         cards.add(new SetCardInfo("Elvish Berserker", 110, Rarity.COMMON, mage.cards.e.ElvishBerserker.class));
@@ -86,6 +87,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Medicine Bag", 133, Rarity.UNCOMMON, mage.cards.m.MedicineBag.class));
         cards.add(new SetCardInfo("Memory Crystal", 134, Rarity.RARE, mage.cards.m.MemoryCrystal.class));
         cards.add(new SetCardInfo("Merfolk Looter", 39, Rarity.COMMON, mage.cards.m.MerfolkLooter.class));
+        cards.add(new SetCardInfo("Mind Maggots", 66, Rarity.UNCOMMON, mage.cards.m.MindMaggots.class));
         cards.add(new SetCardInfo("Mindless Automaton", 135, Rarity.RARE, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mind Over Matter", 40, Rarity.RARE, mage.cards.m.MindOverMatter.class));
         cards.add(new SetCardInfo("Mirozel", 41, Rarity.UNCOMMON, mage.cards.m.Mirozel.class));
@@ -104,6 +106,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Onslaught", 92, Rarity.COMMON, mage.cards.o.Onslaught.class));
         cards.add(new SetCardInfo("Paladin en-Vec", 12, Rarity.RARE, mage.cards.p.PaladinEnVec.class));
         cards.add(new SetCardInfo("Pandemonium", 93, Rarity.RARE, mage.cards.p.Pandemonium.class));
+        cards.add(new SetCardInfo("Paroxysm", 94, Rarity.UNCOMMON, mage.cards.p.Paroxysm.class));
         cards.add(new SetCardInfo("Peace of Mind", 13, Rarity.UNCOMMON, mage.cards.p.PeaceOfMind.class));
         cards.add(new SetCardInfo("Pegasus Stampede", 14, Rarity.UNCOMMON, mage.cards.p.PegasusStampede.class));
         cards.add(new SetCardInfo("Penance", 15, Rarity.UNCOMMON, mage.cards.p.Penance.class));
