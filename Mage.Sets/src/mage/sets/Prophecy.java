@@ -130,7 +130,9 @@ public final class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Root Cage", 122, Rarity.UNCOMMON, mage.cards.r.RootCage.class));
         cards.add(new SetCardInfo("Samite Sanctuary", 21, Rarity.RARE, mage.cards.s.SamiteSanctuary.class));
         cards.add(new SetCardInfo("Scoria Cat", 101, Rarity.UNCOMMON, mage.cards.s.ScoriaCat.class));
+        cards.add(new SetCardInfo("Search for Survivors", 102, Rarity.RARE, mage.cards.s.SearchForSurvivors.class));
         cards.add(new SetCardInfo("Searing Wind", 103, Rarity.RARE, mage.cards.s.SearingWind.class));
+        cards.add(new SetCardInfo("Sheltering Prayers", 22, Rarity.RARE, mage.cards.s.ShelteringPrayers.class));
         cards.add(new SetCardInfo("Shield Dancer", 23, Rarity.UNCOMMON, mage.cards.s.ShieldDancer.class));
         cards.add(new SetCardInfo("Shrouded Serpent", 47, Rarity.RARE, mage.cards.s.ShroudedSerpent.class));
         cards.add(new SetCardInfo("Silt Crawler", 123, Rarity.COMMON, mage.cards.s.SiltCrawler.class));
