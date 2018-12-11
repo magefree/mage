@@ -17,4 +17,5 @@ class JsonSet {
     public List<JsonToken> tokens;
     public int totalSetSize;
     public String type;
+    public String tcgplayerGroupId;
 }
