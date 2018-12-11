@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.Arrays;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -11,9 +12,9 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -48,9 +49,9 @@ class SearchForSurvivorsEffect extends OneShotEffect {
 
     public SearchForSurvivorsEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Reorder your graveyard at random."
-                + "An opponent chooses a card at random in your graveyard."
-                + "If it's a creature card, put it onto the battlefield."
+        this.staticText = "Reorder your graveyard at random. "
+                + "An opponent chooses a card at random in your graveyard. "
+                + "If it's a creature card, put it onto the battlefield. "
                 + "Otherwise, exile it";
     }
 
@@ -67,15 +68,29 @@ class SearchForSurvivorsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.informPlayers("A card will be chosen at random from the controller's graveyard. "
-                    + "The result is essentially the same as the card rule");
-            Cards cards = new CardsImpl();
-            for (Card card : controller.getGraveyard().getCards(new FilterCard(), game)) {
-                cards.add(card);
+            game.informPlayers("The controller of Search for Survivors will have his or her graveyard randomized.  "
+                    + " A card will be chosen at random from the controller's graveyard. "
+                    + " The result is essentially the same as the card rule");
+            // randomly arrange the graveyard
+            UUID[] shuffled = controller.getGraveyard().toArray(new UUID[0]);
+            for (int n = shuffled.length - 1; n > 0; n--) {
+                int r = RandomUtil.nextInt(n + 1);
+                UUID temp = shuffled[r];
+                shuffled[r] = shuffled[n];
+                shuffled[n] = temp;
             }
+            controller.getGraveyard().clear();
+            controller.getGraveyard().addAll(Arrays.asList(shuffled));
+            // end of randomize
+            Cards cards = new CardsImpl();
+            controller.getGraveyard().getCards(game).forEach((card) -> {
+                cards.add(card);
+            });
             if (!cards.isEmpty()) {
                 Card card = cards.getRandom(game);
-                controller.revealCards(source, cards, game);
+                cards.clear();
+                cards.add(card);
+                controller.revealCards(source, cards, game); // reveal the card randomly chosen.
                 if (card.isCreature()) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
