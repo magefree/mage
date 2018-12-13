@@ -91,6 +91,7 @@ public enum CounterType {
     P2P2(new BoostCounter(2, 2).name),
     PAGE("page"),
     PAIN("pain"),
+    PARALYZATION("paralyzation"),
     PETAL("petal"),
     PETRIFICATION("petrification"),
     PHYLACTERY("phylactery"),
