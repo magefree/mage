@@ -89,6 +89,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Circle of Protection: White", 21, Rarity.COMMON, mage.cards.c.CircleOfProtectionWhite.class));
         cards.add(new SetCardInfo("City of Brass", 413, Rarity.RARE, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Clay Statue", 355, Rarity.COMMON, mage.cards.c.ClayStatue.class));
+        cards.add(new SetCardInfo("Cloak of Confusion", 13, Rarity.COMMON, mage.cards.c.CloakOfConfusion.class));
         cards.add(new SetCardInfo("Clockwork Beast", 356, Rarity.RARE, mage.cards.c.ClockworkBeast.class));
         cards.add(new SetCardInfo("Clockwork Steed", 357, Rarity.UNCOMMON, mage.cards.c.ClockworkSteed.class));
         cards.add(new SetCardInfo("Cockatrice", 284, Rarity.RARE, mage.cards.c.Cockatrice.class));

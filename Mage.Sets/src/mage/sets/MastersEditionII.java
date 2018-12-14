@@ -60,6 +60,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Burnout", 121, Rarity.UNCOMMON, mage.cards.b.Burnout.class));
         cards.add(new SetCardInfo("Carapace", 155, Rarity.COMMON, mage.cards.c.Carapace.class));
         cards.add(new SetCardInfo("Caribou Range", 8, Rarity.RARE, mage.cards.c.CaribouRange.class));
+        cards.add(new SetCardInfo("Cloak of Confusion", 82, Rarity.COMMON, mage.cards.c.CloakOfConfusion.class));
         cards.add(new SetCardInfo("Clockwork Steed", 205, Rarity.UNCOMMON, mage.cards.c.ClockworkSteed.class));
         cards.add(new SetCardInfo("Combat Medic", 9, Rarity.COMMON, mage.cards.c.CombatMedic.class));
         cards.add(new SetCardInfo("Conquer", 122, Rarity.UNCOMMON, mage.cards.c.Conquer.class));

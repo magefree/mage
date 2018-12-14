@@ -70,6 +70,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Circle of Protection: Red", 15, Rarity.COMMON, mage.cards.c.CircleOfProtectionRed.class));
         cards.add(new SetCardInfo("Circle of Protection: White", 16, Rarity.COMMON, mage.cards.c.CircleOfProtectionWhite.class));
         cards.add(new SetCardInfo("Clairvoyance", 63, Rarity.COMMON, mage.cards.c.Clairvoyance.class));
+        cards.add(new SetCardInfo("Cloak of Confusion", 5, Rarity.COMMON, mage.cards.c.CloakOfConfusion.class));
         cards.add(new SetCardInfo("Cold Snap", 17, Rarity.UNCOMMON, mage.cards.c.ColdSnap.class));
         cards.add(new SetCardInfo("Conquer", 180, Rarity.UNCOMMON, mage.cards.c.Conquer.class));
         cards.add(new SetCardInfo("Cooperation", 18, Rarity.COMMON, mage.cards.c.Cooperation.class));
@@ -86,6 +87,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Vision", 284, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Dire Wolves", 230, Rarity.COMMON, mage.cards.d.DireWolves.class));
         cards.add(new SetCardInfo("Disenchant", 20, Rarity.COMMON, mage.cards.d.Disenchant.class));
+        cards.add(new SetCardInfo("Dread Wight", 10, Rarity.RARE, mage.cards.d.DreadWight.class));
         cards.add(new SetCardInfo("Dreams of the Dead", 66, Rarity.UNCOMMON, mage.cards.d.DreamsOfTheDead.class));
         cards.add(new SetCardInfo("Drift of the Dead", 123, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Drought", 21, Rarity.UNCOMMON, mage.cards.d.Drought.class));
