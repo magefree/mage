@@ -82,7 +82,7 @@ class CommitEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
                 return controller.putCardOnTopXOfLibrary(permanent, game, source, 2);
             }

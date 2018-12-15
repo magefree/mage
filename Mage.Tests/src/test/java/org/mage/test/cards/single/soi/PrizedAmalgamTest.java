@@ -66,23 +66,24 @@ public class PrizedAmalgamTest extends CardTestPlayerBase {
     public void testOpponentReturnsCreatureFromGrave() {
 
         addCard(Zone.HAND, playerA, "Reanimate", 1);
-        addCard(Zone.GRAVEYARD, playerA, "Hill Giant", 1); // {3}{R} 3/3
+        addCard(Zone.GRAVEYARD, playerA, "Hill Giant", 1); // {3}{R} 3/3, 4 CMC
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Zone.GRAVEYARD, playerB, "Prized Amalgam", 1);
+        addCard(Zone.GRAVEYARD, playerB, "Prized Amalgam", 1); // {1}{U}{B}, 3 CMC
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Hill Giant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate");
+        addTarget(playerA, "Hill Giant");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 16); // lose 4 life from reanimate 4 CMC
+        assertLife(playerA, 16); // lose 4 life from reanimate 4 CMC by Hill Giant
         assertPermanentCount(playerA, "Hill Giant", 1);
         assertPermanentCount(playerB, "Prized Amalgam", 0); // should not recur
         assertGraveyardCount(playerB, "Prized Amalgam", 1); // stays in grave
     }
 
     /*
-    * Test opponent returning a card from your graveyard to battlefield.
+     * Test opponent returning a card from your graveyard to battlefield.
      */
     @Test
     public void testOpponentReturnsCreatureFromYourGrave() {

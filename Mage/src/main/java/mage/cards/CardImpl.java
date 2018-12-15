@@ -327,7 +327,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return spellAbility;
     }
 
-//    @Override
+    //    @Override
 //    public void adjustCosts(Ability ability, Game game) {
 //    }
     @Override
@@ -720,7 +720,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getLogName() {
         if (name.isEmpty()) {
-            return GameLog.getNeutralColoredText("face down card");
+            return GameLog.getNeutralColoredText(EmptyNames.FACE_DOWN_CREATURE.toString());
         } else {
             return GameLog.getColoredObjectIdName(this);
         }

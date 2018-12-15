@@ -1,15 +1,14 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class SpliceOnArcaneTest extends CardTestPlayerBase {
@@ -17,7 +16,6 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
     /**
      * Test that it works to cast Through the Breach by slicing it on an arcane
      * spell
-     *
      */
     @Test
     public void testSpliceThroughTheBreach() {
@@ -32,7 +30,10 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Spike", playerB);
-        setChoice(playerA, "Silvercoat Lion");
+        // activate splice: yes -> card with splice ability -> new target for spliced ability
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Through the Breach");
+        addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -60,8 +61,12 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
+        // cast arcane Lava Spike
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Spike", playerB);
-        addTarget(playerA, "Silvercoat Lion");
+        // activate splice: yes -> card with splice ability -> new target for spliced ability
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Torrent of Stone");
+        addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: 4 damage
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -97,8 +102,10 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nourishing Shoal");
+        // activate splice: yes -> card with splice ability -> new target for spliced ability
         setChoice(playerA, "Yes");
-        setChoice(playerA, "Silvercoat Lion");
+        addTarget(playerA, "Through the Breach");
+        addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -117,12 +124,12 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
     /**
      * Cards involved: Nourishing Shoal, Goryo's Vengeance, Griselbrand,
      * Terminate
-     *
+     * <p>
      * I actually noticed this bug on the 1.4.3 client, but I didn't see it in
      * the change log for 1.4.4, so I assume it is still unknown. Also, it is a
      * bit of a rules corner case and I haven't seen anyone else report it, so
      * the players of this deck may actually not realize it's incorrect.
-     *
+     * <p>
      * The scenario was that I cast a Nourishing Shoal with a Goryo's Vengeance
      * spliced to it targeting Griselbrand in my graveyard and exiling
      * Worldspine Wurm. My opponent responded with a Snapcaster Mage, so to
@@ -132,7 +139,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
      * resolve, it should have been countered due to no legal target. However,
      * it caused me to gain 11 life. It did not resurrect Griselbrand
      * (correctly), but it should have done nothing at all.
-     *
+     * <p>
      * I include the info about the Terminate because thinking through, it could
      * be pertinent. I would guess what is going on here is one of two things.
      * Either the client doesn't recognize the Shoal with a spliced Vengeance as
@@ -145,7 +152,10 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
      * the error against a bot and update this report.
      */
     @Test
+    @Ignore
     public void testCounteredBecauseOfNoLegalTarget() {
+        // TODO: rewrite test, it's wrong and misleading-- user report about Griselbrand was destroyed by Terminate after splice anounce, but tests don't use it at all (Griselbrand legal target all the time)
+
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
         // You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.
@@ -174,5 +184,4 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
-
 }

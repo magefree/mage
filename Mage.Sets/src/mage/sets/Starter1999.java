@@ -137,6 +137,7 @@ public final class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Transfer", 46, Rarity.RARE, mage.cards.p.PsychicTransfer.class));
         cards.add(new SetCardInfo("Raging Goblin", 114, Rarity.COMMON, mage.cards.r.RagingGoblin.class));
         cards.add(new SetCardInfo("Raise Dead", 85, Rarity.COMMON, mage.cards.r.RaiseDead.class));
+        cards.add(new SetCardInfo("Ransack", 47, Rarity.RARE, mage.cards.r.Ransack.class));
         cards.add(new SetCardInfo("Ravenous Rats", 86, Rarity.UNCOMMON, mage.cards.r.RavenousRats.class));
         cards.add(new SetCardInfo("Relearn", 48, Rarity.UNCOMMON, mage.cards.r.Relearn.class));
         cards.add(new SetCardInfo("Relentless Assault", 115, Rarity.RARE, mage.cards.r.RelentlessAssault.class));

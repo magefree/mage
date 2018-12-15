@@ -21,6 +21,8 @@ public class PermanentCard extends PermanentImpl {
     protected int maxLevelCounters;
     // A copy of the origin card that was cast (this is not the original card, so it's possible to chnage some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
     protected Card card;
+    // A copy of original card that was used for copy and create current permanent (used in copy effects and special commands like adjustTargets)
+    protected Card copiedFromCard;
     // the number this permanent instance had
     protected int zoneChangeCounter;
 
@@ -153,7 +155,13 @@ public class PermanentCard extends PermanentImpl {
         if (this.isTransformed() && card.getSecondCardFace() != null) {
             card.getSecondCardFace().adjustTargets(ability, game);
         } else {
-            card.adjustTargets(ability, game);
+            if (this.isCopy()) {
+                // if COPIED card have adjuster then it's must be called instead own -- see OathOfLieges tests
+                // raise null error on wrong copy
+                this.getCopyFrom().adjustTargets(ability, game);
+            } else {
+                card.adjustTargets(ability, game);
+            }
         }
     }
 

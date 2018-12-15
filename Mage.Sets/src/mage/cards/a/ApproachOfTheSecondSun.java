@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,6 +14,10 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author stravant
@@ -64,7 +67,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
             ApproachOfTheSecondSunWatcher watcher
                     = (ApproachOfTheSecondSunWatcher) game.getState().getWatchers().get(ApproachOfTheSecondSunWatcher.class.getSimpleName());
             if (watcher != null
-                    && !spell.isCopiedSpell()
+                    && !spell.isCopy()
                     && watcher.getApproachesCast(controller.getId()) > 1
                     && spell.getFromZone() == Zone.HAND) {
                 // Win the game
@@ -74,7 +77,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                 controller.gainLife(7, game, source);
 
                 // Put this into the library as the 7th from the top
-                if (spell.isCopiedSpell()) {
+                if (spell.isCopy()) {
                     return true;
                 }
                 Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();

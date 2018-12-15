@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -22,9 +20,11 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SearchTheCity extends CardImpl {
@@ -157,7 +157,7 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
         ExileZone searchTheCityExileZone = game.getExile().getExileZone(source.getSourceId());
         if (cardName != null && searchTheCityExileZone != null) {
             for (Card card : searchTheCityExileZone.getCards(game)) {
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName)) {
                     if (card.moveToZone(Zone.HAND, source.getSourceId(), game, true)) {
                         game.informPlayers("Search the City: put " + card.getName() + " into owner's hand");
                     }

@@ -194,11 +194,13 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
-                        <manifestFile>${manifest.file}</manifestFile>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>mage.client.MageFrame</mainClass>
                         </manifest>
+                        <manifestEntries>
+                            <SplashScreen-Image>splash.jpg</SplashScreen-Image>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>

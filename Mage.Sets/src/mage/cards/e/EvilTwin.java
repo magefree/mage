@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -24,10 +22,12 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class EvilTwin extends CardImpl {
@@ -90,7 +90,7 @@ class EvilTwinPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlaye
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent permanent = input.getObject();
         Permanent twin = game.getPermanent(input.getSourceId());
-        return permanent != null && twin != null && !twin.getName().isEmpty() && permanent.getName().equals(twin.getName());
+        return CardUtil.haveSameNames(permanent, twin);
     }
 
     @Override

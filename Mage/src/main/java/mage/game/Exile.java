@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.cards.Card;
+import mage.filter.FilterCard;
 import mage.util.Copyable;
 
 /**
@@ -68,6 +71,11 @@ public class Exile implements Serializable, Copyable<Exile> {
             }
         }
         return null;
+    }
+
+    public List<Card> getCards(FilterCard filter, Game game) {
+        List<Card> allCards = getAllCards(game);
+        return allCards.stream().filter(card -> filter.match(card, game)).collect(Collectors.toList());
     }
 
     public List<Card> getAllCards(Game game) {

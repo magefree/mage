@@ -1,17 +1,5 @@
 package mage.verify;
 
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import mage.ObjectColor;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
@@ -28,6 +16,19 @@ import org.junit.Test;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.DownloadPictures;
 import org.reflections.Reflections;
+
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -58,18 +59,25 @@ public class VerifyCardDataTest {
         skipListCreate("PT");
         skipListAddName("PT", "UST", "Garbage Elemental");
         skipListAddName("PT", "UST", "Infinity Elemental");
+        skipListAddName("PT", "UNH", "Old Fogey");
 
         // color
         skipListCreate("COLOR");
 
         // cost
         skipListCreate("COST");
+        skipListAddName("COST", "KTK", "Erase");
+        skipListAddName("COST", "M13", "Erase");
+        skipListAddName("COST", "ULG", "Erase");
+        skipListAddName("COST", "H17", "Grimlock, Dinobot Leader");
 
         // supertype
         skipListCreate("SUPERTYPE");
 
         // type
         skipListCreate("TYPE");
+        skipListAddName("TYPE", "UNH", "Old Fogey");
+        skipListAddName("TYPE", "UST", "capital offense");
 
         // subtype
         skipListCreate("SUBTYPE");
@@ -594,7 +602,7 @@ public class VerifyCardDataTest {
         // fix names (e.g. Urza’s to Urza's)
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
+            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
                 if (it.next().equals("Urza’s")) {
                     it.set("Urza's");
                 }

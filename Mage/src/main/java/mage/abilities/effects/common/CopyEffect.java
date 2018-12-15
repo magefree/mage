@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -16,7 +15,6 @@ import mage.util.functions.ApplyToPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CopyEffect extends ContinuousEffectImpl {
@@ -90,7 +88,13 @@ public class CopyEffect extends ContinuousEffectImpl {
     }
 
     protected boolean copyToPermanent(Permanent permanent, Game game, Ability source) {
-        permanent.setCopy(true);
+        if (copyFromObject.getCopyFrom() != null) {
+            // copy from temp blueprints (they are already copies)
+            permanent.setCopy(true, copyFromObject.getCopyFrom());
+        } else {
+            // copy object to object
+            permanent.setCopy(true, copyFromObject);
+        }
         permanent.setName(copyFromObject.getName());
         permanent.getColor(game).setColor(copyFromObject.getColor(game));
         permanent.getManaCost().clear();
