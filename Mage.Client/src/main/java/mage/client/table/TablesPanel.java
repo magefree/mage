@@ -1,192 +1,187 @@
- /*
-  * TablesPanel.java
-  *
-  * Created on 15-Dec-2009, 10:54:01 PM
-  */
- package mage.client.table;
+package mage.client.table;
 
- import mage.cards.decks.importer.DeckImporterUtil;
- import mage.client.MageFrame;
- import mage.client.SessionHandler;
- import mage.client.chat.ChatPanelBasic;
- import mage.client.components.MageComponents;
- import mage.client.dialog.*;
- import mage.client.util.*;
- import mage.client.util.gui.GuiDisplayUtil;
- import mage.client.util.gui.TableUtil;
- import mage.constants.*;
- import mage.game.match.MatchOptions;
- import mage.players.PlayerType;
- import mage.remote.MageRemoteException;
- import mage.view.MatchView;
- import mage.view.RoomUsersView;
- import mage.view.TableView;
- import mage.view.UserRequestMessage;
- import org.apache.log4j.Logger;
- import org.mage.card.arcane.CardRendererUtils;
- import org.ocpsoft.prettytime.Duration;
- import org.ocpsoft.prettytime.PrettyTime;
- import org.ocpsoft.prettytime.units.JustNow;
+import mage.cards.decks.importer.DeckImporterUtil;
+import mage.client.MageFrame;
+import mage.client.SessionHandler;
+import mage.client.chat.ChatPanelBasic;
+import mage.client.components.MageComponents;
+import mage.client.dialog.*;
+import mage.client.util.*;
+import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.TableUtil;
+import mage.constants.*;
+import mage.game.match.MatchOptions;
+import mage.players.PlayerType;
+import mage.remote.MageRemoteException;
+import mage.view.MatchView;
+import mage.view.RoomUsersView;
+import mage.view.TableView;
+import mage.view.UserRequestMessage;
+import org.apache.log4j.Logger;
+import org.mage.card.arcane.CardRendererUtils;
+import org.ocpsoft.prettytime.Duration;
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.units.JustNow;
 
- import javax.swing.*;
- import javax.swing.border.EmptyBorder;
- import javax.swing.table.AbstractTableModel;
- import javax.swing.table.DefaultTableCellRenderer;
- import javax.swing.table.TableCellRenderer;
- import java.awt.*;
- import java.awt.event.ActionEvent;
- import java.awt.event.MouseAdapter;
- import java.awt.event.MouseEvent;
- import java.beans.PropertyVetoException;
- import java.io.File;
- import java.text.DateFormat;
- import java.text.SimpleDateFormat;
- import java.util.*;
- import java.util.concurrent.CancellationException;
- import java.util.concurrent.ExecutionException;
- import java.util.concurrent.Executors;
- import java.util.concurrent.TimeUnit;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
- import static mage.client.dialog.PreferencesDialog.*;
+import static mage.client.dialog.PreferencesDialog.*;
 
- /**
-  * @author BetaSteward_at_googlemail.com
-  */
- public class TablesPanel extends javax.swing.JPanel {
+/**
+ * @author BetaSteward_at_googlemail.com
+ */
+public class TablesPanel extends javax.swing.JPanel {
 
-     private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
-     private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 40, 60};
+    private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
-     private final TableTableModel tableModel;
-     private final MatchesTableModel matchesModel;
-     private UUID roomId;
-     private UpdateTablesTask updateTablesTask;
-     private UpdatePlayersTask updatePlayersTask;
-     private UpdateMatchesTask updateMatchesTask;
-     private JoinTableDialog joinTableDialog;
-     private NewTableDialog newTableDialog;
-     private NewTournamentDialog newTournamentDialog;
-     private final GameChooser gameChooser;
-     private java.util.List<String> messages;
-     private int currentMessage;
-     private final MageTableRowSorter activeTablesSorter;
-     private final MageTableRowSorter completedTablesSorter;
+    private final TableTableModel tableModel;
+    private final MatchesTableModel matchesModel;
+    private UUID roomId;
+    private UpdateTablesTask updateTablesTask;
+    private UpdatePlayersTask updatePlayersTask;
+    private UpdateMatchesTask updateMatchesTask;
+    private JoinTableDialog joinTableDialog;
+    private NewTableDialog newTableDialog;
+    private NewTournamentDialog newTournamentDialog;
+    private final GameChooser gameChooser;
+    private java.util.List<String> messages;
+    private int currentMessage;
+    private final MageTableRowSorter activeTablesSorter;
+    private final MageTableRowSorter completedTablesSorter;
 
-     private final ButtonColumn actionButton1;
-     private final ButtonColumn actionButton2;
+    private final ButtonColumn actionButton1;
+    private final ButtonColumn actionButton2;
 
-     final JToggleButton[] filterButtons;
+    final JToggleButton[] filterButtons;
 
-     // time formater
-     private PrettyTime timeFormater = new PrettyTime();
+    // time formater
+    private PrettyTime timeFormater = new PrettyTime();
 
-     // time ago renderer
-     TableCellRenderer timeAgoCellRenderer = new DefaultTableCellRenderer() {
-         @Override
-         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-             Date d = (Date) value;
-             label.setText(timeFormater.format(d));
-             return label;
-         }
-     };
+    // time ago renderer
+    TableCellRenderer timeAgoCellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Date d = (Date) value;
+            label.setText(timeFormater.format(d));
+            return label;
+        }
+    };
 
-     // duration renderer
-     TableCellRenderer durationCellRenderer = new DefaultTableCellRenderer() {
-         @Override
-         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-             Long ms = (Long) value;
+    // duration renderer
+    TableCellRenderer durationCellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Long ms = (Long) value;
 
-             if (ms != 0) {
-                 Duration dur = timeFormater.approximateDuration(new Date(ms));
-                 label.setText((timeFormater.formatDuration(dur)));
-             } else {
-                 label.setText("");
-             }
-             return label;
-         }
-     };
+            if (ms != 0) {
+                Duration dur = timeFormater.approximateDuration(new Date(ms));
+                label.setText((timeFormater.formatDuration(dur)));
+            } else {
+                label.setText("");
+            }
+            return label;
+        }
+    };
 
-     // datetime render
-     TableCellRenderer datetimeCellRenderer = new DefaultTableCellRenderer() {
-         DateFormat datetimeFormater = new SimpleDateFormat("HH:mm:ss");
+    // datetime render
+    TableCellRenderer datetimeCellRenderer = new DefaultTableCellRenderer() {
+        DateFormat datetimeFormater = new SimpleDateFormat("HH:mm:ss");
 
-         @Override
-         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-             Date d = (Date) value;
-             if (d != null) {
-                 label.setText(datetimeFormater.format(d));
-             } else {
-                 label.setText("");
-             }
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Date d = (Date) value;
+            if (d != null) {
+                label.setText(datetimeFormater.format(d));
+            } else {
+                label.setText("");
+            }
 
-             return label;
-         }
-     };
+            return label;
+        }
+    };
 
-     // skill renderer
-     TableCellRenderer skillCellRenderer = new DefaultTableCellRenderer() {
+    // skill renderer
+    TableCellRenderer skillCellRenderer = new DefaultTableCellRenderer() {
 
-         // base panel to render
-         private JPanel renderPanel = new JPanel();
-         private ImageIcon skillIcon = new ImageIcon(this.getClass().getResource("/info/yellow_star_16.png"));
+        // base panel to render
+        private JPanel renderPanel = new JPanel();
+        private ImageIcon skillIcon = new ImageIcon(this.getClass().getResource("/info/yellow_star_16.png"));
 
-         @Override
-         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 
-             // get table text cell settings
-             DefaultTableCellRenderer baseRenderer = (DefaultTableCellRenderer) table.getDefaultRenderer(String.class);
-             JLabel baseComp = (JLabel) baseRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-             String skillCode = baseComp.getText();
+            // get table text cell settings
+            DefaultTableCellRenderer baseRenderer = (DefaultTableCellRenderer) table.getDefaultRenderer(String.class);
+            JLabel baseComp = (JLabel) baseRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            String skillCode = baseComp.getText();
 
-             // apply settings to render panel from parent
-             renderPanel.setOpaque(baseComp.isOpaque());
-             renderPanel.setForeground(CardRendererUtils.copyColor(baseComp.getForeground()));
-             renderPanel.setBackground(CardRendererUtils.copyColor(baseComp.getBackground()));
-             renderPanel.setBorder(baseComp.getBorder());
+            // apply settings to render panel from parent
+            renderPanel.setOpaque(baseComp.isOpaque());
+            renderPanel.setForeground(CardRendererUtils.copyColor(baseComp.getForeground()));
+            renderPanel.setBackground(CardRendererUtils.copyColor(baseComp.getBackground()));
+            renderPanel.setBorder(baseComp.getBorder());
 
-             // create each skill symbol as child label
-             renderPanel.removeAll();
-             renderPanel.setLayout(new BoxLayout(renderPanel, BoxLayout.X_AXIS));
-             for (char skillSymbol : skillCode.toCharArray()) {
-                 JLabel symbolLabel = new JLabel();
-                 symbolLabel.setBorder(new EmptyBorder(0, 3, 0, 0));
-                 symbolLabel.setIcon(skillIcon);
-                 renderPanel.add(symbolLabel);
-             }
+            // create each skill symbol as child label
+            renderPanel.removeAll();
+            renderPanel.setLayout(new BoxLayout(renderPanel, BoxLayout.X_AXIS));
+            for (char skillSymbol : skillCode.toCharArray()) {
+                JLabel symbolLabel = new JLabel();
+                symbolLabel.setBorder(new EmptyBorder(0, 3, 0, 0));
+                symbolLabel.setIcon(skillIcon);
+                renderPanel.add(symbolLabel);
+            }
 
-             return renderPanel;
-         }
-     };
+            return renderPanel;
+        }
+    };
 
-     /**
-      * Creates new form TablesPanel
-      */
-     public TablesPanel() {
+    /**
+     * Creates new form TablesPanel
+     */
+    public TablesPanel() {
 
-         tableModel = new TableTableModel();
-         matchesModel = new MatchesTableModel();
-         gameChooser = new GameChooser();
+        tableModel = new TableTableModel();
+        matchesModel = new MatchesTableModel();
+        gameChooser = new GameChooser();
 
-         initComponents();
-         //  tableModel.setSession(session);
+        initComponents();
+        //  tableModel.setSession(session);
 
-         // formater
-         timeFormater.setLocale(Locale.ENGLISH);
-         JustNow jn = timeFormater.getUnit(JustNow.class);
-         jn.setMaxQuantity(1000L * 30L); // 30 seconds gap (show "just now" from 0 to 30 secs)
+        // formater
+        timeFormater.setLocale(Locale.ENGLISH);
+        JustNow jn = timeFormater.getUnit(JustNow.class);
+        jn.setMaxQuantity(1000L * 30L); // 30 seconds gap (show "just now" from 0 to 30 secs)
 
-         // 1. TABLE CURRENT
-         tableTables.createDefaultColumnsFromModel();
-         activeTablesSorter = new MageTableRowSorter(tableModel);
-         tableTables.setRowSorter(activeTablesSorter);
+        // 1. TABLE CURRENT
+        tableTables.createDefaultColumnsFromModel();
+        activeTablesSorter = new MageTableRowSorter(tableModel);
+        tableTables.setRowSorter(activeTablesSorter);
 
-         // time ago
-         tableTables.getColumnModel().getColumn(TableTableModel.COLUMN_CREATED).setCellRenderer(timeAgoCellRenderer);
-         // skill level
-         tableTables.getColumnModel().getColumn(TableTableModel.COLUMN_SKILL).setCellRenderer(skillCellRenderer);
+        // time ago
+        tableTables.getColumnModel().getColumn(TableTableModel.COLUMN_CREATED).setCellRenderer(timeAgoCellRenderer);
+        // skill level
+        tableTables.getColumnModel().getColumn(TableTableModel.COLUMN_SKILL).setCellRenderer(skillCellRenderer);
 
         /* date sorter (not need, default is good - see getColumnClass)
         activeTablesSorter.setComparator(TableTableModel.COLUMN_CREATED, new Comparator<Date>() {
@@ -225,9 +220,9 @@
 
         // 4. BUTTONS
         filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
-            btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
-            btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
-            btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword};
+                btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
+                btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
+                btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword};
 
         JComponent[] components = new JComponent[]{chatPanelMain, jSplitPane1, jScrollPaneTablesActive, jScrollPaneTablesFinished, jPanelTop, jPanelTables};
         for (JComponent component : components) {
@@ -244,7 +239,12 @@
         openTableAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int modelRow = Integer.valueOf(e.getActionCommand());
+                // tableUUID;gameUUID
+                String searchID = e.getActionCommand();
+                int modelRow = tableModel.findRowByTableAndGameInfo(searchID);
+                if (modelRow == -1) {
+                    return;
+                }
                 UUID tableId = (UUID) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 3);
                 UUID gameId = (UUID) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
                 String action = (String) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
@@ -321,7 +321,12 @@
         closedTableAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int modelRow = Integer.valueOf(e.getActionCommand());
+                // tableUUID;gameUUID
+                String searchID = e.getActionCommand();
+                int modelRow = tableModel.findRowByTableAndGameInfo(searchID);
+                if (modelRow == -1) {
+                    return;
+                }
                 String action = (String) matchesModel.getValueAt(modelRow, MatchesTableModel.COLUMN_ACTION);
                 switch (action) {
                     case "Replay":
@@ -353,22 +358,17 @@
         addTableDoubleClickListener(tableCompleted, closedTableAction);
     }
 
-     private void addTableDoubleClickListener(JTable table, Action action) {
-         table.addMouseListener(new MouseAdapter() {
-             @Override
-             public void mouseClicked(MouseEvent e) {
-                 if (e.getClickCount() == 2) {
-                     int selRow = table.getSelectedRow();
-                     if (selRow != -1) {
-                         int dataRow = table.convertRowIndexToModel(selRow);
-                         if (dataRow != -1) {
-                             action.actionPerformed(new ActionEvent(e.getSource(), e.getID(), "" + dataRow));
-                         }
-                     }
-                 }
-             }
-         });
-     }
+    private void addTableDoubleClickListener(JTable table, Action action) {
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = table.getSelectedRow();
+                if (e.getClickCount() == 2 && row != -1) {
+                    action.actionPerformed(new ActionEvent(table, ActionEvent.ACTION_PERFORMED, tableModel.findTableAndGameInfoByRow(row)));
+                }
+            }
+        });
+    }
 
     public void cleanUp() {
         saveGuiSettings();
@@ -661,7 +661,7 @@
         if (btnSkillBeginner.isSelected()) {
             skillFilterList.add(RowFilter.regexFilter(this.tableModel.getSkillLevelAsCode(SkillLevel.BEGINNER, true), TableTableModel.COLUMN_SKILL));
         }
-         if (btnSkillCasual.isSelected()) {
+        if (btnSkillCasual.isSelected()) {
             skillFilterList.add(RowFilter.regexFilter(this.tableModel.getSkillLevelAsCode(SkillLevel.CASUAL, true), TableTableModel.COLUMN_SKILL));
         }
         if (btnSkillSerious.isSelected()) {
@@ -1121,35 +1121,35 @@
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
         jPanelTop.setLayout(jPanelTopLayout);
         jPanelTopLayout.setHorizontalGroup(
-            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNewTable)
-                .addGap(6, 6, 6)
-                .addComponent(btnNewTournament)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-                    .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnQuickStart)
-                .addContainerGap(835, Short.MAX_VALUE))
+                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnNewTable)
+                                .addGap(6, 6, 6)
+                                .addComponent(btnNewTournament)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnQuickStart)
+                                .addContainerGap(835, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
-            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNewTable)
-                        .addComponent(btnNewTournament))
-                    .addGroup(jPanelTopLayout.createSequentialGroup()
-                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnQuickStart))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(btnNewTable)
+                                                .addComponent(btnNewTournament))
+                                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(btnQuickStart))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1186,12 +1186,12 @@
         javax.swing.GroupLayout jPanelTablesLayout = new javax.swing.GroupLayout(jPanelTables);
         jPanelTables.setLayout(jPanelTablesLayout);
         jPanelTablesLayout.setHorizontalGroup(
-            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
+                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
         );
         jPanelTablesLayout.setVerticalGroup(
-            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanelTables);
@@ -1233,11 +1233,11 @@
         add(jPanelBottom, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-        private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
+    private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
         newTournamentDialog.showDialog(roomId);
-}//GEN-LAST:event_btnNewTournamentActionPerformed
+    }//GEN-LAST:event_btnNewTournamentActionPerformed
 
-        private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
+    private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
         TableView table;
         try {
             File f = new File("test.dck");
@@ -1269,7 +1269,7 @@
         } catch (HeadlessException ex) {
             handleError(ex);
         }
-}//GEN-LAST:event_btnQuickStartActionPerformed
+    }//GEN-LAST:event_btnQuickStartActionPerformed
 
     private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
         newTableDialog.showDialog(roomId);
@@ -1393,6 +1393,28 @@ class TableTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
+    public String getTableAndGameInfo(int row) {
+        return this.tables[row].getTableId().toString() + ";" + (!tables[row].getGames().isEmpty() ? tables[row].getGames().get(0) : null).toString();
+    }
+
+    public String findTableAndGameInfoByRow(int row) {
+        if (row >= 0 && this.tables.length < row) {
+            return getTableAndGameInfo(row);
+        } else {
+            return null;
+        }
+    }
+
+    public int findRowByTableAndGameInfo(String tableAndGame) {
+        for (int i = 0; i < this.tables.length; i++) {
+            String rowID = this.tables[i].getTableId().toString() + ";" + (!tables[i].getGames().isEmpty() ? tables[i].getGames().get(0) : null).toString();
+            if (tableAndGame.equals(rowID)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public String getSkillLevelAsCode(SkillLevel skill, boolean asRegExp) {
         String res;
         switch (skill) {
@@ -1417,7 +1439,7 @@ class TableTableModel extends AbstractTableModel {
 
         return res;
     }
-  
+
     @Override
     public int getRowCount() {
         return tables.length;
@@ -1448,7 +1470,7 @@ class TableTableModel extends AbstractTableModel {
             case 7:
                 return tables[arg0].getCreateTime(); // use cell render, not format here
             case 8:
-                 return this.getSkillLevelAsCode(tables[arg0].getSkillLevel(), false);
+                return this.getSkillLevelAsCode(tables[arg0].getSkillLevel(), false);
             case 9:
                 return tables[arg0].isRated() ? RATED_VALUE_YES : RATED_VALUE_NO;
             case 10:
