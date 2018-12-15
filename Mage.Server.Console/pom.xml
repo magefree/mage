@@ -53,7 +53,6 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
-                        <manifestFile>${manifest.file}</manifestFile>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>mage.server.console.ConsoleFrame</mainClass>
