@@ -92,12 +92,16 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
                 if (permanent != null) {
-                    return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                    permanent.moveToExile(null, null, source.getSourceId(), game);
+                    game.informPlayers(permanent.getLogName() + " entered the exile zone");
+                    return true;
                 }
             } else {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
+                    card.moveToExile(null, null, source.getSourceId(), game);
+                    game.informPlayers(card.getLogName() + " entered the exile zone");
+                    return true;
                 }
             }
         }

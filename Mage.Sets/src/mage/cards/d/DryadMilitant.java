@@ -74,7 +74,9 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, game.getState().getZone(card.getId()), true);
+                card.moveToExile(null, null, source.getSourceId(), game);
+                game.informPlayers(card.getLogName() + " entered the exile zone");
+                return true;
             }
         }
         return false;

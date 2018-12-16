@@ -84,15 +84,19 @@ class RestInPeaceReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-                if (permanent != null) {
-                    return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                if (permanent != null) {                   
+                    permanent.moveToExile(null, null, source.getSourceId(), game);
+                    game.informPlayers(permanent.getLogName() + " entered the exile zone");
+                    return true;
                 }
             }
             else {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
                     ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                    return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, zEvent.getFromZone(), true);
+                    card.moveToExile(null, null, source.getSourceId(), game);
+                    game.informPlayers(card.getLogName() + " entered the exile zone");
+                    return true;
                 }
             }
         }
