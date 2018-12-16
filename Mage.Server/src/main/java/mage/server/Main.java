@@ -1,12 +1,5 @@
-
 package mage.server;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.util.*;
-import javax.management.MBeanServer;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
@@ -39,13 +32,20 @@ import org.jboss.remoting.transporter.TransporterClient;
 import org.jboss.remoting.transporter.TransporterServer;
 import org.w3c.dom.Element;
 
+import javax.management.MBeanServer;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.util.*;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public final class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
-    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(Main.class);
 
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
