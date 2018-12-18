@@ -1,6 +1,6 @@
 package org.mage.plugins.card.dl.sources;
 
-import mage.client.dialog.PreferencesDialog;
+import mage.client.util.CardLanguage;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.util.*;
@@ -14,20 +14,22 @@ public enum ScryfallImageSource implements CardImageSource {
 
     private final Set<String> supportedSets;
     private final Map<String, String> languageAliases;
+    private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
 
     ScryfallImageSource() {
         // https://scryfall.com/docs/api/languages
         languageAliases = new HashMap<>();
-        languageAliases.put("en", "en");
-        languageAliases.put("es", "es");
-        languageAliases.put("jp", "ja");
-        languageAliases.put("it", "it");
-        languageAliases.put("fr", "fr");
-        languageAliases.put("cn", "zhs"); // Simplified Chinese
-        languageAliases.put("de", "de");
-        languageAliases.put("ko", "ko");
-        languageAliases.put("pt", "pt");
-        languageAliases.put("ru", "ru");
+        languageAliases.put(CardLanguage.ENGLISH.getCode(), "en");
+        languageAliases.put(CardLanguage.SPANISH.getCode(), "es");
+        languageAliases.put(CardLanguage.FRENCH.getCode(), "fr");
+        languageAliases.put(CardLanguage.GERMAN.getCode(), "de");
+        languageAliases.put(CardLanguage.ITALIAN.getCode(), "it");
+        languageAliases.put(CardLanguage.PORTUGUESE.getCode(), "pt");
+        languageAliases.put(CardLanguage.JAPANESE.getCode(), "ja");
+        languageAliases.put(CardLanguage.KOREAN.getCode(), "ko");
+        languageAliases.put(CardLanguage.RUSSIAN.getCode(), "ru");
+        languageAliases.put(CardLanguage.CHINES_SIMPLE.getCode(), "zhs");
+        languageAliases.put(CardLanguage.CHINES_TRADITION.getCode(), "zht");
 
         supportedSets = new LinkedHashSet<>();
         // supportedSets.add("PTC"); //
@@ -245,9 +247,9 @@ public enum ScryfallImageSource implements CardImageSource {
     @Override
     public CardImageUrls generateURL(CardDownloadData card) throws Exception {
 
-        String preferredLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
-        String defaultCode = "en";
-        String localizedCode = languageAliases.getOrDefault(preferredLanguage, defaultCode);
+        String preferredCode = this.getCurrentLanguage().getCode();
+        String defaultCode = CardLanguage.ENGLISH.getCode();
+        String localizedCode = languageAliases.getOrDefault(preferredCode, defaultCode);
         // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
 
         // WARNING, some cards haven't direct images and uses random GUID:
@@ -343,6 +345,21 @@ public enum ScryfallImageSource implements CardImageSource {
     @Override
     public boolean isTokenSource() {
         return false;
+    }
+
+    @Override
+    public boolean isLanguagesSupport() {
+        return true;
+    }
+
+    @Override
+    public void setCurrentLanguage(CardLanguage cardLanguage) {
+        this.currentLanguage = cardLanguage;
+    }
+
+    @Override
+    public CardLanguage getCurrentLanguage() {
+        return currentLanguage;
     }
 
     @Override

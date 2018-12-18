@@ -14,7 +14,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.images.DownloadPicturesService;
 import org.reflections.Reflections;
 
 import java.io.IOException;
@@ -425,7 +425,7 @@ public class VerifyCardDataTest {
         }
 
         // tok file's data
-        ArrayList<CardDownloadData> tokFileTokens = DownloadPictures.getTokenCardUrls();
+        ArrayList<CardDownloadData> tokFileTokens = DownloadPicturesService.getTokenCardUrls();
         LinkedHashMap<String, String> tokDataClassesIndex = new LinkedHashMap<>();
         LinkedHashMap<String, String> tokDataNamesIndex = new LinkedHashMap<>();
         for (CardDownloadData tokData : tokFileTokens) {
