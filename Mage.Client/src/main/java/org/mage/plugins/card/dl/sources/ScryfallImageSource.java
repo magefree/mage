@@ -13,23 +13,23 @@ public enum ScryfallImageSource implements CardImageSource {
     instance;
 
     private final Set<String> supportedSets;
-    private final Map<String, String> languageAliases;
+    private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
 
     ScryfallImageSource() {
         // https://scryfall.com/docs/api/languages
         languageAliases = new HashMap<>();
-        languageAliases.put(CardLanguage.ENGLISH.getCode(), "en");
-        languageAliases.put(CardLanguage.SPANISH.getCode(), "es");
-        languageAliases.put(CardLanguage.FRENCH.getCode(), "fr");
-        languageAliases.put(CardLanguage.GERMAN.getCode(), "de");
-        languageAliases.put(CardLanguage.ITALIAN.getCode(), "it");
-        languageAliases.put(CardLanguage.PORTUGUESE.getCode(), "pt");
-        languageAliases.put(CardLanguage.JAPANESE.getCode(), "ja");
-        languageAliases.put(CardLanguage.KOREAN.getCode(), "ko");
-        languageAliases.put(CardLanguage.RUSSIAN.getCode(), "ru");
-        languageAliases.put(CardLanguage.CHINES_SIMPLE.getCode(), "zhs");
-        languageAliases.put(CardLanguage.CHINES_TRADITION.getCode(), "zht");
+        languageAliases.put(CardLanguage.ENGLISH, "en");
+        languageAliases.put(CardLanguage.SPANISH, "es");
+        languageAliases.put(CardLanguage.FRENCH, "fr");
+        languageAliases.put(CardLanguage.GERMAN, "de");
+        languageAliases.put(CardLanguage.ITALIAN, "it");
+        languageAliases.put(CardLanguage.PORTUGUESE, "pt");
+        languageAliases.put(CardLanguage.JAPANESE, "ja");
+        languageAliases.put(CardLanguage.KOREAN, "ko");
+        languageAliases.put(CardLanguage.RUSSIAN, "ru");
+        languageAliases.put(CardLanguage.CHINES_SIMPLE, "zhs");
+        languageAliases.put(CardLanguage.CHINES_TRADITION, "zht");
 
         supportedSets = new LinkedHashSet<>();
         // supportedSets.add("PTC"); //
@@ -249,7 +249,7 @@ public enum ScryfallImageSource implements CardImageSource {
 
         String preferredCode = this.getCurrentLanguage().getCode();
         String defaultCode = CardLanguage.ENGLISH.getCode();
-        String localizedCode = languageAliases.getOrDefault(preferredCode, defaultCode);
+        String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
         // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
 
         // WARNING, some cards haven't direct images and uses random GUID:

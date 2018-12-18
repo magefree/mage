@@ -28,7 +28,7 @@ public enum WizardCardsImageSource implements CardImageSource {
     private static final Logger logger = Logger.getLogger(WizardCardsImageSource.class);
 
     private final Map<String, String> setsAliases;
-    private final Map<String, String> languageAliases;
+    private final Map<CardLanguage, String> languageAliases;
     private final Map<String, Map<String, String>> sets;
     private final Set<String> supportedSets;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
@@ -41,17 +41,17 @@ public enum WizardCardsImageSource implements CardImageSource {
     WizardCardsImageSource() {
 
         languageAliases = new HashMap<>();
-        languageAliases.put(CardLanguage.ENGLISH.getCode(), "English");
-        languageAliases.put(CardLanguage.SPANISH.getCode(), "Spanish");
-        languageAliases.put(CardLanguage.FRENCH.getCode(), "French");
-        languageAliases.put(CardLanguage.GERMAN.getCode(), "German");
-        languageAliases.put(CardLanguage.ITALIAN.getCode(), "Italian");
-        languageAliases.put(CardLanguage.PORTUGUESE.getCode(), "Portuguese (Brazil)");
-        languageAliases.put(CardLanguage.JAPANESE.getCode(), "Japanese");
-        languageAliases.put(CardLanguage.KOREAN.getCode(), "Korean");
-        languageAliases.put(CardLanguage.RUSSIAN.getCode(), "Russian");
-        languageAliases.put(CardLanguage.CHINES_SIMPLE.getCode(), "Chinese Simplified");
-        languageAliases.put(CardLanguage.CHINES_TRADITION.getCode(), "Chinese Traditional ");
+        languageAliases.put(CardLanguage.ENGLISH, "English");
+        languageAliases.put(CardLanguage.SPANISH, "Spanish");
+        languageAliases.put(CardLanguage.FRENCH, "French");
+        languageAliases.put(CardLanguage.GERMAN, "German");
+        languageAliases.put(CardLanguage.ITALIAN, "Italian");
+        languageAliases.put(CardLanguage.PORTUGUESE, "Portuguese (Brazil)");
+        languageAliases.put(CardLanguage.JAPANESE, "Japanese");
+        languageAliases.put(CardLanguage.KOREAN, "Korean");
+        languageAliases.put(CardLanguage.RUSSIAN, "Russian");
+        languageAliases.put(CardLanguage.CHINES_SIMPLE, "Chinese Simplified");
+        languageAliases.put(CardLanguage.CHINES_TRADITION, "Chinese Traditional ");
 
         supportedSets = new LinkedHashSet<>();
         // supportedSets.add("PTC"); // Prerelease Events
@@ -552,7 +552,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                                         cardName = cardName.substring(0, pos1);
                                     }
                                 }
-                                Integer preferredMultiverseId = getLocalizedMultiverseId(getCurrentLanguage().getCode(), multiverseId);
+                                Integer preferredMultiverseId = getLocalizedMultiverseId(getCurrentLanguage(), multiverseId);
                                 setLinks.put(cardName.toLowerCase(Locale.ENGLISH) + numberChar, generateLink(preferredMultiverseId));
                             }
                         }
@@ -614,8 +614,8 @@ public enum WizardCardsImageSource implements CardImageSource {
         return "/Handlers/Image.ashx?multiverseid=" + landMultiverseId + "&type=card";
     }
 
-    private int getLocalizedMultiverseId(String preferredLanguage, Integer multiverseId) throws IOException {
-        if (preferredLanguage.equals(CardLanguage.ENGLISH.getCode())) {
+    private int getLocalizedMultiverseId(CardLanguage preferredLanguage, Integer multiverseId) throws IOException {
+        if (preferredLanguage.equals(CardLanguage.ENGLISH)) {
             return multiverseId;
         }
 
