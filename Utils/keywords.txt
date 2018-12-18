@@ -1,4 +1,5 @@
 Afflict|number|
+Afterlife|number|
 Annihilator|number|
 Ascend|new|
 Assist|new|
