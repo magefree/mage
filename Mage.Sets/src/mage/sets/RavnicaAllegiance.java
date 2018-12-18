@@ -23,6 +23,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         super("Ravnica Allegiance", "RNA", ExpansionSet.buildDate(2019, 1, 25), SetType.EXPANSION);
         this.blockName = "Guilds of Ravnica";
         this.hasBoosters = true;
+        this.hasBasicLands = false; // this is temporary until the actual basics have been spoiled to prevent a test fail 
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
