@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author JayDi85
@@ -19,6 +21,7 @@ public class DownloadImagesDialog extends MageDialog {
 
     private Dimension sizeModeMessageOnly;
     private Dimension sizeModeMessageAndControls;
+    private Map<Component, Boolean> actionsControlStates = new HashMap<>();
 
 
     /**
@@ -27,6 +30,9 @@ public class DownloadImagesDialog extends MageDialog {
     public DownloadImagesDialog() {
         initComponents();
         this.setModal(true);
+
+        // fix for panelInfo (it's resets aligmentX after netbeans designer opened)
+        panelInfo.setAlignmentX(CENTER_ALIGNMENT);
 
         // save default sizes
         //
@@ -105,9 +111,34 @@ public class DownloadImagesDialog extends MageDialog {
         return this.progress;
     }
 
+    public JCheckBox getRedownloadCheckbox() {
+        return this.checkboxRedownload;
+    }
+
     public void showLanguagesSupport(boolean haveSupport) {
         labelLanguage.setEnabled(haveSupport);
         comboLanguage.setEnabled(haveSupport);
+    }
+
+    private void enableActionControl(boolean enable, Component comp) {
+        if (enable) {
+            // restore last enable state
+            comp.setEnabled(actionsControlStates.getOrDefault(comp, true));
+        } else {
+            // save enable state and disable it
+            actionsControlStates.putIfAbsent(comp, comp.isEnabled());
+            comp.setEnabled(false);
+        }
+    }
+
+    public void enableActionControls(boolean enable) {
+        // restrict user actions while downloading/processing (all buttons, comboboxes and edits)
+        enableActionControl(enable, tabsList);
+        enableActionControl(enable, comboSource);
+        enableActionControl(enable, comboSets);
+        enableActionControl(enable, buttonSearchSet);
+        enableActionControl(enable, comboLanguage);
+        enableActionControl(enable, checkboxRedownload);
     }
 
     private void setTabTitle(int tabIndex, String title, String iconResourceName) {
@@ -186,7 +217,9 @@ public class DownloadImagesDialog extends MageDialog {
         comboSets = new javax.swing.JComboBox<>();
         fillerMode1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         buttonSearchSet = new javax.swing.JButton();
-        fillerMode = new javax.swing.Box.Filler(new java.awt.Dimension(130, 0), new java.awt.Dimension(130, 0), new java.awt.Dimension(130, 32767));
+        panelRedownload = new javax.swing.JPanel();
+        checkboxRedownload = new javax.swing.JCheckBox();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 3), new java.awt.Dimension(32767, 5));
         fillerMain1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         panelProgress = new javax.swing.JPanel();
         fillerProgress1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
@@ -216,10 +249,11 @@ public class DownloadImagesDialog extends MageDialog {
 
         tabMain.setLayout(new javax.swing.BoxLayout(tabMain, javax.swing.BoxLayout.Y_AXIS));
 
+        panelInfo.setAlignmentX(0.5F);
         panelInfo.setLayout(new javax.swing.BoxLayout(panelInfo, javax.swing.BoxLayout.Y_AXIS));
         panelInfo.add(fillerInfo1);
 
-        labelInfo.setText("Missing: 12345 card images / 789 token images");
+        labelInfo.setText("Missing stats: 12345 card images / 789 token images");
         labelInfo.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 7, 0, 0));
         panelInfo.add(labelInfo);
         panelInfo.add(fillerInfo2);
@@ -297,7 +331,19 @@ public class DownloadImagesDialog extends MageDialog {
         panelModeInner.add(panelModeSelect);
 
         panelMode.add(panelModeInner);
-        panelMode.add(fillerMode);
+
+        panelRedownload.setAlignmentX(0.0F);
+        panelRedownload.setMaximumSize(new java.awt.Dimension(130, 32767));
+        panelRedownload.setMinimumSize(new java.awt.Dimension(130, 30));
+        panelRedownload.setPreferredSize(new java.awt.Dimension(130, 100));
+        panelRedownload.setLayout(new java.awt.BorderLayout());
+
+        checkboxRedownload.setText("<html>Re-download selected images");
+        checkboxRedownload.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        panelRedownload.add(checkboxRedownload, java.awt.BorderLayout.CENTER);
+        panelRedownload.add(filler1, java.awt.BorderLayout.PAGE_END);
+
+        panelMode.add(panelRedownload);
 
         tabMain.add(panelMode);
         tabMain.add(fillerMain1);
@@ -363,15 +409,16 @@ public class DownloadImagesDialog extends MageDialog {
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonOK;
     private javax.swing.JButton buttonSearchSet;
+    private javax.swing.JCheckBox checkboxRedownload;
     private javax.swing.JComboBox<String> comboLanguage;
     private javax.swing.JComboBox<String> comboSets;
     private javax.swing.JComboBox<String> comboSource;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler fillerGlobal1;
     private javax.swing.Box.Filler fillerInfo1;
     private javax.swing.Box.Filler fillerInfo2;
     private javax.swing.Box.Filler fillerMain1;
     private javax.swing.Box.Filler fillerMain2;
-    private javax.swing.Box.Filler fillerMode;
     private javax.swing.Box.Filler fillerMode1;
     private javax.swing.Box.Filler fillerProgress1;
     private javax.swing.Box.Filler fillerProgress2;
@@ -388,6 +435,7 @@ public class DownloadImagesDialog extends MageDialog {
     private javax.swing.JPanel panelModeInner;
     private javax.swing.JPanel panelModeSelect;
     private javax.swing.JPanel panelProgress;
+    private javax.swing.JPanel panelRedownload;
     private javax.swing.JPanel panelSource;
     private javax.swing.JPanel panelSourceLeft;
     private javax.swing.JPanel panelSourceRight;

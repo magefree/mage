@@ -22,10 +22,12 @@ import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.io.*;
 import java.net.*;
 import java.nio.file.AccessDeniedException;
+import java.util.List;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,6 +36,9 @@ import java.util.stream.Collectors;
 
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
+/**
+ * @author JayDi85
+ */
 public class DownloadPicturesService extends DefaultBoundedRangeModel implements Runnable {
 
     // don't forget to remove new sets from ignore.urls to download (properties file in resources)
@@ -49,8 +54,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private boolean needCancel;
     private int cardIndex;
 
+    private List<CardInfo> cardsAll;
     private List<CardDownloadData> cardsMissing;
-    private List<CardDownloadData> cardsToDownload;
+    private List<CardDownloadData> cardsDownloadQueue;
     private int missingCardsCount = 0;
     private int missingTokensCount = 0;
 
@@ -120,7 +126,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     public DownloadPicturesService(JFrame frame) {
         // init service and dialog
-        cardsToDownload = new ArrayList<>();
+        cardsAll = Collections.synchronizedList(new ArrayList<>());
+        cardsMissing = Collections.synchronizedList(new ArrayList<>());
+        cardsDownloadQueue = Collections.synchronizedList(new ArrayList<>());
         uiDialog = new DownloadImagesDialog();
 
         // MESSAGE
@@ -136,10 +144,15 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
         });
 
-        // TODO: LANGUAGES
+        // LANGUAGES
         uiDialog.getLaunguagesCombo().setModel(new DefaultComboBoxModel(CardLanguage.values()));
         uiDialog.getLaunguagesCombo().setSelectedItem(PreferencesDialog.getPrefImagesLanguage());
         reloadLanguagesForSelectedSource();
+
+        // REDOWNLOAD
+        uiDialog.getRedownloadCheckbox().setSelected(false);
+        uiDialog.getRedownloadCheckbox().addItemListener(this::checkboxRedowloadChanged);
+
 
         // SETS (fills after source and language select)
         //uiDialog.getSetsCombo().setModel(new DefaultComboBoxModel(DownloadSources.values()));
@@ -159,8 +172,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
 
             // run
-            new Thread(DownloadPicturesService.this).start();
+            uiDialog.enableActionControls(false);
             uiDialog.getStartButton().setEnabled(false);
+            new Thread(DownloadPicturesService.this).start();
         });
 
         // BUTTON CANCEL
@@ -172,14 +186,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         uiDialog.showDownloadControls(false);
     }
 
-    public void setAllMissingCards() {
+    public void findMissingCards() {
+        updateAndViewMessage("Loading...");
+        this.cardsAll.clear();
+        this.cardsMissing.clear();
+        this.cardsDownloadQueue.clear();
+
         updateAndViewMessage("Loading cards list...");
-        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
+        this.cardsAll = Collections.synchronizedList(CardRepository.instance.findCards(new CardCriteria()));
 
-        updateAndViewMessage("Find missing images...");
-        this.cardsMissing = getNeededCards(cards);
+        updateAndViewMessage("Finding missing images...");
+        this.cardsMissing = prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected());
 
-        updateAndViewMessage("Find available sets from selected source...");
+        updateAndViewMessage("Finding available sets from selected source...");
         this.uiDialog.getSetsCombo().setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
         reloadCardsToDownload(this.uiDialog.getSetsCombo().getSelectedItem().toString());
 
@@ -304,14 +323,14 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         }
 
         // find missing cards to download
-        cardsToDownload.clear();
+        cardsDownloadQueue.clear();
         int numberTokenImagesAvailable = 0;
         int numberCardImagesAvailable = 0;
         for (CardDownloadData data : cardsMissing) {
             if (data.isToken()) {
                 if (selectedSource.isTokenSource() && selectedSource.isImageProvided(data.getSet(), data.getName())) {
                     numberTokenImagesAvailable++;
-                    cardsToDownload.add(data);
+                    cardsDownloadQueue.add(data);
                 } else {
                     //logger.warn("Source do not support token (set " + data.getSet() + ", token " + data.getName() + ")");
                 }
@@ -319,7 +338,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 if (selectedSets != null && selectedSets.contains(data.getSet())) {
                     if (selectedSource.isSetSupportedComplete(data.getSet()) || selectedSource.isImageProvided(data.getSet(), data.getName())) {
                         numberCardImagesAvailable++;
-                        cardsToDownload.add(data);
+                        cardsDownloadQueue.add(data);
                     }
                 }
             }
@@ -332,6 +351,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         reloadCardsToDownload(event.getItem().toString());
     }
 
+    private void checkboxRedowloadChanged(ItemEvent event) {
+        MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        try {
+            this.cardsMissing.clear();
+            this.cardsMissing = prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected());
+            reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
+        } finally {
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+
     private void updateProgressText(int cardCount, int tokenCount) {
         missingTokensCount = 0;
         for (CardDownloadData card : cardsMissing) {
@@ -340,6 +370,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
         }
         missingCardsCount = cardsMissing.size() - missingTokensCount;
+
         uiDialog.setCurrentInfo("Missing: " + missingCardsCount + " card images / " + missingTokensCount + " token images");
         int imageSum = cardCount + tokenCount;
         float mb = (imageSum * selectedSource.getAverageSize()) / 1024;
@@ -356,16 +387,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         return className.substring(className.lastIndexOf('.') + 1);
     }
 
-    private static List<CardDownloadData> getNeededCards(List<CardInfo> allCards) {
-
-        /**
-         * read all card names and urls
-         */
+    private static List<CardDownloadData> prepareMissingCards(List<CardInfo> allCards, boolean redownloadMode) {
         HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
-        /**
-         * get filter for Standard Type 2 cards
-         */
+        // get filter for Standard Type 2 cards
         Set<String> type2SetsFilter = new HashSet<>();
         List<String> constructedFormats = ConstructedFormats.getSetsByFormat(ConstructedFormats.STANDARD);
         if (constructedFormats != null && !constructedFormats.isEmpty()) {
@@ -374,6 +399,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             logger.warn("No formats defined. Try connecting to a server first!");
         }
 
+        // prepare checking list
         List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         try {
             allCards.parallelStream().forEach(card -> {
@@ -423,26 +449,28 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     logger.info("Card was not selected: " + card.getName());
                 }
             });
+
             allCardsUrls.addAll(getTokenCardUrls());
         } catch (Exception e) {
             logger.error(e);
         }
 
-        /**
-         * check to see which cards we already have
-         */
+        // find missing files
         List<CardDownloadData> cardsToDownload = Collections.synchronizedList(new ArrayList<>());
         allCardsUrls.parallelStream().forEach(card -> {
-            File file = new TFile(CardImageUtils.buildImagePathToCard(card));
-            logger.debug(card.getName() + " (is_token=" + card.isToken() + "). Image is here:" + file.getAbsolutePath() + " (exists=" + file.exists() + ')');
-            if (!file.exists()) {
-                logger.debug("Missing: " + file.getAbsolutePath());
-                // logger.info("Missing image: " + (card.isToken() ? "TOKEN " : "CARD  ") + card.getSet() + "/" + card.getName() + "               type: " + card.getType());
+            if (redownloadMode) {
+                // need all cards
                 cardsToDownload.add(card);
+            } else {
+                // need missing cards
+                File file = new TFile(CardImageUtils.buildImagePathToCard(card));
+                if (!file.exists()) {
+                    cardsToDownload.add(card);
+                }
             }
         });
 
-        return new ArrayList<>(cardsToDownload);
+        return Collections.synchronizedList(new ArrayList<>(cardsToDownload));
     }
 
     public static ArrayList<CardDownloadData> getTokenCardUrls() throws RuntimeException {
@@ -555,22 +583,20 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         if (p != null) {
             HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
-            update(0, cardsToDownload.size());
-            logger.info("Started download of " + cardsToDownload.size()
-                    + " images from source: " + selectedSource.getSourceName()
+            update(0, cardsDownloadQueue.size());
+            logger.info("Started download of " + cardsDownloadQueue.size() + " images"
+                    + " from source: " + selectedSource.getSourceName()
                     + ", language: " + selectedSource.getCurrentLanguage().getCode());
 
             int numberOfThreads = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_THREADS, "10"));
             ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
-            for (int i = 0; i < cardsToDownload.size() && !this.getNeedCancel(); i++) {
+            for (int i = 0; i < cardsDownloadQueue.size() && !this.getNeedCancel(); i++) {
                 try {
-
-                    CardDownloadData card = cardsToDownload.get(i);
+                    CardDownloadData card = cardsDownloadQueue.get(i);
 
                     logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
 
                     CardImageUrls urls;
-
                     if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
                         if (!"0".equals(card.getCollectorId())) {
                             continue;
@@ -594,18 +620,18 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         } else if (selectedSource.getTotalImages() == -1) {
                             logger.info("Image not available on " + selectedSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
                             synchronized (sync) {
-                                update(cardIndex + 1, cardsToDownload.size());
+                                update(cardIndex + 1, cardsDownloadQueue.size());
                             }
                         }
                     } else {
-                        Runnable task = new DownloadTask(card, urls, cardsToDownload.size());
+                        Runnable task = new DownloadTask(card, urls, cardsDownloadQueue.size());
                         executor.execute(task);
                     }
-
                 } catch (Exception ex) {
                     logger.error(ex, ex);
                 }
             }
+
             executor.shutdown();
             while (!executor.isTerminated()) {
                 try {
@@ -614,6 +640,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
             }
         }
+
         try {
             TVFS.umount();
         } catch (FsSyncException e) {
@@ -622,6 +649,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         } finally {
             //
         }
+
+        // stop
         reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
     }
 
@@ -637,10 +666,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         private final int count;
         private final String actualFilename;
         private final boolean useSpecifiedPaths;
-
-        DownloadTask(CardDownloadData card, String baseUrl, int count) {
-            this(card, new CardImageUrls(baseUrl, null), count);
-        }
 
         DownloadTask(CardDownloadData card, CardImageUrls urls, int count) {
             this.card = card;
@@ -704,20 +729,23 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
 
                 // FILE already exists (in zip or in dir)
+                // don't use, images can be re-downloaded
+                /*
                 if (destFile.exists()) {
                     synchronized (sync) {
                         update(cardIndex + 1, count);
                     }
                     return;
                 }
+                */
 
-                // zip can't be read
+                // check zip access
                 TFile testArchive = destFile.getTopLevelArchive();
                 if (testArchive != null && testArchive.exists()) {
                     try {
                         testArchive.list();
                     } catch (Exception e) {
-                        logger.error("Error reading archive, may be it was corrapted. Try to delete it: " + testArchive.toString());
+                        logger.error("Error reading archive, it's can be corrupted. Try to delete it: " + testArchive.toString());
 
                         synchronized (sync) {
                             update(cardIndex + 1, count);
@@ -849,34 +877,38 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         }
     }
 
-    private void update(int card, int count) {
-        this.cardIndex = card;
+    private void update(int lastCardIndex, int needDownloadCount) {
+        this.cardIndex = lastCardIndex;
 
-        if (cardIndex < count) {
-            float mb = ((count - card) * selectedSource.getAverageSize()) / 1024;
+        if (cardIndex < needDownloadCount) {
+            // downloading
+            float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSize()) / 1024;
             uiDialog.getProgressBar().setString(String.format("%d of %d image downloads finished! Please wait! [%.1f Mb]",
-                    card, count, mb));
+                    lastCardIndex, needDownloadCount, mb));
         } else {
-            List<CardDownloadData> remainingCards = Collections.synchronizedList(new ArrayList<>());
+            // finished
+            List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
             DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
                 TFile file = new TFile(CardImageUtils.buildImagePathToCard(cardDownloadData));
-                if (!file.exists()) {
-                    remainingCards.add(cardDownloadData);
+                if (file.exists()) {
+                    downloadedCards.add(cardDownloadData);
                 }
             });
 
-            // remove the cards not downloaded to get the siccessfull downloaded cards
-            DownloadPicturesService.this.cardsToDownload.removeAll(remainingCards);
-            DownloadPicturesService.this.cardsMissing.removeAll(DownloadPicturesService.this.cardsToDownload);
+            // remove all downloaded cards, missing must be remains
+            this.cardsDownloadQueue.removeAll(downloadedCards);
+            this.cardsMissing.removeAll(downloadedCards);
 
-            count = remainingCards.size();
-
-            if (count == 0) {
-                uiDialog.getProgressBar().setString("0 images remaining! Please close!");
+            if (this.cardsDownloadQueue.size() == 0) {
+                // stop download
+                uiDialog.getProgressBar().setString("0 images remaining. Please close.");
             } else {
-                //bar.setString(String.format("%d cards remaining! Please choose another source!", count));
-                uiDialog.getStartButton().setEnabled(true);
+                // try download again
             }
+
+            this.uiDialog.getRedownloadCheckbox().setSelected(false);
+            uiDialog.enableActionControls(true);
+            uiDialog.getStartButton().setEnabled(true);
         }
     }
 
@@ -894,7 +926,7 @@ class LoadMissingCardDataNew implements Runnable {
 
     @Override
     public void run() {
-        downloadPicturesService.setAllMissingCards();
+        downloadPicturesService.findMissingCards();
     }
 
     public static void main() {

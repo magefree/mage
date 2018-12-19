@@ -128,7 +128,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="labelInfo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Missing: 12345 card images / 789 token images"/>
+                    <Property name="text" type="java.lang.String" value="Missing stats: 12345 card images / 789 token images"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                         <EmptyBorder bottom="0" left="7" right="0" top="0"/>
@@ -349,22 +349,56 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.Box$Filler" name="fillerMode">
+                <Container class="javax.swing.JPanel" name="panelRedownload">
                   <Properties>
+                    <Property name="alignmentX" type="float" value="0.0"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[130, 32767]"/>
                     </Property>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[130, 0]"/>
+                      <Dimension value="[130, 30]"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[130, 0]"/>
+                      <Dimension value="[130, 100]"/>
                     </Property>
                   </Properties>
-                  <AuxValues>
-                    <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalStrut"/>
-                  </AuxValues>
-                </Component>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JCheckBox" name="checkboxRedownload">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Re-download selected images"/>
+                        <Property name="verticalAlignment" type="int" value="3"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Center"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.Box$Filler" name="filler1">
+                      <Properties>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[32767, 5]"/>
+                        </Property>
+                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[0, 5]"/>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[0, 3]"/>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.VerticalStrut"/>
+                      </AuxValues>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Last"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                  </SubComponents>
+                </Container>
               </SubComponents>
             </Container>
             <Component class="javax.swing.Box$Filler" name="fillerMain1">
