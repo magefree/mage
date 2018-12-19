@@ -82,6 +82,7 @@ Shroud|instance|
 Soulbond|instance|
 Soulshift|number|
 Skulk|new|
+Spectacle|card, cost|
 Storm|new|
 Sunburst|new|
 Swampcycling|cost|
