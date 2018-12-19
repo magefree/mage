@@ -1,9 +1,11 @@
-package mage.cards.c;
+package mage.cards.l;
 
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.SpectacleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,43 +19,44 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
- * @author jeffwadsworth
+ * @author TheElk801 and jeffwadsworth
  */
-public final class CommuneWithLava extends CardImpl {
+public final class LightUpTheStage extends CardImpl {
 
-    public CommuneWithLava(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
+    public LightUpTheStage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
-        // Exile the top X cards of your library. Until the end of your next turn, you may play those cards.
-        this.getSpellAbility().addEffect(new CommuneWithLavaEffect());
+        // Spectacle {R}
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{R}")));
 
+        // Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
+        this.getSpellAbility().addEffect(new LightUpTheStageEffect());
     }
 
-    public CommuneWithLava(final CommuneWithLava card) {
+    public LightUpTheStage(final LightUpTheStage card) {
         super(card);
     }
 
     @Override
-    public CommuneWithLava copy() {
-        return new CommuneWithLava(this);
+    public LightUpTheStage copy() {
+        return new LightUpTheStage(this);
     }
 }
 
-class CommuneWithLavaEffect extends OneShotEffect {
+class LightUpTheStageEffect extends OneShotEffect {
 
-    public CommuneWithLavaEffect() {
+    public LightUpTheStageEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile the top X cards of your library. Until the end of your next turn, you may play those cards";
+        this.staticText = "Exile the top two cards of your library. Until the end of your next turn, you may play those cards";
     }
 
-    public CommuneWithLavaEffect(final CommuneWithLavaEffect effect) {
+    public LightUpTheStageEffect(final LightUpTheStageEffect effect) {
         super(effect);
     }
 
     @Override
-    public CommuneWithLavaEffect copy() {
-        return new CommuneWithLavaEffect(this);
+    public LightUpTheStageEffect copy() {
+        return new LightUpTheStageEffect(this);
     }
 
     @Override
@@ -61,12 +64,11 @@ class CommuneWithLavaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null) {
-            int amount = source.getManaCostsToPay().getX();
-            Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
+            Set<Card> cards = controller.getLibrary().getTopCards(game, 2);
             controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName());
 
             for (Card card : cards) {
-                ContinuousEffect effect = new CommuneWithLavaMayPlayEffect();
+                ContinuousEffect effect = new LightUpTheStageMayPlayEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
             }
@@ -77,23 +79,23 @@ class CommuneWithLavaEffect extends OneShotEffect {
     }
 }
 
-class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
+class LightUpTheStageMayPlayEffect extends AsThoughEffectImpl {
 
     private int castOnTurn = 0;
 
-    public CommuneWithLavaMayPlayEffect() {
+    public LightUpTheStageMayPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the end of your next turn, you may play that card.";
     }
 
-    public CommuneWithLavaMayPlayEffect(final CommuneWithLavaMayPlayEffect effect) {
+    public LightUpTheStageMayPlayEffect(final LightUpTheStageMayPlayEffect effect) {
         super(effect);
         castOnTurn = effect.castOnTurn;
     }
 
     @Override
-    public CommuneWithLavaMayPlayEffect copy() {
-        return new CommuneWithLavaMayPlayEffect(this);
+    public LightUpTheStageMayPlayEffect copy() {
+        return new LightUpTheStageMayPlayEffect(this);
     }
 
     @Override
@@ -122,5 +124,4 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
         return source.isControlledBy(affectedControllerId)
                 && getTargetPointer().getTargets(game, source).contains(sourceId);
     }
-
 }
