@@ -34,6 +34,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
 
         cards.add(new SetCardInfo("Growth Spiral", 178, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Mortify", 192, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
+        cards.add(new SetCardInfo("Rakdos Firewheeler", Rarity.UNCOMMON, mage.cards.r.RakdosFirewheeler.class));
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
     }
 
