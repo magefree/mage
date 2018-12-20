@@ -32,10 +32,18 @@ public final class RavnicaAllegiance extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 259;
 
+        cards.add(new SetCardInfo("Aeromunculus", 152, Rarity.COMMON, mage.cards.a.Aeromunculus.class));
+        cards.add(new SetCardInfo("Bedevil", 157, Rarity.RARE, mage.cards.b.Bedevil.class));
+        cards.add(new SetCardInfo("Gate Colossus", 232, Rarity.UNCOMMON, mage.cards.g.GateColossus.class));
         cards.add(new SetCardInfo("Growth Spiral", 178, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
+        cards.add(new SetCardInfo("Imperious Oligarch", 184, Rarity.COMMON, mage.cards.i.ImperiousOligarch.class));
+        cards.add(new SetCardInfo("Light Up the Stage", 107, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Mortify", 192, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
+        cards.add(new SetCardInfo("Rafter Demon", 196, Rarity.COMMON, mage.cards.r.RafterDemon.class));
         cards.add(new SetCardInfo("Rakdos Firewheeler", Rarity.UNCOMMON, mage.cards.r.RakdosFirewheeler.class));
+        cards.add(new SetCardInfo("Rix Maadi Reveler", 109, Rarity.RARE, mage.cards.r.RixMaadiReveler.class));
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
+        cards.add(new SetCardInfo("Zegana, Utopian Speaker", 214, Rarity.RARE, mage.cards.z.ZeganaUtopianSpeaker.class));
     }
 
     @Override
