@@ -63,7 +63,7 @@ public final class SimicAscendancy extends CardImpl {
 class SimicAscendancyTriggeredAbility extends TriggeredAbilityImpl {
 
     SimicAscendancyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.GROWTH.createInstance()), true);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.GROWTH.createInstance()), false);
     }
 
     SimicAscendancyTriggeredAbility(final SimicAscendancyTriggeredAbility ability) {
