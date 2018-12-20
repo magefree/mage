@@ -9,13 +9,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
 /**
- *
  * @author jmharmon
  */
 
@@ -29,11 +29,12 @@ public final class RakdosFirewheeler extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
+        // When Rakdos Firewheeler enters the battlefield, it deals 2 damage to target opponent and 2 damage to up to one target creature or planeswalker.
         Effect effect = new DamageTargetEffect(2);
         effect.setText("it deals 2 damage to target opponent and 2 damage to up to one target creature or planeswalker");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetOpponent());
-        ability.addTarget(new TargetCreatureOrPlaneswalker());
+        ability.addTarget(new TargetCreatureOrPlaneswalker(0, 1, new FilterCreatureOrPlaneswalkerPermanent(), false));
         this.addAbility(ability);
     }
 
