@@ -1,5 +1,7 @@
 package mage.utils;
 
+import mage.util.JarVersion;
+
 import java.io.Serializable;
 
 /**
