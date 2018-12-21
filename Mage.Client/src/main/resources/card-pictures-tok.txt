@@ -187,6 +187,7 @@
 |Generate|TOK:ALL|Graveborn|||SekKuarDeathkeeperGravebornToken|
 |Generate|TOK:ALL|Hippo|||HippoToken|
 |Generate|TOK:ALL|Soldier|||SoldierToken|
+|Generate|TOK:ALL|Starfish|||StarfishToken|
 |Generate|TOK:ALL|Zombie|||ZombieToken|
 |Generate|TOK:APC|Angel|||HauntedAngelToken|
 |Generate|TOK:APC|Cat|||PenumbraBobcatToken|
