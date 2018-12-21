@@ -236,6 +236,7 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("GNT");
         supportedSets.add("UMA");
         supportedSets.add("PUMA");
+        supportedSets.add("RNA");
         //
         supportedSets.add("EURO");
         supportedSets.add("GPX");
@@ -385,6 +386,7 @@ public enum ScryfallImageSource implements CardImageSource {
             put("WMCQ", "pwcq");
             put("EURO", "pelp");
             put("GPX", "pgpx");
+            put("MED", "me1");
         }
     };
 
