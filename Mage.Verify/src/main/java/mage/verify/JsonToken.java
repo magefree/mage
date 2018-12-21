@@ -20,4 +20,5 @@ public class JsonToken {
     public String uuid;
     public String watermark;
     public boolean isOnlineOnly;
+    public String scryfallId;
 }
