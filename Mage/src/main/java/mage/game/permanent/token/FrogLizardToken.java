@@ -9,9 +9,9 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public final class RapidHybridizationToken extends TokenImpl {
+public final class FrogLizardToken extends TokenImpl {
 
-    public RapidHybridizationToken() {
+    public FrogLizardToken() {
         super("Frog Lizard", "3/3 green Frog Lizard creature token");
         this.setOriginalExpansionSetCode("GTC");
         cardType.add(CardType.CREATURE);
@@ -25,11 +25,11 @@ public final class RapidHybridizationToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public RapidHybridizationToken(final RapidHybridizationToken token) {
+    public FrogLizardToken(final FrogLizardToken token) {
         super(token);
     }
 
-    public RapidHybridizationToken copy() {
-        return new RapidHybridizationToken(this);
+    public FrogLizardToken copy() {
+        return new FrogLizardToken(this);
     }
 }
