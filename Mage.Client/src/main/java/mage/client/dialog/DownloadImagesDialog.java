@@ -171,6 +171,7 @@ public class DownloadImagesDialog extends MageDialog {
         } else {
             this.setWindowSize(this.sizeModeMessageOnly.width, this.sizeModeMessageOnly.height);
         }
+        this.makeWindowCentered();
         //this.setLocationRelativeTo(null); // center screen //FIX
 
         // icons on tabs left side
