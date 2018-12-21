@@ -177,8 +177,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             new Thread(DownloadPicturesService.this).start();
         });
 
-        // BUTTON CANCEL
+        // BUTTON CANCEL (dialog and loading)
         uiDialog.getCancelButton().addActionListener(e -> uiDialog.setVisible(false));
+        uiDialog.getStopButton().addActionListener(e -> uiDialog.setVisible(false));
 
         // PROGRESS BAR
         uiDialog.getProgressBar().setValue(0);

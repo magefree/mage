@@ -39,7 +39,7 @@ public class DownloadImagesDialog extends MageDialog {
         this.sizeModeMessageAndControls = new Dimension(580, 330); // dialog -> properties -> designer size
         //
         this.sizeModeMessageOnly = new Dimension(this.sizeModeMessageAndControls.getSize());
-        sizeModeMessageOnly.height = 25 * 3;
+        sizeModeMessageOnly.height = 25 * 4;
         sizeModeMessageOnly.width = sizeModeMessageOnly.width / 2;
 
         // Close the dialog when Esc is pressed
@@ -106,6 +106,10 @@ public class DownloadImagesDialog extends MageDialog {
     public JButton getCancelButton() {
         return this.buttonCancel;
     }
+    
+    public JButton getStopButton() {
+        return this.buttonStop;
+    }
 
     public JProgressBar getProgressBar() {
         return this.progress;
@@ -157,6 +161,7 @@ public class DownloadImagesDialog extends MageDialog {
         //  - only message;
         //  - message + download controls and buttons        
         this.panelGlobal.setVisible(true);
+        this.buttonStop.setVisible(!needToShow); // stop button only for loading mode
         this.tabsList.setVisible(needToShow);
         this.panelCommands.setVisible(needToShow);
 
@@ -196,6 +201,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelGlobal = new javax.swing.JPanel();
         fillerGlobal1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         labelGlobal = new javax.swing.JLabel();
+        buttonStop = new javax.swing.JButton();
         fillerglobal2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         tabsList = new javax.swing.JTabbedPane();
         tabMain = new javax.swing.JPanel();
@@ -241,6 +247,16 @@ public class DownloadImagesDialog extends MageDialog {
         labelGlobal.setText("Initializing image download...");
         labelGlobal.setAlignmentX(0.5F);
         panelGlobal.add(labelGlobal);
+
+        buttonStop.setText("Cancel");
+        buttonStop.setAlignmentX(0.5F);
+        buttonStop.setPreferredSize(new java.awt.Dimension(65, 30));
+        buttonStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStopActionPerformed(evt);
+            }
+        });
+        panelGlobal.add(buttonStop);
         panelGlobal.add(fillerglobal2);
 
         getContentPane().add(panelGlobal, java.awt.BorderLayout.NORTH);
@@ -249,7 +265,6 @@ public class DownloadImagesDialog extends MageDialog {
 
         tabMain.setLayout(new javax.swing.BoxLayout(tabMain, javax.swing.BoxLayout.Y_AXIS));
 
-        panelInfo.setAlignmentX(0.5F);
         panelInfo.setLayout(new javax.swing.BoxLayout(panelInfo, javax.swing.BoxLayout.Y_AXIS));
         panelInfo.add(fillerInfo1);
 
@@ -272,7 +287,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelSourceLeft.add(labelSource);
 
         comboSource.setMaximumRowCount(10);
-        comboSource.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        comboSource.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboSource.setMinimumSize(new java.awt.Dimension(300, 20));
         comboSource.setPreferredSize(new java.awt.Dimension(400, 25));
         panelSourceLeft.add(comboSource);
@@ -289,7 +304,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelSourceRight.add(labelLanguage);
 
         comboLanguage.setMaximumRowCount(20);
-        comboLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        comboLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboLanguage.setPreferredSize(new java.awt.Dimension(90, 25));
         panelSourceRight.add(comboLanguage);
 
@@ -312,7 +327,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelModeSelect.setLayout(new javax.swing.BoxLayout(panelModeSelect, javax.swing.BoxLayout.X_AXIS));
 
         comboSets.setMaximumRowCount(20);
-        comboSets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        comboSets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboSets.setPreferredSize(new java.awt.Dimension(373, 25));
         panelModeSelect.add(comboSets);
         panelModeSelect.add(fillerMode1);
@@ -399,6 +414,10 @@ public class DownloadImagesDialog extends MageDialog {
         FastSearchUtil.showFastSearchForStringComboBox(comboSets, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
     }//GEN-LAST:event_buttonSearchSetActionPerformed
 
+    private void buttonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStopActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonStopActionPerformed
+
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
@@ -409,6 +428,7 @@ public class DownloadImagesDialog extends MageDialog {
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonOK;
     private javax.swing.JButton buttonSearchSet;
+    private javax.swing.JButton buttonStop;
     private javax.swing.JCheckBox checkboxRedownload;
     private javax.swing.JComboBox<String> comboLanguage;
     private javax.swing.JComboBox<String> comboSets;
