@@ -1,9 +1,8 @@
 package mage.client.components.ability;
 
 import mage.client.SessionHandler;
+import mage.client.dialog.MageDialog;
 import mage.client.util.ImageHelper;
-import mage.client.util.SettingsManager;
-import mage.client.util.gui.GuiDisplayUtil;
 import mage.remote.Session;
 import mage.view.AbilityPickerView;
 import org.apache.log4j.Logger;
@@ -17,8 +16,8 @@ import org.mage.card.arcane.UI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 /**
  * Dialog for choosing abilities.
@@ -112,10 +111,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         this.selected = false; // back to false - waiting for selection
         setVisible(true);
 
-        Point centered = SettingsManager.instance.getComponentPosition(DIALOG_WIDTH, DIALOG_HEIGHT);
-        this.setLocation(centered.x, centered.y);
-        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
-
+        MageDialog.makeWindowCentered(this, DIALOG_WIDTH, DIALOG_HEIGHT);
         //startModal();
     }
 
@@ -188,28 +184,28 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                 GroupLayout.TRAILING,
                 layout.createSequentialGroup().addContainerGap().add(
                         layout.createParallelGroup(GroupLayout.TRAILING).add(GroupLayout.LEADING, jScrollPane2, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE).add(GroupLayout.LEADING,
-                        layout.createSequentialGroup().add(jLabel1).addPreferredGap(LayoutStyle.RELATED, 175, Short.MAX_VALUE).add(1, 1, 1)).add(
-                        GroupLayout.LEADING,
-                        layout.createSequentialGroup().add(layout.createParallelGroup(GroupLayout.LEADING)
-                        )
-                        .addPreferredGap(LayoutStyle.RELATED)
-                        .add(
-                                layout.createParallelGroup(GroupLayout.TRAILING)
-                                .add(
-                                        GroupLayout.LEADING, layout.createParallelGroup(GroupLayout.LEADING))))).add(10, 10, 10)));
+                                layout.createSequentialGroup().add(jLabel1).addPreferredGap(LayoutStyle.RELATED, 175, Short.MAX_VALUE).add(1, 1, 1)).add(
+                                GroupLayout.LEADING,
+                                layout.createSequentialGroup().add(layout.createParallelGroup(GroupLayout.LEADING)
+                                )
+                                        .addPreferredGap(LayoutStyle.RELATED)
+                                        .add(
+                                                layout.createParallelGroup(GroupLayout.TRAILING)
+                                                        .add(
+                                                                GroupLayout.LEADING, layout.createParallelGroup(GroupLayout.LEADING))))).add(10, 10, 10)));
 
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.LEADING).add(
                 layout.createSequentialGroup().add(
                         layout.createParallelGroup(GroupLayout.LEADING).add(
-                        layout.createSequentialGroup().add(jLabel1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-                        .add(5, 5, 5)
-                        .add(
-                                layout.createParallelGroup(GroupLayout.BASELINE)
-                        )
-                ).add(layout.createSequentialGroup().add(8, 8, 8)))
-                .addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(
-                layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.LEADING)).addPreferredGap(
-                LayoutStyle.RELATED).add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addContainerGap(23, Short.MAX_VALUE)));
+                                layout.createSequentialGroup().add(jLabel1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+                                        .add(5, 5, 5)
+                                        .add(
+                                                layout.createParallelGroup(GroupLayout.BASELINE)
+                                        )
+                        ).add(layout.createSequentialGroup().add(8, 8, 8)))
+                        .addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(
+                        layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.LEADING)).addPreferredGap(
+                        LayoutStyle.RELATED).add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addContainerGap(23, Short.MAX_VALUE)));
     }
 
     @Override

@@ -236,7 +236,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Write the card&apos;s name on the card to make the card name more recognizable."/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -267,7 +267,7 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" value="Show the path Xmage is expecting for this card&apos;s image (only displays if missing)"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                     <Property name="label" type="java.lang.String" value="Display image path for missing images"/>
                   </Properties>
@@ -4425,6 +4425,7 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbPreferedImageLanguage">
                   <Properties>
+                    <Property name="maximumRowCount" type="int" value="20"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
                         <StringItem index="0" value="Item 1"/>
@@ -4451,6 +4452,7 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbNumberOfDownloadThreads">
                   <Properties>
+                    <Property name="maximumRowCount" type="int" value="20"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
                         <StringItem index="0" value="Item 1"/>

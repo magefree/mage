@@ -3,15 +3,6 @@ package org.mage.plugins.card.images;
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
-import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.TransformedImageCache;
@@ -23,13 +14,23 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.utils.CardImageUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * This class stores ALL card images in a cache with soft values. this means
  * that the images may be garbage collected when they are not needed any more,
  * but will be kept as long as possible.
- *
+ * <p>
  * Key format: "[cardname]#[setname]#[type]#[collectorID]#[param]"
- *
+ * <p>
  * where param is:
  * <ul>
  * <li>size of image</li>
@@ -228,6 +229,10 @@ public final class ImageCache {
         });
     }
 
+    public static void clearCache() {
+        IMAGE_CACHE.clear();
+    }
+
     public static String getFilePath(CardView card, int width) {
         String key = getKey(card, card.getName(), Integer.toString(width));
         boolean usesVariousArt = false;
@@ -389,7 +394,7 @@ public final class ImageCache {
         return getImage(getKey(card, card.getName(), ""));
     }
 
-//    public static BufferedImage getImageFaceOriginal(CardView card) {
+    //    public static BufferedImage getImageFaceOriginal(CardView card) {
 //        return getFaceImage(getFaceKey(card, card.getName(), card.getExpansionSetCode()));
 //    }
     public static BufferedImage getImageOriginalAlternateName(CardView card) {
@@ -472,6 +477,7 @@ public final class ImageCache {
 //        return alternateName + "#" + card.getExpansionSetCode() + "#" +card.getType()+ "#" + card.getCardNumber() + "#"
 //                + (card.getTokenSetCode() == null ? "":card.getTokenSetCode());
 //    }
+
     /**
      * Load image from file
      *
