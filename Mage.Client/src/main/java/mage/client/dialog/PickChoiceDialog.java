@@ -180,8 +180,8 @@ public class PickChoiceDialog extends MageDialog {
         this.setVisible(true);
     }
 
-    public void setWindowSize(int width, int heigth) {
-        this.setSize(new Dimension(width, heigth));
+    public void setWindowSize(int width, int height) {
+        this.setSize(new Dimension(width, height));
     }
 
     private void loadData() {

@@ -201,7 +201,7 @@
                     </Component>
                     <Component class="javax.swing.JComboBox" name="comboSource">
                       <Properties>
-                        <Property name="maximumRowCount" type="int" value="10"/>
+                        <Property name="maximumRowCount" type="int" value="15"/>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
                             <StringItem index="0" value="Item 1"/>
@@ -248,7 +248,7 @@
                     </Component>
                     <Component class="javax.swing.JComboBox" name="comboLanguage">
                       <Properties>
-                        <Property name="maximumRowCount" type="int" value="20"/>
+                        <Property name="maximumRowCount" type="int" value="15"/>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
                             <StringItem index="0" value="Item 1"/>
@@ -309,7 +309,7 @@
                       <SubComponents>
                         <Component class="javax.swing.JComboBox" name="comboSets">
                           <Properties>
-                            <Property name="maximumRowCount" type="int" value="20"/>
+                            <Property name="maximumRowCount" type="int" value="15"/>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="4">
                                 <StringItem index="0" value="Item 1"/>

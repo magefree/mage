@@ -287,7 +287,7 @@ public class DownloadImagesDialog extends MageDialog {
         labelSource.setText("Images source to download:");
         panelSourceLeft.add(labelSource);
 
-        comboSource.setMaximumRowCount(10);
+        comboSource.setMaximumRowCount(15);
         comboSource.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboSource.setMinimumSize(new java.awt.Dimension(300, 20));
         comboSource.setPreferredSize(new java.awt.Dimension(400, 25));
@@ -304,7 +304,7 @@ public class DownloadImagesDialog extends MageDialog {
         labelLanguage.setText("Language:");
         panelSourceRight.add(labelLanguage);
 
-        comboLanguage.setMaximumRowCount(20);
+        comboLanguage.setMaximumRowCount(15);
         comboLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboLanguage.setPreferredSize(new java.awt.Dimension(90, 25));
         panelSourceRight.add(comboLanguage);
@@ -327,7 +327,7 @@ public class DownloadImagesDialog extends MageDialog {
 
         panelModeSelect.setLayout(new javax.swing.BoxLayout(panelModeSelect, javax.swing.BoxLayout.X_AXIS));
 
-        comboSets.setMaximumRowCount(20);
+        comboSets.setMaximumRowCount(15);
         comboSets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboSets.setPreferredSize(new java.awt.Dimension(373, 25));
         panelModeSelect.add(comboSets);
@@ -412,7 +412,7 @@ public class DownloadImagesDialog extends MageDialog {
     }//GEN-LAST:event_closeDialog
 
     private void buttonSearchSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchSetActionPerformed
-        FastSearchUtil.showFastSearchForStringComboBox(comboSets, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
+        FastSearchUtil.showFastSearchForStringComboBox(comboSets, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE, 400, 500);
     }//GEN-LAST:event_buttonSearchSetActionPerformed
 
     private void buttonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStopActionPerformed

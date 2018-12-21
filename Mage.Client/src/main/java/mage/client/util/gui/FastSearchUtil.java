@@ -19,12 +19,16 @@ public class FastSearchUtil {
     public static String DEFAULT_EXPANSION_SEARCH_MESSAGE = "Select set or expansion";
     public static String DEFAULT_EXPANSION_TOOLTIP_MESSAGE = "Fast search set or expansion";
 
+    public static void showFastSearchForStringComboBox(JComboBox combo, String chooseMessage){
+        showFastSearchForStringComboBox(combo, chooseMessage, 300, 500);
+    }
+
     /**
      * Show fast choice modal dialog with incremental searching for any string combobox components
      * @param combo combobox control with default data model
      * @param chooseMessage caption message for dialog
      */
-    public static void showFastSearchForStringComboBox(JComboBox combo, String chooseMessage){
+    public static void showFastSearchForStringComboBox(JComboBox combo, String chooseMessage, int windowWidth, int windowHeight){
         // fast search/choice dialog for string combobox
 
         mage.choices.Choice choice = new ChoiceImpl(false);
@@ -51,7 +55,7 @@ public class FastSearchUtil {
 
         // ask for new value
         PickChoiceDialog dlg = new PickChoiceDialog();
-        dlg.setWindowSize(300, 500);
+        dlg.setWindowSize(windowWidth, windowHeight);
         dlg.showDialog(choice, needSelectValue);
         if(choice.isChosen()){
             item = choice.getChoiceKey();

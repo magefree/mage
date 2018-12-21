@@ -243,11 +243,15 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         cal.setTime(exp.getReleaseDate());
         String year = String.valueOf(cal.get(Calendar.YEAR));
 
+        return exp.getName() + " (" + exp.getCode() + ", " + year + ")";
+
+        /*
         if (!exp.getName().contains(year)) {
             return exp.getName() + " (" + year + ")";
         } else {
             return exp.getName();
         }
+        */
     }
 
     private ExpansionSet findSetByNameWithYear(String name) {
