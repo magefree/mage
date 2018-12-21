@@ -653,6 +653,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // stop
         reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
+
+        // reset images cache
+        ImageCache.clearCache();
     }
 
     static String convertStreamToString(InputStream is) {
