@@ -43,7 +43,7 @@ public class TournamentGameView implements Serializable {
         String duelingTime = "";
         
         if (game.hasEnded()) {
-            if (game.getEndTime() != null) {
+            if (game.getEndTime() != null && game.getStartTime() != null) {
                 duelingTime = " (" + DateFormat.getDuration((game.getEndTime().getTime() - game.getStartTime().getTime())/1000) + ')';
             }
             this.state = "Finished" + duelingTime;
