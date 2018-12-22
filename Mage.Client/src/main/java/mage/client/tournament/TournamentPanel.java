@@ -1,15 +1,21 @@
-
-
- /*
- * TournamentPanel.java
- *
- * Created on 20-Jan-2011, 9:18:30 PM
- */
 package mage.client.tournament;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import mage.client.MageFrame;
+import mage.client.SessionHandler;
+import mage.client.chat.ChatPanelBasic;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.table.TablesButtonColumn;
+import mage.client.util.Format;
+import mage.client.util.GUISizeHelper;
+import mage.client.util.gui.TableUtil;
+import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.constants.PlayerAction;
+import mage.view.*;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -19,34 +25,10 @@ import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.SwingWorker;
-import javax.swing.table.AbstractTableModel;
-import mage.client.MageFrame;
-import mage.client.SessionHandler;
-import mage.client.chat.ChatPanelBasic;
-import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_ORDER;
-import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH;
-import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER;
-import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH;
-import mage.client.util.ButtonColumn;
-import mage.client.util.Format;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.gui.TableUtil;
-import mage.client.util.gui.countryBox.CountryCellRenderer;
-import mage.constants.PlayerAction;
-import mage.view.RoundView;
-import mage.view.TournamentGameView;
-import mage.view.TournamentPlayerView;
-import mage.view.TournamentView;
-import mage.view.UserRequestMessage;
-import org.apache.log4j.Logger;
+
+import static mage.client.dialog.PreferencesDialog.*;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentPanel extends javax.swing.JPanel {
@@ -64,7 +46,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     private UpdateTournamentTask updateTask;
     private final DateFormat df;
 
-    private final ButtonColumn actionButtonColumn1;
+    private final TablesButtonColumn actionButtonColumn1;
 
     /**
      * Creates new form TournamentPanel
@@ -111,7 +93,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         };
 
         // action button, don't delete this
-        actionButtonColumn1 = new ButtonColumn(tableMatches, action, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
+        actionButtonColumn1 = new TablesButtonColumn(tableMatches, action, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
         setGUISize();
 
     }
@@ -390,67 +372,67 @@ public class TournamentPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
         actionPanel.setLayout(actionPanelLayout);
         actionPanelLayout.setHorizontalGroup(
-            actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(actionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblName)
-                    .addComponent(lblState)
-                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                    .addComponent(txtTournamentState))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblType)
-                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(actionPanelLayout.createSequentialGroup()
-                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblStartTime))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEndTime)
-                            .addComponent(txtEndTime))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnQuitTournament, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCloseWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(actionPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblName)
+                                        .addComponent(lblState)
+                                        .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                        .addComponent(txtTournamentState))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblType)
+                                        .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(actionPanelLayout.createSequentialGroup()
+                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lblStartTime))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblEndTime)
+                                                        .addComponent(txtEndTime))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnQuitTournament, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnCloseWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         actionPanelLayout.setVerticalGroup(
-            actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(actionPanelLayout.createSequentialGroup()
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(actionPanelLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(lblName))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblType)))
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(actionPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnQuitTournament))
-                        .addGap(13, 13, 13)
-                        .addComponent(btnCloseWindow))
-                    .addGroup(actionPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblState)
-                            .addComponent(lblStartTime)
-                            .addComponent(lblEndTime))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(actionPanelLayout.createSequentialGroup()
-                                .addComponent(txtTournamentState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtStartTime)
-                                .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(actionPanelLayout.createSequentialGroup()
+                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(actionPanelLayout.createSequentialGroup()
+                                                .addGap(7, 7, 7)
+                                                .addComponent(lblName))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionPanelLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(lblType)))
+                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(actionPanelLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnQuitTournament))
+                                                .addGap(13, 13, 13)
+                                                .addComponent(btnCloseWindow))
+                                        .addGroup(actionPanelLayout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(lblState)
+                                                        .addComponent(lblStartTime)
+                                                        .addComponent(lblEndTime))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(actionPanelLayout.createSequentialGroup()
+                                                                .addComponent(txtTournamentState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(txtStartTime)
+                                                                .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addContainerGap())
         );
 
         jSplitPane2.setResizeWeight(1.0);
@@ -481,17 +463,17 @@ public class TournamentPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(actionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(actionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
