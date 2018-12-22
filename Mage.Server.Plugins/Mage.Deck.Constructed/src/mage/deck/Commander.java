@@ -11,7 +11,6 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 
 import java.util.*;
@@ -27,8 +26,7 @@ public class Commander extends Constructed {
     public Commander() {
         this("Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET
-                    && set.getSetType() != SetType.JOKESET) {
+            if (set.isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

@@ -4,7 +4,6 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -82,7 +81,7 @@ public class AusHighlander extends Constructed {
     public AusHighlander() {
         this("Australian Highlander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
