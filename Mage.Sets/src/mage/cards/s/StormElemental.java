@@ -41,7 +41,7 @@ public final class StormElemental extends CardImpl {
     }
 
     public StormElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
