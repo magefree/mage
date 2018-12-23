@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -97,26 +96,29 @@ class ArcaneArtisanCreateTokenEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(target.getFirstTarget());
-        player.moveCards(card, Zone.EXILED, source, game);
-        if (!card.isCreature()) {
+        if (!player.moveCards(card, Zone.EXILED, source, game)) {
             return false;
         }
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(player.getId());
-        effect.setTargetPointer(new FixedTarget(card.getId(), game));
-        effect.apply(game, source);
-        Object object = game.getState().getValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game));
-        Set<UUID> tokensCreated;
-        if (object != null) {
-            tokensCreated = (Set<UUID>) object;
-        } else {
-            tokensCreated = new HashSet<>();
-        }
-        for (Permanent perm : effect.getAddedPermanent()) {
-            if (perm != null) {
-                tokensCreated.add(perm.getId());
+
+        if (card.isCreature()) {
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(player.getId());
+            effect.setTargetPointer(new FixedTarget(card.getId(), game));
+            effect.apply(game, source);
+            Object object = game.getState().getValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game));
+            Set<UUID> tokensCreated;
+            if (object != null) {
+                tokensCreated = (Set<UUID>) object;
+            } else {
+                tokensCreated = new HashSet<>();
             }
+            for (Permanent perm : effect.getAddedPermanent()) {
+                if (perm != null) {
+                    tokensCreated.add(perm.getId());
+                }
+            }
+            game.getState().setValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game), tokensCreated);
         }
-        game.getState().setValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game), tokensCreated);
+
         return true;
     }
 }
