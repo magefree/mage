@@ -1,5 +1,8 @@
 package mage.abilities.meta;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -7,10 +10,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * A triggered ability that combines several others and triggers whenever one or
@@ -56,7 +55,6 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         for (TriggeredAbility ability : triggeredAbilities) {
             if (ability.checkEventType(event, game)) {
-                System.out.println("Correct event type (" + event.getType() + ")");
                 return true;
             }
         }
@@ -69,11 +67,9 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (int i = 0; i < triggeredAbilities.length; i++) {
             TriggeredAbility ability = triggeredAbilities[i];
             if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)) {
-                System.out.println("Triggered from " + ability.getRule());
                 triggeringAbilities.add(i);
                 toRet = true;
             }
-            System.out.println("Checked " + ability.getRule());
         }
         return toRet;
     }

@@ -160,6 +160,7 @@ Premium Deck Series: Fire and Lightning|PremiumDeckSeriesFireAndLightning|
 Premium Deck Series: Slivers|PremiumDeckSeriesSlivers|
 Prerelease Events|PrereleaseEvents|
 Prophecy|Prophecy|
+Ravnica Allegiance|RavnicaAllegiance|
 Ravnica: City of Guilds|RavnicaCityOfGuilds|
 Return to Ravnica|ReturnToRavnica|
 Revised Edition|RevisedEdition|

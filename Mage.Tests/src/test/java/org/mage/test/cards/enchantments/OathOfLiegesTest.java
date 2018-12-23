@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.enchantments;
 
 import mage.constants.PhaseStep;
@@ -7,93 +6,229 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class OathOfLiegesTest extends CardTestPlayerBase {
 
+    //addCard(Zone.BATTLEFIELD, playerA, "Hypersonic Dragon", 1); // can cast spells at any time
+    //addCard(Zone.HAND, playerA, "Breath of Life", 1); // {3}{W} // return creatures
+    //addCard(Zone.HAND, playerA, "Replenish", 1); // {3}{W} // return all enchantments
+
     @Test
-    public void testSearchLandOwner() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is their opponent.
-        // The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
-        addCard(Zone.HAND, playerA, "Oath of Lieges", 1); // {1}{W}
-        addCard(Zone.LIBRARY, playerA, "Plains", 1);
+    public void testOath_OwnCardTriggersOnOwnTurn() {
+        // A
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Oath of Lieges", 1); // {1}{W}
+        // B
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
+        // turn 1 - A
+        // oath A triggers for A and activates
+        addTarget(playerA, playerB); // who control more lands
+        setChoice(playerA, "Yes"); // search library
+        addTarget(playerA, "Plains"); // card from library
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oath of Lieges");
-        addTarget(playerA, playerB);
-        addTarget(playerA, "Plains");
-
-        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Oath of Lieges", 1);
-        assertPermanentCount(playerA, "Plains", 3);
-
+        assertPermanentCount(playerA, "Plains", 4 + 1);
+        assertPermanentCount(playerB, "Island", 5);
     }
 
     @Test
-    public void testSearchLandOpponent() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is their opponent.
-        // The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
-        addCard(Zone.HAND, playerA, "Oath of Lieges", 1); // {1}{W}
+    public void testOath_OwnCardTriggersOnOpponentTurn() {
+        // A
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Hypersonic Dragon", 1); // can cast spells at any time
+        addCard(Zone.GRAVEYARD, playerA, "Oath of Lieges", 1); // {1}{W}
+        addCard(Zone.HAND, playerA, "Replenish", 1); // {3}{W} // return all enchantments
+        // B
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addCard(Zone.LIBRARY, playerB, "Plains", 5);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
-        addCard(Zone.LIBRARY, playerB, "Plains", 1);
+        // turn 1 - A (play oath from grave)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
+        checkPermanentCount("A have oath", 1, PhaseStep.END_TURN, playerA, "Oath of Lieges", 1);
+        checkPermanentCount("A have 5 plains", 1, PhaseStep.END_TURN, playerA, "Plains", 5);
+        checkPermanentCount("B have 4 plains", 1, PhaseStep.END_TURN, playerB, "Plains", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oath of Lieges");
-        addTarget(playerB, playerA);
-        addTarget(playerB, "Plains");
+        // turn 2 - B
+        // oath A triggers for B and activates
+        addTarget(playerB, playerA); // who control more lands
+        setChoice(playerB, "Yes"); // search library
+        addTarget(playerB, "Plains"); // card from library
 
-        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Oath of Lieges", 1);
-        assertPermanentCount(playerA, "Plains", 2);
-        assertPermanentCount(playerB, "Plains", 2);
+        assertPermanentCount(playerA, "Plains", 5);
+        assertPermanentCount(playerB, "Plains", 4 + 1);
     }
 
     @Test
-    public void testSearchLandOwnerCopy() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is their opponent.
-        // The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
-        addCard(Zone.HAND, playerA, "Oath of Lieges", 1); // {1}{W}
-        addCard(Zone.LIBRARY, playerA, "Plains", 3);
-        addCard(Zone.HAND, playerA, "Plains", 1);
+    public void testOath_OpponentCardTriggersOnOwnTurn() {
+        // A
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        // B
+        addCard(Zone.LIBRARY, playerB, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Oath of Lieges", 1); // {1}{W}
 
+        // turn 1 - A
+        // oath B triggers for A and activates
+        addTarget(playerA, playerB); // who control more lands
+        setChoice(playerA, "Yes"); // search library
+        addTarget(playerA, "Plains"); // card from library
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Plains", 4 + 1);
+        assertPermanentCount(playerB, "Plains", 5);
+    }
+
+    @Test
+    public void testOath_DoubleOath() {
+        // A
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Oath of Lieges", 2); // {1}{W}
+        // B
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
+
+        // turn 1 - A
+        // oath A triggers for A and activates
+        // oath B triggers for A and activates
+        // 1
+        addTarget(playerA, playerB); // who control more lands
+        setChoice(playerA, "Yes"); // search library
+        addTarget(playerA, "Plains"); // card from library
+        // 2
+        addTarget(playerA, playerB); // who control more lands
+        setChoice(playerA, "Yes"); // search library
+        addTarget(playerA, "Plains"); // card from library
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Plains", 3 + 2);
+        assertPermanentCount(playerB, "Plains", 5);
+    }
+
+    @Test
+    public void testOath_OwnNormalAndOwnCopy() {
+        // A
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3); // for copy
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Hypersonic Dragon", 1); // can cast spells at any time
+        addCard(Zone.GRAVEYARD, playerA, "Oath of Lieges", 1); // {1}{W}
+        addCard(Zone.HAND, playerA, "Replenish", 1); // {3}{W} // return all enchantments
+        addCard(Zone.HAND, playerA, "Copy Enchantment", 1); // {2}{U} // copy target
+        // B
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 12);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
-        addCard(Zone.HAND, playerB, "Copy Enchantment", 1); // {2}{U}
-        addCard(Zone.LIBRARY, playerB, "Plains", 3);
+        addCard(Zone.LIBRARY, playerB, "Plains", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oath of Lieges");
+        // turn 1 - A
+        // cast oath A
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
+        showBattlefield("A perms", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+        // cast oath copy
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Copy Enchantment");
+        setChoice(playerA, "Yes"); // use copy effect
+        setChoice(playerA, "Oath of Lieges"); // target for copy
+        checkPermanentCount("A have 2 oath", 1, PhaseStep.END_TURN, playerA, "Oath of Lieges", 2);
+        checkPermanentCount("A have 10 plains", 1, PhaseStep.END_TURN, playerA, "Plains", 10);
+        checkPermanentCount("B have 12 plains", 1, PhaseStep.END_TURN, playerB, "Plains", 12);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Copy Enchantment");
-        setChoice(playerB, "Oath of Lieges");
+        // turn 2 - B
+        // oath A triggers for B and do nothing
+        // copy oath A triggers for B and do nothing
+        checkPermanentCount("A have 10 plains", 1, PhaseStep.END_TURN, playerA, "Plains", 10);
+        checkPermanentCount("B have 12 plains", 1, PhaseStep.END_TURN, playerB, "Plains", 12);
 
-        // turn 3
-        addTarget(playerA, playerB);
-        addTarget(playerA, "Plains"); // 3rd land
-        addTarget(playerA, "Plains"); // second trigger will fail because target player has no longer more lands than controller
+        // turn 3 - A
+        // oath A triggers for A and activates
+        // copy oath A triggers for A and activates
+        // 1
+        addTarget(playerA, playerB); // who control more lands
+        setChoice(playerA, "Yes"); // search library
+        addTarget(playerA, "Plains"); // card from library
+        // 2
+        addTarget(playerA, playerB); // who control more lands
+        setChoice(playerA, "Yes"); // search library
+        addTarget(playerA, "Plains"); // card from library
 
-        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains"); // 4th land
-
-        // turn 4
-        addTarget(playerB, playerA);
-        addTarget(playerB, "Plains");
-        addTarget(playerB, "Plains"); // second trigger will fail because target player has no longer more lands than controller
-
-        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
-        assertPermanentCount(playerB, "Oath of Lieges", 1);
-        assertPermanentCount(playerA, "Oath of Lieges", 1);
+        assertPermanentCount(playerA, "Plains", 10 + 2);
+        assertPermanentCount(playerB, "Plains", 12);
+    }
 
-        assertPermanentCount(playerB, "Plains", 1);
-        assertPermanentCount(playerA, "Plains", 4);
+    @Test
+    public void testOath_OwnNormalAndOpponentCopy() {
+        // special test to check targetadjusters (copy card must used target adjuster from original card, not from copied)
 
+        // A
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        addCard(Zone.GRAVEYARD, playerA, "Oath of Lieges", 1); // {1}{W}
+        addCard(Zone.HAND, playerA, "Replenish", 1); // {3}{W} // return all enchantments
+        addCard(Zone.BATTLEFIELD, playerA, "Hypersonic Dragon", 1); // can cast spells at any time
+        // B
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 12);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3); // for copy
+        addCard(Zone.LIBRARY, playerB, "Plains", 5);
+        addCard(Zone.HAND, playerB, "Copy Enchantment", 1); // {2}{U} // copy target
+
+        // turn 1 - A
+        // nothing
+
+        // turn 2 - B
+        // cast oath A
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
+        // cast oath copy by opponent
+        showBattlefield("A perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerA);
+        showBattlefield("B perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        showAvaileableAbilities("B abils", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        showHand("B hand", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Copy Enchantment");
+        setChoice(playerB, "Yes"); // use copy effect
+        setChoice(playerB, "Oath of Lieges"); // target for copy
+        checkPermanentCount("A have 1 oath", 2, PhaseStep.END_TURN, playerA, "Oath of Lieges", 1);
+        checkPermanentCount("B have 1 oath", 2, PhaseStep.END_TURN, playerA, "Oath of Lieges", 1);
+        checkPermanentCount("A have 10 plains", 2, PhaseStep.END_TURN, playerA, "Plains", 10);
+        checkPermanentCount("B have 12 plains", 2, PhaseStep.END_TURN, playerB, "Plains", 12);
+        showLibrary("lib B", 2, PhaseStep.END_TURN, playerB);
+
+        // turn 3 - A
+        // oath A triggers for A and activates
+        // copy oath B triggers for A and activates
+        // 1
+        addTarget(playerA, playerB); // who control more lands
+        setChoice(playerA, "Yes"); // search library
+        addTarget(playerA, "Plains"); // card from library
+        // 2
+        addTarget(playerA, playerB); // who control more lands
+        setChoice(playerA, "Yes"); // search library
+        addTarget(playerA, "Plains"); // card from library
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Plains", 10 + 2);
+        assertPermanentCount(playerB, "Plains", 12);
     }
 }

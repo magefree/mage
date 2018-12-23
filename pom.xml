@@ -6,7 +6,7 @@
 
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
-    <version>1.4.31</version>
+    <version>1.4.32</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
@@ -29,6 +29,7 @@
                     <!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.7</version>
@@ -36,6 +37,8 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
+            <!-- default manifest settings (parent) -->
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.5</version>
@@ -43,6 +46,7 @@
                     <archive>
                         <manifestEntries>
                             <Built-By>MageTeam</Built-By>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -84,7 +88,7 @@
     </repositories>
 
     <properties>
-        <mage-version>1.4.31</mage-version>
+        <mage-version>1.4.32</mage-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

@@ -52,15 +52,24 @@ public class CryptoplasmTest extends CardTestPlayerBase {
         // At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
         addCard(Zone.BATTLEFIELD, playerB, "Cryptoplasm", 1); // {1}{U}{U}
 
+        // turn 2 - prepare (crypto to paladin, footsteps to crypto)
+        // crypto:  copy as paladin on upkeep
+        setChoice(playerB, "Yes");
+        addTarget(playerB, "Sigiled Paladin");
+        // footsteps: enchant copy of paladin (crypto)
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Followed Footsteps");
         addTarget(playerB, "Sigiled Paladin[only copy]");
+
+        // turn 4 - ignore crypto ask for new copy
+        setChoice(playerB, "No");
 
         setStopAt(4, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerB, "Followed Footsteps", 1);
-        assertPermanentCount(playerB, "Cryptoplasm", 0);
-        assertPermanentCount(playerB, "Sigiled Paladin", 2);
+        assertPermanentCount(playerB, "Cryptoplasm", 0); // it's a copy
+        assertPermanentCount(playerB, "Sigiled Paladin", 2); // crypto as copy + footstep token as copy
+        assertPermanentCount(playerA, "Sigiled Paladin", 1); // original
     }
 
     /**

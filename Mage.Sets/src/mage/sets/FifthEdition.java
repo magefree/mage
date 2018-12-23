@@ -20,6 +20,7 @@ public final class FifthEdition extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Abbey Gargoyles", 1, Rarity.UNCOMMON, mage.cards.a.AbbeyGargoyles.class));
         cards.add(new SetCardInfo("Abyssal Specter", 139, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 410, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
@@ -89,6 +90,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Circle of Protection: White", 21, Rarity.COMMON, mage.cards.c.CircleOfProtectionWhite.class));
         cards.add(new SetCardInfo("City of Brass", 413, Rarity.RARE, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Clay Statue", 355, Rarity.COMMON, mage.cards.c.ClayStatue.class));
+        cards.add(new SetCardInfo("Cloak of Confusion", 151, Rarity.COMMON, mage.cards.c.CloakOfConfusion.class));
         cards.add(new SetCardInfo("Clockwork Beast", 356, Rarity.RARE, mage.cards.c.ClockworkBeast.class));
         cards.add(new SetCardInfo("Clockwork Steed", 357, Rarity.UNCOMMON, mage.cards.c.ClockworkSteed.class));
         cards.add(new SetCardInfo("Cockatrice", 284, Rarity.RARE, mage.cards.c.Cockatrice.class));
@@ -165,8 +167,8 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Flood", 87, Rarity.COMMON, mage.cards.f.Flood.class));
         cards.add(new SetCardInfo("Flying Carpet", 371, Rarity.RARE, mage.cards.f.FlyingCarpet.class));
         cards.add(new SetCardInfo("Fog", 293, Rarity.COMMON, mage.cards.f.Fog.class));
-        cards.add(new SetCardInfo("Force Spike", 88, Rarity.COMMON, mage.cards.f.ForceSpike.class));
         cards.add(new SetCardInfo("Force of Nature", 294, Rarity.RARE, mage.cards.f.ForceOfNature.class));
+        cards.add(new SetCardInfo("Force Spike", 88, Rarity.COMMON, mage.cards.f.ForceSpike.class));
         cards.add(new SetCardInfo("Forest", 446, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 447, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 448, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

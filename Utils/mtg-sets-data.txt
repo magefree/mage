@@ -165,6 +165,7 @@ Planeshift|PLS|
 Portal|POR|
 Prerelease Events|PTC|
 Portal Three Kingdoms|PTK|
+Ravnica Allegiance|RNA|
 Ravnica: City of Guilds|RAV|
 Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|

@@ -34,6 +34,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
@@ -454,7 +456,8 @@ public class ConnectDialog extends MageDialog {
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setPassword(this.txtPassword.getText().trim());
-            connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
+            boolean redownloadDatabase = CardRepository.instance.findCard("Island") == null;
+            connection.setForceDBComparison(this.chkForceUpdateDB.isSelected() || redownloadDatabase);
             String allMAC = "";
             try {
                 allMAC = connection.getMAC();

@@ -12,8 +12,8 @@ public class ObjectSourcePlayer<T> extends ObjectPlayer<T> {
 
     protected final UUID sourceId;
 
-    public ObjectSourcePlayer(T object, UUID sourceId, UUID playerId) {
-        super(object, playerId);
+    public ObjectSourcePlayer(T object, UUID sourceId, UUID sourceControllerId) {
+        super(object, sourceControllerId);
         this.sourceId = sourceId;
     }
 

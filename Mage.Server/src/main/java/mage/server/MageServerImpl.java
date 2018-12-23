@@ -1,10 +1,5 @@
-
 package mage.server;
 
-import java.security.SecureRandom;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import javax.management.timer.Timer;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -42,6 +37,11 @@ import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
+
+import javax.management.timer.Timer;
+import java.security.SecureRandom;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author BetaSteward_at_googlemail.com, noxx
@@ -224,6 +224,20 @@ public class MageServerImpl implements MageServer {
                     if (quitRatio < user.getTourneyQuitRatio()) {
                         String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
                                 .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
+                        user.showUserMessage("Create tournament", message);
+                        throw new MageException("No message");
+                    }
+                    // check if the user satisfies the minimumRating requirement.
+                    int minimumRating = options.getMinimumRating();
+                    int userRating;
+                    if (options.getMatchOptions().isLimited()) {
+                        userRating = user.getUserData().getLimitedRating();
+                    } else {
+                        userRating = user.getUserData().getConstructedRating();
+                    }
+                    if (userRating < minimumRating) {
+                        String message = new StringBuilder("Your rating ").append(userRating)
+                                .append(" is lower than the table requirement ").append(minimumRating).toString();
                         user.showUserMessage("Create tournament", message);
                         throw new MageException("No message");
                     }
@@ -813,27 +827,27 @@ public class MageServerImpl implements MageServer {
 
     public void quitDraft(final UUID draftId, final String sessionId) throws MageException {
         execute("quitDraft", sessionId, () -> {
-            try {
-                callExecutor.execute(
-                        () -> {
-                            Optional<Session> session = SessionManager.instance.getSession(sessionId);
-                            if (!session.isPresent()) {
-                                logger.error("Session not found : " + sessionId);
-                            } else {
-                                UUID userId = session.get().getUserId();
-                                UUID tableId = DraftManager.instance.getControllerByDraftId(draftId).getTableId();
-                                Table table = TableManager.instance.getTable(tableId);
-                                if (table.isTournament()) {
-                                    UUID tournamentId = table.getTournament().getId();
-                                    TournamentManager.instance.quit(tournamentId, userId);
+                    try {
+                        callExecutor.execute(
+                                () -> {
+                                    Optional<Session> session = SessionManager.instance.getSession(sessionId);
+                                    if (!session.isPresent()) {
+                                        logger.error("Session not found : " + sessionId);
+                                    } else {
+                                        UUID userId = session.get().getUserId();
+                                        UUID tableId = DraftManager.instance.getControllerByDraftId(draftId).getTableId();
+                                        Table table = TableManager.instance.getTable(tableId);
+                                        if (table.isTournament()) {
+                                            UUID tournamentId = table.getTournament().getId();
+                                            TournamentManager.instance.quit(tournamentId, userId);
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                );
-            } catch (Exception ex) {
-                handleException(ex);
-            }
-        }
+                        );
+                    } catch (Exception ex) {
+                        handleException(ex);
+                    }
+                }
         );
     }
 
@@ -1127,12 +1141,12 @@ public class MageServerImpl implements MageServer {
     public void toggleActivation(final String sessionId, final String userName) throws MageException {
         execute("toggleActivation", sessionId, ()
                 -> UserManager.instance.getUserByName(userName).ifPresent(user
-                        -> {
-                    user.setActive(!user.isActive());
-                    if (!user.isActive() && user.isConnected()) {
-                        SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
-                    }
-                }));
+                -> {
+            user.setActive(!user.isActive());
+            if (!user.isActive() && user.isConnected()) {
+                SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
+            }
+        }));
     }
 
     @Override
@@ -1167,8 +1181,8 @@ public class MageServerImpl implements MageServer {
         if (title != null && message != null) {
             execute("sendFeedbackMessage", sessionId, ()
                     -> SessionManager.instance.getSession(sessionId).ifPresent(
-                            session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
-                    ));
+                    session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
+            ));
         }
     }
 
@@ -1293,8 +1307,8 @@ public class MageServerImpl implements MageServer {
                 logger.error("Session not found : " + sessionId);
                 return null;
             } else {
-                UUID userId = session.get().getUserId();
-                return GameManager.instance.getGameView(gameId, userId, playerId);
+                //UUID userId = session.get().getUserId();
+                return GameManager.instance.getGameView(gameId, playerId);
             }
         }
     }
@@ -1386,7 +1400,19 @@ public class MageServerImpl implements MageServer {
                 user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + '%');
                 throw new MageException("No message");
             }
-
+            // check if the user satisfies the minimumRating requirement.
+            int minimumRating = options.getMinimumRating();
+            int userRating;
+            if (options.isLimited()) {
+                userRating = user.getUserData().getLimitedRating();
+            } else {
+                userRating = user.getUserData().getConstructedRating();
+            }
+            if (userRating < minimumRating) {
+                String message = new StringBuilder("Your rating ").append(userRating).append(" is lower than the table requirement ").append(minimumRating).toString();
+                user.showUserMessage("Create table", message);
+                throw new MageException("No message");
+            }
             Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(roomId);
             if (room.isPresent()) {
                 TableView table = room.get().createTable(userId, options);

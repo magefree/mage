@@ -1,14 +1,12 @@
 package mage.verify;
 
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
-import mage.cards.repository.CardRepository;
-import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -16,7 +14,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.images.DownloadPicturesService;
 import org.reflections.Reflections;
 
 import java.io.IOException;
@@ -61,18 +59,25 @@ public class VerifyCardDataTest {
         skipListCreate("PT");
         skipListAddName("PT", "UST", "Garbage Elemental");
         skipListAddName("PT", "UST", "Infinity Elemental");
+        skipListAddName("PT", "UNH", "Old Fogey");
 
         // color
         skipListCreate("COLOR");
 
         // cost
         skipListCreate("COST");
+        skipListAddName("COST", "KTK", "Erase");
+        skipListAddName("COST", "M13", "Erase");
+        skipListAddName("COST", "ULG", "Erase");
+        skipListAddName("COST", "H17", "Grimlock, Dinobot Leader");
 
         // supertype
         skipListCreate("SUPERTYPE");
 
         // type
         skipListCreate("TYPE");
+        skipListAddName("TYPE", "UNH", "Old Fogey");
+        skipListAddName("TYPE", "UST", "capital offense");
 
         // subtype
         skipListCreate("SUBTYPE");
@@ -109,7 +114,7 @@ public class VerifyCardDataTest {
     }
 
     private int failed = 0;
-    private ArrayList<String> outputMessages = new ArrayList<>();
+    private final ArrayList<String> outputMessages = new ArrayList<>();
 
     @Test
     public void verifyCards() throws IOException {
@@ -232,7 +237,7 @@ public class VerifyCardDataTest {
             // replace codes for aliases
             String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
 
-            ExpansionSet mageSet = Sets.findSet(searchSet);
+            ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase());
             if (mageSet == null) {
                 totalMissingSets = totalMissingSets + 1;
                 totalMissingCards = totalMissingCards + refSet.cards.size();
@@ -354,7 +359,6 @@ public class VerifyCardDataTest {
         }
 
         // TODO: add test to check num cards for rarity (rarityStats > 0 and numRarity > 0)
-
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
@@ -369,7 +373,6 @@ public class VerifyCardDataTest {
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
 
-
         // 1. wrong UsesVariousArt settings (set have duplicated card name without that setting -- e.g. cards will have same image)
         for (ExpansionSet set : sets) {
 
@@ -383,7 +386,7 @@ public class VerifyCardDataTest {
             // check
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
-                boolean cardHaveVariousSetting = card.getGraphicInfo() == null ? false : card.getGraphicInfo().getUsesVariousArt();
+                boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
                 if (cardHaveDoubleName && !cardHaveVariousSetting) {
                     errorsList.add("error, founded double card names, but UsesVariousArt is not true: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
@@ -422,7 +425,7 @@ public class VerifyCardDataTest {
         }
 
         // tok file's data
-        ArrayList<CardDownloadData> tokFileTokens = DownloadPictures.getTokenCardUrls();
+        ArrayList<CardDownloadData> tokFileTokens = DownloadPicturesService.getTokenCardUrls();
         LinkedHashMap<String, String> tokDataClassesIndex = new LinkedHashMap<>();
         LinkedHashMap<String, String> tokDataNamesIndex = new LinkedHashMap<>();
         for (CardDownloadData tokData : tokFileTokens) {
@@ -569,17 +572,22 @@ public class VerifyCardDataTest {
             return;
         }
 
-        Collection<String> expected = ref.colors;
-        ObjectColor color = card.getColor(null);
-        if (expected == null) {
-            expected = Collections.emptyList();
+        Set<String> expected = new HashSet<>();
+        if (ref.colors != null) {
+            expected.addAll(ref.colors);
         }
+        if (card.isFlipCard()) {
+            expected.addAll(ref.colorIdentity);
+        }
+
+        ObjectColor color = card.getColor(null);
+
         if (expected.size() != color.getColorCount()
-                || (color.isBlack() && !expected.contains("Black"))
-                || (color.isBlue() && !expected.contains("Blue"))
-                || (color.isGreen() && !expected.contains("Green"))
-                || (color.isRed() && !expected.contains("Red"))
-                || (color.isWhite() && !expected.contains("White"))) {
+                || (color.isBlack() && !expected.contains("B"))
+                || (color.isBlue() && !expected.contains("U"))
+                || (color.isGreen() && !expected.contains("G"))
+                || (color.isRed() && !expected.contains("R"))
+                || (color.isWhite() && !expected.contains("W"))) {
             fail(card, "colors", color + " != " + expected);
         }
     }
@@ -601,7 +609,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        if (!eqSet(card.getSubtype(null).stream().map(p -> p.toString()).collect(Collectors.toSet()), expected)) {
+        if (!eqSet(card.getSubtype(null).stream().map(SubType::toString).collect(Collectors.toSet()), expected)) {
             fail(card, "subtypes", card.getSubtype(null) + " != " + expected);
         }
     }
@@ -628,11 +636,11 @@ public class VerifyCardDataTest {
         }
 
         // special check: kicker ability must be in rules
-        if (card.getAbilities().containsClass(MultikickerAbility.class) && !card.getRules().stream().anyMatch(rule -> rule.contains("Multikicker"))) {
+        if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
         }
 
-        // spells have only 1 abilities
+        // spells have only 1 ability
         if (card.isSorcery() || card.isInstant()) {
             return;
         }
@@ -697,7 +705,7 @@ public class VerifyCardDataTest {
 
         String expected = ref.manaCost;
         String cost = join(card.getManaCost().getSymbols());
-        if (cost != null && cost.isEmpty()) {
+        if (cost.isEmpty()) {
             cost = null;
         }
         if (cost != null) {

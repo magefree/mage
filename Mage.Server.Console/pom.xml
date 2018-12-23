@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.31</version>
+        <version>1.4.32</version>
     </parent>
 
     <groupId>org.mage</groupId>
@@ -53,7 +53,6 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
-                        <manifestFile>${manifest.file}</manifestFile>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>mage.server.console.ConsoleFrame</mainClass>

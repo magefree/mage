@@ -77,9 +77,9 @@ class GoblinMachinistEffect extends OneShotEffect {
                         break;
                     }
                 }
-                controller.revealCards(source, cards, game);
-                controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             }
+            controller.revealCards(source, cards, game);
+            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             return true;
         }
         return false;

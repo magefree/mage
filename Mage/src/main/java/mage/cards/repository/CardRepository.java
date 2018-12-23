@@ -10,15 +10,16 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
-import java.io.File;
-import java.sql.SQLException;
-import java.util.*;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * @author North
@@ -32,7 +33,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 122;
+    private static final long CARD_CONTENT_VERSION = 123;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
@@ -43,9 +44,10 @@ public enum CardRepository {
         }
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
-            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, CARD_DB_VERSION);
 
-            if (obsolete) {
+            boolean isObsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, CARD_DB_VERSION);
+            boolean isNewBuild = RepositoryUtil.isNewBuildRun(connectionSource, VERSION_ENTITY_NAME, CardRepository.class); // recreate db on new build
+            if (isObsolete || isNewBuild) {
                 TableUtils.dropTable(connectionSource, CardInfo.class, true);
             }
 
@@ -483,9 +485,7 @@ public enum CardRepository {
                 DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection();
                 conn.executeStatement("shutdown compact", 0);
             }
-
         } catch (SQLException ex) {
-
         }
     }
 

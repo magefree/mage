@@ -1,15 +1,15 @@
-
 package mage.game.permanent;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PermanentToken extends PermanentImpl {
@@ -40,6 +40,15 @@ public class PermanentToken extends PermanentImpl {
         // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
         this.power.resetToBaseValue();
         this.toughness.resetToBaseValue();
+    }
+
+    @Override
+    public String getName() {
+        if (name.isEmpty()) {
+            return EmptyNames.FACE_DOWN_TOKEN.toString();
+        } else {
+            return name;
+        }
     }
 
     private void copyFromToken(Token token, Game game, boolean reset) {

@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import mage.constants.SubType;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.images.DownloadPicturesService;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
@@ -182,7 +182,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     private HashMap<String, ArrayList<TokenData>> getTokensData() throws IOException {
         synchronized (tokensDataSync) {
             if (tokensData == null) {
-                DownloadPictures.getInstance().updateAndViewMessage("Creating token data...");
+                DownloadPicturesService.getInstance().updateAndViewMessage("Find tokens data...");
                 tokensData = new HashMap<>();
 
                 // get tokens data from resource file
@@ -233,10 +233,10 @@ public enum TokensMtgImageSource implements CardImageSource {
                             }
                         }
                     }
-                    DownloadPictures.getInstance().updateAndViewMessage("");
+                    DownloadPicturesService.getInstance().updateAndViewMessage("");
                 } catch (Exception ex) {
                     logger.warn("Failed to get tokens description from tokens.mtg.onl", ex);
-                    DownloadPictures.getInstance().updateAndViewMessage(ex.getMessage());
+                    DownloadPicturesService.getInstance().updateAndViewMessage(ex.getMessage());
                 }
             }
         }

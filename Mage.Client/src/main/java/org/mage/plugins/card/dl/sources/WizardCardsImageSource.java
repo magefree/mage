@@ -1,28 +1,22 @@
 package org.mage.plugins.card.dl.sources;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.client.dialog.PreferencesDialog;
+import mage.client.util.CardLanguage;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.utils.CardImageUtils;
+
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author North
@@ -34,9 +28,10 @@ public enum WizardCardsImageSource implements CardImageSource {
     private static final Logger logger = Logger.getLogger(WizardCardsImageSource.class);
 
     private final Map<String, String> setsAliases;
-    private final Map<String, String> languageAliases;
+    private final Map<CardLanguage, String> languageAliases;
     private final Map<String, Map<String, String>> sets;
     private final Set<String> supportedSets;
+    private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
 
     @Override
     public String getSourceName() {
@@ -44,6 +39,20 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     WizardCardsImageSource() {
+
+        languageAliases = new HashMap<>();
+        languageAliases.put(CardLanguage.ENGLISH, "English");
+        languageAliases.put(CardLanguage.SPANISH, "Spanish");
+        languageAliases.put(CardLanguage.FRENCH, "French");
+        languageAliases.put(CardLanguage.GERMAN, "German");
+        languageAliases.put(CardLanguage.ITALIAN, "Italian");
+        languageAliases.put(CardLanguage.PORTUGUESE, "Portuguese (Brazil)");
+        languageAliases.put(CardLanguage.JAPANESE, "Japanese");
+        languageAliases.put(CardLanguage.KOREAN, "Korean");
+        languageAliases.put(CardLanguage.RUSSIAN, "Russian");
+        languageAliases.put(CardLanguage.CHINES_SIMPLE, "Chinese Simplified");
+        languageAliases.put(CardLanguage.CHINES_TRADITION, "Chinese Traditional ");
+
         supportedSets = new LinkedHashSet<>();
         // supportedSets.add("PTC"); // Prerelease Events
         supportedSets.add("LEA");
@@ -430,18 +439,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
         setsAliases.put("ZEN", "Zendikar");
-
-        languageAliases = new HashMap<>();
-        languageAliases.put("en", "English");
-        languageAliases.put("es", "Spanish");
-        languageAliases.put("jp", "Japanese");
-        languageAliases.put("it", "Italian");
-        languageAliases.put("fr", "French");
-        languageAliases.put("cn", "Chinese Simplified");
-        languageAliases.put("de", "German");
-        languageAliases.put("ko", "Korean");
-        languageAliases.put("pt", "Portuguese (Brazil)");
-        languageAliases.put("ru", "Russian");
     }
 
     @Override
@@ -517,7 +514,7 @@ public enum WizardCardsImageSource implements CardImageSource {
             if (setNames == null) {
                 setNames = Sets.getInstance().get(cardSet).getName();
             }
-            String preferredLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
+
             for (String setName : setNames.split("\\^")) {
                 // String URLSetName = URLEncoder.encode(setName, "UTF-8");
                 String URLSetName = setName.replaceAll(" ", "%20");
@@ -555,7 +552,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                                         cardName = cardName.substring(0, pos1);
                                     }
                                 }
-                                Integer preferredMultiverseId = getLocalizedMultiverseId(preferredLanguage, multiverseId);
+                                Integer preferredMultiverseId = getLocalizedMultiverseId(getCurrentLanguage(), multiverseId);
                                 setLinks.put(cardName.toLowerCase(Locale.ENGLISH) + numberChar, generateLink(preferredMultiverseId));
                             }
                         }
@@ -617,8 +614,8 @@ public enum WizardCardsImageSource implements CardImageSource {
         return "/Handlers/Image.ashx?multiverseid=" + landMultiverseId + "&type=card";
     }
 
-    private int getLocalizedMultiverseId(String preferredLanguage, Integer multiverseId) throws IOException {
-        if (preferredLanguage.equals("en")) {
+    private int getLocalizedMultiverseId(CardLanguage preferredLanguage, Integer multiverseId) throws IOException {
+        if (preferredLanguage.equals(CardLanguage.ENGLISH)) {
             return multiverseId;
         }
 
@@ -682,43 +679,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         return 60.0f;
     }
 
-    //    private final class GetImageLinkTask implements Runnable {
-//
-//        private int multiverseId;
-//        private String cardName;
-//        private String preferredLanguage;
-//        private LinkedHashMap setLinks;
-//
-//        public GetImageLinkTask(int multiverseId, String cardName, String preferredLanguage, LinkedHashMap setLinks) {
-//            try {
-//                this.multiverseId = multiverseId;
-//                this.cardName = cardName;
-//                this.preferredLanguage = preferredLanguage;
-//                this.setLinks = setLinks;
-//            } catch (Exception ex) {
-//                logger.error(ex.getMessage());
-//                logger.error("multiverseId: " + multiverseId);
-//                logger.error("cardName: " + cardName);
-//                logger.error("preferredLanguage: " + preferredLanguage);
-//                logger.error("setLinks: " + setLinks.toString());
-//            }
-//        }
-//
-//        @Override
-//        public void run() {
-//            try {
-//                if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
-//                    setLinks.putAll(getLandVariations(multiverseId, cardName));
-//                } else {
-//                    Integer preferredMultiverseId = getLocalizedMultiverseId(preferredLanguage, multiverseId);
-//                    setLinks.put(cardName.toLowerCase(Locale.ENGLISH), generateLink(preferredMultiverseId));
-//                }
-//            } catch (IOException | NumberFormatException ex) {
-//                logger.error("Exception when parsing the wizards page: " + ex.getMessage());
-//            }
-//        }
-//
-//    }
     @Override
     public int getTotalImages() {
         return -1;
@@ -727,6 +687,21 @@ public enum WizardCardsImageSource implements CardImageSource {
     @Override
     public boolean isTokenSource() {
         return false;
+    }
+
+    @Override
+    public boolean isLanguagesSupport() {
+        return true;
+    }
+
+    @Override
+    public void setCurrentLanguage(CardLanguage cardLanguage) {
+        this.currentLanguage = cardLanguage;
+    }
+
+    @Override
+    public CardLanguage getCurrentLanguage() {
+        return currentLanguage;
     }
 
     @Override

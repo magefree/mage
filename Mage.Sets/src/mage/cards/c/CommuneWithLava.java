@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -14,6 +12,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +79,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
 
 class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
 
-    int castOnTurn = 0;
+    private int castOnTurn = 0;
 
     public CommuneWithLavaMayPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);

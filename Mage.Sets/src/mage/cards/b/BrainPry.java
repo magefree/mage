@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -14,15 +12,17 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class BrainPry extends CardImpl {
 
     public BrainPry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         //Name a nonland card. Target player reveals their hand. That player discards a card with that name. If he or she can't, you draw a card.
         this.getSpellAbility().addEffect((new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
@@ -60,7 +60,7 @@ class BrainPryEffect extends OneShotEffect {
         if (targetPlayer != null && controller != null && sourceObject != null && cardName != null) {
             boolean hasDiscarded = false;
             for (Card card : targetPlayer.getHand().getCards(game)) {
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName)) {
                     targetPlayer.discard(card, source, game);
                     hasDiscarded = true;
                     break;

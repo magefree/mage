@@ -98,6 +98,7 @@ public final class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Dread of Night", 130, Rarity.UNCOMMON, mage.cards.d.DreadOfNight.class));
         cards.add(new SetCardInfo("Dream Cache", 59, Rarity.COMMON, mage.cards.d.DreamCache.class));
         cards.add(new SetCardInfo("Dregs of Sorrow", 131, Rarity.RARE, mage.cards.d.DregsOfSorrow.class));
+        cards.add(new SetCardInfo("Duplicity", 60, Rarity.RARE, mage.cards.d.Duplicity.class));
         cards.add(new SetCardInfo("Earthcraft", 222, Rarity.RARE, mage.cards.e.Earthcraft.class));
         cards.add(new SetCardInfo("Echo Chamber", 282, Rarity.RARE, mage.cards.e.EchoChamber.class));
         cards.add(new SetCardInfo("Eladamri's Vineyard", 223, Rarity.RARE, mage.cards.e.EladamrisVineyard.class));

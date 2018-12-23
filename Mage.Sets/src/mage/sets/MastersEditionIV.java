@@ -104,6 +104,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon Engine", 197, Rarity.COMMON, mage.cards.d.DragonEngine.class));
         cards.add(new SetCardInfo("Drain Power", 46, Rarity.RARE, mage.cards.d.DrainPower.class));
         cards.add(new SetCardInfo("Dread Reaper", 78, Rarity.RARE, mage.cards.d.DreadReaper.class));
+        cards.add(new SetCardInfo("Dread Wight", 79, Rarity.UNCOMMON, mage.cards.d.DreadWight.class));
         cards.add(new SetCardInfo("Drop of Honey", 150, Rarity.RARE, mage.cards.d.DropOfHoney.class));
         cards.add(new SetCardInfo("Drowned", 47, Rarity.COMMON, mage.cards.d.Drowned.class));
         cards.add(new SetCardInfo("Dust to Dust", 11, Rarity.UNCOMMON, mage.cards.d.DustToDust.class));

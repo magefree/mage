@@ -36,9 +36,9 @@ public final class UltimateBoxTopperPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Gaddock Teeg", "U21", Rarity.MYTHIC, mage.cards.g.GaddockTeeg.class));
         cards.add(new SetCardInfo("Goryo's Vengeance", "U9", Rarity.MYTHIC, mage.cards.g.GoryosVengeance.class));
         cards.add(new SetCardInfo("Karakas", "U36", Rarity.MYTHIC, mage.cards.k.Karakas.class));
-        cards.add(new SetCardInfo("Karn Liberated", "U02", Rarity.MYTHIC, mage.cards.k.KarnLiberated.class));
+        cards.add(new SetCardInfo("Karn Liberated", "U2", Rarity.MYTHIC, mage.cards.k.KarnLiberated.class));
         cards.add(new SetCardInfo("Kitchen Finks", "U27", Rarity.MYTHIC, mage.cards.k.KitchenFinks.class));
-        cards.add(new SetCardInfo("Kozilek, Butcher of Truth", "U03", Rarity.MYTHIC, mage.cards.k.KozilekButcherOfTruth.class));
+        cards.add(new SetCardInfo("Kozilek, Butcher of Truth", "U3", Rarity.MYTHIC, mage.cards.k.KozilekButcherOfTruth.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", "U37", Rarity.MYTHIC, mage.cards.l.LavaclawReaches.class));
         cards.add(new SetCardInfo("Leovold, Emissary of Trest", "U22", Rarity.MYTHIC, mage.cards.l.LeovoldEmissaryOfTrest.class));
         cards.add(new SetCardInfo("Life from the Loam", "U17", Rarity.MYTHIC, mage.cards.l.LifeFromTheLoam.class));

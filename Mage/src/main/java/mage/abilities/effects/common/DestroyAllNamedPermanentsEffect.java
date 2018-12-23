@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -11,9 +9,9 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
@@ -38,12 +36,12 @@ public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
             return false;
         }
         FilterPermanent filter = new FilterPermanent();
-        if (targetPermanent.getName().isEmpty()) {
+        if (CardUtil.haveEmptyName(targetPermanent)) {
             filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
         } else {
             filter.add(new NamePredicate(targetPermanent.getName()));
         }
-        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             perm.destroy(source.getSourceId(), game, false);
         }
         return true;

@@ -2,21 +2,20 @@
 package mage.cards;
 
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.abilities.Ability;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import mage.abilities.keyword.PartnerWithAbility;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -608,6 +607,11 @@ public abstract class ExpansionSet implements Serializable {
 
     public boolean isCustomSet() {
         return setType == SetType.CUSTOM_SET;
+    }
+
+    public boolean isEternalLegal() {
+        return setType != SetType.CUSTOM_SET
+                && setType != SetType.JOKESET;
     }
 
     public void removeSavedCards() {

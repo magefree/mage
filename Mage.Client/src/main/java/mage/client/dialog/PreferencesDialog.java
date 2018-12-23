@@ -41,6 +41,8 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.KeyBindButton;
 import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
+
+import mage.client.util.CardLanguage;
 import mage.client.util.Config;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
@@ -222,6 +224,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_NUMBER_PLAYERS = "newTableNumberPlayers";
     public static final String KEY_NEW_TABLE_PLAYER_TYPES = "newTablePlayerTypes";
     public static final String KEY_NEW_TABLE_QUIT_RATIO = "newTableQuitRatio";
+    public static final String KEY_NEW_TABLE_MINIMUM_RATING = "newTableMinimumRating";
     public static final String KEY_NEW_TABLE_RATED = "newTableRated";
 
     // pref setting for new tournament dialog
@@ -243,6 +246,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS = "newTournamentAllowRollbacks";
     public static final String KEY_NEW_TOURNAMENT_DECK_FILE = "newTournamentDeckFile";
     public static final String KEY_NEW_TOURNAMENT_QUIT_RATIO = "newTournamentQuitRatio";
+    public static final String KEY_NEW_TOURNAMENT_MINIMUM_RATING = "newTournamentMinimumRating";
     public static final String KEY_NEW_TOURNAMENT_RATED = "newTournamentRated";
 
     // pref setting for deck generator
@@ -336,6 +340,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         fc_i.addChoosableFileFilter(new ImageFileFilter());
     }
 
+    public static CardLanguage getPrefImagesLanguage() {
+        return CardLanguage.valueByCode(getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
+    }
+
     private static class ImageFileFilter extends FileFilter {
 
         @Override
@@ -372,7 +380,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbProxyType.setModel(new DefaultComboBoxModel<>(Connection.ProxyType.values()));
         addAvatars();
 
-        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(new String[]{"en", "de", "fr", "it", "es", "pt", "jp", "cn", "ru", "tw", "ko"}));
+        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
         cbNumberOfDownloadThreads.setModel(new DefaultComboBoxModel<>(new String[]{"10", "9", "8", "7", "6", "5", "4", "3", "2", "1"}));
     }
 
@@ -1556,6 +1564,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        cbPreferedImageLanguage.setMaximumRowCount(20);
         cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelPreferedImageLanguage.setText("Prefered image language:");
@@ -1563,6 +1572,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         labelNumberOfDownloadThreads.setText("Number of download threads:");
 
+        cbNumberOfDownloadThreads.setMaximumRowCount(20);
         cbNumberOfDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         org.jdesktop.layout.GroupLayout panelCardImagesLayout = new org.jdesktop.layout.GroupLayout(panelCardImages);
@@ -3409,7 +3419,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true");
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
         dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, "10"));
-        dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, "en"));
+        dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
         load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true");

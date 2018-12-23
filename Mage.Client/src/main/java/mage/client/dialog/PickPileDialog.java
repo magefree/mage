@@ -1,23 +1,16 @@
-
 package mage.client.dialog;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Point;
-import java.util.UUID;
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
-import mage.client.util.SettingsManager;
-import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
 import org.mage.card.arcane.CardPanel;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PickPileDialog extends MageDialog {
@@ -81,18 +74,16 @@ public class PickPileDialog extends MageDialog {
         }
         pack();
 
-        Point centered = SettingsManager.instance.getComponentPosition(getWidth(), getHeight());
-        this.setLocation(centered.x, centered.y);
-        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
+        this.makeWindowCentered();
 
         this.revalidate();
         this.repaint();
         this.setModal(true);
 
         // window settings
-        if (this.isModal()){
+        if (this.isModal()) {
             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        }else{
+        } else {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
 

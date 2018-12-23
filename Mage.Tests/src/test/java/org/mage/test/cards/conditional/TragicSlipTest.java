@@ -1,4 +1,4 @@
- package org.mage.test.cards.conditional;
+package org.mage.test.cards.conditional;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -6,12 +6,8 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
-
-
-
 public class TragicSlipTest extends CardTestPlayerBase {
 
     @Test
@@ -108,7 +104,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tragic Slip", "Silvercoat Lion");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Tragic Slip");
+        addTarget(playerA, "Tragic Slip");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Snapcaster Mage");
 
@@ -122,7 +118,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Snapcaster Mage", 0);
         assertExileCount("Tragic Slip", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
-        assertPowerToughness(playerB, "Silvercoat Lion", 1,1);
+        assertPowerToughness(playerB, "Silvercoat Lion", 1, 1);
         assertGraveyardCount(playerB, "Tarmogoyf", 1);
     }
 }

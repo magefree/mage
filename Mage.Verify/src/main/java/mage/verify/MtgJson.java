@@ -9,10 +9,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
 
@@ -61,6 +64,29 @@ public final class MtgJson {
         static {
             try {
                 cards = loadAllCards();
+
+                List<String> keysToDelete = new ArrayList<>();
+
+                // fix names
+                Map<String, JsonCard> newKeys = new HashMap<>();
+                for (String key : cards.keySet()) {
+                    if (key.contains("(")) {
+                        newKeys.put(key.replaceAll("\\(.*\\)", "").trim(), cards.get(key));
+                        keysToDelete.add(key);
+                    }
+                }
+                cards.putAll(newKeys);
+                cards.keySet().removeAll(keysToDelete);
+
+                // remove wrong data (tokens)
+                keysToDelete.clear();
+                for (Map.Entry<String, JsonCard> record : cards.entrySet()) {
+                    if (record.getValue().layout.equals("token") || record.getValue().layout.equals("double_faced_token")) {
+                        keysToDelete.add(record.getKey());
+                    }
+                }
+                cards.keySet().removeAll(keysToDelete);
+
                 addAliases(cards);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -95,7 +121,9 @@ public final class MtgJson {
         if (stream == null) {
             File file = new File(filename);
             if (!file.exists()) {
-                InputStream download = new URL("http://mtgjson.com/json/" + filename).openStream();
+                URLConnection connection = new URL("https://mtgjson.com/json/" + filename).openConnection();
+                connection.setRequestProperty("user-agent", "xmage");
+                InputStream download = connection.getInputStream();
                 Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Downloaded " + filename + " to " + file.getAbsolutePath());
             } else {
@@ -133,6 +161,7 @@ public final class MtgJson {
             name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
             ref = reference.get(name);
         }
+
         return ref;
     }
 

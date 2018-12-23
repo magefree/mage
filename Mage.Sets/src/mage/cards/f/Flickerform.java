@@ -156,39 +156,44 @@ class FlickerformReturnEffect extends OneShotEffect {
         }
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         Card enchantedCard = exileZone.get(enchantedCardId, game);
+        //skip if exiled card is missing
         if (enchantedCard != null) {
-            controller.moveCards(enchantedCard, Zone.BATTLEFIELD, source, game);
-            Permanent newPermanent = game.getPermanent(enchantedCardId);
-            if (newPermanent != null) {
-                Set<Card> toBattlefieldAttached = new HashSet<Card>();
-                for (Card enchantment : exileZone.getCards(game)) {
-                    if (filterAura.match(enchantment, game)) {
-                        boolean canTarget = false;
-                        for (Target target : enchantment.getSpellAbility().getTargets()) {
-                            Filter filter = target.getFilter();
-                            if (filter.match(newPermanent, game)) {
-                                canTarget = true;
-                                break;
+            Player owner = game.getPlayer(enchantedCard.getOwnerId());
+            //skip if card's owner is missing
+            if (owner != null) {
+                owner.moveCards(enchantedCard, Zone.BATTLEFIELD, source, game);
+                Permanent newPermanent = game.getPermanent(enchantedCardId);
+                if (newPermanent != null) {
+                    Set<Card> toBattlefieldAttached = new HashSet<Card>();
+                    for (Card enchantment : exileZone.getCards(game)) {
+                        if (filterAura.match(enchantment, game)) {
+                            boolean canTarget = false;
+                            for (Target target : enchantment.getSpellAbility().getTargets()) {
+                                Filter filter = target.getFilter();
+                                if (filter.match(newPermanent, game)) {
+                                    canTarget = true;
+                                    break;
+                                }
+                            }
+                            if (!canTarget) {
+                                // Aura stays exiled
+                                continue;
+                            }
+                            game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
+                        }
+                        toBattlefieldAttached.add(enchantment);
+                    }
+                    if (!toBattlefieldAttached.isEmpty()) {
+                        controller.moveCards(toBattlefieldAttached, Zone.BATTLEFIELD, source, game);
+                        for (Card card : toBattlefieldAttached) {
+                            if (game.getState().getZone(card.getId()) == Zone.BATTLEFIELD) {
+                                newPermanent.addAttachment(card.getId(), game);
                             }
                         }
-                        if (!canTarget) {
-                            // Aura stays exiled
-                            continue;
-                        }
-                        game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
-                    }
-                    toBattlefieldAttached.add(enchantment);
-                }
-                if (!toBattlefieldAttached.isEmpty()) {
-                    controller.moveCards(toBattlefieldAttached, Zone.BATTLEFIELD, source, game);
-                    for (Card card : toBattlefieldAttached) {
-                        if (game.getState().getZone(card.getId()) == Zone.BATTLEFIELD) {
-                            newPermanent.addAttachment(card.getId(), game);
-                        }
                     }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }
