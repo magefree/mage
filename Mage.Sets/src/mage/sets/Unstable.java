@@ -76,6 +76,7 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Target Minotaur", "98d", Rarity.COMMON, mage.cards.t.TargetMinotaur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Big Idea", 76, Rarity.RARE, mage.cards.t.TheBigIdea.class));
         cards.add(new SetCardInfo("Time Out", 48, Rarity.COMMON, mage.cards.t.TimeOut.class));
+        cards.add(new SetCardInfo("Urza, Academy Headmaster", 136, Rarity.MYTHIC, mage.cards.u.UrzaAcademyHeadmaster.class));
         cards.add(new SetCardInfo("Very Cryptic Command", "49d", Rarity.RARE, mage.cards.v.VeryCrypticCommandD.class));
         cards.add(new SetCardInfo("Willing Test Subject", 126, Rarity.COMMON, mage.cards.w.WillingTestSubject.class));
         cards.add(new SetCardInfo("capital offense", 52, Rarity.COMMON, mage.cards.c.CapitalOffense.class));
