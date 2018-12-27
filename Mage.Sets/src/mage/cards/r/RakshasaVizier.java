@@ -64,7 +64,7 @@ class RakshasaVizierTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         if (zEvent != null
                 && Zone.GRAVEYARD == zEvent.getFromZone()
-                && Zone.EXILED != zEvent.getToZone()
+                && Zone.EXILED == zEvent.getToZone()
                 && zEvent.getCards() != null) {
             int cardCount = 0;
             for (Card card : zEvent.getCards()) {
