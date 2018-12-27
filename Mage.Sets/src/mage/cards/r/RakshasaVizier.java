@@ -72,6 +72,9 @@ class RakshasaVizierTriggeredAbility extends TriggeredAbilityImpl {
                     cardCount++;
                 }
             }
+            if (cardCount == 0) {
+                return false;
+            }
             this.getEffects().clear();
             this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(cardCount)));
             return true;
