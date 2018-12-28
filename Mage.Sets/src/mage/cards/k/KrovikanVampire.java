@@ -259,6 +259,6 @@ class KrovikanVampireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "LOSE CONTROL DUDE WORKS";
+        return "Control of Krovikan Vampire lost";
     }
 }
