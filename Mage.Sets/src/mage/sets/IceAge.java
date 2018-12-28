@@ -130,7 +130,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Fyndhorn Pollen", 245, Rarity.RARE, mage.cards.f.FyndhornPollen.class));
         cards.add(new SetCardInfo("Game of Chaos", 186, Rarity.RARE, mage.cards.g.GameOfChaos.class));
         cards.add(new SetCardInfo("Gangrenous Zombies", 127, Rarity.COMMON, mage.cards.g.GangrenousZombies.class));
-        cards.add(new SetCardInfo("Gaze of Pain", 16, Rarity.COMMON, mage.cards.g.GazeOfPain.class));
+        cards.add(new SetCardInfo("Gaze of Pain", 128, Rarity.COMMON, mage.cards.g.GazeOfPain.class));
         cards.add(new SetCardInfo("General Jarkeld", 27, Rarity.RARE, mage.cards.g.GeneralJarkeld.class));
         cards.add(new SetCardInfo("Giant Growth", 246, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Giant Trap Door Spider", 293, Rarity.UNCOMMON, mage.cards.g.GiantTrapDoorSpider.class));
