@@ -147,6 +147,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Fetish", 100, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Horror", 101, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 51, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
+        cards.add(new SetCardInfo("Krovikan Vampire", 102, Rarity.UNCOMMON, mage.cards.k.KrovikanVampire.class));
         cards.add(new SetCardInfo("Lat-Nam's Legacy", 52, Rarity.COMMON, mage.cards.l.LatNamsLegacy.class));
         cards.add(new SetCardInfo("Leaping Lizard", 171, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", 103, Rarity.UNCOMMON, mage.cards.l.LimDulsHighGuard.class));
