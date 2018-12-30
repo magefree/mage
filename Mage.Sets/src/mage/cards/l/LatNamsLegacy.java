@@ -55,7 +55,7 @@ class LatNamsLegacyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (!controller.getHand().isEmpty()) {
+        if (controller != null && !controller.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, new FilterCard("card to shuffle into your library"));
             controller.choose(Outcome.Detriment, controller.getHand(), target, game);
             Card card = controller.getHand().get(target.getFirstTarget(), game);

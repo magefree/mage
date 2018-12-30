@@ -1,21 +1,15 @@
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.DamageEvent;
@@ -23,11 +17,13 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class CloakOfConfusion extends CardImpl {
@@ -128,19 +124,18 @@ class CloakOfConfusionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent enchantedCreature = game.getPermanent(game.getPermanent(source.getSourceId()).getAttachedTo());
-        if (controller != null) {
-            if (controller.chooseUse(outcome, "Do you wish to not assign combat damage from "
-                    + enchantedCreature.getName() + " and have the defending player discard a card at random?", source, game)) {
-                ContinuousEffect effect = new AssignNoCombatDamageTargetEffect();
-                effect.setTargetPointer(new FixedTarget(enchantedCreature.getId()));
-                game.addEffect(effect, source);
-                Player defendingPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-                if (defendingPlayer != null) {
-                    defendingPlayer.discard(1, true, source, game);
-                }
+        if (controller != null && controller.chooseUse(outcome, "Do you wish to not assign combat damage from "
+                + enchantedCreature.getName() + " and have the defending player discard a card at random?", source, game)) {
+            ContinuousEffect effect = new AssignNoCombatDamageTargetEffect();
+            effect.setTargetPointer(new FixedTarget(enchantedCreature.getId()));
+            game.addEffect(effect, source);
+            Player defendingPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            if (defendingPlayer != null) {
+                defendingPlayer.discard(1, true, source, game);
             }
             return true;
         }
+
         return false;
     }
 }

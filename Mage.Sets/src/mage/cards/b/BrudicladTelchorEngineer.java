@@ -84,6 +84,9 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if(controller == null){
+            return false;
+        }
         CreateTokenEffect effect = new CreateTokenEffect(new BrudicladTelchorMyrToken(), 1);
 
         if (effect.apply(game, source)) {

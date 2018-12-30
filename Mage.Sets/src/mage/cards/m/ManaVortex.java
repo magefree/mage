@@ -82,7 +82,7 @@ class CounterSourceEffect extends OneShotEffect {
         }
         if(spell != null){
                 Player controller = game.getPlayer(source.getControllerId());
-                if(controller.chooseUse(Outcome.Detriment, "Sacrifice a land to not counter " + spell.getName() + '?', source, game)){
+                if(controller != null && controller.chooseUse(Outcome.Detriment, "Sacrifice a land to not counter " + spell.getName() + '?', source, game)){
                     SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()));
                     if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)){
                         game.informPlayers(controller.getLogName() + " sacrifices a land to not counter " + spell.getName() + '.');

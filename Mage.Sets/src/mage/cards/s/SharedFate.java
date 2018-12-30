@@ -133,7 +133,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
             if (exileId != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(objectId)) {
-                    if (player.chooseUse(outcome, "Play " + game.getCard(objectId).getIdName() + '?', source, game)) {
+                    if (player != null && player.chooseUse(outcome, "Play " + game.getCard(objectId).getIdName() + '?', source, game)) {
                         return true;
                     }
                 }

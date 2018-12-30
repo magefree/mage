@@ -63,6 +63,9 @@ class CandlesOfLengEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
+        if(controller == null || sourceObject == null){
+            return false;
+        }
         if (controller.getLibrary().hasCards()) {
             CardsImpl cards = new CardsImpl();
             Card card = controller.getLibrary().getFromTop(game);

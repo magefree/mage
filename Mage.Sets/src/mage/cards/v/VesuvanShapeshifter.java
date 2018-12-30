@@ -125,7 +125,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
 
             TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
 
-            if (controller.chooseTarget(Outcome.BecomeCreature, target, source, game) && !target.getTargets().isEmpty()) {
+            if (controller != null && controller.chooseTarget(Outcome.BecomeCreature, target, source, game) && !target.getTargets().isEmpty()) {
                 Permanent copyFromCreature = game.getPermanentOrLKIBattlefield(target.getFirstTarget());
                 if (copyFromCreature != null) {
                     game.copyPermanent(Duration.Custom, copyFromCreature, copyToCreature.getId(), source, new VesuvanShapeShifterFaceUpApplier());

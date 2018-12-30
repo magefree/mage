@@ -60,13 +60,15 @@ class ChaliceOfLifeEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Player player = game.getPlayer(source.getControllerId());
-            //gain 1 life
-            player.gainLife(1, game, source);
+            if(player != null) {
+                //gain 1 life
+                player.gainLife(1, game, source);
 
-            // if you have at least 10 life more than your starting life total, transform Chalice of Life.
-            if (player.getLife() >= game.getLife() + 10) {
-                permanent.transform(game);
-                game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());
+                // if you have at least 10 life more than your starting life total, transform Chalice of Life.
+                if (player.getLife() >= game.getLife() + 10) {
+                    permanent.transform(game);
+                    game.informPlayers(permanent.getName() + " transforms into " + permanent.getSecondCardFace().getName());
+                }
             }
         }
         return false;

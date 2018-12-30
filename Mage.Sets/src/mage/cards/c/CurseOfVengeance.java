@@ -153,7 +153,7 @@ class CurseOfVengeanceDrawLifeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = (Permanent) game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceObject != null && controller != null) {
             if (sourceObject.getCounters(game).containsKey(CounterType.SPITE)) {
                 controller.drawCards(sourceObject.getCounters(game).getCount(CounterType.SPITE), game);

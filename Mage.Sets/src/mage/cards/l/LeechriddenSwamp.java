@@ -2,6 +2,7 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -26,7 +27,6 @@ import mage.players.Player;
 import mage.players.Players;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class LeechriddenSwamp extends CardImpl {
@@ -38,7 +38,7 @@ public final class LeechriddenSwamp extends CardImpl {
     }
 
     public LeechriddenSwamp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.subtype.add(SubType.SWAMP);
 
         // ({tap}: Add {B}.)
@@ -70,28 +70,28 @@ class LeechriddenSwampLoseLifeEffect extends OneShotEffect {
 
     private static final String effectText = "each opponent loses 1 life";
 
-    LeechriddenSwampLoseLifeEffect ( ) {
+    LeechriddenSwampLoseLifeEffect() {
         super(Outcome.Damage);
-    staticText = effectText;
+        staticText = effectText;
     }
 
-    LeechriddenSwampLoseLifeEffect ( LeechriddenSwampLoseLifeEffect effect ) {
-    super(effect);
+    LeechriddenSwampLoseLifeEffect(LeechriddenSwampLoseLifeEffect effect) {
+        super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-    Players players = game.getPlayers();
-        for ( Player player : players.values() ) {
-            if ( !player.getId().equals(source.getControllerId()) ) {
+        Players players = game.getPlayers();
+        for (Player player : players.values()) {
+            if (!player.getId().equals(source.getControllerId())) {
                 player.loseLife(1, game, false);
             }
-    }
-    return true;
+        }
+        return true;
     }
 
     @Override
     public LeechriddenSwampLoseLifeEffect copy() {
-    return new LeechriddenSwampLoseLifeEffect(this);
+        return new LeechriddenSwampLoseLifeEffect(this);
     }
 }

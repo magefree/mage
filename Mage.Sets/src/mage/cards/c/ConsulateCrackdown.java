@@ -64,19 +64,19 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player contoller = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
 
         //If the permanent leaves the battlefield before the ability resolves, artifacts won't be exiled.
-        if (permanent == null || contoller == null) return false;
+        if (permanent == null || controller == null) return false;
 
         Set<Card> toExile = new LinkedHashSet<>();
-        for (Permanent artifact : game.getBattlefield().getActivePermanents(filter, contoller.getId(), game)) {
+        for (Permanent artifact : game.getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
             toExile.add(artifact);
         }
 
         if (!toExile.isEmpty()) {
-            contoller.moveCardsToExile(toExile, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
+            controller.moveCardsToExile(toExile, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
             new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()).apply(game, source);
         }
 

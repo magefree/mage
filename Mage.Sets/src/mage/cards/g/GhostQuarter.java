@@ -71,7 +71,7 @@ class GhostQuarterEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
-            if (controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", source, game)) {
+            if (controller != null && controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
                 if (controller.searchLibrary(target, game)) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);

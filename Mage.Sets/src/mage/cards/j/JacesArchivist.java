@@ -62,23 +62,24 @@ class JacesArchivistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int maxDiscarded = 0;
         Player controller = game.getPlayer(source.getControllerId());
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int discarded = player.getHand().size();
-                player.discard(discarded, false, source, game);
-                if (discarded > maxDiscarded) {
-                    maxDiscarded = discarded;
+        if(controller != null) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    int discarded = player.getHand().size();
+                    player.discard(discarded, false, source, game);
+                    if (discarded > maxDiscarded) {
+                        maxDiscarded = discarded;
+                    }
+                }
+            }
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.drawCards(maxDiscarded, game);
                 }
             }
         }
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.drawCards(maxDiscarded, game);
-            }
-        }
-
         return true;
     }
 

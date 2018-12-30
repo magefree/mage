@@ -69,7 +69,7 @@ class FeedThePackEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Target target = new TargetPermanent(filter);
         Player player = game.getPlayer(source.getControllerId());
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (player != null && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null && permanent.sacrifice(source.getSourceId(), game)) {
                 int toughness = permanent.getToughness().getValue();

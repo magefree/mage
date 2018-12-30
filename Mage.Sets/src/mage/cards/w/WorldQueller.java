@@ -119,7 +119,7 @@ class WorldQuellerEffect extends OneShotEffect {
 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player2 = game.getPlayer(playerId);
-                    if (target.canChoose(playerId, game)) {
+                    if (player2 != null && target.canChoose(playerId, game)) {
                         while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, game)) {
                             player2.chooseTarget(Outcome.Sacrifice, target, source, game);
                         }

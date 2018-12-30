@@ -89,7 +89,7 @@ class CreepingDreadEffect extends OneShotEffect {
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(playerId);
                 // opponent discards a card - if it is same card type as controller, add to opponentsAffected
-                if(!opponent.getHand().isEmpty()) {
+                if(opponent != null && !opponent.getHand().isEmpty()) {
                     TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
                     if(opponent.choose(Outcome.Discard, opponent.getHand(), target, game)) {
                         Card card = opponent.getHand().get(target.getFirstTarget(), game);
