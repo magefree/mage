@@ -205,6 +205,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Leshrac's Sigil", 144, Rarity.UNCOMMON, mage.cards.l.LeshracsSigil.class));
         cards.add(new SetCardInfo("Lhurgoyf", 252, Rarity.RARE, mage.cards.l.Lhurgoyf.class));
         cards.add(new SetCardInfo("Lightning Blow", 42, Rarity.RARE, mage.cards.l.LightningBlow.class));
+        cards.add(new SetCardInfo("Lim-Dul's Cohort", 145, Rarity.COMMON, mage.cards.l.LimDulsCohort.class));
         cards.add(new SetCardInfo("Lim-Dul's Hex", 146, Rarity.UNCOMMON, mage.cards.l.LimDulsHex.class));
         cards.add(new SetCardInfo("Lure", 253, Rarity.UNCOMMON, mage.cards.l.Lure.class));
         cards.add(new SetCardInfo("Magus of the Unseen", 82, Rarity.RARE, mage.cards.m.MagusOfTheUnseen.class));
@@ -217,6 +218,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Meteor Shower", 202, Rarity.COMMON, mage.cards.m.MeteorShower.class));
         cards.add(new SetCardInfo("Mind Ravel", 147, Rarity.COMMON, mage.cards.m.MindRavel.class));
         cards.add(new SetCardInfo("Mind Warp", 148, Rarity.UNCOMMON, mage.cards.m.MindWarp.class));
+        cards.add(new SetCardInfo("Mind Whip", 149, Rarity.RARE, mage.cards.m.MindWhip.class));
         cards.add(new SetCardInfo("Minion of Leshrac", 150, Rarity.RARE, mage.cards.m.MinionOfLeshrac.class));
         cards.add(new SetCardInfo("Minion of Tevesh Szat", 151, Rarity.RARE, mage.cards.m.MinionOfTeveshSzat.class));
         cards.add(new SetCardInfo("Mistfolk", 84, Rarity.COMMON, mage.cards.m.Mistfolk.class));
