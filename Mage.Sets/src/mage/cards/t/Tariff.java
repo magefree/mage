@@ -96,8 +96,7 @@ class TariffEffect extends OneShotEffect {
                 }
             }
 
-            game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getName() : "")
-                    .append(": ").append(player.getLogName()).append(" hasn't paid").toString());
+            game.informPlayers(sourceObject.getName() + ": " + player.getLogName() + " hasn't paid");
             creatureToPayFor.sacrifice(source.getSourceId(), game);
         }
     }

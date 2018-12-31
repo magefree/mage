@@ -100,7 +100,7 @@ class UnexpectedResultEffect extends OneShotEffect {
                     return true;
                 }
             } else {
-                if (controller.chooseUse(outcome, new StringBuilder("Cast ").append(card.getName()).append(" without paying its mana cost?").toString(), source, game)) {
+                if (controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
                     return controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
             }

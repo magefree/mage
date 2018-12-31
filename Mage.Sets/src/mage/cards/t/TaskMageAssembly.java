@@ -71,7 +71,7 @@ class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When there are no creatures on the battlefield, ").append(super.getRule()).toString() ;
+        return "When there are no creatures on the battlefield, " + super.getRule();
     }
 
 }

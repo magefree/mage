@@ -41,7 +41,7 @@ public final class GangUp extends CardImpl {
         if (ability instanceof SpellAbility) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(xValue).append(" or less").toString());
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
             filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
             ability.addTarget(new TargetCreaturePermanent(filter));
         }

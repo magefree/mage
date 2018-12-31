@@ -108,7 +108,7 @@ class UneshCriosphinxSovereignTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever {this} or another Sphinx enters the battlefield under your control, ").append(super.getRule()).toString();
+        return "Whenever {this} or another Sphinx enters the battlefield under your control, " + super.getRule();
     }
 
     @Override

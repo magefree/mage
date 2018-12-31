@@ -120,7 +120,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever an instant or sorcery spell you control deals damage to an opponent, ").append(super.getRule()).toString();
+        return "Whenever an instant or sorcery spell you control deals damage to an opponent, " + super.getRule();
     }
 }
 

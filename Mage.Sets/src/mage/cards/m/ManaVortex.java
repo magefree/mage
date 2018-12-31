@@ -128,7 +128,7 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When there are no lands on the battlefield, ").append(super.getRule()).toString() ;
+        return "When there are no lands on the battlefield, " + super.getRule();
     }
 
 }

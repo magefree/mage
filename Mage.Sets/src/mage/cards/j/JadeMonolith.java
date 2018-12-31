@@ -81,7 +81,7 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
         DamageEvent damageEvent = (DamageEvent) event;
         if (controller != null && targetCreature != null && sourceObject != null) {
             controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());            
-            StringBuilder sb = new StringBuilder(sourceObject != null ? sourceObject.getLogName() : "");
+            StringBuilder sb = new StringBuilder(sourceObject.getLogName());
             sb.append(": ").append(damageEvent.getAmount()).append(" damage redirected from ").append(targetCreature.getLogName());
             sb.append(" to ").append(controller.getLogName());
             game.informPlayers(sb.toString());

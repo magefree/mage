@@ -56,7 +56,7 @@ public final class SkyfireKirin extends CardImpl {
             if (spell != null) {
                 int cmc = spell.getConvertedManaCost();
                 ability.getTargets().clear();
-                FilterPermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with converted mana costs of ").append(cmc).toString());
+                FilterPermanent filter = new FilterCreaturePermanent("creature with converted mana costs of " + cmc);
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
                 Target target = new TargetPermanent(filter);
                 ability.addTarget(target);

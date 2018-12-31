@@ -100,8 +100,8 @@ class NamelessRaceEffect extends OneShotEffect {
             int maxAmount = Math.min(permanentsInPlay + cardsInGraveyards, controller.getLife());
             int payAmount = controller.getAmount(0, maxAmount, "Pay up to " + maxAmount + " life", game);
             controller.loseLife(payAmount, game, false);
-            game.informPlayers(new StringBuilder(sourceCard.getLogName()).append(": ").append(controller.getLogName())
-                .append(" pays ").append(payAmount).append(" life").toString());
+            game.informPlayers(sourceCard.getLogName() + ": " + controller.getLogName() +
+                    " pays " + payAmount + " life");
             game.addEffect(new SetPowerToughnessSourceEffect(payAmount, payAmount, Duration.Custom, SubLayer.SetPT_7b), source);
             return true;
         }

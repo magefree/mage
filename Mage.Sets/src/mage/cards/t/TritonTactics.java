@@ -164,7 +164,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
                         // tap creature and add the not untap effect
                         creature.tap(game);
                         doNotUntapNextUntapStep.add(creature);
-                        game.informPlayers(new StringBuilder("Triton Tactics: ").append(creature.getName()).append(" doesn't untap during its controller's next untap step").toString());
+                        game.informPlayers("Triton Tactics: " + creature.getName() + " doesn't untap during its controller's next untap step");
                     }
                 }
                 if (!doNotUntapNextUntapStep.isEmpty()) {

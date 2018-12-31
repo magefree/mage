@@ -84,7 +84,7 @@ class GusthasScepterExileEffect extends OneShotEffect {
                 Card card = game.getCard(target.getFirstTarget());
                 MageObject sourceObject = game.getObject(source.getSourceId());
                 if (card != null && sourceObject != null) {
-                    if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), new StringBuilder(sourceObject.getIdName()).toString(), source.getSourceId(), game)) {
+                    if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName(), source.getSourceId(), game)) {
                         card.setFaceDown(true, game);
                         game.addEffect(new GusthasScepterLookAtCardEffect(card.getId()), source);
                         return true;

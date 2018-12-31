@@ -57,7 +57,7 @@ public final class SpellstutterSprite extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             int numberFaeries = game.getState().getBattlefield().countAll(filter, ability.getControllerId(), game);
-            FilterSpell xFilter = new FilterSpell(new StringBuilder("spell with converted mana cost ").append(numberFaeries).append(" or less").toString());
+            FilterSpell xFilter = new FilterSpell("spell with converted mana cost " + numberFaeries + " or less");
             xFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberFaeries + 1));
             ability.getTargets().clear();
             ability.addTarget(new TargetSpell(xFilter));

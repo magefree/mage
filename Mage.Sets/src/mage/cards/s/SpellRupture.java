@@ -76,7 +76,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
                 }
                 if (!cost.isPaid()) {
                     if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
-                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": cost wasn't payed - countering ").append(spell.getName()).toString());
+                        game.informPlayers(sourceObject.getName() + ": cost wasn't payed - countering " + spell.getName());
                         return true;
                     }
                 }

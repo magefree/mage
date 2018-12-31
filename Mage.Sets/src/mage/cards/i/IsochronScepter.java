@@ -130,7 +130,7 @@ class IsochronScepterCopyEffect extends OneShotEffect {
             if (scepter != null && scepter.getImprinted() != null && !scepter.getImprinted().isEmpty()) {
                 Card imprintedInstant = game.getCard(scepter.getImprinted().get(0));
                 if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()) == Zone.EXILED) {
-                    if (controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append('?').toString(), source, game)) {
+                    if (controller.chooseUse(outcome, "Create a copy of " + imprintedInstant.getName() + '?', source, game)) {
                         Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                         if (copiedCard != null) {
                             game.getExile().add(source.getSourceId(), "", copiedCard);

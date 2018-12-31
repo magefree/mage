@@ -42,7 +42,7 @@ public final class HourOfEternity extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
-            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ? " creature cards" : "creature card").append(" from your graveyard").toString()));
+            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard((xValue != 1 ? " creature cards" : "creature card") + " from your graveyard"));
             ability.addTarget(target);
         }
     }

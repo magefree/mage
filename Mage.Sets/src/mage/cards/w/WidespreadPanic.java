@@ -75,7 +75,7 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever a spell or ability causes its controller to shuffle their library, ").append(super.getRule()).toString();
+        return "Whenever a spell or ability causes its controller to shuffle their library, " + super.getRule();
     }
 }
 
