@@ -103,7 +103,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
                 return false;
             }
             // do the 2 objects match?
-            if (!sourceObject.getId().equals(chosenSourceObject.getId())) {
+            if (chosenSourceObject == null || !sourceObject.getId().equals(chosenSourceObject.getId())) {
                 return false;
             }
 

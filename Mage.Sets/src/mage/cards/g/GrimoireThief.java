@@ -172,7 +172,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         MageObject sourceObject = game.getObject(source.getSourceId());
         Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
-        if (exileZones != null) {
+        if (exileZones != null && sourceObject != null) {
             for (ExileZone exileZone : game.getExile().getExileZones()) {
                 if (!exileZone.isEmpty()) {
                     cards.addAll(exileZone.getCards(game));

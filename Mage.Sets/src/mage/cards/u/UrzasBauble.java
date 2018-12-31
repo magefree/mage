@@ -72,13 +72,13 @@ class LookAtRandomCardEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (you != null && targetPlayer != null) {
+        if (you != null && targetPlayer != null && sourceObject != null) {
             if(!targetPlayer.getHand().isEmpty())
             {
                 Cards randomCard = new CardsImpl();
                 Card card = targetPlayer.getHand().getRandom(game);
                 randomCard.add(card);
-                you.lookAtCards(sourceObject != null ? sourceObject.getName() : null, randomCard, game);
+                you.lookAtCards(sourceObject.getName(), randomCard, game);
             }
             return true;
         }

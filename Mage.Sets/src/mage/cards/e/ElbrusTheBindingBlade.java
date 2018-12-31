@@ -71,7 +71,7 @@ class ElbrusTheBindingBladeEffect extends OneShotEffect {
             if (attachedTo != null) {
                 attachedTo.removeAttachment(equipment.getId(), game);
                 equipment.transform(game);
-                game.informPlayers(new StringBuilder(equipment.getName()).append(" transforms into ").append(equipment.getSecondCardFace().getName()).toString());
+                game.informPlayers(equipment.getName() + " transforms into " + equipment.getSecondCardFace().getName());
 
             }
         }

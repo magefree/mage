@@ -74,7 +74,7 @@ class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
-        if (watcher != null) {
+        if (watcher != null && targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (!targets.containsKey(permanent.getId()) && watcher.damageSources.contains(permanent.getId())) {
                     if (!notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {

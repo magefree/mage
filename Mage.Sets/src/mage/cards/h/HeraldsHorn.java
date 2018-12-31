@@ -73,7 +73,7 @@ class HeraldsHornEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
 
         // Look at the top card of your library.
-        if (controller != null && controller.getLibrary().hasCards()) {
+        if (controller != null && controller.getLibrary().hasCards() && sourceObject != null) {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.lookAtCards(sourceObject.getIdName(), cards, game);
