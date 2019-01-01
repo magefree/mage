@@ -72,14 +72,16 @@ class TargetPermanentsThatShareCardType extends TargetPermanent {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<CardType> cardTypes = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                for (CardType cardType :permanent.getCardType()) {
-                    if (cardTypes.contains(cardType)) {
-                        return true;
+        if(targetSource != null) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    for (CardType cardType : permanent.getCardType()) {
+                        if (cardTypes.contains(cardType)) {
+                            return true;
+                        }
                     }
+                    cardTypes.addAll(permanent.getCardType());
                 }
-                cardTypes.addAll(permanent.getCardType());
             }
         }
         return false;

@@ -132,7 +132,7 @@ class GrimReminderWatcher extends Watcher {
             MageObject spell = game.getObject(event.getTargetId());
             UUID playerId = event.getPlayerId();
             if (playerId != null && spell != null) {
-                playersCastSpell.putIfAbsent(spell.getName(), new HashSet());
+                playersCastSpell.putIfAbsent(spell.getName(), new HashSet<>());
                 playersCastSpell.get(spell.getName()).add(playerId);
             }
         }
@@ -144,7 +144,7 @@ class GrimReminderWatcher extends Watcher {
     }
 
     public Set<UUID> getPlayersCastSpell(String spellName) {
-        return playersCastSpell.getOrDefault(spellName, new HashSet());
+        return playersCastSpell.getOrDefault(spellName, new HashSet<>());
     }
 
     @Override

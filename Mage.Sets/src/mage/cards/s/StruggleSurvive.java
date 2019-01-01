@@ -69,13 +69,17 @@ class SurviveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+        if(sourcePlayer != null) {
+            for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    for (Card card : player.getGraveyard().getCards(game)) {
+                        if(card != null) {
+                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                        }
+                    }
+                    player.shuffleLibrary(source, game);
                 }
-                player.shuffleLibrary(source, game);
             }
         }
         return true;

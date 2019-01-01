@@ -119,12 +119,14 @@ class RemembranceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        cardName = (String) game.getState().getValue(mageObject + "nameOfPermanent");
-        if (controller != null
-                && cardName != null) {
-            FilterCard filterCard = new FilterCard("card named " + cardName);
-            filterCard.add(new NamePredicate(cardName));
-            return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
+        if(mageObject != null) {
+            cardName = (String) game.getState().getValue(mageObject + "nameOfPermanent");
+            if (controller != null
+                    && cardName != null) {
+                FilterCard filterCard = new FilterCard("card named " + cardName);
+                filterCard.add(new NamePredicate(cardName));
+                return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
+            }
         }
         return false;
     }

@@ -76,7 +76,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(event.getSourceId());
-        if (sourceObject.getColor(game).isRed()) {
+        if (sourceObject != null && sourceObject.getColor(game).isRed()) {
             if (sourceObject instanceof Permanent && sourceObject.isCreature()
                     || sourceObject instanceof Spell) {
                 this.getEffects().get(0).setValue("damageAmount", event.getAmount());

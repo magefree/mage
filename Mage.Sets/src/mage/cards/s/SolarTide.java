@@ -37,7 +37,7 @@ public final class SolarTide extends CardImpl {
         
         // or destroy all creatures with power 3 or greater.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyAllEffect(filter2));
+        mode.addEffect(new DestroyAllEffect(filter2));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine-Sacrifice two lands.

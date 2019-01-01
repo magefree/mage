@@ -189,9 +189,9 @@ public class MageBase {
         } catch (MageException ex) {
             logger.log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
-            logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
+            logger.log(Level.SEVERE, "Unable connect to server - ", ex);
         } catch (NotBoundException ex) {
-            logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
+            logger.log(Level.SEVERE, "Unable connect to server - ", ex);
         }
     }
 

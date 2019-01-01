@@ -1,12 +1,11 @@
-
-
 package mage.choices;
+
+import mage.util.RandomUtil;
 
 import java.io.Serializable;
 import java.util.*;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ChoiceImpl implements Choice, Serializable {
@@ -22,7 +21,6 @@ public class ChoiceImpl implements Choice, Serializable {
     protected String subMessage;
     protected boolean searchEnabled = true; // enable for all windows by default
     protected String searchText;
-    private static Random rnd = new Random();
 
     public ChoiceImpl() {
         this(false);
@@ -69,10 +67,14 @@ public class ChoiceImpl implements Choice, Serializable {
     }
 
     @Override
-    public String getSubMessage(){ return subMessage; }
+    public String getSubMessage() {
+        return subMessage;
+    }
 
     @Override
-    public void setSubMessage(String subMessage){ this.subMessage = subMessage; }
+    public void setSubMessage(String subMessage) {
+        this.subMessage = subMessage;
+    }
 
     @Override
     public Set<String> getChoices() {
@@ -124,9 +126,9 @@ public class ChoiceImpl implements Choice, Serializable {
 
     @Override
     public String getChoiceValue() {
-        if ((keyChoices != null) && (keyChoices.containsKey(choiceKey))){
+        if ((keyChoices != null) && (keyChoices.containsKey(choiceKey))) {
             return keyChoices.get(choiceKey);
-        }else{
+        } else {
             return null;
         }
     }
@@ -147,67 +149,67 @@ public class ChoiceImpl implements Choice, Serializable {
     }
 
     @Override
-    public boolean isSearchEnabled(){
+    public boolean isSearchEnabled() {
         return this.searchEnabled;
-    };
+    }
 
     @Override
-    public void setSearchEnabled(boolean isEnabled){
+    public void setSearchEnabled(boolean isEnabled) {
         this.searchEnabled = isEnabled;
-    };
+    }
 
     @Override
-    public void setSearchText(String searchText){
+    public void setSearchText(String searchText) {
         this.searchText = searchText;
-    };
+    }
 
     @Override
-    public String getSearchText(){
+    public String getSearchText() {
         return this.searchText;
-    };
+    }
 
     @Override
-    public boolean isSortEnabled(){
+    public boolean isSortEnabled() {
         return (this.sortData != null) && !this.sortData.isEmpty();
-    };
+    }
 
     @Override
-    public void setSortData(Map<String, Integer> sortData){
+    public void setSortData(Map<String, Integer> sortData) {
         this.sortData = sortData;
-    };
+    }
 
     @Override
-    public Map<String, Integer> getSortData(){
+    public Map<String, Integer> getSortData() {
         return this.sortData;
-    };
+    }
 
     @Override
     public void setRandomChoice() {
 
-        if(this.isKeyChoice()){
+        if (this.isKeyChoice()) {
             // key mode
             String[] vals = this.getKeyChoices().keySet().toArray(new String[0]);
-            if(vals.length > 0) {
-                int choiceNum = rnd.nextInt(vals.length);
+            if (vals.length > 0) {
+                int choiceNum = RandomUtil.nextInt(vals.length);
                 this.setChoiceByKey(vals[choiceNum]);
             }
         } else {
             // string mode
             String[] vals = this.getChoices().toArray(new String[0]);
-            if(vals.length > 0) {
-                int choiceNum = rnd.nextInt(vals.length);
+            if (vals.length > 0) {
+                int choiceNum = RandomUtil.nextInt(vals.length);
                 this.setChoice(vals[choiceNum]);
             }
         }
     }
 
     @Override
-    public boolean setChoiceByAnswers(List<String> answers, boolean removeSelectAnswerFromList){
+    public boolean setChoiceByAnswers(List<String> answers, boolean removeSelectAnswerFromList) {
         // select by answers
-        if(this.isKeyChoice()){
+        if (this.isKeyChoice()) {
             // keys mode
             for (String needChoice : answers) {
-                for (Map.Entry<String, String> currentChoice: this.getKeyChoices().entrySet()) {
+                for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
                     if (currentChoice.getKey().equals(needChoice)) {
                         this.setChoiceByKey(needChoice);
                         answers.remove(needChoice);

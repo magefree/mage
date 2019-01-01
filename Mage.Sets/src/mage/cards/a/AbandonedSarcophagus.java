@@ -120,6 +120,7 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
             AbandonedSarcophagusWatcher watcher = (AbandonedSarcophagusWatcher) game.getState().getWatchers().get(AbandonedSarcophagusWatcher.class.getSimpleName());
             Card card = game.getCard(event.getTargetId());
             if (card != null
+                    && controller != null
                     && watcher != null
                     && card.isOwnedBy(controller.getId())) {
                 for (Ability ability : card.getAbilities()) {

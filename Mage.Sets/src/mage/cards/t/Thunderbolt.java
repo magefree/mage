@@ -32,8 +32,8 @@ public final class Thunderbolt extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(4));
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
+        mode.addEffect(new DamageTargetEffect(4));
+        mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

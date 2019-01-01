@@ -62,7 +62,7 @@ class MultanisDecreeDestroyEffect extends OneShotEffect {
                 enchantmentsDestoyed++;
             }
         }
-		if(enchantmentsDestoyed > 0) {
+		if(enchantmentsDestoyed > 0 && controller != null) {
 			controller.gainLife(enchantmentsDestoyed * 2, game, source);
 		}
         return false;

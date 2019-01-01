@@ -41,16 +41,16 @@ public final class VitalityCharm extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("target creature gets +1/+1");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(effect);
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or regenerate target Beast.
         mode = new Mode();
-        mode.getEffects().add(new RegenerateTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filter));
+        mode.addEffect(new RegenerateTargetEffect());
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

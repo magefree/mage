@@ -65,8 +65,8 @@ class WellEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int life = 2 * game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
         if (player != null) {
+            int life = 2 * game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
             player.gainLife(life, game, source);
         }
         return true;

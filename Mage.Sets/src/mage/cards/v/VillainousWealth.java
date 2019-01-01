@@ -65,7 +65,7 @@ class VillainousWealthEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (controller != null) {
+        if (controller != null && mageObject != null) {
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             FilterCard filter = new FilterNonlandCard();
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));

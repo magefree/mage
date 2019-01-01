@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -27,7 +28,6 @@ import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public final class MechanizedProduction extends CardImpl {
@@ -86,15 +86,17 @@ class MechanizedProductionEffect extends OneShotEffect {
             }
             Map<String, Integer> countNames = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), game)) {
-                int counter = countNames.getOrDefault(permanent.getName(),0);
+                int counter = countNames.getOrDefault(permanent.getName(), 0);
                 countNames.put(permanent.getName(), counter + 1);
             }
             for (Entry<String, Integer> entry : countNames.entrySet()) {
                 if (entry.getValue() > 7) {
                     Player controller = game.getPlayer(source.getControllerId());
-                    game.informPlayers(controller.getLogName() + " controls eight or more artifacts with the same name as one another (" + entry.getKey() + ").");
-                    controller.won(game);
-                    return true;
+                    if (controller != null) {
+                        game.informPlayers(controller.getLogName() + " controls eight or more artifacts with the same name as one another (" + entry.getKey() + ").");
+                        controller.won(game);
+                        return true;
+                    }
                 }
             }
             return true;

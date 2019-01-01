@@ -81,7 +81,7 @@ class SlaveringNullsTriggeredAbility extends TriggeredAbilityImpl {
             if (game.getBattlefield().countAll(filter, controllerId, game) > 0) {
                 Permanent slaveringNulls = game.getPermanent(event.getSourceId());
                 Player player = game.getPlayer(event.getTargetId());
-                if (slaveringNulls != null) {
+                if (slaveringNulls != null && player != null) {
                     Effect effect = this.getEffects().get(0);
                     effect.setTargetPointer(new FixedTarget(player.getId()));
                     return true;

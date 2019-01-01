@@ -7,6 +7,8 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import mage.util.JarVersion;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -31,6 +33,29 @@ public final class RepositoryUtil {
             dbVersionDao.create(dbVersion);
         }
         return dbVersions.isEmpty();
+    }
+
+    public static boolean isNewBuildRun(ConnectionSource connectionSource, String entityName, Class clazz) throws SQLException {
+        // build time checks only for releases, not runtime (e.g. IDE debug)
+        String currentBuild = JarVersion.getBuildTime(clazz);
+        if (!JarVersion.isBuildTimeOk(currentBuild)) {
+            return false;
+        }
+
+        TableUtils.createTableIfNotExists(connectionSource, DatabaseBuild.class);
+        Dao<DatabaseBuild, Object> dbBuildDao = DaoManager.createDao(connectionSource, DatabaseBuild.class);
+
+        QueryBuilder<DatabaseBuild, Object> queryBuilder = dbBuildDao.queryBuilder();
+        queryBuilder.where().eq("entity", new SelectArg(entityName)).and().eq("last_build", currentBuild);
+        List<DatabaseBuild> dbBuilds = dbBuildDao.query(queryBuilder.prepare());
+
+        if (dbBuilds.isEmpty()) {
+            DatabaseBuild dbBuild = new DatabaseBuild();
+            dbBuild.setEntity(entityName);
+            dbBuild.setLastBuild(currentBuild);
+            dbBuildDao.create(dbBuild);
+        }
+        return dbBuilds.isEmpty();
     }
 
     public static void updateVersion(ConnectionSource connectionSource, String entityName, long version) throws SQLException {

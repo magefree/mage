@@ -1,25 +1,21 @@
+package mage.client.table;
 
-package mage.client.util;
+import mage.client.util.GUISizeHelper;
 
-import java.awt.Component;
+import javax.swing.*;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.AbstractCellEditor;
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener, MouseListener {
+public class TablesButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener, MouseListener {
 
     private final JTable table;
     private final Action action;
@@ -28,7 +24,7 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
     private String text;
     private boolean isButtonColumnEditor;
 
-    public ButtonColumn(JTable table, Action action, int column) {
+    public TablesButtonColumn(JTable table, Action action, int column) {
         super();
         this.table = table;
         this.action = action;
@@ -88,7 +84,7 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
         if (table.getRowCount() > 0 && table.getRowCount() >= table.getEditingRow() && table.getEditingRow() >= 0) {
             int row = table.convertRowIndexToModel(table.getEditingRow());
             fireEditingStopped();
-            ActionEvent event = new ActionEvent(table, ActionEvent.ACTION_PERFORMED, String.valueOf(row));
+            ActionEvent event = new ActionEvent(table, ActionEvent.ACTION_PERFORMED, TablesUtil.getSearchIdFromTable(table, row));
             action.actionPerformed(event);
         }
     }

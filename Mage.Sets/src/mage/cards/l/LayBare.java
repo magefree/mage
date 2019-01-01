@@ -58,7 +58,7 @@ class LayBareEffect extends OneShotEffect {
         Card target = (Card) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         if (target != null) {
             Player controller = game.getPlayer(target.getOwnerId());
-            if (controller != null) {
+            if (controller != null && player != null) {
                 player.lookAtCards("Lay Bare", controller.getHand(), game);
                 return true;
             }

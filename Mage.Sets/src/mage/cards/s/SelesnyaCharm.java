@@ -46,13 +46,13 @@ public final class SelesnyaCharm extends CardImpl {
 
         // or exile target creature with power 5 or greater;
         Mode mode = new Mode();
-        mode.getEffects().add(new ExileTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
+        mode.addEffect(new ExileTargetEffect());
+        mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
 
         // or create a 2/2 white Knight creature token with vigilance.
         mode = new Mode();
-        mode.getEffects().add(new CreateTokenEffect(new KnightToken()));
+        mode.addEffect(new CreateTokenEffect(new KnightToken()));
         this.getSpellAbility().addMode(mode);
     }
 

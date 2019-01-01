@@ -54,13 +54,15 @@ class DrasticRevelationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        you.discardToMax(game);
-        you.drawCards(7, game);
-        Cards hand = you.getHand();
-        for (int i = 0; i < 3; i++) {
-            Card card = hand.getRandom(game);
-            if (card != null) {
-                you.discard(card, source, game);
+        if(you != null) {
+            you.discardToMax(game);
+            you.drawCards(7, game);
+            Cards hand = you.getHand();
+            for (int i = 0; i < 3; i++) {
+                Card card = hand.getRandom(game);
+                if (card != null) {
+                    you.discard(card, source, game);
+                }
             }
         }
         return false;

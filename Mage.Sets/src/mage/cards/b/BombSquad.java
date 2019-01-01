@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -26,20 +24,22 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *     10/4/2004: If the creature regenerates, the fuse counters are still removed and 
- *                the four damage is still dealt.
- *     10/4/2004: If there are two Bomb Squads on the battlefield when a creature ends 
- *                up with 4 or more fuse counters, both Bomb Squad abilities will trigger
- *                causing 4 damage each even though the first to resolve will destroy the
- *                creature.
+ * 10/4/2004: If the creature regenerates, the fuse counters are still removed and
+ * the four damage is still dealt.
+ * 10/4/2004: If there are two Bomb Squads on the battlefield when a creature ends
+ * up with 4 or more fuse counters, both Bomb Squad abilities will trigger
+ * causing 4 damage each even though the first to resolve will destroy the
+ * creature.
  *
  * @author LevelX2
  */
 public final class BombSquad extends CardImpl {
 
     public BombSquad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.DWARF);
 
         this.power = new MageInt(1);
@@ -150,6 +150,7 @@ class BombSquadDamgeEffect extends OneShotEffect {
 class BombSquadBeginningEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a fuse counter on it");
+
     static {
         filter.add(new CounterPredicate(CounterType.FUSE));
     }
@@ -171,10 +172,13 @@ class BombSquadBeginningEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
+        }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             permanent.addCounters(CounterType.FUSE.createInstance(), source, game);
 
-            game.informPlayers(new StringBuilder(card.getName()).append(" puts a fuse counter on ").append(permanent.getName()).toString());
+            game.informPlayers(card.getName() + " puts a fuse counter on " + permanent.getName());
         }
         return true;
     }

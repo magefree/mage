@@ -1,4 +1,3 @@
-
 package mage.server;
 
 import java.util.Locale;
@@ -240,6 +239,7 @@ public class TableController {
     public synchronized boolean joinTable(UUID userId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         Optional<User> _user = UserManager.instance.getUser(userId);
         if (!_user.isPresent()) {
+            logger.error("Join Table: can't find user to join " + name + " Id = " + userId);
             return false;
         }
         User user = _user.get();

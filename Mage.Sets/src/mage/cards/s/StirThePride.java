@@ -32,7 +32,7 @@ public final class StirThePride extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new GainAbilityControlledEffect(new DealsDamageGainLifeSourceTriggeredAbility(), Duration.EndOfTurn);
         effect.setText("until end of turn, creatures you control gain \"Whenever this creature deals damage, you gain that much life.\"");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {1}{W}

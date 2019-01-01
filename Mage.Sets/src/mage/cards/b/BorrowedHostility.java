@@ -45,8 +45,8 @@ public final class BorrowedHostility extends CardImpl {
         Mode mode = new Mode();
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains first strike until end of turn");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetCreaturePermanent(filterFirstStrike));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetCreaturePermanent(filterFirstStrike));
         this.getSpellAbility().addMode(mode);
     }
 

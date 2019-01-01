@@ -3,6 +3,7 @@ package mage.cards.i;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
@@ -21,13 +22,12 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
 /**
- *
  * @author Plopman
  */
 public final class Intuition extends CardImpl {
 
     public Intuition(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
 
         // Search your library for three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.
@@ -47,7 +47,6 @@ public final class Intuition extends CardImpl {
 
 class IntuitionEffect extends SearchEffect {
 
-    
 
     public IntuitionEffect() {
         super(new TargetCardInLibrary(3, new FilterCard()), Outcome.Benefit);
@@ -70,22 +69,22 @@ class IntuitionEffect extends SearchEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (controller == null || opponent == null)
             return false;
-        
+
         if (controller.getLibrary().size() >= 3 && controller.searchLibrary(target, game)) {
-            
+
             if (target.getTargets().size() == 3) {
                 Cards cards = new CardsImpl();
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
+                for (UUID cardId : target.getTargets()) {
                     Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         cards.add(card);
                     }
                 }
                 controller.revealCards("Reveal", cards, game);
-                
+
                 TargetCard targetCard = new TargetCard(Zone.LIBRARY, new FilterCard());
-                
-                while(!opponent.choose(Outcome.Neutral, cards, targetCard, game)) {
+
+                while (!opponent.choose(Outcome.Neutral, cards, targetCard, game)) {
                     if (!opponent.canRespond()) {
                         return false;
                     }
@@ -100,7 +99,7 @@ class IntuitionEffect extends SearchEffect {
             controller.shuffleLibrary(source, game);
             return true;
         }
-        
+
         controller.shuffleLibrary(source, game);
         return false;
     }

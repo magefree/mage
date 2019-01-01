@@ -353,8 +353,9 @@ public class CallbackClientImpl implements CallbackClient {
                     }
                     case DRAFT_UPDATE: {
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
+                        DraftClientMessage message = (DraftClientMessage) callback.getData();
                         if (panel != null) {
-                            panel.updateDraft((DraftView) callback.getData());
+                            panel.updateDraft(message.getDraftView());
                         }
                         break;
                     }

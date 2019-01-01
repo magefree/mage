@@ -27,8 +27,8 @@ public final class FissureVent extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
         Mode mode1 = new Mode();
-        mode1.getTargets().add(new TargetNonBasicLandPermanent());
-        mode1.getEffects().add(new DestroyTargetEffect());
+        mode1.addTarget(new TargetNonBasicLandPermanent());
+        mode1.addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addMode(mode1);
     }
 

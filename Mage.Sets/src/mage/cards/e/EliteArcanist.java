@@ -95,7 +95,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (!player.getHand().isEmpty()) {
+        if (player != null && !player.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && player.choose(Outcome.Benefit, player.getHand(), target, game)) {
@@ -105,7 +105,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(source.getSourceId());
                     if (permanent != null) {
                         permanent.imprint(card.getId(), game);
-                        permanent.addInfo("imprint", new StringBuilder("[Exiled card - ").append(card.getName()).append(']').toString(), game);
+                        permanent.addInfo("imprint", "[Exiled card - " + card.getName() + ']', game);
                     }
                     return true;
                 }

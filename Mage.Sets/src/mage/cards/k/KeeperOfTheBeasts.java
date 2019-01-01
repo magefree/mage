@@ -84,7 +84,7 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         Player controller = game.getPlayer(sourceControllerId);
-        if (controller != null) {
+        if (controller != null && targetSource != null) {
             for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null

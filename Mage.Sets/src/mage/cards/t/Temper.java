@@ -98,7 +98,7 @@ class TemperPreventDamageTargetEffect extends PreventionEffectImpl {
                 Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
                 if (targetPermanent != null) {
                     targetPermanent.addCounters(CounterType.P1P1.createInstance(prevented), source, game);
-                    game.informPlayers(new StringBuilder("Temper: Prevented ").append(prevented).append(" damage ").toString());
+                    game.informPlayers("Temper: Prevented " + prevented + " damage ");
                     game.informPlayers("Temper: Adding " + prevented + " +1/+1 counters to " + targetPermanent.getName());
                 }
             }

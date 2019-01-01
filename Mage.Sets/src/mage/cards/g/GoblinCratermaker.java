@@ -50,8 +50,8 @@ public final class GoblinCratermaker extends CardImpl {
 
         // • Destroy target colorless nonland permanent.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filter));
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetPermanent(filter));
 
         ability.addMode(mode);
         this.addAbility(ability);

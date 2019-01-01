@@ -58,7 +58,7 @@ class GearseekerSerpentCostReductionEffect extends CostModificationEffectImpl {
 
     public GearseekerSerpentCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each artifact you control";
+        staticText = "This spell costs {1} less to cast for each artifact you control";
     }
 
     protected GearseekerSerpentCostReductionEffect(final GearseekerSerpentCostReductionEffect effect) {

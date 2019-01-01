@@ -34,8 +34,8 @@ public final class CrushingCanopy extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // * Destroy target enchantment.
         Mode mode = new Mode();
-        mode.getTargets().add(new TargetEnchantmentPermanent());
-        mode.getEffects().add(new DestroyTargetEffect());
+        mode.addTarget(new TargetEnchantmentPermanent());
+        mode.addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addMode(mode);
     }
 

@@ -258,7 +258,6 @@
                 <configuration>
                     <generatePackage>mage.server.util.config</generatePackage>
                     <schemaDirectory>./src/main/xml-resources/jaxb/Config/</schemaDirectory>
-                    <arguments>-Xcommons-lang</arguments>
                 </configuration>
                 <executions>
                     <execution>

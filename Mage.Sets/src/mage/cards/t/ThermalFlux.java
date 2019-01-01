@@ -50,9 +50,9 @@ public final class ThermalFlux extends CardImpl {
         // Target snow permanent isn't snow until end of turn.
         // Draw a card at the beginning of the next turn's upkeep.
         Mode mode = new Mode();
-        mode.getTargets().add(new TargetPermanent(filterSnow));
-        mode.getEffects().add(new ThermalFluxEffect(false));
-        mode.getEffects().add(new CreateDelayedTriggeredAbilityEffect(
+        mode.addTarget(new TargetPermanent(filterSnow));
+        mode.addEffect(new ThermalFluxEffect(false));
+        mode.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
         this.getSpellAbility().addMode(mode);
 

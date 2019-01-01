@@ -45,14 +45,14 @@ public final class OrzhovCharm extends CardImpl {
 
         // or destroy target creature and you lose life equal to its toughness;
         Mode mode = new Mode();
-        mode.getEffects().add(new OrzhovCharmDestroyAndLoseLifeEffect());
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new OrzhovCharmDestroyAndLoseLifeEffect());
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
 
         // or return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
         Mode mode2 = new Mode();
-        mode2.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        mode2.getTargets().add(new TargetCardInYourGraveyard(filter));
+        mode2.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        mode2.addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addMode(mode2);
 
 

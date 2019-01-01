@@ -79,7 +79,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
                     } else {
                         decision = " won't copy ";
                     }
-                    game.informPlayers((new StringBuilder(player.getLogName()).append(decision).append(permanent.getName()).toString()));
+                    game.informPlayers((player.getLogName() + decision + permanent.getName()));
                 }
                 player = playerList.getNext(game);
             } while (!player.getId().equals(game.getActivePlayerId()));

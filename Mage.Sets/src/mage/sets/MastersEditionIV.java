@@ -104,6 +104,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon Engine", 197, Rarity.COMMON, mage.cards.d.DragonEngine.class));
         cards.add(new SetCardInfo("Drain Power", 46, Rarity.RARE, mage.cards.d.DrainPower.class));
         cards.add(new SetCardInfo("Dread Reaper", 78, Rarity.RARE, mage.cards.d.DreadReaper.class));
+        cards.add(new SetCardInfo("Dread Wight", 79, Rarity.UNCOMMON, mage.cards.d.DreadWight.class));
         cards.add(new SetCardInfo("Drop of Honey", 150, Rarity.RARE, mage.cards.d.DropOfHoney.class));
         cards.add(new SetCardInfo("Drowned", 47, Rarity.COMMON, mage.cards.d.Drowned.class));
         cards.add(new SetCardInfo("Dust to Dust", 11, Rarity.UNCOMMON, mage.cards.d.DustToDust.class));
@@ -168,6 +169,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Library of Leng", 211, Rarity.COMMON, mage.cards.l.LibraryOfLeng.class));
         cards.add(new SetCardInfo("Lich", 89, Rarity.RARE, mage.cards.l.Lich.class));
         cards.add(new SetCardInfo("Lifeforce", 160, Rarity.RARE, mage.cards.l.Lifeforce.class));
+        cards.add(new SetCardInfo("Lim-Dul's Cohort", 90, Rarity.COMMON, mage.cards.l.LimDulsCohort.class));
         cards.add(new SetCardInfo("Living Lands", 161, Rarity.RARE, mage.cards.l.LivingLands.class));
         cards.add(new SetCardInfo("Living Wall", 212, Rarity.UNCOMMON, mage.cards.l.LivingWall.class));
         cards.add(new SetCardInfo("Mahamoti Djinn", 52, Rarity.RARE, mage.cards.m.MahamotiDjinn.class));

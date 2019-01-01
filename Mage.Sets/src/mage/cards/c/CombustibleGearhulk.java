@@ -86,8 +86,8 @@ class CombustibleGearhulkEffect extends OneShotEffect {
             if (opponentId != null) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    StringBuilder sb = new StringBuilder("Have " + controller.getLogName() + " draw three cards?");
-                    if (opponent.chooseUse(outcome, sb.toString(), source, game)) {
+                    String questionDrawThree = "Have " + controller.getLogName() + " draw three cards?";
+                    if (opponent.chooseUse(outcome, questionDrawThree, source, game)) {
                         if (!game.isSimulation()) {
                             game.informPlayers(opponent.getLogName() + " lets " + controller.getLogName() + " draw three cards");
                         }

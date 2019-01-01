@@ -119,7 +119,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever a ").append(filter.getMessage()).append(" is put into your graveyard from the battlefield, ").append(super.getRule()).toString();
+        return "Whenever a " + filter.getMessage() + " is put into your graveyard from the battlefield, " + super.getRule();
     }
 }
 

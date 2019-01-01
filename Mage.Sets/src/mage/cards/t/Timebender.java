@@ -43,8 +43,8 @@ public final class Timebender extends CardImpl {
 
         // Put two time counters on target permanent with a time counter on it or suspended card.
         Mode mode = new Mode();
-        mode.getEffects().add(new TimebenderEffect(true));
-        mode.getTargets().add(new TargetPermanentOrSuspendedCard());
+        mode.addEffect(new TimebenderEffect(true));
+        mode.addTarget(new TargetPermanentOrSuspendedCard());
         ability.addMode(mode);
         ability.getModes().addMode(mode);
         this.addAbility(ability);

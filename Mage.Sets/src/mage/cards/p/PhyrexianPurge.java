@@ -43,8 +43,10 @@ public final class PhyrexianPurge extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             Player you = game.getPlayer(ownerId);
-            int maxTargets = you.getLife() / 3;
-            ability.addTarget(new TargetCreaturePermanent(0, maxTargets));
+            if(you != null) {
+                int maxTargets = you.getLife() / 3;
+                ability.addTarget(new TargetCreaturePermanent(0, maxTargets));
+            }
         }
     }
 

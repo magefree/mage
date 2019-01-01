@@ -163,7 +163,7 @@ class JarJarBinksTapEffect extends OneShotEffect {
                 }
             }
             if (permanentToTap != null) {
-                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(" chosen creature: ").append(permanentToTap.getName()).toString());
+                game.informPlayers(sourcePermanent.getName() + " chosen creature: " + permanentToTap.getName());
                 return permanentToTap.tap(game);
             }
             return true;

@@ -27,8 +27,8 @@ public final class FieryIntervention extends CardImpl {
 
         // -Destroy target artifact.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetArtifactPermanent());
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addMode(mode);
     }
 

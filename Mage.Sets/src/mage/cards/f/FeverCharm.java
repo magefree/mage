@@ -36,13 +36,13 @@ public final class FeverCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or target creature gets +2/+0 until end of turn
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or Fever Charm deals 3 damage to target Wizard creature.
         mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(3));
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
+        mode.addEffect(new DamageTargetEffect(3));
+        mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

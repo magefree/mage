@@ -78,6 +78,9 @@ class AyliEternalPilgrimCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        return player.getLife() >= game.getLife() + 10;
+        if(player != null) {
+            return player.getLife() >= game.getLife() + 10;
+        }
+        return false;
     }
 }

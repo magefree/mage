@@ -33,14 +33,14 @@ public final class DarigaazsCharm extends CardImpl {
 
         // or Darigaaz's Charm deals 3 damage to any target;
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(3));
-        mode.getTargets().add(new TargetAnyTarget());
+        mode.addEffect(new DamageTargetEffect(3));
+        mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
 
         // or target creature gets +3/+3 until end of turn.
         mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }
 

@@ -51,13 +51,13 @@ public final class MarduCharm extends CardImpl {
 
         // <strong>*</strong> Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new MarduCharmCreateTokenEffect());
+        mode.addEffect(new MarduCharmCreateTokenEffect());
         this.getSpellAbility().addMode(mode);
 
         // <strong>*</strong> Target opponent reveals their hand. You choose a noncreature, nonland card from it.  That player discards that card.
         mode = new Mode();
-        mode.getEffects().add(new DiscardCardYouChooseTargetEffect(filter));
-        mode.getTargets().add(new TargetOpponent());
+        mode.addEffect(new DiscardCardYouChooseTargetEffect(filter));
+        mode.addTarget(new TargetOpponent());
         this.getSpellAbility().addMode(mode);
 
     }

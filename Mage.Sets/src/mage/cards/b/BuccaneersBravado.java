@@ -39,9 +39,9 @@ public final class BuccaneersBravado extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and gains first strike until end of turn"));
         // Target Pirate gets +1/+1 and gains double strike until end of turn.
         Mode mode = new Mode();
-        mode.getTargets().add(new TargetPermanent(filter));
-        mode.getEffects().add(new BoostTargetEffect(1, 1, Duration.EndOfTurn).setText("Target Pirate gets +1/+1"));
-        mode.getEffects().add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and gains double strike until end of turn"));
+        mode.addTarget(new TargetPermanent(filter));
+        mode.addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn).setText("Target Pirate gets +1/+1"));
+        mode.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and gains double strike until end of turn"));
         this.getSpellAbility().addMode(mode);
     }
 

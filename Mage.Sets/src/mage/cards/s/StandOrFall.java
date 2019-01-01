@@ -84,7 +84,7 @@ class StandOrFallEffect extends OneShotEffect {
             Player targetPlayer = game.getPlayer(opponents.iterator().next());
             if (opponents.size() > 1) {
                 TargetOpponent targetOpponent = new TargetOpponent(true);
-                if (player.chooseTarget(Outcome.Neutral, targetOpponent, source, game)) {
+                if (player != null && player.chooseTarget(Outcome.Neutral, targetOpponent, source, game)) {
                     targetPlayer = game.getPlayer(targetOpponent.getFirstTarget());
                     game.informPlayers(player.getLogName() + " chose " + targetPlayer.getLogName() + " as the defending player");
                 }
@@ -122,9 +122,7 @@ class StandOrFallEffect extends OneShotEffect {
                         game.addEffect(effect, source);
                     }
                 }
-                StringBuilder sb = new StringBuilder("Creatures that can block this turn: ");
-                sb.append(otherPile.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
-                game.informPlayers(sb.toString());
+                game.informPlayers("Creatures that can block this turn: " + otherPile.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
                 return true;
             }
         }

@@ -98,8 +98,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("At the beginning of each of your main phases, if you haven't added mana with this ability this turn, ");
-        return sb.append(super.getRule()).toString();
+        return "At the beginning of each of your main phases, if you haven't added mana with this ability this turn, " + super.getRule();
     }
 
 }

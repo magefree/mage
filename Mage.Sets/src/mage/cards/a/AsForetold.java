@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -26,24 +25,32 @@ import mage.watchers.Watcher;
  *
  * @author stravant
  *
- * Note, this card is pretty hacky in its implementation due to the fact that the alternative cost system doesn't
- * really support "once each turn" alternative costs in an obvious way, but it should work in all scenarios as far
- * as I can see.
+ * Note, this card is pretty hacky in its implementation due to the fact that
+ * the alternative cost system doesn't really support "once each turn"
+ * alternative costs in an obvious way, but it should work in all scenarios as
+ * far as I can see.
  */
 public final class AsForetold extends CardImpl {
+
     public AsForetold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-
 
         // At the beginning of your upkeep, put a time counter on As Foretold.
         addAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.TIME.createInstance(), new StaticValue(1), true),
+                        new AddCountersSourceEffect(
+                                CounterType.TIME.createInstance(),
+                                new StaticValue(1),
+                                true),
                         TargetController.YOU,
-                        /* optional = */false));
+                        /* optional = */ false));
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with converted mana cost X or less, where X is the number of time counters on As Foretold.
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AsForetoldAddAltCostEffect()), new AsForetoldAltCostUsedWatcher());
+        addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new AsForetoldAddAltCostEffect()),
+                new AsForetoldAltCostUsedWatcher());
+
     }
 
     public AsForetold(final AsForetold card) {
@@ -60,6 +67,7 @@ public final class AsForetold extends CardImpl {
  * Used to determine what cast objects to apply the alternative cost to
  */
 class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
+
     private int counters;
 
     public SpellWithManaCostLessThanOrEqualToCondition(int counters) {
@@ -69,17 +77,21 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        return object != null && !object.isLand() && object.getConvertedManaCost() <= counters;
+        return object != null
+                && !object.isLand()
+                && object.getConvertedManaCost() <= counters;
     }
 }
 
-
 /**
- * Special AlternativeCostSourceAbility implementation. We wrap the call to askToActivateAlternativeCosts in order to
- * tell when the alternative cost is used, and mark it as having been used this turn in the watcher
+ * Special AlternativeCostSourceAbility implementation. We wrap the call to
+ * askToActivateAlternativeCosts in order to tell when the alternative cost is
+ * used, and mark it as having been used this turn in the watcher
  */
 class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
+
     private UUID sourceAsForetold;
+    boolean activated;
 
     AsForetoldAlternativeCost(UUID sourceAsForetold, int timeCounters) {
         super(new ManaCostsImpl("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
@@ -89,6 +101,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
     AsForetoldAlternativeCost(final AsForetoldAlternativeCost ability) {
         super(ability);
         this.sourceAsForetold = ability.sourceAsForetold;
+        this.activated = ability.activated;
     }
 
     @Override
@@ -98,24 +111,34 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
 
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        boolean activated = super.askToActivateAlternativeCosts(ability, game);
-        if (activated) {
-            // Get the watcher
-            AsForetoldAltCostUsedWatcher asForetoldAltCostUsedWatcher =
-                    (AsForetoldAltCostUsedWatcher)game.getState().getWatchers()
-                            .get("asForetoldAltCostUsedWatcher", sourceAsForetold);
+        Player controller = game.getPlayer(ability.getControllerId());
+        Permanent asForetold = game.getPermanent(sourceAsForetold);
+        if (controller != null
+                && asForetold != null) {
+            if (controller.chooseUse(Outcome.Neutral, "Do you wish to use " + asForetold.getLogName() + " to pay the alternative cost ?", ability, game)) {
+                activated = super.askToActivateAlternativeCosts(ability, game);
+                if (activated) {
+                    // Get the watcher
+                    AsForetoldAltCostUsedWatcher asForetoldAltCostUsedWatcher
+                            = (AsForetoldAltCostUsedWatcher) game.getState().getWatchers()
+                                    .get("asForetoldAltCostUsedWatcher", sourceAsForetold);
 
-            // Mark as used
-            asForetoldAltCostUsedWatcher.markUsedThisTurn();
+                    // Mark as used
+                    asForetoldAltCostUsedWatcher.markUsedThisTurn();
+                }
+            }
         }
         return activated;
     }
+
 }
 
 /**
- * The continuous effect that adds the option to pay the alternative cost if we haven't used it yet this turn
+ * The continuous effect that adds the option to pay the alternative cost if we
+ * haven't used it yet this turn
  */
 class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
+
     public AsForetoldAddAltCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with converted mana cost X or less, where X is the number of time counters on {this}.";
@@ -137,8 +160,8 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null) {
                 // Get the watcher
-                AsForetoldAltCostUsedWatcher asForetoldAltCostUsedWatcher =
-                        (AsForetoldAltCostUsedWatcher)game.getState().getWatchers()
+                AsForetoldAltCostUsedWatcher asForetoldAltCostUsedWatcher
+                        = (AsForetoldAltCostUsedWatcher) game.getState().getWatchers()
                                 .get("asForetoldAltCostUsedWatcher", sourcePermanent.getId());
 
                 // If we haven't used it yet this turn, give the option of using the zero alternative cost
@@ -166,13 +189,15 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
 }
 
 /**
- * Watcher used as extra storage to record whether a given As Foretold has been used this turn.
- * Technically speaking this watcher doesn't *watch* any GameEvents, but it does "watch" the
- * alternative cost being used. That just isn't possible to watch through a game event. It's still
- * helpfull to co-op the Watcher system for this since it automatically handles ZoneChangeCounter
+ * Watcher used as extra storage to record whether a given As Foretold has been
+ * used this turn. Technically speaking this watcher doesn't *watch* any
+ * GameEvents, but it does "watch" the alternative cost being used. That just
+ * isn't possible to watch through a game event. It's still helpful to co-op the
+ * Watcher system for this since it automatically handles ZoneChangeCounter
  * stuff and resetting the condition at the end of the turn.
  */
 class AsForetoldAltCostUsedWatcher extends Watcher {
+
     public AsForetoldAltCostUsedWatcher() {
         super("asForetoldAltCostUsedWatcher", WatcherScope.CARD);
     }

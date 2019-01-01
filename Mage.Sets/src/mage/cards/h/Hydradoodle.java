@@ -84,7 +84,7 @@ class HydradoodleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (permanent != null) {
+        if (permanent != null && controller != null) {
             SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
             if (spellAbility != null
                     && spellAbility.getSourceId().equals(source.getSourceId())

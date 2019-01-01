@@ -89,7 +89,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                 MageObject sourceObject = game.getObject(source.getSourceId());
                 UUID exileId = CardUtil.getCardExileZoneId(game, source);
                 Card card = damagedPlayer.getLibrary().getFromTop(game);
-                if (card != null) {
+                if (card != null && sourceObject != null) {
                     // move card to exile
                     controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
                     // player gains life

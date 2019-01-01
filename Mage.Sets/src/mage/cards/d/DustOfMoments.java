@@ -40,7 +40,7 @@ public final class DustOfMoments extends CardImpl {
 
         // Or put two time counters on each permanent with a time counter on it and each suspended card
         Mode mode = new Mode();
-        mode.getEffects().add(new AddCountersEffect());
+        mode.addEffect(new AddCountersEffect());
         this.getSpellAbility().addMode(mode);
     }
 
@@ -119,10 +119,10 @@ public final class DustOfMoments extends CardImpl {
                         card.addCounters(counter, source, game);
                     }
                     if (!game.isSimulation()) {
-                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
-                                .append(controller.getLogName()).append(getActionStr()).append('s')
-                                .append(counter.getCount()).append(' ').append(counterName.toLowerCase(Locale.ENGLISH))
-                                .append(" counter on ").append(card.getName()).toString());
+                        game.informPlayers(sourceObject.getName() + ": " +
+                                controller.getLogName() + getActionStr() + 's' +
+                                counter.getCount() + ' ' + counterName.toLowerCase(Locale.ENGLISH) +
+                                " counter on " + card.getName());
                     }
                 }
             }
@@ -144,10 +144,10 @@ public final class DustOfMoments extends CardImpl {
                         card.addCounters(counter, source, game);
                     }
                     if (!game.isSimulation()) {
-                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
-                                .append(controller.getLogName()).append(getActionStr()).append("s ")
-                                .append(counter.getCount()).append(' ').append(counterName.toLowerCase(Locale.ENGLISH))
-                                .append(" counter on ").append(card.getName()).toString());
+                        game.informPlayers(sourceObject.getName() + ": " +
+                                controller.getLogName() + getActionStr() + "s " +
+                                counter.getCount() + ' ' + counterName.toLowerCase(Locale.ENGLISH) +
+                                " counter on " + card.getName());
                     }
                 }
             }

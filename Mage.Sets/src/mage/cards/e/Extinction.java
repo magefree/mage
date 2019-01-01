@@ -56,15 +56,18 @@ class ExtinctionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        Choice typeChoice = new ChoiceCreatureType(sourceObject);
-        if (player != null && player.choose(outcome, typeChoice, game)) {
-            game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-            FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-            filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
-            for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
-                creature.destroy(source.getSourceId(), game, true);
+        if (player != null && sourceObject != null) {
+            Choice typeChoice = new ChoiceCreatureType(sourceObject);
+
+            if (player.choose(outcome, typeChoice, game)) {
+                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
+                FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
+                filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
+                    creature.destroy(source.getSourceId(), game, true);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

@@ -64,7 +64,7 @@ class BrandedBrawlersCantBlockEffect extends RestrictionEffect {
     public BrandedBrawlersCantBlockEffect(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield);
         this.filter = filter;
-        staticText = new StringBuilder("{this} can't attack if you control ").append(filter.getMessage()).toString();
+        staticText = "{this} can't attack if you control " + filter.getMessage();
     }
 
     public BrandedBrawlersCantBlockEffect(final BrandedBrawlersCantBlockEffect effect) {

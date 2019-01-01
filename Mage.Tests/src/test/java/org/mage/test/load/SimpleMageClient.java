@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 public class SimpleMageClient implements MageClient {
 
     private final UUID clientId;
-    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(MageClient.class);
 
     private static final Logger log = Logger.getLogger(SimpleMageClient.class);
 
