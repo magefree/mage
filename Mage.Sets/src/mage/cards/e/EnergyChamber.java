@@ -43,8 +43,8 @@ public final class EnergyChamber extends CardImpl {
 
         // or put a charge counter on target noncreature artifact.
         Mode mode = new Mode();
-        mode.getEffects().add(new AddCountersTargetEffect(CounterType.CHARGE.createInstance(), Outcome.BoostCreature));
-        mode.getTargets().add(new TargetPermanent(filter2));
+        mode.addEffect(new AddCountersTargetEffect(CounterType.CHARGE.createInstance(), Outcome.BoostCreature));
+        mode.addTarget(new TargetPermanent(filter2));
         ability.addMode(mode);
 
         this.addAbility(ability);

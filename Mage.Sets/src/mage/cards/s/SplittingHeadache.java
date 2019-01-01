@@ -32,8 +32,8 @@ public final class SplittingHeadache extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         Mode mode = new Mode();
-        mode.getEffects().add(new SplittingHeadacheEffect());
-        mode.getTargets().add(new TargetPlayer());
+        mode.addEffect(new SplittingHeadacheEffect());
+        mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
 
     }

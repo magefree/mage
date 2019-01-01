@@ -52,7 +52,7 @@ public final class DisplayOfDominance extends CardImpl {
 
         // or Permanents you control can't be the targets of blue or black spells your opponents control this turn
         Mode mode = new Mode();
-        mode.getEffects().add(new DisplayOfDominanceEffect());
+        mode.addEffect(new DisplayOfDominanceEffect());
         this.getSpellAbility().getModes().addMode(mode);
     }
 

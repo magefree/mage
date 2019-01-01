@@ -6,7 +6,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.BeckonApparitionToken;
+import mage.game.permanent.token.WhiteBlackSpiritToken;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -22,7 +22,7 @@ public final class BeckonApparition extends CardImpl {
         // Exile target card from a graveyard. Create a 1/1 white and black Spirit creature token with flying.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeckonApparitionToken(), 1));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
     }
 
     public BeckonApparition(final BeckonApparition card) {

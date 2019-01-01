@@ -2,6 +2,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,13 +18,12 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
- *
  * @author emerald000
  */
 public final class BattletideAlchemist extends CardImpl {
 
     public BattletideAlchemist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.KITHKIN, SubType.CLERIC);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -63,7 +63,7 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
         boolean result = false;
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(event.getTargetId());
-        if (controller != null) {
+        if (controller != null && targetPlayer != null) {
             int numberOfClericsControlled = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(SubType.CLERIC, "Clerics")).calculate(game, source, this);
             int toPrevent = Math.min(numberOfClericsControlled, event.getAmount());
             if (toPrevent > 0 && controller.chooseUse(Outcome.PreventDamage, "Prevent " + toPrevent + " damage to " + targetPlayer.getName() + '?', source, game)) {
@@ -71,20 +71,18 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
                 if (!game.replaceEvent(preventEvent)) {
                     if (event.getAmount() >= toPrevent) {
                         event.setAmount(event.getAmount() - toPrevent);
-                    }
-                    else {
+                    } else {
                         event.setAmount(0);
                         result = true;
                     }
-                    if (toPrevent > 0) {
-                        game.informPlayers("Battletide Alchemist prevented " + toPrevent + " damage to " + targetPlayer.getName());
-                        game.fireEvent(GameEvent.getEvent(
-                                GameEvent.EventType.PREVENTED_DAMAGE,
-                                targetPlayer.getId(),
-                                source.getSourceId(),
-                                source.getControllerId(),
-                                toPrevent));
-                    }
+                    game.informPlayers("Battletide Alchemist prevented " + toPrevent + " damage to " + targetPlayer.getName());
+                    game.fireEvent(GameEvent.getEvent(
+                            GameEvent.EventType.PREVENTED_DAMAGE,
+                            targetPlayer.getId(),
+                            source.getSourceId(),
+                            source.getControllerId(),
+                            toPrevent));
+
                 }
             }
         }

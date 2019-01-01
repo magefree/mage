@@ -26,12 +26,12 @@ public final class DromarsCharm extends CardImpl {
         // Choose one - You gain 5 life; or counter target spell; or target creature gets -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
         Mode mode = new Mode();
-        mode.getEffects().add(new CounterTargetEffect());
-        mode.getTargets().add(new TargetSpell());
+        mode.addEffect(new CounterTargetEffect());
+        mode.addTarget(new TargetSpell());
         this.getSpellAbility().addMode(mode);
         mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }
 

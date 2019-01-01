@@ -32,10 +32,10 @@ public final class RetreatToHagra extends CardImpl {
 
         // or Each opponent loses 1 life and you gain 1 life.
         Mode mode = new Mode();
-        mode.getEffects().add(new LoseLifeOpponentsEffect(1));
+        mode.addEffect(new LoseLifeOpponentsEffect(1));
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         ability.addMode(mode);
         this.addAbility(ability);
     }

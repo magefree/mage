@@ -81,7 +81,9 @@ class JandorsRingEffect extends OneShotEffect {
                 DiscardCardYouChooseTargetEffect effect = new DiscardCardYouChooseTargetEffect(filter, TargetController.YOU);
                 if (effect.apply(game, source)) {//Conditional was already checked, card should be in hand, but if for some weird reason it fails, the card won't be drawn, although the cost will already be paid
                     Player controller = game.getPlayer(source.getControllerId());
-                    controller.drawCards(1, game);
+                    if(controller != null) {
+                        controller.drawCards(1, game);
+                    }
                 }
             }
             return true;

@@ -26,6 +26,9 @@ public class FreeformCommander extends Constructed {
         for (ExpansionSet set : Sets.getInstance().values()) {
             setCodes.add(set.getCode());
         }
+
+        // no banned cards
+        this.banned.clear();
     }
 
     public FreeformCommander(String name) {

@@ -3,6 +3,7 @@
 package mage.cards.v;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -20,18 +21,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author Loki
  */
 public final class VigilForTheLost extends CardImpl {
 
-    public VigilForTheLost (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+    public VigilForTheLost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         this.addAbility(new VigilForTheLostTriggeredAbility());
     }
 
-    public VigilForTheLost (final VigilForTheLost card) {
+    public VigilForTheLost(final VigilForTheLost card) {
         super(card);
     }
 
@@ -63,8 +63,8 @@ class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD &&
-                ((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
+        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD &&
+                ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (p.isControlledBy(this.getControllerId()) && p.isCreature()) {
                 return true;
@@ -95,11 +95,13 @@ class VigilForTheLostEffect extends OneShotEffect {
         cost.clearPaid();
         if (cost.payOrRollback(source, game, source.getSourceId(), source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());
-            player.gainLife(cost.getX(), game, source);
-            return true;
-        } else {
-            return false;
+            if (player != null) {
+                player.gainLife(cost.getX(), game, source);
+                return true;
+            }
         }
+        return false;
+
     }
 
     @Override

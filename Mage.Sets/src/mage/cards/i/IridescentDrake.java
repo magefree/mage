@@ -14,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,6 +28,12 @@ import mage.target.common.TargetCardInGraveyard;
  * @author TheElk801
  */
 public final class IridescentDrake extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("Aura from a graveyard");
+    
+    static {
+        filter.add(new SubtypePredicate(SubType.AURA));
+    }
 
     public IridescentDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -39,7 +47,7 @@ public final class IridescentDrake extends CardImpl {
 
         // When Iridescent Drake enters the battlefield, put target Aura card from a graveyard onto the battlefield under your control attached to Iridescent Drake.
         Ability ability = new EntersBattlefieldTriggeredAbility(new IridescentDrakeEffect());
-        ability.addTarget(new TargetCardInGraveyard());
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
     }
 

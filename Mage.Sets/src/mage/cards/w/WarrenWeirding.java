@@ -2,6 +2,7 @@
 package mage.cards.w;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -31,13 +32,12 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public final class WarrenWeirding extends CardImpl {
 
     public WarrenWeirding(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{1}{B}");
         this.subtype.add(SubType.GOBLIN);
 
 
@@ -64,19 +64,21 @@ class WarrenWeirdingEffect extends OneShotEffect {
         filterGoblin.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
-    WarrenWeirdingEffect ( ) {
+    WarrenWeirdingEffect() {
         super(Outcome.Sacrifice);
         staticText = "Target player sacrifices a creature. If a Goblin is sacrificed this way, that player creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn";
     }
 
-    WarrenWeirdingEffect ( WarrenWeirdingEffect effect ) {
+    WarrenWeirdingEffect(WarrenWeirdingEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-
+        if (player == null) {
+            return false;
+        }
         FilterControlledPermanent filter = new FilterControlledPermanent("creature");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerIdPredicate(player.getId()));

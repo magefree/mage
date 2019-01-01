@@ -125,7 +125,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
             Permanent myr = game.getPermanentOrLKIBattlefield(source.getSourceId());
             int tappedAmount = 0;
             TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-            while (true && controller.canRespond()) {
+            while (controller.canRespond()) {
                 target.clearChosen();
                 if (target.canChoose(source.getControllerId(), game)) {
                     Map<String, Serializable> options = new HashMap<>();
@@ -145,7 +145,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
                 }
             }
             if (tappedAmount > 0) {
-                game.informPlayers(new StringBuilder(controller.getLogName()).append(" taps ").append(tappedAmount).append(" Myrs").toString());
+                game.informPlayers(controller.getLogName() + " taps " + tappedAmount + " Myrs");
                 // boost effect
                 game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
                 // damage to defender

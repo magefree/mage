@@ -65,13 +65,13 @@ class SkullStormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         game.getOpponents(source.getControllerId()).forEach((playerId) -> {
             Player player = game.getPlayer(playerId);
-            if (!(player == null)) {
+            if (player != null) {
                 FilterPermanent filter = new FilterCreaturePermanent();
                 filter.add(new ControllerIdPredicate(playerId));
                 if (game.getBattlefield().getActivePermanents(
                         filter, source.getControllerId(), game
                 ).isEmpty()) {
-                    int lifeToLose = (int) Math.ceil(player.getLife() / 2);
+                    int lifeToLose = (int) Math.ceil(player.getLife() / 2f);
                     player.loseLife(lifeToLose, game, false);
                 } else {
                     Effect effect = new SacrificeEffect(

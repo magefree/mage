@@ -43,8 +43,8 @@ public final class DelayTactic extends CardImpl {
 
         //   Creatures target opponent controls don't untap during his or her next untap step.
         Mode mode = new Mode();
-        mode.getEffects().add(new DelayTacticEffect());
-        mode.getTargets().add(new TargetOpponent());
+        mode.addEffect(new DelayTacticEffect());
+        mode.addTarget(new TargetOpponent());
         this.getSpellAbility().addMode(mode);
     }
 

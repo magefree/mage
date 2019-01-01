@@ -26,7 +26,7 @@ public final class MastermindsAcquisition extends CardImpl {
         
         // Choose a card you own from outside the game and put it into your hand.
         Mode mode = new Mode();
-        mode.getEffects().add(new WishEffect(new FilterCard(), false));
+        mode.addEffect(new WishEffect(new FilterCard(), false));
         this.getSpellAbility().addMode(mode);
     }
 

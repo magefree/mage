@@ -1,4 +1,3 @@
-
 package mage.cards;
 
 import mage.Mana;
@@ -22,7 +21,6 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class Sets extends HashMap<String, ExpansionSet> {
@@ -75,6 +73,10 @@ public class Sets extends HashMap<String, ExpansionSet> {
     }
 
     public static List<Card> generateRandomCardPool(int cardsCount, List<ColoredManaSymbol> allowedColors, boolean onlyBasicLands) {
+        return generateRandomCardPool(cardsCount, allowedColors, onlyBasicLands, null);
+    }
+
+    public static List<Card> generateRandomCardPool(int cardsCount, List<ColoredManaSymbol> allowedColors, boolean onlyBasicLands, List<String> allowedSets) {
         CardCriteria criteria = new CardCriteria();
 
         if (onlyBasicLands) {
@@ -92,6 +94,12 @@ public class Sets extends HashMap<String, ExpansionSet> {
             criteria.red(false);
             criteria.green(false);
             criteria.colorless(false); // colorless is not allowed for gen
+        }
+
+        if (allowedSets != null && allowedSets.size() > 0) {
+            for (String code : allowedSets) {
+                criteria.setCodes(code);
+            }
         }
 
         FilterMana manaNeed = new FilterMana();
@@ -120,6 +128,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
             }
         }
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
+        if (cards.isEmpty()) {
+            throw new IllegalStateException("Can't find cards for chosen colors to generate deck: " + allowedColors);
+        }
 
         int count = 0;
         int tries = 0;
@@ -137,21 +148,43 @@ public class Sets extends HashMap<String, ExpansionSet> {
                     // discard not needed color by mana produce
                     Assert.assertEquals("only basic lands allow, but found " + card.getName(), 1, card.getMana().size());
                     for (Mana manaLand : card.getMana()) {
-                        if (manaLand.getWhite() > 0 && !manaNeed.isWhite()) { cardManaOK = false; }
-                        if (manaLand.getBlue() > 0 && !manaNeed.isBlue()) { cardManaOK = false; }
-                        if (manaLand.getBlack() > 0 && !manaNeed.isBlack()) { cardManaOK = false; }
-                        if (manaLand.getRed() > 0 && !manaNeed.isRed()) { cardManaOK = false; }
-                        if (manaLand.getGreen() > 0 && !manaNeed.isGreen()) { cardManaOK = false; }
-                        if (manaLand.getColorless() > 0) { cardManaOK = false; } // ignore colorless land (wastes)
+                        if (manaLand.getWhite() > 0 && !manaNeed.isWhite()) {
+                            cardManaOK = false;
+                        }
+                        if (manaLand.getBlue() > 0 && !manaNeed.isBlue()) {
+                            cardManaOK = false;
+                        }
+                        if (manaLand.getBlack() > 0 && !manaNeed.isBlack()) {
+                            cardManaOK = false;
+                        }
+                        if (manaLand.getRed() > 0 && !manaNeed.isRed()) {
+                            cardManaOK = false;
+                        }
+                        if (manaLand.getGreen() > 0 && !manaNeed.isGreen()) {
+                            cardManaOK = false;
+                        }
+                        if (manaLand.getColorless() > 0) {
+                            cardManaOK = false;
+                        } // ignore colorless land (wastes)
                     }
                 } else {
                     // cards
                     // discard any card that have not needed color
-                    if (manaCard.isWhite() && !manaNeed.isWhite()) { cardManaOK = false; }
-                    if (manaCard.isBlue() && !manaNeed.isBlue()) { cardManaOK = false; }
-                    if (manaCard.isBlack() && !manaNeed.isBlack()) { cardManaOK = false; }
-                    if (manaCard.isRed() && !manaNeed.isRed()) { cardManaOK = false; }
-                    if (manaCard.isGreen() && !manaNeed.isGreen()) { cardManaOK = false; }
+                    if (manaCard.isWhite() && !manaNeed.isWhite()) {
+                        cardManaOK = false;
+                    }
+                    if (manaCard.isBlue() && !manaNeed.isBlue()) {
+                        cardManaOK = false;
+                    }
+                    if (manaCard.isBlack() && !manaNeed.isBlack()) {
+                        cardManaOK = false;
+                    }
+                    if (manaCard.isRed() && !manaNeed.isRed()) {
+                        cardManaOK = false;
+                    }
+                    if (manaCard.isGreen() && !manaNeed.isGreen()) {
+                        cardManaOK = false;
+                    }
                 }
 
                 if (cardManaOK) {

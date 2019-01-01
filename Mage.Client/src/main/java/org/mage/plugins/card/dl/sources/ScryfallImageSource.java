@@ -1,6 +1,6 @@
 package org.mage.plugins.card.dl.sources;
 
-import mage.client.dialog.PreferencesDialog;
+import mage.client.util.CardLanguage;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.util.*;
@@ -13,21 +13,23 @@ public enum ScryfallImageSource implements CardImageSource {
     instance;
 
     private final Set<String> supportedSets;
-    private final Map<String, String> languageAliases;
+    private final Map<CardLanguage, String> languageAliases;
+    private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
 
     ScryfallImageSource() {
         // https://scryfall.com/docs/api/languages
         languageAliases = new HashMap<>();
-        languageAliases.put("en", "en");
-        languageAliases.put("es", "es");
-        languageAliases.put("jp", "ja");
-        languageAliases.put("it", "it");
-        languageAliases.put("fr", "fr");
-        languageAliases.put("cn", "zhs"); // Simplified Chinese
-        languageAliases.put("de", "de");
-        languageAliases.put("ko", "ko");
-        languageAliases.put("pt", "pt");
-        languageAliases.put("ru", "ru");
+        languageAliases.put(CardLanguage.ENGLISH, "en");
+        languageAliases.put(CardLanguage.SPANISH, "es");
+        languageAliases.put(CardLanguage.FRENCH, "fr");
+        languageAliases.put(CardLanguage.GERMAN, "de");
+        languageAliases.put(CardLanguage.ITALIAN, "it");
+        languageAliases.put(CardLanguage.PORTUGUESE, "pt");
+        languageAliases.put(CardLanguage.JAPANESE, "ja");
+        languageAliases.put(CardLanguage.KOREAN, "ko");
+        languageAliases.put(CardLanguage.RUSSIAN, "ru");
+        languageAliases.put(CardLanguage.CHINES_SIMPLE, "zhs");
+        languageAliases.put(CardLanguage.CHINES_TRADITION, "zht");
 
         supportedSets = new LinkedHashSet<>();
         // supportedSets.add("PTC"); //
@@ -234,6 +236,7 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("GNT");
         supportedSets.add("UMA");
         supportedSets.add("PUMA");
+        supportedSets.add("RNA");
         //
         supportedSets.add("EURO");
         supportedSets.add("GPX");
@@ -245,9 +248,9 @@ public enum ScryfallImageSource implements CardImageSource {
     @Override
     public CardImageUrls generateURL(CardDownloadData card) throws Exception {
 
-        String preferredLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
-        String defaultCode = "en";
-        String localizedCode = languageAliases.getOrDefault(preferredLanguage, defaultCode);
+        String preferredCode = this.getCurrentLanguage().getCode();
+        String defaultCode = CardLanguage.ENGLISH.getCode();
+        String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
         // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
 
         // WARNING, some cards haven't direct images and uses random GUID:
@@ -346,6 +349,21 @@ public enum ScryfallImageSource implements CardImageSource {
     }
 
     @Override
+    public boolean isLanguagesSupport() {
+        return true;
+    }
+
+    @Override
+    public void setCurrentLanguage(CardLanguage cardLanguage) {
+        this.currentLanguage = cardLanguage;
+    }
+
+    @Override
+    public CardLanguage getCurrentLanguage() {
+        return currentLanguage;
+    }
+
+    @Override
     public void doPause(String httpImageUrl) {
 
     }
@@ -368,6 +386,7 @@ public enum ScryfallImageSource implements CardImageSource {
             put("WMCQ", "pwcq");
             put("EURO", "pelp");
             put("GPX", "pgpx");
+            put("MED", "me1");
         }
     };
 

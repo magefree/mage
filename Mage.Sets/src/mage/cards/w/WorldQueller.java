@@ -111,7 +111,7 @@ class WorldQuellerEffect extends OneShotEffect {
                 type = CardType.TRIBAL;
             }
             if (type != null) {
-                FilterControlledPermanent filter = new FilterControlledPermanent(new StringBuilder("permanent you control of type ").append(type.toString()).toString());
+                FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control of type " + type.toString());
                 filter.add(new CardTypePredicate(type));
 
                 TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
@@ -119,7 +119,7 @@ class WorldQuellerEffect extends OneShotEffect {
 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player2 = game.getPlayer(playerId);
-                    if (target.canChoose(playerId, game)) {
+                    if (player2 != null && target.canChoose(playerId, game)) {
                         while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, game)) {
                             player2.chooseTarget(Outcome.Sacrifice, target, source, game);
                         }

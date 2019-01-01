@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
@@ -15,7 +16,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author TheElk801
  */
 public final class AncestorDragon extends CardImpl {
@@ -46,8 +46,6 @@ public final class AncestorDragon extends CardImpl {
 
 class AncestorDragonEffect extends OneShotEffect {
 
-    private int attackers;
-
     public AncestorDragonEffect() {
         super(Outcome.GainLife);
         staticText = "you gain 1 life for each attacking creature";
@@ -65,10 +63,9 @@ class AncestorDragonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        attackers = game.getCombat().getAttackers().size();
         if (you != null) {
+            int attackers = game.getCombat().getAttackers().size();
             you.gainLife(attackers, game, source);
-            attackers = 0;
             return true;
         }
         return false;

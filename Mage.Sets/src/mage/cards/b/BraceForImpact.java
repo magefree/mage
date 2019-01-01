@@ -82,7 +82,7 @@ class BraceForImpactPreventDamageTargetEffect extends PreventionEffectImpl {
                 Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
                 if (targetPermanent != null) {
                     targetPermanent.addCounters(CounterType.P1P1.createInstance(prevented), source, game);
-                    game.informPlayers(new StringBuilder("Brace for Impact: Prevented ").append(prevented).append(" damage ").toString());
+                    game.informPlayers("Brace for Impact: Prevented " + prevented + " damage ");
                     game.informPlayers("Brace for Impact: Adding " + prevented + " +1/+1 counters to " + targetPermanent.getName());
                 }
             }

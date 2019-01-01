@@ -21,7 +21,6 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.constants.PlayerAction;
 import mage.view.*;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -31,20 +30,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
-/**
+ /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftPanel extends javax.swing.JPanel {
-
-    private static final Logger LOGGER = Logger.getLogger(DraftPanel.class);
 
     private UUID draftId;
     private Timer countdown;
@@ -63,8 +57,11 @@ public class DraftPanel extends javax.swing.JPanel {
     // id of card with popup menu
     protected UUID cardIdPopupMenu;
 
-    // Filename for the draft log (only updated if writing the log).
-    private String logFilename;
+    // Helper for writing the draft log.
+    private DraftPickLogger draftLogger;
+
+    // List of set codes (for draft log writing).
+    private List<String> setCodes;
 
     // Number of the current booster (for draft log writing).
     private int packNo;
@@ -73,7 +70,6 @@ public class DraftPanel extends javax.swing.JPanel {
     private int pickNo;
 
     // Cached booster data to be written into the log (see logLastPick).
-    private String currentBoosterHeader;
     private String[] currentBooster;
 
     private static final CardsView EMPTY_VIEW = new CardsView();
@@ -139,17 +135,11 @@ public class DraftPanel extends javax.swing.JPanel {
         }
 
         if (isLogging()) {
-            // If we are logging the draft create a file that will contain
-            // the log.
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            logFilename = "Draft_" + sdf.format(new Date()) + '_' + draftId + ".txt";
-            try {
-                Files.write(pathToDraftLog(), "".getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            } catch (IOException ex) {
-                LOGGER.error(null, ex);
-            }
+            String logFilename = "Draft_" + sdf.format(new Date()) + '_' + draftId + ".txt";
+            draftLogger = new DraftPickLogger(new File("gamelogs"), logFilename);
         } else {
-            logFilename = null;
+            draftLogger = new DraftPickLogger();
         }
     }
 
@@ -171,6 +161,8 @@ public class DraftPanel extends javax.swing.JPanel {
 
         packNo = draftView.getBoosterNum();
         pickNo = draftView.getCardNum();
+        setCodes = draftView.getSetCodes();
+        draftLogger.updateDraft(draftId, draftView);
 
         int right = draftView.getPlayers().size() / 2;
         int left = draftView.getPlayers().size() - right;
@@ -251,7 +243,7 @@ public class DraftPanel extends javax.swing.JPanel {
         }
     }
 
-    public void loadBooster(DraftPickView draftPickView) {
+   public void loadBooster(DraftPickView draftPickView) {
         logLastPick(draftPickView);
         // upper area that shows the picks
         loadCardsToPickedCardsArea(draftPickView.getPicks());
@@ -416,13 +408,21 @@ public class DraftPanel extends javax.swing.JPanel {
         if (currentBooster != null) {
             String lastPick = getCardName(getLastPick(pickView.getPicks().values()));
             if (lastPick != null && currentBooster.length > 1) {
-                logPick(lastPick);
+                draftLogger.logPick(getCurrentSetCode(), packNo, pickNo-1, lastPick, currentBooster);
             }
             currentBooster = null;
         }
         setCurrentBoosterForLog(pickView.getBooster());
         if (currentBooster.length == 1) {
-            logPick(currentBooster[0]);
+          draftLogger.logPick(getCurrentSetCode(), packNo, pickNo, currentBooster[0], currentBooster);
+        }
+    }
+
+    private String getCurrentSetCode() {
+        if (!setCodes.isEmpty()) {
+            return setCodes.get(packNo-1);
+        } else {
+            return "";
         }
     }
 
@@ -440,39 +440,10 @@ public class DraftPanel extends javax.swing.JPanel {
             }
         }
 
-        currentBoosterHeader = "Pack " + packNo + " pick " + pickNo + ":\n";
         currentBooster = cards.toArray(new String[cards.size()]);
     }
 
-    private void logPick(String pick) {
-        StringBuilder b = new StringBuilder();
-        b.append(currentBoosterHeader);
-        for (String name : currentBooster) {
-            b.append(pick.equals(name) ? "--> " : "    ");
-            b.append(name);
-            b.append('\n');
-        }
-        b.append('\n');
-        appendToDraftLog(b.toString());
-    }
-
-    private Path pathToDraftLog() {
-        File saveDir = new File("gamelogs");
-        if (!saveDir.exists()) {
-            saveDir.mkdirs();
-        }
-        return new File(saveDir, logFilename).toPath();
-    }
-
-    private void appendToDraftLog(String data) {
-        try {
-            Files.write(pathToDraftLog(), data.getBytes(), StandardOpenOption.APPEND);
-        } catch (IOException ex) {
-            LOGGER.error(null, ex);
-        }
-    }
-
-    private static SimpleCardView getLastPick(Collection<SimpleCardView> picks) {
+     private static SimpleCardView getLastPick(Collection<SimpleCardView> picks) {
         SimpleCardView last = null;
         for (SimpleCardView pick : picks) {
             last = pick;

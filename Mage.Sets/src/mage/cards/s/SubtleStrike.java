@@ -33,8 +33,8 @@ public final class SubtleStrike extends CardImpl {
         Mode mode1 = new Mode();
         AddCountersTargetEffect plusOnePlusOneCounter = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         plusOnePlusOneCounter.setText("Put a +1/+1 counter on target creature");
-        mode1.getEffects().add(plusOnePlusOneCounter);
-        mode1.getTargets().add(new TargetCreaturePermanent());
+        mode1.addEffect(plusOnePlusOneCounter);
+        mode1.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode1);
 
     }

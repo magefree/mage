@@ -1,10 +1,11 @@
 package org.mage.plugins.card.dl.sources;
 
-import java.util.ArrayList;
+import mage.client.util.CardLanguage;
 import org.mage.plugins.card.images.CardDownloadData;
 
+import java.util.ArrayList;
+
 /**
- *
  * @author North
  */
 public interface CardImageSource {
@@ -31,10 +32,21 @@ public interface CardImageSource {
         return false;
     }
 
+    default boolean isLanguagesSupport() {
+        return false;
+    }
+
+    default void setCurrentLanguage(CardLanguage cardLanguage) {
+    }
+
+    default CardLanguage getCurrentLanguage() {
+        return CardLanguage.ENGLISH;
+    }
+
     void doPause(String httpImageUrl);
 
     default ArrayList<String> getSupportedSets() {
-        return null;
+        return new ArrayList<>();
     }
 
     default boolean isSetSupportedComplete(String setCode) {

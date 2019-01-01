@@ -25,7 +25,7 @@ public final class WailOfTheNim extends CardImpl {
         
         // or Wail of the Nim deals 1 damage to each creature and each player.
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageEverythingEffect(1));
+        mode.addEffect(new DamageEverythingEffect(1));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine {B}

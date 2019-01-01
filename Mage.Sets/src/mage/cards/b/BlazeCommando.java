@@ -105,6 +105,6 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever an instant or sorcery spell you control deals damage, ").append(super.getRule()).toString();
+        return "Whenever an instant or sorcery spell you control deals damage, " + super.getRule();
     }
 }

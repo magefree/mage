@@ -146,7 +146,6 @@ class CrypticGatewayEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
         if (source.getCosts() == null) {
             return false;
         }

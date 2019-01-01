@@ -1,9 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,8 +18,11 @@ import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class BorderlandExplorer extends CardImpl {
@@ -127,11 +126,13 @@ class BorderlandExplorerEffect extends OneShotEffect {
                     Cards cardsPlayer = cardsToReveal.get(playerId);
                     if (cardsPlayer != null) {
                         for (UUID cardId : cardsPlayer) {
-                            Cards cards = new CardsImpl(game.getCard(cardId));
                             Card card = game.getCard(cardId);
-                            player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cards, game);
-                            player.moveCards(card, Zone.HAND, source, game);
-                            player.shuffleLibrary(source, game);
+                            Cards cards = new CardsImpl(game.getCard(cardId));
+                            if (card != null && !cards.isEmpty()) {
+                                player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cards, game);
+                                player.moveCards(card, Zone.HAND, source, game);
+                                player.shuffleLibrary(source, game);
+                            }
                         }
                     }
                 }

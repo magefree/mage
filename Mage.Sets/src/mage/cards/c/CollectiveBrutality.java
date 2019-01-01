@@ -65,19 +65,19 @@ public final class CollectiveBrutality extends CardImpl {
         Mode mode = new Mode();
         effect = new BoostTargetEffect(-2, -2, Duration.EndOfTurn);
         effect.setText("Target creature gets -2/-2 until end of turn");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetCreaturePermanent(filterCreatureMinus));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetCreaturePermanent(filterCreatureMinus));
         this.getSpellAbility().addMode(mode);
 
         // Target opponent loses 2 life and you gain 2 life.
         mode = new Mode();
         effect = new LoseLifeTargetEffect(2);
         effect.setText("Target opponent loses 2 life");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetPlayer(1, 1, false, filterLoseLife));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetPlayer(1, 1, false, filterLoseLife));
         effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         this.getSpellAbility().addMode(mode);
     }
 

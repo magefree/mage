@@ -68,16 +68,16 @@ public final class CollectiveEffort extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target enchantment");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetEnchantmentPermanent(filterDestroyEnchantment));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetEnchantmentPermanent(filterDestroyEnchantment));
         this.getSpellAbility().addMode(mode);
 
         // Put a +1/+1 counter on each creature target player controls.
         mode = new Mode();
         effect = new CollectiveEffortEffect();
         effect.setText("Put a +1/+1 counter on each creature target player controls");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetPlayer(1, 1, false, filterPlayer));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetPlayer(1, 1, false, filterPlayer));
         this.getSpellAbility().addMode(mode);
     }
 

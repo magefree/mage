@@ -81,7 +81,7 @@ class TobiasBeckettEffect extends OneShotEffect {
                     MageObject sourceObject = game.getObject(source.getSourceId());
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
                     Card card = opponent.getLibrary().getFromTop(game);
-                    if (card != null) {
+                    if (card != null && sourceObject != null) {
                         // move card to exile
                         controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                         // Add effects only if the card has a spellAbility (e.g. not for lands).

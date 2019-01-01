@@ -37,13 +37,13 @@ public final class ChaosCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // or Chaos Charm deals 1 damage to target creature
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(1));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new DamageTargetEffect(1));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or target creature gains haste until end of turn.
         mode = new Mode();
-        mode.getEffects().add(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }
 

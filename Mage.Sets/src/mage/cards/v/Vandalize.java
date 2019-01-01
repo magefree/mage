@@ -27,8 +27,8 @@ public final class Vandalize extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
         Mode mode1 = new Mode();
-        mode1.getTargets().add(new TargetLandPermanent());
-        mode1.getEffects().add(new DestroyTargetEffect());
+        mode1.addTarget(new TargetLandPermanent());
+        mode1.addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addMode(mode1);
 
     }

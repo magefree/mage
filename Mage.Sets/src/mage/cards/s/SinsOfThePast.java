@@ -100,8 +100,10 @@ class SinsOfThePastCastFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(this.getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId())) {
             Player player = game.getPlayer(affectedControllerId);
-            player.setCastSourceIdWithAlternateMana(sourceId, null, null);
-            return true;
+            if(player != null) {
+                player.setCastSourceIdWithAlternateMana(sourceId, null, null);
+                return true;
+            }
         }
         return false;
     }

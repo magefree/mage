@@ -79,7 +79,7 @@ class RegnaTheRedeemerCondition extends IntCompareCondition {
         if (watcher != null) {
             for (UUID playerId : game.getPlayerList()) {
                 Player player = game.getPlayer(playerId);
-                if (!player.hasOpponent(source.getControllerId(), game)) {
+                if (player != null && !player.hasOpponent(source.getControllerId(), game)) {
                     gainedLife = watcher.getLiveGained(playerId);
                     if (gainedLife > 0) {
                         break;

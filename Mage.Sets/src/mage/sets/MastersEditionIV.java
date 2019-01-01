@@ -169,6 +169,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Library of Leng", 211, Rarity.COMMON, mage.cards.l.LibraryOfLeng.class));
         cards.add(new SetCardInfo("Lich", 89, Rarity.RARE, mage.cards.l.Lich.class));
         cards.add(new SetCardInfo("Lifeforce", 160, Rarity.RARE, mage.cards.l.Lifeforce.class));
+        cards.add(new SetCardInfo("Lim-Dul's Cohort", 90, Rarity.COMMON, mage.cards.l.LimDulsCohort.class));
         cards.add(new SetCardInfo("Living Lands", 161, Rarity.RARE, mage.cards.l.LivingLands.class));
         cards.add(new SetCardInfo("Living Wall", 212, Rarity.UNCOMMON, mage.cards.l.LivingWall.class));
         cards.add(new SetCardInfo("Mahamoti Djinn", 52, Rarity.RARE, mage.cards.m.MahamotiDjinn.class));

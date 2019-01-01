@@ -25,8 +25,8 @@ public final class HealingLeaves extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());
         Mode mode = new Mode();
-        mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
-        mode.getTargets().add(new TargetAnyTarget());
+        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
+        mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
     }
 

@@ -46,7 +46,7 @@ public final class SpellBlast extends CardImpl {
         if (ability instanceof SpellAbility) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
-            FilterSpell newfilter = new FilterSpell(new StringBuilder("spell with converted mana cost ").append(xValue).toString());
+            FilterSpell newfilter = new FilterSpell("spell with converted mana cost " + xValue);
             newfilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             Target target = new TargetSpell(newfilter);
             ability.addTarget(target);

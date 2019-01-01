@@ -41,7 +41,7 @@ import mage.view.PlaneView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.CardDownloadData;
-import static org.mage.plugins.card.images.DownloadPictures.getTokenCardUrls;
+import static org.mage.plugins.card.images.DownloadPicturesService.getTokenCardUrls;
 
 /**
  * Mage book with cards and page flipping.

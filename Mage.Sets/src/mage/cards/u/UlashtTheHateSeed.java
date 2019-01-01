@@ -57,7 +57,7 @@ public final class UlashtTheHateSeed extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new CreateTokenEffect(new SaprolingToken());
         effect.setText("Create a 1/1 green Saproling creature token.");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         ability.addMode(mode);
         this.addAbility(ability);
     }

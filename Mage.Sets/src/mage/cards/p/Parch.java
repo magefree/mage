@@ -33,8 +33,8 @@ public final class Parch extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(4));
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
+        mode.addEffect(new DamageTargetEffect(4));
+        mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

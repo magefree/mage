@@ -58,8 +58,7 @@ class DidNotCastCreatureCondition implements Condition {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("if that player didn't cast a creature spell this turn");
-        return sb.toString();
+        return "if that player didn't cast a creature spell this turn";
     }
 }
 

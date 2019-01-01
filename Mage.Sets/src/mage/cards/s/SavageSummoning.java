@@ -148,7 +148,7 @@ class SavageSummoningWatcher extends Watcher {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null && spell.isCreature()) {
                     spellsCastWithSavageSummoning.put(spell.getId(), new HashSet<>(savageSummoningSpells));
-                    String cardKey = new StringBuilder(spell.getCard().getId().toString()).append('_').append(spell.getCard().getZoneChangeCounter(game)).toString();
+                    String cardKey = spell.getCard().getId().toString() + '_' + spell.getCard().getZoneChangeCounter(game);
                     cardsCastWithSavageSummoning.put(cardKey, new HashSet<>(savageSummoningSpells));
                     savageSummoningSpells.clear();
                 }
@@ -157,7 +157,7 @@ class SavageSummoningWatcher extends Watcher {
     }
 
     public void setSavageSummoningSpellActive(Card card, Game game) {
-        String cardKey = new StringBuilder(card.getId().toString()).append('_').append(card.getZoneChangeCounter(game)).toString();
+        String cardKey = card.getId().toString() + '_' + card.getZoneChangeCounter(game);
         savageSummoningSpells.add(cardKey);
     }
 
@@ -166,7 +166,7 @@ class SavageSummoningWatcher extends Watcher {
     }
 
     public boolean isSpellCastWithThisSavageSummoning(UUID spellId, UUID cardId, int zoneChangeCounter) {
-        String cardKey = new StringBuilder(cardId.toString()).append('_').append(zoneChangeCounter).toString();
+        String cardKey = cardId.toString() + '_' + zoneChangeCounter;
         Set<String> savageSpells = spellsCastWithSavageSummoning.get(spellId);
         return savageSpells != null && savageSpells.contains(cardKey);
     }

@@ -28,7 +28,7 @@ public final class TemporalCascade extends CardImpl {
 
         // or each player draws seven cards.
         Mode mode = new Mode();
-        mode.getEffects().add(new TemporalCascadeDrawEffect());
+        mode.addEffect(new TemporalCascadeDrawEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}

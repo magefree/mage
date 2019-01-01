@@ -91,6 +91,9 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
         Set<UUID> newPossibleTargets = new HashSet<>();
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
+        if(player == null){
+            return newPossibleTargets;
+        }
         for (Card card : player.getHand().getCards(filter, game)) {
             possibleTargets.add(card.getId());
         }
@@ -126,6 +129,9 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
     public boolean canChoose(UUID sourceControllerId, Game game) {
         Cards cardsToCheck = new CardsImpl();
         Player player = game.getPlayer(sourceControllerId);
+        if(player == null){
+            return false;
+        }
         for (Card card : player.getHand().getCards(filter, game)) {
             cardsToCheck.add(card.getId());
         }
@@ -154,7 +160,7 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
                     FilterCard nameFilter = new FilterCard();
                     nameFilter.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
                     Player player = game.getPlayer(card.getOwnerId());
-                    if (player.getHand().getCards(nameFilter, game).size() > 1) {
+                    if (player != null && player.getHand().getCards(nameFilter, game).size() > 1) {
                         return true;
                     }
                 }

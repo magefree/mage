@@ -37,14 +37,14 @@ public final class CrosissCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
         // or destroy target nonblack creature, and it can't be regenerated;
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect(true));
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
+        mode.addEffect(new DestroyTargetEffect(true));
+        mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
         // or destroy target artifact.
         mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
+        mode.addEffect(new DestroyTargetEffect());
         Target target = new TargetArtifactPermanent();
-        mode.getTargets().add(target);
+        mode.addTarget(target);
         this.getSpellAbility().addMode(mode);
 
     }

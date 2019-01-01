@@ -144,6 +144,9 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if(controller == null){
+            return false;
+        }
         MageObject sourceObject = source.getSourceObject(game);
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
 

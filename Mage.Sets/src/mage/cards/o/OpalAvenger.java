@@ -100,7 +100,7 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When you have 10 or less life, if {this} is an enchantment, ").append(super.getRule()).toString();
+        return "When you have 10 or less life, if {this} is an enchantment, " + super.getRule();
     }
 
 }

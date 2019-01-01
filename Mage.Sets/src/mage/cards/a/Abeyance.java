@@ -78,6 +78,9 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (source.getFirstTarget() != null && source.getFirstTarget().equals(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
+            if(object == null){
+                return false;
+            }
             if (event.getType() == GameEvent.EventType.CAST_SPELL) {
                 if (object.isInstant() || object.isSorcery()) {
                     return true;

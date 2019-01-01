@@ -23,8 +23,8 @@ public final class InvokeTheFiremind extends CardImpl {
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new ManacostVariableValue()));
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
-        mode.getTargets().add(new TargetAnyTarget());
+        mode.addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
     }
 

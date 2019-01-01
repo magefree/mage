@@ -32,8 +32,8 @@ public final class RememberTheFallen extends CardImpl {
 
         // • Return target artifact card from your graveyard to your hand.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(filterArtifact));
+        mode.addEffect(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(filterArtifact));
         this.getSpellAbility().addMode(mode);
 
     }

@@ -28,7 +28,7 @@ public final class JourneyOfDiscovery extends CardImpl {
         
         // or you may play up to two additional lands this turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new PlayAdditionalLandsControllerEffect(2, Duration.EndOfTurn));
+        mode.addEffect(new PlayAdditionalLandsControllerEffect(2, Duration.EndOfTurn));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine {2}{G}

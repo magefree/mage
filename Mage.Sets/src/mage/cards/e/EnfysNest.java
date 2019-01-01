@@ -74,9 +74,11 @@ class EnfysNestEffect extends ExileTargetEffect {
 
             // If you do, that player gains life equal to that creature's power.
             Player player = game.getPlayer(permanent.getControllerId());
-            player.gainLife(permanent.getPower().getValue(), game, source);
+            if(player != null) {
+                player.gainLife(permanent.getPower().getValue(), game, source);
 
-            return true;
+                return true;
+            }
         }
         return false;
     }
