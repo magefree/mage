@@ -36,8 +36,8 @@ public final class RevivingMelody extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         // and/or return target enchantment card from your graveyard to your hand.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnFromGraveyardToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(filterCard));
+        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(filterCard));
         this.getSpellAbility().addMode(mode);
 
     }

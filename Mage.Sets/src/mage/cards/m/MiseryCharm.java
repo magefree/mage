@@ -39,13 +39,13 @@ public final class MiseryCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter1));
         // or return target Cleric card from your graveyard to your hand
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(filter2));
+        mode.addEffect(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(filter2));
         this.getSpellAbility().addMode(mode);
         // or target player loses 2 life.
         mode = new Mode();
-        mode.getEffects().add(new LoseLifeTargetEffect(2));
-        mode.getTargets().add(new TargetPlayer());
+        mode.addEffect(new LoseLifeTargetEffect(2));
+        mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }
 

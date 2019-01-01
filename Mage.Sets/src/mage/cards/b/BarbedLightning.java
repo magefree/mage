@@ -26,8 +26,8 @@ public final class BarbedLightning extends CardImpl {
 
         // or Barbed Lightning deals 3 damage to target player.
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(3));
-        mode.getTargets().add(new TargetPlayerOrPlaneswalker());
+        mode.addEffect(new DamageTargetEffect(3));
+        mode.addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}

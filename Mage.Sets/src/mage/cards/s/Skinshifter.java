@@ -38,11 +38,11 @@ public final class Skinshifter extends CardImpl {
                 new ManaCostsImpl("{G}"));
 
         Mode mode = new Mode();
-        mode.getEffects().add(new BecomesCreatureSourceEffect(new BirdToken(), "", Duration.EndOfTurn));
+        mode.addEffect(new BecomesCreatureSourceEffect(new BirdToken(), "", Duration.EndOfTurn));
         ability.addMode(mode);
 
         mode = new Mode();
-        mode.getEffects().add(new BecomesCreatureSourceEffect(new PlantToken(), "", Duration.EndOfTurn));
+        mode.addEffect(new BecomesCreatureSourceEffect(new PlantToken(), "", Duration.EndOfTurn));
         ability.addMode(mode);
 
         this.addAbility(ability);

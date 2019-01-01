@@ -35,22 +35,22 @@ public final class AtarkasCommand extends CardImpl {
 
         // or Atarka's Command deals 3 damage to each opponent;
         Mode mode = new Mode();
-        mode.getEffects().add(new DamagePlayersEffect(3, TargetController.OPPONENT));
+        mode.addEffect(new DamagePlayersEffect(3, TargetController.OPPONENT));
         this.getSpellAbility().addMode(mode);
 
         // or You may put a land card from your hand onto the battlefield;
         mode = new Mode();
-        mode.getEffects().add(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
+        mode.addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
         this.getSpellAbility().addMode(mode);
 
         // or Creatures you control get +1/+1 and gain reach until the end of turn.
         mode = new Mode();
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Creatures you control get +1/+1");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         effect = new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gain reach until the end of turn");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         this.getSpellAbility().addMode(mode);
 
     }

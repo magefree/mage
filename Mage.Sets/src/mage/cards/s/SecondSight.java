@@ -39,7 +39,7 @@ public final class SecondSight extends CardImpl {
         //or look at the top five cards of your library, then put them back in any order.
         effect = new LookLibraryControllerEffect(5);
         Mode mode = new Mode();
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {U}

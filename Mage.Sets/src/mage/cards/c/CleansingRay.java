@@ -31,8 +31,8 @@ public final class CleansingRay extends CardImpl {
 
         // - Destroy target enchantment.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetEnchantmentPermanent());
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addMode(mode);
 
     }

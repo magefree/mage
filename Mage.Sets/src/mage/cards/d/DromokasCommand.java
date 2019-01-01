@@ -52,25 +52,25 @@ public final class DromokasCommand extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new SacrificeEffect(filterEnchantment, 1, "target player");
         effect.setText("Target player sacrifices an enchantment");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetPlayer());
+        mode.addEffect(effect);
+        mode.addTarget(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Put a +1/+1 counter on target creature;
         mode = new Mode();
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on target creature");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetCreaturePermanent(filterCreature));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetCreaturePermanent(filterCreature));
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Target creature you control fights target creature you don't control.
         mode = new Mode();
         effect = new FightTargetsEffect();
         effect.setText("Target creature you control fights target creature you don't control");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetControlledCreaturePermanent());
-        mode.getTargets().add(new TargetCreaturePermanent(filterUncontrolledCreature));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetControlledCreaturePermanent());
+        mode.addTarget(new TargetCreaturePermanent(filterUncontrolledCreature));
         this.getSpellAbility().getModes().addMode(mode);
 
     }

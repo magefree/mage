@@ -27,7 +27,7 @@ public final class OneDozenEyes extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new OneDozenEyesBeastToken()));
         // or create five 1/1 green Insect creature tokens.
         Mode mode = new Mode();
-        mode.getEffects().add(new CreateTokenEffect(new InsectToken(), 5));
+        mode.addEffect(new CreateTokenEffect(new InsectToken(), 5));
         this.getSpellAbility().addMode(mode);
         // Entwine {G}{G}{G}
         this.addAbility(new EntwineAbility("{G}{G}{G}"));

@@ -46,23 +46,23 @@ public final class ProfaneCommand extends CardImpl {
 
         // * Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card with converted mana cost X or less from your graveyard")));
+        mode.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card with converted mana cost X or less from your graveyard")));
         this.getSpellAbility().addMode(mode);
 
         // * Target creature gets -X/-X until end of turn.
         DynamicValue minusValue = new SignInversionDynamicValue(xValue);
         mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(minusValue, minusValue, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new BoostTargetEffect(minusValue, minusValue, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
 
         // * Up to X target creatures gain fear until end of turn.
         mode = new Mode();
         Effect effect = new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Up to X target creatures gain fear until end of turn");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetCreaturePermanent(0, 1));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetCreaturePermanent(0, 1));
         this.getSpellAbility().addMode(mode);
     }
 
@@ -76,13 +76,13 @@ public final class ProfaneCommand extends CardImpl {
                 int xValue = ability.getManaCostsToPay().getX();
                 FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-                mode.getTargets().add(new TargetCardInYourGraveyard(filter));
+                mode.addTarget(new TargetCardInYourGraveyard(filter));
             }
             if (effect instanceof GainAbilityTargetEffect) {
                 mode.getTargets().clear();
                 int xValue = ability.getManaCostsToPay().getX();
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures gain fear until end of turn");
-                mode.getTargets().add(new TargetCreaturePermanent(0, xValue, filter, false));
+                mode.addTarget(new TargetCreaturePermanent(0, xValue, filter, false));
             }
         }
     }

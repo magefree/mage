@@ -40,7 +40,7 @@ public final class DustOfMoments extends CardImpl {
 
         // Or put two time counters on each permanent with a time counter on it and each suspended card
         Mode mode = new Mode();
-        mode.getEffects().add(new AddCountersEffect());
+        mode.addEffect(new AddCountersEffect());
         this.getSpellAbility().addMode(mode);
     }
 

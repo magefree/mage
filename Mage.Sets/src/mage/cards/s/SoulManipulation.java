@@ -31,8 +31,8 @@ public final class SoulManipulation extends CardImpl {
 
         // and/or return target creature card from your graveyard to your hand.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnFromGraveyardToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addMode(mode);
 
     }

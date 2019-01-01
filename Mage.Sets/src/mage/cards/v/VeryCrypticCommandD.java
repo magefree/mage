@@ -56,22 +56,22 @@ public final class VeryCrypticCommandD extends CardImpl {
 
         // Draw two cards, then discard a card.
         Mode mode = new Mode();
-        mode.getEffects().add(new DrawCardSourceControllerEffect(2));
+        mode.addEffect(new DrawCardSourceControllerEffect(2));
         Effect effect = new DiscardControllerEffect(1);
         effect.setText(", then discard a card");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         this.getSpellAbility().getModes().addMode(mode);
 
         // Change the target of target spell with a single target.
         mode = new Mode();
-        mode.getEffects().add(new ChooseNewTargetsTargetEffect(true, true));
-        mode.getTargets().add(new TargetStackObject(filter));
+        mode.addEffect(new ChooseNewTargetsTargetEffect(true, true));
+        mode.addTarget(new TargetStackObject(filter));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Turn over target nontoken creature.
         mode = new Mode();
-        mode.getEffects().add(new TurnOverEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filter2));
+        mode.addEffect(new TurnOverEffect());
+        mode.addTarget(new TargetCreaturePermanent(filter2));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

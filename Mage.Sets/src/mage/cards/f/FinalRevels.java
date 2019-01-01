@@ -21,7 +21,7 @@ public final class FinalRevels extends CardImpl {
 
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostAllEffect(0, -2, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+        mode.addEffect(new BoostAllEffect(0, -2, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         this.getSpellAbility().addMode(mode);
     }
 

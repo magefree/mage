@@ -26,8 +26,8 @@ public final class AlabasterPotion extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetPlayer());
         Mode mode = new Mode();
-        mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()));
-        mode.getTargets().add(new TargetAnyTarget());
+        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()));
+        mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
     }
 

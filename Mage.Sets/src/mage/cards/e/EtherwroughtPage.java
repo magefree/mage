@@ -37,12 +37,12 @@ public final class EtherwroughtPage extends CardImpl {
 
         // or look at the top card of your library, then you may put that card into your graveyard;
         Mode mode = new Mode();
-        mode.getEffects().add(new EtherwroughtPageEffect());
+        mode.addEffect(new EtherwroughtPageEffect());
         ability.addMode(mode);
 
         // or each opponent loses 1 life
         Mode mode1 = new Mode();
-        mode1.getEffects().add(new LoseLifeOpponentsEffect(1));
+        mode1.addEffect(new LoseLifeOpponentsEffect(1));
         ability.addMode(mode1);
         
         this.addAbility(ability);

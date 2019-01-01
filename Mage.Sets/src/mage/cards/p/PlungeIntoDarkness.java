@@ -41,7 +41,7 @@ public final class PlungeIntoDarkness extends CardImpl {
         this.getSpellAbility().addEffect(new PlungeIntoDarknessLifeEffect());
         // or pay X life, then look at the top X cards of your library, put one of those cards into your hand, and exile the rest.
         Mode mode = new Mode();
-        mode.getEffects().add(new PlungeIntoDarknessSearchEffect());
+        mode.addEffect(new PlungeIntoDarknessSearchEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {B}

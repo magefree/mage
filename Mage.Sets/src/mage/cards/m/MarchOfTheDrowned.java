@@ -34,8 +34,8 @@ public final class MarchOfTheDrowned extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         // &amp;bull; Return two target Pirate cards from your graveyard to your hand.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnFromGraveyardToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
+        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(2, filter));
         this.getSpellAbility().addMode(mode);
     }
 

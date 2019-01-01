@@ -41,8 +41,8 @@ public final class ConsumingSinkhole extends CardImpl {
 
         // Consuming Sinkhole deals 4 damage to target player.
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(4));
-        mode.getTargets().add(new TargetPlayerOrPlaneswalker());
+        mode.addEffect(new DamageTargetEffect(4));
+        mode.addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addMode(mode);
     }
 
