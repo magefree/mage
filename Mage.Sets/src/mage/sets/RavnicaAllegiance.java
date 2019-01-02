@@ -66,6 +66,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Guildgate", 257, Rarity.COMMON, mage.cards.s.SimicGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Simic Guildgate", 258, Rarity.COMMON, mage.cards.s.SimicGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Simic Locket", 240, Rarity.COMMON, mage.cards.s.SimicLocket.class));
+        cards.add(new SetCardInfo("Sphinx of Foresight", 55, Rarity.RARE, mage.cards.s.SphinxOfForesight.class));
         cards.add(new SetCardInfo("Sphinx's Insight", 209, Rarity.COMMON, mage.cards.s.SphinxsInsight.class));
         cards.add(new SetCardInfo("Stomping Ground", 259, Rarity.RARE, mage.cards.s.StompingGround.class));
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
