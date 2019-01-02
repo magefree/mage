@@ -75,13 +75,15 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
         int count = 0;
         Player controller = game.getPlayer(sourceControllerId);
         MageObject targetSource = game.getObject(sourceId);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-            if (!targets.containsKey(permanent.getId())) {
-                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    if (controller != null && permanent.getPower().getValue() >= controller.getLife()) {
-                        count++;
-                        if (count >= remainingTargets) {
-                            return true;
+        if(targetSource != null) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                if (!targets.containsKey(permanent.getId())) {
+                    if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                        if (controller != null && permanent.getPower().getValue() >= controller.getLife()) {
+                            count++;
+                            if (count >= remainingTargets) {
+                                return true;
+                            }
                         }
                     }
                 }

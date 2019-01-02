@@ -17,7 +17,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class CommuneWithLava extends CardImpl {
@@ -60,7 +59,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
-        if (controller != null) {
+        if (controller != null && sourceCard != null) {
             int amount = source.getManaCostsToPay().getX();
             Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
             controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName());
@@ -105,9 +104,7 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (castOnTurn != game.getTurnNum() && game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
-            if (game.isActivePlayer(source.getControllerId())) {
-                return true;
-            }
+            return game.isActivePlayer(source.getControllerId());
         }
         return false;
     }

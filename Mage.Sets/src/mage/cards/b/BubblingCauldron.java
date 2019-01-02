@@ -72,11 +72,16 @@ class BubblingCauldronEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = 0;
+        Player you = game.getPlayer(source.getControllerId());
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            damage += opponent.loseLife(4, game, false);
+            if(opponent != null) {
+                damage += opponent.loseLife(4, game, false);
+            }
         }
-        game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
+        if(you != null){
+            you.gainLife(damage, game, source);
+        }
         return true;
     }
 

@@ -40,7 +40,7 @@ public final class Repeal extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
-            FilterNonlandPermanent filter = new FilterNonlandPermanent(new StringBuilder("nonland permanent with converted mana cost ").append(xValue).toString());
+            FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent with converted mana cost " + xValue);
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             ability.addTarget(new TargetNonlandPermanent(filter));
         }

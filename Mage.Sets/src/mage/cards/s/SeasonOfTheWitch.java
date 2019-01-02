@@ -124,6 +124,9 @@ class CouldAttackThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
+            if(activePlayer == null){
+                return;
+            }
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
                 if (permanent.isCreature()) {
                     for (UUID defender : game.getCombat().getDefenders()) {

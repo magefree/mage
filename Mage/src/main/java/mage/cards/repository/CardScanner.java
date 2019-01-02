@@ -49,7 +49,7 @@ public final class CardScanner {
         ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
 
         if (setsAddedCount > 0) {
-            logger.info("DB: need to add " + setsUpdatedCount + " new sets");
+            logger.info("DB: need to add " + setsAddedCount + " new sets");
         }
         if (setsUpdatedCount > 0) {
             logger.info("DB: need to update " + setsUpdatedCount + " sets");

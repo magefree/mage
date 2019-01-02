@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,13 +24,12 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author LevelX2
  */
 public final class SoltariGuerrillas extends CardImpl {
 
     public SoltariGuerrillas(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
         this.subtype.add(SubType.SOLTARI);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -67,14 +67,16 @@ class SoltariGuerrillasReplacementEffect extends PreventionEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-         return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getSourceId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
-            return controller.hasOpponent(event.getTargetId(), game);
+            if (controller != null) {
+                return controller.hasOpponent(event.getTargetId(), game);
+            }
         }
         return false;
     }

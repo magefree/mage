@@ -54,15 +54,15 @@ public final class OjutaiExemplars extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("{this} gains first strike");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         Effect effect2 = new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
         effect2.setText("and lifelink until end of turn");
-        mode.getEffects().add(effect2);
+        mode.addEffect(effect2);
         ability.addMode(mode);
 
         // or Exile Ojutai Exemplars, then return it to the battlefield tapped under its owner's control.
         mode = new Mode();
-        mode.getEffects().add(new OjutaiExemplarsEffect());
+        mode.addEffect(new OjutaiExemplarsEffect());
         ability.addMode(mode);
 
         this.addAbility(ability);

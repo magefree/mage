@@ -89,16 +89,18 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getSourceId());
             if (spell != null && !spell.isFaceDown(game) && (spell.isCreature() || spell.isPlaneswalker())) {
                 Player opponent = game.getPlayer(event.getPlayerId());
-                boolean sameName = false;
-                for (Card graveCard : opponent.getGraveyard().getCards(game)) {
-                    if (CardUtil.haveSameNames(graveCard, spell)) {
-                        sameName = true;
-                        break;
+                if(opponent != null) {
+                    boolean sameName = false;
+                    for (Card graveCard : opponent.getGraveyard().getCards(game)) {
+                        if (CardUtil.haveSameNames(graveCard, spell)) {
+                            sameName = true;
+                            break;
+                        }
                     }
-                }
-                if (sameName) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    return true;
+                    if (sameName) {
+                        this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        return true;
+                    }
                 }
             }
         }

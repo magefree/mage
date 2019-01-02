@@ -78,7 +78,7 @@ class SuturedGhoulEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent == null) {
+        if (permanent == null || controller == null) {
             return false;
         }
         if (!controller.getGraveyard().isEmpty()) {

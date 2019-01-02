@@ -22,7 +22,7 @@ public final class Slagstorm extends CardImpl {
 
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
         Mode mode = new Mode();
-        mode.getEffects().add(new DamagePlayersEffect(3));
+        mode.addEffect(new DamagePlayersEffect(3));
         this.getSpellAbility().addMode(mode);
     }
 

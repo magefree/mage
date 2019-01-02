@@ -45,8 +45,8 @@ public final class Pyramids extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
         //or the next time target land would be destroyed this turn, remove all damage marked on it instead.
         Mode mode = new Mode(); //back in the day this was not technically "damage", hopefully this modern description will work nowadays
-        mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn));
-        mode.getTargets().add(new TargetLandPermanent());
+        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn));
+        mode.addTarget(new TargetLandPermanent());
         ability.addMode(mode);
         
         this.addAbility(ability);

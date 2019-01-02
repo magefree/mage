@@ -2,7 +2,6 @@ package mage.game.command.emblems;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Outcome;
@@ -10,7 +9,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 
@@ -51,9 +49,9 @@ class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
-                Effect effect = this.getEffects().get(0);
-                effect.setValue("stackAbility", stackAbility);
+            if (stackAbility != null
+                    && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+                game.getState().setValue("rowanStackAbility", stackAbility);
                 return true;
             }
         }
@@ -88,12 +86,12 @@ class RowanKenrithEmblemEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        StackAbility ability = (StackAbility) getValue("stackAbility");
+        StackAbility ability = (StackAbility) game.getState().getValue("rowanStackAbility");
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (ability != null && controller != null && sourcePermanent != null) {
+        if (ability != null
+                && controller != null) {
             ability.createCopyOnStack(game, source, source.getControllerId(), true);
-            game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied activated ability");
+            game.informPlayers(source.getSourceObjectIfItStillExists(game).getName() + " : " + controller.getLogName() + " copied activated ability");
             return true;
         }
         return false;

@@ -25,7 +25,7 @@ public final class RetreatToKazandu extends CardImpl {
         LandfallAbility ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
         ability.addTarget(new TargetCreaturePermanent());
         Mode mode = new Mode();
-        mode.getEffects().add(new GainLifeEffect(2));
+        mode.addEffect(new GainLifeEffect(2));
         ability.addMode(mode);
         this.addAbility(ability);
     }

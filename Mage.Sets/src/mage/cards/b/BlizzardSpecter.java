@@ -41,7 +41,7 @@ public final class BlizzardSpecter extends CardImpl {
 
         // or that player discards a card.
         Mode mode = new Mode();
-        mode.getEffects().add(new DiscardTargetEffect(1, false));
+        mode.addEffect(new DiscardTargetEffect(1, false));
         ability.addMode(mode);
 
         this.addAbility(ability);

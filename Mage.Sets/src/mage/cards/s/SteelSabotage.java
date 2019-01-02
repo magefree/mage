@@ -24,8 +24,8 @@ public final class SteelSabotage extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(new FilterArtifactSpell()));
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetArtifactPermanent());
+        mode.addEffect(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addMode(mode);
     }
 

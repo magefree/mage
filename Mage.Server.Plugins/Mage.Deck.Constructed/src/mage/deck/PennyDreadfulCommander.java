@@ -1,8 +1,6 @@
 
 package mage.deck;
 
-import java.util.*;
-import java.util.Map.Entry;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.keyword.PartnerAbility;
@@ -12,11 +10,12 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
- *
  * @author spjspj
  */
 public class PennyDreadfulCommander extends Constructed {
@@ -28,7 +27,7 @@ public class PennyDreadfulCommander extends Constructed {
     public PennyDreadfulCommander() {
         this("Penny Dreadful Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

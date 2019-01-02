@@ -72,7 +72,7 @@ class ConsumingVaporsEffect extends OneShotEffect {
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.
-        if (target.canChoose(player.getId(), game)) {
+        if (player != null && target.canChoose(player.getId(), game)) {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
 
             Permanent permanent = game.getPermanent(target.getFirstTarget());

@@ -47,7 +47,7 @@ import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.images.DownloadPicturesService;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
@@ -1010,7 +1010,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnImagesActionPerformed
 
     public void downloadImages() {
-        DownloadPictures.startDownload();
+        DownloadPicturesService.startDownload();
     }
 
     public void exitApp() {
@@ -1380,7 +1380,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 Plugins.instance.downloadSymbols();
                 break;
             case CLIENT_DOWNLOAD_CARD_IMAGES:
-                DownloadPictures.startDownload();
+                DownloadPicturesService.startDownload();
                 break;
             case CLIENT_DISCONNECT:
                 if (SessionHandler.isConnected()) {

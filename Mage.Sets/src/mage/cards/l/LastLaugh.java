@@ -73,7 +73,7 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When no creatures are on the battlefield, ").append(super.getRule()).toString() ;
+        return "When no creatures are on the battlefield, " + super.getRule();
     }
 
 }

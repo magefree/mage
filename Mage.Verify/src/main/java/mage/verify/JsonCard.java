@@ -47,4 +47,7 @@ class JsonCard {
     public List<String> variations;
     public String watermark;
     public String tcgplayerProductId;
+    public String scryfallId;
+    public boolean isAlternative;
+    public String frameEffect;
 }

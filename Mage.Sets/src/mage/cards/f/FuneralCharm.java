@@ -28,12 +28,12 @@ public final class FuneralCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(2, -1, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new BoostTargetEffect(2, -1, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         mode = new Mode();
-        mode.getEffects().add(new GainAbilityTargetEffect(new SwampwalkAbility(), Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new GainAbilityTargetEffect(new SwampwalkAbility(), Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }
 

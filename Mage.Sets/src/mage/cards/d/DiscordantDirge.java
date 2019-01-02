@@ -81,7 +81,7 @@ class DiscordantDirgeEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(0, verseCounters, Zone.HAND, new FilterCard());
                 target.setNotTarget(true);
                 if (controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
-                    target.getTargets().stream().map((targetCardId) -> game.getCard(targetCardId)).filter((card) -> (card != null
+                    target.getTargets().stream().map(game::getCard).filter((card) -> (card != null
                             &&  targetOpponent.getHand().contains(card.getId()))).forEachOrdered((card) -> {
                                 targetOpponent.discard(card, source, game);
                     });

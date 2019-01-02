@@ -32,7 +32,7 @@ public final class CruxOfFate extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent(SubType.DRAGON, "Dragon creatures")));
         // * Destroy all non-Dragon creatures.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyAllEffect(new FilterCreaturePermanent(filterNonDragon)));
+        mode.addEffect(new DestroyAllEffect(new FilterCreaturePermanent(filterNonDragon)));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -50,8 +50,8 @@ public final class RelicBind extends CardImpl {
         ability2.addTarget(new TargetPlayerOrPlaneswalker());
         // — Target player gains 1 life.
         Mode mode = new Mode();
-        mode.getEffects().add(new GainLifeTargetEffect(1));
-        mode.getTargets().add(new TargetPlayer());
+        mode.addEffect(new GainLifeTargetEffect(1));
+        mode.addTarget(new TargetPlayer());
         ability2.addMode(mode);
 
         this.addAbility(ability2);

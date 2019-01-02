@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.Normalizer;
@@ -120,7 +121,9 @@ public final class MtgJson {
         if (stream == null) {
             File file = new File(filename);
             if (!file.exists()) {
-                InputStream download = new URL("http://mtgjson.com/v4/json/" + filename).openStream();
+                URLConnection connection = new URL("https://mtgjson.com/json/" + filename).openConnection();
+                connection.setRequestProperty("user-agent", "xmage");
+                InputStream download = connection.getInputStream();
                 Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Downloaded " + filename + " to " + file.getAbsolutePath());
             } else {

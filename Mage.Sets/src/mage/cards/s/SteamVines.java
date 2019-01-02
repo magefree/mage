@@ -85,7 +85,9 @@ class SteamVinesEffect extends OneShotEffect {
                 Player landsController = game.getPlayer(enchantedLand.getControllerId());
                 if (game.getState().getZone(enchantedLand.getId()) == Zone.BATTLEFIELD) { // if 2 or more Steam Vines were on a land
                     enchantedLand.destroy(source.getId(), game, false);
-                    landsController.damage(1, source.getSourceId(), game, false, true);
+                    if(landsController != null) {
+                        landsController.damage(1, source.getSourceId(), game, false, true);
+                    }
                 }
                 if (!game.getBattlefield().getAllActivePermanents(CardType.LAND).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();

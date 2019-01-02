@@ -8,16 +8,16 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
- *
  * @author North
  */
 public enum ExpansionRepository {
@@ -42,9 +42,10 @@ public enum ExpansionRepository {
         }
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
-            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, EXPANSION_DB_VERSION);
 
-            if (obsolete) {
+            boolean isObsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, EXPANSION_DB_VERSION);
+            boolean isNewBuild = RepositoryUtil.isNewBuildRun(connectionSource, VERSION_ENTITY_NAME, ExpansionRepository.class); // recreate db on new build
+            if (isObsolete || isNewBuild) {
                 TableUtils.dropTable(connectionSource, ExpansionInfo.class, true);
             }
 
@@ -93,9 +94,9 @@ public enum ExpansionRepository {
             // only with boosters and cards
             GenericRawResults<ExpansionInfo> setsList = expansionDao.queryRaw(
                     "select * from expansion e "
-                    + " where e.boosters = 1 "
-                    + "   and exists(select (1) from  card c where c.setcode = e.code) "
-                    + " order by e.releasedate desc",
+                            + " where e.boosters = 1 "
+                            + "   and exists(select (1) from  card c where c.setcode = e.code) "
+                            + " order by e.releasedate desc",
                     expansionDao.getRawRowMapper());
 
             List<ExpansionInfo> resList = new ArrayList<>();

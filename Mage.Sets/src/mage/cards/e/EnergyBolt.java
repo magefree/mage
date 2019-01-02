@@ -25,8 +25,8 @@ public final class EnergyBolt extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         Mode mode = new Mode();
-        mode.getEffects().add(new GainLifeTargetEffect(new ManacostVariableValue()));
-        mode.getTargets().add(new TargetPlayer());
+        mode.addEffect(new GainLifeTargetEffect(new ManacostVariableValue()));
+        mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }
 

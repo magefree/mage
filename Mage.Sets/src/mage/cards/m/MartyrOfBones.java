@@ -88,7 +88,7 @@ class RevealVariableBlackCardsFromHandCost extends VariableCostImpl {
 
     RevealVariableBlackCardsFromHandCost() {
         super("black cards to reveal");
-        this.text = new StringBuilder("Reveal ").append(xText).append(" black cards from {this}").toString();
+        this.text = "Reveal " + xText + " black cards from {this}";
     }
 
     RevealVariableBlackCardsFromHandCost(final RevealVariableBlackCardsFromHandCost cost) {

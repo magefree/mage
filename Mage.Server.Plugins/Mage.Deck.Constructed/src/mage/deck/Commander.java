@@ -1,6 +1,5 @@
 package mage.deck;
 
-import java.util.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -12,11 +11,11 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 
+import java.util.*;
+
 /**
- *
  * @author Plopman
  */
 public class Commander extends Constructed {
@@ -27,7 +26,7 @@ public class Commander extends Constructed {
     public Commander() {
         this("Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

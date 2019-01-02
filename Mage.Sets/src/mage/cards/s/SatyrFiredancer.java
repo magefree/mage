@@ -4,6 +4,7 @@ package mage.cards.s;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -28,13 +29,12 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public final class SatyrFiredancer extends CardImpl {
 
     public SatyrFiredancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.SATYR);
 
         this.power = new MageInt(1);
@@ -47,7 +47,7 @@ public final class SatyrFiredancer extends CardImpl {
     public SatyrFiredancer(final SatyrFiredancer card) {
         super(card);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SatyrFiredancerTriggeredAbility) {
@@ -59,7 +59,7 @@ public final class SatyrFiredancer extends CardImpl {
             }
         }
     }
-    
+
     @Override
     public SatyrFiredancer copy() {
         return new SatyrFiredancer(this);
@@ -97,15 +97,15 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (isControlledBy(game.getControllerId(event.getSourceId()))) {
             MageObject damageSource = game.getObject(event.getSourceId());
-            if (damageSource != null) {            
+            if (damageSource != null) {
                 if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {
                     MageObject object = game.getObject(event.getSourceId());
-                    if (object.isInstant() || object.isSorcery()) {
+                    if (object != null && (object.isInstant() || object.isSorcery())) {
                         if (!(damageSource instanceof StackObject) || !handledStackObjects.contains(damageSource.getId())) {
                             if (damageSource instanceof StackObject) {
                                 handledStackObjects.add(damageSource.getId());
                             }
-                            for (Effect effect: this.getEffects()) {
+                            for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getTargetId())); // used by adjust targets
                                 effect.setValue("damage", event.getAmount());
                             }
@@ -120,7 +120,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever an instant or sorcery spell you control deals damage to an opponent, ").append(super.getRule()).toString();
+        return "Whenever an instant or sorcery spell you control deals damage to an opponent, " + super.getRule();
     }
 }
 
@@ -147,7 +147,7 @@ class SatyrFiredancerDamageEffect extends OneShotEffect {
         if (targetCreature != null && controller != null) {
             int damage = (Integer) this.getValue("damage");
             if (damage > 0) {
-                targetCreature.damage(damage, source.getSourceId(), game, false, true);                
+                targetCreature.damage(damage, source.getSourceId(), game, false, true);
             }
             return true;
         }

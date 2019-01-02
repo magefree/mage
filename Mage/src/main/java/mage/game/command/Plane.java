@@ -1,10 +1,5 @@
 package mage.game.command;
 
-import java.lang.reflect.Constructor;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -26,7 +21,13 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
+import mage.util.RandomUtil;
 import mage.util.SubTypeList;
+
+import java.lang.reflect.Constructor;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author spjspj
@@ -288,7 +289,7 @@ public class Plane implements CommandObject {
     }
 
     public static Plane getRandomPlane() {
-        int pick = new Random().nextInt(Planes.values().length);
+        int pick = RandomUtil.nextInt(Planes.values().length);
         String planeName = Planes.values()[pick].toString();
         planeName = "mage.game.command.planes." + planeName;
         try {

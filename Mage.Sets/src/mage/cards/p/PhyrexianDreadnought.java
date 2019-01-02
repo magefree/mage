@@ -79,7 +79,7 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
                 }
             }
         }
-        game.informPlayers(new StringBuilder("Sacrificed creatures with total power of ").append(sumPower).toString());
+        game.informPlayers("Sacrificed creatures with total power of " + sumPower);
         paid = sumPower >= 12;
         return paid;
     }

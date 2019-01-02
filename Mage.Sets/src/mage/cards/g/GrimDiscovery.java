@@ -30,8 +30,8 @@ public final class GrimDiscovery extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         // and/or return target land card from your graveyard to your hand.
         Mode mode1 = new Mode();
-        mode1.getEffects().add(new ReturnToHandTargetEffect());
-        mode1.getTargets().add(new TargetCardInYourGraveyard(filterLandCard));
+        mode1.addEffect(new ReturnToHandTargetEffect());
+        mode1.addTarget(new TargetCardInYourGraveyard(filterLandCard));
         this.getSpellAbility().addMode(mode1);
     }
 

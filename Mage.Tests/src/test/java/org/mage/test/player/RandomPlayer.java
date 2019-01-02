@@ -1,18 +1,6 @@
-
 package org.mage.test.player;
 
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.Card;
@@ -30,9 +18,12 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
+import mage.util.RandomUtil;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
- *
  * plays randomly
  *
  * @author BetaSteward_at_googlemail.com
@@ -40,7 +31,6 @@ import mage.target.TargetCard;
 public class RandomPlayer extends ComputerPlayer {
 
     private boolean isSimulatedPlayer;
-    private static Random rnd = new Random();
     private int actionCount = 0;
 
     protected PassAbility pass = new PassAbility();
@@ -89,21 +79,21 @@ public class RandomPlayer extends ComputerPlayer {
             if (playables.size() == 1) {
                 ability = playables.get(0);
             } else {
-                ability = playables.get(rnd.nextInt(playables.size()));
+                ability = playables.get(RandomUtil.nextInt(playables.size()));
             }
             List<Ability> options = getPlayableOptions(ability, game);
             if (!options.isEmpty()) {
                 if (options.size() == 1) {
                     ability = options.get(0);
                 } else {
-                    ability = options.get(rnd.nextInt(options.size()));
+                    ability = options.get(RandomUtil.nextInt(options.size()));
                 }
             }
             if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
                 if (amount > 0) {
                     ability = ability.copy();
-                    ability.getManaCostsToPay().add(new GenericManaCost(rnd.nextInt(amount)));
+                    ability.getManaCostsToPay().add(new GenericManaCost(RandomUtil.nextInt(amount)));
                 }
             }
             // check if ability kills player, if not then it's ok to play
@@ -142,7 +132,7 @@ public class RandomPlayer extends ComputerPlayer {
                 if (options.size() == 1) {
                     ability = options.get(0);
                 } else {
-                    ability = options.get(rnd.nextInt(options.size()));
+                    ability = options.get(RandomUtil.nextInt(options.size()));
                 }
             }
             if (ability.isUsesStack()) {
@@ -170,7 +160,7 @@ public class RandomPlayer extends ComputerPlayer {
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
-        int value = rnd.nextInt(powerElements);
+        int value = RandomUtil.nextInt(powerElements);
         StringBuilder binary = new StringBuilder();
         binary.append(Integer.toBinaryString(value));
         while (binary.length() < attackersList.size()) {
@@ -196,7 +186,7 @@ public class RandomPlayer extends ComputerPlayer {
 
         List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker : blockers) {
-            int check = rnd.nextInt(numGroups + 1);
+            int check = RandomUtil.nextInt(numGroups + 1);
             if (check < numGroups) {
                 CombatGroup group = game.getCombat().getGroups().get(check);
                 if (!group.getAttackers().isEmpty()) {
@@ -222,7 +212,7 @@ public class RandomPlayer extends ComputerPlayer {
             return true;
         }
         Iterator<UUID> it = possibleTargets.iterator();
-        int targetNum = rnd.nextInt(possibleTargets.size());
+        int targetNum = RandomUtil.nextInt(possibleTargets.size());
         UUID targetId = it.next();
         for (int i = 0; i < targetNum; i++) {
             targetId = it.next();
@@ -237,7 +227,7 @@ public class RandomPlayer extends ComputerPlayer {
             return false;
         }
         if (!target.isRequired(source)) {
-            if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
+            if (RandomUtil.nextInt(possibleTargets.size() + 1) == 0) {
                 return false;
             }
         }
@@ -246,7 +236,7 @@ public class RandomPlayer extends ComputerPlayer {
             return true;
         }
         Iterator<UUID> it = possibleTargets.iterator();
-        int targetNum = rnd.nextInt(possibleTargets.size());
+        int targetNum = RandomUtil.nextInt(possibleTargets.size());
         UUID targetId = it.next();
         for (int i = 0; i < targetNum; i++) {
             targetId = it.next();
@@ -275,7 +265,7 @@ public class RandomPlayer extends ComputerPlayer {
             return !false;
         }
         Iterator<UUID> it = possibleTargets.iterator();
-        int targetNum = rnd.nextInt(possibleTargets.size());
+        int targetNum = RandomUtil.nextInt(possibleTargets.size());
         UUID targetId = it.next();
         for (int i = 0; i < targetNum; i++) {
             targetId = it.next();
@@ -309,7 +299,7 @@ public class RandomPlayer extends ComputerPlayer {
             return !target.isRequired(source);
         }
         if (!target.isRequired(source)) {
-            if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
+            if (RandomUtil.nextInt(possibleTargets.size() + 1) == 0) {
                 return false;
             }
         }
@@ -318,28 +308,28 @@ public class RandomPlayer extends ComputerPlayer {
             return true;
         }
         Iterator<UUID> it = possibleTargets.iterator();
-        int targetNum = rnd.nextInt(possibleTargets.size());
+        int targetNum = RandomUtil.nextInt(possibleTargets.size());
         UUID targetId = it.next();
         for (int i = 0; i < targetNum; i++) {
             targetId = it.next();
         }
-        target.addTarget(targetId, rnd.nextInt(target.getAmountRemaining()) + 1, source, game);
+        target.addTarget(targetId, RandomUtil.nextInt(target.getAmountRemaining()) + 1, source, game);
         return true;
     }
 
     @Override
     public boolean chooseMulligan(Game game) {
-        return rnd.nextBoolean();
+        return RandomUtil.nextBoolean();
     }
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
-        return rnd.nextBoolean();
+        return RandomUtil.nextBoolean();
     }
 
     @Override
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
-        return rnd.nextBoolean();
+        return RandomUtil.nextBoolean();
     }
 
     @Override
@@ -350,12 +340,12 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
-        return rnd.nextInt(rEffects.size());
+        return RandomUtil.nextInt(rEffects.size());
     }
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        return abilities.get(rnd.nextInt(abilities.size()));
+        return abilities.get(RandomUtil.nextInt(abilities.size()));
     }
 
     @Override
@@ -365,7 +355,7 @@ public class RandomPlayer extends ComputerPlayer {
         if (modes.size() == 1) {
             return mode;
         }
-        int modeNum = rnd.nextInt(modes.getAvailableModes(source, game).size());
+        int modeNum = RandomUtil.nextInt(modes.getAvailableModes(source, game).size());
         for (int i = 0; i < modeNum; i++) {
             mode = it.next();
         }
@@ -374,12 +364,12 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
-        return attackers.get(rnd.nextInt(attackers.size())).getId();
+        return attackers.get(RandomUtil.nextInt(attackers.size())).getId();
     }
 
     @Override
     public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        return blockers.get(rnd.nextInt(blockers.size())).getId();
+        return blockers.get(RandomUtil.nextInt(blockers.size())).getId();
     }
 
     @Override
@@ -392,8 +382,8 @@ public class RandomPlayer extends ComputerPlayer {
                 targetId = targets.get(0);
                 amount = remainingDamage;
             } else {
-                targetId = targets.get(rnd.nextInt(targets.size()));
-                amount = rnd.nextInt(damage + 1);
+                targetId = targets.get(RandomUtil.nextInt(targets.size()));
+                amount = RandomUtil.nextInt(damage + 1);
             }
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
@@ -412,7 +402,7 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public int getAmount(int min, int max, String message, Game game) {
-        return rnd.nextInt(max - min) + min;
+        return RandomUtil.nextInt(max - min) + min;
     }
 
 }

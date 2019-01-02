@@ -90,7 +90,7 @@ class PlagueOfVerminEffect extends OneShotEffect {
                                 payLife.put(currentPlayer.getId(), currentLifePaid + totalPaidLife);
                             }
                         }
-                        game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(currentPlayer.getLogName()).append(" pays ").append(payLife.get(currentPlayer.getId())).append(" life").toString());
+                        game.informPlayers(sourceCard.getName() + ": " + currentPlayer.getLogName() + " pays " + payLife.get(currentPlayer.getId()) + " life");
                         firstInactivePlayer = null;
                     }
                 }

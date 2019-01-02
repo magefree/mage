@@ -31,7 +31,7 @@ public final class LibraryOfLatNam extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true);
         //effect.setText("you search your library for a card, put that card into your hand, then shuffle your library");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         this.getSpellAbility().addMode(mode);
     }
 

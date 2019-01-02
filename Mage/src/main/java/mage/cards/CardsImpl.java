@@ -155,7 +155,9 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         List<String> cards = new ArrayList<>();
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
-            cards.add(card.getName());
+            if (card != null) {
+                cards.add(card.getName());
+            }
         }
         Collections.sort(cards);
         for (String name : cards) {
@@ -183,7 +185,9 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         Map<String, Card> cards = new HashMap<>();
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
-            cards.putIfAbsent(card.getName(), card);
+            if (card != null) {
+                cards.putIfAbsent(card.getName(), card);
+            }
         }
         return cards.values();
     }

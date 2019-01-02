@@ -28,7 +28,7 @@ public final class RoarOfTheKha extends CardImpl {
         
         // or untap all creatures you control.
         Mode mode = new Mode();
-        mode.getEffects().add(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule));
+        mode.addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine {1}{W}

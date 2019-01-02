@@ -1,4 +1,4 @@
-package mage.utils;
+package mage.util;
 
 import org.apache.log4j.Logger;
 
@@ -46,5 +46,12 @@ public class JarVersion {
             logger.error("Can't read build time in jar manifest for class " + clazz.getName() + " and path " + manifestPath, e);
             return JAR_BUILD_TIME_ERROR;
         }
+    }
+
+    public static boolean isBuildTimeOk(String buildTime) {
+        return buildTime != null
+                && !buildTime.isEmpty()
+                && !buildTime.equals(JAR_BUILD_TIME_ERROR)
+                && !buildTime.equals(JAR_BUILD_TIME_FROM_CLASSES);
     }
 }

@@ -78,10 +78,12 @@ class TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard extends Target
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         MageObject targetSource = game.getObject(sourceId);
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                if(permanent.getPower().getValue() < game.getPlayer(sourceControllerId).getGraveyard().size()) {
-                    return true;
+        if(targetSource != null) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    if (permanent.getPower().getValue() < game.getPlayer(sourceControllerId).getGraveyard().size()) {
+                        return true;
+                    }
                 }
             }
         }

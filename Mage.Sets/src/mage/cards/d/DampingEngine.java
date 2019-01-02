@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -39,11 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,8 +46,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class DampingEngine extends CardImpl {
@@ -119,8 +115,7 @@ class DampingEngineEffect extends ContinuousRuleModifyingEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         Permanent dampingEngine = game.getPermanent(source.getSourceId());
         final Card card = game.getCard(event.getSourceId());
-        if (player != null
-                || card != null) {
+        if (player != null || card != null) {
             // check type of spell
             if (card.isCreature()
                     || card.isArtifact()
@@ -129,13 +124,10 @@ class DampingEngineEffect extends ContinuousRuleModifyingEffectImpl {
                 // check to see if the player has more permanents
                 if (new ControlsMorePermanentsThanEachOtherPlayer(player).apply(game, source)) {
                     // check to see if the player choose to ignore the effect
-                    if (game.getState().getValue("ignoreEffect") != null
-                            && dampingEngine != null
-                            && game.getState().getValue("ignoreEffect").equals
-        (dampingEngine.getId() + "ignoreEffect" + game.getState().getPriorityPlayerId() + game.getState().getTurnNum())) {
-                        return false;
-                    }
-                    return true;
+                    return game.getState().getValue("ignoreEffect") == null
+                            || dampingEngine == null
+                            || !game.getState().getValue("ignoreEffect").equals
+                            (dampingEngine.getId() + "ignoreEffect" + game.getState().getPriorityPlayerId() + game.getState().getTurnNum());
                 }
             }
         }

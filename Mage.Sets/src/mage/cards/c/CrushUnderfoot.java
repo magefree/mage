@@ -77,7 +77,7 @@ class CrushUnderfootEffect extends OneShotEffect {
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Permanent giant = game.getPermanent(target.getFirstTarget());                
                 if (giant != null) {
-                    game.informPlayers(new StringBuilder("Crush Underfoot: Choosen Giant is").append(giant.getName()).toString());
+                    game.informPlayers("Crush Underfoot: Chosen Giant is " + giant.getName());
                     Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                     if (targetCreature != null) {
                         targetCreature.damage(giant.getPower().getValue(), source.getSourceId(), game, false, true);

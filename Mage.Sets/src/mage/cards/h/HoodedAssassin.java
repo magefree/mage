@@ -41,8 +41,8 @@ public final class HoodedAssassin extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
         // * Destroy target creature that was dealt damage this turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetCreaturePermanent(filter));
         ability.addMode(mode);
         this.addAbility(ability);        
     }

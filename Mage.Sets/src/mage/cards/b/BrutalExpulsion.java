@@ -43,11 +43,11 @@ public final class BrutalExpulsion extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         // or Brutal Expulsion deals 2 damage to target creature or planeswalker. If that permanent would be put into a graveyard this turn, exile it instead.
         Mode mode = new Mode();
-        mode.getTargets().add(new TargetCreatureOrPlaneswalker());
-        mode.getEffects().add(new DamageTargetEffect(2));
+        mode.addTarget(new TargetCreatureOrPlaneswalker());
+        mode.addEffect(new DamageTargetEffect(2));
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
         effect.setText("If that permanent would be put into a graveyard this turn, exile it instead");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         this.getSpellAbility().addMode(mode);
         this.getSpellAbility().addWatcher(new DamagedByWatcher(true));
     }

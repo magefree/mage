@@ -133,7 +133,7 @@ class MossbridgeTrollCost extends CostImpl {
                 }
             }
         }
-        game.informPlayers(new StringBuilder("Tap creatures with total power of ").append(sumPower).toString());
+        game.informPlayers("Tap creatures with total power of " + sumPower);
         paid = sumPower >= 10;
         return paid;
     }

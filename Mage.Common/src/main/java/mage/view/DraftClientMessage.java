@@ -13,19 +13,10 @@ public class DraftClientMessage implements Serializable {
 
     private DraftView draftView;
     private DraftPickView draftPickView;
-    private String message;
 
-    public DraftClientMessage(DraftView draftView) {
+    public DraftClientMessage(DraftView draftView, DraftPickView draftPickView) {
         this.draftView = draftView;
-    }
-
-    public DraftClientMessage(DraftPickView draftPickView) {
         this.draftPickView = draftPickView;
-    }
-
-    public DraftClientMessage(DraftView draftView, String message) {
-        this.message = message;
-        this.draftView = draftView;
     }
 
     public DraftPickView getDraftPickView() {

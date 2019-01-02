@@ -46,6 +46,7 @@ public abstract class DraftCube {
     private static final Logger logger = Logger.getLogger(DraftCube.class);
 
     private final String name;
+    private final String code;
     private static final int boosterSize = 15;
 
     protected List<CardIdentity> cubeCards = new ArrayList<>();
@@ -53,10 +54,15 @@ public abstract class DraftCube {
 
     public DraftCube(String name) {
         this.name = name;
+        this.code = getClass().getSimpleName();
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public List<CardIdentity> getCubeCards() {

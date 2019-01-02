@@ -14,7 +14,7 @@ public class Legacy extends Constructed {
     public Legacy() {
         super("Constructed - Legacy");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

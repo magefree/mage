@@ -89,8 +89,11 @@ class PayLifeActivePlayerCost extends CostImpl {
         int lifeToPayAmount = amount.calculate(game, ability, null);
         Player activatingPlayer = game.getPlayer(game.getActivePlayerId());
         if (activatingPlayer != null
-                && activatingPlayer.chooseUse(Outcome.LoseLife, "Do you wish to pay + lifeToPayAmount + life?", ability, game)) {
-            this.paid = game.getPlayer(game.getActivePlayerId()).loseLife(lifeToPayAmount, game, false) == lifeToPayAmount;
+                && activatingPlayer.chooseUse(Outcome.LoseLife, "Do you wish to pay "+ lifeToPayAmount +" life?", ability, game)) {
+            Player player = game.getPlayer(game.getActivePlayerId());
+            if(player != null) {
+                this.paid = player.loseLife(lifeToPayAmount, game, false) == lifeToPayAmount;
+            }
         }
         return paid;
     }
