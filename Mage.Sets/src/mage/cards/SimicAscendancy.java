@@ -24,18 +24,15 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author jmharmon
  */
 
 public final class SimicAscendancy extends CardImpl {
 
-    static final String rule = "At the beginning of your upkeep, if Simic Ascendancy has twenty or more growth counters on it, you win the game";
-
     public SimicAscendancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}");
 
-        // {G}{U}: Put a +1/+1 counter on target creature you control.
+        // {1}{G}{U}: Put a +1/+1 counter on target creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{G}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -45,12 +42,16 @@ public final class SimicAscendancy extends CardImpl {
 
         // At the beginning of your upkeep, if Simic Ascendancy has twenty or more growth counters on it, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.YOU, false),
-                new SourceHasCounterCondition(CounterType.GROWTH, 20, Integer.MAX_VALUE),
-                rule));
+                new BeginningOfUpkeepTriggeredAbility(
+                        Zone.BATTLEFIELD, new WinGameSourceControllerEffect(),
+                        TargetController.YOU, false
+                ), new SourceHasCounterCondition(CounterType.GROWTH, 20, Integer.MAX_VALUE),
+                "At the beginning of your upkeep, if {this} has twenty " +
+                        "or more growth counters on it, you win the game"
+        ));
     }
 
-    public SimicAscendancy(final SimicAscendancy card) {
+    private SimicAscendancy(final SimicAscendancy card) {
         super(card);
     }
 
@@ -66,7 +67,7 @@ class SimicAscendancyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.GROWTH.createInstance()), false);
     }
 
-    SimicAscendancyTriggeredAbility(final SimicAscendancyTriggeredAbility ability) {
+    private SimicAscendancyTriggeredAbility(final SimicAscendancyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,20 +78,24 @@ class SimicAscendancyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTER_ADDED;
+        return event.getType() == GameEvent.EventType.COUNTERS_ADDED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getData().equals(CounterType.P1P1.getName())) {
+        if (event.getData().equals(CounterType.P1P1.getName()) && event.getAmount() > 0) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            return (permanent != null
+            if (permanent != null
                     && !event.getTargetId().equals(this.getSourceId())
                     && permanent.isCreature()
-                    && permanent.isControlledBy(this.getControllerId()));
+                    && permanent.isControlledBy(this.getControllerId())) {
+                this.getEffects().clear();
+                this.addEffect(new AddCountersSourceEffect(CounterType.GROWTH.createInstance(event.getAmount())));
+                return true;
+            }
         }
         return false;
     }
