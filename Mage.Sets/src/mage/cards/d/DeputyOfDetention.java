@@ -86,7 +86,7 @@ class DeputyOfDetentionExileEffect extends OneShotEffect {
             return false;
         }
 
-        FilterPermanent filter = new FilterPermanent();
+        FilterPermanent filter = new FilterNonlandPermanent();
         filter.add(new ControllerIdPredicate(targeted.getControllerId()));
         filter.add(new NamePredicate(targeted.getName()));
 
