@@ -30,7 +30,7 @@ public final class [=$className=] extends CardImpl {
         [=$subType=][=$colors=][=
 if ($power || $power eq 0) {
     if ($planeswalker eq 'true') {
-        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
+        $OUT .= "\n        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility($power));";
     } else {
         $OUT .= "\n        this.power = new MageInt($power);";
         $OUT .= "\n        this.toughness = new MageInt($toughness);";
