@@ -1,9 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -22,8 +18,11 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.SubTypeList;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class Conspiracy extends CardImpl {
@@ -72,14 +71,14 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card.isCreature()) {
+                if (card != null && card.isCreature()) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card.isCreature()) {
+                if (card != null && card.isCreature()) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
@@ -99,13 +98,13 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             for (UUID commanderId : controller.getCommandersIds()) {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
-                    if (card.isCreature()) {
+                    if (card != null && card.isCreature()) {
                         setCreatureSubtype(card, subType, game);
                     }
                 }
             }
             // creature spells you control
-            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
+            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell
                         && stackObject.isControlledBy(source.getControllerId())

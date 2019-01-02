@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -27,8 +25,9 @@ import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CherishedHatchling extends CardImpl {
@@ -113,48 +112,3 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
         return "and whenever you cast a Dinosaur spell this turn, " + super.getRule();
     }
 }
-
-//class CherishedHatchlingGainAbilityEffect extends ContinuousEffectImpl {
-//
-//    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-//
-//    static {
-//        filter.add(new AnotherPredicate());
-//    }
-//    private Ability abilityToAdd = null;
-//    private Card relatedCard = null;
-//
-//    public CherishedHatchlingGainAbilityEffect() {
-//        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-//        staticText = "it gains \"When this creature enters the battlefield, you may have it fight another target creature.\"";
-//    }
-//
-//    public CherishedHatchlingGainAbilityEffect(final CherishedHatchlingGainAbilityEffect effect) {
-//        super(effect);
-//        this.abilityToAdd = effect.abilityToAdd;
-//        this.relatedCard = effect.relatedCard;
-//    }
-//
-//    @Override
-//    public CherishedHatchlingGainAbilityEffect copy() {
-//        return new CherishedHatchlingGainAbilityEffect(this);
-//    }
-//
-//    @Override
-//    public boolean apply(Game game, Ability source) {
-//        if (relatedCard == null) {
-//            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-//            if (spell != null) {
-//                relatedCard = game.getCard(spell.getSourceId());
-//                Effect effect = new FightTargetSourceEffect();
-//                effect.setText("you may have it fight another target creature");
-//                abilityToAdd = new EntersBattlefieldTriggeredAbility(effect, true);
-//                abilityToAdd.addTarget(new TargetCreaturePermanent(filter));
-//            }
-//        }
-//        if (relatedCard != null) {
-//            game.getState().addOtherAbility(relatedCard, abilityToAdd, false);
-//        }
-//        return true;
-//    }
-//}
