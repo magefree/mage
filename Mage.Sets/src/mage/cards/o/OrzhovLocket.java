@@ -28,8 +28,8 @@ public final class OrzhovLocket extends CardImpl {
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
 
-        // {W/B}{W/B}{W/B}, {T}, Sacrifice Orzhov Locket: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{W/B}{W/B}{W/B}"));
+        // {W/B}{W/B}{W/B}{W/B}, {T}, Sacrifice Orzhov Locket: Draw two cards.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{W/B}{W/B}{W/B}{W/B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
