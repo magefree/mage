@@ -8,10 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -26,8 +23,7 @@ public final class SnickeringSquirrel extends CardImpl {
     public SnickeringSquirrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 
-        this.subtype.add("Squirrel");
-        this.subtype.add("Advisor");
+        this.subtype.add(SubType.SQUIRREL, SubType.ADVISOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
