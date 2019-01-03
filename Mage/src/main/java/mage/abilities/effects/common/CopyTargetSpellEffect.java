@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -17,6 +18,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
 
     private final boolean useController;
     private final boolean useLKI;
+    private String copyThatSpellName = "that spell";
 
     public CopyTargetSpellEffect() {
         this(false);
@@ -36,6 +38,11 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         super(effect);
         this.useLKI = effect.useLKI;
         this.useController = effect.useController;
+    }
+
+    public Effect withSpellName(String copyThatSpellName) {
+        this.copyThatSpellName = copyThatSpellName;
+        return this;
     }
 
     @Override
@@ -81,7 +88,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         if (!mode.getTargets().isEmpty()) {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         } else {
-            sb.append("that spell");
+            sb.append(copyThatSpellName);
         }
         sb.append(". You may choose new targets for the copy");
 
