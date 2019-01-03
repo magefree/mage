@@ -2,10 +2,8 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.effects.keyword.AdaptEffect;
+import mage.abilities.keyword.AdaptAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,9 +33,7 @@ public final class GrowthChamberGuardian extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{G}: Adapt 2.
-        this.addAbility(new SimpleActivatedAbility(
-                new AdaptEffect(2), new ManaCostsImpl("{2}{G}")
-        ));
+        this.addAbility(new AdaptAbility(2, "{2}{G}"));
 
         // Whenever one or more +1/+1 counters are put on Growth-Chamber Guardian, you may search your library for a card named Growth-Chamber Guardian, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new GrowthChamberGuardianTriggeredAbility());
