@@ -18,6 +18,7 @@ import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.Commander;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
@@ -235,6 +236,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 return ((Emblem) mageObject).isControlledBy(playerId);
             } else if (mageObject instanceof Plane) {
                 return ((Plane) mageObject).isControlledBy(playerId);
+            } else if (mageObject instanceof Commander) {
+                return ((Commander) mageObject).isControlledBy(playerId);
             } else if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
                 return ((Card) mageObject).isOwnedBy(playerId);
             }
