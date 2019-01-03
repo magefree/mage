@@ -1,6 +1,7 @@
-
 package mage.cards.v;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
@@ -36,7 +37,7 @@ public final class VedalkenEngineer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+        // {T}: Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new VedalkenEngineerEffect(2, new VedalkenEngineerManaBuilder()), new TapSourceCost()));
     }
 
@@ -76,10 +77,7 @@ class VedalkenEngineerManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.isArtifact()) {
-            return true;
-        }
-        return false;
+        return object != null && object.isArtifact();
     }
 }
 
@@ -87,11 +85,17 @@ class VedalkenEngineerEffect extends ManaEffect {
 
     private final int amount;
     private final ConditionalManaBuilder manaBuilder;
+    protected final ArrayList<Mana> netMana = new ArrayList<>();
 
     public VedalkenEngineerEffect(int amount, ConditionalManaBuilder manaBuilder) {
         super();
         this.amount = amount;
         this.manaBuilder = manaBuilder;
+        netMana.add(Mana.GreenMana(amount));
+        netMana.add(Mana.BlueMana(amount));
+        netMana.add(Mana.BlackMana(amount));
+        netMana.add(Mana.WhiteMana(amount));
+        netMana.add(Mana.RedMana(amount));
         staticText = "Add " + amount + " mana of any one color. " + manaBuilder.getRule();
     }
 
@@ -99,6 +103,7 @@ class VedalkenEngineerEffect extends ManaEffect {
         super(effect);
         this.amount = effect.amount;
         this.manaBuilder = effect.manaBuilder;
+        this.netMana.addAll(effect.netMana);
     }
 
     @Override
@@ -118,11 +123,15 @@ class VedalkenEngineerEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return netMana;
+    }
+
+    @Override
     public Mana produceMana(boolean netMana, Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choiceColor = new ChoiceColor(true);
         if (controller != null && controller.choose(Outcome.Benefit, choiceColor, game)) {
-
             Mana condMana = manaBuilder.setMana(choiceColor.getMana(amount), source, game).build();
             return condMana;
         }
