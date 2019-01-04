@@ -1,9 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.keyword.AdaptEffect;
+import mage.abilities.keyword.AdaptAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,9 +27,7 @@ public final class Aeromunculus extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}{G}{U}: Adapt 1.
-        this.addAbility(new SimpleActivatedAbility(
-                new AdaptEffect(1), new ManaCostsImpl("{2}{G}{U}")
-        ));
+        this.addAbility(new AdaptAbility(1, "{2}{G}{U}"));
     }
 
     public Aeromunculus(final Aeromunculus card) {

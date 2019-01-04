@@ -2369,6 +2369,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int damage(int damage, UUID sourceId, Game game) {
+        return computerPlayer.damage(damage, sourceId, game);
+    }
+
+    @Override
     public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
         return computerPlayer.damage(damage, sourceId, game, combatDamage, preventable);
     }

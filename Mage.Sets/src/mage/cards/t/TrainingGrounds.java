@@ -1,9 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -12,20 +9,17 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author maurer.it_at_gmail.com
  */
 public final class TrainingGrounds extends CardImpl {
@@ -49,15 +43,15 @@ public final class TrainingGrounds extends CardImpl {
 
 class TrainingGroundsEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of creatures you control cost up to {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final String effectText = "Activated abilities of creatures you control cost {2} less to activate. " +
+            "This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
 
-    public TrainingGroundsEffect() {
+    TrainingGroundsEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = effectText;
     }
 
-    public TrainingGroundsEffect(final TrainingGroundsEffect effect) {
+    private TrainingGroundsEffect(final TrainingGroundsEffect effect) {
         super(effect);
     }
 
@@ -100,7 +94,7 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
                 || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
             //Activated abilities of creatures you control
             Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
-            if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
                 return true;
             }
         }
