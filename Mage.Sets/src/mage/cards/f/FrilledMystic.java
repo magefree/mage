@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class FrilledMystic extends CardImpl {
 
     public FrilledMystic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{G}{U}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}{U}{U}");
 
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.LIZARD);
