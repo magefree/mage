@@ -51,7 +51,7 @@ public final class BroodOfCockroaches extends CardImpl {
 }
 
 class BroodOfCockroachesEffect extends OneShotEffect {
-    private static final String effectText = "at the beginning of the next end step, you lose 1 life and return Brood of Cockroaches to your hand.";
+    private static final String effectText = "at the beginning of the next end step, you lose 1 life and return {this} to your hand.";
 
     BroodOfCockroachesEffect() {
         super(Benefit);

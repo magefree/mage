@@ -1,9 +1,5 @@
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -34,8 +30,12 @@ import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author MTGfan
  */
 public final class CyclopeanTomb extends CardImpl {
@@ -55,6 +55,7 @@ public final class CyclopeanTomb extends CardImpl {
         ability.addTarget(new TargetLandPermanent(filter));
         ability.addEffect(new BecomeSwampEffect(Duration.Custom, false, true, SubType.SWAMP));
         this.addAbility(ability, new CyclopeanTombCounterWatcher());
+
         // When Cyclopean Tomb is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new CyclopeanTombCreateTriggeredEffect()));
     }
@@ -168,8 +169,8 @@ class CyclopeanTombEffect extends OneShotEffect {
             filter.add(Predicates.or(idPref));
             TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
             /*Player must choose a land each upkeep. Using the message are above the player hand where frequent interactions
-            * take place is the most logical way to prompt for this scenario. A new constructor added to provide a not optional
-            * option for any cards like this where the player must choose a target in such the way this card requires.
+             * take place is the most logical way to prompt for this scenario. A new constructor added to provide a not optional
+             * option for any cards like this where the player must choose a target in such the way this card requires.
              */
             if (controller.chooseTarget(Outcome.Neutral, target, source, game)) {
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());

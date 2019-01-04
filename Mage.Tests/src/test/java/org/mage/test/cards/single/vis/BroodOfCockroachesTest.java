@@ -1,7 +1,6 @@
 package org.mage.test.cards.single.vis;
 
 import mage.game.permanent.Permanent;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -21,7 +20,6 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
     private static final String SHOCK = "Shock";
 
     @Test
-    @Ignore // TODO: fix "put into your graveyard from the battlefield" texts for some cards
     public void should_display_correct_text() {
         String expectedText = "When {this} is put into your graveyard from the battlefield, at the beginning of the next end step, you lose 1 life and return {this} to your hand.";
 

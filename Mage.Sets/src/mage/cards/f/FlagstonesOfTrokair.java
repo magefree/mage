@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.WhiteManaAbility;
@@ -14,8 +12,9 @@ import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FlagstonesOfTrokair extends CardImpl {
@@ -34,7 +33,7 @@ public final class FlagstonesOfTrokair extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // When Flagstones of Trokair is put into a graveyard from the battlefield, you may search your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(FILTER), true, false), true));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(FILTER), true, false), true, false));
     }
 
     public FlagstonesOfTrokair(final FlagstonesOfTrokair card) {
