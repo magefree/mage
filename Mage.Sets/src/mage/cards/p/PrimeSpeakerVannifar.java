@@ -1,20 +1,16 @@
+package mage.cards.p;
 
-package mage.cards.b;
-
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -28,45 +24,50 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import java.util.UUID;
 
 /**
- * @author Loki
+ * @author TheElk801 and Loki
  */
-public final class BirthingPod extends CardImpl {
+public final class PrimeSpeakerVannifar extends CardImpl {
 
-    public BirthingPod(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{G/P}");
+    public PrimeSpeakerVannifar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        // {1}{G/P}, {tap}, Sacrifice a creature: Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost,
-        // put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.OOZE);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
+
+        // {T}, Sacrifice another creature: Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD, new BirthingPodEffect(), new ManaCostsImpl("{1}{G/P}")
+                Zone.BATTLEFIELD, new PrimeSpeakerVannifarEffect(), new TapSourceCost()
         );
-        ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         )));
         this.addAbility(ability);
     }
 
-    public BirthingPod(final BirthingPod card) {
+    private PrimeSpeakerVannifar(final PrimeSpeakerVannifar card) {
         super(card);
     }
 
     @Override
-    public BirthingPod copy() {
-        return new BirthingPod(this);
+    public PrimeSpeakerVannifar copy() {
+        return new PrimeSpeakerVannifar(this);
     }
 }
 
-class BirthingPodEffect extends OneShotEffect {
+class PrimeSpeakerVannifarEffect extends OneShotEffect {
 
-    BirthingPodEffect() {
+    PrimeSpeakerVannifarEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library for a creature card with converted mana cost equal to 1 " +
                 "plus the sacrificed creature's converted mana cost, put that card " +
                 "onto the battlefield, then shuffle your library";
     }
 
-    private BirthingPodEffect(final BirthingPodEffect effect) {
+    private PrimeSpeakerVannifarEffect(final PrimeSpeakerVannifarEffect effect) {
         super(effect);
     }
 
@@ -100,7 +101,7 @@ class BirthingPodEffect extends OneShotEffect {
     }
 
     @Override
-    public BirthingPodEffect copy() {
-        return new BirthingPodEffect(this);
+    public PrimeSpeakerVannifarEffect copy() {
+        return new PrimeSpeakerVannifarEffect(this);
     }
 }
