@@ -46,6 +46,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Crypt", 245, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Bolrac-Clan Crusher", 159, Rarity.UNCOMMON, mage.cards.b.BolracClanCrusher.class));
         cards.add(new SetCardInfo("Breeding Pool", 246, Rarity.RARE, mage.cards.b.BreedingPool.class));
+        cards.add(new SetCardInfo("Burning-Tree Vandal", 94, Rarity.COMMON, mage.cards.b.BurningTreeVandal.class));
         cards.add(new SetCardInfo("Carnival // Carnage", 222, Rarity.UNCOMMON, mage.cards.c.CarnivalCarnage.class));
         cards.add(new SetCardInfo("Consecrate // Consume", 224, Rarity.UNCOMMON, mage.cards.c.ConsecrateConsume.class));
         cards.add(new SetCardInfo("Depose // Deploy", 225, Rarity.UNCOMMON, mage.cards.d.DeposeDeploy.class));
