@@ -9,15 +9,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import java.util.UUID;
 import mage.filter.StaticFilters;
+import mage.game.Game;
 import mage.game.events.DamageEvent;
+import mage.game.events.GameEvent;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author bunchOfDevs
  */
 public class HiddenRetreat extends CardImpl {
@@ -27,7 +27,7 @@ public class HiddenRetreat extends CardImpl {
 
         //Put a card from your hand on top of your library: Prevent all damage that would be dealt by target instant or sorcery spell this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HiddenRetreatEffect(), new PutCardFromHandOnTopOfLibraryCost());
-        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
 
     }

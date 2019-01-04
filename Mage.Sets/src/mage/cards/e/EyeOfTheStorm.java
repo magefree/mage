@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -23,8 +21,9 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class EyeOfTheStorm extends CardImpl {
@@ -111,7 +110,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
             Card card = spell.getCard();
             if (spellController == null
                     || card == null
-                    || !StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY.match(spell, game)) {
+                    || !StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY.match(spell, game)) {
                 return false;
             }
             if (!noLongerOnStack) {// the spell is still on the stack, so exile it

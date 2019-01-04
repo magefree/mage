@@ -1,9 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
@@ -20,8 +16,11 @@ import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SentinelTower extends CardImpl {
@@ -46,7 +45,7 @@ public final class SentinelTower extends CardImpl {
 class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
 
     SentinelTowerTriggeredAbility() {
-        super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false);
+        super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false);
         this.addTarget(new TargetAnyTarget());
     }
 
