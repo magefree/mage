@@ -1920,6 +1920,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public int damage(int damage, UUID sourceId, Game game) {
+        return doDamage(damage, sourceId, game, true, false, null);
+    }
+
+    @Override
     public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
         return doDamage(damage, sourceId, game, combatDamage, preventable, null);
     }
@@ -2491,7 +2496,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void lookAtAllLibraries(Ability source, Game game) {
-        for(UUID playerId : game.getState().getPlayersInRange(this.getId(), game)){
+        for (UUID playerId : game.getState().getPlayersInRange(this.getId(), game)) {
             Player player = game.getPlayer(playerId);
             String playerName = this.getName().equals(player.getName()) ? "Your " : player.getName() + "'s ";
             playerName += "library";
