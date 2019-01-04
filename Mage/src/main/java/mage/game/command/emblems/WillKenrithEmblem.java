@@ -17,7 +17,7 @@ public final class WillKenrithEmblem extends Emblem {
         this.getAbilities().add(new SpellCastControllerTriggeredAbility(
                 Zone.COMMAND,
                 new CopyTargetSpellEffect(true).withSpellName("it"),
-                StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false,
                 true
         ));

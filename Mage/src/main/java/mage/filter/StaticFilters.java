@@ -477,7 +477,7 @@ public final class StaticFilters {
         FILTER_SPELL_AN_INSTANT_OR_SORCERY.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_SPELL_INSTANT_OR_SORCERY = new FilterSpell("an instant or sorcery spell");
+    public static final FilterSpell FILTER_SPELL_INSTANT_OR_SORCERY = new FilterSpell("instant or sorcery spell");
 
     static {
         FILTER_SPELL_INSTANT_OR_SORCERY.add(Predicates.or(
