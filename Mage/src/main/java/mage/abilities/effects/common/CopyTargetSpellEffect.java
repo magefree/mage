@@ -38,6 +38,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         super(effect);
         this.useLKI = effect.useLKI;
         this.useController = effect.useController;
+        this.copyThatSpellName = effect.copyThatSpellName;
     }
 
     public Effect withSpellName(String copyThatSpellName) {

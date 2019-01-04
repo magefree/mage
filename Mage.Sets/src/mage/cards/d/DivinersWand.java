@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -23,40 +21,46 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DivinersWand extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Wizard creature");
+
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
     public DivinersWand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.WIZARD);
         this.subtype.add(SubType.EQUIPMENT);
-
-        // Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."
-        Ability gainedAbility = new DrawCardControllerTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn), false);
-        gainedAbility.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
-        effect.setText("Equipped creature has \"Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn\"");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityAttachedEffect(
-                new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(4)), AttachmentType.EQUIPMENT);
-        effect.setText("and \"{4}: Draw a card.\"");
-        ability.addEffect(effect);
-        this.addAbility(ability);
 
         // Whenever a Wizard creature enters the battlefield, you may attach Diviner's Wand to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
+
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+
+        // Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."
+        // new abilities
+        Ability newBoost = new DrawCardControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false);
+        newBoost.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).concatBy("and"));
+        Ability newDraw = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(4));
+        // gain new abilities
+        Effect effectBoost = new GainAbilityAttachedEffect(newBoost, AttachmentType.EQUIPMENT)
+                .setText("Equipped creature has \"Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn\"");
+        Effect effectDraw = new GainAbilityAttachedEffect(newDraw, AttachmentType.EQUIPMENT)
+                .setText("\"{4}: Draw a card.\"");
+        // total ability
+        Ability totalAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effectBoost);
+        totalAbility.addEffect(effectDraw.concatBy("and"));
+        this.addAbility(totalAbility);
     }
 
     public DivinersWand(final DivinersWand card) {
