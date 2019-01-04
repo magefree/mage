@@ -98,6 +98,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Tithe Taker", 27, Rarity.RARE, mage.cards.t.TitheTaker.class));
         cards.add(new SetCardInfo("Wilderness Reclamation", 149, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
         cards.add(new SetCardInfo("Zegana, Utopian Speaker", 214, Rarity.RARE, mage.cards.z.ZeganaUtopianSpeaker.class));
+        cards.add(new SetCardInfo("Zhur-Taa Goblin", 215, Rarity.UNCOMMON, mage.cards.z.ZhurTaaGoblin.class));
     }
 
     @Override
