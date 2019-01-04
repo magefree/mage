@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -13,8 +11,9 @@ import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author Backfir3
  */
 public final class ArgothianEnchantress extends CardImpl {
@@ -26,16 +25,18 @@ public final class ArgothianEnchantress extends CardImpl {
     }
 
     public ArgothianEnchantress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
+        // Shroud
         this.addAbility(ShroudAbility.getInstance());
+
         // Whenever you cast an Enchantment spell, you draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), filter, false));
     }
 
     public ArgothianEnchantress(final ArgothianEnchantress card) {

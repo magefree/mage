@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -13,14 +11,9 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.GetEmblemTargetPlayerEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TurnPhase;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -29,8 +22,9 @@ import mage.game.command.emblems.RowanKenrithEmblem;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RowanKenrith extends CardImpl {
@@ -54,11 +48,6 @@ public final class RowanKenrith extends CardImpl {
 
         // -8: Target player gets an emblem with "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy."
         Effect effect = new GetEmblemTargetPlayerEffect(new RowanKenrithEmblem());
-        effect.setText(
-                "Target player gets an emblem with "
-                + "\"Whenever you activate an ability that isn't a mana ability, "
-                + "copy it. You may choose new targets for the copy.\""
-        );
         ability = new LoyaltyAbility(effect, -8);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

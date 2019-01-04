@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -8,7 +7,6 @@ import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author TheElk801
  */
 public final class WillKenrithEmblem extends Emblem {
@@ -18,8 +16,7 @@ public final class WillKenrithEmblem extends Emblem {
         this.setName("Emblem Will Kenrith");
         this.getAbilities().add(new SpellCastControllerTriggeredAbility(
                 Zone.COMMAND,
-                new CopyTargetSpellEffect(true)
-                        .setText("copy that spell. You may choose new targets for the copy"),
+                new CopyTargetSpellEffect(true).withSpellName("it"),
                 StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
                 false,
                 true

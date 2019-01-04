@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
@@ -17,8 +15,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class MidnightEntourage extends CardImpl {
@@ -42,10 +41,9 @@ public final class MidnightEntourage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // Whenever Midnight Entourage or another Aetherborn you control dies, you draw a card and you lose 1 life.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter);
+        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), false, filter);
         Effect effect = new LoseLifeSourceControllerEffect(1);
-        effect.setText("and you lose 1 life");
-        ability.addEffect(effect);
+        ability.addEffect(effect.concatBy("and"));
         this.addAbility(ability);
     }
 
