@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -12,8 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -50,12 +47,6 @@ public final class DaruSpiritualist extends CardImpl {
 
 class DaruSpiritualistTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Cleric creature you control");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
-    }
-
     public DaruSpiritualistTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
@@ -77,7 +68,7 @@ class DaruSpiritualistTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
-        if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
+        if (creature != null && creature.hasSubtype(SubType.CLERIC, game) && creature.getControllerId().equals(getControllerId()) && creature.isCreature()) {
             this.getEffects().setTargetPointer(new FixedTarget(creature, game));
             return true;
         }
