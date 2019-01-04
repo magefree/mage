@@ -238,6 +238,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 255, Rarity.UNCOMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Necropotence", 154, Rarity.RARE, mage.cards.n.Necropotence.class));
         cards.add(new SetCardInfo("Norritt", 155, Rarity.COMMON, mage.cards.n.Norritt.class));
+        cards.add(new SetCardInfo("Oath of Lim-Dul", 44, Rarity.RARE, mage.cards.o.OathOfLimDul.class));
         cards.add(new SetCardInfo("Onyx Talisman", 331, Rarity.UNCOMMON, mage.cards.o.OnyxTalisman.class));
         cards.add(new SetCardInfo("Orcish Cannoneers", 205, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class));
         cards.add(new SetCardInfo("Orcish Healer", 208, Rarity.UNCOMMON, mage.cards.o.OrcishHealer.class));
@@ -304,6 +305,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Spoils of Evil", 163, Rarity.RARE, mage.cards.s.SpoilsOfEvil.class));
         cards.add(new SetCardInfo("Staff of the Ages", 340, Rarity.RARE, mage.cards.s.StaffOfTheAges.class));
         cards.add(new SetCardInfo("Stampede", 265, Rarity.RARE, mage.cards.s.Stampede.class));
+        cards.add(new SetCardInfo("Stench of Evil", 165, Rarity.UNCOMMON, mage.cards.s.StenchOfEvil.class));
         cards.add(new SetCardInfo("Stone Rain", 217, Rarity.COMMON, mage.cards.s.StoneRain.class));
         cards.add(new SetCardInfo("Stone Spirit", 218, Rarity.UNCOMMON, mage.cards.s.StoneSpirit.class));
         cards.add(new SetCardInfo("Stonehands", 219, Rarity.COMMON, mage.cards.s.Stonehands.class));
