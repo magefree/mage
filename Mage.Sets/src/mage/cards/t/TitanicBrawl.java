@@ -1,17 +1,13 @@
-
-package mage.cards.s;
+package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -30,7 +26,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SavageStomp extends CardImpl {
+public final class TitanicBrawl extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent("creature you don't control");
@@ -39,36 +35,31 @@ public final class SavageStomp extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public SavageStomp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
+    public TitanicBrawl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
-        // Savage Stomp costs {2} less to cast if it targets a Dinosaur you control.
+        // This spell costs {1} less to cast if it targets a creature you control with a +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.STACK,
-                new SpellCostReductionSourceEffect(2, SavageStompCondition.instance))
+                new SpellCostReductionSourceEffect(1, TitanicBrawlCondition.instance))
                 .setRuleAtTheTop(true));
 
-        // Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
-        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        this.getSpellAbility().addEffect(effect);
-        effect = new FightTargetsEffect();
-        effect.setText("Then that creature fights target creature you don't control");
-        this.getSpellAbility().addEffect(effect);
+        // Target creature you control fights target creature you don't control.
+        this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Target target = new TargetCreaturePermanent(filter);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public SavageStomp(final SavageStomp card) {
+    private TitanicBrawl(final TitanicBrawl card) {
         super(card);
     }
 
     @Override
-    public SavageStomp copy() {
-        return new SavageStomp(this);
+    public TitanicBrawl copy() {
+        return new TitanicBrawl(this);
     }
 }
 
-enum SavageStompCondition implements Condition {
+enum TitanicBrawlCondition implements Condition {
     instance;
 
     @Override
@@ -80,7 +71,7 @@ enum SavageStompCondition implements Condition {
         Iterator<Target> targets = sourceSpell.getStackAbility().getTargets().iterator();
         while (targets.hasNext()) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(targets.next().getFirstTarget());
-            if (permanent != null && permanent.hasSubtype(SubType.DINOSAUR, game)
+            if (permanent != null && permanent.getCounters(game).containsKey(CounterType.P1P1)
                     && permanent.isControlledBy(source.getControllerId())) {
                 return true;
             }
@@ -90,6 +81,7 @@ enum SavageStompCondition implements Condition {
 
     @Override
     public String toString() {
-        return "it targets a Dinosaur you control";
+        return "it targets a creature you control with a +1/+1 counter on it";
     }
+
 }
