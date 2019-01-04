@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,8 +15,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DisinformationCampaign extends CardImpl {
@@ -27,11 +27,9 @@ public final class DisinformationCampaign extends CardImpl {
 
         // When Disinformation Campaign enters the battlefield, you draw a card and each opponent discards a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card")
-        );
+                new DrawCardSourceControllerEffect(1, "you"));
         ability.addEffect(new DiscardEachPlayerEffect(
-                new StaticValue(1), false, TargetController.OPPONENT
-        ).setText("and each opponent discards a card"));
+                new StaticValue(1), false, TargetController.OPPONENT).concatBy("and"));
         this.addAbility(ability);
 
         // Whenever you surveil, return Disinformation Campaign to its owner's hand.

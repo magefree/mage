@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
@@ -19,8 +17,9 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class GlintSleeveSiphoner extends CardImpl {
@@ -42,8 +41,7 @@ public final class GlintSleeveSiphoner extends CardImpl {
         // At the beginning of your upkeep, you may pay {E}{E}. If you do, draw a card and you lose 1 life.
         DoIfCostPaid doIfCostPaidEffect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayEnergyCost(2));
         Effect effect = new LoseLifeSourceControllerEffect(1);
-        effect.setText("and you lose 1 life");
-        doIfCostPaidEffect.addEffect(effect);
+        doIfCostPaidEffect.addEffect(effect.concatBy("and"));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, doIfCostPaidEffect, TargetController.YOU, false, false,
                 "At the beginning of your upkeep, "));
     }

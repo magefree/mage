@@ -42,6 +42,7 @@ public class Effects extends ArrayList<Effect> {
     public String getText(Mode mode) {
         StringBuilder sbText = new StringBuilder();
         String lastRule = null;
+        int effectNum = 0;
         for (Effect effect : this) {
             String endString = "";
             String nextRule = effect.getText(mode);
@@ -50,9 +51,16 @@ public class Effects extends ArrayList<Effect> {
             if (nextRule == null || nextRule.isEmpty()) {
                 continue;
             }
+            effectNum++;
+
+            // concat effects (default: each effect with a new sentence)
+            String concatPrefix = effect.getConcatPrefix();
+            if (effectNum > 1 && !concatPrefix.isEmpty() && !concatPrefix.equals(".")) {
+                nextRule = concatPrefix + " " + nextRule;
+            }
 
             if (nextRule != null) {
-                if (nextRule.startsWith("and ") || nextRule.startsWith("with ")) {
+                if (nextRule.startsWith("and ") || nextRule.startsWith("with ") || nextRule.startsWith("then ")) {
                     endString = " ";
                 } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                     endString = "";

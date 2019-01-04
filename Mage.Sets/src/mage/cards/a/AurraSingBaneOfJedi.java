@@ -1,8 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -27,8 +24,10 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class AurraSingBaneOfJedi extends CardImpl {
@@ -39,17 +38,17 @@ public final class AurraSingBaneOfJedi extends CardImpl {
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
-        // +1:You may have {this} deal 2 damage to target creature. If you don't, {this} deals 1 damage to you.
+        // +1: You may have {this} deal 2 damage to target creature. If you don't, {this} deals 1 damage to you.
         Ability ability = new LoyaltyAbility(new AurraSingBaneOfJediEffect(), +1);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // -4:Target player gets an emblem wiht "Whenever a nontoken creature you control leave the battlefied, discard a card.".
+        // -4: Target player gets an emblem wiht "Whenever a nontoken creature you control leave the battlefied, discard a card.".
         ability = new LoyaltyAbility(new GetEmblemTargetPlayerEffect(new AurraSingBaneOfJediEmblem()), -4);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
-        // -6:Each player discards their hand and sacrificies all creatures he or she controls. Each player's life total becomes 1."
+        // -6: Each player discards their hand and sacrificies all creatures he or she controls. Each player's life total becomes 1."
         ability = new LoyaltyAbility(new DiscardHandAllEffect(), -6);
         ability.addEffect(new SacrificeAllEffect());
         Effect effect = new SetPlayerLifeAllEffect(1, TargetController.ANY);
