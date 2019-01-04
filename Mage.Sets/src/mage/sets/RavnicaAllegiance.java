@@ -34,6 +34,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
 
         cards.add(new SetCardInfo("Absorb", 151, Rarity.RARE, mage.cards.a.Absorb.class));
         cards.add(new SetCardInfo("Aeromunculus", 152, Rarity.COMMON, mage.cards.a.Aeromunculus.class));
+        cards.add(new SetCardInfo("Amplifire", 92, Rarity.RARE, mage.cards.a.Amplifire.class));
         cards.add(new SetCardInfo("Azorius Guildgate", 243, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azorius Guildgate", 244, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azorius Locket", 231, Rarity.COMMON, mage.cards.a.AzoriusLocket.class));
