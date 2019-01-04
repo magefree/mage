@@ -35,6 +35,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Absorb", 151, Rarity.RARE, mage.cards.a.Absorb.class));
         cards.add(new SetCardInfo("Aeromunculus", 152, Rarity.COMMON, mage.cards.a.Aeromunculus.class));
         cards.add(new SetCardInfo("Amplifire", 92, Rarity.RARE, mage.cards.a.Amplifire.class));
+        cards.add(new SetCardInfo("Angelic Exaltation", 2, Rarity.UNCOMMON, mage.cards.a.AngelicExaltation.class));
         cards.add(new SetCardInfo("Azorius Guildgate", 243, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azorius Guildgate", 244, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azorius Locket", 231, Rarity.COMMON, mage.cards.a.AzoriusLocket.class));
@@ -69,6 +70,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Gutterbones", 76, Rarity.RARE, mage.cards.g.Gutterbones.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 251, Rarity.RARE, mage.cards.h.HallowedFountain.class));
         cards.add(new SetCardInfo("High Alert", 182, Rarity.UNCOMMON, mage.cards.h.HighAlert.class));
+        cards.add(new SetCardInfo("Humongulus", 41, Rarity.COMMON, mage.cards.h.Humongulus.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 183, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Imperious Oligarch", 184, Rarity.COMMON, mage.cards.i.ImperiousOligarch.class));
         cards.add(new SetCardInfo("Incubation // Incongruity", 226, Rarity.UNCOMMON, mage.cards.i.IncubationIncongruity.class));
