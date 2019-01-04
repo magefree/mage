@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -27,6 +28,8 @@ public final class PitilessPontiff extends CardImpl {
 
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.CLERIC);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         // {1}, Sacrifice another creature: Pitiless Pontiff gains deathtouch and indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilitySourceEffect(

@@ -91,10 +91,10 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Sphinx of Foresight", 55, Rarity.RARE, mage.cards.s.SphinxOfForesight.class));
         cards.add(new SetCardInfo("Sphinx's Insight", 209, Rarity.COMMON, mage.cards.s.SphinxsInsight.class));
         cards.add(new SetCardInfo("Stomping Ground", 259, Rarity.RARE, mage.cards.s.StompingGround.class));
-        cards.add(new SetCardInfo("Teysa Karlov", 213, Rarity.RARE, mage.cards.t.TeysaKarlov.class));
+        cards.add(new SetCardInfo("Teysa Karlov", 212, Rarity.RARE, mage.cards.t.TeysaKarlov.class));
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
         cards.add(new SetCardInfo("Tithe Taker", 27, Rarity.RARE, mage.cards.t.TitheTaker.class));
-        cards.add(new SetCardInfo("Wilderness Reclamation", 140, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
+        cards.add(new SetCardInfo("Wilderness Reclamation", 149, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
         cards.add(new SetCardInfo("Zegana, Utopian Speaker", 214, Rarity.RARE, mage.cards.z.ZeganaUtopianSpeaker.class));
     }
 
