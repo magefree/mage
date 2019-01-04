@@ -42,6 +42,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Bankrupt in Blood", 62, Rarity.UNCOMMON, mage.cards.b.BankruptInBlood.class));
         cards.add(new SetCardInfo("Basilica Bell-Haunt", 156, Rarity.UNCOMMON, mage.cards.b.BasilicaBellHaunt.class));
         cards.add(new SetCardInfo("Bedevil", 157, Rarity.RARE, mage.cards.b.Bedevil.class));
+        cards.add(new SetCardInfo("Biogenic Upgrade", 123, Rarity.UNCOMMON, mage.cards.b.BiogenicUpgrade.class));
         cards.add(new SetCardInfo("Biomancer's Familiar", 158, Rarity.RARE, mage.cards.b.BiomancersFamiliar.class));
         cards.add(new SetCardInfo("Blade Juggler", 63, Rarity.COMMON, mage.cards.b.BladeJuggler.class));
         cards.add(new SetCardInfo("Blood Crypt", 245, Rarity.RARE, mage.cards.b.BloodCrypt.class));
