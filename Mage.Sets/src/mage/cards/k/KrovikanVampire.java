@@ -116,22 +116,20 @@ enum KrovikanVampireInterveningIfCondition implements Condition {
         KrovikanVampireCreaturesDamagedWatcher watcherDamaged = (KrovikanVampireCreaturesDamagedWatcher) game.getState().getWatchers().get(KrovikanVampireCreaturesDamagedWatcher.class.getSimpleName());
         if (watcherDied != null) {
             Set<UUID> creaturesThatDiedThisTurn = watcherDied.diedThisTurn;
-            if (creaturesThatDiedThisTurn != null) {
-                for (UUID mor : creaturesThatDiedThisTurn) {
-                    if (watcherDamaged != null) {
-                        for (UUID mor2 : watcherDamaged.getDamagedBySource()) {
-                            if (mor2 != null
-                                    && mor == mor2) {
-                                creaturesAffected.add(mor);
-                            }
+            for (UUID mor : creaturesThatDiedThisTurn) {
+                if (watcherDamaged != null) {
+                    for (UUID mor2 : watcherDamaged.getDamagedBySource()) {
+                        if (mor2 != null
+                                && mor == mor2) {
+                            creaturesAffected.add(mor);
                         }
                     }
                 }
-                if (creaturesAffected != null
-                        && creaturesAffected.size() > 0) {
-                    game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
-                    return true;
-                }
+            }
+            if (creaturesAffected != null
+                    && creaturesAffected.size() > 0) {
+                game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
+                return true;
             }
         }
         return false;

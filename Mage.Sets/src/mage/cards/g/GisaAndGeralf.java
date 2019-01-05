@@ -121,7 +121,7 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
                 GisaAndGeralfWatcher watcher = (GisaAndGeralfWatcher) game.getState().getWatchers().get(GisaAndGeralfWatcher.class.getSimpleName(), source.getSourceId());
-                return !watcher.isAbilityUsed();
+                return watcher != null && !watcher.isAbilityUsed();
             }
         }
         return false;
@@ -145,7 +145,7 @@ class GisaAndGeralfWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.isCreature() && spell.hasSubtype(SubType.ZOMBIE, game)) {
+            if (spell != null && spell.isCreature() && spell.hasSubtype(SubType.ZOMBIE, game)) {
                 abilityUsed = true;
             }
         }

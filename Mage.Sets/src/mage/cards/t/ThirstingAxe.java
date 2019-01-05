@@ -73,7 +73,7 @@ class EquippedDealtCombatDamageToCreatureCondition implements Condition {
         if (equipment != null && equipment.getAttachedTo() != null) {
             CombatDamageToCreatureWatcher watcher =
                     (CombatDamageToCreatureWatcher) game.getState().getWatchers().get(CombatDamageToCreatureWatcher.BASIC_KEY);
-            return watcher.dealtDamage(equipment.getAttachedTo(), equipment.getAttachedToZoneChangeCounter(), game);
+            return watcher != null && watcher.dealtDamage(equipment.getAttachedTo(), equipment.getAttachedToZoneChangeCounter(), game);
         }
         return false;
     }

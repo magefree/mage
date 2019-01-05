@@ -154,6 +154,9 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
+        if(watcher == null){
+            return false;
+        }
         watcher.decrement();
         if (watcher.copyCountApply > 0) {
             game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
@@ -227,6 +230,9 @@ class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectIm
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+        if(watcher == null){
+            return false;
+        }
         watcher.decrement();
         if (watcher.copyCountApply > 0) {
             game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");

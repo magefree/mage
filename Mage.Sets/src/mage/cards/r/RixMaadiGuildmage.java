@@ -74,7 +74,7 @@ class PlayerLostLifePredicate implements Predicate<Player> {
     public boolean apply(Player input, Game game) {
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
-            return (0 < watcher.getLiveLost(input.getId()));
+            return (0 < watcher.getLifeLost(input.getId()));
         }
         return false;
     }

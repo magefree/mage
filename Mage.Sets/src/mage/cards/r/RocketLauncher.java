@@ -99,7 +99,7 @@ enum ControlledTurnCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         RocketLauncherWatcher watcher = (RocketLauncherWatcher) game.getState().getWatchers().get(RocketLauncherWatcher.class.getSimpleName());
         
-        return !watcher.changedControllerOR1stTurn;
+        return watcher != null && !watcher.changedControllerOR1stTurn;
     }
 
     @Override

@@ -54,7 +54,7 @@ class BrimstoneVolleyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damage = 3;
         Watcher watcher = game.getState().getWatchers().get(MorbidWatcher.class.getSimpleName());
-        if (watcher.conditionMet()) {
+        if (watcher != null && watcher.conditionMet()) {
             damage = 5;
         }
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));

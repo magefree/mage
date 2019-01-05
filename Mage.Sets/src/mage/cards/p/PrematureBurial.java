@@ -83,7 +83,7 @@ class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
         if(targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    if (watcher.enteredSinceLastTurn(sourceControllerId, new MageObjectReference(permanent.getId(), game))) {
+                    if (watcher != null && watcher.enteredSinceLastTurn(sourceControllerId, new MageObjectReference(permanent.getId(), game))) {
                         return true;
                     }
                 }

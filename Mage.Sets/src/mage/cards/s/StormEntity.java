@@ -55,7 +55,10 @@ class OtherSpellsCastThisTurnCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
-        return watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn() - 1;
+        if(watcher != null ) {
+            return watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn() - 1;
+        }
+        return 0;
     }
 
     @Override

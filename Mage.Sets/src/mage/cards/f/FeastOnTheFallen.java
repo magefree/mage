@@ -57,7 +57,7 @@ enum FeastOnTheFallenCondition implements Condition {
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                if (watcher.getLiveLostLastTurn(opponentId) > 0) {
+                if (watcher.getLifeLostLastTurn(opponentId) > 0) {
                     return true;
                 }
             }

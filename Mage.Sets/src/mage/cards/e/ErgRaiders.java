@@ -57,6 +57,6 @@ class ErgRaidersCondition implements Condition {
         Permanent raiders = game.getPermanentOrLKIBattlefield(source.getSourceId());
         AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
         // wasControlledFromStartOfControllerTurn should be checked during resolution I guess, but shouldn't be relevant
-        return raiders.wasControlledFromStartOfControllerTurn() && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(raiders, game));
+        return raiders != null &&raiders.wasControlledFromStartOfControllerTurn() && watcher != null && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(raiders, game));
     }
 }

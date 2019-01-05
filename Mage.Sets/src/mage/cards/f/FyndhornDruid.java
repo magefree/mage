@@ -51,6 +51,6 @@ class SourceWasBlockedThisTurnCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         WasBlockedThisTurnWatcher watcher = (WasBlockedThisTurnWatcher) game.getState().getWatchers().get(WasBlockedThisTurnWatcher.class.getSimpleName());
-        return sourcePermanent != null && watcher.getWasBlockedThisTurnCreatures().contains(new MageObjectReference(sourcePermanent, game));
+        return sourcePermanent != null && watcher != null && watcher.getWasBlockedThisTurnCreatures().contains(new MageObjectReference(sourcePermanent, game));
     }
 }

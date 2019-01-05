@@ -65,11 +65,11 @@ enum MadDogCondition implements Condition {
                 && madDog != null) {
             // For some reason, compare did not work when checking the lists.  Thus the interation.
             List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(source.getControllerId());
-            if (!permanents.stream().noneMatch((p) -> (p.getId().equals(madDog.getId())))) {
+            if (permanents.stream().anyMatch((p) -> (p.getId().equals(madDog.getId())))) {
                 return false;
             }
             Set<MageObjectReference> mor = watcher2.getAttackedThisTurnCreatures();
-            if (!mor.stream().noneMatch((m) -> (m.getPermanent(game).equals(madDog)))) {
+            if (mor.stream().anyMatch((m) -> (m.getPermanent(game).equals(madDog)))) {
                 return false;
             }
             return true; // Mad Dog did not come into play this turn nor did he attack this turn.  Sacrifice the hound.

@@ -65,7 +65,7 @@ class LudevicNecroAlchemistCondition implements Condition {
         currentPlayer = playerList.getNext(game);
 
         while (watcher != null && currentPlayer != null) {
-            if (!Objects.equals(currentPlayer.getId(), sourcePlayerId) && watcher.getLiveLost(currentPlayer.getId()) > 0) {
+            if (!Objects.equals(currentPlayer.getId(), sourcePlayerId) && watcher.getLifeLost(currentPlayer.getId()) > 0) {
                 return true;
             }
             if (Objects.equals(currentPlayer, firstPlayer)) {

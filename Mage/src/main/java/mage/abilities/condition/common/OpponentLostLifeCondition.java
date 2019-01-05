@@ -26,7 +26,7 @@ public class OpponentLostLifeCondition extends IntCompareCondition {
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                int lostLive = watcher.getLiveLost(opponentId);
+                int lostLive = watcher.getLifeLost(opponentId);
                 if (lostLive > maxLostLive) {
                     maxLostLive = lostLive;
                 }

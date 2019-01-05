@@ -58,7 +58,10 @@ class CardsDrawnThisTurnDynamicValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         KydeleCardsDrawnThisTurnWatcher watcher = (KydeleCardsDrawnThisTurnWatcher) game.getState().getWatchers().get(KydeleCardsDrawnThisTurnWatcher.class.getSimpleName());
-        return watcher.getCardsDrawnThisTurn(sourceAbility.getControllerId());
+        if(watcher != null) {
+            return watcher.getCardsDrawnThisTurn(sourceAbility.getControllerId());
+        }
+        return 0;
     }
 
     @Override

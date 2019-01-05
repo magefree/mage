@@ -65,7 +65,7 @@ enum LostLifeCondition implements Condition {
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         UUID player = source.getControllerId();
         if (watcher != null && player != null) {
-            return watcher.getLiveLost(player) > 0;
+            return watcher.getLifeLost(player) > 0;
         }
         return false;
     }

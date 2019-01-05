@@ -51,7 +51,7 @@ class SecondSpellPredicate implements Predicate<StackObject> {
     public boolean apply(StackObject input, Game game) {
         CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
 
-        if (watcher.getSpellOrder(new MageObjectReference(input.getId(), game), game) == 2) {
+        if (watcher != null && watcher.getSpellOrder(new MageObjectReference(input.getId(), game), game) == 2) {
             return true;
         }
 

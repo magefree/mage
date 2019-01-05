@@ -2,7 +2,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,15 +16,16 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.BloodthirstWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
 public final class BloodcrazedGoblin extends CardImpl {
 
     public BloodcrazedGoblin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.GOBLIN, SubType.BERSERKER);
 
         this.power = new MageInt(2);
@@ -70,7 +70,7 @@ class BloodcrazedGoblinEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
             BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get(BloodthirstWatcher.class.getSimpleName(), source.getControllerId()); // BloodthirstWatcher
-            return !watcher.conditionMet();
+            return watcher != null && !watcher.conditionMet();
         }
         return false;
     }

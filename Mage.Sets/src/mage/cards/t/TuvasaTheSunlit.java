@@ -98,7 +98,7 @@ class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbilit
             TuvasaTheSunlitWatcher watcher = (TuvasaTheSunlitWatcher) game.getState().getWatchers().get(
                     TuvasaTheSunlitWatcher.class.getSimpleName()
             );
-            return event.getTargetId().equals(watcher.getFirstEnchantmentThisTurn(this.getControllerId()));
+            return watcher != null && event.getTargetId().equals(watcher.getFirstEnchantmentThisTurn(this.getControllerId()));
         }
         return false;
     }

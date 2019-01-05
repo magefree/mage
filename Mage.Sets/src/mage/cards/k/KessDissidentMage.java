@@ -94,7 +94,7 @@ class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
                     && game.getState().getZone(objectId).equals(Zone.GRAVEYARD)) {
                 // check if not already a card was cast this turn with this ability
                 KessDissidentMageWatcher watcher = (KessDissidentMageWatcher) game.getState().getWatchers().get(KessDissidentMageWatcher.class.getSimpleName());
-                return !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
+                return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
             }
         }
         return false;
@@ -138,7 +138,7 @@ class KessDissidentMageReplacementEffect extends ReplacementEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getToZone() == Zone.GRAVEYARD) {
             KessDissidentMageWatcher watcher = (KessDissidentMageWatcher) game.getState().getWatchers().get(KessDissidentMageWatcher.class.getSimpleName());
-            if (source.getSourceId().equals(watcher.spellCastWasAllowedBy(new MageObjectReference(event.getTargetId(), game)))) {
+            if (watcher != null && source.getSourceId().equals(watcher.spellCastWasAllowedBy(new MageObjectReference(event.getTargetId(), game)))) {
                 return true;
             }
         }

@@ -151,7 +151,7 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
                 KaradorGhostChieftainWatcher watcher = (KaradorGhostChieftainWatcher) game.getState().getWatchers().get(KaradorGhostChieftainWatcher.class.getSimpleName(), source.getSourceId());
-                return !watcher.isAbilityUsed();
+                return watcher != null &&  !watcher.isAbilityUsed();
             }
         }
         return false;
