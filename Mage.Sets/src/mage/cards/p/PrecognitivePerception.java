@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.condition.common.MyMainPhaseCondition;
+import mage.abilities.condition.common.AddendumCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -59,7 +59,7 @@ class PrecognitivePerceptionEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        if (MyMainPhaseCondition.instance.apply(game, source)) {
+        if (AddendumCondition.instance.apply(game, source)) {
             controller.scry(3, source, game);
         }
         controller.drawCards(3, game);
