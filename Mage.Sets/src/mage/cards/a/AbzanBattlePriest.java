@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -17,23 +16,23 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AbzanBattlePriest extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    static final String rule = "Each creature you control with a +1/+1 counter on it has lifelink";
-
     public AbzanBattlePriest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -42,9 +41,15 @@ public final class AbzanBattlePriest extends CardImpl {
 
         // Outlast {W}
         this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{W}")));
-        
+
         // Each creature you control with a +1/+1 counter on it has lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilityAllEffect(
+                        LifelinkAbility.getInstance(), Duration.WhileOnBattlefield,
+                        filter, "Each creature you control with a +1/+1 counter on it has lifelink"
+                )
+        ));
     }
 
     public AbzanBattlePriest(final AbzanBattlePriest card) {

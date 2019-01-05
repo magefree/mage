@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -25,8 +24,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class AchHansRun extends CardImpl {
@@ -38,7 +38,7 @@ public final class AchHansRun extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AchHansRunEffect(), TargetController.YOU, true));
     }
 
-    public AchHansRun(final AchHansRun card) {
+    private AchHansRun(final AchHansRun card) {
         super(card);
     }
 
@@ -50,12 +50,12 @@ public final class AchHansRun extends CardImpl {
 
 class AchHansRunEffect extends OneShotEffect {
 
-    public AchHansRunEffect() {
+    AchHansRunEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "you may say \"Ach! Hans, run! It’s the …\" and the name of a creature card. If you do, search your library for a card with that name, put it onto the battlefield, then shuffle your library. That creature gains haste. Exile it at the beginning of the next end step";
     }
 
-    public AchHansRunEffect(final AchHansRunEffect effect) {
+    private AchHansRunEffect(final AchHansRunEffect effect) {
         super(effect);
     }
 
@@ -67,41 +67,41 @@ class AchHansRunEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ChoiceImpl cardChoice = new ChoiceImpl(true);
-            cardChoice.setChoices(CardRepository.instance.getCreatureNames());
-            cardChoice.setMessage("Choose a creature card name");
-            if (controller.choose(Outcome.Detriment, cardChoice, game)) {
-                String cardName = cardChoice.getChoice();
-                if (!game.isSimulation()) {
-                    game.informPlayers(controller.getLogName() + ": \"Ach! Hans, run! It's the " + cardName + "!\"");
-                }
-                FilterCard nameFilter = new FilterCard();
-                nameFilter.add(new NamePredicate(cardName));
-                TargetCardInLibrary target = new TargetCardInLibrary(1, 1, nameFilter);
-                if (controller.searchLibrary(target, game)) {
-                    Card card = controller.getLibrary().remove(target.getFirstTarget(), game);
-                    if (card != null) {
-                        if (card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            Permanent creature = game.getPermanent(card.getId());
-                            if (creature != null) {
-                                // gains haste
-                                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                                effect.setTargetPointer(new FixedTarget(creature, game));
-                                game.addEffect(effect, source);
-                                // Exile at begin of next end step
-                                ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
-                                exileEffect.setTargetPointer(new FixedTarget(creature, game));
-                                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                                game.addDelayedTriggeredAbility(delayedAbility, source);
-                            }
-                        }
-                    }
-                    controller.shuffleLibrary(source, game);
-                }
-                return true;
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
+        ChoiceImpl cardChoice = new ChoiceImpl(true);
+        cardChoice.setChoices(CardRepository.instance.getCreatureNames());
+        cardChoice.setMessage("Choose a creature card name");
+        if (!controller.choose(Outcome.Detriment, cardChoice, game)) {
+            return false;
+        }
+        String cardName = cardChoice.getChoice();
+        game.informPlayers(controller.getLogName() + ": \"Ach! Hans, run! It's the " + cardName + "!\"");
+        FilterCard nameFilter = new FilterCard();
+        nameFilter.add(new NamePredicate(cardName));
+        TargetCardInLibrary target = new TargetCardInLibrary(1, 1, nameFilter);
+        if (!controller.searchLibrary(target, game)) {
+            return false;
+        }
+        Card card = controller.getLibrary().remove(target.getFirstTarget(), game);
+        if (card == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+            return false;
+        }
+        Permanent creature = game.getPermanent(card.getId());
+        if (creature == null) {
+            return false;
+        }
+        // gains haste
+        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+        effect.setTargetPointer(new FixedTarget(creature, game));
+        game.addEffect(effect, source);
+        // Exile at begin of next end step
+        ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
+        exileEffect.setTargetPointer(new FixedTarget(creature, game));
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+        controller.shuffleLibrary(source, game);
+        return true;
     }
 }
