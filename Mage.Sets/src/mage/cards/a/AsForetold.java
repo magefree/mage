@@ -91,17 +91,17 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
 class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
 
     private UUID sourceAsForetold;
-    boolean activated;
+    private boolean wasActivated;
 
     AsForetoldAlternativeCost(UUID sourceAsForetold, int timeCounters) {
         super(new ManaCostsImpl("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
         this.sourceAsForetold = sourceAsForetold;
     }
 
-    AsForetoldAlternativeCost(final AsForetoldAlternativeCost ability) {
+   private AsForetoldAlternativeCost(final AsForetoldAlternativeCost ability) {
         super(ability);
         this.sourceAsForetold = ability.sourceAsForetold;
-        this.activated = ability.activated;
+        this.wasActivated = ability.wasActivated;
     }
 
     @Override
@@ -116,8 +116,8 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
         if (controller != null
                 && asForetold != null) {
             if (controller.chooseUse(Outcome.Neutral, "Do you wish to use " + asForetold.getLogName() + " to pay the alternative cost ?", ability, game)) {
-                activated = super.askToActivateAlternativeCosts(ability, game);
-                if (activated) {
+                wasActivated = super.askToActivateAlternativeCosts(ability, game);
+                if (wasActivated) {
                     // Get the watcher
                     AsForetoldAltCostUsedWatcher asForetoldAltCostUsedWatcher
                             = (AsForetoldAltCostUsedWatcher) game.getState().getWatchers()
@@ -128,7 +128,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
                 }
             }
         }
-        return activated;
+        return wasActivated;
     }
 
 }
