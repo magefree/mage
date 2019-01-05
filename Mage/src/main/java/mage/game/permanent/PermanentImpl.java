@@ -390,11 +390,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean tap(Game game) {
+        return tap(false, game);
+    }
+
+    @Override
+    public boolean tap(boolean forCombat, Game game) {
         //20091005 - 701.15a
         if (!tapped) {
             if (!replaceEvent(EventType.TAP, game)) {
                 this.tapped = true;
-                fireEvent(EventType.TAPPED, game);
+                game.fireEvent(new GameEvent(EventType.TAPPED, objectId, ownerId, controllerId, 0, forCombat));
                 return true;
             }
         }

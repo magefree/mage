@@ -25,6 +25,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean tap(Game game);
 
+    boolean tap(boolean forCombat, Game game);
+
     /**
      * use tap(game)
      * <p>
