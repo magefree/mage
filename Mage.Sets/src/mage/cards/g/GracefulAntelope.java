@@ -1,6 +1,6 @@
-
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -11,10 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -23,7 +20,7 @@ import java.util.UUID;
 public final class GracefulAntelope extends CardImpl {
 
     public GracefulAntelope(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.ANTELOPE);
 
         this.power = new MageInt(1);
@@ -32,9 +29,8 @@ public final class GracefulAntelope extends CardImpl {
         // Plainswalk
         this.addAbility(new PlainswalkAbility());
         // Whenever Graceful Antelope deals combat damage to a player, you may have target land become a Plains until Graceful Antelope leaves the battlefield.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield, SubType.PLAINS), true);
-        Target target = new TargetLandPermanent();
-        ability.addTarget(target);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new BecomesBasicLandTargetEffect(Duration.UntilSourceLeavesBattlefield, SubType.PLAINS), true);
+        ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
 
