@@ -8,15 +8,24 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import mage.util.JarVersion;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;
 
 /**
- *
- * @author North
+ * @author North, JayDi85
  */
 public final class RepositoryUtil {
+
+    private static final Logger logger = Logger.getLogger(RepositoryUtil.class);
+
+    public static void bootstrapLocalDb() {
+        // call local db to init all sets and cards repository (need for correct updates cycle, not on random request)
+        logger.info("Loading database...");
+        ExpansionRepository.instance.getContentVersionConstant();
+        CardRepository.instance.getContentVersionConstant();
+    }
 
     public static boolean isDatabaseObsolete(ConnectionSource connectionSource, String entityName, long version) throws SQLException {
         TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
@@ -37,6 +46,7 @@ public final class RepositoryUtil {
 
     public static boolean isNewBuildRun(ConnectionSource connectionSource, String entityName, Class clazz) throws SQLException {
         // build time checks only for releases, not runtime (e.g. IDE debug)
+        // that's check uses for cards db cleanup on new version/build
         String currentBuild = JarVersion.getBuildTime(clazz);
         if (!JarVersion.isBuildTimeOk(currentBuild)) {
             return false;

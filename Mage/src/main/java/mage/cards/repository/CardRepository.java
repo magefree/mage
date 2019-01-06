@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.constants.SuperType;
+import mage.game.events.Listener;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
@@ -22,11 +23,13 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
- * @author North
+ * @author North, JayDi85
  */
 public enum CardRepository {
 
     instance;
+
+    private static final Logger logger = Logger.getLogger(CardRepository.class);
 
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
@@ -36,6 +39,7 @@ public enum CardRepository {
     private static final long CARD_CONTENT_VERSION = 123;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
+    private RepositoryEventSource eventSource = new RepositoryEventSource();
 
     CardRepository() {
         File file = new File("db");
@@ -48,32 +52,50 @@ public enum CardRepository {
             boolean isObsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, CARD_DB_VERSION);
             boolean isNewBuild = RepositoryUtil.isNewBuildRun(connectionSource, VERSION_ENTITY_NAME, CardRepository.class); // recreate db on new build
             if (isObsolete || isNewBuild) {
+                //System.out.println("Local cards db is outdated, cleaning...");
                 TableUtils.dropTable(connectionSource, CardInfo.class, true);
             }
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
+
+            eventSource.fireRepositoryDbLoaded();
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
         }
     }
 
-    public void addCards(final List<CardInfo> cards) {
+    public void subscribe(Listener<RepositoryEvent> listener) {
+        eventSource.addListener(listener);
+    }
+
+    public void saveCards(final List<CardInfo> newCards, long newContentVersion) {
         try {
             cardDao.callBatchTasks(() -> {
-                try {
-                    for (CardInfo card : cards) {
-                        cardDao.create(card);
-                        if (classNames != null) {
-                            classNames.add(card.getClassName());
+                // add
+                if (newCards != null && newCards.size() > 0) {
+                    logger.info("DB: need to add " + newCards.size() + " new cards");
+                    try {
+                        for (CardInfo card : newCards) {
+                            cardDao.create(card);
+                            if (classNames != null) {
+                                classNames.add(card.getClassName());
+                            }
                         }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
                 }
+
+                // no card updates
+
                 return null;
             });
+
+            setContentVersion(newContentVersion);
+            eventSource.fireRepositoryDbUpdated();
         } catch (Exception ex) {
+            //
         }
     }
 

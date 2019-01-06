@@ -4,6 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.PluginClassloaderRegistery;
+import mage.cards.repository.RepositoryUtil;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -87,6 +88,10 @@ public final class Main {
             }
             logger.info("Done.");
         }
+
+        // db init and updates checks (e.g. cleanup cards db on new version)
+        RepositoryUtil.bootstrapLocalDb();
+        logger.info("Done.");
 
         logger.info("Loading extension packages...");
         if (!extensionFolder.exists()) {

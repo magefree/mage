@@ -80,7 +80,7 @@ public class SessionImpl implements Session {
     // handling.
     public interface RemotingTask {
 
-        public boolean run() throws Throwable;
+        boolean run() throws Throwable;
     }
 
     // handleRemotingTaskExceptions runs the given task and handles exceptions appropriately. This
@@ -223,7 +223,7 @@ public class SessionImpl implements Session {
 
     @Override
     public Optional<String> getServerHostname() {
-        return isConnected() ? Optional.of(connection.getHost()) : Optional.<String>empty();
+        return isConnected() ? Optional.of(connection.getHost()) : Optional.empty();
     }
 
     @Override
@@ -392,26 +392,22 @@ public class SessionImpl implements Session {
     }
 
     private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
-        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
-        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
-            List<String> classNames = CardRepository.instance.getClassNames();
-            List<CardInfo> cards = server.getMissingCardsData(classNames);
-            CardRepository.instance.addCards(cards);
-            CardRepository.instance.setContentVersion(serverState.getCardsContentVersion());
-            logger.info("Updating client cards DB - existing cards: " + classNames.size() + " new cards: " + cards.size()
-                    + " content versions - server: " + serverState.getCardsContentVersion() + " client: " + cardDBVersion);
-        }
-
+        // sets
         long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
         if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
             List<String> setCodes = ExpansionRepository.instance.getSetCodes();
             List<ExpansionInfo> expansions = server.getMissingExpansionData(setCodes);
-            for (ExpansionInfo expansion : expansions) {
-                ExpansionRepository.instance.add(expansion);
-            }
-            ExpansionRepository.instance.setContentVersion(serverState.getExpansionsContentVersion());
-            logger.info("Updating client expansions DB - existing sets: " + setCodes.size() + " new sets: " + expansions.size()
-                    + " content versions - server: " + serverState.getExpansionsContentVersion() + " client: " + expansionDBVersion);
+            logger.info("DB: updating sets... Founded new: " + expansions.size());
+            ExpansionRepository.instance.saveSets(expansions, null, serverState.getExpansionsContentVersion());
+        }
+
+        // cards
+        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
+        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
+            List<String> classNames = CardRepository.instance.getClassNames();
+            List<CardInfo> cards = server.getMissingCardsData(classNames);
+            logger.info("DB: updating cards... Founded new: " + cards.size());
+            CardRepository.instance.saveCards(cards, serverState.getCardsContentVersion());
         }
     }
 
