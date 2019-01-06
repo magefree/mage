@@ -15,7 +15,7 @@ public enum TwoOrMoreSpellsWereCastLastTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
+        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         if(watcher == null){
             return false;
         }

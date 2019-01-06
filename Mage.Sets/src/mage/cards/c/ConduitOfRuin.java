@@ -117,7 +117,7 @@ class FirstCastCreatureSpellPredicate implements ObjectPlayerPredicate<ObjectPla
     public boolean apply(ObjectPlayer<Controllable> input, Game game) {
         if (input.getObject() instanceof Spell
                 && ((Spell) input.getObject()).isCreature()) {
-            ConduitOfRuinWatcher watcher = (ConduitOfRuinWatcher) game.getState().getWatchers().get(ConduitOfRuinWatcher.class.getSimpleName());
+            ConduitOfRuinWatcher watcher = game.getState().getWatcher(ConduitOfRuinWatcher.class);
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }
         return false;

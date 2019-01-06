@@ -55,7 +55,7 @@ enum CobraTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CobraTrapWatcher watcher = (CobraTrapWatcher) game.getState().getWatchers().get(CobraTrapWatcher.class.getSimpleName());
+        CobraTrapWatcher watcher = game.getState().getWatcher(CobraTrapWatcher.class);
         return watcher != null && watcher.conditionMet(source.getControllerId());
     }
 

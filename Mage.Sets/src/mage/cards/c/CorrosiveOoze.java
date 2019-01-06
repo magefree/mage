@@ -76,7 +76,7 @@ class CorrosiveOozeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        CorrosiveOozeCombatWatcher watcher = (CorrosiveOozeCombatWatcher) game.getState().getWatchers().get(CorrosiveOozeCombatWatcher.class.getSimpleName());
+        CorrosiveOozeCombatWatcher watcher = game.getState().getWatcher(CorrosiveOozeCombatWatcher.class);
         if (controller != null && watcher != null) {
             MageObjectReference sourceMor = new MageObjectReference(source.getSourceObject(game), game);
             // get equipmentsToDestroy of creatres already left the battlefield
@@ -118,8 +118,8 @@ class CorrosiveOozeEffect extends OneShotEffect {
 
 class CorrosiveOozeCombatWatcher extends Watcher {
 
-    public final HashMap<MageObjectReference, HashSet<MageObjectReference>> oozeBlocksOrBlocked = new HashMap<>();
-    public final HashMap<MageObjectReference, HashSet<MageObjectReference>> oozeEquipmentsToDestroy = new HashMap<>();
+    private final Map<MageObjectReference, Set<MageObjectReference>> oozeBlocksOrBlocked = new HashMap<>();
+    private final Map<MageObjectReference, Set<MageObjectReference>> oozeEquipmentsToDestroy = new HashMap<>();
 
     public CorrosiveOozeCombatWatcher() {
         super(CorrosiveOozeCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -127,11 +127,11 @@ class CorrosiveOozeCombatWatcher extends Watcher {
 
     public CorrosiveOozeCombatWatcher(final CorrosiveOozeCombatWatcher watcher) {
         super(watcher);
-        for (Map.Entry<MageObjectReference, HashSet<MageObjectReference>> entry : watcher.oozeBlocksOrBlocked.entrySet()) {
-            HashSet<MageObjectReference> newSet = new HashSet<>(entry.getValue());
+        for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : watcher.oozeBlocksOrBlocked.entrySet()) {
+            Set<MageObjectReference> newSet = new HashSet<>(entry.getValue());
             oozeBlocksOrBlocked.put(entry.getKey(), newSet);
         }
-        for (Map.Entry<MageObjectReference, HashSet<MageObjectReference>> entry : watcher.oozeEquipmentsToDestroy.entrySet()) {
+        for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : watcher.oozeEquipmentsToDestroy.entrySet()) {
             HashSet<MageObjectReference> newSet = new HashSet<>(entry.getValue());
             oozeEquipmentsToDestroy.put(entry.getKey(), newSet);
         }
@@ -148,7 +148,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
             if (attacker != null && CardUtil.haveSameNames(attacker.getName(), "Corrosive Ooze")) { // To check for name is not working if Ooze is copied but name changed
                 if (blocker != null && hasAttachedEquipment(game, blocker)) {
                     MageObjectReference oozeMor = new MageObjectReference(attacker, game);
-                    HashSet<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());
+                    Set<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());
                     relatedCreatures.add(new MageObjectReference(event.getSourceId(), game));
                     oozeBlocksOrBlocked.put(oozeMor, relatedCreatures);
                 }
@@ -156,7 +156,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
             if (blocker != null && CardUtil.haveSameNames(blocker.getName(), "Corrosive Ooze")) {
                 if (attacker != null && hasAttachedEquipment(game, attacker)) {
                     MageObjectReference oozeMor = new MageObjectReference(blocker, game);
-                    HashSet<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());
+                    Set<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());
                     relatedCreatures.add(new MageObjectReference(event.getTargetId(), game));
                     oozeBlocksOrBlocked.put(oozeMor, relatedCreatures);
                 }
@@ -167,14 +167,14 @@ class CorrosiveOozeCombatWatcher extends Watcher {
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 if (game.getTurn() != null && TurnPhase.COMBAT == game.getTurn().getPhaseType()) {
                     // Check if a previous blocked or blocked by creatures is leaving the battlefield
-                    for (Map.Entry<MageObjectReference, HashSet<MageObjectReference>> entry : oozeBlocksOrBlocked.entrySet()) {
+                    for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : oozeBlocksOrBlocked.entrySet()) {
                         for (MageObjectReference mor : entry.getValue()) {
                             if (mor.refersTo(((ZoneChangeEvent) event).getTarget(), game)) {
                                 // check for equipments and remember
                                 for (UUID attachmentId : ((ZoneChangeEvent) event).getTarget().getAttachments()) {
                                     Permanent attachment = game.getPermanent(attachmentId);
                                     if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                                        HashSet<MageObjectReference> toDestroy = oozeEquipmentsToDestroy.getOrDefault(entry.getKey(), new HashSet<>());
+                                        Set<MageObjectReference> toDestroy = oozeEquipmentsToDestroy.getOrDefault(entry.getKey(), new HashSet<>());
                                         toDestroy.add(new MageObjectReference(attachment, game));
                                         oozeEquipmentsToDestroy.put(entry.getKey(), toDestroy);
                                     }

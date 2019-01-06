@@ -120,8 +120,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
                 if (wasActivated) {
                     // Get the watcher
                     AsForetoldAltCostUsedWatcher asForetoldAltCostUsedWatcher
-                            = (AsForetoldAltCostUsedWatcher) game.getState().getWatchers()
-                                    .get("asForetoldAltCostUsedWatcher", sourceAsForetold);
+                            = game.getState().getWatcher(AsForetoldAltCostUsedWatcher.class, sourceAsForetold);
 
                     // Mark as used
                     asForetoldAltCostUsedWatcher.markUsedThisTurn();
@@ -161,8 +160,8 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
             if (sourcePermanent != null) {
                 // Get the watcher
                 AsForetoldAltCostUsedWatcher asForetoldAltCostUsedWatcher
-                        = (AsForetoldAltCostUsedWatcher) game.getState().getWatchers()
-                                .get("asForetoldAltCostUsedWatcher", sourcePermanent.getId());
+                        = game.getState().getWatcher(
+                                AsForetoldAltCostUsedWatcher.class, sourcePermanent.getId());
 
                 // If we haven't used it yet this turn, give the option of using the zero alternative cost
                 if (!asForetoldAltCostUsedWatcher.hasBeenUsedThisTurn()) {

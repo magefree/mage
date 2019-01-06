@@ -70,7 +70,7 @@ class HuntDownEffect extends RequirementEffect {
                     && blocker.canBlock(source.getTargets().get(1).getFirstTarget(), game)) {              
                 Permanent attacker = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (attacker != null) {
-                    BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
+                    BlockedAttackerWatcher blockedAttackerWatcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
                     if (blockedAttackerWatcher != null 
                             && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker, game)) {
                         // has already blocked this turn, so no need to do again

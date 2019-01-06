@@ -30,10 +30,7 @@ import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author MTGfan
@@ -151,7 +148,7 @@ class CyclopeanTombEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObjectReference mor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game);
-        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getSimpleName());
+        CyclopeanTombCounterWatcher watcher = game.getState().getWatcher(CyclopeanTombCounterWatcher.class);
         if (controller != null && watcher != null) {
 
             Set<MageObjectReference> landRef = watcher.landMiredByCyclopeanTombInstance(mor, game);
@@ -190,7 +187,7 @@ class CyclopeanTombEffect extends OneShotEffect {
 
 class CyclopeanTombCounterWatcher extends Watcher {
 
-    private final HashMap<MageObjectReference, Set<MageObjectReference>> counterData = new HashMap<>();
+    private final Map<MageObjectReference, Set<MageObjectReference>> counterData = new HashMap<>();
 
     CyclopeanTombCounterWatcher() {
         super(CyclopeanTombCounterWatcher.class.getSimpleName(), WatcherScope.GAME);

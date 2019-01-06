@@ -75,7 +75,7 @@ public final class Melee extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
             if (watcher != null) {
                 watcher.increment();
                 return true;
@@ -118,7 +118,7 @@ class MeleeChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+        ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
         if (watcher == null) {
             return false;
         }

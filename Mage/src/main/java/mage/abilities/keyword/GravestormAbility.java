@@ -74,7 +74,7 @@ class GravestormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObjectReference spellRef = (MageObjectReference) this.getValue("GravestormSpellRef");
         if (spellRef != null) {
-            GravestormWatcher watcher = (GravestormWatcher) game.getState().getWatchers().get(GravestormWatcher.class.getSimpleName());
+            GravestormWatcher watcher = game.getState().getWatcher(GravestormWatcher.class);
             if(watcher != null) {
                 int gravestormCount = watcher.getGravestormCount();
                 if (gravestormCount > 0) {

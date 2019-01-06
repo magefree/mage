@@ -18,9 +18,9 @@ public class YouGainedLifeCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         int gainedLife = 0;
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getSimpleName());
+        PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
         if (watcher != null) {
-            gainedLife = watcher.getLiveGained(source.getControllerId());
+            gainedLife = watcher.getLifeGained(source.getControllerId());
         }
         return gainedLife;
     }

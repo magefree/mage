@@ -12,6 +12,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.h.HomicidalBruteWatcher;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -54,31 +55,7 @@ public final class CivilizedScholar extends CardImpl {
     }
 }
 
-class HomicidalBruteWatcher extends Watcher {
 
-    public HomicidalBruteWatcher() {
-        super(HomicidalBruteWatcher.class.getSimpleName(), WatcherScope.CARD);
-    }
-
-    public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public HomicidalBruteWatcher copy() {
-        return new HomicidalBruteWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (condition == true) {
-            return;
-        }
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(sourceId)) {
-            condition = true;
-        }
-    }
-}
 
 class CivilizedScholarEffect extends OneShotEffect {
 
@@ -87,7 +64,7 @@ class CivilizedScholarEffect extends OneShotEffect {
         staticText = "Draw a card, then discard a card. If a creature card is discarded this way, untap {this}, then transform it";
     }
 
-    public CivilizedScholarEffect(final CivilizedScholarEffect effect) {
+    private CivilizedScholarEffect(final CivilizedScholarEffect effect) {
         super(effect);
     }
 

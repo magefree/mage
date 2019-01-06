@@ -48,9 +48,9 @@ class SilentChantZuberaDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ZuberasDiedWatcher watcher = (ZuberasDiedWatcher) game.getState().getWatchers().get(ZuberasDiedWatcher.class.getSimpleName());
+        ZuberasDiedWatcher watcher = game.getState().getWatcher(ZuberasDiedWatcher.class);
        if(watcher != null) {
-           return watcher.zuberasDiedThisTurn * 2;
+           return watcher.getZuberasDiedThisTurn() * 2;
        }
        return 0;
     }

@@ -93,7 +93,7 @@ class CathedralMembraneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CathedralMembraneWatcher watcher = (CathedralMembraneWatcher) game.getState().getWatchers().get(CathedralMembraneWatcher.class.getSimpleName(), source.getSourceId());
+        CathedralMembraneWatcher watcher = game.getState().getWatcher(CathedralMembraneWatcher.class, source.getSourceId());
         if (watcher != null) {
             for (UUID uuid : watcher.getBlockedCreatures()) {
                 Permanent permanent = game.getPermanent(uuid);

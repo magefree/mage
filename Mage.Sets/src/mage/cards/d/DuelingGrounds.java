@@ -74,7 +74,7 @@ class NoMoreThanOneCreatureCanAttackEachTurnEffect extends RestrictionEffect {
         if (!game.getCombat().getAttackers().isEmpty()) {
             return false;
         }
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
         if(watcher == null){
             return false;
         }
@@ -111,7 +111,7 @@ class NoMoreThanOneCreatureCanBlockEachTurnEffect extends RestrictionEffect {
         if (!game.getCombat().getBlockers().isEmpty()) {
             return false;
         }
-        BlockedThisTurnWatcher watcher = (BlockedThisTurnWatcher) game.getState().getWatchers().get(BlockedThisTurnWatcher.class.getSimpleName());
+        BlockedThisTurnWatcher watcher = game.getState().getWatcher(BlockedThisTurnWatcher.class);
         if(watcher == null){
             return false;
         }

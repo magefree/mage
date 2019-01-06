@@ -112,8 +112,8 @@ enum KrovikanVampireInterveningIfCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        KrovikanVampireCreaturesDiedWatcher watcherDied = (KrovikanVampireCreaturesDiedWatcher) game.getState().getWatchers().get(KrovikanVampireCreaturesDiedWatcher.class.getSimpleName());
-        KrovikanVampireCreaturesDamagedWatcher watcherDamaged = (KrovikanVampireCreaturesDamagedWatcher) game.getState().getWatchers().get(KrovikanVampireCreaturesDamagedWatcher.class.getSimpleName());
+        KrovikanVampireCreaturesDiedWatcher watcherDied = (KrovikanVampireCreaturesDiedWatcher) game.getState().getWatcher(KrovikanVampireCreaturesDiedWatcher.class);
+        KrovikanVampireCreaturesDamagedWatcher watcherDamaged = (KrovikanVampireCreaturesDamagedWatcher) game.getState().getWatcher(KrovikanVampireCreaturesDamagedWatcher.class);
         if (watcherDied != null) {
             Set<UUID> creaturesThatDiedThisTurn = watcherDied.diedThisTurn;
             for (UUID mor : creaturesThatDiedThisTurn) {
@@ -146,7 +146,7 @@ class KrovikanVampireCreaturesDamagedWatcher extends Watcher {
     public final Set<UUID> damagedBySource = new HashSet<>();
 
     public KrovikanVampireCreaturesDamagedWatcher() {
-        super(KrovikanVampireCreaturesDamagedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(KrovikanVampireCreaturesDamagedWatcher.class, WatcherScope.GAME);
     }
 
     public KrovikanVampireCreaturesDamagedWatcher(final KrovikanVampireCreaturesDamagedWatcher watcher) {
@@ -182,7 +182,7 @@ class KrovikanVampireCreaturesDiedWatcher extends Watcher {
     public final Set<UUID> diedThisTurn = new HashSet<>();
 
     public KrovikanVampireCreaturesDiedWatcher() {
-        super(KrovikanVampireCreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(KrovikanVampireCreaturesDiedWatcher.class, WatcherScope.GAME);
     }
 
     public KrovikanVampireCreaturesDiedWatcher(final KrovikanVampireCreaturesDiedWatcher watcher) {

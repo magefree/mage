@@ -54,7 +54,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         getState().setValue(commander.getId() + "_castCount", 0);
                         CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), checkCommanderDamage);
-                        getState().getWatchers().add(watcher);
+                        getState().addWatcher(watcher);
                         watcher.addCardInfoToCommander(this);
                     }
                 }
@@ -155,7 +155,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean checkStateBasedActions() {
         for (Player player : getPlayers().values()) {
             for (UUID commanderId : player.getCommandersIds()) {
-                CommanderInfoWatcher damageWatcher = (CommanderInfoWatcher) getState().getWatchers().get(CommanderInfoWatcher.class.getSimpleName(), commanderId);
+                CommanderInfoWatcher damageWatcher = getState().getWatcher(CommanderInfoWatcher.class, commanderId);
                 if (damageWatcher == null) {
                     continue;
                 }

@@ -148,7 +148,7 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        GrothamaAllDevouringWatcher watcher = (GrothamaAllDevouringWatcher) game.getState().getWatchers().get(GrothamaAllDevouringWatcher.class.getSimpleName());
+        GrothamaAllDevouringWatcher watcher = (GrothamaAllDevouringWatcher) game.getState().getWatcher(GrothamaAllDevouringWatcher.class);
         if (watcher == null) {
             return false;
         }
@@ -171,7 +171,7 @@ class GrothamaAllDevouringWatcher extends Watcher {
     Map<MageObjectReference, Map<UUID, Integer>> damageMap = new HashMap<>();
 
     GrothamaAllDevouringWatcher() {
-        super(GrothamaAllDevouringWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(GrothamaAllDevouringWatcher.class, WatcherScope.GAME);
     }
 
     GrothamaAllDevouringWatcher(final GrothamaAllDevouringWatcher watcher) {

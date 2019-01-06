@@ -98,7 +98,7 @@ class AureliasFuryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AureliasFuryDamagedByWatcher watcher = (AureliasFuryDamagedByWatcher) game.getState().getWatchers().get(AureliasFuryDamagedByWatcher.class.getSimpleName(), source.getSourceId());
+        AureliasFuryDamagedByWatcher watcher = game.getState().getWatcher(AureliasFuryDamagedByWatcher.class, source.getSourceId());
         if (watcher != null) {
             for (UUID creatureId : watcher.getDamagedCreatures()) {
                 Permanent permanent = game.getPermanent(creatureId);

@@ -95,7 +95,7 @@ class AsmiraHolyAvengerDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        AsmiraHolyAvengerWatcher watcher = (AsmiraHolyAvengerWatcher) game.getState().getWatchers().get(AsmiraHolyAvengerWatcher.class.getSimpleName(), sourceAbility.getControllerId());
+        AsmiraHolyAvengerWatcher watcher = game.getState().getWatcher(AsmiraHolyAvengerWatcher.class, sourceAbility.getControllerId());
         if (watcher != null) {
             return watcher.getCreaturesCount();
         }

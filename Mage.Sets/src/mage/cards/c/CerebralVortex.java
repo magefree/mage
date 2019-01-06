@@ -66,7 +66,7 @@ class CerebralVortexEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            CerebralVortexWatcher watcher = (CerebralVortexWatcher) game.getState().getWatchers().get(CerebralVortexWatcher.class.getSimpleName());
+            CerebralVortexWatcher watcher = game.getState().getWatcher(CerebralVortexWatcher.class);
             if (watcher != null) {
                 targetPlayer.damage(watcher.getDraws(targetPlayer.getId()), source.getSourceId(), game, false, true);
                 return true;

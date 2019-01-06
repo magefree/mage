@@ -80,7 +80,7 @@ enum RasputinDreamweaverStartedUntappedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        RasputinDreamweaverStartedUntappedWatcher watcher = (RasputinDreamweaverStartedUntappedWatcher) game.getState().getWatchers().get(RasputinDreamweaverStartedUntappedWatcher.class.getSimpleName());
+        RasputinDreamweaverStartedUntappedWatcher watcher = (RasputinDreamweaverStartedUntappedWatcher) game.getState().getWatcher(RasputinDreamweaverStartedUntappedWatcher.class);
         if (watcher != null) {
             return watcher.startedUntapped(source.getSourceId());
         }
@@ -104,7 +104,7 @@ class RasputinDreamweaverStartedUntappedWatcher extends Watcher {
     private final Set<UUID> startedUntapped = new HashSet<>(0);
 
     RasputinDreamweaverStartedUntappedWatcher() {
-        super(RasputinDreamweaverStartedUntappedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(RasputinDreamweaverStartedUntappedWatcher.class, WatcherScope.GAME);
     }
 
     RasputinDreamweaverStartedUntappedWatcher(final RasputinDreamweaverStartedUntappedWatcher watcher) {

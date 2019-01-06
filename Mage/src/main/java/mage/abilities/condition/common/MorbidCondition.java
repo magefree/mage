@@ -16,7 +16,7 @@ public enum MorbidCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(MorbidWatcher.class.getSimpleName());
+        MorbidWatcher watcher = game.getState().getWatcher(MorbidWatcher.class);
         return watcher != null && watcher.conditionMet();
     }
 

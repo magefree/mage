@@ -40,7 +40,7 @@ public class SpectacleAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
+        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         if (watcher != null && watcher.getAllOppLifeLost(playerId, game) > 0) {
             return super.canActivate(playerId, game);
         }

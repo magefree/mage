@@ -65,7 +65,7 @@ class YdwenEfreetEffect extends OneShotEffect {
                 creature.setMaxBlocks(0);
                 
                 // Make blocked creatures unblocked
-                BlockedByOnlyOneCreatureThisCombatWatcher watcher = (BlockedByOnlyOneCreatureThisCombatWatcher) game.getState().getWatchers().get(BlockedByOnlyOneCreatureThisCombatWatcher.class.getSimpleName());
+                BlockedByOnlyOneCreatureThisCombatWatcher watcher = game.getState().getWatcher(BlockedByOnlyOneCreatureThisCombatWatcher.class);
                 if (watcher != null) {
                     Set<CombatGroup> combatGroups = watcher.getBlockedOnlyByCreature(creature.getId());
                     if (combatGroups != null) {

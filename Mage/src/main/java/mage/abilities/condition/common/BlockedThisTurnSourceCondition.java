@@ -18,7 +18,7 @@ public enum BlockedThisTurnSourceCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        BlockedThisTurnWatcher watcher = (BlockedThisTurnWatcher) game.getState().getWatchers().get(BlockedThisTurnWatcher.class.getSimpleName());
+        BlockedThisTurnWatcher watcher = game.getState().getWatcher(BlockedThisTurnWatcher.class);
         return sourcePermanent != null && watcher.getBlockedThisTurnCreatures().contains(new MageObjectReference(sourcePermanent, game));
     }
 }

@@ -1011,22 +1011,21 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         getState().setChoosingPlayerId(null);
-        state.getWatchers().reset(); // watcher objects from cards are reused during match so reset all card watchers already added
-        Watchers watchers = state.getWatchers();
+        state.resetWatchers(); // watcher objects from cards are reused during match so reset all card watchers already added
         // add default watchers
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-            watchers.add(new PlayerDamagedBySourceWatcher(playerId));
-            watchers.add(new BloodthirstWatcher(playerId));
+            getState().addWatcher(new PlayerDamagedBySourceWatcher(playerId));
+            getState().addWatcher(new BloodthirstWatcher(playerId));
         }
-        watchers.add(new MorbidWatcher());
-        watchers.add(new CastSpellLastTurnWatcher());
-        watchers.add(new CastSpellYourLastTurnWatcher());
-        watchers.add(new PlayerLostLifeWatcher());
-        watchers.add(new PlayerLostLifeNonCombatWatcher());
-        watchers.add(new BlockedAttackerWatcher());
-        watchers.add(new DamageDoneWatcher());
-        watchers.add(new PlanarRollWatcher());
-        watchers.add(new PlayersAttackedThisTurnWatcher());
+        getState().addWatcher(new MorbidWatcher());
+        getState().addWatcher(new CastSpellLastTurnWatcher());
+        getState().addWatcher(new CastSpellYourLastTurnWatcher());
+        getState().addWatcher(new PlayerLostLifeWatcher());
+        getState().addWatcher(new PlayerLostLifeNonCombatWatcher());
+        getState().addWatcher(new BlockedAttackerWatcher());
+        getState().addWatcher(new DamageDoneWatcher());
+        getState().addWatcher(new PlanarRollWatcher());
+        getState().addWatcher(new PlayersAttackedThisTurnWatcher());
 
         //20100716 - 103.5
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
@@ -1117,7 +1116,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (Player player : getPlayers().values()) {
             player.endOfTurn(this);
         }
-        state.getWatchers().reset();
+        state.resetWatchers();
     }
 
     protected UUID pickChoosingPlayer() {

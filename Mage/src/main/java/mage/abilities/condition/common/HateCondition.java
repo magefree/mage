@@ -18,7 +18,7 @@ public enum HateCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        LifeLossOtherFromCombatWatcher watcher = (LifeLossOtherFromCombatWatcher) game.getState().getWatchers().get(LifeLossOtherFromCombatWatcher.class.getSimpleName());
+        LifeLossOtherFromCombatWatcher watcher = game.getState().getWatcher(LifeLossOtherFromCombatWatcher.class);
         return watcher != null && watcher.opponentLostLifeOtherFromCombat(source.getControllerId(), game);
     }
 

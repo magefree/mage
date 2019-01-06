@@ -69,7 +69,7 @@ class DesolationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DesolationWatcher watcher = (DesolationWatcher) game.getState().getWatchers().get(DesolationWatcher.class.getSimpleName());
+        DesolationWatcher watcher = game.getState().getWatcher(DesolationWatcher.class);
         if (watcher != null) {
             for (UUID playerId : watcher.getPlayersTappedForMana()) {
                 Player player = game.getPlayer(playerId);

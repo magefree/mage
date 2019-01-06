@@ -46,7 +46,7 @@ class ImpatienceCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         return watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(game.getActivePlayerId()) == 0;
     }
 

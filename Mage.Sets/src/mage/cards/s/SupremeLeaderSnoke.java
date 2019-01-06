@@ -95,7 +95,7 @@ class OpponentNoncombatLostLifeCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
-        PlayerLostLifeNonCombatWatcher watcher = (PlayerLostLifeNonCombatWatcher) game.getState().getWatchers().get(PlayerLostLifeNonCombatWatcher.class.getSimpleName());
+        PlayerLostLifeNonCombatWatcher watcher = (PlayerLostLifeNonCombatWatcher) game.getState().getWatcher(PlayerLostLifeNonCombatWatcher.class);
         if(watcher != null) {
             return watcher.getAllOppLifeLost(source.getControllerId(), game);
         }

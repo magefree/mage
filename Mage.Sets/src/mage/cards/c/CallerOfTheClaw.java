@@ -114,7 +114,7 @@ class CallerOfTheClawDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CallerOfTheClawWatcher watcher = (CallerOfTheClawWatcher) game.getState().getWatchers().get(CallerOfTheClawWatcher.class.getSimpleName(), sourceAbility.getControllerId());
+        CallerOfTheClawWatcher watcher = game.getState().getWatcher(CallerOfTheClawWatcher.class, sourceAbility.getControllerId());
         if (watcher != null) {
             return watcher.getCreaturesCount();
         }

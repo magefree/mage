@@ -52,7 +52,7 @@ public final class CustodiSoulcaller extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability.getClass().equals(AttacksTriggeredAbility.class)) {
             ability.getTargets().clear();
-            CustodiSoulcallerWatcher watcher = (CustodiSoulcallerWatcher) game.getState().getWatchers().get(CustodiSoulcallerWatcher.class.getSimpleName());
+            CustodiSoulcallerWatcher watcher = game.getState().getWatcher(CustodiSoulcallerWatcher.class);
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
             if (watcher != null && watcher.playersAttacked != null) {
                 int xValue = watcher.getNumberOfAttackedPlayers(sourcePermanent.getControllerId());

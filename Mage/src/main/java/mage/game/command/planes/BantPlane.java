@@ -107,7 +107,7 @@ class PlanarDieRollCostIncreasingEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
-            PlanarRollWatcher watcher = (PlanarRollWatcher) game.getState().getWatchers().get(PlanarRollWatcher.class.getSimpleName());
+            PlanarRollWatcher watcher = game.getState().getWatcher(PlanarRollWatcher.class);
             int rolledCounter = 0;
             if (watcher != null) {
                 rolledCounter = watcher.getNumberTimesPlanarDieRolled(activePlayer.getId());

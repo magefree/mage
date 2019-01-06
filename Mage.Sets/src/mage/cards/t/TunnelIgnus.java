@@ -53,7 +53,7 @@ class TunnelIgnusWatcher extends Watcher {
     protected Map<UUID, Integer> counts = new HashMap<>();
 
     public TunnelIgnusWatcher() {
-        super(TunnelIgnusWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(TunnelIgnusWatcher.class, WatcherScope.PLAYER);
     }
 
     public TunnelIgnusWatcher(final TunnelIgnusWatcher watcher) {
@@ -111,7 +111,7 @@ class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
-            TunnelIgnusWatcher watcher = (TunnelIgnusWatcher) game.getState().getWatchers().get(TunnelIgnusWatcher.class.getSimpleName(), this.controllerId);
+            TunnelIgnusWatcher watcher = (TunnelIgnusWatcher) game.getState().getWatcher(TunnelIgnusWatcher.class, this.controllerId);
             if (watcher != null && watcher.counts.get(permanent.getControllerId()) > 1) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));

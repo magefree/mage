@@ -21,6 +21,10 @@ public abstract class Watcher implements Serializable {
     protected boolean condition;
     protected final WatcherScope scope;
 
+    public Watcher(Class<? extends Watcher> watcherClass, WatcherScope scope){
+        this(watcherClass.getSimpleName(), scope);
+    }
+
     public Watcher(String basicKey, WatcherScope scope) {
         this.basicKey = basicKey;
         this.scope = scope;

@@ -69,7 +69,7 @@ class BloodcrazedGoblinEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get(BloodthirstWatcher.class.getSimpleName(), source.getControllerId()); // BloodthirstWatcher
+            BloodthirstWatcher watcher = game.getState().getWatcher(BloodthirstWatcher.class, source.getControllerId()); // BloodthirstWatcher
             return watcher != null && !watcher.conditionMet();
         }
         return false;

@@ -1,8 +1,5 @@
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -12,19 +9,18 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DarkbladeAgent extends CardImpl {
@@ -46,7 +42,7 @@ public final class DarkbladeAgent extends CardImpl {
                                 Duration.WhileOnBattlefield
                         ), DarkbladeAgentCondition.instance,
                         "As long as you've surveilled this turn, "
-                        + "{this} has deathtouch"
+                                + "{this} has deathtouch"
                 )
         );
         ability.addEffect(new ConditionalContinuousEffect(
@@ -56,7 +52,7 @@ public final class DarkbladeAgent extends CardImpl {
                         ), Duration.WhileOnBattlefield
                 ), DarkbladeAgentCondition.instance,
                 "and \"Whenever this creature deals "
-                + "combat damage to a player, draw a card.\""
+                        + "combat damage to a player, draw a card.\""
         ));
         this.addAbility(ability, new DarkbladeAgentWatcher());
     }
@@ -77,9 +73,8 @@ enum DarkbladeAgentCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         DarkbladeAgentWatcher watcher
-                = (DarkbladeAgentWatcher) game.getState().getWatchers().get(
-                        DarkbladeAgentWatcher.class.getSimpleName()
-                );
+                = game.getState().getWatcher(
+                DarkbladeAgentWatcher.class);
         return watcher != null
                 && watcher.getSurveiledThisTurn(source.getControllerId());
     }
@@ -87,10 +82,10 @@ enum DarkbladeAgentCondition implements Condition {
 
 class DarkbladeAgentWatcher extends Watcher {
 
-    private final Set<UUID> surveiledThisTurn = new HashSet();
+    private final Set<UUID> surveiledThisTurn = new HashSet<>();
 
     public DarkbladeAgentWatcher() {
-        super(DarkbladeAgentWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(DarkbladeAgentWatcher.class, WatcherScope.GAME);
     }
 
     public DarkbladeAgentWatcher(final DarkbladeAgentWatcher watcher) {

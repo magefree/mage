@@ -531,8 +531,21 @@ public class GameState implements Serializable, Copyable<GameState> {
         return this.turnMods;
     }
 
+    @Deprecated
     public Watchers getWatchers() {
         return this.watchers;
+    }
+
+    public <T extends Watcher> T getWatcher(Class<T> watcherClass) {
+        return watcherClass.cast(watchers.get(watcherClass.getSimpleName()));
+    }
+
+    public <T extends Watcher> T getWatcher(Class<T> watcherClass, UUID uuid) {
+        return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), uuid.toString()));
+    }
+
+    public <T extends Watcher> T getWatcher(Class<T> watcherClass,String prefix) {
+        return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), prefix));
     }
 
     public SpecialActions getSpecialActions() {
@@ -1102,6 +1115,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addWatcher(Watcher watcher) {
         this.watchers.add(watcher);
+    }
+
+    public void resetWatchers(){
+        this.watchers.reset();
     }
 
     public int getZoneChangeCounter(UUID objectId) {

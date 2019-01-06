@@ -62,7 +62,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.isActivePlayer(getControllerId())
                 && super.checkTrigger(event, game)) {
-            SentinelTowerWatcher watcher = (SentinelTowerWatcher) game.getState().getWatchers().get(SentinelTowerWatcher.class.getSimpleName());
+            SentinelTowerWatcher watcher = (SentinelTowerWatcher) game.getState().getWatcher(SentinelTowerWatcher.class);
             if (watcher == null) {
                 return false;
             }
@@ -101,7 +101,7 @@ class SentinelTowerWatcher extends Watcher {
     private final List<MageObjectReference> spellsThisTurn;
 
     SentinelTowerWatcher() {
-        super(SentinelTowerWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(SentinelTowerWatcher.class, WatcherScope.GAME);
         this.spellsThisTurn = new ArrayList<>();
     }
 

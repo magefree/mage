@@ -124,7 +124,7 @@ class ControllerDealtDamageByPiratesPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        DamagedByPiratesWatcher watcher = (DamagedByPiratesWatcher) game.getState().getWatchers().get(DamagedByPiratesWatcher.class.getSimpleName());
+        DamagedByPiratesWatcher watcher = game.getState().getWatcher(DamagedByPiratesWatcher.class);
         if (watcher != null) {
             return watcher.damagedByEnoughPirates(input.getControllerId(), game);
         }
