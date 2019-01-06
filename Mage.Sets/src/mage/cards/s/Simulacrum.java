@@ -47,7 +47,7 @@ class SimulacrumAmount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
-        AmountOfDamageAPlayerReceivedThisTurnWatcher watcher = (AmountOfDamageAPlayerReceivedThisTurnWatcher) game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
+        AmountOfDamageAPlayerReceivedThisTurnWatcher watcher = game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
         if(watcher != null) {
             return watcher.getAmountOfDamageReceivedThisTurn(source.getControllerId());
         }

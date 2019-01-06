@@ -79,7 +79,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Object object = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        Object object = game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (player != null && object instanceof String) {
             player.revealCards(player.getLogName() + " hand", player.getHand(), game, true);
             String namedCard = (String) object;

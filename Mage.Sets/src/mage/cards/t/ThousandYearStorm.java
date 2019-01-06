@@ -63,7 +63,7 @@ class ThousandYearStormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            ThousandYearWatcher watcher = (ThousandYearWatcher) game.getState().getWatcher(ThousandYearWatcher.class);
+            ThousandYearWatcher watcher = game.getState().getWatcher(ThousandYearWatcher.class);
             if (watcher != null) {
                 int numberOfCopies = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) - 1;
                 if (numberOfCopies > 0) {

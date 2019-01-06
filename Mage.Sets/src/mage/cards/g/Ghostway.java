@@ -76,7 +76,7 @@ class GhostwayEffect extends OneShotEffect {
 
             Cards cardsToReturn = new CardsImpl();
             for (Card exiled : toExile) {
-                if (((Permanent) exiled).getZoneChangeCounter(game) == game.getState().getZoneChangeCounter(exiled.getId()) - 1) {
+                if (exiled.getZoneChangeCounter(game) == game.getState().getZoneChangeCounter(exiled.getId()) - 1) {
                     cardsToReturn.add(exiled);
                 }
             }

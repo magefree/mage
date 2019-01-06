@@ -42,7 +42,7 @@ public final class TimeToReflect extends CardImpl {
         if (ability instanceof SpellAbility) {
             List<PermanentIdPredicate> creaturesThatBlockedOrWereBlockedByAZombie = new ArrayList<>();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that blocked or was blocked by a Zombie this turn.").copy();
-            BlockedOrWasBlockedByAZombieWatcher watcher = (BlockedOrWasBlockedByAZombieWatcher) game.getState().getWatcher(BlockedOrWasBlockedByAZombieWatcher.class);
+            BlockedOrWasBlockedByAZombieWatcher watcher = game.getState().getWatcher(BlockedOrWasBlockedByAZombieWatcher.class);
             if (watcher != null) {
                 for (MageObjectReference mor : watcher.getBlockedThisTurnCreatures()) {
                     Permanent permanent = mor.getPermanent(game);

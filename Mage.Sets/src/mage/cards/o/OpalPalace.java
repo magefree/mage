@@ -130,7 +130,7 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        OpalPalaceWatcher watcher = (OpalPalaceWatcher) game.getState().getWatcher(OpalPalaceWatcher.class, source.getSourceId());
+        OpalPalaceWatcher watcher = game.getState().getWatcher(OpalPalaceWatcher.class, source.getSourceId());
         return watcher != null
                 && watcher.commanderId.contains(event.getTargetId());
     }

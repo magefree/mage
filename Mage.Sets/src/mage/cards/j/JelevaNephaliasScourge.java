@@ -84,7 +84,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatcher(JelevaNephaliasWatcher.class);
+        JelevaNephaliasWatcher watcher = game.getState().getWatcher(JelevaNephaliasWatcher.class);
         if (controller != null && sourceObject != null && watcher != null) {
             int xValue = watcher.getManaSpentToCastLastTime(sourceObject.getId(), sourceObject.getZoneChangeCounter(game) - 1);
             if (xValue > 0) {

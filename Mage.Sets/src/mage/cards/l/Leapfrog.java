@@ -62,7 +62,7 @@ enum LeapfrogCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         SpellsCastWatcher watcher
-                = (SpellsCastWatcher) game.getState().getWatcher(
+                = game.getState().getWatcher(
                         SpellsCastWatcher.class
                 );
         if (watcher == null) {

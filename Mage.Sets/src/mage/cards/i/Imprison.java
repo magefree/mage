@@ -145,7 +145,7 @@ class ImprisonUnblockEffect extends OneShotEffect {
                     effect.apply(game, source);
     
                     // Make blocked creatures unblocked
-                    BlockedByOnlyOneCreatureThisCombatWatcher watcher = (BlockedByOnlyOneCreatureThisCombatWatcher) game.getState().getWatcher(BlockedByOnlyOneCreatureThisCombatWatcher.class);
+                    BlockedByOnlyOneCreatureThisCombatWatcher watcher = game.getState().getWatcher(BlockedByOnlyOneCreatureThisCombatWatcher.class);
                     if (watcher != null) {
                         Set<CombatGroup> combatGroups = watcher.getBlockedOnlyByCreature(permanent.getId());
                         if (combatGroups != null) {

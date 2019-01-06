@@ -55,7 +55,7 @@ enum SummoningTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SummoningTrapWatcher watcher = (SummoningTrapWatcher) game.getState().getWatcher(SummoningTrapWatcher.class);
+        SummoningTrapWatcher watcher = game.getState().getWatcher(SummoningTrapWatcher.class);
         return watcher != null && watcher.creatureSpellOfPlayerWasCountered(source.getControllerId());
     }
 

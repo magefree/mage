@@ -68,7 +68,7 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
             GontisMachinationsFirstLostLifeThisTurnWatcher watcher
-                    = (GontisMachinationsFirstLostLifeThisTurnWatcher) game.getState().getWatcher(GontisMachinationsFirstLostLifeThisTurnWatcher.class);
+                    = game.getState().getWatcher(GontisMachinationsFirstLostLifeThisTurnWatcher.class);
             if (watcher != null && watcher.timesLostLifeThisTurn(event.getTargetId()) < 2) {
                 return true;
             }

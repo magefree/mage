@@ -160,7 +160,7 @@ class MaddeningImpDelayedDestroyEffect extends OneShotEffect {
                     continue;
                 }
                 // Creatures that attacked are safe.
-                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatcher(AttackedThisTurnWatcher.class);
+                AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
                 if (watcher != null && watcher.getAttackedThisTurnCreatures().contains(mor)) {
                     continue;
                 }

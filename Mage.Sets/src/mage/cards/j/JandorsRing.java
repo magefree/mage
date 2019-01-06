@@ -71,7 +71,7 @@ class JandorsRingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        JandorsRingWatcher watcher = (JandorsRingWatcher) game.getState().getWatcher(JandorsRingWatcher.class);
+        JandorsRingWatcher watcher = game.getState().getWatcher(JandorsRingWatcher.class);
         if (watcher != null) {
             UUID cardId = watcher.getLastDrewCard(source.getControllerId());
             Card card = game.getCard(cardId);
@@ -134,7 +134,7 @@ enum WatchedCardInHandCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        JandorsRingWatcher watcher = (JandorsRingWatcher) game.getState().getWatcher(JandorsRingWatcher.class);
+        JandorsRingWatcher watcher = game.getState().getWatcher(JandorsRingWatcher.class);
 
         return watcher != null
                 && watcher.lastDrawnCards != null && game.getPlayer(source.getControllerId()).getHand().contains(watcher.getLastDrewCard(source.getControllerId()));

@@ -72,7 +72,7 @@ class SylvanLibraryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.drawCards(2, game);
-            SylvanLibraryCardsDrawnThisTurnWatcher watcher = (SylvanLibraryCardsDrawnThisTurnWatcher) game.getState().getWatcher(SylvanLibraryCardsDrawnThisTurnWatcher.class);
+            SylvanLibraryCardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(SylvanLibraryCardsDrawnThisTurnWatcher.class);
             if (watcher != null) {
                 Cards cards = new CardsImpl();
                 Set<UUID> cardsDrawnThisTurn = watcher.getCardsDrawnThisTurn(controller.getId());

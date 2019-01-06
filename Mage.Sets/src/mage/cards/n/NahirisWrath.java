@@ -44,7 +44,7 @@ public final class NahirisWrath extends CardImpl {
         int numTargets = 0;
         for (VariableCost cost : ability.getCosts().getVariableCosts()) {
             if (cost instanceof NahirisWrathAdditionalCost) {
-                numTargets = ((NahirisWrathAdditionalCost) cost).getAmount();
+                numTargets = cost.getAmount();
                 break;
             }
         }

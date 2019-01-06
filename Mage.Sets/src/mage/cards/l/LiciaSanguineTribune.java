@@ -112,7 +112,7 @@ class YouGainLifeCount implements DynamicValue {
     }
 
     public int calculate(Game game, UUID controllerId) {
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatcher(PlayerGainedLifeWatcher.class);
+        PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
         if (watcher != null) {
             return watcher.getLifeGained(controllerId);
         }

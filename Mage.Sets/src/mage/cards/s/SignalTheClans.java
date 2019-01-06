@@ -69,7 +69,7 @@ class SignalTheClansEffect extends SearchEffect {
         if (player.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
+                for (UUID cardId: target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null){
                         cards.add(card);

@@ -153,7 +153,7 @@ class GrandWarlordRadhaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreaturesAttackedWatcher watcher = (CreaturesAttackedWatcher) game.getState().getWatcher(CreaturesAttackedWatcher.class);
+            CreaturesAttackedWatcher watcher = game.getState().getWatcher(CreaturesAttackedWatcher.class);
             if (watcher != null) {
                 int attackingCreatures = 0;
                 for (MageObjectReference attacker : watcher.getAttackedThisTurnCreatures()) {

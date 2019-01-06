@@ -71,7 +71,7 @@ class KytheonHeroOfAkrosCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (sourceObject != null) {
-            AttackedOrBlockedThisCombatWatcher watcher = (AttackedOrBlockedThisCombatWatcher) game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+            AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
             if (watcher != null) {
                 boolean sourceFound = false;
                 int number = 0;

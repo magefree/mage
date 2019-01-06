@@ -74,7 +74,7 @@ class ReversalOfFortuneEffect extends OneShotEffect {
             TargetCard target = new TargetCard(1, Zone.HAND, new FilterInstantOrSorceryCard());
             target.setRequired(false);
             if (controller.choose(outcome, revealedCards, target, game)) {
-                Card card = revealedCards.get((UUID) target.getFirstTarget(), game);
+                Card card = revealedCards.get(target.getFirstTarget(), game);
                 //If you do, you may cast the copy without paying its mana cost
                 if (card != null) {
                     Card copiedCard = game.copyCard(card, source, source.getControllerId());

@@ -62,7 +62,7 @@ class InsatiableRakghoulEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            NonArtifactCreaturesDiedWatcher watcher = (NonArtifactCreaturesDiedWatcher) game.getState().getWatcher(NonArtifactCreaturesDiedWatcher.class);
+            NonArtifactCreaturesDiedWatcher watcher = game.getState().getWatcher(NonArtifactCreaturesDiedWatcher.class);
             if (watcher != null && watcher.conditionMet()) {
                 Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {

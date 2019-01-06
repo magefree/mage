@@ -58,7 +58,7 @@ class ShadowOfTheGraveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        CardsCycledOrDiscardedThisTurnWatcher watcher = (CardsCycledOrDiscardedThisTurnWatcher) game.getState().getWatcher(CardsCycledOrDiscardedThisTurnWatcher.class);
+        CardsCycledOrDiscardedThisTurnWatcher watcher = game.getState().getWatcher(CardsCycledOrDiscardedThisTurnWatcher.class);
         if (controller != null
                 && watcher != null) {
             for (Card card : watcher.getCardsCycledOrDiscardedThisTurn(controller.getId()).getCards(game)) {

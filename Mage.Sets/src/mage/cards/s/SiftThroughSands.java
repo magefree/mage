@@ -66,7 +66,7 @@ class SiftThroughSandsCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SiftThroughSandsWatcher watcher = (SiftThroughSandsWatcher) game.getState().getWatcher(SiftThroughSandsWatcher.class, source.getControllerId());
+        SiftThroughSandsWatcher watcher = game.getState().getWatcher(SiftThroughSandsWatcher.class, source.getControllerId());
         if (watcher != null) {
             return watcher.conditionMet();
         }

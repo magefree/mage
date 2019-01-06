@@ -119,11 +119,11 @@ class ToshiroUmezawaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        UUID eventObject = ((ZoneChangeEvent) event).getTargetId();
+        UUID eventObject = event.getTargetId();
         StackObject stackObject = game.getStack().getStackObject(eventObject);
         if (stackObject != null) {
             if (stackObject instanceof Spell) {
-                game.rememberLKI(stackObject.getId(), Zone.STACK, (Spell) stackObject);
+                game.rememberLKI(stackObject.getId(), Zone.STACK, stackObject);
             }
             if (stackObject instanceof Card && eventObject.equals(cardId)) {
                 ((Card) stackObject).moveToExile(null, null, source.getSourceId(), game);
@@ -142,6 +142,6 @@ class ToshiroUmezawaReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getTargetId().equals(cardId);
+                && event.getTargetId().equals(cardId);
     }
 }

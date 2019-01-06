@@ -161,6 +161,6 @@ class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getTargetId().equals(getTargetPointer().getFirst(game, source));
+                && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 }

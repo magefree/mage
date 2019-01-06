@@ -78,7 +78,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
         StackObject stackObject = game.getStack().getStackObject(objectId);
         if (stackObject != null
                 && game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.EXILED, false, ZoneDetail.NONE)) {
-            if (!((Spell) stackObject).isCopy()) {
+            if (!stackObject.isCopy()) {
                 MageObject card = game.getObject(stackObject.getSourceId());
                 if (card instanceof Card) {
                     ((Card) card).moveToZone(Zone.EXILED, sourceId, game, true);

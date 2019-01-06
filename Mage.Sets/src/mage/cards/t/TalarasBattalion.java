@@ -94,7 +94,7 @@ class CastGreenSpellThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TalarasBattalionWatcher watcher = (TalarasBattalionWatcher) game.getState().getWatcher(TalarasBattalionWatcher.class, source.getControllerId());
+        TalarasBattalionWatcher watcher = game.getState().getWatcher(TalarasBattalionWatcher.class, source.getControllerId());
         if (watcher != null) {
             return watcher.conditionMet();
         }

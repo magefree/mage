@@ -119,7 +119,7 @@ enum YouLostNoLifeThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatcher(PlayerLostLifeWatcher.class);
+        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         if (watcher != null) {
             return (watcher.getLifeLost(source.getControllerId()) == 0);
         }

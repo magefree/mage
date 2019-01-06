@@ -162,7 +162,7 @@ class PsychicTheftCondition implements Condition {
         if (!game.getExile().getExileZone(exileId).contains(cardId)) {
             return false;
         }
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatcher(SpellsCastWatcher.class, source.getSourceId());
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class, source.getSourceId());
         if (watcher != null) {
             List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spells != null) {

@@ -98,7 +98,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = (Permanent) game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent target = game.getPermanent(this.targetPointer.getFirst(game, source));
         if (target != null) {
             target.addPower(power);
             return true;

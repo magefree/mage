@@ -35,7 +35,7 @@ public final class DestinedLead extends SplitCard {
         // to
         // Lead
         // All creatures able to block target creature this turn must do so.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getRightHalfCard().getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
     }

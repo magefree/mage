@@ -75,7 +75,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        watcher = (SavageSummoningWatcher) game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
+        watcher = game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher != null && card != null) {
             watcher.setSavageSummoningSpellActive(card, game);
@@ -207,7 +207,7 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public void init(Ability source, Game game) {
-        watcher = (SavageSummoningWatcher) game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
+        watcher = game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher == null || card == null) {
             throw new IllegalArgumentException("Consume Savage watcher or card could not be found");
@@ -265,7 +265,7 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        watcher = (SavageSummoningWatcher) game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
+        watcher = game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher == null || card == null) {
             throw new IllegalArgumentException("Consume Savage watcher or card could not be found");

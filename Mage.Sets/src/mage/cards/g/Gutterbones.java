@@ -56,7 +56,7 @@ enum GutterbonesCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (game.isActivePlayer(source.getControllerId())) {
-            PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatcher(PlayerLostLifeWatcher.class);
+            PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
             return watcher != null && watcher.getAllOppLifeLost(source.getControllerId(), game) > 0;
         }
         return false;

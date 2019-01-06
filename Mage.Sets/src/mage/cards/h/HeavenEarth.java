@@ -38,7 +38,7 @@ public final class HeavenEarth extends SplitCard {
         // to
         // Earth
         // Earth deals X damage to each creature without flying.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filterWithouFlying));
     }
 

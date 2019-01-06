@@ -60,8 +60,8 @@ public final class VizierOfDeferment extends CardImpl {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             List<PermanentIdPredicate> creaturesThatCanBeTargeted = new ArrayList<>();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that attacked or blocked this turn.");
-            AttackedThisTurnWatcher watcherAttacked = (AttackedThisTurnWatcher) game.getState().getWatcher(AttackedThisTurnWatcher.class);
-            BlockedThisTurnWatcher watcherBlocked = (BlockedThisTurnWatcher) game.getState().getWatcher(BlockedThisTurnWatcher.class);
+            AttackedThisTurnWatcher watcherAttacked = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+            BlockedThisTurnWatcher watcherBlocked = game.getState().getWatcher(BlockedThisTurnWatcher.class);
             if (watcherAttacked != null) {
                 for (MageObjectReference mor : watcherAttacked.getAttackedThisTurnCreatures()) {
                     Permanent permanent = mor.getPermanent(game);

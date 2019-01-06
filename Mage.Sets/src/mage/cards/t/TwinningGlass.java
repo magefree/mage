@@ -75,7 +75,7 @@ class TwinningGlassEffect extends OneShotEffect {
         filterCard.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         Permanent twinningGlass = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatcher(SpellsCastWatcher.class);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (twinningGlass == null) {
             twinningGlass = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }

@@ -89,7 +89,7 @@ class PrizedAmalgamTriggerdAbility extends EntersBattlefieldAllTriggeredAbility 
             if (entersEvent.getFromZone() == Zone.GRAVEYARD) {
                 result = true;
             } else if (entersEvent.getFromZone() == Zone.STACK && entersEvent.getTarget().isControlledBy(getControllerId())) {
-                CastFromGraveyardWatcher watcher = (CastFromGraveyardWatcher) game.getState().getWatcher(CastFromGraveyardWatcher.class);
+                CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
                 if (watcher != null) {
                     int zcc = game.getState().getZoneChangeCounter(event.getSourceId());
                     result = watcher.spellWasCastFromGraveyard(event.getSourceId(), zcc - 1);

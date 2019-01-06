@@ -78,7 +78,7 @@ class MythUnboundCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Ability spellAbility = (SpellAbility) abilityToModify;
+        Ability spellAbility = abilityToModify;
         if (spellAbility != null) {
             Integer amount = (Integer) game.getState().getValue(abilityToModify.getControllerId() + "_castCount");
             if (amount != null && amount > 0) {

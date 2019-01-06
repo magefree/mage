@@ -62,7 +62,7 @@ enum GreatestAmountOfDamageDealtValue implements DynamicValue, MageSingleton {
     }
 
     public int calculate(Game game, UUID controllerId) {
-        GreatestAmountOfDamageWatcher watcher = (GreatestAmountOfDamageWatcher) game.getState().getWatcher(GreatestAmountOfDamageWatcher.class);
+        GreatestAmountOfDamageWatcher watcher = game.getState().getWatcher(GreatestAmountOfDamageWatcher.class);
         if (watcher != null) {
             return watcher.getGreatestAmountOfDamage();
         }

@@ -81,7 +81,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
                 Cards cardsToExile = new CardsImpl();
                 cardsToExile.add(copyFromCard);
                 controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-                newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
+                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 ApplyToPermanent applier = new DimirDoppelgangerApplier();
                 applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());

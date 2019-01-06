@@ -112,8 +112,8 @@ enum KrovikanVampireInterveningIfCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        KrovikanVampireCreaturesDiedWatcher watcherDied = (KrovikanVampireCreaturesDiedWatcher) game.getState().getWatcher(KrovikanVampireCreaturesDiedWatcher.class);
-        KrovikanVampireCreaturesDamagedWatcher watcherDamaged = (KrovikanVampireCreaturesDamagedWatcher) game.getState().getWatcher(KrovikanVampireCreaturesDamagedWatcher.class);
+        KrovikanVampireCreaturesDiedWatcher watcherDied = game.getState().getWatcher(KrovikanVampireCreaturesDiedWatcher.class);
+        KrovikanVampireCreaturesDamagedWatcher watcherDamaged = game.getState().getWatcher(KrovikanVampireCreaturesDamagedWatcher.class);
         if (watcherDied != null) {
             Set<UUID> creaturesThatDiedThisTurn = watcherDied.diedThisTurn;
             for (UUID mor : creaturesThatDiedThisTurn) {

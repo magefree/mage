@@ -88,7 +88,7 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
                 && source.isControlledBy(game.getOwnerId(objectId)) // only from your graveyard
                 && affectedControllerId.equals(game.getActivePlayerId()) // only during your turns (e.g. prevent flash creatures)
                 && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
-            MuldrothaTheGravetideWatcher watcher = (MuldrothaTheGravetideWatcher) game.getState().getWatcher(MuldrothaTheGravetideWatcher.class);
+            MuldrothaTheGravetideWatcher watcher = game.getState().getWatcher(MuldrothaTheGravetideWatcher.class);
             MageObject mageObject = game.getObject(objectId);
             if (mageObject != null && watcher != null) {
                 for (CardType cardType : mageObject.getCardType()) {

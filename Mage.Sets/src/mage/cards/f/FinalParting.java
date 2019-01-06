@@ -69,7 +69,7 @@ class FinalPartingEffect extends OneShotEffect {
             if (controller.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards searched = new CardsImpl();
-                    for (UUID cardId : (List<UUID>) target.getTargets()) {
+                    for (UUID cardId : target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);
                         searched.add(card);
                     }

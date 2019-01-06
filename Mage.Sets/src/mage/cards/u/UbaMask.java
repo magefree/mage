@@ -68,7 +68,7 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
                 if (player.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
-                    UbaMaskExiledCardsWatcher watcher = (UbaMaskExiledCardsWatcher) game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
+                    UbaMaskExiledCardsWatcher watcher = game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
                     if (watcher != null) {
                         watcher.addExiledCard(event.getPlayerId(), card, game);
                     }
@@ -116,7 +116,7 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
         if (card != null
                 && affectedControllerId.equals(card.getOwnerId())
                 && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            UbaMaskExiledCardsWatcher watcher = (UbaMaskExiledCardsWatcher) game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
+            UbaMaskExiledCardsWatcher watcher = game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
             if (watcher != null) {
                 List<MageObjectReference> exiledThisTurn = watcher.getUbaMaskExiledCardsThisTurn(affectedControllerId);
                 return exiledThisTurn != null

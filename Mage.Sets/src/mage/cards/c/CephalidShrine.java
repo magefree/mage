@@ -109,7 +109,7 @@ class CephalidShrineEffect extends OneShotEffect {
                     }
                     // even if the cost is 0, we still offer
                     Cost cost = new GenericManaCost(count);
-                    if (game.getStack().contains((StackObject) spell)
+                    if (game.getStack().contains(spell)
                             && cost.canPay(source, source.getSourceId(), controller.getId(), game)
                             && controller.chooseUse(outcome, "Pay " + cost.getText() + " to prevent countering " + spell.getName() + "?", source, game)
                             && cost.pay(source, game, source.getSourceId(), controller.getId(), false)

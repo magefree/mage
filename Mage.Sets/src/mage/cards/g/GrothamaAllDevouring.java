@@ -148,7 +148,7 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        GrothamaAllDevouringWatcher watcher = (GrothamaAllDevouringWatcher) game.getState().getWatcher(GrothamaAllDevouringWatcher.class);
+        GrothamaAllDevouringWatcher watcher = game.getState().getWatcher(GrothamaAllDevouringWatcher.class);
         if (watcher == null) {
             return false;
         }

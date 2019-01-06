@@ -90,7 +90,7 @@ class DefilerOfSoulsEffect extends OneShotEffect {
             }
 
             for ( int idx = 0; idx < target.getTargets().size(); idx++) {
-                Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
+                Permanent permanent = game.getPermanent(target.getTargets().get(idx));
 
                 if ( permanent != null ) {
                     abilityApplied |= permanent.sacrifice(source.getSourceId(), game);

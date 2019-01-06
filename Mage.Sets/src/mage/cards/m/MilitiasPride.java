@@ -64,7 +64,7 @@ class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
         filter.add(Predicates.not(new TokenPredicate()));
-        Permanent permanent = (Permanent) game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null && filter.match(permanent, sourceId, controllerId, game);
     }
 

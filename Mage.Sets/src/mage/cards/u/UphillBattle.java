@@ -108,8 +108,8 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        CreatureWasCastWatcher creatureSpellWatcher = (CreatureWasCastWatcher) game.getState().getWatcher(CreatureWasCastWatcher.class);
-        PlayCreatureLandWatcher landWatcher = (PlayCreatureLandWatcher) game.getState().getWatcher(PlayCreatureLandWatcher.class);
+        CreatureWasCastWatcher creatureSpellWatcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
+        PlayCreatureLandWatcher landWatcher = game.getState().getWatcher(PlayCreatureLandWatcher.class);
 
         if (target != null
                 && ((creatureSpellWatcher != null && creatureSpellWatcher.wasCreatureCastThisTurn(target.getId()))

@@ -42,7 +42,7 @@ public final class LeaveChance extends SplitCard {
         // Chance
         // Sorcery
         // Aftermath
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Discard any number of cards, then draw that many cards.
         getRightHalfCard().getSpellAbility().addEffect(new ChanceEffect());
 

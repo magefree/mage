@@ -114,7 +114,7 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        GeneratorServantWatcher watcher = (GeneratorServantWatcher) game.getState().getWatcher(GeneratorServantWatcher.class, source.getSourceId());
+        GeneratorServantWatcher watcher = game.getState().getWatcher(GeneratorServantWatcher.class, source.getSourceId());
         if (watcher != null) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
                 if (watcher.creatures.contains(perm.getId())) {

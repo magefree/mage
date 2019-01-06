@@ -80,7 +80,7 @@ enum RasputinDreamweaverStartedUntappedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        RasputinDreamweaverStartedUntappedWatcher watcher = (RasputinDreamweaverStartedUntappedWatcher) game.getState().getWatcher(RasputinDreamweaverStartedUntappedWatcher.class);
+        RasputinDreamweaverStartedUntappedWatcher watcher = game.getState().getWatcher(RasputinDreamweaverStartedUntappedWatcher.class);
         if (watcher != null) {
             return watcher.startedUntapped(source.getSourceId());
         }

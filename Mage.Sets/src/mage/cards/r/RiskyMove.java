@@ -76,8 +76,8 @@ class RiskyMoveGetControlEffect extends OneShotEffect {
             // remove old control effects of the same player
             for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
                 if (effect instanceof GainControlTargetEffect) {
-                    UUID checkId = (UUID) ((GainControlTargetEffect) effect).getValue("RiskyMoveSourceId");
-                    UUID controllerId = (UUID) ((GainControlTargetEffect) effect).getValue("RiskyMoveControllerId");
+                    UUID checkId = (UUID) effect.getValue("RiskyMoveSourceId");
+                    UUID controllerId = (UUID) effect.getValue("RiskyMoveControllerId");
                     if (source.getSourceId().equals(checkId) && newController.getId().equals(controllerId)) {
                         effect.discard();
                     }

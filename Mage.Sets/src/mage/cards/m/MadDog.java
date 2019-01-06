@@ -58,8 +58,8 @@ enum MadDogCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent madDog = game.getPermanent(source.getSourceId());
-        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
-        AttackedThisTurnWatcher watcher2 = (AttackedThisTurnWatcher) game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
+        AttackedThisTurnWatcher watcher2 = game.getState().getWatcher(AttackedThisTurnWatcher.class);
         if (watcher != null
                 && watcher2 != null
                 && madDog != null) {

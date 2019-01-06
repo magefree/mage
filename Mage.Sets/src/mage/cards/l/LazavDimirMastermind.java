@@ -80,7 +80,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
                 && lazavDimirMastermind != null) {
             Card copyFromCard = game.getCard(((FixedTarget) getTargetPointer()).getTarget());
             if (copyFromCard != null) {
-                newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
+                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 ApplyToPermanent applier = new LazavDimirMastermindApplier();
                 applier.apply(game, newBluePrint, source, lazavDimirMastermind.getId());

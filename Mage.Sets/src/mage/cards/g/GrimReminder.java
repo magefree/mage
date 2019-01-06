@@ -93,7 +93,7 @@ class GrimReminderEffect extends OneShotEffect {
                     Cards cardsToReveal = new CardsImpl(card);
                     controller.revealCards(sourceObject.getIdName(), cardsToReveal, game);
                     String cardName = card.getName();
-                    GrimReminderWatcher watcher = (GrimReminderWatcher) game.getState().getWatcher(GrimReminderWatcher.class);
+                    GrimReminderWatcher watcher = game.getState().getWatcher(GrimReminderWatcher.class);
                     if (watcher != null) {
                         for (UUID playerId : watcher.getPlayersCastSpell(cardName)) {
                             Player player = game.getPlayer(playerId);

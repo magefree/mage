@@ -82,7 +82,7 @@ class PetrifiedWoodKinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        DamageDoneWatcher watcher = (DamageDoneWatcher) game.getState().getWatcher(DamageDoneWatcher.class);
+        DamageDoneWatcher watcher = game.getState().getWatcher(DamageDoneWatcher.class);
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (player == null || watcher == null || permanent == null) {
             return false;

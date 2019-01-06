@@ -79,7 +79,7 @@ public final class MasterWarcraft extends CardImpl {
     
         @Override
         public boolean apply(Game game, Ability source) {
-            MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatcher(MasterWarcraftCastWatcher.class);
+            MasterWarcraftCastWatcher watcher = game.getState().getWatcher(MasterWarcraftCastWatcher.class);
             if (watcher != null) {
                 watcher.increment();
                 return true;
@@ -105,7 +105,7 @@ public final class MasterWarcraft extends CardImpl {
     
         @Override
         public boolean apply(Game game, Ability source) {
-            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
+            ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
             if (watcher != null) {
                 watcher.increment();
                 return true;
@@ -153,7 +153,7 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatcher(MasterWarcraftCastWatcher.class);
+        MasterWarcraftCastWatcher watcher = game.getState().getWatcher(MasterWarcraftCastWatcher.class);
         if(watcher == null){
             return false;
         }

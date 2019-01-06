@@ -179,7 +179,7 @@ class DireFleetDaredevilReplacementEffect extends ReplacementEffectImpl {
         StackObject stackObject = game.getStack().getStackObject(eventObject);
         if (stackObject != null) {
             if (stackObject instanceof Spell) {
-                game.rememberLKI(stackObject.getId(), Zone.STACK, (Spell) stackObject);
+                game.rememberLKI(stackObject.getId(), Zone.STACK, stackObject);
             }
             if (stackObject instanceof Card
                     && stackObject.getSourceId().equals(((FixedTarget) getTargetPointer()).getTarget())
@@ -201,6 +201,6 @@ class DireFleetDaredevilReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getTargetId().equals(((FixedTarget) getTargetPointer()).getTarget());
+                && event.getTargetId().equals(((FixedTarget) getTargetPointer()).getTarget());
     }
 }

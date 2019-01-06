@@ -143,7 +143,7 @@ class VodalianWarMachineEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null) {
-            VodalianWarMachineWatcher watcher = (VodalianWarMachineWatcher) game.getState().getWatcher(VodalianWarMachineWatcher.class);
+            VodalianWarMachineWatcher watcher = game.getState().getWatcher(VodalianWarMachineWatcher.class);
             if (watcher != null && watcher.getTappedMerfolkIds(sourcePermanent, game) != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (watcher.getTappedMerfolkIds(sourcePermanent, game).contains(new MageObjectReference(permanent, game))) {

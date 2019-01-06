@@ -61,7 +61,7 @@ enum RicochetTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatcher(SpellsCastWatcher.class);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);
