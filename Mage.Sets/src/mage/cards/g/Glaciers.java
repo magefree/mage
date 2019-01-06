@@ -96,7 +96,7 @@ public final class Glaciers extends CardImpl {
         public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
             return allEffectsInLayer
                     .stream()
-                    .filter(effect->.getDependencyTypes().contains(DependencyType.BecomeMountain))
+                    .filter(effect->effect.getDependencyTypes().contains(DependencyType.BecomeMountain))
                     .map(Effect::getId)
                     .collect(Collectors.toSet());
         }
