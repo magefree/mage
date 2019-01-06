@@ -70,7 +70,7 @@ class ApocalypseHydraEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent != null) {
+        if (permanent == null) {
             return false;
         }
         SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
