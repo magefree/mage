@@ -33,7 +33,7 @@ public final class Glaciers extends CardImpl {
     public Glaciers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{U}");
 
-        // At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{U}.
+        // At the beginning of your upkeep, sacrifice Glaciers unless you pay {W}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{U}")), TargetController.YOU, false));
 
         // All Mountains are Plains.
