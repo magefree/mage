@@ -80,6 +80,7 @@ public enum CounterType {
     MINE("mine"),
     MINING("mining"),
     MIRE("mire"),
+    MUSIC("music"),
     MUSTER("muster"),
     NET("net"),
     OMEN("omen"),

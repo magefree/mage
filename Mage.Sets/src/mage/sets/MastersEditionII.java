@@ -161,6 +161,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Groundbreaker", 215, Rarity.UNCOMMON, mage.cards.m.MishrasGroundbreaker.class));
         cards.add(new SetCardInfo("Misinformation", 105, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mudslide", 136, Rarity.RARE, mage.cards.m.Mudslide.class));
+        cards.add(new SetCardInfo("Musician", 56, Rarity.RARE, mage.cards.m.Musician.class));
         cards.add(new SetCardInfo("Narwhal", 57, Rarity.UNCOMMON, mage.cards.n.Narwhal.class));
         cards.add(new SetCardInfo("Nature's Blessing", 196, Rarity.UNCOMMON, mage.cards.n.NaturesBlessing.class));
         cards.add(new SetCardInfo("Nature's Wrath", 172, Rarity.RARE, mage.cards.n.NaturesWrath.class));

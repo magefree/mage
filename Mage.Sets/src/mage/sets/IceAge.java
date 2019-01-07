@@ -162,6 +162,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Icy Manipulator", 322, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Icy Prison", 74, Rarity.RARE, mage.cards.i.IcyPrison.class));
         cards.add(new SetCardInfo("Illusionary Forces", 75, Rarity.COMMON, mage.cards.i.IllusionaryForces.class));
+        cards.add(new SetCardInfo("Illusionary Terrain", 77, Rarity.UNCOMMON, mage.cards.i.IllusionaryTerrain.class));
         cards.add(new SetCardInfo("Illusionary Wall", 78, Rarity.COMMON, mage.cards.i.IllusionaryWall.class));
         cards.add(new SetCardInfo("Illusions of Grandeur", 79, Rarity.RARE, mage.cards.i.IllusionsOfGrandeur.class));
         cards.add(new SetCardInfo("Imposing Visage", 193, Rarity.COMMON, mage.cards.i.ImposingVisage.class));
@@ -231,6 +232,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 377, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 378, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mudslide", 204, Rarity.RARE, mage.cards.m.Mudslide.class));
+        cards.add(new SetCardInfo("Musician", 85, Rarity.RARE, mage.cards.m.Musician.class));
         cards.add(new SetCardInfo("Mystic Might", 86, Rarity.RARE, mage.cards.m.MysticMight.class));
         cards.add(new SetCardInfo("Mystic Remora", 87, Rarity.COMMON, mage.cards.m.MysticRemora.class));
         cards.add(new SetCardInfo("Nacre Talisman", 329, Rarity.UNCOMMON, mage.cards.n.NacreTalisman.class));
