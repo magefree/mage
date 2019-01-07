@@ -62,10 +62,10 @@ class LightUpTheStageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null) {
             Set<Card> cards = controller.getLibrary().getTopCards(game, 2);
-            controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName());
+            Card sourceCard = game.getCard(source.getSourceId());
+            controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard != null ? sourceCard.getIdName() : "");
 
             for (Card card : cards) {
                 ContinuousEffect effect = new LightUpTheStageMayPlayEffect();
@@ -107,9 +107,7 @@ class LightUpTheStageMayPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (castOnTurn != game.getTurnNum() && game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
-            if (game.isActivePlayer(source.getControllerId())) {
-                return true;
-            }
+            return game.isActivePlayer(source.getControllerId());
         }
         return false;
     }

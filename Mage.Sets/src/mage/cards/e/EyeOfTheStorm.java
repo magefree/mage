@@ -124,11 +124,9 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                     && !eyeOfTheStorm.getImprinted().isEmpty()) {
                 CardsImpl copiedCards = new CardsImpl();
                 for (UUID uuid : eyeOfTheStorm.getImprinted()) {
-                    card = game.getCard(uuid);
-
                     // Check if owner of card is still in game
-                    if (card != null
-                            && game.getPlayer(card.getOwnerId()) != null) {
+                    card = game.getCard(uuid);
+                    if (card != null && game.getPlayer(card.getOwnerId()) != null) {
                         if (card.isSplitCard()) {
                             copiedCards.add(((SplitCard) card).getLeftHalfCard());
                             copiedCards.add(((SplitCard) card).getRightHalfCard());

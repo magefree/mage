@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,11 +10,7 @@ import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
@@ -26,8 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class IxalansBinding extends CardImpl {
@@ -80,10 +75,10 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Card card = game.getCard(event.getSourceId());
-        if(event.getPlayerId().equals(source.getControllerId())){
+        if (event.getPlayerId().equals(source.getControllerId())) {
             return false;
         }
+        Card card = game.getCard(event.getSourceId());
         if (sourcePermanent != null && card != null) {
             UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileZone != null) {
