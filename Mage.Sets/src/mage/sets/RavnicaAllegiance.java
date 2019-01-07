@@ -116,6 +116,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
         cards.add(new SetCardInfo("Titanic Brawl", 146, Rarity.COMMON, mage.cards.t.TitanicBrawl.class));
         cards.add(new SetCardInfo("Tithe Taker", 27, Rarity.RARE, mage.cards.t.TitheTaker.class));
+        cards.add(new SetCardInfo("Trollbred Guardian", 148, Rarity.UNCOMMON, mage.cards.t.TrollbredGuardian.class));
         cards.add(new SetCardInfo("Verity Circle", 58, Rarity.RARE, mage.cards.v.VerityCircle.class));
         cards.add(new SetCardInfo("Wilderness Reclamation", 149, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
         cards.add(new SetCardInfo("Zegana, Utopian Speaker", 214, Rarity.RARE, mage.cards.z.ZeganaUtopianSpeaker.class));
