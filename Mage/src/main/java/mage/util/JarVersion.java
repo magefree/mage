@@ -1,13 +1,12 @@
 package mage.util;
 
-import org.apache.log4j.Logger;
-
 import java.net.URL;
-import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+import org.apache.log4j.Logger;
 
 /**
  * @author JayDi85
@@ -39,9 +38,10 @@ public class JarVersion {
             Manifest manifest = new Manifest(new URL(manifestPath).openStream());
             Attributes attr = manifest.getMainAttributes();
             String buildTime = attr.getValue("Build-Time");
-            Instant instant = Instant.parse(buildTime);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(ZoneOffset.UTC);
-            return formatter.format(instant);
+            DateTimeFormatter sourceFormatter = DateTimeFormatter.ofPattern("uuuuMMdd-HHmm").withZone(ZoneOffset.UTC);
+            TemporalAccessor ta = sourceFormatter.parse(buildTime);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm").withZone(ZoneOffset.UTC);
+            return formatter.format(ta);
         } catch (Throwable e) {
             logger.error("Can't read build time in jar manifest for class " + clazz.getName() + " and path " + manifestPath, e);
             return JAR_BUILD_TIME_ERROR;
