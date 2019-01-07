@@ -102,6 +102,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Rampage of the Clans", 134, Rarity.RARE, mage.cards.r.RampageOfTheClans.class));
         cards.add(new SetCardInfo("Ravager Wurm", 200, Rarity.MYTHIC, mage.cards.r.RavagerWurm.class));
         cards.add(new SetCardInfo("Rix Maadi Reveler", 109, Rarity.RARE, mage.cards.r.RixMaadiReveler.class));
+        cards.add(new SetCardInfo("Sauroform Hybrid", 140, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
         cards.add(new SetCardInfo("Seraph of the Scales", 205, Rarity.MYTHIC, mage.cards.s.SeraphOfTheScales.class));
         cards.add(new SetCardInfo("Simic Ascendancy", 207, Rarity.RARE, mage.cards.s.SimicAscendancy.class));
         cards.add(new SetCardInfo("Simic Guildgate", 257, Rarity.COMMON, mage.cards.s.SimicGuildgate.class, NON_FULL_USE_VARIOUS));
