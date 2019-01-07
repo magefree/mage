@@ -160,7 +160,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             copyFrom = game.getCard(getTargetPointer().getFirst(game, source));
         }
 
-        if (permanent == null || copyFrom == null) {
+        if (copyFrom == null) {
             return false;
         }
 
