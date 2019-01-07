@@ -217,7 +217,9 @@ class ChooseTwoBasicLandTypesEffect extends OneShotEffect {
                 game.informPlayers(mageObject.getName() + ":  Second chosen basic land type is " + choices.getChoice());
                 game.getState().setValue(mageObject.getId().toString() + "secondChoice", choices.getChoice());
                 choiceTwo = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "secondChoice")).getDescription();
-                if (mageObject instanceof Permanent) {
+                if (mageObject instanceof Permanent
+                        && choiceOne != null
+                        && choiceTwo != null) {
                     ((Permanent) mageObject).addInfo("Chosen Types", CardUtil.addToolTipMarkTags("First chosen basic land type: " + choiceOne
                             + "\n Second chosen basic land type: " + choiceTwo), game);
                 }
