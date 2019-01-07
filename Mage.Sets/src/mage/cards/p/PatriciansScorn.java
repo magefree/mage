@@ -98,8 +98,4 @@ class PatriciansScornWatcher extends Watcher {
         }
     }
 
-    @Override
-    public void reset() {
-        super.reset();
-    }
 }
