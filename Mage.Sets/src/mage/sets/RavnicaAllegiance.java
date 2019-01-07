@@ -51,6 +51,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Burn Bright", 93, Rarity.COMMON, mage.cards.b.BurnBright.class));
         cards.add(new SetCardInfo("Burning-Tree Vandal", 94, Rarity.COMMON, mage.cards.b.BurningTreeVandal.class));
         cards.add(new SetCardInfo("Carnival // Carnage", 222, Rarity.UNCOMMON, mage.cards.c.CarnivalCarnage.class));
+        cards.add(new SetCardInfo("Combine Guildmage", 163, Rarity.UNCOMMON, mage.cards.c.CombineGuildmage.class));
         cards.add(new SetCardInfo("Consecrate // Consume", 224, Rarity.UNCOMMON, mage.cards.c.ConsecrateConsume.class));
         cards.add(new SetCardInfo("Cry of the Carnarium", 70, Rarity.UNCOMMON, mage.cards.c.CryOfTheCarnarium.class));
         cards.add(new SetCardInfo("Depose // Deploy", 225, Rarity.UNCOMMON, mage.cards.d.DeposeDeploy.class));
