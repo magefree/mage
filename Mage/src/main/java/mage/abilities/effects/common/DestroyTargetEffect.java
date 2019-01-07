@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -100,7 +99,12 @@ public class DestroyTargetEffect extends OneShotEffect {
                 }
                 sb.append(targetName);
             } else {
-                sb.append("Destroy ").append(CardUtil.numberToText(target.getNumberOfTargets())).append(" target ").append(target.getTargetName());
+                if (target.getMaxNumberOfTargets() == target.getMinNumberOfTargets()) {
+                    sb.append("destroy ").append(CardUtil.numberToText(target.getNumberOfTargets()));
+                } else {
+                    sb.append("destroy up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                }
+                sb.append(" target ").append(target.getTargetName());
             }
         }
         if (noRegen) {

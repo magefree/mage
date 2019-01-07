@@ -405,13 +405,13 @@ public final class StaticFilters {
         FILTER_PERMANENT_PLANESWALKER.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
+    public static final FilterNonlandPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     static {
         FILTER_PERMANENT_NON_LAND.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENTS_NON_LAND = new FilterNonlandPermanent("nonland permanents");
+    public static final FilterNonlandPermanent FILTER_PERMANENTS_NON_LAND = new FilterNonlandPermanent("nonland permanents");
 
     static {
         FILTER_PERMANENTS_NON_LAND.setLockedFilter(true);
