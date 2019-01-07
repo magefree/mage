@@ -78,11 +78,6 @@ class MerseineActivatedAbility extends SimpleActivatedAbility {
     }
 
     @Override
-    public Effects getEffects(Game game, EffectType effectType) {
-        return super.getEffects(game, effectType);
-    }
-
-    @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         Permanent sourcePermanent = game.getBattlefield().getPermanent(this.getSourceId());
         if (sourcePermanent != null) {

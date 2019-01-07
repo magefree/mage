@@ -186,7 +186,9 @@ public class Library implements Serializable {
         Map<String, Card> cards = new HashMap<>();
         for (UUID cardId : library) {
             Card card = game.getCard(cardId);
-            cards.putIfAbsent(card.getName(), card);
+            if (card != null) {
+                cards.putIfAbsent(card.getName(), card);
+            }
         }
         return cards.values();
     }

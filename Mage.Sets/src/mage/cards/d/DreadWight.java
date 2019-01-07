@@ -98,10 +98,6 @@ class DreadWightTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return super.getRule();
-    }
 }
 
 class DreadWightEffect extends OneShotEffect {

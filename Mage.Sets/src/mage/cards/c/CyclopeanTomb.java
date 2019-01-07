@@ -226,11 +226,6 @@ class CyclopeanTombCounterWatcher extends Watcher {
         }
     }
 
-    @Override
-    public void reset() {
-        super.reset();
-    }
-
     public Set<MageObjectReference> landMiredByCyclopeanTombInstance(MageObjectReference mor, Game game) {
         if (counterData.containsKey(mor)) {
             return counterData.get(mor);

@@ -88,11 +88,6 @@ class GuildmagesForumWatcher extends Watcher {
         }
     }
 
-    @Override
-    public void reset() {
-        super.reset();
-    }
-
 }
 
 class GuildmagesForumEntersBattlefieldEffect extends ReplacementEffectImpl {

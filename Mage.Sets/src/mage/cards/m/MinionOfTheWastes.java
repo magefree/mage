@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -13,17 +11,13 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class MinionOfTheWastes extends CardImpl {
@@ -39,7 +33,7 @@ public final class MinionOfTheWastes extends CardImpl {
 
         // As Minion of the Wastes enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
         this.addAbility(new AsEntersBattlefieldAbility(new MinionOfTheWastesEffect()));
-        
+
         // Minion of the Wastes's power and toughness are each equal to the life paid as it entered the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("{this}'s power and toughness are each equal to the life paid as it entered the battlefield")));
     }
@@ -74,10 +68,10 @@ class MinionOfTheWastesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card sourceCard = game.getCard(source.getSourceId());
             int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", game);
             controller.loseLife(payAmount, game, false);
-            game.informPlayers(sourceCard.getLogName() + ": " + controller.getLogName() +
+            Card sourceCard = game.getCard(source.getSourceId());
+            game.informPlayers((sourceCard != null ? sourceCard.getLogName() : "") + ": " + controller.getLogName() +
                     " pays " + payAmount + " life");
             game.addEffect(new SetPowerToughnessSourceEffect(payAmount, payAmount, Duration.Custom, SubLayer.SetPT_7b), source);
             return true;

@@ -1,9 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -17,25 +13,24 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JhoiraOfTheGhitu extends CardImpl {
 
     public JhoiraOfTheGhitu(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -83,13 +78,17 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
             return false;
         }
         List<Card> cards = new ArrayList<>();
-        for (Cost cost: source.getCosts()) {
+        for (Cost cost : source.getCosts()) {
             if (cost instanceof ExileFromHandCost) {
                 cards = ((ExileFromHandCost) cost).getCards();
             }
         }
         if (cards != null && !cards.isEmpty()) {
+            // always one card to exile
             Card card = game.getCard(cards.get(0).getId());
+            if (card == null) {
+                return false;
+            }
             boolean hasSuspend = card.getAbilities().containsClass(SuspendAbility.class);
 
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);

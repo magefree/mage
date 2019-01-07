@@ -65,11 +65,6 @@ class TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent extends
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);

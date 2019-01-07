@@ -544,7 +544,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), uuid.toString()));
     }
 
-    public <T extends Watcher> T getWatcher(Class<T> watcherClass,String prefix) {
+    public <T extends Watcher> T getWatcher(Class<T> watcherClass, String prefix) {
         return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), prefix));
     }
 
@@ -776,7 +776,9 @@ public class GameState implements Serializable, Copyable<GameState> {
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
                 Card card = game.getCard(targetId);
-                movedCards.add(card);
+                if (card != null) {
+                    movedCards.add(card);
+                }
             }
             ZoneChangeData eventData = entry.getKey();
             if (!movedCards.isEmpty()) {
@@ -1117,7 +1119,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.watchers.add(watcher);
     }
 
-    public void resetWatchers(){
+    public void resetWatchers() {
         this.watchers.reset();
     }
 

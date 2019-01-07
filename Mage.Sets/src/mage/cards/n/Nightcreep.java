@@ -60,11 +60,6 @@ class NightcreepLandEffect extends BecomesBasicLandTargetEffect {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        return super.apply(layer, sublayer, source, game);
-    }
-
-    @Override
     public NightcreepLandEffect copy() {
         return new NightcreepLandEffect(this);
     }
@@ -86,11 +81,6 @@ class NightcreepCreatureEffect extends BecomesColorTargetEffect {
         super.init(source, game);
         List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
         this.setTargetPointer(new FixedTargets(targets, game));
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        return super.apply(layer, sublayer, source, game);
     }
 
     @Override

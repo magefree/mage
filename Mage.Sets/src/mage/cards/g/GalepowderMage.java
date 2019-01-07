@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -15,8 +13,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -26,8 +24,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GalepowderMage extends CardImpl {
@@ -39,7 +38,7 @@ public final class GalepowderMage extends CardImpl {
     }
 
     public GalepowderMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.KITHKIN);
         this.subtype.add(SubType.WIZARD);
 
@@ -87,10 +86,10 @@ class GalepowderMageEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             if (getTargetPointer().getFirst(game, source) != null) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-                Card card = game.getCard(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     UUID exileId = UUID.randomUUID();
                     if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                        Card card = game.getCard(getTargetPointer().getFirst(game, source));
                         if (card != null) {
                             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
                             effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
