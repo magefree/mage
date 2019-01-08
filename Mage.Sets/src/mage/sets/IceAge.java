@@ -100,6 +100,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Enduring Renewal", 23, Rarity.RARE, mage.cards.e.EnduringRenewal.class));
         cards.add(new SetCardInfo("Energy Storm", 24, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 67, Rarity.COMMON, mage.cards.e.Enervate.class));
+        cards.add(new SetCardInfo("Errant Minion", 68, Rarity.COMMON, mage.cards.e.ErrantMinion.class));
         cards.add(new SetCardInfo("Errantry", 183, Rarity.COMMON, mage.cards.e.Errantry.class));
         cards.add(new SetCardInfo("Essence Filter", 233, Rarity.COMMON, mage.cards.e.EssenceFilter.class));
         cards.add(new SetCardInfo("Essence Flare", 69, Rarity.COMMON, mage.cards.e.EssenceFlare.class));
@@ -162,6 +163,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Icy Manipulator", 322, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Icy Prison", 74, Rarity.RARE, mage.cards.i.IcyPrison.class));
         cards.add(new SetCardInfo("Illusionary Forces", 75, Rarity.COMMON, mage.cards.i.IllusionaryForces.class));
+        cards.add(new SetCardInfo("Illusionary Presence", 76, Rarity.RARE, mage.cards.i.IllusionaryPresence.class));
         cards.add(new SetCardInfo("Illusionary Terrain", 77, Rarity.UNCOMMON, mage.cards.i.IllusionaryTerrain.class));
         cards.add(new SetCardInfo("Illusionary Wall", 78, Rarity.COMMON, mage.cards.i.IllusionaryWall.class));
         cards.add(new SetCardInfo("Illusions of Grandeur", 79, Rarity.RARE, mage.cards.i.IllusionsOfGrandeur.class));
