@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -14,14 +12,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -30,14 +24,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class RenownedWeaponsmith extends CardImpl {
 
     public RenownedWeaponsmith(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
@@ -120,11 +115,14 @@ class RenownedWeaponsmithEffect extends OneShotEffect {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
-                    Card card = game.getCard(target.getFirstTarget());
                     Cards revealed = new CardsImpl();
-                    revealed.add(card);
-                    controller.revealCards(sourceObject.getIdName(), revealed, game);
-                    controller.moveCards(revealed, Zone.HAND, source, game);
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        revealed.add(card);
+                        controller.revealCards(sourceObject.getIdName(), revealed, game);
+                        controller.moveCards(revealed, Zone.HAND, source, game);
+                    }
+
                 }
             }
             controller.shuffleLibrary(source, game);

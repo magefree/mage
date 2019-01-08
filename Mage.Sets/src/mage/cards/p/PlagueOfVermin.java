@@ -1,9 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -16,14 +12,17 @@ import mage.game.permanent.token.RatToken;
 import mage.players.Player;
 import mage.players.PlayerList;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class PlagueOfVermin extends CardImpl {
 
     public PlagueOfVermin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}");
 
 
         // Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life he or she paid this way.
@@ -60,7 +59,6 @@ class PlagueOfVerminEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
         Map<UUID, Integer> payLife = new HashMap<>();
         int currentLifePaid;
         int totalPaidLife;
@@ -90,15 +88,16 @@ class PlagueOfVerminEffect extends OneShotEffect {
                                 payLife.put(currentPlayer.getId(), currentLifePaid + totalPaidLife);
                             }
                         }
-                        game.informPlayers(sourceCard.getName() + ": " + currentPlayer.getLogName() + " pays " + payLife.get(currentPlayer.getId()) + " life");
+                        Card sourceCard = game.getCard(source.getSourceId());
+                        game.informPlayers((sourceCard != null ? sourceCard.getName() : "") + ": " + currentPlayer.getLogName() + " pays " + payLife.get(currentPlayer.getId()) + " life");
                         firstInactivePlayer = null;
                     }
                 }
-                
+
                 // get next player
                 playerList.getNext();
                 currentPlayer = game.getPlayer(playerList.get());
-                
+
                 // if all player since this player didn't put permanent in play finish the process
                 if (currentPlayer.getId().equals(firstInactivePlayer)) {
                     break;

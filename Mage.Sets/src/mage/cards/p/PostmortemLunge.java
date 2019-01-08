@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -22,6 +20,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author North
@@ -76,13 +76,11 @@ class PostmortemLungeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
-
         if (card != null) {
             Player cardOwner = game.getPlayer(card.getOwnerId());
             if (cardOwner == null) {
                 return false;
             }
-
             if (cardOwner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
@@ -96,7 +94,6 @@ class PostmortemLungeEffect extends OneShotEffect {
             }
             return true;
         }
-
         return false;
     }
 }
