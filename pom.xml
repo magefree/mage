@@ -90,6 +90,7 @@
     <properties>
         <mage-version>1.4.32</mage-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
     </properties>
 
     <dependencyManagement>

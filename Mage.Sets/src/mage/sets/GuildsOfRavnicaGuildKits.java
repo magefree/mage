@@ -123,6 +123,7 @@ public final class GuildsOfRavnicaGuildKits extends ExpansionSet {
         cards.add(new SetCardInfo("Selesnya Guildmage", 119, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 125, Rarity.COMMON, mage.cards.s.SelesnyaSanctuary.class));
         cards.add(new SetCardInfo("Selesnya Signet", 123, Rarity.COMMON, mage.cards.s.SelesnyaSignet.class));
+        cards.add(new SetCardInfo("Senate Guildmage", 204, Rarity.UNCOMMON, mage.cards.s.SenateGuildmage.class));
         cards.add(new SetCardInfo("Shambling Shell", 70, Rarity.COMMON, mage.cards.s.ShamblingShell.class));
         cards.add(new SetCardInfo("Shattering Spree", 34, Rarity.UNCOMMON, mage.cards.s.ShatteringSpree.class));
         cards.add(new SetCardInfo("Sisters of Stone Death", 71, Rarity.RARE, mage.cards.s.SistersOfStoneDeath.class));

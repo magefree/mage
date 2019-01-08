@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.util.CardUtil;
 
 /**
  *
@@ -62,9 +63,9 @@ class AngrathsMaraudersEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.DAMAGED_PLAYER)
-                || event.getType().equals(EventType.DAMAGED_CREATURE)
-                || event.getType().equals(EventType.DAMAGED_PLANESWALKER);
+        return event.getType().equals(EventType.DAMAGE_PLAYER)
+                || event.getType().equals(EventType.DAMAGE_CREATURE)
+                || event.getType().equals(EventType.DAMAGE_PLANESWALKER);
     }
 
     @Override
@@ -74,7 +75,7 @@ class AngrathsMaraudersEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
         return false;
     }
 }

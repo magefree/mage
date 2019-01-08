@@ -1,5 +1,3 @@
-
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -34,6 +32,7 @@ public final class SamuraiOfThePaleCurtain extends CardImpl {
 
         // Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
         this.addAbility(new BushidoAbility(1));
+
         // If a permanent would be put into a graveyard, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SamuraiOfThePaleCurtainEffect()));
     }
@@ -71,7 +70,7 @@ class SamuraiOfThePaleCurtainEffect extends ReplacementEffectImpl {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
-            if (player == null) {
+            if (player != null) {
                 return player.moveCards(permanent, Zone.EXILED, source, game);
             }
         }
