@@ -60,7 +60,7 @@ class KayasWrathEffect extends OneShotEffect {
                 source.getControllerId(), source.getSourceId(), game
         )) {
             boolean isMine = permanent != null && permanent.getControllerId().equals(source.getControllerId());
-            if (permanent.destroy(source.getSourceId(), game, false) && isMine) {
+            if (isMine && permanent.destroy(source.getSourceId(), game, false)) {
                 counter++;
             }
         }

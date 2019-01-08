@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageObject;
@@ -92,8 +91,7 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            return ability != null && ability.isPresent()
-                    && !(ability.get() instanceof ActivatedManaAbilityImpl);
+            return ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl);
         }
         return false;
     }
