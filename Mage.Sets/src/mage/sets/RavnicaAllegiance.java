@@ -74,6 +74,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Gruul Guildgate", 250, Rarity.COMMON, mage.cards.g.GruulGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gruul Locket", 234, Rarity.COMMON, mage.cards.g.GruulLocket.class));
         cards.add(new SetCardInfo("Gruul Spellbreaker", 179, Rarity.RARE, mage.cards.g.GruulSpellbreaker.class));
+        cards.add(new SetCardInfo("Guardian Project", 130, Rarity.RARE, mage.cards.g.GuardianProject.class));
         cards.add(new SetCardInfo("Gutterbones", 76, Rarity.RARE, mage.cards.g.Gutterbones.class));
         cards.add(new SetCardInfo("Hackrobat", 181, Rarity.UNCOMMON, mage.cards.h.Hackrobat.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 251, Rarity.RARE, mage.cards.h.HallowedFountain.class));
