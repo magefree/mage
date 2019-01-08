@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.util.CardUtil;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -63,15 +62,9 @@ class AngrathsMaraudersEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PLAYER:
-                return true;
-            case DAMAGE_CREATURE:
-                return true;
-            case DAMAGE_PLANESWALKER:
-                return true;
-        }
-        return false;
+        return event.getType().equals(EventType.DAMAGED_PLAYER)
+                || event.getType().equals(EventType.DAMAGED_CREATURE)
+                || event.getType().equals(EventType.DAMAGED_PLANESWALKER);
     }
 
     @Override
@@ -81,7 +74,7 @@ class AngrathsMaraudersEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+        event.setAmount(event.getAmount() * 2);
         return false;
     }
 }
