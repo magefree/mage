@@ -9,9 +9,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class DomriChaosBringerToken extends TokenImpl {
+public final class RedGreenBeastToken extends TokenImpl {
 
-    public DomriChaosBringerToken() {
+    public RedGreenBeastToken() {
         super("Beast", "4/4 red and green Beast creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -23,11 +23,11 @@ public final class DomriChaosBringerToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    private DomriChaosBringerToken(final DomriChaosBringerToken token) {
+    private RedGreenBeastToken(final RedGreenBeastToken token) {
         super(token);
     }
 
-    public DomriChaosBringerToken copy() {
-        return new DomriChaosBringerToken(this);
+    public RedGreenBeastToken copy() {
+        return new RedGreenBeastToken(this);
     }
 }

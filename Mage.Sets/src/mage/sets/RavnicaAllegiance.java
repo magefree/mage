@@ -4,6 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.t.ThrashThreat;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -141,6 +142,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Teysa Karlov", 212, Rarity.RARE, mage.cards.t.TeysaKarlov.class));
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
         cards.add(new SetCardInfo("Theater of Horrors", 213, Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
+        cards.add(new SetCardInfo("Thrash // Threat", 229, Rarity.RARE, ThrashThreat.class));
         cards.add(new SetCardInfo("Titanic Brawl", 146, Rarity.COMMON, mage.cards.t.TitanicBrawl.class));
         cards.add(new SetCardInfo("Tithe Taker", 27, Rarity.RARE, mage.cards.t.TitheTaker.class));
         cards.add(new SetCardInfo("Trollbred Guardian", 148, Rarity.UNCOMMON, mage.cards.t.TrollbredGuardian.class));
