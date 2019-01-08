@@ -92,6 +92,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Guildgate", 252, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orzhov Guildgate", 253, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orzhov Locket", 236, Rarity.COMMON, mage.cards.o.OrzhovLocket.class));
+        cards.add(new SetCardInfo("Orzhov Racketeers", 80, Rarity.UNCOMMON, mage.cards.o.OrzhovRacketeers.class));
         cards.add(new SetCardInfo("Pestilent Spirit", 81, Rarity.RARE, mage.cards.p.PestilentSpirit.class));
         cards.add(new SetCardInfo("Pitiless Pontiff", 194, Rarity.UNCOMMON, mage.cards.p.PitilessPontiff.class));
         cards.add(new SetCardInfo("Precognitive Perception", 45, Rarity.RARE, mage.cards.p.PrecognitivePerception.class));
