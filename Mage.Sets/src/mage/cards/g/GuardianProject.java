@@ -75,10 +75,13 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
         if (!filter.match(permanent, sourceId, controllerId, game)) {
             return false;
         }
+
         if (checkCondition(permanent, controllerId, game)) {
             this.getEffects().clear();
             this.addEffect(new GuardianProjectEffect(new MageObjectReference(permanent, game)));
+            return true;
         }
+        return false;
     }
 
     @Override
