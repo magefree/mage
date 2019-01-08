@@ -107,6 +107,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Rakdos, the Showstopper", 199, Rarity.MYTHIC, mage.cards.r.RakdosTheShowstopper.class));
         cards.add(new SetCardInfo("Rampage of the Clans", 134, Rarity.RARE, mage.cards.r.RampageOfTheClans.class));
         cards.add(new SetCardInfo("Ravager Wurm", 200, Rarity.MYTHIC, mage.cards.r.RavagerWurm.class));
+        cards.add(new SetCardInfo("Rhythm of the Wild", 201, Rarity.UNCOMMON, mage.cards.r.RhythmOfTheWild.class));
         cards.add(new SetCardInfo("Rix Maadi Reveler", 109, Rarity.RARE, mage.cards.r.RixMaadiReveler.class));
         cards.add(new SetCardInfo("Sauroform Hybrid", 140, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
         cards.add(new SetCardInfo("Savage Smash", 203, Rarity.COMMON, mage.cards.s.SavageSmash.class));
