@@ -68,6 +68,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Grasping Thrull", 177, Rarity.COMMON, mage.cards.g.GraspingThrull.class));
         cards.add(new SetCardInfo("Growth Spiral", 178, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Growth-Chamber Guardian", 128, Rarity.RARE, mage.cards.g.GrowthChamberGuardian.class));
+        cards.add(new SetCardInfo("Gruul Beastmaster", 129, Rarity.UNCOMMON, mage.cards.g.GruulBeastmaster.class));
         cards.add(new SetCardInfo("Gruul Guildgate", 249, Rarity.COMMON, mage.cards.g.GruulGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gruul Guildgate", 250, Rarity.COMMON, mage.cards.g.GruulGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gruul Locket", 234, Rarity.COMMON, mage.cards.g.GruulLocket.class));

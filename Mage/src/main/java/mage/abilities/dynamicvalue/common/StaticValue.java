@@ -7,8 +7,9 @@ import mage.game.Game;
 
 public class StaticValue implements DynamicValue {
 
-    private int value = 0;
-    private String message;
+    private final int value;
+    private final String message;
+    private static final StaticValue zeroValue = new StaticValue(0);
 
     public StaticValue(int value) {
         this(value, "");
@@ -46,5 +47,9 @@ public class StaticValue implements DynamicValue {
 
     public int getValue() {
         return value;
+    }
+
+    public static StaticValue getZeroValue() {
+        return zeroValue;
     }
 }
