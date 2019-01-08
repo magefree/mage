@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -16,12 +14,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -32,8 +25,9 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class NamelessRace extends CardImpl {
@@ -48,7 +42,7 @@ public final class NamelessRace extends CardImpl {
 
         // As Nameless Race enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
         this.addAbility(new AsEntersBattlefieldAbility(new NamelessRaceEffect()));
-        
+
         // Nameless Race's power and toughness are each equal to the life paid as it entered the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("{this}'s power and toughness are each equal to the life paid as it entered the battlefield")));
     }
@@ -64,10 +58,10 @@ public final class NamelessRace extends CardImpl {
 }
 
 class NamelessRaceEffect extends OneShotEffect {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("white nontoken permanents your opponents control");
     private static final FilterCard filter2 = new FilterCard("white cards in their graveyards");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(Predicates.not(new TokenPredicate()));
@@ -94,13 +88,13 @@ class NamelessRaceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card sourceCard = game.getCard(source.getSourceId());
             int permanentsInPlay = new PermanentsOnBattlefieldCount(filter).calculate(game, source, null);
             int cardsInGraveyards = new CardsInAllGraveyardsCount(filter2).calculate(game, source, null);
             int maxAmount = Math.min(permanentsInPlay + cardsInGraveyards, controller.getLife());
             int payAmount = controller.getAmount(0, maxAmount, "Pay up to " + maxAmount + " life", game);
             controller.loseLife(payAmount, game, false);
-            game.informPlayers(sourceCard.getLogName() + ": " + controller.getLogName() +
+            Card sourceCard = game.getCard(source.getSourceId());
+            game.informPlayers((sourceCard != null ? sourceCard.getLogName() : "") + ": " + controller.getLogName() +
                     " pays " + payAmount + " life");
             game.addEffect(new SetPowerToughnessSourceEffect(payAmount, payAmount, Duration.Custom, SubLayer.SetPT_7b), source);
             return true;

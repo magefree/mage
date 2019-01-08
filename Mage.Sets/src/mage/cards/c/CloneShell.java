@@ -115,7 +115,7 @@ class CloneShellDiesEffect extends OneShotEffect {
             Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (permanent != null) {
                 List<UUID> imprinted = permanent.getImprinted();
-                if (!imprinted.isEmpty()) {
+                if (imprinted != null && !imprinted.isEmpty()) {
                     Card imprintedCard = game.getCard(imprinted.get(0));
                     if (imprintedCard != null) {
                         imprintedCard.setFaceDown(false, game);

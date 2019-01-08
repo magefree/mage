@@ -1,8 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,8 +19,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class Duplicant extends CardImpl {
@@ -117,6 +116,9 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         if (permanent != null) {
             if (!permanent.getImprinted().isEmpty()) {
                 List<UUID> imprinted = permanent.getImprinted();
+                if (imprinted == null || imprinted.isEmpty()) {
+                    return false;
+                }
                 Card card = game.getCard(imprinted.get(imprinted.size() - 1));
                 if (card != null && card.isCreature()) {
                     switch (layer) {
@@ -134,7 +136,6 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
                             }
                     }
                     return true;
-
                 }
             }
 

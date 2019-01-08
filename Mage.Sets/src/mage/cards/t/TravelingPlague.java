@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -18,12 +16,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -34,8 +27,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class TravelingPlague extends CardImpl {
@@ -130,10 +124,10 @@ class TravelingPlagueEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card travelingPlague = game.getCard(source.getSourceId());
         Permanent enchantedCreature = (Permanent) game.getState().getValue("travelingPlague" + source.getSourceId());
         if (enchantedCreature != null) {
             Player controllerOfEnchantedCreature = game.getPlayer(enchantedCreature.getControllerId());
+            Card travelingPlague = game.getCard(source.getSourceId());
             if (travelingPlague != null
                     && game.getState().getZone(travelingPlague.getId()) == Zone.GRAVEYARD // aura must come from the graveyard
                     && controllerOfEnchantedCreature != null) {

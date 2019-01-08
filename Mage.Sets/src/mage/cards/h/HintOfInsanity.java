@@ -58,6 +58,7 @@ class HintOfInsanityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterCard filter = new FilterCard("card from your hand");
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        Card chosenCard;
         if (targetPlayer != null) {
             TargetCardInHand targetCard = new TargetCardInHand(filter);
             targetCard.setNotTarget(true);
@@ -66,12 +67,10 @@ class HintOfInsanityEffect extends OneShotEffect {
             targetPlayer.revealCards("Hint of Insanity Reveal", cardsInHand, game);
             if (!cardsInHand.isEmpty()
                     && targetPlayer.choose(Outcome.Discard, targetCard, source.getSourceId(), game)) {
-                Card chosenCard = game.getCard(targetCard.getFirstTarget());
-                if (chosenCard != null) {
-                    for (Card card : cardsInHand.getCards(game)) {
-                        if (CardUtil.haveSameNames(card, chosenCard) && !card.isLand()) {
-                            targetPlayer.discard(card, source, game);
-                        }
+                chosenCard = game.getCard(targetCard.getFirstTarget());
+                for (Card card : cardsInHand.getCards(game)) {
+                    if (CardUtil.haveSameNames(card, chosenCard) && !card.isLand()) {
+                        targetPlayer.discard(card, source, game);
                     }
                 }
                 return true;
