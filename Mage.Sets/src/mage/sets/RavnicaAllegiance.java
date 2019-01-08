@@ -85,6 +85,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Lavinia, Azorius Renegade", 189, Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class));
         cards.add(new SetCardInfo("Light Up the Stage", 107, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Mass Manipulation", 42, Rarity.RARE, mage.cards.m.MassManipulation.class));
+        cards.add(new SetCardInfo("Mesmerizing Benthid", 43, Rarity.MYTHIC, mage.cards.m.MesmerizingBenthid.class));
         cards.add(new SetCardInfo("Ministrant of Obligation", 16, Rarity.UNCOMMON, mage.cards.m.MinistrantOfObligation.class));
         cards.add(new SetCardInfo("Mortify", 192, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Orzhov Guildgate", 252, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class, NON_FULL_USE_VARIOUS));
