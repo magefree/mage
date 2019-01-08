@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -24,8 +22,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth & L_J
  */
 public final class SteamVines extends CardImpl {
@@ -76,7 +75,6 @@ class SteamVinesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent steamVines = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Card steamVinesCard = game.getCard(source.getSourceId());
         if (steamVines != null) {
             Permanent enchantedLand = game.getPermanentOrLKIBattlefield(steamVines.getAttachedTo());
             Player controller = game.getPlayer(source.getControllerId());
@@ -85,15 +83,15 @@ class SteamVinesEffect extends OneShotEffect {
                 Player landsController = game.getPlayer(enchantedLand.getControllerId());
                 if (game.getState().getZone(enchantedLand.getId()) == Zone.BATTLEFIELD) { // if 2 or more Steam Vines were on a land
                     enchantedLand.destroy(source.getId(), game, false);
-                    if(landsController != null) {
+                    if (landsController != null) {
                         landsController.damage(1, source.getSourceId(), game, false, true);
                     }
                 }
                 if (!game.getBattlefield().getAllActivePermanents(CardType.LAND).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
                     target.setNotTarget(true); //not a target, it is chosen
-                    if (steamVinesCard != null
-                            && landsController != null) {
+                    Card steamVinesCard = game.getCard(source.getSourceId());
+                    if (steamVinesCard != null && landsController != null) {
                         if (landsController.choose(Outcome.DestroyPermanent, target, source.getId(), game)) {
                             if (target.getFirstTarget() != null) {
                                 Permanent landChosen = game.getPermanent(target.getFirstTarget());

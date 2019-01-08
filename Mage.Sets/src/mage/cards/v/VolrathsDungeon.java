@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -25,8 +24,9 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class VolrathsDungeon extends CardImpl {
@@ -65,7 +65,7 @@ class PayLifeActivePlayerCost extends CostImpl {
 
     public PayLifeActivePlayerCost(int amount) {
         this.amount = new StaticValue(amount);
-        this.text = "Pay " + Integer.toString(amount) + " life";
+        this.text = "Pay " + amount + " life";
     }
 
     public PayLifeActivePlayerCost(DynamicValue amount, String text) {
@@ -89,9 +89,9 @@ class PayLifeActivePlayerCost extends CostImpl {
         int lifeToPayAmount = amount.calculate(game, ability, null);
         Player activatingPlayer = game.getPlayer(game.getActivePlayerId());
         if (activatingPlayer != null
-                && activatingPlayer.chooseUse(Outcome.LoseLife, "Do you wish to pay "+ lifeToPayAmount +" life?", ability, game)) {
+                && activatingPlayer.chooseUse(Outcome.LoseLife, "Do you wish to pay " + lifeToPayAmount + " life?", ability, game)) {
             Player player = game.getPlayer(game.getActivePlayerId());
-            if(player != null) {
+            if (player != null) {
                 this.paid = player.loseLife(lifeToPayAmount, game, false) == lifeToPayAmount;
             }
         }
@@ -127,7 +127,7 @@ class VolrathsDungeonEffect extends OneShotEffect {
             TargetCardInHand target = new TargetCardInHand();
             if (targetedPlayer.choose(Outcome.Detriment, targetedPlayer.getHand(), target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                return targetedPlayer.putCardOnTopXOfLibrary(card, game, source, 0);
+                return card != null && targetedPlayer.putCardOnTopXOfLibrary(card, game, source, 0);
             }
         }
         return false;

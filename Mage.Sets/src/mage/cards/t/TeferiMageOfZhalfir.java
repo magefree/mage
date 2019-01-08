@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -17,14 +15,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TeferiMageOfZhalfir extends CardImpl {
 
     public TeferiMageOfZhalfir(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -76,14 +75,14 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card.isCreature()) {
+                if (card != null && card.isCreature()) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card.isCreature()) {
+                if (card != null && card.isCreature()) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
@@ -103,7 +102,7 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
             for (UUID commanderId : controller.getCommandersIds()) {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
-                    if (card.isCreature()) {
+                    if (card != null && card.isCreature()) {
                         game.getState().addOtherAbility(card, FlashAbility.getInstance());
                     }
                 }

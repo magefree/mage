@@ -1,4 +1,3 @@
-
 package mage.player.ai;
 
 import mage.MageObject;
@@ -25,7 +24,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SimulatedPlayer2 extends ComputerPlayer {
@@ -173,6 +171,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
 //            allActions.add(new SimulatedAction(sim, actions));
 //        }
 //    }
+
     /**
      * if suggested abilities exist, return only those from playables
      *
@@ -191,11 +190,13 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         List<Ability> filtered = new ArrayList<>();
         for (Ability ability : playables) {
             Card card = game.getCard(ability.getSourceId());
-            for (String s : suggested) {
-                if (s.equals(card.getName())) {
-                    logger.debug("matched: " + s);
-                    forced = true;
-                    filtered.add(ability);
+            if (card != null) {
+                for (String s : suggested) {
+                    if (s.equals(card.getName())) {
+                        logger.debug("matched: " + s);
+                        forced = true;
+                        filtered.add(ability);
+                    }
                 }
             }
         }
@@ -216,26 +217,28 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         for (Ability option : options) {
             if (!option.getTargets().isEmpty() && option.getTargets().get(0).getMaxNumberOfTargets() == 1) {
                 Card card = game.getCard(ability.getSourceId());
-                for (String s : suggested) {
-                    String[] groups = s.split(";");
-                    logger.trace("s=" + s + ";groups=" + groups.length);
-                    if (groups.length == 2) {
-                        if (groups[0].equals(card.getName()) && groups[1].startsWith("name=")) {
-                            // extract target and compare to suggested
-                            String targetName = groups[1].split("=")[1];
-                            Player player = game.getPlayer(option.getFirstTarget());
-                            if (player != null && targetName.equals(player.getName())) {
-                                System.out.println("matched(option): " + s);
-                                filtered.add(option);
-                                return filtered;
-                            } else {
-                                Card target = game.getCard(option.getFirstTarget());
-                                if (target != null && target.getName().equals(targetName)) {
+                if (card != null) {
+                    for (String s : suggested) {
+                        String[] groups = s.split(";");
+                        logger.trace("s=" + s + ";groups=" + groups.length);
+                        if (groups.length == 2) {
+                            if (groups[0].equals(card.getName()) && groups[1].startsWith("name=")) {
+                                // extract target and compare to suggested
+                                String targetName = groups[1].split("=")[1];
+                                Player player = game.getPlayer(option.getFirstTarget());
+                                if (player != null && targetName.equals(player.getName())) {
                                     System.out.println("matched(option): " + s);
                                     filtered.add(option);
                                     return filtered;
+                                } else {
+                                    Card target = game.getCard(option.getFirstTarget());
+                                    if (target != null && target.getName().equals(targetName)) {
+                                        System.out.println("matched(option): " + s);
+                                        filtered.add(option);
+                                        return filtered;
+                                    }
+                                    System.out.println("not equal UUID for target, player=" + player);
                                 }
-                                System.out.println("not equal UUID for target, player=" + player);
                             }
                         }
                     }
