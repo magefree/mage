@@ -46,6 +46,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Azorius Skyguard", 155, Rarity.UNCOMMON, mage.cards.a.AzoriusSkyguard.class));
         cards.add(new SetCardInfo("Bankrupt in Blood", 62, Rarity.UNCOMMON, mage.cards.b.BankruptInBlood.class));
         cards.add(new SetCardInfo("Basilica Bell-Haunt", 156, Rarity.UNCOMMON, mage.cards.b.BasilicaBellHaunt.class));
+        cards.add(new SetCardInfo("Bedeck // Bedazzle", 221, Rarity.RARE, mage.cards.b.BedeckBedazzle.class));
         cards.add(new SetCardInfo("Bedevil", 157, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Benthic Biomancer", 32, Rarity.RARE, mage.cards.b.BenthicBiomancer.class));
         cards.add(new SetCardInfo("Biogenic Upgrade", 123, Rarity.UNCOMMON, mage.cards.b.BiogenicUpgrade.class));
