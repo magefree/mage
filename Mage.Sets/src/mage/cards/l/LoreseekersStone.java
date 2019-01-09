@@ -1,28 +1,23 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LoreseekersStone extends CardImpl {
@@ -31,17 +26,14 @@ public final class LoreseekersStone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // {3}, {T}: Draw three cards. This ability costs {1} more to activate for each card in your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new GenericManaCost(3));
+        // TODO: Make ability properly copiable
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3).setText("Draw three cards. This ability costs {1} more to activate for each card in your hand"), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        for (Effect effect : ability.getEffects()) {
-            effect.setText("Draw three cards. This ability costs {1} more to activate for each card in your hand");
-        }
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new LoreseekersStoneCostIncreasingEffect(ability.getOriginalId())));
-
     }
 
-    public LoreseekersStone(final LoreseekersStone card) {
+    private LoreseekersStone(final LoreseekersStone card) {
         super(card);
     }
 
@@ -60,7 +52,7 @@ class LoreseekersStoneCostIncreasingEffect extends CostModificationEffectImpl {
         this.originalId = originalId;
     }
 
-    LoreseekersStoneCostIncreasingEffect(final LoreseekersStoneCostIncreasingEffect effect) {
+    private LoreseekersStoneCostIncreasingEffect(final LoreseekersStoneCostIncreasingEffect effect) {
         super(effect);
         this.originalId = effect.originalId;
     }
