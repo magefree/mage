@@ -4,7 +4,6 @@ import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.t.ThrashThreat;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -118,6 +117,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Rakdos, the Showstopper", 199, Rarity.MYTHIC, mage.cards.r.RakdosTheShowstopper.class));
         cards.add(new SetCardInfo("Rampage of the Clans", 134, Rarity.RARE, mage.cards.r.RampageOfTheClans.class));
         cards.add(new SetCardInfo("Ravager Wurm", 200, Rarity.MYTHIC, mage.cards.r.RavagerWurm.class));
+        cards.add(new SetCardInfo("Revival // Revenge", 228, Rarity.RARE, mage.cards.r.RevivalRevenge.class));
         cards.add(new SetCardInfo("Rhythm of the Wild", 201, Rarity.UNCOMMON, mage.cards.r.RhythmOfTheWild.class));
         cards.add(new SetCardInfo("Rix Maadi Reveler", 109, Rarity.RARE, mage.cards.r.RixMaadiReveler.class));
         cards.add(new SetCardInfo("Sauroform Hybrid", 140, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
@@ -142,7 +142,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Teysa Karlov", 212, Rarity.RARE, mage.cards.t.TeysaKarlov.class));
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
         cards.add(new SetCardInfo("Theater of Horrors", 213, Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
-        cards.add(new SetCardInfo("Thrash // Threat", 229, Rarity.RARE, ThrashThreat.class));
+        cards.add(new SetCardInfo("Thrash // Threat", 229, Rarity.RARE, mage.cards.t.ThrashThreat.class));
         cards.add(new SetCardInfo("Titanic Brawl", 146, Rarity.COMMON, mage.cards.t.TitanicBrawl.class));
         cards.add(new SetCardInfo("Tithe Taker", 27, Rarity.RARE, mage.cards.t.TitheTaker.class));
         cards.add(new SetCardInfo("Trollbred Guardian", 148, Rarity.UNCOMMON, mage.cards.t.TrollbredGuardian.class));
