@@ -35,6 +35,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Absorb", 151, Rarity.RARE, mage.cards.a.Absorb.class));
         cards.add(new SetCardInfo("Aeromunculus", 152, Rarity.COMMON, mage.cards.a.Aeromunculus.class));
         cards.add(new SetCardInfo("Amplifire", 92, Rarity.RARE, mage.cards.a.Amplifire.class));
+        cards.add(new SetCardInfo("Angel of Grace", 1, Rarity.MYTHIC, mage.cards.a.AngelOfGrace.class));
         cards.add(new SetCardInfo("Angelic Exaltation", 2, Rarity.UNCOMMON, mage.cards.a.AngelicExaltation.class));
         cards.add(new SetCardInfo("Archway Angel", 3, Rarity.UNCOMMON, mage.cards.a.ArchwayAngel.class));
         cards.add(new SetCardInfo("Arrester's Admonition", 31, Rarity.COMMON, mage.cards.a.ArrestersAdmonition.class));
