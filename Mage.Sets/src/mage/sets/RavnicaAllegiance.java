@@ -93,6 +93,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Gyre Engineer", 180, Rarity.UNCOMMON, mage.cards.g.GyreEngineer.class));
         cards.add(new SetCardInfo("Hackrobat", 181, Rarity.UNCOMMON, mage.cards.h.Hackrobat.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 251, Rarity.RARE, mage.cards.h.HallowedFountain.class));
+        cards.add(new SetCardInfo("Hero of Precinct One", 11, Rarity.RARE, mage.cards.h.HeroOfPrecinctOne.class));
         cards.add(new SetCardInfo("High Alert", 182, Rarity.UNCOMMON, mage.cards.h.HighAlert.class));
         cards.add(new SetCardInfo("Humongulus", 41, Rarity.COMMON, mage.cards.h.Humongulus.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 183, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
