@@ -39,6 +39,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Exaltation", 2, Rarity.UNCOMMON, mage.cards.a.AngelicExaltation.class));
         cards.add(new SetCardInfo("Archway Angel", 3, Rarity.UNCOMMON, mage.cards.a.ArchwayAngel.class));
         cards.add(new SetCardInfo("Arrester's Admonition", 31, Rarity.COMMON, mage.cards.a.ArrestersAdmonition.class));
+        cards.add(new SetCardInfo("Awaken the Erstwhile", 61, Rarity.RARE, mage.cards.a.AwakenTheErstwhile.class));
         cards.add(new SetCardInfo("Azorius Guildgate", 243, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azorius Guildgate", 244, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azorius Locket", 231, Rarity.COMMON, mage.cards.a.AzoriusLocket.class));
