@@ -53,7 +53,8 @@ public final class DovinGrandArbiter extends CardImpl {
                 Zone.HAND, false, false, false
         ).setText("Look at the top ten cards of your library. " +
                 "Put three of them into your hand and the rest " +
-                "on the bottom of your library in a random order.")));
+                "on the bottom of your library in a random order."
+        ), -7));
     }
 
     private DovinGrandArbiter(final DovinGrandArbiter card) {
