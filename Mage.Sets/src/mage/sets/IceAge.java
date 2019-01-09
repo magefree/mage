@@ -255,6 +255,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Panic", 212, Rarity.COMMON, mage.cards.p.Panic.class));
         cards.add(new SetCardInfo("Pentagram of the Ages", 332, Rarity.RARE, mage.cards.p.PentagramOfTheAges.class));
         cards.add(new SetCardInfo("Pestilence Rats", 157, Rarity.COMMON, mage.cards.p.PestilenceRats.class));
+        cards.add(new SetCardInfo("Phantasmal Mount", 88, Rarity.UNCOMMON, mage.cards.p.PhantasmalMount.class));
         cards.add(new SetCardInfo("Pit Trap", 333, Rarity.UNCOMMON, mage.cards.p.PitTrap.class));
         cards.add(new SetCardInfo("Plains", 364, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 365, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -292,6 +293,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Erne", 98, Rarity.UNCOMMON, mage.cards.s.SilverErne.class));
         cards.add(new SetCardInfo("Skeleton Ship", 301, Rarity.RARE, mage.cards.s.SkeletonShip.class));
         cards.add(new SetCardInfo("Skull Catapult", 336, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
+        cards.add(new SetCardInfo("Snow Devil", 100, Rarity.COMMON, mage.cards.s.SnowDevil.class));
         cards.add(new SetCardInfo("Snow Fortress", 337, Rarity.RARE, mage.cards.s.SnowFortress.class));
         cards.add(new SetCardInfo("Snow Hound", 53, Rarity.UNCOMMON, mage.cards.s.SnowHound.class));
         cards.add(new SetCardInfo("Snow-Covered Forest", 383, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
