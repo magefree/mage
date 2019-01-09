@@ -159,6 +159,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Verity Circle", 58, Rarity.RARE, mage.cards.v.VerityCircle.class));
         cards.add(new SetCardInfo("Warrant // Warden", 230, Rarity.RARE, mage.cards.w.WarrantWarden.class));
         cards.add(new SetCardInfo("Wilderness Reclamation", 149, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
+        cards.add(new SetCardInfo("Windstorm Drake", 60, Rarity.UNCOMMON, mage.cards.w.WindstormDrake.class));
         cards.add(new SetCardInfo("Zegana, Utopian Speaker", 214, Rarity.RARE, mage.cards.z.ZeganaUtopianSpeaker.class));
         cards.add(new SetCardInfo("Zhur-Taa Goblin", 215, Rarity.UNCOMMON, mage.cards.z.ZhurTaaGoblin.class));
     }
