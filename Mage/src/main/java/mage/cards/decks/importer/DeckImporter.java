@@ -3,10 +3,13 @@ package mage.cards.decks.importer;
 import org.apache.log4j.Logger;
 import java.io.File;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Scanner;
 
 
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 public abstract class DeckImporter {
 
@@ -51,6 +54,10 @@ public abstract class DeckImporter {
 
   public DeckCardLists importDeck(String file) {
     return importDeck(file, new StringBuilder());
+  }
+
+  public CardLookup getCardLookup() {
+    return CardLookup.instance;
   }
 
   private static boolean haveSideboardSection(String file) {
