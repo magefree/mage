@@ -72,6 +72,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Domri, Chaos Bringer", 166, Rarity.MYTHIC, mage.cards.d.DomriChaosBringer.class));
         cards.add(new SetCardInfo("Domri, City Smasher", 269, Rarity.RARE, mage.cards.d.DomriCitySmasher.class));
         cards.add(new SetCardInfo("Dovin's Acuity", 168, Rarity.UNCOMMON, mage.cards.d.DovinsAcuity.class));
+        cards.add(new SetCardInfo("Dovin's Automaton", 268, Rarity.COMMON, mage.cards.d.DovinsAutomaton.class));
         cards.add(new SetCardInfo("Dovin, Architect of Law", 265, Rarity.MYTHIC, mage.cards.d.DovinArchitectOfLaw.class));
         cards.add(new SetCardInfo("Dovin, Grand Arbiter", 167, Rarity.MYTHIC, mage.cards.d.DovinGrandArbiter.class));
         cards.add(new SetCardInfo("Drill Bit", 73, Rarity.UNCOMMON, mage.cards.d.DrillBit.class));
