@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import mage.abilities.Ability;
@@ -26,11 +25,8 @@ public final class LoreseekersStone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // {3}, {T}: Draw three cards. This ability costs {1} more to activate for each card in your hand.
-        // TODO: Make ability properly copiable
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3).setText("Draw three cards. This ability costs {1} more to activate for each card in your hand"), new GenericManaCost(3));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new LoreseekersStoneCostIncreasingEffect(ability.getOriginalId())));
+        this.addAbility(new LoreseekersStoneActivatedAbility());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new LoreseekersStoneCostIncreasingEffect()));
     }
 
     private LoreseekersStone(final LoreseekersStone card) {
@@ -43,18 +39,34 @@ public final class LoreseekersStone extends CardImpl {
     }
 }
 
+class LoreseekersStoneActivatedAbility extends SimpleActivatedAbility {
+
+    public LoreseekersStoneActivatedAbility() {
+        super(Zone.BATTLEFIELD,
+                new DrawCardSourceControllerEffect(3)
+                        .setText("Draw three cards. This ability costs {1} more to activate for each card in your hand"),
+                new GenericManaCost(3));
+        this.addCost(new TapSourceCost());
+    }
+
+    private LoreseekersStoneActivatedAbility(final LoreseekersStoneActivatedAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public LoreseekersStoneActivatedAbility copy() {
+        return new LoreseekersStoneActivatedAbility(this);
+    }
+}
+
 class LoreseekersStoneCostIncreasingEffect extends CostModificationEffectImpl {
 
-    private final UUID originalId;
-
-    LoreseekersStoneCostIncreasingEffect(UUID originalId) {
+    LoreseekersStoneCostIncreasingEffect() {
         super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        this.originalId = originalId;
     }
 
     private LoreseekersStoneCostIncreasingEffect(final LoreseekersStoneCostIncreasingEffect effect) {
         super(effect);
-        this.originalId = effect.originalId;
     }
 
     @Override
@@ -68,12 +80,11 @@ class LoreseekersStoneCostIncreasingEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getOriginalId().equals(originalId);
+        return (abilityToModify instanceof LoreseekersStoneActivatedAbility) && abilityToModify.getSourceId().equals(source.getSourceId());
     }
 
     @Override
     public LoreseekersStoneCostIncreasingEffect copy() {
         return new LoreseekersStoneCostIncreasingEffect(this);
     }
-
 }
