@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -14,6 +15,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -21,6 +26,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PriestOfForgottenGods extends CardImpl {
+
+    private static final FilterControlledPermanent filter
+            = new FilterControlledCreaturePermanent("other creatures");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public PriestOfForgottenGods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -42,6 +54,7 @@ public final class PriestOfForgottenGods extends CardImpl {
         );
         ability.addEffect(new BasicManaEffect(Mana.BlackMana(2)).setText("You add {B}{B}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(0, 2, filter, true)));
         this.addAbility(ability);
     }
 

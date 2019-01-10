@@ -1,9 +1,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -14,13 +11,16 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SacrificeTargetCost extends CostImpl {
 
-    List<Permanent> permanents = new ArrayList<>();
+    private final List<Permanent> permanents = new ArrayList<>();
 
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
