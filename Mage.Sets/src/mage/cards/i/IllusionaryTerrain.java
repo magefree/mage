@@ -89,76 +89,46 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
                 && firstChoice != null
                 && secondChoice != null) {
             for (Permanent land : lands) {
-                if (land != null
-                        && land.isBasic()) {
+                if (land.isBasic()) {
                     switch (layer) {
                         case TypeChangingEffects_4:
-                            if (sublayer == SubLayer.NA) {
+                            if (land.getSubtype(game).contains(firstChoice)) {
                                 land.getSubtype(game).clear();
                                 land.getSubtype(game).add(secondChoice);
+                                game.getState().setValue("illusionaryTerrain"
+                                        + source.getId()
+                                        + land.getId()
+                                        + land.getZoneChangeCounter(game),
+                                        "true");
                             }
                             break;
                         case AbilityAddingRemovingEffects_6:
-                            if (sublayer == SubLayer.NA) {
-                                boolean addAbility = true;
-                                land.getAbilities().clear();
-                                if (secondChoice.equals(SubType.FOREST)) {
-                                    for (Ability existingAbility : land.getAbilities()) {
-                                        if (existingAbility instanceof GreenManaAbility) {
-                                            addAbility = false;
-                                            break;
-                                        }
-                                    }
-                                    if (addAbility) {
-                                        land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                                    }
+                            if (game.getState().getValue("illusionaryTerrain"
+                                    + source.getId()
+                                    + land.getId()
+                                    + land.getZoneChangeCounter(game)) != null
+                                    && game.getState().getValue("illusionaryTerrain"
+                                            + source.getId()
+                                            + land.getId()
+                                            + land.getZoneChangeCounter(game)).equals("true")) {
+                                land.removeAllAbilities(source.getSourceId(), game);
+                                if (land.getSubtype(game).contains(SubType.FOREST)) {
+                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                 }
-                                if (secondChoice.equals(SubType.PLAINS)) {
-                                    for (Ability existingAbility : land.getAbilities()) {
-                                        if (existingAbility instanceof WhiteManaAbility) {
-                                            addAbility = false;
-                                            break;
-                                        }
-                                    }
-                                    if (addAbility) {
-                                        land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                                    }
+                                if (land.getSubtype(game).contains(SubType.PLAINS)) {
+                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                 }
-                                if (secondChoice.equals(SubType.MOUNTAIN)) {
-                                    for (Ability existingAbility : land.getAbilities()) {
-                                        if (existingAbility instanceof RedManaAbility) {
-                                            addAbility = false;
-                                            break;
-                                        }
-                                    }
-                                    if (addAbility) {
-                                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                                    }
+                                if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
+                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                 }
-                                if (secondChoice.equals(SubType.ISLAND)) {
-                                    for (Ability existingAbility : land.getAbilities()) {
-                                        if (existingAbility instanceof BlueManaAbility) {
-                                            addAbility = false;
-                                            break;
-                                        }
-                                    }
-                                    if (addAbility) {
-                                        land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                                    }
+                                if (land.getSubtype(game).contains(SubType.ISLAND)) {
+                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                 }
-                                if (secondChoice.equals(SubType.SWAMP)) {
-                                    for (Ability existingAbility : land.getAbilities()) {
-                                        if (existingAbility instanceof BlackManaAbility) {
-                                            addAbility = false;
-                                            break;
-                                        }
-                                    }
-                                    if (addAbility) {
-                                        land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                                    }
+                                if (land.getSubtype(game).contains(SubType.SWAMP)) {
+                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                 }
+                                break;
                             }
-                            break;
                     }
                 }
             }
@@ -174,8 +144,9 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6
-                || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.TypeChangingEffects_4
+                || layer == Layer.AbilityAddingRemovingEffects_6;
+
     }
 }
 

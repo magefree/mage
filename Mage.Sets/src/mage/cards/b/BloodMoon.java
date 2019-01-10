@@ -1,11 +1,14 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,7 +25,7 @@ import mage.game.permanent.Permanent;
 public final class BloodMoon extends CardImpl {
 
     public BloodMoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Nonbasic lands are Mountains.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodMoonEffect()));
@@ -72,12 +75,28 @@ class BloodMoonEffect extends ContinuousEffectImpl {
                 case TypeChangingEffects_4:
                     // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
                     // So the ability removing has to be done before Layer 6
-                    land.removeAllAbilities(source.getSourceId(), game);
-                    land.getSubtype(game).removeAll(SubType.getLandTypes(false));
+                    //land.getSubtype(game).removeAll(SubType.getLandTypes(false));
+                    land.getSubtype(game).clear();
                     land.getSubtype(game).add(SubType.MOUNTAIN);
+                    land.removeAllAbilities(source.getSourceId(), game);
                     break;
                 case AbilityAddingRemovingEffects_6:
-                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                    land.removeAllAbilities(source.getSourceId(), game);
+                    if (land.getSubtype(game).contains(SubType.FOREST)) {
+                        land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                    }
+                    if (land.getSubtype(game).contains(SubType.PLAINS)) {
+                        land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                    }
+                    if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
+                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                    }
+                    if (land.getSubtype(game).contains(SubType.ISLAND)) {
+                        land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                    }
+                    if (land.getSubtype(game).contains(SubType.SWAMP)) {
+                        land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                    }
                     break;
             }
         }
@@ -86,6 +105,7 @@ class BloodMoonEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.AbilityAddingRemovingEffects_6 
+                || layer == Layer.TypeChangingEffects_4;
     }
 }
