@@ -101,6 +101,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Immolation Shaman", 105, Rarity.RARE, mage.cards.i.ImmolationShaman.class));
         cards.add(new SetCardInfo("Imperious Oligarch", 184, Rarity.COMMON, mage.cards.i.ImperiousOligarch.class));
         cards.add(new SetCardInfo("Incubation // Incongruity", 226, Rarity.UNCOMMON, mage.cards.i.IncubationIncongruity.class));
+        cards.add(new SetCardInfo("Incubation Druid", 131, Rarity.RARE, mage.cards.i.IncubationDruid.class));
         cards.add(new SetCardInfo("Judith, the Scourge Diva", 185, Rarity.RARE, mage.cards.j.JudithTheScourgeDiva.class));
         cards.add(new SetCardInfo("Kaya's Wrath", 187, Rarity.RARE, mage.cards.k.KayasWrath.class));
         cards.add(new SetCardInfo("Kaya, Orzhov Usurper", 186, Rarity.MYTHIC, mage.cards.k.KayaOrzhovUsurper.class));
