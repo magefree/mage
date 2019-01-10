@@ -79,6 +79,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Dovin, Grand Arbiter", 167, Rarity.MYTHIC, mage.cards.d.DovinGrandArbiter.class));
         cards.add(new SetCardInfo("Drill Bit", 73, Rarity.UNCOMMON, mage.cards.d.DrillBit.class));
         cards.add(new SetCardInfo("Electrodominance", 99, Rarity.RARE, mage.cards.e.Electrodominance.class));
+        cards.add(new SetCardInfo("Elite Arrester", 266, Rarity.COMMON, mage.cards.e.EliteArrester.class));
         cards.add(new SetCardInfo("Emergency Powers", 169, Rarity.MYTHIC, mage.cards.e.EmergencyPowers.class));
         cards.add(new SetCardInfo("End-Raze Forerunners", 124, Rarity.RARE, mage.cards.e.EndRazeForerunners.class));
         cards.add(new SetCardInfo("Essence Capture", 37, Rarity.UNCOMMON, mage.cards.e.EssenceCapture.class));
