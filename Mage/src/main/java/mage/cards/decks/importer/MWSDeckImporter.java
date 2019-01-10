@@ -14,7 +14,7 @@ import mage.util.RandomUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MWSDeckImporter extends DeckImporter {
+public class MWSDeckImporter extends PlainTextDeckImporter {
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {

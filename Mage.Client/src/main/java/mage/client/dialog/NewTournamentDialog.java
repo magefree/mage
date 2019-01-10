@@ -18,7 +18,7 @@ import java.util.UUID;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import mage.cards.decks.Deck;
-import mage.cards.decks.importer.DeckImporterUtil;
+import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
@@ -557,7 +557,7 @@ public class NewTournamentDialog extends MageDialog {
                 if (!(cubeFromDeckFilename.isEmpty())) {
                     Deck cubeFromDeck = new Deck();
                     try {
-                        cubeFromDeck = Deck.load(DeckImporterUtil.importDeck(cubeFromDeckFilename), true, true);
+                        cubeFromDeck = Deck.load(DeckImporter.importDeckFromFile(cubeFromDeckFilename), true, true);
                     } catch (GameException e1) {
                         JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
                     }
@@ -631,11 +631,11 @@ public class NewTournamentDialog extends MageDialog {
                 table.getTableId(),
                 this.player1Panel.getPlayerName(),
                 PlayerType.HUMAN, 1,
-                DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
+                DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile()),
                 tOptions.getPassword())) {
             for (TournamentPlayerPanel player : players) {
                 if (player.getPlayerType().getSelectedItem() != PlayerType.HUMAN) {
-                    if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()))) {
+                    if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile()))) {
                         // error message must be send by sever
                         SessionHandler.removeTable(roomId, table.getTableId());
                         table = null;

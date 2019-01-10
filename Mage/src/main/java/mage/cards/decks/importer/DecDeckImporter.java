@@ -10,7 +10,7 @@ import mage.cards.repository.CardRepository;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DecDeckImporter extends DeckImporter {
+public class DecDeckImporter extends PlainTextDeckImporter {
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
