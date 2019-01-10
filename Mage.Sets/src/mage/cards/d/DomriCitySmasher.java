@@ -51,7 +51,7 @@ public final class DomriCitySmasher extends CardImpl {
         ability = new LoyaltyAbility(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(3),
                 StaticFilters.FILTER_CONTROLLED_CREATURE
-        ));
+        ), -8);
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("Those creatures gain trample until end of turn"));
