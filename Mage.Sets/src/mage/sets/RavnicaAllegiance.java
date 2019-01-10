@@ -119,6 +119,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Pestilent Spirit", 81, Rarity.RARE, mage.cards.p.PestilentSpirit.class));
         cards.add(new SetCardInfo("Pitiless Pontiff", 194, Rarity.UNCOMMON, mage.cards.p.PitilessPontiff.class));
         cards.add(new SetCardInfo("Precognitive Perception", 45, Rarity.RARE, mage.cards.p.PrecognitivePerception.class));
+        cards.add(new SetCardInfo("Priest of Forgotten Gods", 83, Rarity.RARE, mage.cards.p.PriestOfForgottenGods.class));
         cards.add(new SetCardInfo("Prime Speaker Vannifar", 195, Rarity.MYTHIC, mage.cards.p.PrimeSpeakerVannifar.class));
         cards.add(new SetCardInfo("Pteramander", 47, Rarity.UNCOMMON, mage.cards.p.Pteramander.class));
         cards.add(new SetCardInfo("Quench", 48, Rarity.COMMON, mage.cards.q.Quench.class));
