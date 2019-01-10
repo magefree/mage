@@ -956,6 +956,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
 
+            if (abilities.containsKey(HexproofFromMonocoloredAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                        && !source.getColor(game).isColorless() && !source.getColor(game).isMulticolored()) {
+                    return false;
+                }
+            }
+
             if (hasProtectionFrom(source, game)) {
                 return false;
             }
