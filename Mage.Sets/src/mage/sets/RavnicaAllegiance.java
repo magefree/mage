@@ -61,6 +61,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Captive Audience", 160, Rarity.MYTHIC, mage.cards.c.CaptiveAudience.class));
         cards.add(new SetCardInfo("Carnival // Carnage", 222, Rarity.UNCOMMON, mage.cards.c.CarnivalCarnage.class));
         cards.add(new SetCardInfo("Clan Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ClanGuildmage.class));
+        cards.add(new SetCardInfo("Collision // Colossus", 223, Rarity.UNCOMMON, mage.cards.c.CollisionColossus.class));
         cards.add(new SetCardInfo("Combine Guildmage", 163, Rarity.UNCOMMON, mage.cards.c.CombineGuildmage.class));
         cards.add(new SetCardInfo("Consecrate // Consume", 224, Rarity.UNCOMMON, mage.cards.c.ConsecrateConsume.class));
         cards.add(new SetCardInfo("Cry of the Carnarium", 70, Rarity.UNCOMMON, mage.cards.c.CryOfTheCarnarium.class));
