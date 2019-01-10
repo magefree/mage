@@ -94,6 +94,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Gate Colossus", 232, Rarity.UNCOMMON, mage.cards.g.GateColossus.class));
         cards.add(new SetCardInfo("Gatebreaker Ram", 126, Rarity.UNCOMMON, mage.cards.g.GatebreakerRam.class));
         cards.add(new SetCardInfo("Gates Ablaze", 102, Rarity.UNCOMMON, mage.cards.g.GatesAblaze.class));
+        cards.add(new SetCardInfo("Gateway Sneak", 40, Rarity.UNCOMMON, mage.cards.g.GatewaySneak.class));
         cards.add(new SetCardInfo("Glass of the Guildpact", 233, Rarity.RARE, mage.cards.g.GlassOfTheGuildpact.class));
         cards.add(new SetCardInfo("Godless Shrine", 248, Rarity.RARE, mage.cards.g.GodlessShrine.class));
         cards.add(new SetCardInfo("Grasping Thrull", 177, Rarity.COMMON, mage.cards.g.GraspingThrull.class));
