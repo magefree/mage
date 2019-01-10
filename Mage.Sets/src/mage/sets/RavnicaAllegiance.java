@@ -139,6 +139,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Pteramander", 47, Rarity.UNCOMMON, mage.cards.p.Pteramander.class));
         cards.add(new SetCardInfo("Quench", 48, Rarity.COMMON, mage.cards.q.Quench.class));
         cards.add(new SetCardInfo("Rafter Demon", 196, Rarity.COMMON, mage.cards.r.RafterDemon.class));
+        cards.add(new SetCardInfo("Ragefire", 270, Rarity.COMMON, mage.cards.r.Ragefire.class));
         cards.add(new SetCardInfo("Rakdos Firewheeler", 197, Rarity.UNCOMMON, mage.cards.r.RakdosFirewheeler.class));
         cards.add(new SetCardInfo("Rakdos Guildgate", 255, Rarity.COMMON, mage.cards.r.RakdosGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rakdos Guildgate", 256, Rarity.COMMON, mage.cards.r.RakdosGuildgate.class, NON_FULL_USE_VARIOUS));
