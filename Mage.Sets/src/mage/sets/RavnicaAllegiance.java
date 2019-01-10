@@ -69,6 +69,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Cult Guildmage", 164, Rarity.UNCOMMON, mage.cards.c.CultGuildmage.class));
         cards.add(new SetCardInfo("Depose // Deploy", 225, Rarity.UNCOMMON, mage.cards.d.DeposeDeploy.class));
         cards.add(new SetCardInfo("Deputy of Detention", 165, Rarity.RARE, mage.cards.d.DeputyOfDetention.class));
+        cards.add(new SetCardInfo("Domri's Nodorog", 272, Rarity.RARE, mage.cards.d.DomrisNodorog.class));
         cards.add(new SetCardInfo("Domri, Chaos Bringer", 166, Rarity.MYTHIC, mage.cards.d.DomriChaosBringer.class));
         cards.add(new SetCardInfo("Domri, City Smasher", 269, Rarity.RARE, mage.cards.d.DomriCitySmasher.class));
         cards.add(new SetCardInfo("Dovin's Acuity", 168, Rarity.UNCOMMON, mage.cards.d.DovinsAcuity.class));
