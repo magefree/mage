@@ -54,7 +54,7 @@ public final class PriestOfForgottenGods extends CardImpl {
         );
         ability.addEffect(new BasicManaEffect(Mana.BlackMana(2)).setText("You add {B}{B}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(0, 2, filter, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
         this.addAbility(ability);
     }
 
