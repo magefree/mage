@@ -86,6 +86,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Dagger Caster", 97, Rarity.UNCOMMON, mage.cards.d.DaggerCaster.class));
         cards.add(new SetCardInfo("Dead Revels", 71, Rarity.COMMON, mage.cards.d.DeadRevels.class));
         cards.add(new SetCardInfo("Debtors' Transport", 72, Rarity.COMMON, mage.cards.d.DebtorsTransport.class));
+        cards.add(new SetCardInfo("Deface", 98, Rarity.COMMON, mage.cards.d.Deface.class));
         cards.add(new SetCardInfo("Depose // Deploy", 225, Rarity.UNCOMMON, mage.cards.d.DeposeDeploy.class));
         cards.add(new SetCardInfo("Deputy of Detention", 165, Rarity.RARE, mage.cards.d.DeputyOfDetention.class));
         cards.add(new SetCardInfo("Domri's Nodorog", 272, Rarity.RARE, mage.cards.d.DomrisNodorog.class));
