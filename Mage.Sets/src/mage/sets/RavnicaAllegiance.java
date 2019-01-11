@@ -102,6 +102,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Elite Arrester", 266, Rarity.COMMON, mage.cards.e.EliteArrester.class));
         cards.add(new SetCardInfo("Emergency Powers", 169, Rarity.MYTHIC, mage.cards.e.EmergencyPowers.class));
         cards.add(new SetCardInfo("End-Raze Forerunners", 124, Rarity.RARE, mage.cards.e.EndRazeForerunners.class));
+        cards.add(new SetCardInfo("Enraged Ceratok", 125, Rarity.UNCOMMON, mage.cards.e.EnragedCeratok.class));
         cards.add(new SetCardInfo("Essence Capture", 37, Rarity.UNCOMMON, mage.cards.e.EssenceCapture.class));
         cards.add(new SetCardInfo("Ethereal Absolution", 170, Rarity.RARE, mage.cards.e.EtherealAbsolution.class));
         cards.add(new SetCardInfo("Expose to Daylight", 8, Rarity.COMMON, mage.cards.e.ExposeToDaylight.class));
