@@ -122,9 +122,9 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Formation", 25, Rarity.RARE, mage.cards.f.Formation.class));
         cards.add(new SetCardInfo("Foul Familiar", 126, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
         cards.add(new SetCardInfo("Foxfire", 238, Rarity.COMMON, mage.cards.f.Foxfire.class));
-        cards.add(new SetCardInfo("Freyalise Supplicant", 127, Rarity.UNCOMMON, mage.cards.f.FreyaliseSupplicant.class));
+        cards.add(new SetCardInfo("Freyalise Supplicant", 239, Rarity.UNCOMMON, mage.cards.f.FreyaliseSupplicant.class));
         cards.add(new SetCardInfo("Freyalise's Charm", 240, Rarity.UNCOMMON, mage.cards.f.FreyalisesCharm.class));
-        cards.add(new SetCardInfo("Freyalise's Winds", 129, Rarity.RARE, mage.cards.f.FreyalisesWinds.class));
+        cards.add(new SetCardInfo("Freyalise's Winds", 241, Rarity.RARE, mage.cards.f.FreyalisesWinds.class));
         cards.add(new SetCardInfo("Fumarole", 291, Rarity.UNCOMMON, mage.cards.f.Fumarole.class));
         cards.add(new SetCardInfo("Fyndhorn Bow", 318, Rarity.UNCOMMON, mage.cards.f.FyndhornBow.class));
         cards.add(new SetCardInfo("Fyndhorn Brownie", 242, Rarity.COMMON, mage.cards.f.FyndhornBrownie.class));
@@ -245,7 +245,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 255, Rarity.UNCOMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Necropotence", 154, Rarity.RARE, mage.cards.n.Necropotence.class));
         cards.add(new SetCardInfo("Norritt", 155, Rarity.COMMON, mage.cards.n.Norritt.class));
-        cards.add(new SetCardInfo("Oath of Lim-Dul", 44, Rarity.RARE, mage.cards.o.OathOfLimDul.class));
+        cards.add(new SetCardInfo("Oath of Lim-Dul", 156, Rarity.RARE, mage.cards.o.OathOfLimDul.class));
         cards.add(new SetCardInfo("Onyx Talisman", 331, Rarity.UNCOMMON, mage.cards.o.OnyxTalisman.class));
         cards.add(new SetCardInfo("Orcish Cannoneers", 205, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class));
         cards.add(new SetCardInfo("Orcish Healer", 208, Rarity.UNCOMMON, mage.cards.o.OrcishHealer.class));
