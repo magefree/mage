@@ -1,74 +1,87 @@
-
-
 package mage.cards.decks.importer;
 
-import mage.cards.decks.DeckCardLists;
 import org.apache.log4j.Logger;
-
 import java.io.File;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.Scanner;
 
-/**
- *
- * @author BetaSteward_at_googlemail.com
- */
+
+import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+
 public abstract class DeckImporter {
 
-    private static final Logger logger = Logger.getLogger(DeckImporter.class);
+  protected static final Logger logger = Logger.getLogger(DeckImporter.class);
 
-    protected StringBuilder sbMessage = new StringBuilder(); //TODO we should stop using this not garbage collectable StringBuilder. It just bloats
-    protected int lineCount;
+  private static final String[] SIDEBOARD_MARKS = new String[]{"//sideboard", "sb: "};
 
+  public static DeckImporter getDeckImporter(String file) {
+    if (file == null) {
+      return null;
+    } if (file.toLowerCase(Locale.ENGLISH).endsWith("dec")) {
+      return new DecDeckImporter();
+    } else if (file.toLowerCase(Locale.ENGLISH).endsWith("mwdeck")) {
+      return new MWSDeckImporter();
+    } else if (file.toLowerCase(Locale.ENGLISH).endsWith("txt")) {
+      return new TxtDeckImporter(haveSideboardSection(file));
+    } else if (file.toLowerCase(Locale.ENGLISH).endsWith("dck")) {
+      return new DckDeckImporter();
+    } else if (file.toLowerCase(Locale.ENGLISH).endsWith("dek")) {
+      return new DekDeckImporter();
+    } else if (file.toLowerCase(Locale.ENGLISH).endsWith("cod")) {
+      return new CodDeckImporter();
+    } else {
+      return null;
+    }
+  }
 
-    /**
-     *
-     * @param file file to import
-     * @param errorMessages you can setup output messages to showup to user (set null for fatal exception on messages.count > 0)
-     * @return decks list
-     */
-    public DeckCardLists importDeck(String file, StringBuilder errorMessages) {
-        File f = new File(file);
-        DeckCardLists deckList = new DeckCardLists();
-        if (!f.exists()) {
-            logger.warn("Deckfile " + file + " not found.");
-            return deckList;
+  public static DeckCardLists importDeckFromFile(String file) {
+    return importDeckFromFile(file, new StringBuilder());
+  }
+
+  public static DeckCardLists importDeckFromFile(String file, StringBuilder errorMessages) {
+    DeckImporter deckImporter = getDeckImporter(file);
+    if (deckImporter != null) {
+      return deckImporter.importDeck(file, errorMessages);
+    } else {
+      return new DeckCardLists();
+    }
+  }
+
+  public abstract DeckCardLists importDeck(String file, StringBuilder errorMessages);
+
+  public DeckCardLists importDeck(String file) {
+    return importDeck(file, new StringBuilder());
+  }
+
+  public CardLookup getCardLookup() {
+    return CardLookup.instance;
+  }
+
+  private static boolean haveSideboardSection(String file) {
+    // search for sideboard section:
+    // or //sideboard
+    // or SB: 1 card name -- special deckstats.net
+
+    File f = new File(file);
+    try (Scanner scanner = new Scanner(f)) {
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine().trim().toLowerCase(Locale.ENGLISH);
+
+        for (String mark : SIDEBOARD_MARKS) {
+          if (line.startsWith(mark)) {
+            return true;
+          }
         }
-        lineCount = 0;
-
-        sbMessage.setLength(0);
-        try {
-            try (Scanner scanner = new Scanner(f)) {
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine().trim();
-                    lineCount++;
-                    readLine(line, deckList);
-                }
-
-                if (sbMessage.length() > 0) {
-                    if(errorMessages != null) {
-                        // normal output for user
-                        errorMessages.append(sbMessage);
-                    }else{
-                        // fatal error
-                        logger.fatal(sbMessage);
-                    }
-                }
-            } catch (Exception ex) {
-                logger.fatal(null, ex);
-            }
-        } catch (Exception ex) {
-            logger.fatal(null, ex);
-        }
-        return deckList;
+      }
+    } catch (Exception e) {
+      // ignore error, deckimporter will process it
     }
 
-    public DeckCardLists importDeck(String file) {
-        return importDeck(file, null);
-    }
+    // not found
+    return false;
+  }
 
-    public String getErrors(){
-        return sbMessage.toString();
-    }
-
-    protected abstract void readLine(String line, DeckCardLists deckList);
 }

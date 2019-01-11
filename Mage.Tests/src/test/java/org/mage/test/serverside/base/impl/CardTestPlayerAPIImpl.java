@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.importer.DeckImporterUtil;
+import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
@@ -189,7 +189,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (loadedDeckCardLists.containsKey(deckName)) {
             list = loadedDeckCardLists.get(deckName);
         } else {
-            list = DeckImporterUtil.importDeck(deckName);
+            list = DeckImporter.importDeckFromFile(deckName);
             loadedDeckCardLists.put(deckName, list);
         }
         Deck deck = Deck.load(list, false, false);
