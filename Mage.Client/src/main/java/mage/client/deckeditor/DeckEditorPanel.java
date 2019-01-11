@@ -1123,7 +1123,8 @@ class ImportFilter extends FileFilter {
                 || ext.toLowerCase(Locale.ENGLISH).equals("mwdeck")
                 || ext.toLowerCase(Locale.ENGLISH).equals("txt")
                 || ext.toLowerCase(Locale.ENGLISH).equals("dek")
-                || ext.toLowerCase(Locale.ENGLISH).equals("cod")) {
+                || ext.toLowerCase(Locale.ENGLISH).equals("cod")
+                || ext.toLowerCase(Locale.ENGLISH).equals("o8d")) {
                 return true;
             }
         }
@@ -1132,7 +1133,7 @@ class ImportFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return "*.dec | *.mwDeck | *.txt | *.dek | *.cod";
+        return "*.dec | *.mwDeck | *.txt | *.dek | *.cod | *.o8d";
     }
 }
 

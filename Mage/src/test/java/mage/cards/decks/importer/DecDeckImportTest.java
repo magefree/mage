@@ -8,28 +8,7 @@ import mage.cards.decks.DeckCardLists;
 
 public class DecDeckImportTest {
 
-  private static final FakeCardLookup LOOKUP = new FakeCardLookup()
-      .addCard("Masticore")
-      .addCard("Metalworker")
-      .addCard("Phyrexian Colossus")
-      .addCard("Crumbling Sanctuary")
-      .addCard("Grim Monolith")
-      .addCard("Mishra's Helix")
-      .addCard("Phyrexian Processor")
-      .addCard("Tangle Wire")
-      .addCard("Thran Dynamo")
-      .addCard("Voltaic Key")
-      .addCard("Tinker")
-      .addCard("Brainstorm")
-      .addCard("Crystal Vein")
-      .addCard("Island")
-      .addCard("Rishadan Port")
-      .addCard("Saprazzan Skerry")
-      .addCard("Annul")
-      .addCard("Chill")
-      .addCard("Miscalculation")
-      .addCard("Mishra's Helix")
-      .addCard("Rising Waters");
+  private static final FakeCardLookup LOOKUP = new FakeCardLookup();
 
   @Test
   public void testImport() {
@@ -41,7 +20,7 @@ public class DecDeckImportTest {
       }
     };
     DeckCardLists deck = importer.importDeck(
-        "src/test/java/mage/cards/decks/importer/testdeck.dec", errors);
+        "src/test/java/mage/cards/decks/importer/samples/testdeck.dec", errors);
 
     TestDeckChecker.checker()
       .addMain("Masticore", 4)

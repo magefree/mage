@@ -43,13 +43,13 @@ public class MWSDeckImporter extends PlainTextDeckImporter {
                 CardCriteria criteria = new CardCriteria();
                 criteria.name(lineName);
                 criteria.setCodes(setCode);
-                List<CardInfo> cards = CardRepository.instance.findCards(criteria);
+                List<CardInfo> cards = getCardLookup().lookupCardInfo(criteria);
                 if (!cards.isEmpty()) {
                     cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
                 }
             } 
             if (cardInfo == null) {
-                cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
+                cardInfo = getCardLookup().lookupCardInfo(lineName).orElse(null);
             }
 
             if (cardInfo == null) {

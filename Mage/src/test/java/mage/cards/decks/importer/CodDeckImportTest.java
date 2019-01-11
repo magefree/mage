@@ -8,14 +8,14 @@ import mage.cards.decks.DeckCardLists;
 
 public class CodDeckImportTest {
 
-  private static final FakeCardLookup LOOKUP = new FakeCardLookup()
+  private static final FakeCardLookup LOOKUP = new FakeCardLookup(false)
     .addCard("Forest")
     .addCard("Razorverge Thicket")
     .addCard("Avacyn's Pilgrim")
     .addCard("War Priest of Thune");
 
   @Test
-  public void testImportCod() {
+  public void testImport() {
     CodDeckImporter importer = new CodDeckImporter() {
       @Override
       public CardLookup getCardLookup() {
@@ -24,7 +24,7 @@ public class CodDeckImportTest {
     };
     StringBuilder errors = new StringBuilder();
     DeckCardLists deck = importer.importDeck(
-        "src/test/java/mage/cards/decks/importer/testdeck.cod", errors);
+        "src/test/java/mage/cards/decks/importer/samples/testdeck.cod", errors);
     assertEquals("Deck Name", deck.getName());
 
     TestDeckChecker.checker()
