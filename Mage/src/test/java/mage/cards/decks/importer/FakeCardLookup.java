@@ -29,7 +29,6 @@ public class FakeCardLookup extends CardLookup {
     return this;
   }
 
-  @Override
   public Optional<CardInfo> lookupCardInfo(String cardName) {
     CardInfo card = lookup.get(cardName);
     if (card != null) {

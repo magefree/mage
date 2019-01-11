@@ -9,10 +9,10 @@ import mage.cards.decks.DeckCardLists;
 public class CodDeckImportTest {
 
   private static final FakeCardLookup LOOKUP = new FakeCardLookup(false)
-    .addCard("Forest")
-    .addCard("Razorverge Thicket")
-    .addCard("Avacyn's Pilgrim")
-    .addCard("War Priest of Thune");
+      .addCard("Forest")
+      .addCard("Razorverge Thicket")
+      .addCard("Avacyn's Pilgrim")
+      .addCard("War Priest of Thune");
 
   @Test
   public void testImport() {
