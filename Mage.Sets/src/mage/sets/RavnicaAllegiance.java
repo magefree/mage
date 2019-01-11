@@ -68,6 +68,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Burning-Tree Vandal", 94, Rarity.COMMON, mage.cards.b.BurningTreeVandal.class));
         cards.add(new SetCardInfo("Captive Audience", 160, Rarity.MYTHIC, mage.cards.c.CaptiveAudience.class));
         cards.add(new SetCardInfo("Carnival // Carnage", 222, Rarity.UNCOMMON, mage.cards.c.CarnivalCarnage.class));
+        cards.add(new SetCardInfo("Carrion Imp", 66, Rarity.COMMON, mage.cards.c.CarrionImp.class));
         cards.add(new SetCardInfo("Catacomb Crocodile", 67, Rarity.COMMON, mage.cards.c.CatacombCrocodile.class));
         cards.add(new SetCardInfo("Cavalcade of Calamity", 95, Rarity.UNCOMMON, mage.cards.c.CavalcadeOfCalamity.class));
         cards.add(new SetCardInfo("Charging War Boar", 271, Rarity.UNCOMMON, mage.cards.c.ChargingWarBoar.class));
