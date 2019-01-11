@@ -69,7 +69,7 @@ public final class ImmolationShaman extends CardImpl {
 class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     ImmolationShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(1), false, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(1), true, "that player", true));
     }
 
     private ImmolationShamanTriggeredAbility(final ImmolationShamanTriggeredAbility ability) {

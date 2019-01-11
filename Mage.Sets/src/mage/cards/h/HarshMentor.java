@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -20,8 +18,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class HarshMentor extends CardImpl {
@@ -51,7 +50,7 @@ public final class HarshMentor extends CardImpl {
 class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     HarshMentorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(2), false, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(2), true, "that player", true));
     }
 
     HarshMentorTriggeredAbility(final HarshMentorTriggeredAbility ability) {
