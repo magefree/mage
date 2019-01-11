@@ -180,6 +180,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Revival // Revenge", 228, Rarity.RARE, mage.cards.r.RevivalRevenge.class));
         cards.add(new SetCardInfo("Rhythm of the Wild", 201, Rarity.UNCOMMON, mage.cards.r.RhythmOfTheWild.class));
         cards.add(new SetCardInfo("Rix Maadi Reveler", 109, Rarity.RARE, mage.cards.r.RixMaadiReveler.class));
+        cards.add(new SetCardInfo("Sage's Row Savant", 49, Rarity.COMMON, mage.cards.s.SagesRowSavant.class));
         cards.add(new SetCardInfo("Sauroform Hybrid", 140, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
         cards.add(new SetCardInfo("Savage Smash", 203, Rarity.COMMON, mage.cards.s.SavageSmash.class));
         cards.add(new SetCardInfo("Scorchmark", 113, Rarity.COMMON, mage.cards.s.Scorchmark.class));
