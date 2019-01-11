@@ -37,6 +37,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Amplifire", 92, Rarity.RARE, mage.cards.a.Amplifire.class));
         cards.add(new SetCardInfo("Angel of Grace", 1, Rarity.MYTHIC, mage.cards.a.AngelOfGrace.class));
         cards.add(new SetCardInfo("Angelic Exaltation", 2, Rarity.UNCOMMON, mage.cards.a.AngelicExaltation.class));
+        cards.add(new SetCardInfo("Arrester's Zeal", 4, Rarity.COMMON, mage.cards.a.ArrestersZeal.class));
         cards.add(new SetCardInfo("Archway Angel", 3, Rarity.UNCOMMON, mage.cards.a.ArchwayAngel.class));
         cards.add(new SetCardInfo("Arrester's Admonition", 31, Rarity.COMMON, mage.cards.a.ArrestersAdmonition.class));
         cards.add(new SetCardInfo("Awaken the Erstwhile", 61, Rarity.RARE, mage.cards.a.AwakenTheErstwhile.class));
