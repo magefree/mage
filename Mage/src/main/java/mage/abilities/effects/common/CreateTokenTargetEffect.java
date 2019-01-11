@@ -69,6 +69,11 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
+
+        if (mode.getTargets().isEmpty()) {
+            return "";
+        }
+
         sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         sb.append(" creates ");
         if (amount.toString().equals("1")) {

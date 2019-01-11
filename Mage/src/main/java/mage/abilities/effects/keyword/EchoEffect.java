@@ -80,6 +80,11 @@ public class EchoEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
+
+        if (cost == null) {
+            return "";
+        }
+
         String costText = cost.getText();
         if (costText.toLowerCase(Locale.ENGLISH).startsWith("discard")) {
             sb.append(costText.substring(0, 1).toLowerCase(Locale.ENGLISH));

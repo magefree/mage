@@ -65,6 +65,11 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
+
+        if (mode.getTargets().isEmpty()) {
+            return "";
+        }
+
         Target target = mode.getTargets().get(0);
         sb.append("return ");
         if (target.getMaxNumberOfTargets() > 1) {

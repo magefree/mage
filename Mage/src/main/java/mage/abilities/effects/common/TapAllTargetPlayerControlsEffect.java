@@ -51,6 +51,10 @@ public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
+
+        if (mode.getTargets().isEmpty()) {
+            return "";
+        }
         return "tap all " + filter.toString() + " target " + mode.getTargets().get(0).getTargetName() + " controls";
     }
 }
