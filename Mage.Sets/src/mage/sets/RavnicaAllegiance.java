@@ -37,6 +37,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Amplifire", 92, Rarity.RARE, mage.cards.a.Amplifire.class));
         cards.add(new SetCardInfo("Angel of Grace", 1, Rarity.MYTHIC, mage.cards.a.AngelOfGrace.class));
         cards.add(new SetCardInfo("Angelic Exaltation", 2, Rarity.UNCOMMON, mage.cards.a.AngelicExaltation.class));
+        cards.add(new SetCardInfo("Arrester's Zeal", 4, Rarity.COMMON, mage.cards.a.ArrestersZeal.class));
         cards.add(new SetCardInfo("Archway Angel", 3, Rarity.UNCOMMON, mage.cards.a.ArchwayAngel.class));
         cards.add(new SetCardInfo("Arrester's Admonition", 31, Rarity.COMMON, mage.cards.a.ArrestersAdmonition.class));
         cards.add(new SetCardInfo("Awaken the Erstwhile", 61, Rarity.RARE, mage.cards.a.AwakenTheErstwhile.class));
@@ -56,6 +57,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Crypt", 245, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Bolrac-Clan Crusher", 159, Rarity.UNCOMMON, mage.cards.b.BolracClanCrusher.class));
         cards.add(new SetCardInfo("Breeding Pool", 246, Rarity.RARE, mage.cards.b.BreedingPool.class));
+        cards.add(new SetCardInfo("Bring to Trial", 5, Rarity.COMMON, mage.cards.b.BringToTrial.class));
         cards.add(new SetCardInfo("Burn Bright", 93, Rarity.COMMON, mage.cards.b.BurnBright.class));
         cards.add(new SetCardInfo("Burning-Tree Vandal", 94, Rarity.COMMON, mage.cards.b.BurningTreeVandal.class));
         cards.add(new SetCardInfo("Captive Audience", 160, Rarity.MYTHIC, mage.cards.c.CaptiveAudience.class));
@@ -63,6 +65,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Cavalcade of Calamity", 95, Rarity.UNCOMMON, mage.cards.c.CavalcadeOfCalamity.class));
         cards.add(new SetCardInfo("Charging War Boar", 271, Rarity.UNCOMMON, mage.cards.c.ChargingWarBoar.class));
         cards.add(new SetCardInfo("Cindervines", 161, Rarity.RARE, mage.cards.c.Cindervines.class));
+        cards.add(new SetCardInfo("Civic Stalwart", 6, Rarity.COMMON, mage.cards.c.CivicStalwart.class));
         cards.add(new SetCardInfo("Clamor Shaman", 96, Rarity.UNCOMMON, mage.cards.c.ClamorShaman.class));
         cards.add(new SetCardInfo("Clan Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ClanGuildmage.class));
         cards.add(new SetCardInfo("Collision // Colossus", 223, Rarity.UNCOMMON, mage.cards.c.CollisionColossus.class));
