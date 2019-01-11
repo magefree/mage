@@ -94,7 +94,6 @@ public final class Constants {
 
     public interface IO {
         String DEFAULT_IMAGES_DIR = "plugins" + File.separator + "images" + File.separator;
-        String IMAGE_PROPERTIES_FILE = "image.url.properties";
     }
 
     public enum DeckEditorMode {
