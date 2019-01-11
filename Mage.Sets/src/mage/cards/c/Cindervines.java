@@ -31,7 +31,7 @@ public final class Cindervines extends CardImpl {
 
         // Whenever an opponent casts a noncreature spell, Cindervines deals 1 damage to that player.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(1, false, "that player"),
+                Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that player"),
                 StaticFilters.FILTER_SPELL_NON_CREATURE, false, SetTargetPointer.PLAYER
         ));
 
