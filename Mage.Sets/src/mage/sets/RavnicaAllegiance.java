@@ -75,6 +75,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Combine Guildmage", 163, Rarity.UNCOMMON, mage.cards.c.CombineGuildmage.class));
         cards.add(new SetCardInfo("Consecrate // Consume", 224, Rarity.UNCOMMON, mage.cards.c.ConsecrateConsume.class));
         cards.add(new SetCardInfo("Concordia Pegasus", 7, Rarity.COMMON, mage.cards.c.ConcordiaPegasus.class));
+        cards.add(new SetCardInfo("Coral Commando", 36, Rarity.COMMON, mage.cards.c.CoralCommando.class));
         cards.add(new SetCardInfo("Cry of the Carnarium", 70, Rarity.UNCOMMON, mage.cards.c.CryOfTheCarnarium.class));
         cards.add(new SetCardInfo("Cult Guildmage", 164, Rarity.UNCOMMON, mage.cards.c.CultGuildmage.class));
         cards.add(new SetCardInfo("Depose // Deploy", 225, Rarity.UNCOMMON, mage.cards.d.DeposeDeploy.class));
