@@ -196,6 +196,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Sentinel's Mark", 20, Rarity.UNCOMMON, mage.cards.s.SentinelsMark.class));
         cards.add(new SetCardInfo("Seraph of the Scales", 205, Rarity.MYTHIC, mage.cards.s.SeraphOfTheScales.class));
         cards.add(new SetCardInfo("Sharktocrab", 206, Rarity.UNCOMMON, mage.cards.s.Sharktocrab.class));
+        cards.add(new SetCardInfo("Shimmer of Possibility", 51, Rarity.COMMON, mage.cards.s.ShimmerOfPossibility.class));
         cards.add(new SetCardInfo("Silhana Wayfinder", 141, Rarity.UNCOMMON, mage.cards.s.SilhanaWayfinder.class));
         cards.add(new SetCardInfo("Simic Ascendancy", 207, Rarity.RARE, mage.cards.s.SimicAscendancy.class));
         cards.add(new SetCardInfo("Simic Guildgate", 257, Rarity.COMMON, mage.cards.s.SimicGuildgate.class, NON_FULL_USE_VARIOUS));
