@@ -69,15 +69,16 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Collision // Colossus", 223, Rarity.UNCOMMON, mage.cards.c.CollisionColossus.class));
         cards.add(new SetCardInfo("Combine Guildmage", 163, Rarity.UNCOMMON, mage.cards.c.CombineGuildmage.class));
         cards.add(new SetCardInfo("Consecrate // Consume", 224, Rarity.UNCOMMON, mage.cards.c.ConsecrateConsume.class));
+        cards.add(new SetCardInfo("Concordia Pegasus", 7, Rarity.COMMON, mage.cards.c.ConcordiaPegasus.class));
         cards.add(new SetCardInfo("Cry of the Carnarium", 70, Rarity.UNCOMMON, mage.cards.c.CryOfTheCarnarium.class));
         cards.add(new SetCardInfo("Cult Guildmage", 164, Rarity.UNCOMMON, mage.cards.c.CultGuildmage.class));
         cards.add(new SetCardInfo("Depose // Deploy", 225, Rarity.UNCOMMON, mage.cards.d.DeposeDeploy.class));
         cards.add(new SetCardInfo("Deputy of Detention", 165, Rarity.RARE, mage.cards.d.DeputyOfDetention.class));
         cards.add(new SetCardInfo("Domri's Nodorog", 272, Rarity.RARE, mage.cards.d.DomrisNodorog.class));
         cards.add(new SetCardInfo("Domri, Chaos Bringer", 166, Rarity.MYTHIC, mage.cards.d.DomriChaosBringer.class));
-        cards.add(new SetCardInfo("Domri, City Smasher", 269, Rarity.RARE, mage.cards.d.DomriCitySmasher.class));
+        cards.add(new SetCardInfo("Domri, City Smasher", 269, Rarity.MYTHIC, mage.cards.d.DomriCitySmasher.class));
         cards.add(new SetCardInfo("Dovin's Acuity", 168, Rarity.UNCOMMON, mage.cards.d.DovinsAcuity.class));
-        cards.add(new SetCardInfo("Dovin's Automaton", 268, Rarity.COMMON, mage.cards.d.DovinsAutomaton.class));
+        cards.add(new SetCardInfo("Dovin's Automaton", 268, Rarity.UNCOMMON, mage.cards.d.DovinsAutomaton.class));
         cards.add(new SetCardInfo("Dovin's Dismissal", 267, Rarity.RARE, mage.cards.d.DovinsDismissal.class));
         cards.add(new SetCardInfo("Dovin, Architect of Law", 265, Rarity.MYTHIC, mage.cards.d.DovinArchitectOfLaw.class));
         cards.add(new SetCardInfo("Dovin, Grand Arbiter", 167, Rarity.MYTHIC, mage.cards.d.DovinGrandArbiter.class));
