@@ -153,6 +153,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Mirror March", 108, Rarity.RARE, mage.cards.m.MirrorMarch.class));
         cards.add(new SetCardInfo("Mortify", 192, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Nikya of the Old Ways", 193, Rarity.RARE, mage.cards.n.NikyaOfTheOldWays.class));
+        cards.add(new SetCardInfo("Noxious Groodion", 78, Rarity.COMMON, mage.cards.n.NoxiousGroodion.class));
         cards.add(new SetCardInfo("Orzhov Enforcer", 79, Rarity.UNCOMMON, mage.cards.o.OrzhovEnforcer.class));
         cards.add(new SetCardInfo("Orzhov Guildgate", 252, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orzhov Guildgate", 253, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class, NON_FULL_USE_VARIOUS));
