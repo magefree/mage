@@ -43,7 +43,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     private static final Logger logger = Logger.getLogger(PermanentImpl.class);
 
-    public class MarkedDamageInfo {
+    static class MarkedDamageInfo {
 
         public MarkedDamageInfo(Counter counter, MageObject sourceObject) {
             this.counter = counter;

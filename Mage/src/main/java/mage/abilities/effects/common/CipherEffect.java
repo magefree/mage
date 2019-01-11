@@ -115,7 +115,7 @@ class CipherStoreEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card cipherCard = game.getCard(cipherCardId);
-        if (cipherCard != null) {
+        if (cipherCard != null && controller != null) {
             Card copyCard = game.copyCard(cipherCard, source, controller.getId());
             SpellAbility ability = copyCard.getSpellAbility();
             // remove the cipher effect from the copy
