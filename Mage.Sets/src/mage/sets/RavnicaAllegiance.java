@@ -200,6 +200,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Skewer the Critics", 115, Rarity.COMMON, mage.cards.s.SkewerTheCritics.class));
         cards.add(new SetCardInfo("Skitter Eel", 53, Rarity.COMMON, mage.cards.s.SkitterEel.class));
         cards.add(new SetCardInfo("Sky Tether", 21, Rarity.UNCOMMON, mage.cards.s.SkyTether.class));
+        cards.add(new SetCardInfo("Slimebind", 54, Rarity.COMMON, mage.cards.s.Slimebind.class));
         cards.add(new SetCardInfo("Smelt-Ward Ignus", 116, Rarity.UNCOMMON, mage.cards.s.SmeltWardIgnus.class));
         cards.add(new SetCardInfo("Smothering Tithe", 22, Rarity.RARE, mage.cards.s.SmotheringTithe.class));
         cards.add(new SetCardInfo("Spawn of Mayhem", 85, Rarity.MYTHIC, mage.cards.s.SpawnOfMayhem.class));
