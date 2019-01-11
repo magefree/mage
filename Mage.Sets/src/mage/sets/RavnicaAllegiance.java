@@ -80,6 +80,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Coral Commando", 36, Rarity.COMMON, mage.cards.c.CoralCommando.class));
         cards.add(new SetCardInfo("Cry of the Carnarium", 70, Rarity.UNCOMMON, mage.cards.c.CryOfTheCarnarium.class));
         cards.add(new SetCardInfo("Cult Guildmage", 164, Rarity.UNCOMMON, mage.cards.c.CultGuildmage.class));
+        cards.add(new SetCardInfo("Dead Revels", 71, Rarity.COMMON, mage.cards.d.DeadRevels.class));
         cards.add(new SetCardInfo("Debtors' Transport", 72, Rarity.COMMON, mage.cards.d.DebtorsTransport.class));
         cards.add(new SetCardInfo("Depose // Deploy", 225, Rarity.UNCOMMON, mage.cards.d.DeposeDeploy.class));
         cards.add(new SetCardInfo("Deputy of Detention", 165, Rarity.RARE, mage.cards.d.DeputyOfDetention.class));
