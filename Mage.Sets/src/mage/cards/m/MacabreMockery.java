@@ -73,7 +73,7 @@ class MacabreMockeryEffect extends OneShotEffect {
             return false;
         }
         Permanent permanent = game.getPermanent(card.getId());
-        if (permanent != null) {
+        if (permanent == null) {
             return false;
         }
         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);

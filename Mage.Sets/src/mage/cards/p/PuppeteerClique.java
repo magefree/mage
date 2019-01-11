@@ -90,7 +90,7 @@ class PuppeteerCliqueEffect extends OneShotEffect {
             return false;
         }
         Permanent permanent = game.getPermanent(card.getId());
-        if (permanent != null) {
+        if (permanent == null) {
             return false;
         }
         ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
