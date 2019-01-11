@@ -204,6 +204,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Sunder Shaman", 210, Rarity.UNCOMMON, mage.cards.s.SunderShaman.class));
         cards.add(new SetCardInfo("Syndicate Guildmage", 211, Rarity.UNCOMMON, mage.cards.s.SyndicateGuildmage.class));
         cards.add(new SetCardInfo("Syndicate Messenger", 25, Rarity.COMMON, mage.cards.s.SyndicateMessenger.class));
+        cards.add(new SetCardInfo("Tenth District Veteran", 26, Rarity.COMMON, mage.cards.t.TenthDistrictVeteran.class));
         cards.add(new SetCardInfo("Teysa Karlov", 212, Rarity.RARE, mage.cards.t.TeysaKarlov.class));
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
         cards.add(new SetCardInfo("Theater of Horrors", 213, Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
