@@ -111,7 +111,9 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Gate Colossus", 232, Rarity.UNCOMMON, mage.cards.g.GateColossus.class));
         cards.add(new SetCardInfo("Gatebreaker Ram", 126, Rarity.UNCOMMON, mage.cards.g.GatebreakerRam.class));
         cards.add(new SetCardInfo("Gates Ablaze", 102, Rarity.UNCOMMON, mage.cards.g.GatesAblaze.class));
+        cards.add(new SetCardInfo("Gateway Plaza", 247, Rarity.COMMON, mage.cards.g.GatewayPlaza.class));
         cards.add(new SetCardInfo("Gateway Sneak", 40, Rarity.UNCOMMON, mage.cards.g.GatewaySneak.class));
+        cards.add(new SetCardInfo("Gift of Strength", 127, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
         cards.add(new SetCardInfo("Glass of the Guildpact", 233, Rarity.RARE, mage.cards.g.GlassOfTheGuildpact.class));
         cards.add(new SetCardInfo("Godless Shrine", 248, Rarity.RARE, mage.cards.g.GodlessShrine.class));
         cards.add(new SetCardInfo("Grasping Thrull", 177, Rarity.COMMON, mage.cards.g.GraspingThrull.class));
@@ -134,12 +136,13 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Humongulus", 41, Rarity.COMMON, mage.cards.h.Humongulus.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 183, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Ill-Gotten Inheritance", 77, Rarity.COMMON, mage.cards.i.IllGottenInheritance.class));
-        cards.add(new SetCardInfo("Immolation Shaman", 105, Rarity.RARE, mage.cards.i.ImmolationShaman.class));
+        cards.add(new SetCardInfo("Immolation Shaman", 106, Rarity.RARE, mage.cards.i.ImmolationShaman.class));
         cards.add(new SetCardInfo("Impassioned Orator", 12, Rarity.COMMON, mage.cards.i.ImpassionedOrator.class));
         cards.add(new SetCardInfo("Imperious Oligarch", 184, Rarity.COMMON, mage.cards.i.ImperiousOligarch.class));
         cards.add(new SetCardInfo("Incubation // Incongruity", 226, Rarity.UNCOMMON, mage.cards.i.IncubationIncongruity.class));
         cards.add(new SetCardInfo("Incubation Druid", 131, Rarity.RARE, mage.cards.i.IncubationDruid.class));
         cards.add(new SetCardInfo("Judith, the Scourge Diva", 185, Rarity.RARE, mage.cards.j.JudithTheScourgeDiva.class));
+        cards.add(new SetCardInfo("Junktroller", 235, Rarity.UNCOMMON, mage.cards.j.Junktroller.class));
         cards.add(new SetCardInfo("Kaya's Wrath", 187, Rarity.RARE, mage.cards.k.KayasWrath.class));
         cards.add(new SetCardInfo("Kaya, Orzhov Usurper", 186, Rarity.MYTHIC, mage.cards.k.KayaOrzhovUsurper.class));
         cards.add(new SetCardInfo("Knight of Sorrows", 14, Rarity.COMMON, mage.cards.k.KnightOfSorrows.class));
@@ -148,6 +151,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Light Up the Stage", 107, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lumbering Battlement", 15, Rarity.RARE, mage.cards.l.LumberingBattlement.class));
         cards.add(new SetCardInfo("Macabre Mockery", 191, Rarity.UNCOMMON, mage.cards.m.MacabreMockery.class));
+        cards.add(new SetCardInfo("Mammoth Spider", 132, Rarity.COMMON, mage.cards.m.MammothSpider.class));
         cards.add(new SetCardInfo("Mass Manipulation", 42, Rarity.RARE, mage.cards.m.MassManipulation.class));
         cards.add(new SetCardInfo("Mesmerizing Benthid", 43, Rarity.MYTHIC, mage.cards.m.MesmerizingBenthid.class));
         cards.add(new SetCardInfo("Ministrant of Obligation", 16, Rarity.UNCOMMON, mage.cards.m.MinistrantOfObligation.class));
@@ -187,6 +191,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Revival // Revenge", 228, Rarity.RARE, mage.cards.r.RevivalRevenge.class));
         cards.add(new SetCardInfo("Rhythm of the Wild", 201, Rarity.UNCOMMON, mage.cards.r.RhythmOfTheWild.class));
         cards.add(new SetCardInfo("Rix Maadi Reveler", 109, Rarity.RARE, mage.cards.r.RixMaadiReveler.class));
+        cards.add(new SetCardInfo("Root Snare", 137, Rarity.COMMON, mage.cards.r.RootSnare.class));
         cards.add(new SetCardInfo("Sage's Row Savant", 49, Rarity.COMMON, mage.cards.s.SagesRowSavant.class));
         cards.add(new SetCardInfo("Sauroform Hybrid", 140, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
         cards.add(new SetCardInfo("Savage Smash", 203, Rarity.COMMON, mage.cards.s.SavageSmash.class));
@@ -233,6 +238,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Titanic Brawl", 146, Rarity.COMMON, mage.cards.t.TitanicBrawl.class));
         cards.add(new SetCardInfo("Tithe Taker", 27, Rarity.RARE, mage.cards.t.TitheTaker.class));
         cards.add(new SetCardInfo("Tome of the Guildpact", 242, Rarity.RARE, mage.cards.t.TomeOfTheGuildpact.class));
+        cards.add(new SetCardInfo("Tower Defense", 147, Rarity.UNCOMMON, mage.cards.t.TowerDefense.class));
         cards.add(new SetCardInfo("Trollbred Guardian", 148, Rarity.UNCOMMON, mage.cards.t.TrollbredGuardian.class));
         cards.add(new SetCardInfo("Twilight Panther", 28, Rarity.COMMON, mage.cards.t.TwilightPanther.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 29, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
