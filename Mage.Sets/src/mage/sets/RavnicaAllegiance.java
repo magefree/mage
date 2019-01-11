@@ -46,6 +46,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Axebane Beast", 121, Rarity.COMMON, mage.cards.a.AxebaneBeast.class));
         cards.add(new SetCardInfo("Azorius Guildgate", 243, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azorius Guildgate", 244, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Azorius Knight-Arbiter", 154, Rarity.COMMON, mage.cards.a.AzoriusKnightArbiter.class));
         cards.add(new SetCardInfo("Azorius Locket", 231, Rarity.COMMON, mage.cards.a.AzoriusLocket.class));
         cards.add(new SetCardInfo("Azorius Skyguard", 155, Rarity.UNCOMMON, mage.cards.a.AzoriusSkyguard.class));
         cards.add(new SetCardInfo("Bankrupt in Blood", 62, Rarity.UNCOMMON, mage.cards.b.BankruptInBlood.class));
