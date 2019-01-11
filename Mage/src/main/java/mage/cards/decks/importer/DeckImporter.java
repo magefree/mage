@@ -32,6 +32,8 @@ public abstract class DeckImporter {
       return new DekDeckImporter();
     } else if (file.toLowerCase(Locale.ENGLISH).endsWith("cod")) {
       return new CodDeckImporter();
+    } else if (file.toLowerCase(Locale.ENGLISH).endsWith("o8d")) {
+      return new O8dDeckImporter();
     } else {
       return null;
     }

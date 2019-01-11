@@ -14,7 +14,7 @@ import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 
-public class CodDeckImporter extends XmlDeckImporter {
+public class O8dDeckImporter extends XmlDeckImporter {
 
   @Override
   public DeckCardLists importDeck(String filename, StringBuilder errorMessages) {
@@ -22,18 +22,15 @@ public class CodDeckImporter extends XmlDeckImporter {
       Document doc = getXmlDocument(filename);
       DeckCardLists decklist = new DeckCardLists();
 
-      List<Node> mainCards = getNodes(doc, "/cockatrice_deck/zone[@name='main']/card");
+      List<Node> mainCards = getNodes(doc, "/deck/section[@name='Main']/card");
       decklist.setCards(mainCards.stream()
           .flatMap(toDeckCardInfo(getCardLookup(), errorMessages))
           .collect(Collectors.toList()));
 
-      List<Node> sideboardCards = getNodes(doc, "/cockatrice_deck/zone[@name='side']/card");
+      List<Node> sideboardCards = getNodes(doc, "/deck/section[@name='Sideboard']/card");
       decklist.setSideboard(sideboardCards.stream()
           .flatMap(toDeckCardInfo(getCardLookup(), errorMessages))
           .collect(Collectors.toList()));
-
-      getNodes(doc, "/cockatrice_deck/deckname")
-          .forEach(n -> decklist.setName(n.getTextContent().trim()));
 
       return decklist;
     } catch (Exception e) {
@@ -44,7 +41,7 @@ public class CodDeckImporter extends XmlDeckImporter {
   }
 
   private static int getQuantityFromNode(Node node) {
-    Node numberNode = node.getAttributes().getNamedItem("number");
+    Node numberNode = node.getAttributes().getNamedItem("qty");
     if (numberNode == null) {
       return 1;
     }
@@ -57,7 +54,7 @@ public class CodDeckImporter extends XmlDeckImporter {
 
   private static Function<Node, Stream<DeckCardInfo>> toDeckCardInfo(CardLookup lookup, StringBuilder errors) {
     return node -> {
-      String name = node.getAttributes().getNamedItem("name").getNodeValue().trim();
+      String name = node.getTextContent();
       Optional<CardInfo> cardInfo = lookup.lookupCardInfo(name);
       if (cardInfo.isPresent()) {
         CardInfo info = cardInfo.get();

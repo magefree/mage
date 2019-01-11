@@ -309,4 +309,97 @@ public class CardCriteria {
             qb.orderBy(sortBy, true);
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNameExact() {
+        return nameExact;
+    }
+
+    public String getRules() {
+        return rules;
+    }
+
+    public List<String> getSetCodes() {
+        return setCodes;
+    }
+
+    public List<CardType> getTypes() {
+        return types;
+    }
+
+    public List<CardType> getNotTypes() {
+        return notTypes;
+    }
+
+    public List<String> getSupertypes() {
+        return supertypes;
+    }
+
+    public List<String> getNotSupertypes() {
+        return notSupertypes;
+    }
+
+    public List<String> getSubtypes() {
+        return subtypes;
+    }
+
+    public List<Rarity> getRarities() {
+        return rarities;
+    }
+
+    public Boolean getDoubleFaced() {
+        return doubleFaced;
+    }
+
+    public boolean isBlack() {
+        return black;
+    }
+
+    public boolean isBlue() {
+        return blue;
+    }
+
+    public boolean isGreen() {
+        return green;
+    }
+
+    public boolean isRed() {
+        return red;
+    }
+
+    public boolean isWhite() {
+        return white;
+    }
+
+    public boolean isColorless() {
+        return colorless;
+    }
+
+    public Integer getConvertedManaCost() {
+        return convertedManaCost;
+    }
+
+    public String getSortBy() {
+        return sortBy;
+    }
+
+    public Long getStart() {
+        return start;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public int getMinCardNumber() {
+        return minCardNumber;
+    }
+
+    public int getMaxCardNumber() {
+        return maxCardNumber;
+    }
+
 }
