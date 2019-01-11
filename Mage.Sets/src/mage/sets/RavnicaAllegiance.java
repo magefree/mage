@@ -65,6 +65,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Cavalcade of Calamity", 95, Rarity.UNCOMMON, mage.cards.c.CavalcadeOfCalamity.class));
         cards.add(new SetCardInfo("Charging War Boar", 271, Rarity.UNCOMMON, mage.cards.c.ChargingWarBoar.class));
         cards.add(new SetCardInfo("Cindervines", 161, Rarity.RARE, mage.cards.c.Cindervines.class));
+        cards.add(new SetCardInfo("Civic Stalwart", 6, Rarity.COMMON, mage.cards.c.CivicStalwart.class));
         cards.add(new SetCardInfo("Clamor Shaman", 96, Rarity.UNCOMMON, mage.cards.c.ClamorShaman.class));
         cards.add(new SetCardInfo("Clan Guildmage", 162, Rarity.UNCOMMON, mage.cards.c.ClanGuildmage.class));
         cards.add(new SetCardInfo("Collision // Colossus", 223, Rarity.UNCOMMON, mage.cards.c.CollisionColossus.class));
