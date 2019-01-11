@@ -114,7 +114,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         }
 
         if (mode.getTargets().isEmpty()) {
-            return "";
+            return "gain control of target permanent";
         }
 
         Target target = mode.getTargets().get(0);

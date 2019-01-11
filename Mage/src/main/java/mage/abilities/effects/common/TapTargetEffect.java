@@ -55,7 +55,7 @@ public class TapTargetEffect extends OneShotEffect {
         }
 
         if (mode.getTargets().isEmpty()) {
-            return "";
+            return "tap target permanent";
         }
 
         Target target = mode.getTargets().get(0);

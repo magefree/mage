@@ -67,20 +67,20 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
         StringBuilder sb = new StringBuilder();
 
         if (mode.getTargets().isEmpty()) {
-            return "";
-        }
-
-        Target target = mode.getTargets().get(0);
-        sb.append("return ");
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                sb.append("up to ");
+            sb.append("return target creature to the battlefield");
+        } else {
+            Target target = mode.getTargets().get(0);
+            sb.append("return ");
+            if (target.getMaxNumberOfTargets() > 1) {
+                if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                    sb.append("up to ");
+                }
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-        }
-        sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" to the battlefield");
-        if (tapped) {
-            sb.append(" tapped");
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" to the battlefield");
+            if (tapped) {
+                sb.append(" tapped");
+            }
         }
         sb.append(" under your control");
         return sb.toString();

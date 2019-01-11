@@ -67,7 +67,7 @@ public class UntapTargetEffect extends OneShotEffect {
         }
 
         if (mode.getTargets().isEmpty()) {
-            return "";
+            return "untap target permanent";
         }
 
         Target target = mode.getTargets().get(0);

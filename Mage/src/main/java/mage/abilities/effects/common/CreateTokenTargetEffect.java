@@ -71,10 +71,12 @@ public class CreateTokenTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
 
         if (mode.getTargets().isEmpty()) {
-            return "";
+            sb.append("target player");
+        }
+        else {
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
 
-        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         sb.append(" creates ");
         if (amount.toString().equals("1")) {
             sb.append("a ");

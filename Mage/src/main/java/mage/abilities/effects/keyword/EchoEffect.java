@@ -82,7 +82,8 @@ public class EchoEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
 
         if (cost == null) {
-            return "";
+            sb.append("pay this permanent's mana cost");
+            return sb.toString();
         }
 
         String costText = cost.getText();
