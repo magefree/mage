@@ -18,7 +18,6 @@ import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.*;
-import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 import javax.swing.*;
@@ -45,10 +44,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static DownloadPicturesService instance;
     private static final Logger logger = Logger.getLogger(DownloadPicturesService.class);
 
-    public static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
-    public static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
-    public static final String ALL_STANDARD_IMAGES = "- STANDARD images";
-    public static final String ALL_TOKENS = "- TOKEN images";
+    private static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
+    private static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
+    private static final String ALL_STANDARD_IMAGES = "- STANDARD images";
+    private static final String ALL_TOKENS = "- TOKEN images";
 
     private DownloadImagesDialog uiDialog;
     private boolean needCancel;
@@ -60,7 +59,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private int missingCardsCount = 0;
     private int missingTokensCount = 0;
 
-    List<String> selectedSets = new ArrayList<>();
+    private List<String> selectedSets = new ArrayList<>();
     private static CardImageSource selectedSource;
 
     private final Object sync = new Object();
@@ -393,7 +392,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     private static List<CardDownloadData> prepareMissingCards(List<CardInfo> allCards, boolean redownloadMode) {
-        HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
         // get filter for Standard Type 2 cards
         Set<String> type2SetsFilter = new HashSet<>();
@@ -408,8 +406,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         try {
             allCards.parallelStream().forEach(card -> {
-                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()
-                        && !ignoreUrls.contains(card.getSetCode())) {
+                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
                     String cardName = card.getName();
                     boolean isType2 = type2SetsFilter.contains(card.getSetCode());
                     CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
@@ -586,8 +583,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         }
 
         if (p != null) {
-            HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
-
             update(0, cardsDownloadQueue.size());
             logger.info("Started download of " + cardsDownloadQueue.size() + " images"
                     + " from source: " + selectedSource.getSourceName()
@@ -602,7 +597,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
 
                     CardImageUrls urls;
-                    if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
+                    if (card.isToken()) {
                         if (!"0".equals(card.getCollectorId())) {
                             continue;
                         }
