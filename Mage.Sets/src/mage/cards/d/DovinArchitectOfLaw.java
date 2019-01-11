@@ -11,6 +11,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public final class DovinArchitectOfLaw extends CardImpl {
 
         // +1: You gain 2 life and draw a card.
         Ability ability = new LoyaltyAbility(new GainLifeEffect(2), 1);
-        ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 
         // -1: Tap target creature. It doesn't untap during its controller's next untap step.
@@ -39,7 +40,8 @@ public final class DovinArchitectOfLaw extends CardImpl {
 
         // -9: Tap all permanents target opponent controls. That player skips their next untap step.
         ability = new LoyaltyAbility(new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_PERMANENT), -9);
-        ability.addEffect(new SkipNextPlayerUntapStepEffect("That"));
+        ability.addEffect(new SkipNextPlayerUntapStepEffect("That player"));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
