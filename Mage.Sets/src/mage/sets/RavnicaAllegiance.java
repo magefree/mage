@@ -212,6 +212,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Stomping Ground", 259, Rarity.RARE, mage.cards.s.StompingGround.class));
         cards.add(new SetCardInfo("Summary Judgement", 24, Rarity.COMMON, mage.cards.s.SummaryJudgement.class));
         cards.add(new SetCardInfo("Sunder Shaman", 210, Rarity.UNCOMMON, mage.cards.s.SunderShaman.class));
+        cards.add(new SetCardInfo("Swirling Torrent", 56, Rarity.UNCOMMON, mage.cards.s.SwirlingTorrent.class));
         cards.add(new SetCardInfo("Syndicate Guildmage", 211, Rarity.UNCOMMON, mage.cards.s.SyndicateGuildmage.class));
         cards.add(new SetCardInfo("Syndicate Messenger", 25, Rarity.COMMON, mage.cards.s.SyndicateMessenger.class));
         cards.add(new SetCardInfo("Tenth District Veteran", 26, Rarity.COMMON, mage.cards.t.TenthDistrictVeteran.class));
