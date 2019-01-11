@@ -125,6 +125,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Gateway Plaza", 247, Rarity.COMMON, mage.cards.g.GatewayPlaza.class));
         cards.add(new SetCardInfo("Gateway Sneak", 40, Rarity.UNCOMMON, mage.cards.g.GatewaySneak.class));
         cards.add(new SetCardInfo("Get the Point", 176, Rarity.COMMON, mage.cards.g.GetThePoint.class));
+        cards.add(new SetCardInfo("Ghor-Clan Wrecker", 103, Rarity.COMMON, mage.cards.g.GhorClanWrecker.class));
         cards.add(new SetCardInfo("Gift of Strength", 127, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
         cards.add(new SetCardInfo("Glass of the Guildpact", 233, Rarity.RARE, mage.cards.g.GlassOfTheGuildpact.class));
         cards.add(new SetCardInfo("Godless Shrine", 248, Rarity.RARE, mage.cards.g.GodlessShrine.class));
