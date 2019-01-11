@@ -23,7 +23,6 @@ public final class RavnicaAllegiance extends ExpansionSet {
         super("Ravnica Allegiance", "RNA", ExpansionSet.buildDate(2019, 1, 25), SetType.EXPANSION);
         this.blockName = "Guilds of Ravnica";
         this.hasBoosters = true;
-        this.hasBasicLands = false; // this is temporary until the actual basics have been spoiled to prevent a test fail
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
@@ -115,6 +114,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Fireblade Artist", 172, Rarity.UNCOMMON, mage.cards.f.FirebladeArtist.class));
         cards.add(new SetCardInfo("Font of Agonies", 74, Rarity.RARE, mage.cards.f.FontOfAgonies.class));
         cards.add(new SetCardInfo("Forbidding Spirit", 9, Rarity.UNCOMMON, mage.cards.f.ForbiddingSpirit.class));
+        cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Arynx", 173, Rarity.COMMON, mage.cards.f.FrenziedArynx.class));
         cards.add(new SetCardInfo("Frilled Mystic", 174, Rarity.UNCOMMON, mage.cards.f.FrilledMystic.class));
         cards.add(new SetCardInfo("Galloping Lizrog", 175, Rarity.UNCOMMON, mage.cards.g.GallopingLizrog.class));
@@ -151,6 +151,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Imperious Oligarch", 184, Rarity.COMMON, mage.cards.i.ImperiousOligarch.class));
         cards.add(new SetCardInfo("Incubation // Incongruity", 226, Rarity.UNCOMMON, mage.cards.i.IncubationIncongruity.class));
         cards.add(new SetCardInfo("Incubation Druid", 131, Rarity.RARE, mage.cards.i.IncubationDruid.class));
+        cards.add(new SetCardInfo("Island", 261, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Judith, the Scourge Diva", 185, Rarity.RARE, mage.cards.j.JudithTheScourgeDiva.class));
         cards.add(new SetCardInfo("Junktroller", 235, Rarity.UNCOMMON, mage.cards.j.Junktroller.class));
         cards.add(new SetCardInfo("Kaya's Wrath", 187, Rarity.RARE, mage.cards.k.KayasWrath.class));
@@ -167,6 +168,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Ministrant of Obligation", 16, Rarity.UNCOMMON, mage.cards.m.MinistrantOfObligation.class));
         cards.add(new SetCardInfo("Mirror March", 108, Rarity.RARE, mage.cards.m.MirrorMarch.class));
         cards.add(new SetCardInfo("Mortify", 192, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
+        cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nikya of the Old Ways", 193, Rarity.RARE, mage.cards.n.NikyaOfTheOldWays.class));
         cards.add(new SetCardInfo("Noxious Groodion", 78, Rarity.COMMON, mage.cards.n.NoxiousGroodion.class));
         cards.add(new SetCardInfo("Orzhov Enforcer", 79, Rarity.UNCOMMON, mage.cards.o.OrzhovEnforcer.class));
@@ -177,6 +179,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Persistent Petitioners", 44, Rarity.COMMON, mage.cards.p.PersistentPetitioners.class));
         cards.add(new SetCardInfo("Pestilent Spirit", 81, Rarity.RARE, mage.cards.p.PestilentSpirit.class));
         cards.add(new SetCardInfo("Pitiless Pontiff", 194, Rarity.UNCOMMON, mage.cards.p.PitilessPontiff.class));
+        cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plaza of Harmony", 254, Rarity.RARE, mage.cards.p.PlazaOfHarmony.class));
         cards.add(new SetCardInfo("Precognitive Perception", 45, Rarity.RARE, mage.cards.p.PrecognitivePerception.class));
         cards.add(new SetCardInfo("Priest of Forgotten Gods", 83, Rarity.RARE, mage.cards.p.PriestOfForgottenGods.class));
@@ -236,6 +239,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Stomping Ground", 259, Rarity.RARE, mage.cards.s.StompingGround.class));
         cards.add(new SetCardInfo("Summary Judgement", 24, Rarity.COMMON, mage.cards.s.SummaryJudgement.class));
         cards.add(new SetCardInfo("Sunder Shaman", 210, Rarity.UNCOMMON, mage.cards.s.SunderShaman.class));
+        cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swirling Torrent", 56, Rarity.UNCOMMON, mage.cards.s.SwirlingTorrent.class));
         cards.add(new SetCardInfo("Syndicate Guildmage", 211, Rarity.UNCOMMON, mage.cards.s.SyndicateGuildmage.class));
         cards.add(new SetCardInfo("Syndicate Messenger", 25, Rarity.COMMON, mage.cards.s.SyndicateMessenger.class));
