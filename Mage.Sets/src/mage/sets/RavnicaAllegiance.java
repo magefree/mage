@@ -88,6 +88,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("End-Raze Forerunners", 124, Rarity.RARE, mage.cards.e.EndRazeForerunners.class));
         cards.add(new SetCardInfo("Essence Capture", 37, Rarity.UNCOMMON, mage.cards.e.EssenceCapture.class));
         cards.add(new SetCardInfo("Ethereal Absolution", 170, Rarity.RARE, mage.cards.e.EtherealAbsolution.class));
+        cards.add(new SetCardInfo("Expose to Daylight", 8, Rarity.COMMON, mage.cards.e.ExposeToDaylight.class));
         cards.add(new SetCardInfo("Eyes Everywhere", 38, Rarity.UNCOMMON, mage.cards.e.EyesEverywhere.class));
         cards.add(new SetCardInfo("Fireblade Artist", 172, Rarity.UNCOMMON, mage.cards.f.FirebladeArtist.class));
         cards.add(new SetCardInfo("Font of Agonies", 74, Rarity.RARE, mage.cards.f.FontOfAgonies.class));
