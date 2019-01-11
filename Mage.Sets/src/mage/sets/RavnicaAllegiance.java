@@ -112,6 +112,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Glass of the Guildpact", 233, Rarity.RARE, mage.cards.g.GlassOfTheGuildpact.class));
         cards.add(new SetCardInfo("Godless Shrine", 248, Rarity.RARE, mage.cards.g.GodlessShrine.class));
         cards.add(new SetCardInfo("Grasping Thrull", 177, Rarity.COMMON, mage.cards.g.GraspingThrull.class));
+        cards.add(new SetCardInfo("Grotesque Demise", 75, Rarity.COMMON, mage.cards.g.GrotesqueDemise.class));
         cards.add(new SetCardInfo("Growth Spiral", 178, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Growth-Chamber Guardian", 128, Rarity.RARE, mage.cards.g.GrowthChamberGuardian.class));
         cards.add(new SetCardInfo("Gruul Beastmaster", 129, Rarity.UNCOMMON, mage.cards.g.GruulBeastmaster.class));
