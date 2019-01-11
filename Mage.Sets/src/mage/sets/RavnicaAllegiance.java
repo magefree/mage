@@ -121,6 +121,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Judith, the Scourge Diva", 185, Rarity.RARE, mage.cards.j.JudithTheScourgeDiva.class));
         cards.add(new SetCardInfo("Kaya's Wrath", 187, Rarity.RARE, mage.cards.k.KayasWrath.class));
         cards.add(new SetCardInfo("Kaya, Orzhov Usurper", 186, Rarity.MYTHIC, mage.cards.k.KayaOrzhovUsurper.class));
+        cards.add(new SetCardInfo("Knight of the Last Breath", 188, Rarity.UNCOMMON, mage.cards.k.KnightOfTheLastBreath.class));
         cards.add(new SetCardInfo("Lavinia, Azorius Renegade", 189, Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class));
         cards.add(new SetCardInfo("Light Up the Stage", 107, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lumbering Battlement", 15, Rarity.RARE, mage.cards.l.LumberingBattlement.class));
