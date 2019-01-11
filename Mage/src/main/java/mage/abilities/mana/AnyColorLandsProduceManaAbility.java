@@ -1,8 +1,6 @@
 
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -20,8 +18,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author LevelX2
  */
 public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
@@ -31,7 +31,11 @@ public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
     }
 
     public AnyColorLandsProduceManaAbility(TargetController targetController, boolean onlyColors) {
-        super(Zone.BATTLEFIELD, new AnyColorLandsProduceManaEffect(targetController, onlyColors), new TapSourceCost());
+        this(targetController, onlyColors, null);
+    }
+
+    public AnyColorLandsProduceManaAbility(TargetController targetController, boolean onlyColors, FilterPermanent filter) {
+        super(Zone.BATTLEFIELD, new AnyColorLandsProduceManaEffect(targetController, onlyColors, filter), new TapSourceCost());
     }
 
     public AnyColorLandsProduceManaAbility(final AnyColorLandsProduceManaAbility ability) {
@@ -62,16 +66,21 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
 
     private boolean inManaTypeCalculation = false;
 
-    public AnyColorLandsProduceManaEffect(TargetController targetController, boolean onlyColors) {
+    AnyColorLandsProduceManaEffect(TargetController targetController, boolean onlyColors, FilterPermanent filter) {
         super();
-        filter = new FilterLandPermanent();
+        if (filter == null) {
+            this.filter = new FilterLandPermanent();
+        } else {
+            this.filter = filter.copy();
+        }
         this.onlyColors = onlyColors;
-        filter.add(new ControllerPredicate(targetController));
+        this.filter.add(new ControllerPredicate(targetController));
         String text = targetController == TargetController.OPPONENT ? "an opponent controls" : "you control";
-        staticText = "Add one mana of any " + (this.onlyColors ? "color" : "type") + " that a land " + text + " could produce";
+        staticText = "Add one mana of any " + (this.onlyColors ? "color" : "type") + " that a "
+                + (filter == null ? "land " : filter.getMessage() + " ") + text + " could produce";
     }
 
-    public AnyColorLandsProduceManaEffect(final AnyColorLandsProduceManaEffect effect) {
+    private AnyColorLandsProduceManaEffect(final AnyColorLandsProduceManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.onlyColors = effect.onlyColors;

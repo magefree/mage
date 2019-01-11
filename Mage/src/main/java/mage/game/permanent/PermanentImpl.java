@@ -43,7 +43,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     private static final Logger logger = Logger.getLogger(PermanentImpl.class);
 
-    public class MarkedDamageInfo {
+    static class MarkedDamageInfo {
 
         public MarkedDamageInfo(Counter counter, MageObject sourceObject) {
             this.counter = counter;
@@ -952,6 +952,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
                         && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
                         && source.getColor(game).isWhite()) {
+                    return false;
+                }
+            }
+
+            if (abilities.containsKey(HexproofFromMonocoloredAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                        && !source.getColor(game).isColorless() && !source.getColor(game).isMulticolored()) {
                     return false;
                 }
             }
