@@ -133,6 +133,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("High Alert", 182, Rarity.UNCOMMON, mage.cards.h.HighAlert.class));
         cards.add(new SetCardInfo("Humongulus", 41, Rarity.COMMON, mage.cards.h.Humongulus.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 183, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
+        cards.add(new SetCardInfo("Ill-Gotten Inheritance", 77, Rarity.COMMON, mage.cards.i.IllGottenInheritance.class));
         cards.add(new SetCardInfo("Immolation Shaman", 105, Rarity.RARE, mage.cards.i.ImmolationShaman.class));
         cards.add(new SetCardInfo("Impassioned Orator", 12, Rarity.COMMON, mage.cards.i.ImpassionedOrator.class));
         cards.add(new SetCardInfo("Imperious Oligarch", 184, Rarity.COMMON, mage.cards.i.ImperiousOligarch.class));
