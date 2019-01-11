@@ -9,20 +9,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
 public final class TenthDistrictVeteran extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("another target creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
         filter.add(new AnotherPredicate());
@@ -45,7 +43,7 @@ public final class TenthDistrictVeteran extends CardImpl {
         this.addAbility(ability);
     }
 
-    private TenthDistrictVeteran(final TenthDistrictVeteran card) {
+    public TenthDistrictVeteran(final TenthDistrictVeteran card) {
         super(card);
     }
 
