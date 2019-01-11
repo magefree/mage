@@ -93,6 +93,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Forbidding Spirit", 9, Rarity.UNCOMMON, mage.cards.f.ForbiddingSpirit.class));
         cards.add(new SetCardInfo("Frenzied Arynx", 173, Rarity.COMMON, mage.cards.f.FrenziedArynx.class));
         cards.add(new SetCardInfo("Frilled Mystic", 174, Rarity.UNCOMMON, mage.cards.f.FrilledMystic.class));
+        cards.add(new SetCardInfo("Galloping Lizrog", 175, Rarity.UNCOMMON, mage.cards.g.GallopingLizrog.class));
         cards.add(new SetCardInfo("Gate Colossus", 232, Rarity.UNCOMMON, mage.cards.g.GateColossus.class));
         cards.add(new SetCardInfo("Gatebreaker Ram", 126, Rarity.UNCOMMON, mage.cards.g.GatebreakerRam.class));
         cards.add(new SetCardInfo("Gates Ablaze", 102, Rarity.UNCOMMON, mage.cards.g.GatesAblaze.class));
