@@ -42,7 +42,11 @@ public final class SilhanaWayfinder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
                 new StaticValue(4), false, new StaticValue(1), filter, Zone.LIBRARY, false,
                 true, false, Zone.LIBRARY, false, true, false
-        ), false));
+        ).setText("look at the top four cards of your library. " +
+                "You may reveal a creature or land card from among them " +
+                "and put it on top of your library. Put the rest " +
+                "on the bottom of your library in a random order."), false
+        ));
     }
 
     private SilhanaWayfinder(final SilhanaWayfinder card) {
