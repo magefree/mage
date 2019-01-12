@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
+import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -67,7 +68,7 @@ class PlagueWightEffect extends OneShotEffect {
             return false;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new BlockedByIdPredicate(source.getSourceId()));
+        filter.add(new BlockingAttackerIdPredicate(source.getSourceId()));
         game.addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false), source);
         return true;
     }
