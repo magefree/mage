@@ -29,7 +29,7 @@ public final class Skitterskin extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public Skitterskin(UUID ownerId, CardSetInfo setInfo) {

@@ -253,7 +253,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 predicates.add(new ColorPredicate(ObjectColor.WHITE));
             }
             if (this.tbColorless.isSelected()) {
-                predicates.add(new ColorlessPredicate());
+                predicates.add(ColorlessPredicate.instance);
             }
             filter.add(Predicates.or(predicates));
 

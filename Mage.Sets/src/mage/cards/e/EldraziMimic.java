@@ -29,7 +29,7 @@ public final class EldraziMimic extends CardImpl {
 
     static {
         FILTER.add(AnotherPredicate.instance);
-        FILTER.add(new ColorlessPredicate());
+        FILTER.add(ColorlessPredicate.instance);
     }
 
     public EldraziMimic(UUID ownerId, CardSetInfo setInfo) {

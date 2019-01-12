@@ -28,7 +28,7 @@ public final class FlayerDrone extends CardImpl {
     
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public FlayerDrone(UUID ownerId, CardSetInfo setInfo) {

@@ -23,7 +23,7 @@ public final class KozileksSentinel extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("a colorless spell");
 
     static {
-        filterSpell.add(new ColorlessPredicate());
+        filterSpell.add(ColorlessPredicate.instance);
     }
 
     public KozileksSentinel(UUID ownerId, CardSetInfo setInfo) {

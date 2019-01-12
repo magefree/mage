@@ -29,7 +29,7 @@ public final class DominatorDrone extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public DominatorDrone(UUID ownerId, CardSetInfo setInfo) {

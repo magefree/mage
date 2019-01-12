@@ -32,7 +32,7 @@ public final class BarrageTyrant extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public BarrageTyrant(UUID ownerId, CardSetInfo setInfo) {
