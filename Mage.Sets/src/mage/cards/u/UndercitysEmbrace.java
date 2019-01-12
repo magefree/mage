@@ -20,14 +20,14 @@ public final class UndercitysEmbrace extends CardImpl {
     public UndercitysEmbrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
-        // Target opponent sacrifices a creature. If you control a creature with power 4 or greater, your gain 4 life.
+        // Target opponent sacrifices a creature. If you control a creature with power 4 or greater, you gain 4 life.
         this.getSpellAbility().addEffect(new SacrificeEffect(
                 StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, "target player"
         ));
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(4), FerociousCondition.instance,
-                "If you control a creature with power 4 or greater, your gain 4 life."
+                "If you control a creature with power 4 or greater, you gain 4 life."
         ));
     }
 

@@ -18,7 +18,7 @@ public final class RubblebeltRecluse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
         this.subtype.add(SubType.OGRE);
-        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

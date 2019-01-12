@@ -22,7 +22,7 @@ public final class SkitterEel extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {2}{U}: Adapt 2. (If this creature has no +1/+1 counters on it, put two +1/+1 counters on it.
+        // {2}{U}: Adapt 2.
         this.addAbility(new AdaptAbility(2, "{2}{U}"));
     }
 
