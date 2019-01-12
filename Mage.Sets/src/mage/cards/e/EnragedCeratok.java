@@ -27,7 +27,7 @@ public final class EnragedCeratok extends CardImpl {
     }
 
     public EnragedCeratok(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
         this.subtype.add(SubType.RHINO);
         this.power = new MageInt(4);

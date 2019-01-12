@@ -1,5 +1,6 @@
 package mage.cards.v;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -22,6 +23,8 @@ public final class VindictiveVampire extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
         this.subtype.add(SubType.VAMPIRE);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
         // Whenever another creature you control dies, Vindictive Vampire deals 1 damage to each opponent and you gain 1 life.
         Ability ability = new DiesCreatureTriggeredAbility(
