@@ -162,6 +162,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 261, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Judith, the Scourge Diva", 185, Rarity.RARE, mage.cards.j.JudithTheScourgeDiva.class));
         cards.add(new SetCardInfo("Junktroller", 235, Rarity.UNCOMMON, mage.cards.j.Junktroller.class));
+        cards.add(new SetCardInfo("Justiciar's Portal", 13, Rarity.COMMON, mage.cards.j.JusticiarsPortal.class));
         cards.add(new SetCardInfo("Kaya's Wrath", 187, Rarity.RARE, mage.cards.k.KayasWrath.class));
         cards.add(new SetCardInfo("Kaya, Orzhov Usurper", 186, Rarity.MYTHIC, mage.cards.k.KayaOrzhovUsurper.class));
         cards.add(new SetCardInfo("Knight of Sorrows", 14, Rarity.COMMON, mage.cards.k.KnightOfSorrows.class));
