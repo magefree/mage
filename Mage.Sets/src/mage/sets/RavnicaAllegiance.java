@@ -189,6 +189,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Persistent Petitioners", 44, Rarity.COMMON, mage.cards.p.PersistentPetitioners.class));
         cards.add(new SetCardInfo("Pestilent Spirit", 81, Rarity.RARE, mage.cards.p.PestilentSpirit.class));
         cards.add(new SetCardInfo("Pitiless Pontiff", 194, Rarity.UNCOMMON, mage.cards.p.PitilessPontiff.class));
+        cards.add(new SetCardInfo("Plague Wight", 82, Rarity.COMMON, mage.cards.p.PlagueWight.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plaza of Harmony", 254, Rarity.RARE, mage.cards.p.PlazaOfHarmony.class));
         cards.add(new SetCardInfo("Precognitive Perception", 45, Rarity.RARE, mage.cards.p.PrecognitivePerception.class));
