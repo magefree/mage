@@ -37,7 +37,7 @@ public class ScryfallImageSupportTokens {
             // RNA
             put("RNA/Beast", "https://api.scryfall.com/cards/trna/8/en?format=image");
             put("RNA/Centaur", "https://api.scryfall.com/cards/trna/5/en?format=image");
-            put("RNA/Domri, Chaos Bringer", "https://api.scryfall.com/cards/trna/13/en?format=image");
+            put("RNA/Emblem Domri, Chaos Bringer", "https://api.scryfall.com/cards/trna/13/en?format=image");
             put("RNA/Frog Lizard", "https://api.scryfall.com/cards/trna/6/en?format=image");
             put("RNA/Goblin", "https://api.scryfall.com/cards/trna/4/en?format=image");
             put("RNA/Human", "https://api.scryfall.com/cards/trna/1/en?format=image");
