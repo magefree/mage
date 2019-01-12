@@ -76,6 +76,7 @@ class RakdosTheShowstopperEffect extends OneShotEffect {
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent != null
+                    && permanent.isCreature()
                     && !permanent.hasSubtype(SubType.DEMON, game)
                     && !permanent.hasSubtype(SubType.DEVIL, game)
                     && !permanent.hasSubtype(SubType.IMP, game)
