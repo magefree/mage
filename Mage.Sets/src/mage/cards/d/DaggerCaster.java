@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class DaggerCaster extends CardImpl {
 
     public DaggerCaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
         this.subtype.add(SubType.VIASHINO);
         this.subtype.add(SubType.ROGUE);

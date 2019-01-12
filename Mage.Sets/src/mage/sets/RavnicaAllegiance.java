@@ -243,7 +243,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Spire Mangler", 86, Rarity.UNCOMMON, mage.cards.s.SpireMangler.class));
         cards.add(new SetCardInfo("Spirit of the Spires", 23, Rarity.UNCOMMON, mage.cards.s.SpiritOfTheSpires.class));
         cards.add(new SetCardInfo("Stomping Ground", 259, Rarity.RARE, mage.cards.s.StompingGround.class));
-        cards.add(new SetCardInfo("Summary Judgement", 24, Rarity.COMMON, mage.cards.s.SummaryJudgement.class));
+        cards.add(new SetCardInfo("Summary Judgment", 24, Rarity.COMMON, mage.cards.s.SummaryJudgment.class));
         cards.add(new SetCardInfo("Sunder Shaman", 210, Rarity.UNCOMMON, mage.cards.s.SunderShaman.class));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swirling Torrent", 56, Rarity.UNCOMMON, mage.cards.s.SwirlingTorrent.class));

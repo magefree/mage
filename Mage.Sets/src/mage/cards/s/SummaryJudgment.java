@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SummaryJudgement extends CardImpl {
+public final class SummaryJudgment extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
 
@@ -27,7 +27,7 @@ public final class SummaryJudgement extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public SummaryJudgement(UUID ownerId, CardSetInfo setInfo) {
+    public SummaryJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Summary Judgement deals 3 damage to target tapped creature.
@@ -36,13 +36,13 @@ public final class SummaryJudgement extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    private SummaryJudgement(final SummaryJudgement card) {
+    private SummaryJudgment(final SummaryJudgment card) {
         super(card);
     }
 
     @Override
-    public SummaryJudgement copy() {
-        return new SummaryJudgement(this);
+    public SummaryJudgment copy() {
+        return new SummaryJudgment(this);
     }
 }
 

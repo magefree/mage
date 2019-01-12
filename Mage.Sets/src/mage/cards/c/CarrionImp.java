@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -26,6 +27,8 @@ public final class CarrionImp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
         this.subtype.add(SubType.IMP);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
