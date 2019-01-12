@@ -1,10 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -14,8 +10,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -26,7 +22,12 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -49,18 +50,6 @@ public final class SatyrFiredancer extends CardImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SatyrFiredancerTriggeredAbility) {
-            Player opponent = game.getPlayer(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
-            if (opponent != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + opponent.getLogName());
-                filter.add(new ControllerIdPredicate(opponent.getId()));
-                ability.getTargets().add(new TargetCreaturePermanent(filter));
-            }
-        }
-    }
-
-    @Override
     public SatyrFiredancer copy() {
         return new SatyrFiredancer(this);
     }
@@ -72,6 +61,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     public SatyrFiredancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SatyrFiredancerDamageEffect(), false);
+        targetAdjuster = SatyrFiredancerAdjuster.instance;
     }
 
     public SatyrFiredancerTriggeredAbility(final SatyrFiredancerTriggeredAbility ability) {
@@ -152,5 +142,19 @@ class SatyrFiredancerDamageEffect extends OneShotEffect {
             return true;
         }
         return false;
+    }
+}
+
+enum SatyrFiredancerAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        Player opponent = game.getPlayer(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
+        if (opponent != null) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + opponent.getLogName());
+            filter.add(new ControllerIdPredicate(opponent.getId()));
+            ability.getTargets().add(new TargetCreaturePermanent(filter));
+        }
     }
 }

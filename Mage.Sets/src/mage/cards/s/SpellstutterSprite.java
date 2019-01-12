@@ -1,40 +1,40 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SpellstutterSprite extends CardImpl {
-    
-    static final FilterPermanent filter = new FilterPermanent("number of Faeries you control");
+
+    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost X or less, where X is the number of Faeries you control");
+
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate(SubType.FAERIE));
+        filter.add(SpellstutterSpritePredicate.instance);
     }
 
     public SpellstutterSprite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -43,25 +43,18 @@ public final class SpellstutterSprite extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Spellstutter Sprite enters the battlefield, counter target spell with converted mana cost X or less, where X is the number of Faeries you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SpellstutterSpriteCounterTargetEffect()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CounterTargetEffect());
+        ability.addTarget(new TargetSpell(filter));
+        this.addAbility(ability);
     }
 
     public SpellstutterSprite(final SpellstutterSprite card) {
         super(card);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof EntersBattlefieldTriggeredAbility) {
-            int numberFaeries = game.getState().getBattlefield().countAll(filter, ability.getControllerId(), game);
-            FilterSpell xFilter = new FilterSpell("spell with converted mana cost " + numberFaeries + " or less");
-            xFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberFaeries + 1));
-            ability.getTargets().clear();
-            ability.addTarget(new TargetSpell(xFilter));
-        }
     }
 
     @Override
@@ -70,44 +63,17 @@ public final class SpellstutterSprite extends CardImpl {
     }
 }
 
-class SpellstutterSpriteCounterTargetEffect extends OneShotEffect {
+enum SpellstutterSpritePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+    instance;
+    private static final FilterPermanent filter = new FilterPermanent();
 
-    public SpellstutterSpriteCounterTargetEffect() {
-        super(Outcome.Detriment);
-    }
-
-    public SpellstutterSpriteCounterTargetEffect(final SpellstutterSpriteCounterTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpellstutterSpriteCounterTargetEffect copy() {
-        return new SpellstutterSpriteCounterTargetEffect(this);
+    static {
+        filter.add(new SubtypePredicate(SubType.FAERIE));
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        /*
-         * The value of X needs to be determined both when the ability triggers (so you can choose
-         * a target) and again when the ability resolves (to check if that target is still legal).
-         * If the number of Faeries you control has decreased enough in that time to make the target
-         * illegal, Spellstutter Sprite's ability will be countered (and the targeted spell will
-         * resolve as normal).
-         */
-        int numberFaeries = game.getState().getBattlefield().countAll(SpellstutterSprite.filter, source.getControllerId(), game);
-        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        // If do'nt have any spell targeted
-        if (stackObject != null && stackObject.getConvertedManaCost() <= numberFaeries) {
-            if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        return input.getObject().getConvertedManaCost() <=
+                game.getBattlefield().countAll(filter, game.getControllerId(input.getSourceId()), game);
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "counter target spell with converted mana cost X or less, where X is the number of Faeries you control";
-    }
-
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -16,23 +15,22 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class TaintedSigil extends CardImpl {
-    
-    String rule = "You gain life equal to the total life lost by all players this turn";
+
+    private static final String rule = "You gain life equal to the total life lost by all players this turn";
 
     public TaintedSigil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{W}{B}");
-
-        
-
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}{B}");
 
         // {tap}, Sacrifice Tainted Sigil: You gain life equal to the total life lost by all players this turn.
-        AllPlayersLostLifeCount totalLifeLostThisTurn = new AllPlayersLostLifeCount();
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(totalLifeLostThisTurn, rule), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD, new GainLifeEffect(AllPlayersLostLifeCount.instance, rule), new TapSourceCost()
+        );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
@@ -48,7 +46,8 @@ public final class TaintedSigil extends CardImpl {
     }
 }
 
-class AllPlayersLostLifeCount implements DynamicValue {
+enum AllPlayersLostLifeCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -69,7 +68,7 @@ class AllPlayersLostLifeCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new AllPlayersLostLifeCount();
+        return instance;
     }
 
     @Override

@@ -1,7 +1,6 @@
 
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -21,10 +20,12 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class QuarantineField extends CardImpl {
@@ -35,29 +36,15 @@ public final class QuarantineField extends CardImpl {
         // Quarantine Field enters the battlefield with X isolation counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.ISOLATION.createInstance())));
 
-        // When Quarantine Field enters the battlefield, for each isolation counter on it, exile up to one target nonland permanent an opponenet controls until Quarantine Field leaves the battlefield.
+        // When Quarantine Field enters the battlefield, for each isolation counter on it, exile up to one target nonland permanent an opponent controls until Quarantine Field leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new QuarantineFieldEffect(), false);
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.setTargetAdjuster(QuarantineFieldAdjuster.instance);
         this.addAbility(ability);
-
     }
 
     public QuarantineField(final QuarantineField card) {
         super(card);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof EntersBattlefieldTriggeredAbility) {
-            Permanent sourceObject = game.getPermanent(ability.getSourceId());
-            if (sourceObject != null) {
-                int isolationCounters = sourceObject.getCounters(game).getCount(CounterType.ISOLATION);
-                FilterNonlandPermanent filter = new FilterNonlandPermanent("up to " + isolationCounters + " nonland permanents controlled by any opponents");
-                filter.add(new ControllerPredicate(TargetController.OPPONENT));
-                ability.addTarget(new TargetPermanent(0, isolationCounters, filter, false));
-            }
-
-        }
     }
 
     @Override
@@ -66,11 +53,26 @@ public final class QuarantineField extends CardImpl {
     }
 }
 
+enum QuarantineFieldAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        Permanent sourceObject = game.getPermanent(ability.getSourceId());
+        if (sourceObject != null) {
+            int isolationCounters = sourceObject.getCounters(game).getCount(CounterType.ISOLATION);
+            FilterNonlandPermanent filter = new FilterNonlandPermanent("up to " + isolationCounters + " nonland permanents controlled by an opponent");
+            filter.add(new ControllerPredicate(TargetController.OPPONENT));
+            ability.addTarget(new TargetPermanent(0, isolationCounters, filter, false));
+        }
+    }
+}
+
 class QuarantineFieldEffect extends OneShotEffect {
 
     public QuarantineFieldEffect() {
         super(Outcome.Exile);
-        this.staticText = "for each isolation counter on it, exile up to one target nonland permanent an opponenet controls until {this} leaves the battlefield";
+        this.staticText = "for each isolation counter on it, exile up to one target nonland permanent an opponent controls until {this} leaves the battlefield";
     }
 
     public QuarantineFieldEffect(final QuarantineFieldEffect effect) {

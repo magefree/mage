@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -16,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  *
@@ -24,18 +24,27 @@ import mage.target.common.TargetAnyTarget;
 public final class Firestorm extends CardImpl {
 
     public Firestorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // As an additional cost to cast Firestorm, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
         // Firestorm deals X damage to each of X target creatures and/or players.
         this.getSpellAbility().addEffect(new FirestormEffect());
+        this.getSpellAbility().setTargetAdjuster(FirestormAdjuster.instance);
     }
 
     public Firestorm(final Firestorm card) {
         super(card);
     }
+
+    @Override
+    public Firestorm copy() {
+        return new Firestorm(this);
+    }
+}
+
+enum FirestormAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
@@ -44,11 +53,6 @@ public final class Firestorm extends CardImpl {
             Target target = new TargetAnyTarget(xValue);
             ability.addTarget(target);
         }
-    }
-
-    @Override
-    public Firestorm copy() {
-        return new Firestorm(this);
     }
 }
 
@@ -85,9 +89,6 @@ class FirestormEffect extends OneShotEffect {
         }
         return false;
     }
-        
-
-    
 
     @Override
     public FirestormEffect copy() {

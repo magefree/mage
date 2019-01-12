@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
@@ -19,15 +18,17 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class NahirisWrath extends CardImpl {
 
     public NahirisWrath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // As an additional cost to cast Nahiri's Wrath, discard X cards.
         this.getSpellAbility().addCost(new NahirisWrathAdditionalCost());
@@ -36,7 +37,21 @@ public final class NahirisWrath extends CardImpl {
         Effect effect = new DamageTargetEffect(new DiscardCostCardConvertedMana());
         effect.setText("{this} deals damage equal to the total converted mana cost of the discarded cards to each of up to X target creatures and/or planeswalkers");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().setTargetAdjuster(NahirisWrathAdjuster.instance);
     }
+
+    public NahirisWrath(final NahirisWrath card) {
+        super(card);
+    }
+
+    @Override
+    public NahirisWrath copy() {
+        return new NahirisWrath(this);
+    }
+}
+
+enum NahirisWrathAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
@@ -51,15 +66,6 @@ public final class NahirisWrath extends CardImpl {
         if (numTargets > 0) {
             ability.addTarget(new TargetCreatureOrPlaneswalker(0, numTargets, new FilterCreatureOrPlaneswalkerPermanent(), false));
         }
-    }
-
-    public NahirisWrath(final NahirisWrath card) {
-        super(card);
-    }
-
-    @Override
-    public NahirisWrath copy() {
-        return new NahirisWrath(this);
     }
 }
 

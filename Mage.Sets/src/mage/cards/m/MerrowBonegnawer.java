@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -20,13 +19,12 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class MerrowBonegnawer extends CardImpl {
-
-    private UUID exileId = UUID.randomUUID();
 
     private static final FilterSpell filter = new FilterSpell("a black spell");
 
@@ -43,7 +41,7 @@ public final class MerrowBonegnawer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target player exiles a card from their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, exileId, getIdName(), new FilterCard()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, null, getIdName(), new FilterCard()), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

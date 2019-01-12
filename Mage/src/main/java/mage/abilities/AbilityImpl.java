@@ -1,9 +1,5 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.costs.*;
@@ -36,6 +32,11 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -71,6 +72,7 @@ public abstract class AbilityImpl implements Ability {
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
     protected TargetAdjuster targetAdjuster = null;
+    protected CostAdjuster costAdjuster = null;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -1221,6 +1223,23 @@ public abstract class AbilityImpl implements Ability {
     public void adjustTargets(Game game) {
         if (targetAdjuster != null) {
             targetAdjuster.adjustTargets(this, game);
+        }
+    }
+
+    @Override
+    public void setCostAdjuster(CostAdjuster costAdjuster) {
+        this.costAdjuster = costAdjuster;
+    }
+
+    @Override
+    public CostAdjuster getCostAdjuster() {
+        return costAdjuster;
+    }
+
+    @Override
+    public void adjustCosts(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.adjustCosts(this, game);
         }
     }
 }

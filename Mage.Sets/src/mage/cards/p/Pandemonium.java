@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,44 +15,49 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class Pandemonium extends CardImpl {
-
-    private final UUID originalId;
 
     public Pandemonium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to any target of their choice.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PandemoniumEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PERMANENT, "");
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new PandemoniumEffect(),
+                StaticFilters.FILTER_PERMANENT_CREATURE,
+                false, SetTargetPointer.PERMANENT, ""
+        );
         ability.addTarget(new TargetAnyTarget());
-        originalId = ability.getOriginalId();
+        ability.setTargetAdjuster(PandemoniumAdjuster.instance);
         this.addAbility(ability);
     }
 
     public Pandemonium(final Pandemonium card) {
         super(card);
-        this.originalId = card.originalId;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            UUID creatureId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
-            Permanent creature = game.getPermanent(creatureId);
-            if (creature != null) {
-                ability.getTargets().get(0).setTargetController(creature.getControllerId());
-            }
-        }
     }
 
     @Override
     public Pandemonium copy() {
         return new Pandemonium(this);
+    }
+}
+
+enum PandemoniumAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        UUID creatureId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
+        Permanent creature = game.getPermanent(creatureId);
+        if (creature != null) {
+            ability.getTargets().get(0).setTargetController(creature.getControllerId());
+        }
     }
 }
 
