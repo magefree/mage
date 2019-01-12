@@ -284,6 +284,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Trollbred Guardian", 148, Rarity.UNCOMMON, mage.cards.t.TrollbredGuardian.class));
         cards.add(new SetCardInfo("Twilight Panther", 28, Rarity.COMMON, mage.cards.t.TwilightPanther.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 29, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
+        cards.add(new SetCardInfo("Undercity Scavenger", 88, Rarity.COMMON, mage.cards.u.UndercityScavenger.class));
         cards.add(new SetCardInfo("Verity Circle", 58, Rarity.RARE, mage.cards.v.VerityCircle.class));
         cards.add(new SetCardInfo("Vindictive Vampire", 90, Rarity.UNCOMMON, mage.cards.v.VindictiveVampire.class));
         cards.add(new SetCardInfo("Vizkopa Vampire", 220, Rarity.COMMON, mage.cards.v.VizkopaVampire.class));
