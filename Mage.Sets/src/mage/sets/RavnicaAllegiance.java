@@ -275,6 +275,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("The Haunt of Hightower", 273, Rarity.MYTHIC, mage.cards.t.TheHauntOfHightower.class));
         cards.add(new SetCardInfo("Theater of Horrors", 213, Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
         cards.add(new SetCardInfo("Thirsting Shade", 87, Rarity.COMMON, mage.cards.t.ThirstingShade.class));
+        cards.add(new SetCardInfo("Thought Collapse", 57, Rarity.COMMON, mage.cards.t.ThoughtCollapse.class));
         cards.add(new SetCardInfo("Thrash // Threat", 229, Rarity.RARE, mage.cards.t.ThrashThreat.class));
         cards.add(new SetCardInfo("Titanic Brawl", 146, Rarity.COMMON, mage.cards.t.TitanicBrawl.class));
         cards.add(new SetCardInfo("Tithe Taker", 27, Rarity.RARE, mage.cards.t.TitheTaker.class));
