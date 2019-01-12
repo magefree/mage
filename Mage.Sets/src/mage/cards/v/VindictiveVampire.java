@@ -11,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -18,6 +20,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VindictiveVampire extends CardImpl {
+
+    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public VindictiveVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -29,7 +37,7 @@ public final class VindictiveVampire extends CardImpl {
         // Whenever another creature you control dies, Vindictive Vampire deals 1 damage to each opponent and you gain 1 life.
         Ability ability = new DiesCreatureTriggeredAbility(
                 new DamagePlayersEffect(1, TargetController.OPPONENT), false,
-                StaticFilters.FILTER_CONTROLLED_A_CREATURE, true
+                filter, true
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
