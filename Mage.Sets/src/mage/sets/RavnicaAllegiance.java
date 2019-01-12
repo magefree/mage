@@ -259,6 +259,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Steeple Creeper", 142, Rarity.COMMON, mage.cards.s.SteepleCreeper.class));
         cards.add(new SetCardInfo("Stomping Ground", 259, Rarity.RARE, mage.cards.s.StompingGround.class));
         cards.add(new SetCardInfo("Stony Strength", 143, Rarity.COMMON, mage.cards.s.StonyStrength.class));
+        cards.add(new SetCardInfo("Storm Strike", 119, Rarity.COMMON, mage.cards.s.StormStrike.class));
         cards.add(new SetCardInfo("Summary Judgment", 24, Rarity.COMMON, mage.cards.s.SummaryJudgment.class));
         cards.add(new SetCardInfo("Sunder Shaman", 210, Rarity.UNCOMMON, mage.cards.s.SunderShaman.class));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
