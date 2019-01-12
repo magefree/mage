@@ -25,7 +25,7 @@ public final class RhythmOfTheWild extends CardImpl {
     private static final FilterSpell filter
             = new FilterSpell("Creature spells you control");
     private static final FilterPermanent filter2
-            = new FilterControlledCreaturePermanent("Nontoken creatures you control");
+            = new FilterControlledCreaturePermanent("Nontoken creatures");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
