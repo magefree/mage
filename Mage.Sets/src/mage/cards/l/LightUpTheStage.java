@@ -26,11 +26,11 @@ public final class LightUpTheStage extends CardImpl {
     public LightUpTheStage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
-        // Spectacle {R}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{R}")));
-
         // Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
         this.getSpellAbility().addEffect(new LightUpTheStageEffect());
+
+        // Spectacle {R}
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{R}")));
     }
 
     public LightUpTheStage(final LightUpTheStage card) {
@@ -45,12 +45,12 @@ public final class LightUpTheStage extends CardImpl {
 
 class LightUpTheStageEffect extends OneShotEffect {
 
-    public LightUpTheStageEffect() {
+    LightUpTheStageEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile the top two cards of your library. Until the end of your next turn, you may play those cards";
     }
 
-    public LightUpTheStageEffect(final LightUpTheStageEffect effect) {
+    private LightUpTheStageEffect(final LightUpTheStageEffect effect) {
         super(effect);
     }
 
@@ -83,12 +83,12 @@ class LightUpTheStageMayPlayEffect extends AsThoughEffectImpl {
 
     private int castOnTurn = 0;
 
-    public LightUpTheStageMayPlayEffect() {
+    LightUpTheStageMayPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the end of your next turn, you may play that card.";
     }
 
-    public LightUpTheStageMayPlayEffect(final LightUpTheStageMayPlayEffect effect) {
+    private LightUpTheStageMayPlayEffect(final LightUpTheStageMayPlayEffect effect) {
         super(effect);
         castOnTurn = effect.castOnTurn;
     }

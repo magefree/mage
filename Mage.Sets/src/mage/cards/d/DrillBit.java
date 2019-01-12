@@ -20,14 +20,14 @@ public final class DrillBit extends CardImpl {
     public DrillBit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Spectacle {B}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{B}")));
-
         // Target player reveals their hand. You choose a nonland card from it. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(
                 StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY
         ));
         this.getSpellAbility().addTarget(new TargetPlayer());
+
+        // Spectacle {B}
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{B}")));
     }
 
     private DrillBit(final DrillBit card) {
