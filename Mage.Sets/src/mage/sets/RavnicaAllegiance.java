@@ -245,6 +245,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Sphinx of New Prahv", 208, Rarity.UNCOMMON, mage.cards.s.SphinxOfNewPrahv.class));
         cards.add(new SetCardInfo("Sphinx of the Guildpact", 241, Rarity.UNCOMMON, mage.cards.s.SphinxOfTheGuildpact.class));
         cards.add(new SetCardInfo("Sphinx's Insight", 209, Rarity.COMMON, mage.cards.s.SphinxsInsight.class));
+        cards.add(new SetCardInfo("Spikewheel Acrobat", 118, Rarity.COMMON, mage.cards.s.SpikewheelAcrobat.class));
         cards.add(new SetCardInfo("Spire Mangler", 86, Rarity.UNCOMMON, mage.cards.s.SpireMangler.class));
         cards.add(new SetCardInfo("Spirit of the Spires", 23, Rarity.UNCOMMON, mage.cards.s.SpiritOfTheSpires.class));
         cards.add(new SetCardInfo("Stomping Ground", 259, Rarity.RARE, mage.cards.s.StompingGround.class));
