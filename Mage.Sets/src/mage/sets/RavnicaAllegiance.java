@@ -264,6 +264,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Sunder Shaman", 210, Rarity.UNCOMMON, mage.cards.s.SunderShaman.class));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swirling Torrent", 56, Rarity.UNCOMMON, mage.cards.s.SwirlingTorrent.class));
+        cards.add(new SetCardInfo("Sylvan Brushstrider", 144, Rarity.COMMON, mage.cards.s.SylvanBrushstrider.class));
         cards.add(new SetCardInfo("Syndicate Guildmage", 211, Rarity.UNCOMMON, mage.cards.s.SyndicateGuildmage.class));
         cards.add(new SetCardInfo("Syndicate Messenger", 25, Rarity.COMMON, mage.cards.s.SyndicateMessenger.class));
         cards.add(new SetCardInfo("Tenth District Veteran", 26, Rarity.COMMON, mage.cards.t.TenthDistrictVeteran.class));
