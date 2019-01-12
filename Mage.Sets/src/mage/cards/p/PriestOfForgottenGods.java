@@ -18,6 +18,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -55,6 +56,7 @@ public final class PriestOfForgottenGods extends CardImpl {
         ability.addEffect(new BasicManaEffect(Mana.BlackMana(2)).setText("You add {B}{B}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
+        ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.addAbility(ability);
     }
 
