@@ -226,6 +226,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Scorchmark", 113, Rarity.COMMON, mage.cards.s.Scorchmark.class));
         cards.add(new SetCardInfo("Scrabbling Claws", 238, Rarity.UNCOMMON, mage.cards.s.ScrabblingClaws.class));
         cards.add(new SetCardInfo("Screaming Shield", 239, Rarity.UNCOMMON, mage.cards.s.ScreamingShield.class));
+        cards.add(new SetCardInfo("Scuttlegator", 218, Rarity.COMMON, mage.cards.s.Scuttlegator.class));
         cards.add(new SetCardInfo("Senate Courier", 50, Rarity.COMMON, mage.cards.s.SenateCourier.class));
         cards.add(new SetCardInfo("Senate Griffin", 219, Rarity.COMMON, mage.cards.s.SenateGriffin.class));
         cards.add(new SetCardInfo("Senate Guildmage", 204, Rarity.UNCOMMON, mage.cards.s.SenateGuildmage.class));
