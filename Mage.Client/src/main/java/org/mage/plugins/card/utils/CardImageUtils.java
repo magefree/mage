@@ -175,7 +175,7 @@ public final class CardImageUtils {
 
         String prefixType = "";
         if (card.getType() != 0) {
-            prefixType = " " + Integer.toString(card.getType());
+            prefixType = " " + card.getType();
         }
 
         String cardName = card.getFileName();
@@ -192,6 +192,7 @@ public final class CardImageUtils {
             finalFileName = cardName + prefixType + ".full.jpg";
         }
 
+        /* 2019-01-12: no needs in name corrections, all files must be same and auto-downloaded
         // if image file exists, correct name (for case sensitive systems)
         // use TFile for zips
         TFile dirFile = new TFile(setPath);
@@ -210,6 +211,7 @@ public final class CardImageUtils {
         } catch (Exception ex) {
             log.error("Can't read card name from file, may be it broken: " + setPath);
         }
+        */
 
         return setPath + finalFileName;
     }

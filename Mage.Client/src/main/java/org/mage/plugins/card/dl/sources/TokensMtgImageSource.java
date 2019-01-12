@@ -1,5 +1,10 @@
-
 package org.mage.plugins.card.dl.sources;
+
+import mage.constants.SubType;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.images.CardDownloadData;
+import org.mage.plugins.card.images.DownloadPicturesService;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,20 +13,8 @@ import java.io.InputStreamReader;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
-
-import mage.constants.SubType;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.images.DownloadPicturesService;
-import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  * @author Quercitron
@@ -58,7 +51,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         return null;
     }
 
@@ -160,7 +153,12 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public boolean isImageProvided(String setCode, String cardName) {
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        return false;
+    }
+
+    @Override
+    public boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         String searchName = cardName;
         if (cardName.toLowerCase(Locale.ENGLISH).contains("emblem")) {
             searchName = getEmblemName(cardName);
