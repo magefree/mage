@@ -2,6 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
@@ -80,7 +81,11 @@ class HydroidKrasisEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int halfCost = Math.floorDiv(source.getManaCostsToPay().getX(), 2);
+        Object obj = getValue(CastSourceTriggeredAbility.SOURCE_CAST_SPELL_ABILITY);
+        if (!(obj instanceof SpellAbility)) {
+            return false;
+        }
+        int halfCost = Math.floorDiv(((SpellAbility) obj).getManaCostsToPay().getX(), 2);
         player.drawCards(halfCost, game);
         player.gainLife(halfCost, game, source);
         return true;
