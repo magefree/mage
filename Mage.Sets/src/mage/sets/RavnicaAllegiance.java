@@ -163,6 +163,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Sorrows", 14, Rarity.COMMON, mage.cards.k.KnightOfSorrows.class));
         cards.add(new SetCardInfo("Knight of the Last Breath", 188, Rarity.UNCOMMON, mage.cards.k.KnightOfTheLastBreath.class));
         cards.add(new SetCardInfo("Lavinia, Azorius Renegade", 189, Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class));
+        cards.add(new SetCardInfo("Lawmage's Binding", 190, Rarity.COMMON, mage.cards.l.LawmagesBinding.class));
         cards.add(new SetCardInfo("Light Up the Stage", 107, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lumbering Battlement", 15, Rarity.RARE, mage.cards.l.LumberingBattlement.class));
         cards.add(new SetCardInfo("Macabre Mockery", 191, Rarity.UNCOMMON, mage.cards.m.MacabreMockery.class));
