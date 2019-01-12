@@ -111,6 +111,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Eyes Everywhere", 38, Rarity.UNCOMMON, mage.cards.e.EyesEverywhere.class));
         cards.add(new SetCardInfo("Faerie Duelist", 39, Rarity.COMMON, mage.cards.f.FaerieDuelist.class));
         cards.add(new SetCardInfo("Feral Maaka", 100, Rarity.COMMON, mage.cards.f.FeralMaaka.class));
+        cards.add(new SetCardInfo("Final Payment", 171, Rarity.COMMON, mage.cards.f.FinalPayment.class));
         cards.add(new SetCardInfo("Fireblade Artist", 172, Rarity.UNCOMMON, mage.cards.f.FirebladeArtist.class));
         cards.add(new SetCardInfo("Font of Agonies", 74, Rarity.RARE, mage.cards.f.FontOfAgonies.class));
         cards.add(new SetCardInfo("Footlight Fiend", 216, Rarity.COMMON, mage.cards.f.FootlightFiend.class));
