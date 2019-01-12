@@ -28,7 +28,7 @@ public final class GazeOfJustice extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public GazeOfJustice(UUID ownerId, CardSetInfo setInfo) {

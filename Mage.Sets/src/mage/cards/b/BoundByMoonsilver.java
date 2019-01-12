@@ -29,7 +29,7 @@ public final class BoundByMoonsilver extends CardImpl {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public BoundByMoonsilver(UUID ownerId, CardSetInfo setInfo) {

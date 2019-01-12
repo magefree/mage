@@ -29,7 +29,7 @@ public final class GruulBeastmaster extends CardImpl {
             = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     private static final DynamicValue xValue = new SourcePermanentPowerCount(false);

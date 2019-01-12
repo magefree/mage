@@ -34,7 +34,7 @@ public final class BridgeFromBelow extends CardImpl {
     
     static{
         filter1.add(new ControllerPredicate(TargetController.YOU));
-        filter1.add(Predicates.not(new TokenPredicate()));
+        filter1.add(Predicates.not(TokenPredicate.instance));
         filter2.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     

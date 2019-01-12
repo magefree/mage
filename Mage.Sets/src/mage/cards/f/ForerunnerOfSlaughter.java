@@ -28,7 +28,7 @@ public final class ForerunnerOfSlaughter extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public ForerunnerOfSlaughter(UUID ownerId, CardSetInfo setInfo) {

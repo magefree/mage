@@ -26,7 +26,7 @@ public final class GhirapurAetherGrid extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public GhirapurAetherGrid(UUID ownerId, CardSetInfo setInfo) {

@@ -34,7 +34,7 @@ public final class RhonasTheIndomitable extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public RhonasTheIndomitable(UUID ownerId, CardSetInfo setInfo) {
@@ -105,7 +105,7 @@ class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         if (permanent.getId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {

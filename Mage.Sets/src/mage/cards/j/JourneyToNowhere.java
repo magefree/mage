@@ -27,7 +27,7 @@ public final class JourneyToNowhere extends CardImpl {
 
         // When Journey to Nowhere enters the battlefield, exile target creature.
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
         Target target = new TargetPermanent(filter);
         ability1.addTarget(target);

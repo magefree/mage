@@ -49,7 +49,7 @@ class HarmonyOfNatureEffect extends OneShotEffect {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public HarmonyOfNatureEffect() {

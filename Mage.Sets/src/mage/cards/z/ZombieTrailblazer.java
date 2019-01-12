@@ -34,7 +34,7 @@ public final class ZombieTrailblazer extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public ZombieTrailblazer(UUID ownerId, CardSetInfo setInfo) {

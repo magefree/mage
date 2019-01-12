@@ -32,7 +32,7 @@ public final class JoragaWarcaller extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate(SubType.ELF));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public JoragaWarcaller(UUID ownerId, CardSetInfo setInfo) {

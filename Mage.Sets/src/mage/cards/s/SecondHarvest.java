@@ -60,7 +60,7 @@ class SecondHarvestEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterControlledPermanent filter = new FilterControlledPermanent("each token you control");
-            filter.add(new TokenPredicate());
+            filter.add(TokenPredicate.instance);
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
                 if (permanent != null) {
                     CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();

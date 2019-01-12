@@ -30,7 +30,7 @@ public final class UnravelingMummy extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking Zombie");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 

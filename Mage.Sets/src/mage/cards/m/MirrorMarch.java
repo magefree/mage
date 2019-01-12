@@ -25,7 +25,7 @@ public final class MirrorMarch extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public MirrorMarch(UUID ownerId, CardSetInfo setInfo) {

@@ -24,7 +24,7 @@ public final class BullRushBruiser extends CardImpl {
     private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "another Warrior");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public BullRushBruiser(UUID ownerId, CardSetInfo setInfo) {

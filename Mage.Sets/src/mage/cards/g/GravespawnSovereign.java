@@ -30,7 +30,7 @@ public final class GravespawnSovereign extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public GravespawnSovereign(UUID ownerId, CardSetInfo setInfo) {

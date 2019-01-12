@@ -33,7 +33,7 @@ public final class FlameshadowConjuring extends CardImpl {
     private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
-        filterNontoken.add(Predicates.not(new TokenPredicate()));
+        filterNontoken.add(Predicates.not(TokenPredicate.instance));
     }
 
     public FlameshadowConjuring(UUID ownerId, CardSetInfo setInfo) {

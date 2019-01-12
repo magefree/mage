@@ -48,7 +48,7 @@ class DevoutInvocationEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public DevoutInvocationEffect() {

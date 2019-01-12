@@ -23,7 +23,7 @@ public final class MummyParamount extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Zombie");
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public MummyParamount(UUID ownerId, CardSetInfo setInfo) {

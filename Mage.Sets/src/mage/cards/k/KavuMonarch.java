@@ -31,7 +31,7 @@ public final class KavuMonarch extends CardImpl {
     static {
         filter1.add(new SubtypePredicate(SubType.KAVU));
         filter2.add(new SubtypePredicate(SubType.KAVU));
-        filter2.add(new AnotherPredicate());
+        filter2.add(AnotherPredicate.instance);
     }
 
     public KavuMonarch(UUID ownerId, CardSetInfo setInfo) {

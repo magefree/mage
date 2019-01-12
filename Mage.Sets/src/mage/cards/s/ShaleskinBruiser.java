@@ -27,7 +27,7 @@ public final class ShaleskinBruiser extends CardImpl {
     
     static {
         filter.add(new SubtypePredicate(SubType.BEAST));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     

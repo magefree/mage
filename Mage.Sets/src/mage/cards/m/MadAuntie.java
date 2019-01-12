@@ -31,7 +31,7 @@ public final class MadAuntie extends CardImpl {
 
     static {
         filter1.add(new SubtypePredicate(SubType.GOBLIN));
-        filter1.add(new AnotherPredicate());
+        filter1.add(AnotherPredicate.instance);
     }
 
     public MadAuntie(UUID ownerId, CardSetInfo setInfo) {

@@ -21,7 +21,7 @@ public final class Mightstone extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
     
     public Mightstone(UUID ownerId, CardSetInfo setInfo) {

@@ -30,7 +30,7 @@ public final class AdmonitionAngel extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent other than Admonition Angel");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 

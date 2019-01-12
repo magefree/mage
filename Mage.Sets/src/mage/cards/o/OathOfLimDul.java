@@ -91,7 +91,7 @@ class OathOfLimDulEffect extends OneShotEffect {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("controlled permanent other than Oath of Lim-Dul");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public OathOfLimDulEffect() {

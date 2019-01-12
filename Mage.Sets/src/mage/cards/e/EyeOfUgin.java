@@ -31,8 +31,8 @@ public final class EyeOfUgin extends CardImpl {
     private static final FilterCard filterSpells = new FilterCard("Colorless Eldrazi spells");
 
     static {
-        filter.add(new ColorlessPredicate());
-        filterSpells.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
+        filterSpells.add(ColorlessPredicate.instance);
         filterSpells.add(new SubtypePredicate(SubType.ELDRAZI));
     }
 

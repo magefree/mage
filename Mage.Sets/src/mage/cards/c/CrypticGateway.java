@@ -39,7 +39,7 @@ public final class CrypticGateway extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     TargetControlledPermanent target;
@@ -70,7 +70,7 @@ class CrypticGatewayCost extends CostImpl {
     TargetControlledPermanent target;
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public CrypticGatewayCost(TargetControlledPermanent target) {

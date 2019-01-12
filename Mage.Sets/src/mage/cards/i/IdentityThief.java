@@ -37,7 +37,7 @@ public final class IdentityThief extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("target nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public IdentityThief(UUID ownerId, CardSetInfo setInfo) {

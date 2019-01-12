@@ -26,8 +26,8 @@ public final class Mirrorworks extends CardImpl {
     private final static FilterArtifactPermanent filter = new FilterArtifactPermanent("another nontoken artifact");
 
     static {
-        filter.add(new AnotherPredicate());
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(AnotherPredicate.instance);
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public Mirrorworks(UUID ownerId, CardSetInfo setInfo) {

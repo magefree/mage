@@ -22,7 +22,7 @@ public final class RidgescaleTusker extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public RidgescaleTusker(UUID ownerId, CardSetInfo setInfo) {

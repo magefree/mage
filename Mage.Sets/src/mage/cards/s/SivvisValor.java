@@ -38,7 +38,7 @@ public final class SivvisValor extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.PLAINS));
-        filterCreature.add(Predicates.not(new TappedPredicate()));
+        filterCreature.add(Predicates.not(TappedPredicate.instance));
     }
 
     public SivvisValor(UUID ownerId, CardSetInfo setInfo) {

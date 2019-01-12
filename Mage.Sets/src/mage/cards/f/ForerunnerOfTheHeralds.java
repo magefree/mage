@@ -28,7 +28,7 @@ public final class ForerunnerOfTheHeralds extends CardImpl {
 
     private static final FilterPermanent filterAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, "another " + SubType.MERFOLK.toString());
     static {
-        filterAnotherMerfolk.add(new AnotherPredicate());
+        filterAnotherMerfolk.add(AnotherPredicate.instance);
         filterAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
     }
 

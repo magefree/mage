@@ -39,9 +39,9 @@ public final class ImpelledGiant extends CardImpl {
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped red creature you control other than Impelled Giant");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ImpelledGiant(UUID ownerId, CardSetInfo setInfo) {

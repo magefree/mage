@@ -25,7 +25,7 @@ public final class SaruliCaretaker extends CardImpl {
             = new FilterControlledCreaturePermanent("an untapped creature you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public SaruliCaretaker(UUID ownerId, CardSetInfo setInfo) {

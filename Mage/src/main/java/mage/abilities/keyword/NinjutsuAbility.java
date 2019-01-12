@@ -47,7 +47,7 @@ public class NinjutsuAbility extends ActivatedAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("unblocked attacker you control");
 
     static {
-        filter.add(new UnblockedPredicate());
+        filter.add(UnblockedPredicate.instance);
     }
 
     /**

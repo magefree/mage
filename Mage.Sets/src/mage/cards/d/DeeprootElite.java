@@ -26,7 +26,7 @@ public final class DeeprootElite extends CardImpl {
 
     private static final FilterPermanent filterYourAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, "another " + SubType.MERFOLK.toString());
     static {
-        filterYourAnotherMerfolk.add(new AnotherPredicate());
+        filterYourAnotherMerfolk.add(AnotherPredicate.instance);
         filterYourAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
     }
 

@@ -36,7 +36,7 @@ public final class SupremeInquisitor extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public SupremeInquisitor(UUID ownerId, CardSetInfo setInfo) {

@@ -22,7 +22,7 @@ public class FilterCreatureForCombatBase extends FilterCreaturePermanent {
 
     public FilterCreatureForCombatBase(String name) {
         super(name);
-        this.add(Predicates.not(new AttackingPredicate()));
+        this.add(Predicates.not(AttackingPredicate.instance));
         this.add(new PhasedInPredicate());
         this.add(new CanBlockPredicate());
     }

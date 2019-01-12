@@ -20,7 +20,7 @@ public final class UrzasFilter extends CardImpl {
     private static final FilterCard filter = new FilterCard("multicolored spells");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public UrzasFilter(UUID ownerId, CardSetInfo setInfo) {

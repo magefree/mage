@@ -24,7 +24,7 @@ public final class SecretPlans extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creatures");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
     }
 
     public SecretPlans(UUID ownerId, CardSetInfo setInfo) {

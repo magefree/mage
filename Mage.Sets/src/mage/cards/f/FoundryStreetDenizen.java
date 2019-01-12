@@ -27,7 +27,7 @@ public final class FoundryStreetDenizen extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another red creature");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new ColorPredicate(ObjectColor.RED));
     }

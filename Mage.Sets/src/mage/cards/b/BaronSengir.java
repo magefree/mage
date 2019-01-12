@@ -32,7 +32,7 @@ public final class BaronSengir extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.VAMPIRE));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public BaronSengir(UUID ownerId, CardSetInfo setInfo) {

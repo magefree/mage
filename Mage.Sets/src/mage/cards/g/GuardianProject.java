@@ -53,7 +53,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
     public static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     GuardianProjectTriggeredAbility() {

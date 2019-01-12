@@ -23,7 +23,7 @@ public final class TakeHeart extends CardImpl {
             = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public TakeHeart(UUID ownerId, CardSetInfo setInfo) {

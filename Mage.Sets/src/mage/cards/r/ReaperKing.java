@@ -27,7 +27,7 @@ public final class ReaperKing extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.SCARECROW));
-        filterTrigger.add(new AnotherPredicate());
+        filterTrigger.add(AnotherPredicate.instance);
         filterTrigger.add(new SubtypePredicate(SubType.SCARECROW));
     }
 

@@ -31,7 +31,7 @@ public final class HanSoloScrumrat extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public HanSoloScrumrat(UUID ownerId, CardSetInfo setInfo) {

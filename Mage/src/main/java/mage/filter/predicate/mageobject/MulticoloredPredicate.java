@@ -8,10 +8,10 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
- *
  * @author jeffwadsworth
  */
-public class MulticoloredPredicate implements Predicate<MageObject> {
+public enum MulticoloredPredicate implements Predicate<MageObject> {
+    instance;
 
     @Override
     public boolean apply(MageObject input, Game game) {

@@ -24,7 +24,7 @@ public final class SummaryJudgment extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public SummaryJudgment(UUID ownerId, CardSetInfo setInfo) {

@@ -31,7 +31,7 @@ public final class MausoleumWanderer extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 

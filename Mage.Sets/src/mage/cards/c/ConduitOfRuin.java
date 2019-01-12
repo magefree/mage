@@ -38,7 +38,7 @@ public final class ConduitOfRuin extends CardImpl {
     private static final FilterCreatureCard filterCost = new FilterCreatureCard("The first creature spell");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
         filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
         filterCost.add(new FirstCastCreatureSpellPredicate());
     }

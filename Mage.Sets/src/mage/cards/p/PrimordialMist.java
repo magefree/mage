@@ -35,7 +35,7 @@ public final class PrimordialMist extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("face down permanent");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
     }
 
     public PrimordialMist(UUID ownerId, CardSetInfo setInfo) {

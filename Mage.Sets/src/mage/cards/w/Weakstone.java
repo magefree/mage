@@ -21,7 +21,7 @@ public final class Weakstone extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
         
     public Weakstone(UUID ownerId, CardSetInfo setInfo) {

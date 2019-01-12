@@ -33,7 +33,7 @@ public final class FelhideSpiritbinder extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public FelhideSpiritbinder(UUID ownerId, CardSetInfo setInfo) {

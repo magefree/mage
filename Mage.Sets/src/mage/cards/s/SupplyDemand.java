@@ -23,7 +23,7 @@ public final class SupplyDemand extends SplitCard {
     private static final FilterCard filter = new FilterCard("multicolored card");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public SupplyDemand(UUID ownerId, CardSetInfo setInfo) {

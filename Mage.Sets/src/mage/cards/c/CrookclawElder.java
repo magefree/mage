@@ -33,9 +33,9 @@ public final class CrookclawElder extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.BIRD));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter2.add(new SubtypePredicate(SubType.WIZARD));
-        filter2.add(Predicates.not(new TappedPredicate()));
+        filter2.add(Predicates.not(TappedPredicate.instance));
     }
 
     public CrookclawElder(UUID ownerId, CardSetInfo setInfo) {

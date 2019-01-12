@@ -28,7 +28,7 @@ public final class GravityNegator extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public GravityNegator(UUID ownerId, CardSetInfo setInfo) {

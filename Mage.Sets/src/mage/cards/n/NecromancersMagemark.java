@@ -36,7 +36,7 @@ public final class NecromancersMagemark extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control that are enchanted");
 
     static {
-        filter.add(new EnchantedPredicate());
+        filter.add(EnchantedPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

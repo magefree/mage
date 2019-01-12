@@ -30,7 +30,7 @@ public final class PersistentPetitioners extends CardImpl {
             = new FilterControlledPermanent("untapped Advisors you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.ADVISOR));
     }
 

@@ -50,7 +50,7 @@ class BroodingSaurianControlEffect extends ContinuousEffectImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public BroodingSaurianControlEffect() {

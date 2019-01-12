@@ -28,7 +28,7 @@ public final class SealAway extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public SealAway(UUID ownerId, CardSetInfo setInfo) {

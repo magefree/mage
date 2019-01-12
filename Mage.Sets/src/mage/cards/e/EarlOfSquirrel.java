@@ -33,7 +33,7 @@ public final class EarlOfSquirrel extends CardImpl {
 
 
     static {
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(new SubtypePredicate(SubType.SQUIRREL));
     }

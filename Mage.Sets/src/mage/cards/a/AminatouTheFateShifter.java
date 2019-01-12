@@ -40,7 +40,7 @@ public class AminatouTheFateShifter extends CardImpl {
 
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public AminatouTheFateShifter(UUID ownerId, CardSetInfo setInfo) {

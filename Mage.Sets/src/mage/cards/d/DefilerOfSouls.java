@@ -72,7 +72,7 @@ class DefilerOfSoulsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        filter.add(new MonocoloredPredicate());
+        filter.add(MonocoloredPredicate.instance);
         
         int amount;
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);

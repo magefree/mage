@@ -25,7 +25,7 @@ public final class Liability extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public Liability(UUID ownerId, CardSetInfo setInfo) {

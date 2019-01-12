@@ -33,7 +33,7 @@ public final class ChampionOfStraySouls extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ChampionOfStraySouls(UUID ownerId, CardSetInfo setInfo) {

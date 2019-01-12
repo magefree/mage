@@ -23,7 +23,7 @@ public final class ThranTemporalGateway extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("a historic permanent card");
 
     static {
-        filter.add(new HistoricPredicate());
+        filter.add(HistoricPredicate.instance);
     }
 
     public ThranTemporalGateway(UUID ownerId, CardSetInfo setInfo) {

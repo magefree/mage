@@ -27,7 +27,7 @@ public final class RiverSneak extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another Merfolk");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate(SubType.MERFOLK));
     }

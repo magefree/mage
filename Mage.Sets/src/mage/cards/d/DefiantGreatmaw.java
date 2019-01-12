@@ -60,7 +60,7 @@ class DefiantGreatmawTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

@@ -38,7 +38,7 @@ public final class GnarlrootTrapper extends CardImpl {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking ELf you control");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(new SubtypePredicate(SubType.ELF));
     }
 

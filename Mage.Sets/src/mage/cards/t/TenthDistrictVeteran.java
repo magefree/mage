@@ -23,7 +23,7 @@ public final class TenthDistrictVeteran extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public TenthDistrictVeteran(UUID ownerId, CardSetInfo setInfo) {

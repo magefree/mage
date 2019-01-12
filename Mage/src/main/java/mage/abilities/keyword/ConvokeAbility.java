@@ -69,7 +69,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
     private static final FilterCreaturePermanent filterUntapped = new FilterCreaturePermanent();
 
     static {
-        filterUntapped.add(Predicates.not(new TappedPredicate()));
+        filterUntapped.add(Predicates.not(TappedPredicate.instance));
     }
 
     public ConvokeAbility() {
@@ -96,7 +96,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
                 specialAction.setSourceId(source.getSourceId());
                 // create filter for possible creatures to tap
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-                filter.add(Predicates.not(new TappedPredicate()));
+                filter.add(Predicates.not(TappedPredicate.instance));
                 if (unpaid.getMana().getGeneric() == 0) {
                     List<ColorPredicate> colorPredicates = new ArrayList<>();
                     if (unpaid.getMana().getBlack() > 0) {

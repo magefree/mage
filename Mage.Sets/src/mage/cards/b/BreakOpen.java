@@ -21,7 +21,7 @@ public final class BreakOpen extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creature an opponent controls");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

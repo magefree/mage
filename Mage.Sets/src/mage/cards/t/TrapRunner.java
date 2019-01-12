@@ -36,8 +36,8 @@ public final class TrapRunner extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked attacking creature");
 
     static {
-        filter.add(new AttackingPredicate());
-        filter.add(Predicates.not(new BlockedPredicate()));
+        filter.add(AttackingPredicate.instance);
+        filter.add(Predicates.not(BlockedPredicate.instance));
     }
 
     public TrapRunner(UUID ownerId, CardSetInfo setInfo) {

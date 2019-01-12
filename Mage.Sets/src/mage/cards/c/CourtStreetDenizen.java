@@ -29,7 +29,7 @@ public final class CourtStreetDenizen extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another white creature");
     private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(new ControllerPredicate(TargetController.YOU));
         filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));

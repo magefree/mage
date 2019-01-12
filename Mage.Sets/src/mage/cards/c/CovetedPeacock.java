@@ -25,7 +25,7 @@ public final class CovetedPeacock extends CardImpl {
     public static final FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public CovetedPeacock(UUID ownerId, CardSetInfo setInfo) {

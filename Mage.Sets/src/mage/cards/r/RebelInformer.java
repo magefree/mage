@@ -36,7 +36,7 @@ public final class RebelInformer extends CardImpl {
 
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
-        filterRebel.add(Predicates.not(new TokenPredicate()));
+        filterRebel.add(Predicates.not(TokenPredicate.instance));
         filterRebel.add(new SubtypePredicate(SubType.REBEL));
     }
 

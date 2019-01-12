@@ -50,7 +50,7 @@ class MonsoonEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
     static {
         filter.add(new SubtypePredicate(SubType.ISLAND));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public MonsoonEffect() {

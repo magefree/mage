@@ -25,7 +25,7 @@ public final class CavalryPegasus extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("each attacking Human");
     static {
         filter.add(new SubtypePredicate(SubType.HUMAN));
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public CavalryPegasus(UUID ownerId, CardSetInfo setInfo) {

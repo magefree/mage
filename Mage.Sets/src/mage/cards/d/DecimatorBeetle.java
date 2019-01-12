@@ -33,7 +33,7 @@ public final class DecimatorBeetle extends CardImpl {
     public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public DecimatorBeetle(UUID ownerId, CardSetInfo setInfo) {

@@ -30,7 +30,7 @@ public final class RideDown extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
 
     static {
-        filter.add(new BlockingPredicate());
+        filter.add(BlockingPredicate.instance);
     }
 
     public RideDown(UUID ownerId, CardSetInfo setInfo) {

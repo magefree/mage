@@ -56,7 +56,7 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public VerdantSuccessionTriggeredAbility() {

@@ -84,7 +84,7 @@ class PsychicAllergyEffect extends OneShotEffect {
         if (player != null) {
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
-            filter.add(Predicates.not(new TokenPredicate()));        
+            filter.add(Predicates.not(TokenPredicate.instance));
             int damage = game.getBattlefield().countAll(filter, player.getId(), game);
             player.damage(damage, source.getSourceId(), game, false, true);
             return true;

@@ -59,7 +59,7 @@ class DreamTidesEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     DreamTidesEffect() {

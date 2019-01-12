@@ -25,8 +25,8 @@ public final class TacticalAdvantage extends CardImpl {
     static {
         filter.add(
                 Predicates.or(
-                        new BlockingPredicate(),
-                        new BlockedPredicate()
+                        BlockingPredicate.instance,
+                        BlockedPredicate.instance
 
                 ));
         filter.add(new ControllerPredicate(TargetController.YOU));

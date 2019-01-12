@@ -22,7 +22,7 @@ public final class ImpassionedOrator extends CardImpl {
             = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ImpassionedOrator(UUID ownerId, CardSetInfo setInfo) {

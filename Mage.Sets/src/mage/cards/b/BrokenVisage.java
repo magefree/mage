@@ -31,7 +31,7 @@ public final class BrokenVisage extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact attacking creature");
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public BrokenVisage(UUID ownerId, CardSetInfo setInfo) {

@@ -29,7 +29,7 @@ public final class Exile extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite attacking creature");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
 

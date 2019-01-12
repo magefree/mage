@@ -27,7 +27,7 @@ public final class Riftsweeper extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("face-up exiled card");
     static {
-        filter.add(Predicates.not(new FaceDownPredicate()));
+        filter.add(Predicates.not(FaceDownPredicate.instance));
     }
 
     public Riftsweeper(UUID ownerId, CardSetInfo setInfo) {

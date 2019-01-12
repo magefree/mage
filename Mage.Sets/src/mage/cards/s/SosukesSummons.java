@@ -26,7 +26,7 @@ public final class SosukesSummons extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.SNAKE));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public SosukesSummons(UUID ownerId, CardSetInfo setInfo) {

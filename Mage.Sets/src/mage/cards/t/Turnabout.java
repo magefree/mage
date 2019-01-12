@@ -110,14 +110,14 @@ class TurnaboutEffect extends OneShotEffect {
             filter.add(new CardTypePredicate(type));
 
             if (choiceImpl.getChoice().equals("Untap")) {
-                filter.add(new TappedPredicate());
+                filter.add(TappedPredicate.instance);
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.isControlledBy(target)) {
                         permanent.untap(game);
                     }
                 }
             } else {
-                filter.add(Predicates.not(new TappedPredicate()));
+                filter.add(Predicates.not(TappedPredicate.instance));
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.isControlledBy(target)) {
                         permanent.tap(game);

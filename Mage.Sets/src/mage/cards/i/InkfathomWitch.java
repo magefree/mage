@@ -24,7 +24,7 @@ public final class InkfathomWitch extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each unblocked creature");
     static {
-        filter.add(new UnblockedPredicate());
+        filter.add(UnblockedPredicate.instance);
     }
 
     public InkfathomWitch(UUID ownerId, CardSetInfo setInfo) {

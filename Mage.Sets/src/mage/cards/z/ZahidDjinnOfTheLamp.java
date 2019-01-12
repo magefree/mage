@@ -35,7 +35,7 @@ public final class ZahidDjinnOfTheLamp extends CardImpl {
         AlternativeCostSourceAbility alternativeCostSourceAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{3}{U}"), null,
                 "You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell's mana cost.");
         FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         alternativeCostSourceAbility.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(alternativeCostSourceAbility);
 

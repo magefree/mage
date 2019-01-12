@@ -155,7 +155,7 @@ class TetravusAddCountersEffect extends OneShotEffect {
         }
         FilterControlledPermanent filter = new FilterControlledPermanent("tokens created with " + permanent.getName());
         filter.add(new TetravusPredicate(new MageObjectReference(permanent, game)));
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
         ExileTargetCost cost = new ExileTargetCost(new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true));
         if (cost.pay(source, game, source.getSourceId(), player.getId(), true)) {
             return new AddCountersSourceEffect(CounterType.P1P1.createInstance(cost.getPermanents().size())).apply(game, source);

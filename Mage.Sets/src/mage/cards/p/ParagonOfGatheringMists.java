@@ -39,7 +39,7 @@ public final class ParagonOfGatheringMists extends CardImpl {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
         filterBlue.add(new ControllerPredicate(TargetController.YOU));
         filterBlue2.add(new ColorPredicate(ObjectColor.BLUE));
-        filterBlue2.add(new AnotherPredicate());
+        filterBlue2.add(AnotherPredicate.instance);
     }
 
     public ParagonOfGatheringMists(UUID ownerId, CardSetInfo setInfo) {

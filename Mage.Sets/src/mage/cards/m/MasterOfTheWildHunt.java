@@ -69,7 +69,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
 
     static {
         filter.add(new SubtypePredicate(SubType.WOLF));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public MasterOfTheWildHuntEffect() {

@@ -24,7 +24,7 @@ public class SupportAbility extends EntersBattlefieldTriggeredAbility {
         if (!card.isInstant() && !card.isSorcery()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
             if (card.isCreature()) {
-                filter.add(new AnotherPredicate());
+                filter.add(AnotherPredicate.instance);
                 filter.setMessage("other target creatures");
             }
             addTarget(new TargetCreaturePermanent(0, amount, filter, false));

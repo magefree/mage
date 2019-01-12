@@ -25,7 +25,7 @@ public final class ShrineOfTheForsakenGods extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("colorless spells");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public ShrineOfTheForsakenGods(UUID ownerId, CardSetInfo setInfo) {

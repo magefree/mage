@@ -55,7 +55,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     protected static final String CONSPIRE_ACTIVATION_KEY = "ConspireActivation";
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SharesColorWithSourcePredicate());
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }

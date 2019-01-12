@@ -25,7 +25,7 @@ public final class ThaliasLieutenant extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("each other Human you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 

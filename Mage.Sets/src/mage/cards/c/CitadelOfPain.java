@@ -56,7 +56,7 @@ class CitadelOfPainEffect extends OneShotEffect {
     }
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public CitadelOfPainEffect() {

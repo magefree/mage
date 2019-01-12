@@ -33,7 +33,7 @@ public final class GlimmerpointStag extends CardImpl {
     private final static FilterPermanent filter = new FilterPermanent("another target permanent");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public GlimmerpointStag(UUID ownerId, CardSetInfo setInfo) {

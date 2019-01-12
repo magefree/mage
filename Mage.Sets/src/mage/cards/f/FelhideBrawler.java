@@ -24,7 +24,7 @@ public final class FelhideBrawler extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.MINOTAUR));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public FelhideBrawler(UUID ownerId, CardSetInfo setInfo) {

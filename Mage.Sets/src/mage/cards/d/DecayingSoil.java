@@ -40,7 +40,7 @@ public final class DecayingSoil extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
     static{
         filter.add(new OwnerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public DecayingSoil(UUID ownerId, CardSetInfo setInfo) {

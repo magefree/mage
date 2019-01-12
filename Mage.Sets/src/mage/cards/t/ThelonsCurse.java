@@ -64,7 +64,7 @@ class ThelonsCurseEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("tapped blue creature");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 

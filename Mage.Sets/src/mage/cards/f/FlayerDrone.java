@@ -27,8 +27,8 @@ public final class FlayerDrone extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another colorless creature");
     
     static {
-        filter.add(new AnotherPredicate());
-        filter.add(new ColorlessPredicate());
+        filter.add(AnotherPredicate.instance);
+        filter.add(ColorlessPredicate.instance);
     }
 
     public FlayerDrone(UUID ownerId, CardSetInfo setInfo) {

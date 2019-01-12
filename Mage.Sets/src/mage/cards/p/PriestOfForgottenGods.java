@@ -32,7 +32,7 @@ public final class PriestOfForgottenGods extends CardImpl {
             = new FilterControlledCreaturePermanent("other creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public PriestOfForgottenGods(UUID ownerId, CardSetInfo setInfo) {

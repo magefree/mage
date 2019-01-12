@@ -27,7 +27,7 @@ public final class ExtractorDemon extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ExtractorDemon(UUID ownerId, CardSetInfo setInfo) {

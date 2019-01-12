@@ -28,7 +28,7 @@ public final class HearthCharm extends CardImpl {
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("creature with power 2 or less");
     static {
         filter1.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter2.add(new AttackingPredicate());
+        filter2.add(AttackingPredicate.instance);
         filter3.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 

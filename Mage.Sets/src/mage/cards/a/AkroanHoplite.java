@@ -27,7 +27,7 @@ public final class AkroanHoplite extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public AkroanHoplite(UUID ownerId, CardSetInfo setInfo) {

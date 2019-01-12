@@ -20,7 +20,7 @@ public final class Excise extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature");
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public Excise(UUID ownerId, CardSetInfo setInfo) {

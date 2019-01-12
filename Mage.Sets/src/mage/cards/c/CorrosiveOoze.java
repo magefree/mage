@@ -31,7 +31,7 @@ public final class CorrosiveOoze extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("equipped creature");
 
     static {
-        filter.add(new EquippedPredicate());
+        filter.add(EquippedPredicate.instance);
     }
 
     public CorrosiveOoze(UUID ownerId, CardSetInfo setInfo) {

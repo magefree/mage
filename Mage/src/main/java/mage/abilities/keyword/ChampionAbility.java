@@ -99,7 +99,7 @@ public class ChampionAbility extends StaticAbility {
         if (requiresCreature) {
             filter.add(new CardTypePredicate(CardType.CREATURE));
         }
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
 
         // When this permanent enters the battlefield, sacrifice it unless you exile another [object] you control.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(
