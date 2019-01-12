@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -51,10 +50,10 @@ public final class BiogenicOoze extends CardImpl {
         ));
 
         // {1}{G}{G}{G}: Create a 2/2 green Ooze creature token.
-        Ability ability = new SimpleActivatedAbility(
+        this.addAbility(new SimpleActivatedAbility(
                 new CreateTokenEffect(new BiogenicOozeToken()),
                 new ManaCostsImpl("{1}{G}{G}{G}")
-        );
+        ));
     }
 
     private BiogenicOoze(final BiogenicOoze card) {
