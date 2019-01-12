@@ -248,6 +248,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Smelt-Ward Ignus", 116, Rarity.UNCOMMON, mage.cards.s.SmeltWardIgnus.class));
         cards.add(new SetCardInfo("Smothering Tithe", 22, Rarity.RARE, mage.cards.s.SmotheringTithe.class));
         cards.add(new SetCardInfo("Spawn of Mayhem", 85, Rarity.MYTHIC, mage.cards.s.SpawnOfMayhem.class));
+        cards.add(new SetCardInfo("Spear Spewer", 117, Rarity.COMMON, mage.cards.s.SpearSpewer.class));
         cards.add(new SetCardInfo("Sphinx of Foresight", 55, Rarity.RARE, mage.cards.s.SphinxOfForesight.class));
         cards.add(new SetCardInfo("Sphinx of New Prahv", 208, Rarity.UNCOMMON, mage.cards.s.SphinxOfNewPrahv.class));
         cards.add(new SetCardInfo("Sphinx of the Guildpact", 241, Rarity.UNCOMMON, mage.cards.s.SphinxOfTheGuildpact.class));
