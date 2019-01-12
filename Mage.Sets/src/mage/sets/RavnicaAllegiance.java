@@ -218,6 +218,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Rubble Reading", 110, Rarity.COMMON, mage.cards.r.RubbleReading.class));
         cards.add(new SetCardInfo("Rubble Slinger", 217, Rarity.COMMON, mage.cards.r.RubbleSlinger.class));
         cards.add(new SetCardInfo("Rubblebelt Recluse", 111, Rarity.COMMON, mage.cards.r.RubblebeltRecluse.class));
+        cards.add(new SetCardInfo("Rubblebelt Runner", 202, Rarity.COMMON, mage.cards.r.RubblebeltRunner.class));
         cards.add(new SetCardInfo("Sage's Row Savant", 49, Rarity.COMMON, mage.cards.s.SagesRowSavant.class));
         cards.add(new SetCardInfo("Sauroform Hybrid", 140, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
         cards.add(new SetCardInfo("Savage Smash", 203, Rarity.COMMON, mage.cards.s.SavageSmash.class));
