@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class SacrificeTargetCost extends CostImpl {
         target.setNotTarget(true); // sacrifice is never targeted
         this.text = "sacrifice "
                 + ((target.getNumberOfTargets() != 1 || (target.getTargetName().startsWith("an") || target.getTargetName().startsWith("a ")))
-                ? "" : (target.getTargetName().startsWith("artifact") ? "an " : "a ")) + target.getTargetName();
+                ? (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() ? CardUtil.numberToText(target.getNumberOfTargets()) : "" ) : (target.getTargetName().startsWith("artifact") ? "an " : "a ")) + target.getTargetName();
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
