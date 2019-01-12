@@ -1,15 +1,10 @@
 
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -18,9 +13,13 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CurseOfTheSwineBoarToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class CurseOfTheSwine extends CardImpl {
@@ -31,15 +30,7 @@ public final class CurseOfTheSwine extends CardImpl {
         // Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token.
         this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());
         // Correct number of targets will be set in adjustTargets
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility && ability.getAbilityType() == AbilityType.SPELL) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
-        }
+        this.getSpellAbility().setTargetAdjuster(CurseOfTheSwineAdjuster.instance);
     }
 
     public CurseOfTheSwine(final CurseOfTheSwine card) {
@@ -49,6 +40,16 @@ public final class CurseOfTheSwine extends CardImpl {
     @Override
     public CurseOfTheSwine copy() {
         return new CurseOfTheSwine(this);
+    }
+}
+
+enum CurseOfTheSwineAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }
 

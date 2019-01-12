@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -25,15 +24,17 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SylvanPrimordial extends CardImpl {
 
     public SylvanPrimordial(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);
@@ -43,24 +44,9 @@ public final class SylvanPrimordial extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // When Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SylvanPrimordialEffect(),false));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof EntersBattlefieldTriggeredAbility) {
-            ability.getTargets().clear();
-            for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    FilterPermanent filter = new FilterPermanent("noncreature permanent from opponent " + opponent.getLogName());
-                    filter.add(new ControllerIdPredicate(opponentId));
-                    filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-                    TargetPermanent target = new TargetPermanent(0,1, filter,false);
-                    ability.addTarget(target);
-                }
-            }
-        }
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SylvanPrimordialEffect(), false);
+        ability.setTargetAdjuster(SylvanPrimordialAdjuster.instance);
+        this.addAbility(ability);
     }
 
     public SylvanPrimordial(final SylvanPrimordial card) {
@@ -73,10 +59,30 @@ public final class SylvanPrimordial extends CardImpl {
     }
 }
 
+enum SylvanPrimordialAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null) {
+                FilterPermanent filter = new FilterPermanent("noncreature permanent from opponent " + opponent.getLogName());
+                filter.add(new ControllerIdPredicate(opponentId));
+                filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+                TargetPermanent target = new TargetPermanent(0, 1, filter, false);
+                ability.addTarget(target);
+            }
+        }
+    }
+}
+
 class SylvanPrimordialEffect extends OneShotEffect {
 
     private static final FilterLandCard filterForest = new FilterLandCard("Forest");
-    static{
+
+    static {
         filterForest.add(new SubtypePredicate(SubType.FOREST));
     }
 
@@ -98,7 +104,7 @@ class SylvanPrimordialEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean result = false;
         int destroyedCreatures = 0;
-        for (Target target: source.getTargets()) {
+        for (Target target : source.getTargets()) {
             if (target instanceof TargetPermanent) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                 if (targetPermanent != null) {
@@ -109,7 +115,7 @@ class SylvanPrimordialEffect extends OneShotEffect {
             }
         }
         if (destroyedCreatures > 0) {
-            new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(destroyedCreatures,filterForest), true, true).apply(game, source);
+            new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(destroyedCreatures, filterForest), true, true).apply(game, source);
         }
         return result;
     }

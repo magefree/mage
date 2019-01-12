@@ -1,9 +1,7 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,24 +10,22 @@ import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.target.Target;
 import mage.target.TargetSpell;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SpellBlast extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost X");
-
     public SpellBlast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Counter target spell with converted mana cost X.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addEffect(new CounterTargetEffect().setText("counter target spell with converted mana cost X"));
+        this.getSpellAbility().setTargetAdjuster(SpellBlastAdjuster.instance);
     }
 
     public SpellBlast(final SpellBlast card) {
@@ -40,17 +36,17 @@ public final class SpellBlast extends CardImpl {
     public SpellBlast copy() {
         return new SpellBlast(this);
     }
+}
+
+enum SpellBlastAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            FilterSpell newfilter = new FilterSpell("spell with converted mana cost " + xValue);
-            newfilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            Target target = new TargetSpell(newfilter);
-            ability.addTarget(target);
-        }
-
+        int xValue = ability.getManaCostsToPay().getX();
+        ability.getTargets().clear();
+        FilterSpell filter = new FilterSpell("spell with converted mana cost " + xValue);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        ability.addTarget(new TargetSpell(filter));
     }
 }

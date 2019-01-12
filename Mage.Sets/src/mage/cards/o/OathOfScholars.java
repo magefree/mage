@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -17,52 +16,51 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class OathOfScholars extends CardImpl {
-
-    private final UUID originalId;
-    private static final FilterPlayer filter = new FilterPlayer();
-
-    static {
-        filter.add(new OathOfScholarsPredicate());
-    }
 
     public OathOfScholars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // At the beginning of each player's upkeep, that player chooses target player who has more cards in hand than he or she does and is their opponent. The first player may discard their hand and draw three cards.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfScholarsEffect(), TargetController.ANY, false);
-        ability.addTarget(new TargetPlayer(1, 1, false, filter));
+        ability.setTargetAdjuster(OathOfScholarsAdjuster.instance);
         this.addAbility(ability);
-        originalId = ability.getOriginalId();
-
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            Player activePlayer = game.getPlayer(game.getActivePlayerId());
-            if (activePlayer != null) {
-                ability.getTargets().clear();
-                TargetPlayer target = new TargetPlayer(1, 1, false, filter);
-                target.setTargetController(activePlayer.getId());
-                ability.getTargets().add(target);
-            }
-        }
     }
 
     public OathOfScholars(final OathOfScholars card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
     public OathOfScholars copy() {
         return new OathOfScholars(this);
+    }
+}
+
+enum OathOfScholarsAdjuster implements TargetAdjuster {
+    instance;
+    private static final FilterPlayer filter = new FilterPlayer();
+
+    static {
+        filter.add(new OathOfScholarsPredicate());
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        Player activePlayer = game.getPlayer(game.getActivePlayerId());
+        if (activePlayer != null) {
+            ability.getTargets().clear();
+            TargetPlayer target = new TargetPlayer(1, 1, false, filter);
+            target.setTargetController(activePlayer.getId());
+            ability.getTargets().add(target);
+        }
     }
 }
 

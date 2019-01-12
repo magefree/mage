@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -21,17 +20,17 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class AetherstormRoc extends CardImpl {
 
-    private final UUID originalId;
-
     public AetherstormRoc(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -47,30 +46,32 @@ public final class AetherstormRoc extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(doIfCostPaidEffect, false,
                 "Whenever {this} attacks you may pay {E}{E}. If you do, put a +1/+1 counter on it and tap up to one target creature defending player controls.");
         ability.addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent("creature defending player controls"), false));
-        originalId = ability.getOriginalId();
+        ability.setTargetAdjuster(AetherstormRocAdjuster.instance);
         this.addAbility(ability);
 
     }
 
     public AetherstormRoc(final AetherstormRoc card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            ability.getTargets().clear();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
-            filter.add(new ControllerIdPredicate(defenderId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
-            ability.addTarget(target);
-        }
-    }
 
     @Override
     public AetherstormRoc copy() {
         return new AetherstormRoc(this);
+    }
+}
+
+enum AetherstormRocAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+        UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
+        filter.add(new ControllerIdPredicate(defenderId));
+        TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
+        ability.addTarget(target);
     }
 }

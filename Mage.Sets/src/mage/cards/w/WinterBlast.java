@@ -1,9 +1,7 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -13,9 +11,11 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class WinterBlast extends CardImpl {
@@ -26,15 +26,7 @@ public final class WinterBlast extends CardImpl {
         // Tap X target creatures. Winter Blast deals 2 damage to each of those creatures with flying.
         this.getSpellAbility().addEffect(new WinterBlastEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.addTarget(new TargetCreaturePermanent(xValue));
-        }
+        this.getSpellAbility().setTargetAdjuster(WinterBlastAdjuster.instance);
     }
 
     public WinterBlast(final WinterBlast card) {
@@ -44,6 +36,16 @@ public final class WinterBlast extends CardImpl {
     @Override
     public WinterBlast copy() {
         return new WinterBlast(this);
+    }
+}
+
+enum WinterBlastAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }
 

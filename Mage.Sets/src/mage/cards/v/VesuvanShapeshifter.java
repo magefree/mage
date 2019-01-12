@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -17,12 +16,7 @@ import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -32,13 +26,12 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.ApplyToPermanent;
 
+import java.util.UUID;
+
 /**
  * @author spjspj
  */
 public final class VesuvanShapeshifter extends CardImpl {
-
-    protected Ability turnFaceUpAbility = null;
-    private static final String effectText = "as a copy of any creature on the battlefield until {this} is turned faced down";
 
     public VesuvanShapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -53,7 +46,7 @@ public final class VesuvanShapeshifter extends CardImpl {
 
         // As Vesuvan Shapeshifter etbs, you may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new VesuvanShapeShifterFaceUpApplier());
-        effect.setText(effectText);
+        effect.setText("as a copy of any creature on the battlefield until {this} is turned faced down");
         ability = new EntersBattlefieldAbility(effect, true);
         ability.setWorksFaceDown(false);
         this.addAbility(ability);

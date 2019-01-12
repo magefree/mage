@@ -2,7 +2,6 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -16,40 +15,28 @@ import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class IndomitableCreativity extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifacts and/or creatures");
-
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
-    }
 
     public IndomitableCreativity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
 
         // Destroy X target artifacts and/or creatures. For each permanent destroyed this way, its controller reveals cards from the top of their library until an artifact or creature card is revealed and exiles that card. Those players put the exiled card onto the battlefield, then shuffle their libraries.
-        getSpellAbility().addEffect(new IndomitableCreativityEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new IndomitableCreativityEffect());
+        this.getSpellAbility().setTargetAdjuster(IndomitableCreativityAdjuster.instance);
     }
 
     public IndomitableCreativity(final IndomitableCreativity card) {
         super(card);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.addTarget(new TargetPermanent(xValue, xValue, filter, false));
-        }
     }
 
     @Override
@@ -58,11 +45,34 @@ public final class IndomitableCreativity extends CardImpl {
     }
 }
 
+enum IndomitableCreativityAdjuster implements TargetAdjuster {
+    instance;
+    private static final FilterPermanent filter = new FilterPermanent("artifacts and/or creatures");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)
+        ));
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        int xValue = ability.getManaCostsToPay().getX();
+        ability.addTarget(new TargetPermanent(xValue, xValue, filter, false));
+    }
+}
+
 class IndomitableCreativityEffect extends OneShotEffect {
 
     public IndomitableCreativityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Destroy X target artifacts and/or creatures. For each permanent destroyed this way, its controller reveals cards from the top of their library until an artifact or creature card is revealed and exiles that card. Those players put the exiled card onto the battlefield, then shuffle their libraries";
+        this.staticText = "Destroy X target artifacts and/or creatures. " +
+                "For each permanent destroyed this way, " +
+                "its controller reveals cards from the top of their library" +
+                " until an artifact or creature card is revealed and exiles that card. " +
+                "Those players put the exiled card onto the battlefield, then shuffle their libraries";
     }
 
     public IndomitableCreativityEffect(final IndomitableCreativityEffect effect) {
