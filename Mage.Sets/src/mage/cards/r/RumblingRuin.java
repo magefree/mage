@@ -47,7 +47,8 @@ class RumblingRuinEffect extends OneShotEffect {
 
     RumblingRuinEffect() {
         super(Outcome.Benefit);
-        staticText = "";
+        staticText = "count the number of +1/+1 counters on creatures you control. " +
+                "Creatures your opponents control with power less than or equal to that number can't block this turn.";
     }
 
     private RumblingRuinEffect(final RumblingRuinEffect effect) {
