@@ -119,6 +119,7 @@ public abstract class AbilityImpl implements Ability {
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
+        this.costAdjuster = ability.costAdjuster;
     }
 
     @Override
