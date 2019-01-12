@@ -41,6 +41,7 @@ public final class BiogenicUpgrade extends CardImpl {
                 "one, two, or three target creatures"
         ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, filter));
+        this.getSpellAbility().addEffect(new BiogenicUpgradeEffect());
     }
 
     private BiogenicUpgrade(final BiogenicUpgrade card) {
