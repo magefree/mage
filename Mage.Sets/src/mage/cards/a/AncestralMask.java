@@ -24,7 +24,7 @@ public final class AncestralMask extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("each other enchantment on the battlefield");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public AncestralMask(UUID ownerId, CardSetInfo setInfo) {

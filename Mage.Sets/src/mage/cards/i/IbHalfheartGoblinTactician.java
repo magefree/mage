@@ -37,7 +37,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.MOUNTAIN));
         filterGoblin.add(new SubtypePredicate(SubType.GOBLIN));
-        filterGoblin.add(new AnotherPredicate());
+        filterGoblin.add(AnotherPredicate.instance);
         filterGoblin.add(new ControllerPredicate(TargetController.YOU));
     }
 

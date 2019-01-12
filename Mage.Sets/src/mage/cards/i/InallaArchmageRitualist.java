@@ -50,7 +50,7 @@ public final class InallaArchmageRitualist extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));
         filter.add(Predicates.not(new TokenPredicate()));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter2.add(new SubtypePredicate(SubType.WIZARD));
         filter2.add(Predicates.not(new TappedPredicate()));
     }

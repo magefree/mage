@@ -34,7 +34,7 @@ public final class KumenaTyrantOfOrazca extends CardImpl {
     private static final FilterControlledPermanent filterAll = new FilterControlledPermanent("Merfolk you control");
 
     static {
-        filterAnotherNotTapped.add(new AnotherPredicate());
+        filterAnotherNotTapped.add(AnotherPredicate.instance);
         filterAnotherNotTapped.add(new SubtypePredicate(SubType.MERFOLK));
         filterAnotherNotTapped.add(Predicates.not(new TappedPredicate()));
 

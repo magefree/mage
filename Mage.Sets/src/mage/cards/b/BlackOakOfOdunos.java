@@ -30,7 +30,7 @@ public final class BlackOakOfOdunos extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another untapped creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(new TappedPredicate()));
     }
     

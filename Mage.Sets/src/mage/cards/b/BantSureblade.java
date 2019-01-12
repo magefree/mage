@@ -30,7 +30,7 @@ public final class BantSureblade extends CardImpl {
     
     static {
         filter.add(new MulticoloredPredicate());
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public BantSureblade(UUID ownerId, CardSetInfo setInfo) {

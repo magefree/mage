@@ -27,7 +27,7 @@ public final class JubilantMascot extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other target creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public JubilantMascot(UUID ownerId, CardSetInfo setInfo) {

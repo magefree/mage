@@ -30,7 +30,7 @@ public final class EsperStormblade extends CardImpl {
     
     static {
         filter.add(new MulticoloredPredicate());
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public EsperStormblade(UUID ownerId, CardSetInfo setInfo) {

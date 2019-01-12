@@ -22,7 +22,7 @@ public final class DenizenOfTheDeep extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static{
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public DenizenOfTheDeep(UUID ownerId, CardSetInfo setInfo) {

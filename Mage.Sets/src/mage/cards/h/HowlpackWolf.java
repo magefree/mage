@@ -25,7 +25,7 @@ public final class HowlpackWolf extends CardImpl {
 
     static {
         filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public HowlpackWolf(UUID ownerId, CardSetInfo setInfo) {

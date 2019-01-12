@@ -81,7 +81,7 @@ class XathridDemonEffect extends OneShotEffect {
         }
 
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than " + sourcePermanent.getName());
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
         if (target.canChoose(source.getSourceId(), controller.getId(), game)) {

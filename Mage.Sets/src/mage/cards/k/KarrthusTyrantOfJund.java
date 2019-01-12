@@ -33,7 +33,7 @@ public final class KarrthusTyrantOfJund extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon creatures you control");
     
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 

@@ -30,7 +30,7 @@ public final class NayaHushblade extends CardImpl {
     
     static {
         filter.add(new MulticoloredPredicate());
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public NayaHushblade(UUID ownerId, CardSetInfo setInfo) {

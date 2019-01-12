@@ -26,7 +26,7 @@ public final class Fatestitcher extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
     static{
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public Fatestitcher(UUID ownerId, CardSetInfo setInfo) {

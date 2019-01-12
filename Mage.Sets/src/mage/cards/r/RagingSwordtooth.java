@@ -22,7 +22,7 @@ public final class RagingSwordtooth extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public RagingSwordtooth(UUID ownerId, CardSetInfo setInfo) {

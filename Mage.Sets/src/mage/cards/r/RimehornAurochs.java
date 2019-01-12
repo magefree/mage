@@ -33,7 +33,7 @@ public final class RimehornAurochs extends CardImpl {
 
     static {
         filter.add(new AttackingPredicate());
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public RimehornAurochs(UUID ownerId, CardSetInfo setInfo) {

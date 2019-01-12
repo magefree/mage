@@ -24,7 +24,7 @@ public final class HarvesterOfSouls extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TokenPredicate()));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public HarvesterOfSouls(UUID ownerId, CardSetInfo setInfo) {

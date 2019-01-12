@@ -32,7 +32,7 @@ public final class MerenOfClanNelToth extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

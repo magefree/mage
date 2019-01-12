@@ -35,7 +35,7 @@ import java.util.UUID;
 public final class ForgottenAncient extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ForgottenAncient(UUID ownerId, CardSetInfo setInfo) {

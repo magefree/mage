@@ -26,7 +26,7 @@ public final class NinthBridgePatrol extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public NinthBridgePatrol(UUID ownerId, CardSetInfo setInfo) {

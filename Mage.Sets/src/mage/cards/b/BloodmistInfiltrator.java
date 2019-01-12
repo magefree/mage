@@ -26,7 +26,7 @@ public final class BloodmistInfiltrator extends CardImpl {
             = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public BloodmistInfiltrator(UUID ownerId, CardSetInfo setInfo) {

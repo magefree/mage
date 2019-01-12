@@ -37,7 +37,7 @@ public final class GarrukApexPredator extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.PLANESWALKER));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public GarrukApexPredator(UUID ownerId, CardSetInfo setInfo) {

@@ -39,7 +39,7 @@ public final class EstridTheMasked extends CardImpl {
 
     static {
         filter.add(new EnchantedPredicate());
-        filter2.add(new AnotherPredicate());
+        filter2.add(AnotherPredicate.instance);
     }
 
     public EstridTheMasked(UUID ownerId, CardSetInfo setInfo) {

@@ -30,7 +30,7 @@ public final class GrixisGrimblade extends CardImpl {
     
     static {
         filter.add(new MulticoloredPredicate());
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public GrixisGrimblade(UUID ownerId, CardSetInfo setInfo) {

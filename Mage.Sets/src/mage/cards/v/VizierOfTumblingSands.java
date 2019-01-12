@@ -29,7 +29,7 @@ public final class VizierOfTumblingSands extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public VizierOfTumblingSands(UUID ownerId, CardSetInfo setInfo) {

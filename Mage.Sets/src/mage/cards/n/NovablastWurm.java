@@ -22,7 +22,7 @@ public final class NovablastWurm extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("other creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 

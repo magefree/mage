@@ -35,7 +35,7 @@ public final class ParagonOfFierceDefiance extends CardImpl {
     
     static {
         filterCreatures.add(new ColorPredicate(ObjectColor.RED));
-        filterCreature.add(new AnotherPredicate());
+        filterCreature.add(AnotherPredicate.instance);
         filterCreature.add(new ColorPredicate(ObjectColor.RED));
     }
     

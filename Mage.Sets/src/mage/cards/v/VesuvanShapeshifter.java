@@ -114,7 +114,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
         Permanent copyToCreature = game.getPermanent(source.getSourceId());
         if (copyToCreature != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-            filter.add(new AnotherPredicate());
+            filter.add(AnotherPredicate.instance);
 
             TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
 

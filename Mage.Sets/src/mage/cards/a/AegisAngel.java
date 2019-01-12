@@ -27,7 +27,7 @@ public final class AegisAngel extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public AegisAngel(UUID ownerId, CardSetInfo setInfo) {

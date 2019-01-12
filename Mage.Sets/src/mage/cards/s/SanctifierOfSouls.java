@@ -31,7 +31,7 @@ public final class SanctifierOfSouls extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public SanctifierOfSouls(UUID ownerId, CardSetInfo setInfo) {

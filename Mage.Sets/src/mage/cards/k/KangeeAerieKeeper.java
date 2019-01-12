@@ -36,7 +36,7 @@ public final class KangeeAerieKeeper extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.BIRD));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public KangeeAerieKeeper(UUID ownerId, CardSetInfo setInfo) {

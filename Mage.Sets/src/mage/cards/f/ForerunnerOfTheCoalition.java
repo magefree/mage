@@ -26,7 +26,7 @@ public final class ForerunnerOfTheCoalition extends CardImpl {
     private static final FilterPermanent filterAnotherPirate = new FilterPermanent(SubType.PIRATE, "another " + SubType.PIRATE.toString());
 
     static {
-        filterAnotherPirate.add(new AnotherPredicate());
+        filterAnotherPirate.add(AnotherPredicate.instance);
         filterAnotherPirate.add(new ControllerPredicate(TargetController.YOU));
     }
 

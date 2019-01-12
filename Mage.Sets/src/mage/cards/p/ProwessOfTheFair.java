@@ -25,7 +25,7 @@ public final class ProwessOfTheFair extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ELF));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(new TokenPredicate()));
     }
 

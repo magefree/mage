@@ -25,7 +25,7 @@ public final class SoulOfTheHarvest extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(new TokenPredicate()));
     }
 

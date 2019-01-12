@@ -25,7 +25,7 @@ public final class GarruksPackleader extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 3 or greater");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 

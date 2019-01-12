@@ -26,7 +26,7 @@ public final class GuardianShieldBearer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public GuardianShieldBearer(UUID ownerId, CardSetInfo setInfo) {

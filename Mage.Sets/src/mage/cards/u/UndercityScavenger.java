@@ -26,7 +26,7 @@ public final class UndercityScavenger extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public UndercityScavenger(UUID ownerId, CardSetInfo setInfo) {

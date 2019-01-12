@@ -26,7 +26,7 @@ public final class AnafenzaKinTreeSpirit extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TokenPredicate()));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public AnafenzaKinTreeSpirit(UUID ownerId, CardSetInfo setInfo) {

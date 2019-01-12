@@ -32,7 +32,7 @@ public final class Ixidron extends CardImpl {
 
     static {
         filter.add(new FaceDownPredicate());
-        filterTurnFaceDown.add(new AnotherPredicate());
+        filterTurnFaceDown.add(AnotherPredicate.instance);
         filterTurnFaceDown.add(Predicates.not(new TokenPredicate()));
     }
 

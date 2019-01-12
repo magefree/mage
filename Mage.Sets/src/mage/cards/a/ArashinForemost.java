@@ -27,7 +27,7 @@ public final class ArashinForemost extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.WARRIOR));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ArashinForemost(UUID ownerId, CardSetInfo setInfo) {

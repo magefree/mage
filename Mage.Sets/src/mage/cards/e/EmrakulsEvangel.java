@@ -61,7 +61,7 @@ class EmrakulsEvangelCost extends CostImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Eldrazi creatures you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(new SubtypePredicate(SubType.ELDRAZI)));
     }
 

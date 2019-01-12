@@ -32,7 +32,7 @@ public final class GodoBanditWarlord extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.EQUIPMENT));
-        filter2.add(new AnotherPredicate());
+        filter2.add(AnotherPredicate.instance);
     }
 
     public GodoBanditWarlord(UUID ownerId, CardSetInfo setInfo) {

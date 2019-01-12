@@ -30,7 +30,7 @@ public final class JundHackblade extends CardImpl {
     
     static {
         filter.add(new MulticoloredPredicate());
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public JundHackblade(UUID ownerId, CardSetInfo setInfo) {

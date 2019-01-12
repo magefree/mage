@@ -32,7 +32,7 @@ public final class BriarberryCohort extends CardImpl {
     
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
     
     private String rule = "{this} gets +1/+1 as long as you control another blue creature";

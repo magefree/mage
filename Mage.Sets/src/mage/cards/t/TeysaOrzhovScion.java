@@ -37,7 +37,7 @@ public final class TeysaOrzhovScion extends CardImpl {
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
-        filterBlack.add(new AnotherPredicate());
+        filterBlack.add(AnotherPredicate.instance);
         filterBlack.add(new ControllerPredicate(TargetController.YOU));
     }
 

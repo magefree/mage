@@ -27,7 +27,7 @@ public final class FireAnts extends CardImpl {
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public FireAnts(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@ public final class Paleoloth extends CardImpl {
     
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
     
     private static final String rule = "Whenever another creature with power 5 or greater enters the battlefield under your control, you may return target creature card from your graveyard to your hand.";

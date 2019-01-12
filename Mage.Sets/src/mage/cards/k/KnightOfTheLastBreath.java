@@ -30,7 +30,7 @@ public final class KnightOfTheLastBreath extends CardImpl {
             = new FilterControlledCreaturePermanent("another nontoken creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(new TokenPredicate()));
     }
 

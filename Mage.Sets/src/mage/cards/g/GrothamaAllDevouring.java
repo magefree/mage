@@ -64,7 +64,7 @@ class GrothamaAllDevouringGainAbilityEffect extends GainAbilityAllEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     GrothamaAllDevouringGainAbilityEffect() {

@@ -30,7 +30,7 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter2.add(new CounterPredicate(CounterType.P1P1));
     }
 

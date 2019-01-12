@@ -23,7 +23,7 @@ public final class SaddlebackLagac extends CardImpl {
     private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("target creatures");
 
     static {
-        FILTER.add(new AnotherPredicate());
+        FILTER.add(AnotherPredicate.instance);
     }
 
     public SaddlebackLagac(UUID ownerId, CardSetInfo setInfo) {

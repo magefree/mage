@@ -41,7 +41,7 @@ public final class ImpelledGiant extends CardImpl {
     static {
         filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ImpelledGiant(UUID ownerId, CardSetInfo setInfo) {

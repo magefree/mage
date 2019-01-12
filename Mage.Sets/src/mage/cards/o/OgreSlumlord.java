@@ -32,7 +32,7 @@ public final class OgreSlumlord extends CardImpl {
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Rats you control");
     static {
         filter.add(Predicates.not(new TokenPredicate()));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter2.add(new SubtypePredicate(SubType.RAT));
     }
     

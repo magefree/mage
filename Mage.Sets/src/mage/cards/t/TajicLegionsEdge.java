@@ -30,7 +30,7 @@ public final class TajicLegionsEdge extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("other creatures you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public TajicLegionsEdge(UUID ownerId, CardSetInfo setInfo) {
