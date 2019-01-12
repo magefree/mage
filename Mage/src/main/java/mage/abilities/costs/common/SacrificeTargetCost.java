@@ -28,7 +28,7 @@ public class SacrificeTargetCost extends CostImpl {
         target.setNotTarget(true); // sacrifice is never targeted
         this.text = "sacrifice "
                 + ((target.getNumberOfTargets() != 1 || (target.getTargetName().startsWith("an") || target.getTargetName().startsWith("a ")))
-                ? (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() ? CardUtil.numberToText(target.getNumberOfTargets()) : "" ) : (target.getTargetName().startsWith("artifact") ? "an " : "a ")) + target.getTargetName();
+                ? (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && target.getMinNumberOfTargets() > 1 ? CardUtil.numberToText(target.getNumberOfTargets()) : "" ) : (target.getTargetName().startsWith("artifact") ? "an " : "a ")) + target.getTargetName();
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
