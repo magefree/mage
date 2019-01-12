@@ -202,6 +202,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Rakdos Guildgate", 256, Rarity.COMMON, mage.cards.r.RakdosGuildgate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rakdos Locket", 237, Rarity.COMMON, mage.cards.r.RakdosLocket.class));
         cards.add(new SetCardInfo("Rakdos Roustabout", 198, Rarity.COMMON, mage.cards.r.RakdosRoustabout.class));
+        cards.add(new SetCardInfo("Rakdos Trumpeter", 84, Rarity.COMMON, mage.cards.r.RakdosTrumpeter.class));
         cards.add(new SetCardInfo("Rakdos, the Showstopper", 199, Rarity.MYTHIC, mage.cards.r.RakdosTheShowstopper.class));
         cards.add(new SetCardInfo("Rampage of the Clans", 134, Rarity.RARE, mage.cards.r.RampageOfTheClans.class));
         cards.add(new SetCardInfo("Rampaging Rendhorn", 135, Rarity.COMMON, mage.cards.r.RampagingRendhorn.class));
