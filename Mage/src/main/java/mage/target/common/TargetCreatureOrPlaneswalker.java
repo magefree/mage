@@ -23,7 +23,7 @@ public class TargetCreatureOrPlaneswalker extends TargetPermanent {
     }
 
     public TargetCreatureOrPlaneswalker(int minNumTargets, int maxNumTargets) {
-        this(1, 1, new FilterCreatureOrPlaneswalkerPermanent(), false);
+        this(minNumTargets, maxNumTargets, new FilterCreatureOrPlaneswalkerPermanent(), false);
     }
 
     public TargetCreatureOrPlaneswalker(int minNumTargets, int maxNumTargets, FilterCreatureOrPlaneswalkerPermanent filter, boolean notTarget) {

@@ -45,6 +45,6 @@ enum MassManipulationAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreatureOrPlaneswalker(ability.getManaCosts().getX()));
+        ability.addTarget(new TargetCreatureOrPlaneswalker(ability.getManaCostsToPay().getX()));
     }
 }

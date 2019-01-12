@@ -102,7 +102,7 @@ class CryOfTheCarnariumReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
-            if (player == null) {
+            if (player != null) {
                 return player.moveCards(permanent, Zone.EXILED, source, game);
             }
         }
