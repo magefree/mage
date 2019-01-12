@@ -29,7 +29,7 @@ public final class Snag extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));
-        filter2.add(Predicates.not(new BlockedPredicate()));
+        filter2.add(Predicates.not(BlockedPredicate.instance));
     }
 
     public Snag(UUID ownerId, CardSetInfo setInfo) {

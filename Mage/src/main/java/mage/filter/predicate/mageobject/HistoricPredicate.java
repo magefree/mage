@@ -10,10 +10,10 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
-public class HistoricPredicate implements Predicate<MageObject> {
+public enum HistoricPredicate implements Predicate<MageObject> {
+    instance;
 
     @Override
     public boolean apply(MageObject input, Game game) {

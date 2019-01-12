@@ -25,7 +25,7 @@ public final class KukemssaPirates extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact defending player controls");
 
     static {
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public KukemssaPirates(UUID ownerId, CardSetInfo setInfo) {

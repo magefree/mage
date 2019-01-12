@@ -31,7 +31,7 @@ public final class BlackOakOfOdunos extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
     
     public BlackOakOfOdunos(UUID ownerId, CardSetInfo setInfo) {

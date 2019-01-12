@@ -32,7 +32,7 @@ public final class MythUnbound extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new CommanderPredicate());
+        filter.add(CommanderPredicate.instance);
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 

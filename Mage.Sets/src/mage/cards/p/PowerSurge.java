@@ -85,7 +85,7 @@ class PowerSurgeWatcher extends Watcher {
     private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     private int untappedLandCount;

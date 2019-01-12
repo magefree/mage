@@ -25,7 +25,7 @@ public final class InfernalTribute extends CardImpl {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken permanent");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public InfernalTribute(UUID ownerId, CardSetInfo setInfo) {

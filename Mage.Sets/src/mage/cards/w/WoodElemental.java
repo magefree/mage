@@ -62,7 +62,7 @@ class WoodElementalEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Forests you control");
     
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.FOREST));
     }
 

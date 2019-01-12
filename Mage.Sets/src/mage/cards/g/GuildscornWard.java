@@ -24,7 +24,7 @@ public final class GuildscornWard extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("multicolored");
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public GuildscornWard(UUID ownerId, CardSetInfo setInfo) {

@@ -30,7 +30,7 @@ public final class Duplicant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public Duplicant(UUID ownerId, CardSetInfo setInfo) {

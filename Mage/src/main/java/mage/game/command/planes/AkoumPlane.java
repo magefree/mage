@@ -35,7 +35,7 @@ public class AkoumPlane extends Plane {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that isn't enchanted");
 
     static {
-        filter.add(Predicates.not(new EnchantedPredicate()));
+        filter.add(Predicates.not(EnchantedPredicate.instance));
         filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 

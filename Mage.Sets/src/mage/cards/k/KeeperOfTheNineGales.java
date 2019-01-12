@@ -30,7 +30,7 @@ public final class KeeperOfTheNineGales extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Birds you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.BIRD));
     }
 

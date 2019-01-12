@@ -17,7 +17,7 @@ public class FilterUntappedCreature extends FilterCreaturePermanent {
 
     public FilterUntappedCreature(String name) {
         super(name);
-        this.add(Predicates.not(new TappedPredicate()));
+        this.add(Predicates.not(TappedPredicate.instance));
     }
 
     public FilterUntappedCreature(final FilterUntappedCreature filter) {

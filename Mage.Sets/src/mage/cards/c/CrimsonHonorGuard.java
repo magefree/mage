@@ -56,7 +56,7 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
     private final static FilterPermanent filter = new FilterPermanent("Commander");
 
     static {
-        filter.add(new CommanderPredicate());
+        filter.add(CommanderPredicate.instance);
     }
 
     public CrimsonHonorGuardEffect() {

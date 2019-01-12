@@ -40,7 +40,7 @@ public final class VeryCrypticCommandD extends CardImpl {
 
     static {
         filter.add(new NumberOfTargetsPredicate(1));
-        filter2.add(Predicates.not(new TokenPredicate()));
+        filter2.add(Predicates.not(TokenPredicate.instance));
     }
 
     public VeryCrypticCommandD(UUID ownerId, CardSetInfo setInfo) {

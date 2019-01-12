@@ -31,7 +31,7 @@ public final class KnightOfTheLastBreath extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public KnightOfTheLastBreath(UUID ownerId, CardSetInfo setInfo) {

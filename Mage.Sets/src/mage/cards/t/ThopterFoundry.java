@@ -29,7 +29,7 @@ public final class ThopterFoundry extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public ThopterFoundry(UUID ownerId, CardSetInfo setInfo) {

@@ -39,7 +39,7 @@ public final class ArachnusSpinner extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.SPIDER));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public ArachnusSpinner(UUID ownerId, CardSetInfo setInfo) {

@@ -73,7 +73,7 @@ class RaidingPartyEffect extends OneShotEffect {
     private static final FilterPermanent filter2 = new FilterPermanent("Plains");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter2.add(new SubtypePredicate(SubType.PLAINS));
     }

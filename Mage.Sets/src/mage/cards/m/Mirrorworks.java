@@ -27,7 +27,7 @@ public final class Mirrorworks extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public Mirrorworks(UUID ownerId, CardSetInfo setInfo) {

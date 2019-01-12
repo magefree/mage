@@ -36,7 +36,7 @@ public final class FlamerushRider extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public FlamerushRider(UUID ownerId, CardSetInfo setInfo) {

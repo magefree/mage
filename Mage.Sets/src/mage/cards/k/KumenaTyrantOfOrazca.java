@@ -36,10 +36,10 @@ public final class KumenaTyrantOfOrazca extends CardImpl {
     static {
         filterAnotherNotTapped.add(AnotherPredicate.instance);
         filterAnotherNotTapped.add(new SubtypePredicate(SubType.MERFOLK));
-        filterAnotherNotTapped.add(Predicates.not(new TappedPredicate()));
+        filterAnotherNotTapped.add(Predicates.not(TappedPredicate.instance));
 
         filterNotTapped.add(new SubtypePredicate(SubType.MERFOLK));
-        filterNotTapped.add(Predicates.not(new TappedPredicate()));
+        filterNotTapped.add(Predicates.not(TappedPredicate.instance));
 
         filterAll.add(new SubtypePredicate(SubType.MERFOLK));
     }

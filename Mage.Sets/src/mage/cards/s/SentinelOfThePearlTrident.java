@@ -33,7 +33,7 @@ public final class SentinelOfThePearlTrident extends CardImpl {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("historic permanent you control");
 
     static {
-        filter.add(new HistoricPredicate());
+        filter.add(HistoricPredicate.instance);
     }
 
     public SentinelOfThePearlTrident(UUID ownerId, CardSetInfo setInfo) {

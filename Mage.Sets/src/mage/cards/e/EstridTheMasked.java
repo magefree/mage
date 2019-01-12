@@ -38,7 +38,7 @@ public final class EstridTheMasked extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("another permanent");
 
     static {
-        filter.add(new EnchantedPredicate());
+        filter.add(EnchantedPredicate.instance);
         filter2.add(AnotherPredicate.instance);
     }
 

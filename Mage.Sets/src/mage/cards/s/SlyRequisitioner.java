@@ -24,7 +24,7 @@ public final class SlyRequisitioner extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("a nontoken artifact you control");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public SlyRequisitioner(UUID ownerId, CardSetInfo setInfo) {

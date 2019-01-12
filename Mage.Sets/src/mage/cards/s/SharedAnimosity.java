@@ -73,7 +73,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
                         
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(Predicates.not(new PermanentIdPredicate(this.targetPointer.getFirst(game, source))));
-            filter.add(new AttackingPredicate());
+            filter.add(AttackingPredicate.instance);
             boolean allCreatureTypes = false;
             if (permanent.isAllCreatureTypes()) {
                 allCreatureTypes = true;

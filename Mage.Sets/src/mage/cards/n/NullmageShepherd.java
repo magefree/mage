@@ -28,7 +28,7 @@ public final class NullmageShepherd extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creatures you control");
     static {
-        filterCost.add(Predicates.not(new TappedPredicate()));
+        filterCost.add(Predicates.not(TappedPredicate.instance));
     }
 
     public NullmageShepherd(UUID ownerId, CardSetInfo setInfo) {

@@ -30,7 +30,7 @@ public final class RenderSilent extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("multicolored permanent");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public RenderSilent(UUID ownerId, CardSetInfo setInfo) {

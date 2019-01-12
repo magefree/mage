@@ -34,7 +34,7 @@ public final class KorozdaGuildmage extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public KorozdaGuildmage(UUID ownerId, CardSetInfo setInfo) {

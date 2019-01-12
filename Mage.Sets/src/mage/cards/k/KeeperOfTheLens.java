@@ -53,7 +53,7 @@ class KeeperOfTheLensLookFaceDownAbility extends ActivatedAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature you don't control");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 

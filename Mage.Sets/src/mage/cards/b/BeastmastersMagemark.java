@@ -29,7 +29,7 @@ public final class BeastmastersMagemark extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control that are enchanted");
 
     static {
-        filter.add(new EnchantedPredicate());
+        filter.add(EnchantedPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

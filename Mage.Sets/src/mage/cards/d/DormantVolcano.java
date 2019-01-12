@@ -30,7 +30,7 @@ public final class DormantVolcano extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.MOUNTAIN));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public DormantVolcano(UUID ownerId, CardSetInfo setInfo) {

@@ -51,7 +51,7 @@ class GolgothianSylexEffect extends OneShotEffect {
     static {
         filter.add(Predicates.and(
                 new ExpansionSetPredicate("ATQ"),
-                Predicates.not(new TokenPredicate())
+                Predicates.not(TokenPredicate.instance)
         ));
     }
 

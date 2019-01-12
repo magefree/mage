@@ -31,7 +31,7 @@ public final class MaskOfTheMimic extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public MaskOfTheMimic(UUID ownerId, CardSetInfo setInfo) {

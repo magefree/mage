@@ -70,7 +70,7 @@ class RegnasSanctionEffect extends OneShotEffect {
         FilterCreaturePermanent filterToTap = new FilterCreaturePermanent();
         for (Player player : choice.getFoes()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature you control");
-            filter.add(Predicates.not(new TappedPredicate()));
+            filter.add(Predicates.not(TappedPredicate.instance));
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetPermanent target = new TargetPermanent(1, 1, filter, true);
             if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {

@@ -75,7 +75,7 @@ class LumberingBattlementEffect extends OneShotEffect {
             = new FilterControlledCreaturePermanent("nontoken creatures");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     LumberingBattlementEffect() {

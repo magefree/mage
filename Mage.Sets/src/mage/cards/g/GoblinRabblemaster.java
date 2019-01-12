@@ -35,7 +35,7 @@ public final class GoblinRabblemaster extends CardImpl {
         otherGoblinFilter.add(AnotherPredicate.instance);
         otherGoblinFilter.add(new ControllerPredicate(TargetController.YOU));
 
-        attackingFilter.add(new AttackingPredicate());
+        attackingFilter.add(AttackingPredicate.instance);
         attackingFilter.add(AnotherPredicate.instance);
     }
 

@@ -28,7 +28,7 @@ public final class HammerheadCorvette extends CardImpl {
     
     static {
         filter.add(new SubtypePredicate(SubType.STARSHIP));
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
     
     public HammerheadCorvette(UUID ownerId, CardSetInfo setInfo) {

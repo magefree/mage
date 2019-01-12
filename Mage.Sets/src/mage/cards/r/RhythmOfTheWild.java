@@ -32,7 +32,7 @@ public final class RhythmOfTheWild extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(Predicates.not(new TokenPredicate()));
+        filter2.add(Predicates.not(TokenPredicate.instance));
     }
 
     public RhythmOfTheWild(UUID ownerId, CardSetInfo setInfo) {

@@ -26,8 +26,8 @@ public final class RockSlide extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new AttackingPredicate(),
-                new BlockingPredicate()
+                AttackingPredicate.instance,
+                BlockingPredicate.instance
         ));
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }

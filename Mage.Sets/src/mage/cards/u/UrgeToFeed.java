@@ -50,7 +50,7 @@ class UrgeToFeedEffect extends OneShotEffect {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 

@@ -64,7 +64,7 @@ class NamelessRaceEffect extends OneShotEffect {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
         filter2.add(new ColorPredicate(ObjectColor.WHITE));
         filter2.add(new OwnerPredicate(TargetController.OPPONENT));

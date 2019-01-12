@@ -32,7 +32,7 @@ public final class FathomFleetCaptain extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public FathomFleetCaptain(UUID ownerId, CardSetInfo setInfo) {

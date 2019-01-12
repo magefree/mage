@@ -21,7 +21,7 @@ public final class EmmaraTandris extends CardImpl {
 
     private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("creature tokens you control");
     static {
-        filter.getCreatureFilter().add(new TokenPredicate());
+        filter.getCreatureFilter().add(TokenPredicate.instance);
         filter.getCreatureFilter().add(new ControllerPredicate(TargetController.YOU));
         filter.getPlayerFilter().add(new PlayerIdPredicate(UUID.randomUUID()));
     }

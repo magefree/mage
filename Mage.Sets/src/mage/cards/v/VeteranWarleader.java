@@ -44,7 +44,7 @@ public final class VeteranWarleader extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(new SubtypePredicate(SubType.ALLY));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public VeteranWarleader(UUID ownerId, CardSetInfo setInfo) {

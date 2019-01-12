@@ -31,7 +31,7 @@ public final class MalakirSoothsayer extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ALLY));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public MalakirSoothsayer(UUID ownerId, CardSetInfo setInfo) {

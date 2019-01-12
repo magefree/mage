@@ -1,19 +1,18 @@
 
 package mage.filter.predicate.permanent;
 
-import java.util.Objects;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
- *
  * @author LevelX2
  */
-public class EnchantedPredicate implements Predicate<Permanent> {
+public enum EnchantedPredicate implements Predicate<Permanent> {
+    instance;
 
     @Override
     public boolean apply(Permanent input, Game game) {
@@ -26,6 +25,6 @@ public class EnchantedPredicate implements Predicate<Permanent> {
 
     @Override
     public String toString() {
-        return "Enchanted" ;
+        return "Enchanted";
     }
 }

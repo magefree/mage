@@ -38,7 +38,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
     private static final FilterControlledCreaturePermanent equippedFilter = new FilterControlledCreaturePermanent("equipped creature you control");
 
     static {
-        equippedFilter.add(new EquippedPredicate());
+        equippedFilter.add(EquippedPredicate.instance);
         equippedFilter.add(new ControllerPredicate(TargetController.YOU));
     }
 

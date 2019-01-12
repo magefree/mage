@@ -31,9 +31,9 @@ public final class Ixidron extends CardImpl {
     private static final FilterCreaturePermanent filterTurnFaceDown = new FilterCreaturePermanent("other nontoken creatures");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
         filterTurnFaceDown.add(AnotherPredicate.instance);
-        filterTurnFaceDown.add(Predicates.not(new TokenPredicate()));
+        filterTurnFaceDown.add(Predicates.not(TokenPredicate.instance));
     }
 
     public Ixidron(UUID ownerId, CardSetInfo setInfo) {

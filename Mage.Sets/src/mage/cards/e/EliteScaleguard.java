@@ -32,7 +32,7 @@ public final class EliteScaleguard extends CardImpl {
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter2.add(new DefendingPlayerControlsPredicate());
+        filter2.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public EliteScaleguard(UUID ownerId, CardSetInfo setInfo) {

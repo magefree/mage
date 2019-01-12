@@ -18,7 +18,7 @@ public final class WindsOfRath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that aren't enchanted");
     static {
-        filter.add(Predicates.not(new EnchantedPredicate()));
+        filter.add(Predicates.not(EnchantedPredicate.instance));
     }
 
     public WindsOfRath(UUID ownerId, CardSetInfo setInfo) {

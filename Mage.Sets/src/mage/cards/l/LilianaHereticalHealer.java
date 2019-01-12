@@ -33,7 +33,7 @@ public final class LilianaHereticalHealer extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public LilianaHereticalHealer(UUID ownerId, CardSetInfo setInfo) {

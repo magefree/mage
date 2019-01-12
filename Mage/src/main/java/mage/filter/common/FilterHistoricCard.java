@@ -20,7 +20,7 @@ public class FilterHistoricCard extends FilterCard {
 
     public FilterHistoricCard(String name) {
         super(name);
-        this.add(new HistoricPredicate());
+        this.add(HistoricPredicate.instance);
     }
 
     public FilterHistoricCard(final FilterHistoricCard filter) {

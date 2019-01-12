@@ -29,7 +29,7 @@ public final class GrixisGrimblade extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another multicolor permanent");
     
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
         filter.add(AnotherPredicate.instance);
     }
 

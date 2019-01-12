@@ -27,7 +27,7 @@ public final class GuardiansOfKoilos extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new HistoricPredicate());
+        filter.add(HistoricPredicate.instance);
     }
 
     public GuardiansOfKoilos(UUID ownerId, CardSetInfo setInfo) {

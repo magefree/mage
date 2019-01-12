@@ -36,7 +36,7 @@ public final class MercenaryInformer extends CardImpl {
 
     static {
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
-        filterMercenary.add(Predicates.not(new TokenPredicate()));
+        filterMercenary.add(Predicates.not(TokenPredicate.instance));
         filterMercenary.add(new SubtypePredicate(SubType.MERCENARY));
     }
 

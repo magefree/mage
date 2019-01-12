@@ -36,7 +36,7 @@ public final class SorrowsPath extends CardImpl {
     private static final FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("blocking creatures an opponent controls");
     
     static {
-        filter.add(new BlockingPredicate());
+        filter.add(BlockingPredicate.instance);
     }
 
     public SorrowsPath(UUID ownerId, CardSetInfo setInfo) {

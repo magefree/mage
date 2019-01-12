@@ -28,7 +28,7 @@ public final class StalkingAssassin extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public StalkingAssassin(UUID ownerId, CardSetInfo setInfo) {

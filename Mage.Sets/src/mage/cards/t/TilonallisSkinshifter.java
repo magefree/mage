@@ -34,7 +34,7 @@ public final class TilonallisSkinshifter extends CardImpl {
 
     static {
         filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(AnotherPredicate.instance);
     }
 

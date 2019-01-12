@@ -38,7 +38,7 @@ public final class TheBigIdea extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.BRAINIAC, "Brainiac creatures");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public TheBigIdea(UUID ownerId, CardSetInfo setInfo) {

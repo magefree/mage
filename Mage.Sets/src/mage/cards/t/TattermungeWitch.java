@@ -27,7 +27,7 @@ public final class TattermungeWitch extends CardImpl {
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("Each blocked creature");
 
     static {
-        filter.add(new BlockedPredicate());
+        filter.add(BlockedPredicate.instance);
     }
 
     public TattermungeWitch(UUID ownerId, CardSetInfo setInfo) {

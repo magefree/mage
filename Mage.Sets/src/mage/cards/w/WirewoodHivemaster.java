@@ -27,7 +27,7 @@ public final class WirewoodHivemaster extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.ELF));
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
     public WirewoodHivemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

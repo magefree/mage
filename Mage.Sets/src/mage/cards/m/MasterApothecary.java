@@ -30,7 +30,7 @@ public final class MasterApothecary extends CardImpl {
     
     static {
         filter.add(new SubtypePredicate(SubType.CLERIC));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public MasterApothecary(UUID ownerId, CardSetInfo setInfo) {

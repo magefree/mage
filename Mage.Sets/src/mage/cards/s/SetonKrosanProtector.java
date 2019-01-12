@@ -27,7 +27,7 @@ public final class SetonKrosanProtector extends CardImpl {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Druid you control");
     
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.DRUID));
     }
 

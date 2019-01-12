@@ -34,7 +34,7 @@ public final class GalecasterColossus extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
         filter2.add(new SubtypePredicate(SubType.WIZARD));
-        filter2.add(Predicates.not(new TappedPredicate()));
+        filter2.add(Predicates.not(TappedPredicate.instance));
     }
 
     public GalecasterColossus(UUID ownerId, CardSetInfo setInfo) {

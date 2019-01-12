@@ -28,7 +28,7 @@ public final class BrandedBrawlers extends CardImpl {
 
     static final private FilterLandPermanent filter = new FilterLandPermanent("an untapped land");
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
     
     final static private String rule = "{this} can't block if you control an untapped land";

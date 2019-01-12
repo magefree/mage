@@ -26,7 +26,7 @@ public final class AlwaysWatching extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public AlwaysWatching(UUID ownerId, CardSetInfo setInfo) {

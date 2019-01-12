@@ -28,7 +28,7 @@ public final class ChewbaccaTheBeast extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(AnotherPredicate.instance);
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public ChewbaccaTheBeast(UUID ownerId, CardSetInfo setInfo) {

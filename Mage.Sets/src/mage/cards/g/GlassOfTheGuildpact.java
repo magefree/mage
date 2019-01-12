@@ -20,7 +20,7 @@ public final class GlassOfTheGuildpact extends CardImpl {
             = new FilterCreaturePermanent("multicolored creatures");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public GlassOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {

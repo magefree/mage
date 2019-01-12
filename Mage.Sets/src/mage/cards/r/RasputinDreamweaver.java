@@ -98,7 +98,7 @@ class RasputinDreamweaverStartedUntappedWatcher extends Watcher {
     private static final FilterPermanent filter = new FilterPermanent("Untapped permanents");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     private final Set<UUID> startedUntapped = new HashSet<>(0);

@@ -30,7 +30,7 @@ public final class SoldeviGolem extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public SoldeviGolem(UUID ownerId, CardSetInfo setInfo) {

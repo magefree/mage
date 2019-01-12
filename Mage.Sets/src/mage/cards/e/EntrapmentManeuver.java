@@ -66,7 +66,7 @@ class EntrapmentManeuverSacrificeEffect extends OneShotEffect {
             return false;
         }
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         if (realCount > 0) {
             Target target = new TargetControlledPermanent(1, 1, filter, true);

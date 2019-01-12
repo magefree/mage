@@ -29,7 +29,7 @@ public final class SifterOfSkulls extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public SifterOfSkulls(UUID ownerId, CardSetInfo setInfo) {

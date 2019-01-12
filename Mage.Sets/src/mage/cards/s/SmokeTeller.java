@@ -32,7 +32,7 @@ public final class SmokeTeller extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
     }
 
     public SmokeTeller(UUID ownerId, CardSetInfo setInfo) {

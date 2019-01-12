@@ -39,7 +39,7 @@ public final class NewBlood extends CardImpl {
         TextPartSubType textPartVampire = (TextPartSubType) addTextPart(new TextPartSubType(SubType.VAMPIRE));
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Vampire you control");
         filter.add(new TextPartSubtypePredicate(textPartVampire));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         // As an additional cost to cast New Blood, tap an untapped Vampire you control.
         this.getSpellAbility().addCost(new TapTargetCost(
                 new TargetControlledCreaturePermanent(1, 1, filter, true)));

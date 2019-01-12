@@ -27,7 +27,7 @@ public final class DaringArchaeologist extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 
     static {
-        filter.add(new HistoricPredicate());
+        filter.add(HistoricPredicate.instance);
     }
 
     public DaringArchaeologist(UUID ownerId, CardSetInfo setInfo) {

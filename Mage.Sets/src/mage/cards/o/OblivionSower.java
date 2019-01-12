@@ -81,7 +81,7 @@ class OblivionSowerEffect extends OneShotEffect {
         if (controller != null && targetPlayer != null) {
             FilterLandCard filter = new FilterLandCard();
             filter.add(new OwnerIdPredicate(targetPlayer.getId()));
-            filter.add(Predicates.not(new FaceDownPredicate()));
+            filter.add(Predicates.not(FaceDownPredicate.instance));
             Cards exiledCards = new CardsImpl();
             exiledCards.addAll(game.getExile().getAllCards(game));
             Cards exiledLands = new CardsImpl();

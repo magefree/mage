@@ -32,7 +32,7 @@ public final class RashidaScalebane extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking Dragon");
 
     static {
-        filter.add(Predicates.or(new AttackingPredicate(), new BlockingPredicate()));
+        filter.add(Predicates.or(AttackingPredicate.instance, BlockingPredicate.instance));
         filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 

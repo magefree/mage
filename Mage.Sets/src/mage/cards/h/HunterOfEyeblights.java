@@ -33,7 +33,7 @@ public final class HunterOfEyeblights extends CardImpl {
 
     static {
         filter1.add(new ControllerPredicate(TargetController.NOT_YOU));
-        filter2.add(new CounterAnyPredicate());
+        filter2.add(CounterAnyPredicate.instance);
 
     }
 

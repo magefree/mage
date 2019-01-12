@@ -61,7 +61,7 @@ class KulrathKnightRestrictionEffect extends RestrictionEffect {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new CounterAnyPredicate());
+        filter.add(CounterAnyPredicate.instance);
     }
 
     public KulrathKnightRestrictionEffect() {

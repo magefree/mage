@@ -32,7 +32,7 @@ public final class RimehornAurochs extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.AUROCHS, "other attacking Aurochs");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(AnotherPredicate.instance);
     }
 
