@@ -212,6 +212,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Rhythm of the Wild", 201, Rarity.UNCOMMON, mage.cards.r.RhythmOfTheWild.class));
         cards.add(new SetCardInfo("Rix Maadi Reveler", 109, Rarity.RARE, mage.cards.r.RixMaadiReveler.class));
         cards.add(new SetCardInfo("Root Snare", 137, Rarity.COMMON, mage.cards.r.RootSnare.class));
+        cards.add(new SetCardInfo("Rubble Reading", 110, Rarity.COMMON, mage.cards.r.RubbleReading.class));
         cards.add(new SetCardInfo("Rubble Slinger", 217, Rarity.COMMON, mage.cards.r.RubbleSlinger.class));
         cards.add(new SetCardInfo("Rubblebelt Recluse", 111, Rarity.COMMON, mage.cards.r.RubblebeltRecluse.class));
         cards.add(new SetCardInfo("Sage's Row Savant", 49, Rarity.COMMON, mage.cards.s.SagesRowSavant.class));
