@@ -33,7 +33,7 @@ public final class AzoriusSkyguard extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Creatures your opponents control get -1/-0.
-        this.addAbility(new SimpleStaticAbility(new BoostOpponentsEffect(-1, 0, Duration.EndOfTurn)));
+        this.addAbility(new SimpleStaticAbility(new BoostOpponentsEffect(-1, 0, Duration.WhileOnBattlefield)));
     }
 
     private AzoriusSkyguard(final AzoriusSkyguard card) {
