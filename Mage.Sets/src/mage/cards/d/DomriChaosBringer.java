@@ -55,7 +55,7 @@ public final class DomriChaosBringer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
                 new StaticValue(4), false, new StaticValue(2),
                 StaticFilters.FILTER_CARD_CREATURE, Zone.LIBRARY, false,
-                true, false, Zone.HAND, false, false, false
+                true, true, Zone.HAND, false, false, false
         ).setText(
                 "Look at the top four cards of your library. " +
                         "You may reveal up to two creature cards from among them " +

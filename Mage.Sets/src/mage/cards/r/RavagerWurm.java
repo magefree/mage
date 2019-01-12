@@ -12,8 +12,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -25,10 +28,14 @@ import java.util.UUID;
  */
 public final class RavagerWurm extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("land with an activated ability that isn't a mana ability");
+    private static final FilterPermanent filter
+            = new FilterCreaturePermanent("creature you don't control");
+    private static final FilterPermanent filter2
+            = new FilterPermanent("land with an activated ability that isn't a mana ability");
 
     static {
-        filter.add(RavagerWurmPredicate.instance);
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter2.add(RavagerWurmPredicate.instance);
     }
 
     public RavagerWurm(UUID ownerId, CardSetInfo setInfo) {
@@ -43,13 +50,16 @@ public final class RavagerWurm extends CardImpl {
 
         // When Ravager Wurm enters the battlefield, choose up to one —
         // • Ravager Wurm fights target creature you don't control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect().setText("{this} fights target creature you don't control"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new FightTargetSourceEffect().setText("{this} fights target creature you don't control"), false
+        );
+        ability.addTarget(new TargetPermanent(filter));
         ability.getModes().setMinModes(0);
         ability.getModes().setMaxModes(1);
 
         // • Destroy target land with an activated ability that isn't a mana ability.
         Mode mode = new Mode(new DestroyTargetEffect());
-        mode.addTarget(new TargetPermanent(filter));
+        mode.addTarget(new TargetPermanent(filter2));
         ability.addMode(mode);
         this.addAbility(ability);
     }

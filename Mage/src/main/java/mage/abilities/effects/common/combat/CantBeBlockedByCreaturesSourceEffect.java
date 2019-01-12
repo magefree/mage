@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
@@ -19,8 +18,8 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
     public CantBeBlockedByCreaturesSourceEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration);
         this.filter = filter;
-        staticText = new StringBuilder("{this} can't be blocked ")
-                .append(filter.getMessage().startsWith("except by") ? "" : "by ").append(filter.getMessage()).toString();
+        staticText = "{this} can't be blocked " + (duration == Duration.EndOfTurn ? "this turn " : "")
+                + (filter.getMessage().startsWith("except by") ? "" : "by ") + filter.getMessage();
     }
 
     public CantBeBlockedByCreaturesSourceEffect(final CantBeBlockedByCreaturesSourceEffect effect) {
