@@ -256,6 +256,7 @@ public final class RavnicaAllegiance extends ExpansionSet {
         cards.add(new SetCardInfo("Spikewheel Acrobat", 118, Rarity.COMMON, mage.cards.s.SpikewheelAcrobat.class));
         cards.add(new SetCardInfo("Spire Mangler", 86, Rarity.UNCOMMON, mage.cards.s.SpireMangler.class));
         cards.add(new SetCardInfo("Spirit of the Spires", 23, Rarity.UNCOMMON, mage.cards.s.SpiritOfTheSpires.class));
+        cards.add(new SetCardInfo("Steeple Creeper", 142, Rarity.COMMON, mage.cards.s.SteepleCreeper.class));
         cards.add(new SetCardInfo("Stomping Ground", 259, Rarity.RARE, mage.cards.s.StompingGround.class));
         cards.add(new SetCardInfo("Summary Judgment", 24, Rarity.COMMON, mage.cards.s.SummaryJudgment.class));
         cards.add(new SetCardInfo("Sunder Shaman", 210, Rarity.UNCOMMON, mage.cards.s.SunderShaman.class));
