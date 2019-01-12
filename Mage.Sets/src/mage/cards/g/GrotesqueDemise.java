@@ -28,7 +28,7 @@ public final class GrotesqueDemise extends CardImpl {
 
         // Exile target creature with power 3 or less.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private GrotesqueDemise(final GrotesqueDemise card) {
