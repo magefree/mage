@@ -17,7 +17,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.OozeToken;
+import mage.game.permanent.token.BiogenicOozeToken;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class BiogenicOoze extends CardImpl {
 
         // When Biogenic Ooze enters the battlefield, create a 2/2 green Ooze creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new OozeToken(2, 2))
+                new CreateTokenEffect(new BiogenicOozeToken())
         ));
 
         // At the beginning if your end step, put a +1/+1 counter on each Ooze you control.
@@ -52,7 +52,7 @@ public final class BiogenicOoze extends CardImpl {
 
         // {1}{G}{G}{G}: Create a 2/2 green Ooze creature token.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new OozeToken(2, 2)),
+                new CreateTokenEffect(new BiogenicOozeToken()),
                 new ManaCostsImpl("{1}{G}{G}{G}")
         );
     }

@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -16,6 +15,7 @@ public final class MesmerizingBenthidToken extends TokenImpl {
         super("Illusion", "0/2 blue Illusion creature token with \"Whenever this creature blocks a creature, that creature doesn't untap during its controller's next untap step.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
+        setOriginalExpansionSetCode("RNA");
 
         subtype.add(SubType.ILLUSION);
         power = new MageInt(0);

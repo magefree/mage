@@ -34,6 +34,22 @@ public class ScryfallImageSupportTokens {
             put("RIX/Emblem Huatli, Radiant Champion", "https://api.scryfall.com/cards/trix/5/en?format=image");
             put("RIX/Saproling", "https://api.scryfall.com/cards/trix/3/en?format=image");
 
+            // RNA
+            put("RNA/Beast", "https://api.scryfall.com/cards/trna/8/en?format=image");
+            put("RNA/Centaur", "https://api.scryfall.com/cards/trna/5/en?format=image");
+            put("RNA/Domri, Chaos Bringer", "https://api.scryfall.com/cards/trna/13/en?format=image");
+            put("RNA/Frog Lizard", "https://api.scryfall.com/cards/trna/6/en?format=image");
+            put("RNA/Goblin", "https://api.scryfall.com/cards/trna/4/en?format=image");
+            put("RNA/Human", "https://api.scryfall.com/cards/trna/1/en?format=image");
+            put("RNA/Illusion", "https://api.scryfall.com/cards/trna/2/en?format=image");
+            put("RNA/Ooze", "https://api.scryfall.com/cards/trna/7/en?format=image");
+            put("RNA/Sphinx", "https://api.scryfall.com/cards/trna/9/en?format=image");
+            put("RNA/Spirit", "https://api.scryfall.com/cards/trna/10/en?format=image");
+            put("RNA/Thopter", "https://api.scryfall.com/cards/trna/11/en?format=image");
+            put("RNA/Treasure", "https://api.scryfall.com/cards/trna/12/en?format=image");
+            put("RNA/Zombie", "https://api.scryfall.com/cards/trna/3/en?format=image");
+
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
