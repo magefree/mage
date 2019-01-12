@@ -318,6 +318,10 @@ public final class RavnicaAllegiance extends ExpansionSet {
                 if (maxCardNumberInBooster != Integer.MAX_VALUE) {
                     savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
                 }
+                criteria = new CardCriteria();
+                // Gateway Plaza is a normal common: https://twitter.com/EliShffrn/status/1043156989218414593s
+                criteria.setCodes(this.code).nameExact("Gateway Plaza");
+                savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
                 savedCards.put(rarity, savedCardsInfos);
             }
             // Return a copy of the saved cards information, as not to modify the original.
