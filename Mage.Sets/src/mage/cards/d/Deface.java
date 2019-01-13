@@ -35,7 +35,7 @@ public final class Deface extends CardImpl {
 
         // • Destroy target creature with defender.
         Mode mode = new Mode(new DestroyTargetEffect());
-        mode.addTarget(new TargetPermanent());
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 
