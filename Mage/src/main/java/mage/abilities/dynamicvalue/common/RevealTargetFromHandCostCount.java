@@ -13,10 +13,10 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 
 /**
- *
  * @author emerald000
  */
-public class RevealTargetFromHandCostCount implements DynamicValue {
+public enum RevealTargetFromHandCostCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -35,7 +35,7 @@ public class RevealTargetFromHandCostCount implements DynamicValue {
 
     @Override
     public RevealTargetFromHandCostCount copy() {
-        return new RevealTargetFromHandCostCount();
+        return RevealTargetFromHandCostCount.instance;
     }
 
     @Override

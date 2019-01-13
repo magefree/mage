@@ -10,7 +10,8 @@ import mage.game.Game;
 /**
  * @author LevelX2
  */
-public class SacrificeCostCreaturesToughness implements DynamicValue {
+public enum SacrificeCostCreaturesToughness implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -25,7 +26,7 @@ public class SacrificeCostCreaturesToughness implements DynamicValue {
 
     @Override
     public SacrificeCostCreaturesToughness copy() {
-        return new SacrificeCostCreaturesToughness();
+        return SacrificeCostCreaturesToughness.instance;
     }
 
     @Override

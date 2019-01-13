@@ -36,7 +36,7 @@ public final class CalciformPools extends CardImpl {
         this.addAbility(ability);
         // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.W, ColoredManaSymbol.U),
+                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance, ColoredManaSymbol.W, ColoredManaSymbol.U),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

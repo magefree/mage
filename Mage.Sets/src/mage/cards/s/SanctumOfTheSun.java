@@ -32,7 +32,7 @@ public final class SanctumOfTheSun extends CardImpl {
                 new InfoEffect("<i>(Transforms from Azor's Gateway.)</i>")).setRuleAtTheTop(true));
 
         // {T}: Add X mana of any one color, where X is your life total.
-        this.addAbility(new DynamicManaAbility(new Mana(0, 0, 0, 0, 0, 0, 1, 0), new ControllerLifeCount(), new TapSourceCost(),
+        this.addAbility(new DynamicManaAbility(new Mana(0, 0, 0, 0, 0, 0, 1, 0), ControllerLifeCount.instance, new TapSourceCost(),
                 "Add X mana of any one color, where X is is your life total", true));
 
     }

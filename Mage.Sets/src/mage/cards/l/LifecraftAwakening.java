@@ -39,7 +39,7 @@ public final class LifecraftAwakening extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}");
 
         // Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.
-        ManacostVariableValue manaX = new ManacostVariableValue();
+        ManacostVariableValue manaX = ManacostVariableValue.instance;
         getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), manaX));
         getSpellAbility().addTarget(new TargetArtifactPermanent(filter));
         getSpellAbility().addEffect(new LifecraftAwakeningEffect());

@@ -10,7 +10,8 @@ import mage.watchers.common.CreaturesDiedWatcher;
 /**
  * @author LoneFox
  */
-public class CreaturesDiedThisTurnCount implements DynamicValue {
+public enum CreaturesDiedThisTurnCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -23,7 +24,7 @@ public class CreaturesDiedThisTurnCount implements DynamicValue {
 
     @Override
     public CreaturesDiedThisTurnCount copy() {
-        return new CreaturesDiedThisTurnCount();
+        return CreaturesDiedThisTurnCount.instance;
     }
 
     @Override

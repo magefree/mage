@@ -53,7 +53,7 @@ public final class TibaltTheFiendBlooded extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // -4: Tibalt, the Fiend-Blooded deals damage equal to the number of cards in target player's hand to that player.
-        effect = new DamageTargetEffect(new CardsInTargetHandCount(), true);
+        effect = new DamageTargetEffect(CardsInTargetHandCount.instance, true);
         effect.setText("{this} deals damage equal to the number of cards in target player's hand to that player");
         ability = new LoyaltyAbility(effect, -4);
         ability.addTarget(new TargetPlayer());

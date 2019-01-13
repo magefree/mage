@@ -31,7 +31,7 @@ public final class WarbreakTrumpeter extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{X}{X}{R}")));
         
         // When Warbreak Trumpeter is turned face up, create X 1/1 red Goblin creature tokens.
-        DynamicValue morphX = new MorphManacostVariableValue();
+        DynamicValue morphX = MorphManacostVariableValue.instance;
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new CreateTokenEffect(new GoblinToken(), morphX)));
     }
 

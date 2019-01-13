@@ -82,7 +82,7 @@ enum ChampionOfStraySoulsAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         for (Effect effect : ability.getEffects()) {
             if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
-                int xValue = new GetXValue().calculate(game, ability, null);
+                int xValue = GetXValue.instance.calculate(game, ability, null);
                 ability.getTargets().clear();
                 ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, new FilterCreatureCard("creature cards from your graveyard")));
             }

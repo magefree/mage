@@ -35,7 +35,7 @@ public final class LightkeeperOfEmeria extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Lightkeeper of Emeria enters the battlefield, you gain 2 life for each time it was kicked.
-        Effect effect = new GainLifeEffect(new MultipliedValue(new MultikickerCount(), 2));
+        Effect effect = new GainLifeEffect(new MultipliedValue(MultikickerCount.instance, 2));
         effect.setText("you gain 2 life for each time it was kicked");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }

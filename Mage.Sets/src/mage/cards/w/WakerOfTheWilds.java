@@ -40,7 +40,7 @@ public final class WakerOfTheWilds extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance(0),
-                        new ManacostVariableValue()
+                        ManacostVariableValue.instance
                 ).setText("Put X +1/+1 counters on target land you control."),
                 new ManaCostsImpl("{X}{G}{G}")
         );

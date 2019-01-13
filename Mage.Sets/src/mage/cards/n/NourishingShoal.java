@@ -36,7 +36,7 @@ public final class NourishingShoal extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
 
         // You gain X life.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new ExileFromHandCostCardConvertedMana()));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ExileFromHandCostCardConvertedMana.instance));
 
     }
 

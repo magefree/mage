@@ -42,7 +42,7 @@ public final class MartyrOfFrost extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}, Reveal X blue cards from your hand, Sacrifice Martyr of Frost: Counter target spell unless its controller pays {X}.
-        Effect effect = new CounterUnlessPaysEffect(new RevealTargetFromHandCostCount());
+        Effect effect = new CounterUnlessPaysEffect(RevealTargetFromHandCostCount.instance);
         effect.setText("Counter target spell unless its controller pays {X}.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));

@@ -19,7 +19,7 @@ public final class Prosperity extends CardImpl {
 
 
         // Each player draws X cards.
-        this.getSpellAbility().addEffect(new DrawCardAllEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DrawCardAllEffect(ManacostVariableValue.instance));
     }
 
     public Prosperity(final Prosperity card) {

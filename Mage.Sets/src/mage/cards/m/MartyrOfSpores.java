@@ -43,7 +43,7 @@ public final class MartyrOfSpores extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, Reveal X green cards from your hand, Sacrifice Martyr of Spores: Target creature gets +X/+X until end of turn.
-        Effect effect = new BoostTargetEffect(new RevealTargetFromHandCostCount(), new RevealTargetFromHandCostCount(), Duration.EndOfTurn, true);
+        Effect effect = new BoostTargetEffect(RevealTargetFromHandCostCount.instance, RevealTargetFromHandCostCount.instance, Duration.EndOfTurn, true);
         effect.setText("Target creature gets +X/+X until end of turn.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
         ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));

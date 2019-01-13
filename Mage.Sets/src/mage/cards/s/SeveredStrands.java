@@ -26,7 +26,7 @@ public final class SeveredStrands extends CardImpl {
 
         // You gain life equal to the sacrificed creature's toughness. Destroy target creature an opponent controls.
         this.getSpellAbility().addEffect(new GainLifeEffect(
-                new SacrificeCostCreaturesToughness(),
+                SacrificeCostCreaturesToughness.instance,
                 "You gain life equal to the "
                 + "sacrificed creature's toughness."
         ));

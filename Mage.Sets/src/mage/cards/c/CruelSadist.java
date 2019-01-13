@@ -44,7 +44,7 @@ public final class CruelSadist extends CardImpl {
         this.addAbility(ability);
                
         // {2}{B}, {T}, Remove X +1/+1 counters from Cruel Sadist: Cruel Sadist deals X damage to target creature.
-        Effect effect = new DamageTargetEffect(new RemovedCountersForCostValue());
+        Effect effect = new DamageTargetEffect(RemovedCountersForCostValue.instance);
         effect.setText("{this} deals X damage to target creature");
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());

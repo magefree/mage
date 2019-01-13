@@ -22,7 +22,7 @@ public final class DeathWind extends CardImpl {
 
 
         // Target creature gets -X/-X until end of turn.
-        DynamicValue x = new SignInversionDynamicValue(new ManacostVariableValue());
+        DynamicValue x = new SignInversionDynamicValue(ManacostVariableValue.instance);
         this.getSpellAbility().addEffect(new BoostTargetEffect(x, x, Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

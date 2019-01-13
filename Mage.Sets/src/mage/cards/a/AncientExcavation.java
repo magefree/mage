@@ -61,7 +61,7 @@ class AncientExcavationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            DynamicValue numCards = new CardsInControllerHandCount();
+            DynamicValue numCards = CardsInControllerHandCount.instance;
             int amount = numCards.calculate(game, source, this);
             player.drawCards(amount, game);
             player.discard(amount, false, source, game);

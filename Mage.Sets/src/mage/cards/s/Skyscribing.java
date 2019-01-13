@@ -20,7 +20,7 @@ public final class Skyscribing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");
 
         // Each player draws X cards.
-        this.getSpellAbility().addEffect(new DrawCardAllEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DrawCardAllEffect(ManacostVariableValue.instance));
         // Forecast - {2}{U}, Reveal Skyscribing from your hand: Each player draws a card.
         this.addAbility(new ForecastAbility(new DrawCardAllEffect(1), new ManaCostsImpl("{2}{U}")));
     }

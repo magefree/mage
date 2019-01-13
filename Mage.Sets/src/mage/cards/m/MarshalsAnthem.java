@@ -65,7 +65,7 @@ enum MarshalsAnthemAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int numbTargets = new MultikickerCount().calculate(game, ability, null);
+        int numbTargets = MultikickerCount.instance.calculate(game, ability, null);
         if (numbTargets > 0) {
             ability.addTarget(new TargetCardInYourGraveyard(0, numbTargets, filter));
         }

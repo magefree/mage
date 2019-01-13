@@ -10,13 +10,10 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 
 /**
- *
  * @author LevelX2
  */
-public class ManaSpentToCastCount implements DynamicValue {
-
-    public ManaSpentToCastCount() {
-    }
+public enum ManaSpentToCastCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
@@ -36,7 +33,7 @@ public class ManaSpentToCastCount implements DynamicValue {
 
     @Override
     public ManaSpentToCastCount copy() {
-        return new ManaSpentToCastCount();
+        return ManaSpentToCastCount.instance;
     }
 
     @Override

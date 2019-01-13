@@ -26,7 +26,7 @@ public final class HarvestPyre extends CardImpl {
 
         // Harvest Pyre deals X damage to target creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new GetXValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
     }
 
     public HarvestPyre(final HarvestPyre card) {

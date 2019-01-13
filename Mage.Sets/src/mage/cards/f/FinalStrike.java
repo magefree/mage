@@ -26,7 +26,7 @@ public final class FinalStrike extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
         // Final Strike deals damage to target opponent equal to the sacrificed creature's power.
-        Effect effect = new DamageTargetEffect(new SacrificeCostCreaturesPower());
+        Effect effect = new DamageTargetEffect(SacrificeCostCreaturesPower.instance);
         effect.setText("{this} deals damage to target opponent or planeswalker equal to the sacrificed creature's power");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());

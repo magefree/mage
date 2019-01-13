@@ -19,7 +19,7 @@ public final class HeatRay extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");
 
 
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

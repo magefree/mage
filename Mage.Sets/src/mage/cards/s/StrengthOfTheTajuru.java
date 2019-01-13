@@ -49,7 +49,7 @@ enum StrengthOfTheTajuruAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int numbTargets = new MultikickerCount().calculate(game, ability, null) + 1;
+        int numbTargets = MultikickerCount.instance.calculate(game, ability, null) + 1;
         ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
     }
 }

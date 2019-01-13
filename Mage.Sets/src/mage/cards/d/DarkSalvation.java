@@ -34,7 +34,7 @@ public final class DarkSalvation extends CardImpl {
 
         // Target player creates X 2/2 black Zombie creature tokens, then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        Effect effect = new CreateTokenTargetEffect(new ZombieToken(), new ManacostVariableValue());
+        Effect effect = new CreateTokenTargetEffect(new ZombieToken(), ManacostVariableValue.instance);
         effect.setText("Target player creates X 2/2 black Zombie creature tokens");
         this.getSpellAbility().addEffect(effect);
         DynamicValue value = new ZombiesControlledByTargetPlayerCount();

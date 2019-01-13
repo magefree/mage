@@ -55,7 +55,7 @@ public final class RotHulk extends CardImpl {
             // up to X target Zombie cards from your graveyard
             // X is the number of opponents you have.
             ability.getTargets().clear();
-            int numbTargets = new OpponentsCount().calculate(game, ability, null);
+            int numbTargets = OpponentsCount.instance.calculate(game, ability, null);
             ability.addTarget(new TargetCardInYourGraveyard(0, numbTargets, filterZombie));
         }
     }

@@ -25,7 +25,7 @@ public final class BalduvianRage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");
 
         // Target attacking creature gets +X/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.instance, new StaticValue(0), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
 
         // Draw a card at the beginning of the next turn's upkeep.

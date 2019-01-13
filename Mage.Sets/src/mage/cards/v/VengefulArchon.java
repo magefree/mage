@@ -56,7 +56,7 @@ public final class VengefulArchon extends CardImpl {
 class VengefulArchonEffect extends PreventDamageToControllerEffect {
 
     public VengefulArchonEffect() {
-        super(Duration.EndOfTurn, false, true, new ManacostVariableValue());
+        super(Duration.EndOfTurn, false, true, ManacostVariableValue.instance);
         staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player or planeswalker";
     }
 

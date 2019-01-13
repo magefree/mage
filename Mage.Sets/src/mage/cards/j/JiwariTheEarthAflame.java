@@ -44,13 +44,13 @@ public final class JiwariTheEarthAflame extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}{R}, {tap}: Jiwari, the Earth Aflame deals X damage to target creature without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.instance), new ManaCostsImpl("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // Channel - {X}{R}{R}{R}, Discard Jiwari: Jiwari deals X damage to each creature without flying.
-        this.addAbility(new ChannelAbility("{X}{R}{R}{R}", new DamageAllEffect(new ManacostVariableValue(), filter)));
+        this.addAbility(new ChannelAbility("{X}{R}{R}{R}", new DamageAllEffect(ManacostVariableValue.instance, filter)));
     }
 
     public JiwariTheEarthAflame(final JiwariTheEarthAflame card) {

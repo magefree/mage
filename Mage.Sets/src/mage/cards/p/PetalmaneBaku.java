@@ -37,7 +37,7 @@ public final class PetalmaneBaku extends CardImpl {
         // {1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color.
         Ability ability = new DynamicManaAbility(
                 new Mana(0, 0, 0, 0, 0, 0, 1, 0),
-                new RemovedCountersForCostValue(),
+                RemovedCountersForCostValue.instance,
                 new ManaCostsImpl<>("{1}"),
                 "Add X mana of any one color",
                 true, new CountersSourceCount(CounterType.KI));

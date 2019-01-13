@@ -20,7 +20,7 @@ public final class EnshrinedMemories extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
 
         // Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(new ManacostVariableValue(), new FilterCreatureCard(), Zone.LIBRARY, true));
+        this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(ManacostVariableValue.instance, new FilterCreatureCard(), Zone.LIBRARY, true));
     }
 
     public EnshrinedMemories(final EnshrinedMemories card) {

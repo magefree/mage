@@ -27,7 +27,7 @@ public final class AshenSkinZubera extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(new ZuberasDiedDynamicValue()));
+        Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(ZuberasDiedDynamicValue.instance));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new ZuberasDiedWatcher());
     }

@@ -34,7 +34,7 @@ public final class VolrathTheFallen extends CardImpl {
 
         // {1}{B}, Discard a creature card: 
         // Volrath the Fallen gets +X/+X until end of turn, where X is the discarded card's converted mana cost.
-        Effect effect = new BoostSourceEffect(new DiscardCostCardConvertedMana(),new DiscardCostCardConvertedMana(),Duration.EndOfTurn);
+        Effect effect = new BoostSourceEffect(DiscardCostCardConvertedMana.instance,DiscardCostCardConvertedMana.instance,Duration.EndOfTurn);
         effect.setText("{this} gets +X/+X until end of turn, where X is the discarded card's converted mana cost");
         
         Ability ability = new SimpleActivatedAbility(

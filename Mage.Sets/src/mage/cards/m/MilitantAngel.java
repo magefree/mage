@@ -33,7 +33,7 @@ public final class MilitantAngel extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Militant Angel enters the battlefield, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn.
-        Effect effect = new CreateTokenEffect(new KnightToken(), new AttackedThisTurnOpponentsCount());
+        Effect effect = new CreateTokenEffect(new KnightToken(), AttackedThisTurnOpponentsCount.instance);
         effect.setText("create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }

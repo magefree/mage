@@ -6,7 +6,8 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.players.Player;
 
-public class ControllerLifeCount implements DynamicValue {
+public enum ControllerLifeCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -19,7 +20,7 @@ public class ControllerLifeCount implements DynamicValue {
 
     @Override
     public ControllerLifeCount copy() {
-        return new ControllerLifeCount();
+        return ControllerLifeCount.instance;
     }
 
     @Override

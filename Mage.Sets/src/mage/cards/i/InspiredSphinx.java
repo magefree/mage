@@ -33,7 +33,7 @@ public final class InspiredSphinx extends CardImpl {
 
         // When Inspired Sphinx enters the battlefield, draw cards equal to the number of opponents you have.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(new OpponentsCount()).setText("draw cards equal to the number of opponents you have")
+                new DrawCardSourceControllerEffect(OpponentsCount.instance).setText("draw cards equal to the number of opponents you have")
         ));
 
         // {3}{U}: Create a colorless 1/1 Thopter artifact creature token with flying.

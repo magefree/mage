@@ -30,7 +30,7 @@ public final class SickeningDreams extends CardImpl {
         this.getSpellAbility().addCost(new SickeningDreamsAdditionalCost());
         
         // Sickening Dreams deals X damage to each creature and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(new GetXValue(), new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(GetXValue.instance, new FilterCreaturePermanent()));
     }
 
     public SickeningDreams(final SickeningDreams card) {
