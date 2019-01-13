@@ -81,7 +81,7 @@ class AmplifireEffect extends OneShotEffect {
             game.addEffect(new SetPowerToughnessSourceEffect(
                     2 * lastCard.getPower().getValue(),
                     2 * lastCard.getToughness().getValue(),
-                    Duration.UntilYourNextTurn
+                    Duration.UntilYourNextTurn, SubLayer.SetPT_7b
             ), source);
         }
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
