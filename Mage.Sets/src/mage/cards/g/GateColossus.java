@@ -65,7 +65,7 @@ public final class GateColossus extends CardImpl {
 
 class GateColossusCostReductionEffect extends CostModificationEffectImpl {
 
-    static final FilterControlledPermanent filter = new FilterControlledPermanent();
+    static final FilterControlledPermanent filter = new FilterControlledPermanent("a Gate");
 
     static {
         filter.add(new SubtypePredicate(SubType.GATE));
