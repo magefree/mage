@@ -71,7 +71,7 @@ class RiotReplacementEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
-            if (controller.chooseUse(outcome, "Have " + creature.getLogName() + " enter the battlefield with a +1/+1 counter on it or with haste?","", "+1/+1 counter", "Haste", source, game)) {
+            if (controller.chooseUse(outcome, "Have " + creature.getLogName() + " enter the battlefield with a +1/+1 counter on it or with haste?",null, "+1/+1 counter", "Haste", source, game)) {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " choose to put a +1/+1 counter on " + creature.getName());
                 }

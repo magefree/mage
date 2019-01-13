@@ -31,7 +31,7 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Rampaging Rendhorn", 1); // Creature {4}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rampaging Rendhorn");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "+1/+1 counter");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
@@ -51,7 +51,7 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Rampaging Rendhorn", 1); // Creature {4}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rampaging Rendhorn");
-        setChoice(playerA, "No");
+        setChoice(playerA, "Haste");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
 
@@ -74,7 +74,7 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1); // Creature {1}{W}  2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "+1/+1 counter");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
@@ -98,7 +98,7 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1); // Creature {1}{W}  2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "No");
+        setChoice(playerA, "Haste");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
 
