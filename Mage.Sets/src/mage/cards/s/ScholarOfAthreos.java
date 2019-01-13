@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -10,8 +9,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -22,7 +21,7 @@ import mage.game.Game;
 public final class ScholarOfAthreos extends CardImpl {
 
     public ScholarOfAthreos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -56,11 +55,11 @@ class ScholarOfAthreosEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = 0;
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            damage += game.getPlayer(opponentId).damage(1, source.getSourceId(), game, false, true);
+        int lifeLost = 0;
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            lifeLost += game.getPlayer(opponentId).loseLife(1, game, false);
         }
-        game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
+        game.getPlayer(source.getControllerId()).gainLife(lifeLost, game, source);
         return true;
     }
 
