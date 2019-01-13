@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -19,8 +18,9 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class EntropicSpecter extends CardImpl {
@@ -58,7 +58,8 @@ public final class EntropicSpecter extends CardImpl {
     }
 }
 
-class CardsInTargetPlayerHandCount implements DynamicValue {
+enum CardsInTargetPlayerHandCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -74,7 +75,7 @@ class CardsInTargetPlayerHandCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new mage.abilities.dynamicvalue.common.CardsInControllerHandCount();
+        return instance;
     }
 
     @Override

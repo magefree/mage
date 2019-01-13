@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeXTargetCost;
@@ -16,14 +15,15 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class ViciousBetrayal extends CardImpl {
 
     public ViciousBetrayal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
 
         // As an additional cost to cast Vicious Betrayal, sacrifice any number of creatures.
@@ -43,14 +43,16 @@ public final class ViciousBetrayal extends CardImpl {
     }
 }
 
-class GetXValue implements DynamicValue {
+enum GetXValue implements DynamicValue {
+    instance;
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
-        for (VariableCost cost: sourceAbility.getCosts().getVariableCosts()) {
+        for (VariableCost cost : sourceAbility.getCosts().getVariableCosts()) {
             amount += cost.getAmount();
         }
-        return 2*amount;
+        return 2 * amount;
     }
 
     @Override
