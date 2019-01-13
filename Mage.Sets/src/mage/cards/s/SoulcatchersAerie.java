@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -18,8 +16,9 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class SoulcatchersAerie extends CardImpl {
@@ -33,15 +32,16 @@ public final class SoulcatchersAerie extends CardImpl {
     }
 
     public SoulcatchersAerie(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // Whenever a Bird is put into your graveyard from the battlefield, put a feather counter on Soulcatchers' Aerie.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance()),
-            false, filter, false, true));
+                false, filter, false, true));
+
         // Bird creatures get +1/+1 for each feather counter on Soulcatchers' Aerie.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersSourceCount(CounterType.FEATHER),
-            new CountersSourceCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter2, false,
-            "Bird creatures get +1/+1 for each feather counter on {this}.")));
+                new CountersSourceCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter2, false,
+                "Bird creatures get +1/+1 for each feather counter on {this}.")));
     }
 
     public SoulcatchersAerie(final SoulcatchersAerie card) {

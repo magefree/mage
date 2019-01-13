@@ -32,7 +32,7 @@ public final class RishadanPawnshop extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanent you control");
     
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

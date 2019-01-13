@@ -1,22 +1,5 @@
 package org.mage.plugins.card.dl.sources;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
@@ -25,6 +8,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mage.plugins.card.images.CardDownloadData;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
+import java.util.*;
+import java.util.prefs.Preferences;
 
 /**
  * @author LevelX2
@@ -330,7 +320,7 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     private Map<String, String> getSetLinksFromPage(String cardSet, Set<String> aliasesStart, Preferences prefs,
-            ProxyType proxyType, String baseUrl, String pageUrl) throws IOException {
+                                                    ProxyType proxyType, String baseUrl, String pageUrl) throws IOException {
         Map<String, String> pageLinks = new HashMap<>();
 
         String urlDocument;
@@ -392,7 +382,7 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {

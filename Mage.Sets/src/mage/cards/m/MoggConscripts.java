@@ -67,7 +67,7 @@ class MoggConscriptsEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            PlayerCastCreatureWatcher watcher = (PlayerCastCreatureWatcher) game.getState().getWatchers().get(PlayerCastCreatureWatcher.class.getSimpleName());
+            PlayerCastCreatureWatcher watcher = game.getState().getWatcher(PlayerCastCreatureWatcher.class);
             if (watcher != null && !watcher.playerDidCastCreatureThisTurn(source.getControllerId())) {
                 return true;
             }

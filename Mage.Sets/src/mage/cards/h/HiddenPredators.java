@@ -109,7 +109,7 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, ").append(super.getRule()).toString();
+        return "When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, " + super.getRule();
     }
 
 }

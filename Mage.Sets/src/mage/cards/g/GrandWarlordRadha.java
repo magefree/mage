@@ -65,7 +65,7 @@ class CreaturesAttackedWatcher extends Watcher {
     public final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
 
     public CreaturesAttackedWatcher() {
-        super(CreaturesAttackedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(CreaturesAttackedWatcher.class, WatcherScope.GAME);
     }
 
     public CreaturesAttackedWatcher(final CreaturesAttackedWatcher watcher) {
@@ -153,7 +153,7 @@ class GrandWarlordRadhaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreaturesAttackedWatcher watcher = (CreaturesAttackedWatcher) game.getState().getWatchers().get(CreaturesAttackedWatcher.class.getSimpleName());
+            CreaturesAttackedWatcher watcher = game.getState().getWatcher(CreaturesAttackedWatcher.class);
             if (watcher != null) {
                 int attackingCreatures = 0;
                 for (MageObjectReference attacker : watcher.getAttackedThisTurnCreatures()) {

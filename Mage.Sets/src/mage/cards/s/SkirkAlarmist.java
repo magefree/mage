@@ -35,7 +35,7 @@ public final class SkirkAlarmist extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature you control");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

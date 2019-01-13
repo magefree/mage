@@ -147,6 +147,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Fetish", 100, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Horror", 101, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 51, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
+        cards.add(new SetCardInfo("Krovikan Vampire", 102, Rarity.UNCOMMON, mage.cards.k.KrovikanVampire.class));
         cards.add(new SetCardInfo("Lat-Nam's Legacy", 52, Rarity.COMMON, mage.cards.l.LatNamsLegacy.class));
         cards.add(new SetCardInfo("Leaping Lizard", 171, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", 103, Rarity.UNCOMMON, mage.cards.l.LimDulsHighGuard.class));
@@ -160,6 +161,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Groundbreaker", 215, Rarity.UNCOMMON, mage.cards.m.MishrasGroundbreaker.class));
         cards.add(new SetCardInfo("Misinformation", 105, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mudslide", 136, Rarity.RARE, mage.cards.m.Mudslide.class));
+        cards.add(new SetCardInfo("Musician", 56, Rarity.RARE, mage.cards.m.Musician.class));
         cards.add(new SetCardInfo("Narwhal", 57, Rarity.UNCOMMON, mage.cards.n.Narwhal.class));
         cards.add(new SetCardInfo("Nature's Blessing", 196, Rarity.UNCOMMON, mage.cards.n.NaturesBlessing.class));
         cards.add(new SetCardInfo("Nature's Wrath", 172, Rarity.RARE, mage.cards.n.NaturesWrath.class));
@@ -177,6 +179,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Panic", 145, Rarity.COMMON, mage.cards.p.Panic.class));
         cards.add(new SetCardInfo("Personal Tutor", 58, Rarity.UNCOMMON, mage.cards.p.PersonalTutor.class));
         cards.add(new SetCardInfo("Phantasmal Fiend", 108, Rarity.COMMON, mage.cards.p.PhantasmalFiend.class));
+        cards.add(new SetCardInfo("Phantasmal Mount", 59, Rarity.COMMON, mage.cards.p.PhantasmalMount.class));
         cards.add(new SetCardInfo("Phyrexian Devourer", 216, Rarity.UNCOMMON, mage.cards.p.PhyrexianDevourer.class));
         cards.add(new SetCardInfo("Pillage", 146, Rarity.UNCOMMON, mage.cards.p.Pillage.class));
         cards.add(new SetCardInfo("Portent", 60, Rarity.COMMON, mage.cards.p.Portent.class));

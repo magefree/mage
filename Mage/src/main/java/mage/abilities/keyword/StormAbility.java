@@ -74,7 +74,7 @@ class StormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObjectReference spellRef = (MageObjectReference) this.getValue("StormSpellRef");
         if (spellRef != null) {
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
+            CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
             if (watcher != null) {
                 int stormCount = watcher.getSpellOrder(spellRef, game) - 1;
                 if (stormCount > 0) {

@@ -28,7 +28,7 @@ public final class BalthorTheStout extends CardImpl {
 
     static {
         filter1.add(new SubtypePredicate(SubType.BARBARIAN));
-        filter2.add(new AnotherPredicate());
+        filter2.add(AnotherPredicate.instance);
         filter2.add(new SubtypePredicate(SubType.BARBARIAN));
     }
     

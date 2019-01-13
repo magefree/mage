@@ -35,7 +35,7 @@ public final class TakeDown extends CardImpl {
 
         // • Take Down deals 1 damage to each creature with flying
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageAllEffect(1, filter));
+        mode.addEffect(new DamageAllEffect(1, filter));
         this.getSpellAbility().addMode(mode);
     }
 

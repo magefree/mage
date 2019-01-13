@@ -128,7 +128,7 @@ class HopeOfGhirapurPlayerLostLifePredicate implements ObjectSourcePlayerPredica
         if (targetPlayer == null) {
             return false;
         }
-        HopeOfGhirapurCombatDamageWatcher watcher = (HopeOfGhirapurCombatDamageWatcher) game.getState().getWatchers().get(HopeOfGhirapurCombatDamageWatcher.class.getSimpleName());
+        HopeOfGhirapurCombatDamageWatcher watcher = game.getState().getWatcher(HopeOfGhirapurCombatDamageWatcher.class);
         if (watcher != null) {
             return watcher.playerGotCombatDamage(input.getSourceId(), input.getObject().getId(), game);
         }

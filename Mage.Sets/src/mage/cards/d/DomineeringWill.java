@@ -33,7 +33,7 @@ public final class DomineeringWill extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonattacking creatures");
 
     static {
-        filter.add(Predicates.not(new AttackingPredicate()));
+        filter.add(Predicates.not(AttackingPredicate.instance));
     }
 
     public DomineeringWill(UUID ownerId, CardSetInfo setInfo) {

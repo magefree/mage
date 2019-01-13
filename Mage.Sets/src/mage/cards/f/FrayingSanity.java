@@ -113,7 +113,7 @@ class FrayingSanityEffect extends OneShotEffect {
         }
         Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
         if (enchantedPlayer != null) {
-            CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get(CardsPutIntoGraveyardWatcher.class.getSimpleName());
+            CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
             if (watcher != null) {
                 xAmount = watcher.getAmountCardsPutToGraveyard(enchantedPlayer.getId());
             }

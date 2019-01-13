@@ -29,7 +29,7 @@ public final class Foreshadow extends CardImpl {
 
         // Choose a card name, then target opponent puts the top card of their library into their graveyard. If that card has the chosen name, you draw a card.
         this.getSpellAbility().addEffect(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL));
-        this.getSpellAbility().addEffect(new ForeshadowEffect());
+        this.getSpellAbility().addEffect(new ForeshadowEffect().concatBy("then"));
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Draw a card at the beginning of the next turn's upkeep.
@@ -51,7 +51,7 @@ class ForeshadowEffect extends OneShotEffect {
 
     public ForeshadowEffect() {
         super(Outcome.DrawCard);
-        this.staticText = ", then target opponent puts the top card of their library into their graveyard. If that card has the chosen name, you draw a card";
+        this.staticText = "target opponent puts the top card of their library into their graveyard. If that card has the chosen name, you draw a card";
     }
 
     public ForeshadowEffect(final ForeshadowEffect effect) {

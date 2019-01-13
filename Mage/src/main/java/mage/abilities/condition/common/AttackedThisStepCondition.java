@@ -15,7 +15,7 @@ public enum AttackedThisStepCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerAttackedStepWatcher watcher = (PlayerAttackedStepWatcher) game.getState().getWatchers().get(PlayerAttackedStepWatcher.class.getSimpleName());
+        PlayerAttackedStepWatcher watcher = game.getState().getWatcher(PlayerAttackedStepWatcher.class);
         return watcher != null
                 && watcher.getNumberAttackingCurrentStep(source.getControllerId()) > 0;
     }

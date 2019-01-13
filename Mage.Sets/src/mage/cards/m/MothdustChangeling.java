@@ -27,7 +27,7 @@ public final class MothdustChangeling extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public MothdustChangeling(UUID ownerId, CardSetInfo setInfo) {

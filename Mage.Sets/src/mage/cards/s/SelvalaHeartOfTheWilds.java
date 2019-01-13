@@ -35,7 +35,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.";
@@ -132,32 +132,5 @@ class GreatestPowerPredicate implements Predicate<Permanent> {
     @Override
     public String toString() {
         return "Greatest Power";
-    }
-}
-
-class GreatestPowerYouControlValue implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player player = game.getPlayer(sourceAbility.getControllerId());
-        int amount = 0;
-        if (player != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)) {
-                if (permanent.getPower().getValue() > amount) {
-                    amount = permanent.getPower().getValue();
-                }
-            }
-        }
-        return amount;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new GreatestPowerYouControlValue();
-    }
-
-    @Override
-    public String getMessage() {
-        return "Add X mana in any combination of colors, where X is the greatest power among creatures you control.";
     }
 }

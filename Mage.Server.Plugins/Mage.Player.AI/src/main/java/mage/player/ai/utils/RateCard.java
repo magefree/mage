@@ -1,31 +1,26 @@
 package mage.player.ai.utils;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubType;
 import mage.target.Target;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetAttackingCreature;
+import mage.target.common.TargetAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 import org.apache.log4j.Logger;
 
 import java.io.InputStream;
 import java.util.*;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.DamageWithPowerTargetEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
-import mage.abilities.effects.common.FightTargetsEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.Rarity;
-import mage.constants.SubType;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetAttackingCreature;
-import mage.target.common.TargetAttackingOrBlockingCreature;
-import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  * Class responsible for reading ratings from resources and rating given cards.
@@ -43,13 +38,12 @@ public final class RateCard {
      * Rating that is given for new cards.
      * Ratings are in [1,10] range, so setting it high will make new cards appear more often.
      * nowadays, cards that are more rare are more powerful, lets trust that and play the shiny cards.
-     *
      */
     private static final int DEFAULT_NOT_RATED_CARD_RATING = 40;
     private static final int DEFAULT_NOT_RATED_UNCOMMON_RATING = 60;
     private static final int DEFAULT_NOT_RATED_RARE_RATING = 75;
     private static final int DEFAULT_NOT_RATED_MYTHIC_RATING = 90;
-    
+
     private static String RATINGS_DIR = "/ratings/";
     private static String RATINGS_SET_LIST = RATINGS_DIR + "setsWithRatings.csv";
 
@@ -100,54 +94,54 @@ public final class RateCard {
         if (card.isEnchantment() || card.isInstant() || card.isSorcery()) {
 
             for (Ability ability : card.getAbilities()) {
-                for (Effect effect : ability.getEffects()) { 
-                    if (isEffectRemoval(card, ability, effect) == 1){
+                for (Effect effect : ability.getEffects()) {
+                    if (isEffectRemoval(card, ability, effect) == 1) {
                         return 1;
                     }
                 }
-                for (Mode mode: ability.getModes().values() ){
-                    for (Effect effect: mode.getEffects()){
-                        if (isEffectRemoval(card, ability, effect) == 1){
+                for (Mode mode : ability.getModes().values()) {
+                    for (Effect effect : mode.getEffects()) {
+                        if (isEffectRemoval(card, ability, effect) == 1) {
                             return 1;
                         }
                     }
                 }
             }
-           
+
         }
         return 0;
     }
-    
-    private static int isEffectRemoval(Card card, Ability ability, Effect effect){
+
+    private static int isEffectRemoval(Card card, Ability ability, Effect effect) {
         if (effect.getOutcome() == Outcome.Removal) {
             log.debug("Found removal: " + card.getName());
             return 1;
         }
         //static List<Effect> removalEffects =[BoostTargetEffect,BoostEnchantedEffect]
-        if (effect instanceof BoostTargetEffect || effect instanceof BoostEnchantedEffect){
+        if (effect instanceof BoostTargetEffect || effect instanceof BoostEnchantedEffect) {
             String text = effect.getText(null);
-            if (text.contains("/-")){
+            if (text.contains("/-")) {
                 // toughness reducer, aka removal
                 return 1;
             }
         }
-        if (effect instanceof FightTargetsEffect || effect instanceof DamageWithPowerTargetEffect){
+        if (effect instanceof FightTargetsEffect || effect instanceof DamageWithPowerTargetEffect) {
             return 1;
         }
         if (effect.getOutcome() == Outcome.Damage || effect instanceof DamageTargetEffect) {
             for (Target target : ability.getTargets()) {
-                if (!(target instanceof TargetPlayerOrPlaneswalker)){
+                if (!(target instanceof TargetPlayerOrPlaneswalker)) {
                     log.debug("Found damage dealer: " + card.getName());
                     return 1;
                 }
             }
         }
-        if (effect.getOutcome() == Outcome.DestroyPermanent || 
-                effect instanceof DestroyTargetEffect || 
-                effect instanceof ExileTargetEffect || 
+        if (effect.getOutcome() == Outcome.DestroyPermanent ||
+                effect instanceof DestroyTargetEffect ||
+                effect instanceof ExileTargetEffect ||
                 effect instanceof ExileUntilSourceLeavesEffect) {
             for (Target target : ability.getTargets()) {
-                if (target instanceof TargetCreaturePermanent || 
+                if (target instanceof TargetCreaturePermanent ||
                         target instanceof TargetAttackingCreature ||
                         target instanceof TargetAttackingOrBlockingCreature ||
                         target instanceof TargetPermanent) {
@@ -175,37 +169,37 @@ public final class RateCard {
         }
 
         Rarity r = card.getRarity();
-        if (Rarity.COMMON == r){
+        if (Rarity.COMMON == r) {
             return DEFAULT_NOT_RATED_CARD_RATING;
-        }else if (Rarity.UNCOMMON == r){
+        } else if (Rarity.UNCOMMON == r) {
             return DEFAULT_NOT_RATED_UNCOMMON_RATING;
-        }else if (Rarity.RARE == r){
+        } else if (Rarity.RARE == r) {
             return DEFAULT_NOT_RATED_RARE_RATING;
-        }else if (Rarity.MYTHIC == r){
+        } else if (Rarity.MYTHIC == r) {
             return DEFAULT_NOT_RATED_MYTHIC_RATING;
         }
         return DEFAULT_NOT_RATED_CARD_RATING;
     }
-    
+
     /**
      * reads the list of sets that have ratings csv files
      * populates the setsWithRatingsToBeLoaded
      */
-    private synchronized static void readRatingSetList(){
+    private synchronized static void readRatingSetList() {
         try {
-            if (setsWithRatingsToBeLoaded == null){
+            if (setsWithRatingsToBeLoaded == null) {
                 setsWithRatingsToBeLoaded = new LinkedList<>();
                 InputStream is = RateCard.class.getResourceAsStream(RATINGS_SET_LIST);
                 Scanner scanner = new Scanner(is);
-                    while (scanner.hasNextLine()) {
-                        String line = scanner.nextLine();
-                        if (!line.substring(0,1).equals("#")){
-                            setsWithRatingsToBeLoaded.add(line);
-                        }
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    if (!line.substring(0, 1).equals("#")) {
+                        setsWithRatingsToBeLoaded.add(line);
                     }
+                }
             }
-        }catch (Exception e) {
-            log.info("failed to read ratings set list file: " + RATINGS_SET_LIST );
+        } catch (Exception e) {
+            log.info("failed to read ratings set list file: " + RATINGS_SET_LIST);
             e.printStackTrace();
         }
     }
@@ -217,15 +211,16 @@ public final class RateCard {
         if (ratings == null) {
             ratings = new HashMap<>();
         }
-        if (setsWithRatingsToBeLoaded.contains(expCode)){
-            log.info("reading draftbot ratings for the set" + expCode);
-            readFromFile(RATINGS_DIR + expCode + ".csv");            
+        if (setsWithRatingsToBeLoaded.contains(expCode)) {
+            log.info("reading draftbot ratings for the set " + expCode);
+            readFromFile(RATINGS_DIR + expCode + ".csv");
             setsWithRatingsToBeLoaded.remove(expCode);
         }
     }
+
     /**
-    * reads ratings from the file
-    */
+     * reads ratings from the file
+     */
     private synchronized static void readFromFile(String path) {
         Integer min = Integer.MAX_VALUE, max = 0;
         Map<String, Integer> thisFileRatings = new HashMap<>();
@@ -248,21 +243,21 @@ public final class RateCard {
                 }
             }
             // normalize for the file to [1..100]
-            for (String name: thisFileRatings.keySet()){
+            for (String name : thisFileRatings.keySet()) {
                 int r = thisFileRatings.get(name);
-                int newrating = (int)(100.0f * (r - min) / (max - min));
-                if (!ratings.containsKey(name) || 
-                    (ratings.containsKey(name) && newrating > ratings.get(name)) ){
-                        ratings.put(name, newrating);
+                int newrating = (int) (100.0f * (r - min) / (max - min));
+                if (!ratings.containsKey(name) ||
+                        (ratings.containsKey(name) && newrating > ratings.get(name))) {
+                    ratings.put(name, newrating);
                 }
             }
         } catch (Exception e) {
-            log.info("failed to read ratings file: " + path );
+            log.info("failed to read ratings file: " + path);
             e.printStackTrace();
         }
     }
 
-    private static final int SINGLE_PENALTY[] = {0, 1, 1, 3, 6, 9};
+    private static final int[] SINGLE_PENALTY = {0, 1, 1, 3, 6, 9};
     private static final int MULTICOLOR_BONUS = 15;
 
     /**
@@ -270,7 +265,6 @@ public final class RateCard {
      * Depends on chosen colors. Returns negative score for those cards that doesn't fit allowed colors.
      * If allowed colors are not chosen, then score based on converted cost is returned with penalty for heavy colored cards.
      * gives bonus to multicolor cards that fit within allowed colors and if allowed colors is <5
-     *
      *
      * @param card
      * @param allowedColors Can be null.
@@ -282,7 +276,7 @@ public final class RateCard {
             int colorPenalty = 0;
             for (String symbol : card.getManaCost().getSymbols()) {
                 if (isColoredMana(symbol)) {
-                     colorPenalty++;
+                    colorPenalty++;
                 }
             }
             return 2 * (converted - colorPenalty + 1);
@@ -314,22 +308,22 @@ public final class RateCard {
             maxSingleCount = 5;
 
         int rate = 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]);
-        if( singleCount.size() > 1 && singleCount.size() < 5){
+        if (singleCount.size() > 1 && singleCount.size() < 5) {
             rate += MULTICOLOR_BONUS;
         }
         return rate;
     }
-  
+
     /**
      * Determines whether mana symbol is color.
      *
-      * @param symbol
+     * @param symbol
      * @return
      */
     public static boolean isColoredMana(String symbol) {
         String s = symbol;
         if (s.length() > 1) {
-            s = s.replace("{","").replace("}","");
+            s = s.replace("{", "").replace("}", "");
         }
         if (s.length() > 1) {
             return false;
@@ -339,6 +333,7 @@ public final class RateCard {
 
     /**
      * Return number of color mana symbols in manacost.
+     *
      * @param card
      * @return
      */
@@ -354,6 +349,7 @@ public final class RateCard {
 
     /**
      * Return number of different color mana symbols in manacost.
+     *
      * @param card
      * @return
      */

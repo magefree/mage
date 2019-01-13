@@ -36,9 +36,9 @@ public class UntapAllThatAttackedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
-        if (watcher instanceof AttackedThisTurnWatcher) {
-            Set<MageObjectReference> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        if (watcher != null) {
+            Set<MageObjectReference> attackedThisTurn = watcher.getAttackedThisTurnCreatures();
             for (MageObjectReference mor : attackedThisTurn) {
                 Permanent permanent = mor.getPermanent(game);
                 if (permanent != null && permanent.isCreature()) {

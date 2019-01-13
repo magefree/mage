@@ -74,7 +74,7 @@ class BrainGorgersCounterSourceEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 cost.clearPaid();
                 Player player = game.getPlayer(playerId);
-                if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+                if (player != null && cost.canPay(source, source.getSourceId(), player.getId(), game)
                         && player.chooseUse(outcome, "Sacrifice a creature to counter " + sourceObject.getIdName() + '?', source, game)) {
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                         game.informPlayers(player.getLogName() + " sacrifices a creature to counter " + sourceObject.getIdName() + '.');

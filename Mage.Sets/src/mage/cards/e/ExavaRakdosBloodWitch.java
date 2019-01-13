@@ -29,7 +29,7 @@ public final class ExavaRakdosBloodWitch extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     static final String rule = "Each other creature you control with a +1/+1 counter on it has haste";

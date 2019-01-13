@@ -100,7 +100,7 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
 
         FilterPermanent filter = new FilterPermanent("permanent with converted mana cost X or less that's one or more colors");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
-        filter.add(Predicates.not(new ColorlessPredicate()));
+        filter.add(Predicates.not(ColorlessPredicate.instance));
         Set<Card> permanentsToExile = new HashSet<>();
         permanentsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
         controller.moveCards(permanentsToExile, Zone.EXILED, source, game);

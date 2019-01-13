@@ -58,7 +58,7 @@ class HauntingEchoesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
+        if (targetPlayer != null && player != null) {
             for (Card card : targetPlayer.getGraveyard().getCards(game)) {
                 if (!StaticFilters.FILTER_CARD_BASIC_LAND.match(card, game)) {
                     card.moveToExile(null, "", source.getSourceId(), game);

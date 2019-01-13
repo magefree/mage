@@ -18,7 +18,6 @@ import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.*;
-import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 import javax.swing.*;
@@ -45,10 +44,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static DownloadPicturesService instance;
     private static final Logger logger = Logger.getLogger(DownloadPicturesService.class);
 
-    public static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
-    public static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
-    public static final String ALL_STANDARD_IMAGES = "- STANDARD images";
-    public static final String ALL_TOKENS = "- TOKEN images";
+    private static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
+    private static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
+    private static final String ALL_STANDARD_IMAGES = "- STANDARD images";
+    private static final String ALL_TOKENS = "- TOKEN images";
 
     private DownloadImagesDialog uiDialog;
     private boolean needCancel;
@@ -60,16 +59,16 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private int missingCardsCount = 0;
     private int missingTokensCount = 0;
 
-    List<String> selectedSets = new ArrayList<>();
+    private List<String> selectedSets = new ArrayList<>();
     private static CardImageSource selectedSource;
 
     private final Object sync = new Object();
     private Proxy p = Proxy.NO_PROXY;
 
     enum DownloadSources {
-        WIZARDS("1. wizards.com - low quality CARDS, multi-language, can be SLOW", WizardCardsImageSource.instance),
+        WIZARDS("1. wizards.com - low quality CARDS, multi-language, slow download", WizardCardsImageSource.instance),
         TOKENS("2. tokens.mtg.onl - high quality TOKENS", TokensMtgImageSource.instance),
-        SCRYFALL("3. scryfall.com - high quality CARDS, multi-language", ScryfallImageSource.instance),
+        SCRYFALL("3. scryfall.com - high quality CARDS and TOKENS, multi-language", ScryfallImageSource.instance),
         MAGIDEX("4. magidex.com - high quality CARDS", MagidexImageSource.instance),
         GRAB_BAG("5. GrabBag - STAR WARS cards and tokens", GrabbagImageSource.instance),
         MYTHICSPOILER("6. mythicspoiler.com", MythicspoilerComSource.instance),
@@ -333,7 +332,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         int numberCardImagesAvailable = 0;
         for (CardDownloadData data : cardsMissing) {
             if (data.isToken()) {
-                if (selectedSource.isTokenSource() && selectedSource.isImageProvided(data.getSet(), data.getName())) {
+                if (selectedSource.isTokenSource() && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getType())) {
                     numberTokenImagesAvailable++;
                     cardsDownloadQueue.add(data);
                 } else {
@@ -341,7 +340,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
             } else {
                 if (selectedSets != null && selectedSets.contains(data.getSet())) {
-                    if (selectedSource.isSetSupportedComplete(data.getSet()) || selectedSource.isImageProvided(data.getSet(), data.getName())) {
+                    if (selectedSource.isSetSupportedComplete(data.getSet()) || selectedSource.isCardImageProvided(data.getSet(), data.getName())) {
                         numberCardImagesAvailable++;
                         cardsDownloadQueue.add(data);
                     }
@@ -393,7 +392,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     private static List<CardDownloadData> prepareMissingCards(List<CardInfo> allCards, boolean redownloadMode) {
-        HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
         // get filter for Standard Type 2 cards
         Set<String> type2SetsFilter = new HashSet<>();
@@ -408,8 +406,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         try {
             allCards.parallelStream().forEach(card -> {
-                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()
-                        && !ignoreUrls.contains(card.getSetCode())) {
+                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
                     String cardName = card.getName();
                     boolean isType2 = type2SetsFilter.contains(card.getSetCode());
                     CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
@@ -498,7 +495,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     if (params.length >= 5) {
                         int type = 0;
                         if (params[4] != null && !params[4].isEmpty()) {
-                            type = Integer.parseInt(params[4].trim());
+                            type = Integer.parseInt(params[4].trim()); // token number for same names
                         }
                         String fileName = "";
                         if (params.length > 5 && params[5] != null && !params[5].isEmpty()) {
@@ -547,6 +544,16 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             logger.error(ex);
             throw new RuntimeException("DownloadPicturesService : readFile() error");
         }
+
+        // TODO: delete and move to copy-pate images download mode
+        /*
+        for (CardDownloadData card : list) {
+            if (card.isToken()) {
+                System.out.println(card.getSet() + "/" + card.getName() + (!card.getType().equals(0) ? "/" + card.getType() : ""));
+            }
+        }
+        */
+
         return list;
     }
 
@@ -586,8 +593,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         }
 
         if (p != null) {
-            HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
-
             update(0, cardsDownloadQueue.size());
             logger.info("Started download of " + cardsDownloadQueue.size() + " images"
                     + " from source: " + selectedSource.getSourceName()
@@ -602,13 +607,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
 
                     CardImageUrls urls;
-                    if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
+                    if (card.isToken()) {
                         if (!"0".equals(card.getCollectorId())) {
                             continue;
                         }
                         urls = selectedSource.generateTokenUrl(card);
                     } else {
-                        urls = selectedSource.generateURL(card);
+                        urls = selectedSource.generateCardUrl(card);
                     }
 
                     if (urls == null) {
@@ -929,7 +934,7 @@ class LoadMissingCardDataNew implements Runnable {
     private static DownloadPicturesService downloadPicturesService;
 
     public LoadMissingCardDataNew(DownloadPicturesService downloadPicturesService) {
-        this.downloadPicturesService = downloadPicturesService;
+        LoadMissingCardDataNew.downloadPicturesService = downloadPicturesService;
     }
 
     @Override
@@ -940,5 +945,4 @@ class LoadMissingCardDataNew implements Runnable {
     public static void main() {
         (new Thread(new LoadMissingCardDataNew(downloadPicturesService))).start();
     }
-
 }

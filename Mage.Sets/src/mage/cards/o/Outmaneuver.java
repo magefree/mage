@@ -26,7 +26,7 @@ public final class Outmaneuver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new BlockedPredicate());
+        filter.add(BlockedPredicate.instance);
     }
 
     public Outmaneuver(UUID ownerId, CardSetInfo setInfo) {

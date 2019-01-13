@@ -52,9 +52,9 @@ class SourceControllerLostLifeCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
+        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         if (watcher != null) {
-            return watcher.getLiveLost(sourceAbility.getControllerId());
+            return watcher.getLifeLost(sourceAbility.getControllerId());
         }
         return 0;
     }

@@ -28,7 +28,7 @@ public final class N1Starfighter extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public N1Starfighter(UUID ownerId, CardSetInfo setInfo) {

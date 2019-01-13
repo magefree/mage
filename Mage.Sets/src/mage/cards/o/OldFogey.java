@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -39,7 +38,7 @@ public final class OldFogey extends CardImpl {
     }
 
     public OldFogey(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}");
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -51,7 +50,7 @@ public final class OldFogey extends CardImpl {
         // Echo {G}{G}
         this.addAbility(new EchoAbility("{G}{G}"));
         // Fading 3
-        this.addAbility(new FadingAbility(3, this));
+        this.addAbility(new FadingAbility(3, this, true));
         // Bands with other Dinosaurs
         this.addAbility(new BandsWithOtherAbility(SubType.DINOSAUR));
         // Protection from Homarids
@@ -61,7 +60,7 @@ public final class OldFogey extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // Rampage 2
-        this.addAbility(new RampageAbility(2));
+        this.addAbility(new RampageAbility(2, true));
     }
 
     public OldFogey(final OldFogey card) {

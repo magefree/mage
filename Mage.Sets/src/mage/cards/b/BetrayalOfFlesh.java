@@ -34,8 +34,8 @@ public final class BetrayalOfFlesh extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or return target creature card from your graveyard to the battlefield.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        mode.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().getModes().addMode(mode);
         // Entwine-Sacrifice three lands.
         this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("three lands"), true))));

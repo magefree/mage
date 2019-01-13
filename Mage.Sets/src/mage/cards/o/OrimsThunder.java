@@ -3,7 +3,6 @@ package mage.cards.o;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -18,17 +17,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class OrimsThunder extends CardImpl {
 
     public OrimsThunder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Kicker {R}
         this.addAbility(new KickerAbility("{R}"));
@@ -39,16 +38,9 @@ public final class OrimsThunder extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new OrimsThunderEffect2(),
                 KickedCondition.instance,
-                "If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature"));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            if (KickedCondition.instance.apply(game, ability)) {
-                ability.addTarget(new TargetCreaturePermanent());
-            }
-        }
+                "If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature")
+        );
+        this.getSpellAbility().setTargetAdjuster(OrimsThunderAdjuster.instance);
     }
 
     public OrimsThunder(final OrimsThunder card) {
@@ -59,6 +51,18 @@ public final class OrimsThunder extends CardImpl {
     public OrimsThunder copy() {
         return new OrimsThunder(this);
     }
+}
+
+enum OrimsThunderAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (KickedCondition.instance.apply(game, ability)) {
+            ability.addTarget(new TargetCreaturePermanent());
+        }
+    }
+
 }
 
 class OrimsThunderEffect2 extends OneShotEffect {

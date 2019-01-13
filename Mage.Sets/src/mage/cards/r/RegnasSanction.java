@@ -2,6 +2,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapAllEffect;
@@ -22,7 +23,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author TheElk801
  */
 public final class RegnasSanction extends CardImpl {
@@ -64,13 +64,13 @@ class RegnasSanctionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChooseFriendsAndFoes choice = new ChooseFriendsAndFoes();
-        if (!choice.chooseFriendOrFoe(controller, source, game)) {
+        if (controller != null || !choice.chooseFriendOrFoe(controller, source, game)) {
             return false;
         }
         FilterCreaturePermanent filterToTap = new FilterCreaturePermanent();
         for (Player player : choice.getFoes()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature you control");
-            filter.add(Predicates.not(new TappedPredicate()));
+            filter.add(Predicates.not(TappedPredicate.instance));
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetPermanent target = new TargetPermanent(1, 1, filter, true);
             if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {

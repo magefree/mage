@@ -64,31 +64,33 @@ class TsabosDecreeEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
-            if (!player.choose(outcome, typeChoice, game)) {
-                return false;
-            }
-            game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-            targetPlayer.revealCards("hand of " + targetPlayer.getName(), targetPlayer.getHand(), game);
-            FilterCard filterCard = new FilterCard();
-            filterCard.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
-            List<Card> toDiscard = new ArrayList<>();
-            for (Card card : targetPlayer.getHand().getCards(game)) {
-                if (filterCard.match(card, game)) {
-                    toDiscard.add(card);
+            if(sourceObject != null) {
+                Choice typeChoice = new ChoiceCreatureType(sourceObject);
+                if (!player.choose(outcome, typeChoice, game)) {
+                    return false;
                 }
-            }
-            for (Card card : toDiscard) {
-                targetPlayer.discard(card, source, game);
-            }
-            FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-            filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
-            for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
-                if (creature.isControlledBy(targetPlayer.getId())) {
-                    creature.destroy(source.getSourceId(), game, true);
+                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
+                targetPlayer.revealCards("hand of " + targetPlayer.getName(), targetPlayer.getHand(), game);
+                FilterCard filterCard = new FilterCard();
+                filterCard.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                List<Card> toDiscard = new ArrayList<>();
+                for (Card card : targetPlayer.getHand().getCards(game)) {
+                    if (filterCard.match(card, game)) {
+                        toDiscard.add(card);
+                    }
                 }
+                for (Card card : toDiscard) {
+                    targetPlayer.discard(card, source, game);
+                }
+                FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
+                filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
+                    if (creature.isControlledBy(targetPlayer.getId())) {
+                        creature.destroy(source.getSourceId(), game, true);
+                    }
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

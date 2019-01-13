@@ -7,6 +7,7 @@ package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -23,6 +24,7 @@ public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
      * either.
      */
     @Test
+    @Ignore
     public void testTokenTriggeresETBEffect() {
         // Flying
         // Sphinx spells you cast cost {2} less to cast.

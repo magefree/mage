@@ -34,7 +34,7 @@ public class PopulateEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("token for populate");
 
     static {
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -26,6 +25,10 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTargetAmount;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * GATECRASH FAQ 11.01.2013
@@ -67,7 +70,7 @@ public final class AureliasFury extends CardImpl {
 
     }
 
-    public AureliasFury(final AureliasFury card) {
+    private AureliasFury(final AureliasFury card) {
         super(card);
     }
 
@@ -79,12 +82,12 @@ public final class AureliasFury extends CardImpl {
 
 class AureliasFuryEffect extends OneShotEffect {
 
-    public AureliasFuryEffect() {
+    AureliasFuryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn";
     }
 
-    public AureliasFuryEffect(final AureliasFuryEffect effect) {
+    private AureliasFuryEffect(final AureliasFuryEffect effect) {
         super(effect);
     }
 
@@ -95,15 +98,15 @@ class AureliasFuryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AureliasFuryDamagedByWatcher watcher = (AureliasFuryDamagedByWatcher) game.getState().getWatchers().get(AureliasFuryDamagedByWatcher.class.getSimpleName(), source.getSourceId());
+        AureliasFuryDamagedByWatcher watcher = game.getState().getWatcher(AureliasFuryDamagedByWatcher.class, source.getSourceId());
         if (watcher != null) {
-            for (UUID creatureId : watcher.damagedCreatures) {
+            for (UUID creatureId : watcher.getDamagedCreatures()) {
                 Permanent permanent = game.getPermanent(creatureId);
                 if (permanent != null) {
                     permanent.tap(game);
                 }
             }
-            for (UUID playerId : watcher.damagedPlayers) {
+            for (UUID playerId : watcher.getDamagedPlayers()) {
                 ContinuousEffect effect = new AureliasFuryCantCastEffect();
                 effect.setTargetPointer(new FixedTarget(playerId));
                 game.addEffect(effect, source);
@@ -117,12 +120,12 @@ class AureliasFuryEffect extends OneShotEffect {
 
 class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AureliasFuryCantCastEffect() {
+    AureliasFuryCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Players dealt damage this way can't cast noncreature spells this turn";
     }
 
-    public AureliasFuryCantCastEffect(final AureliasFuryCantCastEffect effect) {
+    private AureliasFuryCantCastEffect(final AureliasFuryCantCastEffect effect) {
         super(effect);
     }
 
@@ -165,14 +168,14 @@ class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class AureliasFuryDamagedByWatcher extends Watcher {
 
-    public Set<UUID> damagedCreatures = new HashSet<>();
-    public Set<UUID> damagedPlayers = new HashSet<>();
+    private final Set<UUID> damagedCreatures = new HashSet<>();
+    private final Set<UUID> damagedPlayers = new HashSet<>();
 
-    public AureliasFuryDamagedByWatcher() {
+    AureliasFuryDamagedByWatcher() {
         super(AureliasFuryDamagedByWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
-    public AureliasFuryDamagedByWatcher(final AureliasFuryDamagedByWatcher watcher) {
+    private AureliasFuryDamagedByWatcher(final AureliasFuryDamagedByWatcher watcher) {
         super(watcher);
         this.damagedCreatures.addAll(watcher.damagedCreatures);
         this.damagedPlayers.addAll(watcher.damagedPlayers);
@@ -210,4 +213,11 @@ class AureliasFuryDamagedByWatcher extends Watcher {
         damagedPlayers.clear();
     }
 
+    Set<UUID> getDamagedCreatures() {
+        return damagedCreatures;
+    }
+
+    Set<UUID> getDamagedPlayers() {
+        return damagedPlayers;
+    }
 }

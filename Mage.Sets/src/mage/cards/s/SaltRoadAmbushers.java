@@ -51,7 +51,7 @@ class SaltRoadAmbushersTriggeredAbility extends TurnedFaceUpAllTriggeredAbility 
 private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another permanent you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
     
     public SaltRoadAmbushersTriggeredAbility() {

@@ -29,7 +29,7 @@ public final class CatapultSquad extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Soldiers you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.SOLDIER));
     }
 

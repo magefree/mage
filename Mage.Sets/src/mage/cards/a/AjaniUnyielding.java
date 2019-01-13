@@ -35,7 +35,7 @@ public final class AjaniUnyielding extends CardImpl {
     static {
         nonlandPermanentFilter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         planeswalkerFilter.add(new ControllerPredicate(TargetController.YOU));
-        planeswalkerFilter.add(new AnotherPredicate());
+        planeswalkerFilter.add(AnotherPredicate.instance);
     }
 
     public AjaniUnyielding(UUID ownerId, CardSetInfo setInfo) {

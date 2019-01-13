@@ -298,8 +298,8 @@ public class Table implements Serializable {
                 .setGameType(this.getGameType())
                 .setDeckType(this.getDeckType())
                 .setControllerName(this.getControllerName())
-                .setStartTimeMs(this.getStartTime().getTime())
-                .setEndTimeMs(this.getEndTime().getTime())
+                .setStartTimeMs(this.getStartTime() != null ? this.getStartTime().getTime() : 0L)
+                .setEndTimeMs(this.getEndTime() != null ? this.getEndTime().getTime() : 0L)
                 .build();
     }
 }

@@ -155,7 +155,7 @@ class PlaneswalkersMischiefCondition implements Condition {
         if (!game.getExile().getExileZone(exileId).contains(cardId)) {
             return false;
         }
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName(), source.getSourceId());
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class, source.getSourceId());
         if (watcher != null) {
             List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spells != null) {

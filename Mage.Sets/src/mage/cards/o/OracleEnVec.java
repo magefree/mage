@@ -243,7 +243,7 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
         if (watcher != null) {
             for (UUID targetId : chosenCreatures) {
                 Permanent permanent = game.getPermanent(targetId);

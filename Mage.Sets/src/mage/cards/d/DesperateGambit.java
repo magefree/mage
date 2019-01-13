@@ -68,8 +68,11 @@ class DesperateGambitEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         this.target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game);
-        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(game);
-        super.init(source, game);
+        Player you = game.getPlayer(source.getControllerId());
+        if(you != null) {
+            wonFlip = you.flipCoin(game);
+            super.init(source, game);
+        }
     }
 
     @Override

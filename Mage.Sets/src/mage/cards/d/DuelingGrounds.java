@@ -74,7 +74,10 @@ class NoMoreThanOneCreatureCanAttackEachTurnEffect extends RestrictionEffect {
         if (!game.getCombat().getAttackers().isEmpty()) {
             return false;
         }
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        if(watcher == null){
+            return false;
+        }
         Set<MageObjectReference> attackedThisTurnCreatures = watcher.getAttackedThisTurnCreatures();
         return attackedThisTurnCreatures.isEmpty()
                 || (attackedThisTurnCreatures.size() == 1 && attackedThisTurnCreatures.contains(new MageObjectReference(attacker, game)));
@@ -108,7 +111,10 @@ class NoMoreThanOneCreatureCanBlockEachTurnEffect extends RestrictionEffect {
         if (!game.getCombat().getBlockers().isEmpty()) {
             return false;
         }
-        BlockedThisTurnWatcher watcher = (BlockedThisTurnWatcher) game.getState().getWatchers().get(BlockedThisTurnWatcher.class.getSimpleName());
+        BlockedThisTurnWatcher watcher = game.getState().getWatcher(BlockedThisTurnWatcher.class);
+        if(watcher == null){
+            return false;
+        }
         Set<MageObjectReference> blockedThisTurnCreatures = watcher.getBlockedThisTurnCreatures();
         MageObjectReference blockerReference = new MageObjectReference(blocker.getId(), blocker.getZoneChangeCounter(game), game);
         return blockedThisTurnCreatures.isEmpty()

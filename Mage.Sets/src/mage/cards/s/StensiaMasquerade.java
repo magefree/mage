@@ -35,7 +35,7 @@ public final class StensiaMasquerade extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public StensiaMasquerade(UUID ownerId, CardSetInfo setInfo) {

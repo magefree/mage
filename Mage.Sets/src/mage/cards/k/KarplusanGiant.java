@@ -27,7 +27,7 @@ public final class KarplusanGiant extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped snow land you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 

@@ -27,7 +27,7 @@ public final class HonorWornShaku extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped legendary permanent");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 

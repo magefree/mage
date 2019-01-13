@@ -75,13 +75,15 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
             Player player = game.getPlayer(controllerId);
-            for (UUID targetId: targets.get(0).getTargets()) {
-                card = player.getHand().get(targetId, game);
-                if (card == null) {
-                    return false;
-                }
-                paid |= player.discard(card, null, game);
+            if(player != null) {
+                for (UUID targetId : targets.get(0).getTargets()) {
+                    card = player.getHand().get(targetId, game);
+                    if (card == null) {
+                        return false;
+                    }
+                    paid |= player.discard(card, null, game);
 
+                }
             }
         }
         return paid;

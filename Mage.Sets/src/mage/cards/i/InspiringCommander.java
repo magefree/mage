@@ -27,7 +27,7 @@ public final class InspiringCommander extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 2 or less");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 

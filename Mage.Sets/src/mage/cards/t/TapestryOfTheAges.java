@@ -56,7 +56,7 @@ enum PlayerCastNonCreatureSpellCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerCastNonCreatureSpellWatcher watcher = (PlayerCastNonCreatureSpellWatcher) game.getState().getWatchers().get(PlayerCastNonCreatureSpellWatcher.class.getSimpleName());
+        PlayerCastNonCreatureSpellWatcher watcher = game.getState().getWatcher(PlayerCastNonCreatureSpellWatcher.class);
         return watcher != null && watcher.playerDidCastNonCreatureSpellThisTurn(source.getControllerId());
     }
     
@@ -71,7 +71,7 @@ class PlayerCastNonCreatureSpellWatcher extends Watcher {
     Set<UUID> playerIds = new HashSet<>();
 
     public PlayerCastNonCreatureSpellWatcher() {
-        super(PlayerCastNonCreatureSpellWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(PlayerCastNonCreatureSpellWatcher.class, WatcherScope.GAME);
     }
 
     public PlayerCastNonCreatureSpellWatcher(final PlayerCastNonCreatureSpellWatcher watcher) {

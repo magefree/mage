@@ -275,7 +275,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     Permanent attackingPermanent = game.getPermanent(attacker);
                     if (attackingPermanent != null) {
                         attackingPermanent.setTapped(false);
-                        attackingPermanent.tap(game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
+                        attackingPermanent.tap(true,game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
                     }
                 }
                 handleBanding(attacker, game);

@@ -29,7 +29,7 @@ public final class SkyHussar extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white and/or blue creatures you control");
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.WHITE), new ColorPredicate(ObjectColor.BLUE)));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public SkyHussar(UUID ownerId, CardSetInfo setInfo) {

@@ -76,7 +76,7 @@ class DeceiverOfFormEffect extends OneShotEffect {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                             if (!permanent.getId().equals(sourceObject.getId())) {
                                 Permanent newBluePrint = null;
-                                newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
+                                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                                 newBluePrint.assignNewId();
                                 CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, permanent.getId());
                                 copyEffect.newId();

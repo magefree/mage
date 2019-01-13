@@ -27,7 +27,7 @@ public final class MobileGarrison extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target artifact or creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)

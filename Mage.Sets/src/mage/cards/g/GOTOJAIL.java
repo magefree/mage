@@ -118,7 +118,7 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals((UUID) game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
+        return event.getPlayerId().equals(game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
 
     @Override
@@ -145,7 +145,6 @@ class GoToJailUpkeepEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
         Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
 

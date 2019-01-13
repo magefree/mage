@@ -26,7 +26,7 @@ public final class MoggBombers extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public MoggBombers(UUID ownerId, CardSetInfo setInfo) {

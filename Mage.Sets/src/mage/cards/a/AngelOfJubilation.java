@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -80,7 +79,8 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Player player : game.getPlayers().values()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
             player.setCanPayLifeCost(false);
             player.setCanPaySacrificeCostFilter(new FilterCreaturePermanent());
         }
@@ -113,8 +113,10 @@ class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl 
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || abilityToModify instanceof SpellAbility;
+
+        return (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
+                || abilityToModify instanceof SpellAbility)
+                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(abilityToModify.getControllerId());
     }
 
     @Override

@@ -2,6 +2,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,7 +23,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public final class ElvishSoultiller extends CardImpl {
@@ -69,18 +69,20 @@ class ElvishSoultillerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        Choice typeChoice = new ChoiceCreatureType(mageObject);
-        if (controller != null && mageObject != null && controller.choose(outcome, typeChoice, game)) {
-            if (!game.isSimulation()) {
-                game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
+        if (controller != null && mageObject != null) {
+            Choice typeChoice = new ChoiceCreatureType(mageObject);
+            if (controller.choose(outcome, typeChoice, game)) {
+                if (!game.isSimulation()) {
+                    game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
+                }
+                Cards cardsToLibrary = new CardsImpl();
+                FilterCreatureCard filter = new FilterCreatureCard();
+                filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                cardsToLibrary.addAll(controller.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
+                controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
+                controller.shuffleLibrary(source, game);
+                return true;
             }
-            Cards cardsToLibrary = new CardsImpl();
-            FilterCreatureCard filter = new FilterCreatureCard();
-            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
-            cardsToLibrary.addAll(controller.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
-            controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
-            controller.shuffleLibrary(source, game);
-            return true;
         }
         return false;
     }

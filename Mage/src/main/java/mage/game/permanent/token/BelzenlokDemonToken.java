@@ -72,7 +72,7 @@ class BelzenlokDemonTokenEffect extends OneShotEffect {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     BelzenlokDemonTokenEffect() {

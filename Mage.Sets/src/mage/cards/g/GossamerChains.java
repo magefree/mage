@@ -24,7 +24,7 @@ public final class GossamerChains extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creature");
 
     static {
-        filter.add(new UnblockedPredicate());
+        filter.add(UnblockedPredicate.instance);
     }
 
     public GossamerChains(UUID ownerId, CardSetInfo setInfo) {

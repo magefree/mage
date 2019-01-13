@@ -66,7 +66,7 @@ class WhisperingSnitchTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
-            WhisperingSnitchWatcher watcher = (WhisperingSnitchWatcher) game.getState().getWatchers().get(WhisperingSnitchWatcher.class.getSimpleName());
+            WhisperingSnitchWatcher watcher = game.getState().getWatcher(WhisperingSnitchWatcher.class);
             return watcher != null && watcher.getTimesSurveiled(getControllerId()) == 1;
         }
         return false;
@@ -89,7 +89,7 @@ class WhisperingSnitchWatcher extends Watcher {
     private final Map<UUID, Integer> timesSurveiled = new HashMap<>();
 
     public WhisperingSnitchWatcher() {
-        super(WhisperingSnitchWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WhisperingSnitchWatcher.class, WatcherScope.GAME);
     }
 
     public WhisperingSnitchWatcher(final WhisperingSnitchWatcher watcher) {

@@ -27,7 +27,7 @@ public final class BastionProtector extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
 
     static {
-        filter.add(new CommanderPredicate());
+        filter.add(CommanderPredicate.instance);
     }
 
     public BastionProtector(UUID ownerId, CardSetInfo setInfo) {

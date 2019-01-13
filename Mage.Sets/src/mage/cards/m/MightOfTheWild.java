@@ -42,13 +42,13 @@ public final class MightOfTheWild extends CardImpl {
 
         // Destroy target artifact or enchantment.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filterMode2));
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetPermanent(filterMode2));
         this.getSpellAbility().addMode(mode);
 
         // Creatures you control gain indestructible this turn.
         mode = new Mode();
-        mode.getEffects().add(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")));
+        mode.addEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")));
         this.getSpellAbility().addMode(mode);
     }
 

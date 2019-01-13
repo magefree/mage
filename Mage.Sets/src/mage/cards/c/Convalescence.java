@@ -51,7 +51,7 @@ class ConvalescenceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player.getLife() <= 10) {
+        if (player != null && player.getLife() <= 10) {
             player.gainLife(1, game, source);
             return true;
         }

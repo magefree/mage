@@ -38,7 +38,7 @@ public final class AngelicFavor extends CardImpl {
     private static final FilterControlledCreaturePermanent untappedCreatureYouControl = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        untappedCreatureYouControl.add(Predicates.not(new TappedPredicate()));
+        untappedCreatureYouControl.add(Predicates.not(TappedPredicate.instance));
     }
 
     public AngelicFavor(UUID ownerId, CardSetInfo setInfo) {

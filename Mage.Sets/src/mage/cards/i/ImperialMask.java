@@ -26,7 +26,7 @@ public final class ImperialMask extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public ImperialMask(UUID ownerId, CardSetInfo setInfo) {

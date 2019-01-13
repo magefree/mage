@@ -30,7 +30,7 @@ public final class ElvishScout extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature you control");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public ElvishScout(UUID ownerId, CardSetInfo setInfo) {

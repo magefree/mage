@@ -68,8 +68,10 @@ class DarkRevenantEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             Player owner = game.getPlayer(card.getOwnerId());
-            owner.getGraveyard().remove(card);
-            return card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            if(owner != null) {
+                owner.getGraveyard().remove(card);
+                return card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            }
         }
         return true;
     }

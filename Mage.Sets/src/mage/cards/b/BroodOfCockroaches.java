@@ -1,34 +1,33 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 import static mage.constants.Outcome.Benefit;
 
 /**
- *
  * @author mpouedras
  */
 public final class BroodOfCockroaches extends CardImpl {
 
     public BroodOfCockroaches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
+
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -37,7 +36,7 @@ public final class BroodOfCockroaches extends CardImpl {
         // at the beginning of the next end step,
         // you lose 1 life
         // and return Brood of Cockroaches to your hand.
-        this.addAbility(new DiesTriggeredAbility(new BroodOfCockroachesEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new BroodOfCockroachesEffect(), false, true));
     }
 
     public BroodOfCockroaches(final BroodOfCockroaches card) {
@@ -51,7 +50,7 @@ public final class BroodOfCockroaches extends CardImpl {
 }
 
 class BroodOfCockroachesEffect extends OneShotEffect {
-    private static final String effectText = "at the beginning of the next end step, you lose 1 life and return Brood of Cockroaches to your hand.";
+    private static final String effectText = "at the beginning of the next end step, you lose 1 life and return {this} to your hand.";
 
     BroodOfCockroachesEffect() {
         super(Benefit);

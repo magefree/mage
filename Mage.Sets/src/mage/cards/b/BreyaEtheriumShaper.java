@@ -49,13 +49,13 @@ public final class BreyaEtheriumShaper extends CardImpl {
 
         // Target creature gets -4/-4 until end of turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
 
         // or You gain 5 life.
         mode = new Mode();
-        mode.getEffects().add(new GainLifeEffect(5));
+        mode.addEffect(new GainLifeEffect(5));
         ability.addMode(mode);
         this.addAbility(ability);
     }

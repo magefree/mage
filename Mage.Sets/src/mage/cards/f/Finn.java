@@ -28,7 +28,7 @@ public final class Finn extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public Finn(UUID ownerId, CardSetInfo setInfo) {

@@ -101,7 +101,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         MageObject mageObject = game.getObject(spellId);
-        if (!(mageObject instanceof Spell) || ((Spell) mageObject).isCopy()) {
+        if (!(mageObject instanceof Spell) || mageObject.isCopy()) {
             return false;
         } else {
             Card sourceCard = game.getCard(spellId);

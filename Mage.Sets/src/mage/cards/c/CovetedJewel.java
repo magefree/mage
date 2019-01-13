@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,20 +12,16 @@ import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class CovetedJewel extends CardImpl {
@@ -130,7 +125,7 @@ class CovetedJewelControlEffect extends ContinuousEffectImpl {
         Player newControllingPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (permanent == null || newControllingPlayer == null || !newControllingPlayer.isInGame()) {
             this.discard();
-            return true;
+            return false;
         }
         permanent.changeControllerId(getTargetPointer().getFirst(game, source), game);
         return true;

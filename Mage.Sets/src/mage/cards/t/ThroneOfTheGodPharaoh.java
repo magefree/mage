@@ -23,7 +23,7 @@ public final class ThroneOfTheGodPharaoh extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("tapped creature you control");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public ThroneOfTheGodPharaoh(UUID ownerId, CardSetInfo setInfo) {

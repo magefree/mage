@@ -1,14 +1,14 @@
-
 package mage.players;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.RandomUtil;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -186,7 +186,9 @@ public class Library implements Serializable {
         Map<String, Card> cards = new HashMap<>();
         for (UUID cardId : library) {
             Card card = game.getCard(cardId);
-            cards.putIfAbsent(card.getName(), card);
+            if (card != null) {
+                cards.putIfAbsent(card.getName(), card);
+            }
         }
         return cards.values();
     }
@@ -233,5 +235,18 @@ public class Library implements Serializable {
 
     public void reset() {
         this.emptyDraw = false;
+    }
+
+    /**
+     * Tests only -- find card position in library
+     */
+    public int getCardPosition(UUID cardId) {
+        UUID[] list = library.toArray(new UUID[0]);
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].equals(cardId)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

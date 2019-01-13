@@ -57,7 +57,7 @@ enum FairgroundsTrumpeterCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FairgroundsTrumpeterWatcher watcher = (FairgroundsTrumpeterWatcher) game.getState().getWatchers().get(FairgroundsTrumpeterWatcher.class.getSimpleName());
+        FairgroundsTrumpeterWatcher watcher = game.getState().getWatcher(FairgroundsTrumpeterWatcher.class);
         return watcher != null && watcher.p1p1AddedToPermanent(source.getControllerId());
     }
 

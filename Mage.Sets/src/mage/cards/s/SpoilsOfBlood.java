@@ -59,7 +59,7 @@ class SpoilsOfBloodEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreaturesDiedThisTurnWatcher watcher = (CreaturesDiedThisTurnWatcher) game.getState().getWatchers().get(CreaturesDiedThisTurnWatcher.class.getSimpleName());
+            CreaturesDiedThisTurnWatcher watcher = game.getState().getWatcher(CreaturesDiedThisTurnWatcher.class);
             if (watcher != null) {
                 new CreateTokenEffect(new SpoilsOfBloodHorrorToken(watcher.creaturesDiedThisTurn)).apply(game, source);
             }
@@ -80,7 +80,7 @@ class CreaturesDiedThisTurnWatcher extends Watcher {
     public int creaturesDiedThisTurn = 0;
 
     public CreaturesDiedThisTurnWatcher() {
-        super(CreaturesDiedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(CreaturesDiedThisTurnWatcher.class, WatcherScope.GAME);
     }
 
     public CreaturesDiedThisTurnWatcher(final CreaturesDiedThisTurnWatcher watcher) {

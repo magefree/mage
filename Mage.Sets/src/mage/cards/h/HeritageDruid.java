@@ -25,7 +25,7 @@ public final class HeritageDruid extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Elves you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.ELF));
     }
 

@@ -81,7 +81,7 @@ class ShiftyDoppelgangerExileEffect extends OneShotEffect {
         boolean putCreature = false;
         UUID creatureId = UUID.randomUUID();
         Player player = game.getPlayer(source.getControllerId());
-        if (player.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)) {
+        if (player != null && player.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
             if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                 Card card = game.getCard(target.getFirstTarget());

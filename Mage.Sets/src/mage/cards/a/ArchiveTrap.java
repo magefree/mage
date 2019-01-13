@@ -92,7 +92,7 @@ enum OpponentSearchesLibCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ArchiveTrapWatcher watcher = (ArchiveTrapWatcher) game.getState().getWatchers().get(ArchiveTrapWatcher.class.getSimpleName());
+        ArchiveTrapWatcher watcher = game.getState().getWatcher(ArchiveTrapWatcher.class);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && watcher != null) {
             for (UUID playerId : watcher.getPlayersSearchedLibrary()) {

@@ -98,7 +98,7 @@ class BontuTheGlorifiedRestrictionEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
-            CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
+            CreaturesDiedWatcher watcher = game.getState().getWatcher(CreaturesDiedWatcher.class);
             if (controller != null
                     && watcher != null) {
                 return (watcher.getAmountOfCreaturesDiedThisTurnByController(controller.getId()) == 0);

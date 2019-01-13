@@ -29,7 +29,7 @@ public final class SunCrestedPterodon extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterAnotherDino = new FilterControlledCreaturePermanent();
     static {
-        filterAnotherDino.add(new AnotherPredicate());
+        filterAnotherDino.add(AnotherPredicate.instance);
         filterAnotherDino.add(new SubtypePredicate(SubType.DINOSAUR));
     }
 

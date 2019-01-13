@@ -51,7 +51,7 @@ class RevealingWindEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filter = new FilterAttackingOrBlockingCreature("face-down creature that's attacking or blocking");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
     }
 
     public RevealingWindEffect() {

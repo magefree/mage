@@ -6,11 +6,11 @@ import org.mage.plugins.card.images.CardDownloadData;
 import java.util.ArrayList;
 
 /**
- * @author North
+ * @author North, JayDi85
  */
 public interface CardImageSource {
 
-    CardImageUrls generateURL(CardDownloadData card) throws Exception;
+    CardImageUrls generateCardUrl(CardDownloadData card) throws Exception;
 
     CardImageUrls generateTokenUrl(CardDownloadData card) throws Exception;
 
@@ -53,7 +53,11 @@ public interface CardImageSource {
         return true;
     }
 
-    default boolean isImageProvided(String setCode, String cardName) {
+    default boolean isCardImageProvided(String setCode, String cardName) {
+        return false;
+    }
+
+    default boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         return false;
     }
 }

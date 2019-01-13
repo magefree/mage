@@ -59,7 +59,9 @@ class GroveOfTheBurnwillowsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
-            player.gainLife(1, game, source);
+            if(player != null) {
+                player.gainLife(1, game, source);
+            }
         }
         return true;
     }

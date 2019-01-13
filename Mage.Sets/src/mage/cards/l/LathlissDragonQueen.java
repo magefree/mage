@@ -34,8 +34,8 @@ public final class LathlissDragonQueen extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.DRAGON));
-        filter.add(Predicates.not(new TokenPredicate()));
-        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(AnotherPredicate.instance);
         filter2.add(new SubtypePredicate(SubType.DRAGON));
     }
 

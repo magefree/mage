@@ -65,7 +65,7 @@ class CastBlackSpellThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SoulReapWatcher watcher = (SoulReapWatcher) game.getState().getWatchers().get(SoulReapWatcher.class.getSimpleName(), source.getControllerId());
+        SoulReapWatcher watcher = game.getState().getWatcher(SoulReapWatcher.class, source.getControllerId());
         if (watcher != null) {
             return watcher.conditionMet();
         }
@@ -84,7 +84,7 @@ class SoulReapWatcher extends Watcher {
     private UUID cardId;
 
     public SoulReapWatcher(UUID cardId) {
-        super(SoulReapWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(SoulReapWatcher.class, WatcherScope.PLAYER);
         this.cardId = cardId;
     }
 

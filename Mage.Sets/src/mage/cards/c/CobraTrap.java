@@ -55,7 +55,7 @@ enum CobraTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CobraTrapWatcher watcher = (CobraTrapWatcher) game.getState().getWatchers().get(CobraTrapWatcher.class.getSimpleName());
+        CobraTrapWatcher watcher = game.getState().getWatcher(CobraTrapWatcher.class);
         return watcher != null && watcher.conditionMet(source.getControllerId());
     }
 
@@ -86,7 +86,7 @@ class CobraTrapWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DESTROYED_PERMANENT) {
-            Permanent perm = (Permanent) game.getPermanentOrLKIBattlefield(event.getTargetId()); // can regenerate or be indestructible
+            Permanent perm = game.getPermanentOrLKIBattlefield(event.getTargetId()); // can regenerate or be indestructible
             if (perm != null && !perm.isCreature()) {
                 if (!game.getStack().isEmpty()) {
                     StackObject spell = game.getStack().getStackObject(event.getSourceId());

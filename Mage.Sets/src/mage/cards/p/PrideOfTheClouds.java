@@ -31,7 +31,7 @@ public final class PrideOfTheClouds extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature with flying on the battlefield");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
     

@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -35,31 +34,24 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterOpponent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetOpponent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class KeeperOfTheMind extends CardImpl {
-
-    public final UUID originalId;
-    private static final FilterOpponent filter = new FilterOpponent();
-    
-    static {
-        filter.add(new KeeperOfTheMindPredicate());
-    }
-
 
     public KeeperOfTheMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
@@ -74,33 +66,39 @@ public class KeeperOfTheMind extends CardImpl {
         effect.setText("Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.");
         Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetOpponent());
+        ability.setTargetAdjuster(KeeperOfTheMindAdjuster.instance);
         this.addAbility(ability);
-        originalId = ability.getOriginalId();
-
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            Player activePlayer = game.getPlayer(game.getActivePlayerId());
-            if (activePlayer != null) {
-                ability.getTargets().clear();
-                TargetPlayer target = new TargetPlayer(1, 1, false, filter);
-                target.setTargetController(activePlayer.getId());
-                ability.getTargets().add(target);
-            }
-        }
     }
 
     public KeeperOfTheMind(final KeeperOfTheMind card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
     public KeeperOfTheMind copy() {
         return new KeeperOfTheMind(this);
+    }
+}
+
+enum KeeperOfTheMindAdjuster implements TargetAdjuster {
+    instance;
+
+    private static final FilterOpponent filter = new FilterOpponent();
+
+    static {
+        filter.add(new KeeperOfTheMindPredicate());
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        Player activePlayer = game.getPlayer(game.getActivePlayerId());
+        if (activePlayer == null) {
+            return;
+        }
+        ability.getTargets().clear();
+        TargetPlayer target = new TargetPlayer(1, 1, false, filter);
+        target.setTargetController(activePlayer.getId());
+        ability.addTarget(target);
     }
 }
 

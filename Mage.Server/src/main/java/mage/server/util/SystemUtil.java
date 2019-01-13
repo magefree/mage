@@ -1,19 +1,7 @@
 package mage.server.util;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -24,6 +12,16 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.RandomUtil;
+
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -111,6 +109,9 @@ public final class SystemUtil {
 
         for (UUID cardID : cardsList) {
             Card card = game.getCard(cardID);
+            if (card == null) {
+                continue;
+            }
 
             // basic info (card + set)
             String cardInfo = card.getName() + " - " + card.getExpansionSetCode();
@@ -225,7 +226,7 @@ public final class SystemUtil {
      * <br/>
      * <b>Implementation note:</b><br/>
      * 1. Read init.txt line by line<br/>
-     * 2. Parse line using for searching groups like: [group 1] 
+     * 2. Parse line using for searching groups like: [group 1]
      * 3. Parse line using the following format: line ::=
      * <zone>:<nickname>:<card name>:<amount><br/>
      * 4. If zone equals to 'hand', add card to player's library<br/>
@@ -537,8 +538,8 @@ public final class SystemUtil {
     /**
      * Get a diff between two dates
      *
-     * @param date1 the oldest date
-     * @param date2 the newest date
+     * @param date1    the oldest date
+     * @param date2    the newest date
      * @param timeUnit the unit in which you want the diff
      * @return the diff value, in the provided unit
      */

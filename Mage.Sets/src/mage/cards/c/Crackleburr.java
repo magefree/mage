@@ -38,10 +38,10 @@ public final class Crackleburr extends CardImpl {
     
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         
         filter2.add(new ColorPredicate(ObjectColor.BLUE));
-        filter2.add(new TappedPredicate());
+        filter2.add(TappedPredicate.instance);
     }
 
     public Crackleburr(UUID ownerId, CardSetInfo setInfo) {

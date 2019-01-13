@@ -40,7 +40,7 @@ public final class DecayingSoil extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
     static{
         filter.add(new OwnerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public DecayingSoil(UUID ownerId, CardSetInfo setInfo) {
@@ -119,7 +119,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever a ").append(filter.getMessage()).append(" is put into your graveyard from the battlefield, ").append(super.getRule()).toString();
+        return "Whenever a " + filter.getMessage() + " is put into your graveyard from the battlefield, " + super.getRule();
     }
 }
 

@@ -37,8 +37,8 @@ public final class FeastOrFamine extends CardImpl {
         
         // or destroy target nonartifact, nonblack creature and it can't be regenerated.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect(true));
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
+        mode.addEffect(new DestroyTargetEffect(true));
+        mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

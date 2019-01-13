@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,11 +15,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -32,8 +26,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LegionsInitiative extends CardImpl {
@@ -47,7 +42,7 @@ public final class LegionsInitiative extends CardImpl {
     }
 
     public LegionsInitiative(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{W}");
 
         // Red creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filterRedCreature)));
@@ -136,12 +131,14 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
             exile = exile.copy();
             for (UUID cardId : exile) {
                 Card card = game.getCard(cardId);
-                card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-                Permanent returnedCreature = game.getPermanent(cardId);
-                if (returnedCreature != null) {
-                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(returnedCreature.getId()));
-                    game.addEffect(effect, source);
+                if (card != null) {
+                    card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                    Permanent returnedCreature = game.getPermanent(cardId);
+                    if (returnedCreature != null) {
+                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                        effect.setTargetPointer(new FixedTarget(returnedCreature.getId()));
+                        game.addEffect(effect, source);
+                    }
                 }
             }
             game.getExile().getExileZone(source.getSourceId()).clear();

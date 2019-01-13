@@ -25,7 +25,7 @@ public final class Bloodbriar extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public Bloodbriar(UUID ownerId, CardSetInfo setInfo) {

@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -13,8 +11,9 @@ import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroyTargetEffect extends OneShotEffect {
@@ -27,12 +26,16 @@ public class DestroyTargetEffect extends OneShotEffect {
     }
 
     public DestroyTargetEffect(String ruleText) {
-        this(false);
-        staticText = ruleText;
+        this(ruleText, false);
     }
 
     public DestroyTargetEffect(boolean noRegen) {
         this(noRegen, false);
+    }
+
+    public DestroyTargetEffect(String ruleText, boolean noRegen) {
+        this(noRegen, false);
+        staticText = ruleText;
     }
 
     public DestroyTargetEffect(boolean noRegen, boolean multitargetHandling) {
@@ -100,7 +103,12 @@ public class DestroyTargetEffect extends OneShotEffect {
                 }
                 sb.append(targetName);
             } else {
-                sb.append("Destroy ").append(CardUtil.numberToText(target.getNumberOfTargets())).append(" target ").append(target.getTargetName());
+                if (target.getMaxNumberOfTargets() == target.getMinNumberOfTargets()) {
+                    sb.append("destroy ").append(CardUtil.numberToText(target.getNumberOfTargets()));
+                } else {
+                    sb.append("destroy up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                }
+                sb.append(" target ").append(target.getTargetName());
             }
         }
         if (noRegen) {

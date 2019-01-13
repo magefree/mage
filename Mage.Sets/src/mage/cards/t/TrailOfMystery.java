@@ -27,7 +27,7 @@ public final class TrailOfMystery extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a face-down creature");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
     }
 
     public TrailOfMystery(UUID ownerId, CardSetInfo setInfo) {

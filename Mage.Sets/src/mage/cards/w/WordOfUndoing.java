@@ -64,7 +64,7 @@ class WordOfUndoingReturnToHandEffect extends OneShotEffect {
         Set<Card> attachments = new LinkedHashSet<>();
         Player player = game.getPlayer(source.getControllerId());
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target != null) {
+        if (target != null && player != null) {
             for (UUID attachmentId : target.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
                 if (attachment != null && attachment.isControlledBy(source.getControllerId())

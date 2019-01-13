@@ -193,8 +193,10 @@ class NicolBolasGodPharaohFromExileEffect extends AsThoughEffectImpl {
             Card card = game.getCard(sourceId);
             if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                 Player player = game.getPlayer(affectedControllerId);
-                player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
-                return true;
+                if(player != null) {
+                    player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
+                    return true;
+                }
             }
         }
         return false;

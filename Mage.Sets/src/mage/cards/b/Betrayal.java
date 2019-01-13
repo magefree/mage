@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -18,8 +16,9 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class Betrayal extends CardImpl {
@@ -31,7 +30,7 @@ public final class Betrayal extends CardImpl {
     }
 
     public Betrayal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature an opponent controls
@@ -40,8 +39,9 @@ public final class Betrayal extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Whenever enchanted creature becomes tapped, you draw a card.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature"));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), "enchanted creature"));
     }
 
     public Betrayal(final Betrayal card) {

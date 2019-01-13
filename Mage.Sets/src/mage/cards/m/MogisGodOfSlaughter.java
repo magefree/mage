@@ -118,10 +118,8 @@ class DoUnlessTargetPaysCost extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder(executingEffect.getText(mode));
-        sb.append("unless he or she");
-        sb.append(getCostText());
-        return sb.toString();
+        return executingEffect.getText(mode) + "unless they" +
+                getCostText();
     }
 
     private String getCostText() {

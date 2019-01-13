@@ -198,7 +198,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
 
             boolean pileChoice = player.choosePile(Outcome.Neutral, "Choose a pile to to put into your hand.",
                     new ArrayList<>(pile1.getCards(game)),
-                    new ArrayList<>(allCards.getCards(game)), game);
+                    new ArrayList<>(pile2.getCards(game)), game);
             game.informPlayers(player.getLogName() + " chose pile" + (pileChoice ? "1" : "2"));
             player.moveCards(pileChoice ? pile1 : pile2, Zone.HAND, source, game);
             player.putCardsOnBottomOfLibrary(pileChoice ? pile2 : pile1, game, source, true);
@@ -262,11 +262,11 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                 UUID playerId = targetPlayer.getFirstTarget();
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
+                    String playerName = player.getLogName() + "'s";
                     if (source.isControlledBy(player.getId())) {
                         playerName = "your";
                     }
-                    TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
+                    TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard("nonland card from " + playerName + " library"));
                     if (controller.searchLibrary(target, game, playerId, !checkList.contains(playerId))) {
                         checkList.add(playerId);
                         UUID targetId = target.getFirstTarget();

@@ -63,7 +63,7 @@ class MindstormCrownEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        MindstormCrownWatcher watcher = (MindstormCrownWatcher) game.getState().getWatchers().get(MindstormCrownWatcher.class.getSimpleName());
+        MindstormCrownWatcher watcher = game.getState().getWatcher(MindstormCrownWatcher.class);
         if (watcher != null && watcher.getCardsInHandCount() == 0) {
             player.drawCards(1, game);
         } else {
@@ -80,7 +80,7 @@ class MindstormCrownWatcher extends Watcher {
     private int cardsInHandCount;
 
     public MindstormCrownWatcher() {
-        super(MindstormCrownWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(MindstormCrownWatcher.class, WatcherScope.GAME);
     }
 
     public MindstormCrownWatcher(final MindstormCrownWatcher watcher) {

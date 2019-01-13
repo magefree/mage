@@ -33,8 +33,8 @@ public final class CrushingVines extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Mode mode = new Mode();
-        mode.getTargets().add(new TargetArtifactPermanent());
-        mode.getEffects().add(new DestroyTargetEffect());
+        mode.addTarget(new TargetArtifactPermanent());
+        mode.addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addMode(mode);
     }
 

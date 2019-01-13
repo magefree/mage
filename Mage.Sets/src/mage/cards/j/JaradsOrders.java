@@ -68,7 +68,7 @@ class JaradsOrdersEffect extends OneShotEffect {
             if (controller.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
-                    for (UUID cardId: (List<UUID>)target.getTargets()) {
+                    for (UUID cardId: target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);
                         revealed.add(card);
                     }

@@ -83,7 +83,7 @@ enum RuneflareTrapCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         CardsAmountDrawnThisTurnWatcher watcher =
-                (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.class.getSimpleName());
+                game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
         return watcher != null && watcher.opponentDrewXOrMoreCards(source.getControllerId(), 3, game);
     }
 

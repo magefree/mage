@@ -86,6 +86,7 @@
 |Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
 |Generate|EMBLEM:SWS|Obi-Wan Kenobi||Emblem Obi-Wan Kenobi|ObiWanKenobiEmblem|
 |Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
+|Generate|EMBLEM:RNA|Domri, Chaos Bringer||Emblem Domri|DomriChaosBringerEmblem|
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
@@ -1185,3 +1186,15 @@
 |Generate|TOK:ZEN|Vampire||
 |Generate|TOK:ZEN|Wolf|||WolfToken|
 |Generate|TOK:ZEN|Zombie Giant|||QuestForTheGravelordZombieToken|
+|Generate|TOK:RNA|Beast|||RedGreenBeastToken|
+|Generate|TOK:RNA|Centaur|||CentaurToken|
+|Generate|TOK:RNA|Frog Lizard|||FrogLizardToken|
+|Generate|TOK:RNA|Goblin|||GoblinToken|
+|Generate|TOK:RNA|Human|||HumanToken|
+|Generate|TOK:RNA|Illusion|||MesmerizingBenthidToken|
+|Generate|TOK:RNA|Ooze|||BiogenicOozeToken|
+|Generate|TOK:RNA|Sphinx|||WardenSphinxToken|
+|Generate|TOK:RNA|Spirit|||SpiritWhiteToken|
+|Generate|TOK:RNA|Thopter|||ThopterToken|
+|Generate|TOK:RNA|Treasure|||TreasureToken|
+|Generate|TOK:RNA|Zombie|||ZombieToken|

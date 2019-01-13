@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -13,7 +12,6 @@ import mage.constants.Zone;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author spjspj
  */
 public final class GarrukApexPredatorEmblem extends Emblem {
@@ -25,12 +23,12 @@ public final class GarrukApexPredatorEmblem extends Emblem {
 
     public GarrukApexPredatorEmblem() {
         setName("Emblem Garruk");
-        Effect effect = new BoostTargetEffect(5, 5, Duration.EndOfTurn);
-        effect.setText("it gets +5/+5");
+
+        Effect effect = new BoostTargetEffect(-1, 0, Duration.EndOfTurn);
+        effect.setText("it gets -1/-0");
         Ability ability = new AttackedByCreatureTriggeredAbility(Zone.COMMAND, effect, false, SetTargetPointer.PERMANENT);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn,
-                "and gains trample until end of turn");
-        ability.addEffect(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        ability.addEffect(effect.concatBy("and"));
         this.getAbilities().add(ability);
     }
 }

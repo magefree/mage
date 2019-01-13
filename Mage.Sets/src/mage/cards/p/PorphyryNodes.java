@@ -100,7 +100,7 @@ class PorphyryNodesEffect extends OneShotEffect {
                 }
             }
             if (permanentToDestroy != null) {
-                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(" chosen creature: ").append(permanentToDestroy.getName()).toString());
+                game.informPlayers(sourcePermanent.getName() + " chosen creature: " + permanentToDestroy.getName());
                 return permanentToDestroy.destroy(source.getSourceId(), game, true);
             }
             return true;
@@ -132,7 +132,7 @@ class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When there are no creatures on the battlefield, ").append(super.getRule()).toString() ;
+        return "When there are no creatures on the battlefield, " + super.getRule();
     }
 
 }

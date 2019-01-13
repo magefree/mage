@@ -1,8 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -19,6 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -115,11 +115,13 @@ class CloneShellDiesEffect extends OneShotEffect {
             Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (permanent != null) {
                 List<UUID> imprinted = permanent.getImprinted();
-                if (!imprinted.isEmpty()) {
+                if (imprinted != null && !imprinted.isEmpty()) {
                     Card imprintedCard = game.getCard(imprinted.get(0));
-                    imprintedCard.setFaceDown(false, game);
-                    if (imprintedCard.isCreature()) {
-                        controller.moveCards(imprintedCard, Zone.BATTLEFIELD, source, game);
+                    if (imprintedCard != null) {
+                        imprintedCard.setFaceDown(false, game);
+                        if (imprintedCard.isCreature()) {
+                            controller.moveCards(imprintedCard, Zone.BATTLEFIELD, source, game);
+                        }
                     }
                 }
             }

@@ -29,7 +29,7 @@ public final class Orgg extends CardImpl {
     static final private FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
 
     static {
-        filter.add(Predicates.and(new PowerPredicate(ComparisonType.MORE_THAN, 2), Predicates.not(new TappedPredicate())));
+        filter.add(Predicates.and(new PowerPredicate(ComparisonType.MORE_THAN, 2), Predicates.not(TappedPredicate.instance)));
         filter2.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
     public Orgg(UUID ownerId, CardSetInfo setInfo) {

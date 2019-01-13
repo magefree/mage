@@ -45,7 +45,7 @@ class FinalPunishmentAmount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
         AmountOfDamageAPlayerReceivedThisTurnWatcher watcher
-            = (AmountOfDamageAPlayerReceivedThisTurnWatcher) game.getState().getWatchers().get(AmountOfDamageAPlayerReceivedThisTurnWatcher.class.getSimpleName());
+            = game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
         if(watcher != null) {
             return watcher.getAmountOfDamageReceivedThisTurn(source.getFirstTarget());
         }

@@ -32,7 +32,7 @@ public final class MerenOfClanNelToth extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
@@ -97,7 +97,7 @@ class MerenOfClanNelTothEffect extends OneShotEffect {
                     text = " put onto battlefield for ";
                 }
                 card.moveToZone(targetZone, source.getSourceId(), game, false);
-                game.informPlayers(new StringBuilder("Meren of Clan Nel Toth: ").append(card.getName()).append(text).append(player.getLogName()).toString());
+                game.informPlayers("Meren of Clan Nel Toth: " + card.getName() + text + player.getLogName());
                 return true;
             }
         }

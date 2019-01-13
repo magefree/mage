@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.condition.common.MyMainPhaseCondition;
+import mage.abilities.condition.common.AddendumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -24,7 +24,7 @@ public final class SphinxsInsight extends CardImpl {
 
         // Addendum — If you cast this spell during your main phase, you gain 2 life.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new GainLifeEffect(2), MyMainPhaseCondition.instance,
+                new GainLifeEffect(2), AddendumCondition.instance,
                 "<br><i>Addendum</i> &mdash; If you cast this spell during your main phase, you gain 2 life."
         ));
     }

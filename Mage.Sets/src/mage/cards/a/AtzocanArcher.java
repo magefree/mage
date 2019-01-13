@@ -25,7 +25,7 @@ public final class AtzocanArcher extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public AtzocanArcher(UUID ownerId, CardSetInfo setInfo) {

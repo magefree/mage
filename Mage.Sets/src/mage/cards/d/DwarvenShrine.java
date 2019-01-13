@@ -67,7 +67,7 @@ class DwarvenShrineTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         MageObject mageObject = game.getObject(sourceId);
-        if (spell != null) {
+        if (spell != null && mageObject != null) {
             game.getState().setValue("dwarvenShrine" + mageObject, spell);
             return true;
         }
@@ -90,21 +90,23 @@ class DwarvenShrineEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int count = 0;
         MageObject mageObject = game.getObject(source.getSourceId());
-        Spell spell = (Spell) game.getState().getValue("dwarvenShrine" + mageObject);
-        if (spell != null) {
-            Player controller = game.getPlayer(spell.getControllerId());
-            if (controller != null) {
-                String name = spell.getName();
-                FilterCard filterCardName = new FilterCard();
-                filterCardName.add(new NamePredicate(name));
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        count += player.getGraveyard().count(filterCardName, game);
+        if(mageObject != null) {
+            Spell spell = (Spell) game.getState().getValue("dwarvenShrine" + mageObject);
+            if (spell != null) {
+                Player controller = game.getPlayer(spell.getControllerId());
+                if (controller != null) {
+                    String name = spell.getName();
+                    FilterCard filterCardName = new FilterCard();
+                    filterCardName.add(new NamePredicate(name));
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                        Player player = game.getPlayer(playerId);
+                        if (player != null) {
+                            count += player.getGraveyard().count(filterCardName, game);
+                        }
                     }
+                    controller.damage(count * 2, mageObject.getId(), game, false, true);
+                    return true;
                 }
-                controller.damage(count * 2, mageObject.getId(), game, false, true);
-                return true;
             }
         }
         return false;

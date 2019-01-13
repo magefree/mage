@@ -27,8 +27,8 @@ public final class DesolationGiant extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("other creatures you control");
 
     static {
-        filter.add(new AnotherPredicate());
-        filter2.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
+        filter2.add(AnotherPredicate.instance);
         filter2.add(new ControllerPredicate(TargetController.YOU));
     }
 

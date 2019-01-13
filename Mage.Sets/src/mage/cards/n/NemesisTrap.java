@@ -36,7 +36,7 @@ public final class NemesisTrap extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public NemesisTrap(UUID ownerId, CardSetInfo setInfo) {

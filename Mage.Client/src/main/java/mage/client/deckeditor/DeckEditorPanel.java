@@ -14,7 +14,6 @@ import mage.cards.Sets;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
-import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
@@ -798,7 +797,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 try {
-                    newDeck = Deck.load(DeckImporterUtil.importDeck(dialog.getTmpPath(), errorMessages), true, true);
+                    newDeck = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages), true, true);
                     processAndShowImportErrors(errorMessages);
 
                     if (newDeck != null) {
@@ -831,7 +830,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 try {
-                    deckToAppend = Deck.load(DeckImporterUtil.importDeck(dialog.getTmpPath(), errorMessages), true, true);
+                    deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages), true, true);
                     processAndShowImportErrors(errorMessages);
 
                     if (deckToAppend != null) {
@@ -878,7 +877,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 Deck newDeck = null;
                 StringBuilder errorMessages = new StringBuilder();
 
-                newDeck = Deck.load(DeckImporterUtil.importDeck(file.getPath(), errorMessages), true, true);
+                newDeck = Deck.load(DeckImporter.importDeckFromFile(file.getPath(), errorMessages), true, true);
                 processAndShowImportErrors(errorMessages);
 
                 if (newDeck != null) {
@@ -977,7 +976,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             File file = fcImportDeck.getSelectedFile();
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             try {
-                DeckImporter importer = DeckImporterUtil.getDeckImporter(file.getPath());
+                DeckImporter importer = DeckImporter.getDeckImporter(file.getPath());
 
                 if (importer != null) {
                     StringBuilder errorMessages = new StringBuilder();
@@ -1048,7 +1047,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         try {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             String path = DeckGenerator.generateDeck();
-            deck = Deck.load(DeckImporterUtil.importDeck(path), true, true);
+            deck = Deck.load(DeckImporter.importDeckFromFile(path), true, true);
         } catch (GameException ex) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading generated deck", JOptionPane.ERROR_MESSAGE);
         } catch (DeckGeneratorException ex) {
@@ -1120,7 +1119,12 @@ class ImportFilter extends FileFilter {
             ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
         if (ext != null) {
-            if (ext.toLowerCase(Locale.ENGLISH).equals("dec") || ext.toLowerCase(Locale.ENGLISH).equals("mwdeck") || ext.toLowerCase(Locale.ENGLISH).equals("txt") || ext.toLowerCase(Locale.ENGLISH).equals("dek")) {
+            if (ext.toLowerCase(Locale.ENGLISH).equals("dec")
+                || ext.toLowerCase(Locale.ENGLISH).equals("mwdeck")
+                || ext.toLowerCase(Locale.ENGLISH).equals("txt")
+                || ext.toLowerCase(Locale.ENGLISH).equals("dek")
+                || ext.toLowerCase(Locale.ENGLISH).equals("cod")
+                || ext.toLowerCase(Locale.ENGLISH).equals("o8d")) {
                 return true;
             }
         }
@@ -1129,7 +1133,7 @@ class ImportFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return "*.dec | *.mwDeck | *.txt | *.dek";
+        return "*.dec | *.mwDeck | *.txt | *.dek | *.cod | *.o8d";
     }
 }
 

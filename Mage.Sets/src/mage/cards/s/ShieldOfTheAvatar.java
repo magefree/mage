@@ -88,7 +88,7 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
                     result = true;
                 }
                 if (toPrevent > 0) {
-                    game.informPlayers(new StringBuilder("Shield of the Avatar ").append("prevented ").append(toPrevent).append(" damage to ").append(game.getPermanent(equipment.getAttachedTo()).getName()).toString());
+                    game.informPlayers("Shield of the Avatar " + "prevented " + toPrevent + " damage to " + game.getPermanent(equipment.getAttachedTo()).getName());
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
                             equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), toPrevent));
                 }

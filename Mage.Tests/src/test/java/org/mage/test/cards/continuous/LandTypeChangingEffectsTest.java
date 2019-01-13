@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.continuous;
 
 import mage.abilities.keyword.IndestructibleAbility;
@@ -11,7 +10,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -114,10 +112,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
     String bloodmoon = "Blood Moon";
     String canopyvista = "Canopy Vista";
 
-    /*
-    TODO: NOTE: this test is currently failing due to bug in code. See issue #3072
-     */
-    //@Ignore
     @Test
     public void testBloodMoonBeforeUrborg() {
         // Blood Moon   2R
@@ -147,10 +141,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
     }
 
-    /*
-    TODO: NOTE: this test is currently failing due to bug in code. See issue #3072
-     */
-    //@Ignore
     @Test
     public void testBloodMoonAfterUrborg() {
         // Blood Moon   2R
@@ -186,6 +176,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
        In terms of time-stamp order, Urborg was down first, then Kormus Bell, then Quicksilver.
        When I put a flood counter on a basic swamp, it would become a 0/0 instead of a 1/1 and die.
      */
+    
     @Test
     public void testCormusBellAfterUrborg() {
         // Land - Legendary
@@ -250,19 +241,19 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Blood Sun");  // all lands lose all abilities except for mana-producing
         addCard(Zone.BATTLEFIELD, playerA, "Stormtide Leviathan"); // all lands are islands in addition to their other types
         addCard(Zone.BATTLEFIELD, playerA, "Darksteel Citadel");  // land has indestructible ability
-        
+
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
+
         Permanent darksteel = getPermanent("Darksteel Citadel", playerA.getId());
         Assert.assertNotNull(darksteel);
         Assert.assertFalse(darksteel.getAbilities().contains(IndestructibleAbility.getInstance()));  // The ability is removed
-        
+
         /*
         If a continuous effect has started applying in an earlier layer, it will continue to apply in 
         later layers even if the ability that created that effect has been removed.
         Urborg ability is applied in the 4th layer.  The Blood Sun works in the 6th.  So the effect still applies to the lands.
-        */
+         */
         assertType(urborgtoy, CardType.LAND, SubType.SWAMP);
         assertType("Mountain", CardType.LAND, SubType.SWAMP);
         assertType(urborgtoy, CardType.LAND, SubType.ISLAND);

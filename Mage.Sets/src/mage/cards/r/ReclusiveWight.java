@@ -27,7 +27,7 @@ public final class ReclusiveWight extends CardImpl {
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ReclusiveWight(UUID ownerId, CardSetInfo setInfo) {

@@ -65,7 +65,7 @@ class FellShepherdWatcher extends Watcher {
     private Set<UUID> creatureIds = new HashSet<>();
 
     public FellShepherdWatcher() {
-        super(FellShepherdWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(FellShepherdWatcher.class, WatcherScope.PLAYER);
         condition = true;
     }
 
@@ -118,7 +118,7 @@ class FellShepherdEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FellShepherdWatcher watcher = (FellShepherdWatcher) game.getState().getWatchers().get(FellShepherdWatcher.class.getSimpleName(), source.getControllerId());
+        FellShepherdWatcher watcher = game.getState().getWatcher(FellShepherdWatcher.class, source.getControllerId());
         if (watcher != null) {
             StringBuilder sb = new StringBuilder();
             for (UUID creatureId : watcher.getCreaturesIds()) {

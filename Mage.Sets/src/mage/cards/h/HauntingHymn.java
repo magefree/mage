@@ -2,7 +2,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.condition.common.MyMainPhaseCondition;
+import mage.abilities.condition.common.AddendumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class HauntingHymn extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardTargetEffect(4),
                 new DiscardTargetEffect(2),
-                MyMainPhaseCondition.instance,
+                AddendumCondition.instance,
                 "Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead"));
         this.getSpellAbility().addTarget(new TargetPlayer());
 

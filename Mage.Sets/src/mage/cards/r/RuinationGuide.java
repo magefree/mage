@@ -25,7 +25,7 @@ public final class RuinationGuide extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creatures");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public RuinationGuide(UUID ownerId, CardSetInfo setInfo) {

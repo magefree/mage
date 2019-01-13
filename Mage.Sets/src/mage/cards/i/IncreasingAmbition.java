@@ -77,7 +77,7 @@ class IncreasingAmbitionEffect extends SearchEffect {
                 }
                 if (player.searchLibrary(target, game)) {
                     if (!target.getTargets().isEmpty()) {
-                        for (UUID cardId: (List<UUID>)target.getTargets()) {
+                        for (UUID cardId: target.getTargets()) {
                             Card card = player.getLibrary().remove(cardId, game);
                             if (card != null) {
                                 card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

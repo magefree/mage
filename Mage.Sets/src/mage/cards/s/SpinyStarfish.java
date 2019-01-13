@@ -70,7 +70,7 @@ enum SpinyStarfishCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpinyStarfishWatcher watcher = (SpinyStarfishWatcher) game.getState().getWatchers().get(SpinyStarfishWatcher.class.getSimpleName());
+        SpinyStarfishWatcher watcher = game.getState().getWatcher(SpinyStarfishWatcher.class);
         return watcher != null && watcher.regeneratedCount(source.getSourceId()) != 0;
     }
 
@@ -88,7 +88,7 @@ class SpinyStarfishWatcher extends Watcher {
     private final Map<UUID, Integer> regeneratedCount = new HashMap<>();
 
     public SpinyStarfishWatcher() {
-        super(SpinyStarfishWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(SpinyStarfishWatcher.class, WatcherScope.GAME);
     }
 
     public SpinyStarfishWatcher(final SpinyStarfishWatcher watcher) {
@@ -132,8 +132,8 @@ class SpinyStarfishDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        SpinyStarfishWatcher watcher = (SpinyStarfishWatcher) game.getState().getWatchers().get(
-                SpinyStarfishWatcher.class.getSimpleName());
+        SpinyStarfishWatcher watcher = game.getState().getWatcher(
+                SpinyStarfishWatcher.class);
         if (watcher != null) {
             return watcher.regeneratedCount(sourceAbility.getSourceId());
         }

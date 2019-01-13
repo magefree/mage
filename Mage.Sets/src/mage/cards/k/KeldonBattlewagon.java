@@ -40,7 +40,7 @@ public final class KeldonBattlewagon extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped creature you control");
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public KeldonBattlewagon(UUID ownerId, CardSetInfo setInfo) {
@@ -90,7 +90,7 @@ class KeldonBattlewagonCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
-            for (UUID targetId: (List<UUID>)target.getTargets()) {
+            for (UUID targetId: target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null)
                     return false;

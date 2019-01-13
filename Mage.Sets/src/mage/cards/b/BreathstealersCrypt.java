@@ -46,7 +46,7 @@ class BreathstealersCryptEffect extends ReplacementEffectImpl {
 
     public BreathstealersCryptEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseLife);
-        staticText = "If a player would draw a card, instead he or she draws a card and reveals it. If it's a creature card, that player discards it unless he or she pays 3 life";
+        staticText = "If a player would draw a card, instead they draw a card and reveal it. If it's a creature card, that player discards it unless they pay 3 life";
     }
 
     public BreathstealersCryptEffect(final BreathstealersCryptEffect effect) {

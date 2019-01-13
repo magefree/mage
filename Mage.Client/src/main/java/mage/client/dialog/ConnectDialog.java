@@ -36,6 +36,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
@@ -456,7 +457,9 @@ public class ConnectDialog extends MageDialog {
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setPassword(this.txtPassword.getText().trim());
-            boolean redownloadDatabase = CardRepository.instance.findCard("Island") == null;
+
+            // force to redownload db
+            boolean redownloadDatabase = (ExpansionRepository.instance.getSetByCode("GRN") == null || CardRepository.instance.findCard("Island") == null);
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected() || redownloadDatabase);
             String allMAC = "";
             try {

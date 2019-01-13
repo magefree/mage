@@ -94,7 +94,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
 
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creatures you control that share a creature type");
     static {
-        filterUntapped.add(Predicates.not(new TappedPredicate()));
+        filterUntapped.add(Predicates.not(TappedPredicate.instance));
     }
 
     WeightOfConscienceTarget() {

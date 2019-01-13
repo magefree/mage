@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -19,9 +18,15 @@ public class RampageAbility extends BecomesBlockedTriggeredAbility {
     private final String rule;
 
     public RampageAbility(int amount) {
+        this(amount, false);
+    }
+
+    public RampageAbility(int amount, boolean shortRuleText) {
         super(null, false);
-        rule = "rampage " + amount + " (Whenever this creature becomes blocked, it gets +"
-                + amount + "/+" + amount + " until end of turn for each creature blocking it beyond the first.)";
+        rule = "rampage " + amount
+                + (shortRuleText ? ""
+                        : " <i>(Whenever this creature becomes blocked, it gets +"
+                        + amount + "/+" + amount + " until end of turn for each creature blocking it beyond the first.)</i>");
         RampageValue rv = new RampageValue(amount);
         this.addEffect(new BoostSourceEffect(rv, rv, Duration.EndOfTurn, true));
     }

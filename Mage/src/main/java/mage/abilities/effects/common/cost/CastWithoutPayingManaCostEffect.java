@@ -3,10 +3,13 @@ package mage.abilities.effects.common.cost;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -25,23 +28,23 @@ import org.apache.log4j.Logger;
  */
 public class CastWithoutPayingManaCostEffect extends OneShotEffect {
 
-    private final FilterNonlandCard filter;
-    private final int manaCost;
+    private final DynamicValue manaCost;
 
     /**
      * @param maxCost Maximum converted mana cost for this effect to apply to
      */
     public CastWithoutPayingManaCostEffect(int maxCost) {
+        this(new StaticValue(maxCost));
+    }
+
+    public CastWithoutPayingManaCostEffect(DynamicValue maxCost) {
         super(Outcome.PlayForFree);
-        filter = new FilterNonlandCard("card with converted mana cost " + maxCost + " or less from your hand");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, maxCost + 1));
         this.manaCost = maxCost;
         this.staticText = "you may cast a card with converted mana cost " + maxCost + " or less from your hand without paying its mana cost";
     }
 
     public CastWithoutPayingManaCostEffect(final CastWithoutPayingManaCostEffect effect) {
         super(effect);
-        this.filter = effect.filter.copy();
         this.manaCost = effect.manaCost;
     }
 
@@ -52,11 +55,14 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
+        int cmc = manaCost.calculate(game, source, this);
+        FilterCard filter = new FilterNonlandCard("card with converted mana cost " + cmc + " or less from your hand");
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
 
         Target target = new TargetCardInHand(filter);
         if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                && controller.chooseUse(outcome, "Cast a card with converted mana cost " + manaCost
-                        + " or less from your hand without paying its mana cost?", source, game)) {
+                && controller.chooseUse(outcome, "Cast a card with converted mana cost " + cmc
+                + " or less from your hand without paying its mana cost?", source, game)) {
             Card cardToCast = null;
             boolean cancel = false;
             while (controller.canRespond() && !cancel) {

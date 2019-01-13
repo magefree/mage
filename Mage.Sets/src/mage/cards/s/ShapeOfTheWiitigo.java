@@ -70,7 +70,7 @@ class AttachedAttackedOrBlockedSinceYourLastUpkeepCondition implements Condition
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        AttackedOrBlockedSinceYourLastUpkeepWatcher watcher = (AttackedOrBlockedSinceYourLastUpkeepWatcher) game.getState().getWatchers().get(AttackedOrBlockedSinceYourLastUpkeepWatcher.class.getSimpleName());
+        AttackedOrBlockedSinceYourLastUpkeepWatcher watcher = game.getState().getWatcher(AttackedOrBlockedSinceYourLastUpkeepWatcher.class);
         if (permanent != null && permanent.getAttachedTo() != null && watcher != null) {
             Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
             if (attachedTo == null) {
@@ -95,7 +95,7 @@ class AttackedOrBlockedSinceYourLastUpkeepWatcher extends Watcher{
     private final Map<UUID, Set<MageObjectReference>> attackedOrBlockedCreatures = new HashMap<>();
 
     public AttackedOrBlockedSinceYourLastUpkeepWatcher() {
-        super(AttackedOrBlockedSinceYourLastUpkeepWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(AttackedOrBlockedSinceYourLastUpkeepWatcher.class, WatcherScope.GAME);
     }
 
     public AttackedOrBlockedSinceYourLastUpkeepWatcher(AttackedOrBlockedSinceYourLastUpkeepWatcher watcher) {

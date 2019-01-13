@@ -58,18 +58,18 @@ enum MadDogCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent madDog = game.getPermanent(source.getSourceId());
-        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getSimpleName());
-        AttackedThisTurnWatcher watcher2 = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+        PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
+        AttackedThisTurnWatcher watcher2 = game.getState().getWatcher(AttackedThisTurnWatcher.class);
         if (watcher != null
                 && watcher2 != null
                 && madDog != null) {
             // For some reason, compare did not work when checking the lists.  Thus the interation.
             List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(source.getControllerId());
-            if (!permanents.stream().noneMatch((p) -> (p.getId().equals(madDog.getId())))) {
+            if (permanents.stream().anyMatch((p) -> (p.getId().equals(madDog.getId())))) {
                 return false;
             }
             Set<MageObjectReference> mor = watcher2.getAttackedThisTurnCreatures();
-            if (!mor.stream().noneMatch((m) -> (m.getPermanent(game).equals(madDog)))) {
+            if (mor.stream().anyMatch((m) -> (m.getPermanent(game).equals(madDog)))) {
                 return false;
             }
             return true; // Mad Dog did not come into play this turn nor did he attack this turn.  Sacrifice the hound.

@@ -32,7 +32,7 @@ public final class ReduceRubble extends SplitCard {
 
         // Rubble
         // Up to three target lands don't untap during their controller's next untap step.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         Effect effect = new DontUntapInControllersNextUntapStepTargetEffect();
         effect.setText("Up to three target lands don't untap during their controller's next untap step");
         getRightHalfCard().getSpellAbility().addEffect(effect);

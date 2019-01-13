@@ -23,7 +23,7 @@ public final class Alarum extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonattacking creature");
 
     static {
-        filter.add(Predicates.not(new AttackingPredicate()));
+        filter.add(Predicates.not(AttackingPredicate.instance));
     }
 
     public Alarum(UUID ownerId, CardSetInfo setInfo) {

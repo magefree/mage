@@ -48,22 +48,22 @@ public final class VindictiveLich extends CardImpl {
 
         // *Target opponent discards two cards.
         Mode mode = new Mode();
-        mode.getEffects().add(new DiscardTargetEffect(2, false));
+        mode.addEffect(new DiscardTargetEffect(2, false));
         filter = new FilterOpponent("opponent (discard)");
         filter.add(new AnotherTargetPredicate(2, true));
         target = new TargetOpponent(filter, false);
         target.setTargetTag(2);
-        mode.getTargets().add(target);
+        mode.addTarget(target);
         ability.addMode(mode);
 
         // *Target opponent loses 5 life.
         mode = new Mode();
-        mode.getEffects().add(new LoseLifeTargetEffect(5));
+        mode.addEffect(new LoseLifeTargetEffect(5));
         filter = new FilterOpponent("opponent (life loss)");
         filter.add(new AnotherTargetPredicate(3, true));
         target = new TargetOpponent(filter, false);
         target.setTargetTag(3);
-        mode.getTargets().add(target);
+        mode.addTarget(target);
         ability.addMode(mode);
         this.addAbility(ability);
     }

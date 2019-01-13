@@ -112,7 +112,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
                         this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
                     } else {
                         this.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
-                        targetName = new StringBuilder(targetName).append("equipped by ").append(equipment.getName()).toString();
+                        targetName = targetName + " equipped by " + equipment.getName();
                         FilterCreaturePermanent filter = new FilterCreaturePermanent(targetName);
                         List<PermanentIdPredicate> uuidPredicates = new ArrayList<>();
                         for (UUID creatureId : possibleTargets) {

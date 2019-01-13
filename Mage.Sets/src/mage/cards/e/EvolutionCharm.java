@@ -31,14 +31,14 @@ public final class EvolutionCharm extends CardImpl {
 
         // or return target creature card from your graveyard to your hand;
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        mode.addEffect(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addMode(mode);
 
         // or target creature gains flying until end of turn.
         mode = new Mode();
-        mode.getEffects().add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }
 

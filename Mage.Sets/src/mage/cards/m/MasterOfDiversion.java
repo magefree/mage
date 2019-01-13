@@ -22,7 +22,7 @@ public final class MasterOfDiversion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public MasterOfDiversion(UUID ownerId, CardSetInfo setInfo) {

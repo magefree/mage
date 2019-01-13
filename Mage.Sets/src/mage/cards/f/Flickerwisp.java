@@ -33,7 +33,7 @@ public final class Flickerwisp extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public Flickerwisp(UUID ownerId, CardSetInfo setInfo) {

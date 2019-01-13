@@ -14,7 +14,7 @@ import mage.cards.repository.CardRepository;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TxtDeckImporter extends DeckImporter {
+public class TxtDeckImporter extends PlainTextDeckImporter {
 
     private static final String[] SET_VALUES = new String[]{"lands", "creatures", "planeswalkers", "other spells", "sideboard cards",
         "Instant", "Land", "Enchantment", "Artifact", "Sorcery", "Planeswalker", "Creature"};

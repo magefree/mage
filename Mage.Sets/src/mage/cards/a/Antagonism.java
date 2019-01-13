@@ -49,7 +49,7 @@ class OpponentWasNotDealtDamageCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         UUID activePlayer = game.getState().getActivePlayerId();
         if (activePlayer != null) {
-            BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get(BloodthirstWatcher.class.getSimpleName(), activePlayer);
+            BloodthirstWatcher watcher = game.getState().getWatcher(BloodthirstWatcher.class, activePlayer);
             if (watcher != null) {
                 return !watcher.conditionMet();
             }

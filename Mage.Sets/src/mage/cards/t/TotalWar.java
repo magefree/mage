@@ -107,7 +107,7 @@ class TotalWarDestroyEffect extends OneShotEffect {
                     continue;
                 }
                 // Creatures that attacked are safe.
-                AttackedOrBlockedThisCombatWatcher watcher = (AttackedOrBlockedThisCombatWatcher) game.getState().getWatchers().get(AttackedOrBlockedThisCombatWatcher.class.getSimpleName());
+                AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
                 if (watcher != null 
                     && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;

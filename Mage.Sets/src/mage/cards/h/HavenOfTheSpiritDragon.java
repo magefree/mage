@@ -99,7 +99,7 @@ class HavenOfTheSpiritManaCondition extends CreatureCastManaCondition {
     public boolean apply(Game game, Ability source, UUID manaProducer, Cost costToPay) {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object.hasSubtype(SubType.DRAGON, game)
+            if (object != null && object.hasSubtype(SubType.DRAGON, game)
                     && object.isCreature()) {
                 return true;
             }

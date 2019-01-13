@@ -28,7 +28,7 @@ public final class EmrakulTheAeonsTorn extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("colored spells");
 
     static {
-        filter.add(Predicates.not(new ColorlessPredicate()));
+        filter.add(Predicates.not(ColorlessPredicate.instance));
     }
 
     public EmrakulTheAeonsTorn(UUID ownerId, CardSetInfo setInfo) {

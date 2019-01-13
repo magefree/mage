@@ -35,8 +35,8 @@ public final class FlamerushRider extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target attacking creature");
 
     static {
-        filter.add(new AnotherPredicate());
-        filter.add(new AttackingPredicate());
+        filter.add(AnotherPredicate.instance);
+        filter.add(AttackingPredicate.instance);
     }
 
     public FlamerushRider(UUID ownerId, CardSetInfo setInfo) {

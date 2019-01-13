@@ -124,7 +124,7 @@ class TideOfWarEffect extends OneShotEffect {
                     creature.sacrifice(source.getSourceId(), game);
                     Player player = game.getPlayer(creature.getControllerId());
                     if (player != null) {
-                        game.informPlayers(new StringBuilder(player.getLogName()).append(" sacrifices ").append(creature.getName()).toString());
+                        game.informPlayers(player.getLogName() + " sacrifices " + creature.getName());
                     }
                 }
             }

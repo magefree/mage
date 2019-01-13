@@ -5,6 +5,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
@@ -40,8 +41,15 @@ public class AdaptEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        if (permanent.getCounters(game).getCount(CounterType.P1P1) == 0) {
-            permanent.addCounters(CounterType.P1P1.createInstance(adaptNumber), source, game);
+        GameEvent event = new GameEvent(
+                GameEvent.EventType.ADAPT, source.getSourceId(), source.getSourceId(),
+                source.getControllerId(), adaptNumber, false
+        );
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+        if (permanent.getCounters(game).getCount(CounterType.P1P1) == 0 || event.getFlag()) {
+            permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount()), source, game);
         }
         return true;
     }

@@ -29,7 +29,7 @@ public final class Earthcraft extends CardImpl {
     private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("basic land");
 
     static {
-        filterCreature.add(Predicates.not(new TappedPredicate()));
+        filterCreature.add(Predicates.not(TappedPredicate.instance));
         filterLand.add(new CardTypePredicate(CardType.LAND));
         filterLand.add(new SupertypePredicate(SuperType.BASIC));
     }

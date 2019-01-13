@@ -1159,7 +1159,7 @@ public class TestPlayer implements Player {
                 findPermanent(firstFilter, groups[0], computerPlayer.getId(), game);
                 // Second check to filter creature for combat - less strict to workaround issue in #3038
                 FilterCreatureForCombat secondFilter = new FilterCreatureForCombat();
-                // secondFilter.add(Predicates.not(new AttackingPredicate()));
+                // secondFilter.add(Predicates.not(AttackingPredicate.instance));
                 secondFilter.add(Predicates.not(new SummoningSicknessPredicate()));
                 // TODO: Cannot enforce legal attackers multiple times per combat. See issue #3038
                 Permanent attacker = findPermanent(secondFilter, groups[0], computerPlayer.getId(), game, false);
@@ -2366,6 +2366,11 @@ public class TestPlayer implements Player {
     @Override
     public int gainLife(int amount, Game game, UUID sourceId) {
         return computerPlayer.gainLife(amount, game, sourceId);
+    }
+
+    @Override
+    public int damage(int damage, UUID sourceId, Game game) {
+        return computerPlayer.damage(damage, sourceId, game);
     }
 
     @Override

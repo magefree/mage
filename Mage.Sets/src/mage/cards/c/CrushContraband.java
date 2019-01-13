@@ -28,8 +28,8 @@ public final class CrushContraband extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
 
         Mode mode1 = new Mode();
-        mode1.getTargets().add(new TargetEnchantmentPermanent());
-        mode1.getEffects().add(new ExileTargetEffect());
+        mode1.addTarget(new TargetEnchantmentPermanent());
+        mode1.addEffect(new ExileTargetEffect());
         this.getSpellAbility().addMode(mode1);
 
     }

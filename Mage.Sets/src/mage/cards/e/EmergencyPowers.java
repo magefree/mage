@@ -1,6 +1,6 @@
 package mage.cards.e;
 
-import mage.abilities.condition.common.MyMainPhaseCondition;
+import mage.abilities.condition.common.AddendumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -38,7 +38,7 @@ public final class EmergencyPowers extends CardImpl {
         // Addendum — If you cast this spell during your main phase, you may put a permanent card with converted mana cost 7 or less from your hand onto the battlefield.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new PutCardFromHandOntoBattlefieldEffect(filter),
-                MyMainPhaseCondition.instance,
+                AddendumCondition.instance,
                 "<br><i>Addendum</i> &mdash; " +
                         "If you cast this spell during your main phase, " +
                         "you may put a permanent card with converted mana cost 7 or less " +

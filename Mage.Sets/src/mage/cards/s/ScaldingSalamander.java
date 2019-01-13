@@ -26,7 +26,7 @@ public final class ScaldingSalamander extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

@@ -99,9 +99,7 @@ class FightOrFlightEffect extends OneShotEffect {
                     game.addEffect(effect, source);
                 }
             }
-            StringBuilder sb = new StringBuilder("Creatures that can attack this turn: ");
-            sb.append(otherPile.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
-            game.informPlayers(sb.toString());
+            game.informPlayers("Creatures that can attack this turn: " + otherPile.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
             return true;
         }
         return false;

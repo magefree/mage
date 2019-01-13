@@ -7,10 +7,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author North
  */
-public class AnotherPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public enum AnotherPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

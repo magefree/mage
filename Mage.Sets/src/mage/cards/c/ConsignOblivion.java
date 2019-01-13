@@ -29,7 +29,7 @@ public final class ConsignOblivion extends SplitCard {
         // Oblivion {4}{B}
         // Sorcery
         // Aftermath
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Target opponent discards two cards.
         getRightHalfCard().getSpellAbility().addEffect(new DiscardTargetEffect(2));
         getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());

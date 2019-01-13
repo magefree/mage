@@ -36,7 +36,7 @@ public final class MossbridgeTroll extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public MossbridgeTroll(UUID ownerId, CardSetInfo setInfo) {
@@ -109,8 +109,8 @@ class MossbridgeTrollCost extends CostImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("any number of untapped creatures other than {this} with total power 10 or greater");
 
     static {
-        filter.add(new AnotherPredicate());
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(AnotherPredicate.instance);
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public MossbridgeTrollCost() {
@@ -133,7 +133,7 @@ class MossbridgeTrollCost extends CostImpl {
                 }
             }
         }
-        game.informPlayers(new StringBuilder("Tap creatures with total power of ").append(sumPower).toString());
+        game.informPlayers("Tap creatures with total power of " + sumPower);
         paid = sumPower >= 10;
         return paid;
     }

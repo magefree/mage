@@ -53,7 +53,7 @@ class ForcefieldEffect extends OneShotEffect {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("an unblocked creature");
     static {
-        filter.add(new UnblockedPredicate());
+        filter.add(UnblockedPredicate.instance);
     }
     
     ForcefieldEffect() {

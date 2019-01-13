@@ -24,7 +24,7 @@ public final class SliverLegion extends CardImpl {
     private static final FilterPermanent countfilter = new FilterPermanent(SubType.SLIVER, "other Sliver on the battlefield");
 
     static {
-        countfilter.add(new AnotherPredicate());
+        countfilter.add(AnotherPredicate.instance);
     }
 
     public SliverLegion(UUID ownerId, CardSetInfo setInfo) {

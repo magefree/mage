@@ -13,17 +13,21 @@ import mage.game.permanent.Permanent;
  */
 public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private boolean onlyToControllerGraveyard;
+
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect) {
-        this(effect, false);
+        this(effect, false, false);
     }
 
-    public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect, boolean optional) {
+    public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect, boolean optional, boolean onlyToControllerGraveyard) {
         super(Zone.ALL, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
+        this.onlyToControllerGraveyard = onlyToControllerGraveyard;
     }
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(final PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
         super(ability);
+        this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;
     }
 
     @Override
@@ -44,7 +48,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
             if (permanent != null
                     && zEvent.getToZone() == Zone.GRAVEYARD
                     && zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
+                return !onlyToControllerGraveyard || this.isControlledBy(game.getOwnerId(zEvent.getTargetId()));
             }
         }
         return false;
@@ -52,6 +56,6 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
 
     @Override
     public String getRule() {
-        return "When {this} is put into a graveyard from the battlefield, " + super.getRule();
+        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, " + super.getRule();
     }
 }

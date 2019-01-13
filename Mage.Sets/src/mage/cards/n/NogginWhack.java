@@ -96,7 +96,7 @@ class NogginWhackEffect extends OneShotEffect {
             if (!revealedCards.isEmpty()) {
                 targetPlayer.revealCards("Noggin Whack", revealedCards, game);
                 controller.chooseTarget(Outcome.Exile, revealedCards, targetInHand, source, game);
-                for (UUID cardId : (List<UUID>) targetInHand.getTargets()) {
+                for (UUID cardId : targetInHand.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.discard(card, source, game);

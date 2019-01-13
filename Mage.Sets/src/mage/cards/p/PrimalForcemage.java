@@ -27,7 +27,7 @@ public final class PrimalForcemage extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     private static final String rule = "Whenever another creature enters the battlefield under your control, that creature gets +3/+3 until end of turn.";

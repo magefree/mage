@@ -27,7 +27,7 @@ public final class AncestorsProphet extends CardImpl {
     
     static {
         filter.add(new SubtypePredicate(SubType.CLERIC));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }    
     
     public AncestorsProphet(UUID ownerId, CardSetInfo setInfo) {

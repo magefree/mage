@@ -27,7 +27,7 @@ public final class BurnAtTheStake extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public BurnAtTheStake(UUID ownerId, CardSetInfo setInfo) {

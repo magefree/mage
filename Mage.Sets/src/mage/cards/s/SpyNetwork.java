@@ -103,7 +103,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null && player != null && mageObject != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature controlled by " + player.getLogName());
-            filter.add(new FaceDownPredicate());
+            filter.add(FaceDownPredicate.instance);
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {

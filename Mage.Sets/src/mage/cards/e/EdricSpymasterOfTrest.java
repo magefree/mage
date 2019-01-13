@@ -69,7 +69,7 @@ class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage() && 
-                game.getOpponents(this.controllerId).contains(((DamagedPlayerEvent) event).getPlayerId())) {
+                game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(game.getPermanent(event.getSourceId()).getControllerId()));
             }

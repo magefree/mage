@@ -1,19 +1,20 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
+
+import java.util.UUID;
 
 /**
- *
  * 613.10. Some continuous effects affect game rules rather than objects. For
  * example, effects may modify a player's maximum hand size, or say that a
  * creature must attack this turn if able. These effects are applied after all
@@ -21,7 +22,6 @@ import mage.game.Game;
  * the costs of spells or abilities are applied according to the order specified
  * in rule 601.2e. All other such effects are applied in timestamp order. See
  * also the rules for timestamp order and dependency (rules 613.6 and 613.7)
- *
  *
  * @author LevelX2
  */
@@ -37,50 +37,20 @@ public final class DoranTheSiegeTower extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Each creature assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoranTheSiegeTowerCombatDamageRuleEffect()));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new CombatDamageByToughnessEffect(
+                        StaticFilters.FILTER_PERMANENT_CREATURE, false
+                )
+        ));
     }
 
-    public DoranTheSiegeTower(final DoranTheSiegeTower card) {
+    private DoranTheSiegeTower(final DoranTheSiegeTower card) {
         super(card);
     }
 
     @Override
     public DoranTheSiegeTower copy() {
         return new DoranTheSiegeTower(this);
-    }
-}
-
-class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl {
-
-    public DoranTheSiegeTowerCombatDamageRuleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Each creature assigns combat damage equal to its toughness rather than its power";
-    }
-
-    public DoranTheSiegeTowerCombatDamageRuleEffect(final DoranTheSiegeTowerCombatDamageRuleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DoranTheSiegeTowerCombatDamageRuleEffect copy() {
-        return new DoranTheSiegeTowerCombatDamageRuleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        // Change the rule
-        game.getCombat().setUseToughnessForDamage(true);
-        game.getCombat().addUseToughnessForDamageFilter(StaticFilters.FILTER_PERMANENT_CREATURES);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

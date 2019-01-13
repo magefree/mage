@@ -53,7 +53,7 @@ class RustElementalEffect extends OneShotEffect {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("artifact");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public RustElementalEffect() {

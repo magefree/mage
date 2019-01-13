@@ -62,8 +62,8 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        MultanisPresenceWatcher watcher = (MultanisPresenceWatcher) game.getState().getWatchers().get(MultanisPresenceWatcher.class.getSimpleName());
-        return (watcher.getSpellsCastThisTurn(controllerId).contains(event.getTargetId()));
+        MultanisPresenceWatcher watcher = game.getState().getWatcher(MultanisPresenceWatcher.class);
+        return watcher != null && watcher.getSpellsCastThisTurn(controllerId).contains(event.getTargetId());
     }
 
     @Override

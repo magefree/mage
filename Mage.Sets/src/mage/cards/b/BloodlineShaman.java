@@ -70,7 +70,7 @@ class BloodlineShamanEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         Choice typeChoice = new ChoiceCreatureType(sourceObject);
-        if (controller != null && controller.choose(outcome, typeChoice, game)) {
+        if (controller != null && sourceObject != null && controller.choose(outcome, typeChoice, game)) {
             game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             FilterCard filterSubtype = new FilterCard();
             filterSubtype.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));

@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -17,7 +16,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -25,6 +24,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -36,9 +37,13 @@ public final class BirthingPod extends CardImpl {
 
         // {1}{G/P}, {tap}, Sacrifice a creature: Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost,
         // put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BirthingPodEffect(), new ManaCostsImpl("{1}{G/P}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(
+                Zone.BATTLEFIELD, new BirthingPodEffect(), new ManaCostsImpl("{1}{G/P}")
+        );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(
+                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
+        )));
         this.addAbility(ability);
     }
 
@@ -56,11 +61,12 @@ class BirthingPodEffect extends OneShotEffect {
 
     BirthingPodEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card "
-                + "onto the battlefield, then shuffle your library";
+        staticText = "Search your library for a creature card with converted mana cost equal to 1 " +
+                "plus the sacrificed creature's converted mana cost, put that card " +
+                "onto the battlefield, then shuffle your library";
     }
 
-    BirthingPodEffect(final BirthingPodEffect effect) {
+    private BirthingPodEffect(final BirthingPodEffect effect) {
         super(effect);
     }
 
@@ -77,20 +83,20 @@ class BirthingPodEffect extends OneShotEffect {
             }
         }
         Player controller = game.getPlayer(source.getControllerId());
-        if (sacrificedPermanent != null && controller != null) {
-            int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 1;
-            FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
-            filter.add(new CardTypePredicate(CardType.CREATURE));
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
-                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
+        if (sacrificedPermanent == null || controller == null) {
+            return false;
         }
-        return false;
+        int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 1;
+        FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        if (controller.searchLibrary(target, game)) {
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        }
+        controller.shuffleLibrary(source, game);
+        return true;
     }
 
     @Override

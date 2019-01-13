@@ -49,7 +49,7 @@ public class PlayerLostLifeWatcher extends Watcher {
         }
     }
 
-    public int getLiveLost(UUID playerId) {
+    public int getLifeLost(UUID playerId) {
         return amountOfLifeLostThisTurn.getOrDefault(playerId, 0);
     }
 
@@ -64,7 +64,7 @@ public class PlayerLostLifeWatcher extends Watcher {
         return amount;
     }
 
-    public int getLiveLostLastTurn(UUID playerId) {
+    public int getLifeLostLastTurn(UUID playerId) {
         return amountOfLifeLostLastTurn.getOrDefault(playerId, 0);
     }
 

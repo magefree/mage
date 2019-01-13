@@ -28,7 +28,7 @@ public final class BrandedBrawlers extends CardImpl {
 
     static final private FilterLandPermanent filter = new FilterLandPermanent("an untapped land");
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
     
     final static private String rule = "{this} can't block if you control an untapped land";
@@ -64,7 +64,7 @@ class BrandedBrawlersCantBlockEffect extends RestrictionEffect {
     public BrandedBrawlersCantBlockEffect(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield);
         this.filter = filter;
-        staticText = new StringBuilder("{this} can't attack if you control ").append(filter.getMessage()).toString();
+        staticText = "{this} can't attack if you control " + filter.getMessage();
     }
 
     public BrandedBrawlersCantBlockEffect(final BrandedBrawlersCantBlockEffect effect) {

@@ -69,7 +69,7 @@ class SamiteMinistrationEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         MageObject sourceObject = game.getObject(event.getSourceId());
-        if (sourceObject.getColor(game).isBlack() || sourceObject.getColor(game).isRed()) {
+        if (sourceObject != null && (sourceObject.getColor(game).isBlack() || sourceObject.getColor(game).isRed())) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 player.gainLife(preventionData.getPreventedDamage(), game, source);

@@ -23,7 +23,7 @@ public final class HeraldOfKozilek extends CardImpl {
     private static final FilterCard filter = new FilterCard("Colorless spells");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public HeraldOfKozilek(UUID ownerId, CardSetInfo setInfo) {

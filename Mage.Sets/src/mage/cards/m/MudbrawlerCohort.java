@@ -34,7 +34,7 @@ public final class MudbrawlerCohort extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public MudbrawlerCohort(UUID ownerId, CardSetInfo setInfo) {

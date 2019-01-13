@@ -119,7 +119,7 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
             if (card != null && (card.isInstant() || card.isSorcery())) {
                 // TODO: Find a way to check, that the spell from graveyard was really cast by the ability of the emblem.
                 // currently every spell cast from graveyard will be exiled.
-                CastFromGraveyardWatcher watcher = (CastFromGraveyardWatcher) game.getState().getWatchers().get(CastFromGraveyardWatcher.class.getSimpleName());
+                CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
                 return watcher != null && watcher.spellWasCastFromGraveyard(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId()));
             }
         }

@@ -32,7 +32,7 @@ public final class BorrowedGrace extends CardImpl {
 
         // Creatures you control get +0/+2 until end of turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostControlledEffect(0, 2, Duration.EndOfTurn));
+        mode.addEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
     }
 

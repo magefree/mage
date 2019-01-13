@@ -74,7 +74,7 @@ class NullstoneGargoyleTriggeredAbility extends TriggeredAbilityImpl {
         if (spell.isCreature()) {
             return false;
         }
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null && watcher.getNumberOfNonCreatureSpells() == 1) {
             for (Effect effect : getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));

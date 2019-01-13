@@ -80,7 +80,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterCard());
             if (controller.searchLibrary(target, game)) {
                 Cards chosen = new CardsImpl();
-                for (UUID cardId : (List<UUID>) target.getTargets()) {
+                for (UUID cardId : target.getTargets()) {
                     Card card = controller.getLibrary().remove(cardId, game);
                     chosen.add(card);
                 }

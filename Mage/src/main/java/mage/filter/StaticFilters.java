@@ -297,7 +297,7 @@ public final class StaticFilters {
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_ANOTHER_CREATURE = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        FILTER_CONTROLLED_ANOTHER_CREATURE.add(new AnotherPredicate());
+        FILTER_CONTROLLED_ANOTHER_CREATURE.add(AnotherPredicate.instance);
         FILTER_CONTROLLED_ANOTHER_CREATURE.setLockedFilter(true);
     }
 
@@ -405,13 +405,13 @@ public final class StaticFilters {
         FILTER_PERMANENT_PLANESWALKER.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
+    public static final FilterNonlandPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     static {
         FILTER_PERMANENT_NON_LAND.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENTS_NON_LAND = new FilterNonlandPermanent("nonland permanents");
+    public static final FilterNonlandPermanent FILTER_PERMANENTS_NON_LAND = new FilterNonlandPermanent("nonland permanents");
 
     static {
         FILTER_PERMANENTS_NON_LAND.setLockedFilter(true);
@@ -463,7 +463,7 @@ public final class StaticFilters {
     public static final FilterSpell FILTER_SPELL_A_MULTICOLORED = new FilterSpell("a multicolored spell");
 
     static {
-        FILTER_SPELL_A_MULTICOLORED.add(new MulticoloredPredicate());
+        FILTER_SPELL_A_MULTICOLORED.add(MulticoloredPredicate.instance);
         FILTER_SPELL_A_MULTICOLORED.setLockedFilter(true);
     }
 
@@ -500,14 +500,14 @@ public final class StaticFilters {
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
     static {
-        FILTER_CREATURE_TOKENS.add(new TokenPredicate());
+        FILTER_CREATURE_TOKENS.add(TokenPredicate.instance);
         FILTER_CREATURE_TOKENS.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
 
     static {
-        FILTER_ATTACKING_CREATURES.add(new AttackingPredicate());
+        FILTER_ATTACKING_CREATURES.add(AttackingPredicate.instance);
         FILTER_ATTACKING_CREATURES.setLockedFilter(true);
     }
 

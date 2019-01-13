@@ -8,7 +8,7 @@
 
 package mage.client.table;
 
-import mage.cards.decks.importer.DeckImporterUtil;
+import mage.cards.decks.importer.DeckImporter;
 import mage.client.SessionHandler;
 import mage.client.util.Config;
 import mage.client.util.Event;
@@ -53,7 +53,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
     public boolean joinTable(UUID roomId, UUID tableId) throws IOException, ClassNotFoundException {
         if (this.cbPlayerType.getSelectedItem() != PlayerType.HUMAN) {
-            return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (PlayerType) this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), "");
+            return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (PlayerType) this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile()), "");
         }
         return true;
     }

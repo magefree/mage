@@ -23,10 +23,10 @@ public class OpponentLostLifeCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         int maxLostLive = 0;
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
+        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                int lostLive = watcher.getLiveLost(opponentId);
+                int lostLive = watcher.getLifeLost(opponentId);
                 if (lostLive > maxLostLive) {
                     maxLostLive = lostLive;
                 }

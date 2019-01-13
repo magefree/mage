@@ -27,7 +27,7 @@ public final class Reconnaissance extends CardImpl {
     private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature controlled by you");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public Reconnaissance(UUID ownerId, CardSetInfo setInfo) {

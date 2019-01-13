@@ -1,13 +1,12 @@
-
 package mage.cards.repository;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.*;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author North
  */
 public final class CardScanner {
@@ -27,14 +26,15 @@ public final class CardScanner {
         scanned = true;
 
         List<CardInfo> cardsToAdd = new ArrayList<>();
-        int setsUpdatedCount = 0;
-        int setsAddedCount = 0;
+        List<ExpansionInfo> setsToAdd = new ArrayList<>();
+        List<ExpansionInfo> setsToUpdate = new ArrayList<>();
 
+        // check sets
         for (ExpansionSet set : Sets.getInstance().values()) {
             ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(set.getCode());
             if (expansionInfo == null) {
-                setsAddedCount += 1;
-                ExpansionRepository.instance.add(new ExpansionInfo(set));
+                // need add
+                setsToAdd.add(new ExpansionInfo(set));
             } else if (!expansionInfo.name.equals(set.getName())
                     || !expansionInfo.code.equals(set.getCode())
                     || (expansionInfo.blockName == null ? set.getBlockName() != null : !expansionInfo.blockName.equals(set.getBlockName()))
@@ -42,22 +42,17 @@ public final class CardScanner {
                     || expansionInfo.type != set.getSetType()
                     || expansionInfo.boosters != set.hasBoosters()
                     || expansionInfo.basicLands != set.hasBasicLands()) {
-                setsUpdatedCount += 1;
-                ExpansionRepository.instance.update(expansionInfo);
+                // need update
+                setsToUpdate.add(expansionInfo);
             }
         }
-        ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
+        ExpansionRepository.instance.saveSets(setsToAdd, setsToUpdate, ExpansionRepository.instance.getContentVersionConstant());
 
-        if (setsAddedCount > 0) {
-            logger.info("DB: need to add " + setsAddedCount + " new sets");
-        }
-        if (setsUpdatedCount > 0) {
-            logger.info("DB: need to update " + setsUpdatedCount + " sets");
-        }
-
+        // check cards (only add mode, without updates)
         for (ExpansionSet set : Sets.getInstance().values()) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
                 if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
+                    // need add
                     Card card = CardImpl.createCard(
                             setInfo.getCardClass(),
                             new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
@@ -73,11 +68,6 @@ public final class CardScanner {
                 }
             }
         }
-
-        if (!cardsToAdd.isEmpty()) {
-            logger.info("DB: need to add " + cardsToAdd.size() + " new cards");
-            CardRepository.instance.addCards(cardsToAdd);
-        }
-        CardRepository.instance.setContentVersion(CardRepository.instance.getContentVersionConstant());
+        CardRepository.instance.saveCards(cardsToAdd, CardRepository.instance.getContentVersionConstant());
     }
 }

@@ -68,7 +68,7 @@ class SpinerockKnollCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         int maxDamageReceived = 0;
-        SpinerockKnollWatcher watcher = (SpinerockKnollWatcher) game.getState().getWatchers().get(SpinerockKnollWatcher.class.getSimpleName(), source.getSourceId());
+        SpinerockKnollWatcher watcher = game.getState().getWatcher(SpinerockKnollWatcher.class, source.getSourceId());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 int damageReceived = watcher.getDamageReceived(opponentId);

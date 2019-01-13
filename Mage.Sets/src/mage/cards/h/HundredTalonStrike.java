@@ -30,7 +30,7 @@ public final class HundredTalonStrike extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white creature you control");
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 

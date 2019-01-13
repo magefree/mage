@@ -38,7 +38,7 @@ public final class GrimlockDinobotLeader extends CardImpl{
     static {
         filter2.add(Predicates.not(new SubtypePredicate(SubType.DINOSAUR))); 
         filter2.add(Predicates.not(new SubtypePredicate(SubType.VEHICLE))); 
-        filter2.add(Predicates.or(new AbilityPredicate(TransformAbility.class), new TransformedPredicate()));
+        filter2.add(Predicates.or(new AbilityPredicate(TransformAbility.class), TransformedPredicate.instance));
     }
     
     public GrimlockDinobotLeader(UUID ownerId, CardSetInfo setInfo) {

@@ -2,14 +2,12 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.effects.keyword.AdaptEffect;
+import mage.abilities.keyword.AdaptAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +30,7 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter2.add(new CounterPredicate(CounterType.P1P1));
     }
 
@@ -56,9 +54,7 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
         ));
 
         // {4}{G}{U}: Adapt 4.
-        this.addAbility(new SimpleActivatedAbility(
-                new AdaptEffect(4), new ManaCostsImpl("{4}{G}{U}")
-        ));
+        this.addAbility(new AdaptAbility(4, "{4}{G}{U}"));
 
         // Each creature you control with a +1/+1 counter on it has trample.
         this.addAbility(new SimpleStaticAbility(

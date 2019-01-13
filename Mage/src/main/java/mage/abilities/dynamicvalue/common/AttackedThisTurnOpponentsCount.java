@@ -20,7 +20,7 @@ public class AttackedThisTurnOpponentsCount implements DynamicValue {
     }
 
     public int calculate(Game game, UUID controllerId) {
-        PlayersAttackedThisTurnWatcher watcher = (PlayersAttackedThisTurnWatcher) game.getState().getWatchers().get(PlayersAttackedThisTurnWatcher.class.getSimpleName());
+        PlayersAttackedThisTurnWatcher watcher = game.getState().getWatcher(PlayersAttackedThisTurnWatcher.class);
         if (watcher != null) {
             return watcher.getAttackedOpponentsCount(controllerId);
         }

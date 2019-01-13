@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -15,8 +13,9 @@ import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class FreyalisesCharm extends CardImpl {
@@ -33,7 +32,7 @@ public final class FreyalisesCharm extends CardImpl {
         // Whenever an opponent casts a black spell, you may pay {G}{G}. If you do, you draw a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 new DoIfCostPaid(
-                        new DrawCardSourceControllerEffect(1),
+                        new DrawCardSourceControllerEffect(1, "you"),
                         new ManaCostsImpl("{G}{G}")
                 ), filter, false
         ));

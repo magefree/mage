@@ -58,7 +58,7 @@ class ThrillingEncoreEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get(CardsPutIntoGraveyardWatcher.class.getSimpleName());
+        CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
         if (watcher != null) {
             for (MageObjectReference mor : watcher.getCardsPutToGraveyardFromBattlefield()) {
                 if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {

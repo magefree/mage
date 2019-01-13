@@ -37,7 +37,7 @@ public final class DualNature extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public DualNature(UUID ownerId, CardSetInfo setInfo) {
@@ -130,7 +130,7 @@ class DualNatureCreatureLeavesEffect extends OneShotEffect {
         Permanent creature = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (creature != null) {
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new TokenPredicate());
+            filter.add(TokenPredicate.instance);
             filter.add(new NamePredicate(creature.getName()));
             new ExileAllEffect(filter).apply(game, source);
             return true;

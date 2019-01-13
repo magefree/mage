@@ -17,7 +17,7 @@ public enum TargetAttackedThisTurnCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanentOrLKIBattlefield(source.getTargets().getFirstTarget());
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
         return creature != null && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(creature, game));
     }
 }

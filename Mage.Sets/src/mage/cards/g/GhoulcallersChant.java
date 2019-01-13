@@ -33,8 +33,8 @@ public final class GhoulcallersChant extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         // or return two target Zombie cards from your graveyard to your hand.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(2, filter));
+        mode.addEffect(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(2, filter));
         this.getSpellAbility().addMode(mode);
     }
 

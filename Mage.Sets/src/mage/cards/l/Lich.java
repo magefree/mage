@@ -145,7 +145,7 @@ class LichDamageEffect extends OneShotEffect {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nontoken permanent");
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
     
     private int amount = 0;

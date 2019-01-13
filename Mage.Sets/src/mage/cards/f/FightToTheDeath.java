@@ -21,8 +21,8 @@ public final class FightToTheDeath extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new BlockingPredicate(),
-                new BlockedPredicate()));
+                BlockingPredicate.instance,
+                BlockedPredicate.instance));
     }
 
     public FightToTheDeath(UUID ownerId, CardSetInfo setInfo) {

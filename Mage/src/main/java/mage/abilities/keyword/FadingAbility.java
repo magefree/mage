@@ -23,12 +23,18 @@ public class FadingAbility extends EntersBattlefieldAbility {
     private String ruleText;
 
     public FadingAbility(int fadeCounter, Card card) {
+        this(fadeCounter, card, false);
+    }
+
+    public FadingAbility(int fadeCounter, Card card, boolean shortRuleText) {
         super(new AddCountersSourceEffect(CounterType.FADE.createInstance(fadeCounter)), "with");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new FadingEffect(), TargetController.YOU, false);
         ability.setRuleVisible(false);
         addSubAbility(ability);
-        ruleText = "Fading " + fadeCounter + " <i>(This permanent enters the battlefield with " + fadeCounter + " fade counters on it."
-                + " At the beginning of your upkeep, remove a fade counter from this permanent. If you can't, sacrifice the permanent.</i>";
+        ruleText = "Fading " + fadeCounter
+                + (shortRuleText ? ""
+                        : " <i>(This permanent enters the battlefield with " + fadeCounter + " fade counters on it."
+                        + " At the beginning of your upkeep, remove a fade counter from this permanent. If you can't, sacrifice the permanent.</i>");
     }
 
     public FadingAbility(final FadingAbility ability) {

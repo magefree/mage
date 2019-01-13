@@ -65,7 +65,7 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        watcher = (ScoutsWarningWatcher) game.getState().getWatchers().get(ScoutsWarningWatcher.class.getSimpleName(), source.getControllerId());
+        watcher = game.getState().getWatcher(ScoutsWarningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher != null && card != null) {
             zoneChangeCounter = card.getZoneChangeCounter(game);
@@ -126,12 +126,12 @@ class ScoutsWarningWatcher extends Watcher {
     }
 
     public void addScoutsWarningSpell(UUID sourceId, int zoneChangeCounter) {
-        String spellKey = new StringBuilder(sourceId.toString()).append('_').append(zoneChangeCounter).toString();
+        String spellKey = sourceId.toString() + '_' + zoneChangeCounter;
         activeScoutsWarningSpells.add(spellKey);
     }
 
     public boolean isScoutsWarningSpellActive(UUID sourceId, int zoneChangeCounter) {
-        String spellKey = new StringBuilder(sourceId.toString()).append('_').append(zoneChangeCounter).toString();
+        String spellKey = sourceId.toString() + '_' + zoneChangeCounter;
         return activeScoutsWarningSpells.contains(spellKey);
     }
 

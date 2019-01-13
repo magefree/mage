@@ -30,7 +30,7 @@ public final class ScourgeOfKherRidges extends CardImpl {
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
         filter2.add(new AbilityPredicate(FlyingAbility.class));
-        filter2.add(new AnotherPredicate());
+        filter2.add(AnotherPredicate.instance);
     }
 
     public ScourgeOfKherRidges(UUID ownerId, CardSetInfo setInfo) {

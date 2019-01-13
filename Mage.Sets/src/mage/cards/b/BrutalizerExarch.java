@@ -49,8 +49,8 @@ public final class BrutalizerExarch extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), false);
         // or put target noncreature permanent on the bottom of its owner's library.
         Mode mode = new Mode();
-        mode.getEffects().add(new BrutalizerExarchEffect2());
-        mode.getTargets().add(new TargetPermanent(filter));
+        mode.addEffect(new BrutalizerExarchEffect2());
+        mode.addTarget(new TargetPermanent(filter));
         ability.addMode(mode);
         this.addAbility(ability);
     }

@@ -128,6 +128,8 @@
         <draftCube name="MTGO Vintage Cube June 2017" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJune2017"/>
         <draftCube name="MTGO Vintage Cube December 2017" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeDecember2017"/>
         <draftCube name="MTGO Vintage Cube June 2018" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJune2018"/>
+        <draftCube name="MTGO Vintage Cube December 2018" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeDecember2018"/>
+        <draftCube name="SCG Con Cube 2018 December" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.ScgConCube2018December"/>
         <draftCube name="The Peasant's Toolbox" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
         <draftCube name="www.MTGCube.com" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGCube"/>
         <draftCube name="Cube From Deck" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeFromDeck"/>

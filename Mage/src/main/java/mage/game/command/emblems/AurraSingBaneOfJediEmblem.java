@@ -18,7 +18,7 @@ public final class AurraSingBaneOfJediEmblem extends Emblem {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a nontoken creature you control");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     //  Whenever a nontoken creature you control leaves the battlefied, discard a card.

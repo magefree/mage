@@ -27,7 +27,7 @@ public final class MajesticHeliopterus extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target Dinosaur you control");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new SubtypePredicate(SubType.DINOSAUR));
     }
     public MajesticHeliopterus(UUID ownerId, CardSetInfo setInfo) {

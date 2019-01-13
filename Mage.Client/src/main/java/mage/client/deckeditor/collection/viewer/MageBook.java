@@ -1,20 +1,5 @@
-
 package mage.client.deckeditor.collection.viewer;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import static java.lang.Math.min;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import mage.cards.*;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -24,12 +9,13 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.*;
+import mage.client.util.Config;
+import mage.client.util.ImageHelper;
+import mage.client.util.NaturalOrderCardNumberComparator;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
-import mage.constants.Rarity;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.PermanentToken;
@@ -41,6 +27,19 @@ import mage.view.PlaneView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.CardDownloadData;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.*;
+
+import static java.lang.Math.min;
 import static org.mage.plugins.card.images.DownloadPicturesService.getTokenCardUrls;
 
 /**
@@ -307,25 +306,33 @@ public class MageBook extends JComponent {
             // Already have numTokens tokens presented. Appending the emblems to the end of these.
             numTokens = numTokens % conf.CARDS_PER_PAGE;
             if (numTokens < conf.CARDS_PER_PAGE / 2) {
+                // page 1 with tokens
                 for (int z = 0; z < numTokens && z < conf.CARDS_PER_PAGE / 2; z++) {
                     rectangle = CardPosition.translatePosition(z, rectangle, conf);
                 }
             } else {
+                // page 2 with tokens
                 rectangle.setLocation(second_page_x, OFFSET_Y);
                 for (int z = 0; z < numTokens - conf.CARDS_PER_PAGE / 2; z++) {
                     rectangle = CardPosition.translatePosition(z, rectangle, conf);
                 }
             }
 
+            // page 1 with emblems after tokens
             int lastI = 0;
+            boolean needContinueFromPage1 = false;
             for (int i = 0; i < size && i + numTokens < conf.CARDS_PER_PAGE / 2; i++) {
                 Emblem emblem = emblems.get(i);
                 addEmblem(emblem, bigCard, null, rectangle);
                 rectangle = CardPosition.translatePosition(i + numTokens, rectangle, conf);
                 lastI++;
+                needContinueFromPage1 = true;
             }
 
-            rectangle.setLocation(second_page_x, OFFSET_Y);
+            // page 2 with emblems after tokens
+            if (needContinueFromPage1) {
+                rectangle.setLocation(second_page_x, OFFSET_Y);
+            }
             if (size + numTokens > conf.CARDS_PER_PAGE / 2) {
                 for (int i = lastI; i < size && i + numTokens < conf.CARDS_PER_PAGE; i++) {
                     Emblem emblem = emblems.get(i);
@@ -354,25 +361,33 @@ public class MageBook extends JComponent {
 
             numTokensEmblems = numTokensEmblems % conf.CARDS_PER_PAGE;
             if (numTokensEmblems < conf.CARDS_PER_PAGE / 2) {
+                // page 1 with tokens/emblems
                 for (int z = 0; z < numTokensEmblems && z < conf.CARDS_PER_PAGE / 2; z++) {
                     rectangle = CardPosition.translatePosition(z, rectangle, conf);
                 }
             } else {
+                // page 2 with tokens/emblems
                 rectangle.setLocation(second_page_x, OFFSET_Y);
                 for (int z = 0; z < numTokensEmblems - conf.CARDS_PER_PAGE / 2; z++) {
                     rectangle = CardPosition.translatePosition(z, rectangle, conf);
                 }
             }
 
+            // page 1 with planes after tokens/emblems
             int lastI = 0;
+            boolean needContinueFromPage1 = false;
             for (int i = 0; i < size && i + numTokensEmblems < conf.CARDS_PER_PAGE / 2; i++) {
                 Plane plane = planes.get(i);
                 addPlane(plane, bigCard, null, rectangle);
                 rectangle = CardPosition.translatePosition(i + numTokensEmblems, rectangle, conf);
                 lastI++;
+                needContinueFromPage1 = true;
             }
 
-            rectangle.setLocation(second_page_x, OFFSET_Y);
+            // page 2 with planes after tokens/emblems
+            if (needContinueFromPage1) {
+                rectangle.setLocation(second_page_x, OFFSET_Y);
+            }
             if (size + numTokensEmblems > conf.CARDS_PER_PAGE / 2) {
                 for (int i = lastI; i < size && i + numTokensEmblems < conf.CARDS_PER_PAGE; i++) {
                     Plane plane = planes.get(i);
@@ -602,13 +617,13 @@ public class MageBook extends JComponent {
                 }
             }
         }
-        
+
         int totalTokens = getTotalNumTokens(set);
         int start = 0;
         if (!(page * conf.CARDS_PER_PAGE <= totalTokens && (page + 1) * conf.CARDS_PER_PAGE >= totalTokens)) {
             start = page * conf.CARDS_PER_PAGE - totalTokens;
         }
-        
+
         int end = emblems.size();
         if ((page + 1) * conf.CARDS_PER_PAGE < totalTokens + emblems.size()) {
             end = (page + 1) * conf.CARDS_PER_PAGE - totalTokens;
@@ -659,7 +674,7 @@ public class MageBook extends JComponent {
                 }
             }
         }
-        
+
         int totalTokens = getTotalNumTokens(set);
         int totalTokensEmblems = totalTokens + getTotalNumEmblems(set);
         int start = 0;
@@ -667,7 +682,7 @@ public class MageBook extends JComponent {
             start = page * conf.CARDS_PER_PAGE - totalTokensEmblems;
             pageRight.setVisible(true);
         }
-        
+
         int end = planes.size();
         if ((page + 1) * conf.CARDS_PER_PAGE < totalTokensEmblems + planes.size()) {
             end = (page + 1) * conf.CARDS_PER_PAGE - totalTokensEmblems;

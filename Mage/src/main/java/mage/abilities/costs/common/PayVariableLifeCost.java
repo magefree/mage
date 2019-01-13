@@ -1,5 +1,3 @@
-
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
@@ -12,7 +10,6 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
 public class PayVariableLifeCost extends VariableCostImpl {
 
     public PayVariableLifeCost() {
@@ -21,7 +18,7 @@ public class PayVariableLifeCost extends VariableCostImpl {
 
     public PayVariableLifeCost(boolean additionalCostText) {
         super("life to pay");
-        this.text = new StringBuilder(additionalCostText ? "as an additional cost to cast this spell, pay ":"Pay ")
+        this.text = new StringBuilder(additionalCostText ? "as an additional cost to cast this spell, pay " : "Pay ")
                 .append(xText).append(' ').append("life").toString();
     }
 
@@ -44,7 +41,10 @@ public class PayVariableLifeCost extends VariableCostImpl {
         int maxValue = 0;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            maxValue = controller.getLife();
+            // Paying 0 life is not considered paying any life, so paying 0 is still allowed
+            if (game.getPlayer(source.getControllerId()).canPayLifeCost()) {
+                maxValue = controller.getLife();
+            }
         }
         return maxValue;
     }

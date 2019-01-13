@@ -25,7 +25,7 @@ public final class NebulonBFrigate extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public NebulonBFrigate(UUID ownerId, CardSetInfo setInfo) {

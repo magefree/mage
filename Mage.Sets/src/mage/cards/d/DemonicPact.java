@@ -38,18 +38,18 @@ public final class DemonicPact extends CardImpl {
 
         // - Target opponent discards two cards
         Mode mode = new Mode();
-        mode.getTargets().add(new TargetOpponent());
-        mode.getEffects().add(new DiscardTargetEffect(2));
+        mode.addTarget(new TargetOpponent());
+        mode.addEffect(new DiscardTargetEffect(2));
         ability.addMode(mode);
 
         // - Draw two cards
         mode = new Mode();
-        mode.getEffects().add(new DrawCardSourceControllerEffect(2));
+        mode.addEffect(new DrawCardSourceControllerEffect(2));
         ability.addMode(mode);
 
         // - You lose the game.
         mode = new Mode();
-        mode.getEffects().add(new LoseGameSourceControllerEffect());
+        mode.addEffect(new LoseGameSourceControllerEffect());
         ability.addMode(mode);
 
         this.addAbility(ability);

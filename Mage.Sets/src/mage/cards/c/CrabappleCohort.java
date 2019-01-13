@@ -33,7 +33,7 @@ public final class CrabappleCohort extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public CrabappleCohort(UUID ownerId, CardSetInfo setInfo) {

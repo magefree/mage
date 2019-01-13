@@ -32,7 +32,7 @@ public final class SelkieHedgeMage extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));
         filter2.add(new SubtypePredicate(SubType.ISLAND));
-        filter3.add(new TappedPredicate());
+        filter3.add(TappedPredicate.instance);
     }
 
     private static final String rule1 = "When {this} enters the battlefield, if you control two or more Forests, you may gain 3 life.";

@@ -1,9 +1,7 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -15,9 +13,11 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class ShatteredCrypt extends CardImpl {
@@ -30,17 +30,7 @@ public final class ShatteredCrypt extends CardImpl {
         effect.setText("Return X target creature cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(1, new FilterCreatureCard()));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            int xValue = ability.getManaCostsToPay().getX();
-            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ? " creature cards" : "creature card").append(" from your graveyard").toString()));
-            ability.addTarget(target);
-        }
+        this.getSpellAbility().setTargetAdjuster(ShatteredCryptAdjuster.instance);
     }
 
     public ShatteredCrypt(final ShatteredCrypt card) {
@@ -50,5 +40,17 @@ public final class ShatteredCrypt extends CardImpl {
     @Override
     public ShatteredCrypt copy() {
         return new ShatteredCrypt(this);
+    }
+}
+
+enum ShatteredCryptAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        int xValue = ability.getManaCostsToPay().getX();
+        Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard((xValue != 1 ? " creature cards" : "creature card") + " from your graveyard"));
+        ability.addTarget(target);
     }
 }

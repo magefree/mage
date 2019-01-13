@@ -56,7 +56,7 @@ class RocketLauncherWatcher extends Watcher {
     UUID cardId = null;
 
     public RocketLauncherWatcher(UUID cardId) {
-        super(RocketLauncherWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(RocketLauncherWatcher.class, WatcherScope.GAME);
         this.changedControllerOR1stTurn = true;
         this.cardId = cardId;
     }
@@ -97,9 +97,9 @@ enum ControlledTurnCondition implements Condition {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        RocketLauncherWatcher watcher = (RocketLauncherWatcher) game.getState().getWatchers().get(RocketLauncherWatcher.class.getSimpleName());
+        RocketLauncherWatcher watcher = game.getState().getWatcher(RocketLauncherWatcher.class);
         
-        return !watcher.changedControllerOR1stTurn;
+        return watcher != null && !watcher.changedControllerOR1stTurn;
     }
 
     @Override

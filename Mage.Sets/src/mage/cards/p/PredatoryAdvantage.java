@@ -48,7 +48,7 @@ class DidNotCastCreatureCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            Watcher watcher = game.getState().getWatchers().get(CastCreatureWatcher.class.getSimpleName(), source.getSourceId());
+            Watcher watcher = game.getState().getWatcher(CastCreatureWatcher.class, source.getSourceId());
             if (watcher != null && !watcher.conditionMet()) {
                 return true;
             }
@@ -58,15 +58,14 @@ class DidNotCastCreatureCondition implements Condition {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("if that player didn't cast a creature spell this turn");
-        return sb.toString();
+        return "if that player didn't cast a creature spell this turn";
     }
 }
 
 class CastCreatureWatcher extends Watcher {
 
     public CastCreatureWatcher() {
-        super(CastCreatureWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(CastCreatureWatcher.class, WatcherScope.CARD);
     }
 
     public CastCreatureWatcher(final CastCreatureWatcher watcher) {
