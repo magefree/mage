@@ -58,7 +58,7 @@ class RakdosRoustaboutAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
     }
 
     @Override
