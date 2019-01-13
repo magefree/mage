@@ -31,7 +31,7 @@ public final class KryShield extends CardImpl {
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt this turn by target creature you control");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addEffect(new BoostTargetEffect(new StaticValue(0), new TargetConvertedManaCost(), Duration.EndOfTurn, true)
+        ability.addEffect(new BoostTargetEffect(new StaticValue(0), TargetConvertedManaCost.instance, Duration.EndOfTurn, true)
                 .setText("That creature gets +0/+X until end of turn, where X is its converted mana cost"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());

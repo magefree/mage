@@ -48,7 +48,7 @@ enum FirestormAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = new GetXValue().calculate(game, ability, null);
+        int xValue = GetXValue.instance.calculate(game, ability, null);
         if (xValue > 0) {
             Target target = new TargetAnyTarget(xValue);
             ability.addTarget(target);
@@ -70,7 +70,7 @@ class FirestormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        int amount = (new GetXValue()).calculate(game, source, this);
+        int amount = (GetXValue.instance).calculate(game, source, this);
         if (you != null) {
             if (!source.getTargets().isEmpty()) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {

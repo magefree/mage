@@ -41,7 +41,7 @@ public final class Lich extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}{B}");
 
         // As Lich enters the battlefield, you lose life equal to your life total.
-        this.addAbility(new EntersBattlefieldAbility(new LoseLifeSourceControllerEffect(new ControllerLifeCount()), null, "As Lich enters the battlefield, you lose life equal to your life total.", null));
+        this.addAbility(new EntersBattlefieldAbility(new LoseLifeSourceControllerEffect(ControllerLifeCount.instance), null, "As Lich enters the battlefield, you lose life equal to your life total.", null));
         
         // You don't lose the game for having 0 or less life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));

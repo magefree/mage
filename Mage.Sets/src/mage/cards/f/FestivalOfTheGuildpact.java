@@ -20,7 +20,7 @@ public final class FestivalOfTheGuildpact extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");
 
         // Prevent the next X damage that would be dealt to you this turn.
-        this.getSpellAbility().addEffect(new PreventDamageToControllerEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new PreventDamageToControllerEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.instance));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

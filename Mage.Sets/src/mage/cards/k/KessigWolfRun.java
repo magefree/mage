@@ -33,7 +33,7 @@ public final class KessigWolfRun extends CardImpl {
         // {X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{X}{R}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new BoostTargetEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));
+        ability.addEffect(new BoostTargetEffect(ManacostVariableValue.instance, new StaticValue(0), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

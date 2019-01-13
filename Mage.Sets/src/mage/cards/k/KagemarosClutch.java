@@ -40,7 +40,7 @@ public final class KagemarosClutch extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets -X/-X, where X is the number of cards in your hand.
-        DynamicValue xMinusValue = new SignInversionDynamicValue(new CardsInControllerHandCount());
+        DynamicValue xMinusValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
         Effect effect = new BoostEnchantedEffect(xMinusValue, xMinusValue, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets -X/-X, where X is the number of cards in your hand");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

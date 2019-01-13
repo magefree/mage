@@ -38,7 +38,7 @@ public final class ProfaneCommand extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
 
-        DynamicValue xValue = new ManacostVariableValue();
+        DynamicValue xValue = ManacostVariableValue.instance;
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);

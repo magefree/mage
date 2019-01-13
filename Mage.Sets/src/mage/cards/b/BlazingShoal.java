@@ -38,7 +38,7 @@ public final class BlazingShoal extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter),true)));
 
         // Target creature gets +X/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new ExileFromHandCostCardConvertedMana(), new StaticValue(0), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(ExileFromHandCostCardConvertedMana.instance, new StaticValue(0), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

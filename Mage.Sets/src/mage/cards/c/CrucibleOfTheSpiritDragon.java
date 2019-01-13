@@ -44,7 +44,7 @@ public final class CrucibleOfTheSpiritDragon extends CardImpl {
         // {T}, Remove X storage counters from Crucible of the Spirit Dragon: Add X mana in any combination of colors. Spend this mana only to cast Dragon spells or activate abilities of Dragons.
         ability = new ConditionalAnyColorManaAbility(
                 new TapSourceCost(),
-                new RemovedCountersForCostValue(),
+                RemovedCountersForCostValue.instance,
                 new CrucibleOfTheSpiritDragonManaBuilder(),
                 false
                 );

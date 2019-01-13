@@ -36,7 +36,7 @@ public final class DreadshipReef extends CardImpl {
         this.addAbility(ability);
         // {1}, Remove X storage counters from Dreadship Reef: Add X mana in any combination of {U} and/or {B}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.U, ColoredManaSymbol.B),
+                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance, ColoredManaSymbol.U, ColoredManaSymbol.B),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

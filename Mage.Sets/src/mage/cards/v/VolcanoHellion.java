@@ -32,7 +32,7 @@ public final class VolcanoHellion extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Volcano Hellion has echo {X}, where X is your life total.
-        this.addAbility(new EchoAbility(new ControllerLifeCount(), "{this} has echo {X}, where X is your life total."));
+        this.addAbility(new EchoAbility(ControllerLifeCount.instance, "{this} has echo {X}, where X is your life total."));
 
         // When Volcano Hellion enters the battlefield, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.
         Ability ability = new EntersBattlefieldTriggeredAbility(new VolcanoHellionEffect(), false);

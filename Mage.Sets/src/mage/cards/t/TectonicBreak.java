@@ -19,7 +19,7 @@ public final class TectonicBreak extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
         // Each player sacrifices X lands.
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(new ManacostVariableValue(), new FilterControlledLandPermanent("lands")));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(ManacostVariableValue.instance, new FilterControlledLandPermanent("lands")));
     }
 
     public TectonicBreak(final TectonicBreak card) {

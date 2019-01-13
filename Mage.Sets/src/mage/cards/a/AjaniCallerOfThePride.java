@@ -49,7 +49,7 @@ public final class AjaniCallerOfThePride extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // -8: create X 2/2 white Cat creature tokens, where X is your life total.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new CatToken(), new ControllerLifeCount()), -8));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new CatToken(), ControllerLifeCount.instance), -8));
     }
 
     public AjaniCallerOfThePride(final AjaniCallerOfThePride card) {

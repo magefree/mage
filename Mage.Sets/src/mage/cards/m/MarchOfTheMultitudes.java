@@ -24,7 +24,7 @@ public final class MarchOfTheMultitudes extends CardImpl {
         // Create X 1/1 white Soldier creature tokens with lifelink.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
                 new SoldierLifelinkToken(),
-                new ManacostVariableValue()
+                ManacostVariableValue.instance
         ));
     }
 

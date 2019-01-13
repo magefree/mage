@@ -22,7 +22,7 @@ public final class EntreatTheAngels extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
 
         // Create X 4/4 white Angel creature tokens with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), ManacostVariableValue.instance));
 
         // Miracle {X}{W}{W}
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{X}{W}{W}")));

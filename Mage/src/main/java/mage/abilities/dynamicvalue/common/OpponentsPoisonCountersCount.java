@@ -10,7 +10,8 @@ import mage.players.Player;
 import java.util.Set;
 import java.util.UUID;
 
-public class OpponentsPoisonCountersCount implements DynamicValue {
+public enum OpponentsPoisonCountersCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -27,7 +28,7 @@ public class OpponentsPoisonCountersCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new OpponentsPoisonCountersCount();
+        return OpponentsPoisonCountersCount.instance;
     }
 
     @Override

@@ -45,7 +45,7 @@ public final class BarrageTyrant extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {2}{R}, Sacrifice another colorless creature: Barrage Tyrant deals damage equal to the sacrificed creature's power to any target.
-        Effect effect = new DamageTargetEffect(new SacrificeCostCreaturesPower());
+        Effect effect = new DamageTargetEffect(SacrificeCostCreaturesPower.instance);
         effect.setText("{this} deals damage equal to the sacrificed creature's power to any target");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));

@@ -50,7 +50,7 @@ enum EliminateTheCompetitionAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int sac = new GetXValue().calculate(game, ability, null);
+        int sac = GetXValue.instance.calculate(game, ability, null);
         ability.addTarget(new TargetCreaturePermanent(sac, sac));
     }
 }

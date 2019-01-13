@@ -19,7 +19,7 @@ public final class TheBattleOfHoth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
 
         // Create X 5/5 white artifact AT-AT creature tokens wiht "When this creature dies, create two 1/1 white Trooper creature tokens."
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ATATToken(), new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ATATToken(), ManacostVariableValue.instance));
     }
 
     public TheBattleOfHoth(final TheBattleOfHoth card) {

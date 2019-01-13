@@ -45,7 +45,7 @@ public final class HuatliWarriorPoet extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +2: You gain life equal to the greatest power among creatures you control.
-        this.addAbility(new LoyaltyAbility(new GainLifeEffect(new GreatestPowerAmongControlledCreaturesValue(), "You gain life equal to the greatest power among creatures you control"), 2));
+        this.addAbility(new LoyaltyAbility(new GainLifeEffect(GreatestPowerAmongControlledCreaturesValue.instance, "You gain life equal to the greatest power among creatures you control"), 2));
 
         // 0: Create a 3/3 green Dinosaur creature token with trample.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DinosaurToken()), 0));

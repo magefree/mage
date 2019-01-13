@@ -44,7 +44,7 @@ public final class ShiningShoal extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
 
         // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.
-        this.getSpellAbility().addEffect(new ShiningShoalRedirectDamageTargetEffect(Duration.EndOfTurn, new ExileFromHandCostCardConvertedMana()));
+        this.getSpellAbility().addEffect(new ShiningShoalRedirectDamageTargetEffect(Duration.EndOfTurn, ExileFromHandCostCardConvertedMana.instance));
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

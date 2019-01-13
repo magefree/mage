@@ -38,7 +38,7 @@ public final class FungalReaches extends CardImpl {
 
         // {1}, Remove X storage counters from Fungal Reaches: Add X mana in any combination of {R} and/or {G}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.R, ColoredManaSymbol.G),
+                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance, ColoredManaSymbol.R, ColoredManaSymbol.G),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

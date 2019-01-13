@@ -24,7 +24,7 @@ public final class Subdue extends CardImpl {
         // Prevent all combat damage that would be dealt by target creature this turn. That creature gets +0/+X until end of turn, where X is its converted mana cost.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new StaticValue(0), new TargetConvertedManaCost(), Duration.EndOfTurn, true)
+        this.getSpellAbility().addEffect(new BoostTargetEffect(new StaticValue(0), TargetConvertedManaCost.instance, Duration.EndOfTurn, true)
                 .setText("That creature gets +0/+X until end of turn, where X is its converted mana cost"));
     }
 

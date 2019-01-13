@@ -29,7 +29,7 @@ public final class WorthyCause extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
         // You gain life equal to the sacrificed creature's toughness.
-        Effect effect = new GainLifeEffect(new SacrificeCostCreaturesToughness());
+        Effect effect = new GainLifeEffect(SacrificeCostCreaturesToughness.instance);
         effect.setText("You gain life equal to the sacrificed creature's toughness");
         this.getSpellAbility().addEffect(effect);
     }

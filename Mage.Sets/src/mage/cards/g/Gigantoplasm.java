@@ -57,7 +57,7 @@ class GigantoplasmApplyToPermanent extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        DynamicValue variableMana = new ManacostVariableValue();
+        DynamicValue variableMana = ManacostVariableValue.instance;
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
@@ -67,7 +67,7 @@ class GigantoplasmApplyToPermanent extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        DynamicValue variableMana = new ManacostVariableValue();
+        DynamicValue variableMana = ManacostVariableValue.instance;
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));

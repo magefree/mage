@@ -19,7 +19,7 @@ public final class MindShatter extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
 
         // Target player discards X cards at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(new ManacostVariableValue(), true));
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(ManacostVariableValue.instance, true));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

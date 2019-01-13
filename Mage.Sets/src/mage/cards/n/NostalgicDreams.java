@@ -55,7 +55,7 @@ enum NostalgicDreamsAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         ability.addTarget(new TargetCardInYourGraveyard(
-                new GetXValue().calculate(game, ability, null),
+                GetXValue.instance.calculate(game, ability, null),
                 StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD
         ));
     }

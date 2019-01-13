@@ -76,7 +76,7 @@ class KravTheUnredeemedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = new GetXValue().calculate(game, source, this);
+        int xValue = GetXValue.instance.calculate(game, source, this);
         new DrawCardTargetEffect(xValue).apply(game, source);
         new GainLifeTargetEffect(xValue).apply(game, source);
         new AddCountersSourceEffect(CounterType.P1P1.createInstance(xValue)).apply(game, source);

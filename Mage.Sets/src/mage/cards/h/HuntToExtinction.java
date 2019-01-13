@@ -34,10 +34,10 @@ public final class HuntToExtinction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
 
         // Hunt to Extinction deals X damage to each creature. 
-        this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, new FilterCreaturePermanent()));
 
         // Hunt to Exctinction deals an additional X damage to each creature with a bounty counter on it.
-        Effect effect = new DamageAllEffect(new ManacostVariableValue(), new FilterCreaturePermanent(filter));
+        Effect effect = new DamageAllEffect(ManacostVariableValue.instance, new FilterCreaturePermanent(filter));
         effect.setText("Hunt to Exctinction deals an additional X damage to each creature with a bounty counter on it");
         this.getSpellAbility().addEffect(effect);
 

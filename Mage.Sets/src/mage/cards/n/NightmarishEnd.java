@@ -24,7 +24,7 @@ public final class NightmarishEnd extends CardImpl {
 
 
         // Target creature gets -X/-X until end of turn, where X is the number of cards in your hand.
-        DynamicValue xValue = new SignInversionDynamicValue(new CardsInControllerHandCount());
+        DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true);
         effect.setText("Target creature gets -X/-X until end of turn, where X is the number of cards in your hand");
         this.getSpellAbility().addEffect(effect);

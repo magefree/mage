@@ -36,7 +36,7 @@ public final class RetributionOfTheAncients extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
 
-        DynamicValue xValue = new SignInversionDynamicValue(new GetXValue());
+        DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
         // {B}, Remove X +1/+1 counters from among creatures you control: Target creature gets -X/-X until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(xValue,xValue,Duration.EndOfTurn, true), new ManaCostsImpl("{B}"));
         ability.addCost(new RemoveVariableCountersTargetCost(filter, CounterType.P1P1, "X", 0));

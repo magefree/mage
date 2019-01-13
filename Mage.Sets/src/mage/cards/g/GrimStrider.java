@@ -29,7 +29,7 @@ public final class GrimStrider extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Grim Strider gets -1/-1 for each card in your hand.
-        DynamicValue count = new SignInversionDynamicValue(new CardsInControllerHandCount());
+        DynamicValue count = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
         Effect effect = new BoostSourceEffect(count, count, Duration.WhileOnBattlefield);
         effect.setText("{this} gets -1/-1 for each card in your hand");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
