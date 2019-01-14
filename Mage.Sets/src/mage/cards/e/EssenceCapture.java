@@ -28,7 +28,7 @@ public final class EssenceCapture extends CardImpl {
         // Put a +1/+1 counter on up to one target creature you control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance()
-        ).setTargetPointer(new SecondTargetPointer()).setText("Put a +1/+1 counter on up to one target creature you control"));
+        ).setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
     }
 

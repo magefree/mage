@@ -1,10 +1,14 @@
-
 package mage.target;
 
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FirstTargetPointer;
+import mage.target.targetpointer.SecondTargetPointer;
+import mage.target.targetpointer.TargetPointer;
+import mage.target.targetpointer.ThirdTargetPointer;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +16,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Targets extends ArrayList<Target> {
+
+    private static final Logger logger = Logger.getLogger(Targets.class);
 
     public Targets() {
     }
@@ -101,7 +106,7 @@ public class Targets extends ArrayList<Target> {
      * Checks if there are enough targets that can be chosen. Should only be
      * used for Ability targets since this checks for protection, shroud etc.
      *
-     * @param sourceId - the target event source
+     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
      * @param game
      * @return - true if enough valid targets exist
@@ -127,6 +132,38 @@ public class Targets extends ArrayList<Target> {
         if (this.size() > 0) {
             return this.get(0).getFirstTarget();
         }
+        return null;
+    }
+
+    public Target getEffectTarget(TargetPointer targetPointer) {
+        boolean proccessed = false;
+
+        if (targetPointer instanceof FirstTargetPointer) {
+            proccessed = true;
+            if (this.size() > 0) {
+                return this.get(0);
+            }
+        }
+
+        if (targetPointer instanceof SecondTargetPointer) {
+            proccessed = true;
+            if (this.size() > 1) {
+                return this.get(1);
+            }
+        }
+
+        if (targetPointer instanceof ThirdTargetPointer) {
+            proccessed = true;
+            if (this.size() > 2) {
+                return this.get(2);
+            }
+        }
+
+        if (!proccessed) {
+            logger.error("Unknown target pointer " + (targetPointer != null ? targetPointer : "null"), new Throwable());
+            // TODO: add other target types?
+        }
+
         return null;
     }
 
