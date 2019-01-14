@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class PriestOfForgottenGods extends CardImpl {
 
     private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("other creatures");
+            = new FilterControlledCreaturePermanent("two other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
