@@ -8,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -32,7 +34,13 @@ public final class MirrorMarch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
         // Whenever a nontoken creature enters the battlefield under your control, flip a coin until you lose a flip. For each flip you won, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new MirrorMarchEffect(), filter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new MirrorMarchEffect(), filter, false, SetTargetPointer.PERMANENT,
+                "Whenever a nontoken creature enters the battlefield under your control, " +
+                        "flip a coin until you lose a flip. For each flip you won, " +
+                        "create a token that's a copy of that creature. Those tokens gain haste. " +
+                        "Exile them at the beginning of the next end step."
+        ));
     }
 
     private MirrorMarch(final MirrorMarch card) {
@@ -49,9 +57,6 @@ class MirrorMarchEffect extends OneShotEffect {
 
     MirrorMarchEffect() {
         super(Outcome.Benefit);
-        staticText = "flip a coin until you lose a flip. For each flip you won, " +
-                "create a token that's a copy of that creature. " +
-                "Those tokens gain haste. Exile them at the beginning of the next end step.";
     }
 
     private MirrorMarchEffect(final MirrorMarchEffect effect) {
@@ -80,6 +85,8 @@ class MirrorMarchEffect extends OneShotEffect {
         if (counter > 0) {
             CreateTokenCopyTargetEffect effect
                     = new CreateTokenCopyTargetEffect(player.getId(), null, true, counter);
+            effect.setUseLKI(true);
+            effect.setTargetPointer(targetPointer);
             effect.apply(game, source);
             effect.exileTokensCreatedAtNextEndStep(game, source);
         }
