@@ -19,7 +19,9 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,8 +55,8 @@ public final class LumberingBattlement extends CardImpl {
 
         // Lumbering Battlement gets +2/+2 for each card exiled with it.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                LumberinBattlementValue.instance,
-                LumberinBattlementValue.instance,
+                LumberingBattlementValue.instance,
+                LumberingBattlementValue.instance,
                 Duration.WhileOnBattlefield
         ).setText("{this} gets +2/+2 for each card exiled with it.")));
     }
@@ -72,10 +74,11 @@ public final class LumberingBattlement extends CardImpl {
 class LumberingBattlementEffect extends OneShotEffect {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("nontoken creatures");
+            = new FilterControlledCreaturePermanent("other nontoken creatures");
 
     static {
         filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(AnotherPredicate.instance);
     }
 
     LumberingBattlementEffect() {
@@ -119,15 +122,26 @@ class LumberingBattlementEffect extends OneShotEffect {
     }
 }
 
-enum LumberinBattlementValue implements DynamicValue {
+enum LumberingBattlementValue implements DynamicValue {
     instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        if (sourceAbility == null) {
+            return 0;
+        }
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
+                game, sourceAbility.getSourceId(),
+                sourceAbility.getSourceObjectZoneChangeCounter()
+        ));
+        if (exileZone == null) {
+            exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, sourceAbility));
+        }
+        if (exileZone == null) {
+            return 0;
+        }
         int counter = 0;
-        for (UUID cardId : game.getExile().getExileZone(CardUtil.getExileZoneId(
-                game, sourceAbility.getSourceId(), sourceAbility.getSourceObjectZoneChangeCounter()
-        ))) {
+        for (UUID cardId : exileZone) {
             Card card = game.getCard(cardId);
             if (card != null) {
                 counter++;
