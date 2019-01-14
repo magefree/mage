@@ -70,7 +70,7 @@ public final class DovinGrandArbiter extends CardImpl {
 class DovinGrandArbiterDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     DovinGrandArbiterDelayedTriggeredAbility() {
-        super(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance()), Duration.EndOfTurn);
+        super(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance()), Duration.EndOfTurn, false);
     }
 
     private DovinGrandArbiterDelayedTriggeredAbility(final DovinGrandArbiterDelayedTriggeredAbility ability) {
