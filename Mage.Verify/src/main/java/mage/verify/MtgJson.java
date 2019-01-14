@@ -24,6 +24,8 @@ public final class MtgJson {
     public static Map<String, String> mtgJsonToXMageCodes = new HashMap<>();
     public static Map<String, String> xMageToMtgJsonCodes = new HashMap<>();
 
+    public static final boolean MTGJSON_IGNORE_NEW_PROPERTIES = true; // set it to false for full mtgjson checks and research (new fields finds or mtgjson updates)
+
     static {
         mtgJsonToXMageCodes.put("pWCQ", "WMCQ");
         mtgJsonToXMageCodes.put("pSUS", "SUS");
