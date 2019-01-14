@@ -3,29 +3,28 @@ package mage.cards.d;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.RiotAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.DomriChaosBringerEmblem;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
-import mage.watchers.Watcher;
+import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -41,15 +40,7 @@ public final class DomriChaosBringer extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: Add {R} or {G}. If that mana is spent on a creature spell, it gains riot.
-        // TODO: make this into a single ability, also make this, Generator Servant and Hall of the Bandit Lord work without card scope watchers
-        Mana mana = Mana.RedMana(1);
-        mana.setFlag(true);
-        Ability ability = new LoyaltyAbility(new BasicManaEffect(mana).setText("Add {R}. If that mana is spent on a creature spell, it gains riot"), 1);
-        this.addAbility(ability, new HallOfTheBanditLordWatcher(ability));
-        mana = Mana.GreenMana(1);
-        mana.setFlag(true);
-        ability = new LoyaltyAbility(new BasicManaEffect(mana).setText("Add {G}. If that mana is spent on a creature spell, it gains riot"), 1);
-        this.addAbility(ability, new HallOfTheBanditLordWatcher(ability));
+        this.addAbility(new LoyaltyAbility(new DomriChaosBringerEffect(), 1));
 
         // −3: Look at the top four cards of your library. You may reveal up to two creature cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
@@ -77,68 +68,77 @@ public final class DomriChaosBringer extends CardImpl {
     }
 }
 
-class HallOfTheBanditLordWatcher extends Watcher {
+class DomriChaosBringerEffect extends OneShotEffect {
 
-    private final Ability source;
-    private final List<UUID> creatures = new ArrayList<>();
-
-    HallOfTheBanditLordWatcher(Ability source) {
-        super(HallOfTheBanditLordWatcher.class.getSimpleName(), WatcherScope.CARD);
-        this.source = source;
+    DomriChaosBringerEffect() {
+        super(Outcome.Benefit);
+        staticText = "Add {R} or {G}. If that mana is spent on a creature spell, it gains riot.";
     }
 
-    private HallOfTheBanditLordWatcher(final HallOfTheBanditLordWatcher watcher) {
-        super(watcher);
-        this.creatures.addAll(watcher.creatures);
-        this.source = watcher.source;
+    private DomriChaosBringerEffect(final DomriChaosBringerEffect effect) {
+        super(effect);
     }
 
     @Override
-    public HallOfTheBanditLordWatcher copy() {
-        return new HallOfTheBanditLordWatcher(this);
+    public DomriChaosBringerEffect copy() {
+        return new DomriChaosBringerEffect(this);
     }
 
     @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            MageObject target = game.getObject(event.getTargetId());
-            if (event.getSourceId() != null
-                    && event.getSourceId().equals(this.getSourceId())
-                    && target != null && target.isCreature()
-                    && event.getFlag()) {
-                if (target instanceof Spell) {
-                    this.creatures.add(((Spell) target).getCard().getId());
-                }
-            }
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        if (event.getType() == GameEvent.EventType.COUNTERED) {
-            if (creatures.contains(event.getTargetId())) {
-                creatures.remove(event.getSourceId());
-            }
+        ManaEffect manaEffect;
+        if (player.chooseUse(Outcome.PutManaInPool, "Choose red or green mana", "", "Red", "Green", source, game)) {
+            manaEffect = new BasicManaEffect(Mana.RedMana(1));
+        } else {
+            manaEffect = new BasicManaEffect(Mana.GreenMana(1));
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (creatures.contains(event.getSourceId())) {
-                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                // spell was e.g. exiled and goes again to stack, so previous cast has not resolved.
-                if (zEvent.getToZone() == Zone.STACK) {
-                    creatures.remove(event.getSourceId());
-                }
-            }
-        }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            if (creatures.contains(event.getSourceId())) {
-                ContinuousEffect effect = new GainAbilityTargetEffect(new RiotAbility(), Duration.Custom);
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                game.addEffect(effect, source);
-                creatures.remove(event.getSourceId());
-            }
-        }
+        game.addDelayedTriggeredAbility(new DomriChaosBringerTriggeredAbility(source.getSourceId()), source);
+        return manaEffect.apply(game, source);
+    }
+}
+
+class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
+
+    private final UUID spellId;
+
+    DomriChaosBringerTriggeredAbility(UUID spellId) {
+        super(null, Duration.Custom, true);
+        this.spellId = spellId;
+        this.usesStack = false;
+    }
+
+    private DomriChaosBringerTriggeredAbility(final DomriChaosBringerTriggeredAbility ability) {
+        super(ability);
+        this.spellId = ability.spellId;
     }
 
     @Override
-    public void reset() {
-        super.reset();
-        creatures.clear();
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.MANA_PAID;
     }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getSourceId().equals(spellId)) {
+            return false;
+        }
+        MageObject mo = game.getObject(event.getTargetId());
+        if (mo == null || !mo.isCreature()) {
+            return false;
+        }
+        this.getEffects().clear();
+        FilterSpell filter = new FilterSpell();
+        filter.add(new CardIdPredicate(event.getTargetId()));
+        this.addEffect(new GainAbilityControlledSpellsEffect(new RiotAbility(), filter));
+        return true;
+    }
+
+    @Override
+    public DomriChaosBringerTriggeredAbility copy() {
+        return new DomriChaosBringerTriggeredAbility(this);
+    }
 }
