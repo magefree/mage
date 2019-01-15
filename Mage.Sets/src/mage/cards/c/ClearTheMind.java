@@ -58,7 +58,7 @@ class ClearTheMindEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getFirstTarget());
         if (player == null) {
             return false;
         }
