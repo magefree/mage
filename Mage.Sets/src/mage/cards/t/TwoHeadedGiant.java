@@ -69,8 +69,8 @@ class TwoHeadedGiantEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        boolean head1 = player.flipCoin(source, game, true);
-        boolean head2 = player.flipCoin(source, game, true);
+        boolean head1 = player.flipCoin(source, game, false);
+        boolean head2 = player.flipCoin(source, game, false);
         if (head1 == head2) {
             if (head1) {
                 game.addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), source);

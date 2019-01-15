@@ -99,7 +99,7 @@ class GoblinAssassinTriggeredEffect extends OneShotEffect {
         if (controller != null) {            
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && !player.flipCoin(source, game, true)) {
+                if (player != null && !player.flipCoin(source, game, false)) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
                     target.setNotTarget(true);
                     if (target.canChoose(player.getId(), game)) {
