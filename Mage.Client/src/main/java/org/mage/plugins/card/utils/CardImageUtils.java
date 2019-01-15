@@ -126,6 +126,15 @@ public final class CardImageUtils {
         return path;
     }
 
+    public static String fixSetNameForWindows(String set) {
+        // windows can't create con folders
+        if (set.equals("CON") || set.equals("con")) {
+            return "COX";
+        } else {
+            return set;
+        }
+    }
+
     public static String buildImagePathToTokens() {
         String imagesPath = getImagesDir() + File.separator;
 
@@ -159,14 +168,14 @@ public final class CardImageUtils {
         String imagesPath = getImagesDir() + File.separator;
 
         if (PreferencesDialog.isSaveImagesToZip()) {
-            return imagesPath + set + ".zip" + File.separator + set + File.separator;
+            return imagesPath + fixSetNameForWindows(set) + ".zip" + File.separator + fixSetNameForWindows(set) + File.separator;
         } else {
-            return imagesPath + set + File.separator;
+            return imagesPath + fixSetNameForWindows(set) + File.separator;
         }
     }
 
     private static String buildImagePathToSetAsToken(String set) {
-        return buildImagePathToTokens() + set + File.separator;
+        return buildImagePathToTokens() + fixSetNameForWindows(set) + File.separator;
     }
 
     public static String buildImagePathToCard(CardDownloadData card) {
@@ -217,7 +226,7 @@ public final class CardImageUtils {
     }
 
     public static String generateFaceImagePath(String cardname, String set) {
-        return getImagesDir() + File.separator + "FACE" + File.separator + set + File.separator + prepareCardNameForFile(cardname) + ".jpg";
+        return getImagesDir() + File.separator + "FACE" + File.separator + fixSetNameForWindows(set) + File.separator + prepareCardNameForFile(cardname) + ".jpg";
     }
 
     public static String generateTokenDescriptorImagePath(CardDownloadData card) {
