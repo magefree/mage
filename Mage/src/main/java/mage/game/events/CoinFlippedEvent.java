@@ -1,5 +1,7 @@
 package mage.game.events;
 
+import mage.util.CardUtil;
+
 import java.util.UUID;
 
 /**
@@ -21,8 +23,16 @@ public class CoinFlippedEvent extends GameEvent {
         return result;
     }
 
+    public String getResultName() {
+        return CardUtil.booleanToFlipName(result);
+    }
+
     public boolean getChosen() {
         return chosen;
+    }
+
+    public String getChosenName() {
+        return CardUtil.booleanToFlipName(chosen);
     }
 
     public boolean isWinnable() {

@@ -1,5 +1,7 @@
 package mage.game.events;
 
+import mage.util.CardUtil;
+
 import java.util.UUID;
 
 /**
@@ -21,12 +23,20 @@ public class FlipCoinEvent extends GameEvent {
         return result;
     }
 
+    public String getResultName() {
+        return CardUtil.booleanToFlipName(result);
+    }
+
     public void setResult(boolean result) {
         this.result = result;
     }
 
     public boolean getChosen() {
         return chosen;
+    }
+
+    public String getChosenName() {
+        return CardUtil.booleanToFlipName(chosen);
     }
 
     public boolean isWinnable() {

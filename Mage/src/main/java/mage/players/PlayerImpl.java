@@ -2558,7 +2558,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean flipCoin(Ability source, Game game, boolean winnable) {
-        return this.flipCoin(source, game, true, null);
+        return this.flipCoin(source, game, winnable, null);
     }
 
     /**
