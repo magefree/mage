@@ -101,7 +101,7 @@ class TideOfWarEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<UUID> toSacrifice = new HashSet<>();
-            if (controller.flipCoin(game)) {
+            if (controller.flipCoin(game, true)) {
                 // each blocking creature is sacrificed by its controller
                 for (CombatGroup combatGroup: game.getCombat().getGroups()) {
                     for (UUID blockerId: combatGroup.getBlockers()) {

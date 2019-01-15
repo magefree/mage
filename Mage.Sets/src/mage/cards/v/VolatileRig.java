@@ -130,7 +130,7 @@ class VolatileRigEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (!player.flipCoin(game)) {
+            if (!player.flipCoin(game, true)) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     return permanent.sacrifice(source.getSourceId(), game);
@@ -161,7 +161,7 @@ class VolatileRigEffect2 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (!player.flipCoin(game)) {
+            if (!player.flipCoin(game, true)) {
 
                 List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
                 for (Permanent permanent : permanents) {

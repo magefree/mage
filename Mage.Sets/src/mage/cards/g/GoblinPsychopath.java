@@ -60,7 +60,7 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(game);
+        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(game, true);
         super.init(source, game);
     }
 

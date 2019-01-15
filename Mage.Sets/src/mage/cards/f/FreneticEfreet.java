@@ -69,7 +69,7 @@ class FreneticEfreetEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        boolean flip = controller.flipCoin(game);
+        boolean flip = controller.flipCoin(game, true);
         if (permanent == null) {
             return false;
         }

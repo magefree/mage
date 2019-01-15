@@ -76,7 +76,7 @@ class FreneticSliverEffect extends OneShotEffect {
         if (player == null || perm == null) {
             return false;
         }
-        if (player.flipCoin(game)) {
+        if (player.flipCoin(game, true)) {
             return new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true).apply(game, source);
         } else {
             return perm.sacrifice(source.getSourceId(), game);

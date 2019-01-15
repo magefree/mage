@@ -642,12 +642,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean flipCoin(Game game) {
+    public boolean flipCoin(Game game, boolean winnable) {
         return false;
     }
 
     @Override
-    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
+    public boolean flipCoin(Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
         return false;
     }
 

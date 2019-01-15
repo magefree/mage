@@ -88,7 +88,7 @@ class SabaccGameEffect extends OneShotEffect {
                     if (target.chooseTarget(outcome, opponent.getId(), source, game)) {
                         chosenPermanent = game.getPermanent(target.getFirstTarget());
                     }
-                    boolean flipWin = controller.flipCoin(game);
+                    boolean flipWin = controller.flipCoin(game, true);
                     if (flipWin) {
                         ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, controller.getId());
                         effect.setTargetPointer(new FixedTarget(targetPermanent, game));

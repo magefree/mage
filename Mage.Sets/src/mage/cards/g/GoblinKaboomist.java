@@ -70,7 +70,7 @@ class GoblinKaboomistFlipCoinEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            if (!player.flipCoin(game)) {
+            if (!player.flipCoin(game, true)) {
                 String message = permanent.getLogName() + " deals 2 damage to itself";
                 game.informPlayers(message);
                 permanent.damage(2, source.getSourceId(), game, false, true);

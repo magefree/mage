@@ -110,7 +110,7 @@ class MoggAssassinEffect extends OneShotEffect {
         }
         Permanent chosenPermanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
         Permanent opponentsPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (controller.flipCoin(game)) {
+        if (controller.flipCoin(game, true)) {
             if (chosenPermanent != null) {
                 chosenPermanent.destroy(source.getSourceId(), game, false);
                 return true;

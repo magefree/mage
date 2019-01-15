@@ -77,7 +77,7 @@ class MirrorMarchEffect extends OneShotEffect {
         int counter = 0;
         boolean wonFlip = false;
         do {
-            wonFlip = player.flipCoin(game);
+            wonFlip = player.flipCoin(game, true);
             if (wonFlip) {
                 counter++;
             }

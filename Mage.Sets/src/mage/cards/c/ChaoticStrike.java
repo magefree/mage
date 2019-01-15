@@ -65,7 +65,7 @@ class ChaoticStrikeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
-            if (controller.flipCoin(game)) {
+            if (controller.flipCoin(game, true)) {
                 game.addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn), source);
                 return true;
             }

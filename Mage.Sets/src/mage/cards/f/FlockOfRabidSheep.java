@@ -59,7 +59,7 @@ class FlockOfRabidSheepEffect extends OneShotEffect {
             int repeat = source.getManaCostsToPay().getX();
             int wonCount = 0;
             for (int i = 1; i <= repeat; i++) {
-                if (controller.flipCoin(game)) {
+                if (controller.flipCoin(game, true)) {
                     wonCount++;
                 }
             }

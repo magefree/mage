@@ -58,7 +58,7 @@ class ManaCryptEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (!player.flipCoin(game)) {
+            if (!player.flipCoin(game, true)) {
                 player.damage(3, source.getSourceId(), game, false, true);
             }
             return true;

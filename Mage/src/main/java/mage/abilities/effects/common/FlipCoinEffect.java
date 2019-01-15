@@ -60,7 +60,7 @@ public class FlipCoinEffect extends OneShotEffect {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null && mageObject != null) {
             boolean result = true;
-            for (Effect effect : controller.flipCoin(game) ? executingEffectsWon : executingEffectsLost) {
+            for (Effect effect : controller.flipCoin(game, true) ? executingEffectsWon : executingEffectsLost) {
                 effect.setTargetPointer(this.targetPointer);
                 if (effect instanceof OneShotEffect) {
                     result &= effect.apply(game, source);

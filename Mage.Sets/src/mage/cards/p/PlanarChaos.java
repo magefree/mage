@@ -61,7 +61,7 @@ class PlanarChaosUpkeepEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (!player.flipCoin(game)) {
+            if (!player.flipCoin(game, true)) {
                 Permanent perm = game.getPermanent(source.getSourceId());
                 if (perm != null) {
                     perm.sacrifice(source.getSourceId(), game);
@@ -104,7 +104,7 @@ class PlanarChaosCastAllEffect extends OneShotEffect {
         if (sourceObject != null && spell != null) {
             Player caster = game.getPlayer(spell.getControllerId());
             if (caster != null) {
-                if (!caster.flipCoin(game)) {
+                if (!caster.flipCoin(game, true)) {
                     game.informPlayers(sourceObject.getLogName() + ": " + spell.getLogName() + " countered");
                     game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
                 }

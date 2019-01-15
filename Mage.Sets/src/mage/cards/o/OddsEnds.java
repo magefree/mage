@@ -65,7 +65,7 @@ class OddsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.flipCoin(game)) {
+            if (controller.flipCoin(game, true)) {
                 game.informPlayers("Odds: Spell countered");
                 return game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
 

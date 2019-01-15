@@ -63,7 +63,7 @@ class SkittishValeskEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null && !controller.flipCoin(game)) {
+        if (controller != null && permanent != null && !controller.flipCoin(game, true)) {
             return permanent.turnFaceDown(game, source.getControllerId());
         }
         return false;

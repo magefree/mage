@@ -67,7 +67,7 @@ class ChaoticGooEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            if (controller.flipCoin(game)) {
+            if (controller.flipCoin(game, true)) {
                 game.informPlayers("Chaotic Goo: Won flip. Put a +1/+1 counter on Chaotic Goo.");
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)).apply(game, source);
                 return true;

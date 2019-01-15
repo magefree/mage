@@ -69,7 +69,7 @@ class OrcishCaptainEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
-            if (controller.flipCoin(game)) {
+            if (controller.flipCoin(game, true)) {
                 game.informPlayers("Orcish Captain: Won flip. Target Orc creature gets +2/+0 until end of turn.");
                 game.addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn), source);
                 return true;

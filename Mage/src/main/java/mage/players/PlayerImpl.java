@@ -2560,17 +2560,18 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean flipCoin(Game game) {
-        return this.flipCoin(game, null);
+    public boolean flipCoin(Game game, boolean winnable) {
+        return this.flipCoin(game, true, null);
     }
 
     /**
      * @param game
+     * @param winnable
      * @param appliedEffects
      * @return true if player won the toss
      */
     @Override
-    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
+    public boolean flipCoin(Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
         boolean result = RandomUtil.nextBoolean();
         if (!game.isSimulation()) {
             game.informPlayers("[Flip a coin] " + getLogName() + (result ? " won (head)." : " lost (tail)."));
