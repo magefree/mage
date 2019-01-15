@@ -97,7 +97,7 @@ class CaptiveAudienceETBEffect extends OneShotEffect {
                 Duration.WhileOnBattlefield, true, player.getId()
         );
         continuousEffect.setTargetPointer(
-                new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter() + 1)
+                new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter())
         );
         game.addEffect(continuousEffect, source);
         return true;
