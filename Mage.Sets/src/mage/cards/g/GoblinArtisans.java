@@ -78,7 +78,7 @@ class GoblinArtisansEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.flipCoin(game, true)) {
+            if (controller.flipCoin(source, game, true)) {
                 controller.drawCards(1, game);
             } else {
                 List<Permanent> artifacts = game.getBattlefield().getActivePermanents(new FilterControlledArtifactPermanent(), source.getControllerId(), game);

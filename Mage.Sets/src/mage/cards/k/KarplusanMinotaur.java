@@ -155,7 +155,7 @@ class KarplusanMinotaurCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            controller.flipCoin(game, true);
+            controller.flipCoin(source, game, true);
             this.paid = true;
             return true;
         }

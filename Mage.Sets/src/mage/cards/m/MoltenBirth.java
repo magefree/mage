@@ -59,7 +59,7 @@ class MoltenBirthEffect extends OneShotEffect {
         if (controller != null) {
             MoltenBirthElementalToken token = new MoltenBirthElementalToken();
             token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
-            if (controller.flipCoin(game, true)) {
+            if (controller.flipCoin(source, game, true)) {
                 Card molten = game.getCard(source.getSourceId());
                 if (molten != null) {
                     molten.moveToZone(Zone.HAND, source.getSourceId(), game, true);

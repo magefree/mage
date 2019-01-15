@@ -2609,13 +2609,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean flipCoin(Game game, boolean winnable) {
-        return computerPlayer.flipCoin(game, true);
+    public boolean flipCoin(Ability source, Game game, boolean winnable) {
+        return computerPlayer.flipCoin(source, game, true);
     }
 
     @Override
-    public boolean flipCoin(Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
-        return computerPlayer.flipCoin(game, true, appliedEffects);
+    public boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
+        return computerPlayer.flipCoin(source, game, true, appliedEffects);
     }
 
     @Override
