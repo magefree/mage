@@ -2,6 +2,9 @@ package mage.game.events;
 
 import java.util.UUID;
 
+/**
+ * @author TheElk801
+ **/
 public class FlipCoinEvent extends GameEvent {
     private boolean result;
     private final boolean chosen;

@@ -15,6 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.CoinFlippedEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
@@ -56,30 +57,6 @@ public final class KarplusanMinotaur extends CardImpl {
     }
 }
 
-enum KarplusanMinotaurAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        if (controller == null) {
-            return;
-        }
-        UUID opponentId = null;
-        if (game.getOpponents(controller.getId()).size() > 1) {
-            Target target = new TargetOpponent(true);
-            if (controller.chooseTarget(Outcome.Neutral, target, ability, game)) {
-                opponentId = target.getFirstTarget();
-            }
-        } else {
-            opponentId = game.getOpponents(controller.getId()).iterator().next();
-        }
-        if (opponentId != null) {
-            ability.getTargets().get(0).setTargetController(opponentId);
-        }
-    }
-}
-
 class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
 
     public KarplusanMinotaurFlipWinTriggeredAbility() {
@@ -103,7 +80,10 @@ class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return this.isControlledBy(event.getPlayerId()) && event.getFlag();
+        CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
+        return flipEvent.getPlayerId().equals(controllerId)
+                && flipEvent.isWinnable()
+                && (flipEvent.getChosen() == flipEvent.getResult());
     }
 
     @Override
@@ -136,7 +116,10 @@ class KarplusanMinotaurFlipLoseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return this.isControlledBy(event.getPlayerId()) && !event.getFlag();
+        CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
+        return flipEvent.getPlayerId().equals(controllerId)
+                && flipEvent.isWinnable()
+                && (flipEvent.getChosen() != flipEvent.getResult());
     }
 
     @Override
@@ -155,7 +138,7 @@ class KarplusanMinotaurCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            controller.flipCoin(source, game, true);
+            controller.flipCoin(ability, game, true);
             this.paid = true;
             return true;
         }
@@ -176,5 +159,29 @@ class KarplusanMinotaurCost extends CostImpl {
     @Override
     public KarplusanMinotaurCost copy() {
         return new KarplusanMinotaurCost();
+    }
+}
+
+enum KarplusanMinotaurAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller == null) {
+            return;
+        }
+        UUID opponentId = null;
+        if (game.getOpponents(controller.getId()).size() > 1) {
+            Target target = new TargetOpponent(true);
+            if (controller.chooseTarget(Outcome.Neutral, target, ability, game)) {
+                opponentId = target.getFirstTarget();
+            }
+        } else {
+            opponentId = game.getOpponents(controller.getId()).iterator().next();
+        }
+        if (opponentId != null) {
+            ability.getTargets().get(0).setTargetController(opponentId);
+        }
     }
 }

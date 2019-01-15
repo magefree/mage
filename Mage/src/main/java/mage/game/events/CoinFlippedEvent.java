@@ -2,13 +2,16 @@ package mage.game.events;
 
 import java.util.UUID;
 
+/**
+ * @author TheElk801
+ **/
 public class CoinFlippedEvent extends GameEvent {
     private final boolean result;
     private final boolean chosen;
     private final boolean winnable;
 
     CoinFlippedEvent(UUID playerId, UUID sourceId, boolean result, boolean chosen, boolean winnable) {
-        super(EventType.FLIP_COIN, playerId, sourceId, playerId);
+        super(EventType.COIN_FLIPPED, playerId, sourceId, playerId);
         this.result = result;
         this.chosen = chosen;
         this.winnable = winnable;
