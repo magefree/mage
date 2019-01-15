@@ -13,6 +13,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  * @author TheElk801
@@ -20,7 +21,7 @@ import java.util.UUID;
 public final class WindstormDrake extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creatures you control with flying");
+            = new FilterCreaturePermanent();
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
@@ -37,9 +38,11 @@ public final class WindstormDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other creatures you control with flying get +1/+0.
-        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+        Effect effect = new BoostControlledEffect(
                 1, 0, Duration.WhileOnBattlefield, filter, true
-        )));
+        );
+        effect.setText("Other creatures you control with flying get +1/+0");
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private WindstormDrake(final WindstormDrake card) {
