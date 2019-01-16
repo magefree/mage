@@ -44,9 +44,9 @@ public class RevoltTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Narnam Renegade");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Narnam Renegade");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerA, "Terramorphic Expanse", 1);

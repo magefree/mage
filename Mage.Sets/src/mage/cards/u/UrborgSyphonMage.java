@@ -70,7 +70,7 @@ class UrborgSyphonMageEffect extends OneShotEffect {
                 if (!Objects.equals(playerId, source.getControllerId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        damage += player.damage(2, source.getSourceId(), game, false, true);
+                        damage += player.loseLife(2, game, false);
                     }
                 }
             }
