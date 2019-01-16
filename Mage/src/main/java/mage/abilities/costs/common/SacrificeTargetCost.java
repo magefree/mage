@@ -32,7 +32,7 @@ public class SacrificeTargetCost extends CostImpl {
                 || target.getTargetName().startsWith("a ")))
                 ? (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets()
                 && target.getMinNumberOfTargets() > 1
-                ? CardUtil.numberToText(target.getNumberOfTargets()) : "")
+                ? CardUtil.numberToText(target.getNumberOfTargets()) +  " " : "")
                 : (target.getTargetName().startsWith("artifact") ? "an " : "a "))
                 + target.getTargetName();
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
