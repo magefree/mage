@@ -63,7 +63,7 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
         );
         boolean chosenFlip = player.chooseUse(
                 Outcome.Benefit, "Choose which coin you want",
-                "(You chose " + flipEvent.getChosenName() + ")",
+                (flipEvent.isWinnable() ? "(You chose " + flipEvent.getChosenName() + ")" : null),
                 flipEvent.getResultName(), CardUtil.booleanToFlipName(secondFlip), source, game
         );
         if (!chosenFlip) {
