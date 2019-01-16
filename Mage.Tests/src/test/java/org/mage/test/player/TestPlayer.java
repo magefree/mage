@@ -2419,6 +2419,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int getExtraCoinFlips() {
+        return computerPlayer.getExtraCoinFlips();
+    }
+
+    @Override
+    public void setExtraCoinFlips(int extraCoinFlips) {
+        computerPlayer.setExtraCoinFlips(extraCoinFlips);
+    }
+
+    @Override
     public int getMaxHandSize() {
         return computerPlayer.getMaxHandSize();
     }

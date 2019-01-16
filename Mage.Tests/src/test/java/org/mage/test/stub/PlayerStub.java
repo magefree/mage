@@ -263,6 +263,16 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int getExtraCoinFlips() {
+        return 0;
+    }
+
+    @Override
+    public void setExtraCoinFlips(int extraCoinFlips) {
+
+    }
+
+    @Override
     public int getMaxHandSize() {
         return 0;
     }
