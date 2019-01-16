@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class ScholarOfAthreos extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScholarOfAthreosEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
-    public ScholarOfAthreos(final ScholarOfAthreos card) {
+    private ScholarOfAthreos(final ScholarOfAthreos card) {
         super(card);
     }
 
@@ -49,7 +50,7 @@ class ScholarOfAthreosEffect extends OneShotEffect {
         staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
-    public ScholarOfAthreosEffect(final ScholarOfAthreosEffect effect) {
+    private ScholarOfAthreosEffect(final ScholarOfAthreosEffect effect) {
         super(effect);
     }
 
@@ -57,7 +58,10 @@ class ScholarOfAthreosEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int lifeLost = 0;
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            lifeLost += game.getPlayer(opponentId).loseLife(1, game, false);
+            Player opponent = game.getPlayer(opponentId);
+            if(opponent != null) {
+                lifeLost += opponent.loseLife(1, game, false);
+            }
         }
         game.getPlayer(source.getControllerId()).gainLife(lifeLost, game, source);
         return true;
