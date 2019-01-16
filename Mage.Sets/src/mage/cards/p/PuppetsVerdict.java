@@ -54,7 +54,7 @@ class PuppetsVerdictEffect extends OneShotEffect {
         
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.flipCoin(game)) {
+            if (controller.flipCoin(source, game, true)) {
                 
                 FilterCreaturePermanent filterPower2OrLess = new FilterCreaturePermanent("all creatures power 2 or less");
                 filterPower2OrLess.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));

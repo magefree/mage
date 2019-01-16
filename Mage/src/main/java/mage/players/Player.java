@@ -395,9 +395,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
-    boolean flipCoin(Game game);
+    boolean flipCoin(Ability source, Game game, boolean winnable);
 
-    boolean flipCoin(Game game, ArrayList<UUID> appliedEffects);
+    boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects);
 
     int rollDice(Game game, int numSides);
 

@@ -66,7 +66,7 @@ class CrazedFirecatEffect extends OneShotEffect {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (controller != null && sourceObject != null) {
             int flipsWon = 0;
-            while (controller.flipCoin(game)) {
+            while (controller.flipCoin(source, game, true)) {
                 flipsWon++;
             }
             sourceObject.addCounters(CounterType.P1P1.createInstance(flipsWon), source, game);

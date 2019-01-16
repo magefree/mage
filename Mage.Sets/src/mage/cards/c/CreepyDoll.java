@@ -100,7 +100,7 @@ class CreepyDollEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (player.flipCoin(game)) {
+            if (player.flipCoin(source, game, true)) {
                 UUID targetId = getTargetPointer().getFirst(game, source);
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {

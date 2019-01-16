@@ -99,7 +99,7 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (int i = 0; i < 5; i++) {
-                if (controller.flipCoin(game)) {
+                if (controller.flipCoin(source, game, false)) {
                     game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
                 }
             }
