@@ -55,7 +55,7 @@ class KrarksThumbEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.setExtraCoinFlips(controller.getExtraCoinFlips() + 1);
+            controller.setExtraCoinFlips(2 * controller.getExtraCoinFlips());
         }
         return true;
     }
