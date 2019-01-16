@@ -106,7 +106,7 @@ class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
     private final UUID spellId;
 
     DomriChaosBringerTriggeredAbility(UUID spellId) {
-        super(null, Duration.Custom, true);
+        super(null, Duration.EndOfStep, true);
         this.spellId = spellId;
         this.usesStack = false;
     }

@@ -40,7 +40,7 @@ public final class BedeckBedazzle extends SplitCard {
         // Destroy target nonbasic land. Bedazzle deals 2 damage to target opponent or planeswalker.
         this.getRightHalfCard().getSpellAbility().addEffect(new BedazzleEffect());
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetLandPermanent());
-        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
     private BedeckBedazzle(final BedeckBedazzle card) {

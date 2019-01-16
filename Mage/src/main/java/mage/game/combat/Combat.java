@@ -463,7 +463,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 target.setRequired(true);
                                 target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack");
                                 if (player.chooseTarget(Outcome.Damage, target, null, game)) {
-                                    System.out.println("The player " + player.getName() + " declares an attacker here. " + creature.getName());
+                                    //System.out.println("The player " + player.getName() + " declares an attacker here. " + creature.getName());
                                     player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
                                 }
                             }

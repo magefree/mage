@@ -7,9 +7,12 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
@@ -433,6 +436,13 @@ public final class SystemUtil {
                         game.addPlane((mage.game.command.Plane) plane, null, player.getId());
                         continue;
                     }
+                } else if ("loyalty".equalsIgnoreCase(command.zone)) {
+                    for (Permanent perm : game.getBattlefield().getAllActivePermanents(player.getId())) {
+                        if (perm.getName().equals(command.cardName) && perm.getCardType().contains(CardType.PLANESWALKER)) {
+                            perm.addCounters(CounterType.LOYALTY.createInstance(command.Amount), null, game);
+                        }
+                    }
+                    continue;
                 }
 
                 Zone gameZone;

@@ -11,7 +11,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -29,6 +31,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static mage.constants.Outcome.Benefit;
@@ -106,7 +110,7 @@ class LumberingBattlementEffect extends OneShotEffect {
         if (!player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
             return false;
         }
-        Cards cards = new CardsImpl();
+        Set<Card> cards = new HashSet();
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
@@ -114,10 +118,8 @@ class LumberingBattlementEffect extends OneShotEffect {
             }
         }
         return player.moveCardsToExile(
-                cards.getCards(game), source, game, true,
-                CardUtil.getExileZoneId(
-                        game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
-                ), sourcePerm.getIdName()
+                cards, source, game, true,
+                CardUtil.getCardExileZoneId(game, source), sourcePerm.getIdName()
         );
     }
 }
