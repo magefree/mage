@@ -56,7 +56,7 @@ class SqueesRevengeEffect extends OneShotEffect {
             int number = player.announceXMana(0, Integer.MAX_VALUE, "Choose how many times to flip a coin", game, source);
             game.informPlayers(player.getLogName() + " chooses " + number + '.');
             for(int i = 0; i < number; i++) {
-                if(!player.flipCoin(game)) {
+                if(!player.flipCoin(source, game, true)) {
                     return true;
                 }
             }

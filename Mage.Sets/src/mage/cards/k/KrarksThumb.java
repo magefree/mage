@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -9,25 +8,28 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.FlipCoinEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KrarksThumb extends CardImpl {
 
     public KrarksThumb(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         addSuperType(SuperType.LEGENDARY);
 
         // If you would flip a coin, instead flip two coins and ignore one.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KrarksThumbEffect()));
     }
 
-    public KrarksThumb(final KrarksThumb card) {
+    private KrarksThumb(final KrarksThumb card) {
         super(card);
     }
 
@@ -44,26 +46,30 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
         staticText = "If you would flip a coin, instead flip two coins and ignore one";
     }
 
-    KrarksThumbEffect(final KrarksThumbEffect effect) {
+    private KrarksThumbEffect(final KrarksThumbEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            // because second flip is ignored it may not be done by the player method
-            boolean secondCoinFlip = RandomUtil.nextBoolean();
-            if (!game.isSimulation()) {
-                game.informPlayers("[Flip a coin] " + player.getLogName() + (secondCoinFlip ? " won (head)." : " lost (tail)."));
-            }
-            if (player.chooseUse(outcome, "Ignore the first coin flip?", source, game)) {
-                event.setFlag(secondCoinFlip);
-                game.informPlayers(player.getLogName() + " ignores the first coin flip.");
-            } else {
-                game.informPlayers(player.getLogName() + " ignores the second coin flip.");
-            }
+        if (player == null || !player.getId().equals(source.getControllerId())) {
+            return false;
         }
+        FlipCoinEvent flipEvent = (FlipCoinEvent) event;
+        boolean secondFlip = RandomUtil.nextBoolean();
+        game.informPlayers(player.getLogName() + " flipped a " + flipEvent.getResultName()
+                + " and a " + CardUtil.booleanToFlipName(secondFlip)
+        );
+        boolean chosenFlip = player.chooseUse(
+                Outcome.Benefit, "Choose which coin you want",
+                "(You chose " + flipEvent.getChosenName() + ")",
+                flipEvent.getResultName(), CardUtil.booleanToFlipName(secondFlip), source, game
+        );
+        if (!chosenFlip) {
+            flipEvent.setResult(secondFlip);
+        }
+        game.informPlayers(player.getLogName() + " chooses to keep " + flipEvent.getResultName());
         return false;
     }
 

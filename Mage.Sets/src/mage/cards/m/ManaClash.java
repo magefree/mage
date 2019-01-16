@@ -62,8 +62,8 @@ class ManaClashEffect extends OneShotEffect {
                 if (!targetOpponent.canRespond() || !controller.canRespond()) {
                     return false;
                 }
-                boolean controllerFlip = controller.flipCoin(game);
-                boolean opponentFlip = targetOpponent.flipCoin(game);
+                boolean controllerFlip = controller.flipCoin(source, game, false);
+                boolean opponentFlip = targetOpponent.flipCoin(source, game, false);
                 if (controllerFlip && opponentFlip) {
                     bothHeads = true;
                 }

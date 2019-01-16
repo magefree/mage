@@ -354,6 +354,13 @@ public final class CardUtil {
         return message;
     }
 
+    public static String booleanToFlipName(boolean flip) {
+        if (flip) {
+            return "Heads";
+        }
+        return "Tails";
+    }
+
     public static boolean checkNumeric(String s) {
         return s.chars().allMatch(Character::isDigit);
 
