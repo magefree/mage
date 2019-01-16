@@ -85,7 +85,7 @@ class CryOfTheCarnariumReplacementEffect extends ReplacementEffectImpl {
 
     CryOfTheCarnariumReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If a creature would die this turn, exile it instead.";
+        staticText = " If a creature would die this turn, exile it instead.";
     }
 
     private CryOfTheCarnariumReplacementEffect(final CryOfTheCarnariumReplacementEffect effect) {

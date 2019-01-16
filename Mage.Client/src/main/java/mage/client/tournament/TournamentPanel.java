@@ -5,12 +5,16 @@ import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.table.TablesButtonColumn;
+import mage.client.table.TablesUtil;
+import mage.client.table.TournamentMatchesTableModel;
 import mage.client.util.Format;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.constants.PlayerAction;
-import mage.view.*;
+import mage.view.TournamentPlayerView;
+import mage.view.TournamentView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -18,7 +22,6 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -74,7 +77,11 @@ public class TournamentPanel extends javax.swing.JPanel {
         Action action = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int modelRow = Integer.valueOf(e.getActionCommand());
+                String searchID = e.getActionCommand();
+                int modelRow = TablesUtil.findTableRowFromSearchId(matchesModel, searchID);
+                if (modelRow == -1) {
+                    return;
+                }
 
                 String state = (String) tableMatches.getValueAt(modelRow, tableMatches.convertColumnIndexToView(2));
                 String actionText = (String) tableMatches.getValueAt(modelRow, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
@@ -132,7 +139,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
+        String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
@@ -142,7 +149,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
+            String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
             // use divider positions only if screen size is the same as it was the time the settings were saved
             if (size != null && size.equals(sb)) {
                 String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, null);
@@ -585,88 +592,6 @@ class TournamentPlayersTableModel extends AbstractTableModel {
 
 }
 
-class TournamentMatchesTableModel extends AbstractTableModel {
-
-    public static final int ACTION_COLUMN = 4; // column the action is located
-
-    private final String[] columnNames = new String[]{"Round Number", "Players", "State", "Result", "Action"};
-    private TournamentGameView[] games = new TournamentGameView[0];
-    private boolean watchingAllowed;
-
-    public void loadData(TournamentView tournament) {
-        List<TournamentGameView> views = new ArrayList<>();
-        watchingAllowed = tournament.isWatchingAllowed();
-        for (RoundView round : tournament.getRounds()) {
-            for (TournamentGameView game : round.getGames()) {
-                views.add(game);
-            }
-        }
-        games = views.toArray(new TournamentGameView[0]);
-        this.fireTableDataChanged();
-    }
-
-    @Override
-    public int getRowCount() {
-        return games.length;
-    }
-
-    @Override
-    public int getColumnCount() {
-        return columnNames.length;
-    }
-
-    @Override
-    public Object getValueAt(int arg0, int arg1) {
-        switch (arg1) {
-            case 0:
-                return Integer.toString(games[arg0].getRoundNum());
-            case 1:
-                return games[arg0].getPlayers();
-            case 2:
-                return games[arg0].getState();
-            case 3:
-                return games[arg0].getResult();
-            case 4:
-//                if (games[arg0].getState().equals("Finished")) {
-//                    return "Replay";
-//                }
-                if (watchingAllowed && games[arg0].getState().startsWith("Dueling")) {
-                    return "Watch";
-                }
-                return "";
-            case 5:
-                return games[arg0].getTableId().toString();
-            case 6:
-                return games[arg0].getMatchId().toString();
-            case 7:
-                return games[arg0].getGameId().toString();
-
-        }
-        return "";
-    }
-
-    @Override
-    public String getColumnName(int columnIndex) {
-        String colName = "";
-
-        if (columnIndex <= getColumnCount()) {
-            colName = columnNames[columnIndex];
-        }
-
-        return colName;
-    }
-
-    @Override
-    public Class getColumnClass(int columnIndex) {
-        return String.class;
-    }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == ACTION_COLUMN;
-    }
-
-}
 
 class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
 

@@ -5,7 +5,7 @@
 use strict;
 
 my $addedCards;
-my $GIT_CMD = "C:\\Program Files (x86)\\Git\\bin\\git.exe";
+my $GIT_CMD = "git.exe";
 
 my $text = `\"$GIT_CMD\" tag`;
 print "Assuming the tag command is on: \"$GIT_CMD\" tag\n";

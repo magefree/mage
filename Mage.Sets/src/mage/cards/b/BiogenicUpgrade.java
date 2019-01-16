@@ -9,10 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanentAmount;
@@ -25,13 +22,6 @@ import java.util.UUID;
  */
 public final class BiogenicUpgrade extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creatures you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public BiogenicUpgrade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
@@ -40,7 +30,7 @@ public final class BiogenicUpgrade extends CardImpl {
                 CounterType.P1P1, 3, false,
                 "one, two, or three target creatures"
         ));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3));
         this.getSpellAbility().addEffect(new BiogenicUpgradeEffect());
     }
 
