@@ -2579,6 +2579,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         FlipCoinEvent event = new FlipCoinEvent(playerId, source.getSourceId(), result, chosen, winnable);
         event.addAppliedEffects(appliedEffects);
         game.replaceEvent(event);
+        game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult()));
         if (event.getFlipCount() > 1) {
             boolean canChooseHeads = event.getResult();
             boolean canChooseTails = !event.getResult();
@@ -2598,8 +2599,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             } else {
                 event.setResult(false);
             }
+            game.informPlayers(getLogName() + " chose to keep " + CardUtil.booleanToFlipName(event.getResult()));
         }
-        game.informPlayers(getLogName() + " got " + CardUtil.booleanToFlipName(event.getResult()));
         if (event.isWinnable()) {
             game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip");
         }
