@@ -41,7 +41,9 @@ public final class CaptiveAudience extends CardImpl {
 
         // At the beginning of your upkeep, choose one that hasn't been chosen —
         // • Your life total becomes 4.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SetPlayerLifeSourceEffect(4), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new SetPlayerLifeSourceEffect(4), TargetController.YOU, false
+        );
         ability.getModes().setEachModeOnlyOnce(true);
 
         // • Discard your hand.
@@ -96,9 +98,9 @@ class CaptiveAudienceETBEffect extends OneShotEffect {
         ContinuousEffect continuousEffect = new GainControlTargetEffect(
                 Duration.WhileOnBattlefield, true, player.getId()
         );
-        continuousEffect.setTargetPointer(
-                new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter())
-        );
+        continuousEffect.setTargetPointer(new FixedTarget(
+                source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+        ));
         game.addEffect(continuousEffect, source);
         return true;
     }
