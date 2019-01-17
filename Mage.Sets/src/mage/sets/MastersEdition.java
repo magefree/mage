@@ -77,7 +77,6 @@ public final class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Erg Raiders", 68, Rarity.COMMON, mage.cards.e.ErgRaiders.class));
         cards.add(new SetCardInfo("Eureka", 117, Rarity.RARE, mage.cards.e.Eureka.class));
         cards.add(new SetCardInfo("Exile", 12, Rarity.COMMON, mage.cards.e.Exile.class));
-        cards.add(new SetCardInfo("Seraph", 26, Rarity.RARE, mage.cards.s.Seraph.class));
         cards.add(new SetCardInfo("The Fallen", 69, Rarity.UNCOMMON, mage.cards.t.TheFallen.class));
         cards.add(new SetCardInfo("Feast or Famine", 70, Rarity.COMMON, mage.cards.f.FeastOrFamine.class));
         cards.add(new SetCardInfo("Fire Covenant", 145, Rarity.UNCOMMON, mage.cards.f.FireCovenant.class));
