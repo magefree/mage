@@ -42,7 +42,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        return isActivatedOrTriggeredAbility(stackObject) && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
+        return isActivatedOrTriggeredAbility(stackObject) && source != null && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

@@ -89,7 +89,7 @@ class StormEffect extends OneShotEffect {
                     }
                 }
             } else {
-                Logger.getLogger(StormEffect.class).fatal("CastSpellLastTurnWatcher not found. game = " + game == null ? "NULL" : game.getGameType().toString());
+                Logger.getLogger(StormEffect.class).fatal("CastSpellLastTurnWatcher not found. game = " +game.getGameType().toString());
             }
             return true;
         }

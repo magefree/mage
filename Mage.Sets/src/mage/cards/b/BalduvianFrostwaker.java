@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -44,7 +43,7 @@ public final class BalduvianFrostwaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalduvianFrostwaker(final BalduvianFrostwaker card) {
+    private BalduvianFrostwaker(final BalduvianFrostwaker card) {
         super(card);
     }
 
@@ -65,7 +64,7 @@ class BalduvianFrostwakerToken extends TokenImpl {
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public BalduvianFrostwakerToken(final BalduvianFrostwakerToken token) {
+    private BalduvianFrostwakerToken(final BalduvianFrostwakerToken token) {
         super(token);
     }
 

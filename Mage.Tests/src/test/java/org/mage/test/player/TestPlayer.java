@@ -800,7 +800,7 @@ public class TestPlayer implements Player {
     }
 
     private void printCards(Set<Card> cards) {
-        printCards(cards.stream().collect(Collectors.toList()));
+        printCards(new ArrayList<>(cards));
     }
 
     private void printCards(List<Card> cards) {

@@ -627,7 +627,7 @@ public class GameController implements GameCallback {
                 for (MatchPlayer p : TableManager.instance.getTable(tableId).getMatch().getPlayers()) {
                     if (p.getPlayer().getId().equals(userIdRequester)) {
                         Optional<User> u = UserManager.instance.getUser(origId);
-                        if (u != null && u.isPresent() && p.getDeck() != null) {
+                        if (u.isPresent() && p.getDeck() != null) {
                             u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
                         }
                     }
