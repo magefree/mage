@@ -368,6 +368,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Seasinger", 121, Rarity.UNCOMMON, mage.cards.s.Seasinger.class));
         cards.add(new SetCardInfo("Segovian Leviathan", 122, Rarity.UNCOMMON, mage.cards.s.SegovianLeviathan.class));
         cards.add(new SetCardInfo("Sengir Autocrat", 193, Rarity.RARE, mage.cards.s.SengirAutocrat.class));
+        cards.add(new SetCardInfo("Seraph", 59, Rarity.RARE, mage.cards.s.Seraph.class));
         cards.add(new SetCardInfo("Serpent Generator", 397, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
         cards.add(new SetCardInfo("Serra Bestiary", 60, Rarity.UNCOMMON, mage.cards.s.SerraBestiary.class));
         cards.add(new SetCardInfo("Serra Paladin", 61, Rarity.UNCOMMON, mage.cards.s.SerraPaladin.class));

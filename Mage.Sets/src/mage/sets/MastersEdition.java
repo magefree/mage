@@ -77,6 +77,7 @@ public final class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Erg Raiders", 68, Rarity.COMMON, mage.cards.e.ErgRaiders.class));
         cards.add(new SetCardInfo("Eureka", 117, Rarity.RARE, mage.cards.e.Eureka.class));
         cards.add(new SetCardInfo("Exile", 12, Rarity.COMMON, mage.cards.e.Exile.class));
+        cards.add(new SetCardInfo("Seraph", 26, Rarity.RARE, mage.cards.s.Seraph.class));
         cards.add(new SetCardInfo("The Fallen", 69, Rarity.UNCOMMON, mage.cards.t.TheFallen.class));
         cards.add(new SetCardInfo("Feast or Famine", 70, Rarity.COMMON, mage.cards.f.FeastOrFamine.class));
         cards.add(new SetCardInfo("Fire Covenant", 145, Rarity.UNCOMMON, mage.cards.f.FireCovenant.class));
@@ -175,6 +176,7 @@ public final class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Scryb Sprites", 128, Rarity.COMMON, mage.cards.s.ScrybSprites.class));
         cards.add(new SetCardInfo("Seasinger", 49, Rarity.UNCOMMON, mage.cards.s.Seasinger.class));
         cards.add(new SetCardInfo("Sea Sprite", 48, Rarity.COMMON, mage.cards.s.SeaSprite.class));
+        cards.add(new SetCardInfo("Seraph", 26, Rarity.RARE, mage.cards.s.Seraph.class));
         cards.add(new SetCardInfo("Serendib Efreet", 50, Rarity.RARE, mage.cards.s.SerendibEfreet.class));
         cards.add(new SetCardInfo("Serpent Generator", 164, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
         cards.add(new SetCardInfo("Shambling Strider", 129, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));
