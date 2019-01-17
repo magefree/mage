@@ -31,7 +31,7 @@ public final class BrothersYamazaki extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new NamePredicate("Brothers Yamazaki"));
     }
 

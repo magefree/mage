@@ -52,12 +52,12 @@ public final class MarathWillOfTheWild extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Marath, Will of the Wild enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new ManaSpentToCastCount(), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ManaSpentToCastCount.instance, true);
         effect.setText("with a number of +1/+1 counters on it equal to the amount of mana spent to cast it");
         this.addAbility(new EntersBattlefieldAbility(effect));
 
         // {X}, Remove X +1/+1 counters from Marath: Choose one - Put X +1/+1 counters on target creature;
-        effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), new ManacostVariableValue());
+        effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), ManacostVariableValue.instance);
         effect.setText("Put X +1/+1 counters on target creature");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new MarathWillOfTheWildRemoveCountersCost());
@@ -65,7 +65,7 @@ public final class MarathWillOfTheWild extends CardImpl {
 
         // or Marath deals X damage to any target;
         Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        mode.addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         mode.addTarget(new TargetAnyTarget());
         ability.addMode(mode);
 
@@ -132,7 +132,7 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int amount = new ManacostVariableValue().calculate(game, source, this);
+            int amount = ManacostVariableValue.instance.calculate(game, source, this);
             Token token = new MarathWillOfTheWildElementalToken();
             token.getPower().modifyBaseValue(amount);
             token.getToughness().modifyBaseValue(amount);
@@ -165,7 +165,7 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        int amount = new ManacostVariableValue().calculate(game, ability, null);
+        int amount = ManacostVariableValue.instance.calculate(game, ability, null);
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) >= amount) {
             permanent.removeCounters(CounterType.P1P1.getName(), amount, game);

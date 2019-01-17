@@ -32,8 +32,8 @@ public final class WhisperwoodElemental extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-up, nontoken creatures you control");
 
     static {
-        filter.add(Predicates.not(new FaceDownPredicate()));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(FaceDownPredicate.instance));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public WhisperwoodElemental(UUID ownerId, CardSetInfo setInfo) {

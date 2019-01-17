@@ -23,7 +23,7 @@ public final class ToilToRenown extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("tapped artifact, creature, and land you control");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),

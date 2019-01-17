@@ -6,10 +6,10 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
- *
  * @author North
  */
-public class ColorlessPredicate implements Predicate<MageObject> {
+public enum ColorlessPredicate implements Predicate<MageObject> {
+    instance;
 
     @Override
     public boolean apply(MageObject input, Game game) {

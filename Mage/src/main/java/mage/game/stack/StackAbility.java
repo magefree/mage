@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCost;
@@ -52,6 +53,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     private String name;
     private String expansionSetCode;
     private TargetAdjuster targetAdjuster = null;
+    private CostAdjuster costAdjuster = null;
 
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
@@ -68,6 +70,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         this.expansionSetCode = stackAbility.expansionSetCode;
         this.targetAdjuster = stackAbility.targetAdjuster;
         this.targetChanged = stackAbility.targetChanged;
+        this.costAdjuster = stackAbility.costAdjuster;
     }
 
     @Override
@@ -625,6 +628,23 @@ public class StackAbility extends StackObjImpl implements Ability {
     public void adjustTargets(Game game) {
         if (targetAdjuster != null) {
             targetAdjuster.adjustTargets(this, game);
+        }
+    }
+
+    @Override
+    public void setCostAdjuster(CostAdjuster costAdjuster) {
+        this.costAdjuster = costAdjuster;
+    }
+
+    @Override
+    public CostAdjuster getCostAdjuster() {
+        return costAdjuster;
+    }
+
+    @Override
+    public void adjustCosts(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.adjustCosts(this, game);
         }
     }
 }

@@ -10,10 +10,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author Styxo
  */
-public class GreatestPowerAmongControlledCreaturesValue implements DynamicValue {
+public enum GreatestPowerAmongControlledCreaturesValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -32,7 +32,7 @@ public class GreatestPowerAmongControlledCreaturesValue implements DynamicValue 
 
     @Override
     public GreatestPowerAmongControlledCreaturesValue copy() {
-        return new GreatestPowerAmongControlledCreaturesValue();
+        return GreatestPowerAmongControlledCreaturesValue.instance;
     }
 
     @Override

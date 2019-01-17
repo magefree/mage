@@ -90,7 +90,7 @@ class TeferisRealmEffect extends OneShotEffect {
             }
             String choosenType = choiceImpl.getChoice();
             FilterPermanent filter = new FilterPermanent();
-            filter.add(Predicates.not(new TokenPredicate()));
+            filter.add(Predicates.not(TokenPredicate.instance));
             switch (choosenType) {
                 case ARTIFACT:
                     filter.add(new CardTypePredicate(CardType.ARTIFACT));

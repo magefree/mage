@@ -57,7 +57,7 @@ class ImpetuousProtegeEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

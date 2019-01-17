@@ -1,9 +1,8 @@
-
 package org.mage.plugins.card.dl.sources;
 
-import java.util.Locale;
-
 import org.mage.plugins.card.images.CardDownloadData;
+
+import java.util.Locale;
 
 /**
  * Site was shutdown by wizards Feb. 2015
@@ -30,7 +29,7 @@ public enum MtgImageSource implements CardImageSource {
     }
 
     @Override
-    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {

@@ -1,9 +1,5 @@
 package mage.game;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.*;
@@ -65,9 +61,13 @@ import mage.util.GameLog;
 import mage.util.MessageToClient;
 import mage.util.RandomUtil;
 import mage.util.functions.ApplyToPermanent;
-import mage.watchers.Watchers;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -150,6 +150,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.state = new GameState();
         this.startLife = startLife;
         this.executingRollback = false;
+        initGameDefaultWatchers();
     }
 
     public GameImpl(final GameImpl game) {
@@ -259,6 +260,7 @@ public abstract class GameImpl implements Game, Serializable {
     public void addPlayer(Player player, Deck deck) {
         player.useDeck(deck, this);
         state.addPlayer(player);
+        initPlayerDefaultWatchers(player.getId());
     }
 
     @Override
@@ -504,7 +506,7 @@ public abstract class GameImpl implements Game, Serializable {
         return Optional.empty();
     }
 
-//    @Override
+    //    @Override
 //    public Zone getZone(UUID objectId) {
 //        return state.getZone(objectId);
 //    }
@@ -532,7 +534,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
-//    /**
+    //    /**
 //     * Starts check if game is over or if playerId is given let the player
 //     * concede.
 //     *
@@ -1011,22 +1013,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         getState().setChoosingPlayerId(null);
-        state.getWatchers().reset(); // watcher objects from cards are reused during match so reset all card watchers already added
-        Watchers watchers = state.getWatchers();
-        // add default watchers
-        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-            watchers.add(new PlayerDamagedBySourceWatcher(playerId));
-            watchers.add(new BloodthirstWatcher(playerId));
-        }
-        watchers.add(new MorbidWatcher());
-        watchers.add(new CastSpellLastTurnWatcher());
-        watchers.add(new CastSpellYourLastTurnWatcher());
-        watchers.add(new PlayerLostLifeWatcher());
-        watchers.add(new PlayerLostLifeNonCombatWatcher());
-        watchers.add(new BlockedAttackerWatcher());
-        watchers.add(new DamageDoneWatcher());
-        watchers.add(new PlanarRollWatcher());
-        watchers.add(new PlayersAttackedThisTurnWatcher());
+        state.resetWatchers(); // watcher objects from cards are reused during match so reset all card watchers already added
 
         //20100716 - 103.5
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
@@ -1075,6 +1062,24 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
+
+    public void initGameDefaultWatchers() {
+        getState().addWatcher(new MorbidWatcher());
+        getState().addWatcher(new CastSpellLastTurnWatcher());
+        getState().addWatcher(new CastSpellYourLastTurnWatcher());
+        getState().addWatcher(new PlayerLostLifeWatcher());
+        getState().addWatcher(new PlayerLostLifeNonCombatWatcher());
+        getState().addWatcher(new BlockedAttackerWatcher());
+        getState().addWatcher(new DamageDoneWatcher());
+        getState().addWatcher(new PlanarRollWatcher());
+        getState().addWatcher(new PlayersAttackedThisTurnWatcher());
+    }
+
+    public void initPlayerDefaultWatchers(UUID playerId) {
+        getState().addWatcher(new PlayerDamagedBySourceWatcher(playerId));
+        getState().addWatcher(new BloodthirstWatcher(playerId));
+    }
+
     protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {
         StringBuilder message = new StringBuilder();
         if (choosingPlayer != null) {
@@ -1117,7 +1122,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (Player player : getPlayers().values()) {
             player.endOfTurn(this);
         }
-        state.getWatchers().reset();
+        state.resetWatchers();
     }
 
     protected UUID pickChoosingPlayer() {
@@ -1206,7 +1211,7 @@ public abstract class GameImpl implements Game, Serializable {
         fireInformEvent(new StringBuilder(player.getLogName())
                 .append(" mulligans")
                 .append(deduction == 0 ? " for free and draws " : " down to ")
-                .append(Integer.toString(numCards - deduction))
+                .append((numCards - deduction))
                 .append(numCards - deduction == 1 ? " card" : " cards").toString());
         player.drawCards(numCards - deduction, this);
     }
@@ -1543,10 +1548,9 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     /**
-     *
      * @param emblem
      * @param sourceObject
-     * @param toPlayerId controller and owner of the emblem
+     * @param toPlayerId   controller and owner of the emblem
      */
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
@@ -1562,11 +1566,10 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     /**
-     *
      * @param plane
      * @param sourceObject
-     * @param toPlayerId controller and owner of the plane (may only be one per
-     * game..)
+     * @param toPlayerId   controller and owner of the plane (may only be one per
+     *                     game..)
      * @return boolean - whether the plane was added successfully or not
      */
     @Override
@@ -1795,7 +1798,7 @@ public abstract class GameImpl implements Game, Serializable {
                     break;
                 }
                 // triggered abilities that don't use the stack have to be executed first (e.g. Banisher Priest Return exiled creature
-                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext(); ) {
                     TriggeredAbility triggeredAbility = it.next();
                     if (!triggeredAbility.isUsesStack()) {
                         state.removeTriggeredAbility(triggeredAbility);
@@ -1980,7 +1983,7 @@ public abstract class GameImpl implements Game, Serializable {
                             if ((ability instanceof SpellAbility)
                                     && SpellAbilityType.BASE_ALTERNATE == ((SpellAbility) ability).getSpellAbilityType()
                                     && !ability.getTargets().isEmpty()) {
-                                spellAbility = (SpellAbility) ability;
+                                spellAbility = ability;
                                 break;
                             }
                         }
@@ -2530,7 +2533,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         //20100423 - 800.4a
         Set<Card> toOutside = new HashSet<>();
-        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
+        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext(); ) {
             Permanent perm = it.next();
             if (perm.isOwnedBy(playerId)) {
                 if (perm.getAttachedTo() != null) {
@@ -2573,7 +2576,7 @@ public abstract class GameImpl implements Game, Serializable {
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
         // triggered abilities that don't use the stack have to be executed
         List<TriggeredAbility> abilities = state.getTriggered(player.getId());
-        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext(); ) {
             TriggeredAbility triggeredAbility = it.next();
             if (!triggeredAbility.isUsesStack()) {
                 state.removeTriggeredAbility(triggeredAbility);
@@ -2593,7 +2596,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         // Remove cards from the player in all exile zones
         for (ExileZone exile : this.getExile().getExileZones()) {
-            for (Iterator<UUID> it = exile.iterator(); it.hasNext();) {
+            for (Iterator<UUID> it = exile.iterator(); it.hasNext(); ) {
                 Card card = this.getCard(it.next());
                 if (card != null && card.isOwnedBy(playerId)) {
                     it.remove();
@@ -2603,7 +2606,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         //Remove all commander/emblems/plane the player controls
         boolean addPlaneAgain = false;
-        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
+        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext(); ) {
             CommandObject obj = it.next();
             if (obj.isControlledBy(playerId)) {
                 if (obj instanceof Emblem) {
@@ -2739,7 +2742,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             if (!game.isSimulation()) {
                 StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
-                message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getLogName());
+                message.append(result.getPreventedDamage()).append(" damage from ").append(damageSource.getLogName());
                 if (!targetName.isEmpty()) {
                     message.append(" to ").append(targetName);
                 }
@@ -2774,7 +2777,7 @@ public abstract class GameImpl implements Game, Serializable {
      * Gets last known information about object in the zone. At the moment
      * doesn't take into account zone (it is expected that it doesn't really
      * matter, if not, then Map<UUID, Map<Zone, Card>> should be used instead).
-     *
+     * <p>
      * Can return null.
      *
      * @param objectId
@@ -3129,7 +3132,7 @@ public abstract class GameImpl implements Game, Serializable {
     public void saveRollBackGameState() {
         if (gameOptions.rollbackTurnsAllowed) {
             int toDelete = getTurnNum() - ROLLBACK_TURNS_MAX;
-            if (toDelete > 0 && gameStatesRollBack.containsKey(toDelete)) {
+            if (toDelete > 0) {
                 gameStatesRollBack.remove(toDelete);
             }
             gameStatesRollBack.put(getTurnNum(), state.copy());
@@ -3181,9 +3184,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void setEnterWithCounters(UUID sourceId, Counters counters) {
         if (counters == null) {
-            if (enterWithCounters.containsKey(sourceId)) {
-                enterWithCounters.remove(sourceId);
-            }
+            enterWithCounters.remove(sourceId);
             return;
         }
         enterWithCounters.put(sourceId, counters);

@@ -1,9 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -23,8 +19,11 @@ import mage.players.Player;
 import mage.target.common.TargetPermanentOrSuspendedCard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class Clockspinning extends CardImpl {
@@ -133,7 +132,6 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        Card card = game.getCard(source.getFirstTarget());
 
         if (player != null && permanent != null) {
             if (player.chooseUse(Outcome.Neutral, "Do you want to to remove a counter?", source, game)) {
@@ -151,6 +149,8 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
             }
             return true;
         }
+
+        Card card = game.getCard(source.getFirstTarget());
         if (player != null && card != null) {
             if (player.chooseUse(Outcome.Neutral, "Do you want to to remove a counter?", source, game)) {
                 Counter counter = selectCounterType(game, source, card);

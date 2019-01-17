@@ -21,7 +21,7 @@ public final class AltarOfTheBrood extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public AltarOfTheBrood(UUID ownerId, CardSetInfo setInfo) {

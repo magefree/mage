@@ -30,7 +30,7 @@ public final class SoultetherGolem extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public SoultetherGolem(UUID ownerId, CardSetInfo setInfo) {

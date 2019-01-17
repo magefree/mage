@@ -34,7 +34,7 @@ public final class KorozdaGuildmage extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public KorozdaGuildmage(UUID ownerId, CardSetInfo setInfo) {
@@ -53,7 +53,7 @@ public final class KorozdaGuildmage extends CardImpl {
         this.addAbility(ability);
 
         // {2}{B}{G}, Sacrifice a nontoken creature: create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(),new SacrificeCostCreaturesToughness()),new ManaCostsImpl("{2}{B}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(),SacrificeCostCreaturesToughness.instance),new ManaCostsImpl("{2}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true)));
         this.addAbility(ability);
         

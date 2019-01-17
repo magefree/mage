@@ -32,8 +32,8 @@ public final class AnafenzaTheForemost extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target tapped creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
-        filter.add(new TappedPredicate());
+        filter.add(AnotherPredicate.instance);
+        filter.add(TappedPredicate.instance);
     }
 
     public AnafenzaTheForemost(UUID ownerId, CardSetInfo setInfo) {

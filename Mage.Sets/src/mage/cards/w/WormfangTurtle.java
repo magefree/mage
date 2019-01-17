@@ -25,7 +25,7 @@ public final class WormfangTurtle extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public WormfangTurtle(UUID ownerId, CardSetInfo setInfo) {

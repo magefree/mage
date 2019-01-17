@@ -61,7 +61,7 @@ class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public EfreetWeaponmasterAbility() {

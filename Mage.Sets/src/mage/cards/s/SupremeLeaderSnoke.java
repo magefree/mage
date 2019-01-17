@@ -11,13 +11,16 @@ import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -26,19 +29,17 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.common.PlayerLostLifeNonCombatWatcher;
 
 /**
- *
  * @author NinthWorld
  */
 public final class SupremeLeaderSnoke extends CardImpl {
 
-    UUID ability3Id;
-
     public SupremeLeaderSnoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{U}{B}{R}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNOKE);
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
@@ -54,35 +55,17 @@ public final class SupremeLeaderSnoke extends CardImpl {
 
         // -X: Gain control of target creature with converted mana cost X. Untap that creature. It gains haste. Sacrifice that creature at the beginning of the next end step.
         Ability ability3 = new LoyaltyAbility(new GainControlTargetEffect(Duration.WhileOnBattlefield)
-            .setText("Gain control of target creature with converted mana cost X"));
+                .setText("Gain control of target creature with converted mana cost X"));
         ability3.addEffect(new UntapTargetEffect().setText("Untap that creature"));
         ability3.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield).setText("It gains haste"));
         ability3.addEffect(new GainAbilityTargetEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect()), Duration.WhileOnBattlefield)
-            .setText("Sacrifice that creature at the beginning of the next end step"));
-        ability3Id = ability3.getOriginalId();
-        ability3.addTarget(new TargetCreaturePermanent());
+                .setText("Sacrifice that creature at the beginning of the next end step"));
+        ability3.setTargetAdjuster(SupremeLeaderSnokeAdjuster.instance);
         this.addAbility(ability3);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(ability3Id)) {
-            int cmc = 0;
-            for (Cost cost : ability.getCosts()) {
-                if (cost instanceof PayVariableLoyaltyCost) {
-                    cmc = ((PayVariableLoyaltyCost) cost).getAmount();
-                }
-            }
-            FilterCreaturePermanent newFilter = StaticFilters.FILTER_PERMANENT_CREATURE.copy();
-            newFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
-            ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanent(newFilter));
-        }
     }
 
     public SupremeLeaderSnoke(final SupremeLeaderSnoke card) {
         super(card);
-        this.ability3Id = card.ability3Id;
     }
 
     @Override
@@ -91,11 +74,29 @@ public final class SupremeLeaderSnoke extends CardImpl {
     }
 }
 
+enum SupremeLeaderSnokeAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int cmc = 0;
+        for (Cost cost : ability.getCosts()) {
+            if (cost instanceof PayVariableLoyaltyCost) {
+                cmc = ((PayVariableLoyaltyCost) cost).getAmount();
+            }
+        }
+        FilterCreaturePermanent newFilter = StaticFilters.FILTER_PERMANENT_CREATURE.copy();
+        newFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCreaturePermanent(newFilter));
+    }
+}
+
 class OpponentNoncombatLostLifeCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
-        PlayerLostLifeNonCombatWatcher watcher = (PlayerLostLifeNonCombatWatcher) game.getState().getWatchers().get(PlayerLostLifeNonCombatWatcher.class.getSimpleName());
+        PlayerLostLifeNonCombatWatcher watcher = game.getState().getWatcher(PlayerLostLifeNonCombatWatcher.class);
         if(watcher != null) {
             return watcher.getAllOppLifeLost(source.getControllerId(), game);
         }
@@ -131,9 +132,9 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if(permanent != null) {
+        if (permanent != null) {
             int amount = new OpponentNoncombatLostLifeCount().calculate(game, source, this);
-            if(amount > 0) {
+            if (amount > 0) {
                 Counter counterToAdd = counter.copy();
                 counterToAdd.add(amount - counter.getCount());
                 permanent.addCounters(counterToAdd, source, game);

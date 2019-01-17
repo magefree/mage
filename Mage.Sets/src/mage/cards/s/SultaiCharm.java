@@ -25,7 +25,7 @@ public final class SultaiCharm extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
 
     static {
-        filter.add(new MonocoloredPredicate());
+        filter.add(MonocoloredPredicate.instance);
     }
 
     public SultaiCharm(UUID ownerId, CardSetInfo setInfo) {

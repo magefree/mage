@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
@@ -18,8 +16,9 @@ import mage.game.command.emblems.ObNixilisReignitedEmblem;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ObNixilisReignited extends CardImpl {
@@ -32,12 +31,10 @@ public final class ObNixilisReignited extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: You draw a card and you lose 1 life.
-        Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("You draw a card");
+        Effect effect = new DrawCardSourceControllerEffect(1, "you");
         LoyaltyAbility ability1 = new LoyaltyAbility(effect, 1);
         effect = new LoseLifeSourceControllerEffect(1);
-        effect.setText("and you lose 1 life");
-        ability1.addEffect(effect);
+        ability1.addEffect(effect.concatBy("and"));
         this.addAbility(ability1);
 
         // -3: Destroy target creature.
@@ -47,7 +44,6 @@ public final class ObNixilisReignited extends CardImpl {
 
         // -8: Target opponent gets an emblem with "Whenever a player draws a card, you lose 2 life."
         effect = new GetEmblemTargetPlayerEffect(new ObNixilisReignitedEmblem());
-        effect.setText("Target opponent gets an emblem with \"Whenever a player draws a card, you lose 2 life.\"");
         LoyaltyAbility ability3 = new LoyaltyAbility(effect, -8);
         ability3.addTarget(new TargetOpponent());
         this.addAbility(ability3);

@@ -46,7 +46,7 @@ public final class KrovikanPlague extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchanted creature is untapped");
     
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public KrovikanPlague(UUID ownerId, CardSetInfo setInfo) {

@@ -38,7 +38,7 @@ public final class YodaJediMaster extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target permanent you own");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 

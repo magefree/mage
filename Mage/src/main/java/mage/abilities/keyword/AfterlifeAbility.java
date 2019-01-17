@@ -6,6 +6,7 @@ import mage.game.permanent.token.WhiteBlackSpiritToken;
 import mage.util.CardUtil;
 
 public class AfterlifeAbility extends DiesTriggeredAbility {
+
     private final int tokenCount;
 
     public AfterlifeAbility(int tokenCount) {
@@ -22,7 +23,7 @@ public class AfterlifeAbility extends DiesTriggeredAbility {
     public String getRule() {
         return "Afterlife " + tokenCount + " <i>(When this creature dies, create "
                 + CardUtil.numberToText(tokenCount, "a")
-                + " white and black Spirit creature token"
+                + " 1/1 white and black Spirit creature token"
                 + (tokenCount > 1 ? "s" : "")
                 + " with flying)</i>";
     }

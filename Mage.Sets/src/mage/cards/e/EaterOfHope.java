@@ -30,7 +30,7 @@ public final class EaterOfHope extends CardImpl {
     private static final FilterControlledCreaturePermanent destroyFilter = new FilterControlledCreaturePermanent("two other creatures");
 
     static {
-        destroyFilter.add(new AnotherPredicate());
+        destroyFilter.add(AnotherPredicate.instance);
     }
 
     public EaterOfHope(UUID ownerId, CardSetInfo setInfo) {

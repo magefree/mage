@@ -29,7 +29,7 @@ public final class ShadowAlleyDenizen extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ShadowAlleyDenizen(UUID ownerId, CardSetInfo setInfo) {

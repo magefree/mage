@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -17,15 +15,15 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class PutAway extends CardImpl {
 
     public PutAway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
 
         // Counter target spell. You may shuffle up to one target card from your graveyard into your library.
@@ -46,7 +44,7 @@ public final class PutAway extends CardImpl {
 }
 
 class PutAwayEffect extends OneShotEffect {
-    
+
     boolean countered = false;
 
     public PutAwayEffect() {
@@ -66,15 +64,14 @@ class PutAwayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(source.getFirstTarget());
-        Card card = game.getCard(source.getTargets().get(1).getFirstTarget());
-        Player you = game.getPlayer(source.getControllerId());
-        if (spell != null
-                && game.getStack().counter(spell.getId(), source.getSourceId(), game)) {
+        if (spell != null && game.getStack().counter(spell.getId(), source.getSourceId(), game)) {
             countered = true;
         }
-        if (you != null) {
-            if (card != null
-                    && you.chooseUse(Outcome.Benefit, "Do you wish to shuffle up to one target card from your graveyard into your library?", source, game)
+
+        Card card = game.getCard(source.getTargets().get(1).getFirstTarget());
+        Player you = game.getPlayer(source.getControllerId());
+        if (you != null && card != null) {
+            if (you.chooseUse(Outcome.Benefit, "Do you wish to shuffle up to one target card from your graveyard into your library?", source, game)
                     && game.getState().getZone(card.getId()).match(Zone.GRAVEYARD)) {
                 card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 you.shuffleLibrary(source, game);

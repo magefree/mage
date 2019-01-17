@@ -26,7 +26,7 @@ public final class PrimalWhisperer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
     }
 
     public PrimalWhisperer(UUID ownerId, CardSetInfo setInfo) {

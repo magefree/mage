@@ -66,7 +66,7 @@ class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         System.out.println("canTarget called");
-        ETBSinceYourLastTurnWatcher watcher = (ETBSinceYourLastTurnWatcher) game.getState().getWatchers().get(ETBSinceYourLastTurnWatcher.class.getSimpleName());
+        ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
         if (watcher != null){
             if (watcher.enteredSinceLastTurn(controllerId, new MageObjectReference(id, game))){
                 System.out.println(game.getPermanent(id).getIdName()+" entered since the last turn.");
@@ -79,11 +79,11 @@ class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         MageObject targetSource = game.getObject(sourceId);
-        ETBSinceYourLastTurnWatcher watcher = (ETBSinceYourLastTurnWatcher) game.getState().getWatchers().get(ETBSinceYourLastTurnWatcher.class.getSimpleName());
+        ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
         if(targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    if (watcher.enteredSinceLastTurn(sourceControllerId, new MageObjectReference(permanent.getId(), game))) {
+                    if (watcher != null && watcher.enteredSinceLastTurn(sourceControllerId, new MageObjectReference(permanent.getId(), game))) {
                         return true;
                     }
                 }
@@ -103,7 +103,7 @@ class ETBSinceYourLastTurnWatcher extends Watcher {
     private final Map<UUID, Set<MageObjectReference>> playerToETBMap;
 
     public ETBSinceYourLastTurnWatcher() {
-        super(ETBSinceYourLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(ETBSinceYourLastTurnWatcher.class, WatcherScope.GAME);
         this.playerToETBMap = new HashMap<>();
     }
 

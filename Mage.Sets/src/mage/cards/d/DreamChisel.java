@@ -20,7 +20,7 @@ public final class DreamChisel extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
     }
 
     public DreamChisel(UUID ownerId, CardSetInfo setInfo) {

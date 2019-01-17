@@ -23,7 +23,7 @@ public final class MishrasSelfReplicator extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 
     static {
-        filter.add(new HistoricPredicate());
+        filter.add(HistoricPredicate.instance);
     }
 
     public MishrasSelfReplicator(UUID ownerId, CardSetInfo setInfo) {
@@ -37,7 +37,7 @@ public final class MishrasSelfReplicator extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenCopySourceEffect()
                         .setText("create a token that's a copy of {this}. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new ManaCostsImpl("{1}")), filter, true));
+                new ManaCostsImpl("{1}")), filter, false));
 
     }
 

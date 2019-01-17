@@ -26,11 +26,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class NazahnReveredBladesmith extends CardImpl {
@@ -38,7 +38,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
     private static final FilterControlledCreaturePermanent equippedFilter = new FilterControlledCreaturePermanent("equipped creature you control");
 
     static {
-        equippedFilter.add(new EquippedPredicate());
+        equippedFilter.add(EquippedPredicate.instance);
         equippedFilter.add(new ControllerPredicate(TargetController.YOU));
     }
 
@@ -65,23 +65,8 @@ public final class NazahnReveredBladesmith extends CardImpl {
         // Whenever an equipped creature you control attacks, you may tap target creature defending player controls.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(new NazahnTapEffect(), true, equippedFilter, true);
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
+        ability.setTargetAdjuster(NazahnReveredBladesmithAdjuster.instance);
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof AttacksCreatureYouControlTriggeredAbility) {
-            FilterCreaturePermanent filterDefender = new FilterCreaturePermanent("creature defending player controls");
-            for (Effect effect : ability.getEffects()) {
-                if (effect instanceof NazahnTapEffect) {
-                    filterDefender.add(new ControllerIdPredicate(game.getCombat().getDefendingPlayerId(effect.getTargetPointer().getFirst(game, ability), game)));
-                    break;
-                }
-            }
-            ability.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filterDefender);
-            ability.addTarget(target);
-        }
     }
 
     public NazahnReveredBladesmith(final NazahnReveredBladesmith card) {
@@ -91,6 +76,24 @@ public final class NazahnReveredBladesmith extends CardImpl {
     @Override
     public NazahnReveredBladesmith copy() {
         return new NazahnReveredBladesmith(this);
+    }
+}
+
+enum NazahnReveredBladesmithAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        FilterCreaturePermanent filterDefender = new FilterCreaturePermanent("creature defending player controls");
+        for (Effect effect : ability.getEffects()) {
+            if (effect instanceof NazahnTapEffect) {
+                filterDefender.add(new ControllerIdPredicate(game.getCombat().getDefendingPlayerId(effect.getTargetPointer().getFirst(game, ability), game)));
+                break;
+            }
+        }
+        ability.getTargets().clear();
+        TargetCreaturePermanent target = new TargetCreaturePermanent(filterDefender);
+        ability.addTarget(target);
     }
 }
 

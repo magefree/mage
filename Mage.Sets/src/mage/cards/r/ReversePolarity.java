@@ -46,7 +46,7 @@ class ReversePolarityAmount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
-        ReversePolarityWatcher watcher = (ReversePolarityWatcher) game.getState().getWatchers().get(ReversePolarityWatcher.class.getSimpleName());
+        ReversePolarityWatcher watcher = game.getState().getWatcher(ReversePolarityWatcher.class);
         if(watcher != null) {
             return watcher.getArtifactDamageReceivedThisTurn(source.getControllerId()) * 2;
         }

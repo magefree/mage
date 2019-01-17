@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -19,14 +17,15 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class BurningTreeShaman extends CardImpl {
 
     public BurningTreeShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
         this.subtype.add(SubType.CENTAUR, SubType.SHAMAN);
 
         this.power = new MageInt(3);
@@ -49,7 +48,7 @@ public final class BurningTreeShaman extends CardImpl {
 class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     BurningTreeShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(1), false, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(1), true, "that player", true));
     }
 
     BurningTreeShamanTriggeredAbility(final BurningTreeShamanTriggeredAbility ability) {

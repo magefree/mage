@@ -67,7 +67,7 @@ class OvermasterEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get(OvermasterWatcher.class.getSimpleName(), source.getControllerId());
+        OvermasterWatcher watcher = game.getState().getWatcher(OvermasterWatcher.class, source.getControllerId());
             if (watcher != null) {
                 watcher.setReady();
             }
@@ -95,7 +95,7 @@ class OvermasterEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get(OvermasterWatcher.class.getSimpleName(), source.getControllerId());
+        OvermasterWatcher watcher = game.getState().getWatcher(OvermasterWatcher.class, source.getControllerId());
         return spell != null && watcher != null && watcher.isUncounterable(spell.getId());
     }
 }
@@ -106,7 +106,7 @@ class OvermasterWatcher extends Watcher {
     protected UUID uncounterableSpell;
 
     OvermasterWatcher() {
-        super(OvermasterWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(OvermasterWatcher.class, WatcherScope.PLAYER);
     }
 
     OvermasterWatcher(final OvermasterWatcher watcher) {

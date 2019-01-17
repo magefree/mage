@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.DoIfClashWonEffect;
@@ -12,24 +10,25 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class Ringskipper extends CardImpl {
 
     public Ringskipper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //Flying
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        //When {this} is put into graveyard from play, clash with an opponent. If you win return {this} to its owner's hand 
+        // When {this} is put into graveyard from play, clash with an opponent. If you win return {this} to its owner's hand
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfClashWonEffect(new ReturnToHandSourceEffect())));
     }
 

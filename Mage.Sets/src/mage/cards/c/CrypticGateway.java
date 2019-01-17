@@ -39,7 +39,7 @@ public final class CrypticGateway extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     TargetControlledPermanent target;
@@ -70,7 +70,7 @@ class CrypticGatewayCost extends CostImpl {
     TargetControlledPermanent target;
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public CrypticGatewayCost(TargetControlledPermanent target) {
@@ -87,7 +87,7 @@ class CrypticGatewayCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         int numTargets = 0;
         while (numTargets < 2 && target.choose(Outcome.Tap, controllerId, sourceId, game)) {
-            for (UUID targetId : (List<UUID>) target.getTargets()) {
+            for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
                     return false;

@@ -95,11 +95,6 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public Effects getEffects(Game game, EffectType effectType) {
-        return super.getEffects(game, effectType);
-    }
-
-    @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         if (playerId.equals(caster)) {
             Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());

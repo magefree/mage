@@ -36,7 +36,7 @@ public final class AthreosGodOfPassage extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you own");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 

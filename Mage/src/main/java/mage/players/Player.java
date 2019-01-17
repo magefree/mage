@@ -1,7 +1,5 @@
 package mage.players;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -38,6 +36,9 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -83,6 +84,8 @@ public interface Player extends MageItem, Copyable<Player> {
     int gainLife(int amount, Game game, Ability source);
 
     int gainLife(int amount, Game game, UUID sourceId);
+
+    int damage(int damage, UUID sourceId, Game game);
 
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 
@@ -392,9 +395,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
-    boolean flipCoin(Game game);
+    boolean flipCoin(Ability source, Game game, boolean winnable);
 
-    boolean flipCoin(Game game, ArrayList<UUID> appliedEffects);
+    boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects);
 
     int rollDice(Game game, int numSides);
 

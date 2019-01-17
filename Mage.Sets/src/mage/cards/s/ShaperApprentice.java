@@ -28,7 +28,7 @@ public final class ShaperApprentice extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.MERFOLK));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ShaperApprentice(UUID ownerId, CardSetInfo setInfo) {

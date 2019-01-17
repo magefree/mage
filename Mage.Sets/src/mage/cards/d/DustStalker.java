@@ -28,8 +28,8 @@ public final class DustStalker extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("if you control no other colorless creatures");
 
     static {
-        filter.add(new AnotherPredicate());
-        filter.add(new ColorlessPredicate());
+        filter.add(AnotherPredicate.instance);
+        filter.add(ColorlessPredicate.instance);
     }
 
     public DustStalker(UUID ownerId, CardSetInfo setInfo) {

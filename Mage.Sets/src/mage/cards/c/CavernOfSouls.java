@@ -197,7 +197,7 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get(CavernOfSoulsWatcher.class.getSimpleName(), source.getSourceId());
+        CavernOfSoulsWatcher watcher = game.getState().getWatcher(CavernOfSoulsWatcher.class, source.getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
         return spell != null && watcher != null && watcher.spellCantBeCountered(spell.getId());
     }

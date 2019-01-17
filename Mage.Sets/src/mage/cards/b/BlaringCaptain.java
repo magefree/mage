@@ -23,7 +23,7 @@ public final class BlaringCaptain extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "attacking Warriors");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public BlaringCaptain(UUID ownerId, CardSetInfo setInfo) {

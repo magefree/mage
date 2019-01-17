@@ -24,7 +24,7 @@ public final class MaraudingBoneslasher extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public MaraudingBoneslasher(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,7 @@ public final class BondOfAgony extends CardImpl {
     public BondOfAgony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");
 
-        DynamicValue xValue = new ManacostVariableValue();
+        DynamicValue xValue = ManacostVariableValue.instance;
 
         // As an additional cost to cast Bond of Agony, pay X life.
         // magenoxx: here we don't use PayVariableLifeCost as {X} shouldn't actually be announced

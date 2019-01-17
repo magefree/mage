@@ -32,7 +32,7 @@ public final class BloodhuskRitualist extends CardImpl {
         this.addAbility(new MultikickerAbility("{B}"));
 
         // When Bloodhusk Ritualist enters the battlefield, target opponent discards a card for each time it was kicked.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(new MultikickerCount()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(MultikickerCount.instance));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

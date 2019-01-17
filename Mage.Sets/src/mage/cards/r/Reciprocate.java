@@ -53,7 +53,7 @@ class ReciprocateTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), source.getControllerId());
+        PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, source.getControllerId());
         if (watcher != null && watcher.hasSourceDoneDamage(id, game)) {
             return super.canTarget(id, source, game);
         }
@@ -64,7 +64,7 @@ class ReciprocateTarget extends TargetPermanent {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), sourceControllerId);
+        PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, sourceControllerId);
         for (UUID targetId : availablePossibleTargets) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null && watcher != null && watcher.hasSourceDoneDamage(targetId, game)) {
@@ -83,7 +83,7 @@ class ReciprocateTarget extends TargetPermanent {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         if(targetSource != null) {
-            PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), sourceControllerId);
+            PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, sourceControllerId);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
                         && watcher != null && watcher.hasSourceDoneDamage(permanent.getId(), game)) {

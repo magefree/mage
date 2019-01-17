@@ -27,7 +27,7 @@ public final class MorkrutNecropod extends CardImpl {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.CREATURE), 
                 new CardTypePredicate(CardType.LAND)));        
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public MorkrutNecropod(UUID ownerId, CardSetInfo setInfo) {

@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.condition.common.MyMainPhaseCondition;
+import mage.abilities.condition.common.AddendumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawDiscardTargetEffect;
 import mage.cards.CardImpl;
@@ -24,7 +24,7 @@ public final class CarefulConsideration extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawDiscardTargetEffect(4,2),
                 new DrawDiscardTargetEffect(4,3),
-                MyMainPhaseCondition.instance,
+                AddendumCondition.instance,
                 "Target player draws four cards, then discards three cards. If you cast this spell during your main phase, instead that player draws four cards, then discards two cards"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

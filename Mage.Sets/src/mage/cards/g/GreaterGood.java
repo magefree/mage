@@ -26,7 +26,7 @@ public final class GreaterGood extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.
-        Effect effect = new DrawCardSourceControllerEffect(new SacrificeCostCreaturesPower());
+        Effect effect = new DrawCardSourceControllerEffect(SacrificeCostCreaturesPower.instance);
         effect.setText("Draw cards equal to the sacrificed creature's power");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect,
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));

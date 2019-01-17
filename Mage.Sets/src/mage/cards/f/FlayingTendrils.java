@@ -67,7 +67,7 @@ class FlayingTendrilsReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null) {
-            return controller.moveCards((Card) permanent, Zone.EXILED, source, game);
+            return controller.moveCards(permanent, Zone.EXILED, source, game);
         }
         return false;
     }

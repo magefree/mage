@@ -23,7 +23,7 @@ public final class PiannaNomadCaptain extends CardImpl {
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
     
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public PiannaNomadCaptain(UUID ownerId, CardSetInfo setInfo) {

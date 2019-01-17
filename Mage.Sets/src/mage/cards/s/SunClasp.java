@@ -71,7 +71,7 @@ class SunClaspReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null && permanent.getAttachedTo() != null) {
             Permanent enchantedCreature = game.getPermanent(permanent.getAttachedTo());

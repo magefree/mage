@@ -120,7 +120,7 @@ class MoveTargetAuraEffect extends OneShotEffect {
         }
 
         FilterPermanent filter = new FilterPermanent("another permanent " + enchantment.getLogName() + " can enchant");
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new PermanentCanBeAttachedToPredicate(enchantment));
         Target target = new TargetPermanent(filter);
         target.setNotTarget(true);

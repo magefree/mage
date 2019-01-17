@@ -35,7 +35,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.";
@@ -54,7 +54,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
 
         // {G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
         ManaEffect manaEffect = new AddManaInAnyCombinationEffect(
-                new GreatestPowerAmongControlledCreaturesValue(), rule2,
+                GreatestPowerAmongControlledCreaturesValue.instance, rule2,
                 ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());

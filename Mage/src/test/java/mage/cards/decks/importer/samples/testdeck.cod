@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cockatrice_deck version="1">
+    <deckname>Deck Name </deckname>
+    <comments>Some comments in here.</comments>
+    <zone name="main">
+        <card number="12" name="Forest"/>
+        <card number="101" price="0" name="Razorverge Thicket"/>
+        <card price="0" name="Avacyn's Pilgrim"/>
+        <card number="1" price="0" name="@#$NOT A REAL CARD NAME@#$"/>
+    </zone>
+    <zone name="side">
+        <card number="3" price="0" name="War Priest of Thune"/>
+    </zone>
+</cockatrice_deck>

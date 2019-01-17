@@ -15,7 +15,7 @@ import mage.cards.repository.CardRepository;
  *
  * @author North
  */
-public class DckDeckImporter extends DeckImporter {
+public class DckDeckImporter extends PlainTextDeckImporter {
 
     private static final Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([^]:]+):([^]:]+)\\]\\s*(.*)\\s*$");
 

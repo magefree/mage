@@ -31,7 +31,7 @@ public final class GreaterAuramancy extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
         filter2.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(new CardTypePredicate(CardType.CREATURE));
-        filter2.add(new EnchantedPredicate());
+        filter2.add(EnchantedPredicate.instance);
     }
 
     public GreaterAuramancy(UUID ownerId, CardSetInfo setInfo) {

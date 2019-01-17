@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -22,8 +21,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ArchmageAscension extends CardImpl {
@@ -74,7 +74,7 @@ class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent archmage = game.getPermanent(super.getSourceId());
         CardsAmountDrawnThisTurnWatcher watcher
-                = (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.class.getSimpleName());
+                = game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
         return archmage != null && watcher != null && watcher.getAmountCardsDrawn(this.getControllerId()) >= 2;
     }
 

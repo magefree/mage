@@ -74,7 +74,7 @@ class VeneratedLoxodonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        VeneratedLoxodonWatcher watcher = (VeneratedLoxodonWatcher) game.getState().getWatchers().get(VeneratedLoxodonWatcher.class.getSimpleName());
+        VeneratedLoxodonWatcher watcher = game.getState().getWatcher(VeneratedLoxodonWatcher.class);
         if (watcher != null) {
             MageObjectReference mor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter() - 1, game); // -1 because of spell on the stack
             Set<MageObjectReference> creatures = watcher.getConvokingCreatures(mor);
@@ -97,7 +97,7 @@ class VeneratedLoxodonWatcher extends Watcher {
     private final Map<MageObjectReference, Set<MageObjectReference>> convokingCreatures = new HashMap<>();
 
     public VeneratedLoxodonWatcher() {
-        super(VeneratedLoxodonWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(VeneratedLoxodonWatcher.class, WatcherScope.GAME);
     }
 
     public VeneratedLoxodonWatcher(final VeneratedLoxodonWatcher watcher) {

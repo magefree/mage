@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.condition.common.MyMainPhaseCondition;
+import mage.abilities.condition.common.AddendumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ public final class SulfurousBlast extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageEverythingEffect(3),
                 new DamageEverythingEffect(2),
-                MyMainPhaseCondition.instance,
+                AddendumCondition.instance,
                 "Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead"));
     }
 

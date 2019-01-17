@@ -25,7 +25,7 @@ public final class FireCovenant extends CardImpl {
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));
 
         // Fire Covenant deals X damage divided as you choose among any number of target creatures.
-        DynamicValue xValue = new GetXValue();
+        DynamicValue xValue = GetXValue.instance;
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));
     }

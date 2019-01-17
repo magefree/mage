@@ -7,7 +7,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
@@ -26,7 +25,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
@@ -54,10 +52,6 @@ public final class ThiefOfSanity extends CardImpl {
 
         // Whenever Thief of Sanity deals combat damage to a player, look at the top three cards of that player's library, exile one of them face down, then put the rest into their graveyard. For as long as that card remains exiled, you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ThiefOfSanityEffect(), false, true));
-
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new ThiefOfSanityLookEffect());
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
     }
 
     public ThiefOfSanity(final ThiefOfSanity card) {
@@ -74,7 +68,8 @@ class ThiefOfSanityEffect extends OneShotEffect {
 
     public ThiefOfSanityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "look at the top three cards of that player's library, exile one of them face down, then put the rest into their graveyard. For as long as that card remains exiled, you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it";
+        this.staticText = "look at the top three cards of that player's library, exile one of them face down, then put the rest into their graveyard. "
+                + "For as long as that card remains exiled, you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it";
     }
 
     public ThiefOfSanityEffect(final ThiefOfSanityEffect effect) {
@@ -102,7 +97,7 @@ class ThiefOfSanityEffect extends OneShotEffect {
                     // move card to exile
                     UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                     card.setFaceDown(true, game);
-                    if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName())) {
+                    if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName() + " (" + controller.getName() + ")")) {
                         card.setFaceDown(true, game);
                         Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(ThiefOfSanity.VALUE_PREFIX + source.getSourceId().toString());
                         if (exileZones == null) {
@@ -110,12 +105,17 @@ class ThiefOfSanityEffect extends OneShotEffect {
                             game.getState().setValue(ThiefOfSanity.VALUE_PREFIX + source.getSourceId().toString(), exileZones);
                         }
                         exileZones.add(exileZoneId);
+                        // rule information: https://blogs.magicjudges.org/rulestips/2018/11/thief-of-sanity-and-control-changing/
                         // allow to cast the card
-                        ContinuousEffect effect = new ThiefOfSanityCastFromExileEffect();
+                        ContinuousEffect effect = new ThiefOfSanityCastFromExileEffect(controller.getId());
                         effect.setTargetPointer(new FixedTarget(card.getId(), game));
                         game.addEffect(effect, source);
                         // and you may spend mana as though it were mana of any color to cast it
-                        effect = new ThiefOfSanitySpendAnyManaEffect();
+                        effect = new ThiefOfSanitySpendAnyManaEffect(controller.getId());
+                        effect.setTargetPointer(new FixedTarget(card.getId(), game));
+                        game.addEffect(effect, source);
+                        // For as long as that card remains exiled, you may look at it
+                        effect = new ThiefOfSanityLookEffect(controller.getId());
                         effect.setTargetPointer(new FixedTarget(card.getId(), game));
                         game.addEffect(effect, source);
                     }
@@ -132,13 +132,17 @@ class ThiefOfSanityEffect extends OneShotEffect {
 
 class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
 
-    public ThiefOfSanityCastFromExileEffect() {
+    final UUID authorizedPlayerId;
+
+    public ThiefOfSanityCastFromExileEffect(UUID authorizedPlayerId) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
+        this.authorizedPlayerId = authorizedPlayerId;
+        staticText = "For as long as that card remains exiled, you may cast it";
     }
 
     public ThiefOfSanityCastFromExileEffect(final ThiefOfSanityCastFromExileEffect effect) {
         super(effect);
+        this.authorizedPlayerId = effect.authorizedPlayerId;
     }
 
     @Override
@@ -153,11 +157,11 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        if (targetId == null) {
-            this.discard();
-        } else if (objectId.equals(targetId)
-                && affectedControllerId.equals(source.getControllerId())) {
+        UUID cardId = getTargetPointer().getFirst(game, source);
+        if (cardId == null) {
+            this.discard(); // card is no longer in the origin zone, effect can be discarded
+        } else if (objectId.equals(cardId)
+                && affectedControllerId.equals(authorizedPlayerId)) {
             Card card = game.getCard(objectId);
             // TODO: Allow to cast Zoetic Cavern face down
             return card != null && !card.isLand();
@@ -168,13 +172,17 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
 
 class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
-    public ThiefOfSanitySpendAnyManaEffect() {
+    final UUID authorizedPlayerId;
+
+    public ThiefOfSanitySpendAnyManaEffect(UUID authorizedPlayerId) {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast it";
+        this.authorizedPlayerId = authorizedPlayerId;
+        staticText = "For as long as that card remains exiled, you may spend mana as though it were mana of any color to cast it";
     }
 
     public ThiefOfSanitySpendAnyManaEffect(final ThiefOfSanitySpendAnyManaEffect effect) {
         super(effect);
+        this.authorizedPlayerId = effect.authorizedPlayerId;
     }
 
     @Override
@@ -192,8 +200,8 @@ class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
 
-            if (affectedControllerId.equals(source.getControllerId())) {
-                // if the card moved from exile to spell the zone change counter is increased by 1
+            if (affectedControllerId.equals(authorizedPlayerId)) {
+                // if the card moved from exile to stack the zone change counter is increased by 1
                 if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
                     return true;
                 }
@@ -214,13 +222,17 @@ class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
 
 class ThiefOfSanityLookEffect extends AsThoughEffectImpl {
 
-    public ThiefOfSanityLookEffect() {
+    final UUID authorizedPlayerId;
+
+    public ThiefOfSanityLookEffect(UUID authorizedPlayerId) {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at the cards exiled with {this}";
+        this.authorizedPlayerId = authorizedPlayerId;
+        staticText = "For as long as that card remains exiled, you may look at it";
     }
 
     public ThiefOfSanityLookEffect(final ThiefOfSanityLookEffect effect) {
         super(effect);
+        this.authorizedPlayerId = effect.authorizedPlayerId;
     }
 
     @Override
@@ -235,26 +247,11 @@ class ThiefOfSanityLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
-            Player controller = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = source.getSourceObject(game);
-            if (controller != null && sourceObject != null) {
-                Card card = game.getCard(objectId);
-                if (card != null && card.isFaceDown(game)) {
-                    Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(ThiefOfSanity.VALUE_PREFIX + source.getSourceId().toString());
-                    if (exileZones != null) {
-                        for (ExileZone exileZone : game.getExile().getExileZones()) {
-                            if (exileZone.contains(objectId)) {
-                                if (!exileZones.contains(exileZone.getId())) {
-                                    return false;
-                                }
-                            }
-                        }
-                        return true;
-                    }
-                }
-            }
+        UUID cardId = getTargetPointer().getFirst(game, source);
+        if (cardId == null) {
+            this.discard(); // card is no longer in the origin zone, effect can be discarded
         }
-        return false;
+        return affectedControllerId.equals(authorizedPlayerId)
+                && objectId.equals(cardId);
     }
 }

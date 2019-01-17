@@ -1,14 +1,8 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -18,14 +12,15 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Nightsnare extends CardImpl {
 
     public Nightsnare(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -57,11 +52,11 @@ class NightsnareDiscardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
         if (player != null && controller != null) {
             if (!player.getHand().isEmpty()) {
                 Cards revealedCards = new CardsImpl();
                 revealedCards.addAll(player.getHand());
+                Card sourceCard = game.getCard(source.getSourceId());
                 player.revealCards(sourceCard != null ? sourceCard.getIdName() : "Discard", revealedCards, game);
                 // You may choose a nonland card from it.
                 if (controller.chooseUse(outcome, "Choose a a card to discard? (Otherwise " + player.getLogName() + " has to discard 2 cards).", source, game)) {

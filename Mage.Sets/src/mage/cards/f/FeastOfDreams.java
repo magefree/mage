@@ -22,7 +22,7 @@ public final class FeastOfDreams extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new EnchantedPredicate(),
+                EnchantedPredicate.instance,
                 new CardTypePredicate(CardType.ENCHANTMENT)
         ));
     }

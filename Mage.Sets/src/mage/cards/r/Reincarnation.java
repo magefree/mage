@@ -143,6 +143,7 @@ class ReincarnationDelayedEffect extends OneShotEffect {
                 FilterCreatureCard filter = new FilterCreatureCard("a creature card from " + player.getName() + "'s graveyard");
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Target targetCreature = new TargetCardInGraveyard(filter);
+                targetCreature.setNotTarget(true);
                 if (targetCreature.canChoose(source.getSourceId(), controller.getId(), game)
                         && controller.chooseTarget(outcome, targetCreature, source, game)) {
                     Card card = game.getCard(targetCreature.getFirstTarget());

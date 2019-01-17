@@ -23,8 +23,8 @@ public final class SwallowingPlague extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
         this.subtype.add(SubType.ARCANE);
 
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addEffect(new GainLifeEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

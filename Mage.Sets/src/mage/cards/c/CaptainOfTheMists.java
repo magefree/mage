@@ -31,7 +31,7 @@ public final class CaptainOfTheMists extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 

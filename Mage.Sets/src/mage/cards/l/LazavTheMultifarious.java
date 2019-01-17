@@ -110,7 +110,7 @@ class LazavTheMultifariousEffect extends OneShotEffect {
                 && lazavTheMultifarious != null) {
             Card copyFromCard = game.getCard(source.getFirstTarget());
             if (copyFromCard != null) {
-                newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
+                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 ApplyToPermanent applier = new LazavTheMultifariousApplier();
                 applier.apply(game, newBluePrint, source, lazavTheMultifarious.getId());

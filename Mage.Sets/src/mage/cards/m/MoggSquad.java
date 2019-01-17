@@ -27,7 +27,7 @@ public final class MoggSquad extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public MoggSquad(UUID ownerId, CardSetInfo setInfo) {

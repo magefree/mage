@@ -28,7 +28,7 @@ public final class Hurricane extends CardImpl {
 
 
         // Hurricane deals X damage to each creature with flying and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.instance, filter));
     }
 
     public Hurricane(final Hurricane card) {

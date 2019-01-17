@@ -29,7 +29,7 @@ public final class RollingEarthquake extends CardImpl {
 
 
         // Rolling Earthquake deals X damage to each creature without horsemanship and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.instance, filter));
     }
 
     public RollingEarthquake(final RollingEarthquake card) {

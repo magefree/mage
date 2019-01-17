@@ -24,7 +24,7 @@ public final class DragonArch extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a multicolored creature card");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public DragonArch(UUID ownerId, CardSetInfo setInfo) {

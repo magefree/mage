@@ -41,10 +41,10 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.CAT));
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter2.add(new SubtypePredicate(SubType.CAT));
         filter2.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(new AnotherPredicate());
+        filter2.add(AnotherPredicate.instance);
     }
 
     public ArahboRoarOfTheWorld(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@ public final class Cryptoplasm extends CardImpl {
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public Cryptoplasm(UUID ownerId, CardSetInfo setInfo) {

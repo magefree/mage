@@ -28,7 +28,7 @@ public final class MindWarp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");
 
         // Look at target player's hand and choose X cards from it. That player discards those cards.
-        this.getSpellAbility().addEffect(new MindWarpEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new MindWarpEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

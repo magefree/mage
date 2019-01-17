@@ -1,8 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -20,6 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -113,11 +113,9 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     List<UUID> imprinted = permanent.getImprinted();
-                    if (!imprinted.isEmpty()) {
+                    if (imprinted != null && !imprinted.isEmpty()) {
                         Card imprintedCard = game.getCard(imprinted.get(0));
-                        if (imprintedCard != null && imprintedCard.shareTypes(sourceCard)) {
-                            return true;
-                        }
+                        return imprintedCard != null && imprintedCard.shareTypes(sourceCard);
                     }
                 }
             }

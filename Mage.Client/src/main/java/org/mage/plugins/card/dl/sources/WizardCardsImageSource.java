@@ -452,7 +452,7 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {

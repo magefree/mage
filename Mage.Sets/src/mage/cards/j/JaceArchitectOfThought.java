@@ -198,7 +198,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
 
             boolean pileChoice = player.choosePile(Outcome.Neutral, "Choose a pile to to put into your hand.",
                     new ArrayList<>(pile1.getCards(game)),
-                    new ArrayList<>(allCards.getCards(game)), game);
+                    new ArrayList<>(pile2.getCards(game)), game);
             game.informPlayers(player.getLogName() + " chose pile" + (pileChoice ? "1" : "2"));
             player.moveCards(pileChoice ? pile1 : pile2, Zone.HAND, source, game);
             player.putCardsOnBottomOfLibrary(pileChoice ? pile2 : pile1, game, source, true);

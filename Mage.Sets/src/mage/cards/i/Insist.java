@@ -65,7 +65,7 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        InsistWatcher watcher = (InsistWatcher) game.getState().getWatchers().get(InsistWatcher.class.getSimpleName(), source.getControllerId());
+        InsistWatcher watcher = game.getState().getWatcher(InsistWatcher.class, source.getControllerId());
         if (watcher != null) {
             watcher.setReady();
         }
@@ -93,7 +93,7 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        InsistWatcher watcher = (InsistWatcher) game.getState().getWatchers().get(InsistWatcher.class.getSimpleName(), source.getControllerId());
+        InsistWatcher watcher = game.getState().getWatcher(InsistWatcher.class, source.getControllerId());
         return spell != null && watcher != null && watcher.isUncounterable(spell.getId());
     }
 }
@@ -104,7 +104,7 @@ class InsistWatcher extends Watcher {
     protected UUID uncounterableSpell;
 
     InsistWatcher() {
-        super(InsistWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(InsistWatcher.class, WatcherScope.PLAYER);
     }
 
     InsistWatcher(final InsistWatcher watcher) {

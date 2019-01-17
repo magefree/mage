@@ -27,7 +27,7 @@ public final class KiAdiMundi extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

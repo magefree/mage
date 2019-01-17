@@ -1,6 +1,6 @@
 package mage.client.table;
 
-import mage.cards.decks.importer.DeckImporterUtil;
+import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
@@ -1263,8 +1263,8 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 
-            SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, DeckImporterUtil.importDeck("test.dck"), "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", PlayerType.COMPUTER_MAD, 5, DeckImporterUtil.importDeck("test.dck"), "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, DeckImporter.importDeckFromFile("test.dck"), "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", PlayerType.COMPUTER_MAD, 5, DeckImporter.importDeckFromFile("test.dck"), "");
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
             handleError(ex);

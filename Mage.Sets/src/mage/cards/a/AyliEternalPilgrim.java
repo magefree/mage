@@ -45,7 +45,7 @@ public final class AyliEternalPilgrim extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // {1}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.
-        Effect effect = new GainLifeEffect(new SacrificeCostCreaturesToughness());
+        Effect effect = new GainLifeEffect(SacrificeCostCreaturesToughness.instance);
         effect.setText("You gain life equal to the sacrificed creature's toughness");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));

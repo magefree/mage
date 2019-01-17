@@ -67,7 +67,7 @@ class SearingBlazeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        LandfallWatcher watcher = (LandfallWatcher) game.getState().getWatchers().get(LandfallWatcher.class.getSimpleName());
+        LandfallWatcher watcher = game.getState().getWatcher(LandfallWatcher.class);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         int damage = 1;
         if (watcher != null && watcher.landPlayed(source.getControllerId())) {

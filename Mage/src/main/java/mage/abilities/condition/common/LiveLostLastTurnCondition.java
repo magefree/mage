@@ -17,9 +17,9 @@ public enum LiveLostLastTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
+        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         if (watcher != null) {
-            return watcher.getLiveLostLastTurn(source.getControllerId()) > 0;
+            return watcher.getLifeLostLastTurn(source.getControllerId()) > 0;
         } else {
             WatcherUtils.logMissingWatcher(game, source, PlayerLostLifeWatcher.class, this.getClass());
         }

@@ -23,7 +23,7 @@ public final class DevilsPlay extends CardImpl {
 
 
         // Devil's Play deals X damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Flashback {X}{R}{R}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{R}{R}{R}"), TimingRule.SORCERY));

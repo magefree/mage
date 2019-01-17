@@ -20,7 +20,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.MenuSelectionManager;
 import javax.swing.event.ChangeListener;
-import mage.cards.decks.importer.DeckImporterUtil;
+
+import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
@@ -569,7 +570,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
-        SessionHandler.cheat(gameId, playerId, DeckImporterUtil.importDeck("cheat.dck"));
+        SessionHandler.cheat(gameId, playerId, DeckImporter.importDeckFromFile("cheat.dck"));
     }
 
     public boolean isSmallMode() {

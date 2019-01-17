@@ -42,7 +42,7 @@ public final class GateToTheAfterlife extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public GateToTheAfterlife(UUID ownerId, CardSetInfo setInfo) {

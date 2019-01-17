@@ -29,8 +29,8 @@ public final class BelbesArmor extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(
-                        new MultipliedValue(new ManacostVariableValue(), -1),
-                        new ManacostVariableValue(),
+                        new MultipliedValue(ManacostVariableValue.instance, -1),
+                        ManacostVariableValue.instance,
                         Duration.EndOfTurn
                 ),
                 new ManaCostsImpl("{X}"));

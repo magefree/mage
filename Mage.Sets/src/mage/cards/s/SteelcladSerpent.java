@@ -51,7 +51,7 @@ class SteelcladSerpentEffect extends RestrictionEffect {
     
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public SteelcladSerpentEffect() {

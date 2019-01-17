@@ -50,7 +50,7 @@ class HarvestSeasonEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("tapped creature you control");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     HarvestSeasonEffect() {

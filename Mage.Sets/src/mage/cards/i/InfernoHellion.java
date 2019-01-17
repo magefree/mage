@@ -66,8 +66,8 @@ enum InfernoHellionCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AttackedThisTurnWatcher watcherAttacked = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
-        BlockedThisTurnWatcher watcherBlocked = (BlockedThisTurnWatcher) game.getState().getWatchers().get(BlockedThisTurnWatcher.class.getSimpleName());
+        AttackedThisTurnWatcher watcherAttacked = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        BlockedThisTurnWatcher watcherBlocked = game.getState().getWatcher(BlockedThisTurnWatcher.class);
         MageObjectReference mor = new MageObjectReference(source.getSourceId(), game);
         if (watcherAttacked == null || watcherBlocked == null) {
             return false;

@@ -70,7 +70,7 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
+            SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
             if (watcher != null) {
                 List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
                 if (spells != null && spells.size() == 1) {

@@ -72,7 +72,7 @@ class CrookedScalesEffect extends OneShotEffect {
             Cost cost;
             String message = "You lost the flip. Pay {3} to prevent your creature from being destroyed?";
             do {
-                if (controller.flipCoin(game)) {
+                if (controller.flipCoin(source, game, true)) {
                     if (theirGuy != null) {
                         theirGuy.destroy(controller.getId(), game, false);
                     }

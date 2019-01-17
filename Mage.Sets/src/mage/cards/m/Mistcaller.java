@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -8,21 +7,18 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CreatureWasCastWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Mistcaller extends CardImpl {
@@ -96,14 +92,14 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(event.getTargetId());
-            Object entersTransformed = game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + event.getTargetId());
-            if (entersTransformed instanceof Boolean && (Boolean) entersTransformed && card.getSecondCardFace() != null) {
-                card = card.getSecondCardFace();
-            }
-            if (card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
-                CreatureWasCastWatcher watcher = (CreatureWasCastWatcher) game.getState().getWatchers().get(CreatureWasCastWatcher.class.getSimpleName());
-                if (watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId())) {
-                    return true;
+            if (card != null) {
+                Object entersTransformed = game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + event.getTargetId());
+                if (entersTransformed instanceof Boolean && (Boolean) entersTransformed && card.getSecondCardFace() != null) {
+                    card = card.getSecondCardFace();
+                }
+                if (card != null && card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+                    CreatureWasCastWatcher watcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
+                    return watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId());
                 }
             }
         }

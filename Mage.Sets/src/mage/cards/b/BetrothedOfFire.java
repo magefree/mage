@@ -32,7 +32,7 @@ public final class BetrothedOfFire extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("an untapped creature");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public BetrothedOfFire(UUID ownerId, CardSetInfo setInfo) {

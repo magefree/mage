@@ -65,7 +65,7 @@ class TheBattleOfYavinEffect extends OneShotEffect {
             return false;
         }
 
-        int amount = (new ManacostVariableValue()).calculate(game, source, this);
+        int amount = (ManacostVariableValue.instance).calculate(game, source, this);
         if (amount > 0) {
             LinkedList<Permanent> sacrifices = new LinkedList<>();
 

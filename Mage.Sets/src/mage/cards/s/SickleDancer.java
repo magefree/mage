@@ -24,7 +24,7 @@ public final class SickleDancer extends CardImpl {
     private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "Warrior creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public SickleDancer(UUID ownerId, CardSetInfo setInfo) {

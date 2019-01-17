@@ -107,7 +107,7 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl implements Sou
                     break;
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        if (((ObjectColor) game.getState().getValue("opalTitanColor" + source.getSourceId())) != null) {
+                        if (game.getState().getValue("opalTitanColor" + source.getSourceId()) != null) {
                             for (ObjectColor color : ((ObjectColor) game.getState().getValue("opalTitanColor" + source.getSourceId())).getColors()) {
                                 if (!permanent.getAbilities().contains(ProtectionAbility.from(color))) {
                                     permanent.addAbility(ProtectionAbility.from(color));

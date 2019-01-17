@@ -28,7 +28,7 @@ public final class TownGossipmonger extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public TownGossipmonger(UUID ownerId, CardSetInfo setInfo) {

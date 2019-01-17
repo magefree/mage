@@ -1,9 +1,5 @@
-
 package mage.abilities.effects;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.constants.EffectType;
@@ -11,8 +7,11 @@ import mage.constants.Outcome;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class EffectImpl implements Effect {
@@ -23,7 +22,7 @@ public abstract class EffectImpl implements Effect {
     protected TargetPointer targetPointer = FirstTargetPointer.getInstance();
     protected String staticText = "";
     protected Map<String, Object> values;
-    protected boolean applyEffectsAfter = false;
+    protected String concatPrefix = ""; // combines multiple effects in text rule
 
     public EffectImpl(Outcome outcome) {
         this.id = UUID.randomUUID();
@@ -36,6 +35,7 @@ public abstract class EffectImpl implements Effect {
         this.staticText = effect.staticText;
         this.effectType = effect.effectType;
         this.targetPointer = effect.targetPointer.copy();
+        this.concatPrefix = effect.concatPrefix;
         if (effect.values != null) {
             values = new HashMap<>();
             Map<String, Object> map = effect.values;
@@ -43,7 +43,6 @@ public abstract class EffectImpl implements Effect {
                 values.put(entry.getKey(), entry.getValue());
             }
         }
-        this.applyEffectsAfter = effect.applyEffectsAfter;
     }
 
     @Override
@@ -111,5 +110,16 @@ public abstract class EffectImpl implements Effect {
             return null;
         }
         return values.get(key);
+    }
+
+    @Override
+    public Effect concatBy(String concatPrefix) {
+        this.concatPrefix = concatPrefix;
+        return this;
+    }
+
+    @Override
+    public String getConcatPrefix() {
+        return this.concatPrefix;
     }
 }

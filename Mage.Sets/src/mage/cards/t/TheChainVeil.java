@@ -139,7 +139,7 @@ enum TheChainVeilCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ActivatedLoyaltyAbilityWatcher watcher = (ActivatedLoyaltyAbilityWatcher) game.getState().getWatchers().get(ActivatedLoyaltyAbilityWatcher.class.getSimpleName());
+        ActivatedLoyaltyAbilityWatcher watcher = game.getState().getWatcher(ActivatedLoyaltyAbilityWatcher.class);
         if (watcher != null) {
             if (!watcher.activatedLoyaltyAbility(source.getControllerId())) {
                 return true;

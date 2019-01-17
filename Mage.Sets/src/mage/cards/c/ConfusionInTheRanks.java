@@ -1,10 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -22,9 +18,14 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author anonymous
  */
 public final class ConfusionInTheRanks extends CardImpl {
@@ -38,7 +39,6 @@ public final class ConfusionInTheRanks extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)
         ));
     }
-    private final UUID originalId;
 
     public ConfusionInTheRanks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
@@ -49,58 +49,59 @@ public final class ConfusionInTheRanks extends CardImpl {
                 new ExchangeControlTargetEffect(
                         Duration.EndOfGame,
                         "its controller chooses target permanent "
-                        + "another player controls that shares a card type with it. "
-                        + "Exchange control of those permanents"
+                                + "another player controls that shares a card type with it. "
+                                + "Exchange control of those permanents"
                 ),
                 filter, false, SetTargetPointer.PERMANENT, null
         );
         ability.addTarget(new TargetPermanent());
-        originalId = ability.getOriginalId();
+        ability.setTargetAdjuster(ConfusionInTheRanksAdjuster.instance);
         this.addAbility(ability);
     }
 
     public ConfusionInTheRanks(final ConfusionInTheRanks card) {
         super(card);
-        this.originalId = card.originalId;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            UUID enteringPermanentId = null;
-            for (Effect effect : ability.getEffects()) {
-                enteringPermanentId = effect.getTargetPointer().getFirst(game, ability);
-            }
-            if (enteringPermanentId == null) {
-                return;
-            }
-            Permanent enteringPermanent = game.getPermanent(enteringPermanentId);
-            if (enteringPermanent == null) {
-                return;
-            }
-            ability.getTargets().clear();
-            FilterPermanent filterTarget = new FilterPermanent();
-            String message = "";
-            filterTarget.add(Predicates.not(new ControllerIdPredicate(enteringPermanent.getControllerId())));
-            Set<CardTypePredicate> cardTypesPredicates = new HashSet<>(1);
-            for (CardType cardTypeEntering : enteringPermanent.getCardType()) {
-                cardTypesPredicates.add(new CardTypePredicate(cardTypeEntering));
-                if (!message.isEmpty()) {
-                    message += "or ";
-                }
-                message += cardTypeEntering.toString().toLowerCase(Locale.ENGLISH) + ' ';
-            }
-            filterTarget.add(Predicates.or(cardTypesPredicates));
-            message += "you don't control";
-            filterTarget.setMessage(message);
-            TargetPermanent target = new TargetPermanent(filterTarget);
-            target.setTargetController(enteringPermanent.getControllerId());
-            ability.getTargets().add(target);
-        }
     }
 
     @Override
     public ConfusionInTheRanks copy() {
         return new ConfusionInTheRanks(this);
+    }
+}
+
+enum ConfusionInTheRanksAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        UUID enteringPermanentId = null;
+        for (Effect effect : ability.getEffects()) {
+            enteringPermanentId = effect.getTargetPointer().getFirst(game, ability);
+        }
+        if (enteringPermanentId == null) {
+            return;
+        }
+        Permanent enteringPermanent = game.getPermanent(enteringPermanentId);
+        if (enteringPermanent == null) {
+            return;
+        }
+        ability.getTargets().clear();
+        FilterPermanent filterTarget = new FilterPermanent();
+        String message = "";
+        filterTarget.add(Predicates.not(new ControllerIdPredicate(enteringPermanent.getControllerId())));
+        Set<CardTypePredicate> cardTypesPredicates = new HashSet<>(1);
+        for (CardType cardTypeEntering : enteringPermanent.getCardType()) {
+            cardTypesPredicates.add(new CardTypePredicate(cardTypeEntering));
+            if (!message.isEmpty()) {
+                message += "or ";
+            }
+            message += cardTypeEntering.toString().toLowerCase(Locale.ENGLISH) + ' ';
+        }
+        filterTarget.add(Predicates.or(cardTypesPredicates));
+        message += "you don't control";
+        filterTarget.setMessage(message);
+        TargetPermanent target = new TargetPermanent(filterTarget);
+        target.setTargetController(enteringPermanent.getControllerId());
+        ability.getTargets().add(target);
     }
 }

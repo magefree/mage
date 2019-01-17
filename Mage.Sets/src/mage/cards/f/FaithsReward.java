@@ -57,7 +57,7 @@ class FaithsRewardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FaithsRewardWatcher watcher = (FaithsRewardWatcher) game.getState().getWatchers().get(FaithsRewardWatcher.class.getSimpleName());
+        FaithsRewardWatcher watcher = game.getState().getWatcher(FaithsRewardWatcher.class);
         if (watcher != null) {
             for (UUID id : watcher.cards) {
                 Card c = game.getCard(id);
@@ -80,7 +80,7 @@ class FaithsRewardWatcher extends Watcher {
     List<UUID> cards = new ArrayList<>();
 
     public FaithsRewardWatcher() {
-        super(FaithsRewardWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(FaithsRewardWatcher.class, WatcherScope.GAME);
     }
 
     public FaithsRewardWatcher(final FaithsRewardWatcher watcher) {

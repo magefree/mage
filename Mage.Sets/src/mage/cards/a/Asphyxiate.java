@@ -20,7 +20,7 @@ public final class Asphyxiate extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
     
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
     
     public Asphyxiate(UUID ownerId, CardSetInfo setInfo) {

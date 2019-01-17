@@ -29,7 +29,7 @@ public final class Lavalanche extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}{G}");
 
         // Lavalanche deals X damage to target player and each creature he or she controls.
-        this.getSpellAbility().addEffect(new LavalancheEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new LavalancheEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 
     }

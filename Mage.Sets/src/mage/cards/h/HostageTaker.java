@@ -41,7 +41,7 @@ public final class HostageTaker extends CardImpl {
     private final static FilterPermanent filter = new FilterPermanent("another target artifact or creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)));

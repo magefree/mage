@@ -29,7 +29,7 @@ public final class FlameKinWarScout extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public FlameKinWarScout(UUID ownerId, CardSetInfo setInfo) {

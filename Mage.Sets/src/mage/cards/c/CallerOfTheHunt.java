@@ -1,14 +1,15 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
 import mage.cards.CardImpl;
@@ -21,8 +22,9 @@ import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class CallerOfTheHunt extends CardImpl {
@@ -34,13 +36,23 @@ public final class CallerOfTheHunt extends CardImpl {
 
         // As an additional cost to cast Caller of the Hunt, choose a creature type.
         // Caller of the Hunt's power and toughness are each equal to the number of creatures of the chosen type on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CallerOfTheHuntAdditionalCostEffect()));
-
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("as an additional cost to cast this spell, choose a creature type. \r"
+                + "{this}'s power and toughness are each equal to the number of creatures of the chosen type on the battlefield")));
+        this.getSpellAbility().setCostAdjuster(CallerOfTheHuntAdjuster.instance);
     }
 
     public CallerOfTheHunt(final CallerOfTheHunt card) {
         super(card);
     }
+
+    @Override
+    public CallerOfTheHunt copy() {
+        return new CallerOfTheHunt(this);
+    }
+}
+
+enum CallerOfTheHuntAdjuster implements CostAdjuster {
+    instance;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
@@ -55,34 +67,6 @@ public final class CallerOfTheHunt extends CardImpl {
             game.addEffect(effectPower, ability);
             game.addEffect(effectToughness, ability);
         }
-    }
-
-    @Override
-    public CallerOfTheHunt copy() {
-        return new CallerOfTheHunt(this);
-    }
-}
-
-class CallerOfTheHuntAdditionalCostEffect extends OneShotEffect {
-
-    public CallerOfTheHuntAdditionalCostEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "as an additional cost to cast this spell, choose a creature type. \r"
-                + "{this}'s power and toughness are each equal to the number of creatures of the chosen type on the battlefield";
-    }
-
-    public CallerOfTheHuntAdditionalCostEffect(final CallerOfTheHuntAdditionalCostEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CallerOfTheHuntAdditionalCostEffect copy() {
-        return new CallerOfTheHuntAdditionalCostEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 }
 
@@ -116,5 +100,4 @@ class ChooseCreatureTypeEffect extends OneShotEffect { // code by LevelX2, but t
     public ChooseCreatureTypeEffect copy() {
         return new ChooseCreatureTypeEffect(this);
     }
-
 }

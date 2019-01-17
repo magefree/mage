@@ -169,12 +169,12 @@ class WrexialReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getTargetId().equals(cardid);
+                && event.getTargetId().equals(cardid);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        UUID eventObject = ((ZoneChangeEvent) event).getTargetId();
+        UUID eventObject = event.getTargetId();
         StackObject card = game.getStack().getStackObject(eventObject);
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {

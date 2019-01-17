@@ -1,9 +1,7 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
@@ -16,6 +14,7 @@ import mage.game.Game;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAnyTargetAmount;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  *
@@ -39,6 +38,7 @@ public final class FightWithFire extends CardImpl {
                 + "<i> (Those targets can include players and planeswalkers.)</i>"
         ));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().setTargetAdjuster(FightWithFireAdjuster.instance);
     }
 
     public FightWithFire(final FightWithFire card) {
@@ -46,19 +46,21 @@ public final class FightWithFire extends CardImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        if (ability instanceof SpellAbility) {
-            if (KickedCondition.instance.apply(game, ability)) {
-                ability.addTarget(new TargetAnyTargetAmount(10));
-            } else {
-                ability.addTarget(new TargetCreaturePermanent());
-            }
-        }
-    }
-
-    @Override
     public FightWithFire copy() {
         return new FightWithFire(this);
+    }
+}
+
+enum FightWithFireAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        if (KickedCondition.instance.apply(game, ability)) {
+            ability.addTarget(new TargetAnyTargetAmount(10));
+        } else {
+            ability.addTarget(new TargetCreaturePermanent());
+        }
     }
 }

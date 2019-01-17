@@ -18,6 +18,8 @@ public class TablesUtil {
             searchId = ((TablesTableModel) table.getModel()).findTableAndGameInfoByRow(row);
         } else if (table.getModel() instanceof MatchesTableModel) {
             searchId = ((MatchesTableModel) table.getModel()).findTableAndGameInfoByRow(row);
+        } else if (table.getModel() instanceof TournamentMatchesTableModel) {
+            searchId = ((TournamentMatchesTableModel) table.getModel()).findTableAndGameInfoByRow(row);
         } else {
             logger.error("Not supported tables model " + table.getModel().getClass().toString());
         }
@@ -31,6 +33,8 @@ public class TablesUtil {
             row = ((TablesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
         } else if (tableModel instanceof MatchesTableModel) {
             row = ((MatchesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
+        } else if (tableModel instanceof TournamentMatchesTableModel) {
+            row = ((TournamentMatchesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
         } else {
             logger.error("Not supported tables model " + tableModel.getClass().toString());
         }

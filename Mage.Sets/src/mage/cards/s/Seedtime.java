@@ -53,7 +53,7 @@ enum OpponentCastBlueSpellThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 if (opponentId != null) {

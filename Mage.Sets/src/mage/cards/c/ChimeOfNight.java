@@ -1,25 +1,25 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class ChimeOfNight extends CardImpl {
@@ -43,7 +43,7 @@ public final class ChimeOfNight extends CardImpl {
         this.addAbility(ability);
 
         // When Chime of Night is put into a graveyard from the battlefield, destroy target nonblack creature.
-        ability = new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DestroyTargetEffect(), false);
+        ability = new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

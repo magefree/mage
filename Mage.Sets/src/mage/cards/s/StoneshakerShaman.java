@@ -23,7 +23,7 @@ public final class StoneshakerShaman extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("untapped land");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public StoneshakerShaman(UUID ownerId, CardSetInfo setInfo) {

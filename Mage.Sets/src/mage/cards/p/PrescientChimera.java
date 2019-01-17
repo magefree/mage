@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -12,14 +10,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PrescientChimera extends CardImpl {
 
     public PrescientChimera(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.CHIMERA);
 
         this.power = new MageInt(3);
@@ -28,7 +27,7 @@ public final class PrescientChimera extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast an instant or sorcery spell, scry 1.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false));
     }
 
     public PrescientChimera(final PrescientChimera card) {

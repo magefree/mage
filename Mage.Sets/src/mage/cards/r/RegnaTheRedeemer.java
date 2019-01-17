@@ -75,12 +75,12 @@ class RegnaTheRedeemerCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         int gainedLife = 0;
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getSimpleName());
+        PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
         if (watcher != null) {
             for (UUID playerId : game.getPlayerList()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !player.hasOpponent(source.getControllerId(), game)) {
-                    gainedLife = watcher.getLiveGained(playerId);
+                    gainedLife = watcher.getLifeGained(playerId);
                     if (gainedLife > 0) {
                         break;
                     }

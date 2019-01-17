@@ -26,7 +26,7 @@ public final class ForerunnerOfTheLegion extends CardImpl {
 
     private static final FilterPermanent filterAnotherVampire = new FilterPermanent(SubType.VAMPIRE, "another " + SubType.VAMPIRE.toString());
     static {
-        filterAnotherVampire.add(new AnotherPredicate());
+        filterAnotherVampire.add(AnotherPredicate.instance);
         filterAnotherVampire.add(new ControllerPredicate(TargetController.YOU));
     }
 

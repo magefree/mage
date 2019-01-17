@@ -33,7 +33,7 @@ public final class EverflowingChalice extends CardImpl {
 
         // Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(0), new MultikickerCount(), true),
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(0), MultikickerCount.instance, true),
                 "with a charge counter on it for each time it was kicked"));
 
         // {T}: Add {C} for each charge counter on Everflowing Chalice.

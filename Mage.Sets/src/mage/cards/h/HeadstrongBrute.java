@@ -29,7 +29,7 @@ public final class HeadstrongBrute extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public HeadstrongBrute(UUID ownerId, CardSetInfo setInfo) {

@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.*;
-import mage.cards.decks.importer.DeckImporterUtil;
+
+import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.MageComponents;
@@ -425,7 +426,7 @@ public class NewTableDialog extends MageDialog {
                     table.getTableId(),
                     this.player1Panel.getPlayerName(),
                     PlayerType.HUMAN, 1,
-                    DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
+                    DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile()),
                     this.txtPassword.getText())) {
                 for (TablePlayerPanel player : players) {
                     if (player.getPlayerType() != PlayerType.HUMAN) {

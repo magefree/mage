@@ -94,8 +94,4 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
         return event.getType() == EventType.DAMAGE_PLAYER;
     }
 
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return super.applies(event, source, game);
-    }
 }

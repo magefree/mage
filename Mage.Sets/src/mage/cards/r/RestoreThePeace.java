@@ -56,7 +56,7 @@ class RestoreThePeaceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
+        SourceDidDamageWatcher watcher = game.getState().getWatcher(SourceDidDamageWatcher.class);
         if (watcher != null) {
             for (UUID permId : watcher.damageSources) {
                 Permanent perm = game.getPermanent(permId);

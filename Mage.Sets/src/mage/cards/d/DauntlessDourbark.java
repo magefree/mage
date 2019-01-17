@@ -36,7 +36,7 @@ public final class DauntlessDourbark extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),
                 new SubtypePredicate(SubType.TREEFOLK)));
         filter2.add(new SubtypePredicate(SubType.TREEFOLK));
-        filter2.add(new AnotherPredicate());
+        filter2.add(AnotherPredicate.instance);
     }
     
     final static private String rule = "{this} has trample as long as you control another Treefolk";

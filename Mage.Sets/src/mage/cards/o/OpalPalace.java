@@ -67,7 +67,7 @@ class OpalPalaceWatcher extends Watcher {
     private final String originalId;
 
     public OpalPalaceWatcher(String originalId) {
-        super(OpalPalaceWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(OpalPalaceWatcher.class, WatcherScope.CARD);
         this.originalId = originalId;
     }
 
@@ -130,7 +130,7 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        OpalPalaceWatcher watcher = (OpalPalaceWatcher) game.getState().getWatchers().get(OpalPalaceWatcher.class.getSimpleName(), source.getSourceId());
+        OpalPalaceWatcher watcher = game.getState().getWatcher(OpalPalaceWatcher.class, source.getSourceId());
         return watcher != null
                 && watcher.commanderId.contains(event.getTargetId());
     }

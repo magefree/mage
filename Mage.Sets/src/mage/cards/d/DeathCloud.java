@@ -25,7 +25,7 @@ public final class DeathCloud extends CardImpl {
 
 
         // Each player loses X life, discards X cards, sacrifices X creatures, then sacrifices X lands.
-        DynamicValue xValue = new ManacostVariableValue();
+        DynamicValue xValue = ManacostVariableValue.instance;
         this.getSpellAbility().addEffect(new LoseLifeAllPlayersEffect(xValue));
         Effect effect = new DiscardEachPlayerEffect(xValue, false);
         effect.setText(", discards X cards");

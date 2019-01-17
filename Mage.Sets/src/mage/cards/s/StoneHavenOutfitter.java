@@ -27,7 +27,7 @@ public final class StoneHavenOutfitter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("equipped creatures you control");
 
     static {
-        filter.add(new EquippedPredicate());
+        filter.add(EquippedPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

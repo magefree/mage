@@ -30,7 +30,7 @@ public final class ChampionOfLambholt extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

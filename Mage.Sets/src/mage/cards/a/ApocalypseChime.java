@@ -27,7 +27,7 @@ public final class ApocalypseChime extends CardImpl {
 
     static {
         filter.add(Predicates.and(
-                Predicates.not(new TokenPredicate()),
+                Predicates.not(TokenPredicate.instance),
                 new ExpansionSetPredicate("HML")
         ));
     }

@@ -23,7 +23,7 @@ public final class ShriekingMogg extends CardImpl {
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all other creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
     
     public ShriekingMogg(UUID ownerId, CardSetInfo setInfo) {

@@ -34,7 +34,7 @@ public final class FountainOfCho extends CardImpl {
         // {T}, Remove any number of storage counters from Fountain of Cho: Add {W} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.WhiteMana(1),
-                new RemovedCountersForCostValue(),
+                RemovedCountersForCostValue.instance,
                 new TapSourceCost(),
                 "Add {W} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

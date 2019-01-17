@@ -30,7 +30,7 @@ public final class UnstableShapeshifter extends CardImpl {
     final static FilterCreaturePermanent filterAnotherCreature = new FilterCreaturePermanent("another creature");
 
     static {
-        filterAnotherCreature.add(new AnotherPredicate());
+        filterAnotherCreature.add(AnotherPredicate.instance);
     }
 
     public UnstableShapeshifter(UUID ownerId, CardSetInfo setInfo) {

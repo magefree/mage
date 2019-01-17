@@ -1,8 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -21,6 +19,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author halljared
@@ -44,7 +44,7 @@ public final class AccursedWitch extends CardImpl {
         this.addAbility(new DiesTriggeredAbility(new AccursedWitchReturnTransformedEffect()));
     }
 
-    public AccursedWitch(final AccursedWitch card) {
+    private AccursedWitch(final AccursedWitch card) {
         super(card);
     }
 
@@ -56,12 +56,12 @@ public final class AccursedWitch extends CardImpl {
 
 class AccursedWitchReturnTransformedEffect extends OneShotEffect {
 
-    public AccursedWitchReturnTransformedEffect() {
+    AccursedWitchReturnTransformedEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Put {this} from your graveyard onto the battlefield transformed";
     }
 
-    public AccursedWitchReturnTransformedEffect(final AccursedWitchReturnTransformedEffect effect) {
+    private AccursedWitchReturnTransformedEffect(final AccursedWitchReturnTransformedEffect effect) {
         super(effect);
     }
 
@@ -73,29 +73,27 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-                //note: should check for null after game.getCard
-                Card card = game.getCard(source.getSourceId());
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
+        if (controller == null || !(game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD)) {
+            return false;
         }
-        return false;
+        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        //note: should check for null after game.getCard
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        }
+        return true;
     }
 }
 
 class AccursedWitchSpellsCostReductionEffect extends CostModificationEffectImpl {
 
-    public AccursedWitchSpellsCostReductionEffect() {
+    AccursedWitchSpellsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.REDUCE_COST);
         this.staticText = "Spells your opponents cast that target {this} cost {1} less to cast.";
     }
 
-    protected AccursedWitchSpellsCostReductionEffect(AccursedWitchSpellsCostReductionEffect effect) {
+    private AccursedWitchSpellsCostReductionEffect(AccursedWitchSpellsCostReductionEffect effect) {
         super(effect);
     }
 
@@ -107,17 +105,16 @@ class AccursedWitchSpellsCostReductionEffect extends CostModificationEffectImpl 
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
-                    Mode mode = abilityToModify.getModes().get(modeId);
-                    for (Target target : mode.getTargets()) {
-                        for (UUID targetUUID : target.getTargets()) {
-                            Permanent permanent = game.getPermanent(targetUUID);
-                            if (permanent != null && permanent.getId().equals(source.getSourceId())) {
-                                return true;
-                            }
-                        }
+        if (!(abilityToModify instanceof SpellAbility) || !game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+            return false;
+        }
+        for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
+            Mode mode = abilityToModify.getModes().get(modeId);
+            for (Target target : mode.getTargets()) {
+                for (UUID targetUUID : target.getTargets()) {
+                    Permanent permanent = game.getPermanent(targetUUID);
+                    if (permanent != null && permanent.getId().equals(source.getSourceId())) {
+                        return true;
                     }
                 }
             }

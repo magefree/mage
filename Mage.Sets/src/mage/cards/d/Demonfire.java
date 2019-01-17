@@ -31,7 +31,7 @@ public final class Demonfire extends CardImpl {
 
         // Demonfire deals X damage to any target.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(new ManacostVariableValue()),
+                new DamageTargetEffect(ManacostVariableValue.instance),
                 new InvertCondition(HellbentCondition.instance),
                 "{this} deals X damage to any target"));
 
@@ -41,7 +41,7 @@ public final class Demonfire extends CardImpl {
 
         // Hellbent - If you have no cards in hand, Demonfire can't be countered and the damage can't be prevented.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(new ManacostVariableValue(), false),
+                new DamageTargetEffect(ManacostVariableValue.instance, false),
                 HellbentCondition.instance,
                 "<br/><i>Hellbent</i> &mdash; If you have no cards in hand, this spell can't be countered and the damage can't be prevented."));
         // can't be countered

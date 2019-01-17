@@ -8,6 +8,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import mage.game.events.Listener;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -18,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author North
+ * @author North, JayDi85
  */
 public enum ExpansionRepository {
 
@@ -32,7 +33,7 @@ public enum ExpansionRepository {
     private static final long EXPANSION_CONTENT_VERSION = 17;
 
     private Dao<ExpansionInfo, Object> expansionDao;
-
+    private RepositoryEventSource eventSource = new RepositoryEventSource();
     public boolean instanceInitialized = false;
 
     ExpansionRepository() {
@@ -46,31 +47,59 @@ public enum ExpansionRepository {
             boolean isObsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, EXPANSION_DB_VERSION);
             boolean isNewBuild = RepositoryUtil.isNewBuildRun(connectionSource, VERSION_ENTITY_NAME, ExpansionRepository.class); // recreate db on new build
             if (isObsolete || isNewBuild) {
+                //System.out.println("Local sets db is outdated, cleaning...");
                 TableUtils.dropTable(connectionSource, ExpansionInfo.class, true);
             }
 
             TableUtils.createTableIfNotExists(connectionSource, ExpansionInfo.class);
             expansionDao = DaoManager.createDao(connectionSource, ExpansionInfo.class);
             instanceInitialized = true;
+
+            eventSource.fireRepositoryDbLoaded();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
     }
 
-    public void add(ExpansionInfo expansion) {
-        try {
-            expansionDao.create(expansion);
-        } catch (SQLException ex) {
-            logger.error(ex);
-        }
+    public void subscribe(Listener<RepositoryEvent> listener) {
+        eventSource.addListener(listener);
     }
 
-    public void update(ExpansionInfo expansion) {
+    public void saveSets(final List<ExpansionInfo> newSets, final List<ExpansionInfo> updatedSets, long newContentVersion) {
         try {
-            expansionDao.update(expansion);
-        } catch (SQLException ex) {
-            logger.error(ex);
+            expansionDao.callBatchTasks(() -> {
+                // add
+                if (newSets != null && newSets.size() > 0) {
+                    logger.info("DB: need to add " + newSets.size() + " new sets");
+                    try {
+                        for (ExpansionInfo exp : newSets) {
+                            expansionDao.create(exp);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CardRepository.class).error("Error adding expansions to DB - ", ex);
+                    }
+                }
+
+                // update
+                if (updatedSets != null && updatedSets.size() > 0) {
+                    logger.info("DB: need to update " + updatedSets.size() + " sets");
+                    try {
+                        for (ExpansionInfo exp : updatedSets) {
+                            expansionDao.update(exp);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CardRepository.class).error("Error adding expansions to DB - ", ex);
+                    }
+                }
+
+                return null;
+            });
+
+            setContentVersion(newContentVersion);
+            eventSource.fireRepositoryDbUpdated();
+        } catch (Exception ex) {
+            //
         }
     }
 

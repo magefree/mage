@@ -25,7 +25,7 @@ public final class JwariShapeshifter extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.ALLY));
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new AnotherPredicate()); // needed because during enters_the_battlefield event the creature is already targetable although it shouldn't
+        filter.add(AnotherPredicate.instance); // needed because during enters_the_battlefield event the creature is already targetable although it shouldn't
     }
 
     public JwariShapeshifter(UUID ownerId, CardSetInfo setInfo) {

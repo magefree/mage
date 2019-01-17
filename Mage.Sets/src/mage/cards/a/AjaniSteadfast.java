@@ -36,7 +36,7 @@ public final class AjaniSteadfast extends CardImpl {
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("other planeswalker you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

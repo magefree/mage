@@ -25,7 +25,7 @@ public final class ClearTheLand extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
         
 
-        // Each player reveals the top five cards of his or her library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.
+        // Each player reveals the top five cards of their library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.
         getSpellAbility().addEffect(new ClearTheLandEffect());
     }
 
@@ -43,7 +43,7 @@ class ClearTheLandEffect extends OneShotEffect {
     
     public ClearTheLandEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player reveals the top five cards of his or her library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.";
+        this.staticText = "Each player reveals the top five cards of their library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.";
     }
     
     public ClearTheLandEffect(final ClearTheLandEffect effect) {

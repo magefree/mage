@@ -26,7 +26,7 @@ public final class LeoninBladetrap extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature without flying");
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

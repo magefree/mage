@@ -105,7 +105,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Myr you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.MYR));
     }
 

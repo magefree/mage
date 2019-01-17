@@ -23,7 +23,7 @@ public final class HerdGnarr extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
     
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public HerdGnarr(UUID ownerId, CardSetInfo setInfo) {

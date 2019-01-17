@@ -1,26 +1,29 @@
 
 package mage.cards.decks;
 
-import java.util.*;
-import java.util.Map.Entry;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import org.apache.log4j.Logger;
 
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Constructed extends DeckValidator {
 
     private static final Logger logger = Logger.getLogger(DeckValidator.class);
 
-    protected static final List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList("Relentless Rats", "Shadowborn Apostle", "Rat Colony"));
-    protected static final List<String> basicLandNames = new ArrayList<>(
-            Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes", "Snow-Covered Forest",
-                    "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
+    protected static final List<String> anyNumberCardsAllowed = Arrays.asList(
+            "Relentless Rats", "Shadowborn Apostle", "Rat Colony", "Persistent Petitioners"
+    );
+    protected static final List<String> basicLandNames = Arrays.asList(
+            "Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes", "Snow-Covered Forest",
+            "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"
+    );
     protected List<String> banned = new ArrayList<>();
     protected List<String> restricted = new ArrayList<>();
     protected List<String> setCodes = new ArrayList<>();

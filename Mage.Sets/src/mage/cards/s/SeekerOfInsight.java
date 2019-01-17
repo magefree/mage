@@ -56,7 +56,7 @@ class CastNonCreatureSpellCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             List<Spell> spellsCast = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spellsCast != null) {

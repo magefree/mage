@@ -139,6 +139,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int damage(int damage, UUID sourceId, Game game) {
+        return 0;
+    }
+
+    @Override
     public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
         return 0;
     }
@@ -598,7 +603,8 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void lookAtAllLibraries(Ability source, Game game) {}
+    public void lookAtAllLibraries(Ability source, Game game) {
+    }
 
     @Override
     public boolean canPlayLand() {
@@ -636,12 +642,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean flipCoin(Game game) {
+    public boolean flipCoin(Ability source, Game game, boolean winnable) {
         return false;
     }
 
     @Override
-    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
+    public boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
         return false;
     }
 

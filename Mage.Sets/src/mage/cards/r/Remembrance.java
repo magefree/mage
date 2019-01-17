@@ -55,7 +55,7 @@ class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public RemembranceTriggeredAbility() {

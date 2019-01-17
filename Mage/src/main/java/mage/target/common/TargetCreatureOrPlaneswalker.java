@@ -1,21 +1,29 @@
 
 package mage.target.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class TargetCreatureOrPlaneswalker extends TargetPermanent {
 
     public TargetCreatureOrPlaneswalker() {
-        this(1, 1, new FilterCreatureOrPlaneswalkerPermanent(), false);
+        this(1);
+    }
+
+    public TargetCreatureOrPlaneswalker(int numTargets) {
+        this(numTargets, numTargets);
+    }
+
+    public TargetCreatureOrPlaneswalker(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, new FilterCreatureOrPlaneswalkerPermanent(), false);
     }
 
     public TargetCreatureOrPlaneswalker(int minNumTargets, int maxNumTargets, FilterCreatureOrPlaneswalkerPermanent filter, boolean notTarget) {

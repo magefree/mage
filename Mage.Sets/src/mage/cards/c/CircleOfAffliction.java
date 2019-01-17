@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ import mage.target.TargetPlayer;
 public final class CircleOfAffliction extends CardImpl {
 
     public CircleOfAffliction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // As Circle of Affliction enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
@@ -69,12 +68,12 @@ class CircleOfAfflictionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent circleOfAffliction = game.getPermanentOrLKIBattlefield(getSourceId());
-        if (circleOfAffliction != null) {
+        if (circleOfAffliction != null && event.getTargetId().equals(getControllerId())) {
             ObjectColor chosenColor = (ObjectColor) game.getState().getValue(circleOfAffliction.getId() + "_color");
             if (chosenColor != null) {
                 MageObject damageSource = game.getObject(event.getSourceId());
                 if (damageSource != null) {
-                    if ( damageSource.getColor(game).shares(chosenColor) ) {
+                    if (damageSource.getColor(game).shares(chosenColor)) {
                         return true;
                     }
                 }

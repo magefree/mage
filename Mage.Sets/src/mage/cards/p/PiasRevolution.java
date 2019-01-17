@@ -93,7 +93,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 

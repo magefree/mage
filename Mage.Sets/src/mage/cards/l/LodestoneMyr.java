@@ -26,7 +26,7 @@ public final class LodestoneMyr extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public LodestoneMyr(UUID ownerId, CardSetInfo setInfo) {

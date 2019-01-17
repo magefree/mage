@@ -93,7 +93,7 @@ class GrimReminderEffect extends OneShotEffect {
                     Cards cardsToReveal = new CardsImpl(card);
                     controller.revealCards(sourceObject.getIdName(), cardsToReveal, game);
                     String cardName = card.getName();
-                    GrimReminderWatcher watcher = (GrimReminderWatcher) game.getState().getWatchers().get(GrimReminderWatcher.class.getSimpleName());
+                    GrimReminderWatcher watcher = game.getState().getWatcher(GrimReminderWatcher.class);
                     if (watcher != null) {
                         for (UUID playerId : watcher.getPlayersCastSpell(cardName)) {
                             Player player = game.getPlayer(playerId);
@@ -116,7 +116,7 @@ class GrimReminderWatcher extends Watcher {
     private final Map<String, Set<UUID>> playersCastSpell = new HashMap<>();
 
     public GrimReminderWatcher() {
-        super(GrimReminderWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(GrimReminderWatcher.class, WatcherScope.GAME);
     }
 
     public GrimReminderWatcher(final GrimReminderWatcher watcher) {

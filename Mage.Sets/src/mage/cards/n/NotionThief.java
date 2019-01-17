@@ -90,7 +90,7 @@ class NotionThiefReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             if (game.isActivePlayer(event.getPlayerId()) && game.getStep().getType() == PhaseStep.DRAW) {
-                CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get(CardsDrawnDuringDrawStepWatcher.class.getSimpleName());
+                CardsDrawnDuringDrawStepWatcher watcher = game.getState().getWatcher(CardsDrawnDuringDrawStepWatcher.class);
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                     return true;
                 }

@@ -1,28 +1,12 @@
-
 package mage.player.ai;
 
-import java.io.File;
-import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.ExaltedAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
@@ -49,8 +33,11 @@ import mage.target.Targets;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
+import java.io.File;
+import java.util.*;
+import java.util.concurrent.*;
+
 /**
- *
  * @author nantuko
  */
 public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
@@ -180,10 +167,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 if (!suggested.isEmpty() && !(ability instanceof PassAbility)) {
                     Iterator<String> it = suggested.iterator();
                     while (it.hasNext()) {
-                        Card card = game.getCard(ability.getSourceId());
                         String action = it.next();
-                        logger.info("Suggested action=" + action + ";card=" + card);
-                        if (action.equals(card.getName())) {
+                        Card card = game.getCard(ability.getSourceId());
+                        if (card != null && action.equals(card.getName())) {
                             logger.info("-> removed from suggested=" + action);
                             it.remove();
                         }
@@ -930,7 +916,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     String line = scanner.nextLine();
                     if (line.startsWith("cast:")
                             || line.startsWith("play:")) {
-                        suggested.add(line.substring(5, line.length()));
+                        suggested.add(line.substring(5));
                     }
                 }
                 System.out.println("suggested::");
@@ -953,7 +939,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (action != null
                 && (action.startsWith("cast:")
                 || action.startsWith("play:"))) {
-            suggested.add(action.substring(5, action.length()));
+            suggested.add(action.substring(5));
         }
     }
 

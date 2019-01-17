@@ -58,7 +58,7 @@ class NoRestForTheWickedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        NoRestForTheWickedWatcher watcher = (NoRestForTheWickedWatcher) game.getState().getWatchers().get(NoRestForTheWickedWatcher.class.getSimpleName());
+        NoRestForTheWickedWatcher watcher = game.getState().getWatcher(NoRestForTheWickedWatcher.class);
         Player controller = game.getPlayer(source.getControllerId());
         if (watcher != null && controller != null) {
             Cards cardsToHand = new CardsImpl();
@@ -90,7 +90,7 @@ class NoRestForTheWickedWatcher extends Watcher {
     List<UUID> cards;
 
     public NoRestForTheWickedWatcher() {
-        super(NoRestForTheWickedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(NoRestForTheWickedWatcher.class, WatcherScope.GAME);
         this.cards = new ArrayList<>();
     }
 

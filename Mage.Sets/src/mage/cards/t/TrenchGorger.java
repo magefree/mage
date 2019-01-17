@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,25 +9,21 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TrenchGorger extends CardImpl {
 
     public TrenchGorger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
         this.subtype.add(SubType.LEVIATHAN);
 
         this.power = new MageInt(6);
@@ -77,8 +71,10 @@ class TrenchGorgerEffect extends OneShotEffect {
             int count = 0;
             for (UUID cardId : target.getTargets()) {
                 Card card = game.getCard(cardId);
-                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
-                count++;
+                if (card != null) {
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
+                    count++;
+                }
             }
             controller.shuffleLibrary(source, game);
             game.addEffect(new SetPowerToughnessSourceEffect(count, count, Duration.EndOfGame, SubLayer.SetPT_7b), source);

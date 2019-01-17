@@ -43,7 +43,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     private static final Logger logger = Logger.getLogger(PermanentImpl.class);
 
-    public class MarkedDamageInfo {
+    static class MarkedDamageInfo {
 
         public MarkedDamageInfo(Counter counter, MageObject sourceObject) {
             this.counter = counter;
@@ -390,11 +390,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean tap(Game game) {
+        return tap(false, game);
+    }
+
+    @Override
+    public boolean tap(boolean forCombat, Game game) {
         //20091005 - 701.15a
         if (!tapped) {
             if (!replaceEvent(EventType.TAP, game)) {
                 this.tapped = true;
-                fireEvent(EventType.TAPPED, game);
+                game.fireEvent(new GameEvent(EventType.TAPPED, objectId, ownerId, controllerId, 0, forCombat));
                 return true;
             }
         }
@@ -712,6 +717,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public int damage(int damage, UUID sourceId, Game game) {
+        return damage(damage, sourceId, game, true, false, false, null);
+    }
+
+    @Override
     public int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable) {
         return damage(damage, sourceId, game, preventable, combat, false, null);
     }
@@ -942,6 +952,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
                         && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
                         && source.getColor(game).isWhite()) {
+                    return false;
+                }
+            }
+
+            if (abilities.containsKey(HexproofFromMonocoloredAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                        && !source.getColor(game).isColorless() && !source.getColor(game).isMulticolored()) {
                     return false;
                 }
             }

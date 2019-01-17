@@ -1,8 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -14,11 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -27,8 +20,11 @@ import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class CreateTokenCopyTargetEffect extends OneShotEffect {
@@ -73,12 +69,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     /**
-     *
-     * @param playerId null the token is controlled/owned by the controller of
-     * the source ability
+     * @param playerId           null the token is controlled/owned by the controller of
+     *                           the source ability
      * @param additionalCardType the token gains this card type in addition
-     * @param hasHaste the token gains haste
-     * @param number number of tokens to put into play
+     * @param hasHaste           the token gains haste
+     * @param number             number of tokens to put into play
      * @param tapped
      * @param attacking
      */
@@ -165,7 +160,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             copyFrom = game.getCard(getTargetPointer().getFirst(game, source));
         }
 
-        if (permanent == null && copyFrom == null) {
+        if (copyFrom == null) {
             return false;
         }
 

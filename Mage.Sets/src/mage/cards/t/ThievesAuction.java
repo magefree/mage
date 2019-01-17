@@ -52,7 +52,7 @@ class ThievesAuctionEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanents");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     ThievesAuctionEffect() {

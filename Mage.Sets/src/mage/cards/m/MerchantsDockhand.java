@@ -116,7 +116,7 @@ class TapXTargetCost extends VariableCostImpl {
     final static FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifacts you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public TapXTargetCost() {

@@ -20,7 +20,7 @@ public final class EnemyOfTheGuildpact extends CardImpl {
     private static final FilterObject filter = new FilterObject("multicolored");
     
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
     
     public EnemyOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {

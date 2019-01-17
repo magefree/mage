@@ -74,7 +74,7 @@ public final class ShapeAnew extends CardImpl {
             if (artifactCard != null) {
                 targetController.moveCards(artifactCard, Zone.BATTLEFIELD, source, game);
             }
-            // 1/1/2011: If the first card the player reveals is an artifact card, he or she will still have to shuffle his or her library even though no other cards were revealed this way.
+            // 1/1/2011: If the first card the player reveals is an artifact card, he or she will still have to shuffle their library even though no other cards were revealed this way.
             targetController.shuffleLibrary(source, game);
             return true;
         }

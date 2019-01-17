@@ -60,7 +60,7 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
             if (eachCombat) {
                 return true;
             }
-            AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+            AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
             return watcher != null && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game));
         }
         return false;

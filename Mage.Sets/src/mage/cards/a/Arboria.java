@@ -60,13 +60,13 @@ class ArboriaEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        CastSpellYourLastTurnWatcher watcher = (CastSpellYourLastTurnWatcher) game.getState().getWatchers().get(CastSpellYourLastTurnWatcher.class.getSimpleName());
+        CastSpellYourLastTurnWatcher watcher = game.getState().getWatcher(CastSpellYourLastTurnWatcher.class);
         if (watcher != null && watcher.getAmountOfSpellsCastOnPlayersTurn(defenderId) > 0) {
             return true;
         }
 
         PermanentsEnteredBattlefieldYourLastTurnWatcher watcher2
-                = (PermanentsEnteredBattlefieldYourLastTurnWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldYourLastTurnWatcher.class.getSimpleName());
+                = game.getState().getWatcher(PermanentsEnteredBattlefieldYourLastTurnWatcher.class);
 
         if (watcher2 != null && watcher2.getPermanentsEnteringOnPlayersLastTurn(game, defenderId) != null) {
             for (Permanent permanent : watcher2.getPermanentsEnteringOnPlayersLastTurn(game, defenderId)) {

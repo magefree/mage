@@ -118,7 +118,7 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals((UUID) game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
+        return event.getPlayerId().equals(game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
 
     @Override

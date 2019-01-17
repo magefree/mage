@@ -44,7 +44,7 @@ public final class CollectiveEffort extends CardImpl {
     private static final FilterPlayer filterPlayer = new FilterPlayer("player whose creatures get +1/+1 counters");
 
     static {
-        filterUntapped.add(Predicates.not(new TappedPredicate()));
+        filterUntapped.add(Predicates.not(TappedPredicate.instance));
         filterDestroyCreature.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 

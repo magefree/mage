@@ -21,8 +21,8 @@ public final class RadiantPurge extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("multicolored creature or multicolored enchantment");
     static {
         filter.add(Predicates.or(
-                Predicates.and(new CardTypePredicate(CardType.CREATURE), new MulticoloredPredicate()),
-                Predicates.and(new CardTypePredicate(CardType.ENCHANTMENT), new MulticoloredPredicate())));
+                Predicates.and(new CardTypePredicate(CardType.CREATURE), MulticoloredPredicate.instance),
+                Predicates.and(new CardTypePredicate(CardType.ENCHANTMENT), MulticoloredPredicate.instance)));
     }
 
     public RadiantPurge(UUID ownerId, CardSetInfo setInfo) {

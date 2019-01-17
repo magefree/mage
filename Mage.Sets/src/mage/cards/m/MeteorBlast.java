@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -13,6 +12,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  *
@@ -21,7 +21,7 @@ import mage.target.common.TargetAnyTarget;
 public final class MeteorBlast extends CardImpl {
 
     public MeteorBlast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
 
         // Meteor Blast deals 4 damage to each of X target creatures and/or players.
         this.getSpellAbility().addEffect(new MeteorBlastEffect());
@@ -32,17 +32,21 @@ public final class MeteorBlast extends CardImpl {
     }
 
     @Override
+    public MeteorBlast copy() {
+        return new MeteorBlast(this);
+    }
+}
+
+enum MeteorBlastAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
         if (xValue > 0) {
             Target target = new TargetAnyTarget(xValue);
             ability.addTarget(target);
         }
-    }
-
-    @Override
-    public MeteorBlast copy() {
-        return new MeteorBlast(this);
     }
 }
 

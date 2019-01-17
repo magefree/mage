@@ -25,7 +25,7 @@ public final class ThoughtHarvester extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a colorless spell");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public ThoughtHarvester(UUID ownerId, CardSetInfo setInfo) {

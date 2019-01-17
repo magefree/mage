@@ -19,7 +19,7 @@ public final class ClashOfWills extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
         // Counter target spell unless its controller pays {X}.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 

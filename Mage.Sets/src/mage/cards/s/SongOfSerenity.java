@@ -44,7 +44,7 @@ class SongOfSerenityRestrictionEffect extends RestrictionEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new EnchantedPredicate());
+        filter.add(EnchantedPredicate.instance);
     }
 
     public SongOfSerenityRestrictionEffect() {

@@ -30,8 +30,8 @@ public final class RuthlessInstincts extends CardImpl {
     private static final FilterCreaturePermanent filterAttacking = new FilterCreaturePermanent("attacking creature");
 
     static {
-        filter.add(Predicates.not(new AttackingPredicate()));
-        filterAttacking.add(new AttackingPredicate());
+        filter.add(Predicates.not(AttackingPredicate.instance));
+        filterAttacking.add(AttackingPredicate.instance);
     }
 
     public RuthlessInstincts(UUID ownerId, CardSetInfo setInfo) {

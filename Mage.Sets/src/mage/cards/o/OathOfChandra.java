@@ -69,7 +69,7 @@ enum OathOfChandraCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        OathOfChandraWatcher watcher = (OathOfChandraWatcher) game.getState().getWatchers().get(OathOfChandraWatcher.class.getSimpleName());
+        OathOfChandraWatcher watcher = game.getState().getWatcher(OathOfChandraWatcher.class);
         return watcher != null && watcher.enteredPlaneswalkerForPlayer(source.getControllerId());
     }
 
@@ -85,7 +85,7 @@ class OathOfChandraWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public OathOfChandraWatcher() {
-        super(OathOfChandraWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(OathOfChandraWatcher.class, WatcherScope.GAME);
     }
 
     public OathOfChandraWatcher(final OathOfChandraWatcher watcher) {

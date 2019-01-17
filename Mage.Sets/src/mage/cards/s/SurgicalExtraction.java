@@ -1,11 +1,11 @@
-
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -21,8 +21,10 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class SurgicalExtraction extends CardImpl {
@@ -71,12 +73,12 @@ class SurgicalExtractionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card chosenCard = game.getCard(source.getFirstTarget());
-        Player controller = game.getPlayer(source.getControllerId());
-
         // 6/1/2011 	"Any number of cards" means just that. If you wish, you can choose to
         //              leave some or all of the cards with the same name as the targeted card,
         //              including that card, in the zone they're in.
+
+        Card chosenCard = game.getCard(source.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
         if (chosenCard != null && controller != null) {
             Player owner = game.getPlayer(chosenCard.getOwnerId());
             if (owner != null) {

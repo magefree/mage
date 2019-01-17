@@ -74,20 +74,22 @@ class GravestormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObjectReference spellRef = (MageObjectReference) this.getValue("GravestormSpellRef");
         if (spellRef != null) {
-            GravestormWatcher watcher = (GravestormWatcher) game.getState().getWatchers().get(GravestormWatcher.class.getSimpleName());
-            int gravestormCount = watcher.getGravestormCount();
-            if (gravestormCount > 0) {
-                Spell spell = (Spell) this.getValue("GravestormSpell");
-                if (spell != null) {
-                    if (!game.isSimulation()) {
-                        game.informPlayers("Gravestorm: " + spell.getName() + " will be copied " + gravestormCount + " time" + (gravestormCount > 1 ? "s" : ""));
-                    }
-                    for (int i = 0; i < gravestormCount; i++) {
-                        spell.createCopyOnStack(game, source, source.getControllerId(), true);
+            GravestormWatcher watcher = game.getState().getWatcher(GravestormWatcher.class);
+            if(watcher != null) {
+                int gravestormCount = watcher.getGravestormCount();
+                if (gravestormCount > 0) {
+                    Spell spell = (Spell) this.getValue("GravestormSpell");
+                    if (spell != null) {
+                        if (!game.isSimulation()) {
+                            game.informPlayers("Gravestorm: " + spell.getName() + " will be copied " + gravestormCount + " time" + (gravestormCount > 1 ? "s" : ""));
+                        }
+                        for (int i = 0; i < gravestormCount; i++) {
+                            spell.createCopyOnStack(game, source, source.getControllerId(), true);
+                        }
                     }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }

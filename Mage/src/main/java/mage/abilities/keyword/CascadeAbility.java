@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -84,7 +83,11 @@ class CascadeEffect extends OneShotEffect {
             return false;
         }
         ExileZone exile = game.getExile().createZone(source.getSourceId(), controller.getName() + " Cascade");
-        int sourceCost = game.getCard(source.getSourceId()).getConvertedManaCost();
+        card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
+        }
+        int sourceCost = card.getConvertedManaCost();
         do {
             card = controller.getLibrary().getFromTop(game);
             if (card == null) {

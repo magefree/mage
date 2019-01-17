@@ -20,7 +20,7 @@ public class MentorAbility extends AttacksTriggeredAbility {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature with lesser power");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(MentorAbilityPredicate.instance);
     }
 

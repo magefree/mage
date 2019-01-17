@@ -25,7 +25,7 @@ public final class TombOfTheSpiritDragon extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("colorless creature you control");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public TombOfTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {

@@ -1,8 +1,5 @@
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -30,8 +27,11 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class ChromeMox extends CardImpl {
@@ -141,7 +141,7 @@ class ChromeMoxManaEffect extends ManaEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             List<UUID> imprinted = permanent.getImprinted();
-            if (!imprinted.isEmpty()) {
+            if (imprinted != null && !imprinted.isEmpty()) {
                 Card imprintedCard = game.getCard(imprinted.get(0));
                 if (imprintedCard != null) {
                     ObjectColor color = imprintedCard.getColor(game);
@@ -172,7 +172,7 @@ class ChromeMoxManaEffect extends ManaEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (permanent != null && player != null) {
             List<UUID> imprinted = permanent.getImprinted();
-            if (!imprinted.isEmpty()) {
+            if (imprinted != null && !imprinted.isEmpty()) {
                 Card imprintedCard = game.getCard(imprinted.get(0));
                 if (imprintedCard != null) {
                     Choice choice = new ChoiceColor(true);

@@ -39,7 +39,7 @@ public final class RathiAssassin extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.MERCENARY));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
-        destroyFilter.add(new TappedPredicate());
+        destroyFilter.add(TappedPredicate.instance);
         destroyFilter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 

@@ -27,7 +27,7 @@ public final class HazyHomunculus extends CardImpl {
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public HazyHomunculus(UUID ownerId, CardSetInfo setInfo) {

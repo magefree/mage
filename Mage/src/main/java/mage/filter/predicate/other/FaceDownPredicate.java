@@ -6,10 +6,10 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
- *
  * @author North
  */
-public class FaceDownPredicate implements Predicate<Card> {
+public enum FaceDownPredicate implements Predicate<Card> {
+    instance;
 
     @Override
     public boolean apply(Card input, Game game) {

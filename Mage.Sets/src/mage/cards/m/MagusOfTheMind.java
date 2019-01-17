@@ -78,7 +78,10 @@ class MagusOfTheMindEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
+        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+        if(watcher == null){
+            return false;
+        }
         int stormCount = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn() + 1;
         if (controller != null && sourceObject != null) {
             controller.shuffleLibrary(source, game);

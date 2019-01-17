@@ -27,7 +27,7 @@ public final class Aurochs extends CardImpl {
 
     static {
         filter1.add(new SubtypePredicate(SubType.AUROCHS));
-        filter1.add(new AnotherPredicate());
+        filter1.add(AnotherPredicate.instance);
     }
 
     public Aurochs(UUID ownerId, CardSetInfo setInfo) {

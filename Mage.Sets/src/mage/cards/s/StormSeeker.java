@@ -20,7 +20,7 @@ public final class StormSeeker extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Storm Seeker deals damage to target player equal to the number of cards in that player's hand.
-        Effect effect = new DamageTargetEffect(new CardsInTargetHandCount());
+        Effect effect = new DamageTargetEffect(CardsInTargetHandCount.instance);
         effect.setText("{this} deals damage to target player equal to the number of cards in that player's hand.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());

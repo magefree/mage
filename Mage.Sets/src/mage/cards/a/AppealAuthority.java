@@ -43,7 +43,7 @@ public final class AppealAuthority extends SplitCard {
 
         // Authority
         // Aftermath
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Tap up to two target creatures your opponents control. Creatures you control gain vigilance until end of turn.
         getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");

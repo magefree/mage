@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,16 +11,15 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FirstTargetPointer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
- *
  */
 public final class DeathMatch extends CardImpl {
-
-    private final UUID originalId;
 
     public DeathMatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
@@ -32,29 +29,30 @@ public final class DeathMatch extends CardImpl {
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DeathMatchEffect(),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PLAYER, "");
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(DeathMatchAdjuster.instance);
         this.addAbility(ability);
-        originalId = ability.getOriginalId();
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            UUID controllerId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
-            if (controllerId != null) {
-                ability.getTargets().get(0).setTargetController(controllerId);
-                ability.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
-            }
-        }
     }
 
     public DeathMatch(final DeathMatch card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
     public DeathMatch copy() {
         return new DeathMatch(this);
+    }
+}
+
+enum DeathMatchAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        UUID controllerId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
+        if (controllerId != null) {
+            ability.getTargets().get(0).setTargetController(controllerId);
+            ability.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
+        }
     }
 }
 

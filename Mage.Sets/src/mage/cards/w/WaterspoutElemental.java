@@ -26,7 +26,7 @@ public final class WaterspoutElemental extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public WaterspoutElemental(UUID ownerId, CardSetInfo setInfo) {

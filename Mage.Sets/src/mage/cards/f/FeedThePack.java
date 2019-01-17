@@ -48,7 +48,7 @@ class FeedThePackEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public FeedThePackEffect() {

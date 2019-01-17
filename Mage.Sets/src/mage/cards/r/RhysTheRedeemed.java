@@ -69,7 +69,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
     }
 
     public RhysTheRedeemedEffect() {

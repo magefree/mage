@@ -5,8 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.RevealHandSourceControllerEffect;
-import mage.abilities.effects.common.RevealHandTargetEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.*;
@@ -23,14 +21,13 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- *
  * @author noahg
  */
 public final class RakdosAugermage extends CardImpl {
 
     public RakdosAugermage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{R}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -71,16 +68,16 @@ class RakdosAugermageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
         if (player != null && controller != null) {
             Cards revealedCards = new CardsImpl();
             revealedCards.addAll(controller.getHand());
-            player.revealCards((sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ") (" : "Discard (")+controller.getName()+")", revealedCards, game);
+            Card sourceCard = game.getCard(source.getSourceId());
+            player.revealCards((sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ") (" : "Discard (") + controller.getName() + ")", revealedCards, game);
             TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
             if (player.choose(Outcome.Benefit, revealedCards, target, game)) {
                 Card card = revealedCards.get(target.getFirstTarget(), game);
                 if (card != null) {
-                    return  player.discard(card, source, game);
+                    return player.discard(card, source, game);
                 }
             }
         }

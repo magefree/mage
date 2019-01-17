@@ -80,7 +80,7 @@ class GarnaTheBloodflameEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            GarnaTheBloodflameWatcher watcher = (GarnaTheBloodflameWatcher) game.getState().getWatchers().get(GarnaTheBloodflameWatcher.class.getSimpleName());
+            GarnaTheBloodflameWatcher watcher = game.getState().getWatcher(GarnaTheBloodflameWatcher.class);
             if (watcher != null) {
                 Set<Card> toHand = new HashSet<>();
                 for (UUID cardId : watcher.getCardsPutToGraveyardThisTurn()) {

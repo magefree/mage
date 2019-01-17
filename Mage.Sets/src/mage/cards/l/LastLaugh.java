@@ -27,7 +27,7 @@ public final class LastLaugh extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a permanent other than Last Laugh");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
     
     public LastLaugh(UUID ownerId, CardSetInfo setInfo) {

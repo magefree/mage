@@ -3,6 +3,8 @@ package mage.client;
 import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionRepository;
+import mage.cards.repository.RepositoryUtil;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.*;
@@ -212,6 +214,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             LOGGER.fatal(null, ex);
         }
 
+        RepositoryUtil.bootstrapLocalDb();
         ManaSymbols.loadImages();
         Plugins.instance.loadPlugins();
 
@@ -281,7 +284,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         if (Plugins.instance.isCounterPluginLoaded()) {
             int i = Plugins.instance.getGamesPlayed();
-            JLabel label = new JLabel("  Games played: " + String.valueOf(i));
+            JLabel label = new JLabel("  Games played: " + i);
             desktopPane.add(label, JLayeredPane.DEFAULT_LAYER + 1);
             label.setVisible(true);
             label.setForeground(Color.white);
@@ -717,6 +720,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         boolean autoConnectParamValue = startUser != null || Boolean.parseBoolean(PREFS.get("autoConnect", "false"));
         boolean status = false;
         if (autoConnectParamValue) {
+            LOGGER.info("Auto-connecting to " + MagePreferences.getServerAddress());
             status = performConnect(false);
         }
         return status;
@@ -739,6 +743,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             currentConnection.setPassword(password);
             currentConnection.setHost(server);
             currentConnection.setPort(port);
+            // force to redownload db on updates
+            boolean redownloadDatabase = (ExpansionRepository.instance.getSetByCode("GRN") == null || CardRepository.instance.findCard("Island") == null);
+            currentConnection.setForceDBComparison(redownloadDatabase);
             String allMAC = "";
             try {
                 allMAC = Connection.getMAC();
@@ -1160,7 +1167,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     /**
      * @param args the command line arguments
      */
-    public static void main(final String args[]) {
+    public static void main(final String[] args) {
         // Workaround for #451
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         LOGGER.info("Starting MAGE client version " + VERSION);

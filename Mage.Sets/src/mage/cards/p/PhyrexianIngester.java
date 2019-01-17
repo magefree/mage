@@ -36,7 +36,7 @@ public final class PhyrexianIngester extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public PhyrexianIngester(UUID ownerId, CardSetInfo setInfo) {

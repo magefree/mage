@@ -43,7 +43,7 @@ public final class MartyrOfSands extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, Reveal X white cards from your hand, Sacrifice Martyr of Sands: You gain three times X life.
-        Effect effect = new GainLifeEffect(new MultipliedValue(new RevealTargetFromHandCostCount(), 3));
+        Effect effect = new GainLifeEffect(new MultipliedValue(RevealTargetFromHandCostCount.instance, 3));
         effect.setText("You gain three times X life.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
         ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));

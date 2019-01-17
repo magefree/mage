@@ -70,7 +70,7 @@ class DisappearEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent aura = (Permanent) game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent aura = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null 
                 && aura != null 

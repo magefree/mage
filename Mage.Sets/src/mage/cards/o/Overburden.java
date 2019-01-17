@@ -25,7 +25,7 @@ public final class Overburden extends CardImpl {
     private static final FilterControlledLandPermanent RETURN_FILTER = new FilterControlledLandPermanent("a land");
 
     static {
-        ENTERS_BATTLEFIELD_FILTER.add(Predicates.not(new TokenPredicate()));
+        ENTERS_BATTLEFIELD_FILTER.add(Predicates.not(TokenPredicate.instance));
     }
 
     public Overburden(UUID ownerId, CardSetInfo setInfo) {

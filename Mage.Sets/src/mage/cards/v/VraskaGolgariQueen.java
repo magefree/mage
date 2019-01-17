@@ -37,7 +37,7 @@ public final class VraskaGolgariQueen extends CardImpl {
             = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
 
     static {
-        filter1.add(new AnotherPredicate());
+        filter1.add(AnotherPredicate.instance);
         filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 

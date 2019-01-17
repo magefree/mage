@@ -29,7 +29,7 @@ public final class TideforceElemental extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public TideforceElemental(UUID ownerId, CardSetInfo setInfo) {

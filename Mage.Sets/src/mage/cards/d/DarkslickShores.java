@@ -26,7 +26,7 @@ public final class DarkslickShores extends CardImpl {
     private final static FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public DarkslickShores(UUID ownerId, CardSetInfo setInfo) {

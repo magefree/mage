@@ -103,7 +103,7 @@ class SeaTrollCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null){
-            SeaTrollWatcher watcher = (SeaTrollWatcher) game.getState().getWatchers().get(SeaTrollWatcher.class.getSimpleName());
+            SeaTrollWatcher watcher = game.getState().getWatcher(SeaTrollWatcher.class);
             if (watcher != null) {
                 return watcher.blockedOrBlockedByBlueCreatureThisTurn(new MageObjectReference(sourcePermanent, game));
             }

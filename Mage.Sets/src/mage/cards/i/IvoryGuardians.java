@@ -33,7 +33,7 @@ public final class IvoryGuardians extends CardImpl {
 
     static {
         controlFilter.add(new ColorPredicate(ObjectColor.RED));
-        controlFilter.add(Predicates.not(new TokenPredicate()));
+        controlFilter.add(Predicates.not(TokenPredicate.instance));
         boostFilter.add(new NamePredicate("Ivory Guardians"));
     }
 

@@ -112,26 +112,24 @@ enum KrovikanVampireInterveningIfCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        KrovikanVampireCreaturesDiedWatcher watcherDied = (KrovikanVampireCreaturesDiedWatcher) game.getState().getWatchers().get(KrovikanVampireCreaturesDiedWatcher.class.getSimpleName());
-        KrovikanVampireCreaturesDamagedWatcher watcherDamaged = (KrovikanVampireCreaturesDamagedWatcher) game.getState().getWatchers().get(KrovikanVampireCreaturesDamagedWatcher.class.getSimpleName());
+        KrovikanVampireCreaturesDiedWatcher watcherDied = game.getState().getWatcher(KrovikanVampireCreaturesDiedWatcher.class);
+        KrovikanVampireCreaturesDamagedWatcher watcherDamaged = game.getState().getWatcher(KrovikanVampireCreaturesDamagedWatcher.class);
         if (watcherDied != null) {
             Set<UUID> creaturesThatDiedThisTurn = watcherDied.diedThisTurn;
-            if (creaturesThatDiedThisTurn != null) {
-                for (UUID mor : creaturesThatDiedThisTurn) {
-                    if (watcherDamaged != null) {
-                        for (UUID mor2 : watcherDamaged.getDamagedBySource()) {
-                            if (mor2 != null
-                                    && mor == mor2) {
-                                creaturesAffected.add(mor);
-                            }
+            for (UUID mor : creaturesThatDiedThisTurn) {
+                if (watcherDamaged != null) {
+                    for (UUID mor2 : watcherDamaged.getDamagedBySource()) {
+                        if (mor2 != null
+                                && mor == mor2) {
+                            creaturesAffected.add(mor);
                         }
                     }
                 }
-                if (creaturesAffected != null
-                        && creaturesAffected.size() > 0) {
-                    game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
-                    return true;
-                }
+            }
+            if (creaturesAffected != null
+                    && creaturesAffected.size() > 0) {
+                game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
+                return true;
             }
         }
         return false;
@@ -148,7 +146,7 @@ class KrovikanVampireCreaturesDamagedWatcher extends Watcher {
     public final Set<UUID> damagedBySource = new HashSet<>();
 
     public KrovikanVampireCreaturesDamagedWatcher() {
-        super(KrovikanVampireCreaturesDamagedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(KrovikanVampireCreaturesDamagedWatcher.class, WatcherScope.GAME);
     }
 
     public KrovikanVampireCreaturesDamagedWatcher(final KrovikanVampireCreaturesDamagedWatcher watcher) {
@@ -184,7 +182,7 @@ class KrovikanVampireCreaturesDiedWatcher extends Watcher {
     public final Set<UUID> diedThisTurn = new HashSet<>();
 
     public KrovikanVampireCreaturesDiedWatcher() {
-        super(KrovikanVampireCreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(KrovikanVampireCreaturesDiedWatcher.class, WatcherScope.GAME);
     }
 
     public KrovikanVampireCreaturesDiedWatcher(final KrovikanVampireCreaturesDiedWatcher watcher) {

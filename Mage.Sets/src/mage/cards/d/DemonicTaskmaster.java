@@ -24,7 +24,7 @@ public final class DemonicTaskmaster extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature other than Demonic Taskmaster");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public DemonicTaskmaster(UUID ownerId, CardSetInfo setInfo) {

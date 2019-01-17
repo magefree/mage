@@ -1,10 +1,9 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.abilities.keyword.FlashAbility;
@@ -15,14 +14,15 @@ import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Offalsnout extends CardImpl {
 
     public Offalsnout(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(2);
@@ -31,7 +31,7 @@ public final class Offalsnout extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // When Offalsnout leaves the battlefield, exile target card from a graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(),false);
+        Ability ability = new LeavesBattlefieldTriggeredAbility(new ExileTargetEffect(), false);
         Target target = new TargetCardInGraveyard();
         ability.addTarget(target);
         this.addAbility(ability);

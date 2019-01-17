@@ -1,17 +1,13 @@
 package mage.client.util.sets;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.cards.repository.RepositoryEvent;
 import mage.constants.SetType;
-import static mage.constants.SetType.EXPANSION;
-import static mage.constants.SetType.SUPPLEMENTAL;
 import mage.deck.Standard;
+import mage.game.events.Listener;
+
+import java.util.*;
 
 /**
  * Utility class for constructed formats (expansions and other editions).
@@ -26,11 +22,36 @@ public final class ConstructedFormats {
     public static final String FRONTIER = "- Frontier";
     public static final String MODERN = "- Modern";
     public static final String VINTAGE_LEGACY = "- Vintage / Legacy";
+    public static final String JOKE = "- Joke Sets";
     public static final String CUSTOM = "- Custom";
     public static final Standard STANDARD_CARDS = new Standard();
 
+    // Attention -Month is 0 Based so Feb = 1 for example. //
+    private static final Date extendedDate = new GregorianCalendar(2009, 7, 20).getTime();
+    private static final Date frontierDate = new GregorianCalendar(2014, 6, 17).getTime();
+    private static final Date modernDate = new GregorianCalendar(2003, 6, 20).getTime();
+
+    // for all sets just return empty list
+    private static final List<String> all = new ArrayList<>();
+
     private static final Map<String, List<String>> underlyingSetCodesPerFormat = new HashMap<>();
     private static final List<String> formats = new ArrayList<>();
+    private static final Listener<RepositoryEvent> setsDbListener;
+
+    static {
+        buildLists();
+
+        // auto-update sets list on changes
+        setsDbListener = new Listener<RepositoryEvent>() {
+            @Override
+            public void event(RepositoryEvent event) {
+                if (event.getEventType().equals(RepositoryEvent.RepositoryEventType.DB_UPDATED)) {
+                    buildLists();
+                }
+            }
+        };
+        ExpansionRepository.instance.subscribe(setsDbListener);
+    }
 
     private ConstructedFormats() {
     }
@@ -57,12 +78,13 @@ public final class ConstructedFormats {
         }
     }
 
-    private static void buildLists() {
+    public static void buildLists() {
         underlyingSetCodesPerFormat.put(STANDARD, new ArrayList<>());
         underlyingSetCodesPerFormat.put(EXTENDED, new ArrayList<>());
         underlyingSetCodesPerFormat.put(FRONTIER, new ArrayList<>());
         underlyingSetCodesPerFormat.put(MODERN, new ArrayList<>());
         underlyingSetCodesPerFormat.put(VINTAGE_LEGACY, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(JOKE, new ArrayList<>());
         underlyingSetCodesPerFormat.put(CUSTOM, new ArrayList<>());
         final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
         formats.clear(); // prevent NPE on sorting if this is not the first try
@@ -83,6 +105,10 @@ public final class ConstructedFormats {
             // create the play formats
             if (set.getType() == SetType.CUSTOM_SET) {
                 underlyingSetCodesPerFormat.get(CUSTOM).add(set.getCode());
+                continue;
+            }
+            if (set.getType() == SetType.JOKESET) {
+                underlyingSetCodesPerFormat.get(JOKE).add(set.getCode());
                 continue;
             }
             underlyingSetCodesPerFormat.get(VINTAGE_LEGACY).add(set.getCode());
@@ -211,28 +237,17 @@ public final class ConstructedFormats {
         });
         if (!formats.isEmpty()) {
             formats.add(0, CUSTOM);
+            formats.add(0, JOKE);
             formats.add(0, VINTAGE_LEGACY);
             formats.add(0, MODERN);
-            formats.add(0, EXTENDED);
             formats.add(0, FRONTIER);
+            formats.add(0, EXTENDED);
             formats.add(0, STANDARD);
-
         }
         formats.add(0, ALL);
     }
 
     private static String getBlockDisplayName(String blockName) {
         return "* " + blockName + " Block";
-    }
-    // Attention -Month is 0 Based so Feb = 1 for example.
-    private static final Date extendedDate = new GregorianCalendar(2009, 7, 20).getTime();
-    private static final Date frontierDate = new GregorianCalendar(2014, 6, 17).getTime();
-    private static final Date modernDate = new GregorianCalendar(2003, 6, 20).getTime();
-
-    // for all sets just return empty list
-    private static final List<String> all = new ArrayList<>();
-
-    static {
-        buildLists();
     }
 }

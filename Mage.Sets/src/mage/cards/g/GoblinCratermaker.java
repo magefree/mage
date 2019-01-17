@@ -29,7 +29,7 @@ public final class GoblinCratermaker extends CardImpl {
             = new FilterNonlandPermanent("colorless nonland permanent");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public GoblinCratermaker(UUID ownerId, CardSetInfo setInfo) {

@@ -1,7 +1,12 @@
 package mage.verify;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+import static mage.verify.MtgJson.MTGJSON_IGNORE_NEW_PROPERTIES;
+
+@JsonIgnoreProperties(ignoreUnknown = MTGJSON_IGNORE_NEW_PROPERTIES)
 public class JsonToken {
     public String artist;
     public String borderColor;

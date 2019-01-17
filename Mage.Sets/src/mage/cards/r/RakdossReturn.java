@@ -28,7 +28,7 @@ public final class RakdossReturn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");
 
         // Rakdos's Return deals X damage to target opponent or planeswalker. That player or that planeswalker’s controller discards X cards.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addEffect(new RakdossReturnEffect());
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
@@ -65,7 +65,7 @@ class RakdossReturnEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Effect effect = new DiscardTargetEffect(new ManacostVariableValue());
+        Effect effect = new DiscardTargetEffect(ManacostVariableValue.instance);
         effect.setTargetPointer(new FixedTarget(player.getId(), game));
         return effect.apply(game, source);
     }

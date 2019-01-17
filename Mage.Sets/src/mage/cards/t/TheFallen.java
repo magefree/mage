@@ -62,7 +62,7 @@ class TheFallenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TheFallenWatcher watcher = (TheFallenWatcher) game.getState().getWatchers().get(TheFallenWatcher.class.getSimpleName());
+        TheFallenWatcher watcher = game.getState().getWatcher(TheFallenWatcher.class);
         if (watcher != null && watcher.getPlayersAndWalkersDealtDamageThisGame(source.getSourceId()) != null) {
             for (UUID playerId : watcher.getPlayersAndWalkersDealtDamageThisGame(source.getSourceId())) {
                 if (!source.isControlledBy(playerId)) {
@@ -80,7 +80,7 @@ class TheFallenWatcher extends Watcher {
     private Map<UUID, Set<UUID>> playersAndWalkersDealtDamageThisGame = new HashMap<>(); // Map<creatureId, Set<playerId>>
 
     public TheFallenWatcher() {
-        super(TheFallenWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(TheFallenWatcher.class, WatcherScope.GAME);
     }
 
     public TheFallenWatcher(final TheFallenWatcher watcher) {

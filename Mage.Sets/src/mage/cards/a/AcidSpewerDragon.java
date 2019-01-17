@@ -27,7 +27,7 @@ public final class AcidSpewerDragon extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Dragon creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 

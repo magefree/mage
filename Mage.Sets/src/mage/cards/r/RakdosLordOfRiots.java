@@ -105,7 +105,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Ability spellAbility = (SpellAbility) abilityToModify;
+        Ability spellAbility = abilityToModify;
         if (spellAbility != null) {
             OpponentsLostLifeCount dynamicValue = new OpponentsLostLifeCount();
             int amount = dynamicValue.calculate(game, source, this);

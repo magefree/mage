@@ -76,7 +76,7 @@ class BazaarOfWondersEffect extends OneShotEffect {
         String spellName = spell.getName();
         FilterPermanent filter1 = new FilterPermanent();
         filter1.add(new NamePredicate(spellName));
-        filter1.add(Predicates.not(new TokenPredicate()));
+        filter1.add(Predicates.not(TokenPredicate.instance));
         if (!game.getBattlefield().getActivePermanents(filter1, source.getControllerId(), game).isEmpty()) {
             spell.counter(source.getControllerId(), game);
             return true;

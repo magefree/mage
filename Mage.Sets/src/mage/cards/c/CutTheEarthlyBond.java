@@ -21,7 +21,7 @@ public final class CutTheEarthlyBond extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchanted permanent");
     static {
-        filter.add(new EnchantedPredicate());
+        filter.add(EnchantedPredicate.instance);
     }
 
     public CutTheEarthlyBond(UUID ownerId, CardSetInfo setInfo) {

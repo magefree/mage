@@ -25,7 +25,7 @@ public final class BraceForImpact extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("multicolored creature");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public BraceForImpact(UUID ownerId, CardSetInfo setInfo) {

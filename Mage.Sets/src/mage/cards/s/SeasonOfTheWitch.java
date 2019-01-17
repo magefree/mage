@@ -87,13 +87,13 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
                     continue;
                 }
                 // Creatures that attacked are safe.
-                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+                AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
                 if (watcher != null
                         && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
                 }
                 // Creatures that couldn't attack are safe.
-                CouldAttackThisTurnWatcher watcher2 = (CouldAttackThisTurnWatcher) game.getState().getWatchers().get(CouldAttackThisTurnWatcher.class.getSimpleName());
+                CouldAttackThisTurnWatcher watcher2 = game.getState().getWatcher(CouldAttackThisTurnWatcher.class);
                 if (watcher2 != null
                         && !watcher2.getCouldAttackThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
@@ -112,7 +112,7 @@ class CouldAttackThisTurnWatcher extends Watcher {
     public final Set<MageObjectReference> couldAttackThisTurnCreatures = new HashSet<>();
 
     public CouldAttackThisTurnWatcher() {
-        super(CouldAttackThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(CouldAttackThisTurnWatcher.class, WatcherScope.GAME);
     }
 
     public CouldAttackThisTurnWatcher(final CouldAttackThisTurnWatcher watcher) {
