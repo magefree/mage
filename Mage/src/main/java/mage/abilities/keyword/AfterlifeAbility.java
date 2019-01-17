@@ -25,7 +25,7 @@ public class AfterlifeAbility extends DiesTriggeredAbility {
                 + CardUtil.numberToText(tokenCount, "a")
                 + " 1/1 white and black Spirit creature token"
                 + (tokenCount > 1 ? "s" : "")
-                + " with flying)</i>";
+                + " with flying.)</i>";
     }
 
     @Override
