@@ -6,13 +6,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.FlipCoinEvent;
 import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.util.CardUtil;
-import mage.util.RandomUtil;
 
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ public final class KrarksThumb extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
 
         // If you would flip a coin, instead flip two coins and ignore one.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KrarksThumbEffect()));
+        this.addAbility(new SimpleStaticAbility(new KrarksThumbEffect()));
     }
 
     private KrarksThumb(final KrarksThumb card) {
@@ -43,7 +43,7 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
 
     KrarksThumbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would flip a coin, instead flip two coins and ignore one";
+        staticText = "If you would flip a coin, instead flip two coins and ignore one.";
     }
 
     private KrarksThumbEffect(final KrarksThumbEffect effect) {
@@ -51,25 +51,14 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public KrarksThumbEffect copy() {
+        return new KrarksThumbEffect(this);
+    }
+
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player == null || !player.getId().equals(source.getControllerId())) {
-            return false;
-        }
-        FlipCoinEvent flipEvent = (FlipCoinEvent) event;
-        boolean secondFlip = RandomUtil.nextBoolean();
-        game.informPlayers(player.getLogName() + " flipped a " + flipEvent.getResultName()
-                + " and a " + CardUtil.booleanToFlipName(secondFlip)
-        );
-        boolean chosenFlip = player.chooseUse(
-                Outcome.Benefit, "Choose which coin you want",
-                (flipEvent.isWinnable() ? "(You chose " + flipEvent.getChosenName() + ")" : null),
-                flipEvent.getResultName(), CardUtil.booleanToFlipName(secondFlip), source, game
-        );
-        if (!chosenFlip) {
-            flipEvent.setResult(secondFlip);
-        }
-        game.informPlayers(player.getLogName() + " chooses to keep " + flipEvent.getResultName());
+        FlipCoinEvent flipCoinEvent = (FlipCoinEvent) event;
+        flipCoinEvent.setFlipCount(2 * flipCoinEvent.getFlipCount());
         return false;
     }
 
@@ -86,10 +75,5 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
-    }
-
-    @Override
-    public KrarksThumbEffect copy() {
-        return new KrarksThumbEffect(this);
     }
 }

@@ -62,6 +62,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Caribou Range", 11, Rarity.RARE, mage.cards.c.CaribouRange.class));
         cards.add(new SetCardInfo("Celestial Sword", 314, Rarity.RARE, mage.cards.c.CelestialSword.class));
         cards.add(new SetCardInfo("Centaur Archer", 282, Rarity.UNCOMMON, mage.cards.c.CentaurArcher.class));
+        cards.add(new SetCardInfo("Chaos Lord", 178, Rarity.RARE, mage.cards.c.ChaosLord.class));
         cards.add(new SetCardInfo("Chaos Moon", 179, Rarity.RARE, mage.cards.c.ChaosMoon.class));
         cards.add(new SetCardInfo("Chub Toad", 229, Rarity.COMMON, mage.cards.c.ChubToad.class));
         cards.add(new SetCardInfo("Circle of Protection: Black", 12, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlack.class));
@@ -287,6 +288,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Scaled Wurm", 262, Rarity.COMMON, mage.cards.s.ScaledWurm.class));
         cards.add(new SetCardInfo("Sea Spirit", 95, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class));
         cards.add(new SetCardInfo("Seizures", 159, Rarity.COMMON, mage.cards.s.Seizures.class));
+        cards.add(new SetCardInfo("Seraph", 51, Rarity.RARE, mage.cards.s.Seraph.class));
         cards.add(new SetCardInfo("Shambling Strider", 263, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));
         cards.add(new SetCardInfo("Shatter", 216, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shield Bearer", 52, Rarity.COMMON, mage.cards.s.ShieldBearer.class));

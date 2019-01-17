@@ -2573,13 +2573,34 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean chosen = false;
         if (winnable) {
             chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
-            game.informPlayers(getLogName() + " chose " + (chosen ? "heads." : "tails."));
+            game.informPlayers(getLogName() + " chose " + CardUtil.booleanToFlipName(chosen));
         }
         boolean result = RandomUtil.nextBoolean();
         FlipCoinEvent event = new FlipCoinEvent(playerId, source.getSourceId(), result, chosen, winnable);
         event.addAppliedEffects(appliedEffects);
         game.replaceEvent(event);
-        game.informPlayers(getLogName() + " got " + (event.getResult() ? "heads" : "tails"));
+        game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult()));
+        if (event.getFlipCount() > 1) {
+            boolean canChooseHeads = event.getResult();
+            boolean canChooseTails = !event.getResult();
+            for (int i = 1; i < event.getFlipCount(); i++) {
+                boolean tempFlip = RandomUtil.nextBoolean();
+                canChooseHeads = canChooseHeads || tempFlip;
+                canChooseTails = canChooseTails || !tempFlip;
+                game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(tempFlip));
+            }
+            if (canChooseHeads && canChooseTails) {
+                event.setResult(chooseUse(Outcome.Benefit, "Choose which flip to keep",
+                        (event.isWinnable() ? "(You called " + event.getChosenName() + ")" : null),
+                        "Heads", "Tails", source, game
+                ));
+            } else if (canChooseHeads) {
+                event.setResult(true);
+            } else {
+                event.setResult(false);
+            }
+            game.informPlayers(getLogName() + " chose to keep " + CardUtil.booleanToFlipName(event.getResult()));
+        }
         if (event.isWinnable()) {
             game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip");
         }
