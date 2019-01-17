@@ -1,8 +1,5 @@
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -23,8 +20,11 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author themogwi
  */
 public final class Plaguecrafter extends CardImpl {
@@ -43,7 +43,7 @@ public final class Plaguecrafter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PlaguecrafterEffect()));
     }
 
-    public Plaguecrafter(final Plaguecrafter card) {
+    private Plaguecrafter(final Plaguecrafter card) {
         super(card);
     }
 
@@ -55,13 +55,13 @@ public final class Plaguecrafter extends CardImpl {
 
 class PlaguecrafterEffect extends OneShotEffect {
 
-    public PlaguecrafterEffect() {
+    PlaguecrafterEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player sacrifices a creature or planeswalker. "
                 + "Each player who can't discards a card.";
     }
 
-    public PlaguecrafterEffect(final PlaguecrafterEffect effect) {
+    private PlaguecrafterEffect(final PlaguecrafterEffect effect) {
         super(effect);
     }
 
@@ -82,20 +82,22 @@ class PlaguecrafterEffect extends OneShotEffect {
 
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                FilterControlledPermanent filter = new FilterControlledPermanent();
-                filter.add(Predicates.or(
-                        new CardTypePredicate(CardType.CREATURE),
-                        new CardTypePredicate(CardType.PLANESWALKER)));
-                TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-                if (target.canChoose(player.getId(), game)) {
-                    while (!target.isChosen() && player.canRespond()) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                    }
-                    perms.addAll(target.getTargets());
-                } else {
-                    cantSac.add(playerId);
+            if (player == null) {
+                continue;
+            }
+            FilterControlledPermanent filter = new FilterControlledPermanent("creature or planeswalker");
+            filter.add(Predicates.or(
+                    new CardTypePredicate(CardType.CREATURE),
+                    new CardTypePredicate(CardType.PLANESWALKER)
+            ));
+            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+            if (target.canChoose(player.getId(), game)) {
+                while (!target.isChosen() && player.canRespond()) {
+                    player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 }
+                perms.addAll(target.getTargets());
+            } else {
+                cantSac.add(playerId);
             }
         }
 
