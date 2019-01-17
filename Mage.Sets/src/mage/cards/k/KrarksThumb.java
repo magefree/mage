@@ -3,12 +3,16 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.events.FlipCoinEvent;
+import mage.game.events.GameEvent;
 
 import java.util.UUID;
 
@@ -35,7 +39,7 @@ public final class KrarksThumb extends CardImpl {
     }
 }
 
-class KrarksThumbEffect extends ContinuousEffectImpl {
+class KrarksThumbEffect extends ReplacementEffectImpl {
 
     KrarksThumbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -52,12 +56,20 @@ class KrarksThumbEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.setExtraCoinFlips(2 * controller.getExtraCoinFlips());
-        }
-        return true;
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        FlipCoinEvent flipCoinEvent = (FlipCoinEvent) event;
+        flipCoinEvent.setFlipCount(2 * flipCoinEvent.getFlipCount());
+        return false;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.FLIP_COIN;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return source.isControlledBy(event.getPlayerId());
     }
 
     @Override

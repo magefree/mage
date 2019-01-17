@@ -98,7 +98,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected int landsPlayed;
     protected int landsPerTurn = 1;
     protected int loyaltyUsePerTurn = 1;
-    protected int extraCoinFlips = 1;
     protected int maxHandSize = 7;
     protected int maxAttackedBy = Integer.MAX_VALUE;
     protected ManaPool manaPool;
@@ -224,7 +223,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.landsPlayed = player.landsPlayed;
         this.landsPerTurn = player.landsPerTurn;
         this.loyaltyUsePerTurn = player.loyaltyUsePerTurn;
-        this.extraCoinFlips = player.extraCoinFlips;
         this.maxHandSize = player.maxHandSize;
         this.maxAttackedBy = player.maxAttackedBy;
         this.manaPool = player.manaPool.copy();
@@ -315,7 +313,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.landsPlayed = player.getLandsPlayed();
         this.landsPerTurn = player.getLandsPerTurn();
         this.loyaltyUsePerTurn = player.getLoyaltyUsePerTurn();
-        this.extraCoinFlips = player.getExtraCoinFlips();
         this.maxHandSize = player.getMaxHandSize();
         this.maxAttackedBy = player.getMaxAttackedBy();
         this.manaPool = player.getManaPool().copy();
@@ -436,7 +433,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.abilities.clear();
         this.landsPerTurn = 1;
         this.loyaltyUsePerTurn = 1;
-        this.extraCoinFlips = 1;
         this.maxHandSize = 7;
         this.maxAttackedBy = Integer.MAX_VALUE;
         this.canGainLife = true;
@@ -2084,16 +2080,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int getExtraCoinFlips() {
-        return extraCoinFlips;
-    }
-
-    @Override
-    public void setExtraCoinFlips(int extraCoinFlips) {
-        this.extraCoinFlips = extraCoinFlips;
-    }
-
-    @Override
     public int getMaxHandSize() {
         return maxHandSize;
     }
@@ -2593,12 +2579,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         FlipCoinEvent event = new FlipCoinEvent(playerId, source.getSourceId(), result, chosen, winnable);
         event.addAppliedEffects(appliedEffects);
         game.replaceEvent(event);
-        if (extraCoinFlips > 1) {
+        if (event.getFlipCount() > 1) {
             boolean canChooseHeads = event.getResult();
             boolean canChooseTails = !event.getResult();
-            boolean tempFlip;
-            for (int i = 0; i < extraCoinFlips; i++) {
-                tempFlip = RandomUtil.nextBoolean();
+            for (int i = 1; i < event.getFlipCount(); i++) {
+                boolean tempFlip = RandomUtil.nextBoolean();
                 canChooseHeads = canChooseHeads || tempFlip;
                 canChooseTails = canChooseTails || !tempFlip;
                 game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(tempFlip));

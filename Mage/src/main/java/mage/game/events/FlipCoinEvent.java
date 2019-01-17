@@ -11,6 +11,7 @@ public class FlipCoinEvent extends GameEvent {
     private boolean result;
     private final boolean chosen;
     private final boolean winnable;
+    private int flipCount = 1;
 
     public FlipCoinEvent(UUID playerId, UUID sourceId, boolean result, boolean chosen, boolean winnable) {
         super(EventType.FLIP_COIN, playerId, sourceId, playerId);
@@ -41,6 +42,14 @@ public class FlipCoinEvent extends GameEvent {
 
     public boolean isWinnable() {
         return winnable;
+    }
+
+    public int getFlipCount() {
+        return flipCount;
+    }
+
+    public void setFlipCount(int flipCount) {
+        this.flipCount = flipCount;
     }
 
     public CoinFlippedEvent getFlippedEvent() {

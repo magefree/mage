@@ -141,10 +141,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setLoyaltyUsePerTurn(int loyaltyUsePerTurn);
 
-    int getExtraCoinFlips();
-
-    void setExtraCoinFlips(int getExtraCoinFlips);
-
     int getMaxHandSize();
 
     void setMaxHandSize(int maxHandSize);
