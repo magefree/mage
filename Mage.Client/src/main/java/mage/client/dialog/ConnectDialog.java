@@ -10,6 +10,7 @@ import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.client.util.Config;
 import mage.client.util.gui.countryBox.CountryItemEditor;
@@ -513,7 +514,7 @@ public class ConnectDialog extends MageDialog {
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected() || redownloadDatabase);
             String allMAC = "";
             try {
-                allMAC = connection.getMAC();
+                allMAC = Connection.getMAC();
             } catch (SocketException ex) {
             }
             connection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);
@@ -535,6 +536,7 @@ public class ConnectDialog extends MageDialog {
     private class ConnectTask extends SwingWorker<Boolean, Void> {
 
         private boolean result = false;
+        private String lastConnectError = "";
 
         private static final int CONNECTION_TIMEOUT_MS = 2100;
 
@@ -543,6 +545,7 @@ public class ConnectDialog extends MageDialog {
             lblStatus.setText("Connecting...");
             btnConnect.setEnabled(false);
             result = MageFrame.connect(connection);
+            lastConnectError = SessionHandler.getLastConnectError();
             return result;
         }
 
@@ -556,7 +559,7 @@ public class ConnectDialog extends MageDialog {
                     connected();
                     MageFrame.getInstance().prepareAndShowTablesPane();
                 } else {
-                    lblStatus.setText("Could not connect");
+                    lblStatus.setText("Could not connect: " + lastConnectError);
                 }
             } catch (InterruptedException ex) {
                 logger.fatal("Update Players Task error", ex);

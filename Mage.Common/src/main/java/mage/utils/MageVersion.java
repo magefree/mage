@@ -16,7 +16,9 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
     public final static int MAGE_VERSION_MINOR = 4;
     public final static int MAGE_VERSION_PATCH = 33;
     public final static String MAGE_EDITION_INFO = ""; // set "-beta" for 1.4.32-betaV0
-    public final static String MAGE_VERSION_MINOR_PATCH = "V0";
+    public final static String MAGE_VERSION_MINOR_PATCH = "V1"; // default V0
+    // strict mode
+    private final static boolean MAGE_VERSION_MINOR_PATCH_MUST_BE_SAME = true; // set true on uncompatible github changes, set false after new major release (after MAGE_VERSION_PATCH changes)
 
     private final int major;
     private final int minor;
@@ -74,7 +76,9 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
         if (patch != o.patch) {
             return patch - o.patch;
         }
+        if (MAGE_VERSION_MINOR_PATCH_MUST_BE_SAME && !minorPatch.equals(o.minorPatch)) {
+            return minorPatch.compareTo(o.minorPatch);
+        }
         return editionInfo.compareTo(o.editionInfo);
     }
-
 }

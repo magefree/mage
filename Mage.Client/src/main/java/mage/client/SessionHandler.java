@@ -1,6 +1,5 @@
 package mage.client;
 
-import java.util.*;
 import mage.cards.decks.DeckCardLists;
 import mage.client.chat.LocalCommands;
 import mage.client.dialog.PreferencesDialog;
@@ -16,19 +15,22 @@ import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.view.*;
 
+import java.util.*;
+
 /**
  * Created by IGOUDT on 15-9-2016.
  */
 public final class SessionHandler {
 
     private static Session session;
+    private static String lastConnectError = "";
 
     public static void startSession(MageFrame mageFrame) {
 
         session = new SessionImpl(mageFrame);
         session.setJsonLogActive("true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_LOG_AUTO_SAVE, "true")));
     }
-    
+
     public static void ping() {
         session.ping();
     }
@@ -46,7 +48,17 @@ public final class SessionHandler {
     }
 
     public static boolean connect(Connection connection) {
-        return session.connect(connection);
+        lastConnectError = "";
+        if (session.connect(connection)) {
+            return true;
+        } else {
+            lastConnectError = session.getLastError();
+            return false;
+        }
+    }
+
+    public static String getLastConnectError() {
+        return lastConnectError;
     }
 
     public static boolean stopConnecting() {

@@ -767,7 +767,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 prepareAndShowTablesPane();
                 return true;
             } else {
-                showMessage("Unable connect to server");
+                showMessage("Unable connect to server: " + SessionHandler.getLastConnectError());
             }
         } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

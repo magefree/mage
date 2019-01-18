@@ -61,6 +61,7 @@ public class SessionImpl implements Session {
 
     private boolean canceled = false;
     private boolean jsonLogActive = false;
+    private String lastError = "";
 
     static {
         debugMode = System.getProperty("debug.mage") != null;
@@ -195,20 +196,29 @@ public class SessionImpl implements Session {
                 && handleRemotingTaskExceptions(new RemotingTask() {
             @Override
             public boolean run() throws Throwable {
+                setLastError("");
                 logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
                 boolean registerResult;
                 if (connection.getAdminPassword() == null) {
                     // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                     registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
-                    if (registerResult) {
-                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
-                    }
                 } else {
                     registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
                 }
                 if (registerResult) {
                     serverState = server.getServerState();
+
+                    // client side check for incompatible versions
+                    if (client.getVersion().compareTo(serverState.getVersion()) != 0) {
+                        String err = "Client and server versions are incompatible.";
+                        setLastError(err);
+                        logger.info(err);
+                        disconnect(false);
+                        return false;
+                    }
+
                     if (!connection.getUsername().equals("Admin")) {
+                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
                         updateDatabase(connection.isForceDBComparison(), serverState);
                     }
                     logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
@@ -1619,6 +1629,15 @@ public class SessionImpl implements Session {
     @Override
     public void setJsonLogActive(boolean jsonLogActive) {
         this.jsonLogActive = jsonLogActive;
+    }
+
+    private void setLastError(String error) {
+        lastError = error;
+    }
+
+    @Override
+    public String getLastError() {
+        return lastError;
     }
 
 }
