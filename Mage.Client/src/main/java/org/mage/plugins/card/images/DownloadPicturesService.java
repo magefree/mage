@@ -26,8 +26,8 @@ import java.awt.event.ItemEvent;
 import java.io.*;
 import java.net.*;
 import java.nio.file.AccessDeniedException;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -817,13 +817,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 // can save result
                 if (isDownloadOK & httpConn != null) {
                     // save data to temp
-                    OutputStream out = null;
-                    OutputStream tfileout = null;
-                    InputStream in = null;
-                    try {
-                        in = new BufferedInputStream(httpConn.getInputStream());
-                        tfileout = new TFileOutputStream(fileTempImage);
-                        out = new BufferedOutputStream(tfileout);
+                    try (InputStream in = new BufferedInputStream(httpConn.getInputStream());
+                         OutputStream tfileout = new TFileOutputStream(fileTempImage);
+                         OutputStream out = new BufferedOutputStream(tfileout)) {
                         byte[] buf = new byte[1024];
                         int len;
                         while ((len = in.read(buf)) != -1) {
@@ -849,13 +845,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             }
                             out.write(buf, 0, len);
                         }
-                    } finally {
-                        StreamUtils.closeQuietly(in);
-                        StreamUtils.closeQuietly(out);
-                        StreamUtils.closeQuietly(tfileout);
                     }
-
-
                     // TODO: add two faces card correction? (WTF)
                     // SAVE final data
                     if (fileTempImage.exists()) {
@@ -912,7 +902,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             this.cardsDownloadQueue.removeAll(downloadedCards);
             this.cardsMissing.removeAll(downloadedCards);
 
-            if (this.cardsDownloadQueue.size() == 0) {
+            if (this.cardsDownloadQueue.isEmpty()) {
                 // stop download
                 uiDialog.getProgressBar().setString("0 images remaining. Please close.");
             } else {
