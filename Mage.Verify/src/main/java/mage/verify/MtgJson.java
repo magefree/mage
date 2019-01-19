@@ -2,7 +2,6 @@ package mage.verify;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mage.util.StreamUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -133,14 +132,9 @@ public final class MtgJson {
             }
             stream = new FileInputStream(file);
         }
-        ZipInputStream zipInputStream = null;
-        try {
-            zipInputStream = new ZipInputStream(stream);
+        try (ZipInputStream zipInputStream = new ZipInputStream(stream)) {
             zipInputStream.getNextEntry();
             return new ObjectMapper().readValue(zipInputStream, ref);
-        } finally {
-            StreamUtils.closeQuietly(zipInputStream);
-            StreamUtils.closeQuietly(stream);
         }
 
     }
