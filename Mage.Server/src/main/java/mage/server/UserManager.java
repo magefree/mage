@@ -70,13 +70,8 @@ public enum UserManager {
         final Lock r = lock.readLock();
         r.lock();
         try {
-            Optional<User> u = users.values().stream().filter(user -> user.getName().equals(userName))
+            return users.values().stream().filter(user -> user.getName().equals(userName))
                     .findFirst();
-            if (u.isPresent()) {
-                return u;
-            } else {
-                return Optional.empty();
-            }
         } finally {
             r.unlock();
         }
@@ -84,7 +79,7 @@ public enum UserManager {
     }
 
     public Collection<User> getUsers() {
-        ArrayList<User> userList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         final Lock r = lock.readLock();
         r.lock();
         try {

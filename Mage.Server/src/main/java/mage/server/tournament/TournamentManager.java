@@ -16,8 +16,8 @@ public enum TournamentManager {
     instance;
     private final ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<>();
 
-    public TournamentController getTournamentController(UUID tournamentId) {
-        return controllers.get(tournamentId);
+    public Optional<TournamentController> getTournamentController(UUID tournamentId) {
+        return Optional.ofNullable(controllers.get(tournamentId));
     }
 
     public void createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {

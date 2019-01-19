@@ -56,9 +56,9 @@ public final class Main {
     private static final File extensionFolder = new File("extensions");
 
     public static final PluginClassLoader classLoader = new PluginClassLoader();
-    public static TransporterServer server;
-    protected static boolean testMode;
-    protected static boolean fastDbMode;
+    private static TransporterServer server;
+    private static boolean testMode;
+    private static boolean fastDbMode;
 
     /**
      * @param args the command line arguments
@@ -418,8 +418,10 @@ public final class Main {
         File[] files = directory.listFiles(
                 (dir, name) -> name.endsWith(".game")
         );
-        for (File file : files) {
-            file.delete();
+        if(files != null) {
+            for (File file : files) {
+                file.delete();
+            }
         }
     }
 
