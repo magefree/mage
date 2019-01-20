@@ -34,7 +34,7 @@ public final class IncubationIncongruity extends SplitCard {
                 new StaticValue(1), StaticFilters.FILTER_CARD_CREATURE_A,
                 Zone.LIBRARY, false, true, false,
                 Zone.HAND, false, false, false
-        ));
+        ).setBackInRandomOrder(true));
 
         // Incongruity
         // Exile target creature. That creature's controller creates a 3/3 green Frog Lizard creature token.

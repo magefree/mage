@@ -22,7 +22,7 @@ public final class ShimmerOfPossibility extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
                 new StaticValue(4), false, new StaticValue(1), StaticFilters.FILTER_CARD, Zone.LIBRARY,
                 false, false, false, Zone.HAND, false, false, false
-        ));
+        ).setBackInRandomOrder(true));
     }
 
     private ShimmerOfPossibility(final ShimmerOfPossibility card) {
