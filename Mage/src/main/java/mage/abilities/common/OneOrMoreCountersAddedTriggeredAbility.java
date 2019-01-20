@@ -20,7 +20,7 @@ public class OneOrMoreCountersAddedTriggeredAbility extends TriggeredAbilityImpl
     }
 
     public OneOrMoreCountersAddedTriggeredAbility(Effect effect, boolean optional, CounterType counterType) {
-        super(Zone.BATTLEFIELD, effect, true);
+        super(Zone.ALL, effect, true);
         this.counterType = counterType;
     }
 
