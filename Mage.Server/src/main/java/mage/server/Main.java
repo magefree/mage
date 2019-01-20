@@ -418,7 +418,7 @@ public final class Main {
         File[] files = directory.listFiles(
                 (dir, name) -> name.endsWith(".game")
         );
-        if(files != null) {
+        if (files != null) {
             for (File file : files) {
                 file.delete();
             }
