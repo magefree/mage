@@ -392,7 +392,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 4: // AJANI CALLER OF THE PRIDE 3
                                 sb.append("Create X 2/2 white Cat creature tokens, where X is your life total.");
-                                effects.add(new CreateTokenEffect(new CatToken(), new ControllerLifeCount()));
+                                effects.add(new CreateTokenEffect(new CatToken(), ControllerLifeCount.instance));
                                 break;
                             case 5: // AJANI MENTOR OF HEROES 3
                                 sb.append("You gain 100 life.");
