@@ -471,7 +471,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                 game.informPlayers(sb.toString());
                 if (target != null) {
                     if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
-                        controller.chooseTarget(outcome, target, source, game);
+                        target.chooseTarget(outcome, controller.getId(), source, game);
                     } else {
                         // 1/19/2018 	(...) If the ability that comes up requires a target and there are no legal targets available, click again until that’s not true.
                         game.informPlayers("[URZA] Target can't be chosen, picking next ability...");
