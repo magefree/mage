@@ -1,6 +1,6 @@
-
 package mage.cards.v;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.effects.Effect;
@@ -9,14 +9,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -48,11 +45,10 @@ public final class VengefulDreams extends CardImpl {
 
 enum VengefulDreamsAdjuster implements TargetAdjuster {
     instance;
-    private static final FilterPermanent filter = new FilterAttackingCreature();
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        Target target = new TargetPermanent(0, ability.getManaCostsToPay().getX(), filter, false);
+        Target target = new TargetPermanent(ability.getCosts().getVariableCosts().get(0).getAmount(), new FilterAttackingCreature());
         ability.addTarget(target);
     }
 }
