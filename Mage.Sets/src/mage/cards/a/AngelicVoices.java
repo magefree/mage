@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -15,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -26,7 +26,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class AngelicVoices extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonartifact, nonwhite creatures");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("nonartifact, nonwhite creatures");
 
     static {
         filter.add(Predicates.not(
