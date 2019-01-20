@@ -800,7 +800,7 @@ public class TestPlayer implements Player {
     }
 
     private void printCards(Set<Card> cards) {
-        printCards(cards.stream().collect(Collectors.toList()));
+        printCards(new ArrayList<>(cards));
     }
 
     private void printCards(List<Card> cards) {
@@ -2609,13 +2609,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean flipCoin(Game game) {
-        return computerPlayer.flipCoin(game);
+    public boolean flipCoin(Ability source, Game game, boolean winnable) {
+        return computerPlayer.flipCoin(source, game, true);
     }
 
     @Override
-    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
-        return computerPlayer.flipCoin(game, appliedEffects);
+    public boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
+        return computerPlayer.flipCoin(source, game, true, appliedEffects);
     }
 
     @Override

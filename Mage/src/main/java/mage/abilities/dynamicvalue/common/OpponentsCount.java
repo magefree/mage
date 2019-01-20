@@ -8,7 +8,8 @@ import mage.game.Game;
 /**
  * @author JayDi85
  */
-public class OpponentsCount implements DynamicValue {
+public enum OpponentsCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -17,7 +18,7 @@ public class OpponentsCount implements DynamicValue {
 
     @Override
     public OpponentsCount copy() {
-        return new OpponentsCount();
+        return OpponentsCount.instance;
     }
 
     @Override

@@ -24,7 +24,7 @@ public final class HauntingMisery extends CardImpl {
         this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCreatureCard()));
         // Haunting Misery deals X damage to target player.
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new GetXValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
     }
 
     public HauntingMisery(final HauntingMisery card) {

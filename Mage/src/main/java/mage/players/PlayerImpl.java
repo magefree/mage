@@ -42,11 +42,8 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
-import mage.game.events.DamagePlayerEvent;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
+import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -2560,27 +2557,59 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean flipCoin(Game game) {
-        return this.flipCoin(game, null);
+    public boolean flipCoin(Ability source, Game game, boolean winnable) {
+        return this.flipCoin(source, game, winnable, null);
     }
 
     /**
+     * @param source
      * @param game
+     * @param winnable
      * @param appliedEffects
-     * @return true if player won the toss
+     * @return if winnable, true if player won the toss, if not winnable, true for heads and false for tails
      */
     @Override
-    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
+    public boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
+        boolean chosen = false;
+        if (winnable) {
+            chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
+            game.informPlayers(getLogName() + " chose " + CardUtil.booleanToFlipName(chosen));
+        }
         boolean result = RandomUtil.nextBoolean();
-        if (!game.isSimulation()) {
-            game.informPlayers("[Flip a coin] " + getLogName() + (result ? " won (head)." : " lost (tail)."));
+        FlipCoinEvent event = new FlipCoinEvent(playerId, source.getSourceId(), result, chosen, winnable);
+        event.addAppliedEffects(appliedEffects);
+        game.replaceEvent(event);
+        game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult()));
+        if (event.getFlipCount() > 1) {
+            boolean canChooseHeads = event.getResult();
+            boolean canChooseTails = !event.getResult();
+            for (int i = 1; i < event.getFlipCount(); i++) {
+                boolean tempFlip = RandomUtil.nextBoolean();
+                canChooseHeads = canChooseHeads || tempFlip;
+                canChooseTails = canChooseTails || !tempFlip;
+                game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(tempFlip));
+            }
+            if (canChooseHeads && canChooseTails) {
+                event.setResult(chooseUse(Outcome.Benefit, "Choose which flip to keep",
+                        (event.isWinnable() ? "(You called " + event.getChosenName() + ")" : null),
+                        "Heads", "Tails", source, game
+                ));
+            } else if (canChooseHeads) {
+                event.setResult(true);
+            } else {
+                event.setResult(false);
+            }
+            game.informPlayers(getLogName() + " chose to keep " + CardUtil.booleanToFlipName(event.getResult()));
         }
-        GameEvent event = new GameEvent(GameEvent.EventType.FLIP_COIN, playerId, null, playerId, 0, result);
+        if (event.isWinnable()) {
+            game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip");
+        }
         event.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(event)) {
-            game.fireEvent(new GameEvent(GameEvent.EventType.COIN_FLIPPED, playerId, null, playerId, 0, event.getFlag()));
+        game.fireEvent(event.getFlippedEvent());
+        if (event.isWinnable()) {
+            return event.getResult() == event.getChosen();
         }
-        return event.getFlag();
+        return event.getResult();
     }
 
     @Override
@@ -2598,7 +2627,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
         int result = RandomUtil.nextInt(numSides) + 1;
         if (!game.isSimulation()) {
-            game.informPlayers("[Roll a die] " + getLogName() + " rolled a " + result + " on a " + numSides + " sided dice");
+            game.informPlayers("[Roll a die] " + getLogName() + " rolled a " + result + " on a " + numSides + " sided die");
         }
         GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DICE, playerId, null, playerId, result, true);
         event.setAppliedEffects(appliedEffects);

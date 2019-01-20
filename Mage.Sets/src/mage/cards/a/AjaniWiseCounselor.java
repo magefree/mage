@@ -44,7 +44,7 @@ public final class AjaniWiseCounselor extends CardImpl {
         // −9: Put X +1/+1 counters on target creature, where X is your life total.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(),
-                new ControllerLifeCount()
+                ControllerLifeCount.instance
         ).setText("put X +1/+1 counters on target creature, where X is your life total"), -9);
         this.addAbility(ability);
     }

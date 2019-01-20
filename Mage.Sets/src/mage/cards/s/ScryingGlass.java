@@ -27,7 +27,7 @@ public final class ScryingGlass extends CardImpl {
     public ScryingGlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // {3}, {tap}: Choose a number greater than 0 and a color. Target opponent reveals his or her hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card.
+        // {3}, {tap}: Choose a number greater than 0 and a color. Target opponent reveals their hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryingGlassEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
@@ -49,7 +49,7 @@ class ScryingGlassEffect extends OneShotEffect {
     
     public ScryingGlassEffect() {
         super(Outcome.Neutral);
-        staticText = "Choose a number greater than 0 and a color. Target opponent reveals his or her hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card";
+        staticText = "Choose a number greater than 0 and a color. Target opponent reveals their hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card";
     }
     
     public ScryingGlassEffect(final ScryingGlassEffect effect) {

@@ -44,7 +44,7 @@ public final class AjaniValiantProtector extends CardImpl {
         this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(new FilterCreatureCard(), Zone.HAND, Zone.LIBRARY), 1));
 
         // -11: Put X +1/+1 counters on target creature, where X is your life total. That creature gains trample until end of turn.
-        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), new ControllerLifeCount());
+        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), ControllerLifeCount.instance);
         effect.setText("Put X +1/+1 counters on target creature, where X is your life total.");
         ability = new LoyaltyAbility(effect, -11);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);

@@ -7,29 +7,24 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.watchers.common.PlayersAttackedThisTurnWatcher;
 
-import java.util.UUID;
-
 /**
  * @author JayDi85
  */
-public class AttackedThisTurnOpponentsCount implements DynamicValue {
+public enum AttackedThisTurnOpponentsCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return this.calculate(game, sourceAbility.getControllerId());
-    }
-
-    public int calculate(Game game, UUID controllerId) {
         PlayersAttackedThisTurnWatcher watcher = game.getState().getWatcher(PlayersAttackedThisTurnWatcher.class);
         if (watcher != null) {
-            return watcher.getAttackedOpponentsCount(controllerId);
+            return watcher.getAttackedOpponentsCount(sourceAbility.getControllerId());
         }
         return 0;
     }
 
     @Override
     public AttackedThisTurnOpponentsCount copy() {
-        return new AttackedThisTurnOpponentsCount();
+        return AttackedThisTurnOpponentsCount.instance;
     }
 
     @Override

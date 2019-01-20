@@ -51,7 +51,7 @@ public final class DovinGrandArbiter extends CardImpl {
                 new StaticValue(3), StaticFilters.FILTER_CARD,
                 Zone.LIBRARY, false, false, false,
                 Zone.HAND, false, false, false
-        ).setText("Look at the top ten cards of your library. " +
+        ).setBackInRandomOrder(true).setText("Look at the top ten cards of your library. " +
                 "Put three of them into your hand and the rest " +
                 "on the bottom of your library in a random order."
         ), -7));
@@ -70,7 +70,7 @@ public final class DovinGrandArbiter extends CardImpl {
 class DovinGrandArbiterDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     DovinGrandArbiterDelayedTriggeredAbility() {
-        super(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance()), Duration.EndOfTurn);
+        super(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance()), Duration.EndOfTurn, false);
     }
 
     private DovinGrandArbiterDelayedTriggeredAbility(final DovinGrandArbiterDelayedTriggeredAbility ability) {

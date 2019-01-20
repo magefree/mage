@@ -249,6 +249,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Warning", 38, Rarity.COMMON, mage.cards.w.Warning.class));
         cards.add(new SetCardInfo("Whirling Catapult", 224, Rarity.UNCOMMON, mage.cards.w.WhirlingCatapult.class));
         cards.add(new SetCardInfo("Whiteout", 185, Rarity.COMMON, mage.cards.w.Whiteout.class));
+        cards.add(new SetCardInfo("Wiitigo", 186, Rarity.RARE, mage.cards.w.Wiitigo.class));
         cards.add(new SetCardInfo("Wind Spirit", 75, Rarity.UNCOMMON, mage.cards.w.WindSpirit.class));
         cards.add(new SetCardInfo("Wings of Aesthir", 199, Rarity.UNCOMMON, mage.cards.w.WingsOfAesthir.class));
         cards.add(new SetCardInfo("Winter's Night", 200, Rarity.RARE, mage.cards.w.WintersNight.class));

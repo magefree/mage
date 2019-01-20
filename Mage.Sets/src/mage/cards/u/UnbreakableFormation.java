@@ -6,6 +6,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -68,7 +69,7 @@ class UnbreakableFormationEffect extends OneShotEffect {
             return false;
         }
         game.addEffect(new GainAbilityControlledEffect(
-                IndestructibleAbility.getInstance(), Duration.EndOfTurn,
+                VigilanceAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE
         ), source);
         return new AddCountersAllEffect(

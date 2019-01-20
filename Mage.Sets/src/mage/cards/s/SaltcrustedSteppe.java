@@ -36,7 +36,7 @@ public final class SaltcrustedSteppe extends CardImpl {
         this.addAbility(ability);
         // {1}, Remove X storage counters from Saltcrusted Steppe: Add X mana in any combination of {G} and/or {W}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.G, ColoredManaSymbol.W),
+                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance, ColoredManaSymbol.G, ColoredManaSymbol.W),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

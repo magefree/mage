@@ -500,6 +500,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         if (target.getOriginalTarget() instanceof TargetPermanent) {
             List<Permanent> targets;
+            TargetPermanent t = (TargetPermanent) target.getOriginalTarget();
             boolean outcomeTargets = true;
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source == null ? null : source.getSourceId(), ((TargetPermanent) target).getFilter(), game, target.getTargets());
@@ -511,6 +512,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 Collections.reverse(targets);
                 outcomeTargets = false;
                 //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
+            }
+            if (targets.isEmpty() && target.isRequired()) {
+                targets = game.getBattlefield().getActivePermanents(t.getFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
                 if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {

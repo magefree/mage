@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,14 +13,15 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AdamaroFirstToDesire extends CardImpl {
 
     public AdamaroFirstToDesire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -46,7 +46,7 @@ class MostCardsInOpponentsHandCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
         int maxCards = 0;
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
                 int cards = opponent.getHand().size();
@@ -60,7 +60,7 @@ class MostCardsInOpponentsHandCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new mage.abilities.dynamicvalue.common.CardsInControllerHandCount();
+        return new MostCardsInOpponentsHandCount();
     }
 
     @Override

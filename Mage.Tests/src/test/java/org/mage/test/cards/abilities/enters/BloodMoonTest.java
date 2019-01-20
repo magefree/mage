@@ -192,9 +192,9 @@ public class BloodMoonTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Pithing Needle");
         setChoice(playerB, "Blood Moon");
-        playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Ghost Quarter");
+        playLand(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ghost Quarter");
 
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Blood Moon", 1);

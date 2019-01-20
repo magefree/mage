@@ -22,7 +22,7 @@ public final class ViciousShadows extends CardImpl {
 
 
         // Whenever a creature dies, you may have Vicious Shadows deal damage to target player equal to the number of cards in that player's hand.
-        Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(new CardsInTargetHandCount()), true);
+        Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(CardsInTargetHandCount.instance), true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

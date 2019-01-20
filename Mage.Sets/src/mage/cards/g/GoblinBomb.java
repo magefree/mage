@@ -72,7 +72,7 @@ class GoblinBombEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            if (controller.flipCoin(game)) {
+            if (controller.flipCoin(source, game, true)) {
                 game.informPlayers("Goblin Bomb: Won flip. Put a fuse counter on Goblin Bomb.");
                 new AddCountersSourceEffect(CounterType.FUSE.createInstance(1)).apply(game, source);
                 return true;

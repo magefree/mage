@@ -25,7 +25,7 @@ public final class DreambornMuse extends CardImpl {
         this.toughness = new MageInt(2);
         
         // At the beginning of each player's upkeep, that player puts the top X cards of their library into their graveyard, where X is the number of cards in their hand.
-        PutLibraryIntoGraveTargetEffect effect = new PutLibraryIntoGraveTargetEffect(new CardsInTargetPlayerHandCount());
+        PutLibraryIntoGraveTargetEffect effect = new PutLibraryIntoGraveTargetEffect(CardsInTargetPlayerHandCount.instance);
         effect.setText("that player puts the top X cards of their library into their graveyard, where X is the number of cards in their hand.");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false));
         

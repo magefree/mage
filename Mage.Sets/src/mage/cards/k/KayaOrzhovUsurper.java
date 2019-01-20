@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class KayaOrzhovUsurper extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterNonlandPermanent("permanent with converted mana cost 1 or less");
+            = new FilterNonlandPermanent("nonland permanent with converted mana cost 1 or less");
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));

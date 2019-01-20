@@ -74,7 +74,7 @@ class HighestLifeTotalAmongOpponentsCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new CardsInControllerHandCount();
+        return CardsInControllerHandCount.instance;
     }
 
     @Override

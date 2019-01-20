@@ -34,15 +34,15 @@ public final class VolrathsDungeon extends CardImpl {
     public VolrathsDungeon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
-        // Pay 5 life: Destroy Volrath's Dungeon. Any player may activate this ability but only during his or her turn.
+        // Pay 5 life: Destroy Volrath's Dungeon. Any player may activate this ability but only during their turn.
         ActivatedAbility ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new DestroySourceEffect().setText("Destroy {this}. Any player may activate this ability but only during his or her turn."),
+                new DestroySourceEffect().setText("Destroy {this}. Any player may activate this ability but only during their turn."),
                 new PayLifeActivePlayerCost(5));
         ability.setMayActivate(TargetController.ACTIVE);
         this.addAbility(ability);
 
-        // Discard a card: Target player puts a card from his or her hand on top of his or her library. Activate this ability only any time you could cast a sorcery.
+        // Discard a card: Target player puts a card from their hand on top of their library. Activate this ability only any time you could cast a sorcery.
         FilterCard filter = new FilterCard("a card for payment");
         Ability ability2 = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new VolrathsDungeonEffect(), new DiscardCardCost(filter));
         ability2.addTarget(new TargetPlayer());
@@ -108,7 +108,7 @@ class VolrathsDungeonEffect extends OneShotEffect {
 
     public VolrathsDungeonEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target player puts a card from his or her hand on top of his or her library";
+        this.staticText = "Target player puts a card from their hand on top of their library";
     }
 
     public VolrathsDungeonEffect(final VolrathsDungeonEffect effect) {

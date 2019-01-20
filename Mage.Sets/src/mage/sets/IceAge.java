@@ -29,6 +29,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Sentinel", 306, Rarity.UNCOMMON, mage.cards.a.AdarkarSentinel.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 351, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aegis of the Meek", 307, Rarity.RARE, mage.cards.a.AegisOfTheMeek.class));
+        cards.add(new SetCardInfo("Aggression", 169, Rarity.UNCOMMON, mage.cards.a.Aggression.class));
         cards.add(new SetCardInfo("Altar of Bone", 281, Rarity.RARE, mage.cards.a.AltarOfBone.class));
         cards.add(new SetCardInfo("Anarchy", 170, Rarity.UNCOMMON, mage.cards.a.Anarchy.class));
         cards.add(new SetCardInfo("Arenson's Aura", 3, Rarity.COMMON, mage.cards.a.ArensonsAura.class));
@@ -62,6 +63,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Caribou Range", 11, Rarity.RARE, mage.cards.c.CaribouRange.class));
         cards.add(new SetCardInfo("Celestial Sword", 314, Rarity.RARE, mage.cards.c.CelestialSword.class));
         cards.add(new SetCardInfo("Centaur Archer", 282, Rarity.UNCOMMON, mage.cards.c.CentaurArcher.class));
+        cards.add(new SetCardInfo("Chaos Lord", 178, Rarity.RARE, mage.cards.c.ChaosLord.class));
         cards.add(new SetCardInfo("Chaos Moon", 179, Rarity.RARE, mage.cards.c.ChaosMoon.class));
         cards.add(new SetCardInfo("Chub Toad", 229, Rarity.COMMON, mage.cards.c.ChubToad.class));
         cards.add(new SetCardInfo("Circle of Protection: Black", 12, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlack.class));
@@ -287,6 +289,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Scaled Wurm", 262, Rarity.COMMON, mage.cards.s.ScaledWurm.class));
         cards.add(new SetCardInfo("Sea Spirit", 95, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class));
         cards.add(new SetCardInfo("Seizures", 159, Rarity.COMMON, mage.cards.s.Seizures.class));
+        cards.add(new SetCardInfo("Seraph", 51, Rarity.RARE, mage.cards.s.Seraph.class));
         cards.add(new SetCardInfo("Shambling Strider", 263, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));
         cards.add(new SetCardInfo("Shatter", 216, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shield Bearer", 52, Rarity.COMMON, mage.cards.s.ShieldBearer.class));
@@ -356,6 +359,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Whalebone Glider", 349, Rarity.UNCOMMON, mage.cards.w.WhaleboneGlider.class));
         cards.add(new SetCardInfo("White Scarab", 56, Rarity.UNCOMMON, mage.cards.w.WhiteScarab.class));
         cards.add(new SetCardInfo("Whiteout", 275, Rarity.UNCOMMON, mage.cards.w.Whiteout.class));
+        cards.add(new SetCardInfo("Wiitigo", 276, Rarity.RARE, mage.cards.w.Wiitigo.class));
         cards.add(new SetCardInfo("Wild Growth", 277, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Wind Spirit", 106, Rarity.UNCOMMON, mage.cards.w.WindSpirit.class));
         cards.add(new SetCardInfo("Wings of Aesthir", 305, Rarity.UNCOMMON, mage.cards.w.WingsOfAesthir.class));

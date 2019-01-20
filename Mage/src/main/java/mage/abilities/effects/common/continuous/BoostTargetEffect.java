@@ -99,7 +99,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder();
         if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getNumberOfTargets()) {
+            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
                 sb.append("up to ");
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");

@@ -21,7 +21,7 @@ public final class SphinxsRevelation extends CardImpl {
 
 
         // You gain X life and draw X cards.
-        ManacostVariableValue manaX = new ManacostVariableValue();
+        ManacostVariableValue manaX = ManacostVariableValue.instance;
         this.getSpellAbility().addEffect(new GainLifeEffect(manaX));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(manaX));
     }

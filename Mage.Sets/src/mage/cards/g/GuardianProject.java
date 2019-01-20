@@ -19,6 +19,7 @@ import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -71,7 +72,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (!filter.match(permanent, sourceId, controllerId, game)) {
             return false;
         }
@@ -97,7 +98,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
         if (player == null) {
             return false;
         }
-        if (!permanent.getName().equals("")) {
+        if (!permanent.getName().isEmpty()) {
             FilterCard filterCard = new FilterCard();
             filterCard.add(new NamePredicate(permanent.getName()));
             filterCard.add(new OwnerIdPredicate(controllerId));

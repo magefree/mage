@@ -45,7 +45,7 @@ public final class WarTax extends CardImpl {
 
 class WarTaxCantAttackUnlessPaysEffect extends PayCostToAttackBlockEffectImpl {
 
-    DynamicValue xCosts = new ManacostVariableValue();
+    DynamicValue xCosts = ManacostVariableValue.instance;
 
     WarTaxCantAttackUnlessPaysEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral, RestrictType.ATTACK);

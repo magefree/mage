@@ -29,7 +29,7 @@ public final class SerraAvatar extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Serra Avatar's power and toughness are each equal to your life total.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new ControllerLifeCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(ControllerLifeCount.instance, Duration.EndOfGame)));
         
         // When Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));

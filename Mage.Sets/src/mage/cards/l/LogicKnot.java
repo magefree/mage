@@ -24,7 +24,7 @@ public final class LogicKnot extends CardImpl {
         this.addAbility(new DelveAbility());
 
         // Counter target spell unless its controller pays {X}.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 

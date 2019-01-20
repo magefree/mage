@@ -68,7 +68,7 @@ class SearchForSurvivorsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.informPlayers("The controller of Search for Survivors will have his or her graveyard randomized.  "
+            game.informPlayers("The controller of Search for Survivors will have their graveyard randomized.  "
                     + " A card will be chosen at random from the controller's graveyard. "
                     + " The result is essentially the same as the card rule");
             // randomly arrange the graveyard

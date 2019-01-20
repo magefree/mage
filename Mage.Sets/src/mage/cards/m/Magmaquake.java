@@ -34,7 +34,7 @@ public final class Magmaquake extends CardImpl {
 
 
         // Magmaquake deals X damage to each creature without flying and each planeswalker.
-        this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
     }
 
     public Magmaquake(final Magmaquake card) {

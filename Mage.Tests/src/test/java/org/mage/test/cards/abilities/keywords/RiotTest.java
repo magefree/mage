@@ -31,11 +31,12 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Rampaging Rendhorn", 1); // Creature {4}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rampaging Rendhorn");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // yes - counter
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Rampaging Rendhorn", 1);
         assertPowerToughness(playerA, "Rampaging Rendhorn", 5, 5);
@@ -51,11 +52,12 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Rampaging Rendhorn", 1); // Creature {4}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rampaging Rendhorn");
-        setChoice(playerA, "No");
+        setChoice(playerA, "No"); // no - haste
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
 
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Rampaging Rendhorn", 1);
         assertPowerToughness(playerA, "Rampaging Rendhorn", 4, 4);
@@ -74,11 +76,12 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1); // Creature {1}{W}  2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // yes - counter
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
@@ -98,11 +101,12 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1); // Creature {1}{W}  2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "No");
+        setChoice(playerA, "No"); // no - haste
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
 
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);

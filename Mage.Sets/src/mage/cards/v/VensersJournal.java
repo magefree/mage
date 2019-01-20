@@ -30,7 +30,7 @@ public final class VensersJournal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of your upkeep, you gain 1 life for each card in your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new CardsInControllerHandCount()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(CardsInControllerHandCount.instance), TargetController.YOU, false));
     }
 
     public VensersJournal(final VensersJournal card) {

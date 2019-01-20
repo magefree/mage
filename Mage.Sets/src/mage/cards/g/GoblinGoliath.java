@@ -34,7 +34,7 @@ public final class GoblinGoliath extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Goblin Goliath enters the battlefield, create a number of 1/1 red Goblin creature tokens equal to the number of opponents you have.
-        Effect effect = new CreateTokenEffect(new GoblinToken(), new OpponentsCount());
+        Effect effect = new CreateTokenEffect(new GoblinToken(), OpponentsCount.instance);
         effect.setText("create a number of 1/1 red Goblin creature tokens equal to the number of opponents you have");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 

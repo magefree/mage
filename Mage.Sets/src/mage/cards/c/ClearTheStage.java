@@ -68,7 +68,7 @@ class ClearTheStageEffect extends OneShotEffect {
         if (!FerociousCondition.instance.apply(game, source)) {
             return true;
         }
-        Player player = game.getPlayer(source.getSourceId());
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null || !player.chooseUse(Outcome.Benefit, "Return a creature card from your graveyard to your hand?", source, game)) {
             return false;
         }

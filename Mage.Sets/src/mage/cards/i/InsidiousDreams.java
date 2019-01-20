@@ -74,7 +74,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        int amount = new GetXValue().calculate(game, source, this);
+        int amount = GetXValue.instance.calculate(game, source, this);
 
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterCard());

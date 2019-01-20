@@ -6,6 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreatureSpell;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -22,7 +23,7 @@ public final class EssenceCapture extends CardImpl {
 
         // Counter target creature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addTarget(new TargetSpell(new FilterCreatureSpell()));
 
         // Put a +1/+1 counter on up to one target creature you control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(

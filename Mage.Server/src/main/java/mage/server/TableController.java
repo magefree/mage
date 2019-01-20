@@ -927,12 +927,10 @@ public class TableController {
     public boolean isTournamentStillValid() {
         if (table.getTournament() != null) {
             if (table.getState() != TableState.WAITING && table.getState() != TableState.READY_TO_START && table.getState() != TableState.STARTING) {
-                TournamentController tournamentController = TournamentManager.instance.getTournamentController(table.getTournament().getId());
-                if (tournamentController != null) {
-                    return tournamentController.isTournamentStillValid(table.getState());
-                } else {
-                    return false;
-                }
+               return TournamentManager.instance.getTournamentController(table.getTournament().getId())
+                       .map(tc -> tc.isTournamentStillValid(table.getState()))
+                       .orElse(false);
+
             } else {
                 // check if table creator is still a valid user, if not removeUserFromAllTablesAndChat table
                 return UserManager.instance.getUser(userId).isPresent();

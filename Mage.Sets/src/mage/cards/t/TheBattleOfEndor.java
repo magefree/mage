@@ -32,7 +32,7 @@ public final class TheBattleOfEndor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}{G}{G}");
 
         // Create X 1/1 green Ewok creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), ManacostVariableValue.instance));
 
         // Put X +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new TheBattleOfEndorEffect());

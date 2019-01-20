@@ -2,7 +2,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,16 +20,16 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RighteousAuthority extends CardImpl {
 
-    public RighteousAuthority (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{U}");
+    public RighteousAuthority(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
         this.subtype.add(SubType.AURA);
-
 
 
         // Enchant creature
@@ -48,7 +47,7 @@ public final class RighteousAuthority extends CardImpl {
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
-    public RighteousAuthority (final RighteousAuthority card) {
+    public RighteousAuthority(final RighteousAuthority card) {
         super(card);
     }
 
@@ -79,7 +78,7 @@ class CardsInEnchantedControllerHandCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new mage.abilities.dynamicvalue.common.CardsInControllerHandCount();
+        return new CardsInEnchantedControllerHandCount();
     }
 
     @Override

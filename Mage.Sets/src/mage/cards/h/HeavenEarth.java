@@ -33,13 +33,13 @@ public final class HeavenEarth extends SplitCard {
 
         // Falling
         // Falling deals X damage to each creature with flying.
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filterFlying));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filterFlying));
 
         // to
         // Earth
         // Earth deals X damage to each creature without flying.
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filterWithouFlying));
+        getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filterWithouFlying));
     }
 
     public HeavenEarth(final HeavenEarth card) {

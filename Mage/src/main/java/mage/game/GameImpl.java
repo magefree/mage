@@ -1063,7 +1063,7 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
 
-    private void initGameDefaultWatchers() {
+    public void initGameDefaultWatchers() {
         getState().addWatcher(new MorbidWatcher());
         getState().addWatcher(new CastSpellLastTurnWatcher());
         getState().addWatcher(new CastSpellYourLastTurnWatcher());
@@ -1075,7 +1075,7 @@ public abstract class GameImpl implements Game, Serializable {
         getState().addWatcher(new PlayersAttackedThisTurnWatcher());
     }
 
-    private void initPlayerDefaultWatchers(UUID playerId) {
+    public void initPlayerDefaultWatchers(UUID playerId) {
         getState().addWatcher(new PlayerDamagedBySourceWatcher(playerId));
         getState().addWatcher(new BloodthirstWatcher(playerId));
     }

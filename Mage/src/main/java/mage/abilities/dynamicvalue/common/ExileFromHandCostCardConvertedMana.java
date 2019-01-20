@@ -14,10 +14,10 @@ import mage.game.Game;
  * cost. If no card was exiled the getManaCostsToPay().getX() will be used as
  * value.
  *
- *
  * @author LevelX2
  */
-public class ExileFromHandCostCardConvertedMana implements DynamicValue {
+public enum ExileFromHandCostCardConvertedMana implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -35,7 +35,7 @@ public class ExileFromHandCostCardConvertedMana implements DynamicValue {
 
     @Override
     public ExileFromHandCostCardConvertedMana copy() {
-        return new ExileFromHandCostCardConvertedMana();
+        return ExileFromHandCostCardConvertedMana.instance;
     }
 
     @Override

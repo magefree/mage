@@ -49,7 +49,7 @@ public final class ThoughtDissector extends CardImpl {
 
 class ThoughtDissectorEffect extends OneShotEffect {
 
-    private static final ManacostVariableValue amount = new ManacostVariableValue();
+    private static final ManacostVariableValue amount = ManacostVariableValue.instance;
 
     public ThoughtDissectorEffect() {
         super(Outcome.Detriment);

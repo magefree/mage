@@ -1,9 +1,8 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToLibrarySpellEffect;
@@ -12,8 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class SanguineSacrament extends CardImpl {
@@ -22,11 +22,11 @@ public final class SanguineSacrament extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
 
         // You gain twice X life. Put Sanguine Sacrament on the bottom of its owner's library.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new SanguineSacramentValue()));
+        this.getSpellAbility().addEffect(new GainLifeEffect(SanguineSacramentValue.instance));
         this.getSpellAbility().addEffect(new ReturnToLibrarySpellEffect(false));
     }
 
-    public SanguineSacrament(final SanguineSacrament card) {
+    private SanguineSacrament(final SanguineSacrament card) {
         super(card);
     }
 
@@ -36,16 +36,22 @@ public final class SanguineSacrament extends CardImpl {
     }
 }
 
-class SanguineSacramentValue extends ManacostVariableValue {
+enum SanguineSacramentValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return super.calculate(game, sourceAbility, effect) * 2;
+        return sourceAbility.getManaCostsToPay().getX() * 2;
     }
 
     @Override
     public SanguineSacramentValue copy() {
-        return new SanguineSacramentValue();
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 
     @Override

@@ -2,7 +2,6 @@ package mage.verify;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mage.util.StreamUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,6 +22,8 @@ public final class MtgJson {
 
     public static Map<String, String> mtgJsonToXMageCodes = new HashMap<>();
     public static Map<String, String> xMageToMtgJsonCodes = new HashMap<>();
+
+    public static final boolean MTGJSON_IGNORE_NEW_PROPERTIES = true; // set it to false for full mtgjson checks and research (new fields finds or mtgjson updates)
 
     static {
         mtgJsonToXMageCodes.put("pWCQ", "WMCQ");
@@ -131,14 +132,9 @@ public final class MtgJson {
             }
             stream = new FileInputStream(file);
         }
-        ZipInputStream zipInputStream = null;
-        try {
-            zipInputStream = new ZipInputStream(stream);
+        try (ZipInputStream zipInputStream = new ZipInputStream(stream)) {
             zipInputStream.getNextEntry();
             return new ObjectMapper().readValue(zipInputStream, ref);
-        } finally {
-            StreamUtils.closeQuietly(zipInputStream);
-            StreamUtils.closeQuietly(stream);
         }
 
     }

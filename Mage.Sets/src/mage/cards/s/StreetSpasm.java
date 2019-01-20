@@ -37,10 +37,10 @@ public final class StreetSpasm extends CardImpl {
 
         // Street Spasm deals X damage to target creature without flying you don't control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
 
         // Overload {X}{X}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new DamageAllEffect(new ManacostVariableValue(), filter), new ManaCostsImpl("{X}{X}{R}{R}")));
+        this.addAbility(new OverloadAbility(this, new DamageAllEffect(ManacostVariableValue.instance, filter), new ManaCostsImpl("{X}{X}{R}{R}")));
     }
 
     public StreetSpasm(final StreetSpasm card) {

@@ -70,9 +70,9 @@ class ForesightEffect extends SearchEffect {
                     card.moveToExile(null, null, targetId, game);
                 }
             }
+            player.shuffleLibrary(source, game);
             return true;
         }
-        player.shuffleLibrary(source, game);
         return false;
     }
 

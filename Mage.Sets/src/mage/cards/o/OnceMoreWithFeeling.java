@@ -28,7 +28,7 @@ public final class OnceMoreWithFeeling extends CardImpl {
     public OnceMoreWithFeeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{W}{W}{W}");
 
-        // Exile all permanents and all cards from all graveyards. Each player shuffles his or her hand into his or her library, then draws seven cards. Each player's life total becomes 10. Exile Once More with Feeling.
+        // Exile all permanents and all cards from all graveyards. Each player shuffles their hand into their library, then draws seven cards. Each player's life total becomes 10. Exile Once More with Feeling.
         this.getSpellAbility().addEffect(new OnceMoreWithFeelingEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");

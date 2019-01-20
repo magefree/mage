@@ -1,7 +1,12 @@
 package mage.verify;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+import static mage.verify.MtgJson.MTGJSON_IGNORE_NEW_PROPERTIES;
+
+@JsonIgnoreProperties(ignoreUnknown = MTGJSON_IGNORE_NEW_PROPERTIES)
 class JsonCard {
     // docs: https://mtgjson.com/v4/docs.html
 

@@ -60,7 +60,7 @@ class YdwenEfreetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(source.getSourceId());
         if (controller != null && creature != null) {
-            if (!controller.flipCoin(game)) {
+            if (!controller.flipCoin(source, game, true)) {
                 creature.removeFromCombat(game);
                 creature.setMaxBlocks(0);
                 

@@ -4,6 +4,7 @@ import mage.ObjectColor;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
+import mage.cards.repository.*;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
@@ -565,6 +566,7 @@ public class VerifyCardDataTest {
         //checkNumbers(card, ref); // TODO: load data from allsets.json and check it (allcards.json do not have card numbers)
         checkBasicLands(card, ref);
         checkMissingAbilities(card, ref);
+        //checkWrongCosts(card, ref);
     }
 
     private void checkColors(Card card, JsonCard ref) {
@@ -655,6 +657,128 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card's abilities is empty, but ref have text");
         }
     }
+
+    private String prepareRule(String cardName, String rule) {
+        // remove and optimize rule text for analyze
+        String newRule = rule;
+
+        // remove reminder text
+        newRule = newRule.replaceAll("(?i)<i>\\(.+\\)</i>", "");
+
+        // replace special text and symbols
+        newRule = newRule
+                .replace("{this}", cardName)
+                .replace("&mdash;", "—");
+
+        // remove html marks
+        newRule = newRule
+                .replace("<i>", "")
+                .replace("</i>", "");
+
+        return newRule;
+    }
+
+    @Test
+    @Ignore
+    public void showCardInfo() throws Exception {
+        // debug only: show direct card info (takes it from class file, not from db repository)
+        String cardName = "Essence Capture";
+        CardScanner.scan();
+        CardSetInfo testSet = new CardSetInfo("test", "test", "123", Rarity.COMMON);
+        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+        Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+        card.getRules().stream().forEach(System.out::println);
+    }
+
+    private void checkWrongCosts(Card card, JsonCard ref) {
+        // checks missing or wrong cost
+        if (!card.getExpansionSetCode().equals("RNA")) {
+            return;
+        }
+
+        String[] refRules = ref.text.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
+        for (int i = 0; i < refRules.length; i++) {
+            refRules[i] = prepareRule(card.getName(), refRules[i]);
+        }
+
+        String[] cardRules = card.getRules().toArray(new String[0]);
+        for (int i = 0; i < cardRules.length; i++) {
+            cardRules[i] = prepareRule(card.getName(), cardRules[i]);
+        }
+
+        for (String cardRule : cardRules) {
+            boolean isAbilityFounded = false;
+            boolean isCostOk = false;
+            for (String refRule : refRules) {
+                if (cardRule.equals(refRule)) {
+                    isAbilityFounded = true;
+                    isCostOk = true;
+                    break;
+                }
+            }
+
+            if (!isCostOk) {
+                fail(card, "abilities", "card ability have cost, but can't find in ref [" + "xxx" + ": " + card.getRules() + "]");
+            }
+        }
+    }
+
+
+        /*
+        for(String rule : card.getRules()) {
+            rule = rule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
+            // TODO: add Equip {3} checks
+            // TODO: add Raid and other words checks
+            String[] sl = rule.split(":");
+            if (sl.length == 2 && !sl[0].isEmpty()) {
+                String cardCost = sl[0]
+                        .replace("{this}", card.getName())
+                        //.replace("<i>", "")
+                        //.replace("</i>", "")
+                        .replace("&mdash;", "—");
+                String cardAbility = sl[1]
+                        .trim()
+                        .replace("{this}", card.getName())
+                        //.replace("<i>", "")
+                        //.replace("</i>", "")
+                        .replace("&mdash;", "—");;
+
+                boolean found = false;
+                for (String refRule : refRules) {
+                    refRule = refRule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
+
+                    // fix for ref mana: ref card have xxx instead {T}: Add {xxx}, example: W
+                    if (refRule.length() == 1) {
+                        refRule = "{T}: Add {" + refRule + "}";
+                    }
+                    refRule = refRule
+                            .trim()
+                            //.replace("<i>", "")
+                            //.replace("</i>", "")
+                            .replace("&mdash;", "—");
+
+                    // normal
+                    if (refRule.startsWith(cardCost)) {
+                        found = true;
+                        break;
+                    }
+
+                    // ref card have (xxx) instead xxx, example: ({T}: Add {G}.)
+                    // ref card have <i>(xxx) instead xxx, example: <i>({T}: Add {G}.)</i>
+                    // TODO: delete?
+                    if (refRule.startsWith("(" + cardCost)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    fail(card, "abilities", "card ability have cost, but can't find in ref [" + cardCost + ": " + cardAbility + "]");
+                }
+            }
+
+        }
+    }*/
+
 
     private void checkTypes(Card card, JsonCard ref) {
         if (skipListHaveName("TYPE", card.getExpansionSetCode(), card.getName())) {

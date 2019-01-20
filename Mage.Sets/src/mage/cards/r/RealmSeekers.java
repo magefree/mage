@@ -37,7 +37,7 @@ public final class RealmSeekers extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(), 
-                        new CardsInAllHandsCount(), 
+                        CardsInAllHandsCount.instance,
                         false), 
                 "with X +1/+1 counters on it, where X is the total number of cards in all players' hands"));
         

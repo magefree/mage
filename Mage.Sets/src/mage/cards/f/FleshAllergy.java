@@ -54,13 +54,13 @@ public final class FleshAllergy extends CardImpl {
 
 class FleshAllergyWatcher extends Watcher {
 
-    public int creaturesDiedThisTurn = 0;
+    private int creaturesDiedThisTurn = 0;
 
     public FleshAllergyWatcher() {
         super(FleshAllergyWatcher.class, WatcherScope.GAME);
     }
 
-    public FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
+    private FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
         super(watcher);
     }
 
@@ -79,6 +79,10 @@ class FleshAllergyWatcher extends Watcher {
         }
     }
 
+    public int getCreaturesDiedThisTurn(){
+        return creaturesDiedThisTurn;
+    }
+
     @Override
     public void reset() {
         super.reset();
@@ -94,7 +98,7 @@ class FleshAllergyEffect extends OneShotEffect {
         staticText = "Its controller loses life equal to the number of creatures that died this turn";
     }
 
-    public FleshAllergyEffect(final FleshAllergyEffect effect) {
+    private FleshAllergyEffect(final FleshAllergyEffect effect) {
         super(effect);
     }
 
@@ -110,7 +114,7 @@ class FleshAllergyEffect extends OneShotEffect {
         if (permanent != null && watcher != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                int amount = watcher.creaturesDiedThisTurn;
+                int amount = watcher.getCreaturesDiedThisTurn();
                 if (amount > 0) {
                     player.loseLife(amount, game, false);
                     return true;

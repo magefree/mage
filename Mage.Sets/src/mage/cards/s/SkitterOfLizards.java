@@ -35,7 +35,7 @@ public final class SkitterOfLizards extends CardImpl {
 
         // Skitter of Lizards enters the battlefield with a +1/+1 counter on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new MultikickerCount(), true),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), MultikickerCount.instance, true),
                 "with a +1/+1 counter on it for each time it was kicked"));
 
     }

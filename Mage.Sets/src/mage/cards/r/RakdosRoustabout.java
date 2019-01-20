@@ -58,13 +58,15 @@ class RakdosRoustaboutAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (sourceId.equals(event.getSourceId())) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getCombat().getDefenderId(event.getSourceId())));
+        if (sourceId.equals(event.getTargetId())) {
+            this.getEffects().get(0).setTargetPointer(
+                    new FixedTarget(game.getCombat().getDefenderId(event.getTargetId()), game)
+            );
             return true;
         }
         return false;

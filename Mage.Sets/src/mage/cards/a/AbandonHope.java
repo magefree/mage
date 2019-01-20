@@ -34,7 +34,7 @@ public final class AbandonHope extends CardImpl {
         this.addAbility(ability);
 
         // Look at target opponent's hand and choose X cards from it. That player discards those cards.
-        ManacostVariableValue manaX = new ManacostVariableValue();
+        ManacostVariableValue manaX = ManacostVariableValue.instance;
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(manaX, TargetController.ANY));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().setCostAdjuster(AbandonHopeAdjuster.instance);

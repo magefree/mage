@@ -22,7 +22,7 @@ public final class HintOfInsanity extends CardImpl {
     public HintOfInsanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Target player reveals his or her hand. That player discards all nonland cards with the same name as another card in his or her hand.
+        // Target player reveals their hand. That player discards all nonland cards with the same name as another card in their hand.
         this.getSpellAbility().addEffect(new HintOfInsanityEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 

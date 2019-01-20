@@ -14,6 +14,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -31,6 +32,7 @@ public final class FontOfAgonies extends CardImpl {
         // {1}{B}, Remove four blood counters from Font of Agonies: Destroy target creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.BLOOD.createInstance(4)));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

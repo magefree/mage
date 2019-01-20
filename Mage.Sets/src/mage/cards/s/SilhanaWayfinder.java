@@ -41,7 +41,7 @@ public final class SilhanaWayfinder extends CardImpl {
         // When Silhana Wayfinder enters the battlefield, look at the top four cards of your library. You may reveal a creature or land card from among them and put it on top of your library. Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
                 new StaticValue(4), false, new StaticValue(1), filter, Zone.LIBRARY, false,
-                true, false, Zone.LIBRARY, false, true, false
+                true, true, Zone.LIBRARY, false, true, false
         ).setText("look at the top four cards of your library. " +
                 "You may reveal a creature or land card from among them " +
                 "and put it on top of your library. Put the rest " +

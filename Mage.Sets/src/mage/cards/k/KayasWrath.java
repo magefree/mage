@@ -59,9 +59,11 @@ class KayasWrathEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE,
                 source.getControllerId(), source.getSourceId(), game
         )) {
-            boolean isMine = permanent != null && permanent.isControlledBy(source.getControllerId());
-            if (permanent.destroy(source.getSourceId(), game, false) && isMine) {
-                counter++;
+            if (permanent != null) {
+                boolean isMine = permanent.isControlledBy(source.getControllerId());
+                if (permanent.destroy(source.getSourceId(), game, false) && isMine) {
+                    counter++;
+                }
             }
         }
         return new GainLifeEffect(counter).apply(game, source);

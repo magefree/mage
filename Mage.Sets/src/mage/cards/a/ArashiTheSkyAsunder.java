@@ -43,13 +43,13 @@ public final class ArashiTheSkyAsunder extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {X}{G}, {tap}: Arashi, the Sky Asunder deals X damage to target creature with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.instance), new ManaCostsImpl("{X}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Channel - {X}{G}{G}, Discard Arashi: Arashi deals X damage to each creature with flying.
-        this.addAbility(new ChannelAbility("{X}{G}{G}", new DamageAllEffect(new ManacostVariableValue(), filter)));
+        this.addAbility(new ChannelAbility("{X}{G}{G}", new DamageAllEffect(ManacostVariableValue.instance, filter)));
     }
 
     public ArashiTheSkyAsunder(final ArashiTheSkyAsunder card) {

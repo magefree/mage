@@ -28,7 +28,7 @@ public final class ChillHaunting extends CardImpl {
 
         // Target creature gets -X/-X until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        DynamicValue xval = new SignInversionDynamicValue(new GetXValue());
+        DynamicValue xval = new SignInversionDynamicValue(GetXValue.instance);
         this.getSpellAbility().addEffect(new BoostTargetEffect(xval, xval, Duration.EndOfTurn));
     }
 

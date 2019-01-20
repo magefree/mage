@@ -5,10 +5,10 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.CoinFlippedEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author TheElk801
  */
 public class WinsCoinFlipTriggeredAbility extends TriggeredAbilityImpl {
@@ -33,7 +33,8 @@ public class WinsCoinFlipTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getFlag();
+        CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
+        return flipEvent.isWinnable() && (flipEvent.getChosen() == flipEvent.getResult());
     }
 
     @Override

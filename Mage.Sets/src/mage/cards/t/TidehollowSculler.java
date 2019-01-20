@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ import mage.util.CardUtil;
 public final class TidehollowSculler extends CardImpl {
 
     public TidehollowSculler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
@@ -80,23 +79,30 @@ class TidehollowScullerExileEffect extends OneShotEffect {
         // 6/7/2013 	If Tidehollow Sculler leaves the battlefield before its first ability has resolved,
         //              its second ability will trigger. This ability will do nothing when it resolves.
         //              Then its first ability will resolve and exile the chosen card forever.
-        Permanent sourcePermanent = (Permanent) source.getSourceObject(game);
-        if (controller != null && opponent != null && sourcePermanent != null) {
+        Permanent sourcePermanent = (Permanent) source.getSourcePermanentIfItStillExists(game);
+        if (controller != null
+                && opponent != null
+                && sourcePermanent != null) {
             opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
-
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card to exile"));
             if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.HAND, true);
+                    controller.moveCardsToExile(
+                            card,
+                            source,
+                            game,
+                            true,
+                            CardUtil.getExileZoneId(game,
+                                    source.getSourceId(),
+                                    source.getSourceObjectZoneChangeCounter()),
+                            sourcePermanent.getIdName());
                 }
             }
-
             return true;
         }
         return false;
     }
-
 }
 
 class TidehollowScullerLeaveEffect extends OneShotEffect {
@@ -120,8 +126,11 @@ class TidehollowScullerLeaveEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
-            ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) 
+                    ? source.getSourceObjectZoneChangeCounter() 
+                    : source.getSourceObjectZoneChangeCounter() - 1;
+            ExileZone exZone = game.getExile().getExileZone(
+                    CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exZone != null) {
                 controller.moveCards(exZone, Zone.HAND, source, game);
             }

@@ -32,7 +32,7 @@ public final class EnslavedHorror extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Enslaved Horror enters the battlefield, each other player may return a creature card from his or her graveyard to the battlefield.
+        // When Enslaved Horror enters the battlefield, each other player may return a creature card from their graveyard to the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EnslavedHorrorEffect()));
     }
 

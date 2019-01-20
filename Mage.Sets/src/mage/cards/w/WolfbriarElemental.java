@@ -31,7 +31,7 @@ public final class WolfbriarElemental extends CardImpl {
         this.addAbility(new MultikickerAbility("{G}"));
 
         // When Wolfbriar Elemental enters the battlefield, create a 2/2 green Wolf creature token for each time it was kicked.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(), new MultikickerCount())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(), MultikickerCount.instance)));
     }
 
     public WolfbriarElemental(final WolfbriarElemental card) {

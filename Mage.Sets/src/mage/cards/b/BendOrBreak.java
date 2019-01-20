@@ -82,7 +82,7 @@ class BendOrBreakEffect extends OneShotEffect {
             Player nextPlayer;
             UUID firstNextPlayer = null;
 
-            while (!getNextPlayerInDirection(true, playerList, game).equals(firstNextPlayer) && controller.canRespond()) {
+            while (!getNextPlayerInDirection(true, playerList).equals(firstNextPlayer) && controller.canRespond()) {
                 nextPlayer = game.getPlayer(playerList.get());
                 if (nextPlayer == null) {
                     return false;
@@ -187,7 +187,7 @@ class BendOrBreakEffect extends OneShotEffect {
         return false;
     }
 
-    private UUID getNextPlayerInDirection(boolean left, PlayerList playerList, Game game) {
+    private UUID getNextPlayerInDirection(boolean left, PlayerList playerList) {
         UUID nextPlayerId;
         if (left) {
             nextPlayerId = playerList.getNext();

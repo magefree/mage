@@ -27,7 +27,7 @@ public final class BorrowingTheEastWind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}");
 
         // Borrowing the East Wind deals X damage to each creature with horsemanship and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));                                                                                                  }
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.instance, filter));                                                                                                  }
 
     public BorrowingTheEastWind(final BorrowingTheEastWind card) {
         super(card);

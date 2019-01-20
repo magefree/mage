@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,18 +23,15 @@ public final class CryptOfTheEternals extends CardImpl {
 
         // When Crypt of the Eternals enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        
+
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Add {U}, {B}, or {R}.
-        List<Mana> list = new ArrayList<Mana>() {{
-            add(Mana.BlueMana(1));
-            add(Mana.BlackMana(1));
-            add(Mana.RedMana(1));
-        }};
-        
-        for(Mana m: list) {       
+        List<Mana> list = Arrays.asList(Mana.BlueMana(1), Mana.BlackMana(1), Mana.RedMana(1));
+
+
+        for (Mana m : list) {
             SimpleManaAbility uAbility = new SimpleManaAbility(Zone.BATTLEFIELD, m, new ManaCostsImpl("{1}"));
             uAbility.addCost(new TapSourceCost());
             this.addAbility(uAbility);

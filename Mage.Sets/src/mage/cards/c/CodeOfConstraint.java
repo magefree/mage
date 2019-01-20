@@ -1,15 +1,17 @@
 package mage.cards.c;
 
+import mage.abilities.Ability;
 import mage.abilities.condition.common.AddendumCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -30,16 +32,7 @@ public final class CodeOfConstraint extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
         // Addendum — If you cast this spell during your main phase, tap that creature and it doesn't untap during its controller's next untap step.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new TapTargetEffect(), AddendumCondition.instance,
-                "<br><i>Addendum</i> &mdash; If you cast this spell " +
-                        "during your main phase, tap that creature"
-        ));
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new DontUntapInControllersNextUntapStepSourceEffect(),
-                AddendumCondition.instance, "and it doesn't untap " +
-                "during its controller's next untap step."
-        ));
+        this.getSpellAbility().addEffect(new CodeOfConstraintEffect());
     }
 
     private CodeOfConstraint(final CodeOfConstraint card) {
@@ -49,5 +42,32 @@ public final class CodeOfConstraint extends CardImpl {
     @Override
     public CodeOfConstraint copy() {
         return new CodeOfConstraint(this);
+    }
+}
+
+class CodeOfConstraintEffect extends OneShotEffect {
+
+    CodeOfConstraintEffect() {
+        super(Outcome.Benefit);
+        staticText = "<br><i>Addendum</i> &mdash; If you cast this spell during your main phase, " +
+                "tap that creature and it doesn't untap during its controller's next untap step.";
+    }
+
+    private CodeOfConstraintEffect(final CodeOfConstraintEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CodeOfConstraintEffect copy() {
+        return new CodeOfConstraintEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (AddendumCondition.instance.apply(game, source)) {
+            new TapTargetEffect().apply(game, source);
+            game.addEffect(new DontUntapInControllersNextUntapStepTargetEffect(), source);
+        }
+        return true;
     }
 }

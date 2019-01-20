@@ -35,7 +35,7 @@ public final class DeathMutation extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // create X 1/1 green Saproling creature tokens, where X is that creature's converted mana cost.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new TargetConvertedManaCost()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance));
     }
 
     public DeathMutation(final DeathMutation card) {

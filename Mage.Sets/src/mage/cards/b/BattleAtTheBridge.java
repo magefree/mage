@@ -27,10 +27,10 @@ public final class BattleAtTheBridge extends CardImpl {
         addAbility(new ImproviseAbility());
 
         // Target creature gets -X/-X until end of turn. You gain X life.
-        DynamicValue x = new SignInversionDynamicValue(new ManacostVariableValue());
+        DynamicValue x = new SignInversionDynamicValue(ManacostVariableValue.instance);
         this.getSpellAbility().addEffect(new BoostTargetEffect(x, x, Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new GainLifeEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance));
     }
 
     public BattleAtTheBridge(final BattleAtTheBridge card) {

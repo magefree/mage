@@ -27,7 +27,7 @@ public final class DrippingTongueZubera extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new ZuberasDiedDynamicValue()), false), new ZuberasDiedWatcher());
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), ZuberasDiedDynamicValue.instance), false), new ZuberasDiedWatcher());
     }
 
     public DrippingTongueZubera (final DrippingTongueZubera card) {

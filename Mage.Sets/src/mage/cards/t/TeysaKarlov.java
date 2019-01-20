@@ -33,7 +33,7 @@ public final class TeysaKarlov extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If a creature dying causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeysaKarlovEffect()));
+        this.addAbility(new SimpleStaticAbility(new TeysaKarlovEffect()));
 
         // Creature tokens you control have vigilance and lifelink.
         Ability ability = new SimpleStaticAbility(
@@ -89,15 +89,13 @@ class TeysaKarlovEffect extends ReplacementEffectImpl {
         if (event instanceof NumberOfTriggersEvent) {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
             if (source.isControlledBy(event.getPlayerId())
-                    && game.getPermanent(numberOfTriggersEvent.getSourceId()) != null
+                    && game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null
                     && numberOfTriggersEvent.getSourceEvent() instanceof ZoneChangeEvent) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) numberOfTriggersEvent.getSourceEvent();
-                if (zEvent.getFromZone() == Zone.BATTLEFIELD
+                return zEvent.getFromZone() == Zone.BATTLEFIELD
                         && zEvent.getToZone() == Zone.GRAVEYARD
                         && zEvent.getTarget() != null
-                        && zEvent.getTarget().isCreature()) {
-                    return true;
-                }
+                        && zEvent.getTarget().isCreature();
             }
         }
         return false;

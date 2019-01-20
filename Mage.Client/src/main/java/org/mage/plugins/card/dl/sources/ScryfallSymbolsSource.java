@@ -70,10 +70,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
         }
 
         // gen symbols list
-        ArrayList<String> allMageSymbols = new ArrayList<>();
-        for (int i = 0; i < SYMBOLS_LIST.length; i++) {
-            allMageSymbols.add(SYMBOLS_LIST[i]);
-        }
+        List<String> allMageSymbols = Arrays.asList(SYMBOLS_LIST);
         for (Integer i = SYMBOLS_NUMBER_START; i <= SYMBOLS_NUMBER_END; i++) {
             allMageSymbols.add(String.valueOf(SYMBOLS_NUMBER_START + i));
         }
@@ -111,21 +108,17 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             if (destFile.exists() && (destFile.length() > 0)) {
                 continue;
             }
-            FileOutputStream stream = null;
-            try {
+            try(FileOutputStream stream  = new FileOutputStream(destFile)) {
                 // base64 transform
                 String data64 = foundedData.get(searchCode);
                 Base64.Decoder dec = Base64.getDecoder();
                 byte[] fileData = dec.decode(data64);
 
-                stream = new FileOutputStream(destFile);
                 stream.write(fileData);
 
                 LOGGER.info("New svg symbol downloaded: " + needCode);
             } catch (Exception e) {
                 LOGGER.error("Can't decode svg icon and save to file: " + destFile.getPath() + ", reason: " + e.getMessage());
-            } finally {
-                StreamUtils.closeQuietly(stream);
             }
         }
     }
@@ -166,7 +159,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             org.jsoup.nodes.Document doc = CardImageUtils.downloadHtmlDocument(CSS_SOURCE_URL);
             org.jsoup.select.Elements cssList = doc.select(CSS_SOURCE_SELECTOR);
             if (cssList.size() == 1) {
-                this.cssUrl = cssList.first().attr("href").toString();
+                this.cssUrl = cssList.first().attr("href");
             }
 
             if (this.cssUrl.isEmpty()) {

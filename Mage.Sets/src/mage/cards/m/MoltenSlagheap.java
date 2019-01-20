@@ -36,7 +36,7 @@ public final class MoltenSlagheap extends CardImpl {
         this.addAbility(ability);
         // {1}, Remove X storage counters from Molten Slagheap: Add X mana in any combination of {B} and/or {R}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.B, ColoredManaSymbol.R),
+                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance, ColoredManaSymbol.B, ColoredManaSymbol.R),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

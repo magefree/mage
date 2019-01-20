@@ -9,12 +9,11 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean setTargetPointer;
+    private final boolean setTargetPointer;
 
     public GainLifeControllerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
@@ -56,7 +55,6 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever you gain life, ").append(super.getRule()).toString();
+        return "Whenever you gain life, " + super.getRule();
     }
-
 }

@@ -118,7 +118,7 @@ class BrainInAJarScryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int x = new RemovedCountersForCostValue().calculate(game, source, this);
+            int x = RemovedCountersForCostValue.instance.calculate(game, source, this);
             if (x > 0) {
                 return controller.scry(x, source, game);
             }

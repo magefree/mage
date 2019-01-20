@@ -44,7 +44,7 @@ public final class Paroxysm extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of his or her library. 
+        // At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of their library.
         // If that card is a land card, destroy that creature. Otherwise, it gets +3/+3 until end of turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD,
@@ -67,7 +67,7 @@ class ParoxysmEffect extends OneShotEffect {
 
     ParoxysmEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "that player reveals the top card of his or her library. \n"
+        this.staticText = "that player reveals the top card of their library. \n"
                 + "If that card is a land card, destroy that creature. \n"
                 + "Otherwise, it gets +3/+3 until end of turn.";
     }
