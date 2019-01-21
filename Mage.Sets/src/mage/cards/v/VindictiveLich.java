@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -19,8 +17,9 @@ import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class VindictiveLich extends CardImpl {
@@ -33,37 +32,37 @@ public final class VindictiveLich extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Vindictive Lich dies, choose one or more. Each mode must target a different player.
-        // *Target opponent sacrifices a creature.
+
+        // * Target opponent sacrifices a creature.
         Ability ability = new DiesTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"));
         ability.getModes().setMinModes(1);
         ability.getModes().setMaxModes(3);
         ability.getModes().setEachModeOnlyOnce(true);
         ability.getModes().setMaxModesFilter(new FilterOpponent("a different player"));
-
-        FilterOpponent filter = new FilterOpponent("opponent (sacrifice)");
+        FilterOpponent filter = new FilterOpponent();
         filter.add(new AnotherTargetPredicate(1, true));
-        Target target = new TargetOpponent(filter, false);
+        Target target = new TargetOpponent(filter, false).withChooseHint("who sacrifice a creature");
         target.setTargetTag(1);
         ability.addTarget(target);
 
-        // *Target opponent discards two cards.
+        // * Target opponent discards two cards.
         Mode mode = new Mode();
         mode.addEffect(new DiscardTargetEffect(2, false));
-        filter = new FilterOpponent("opponent (discard)");
+        filter = new FilterOpponent();
         filter.add(new AnotherTargetPredicate(2, true));
         target = new TargetOpponent(filter, false);
         target.setTargetTag(2);
-        mode.addTarget(target);
+        mode.addTarget(target.withChooseHint("who discard a card"));
         ability.addMode(mode);
 
-        // *Target opponent loses 5 life.
+        // * Target opponent loses 5 life.
         mode = new Mode();
         mode.addEffect(new LoseLifeTargetEffect(5));
-        filter = new FilterOpponent("opponent (life loss)");
+        filter = new FilterOpponent();
         filter.add(new AnotherTargetPredicate(3, true));
         target = new TargetOpponent(filter, false);
         target.setTargetTag(3);
-        mode.addTarget(target);
+        mode.addTarget(target.withChooseHint("who lose 5 life"));
         ability.addMode(mode);
         this.addAbility(ability);
     }
