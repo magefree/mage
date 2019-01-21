@@ -1,16 +1,15 @@
 
 package mage.deck;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.constants.SetType;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
- *
  * @author LevelX2
  */
 public class Modern extends Constructed {
@@ -42,6 +41,7 @@ public class Modern extends Constructed {
         banned.add("Great Furnace");
         banned.add("Green Sun's Zenith");
         banned.add("Hypergenesis");
+        banned.add("Krark-Clan Ironworks");
         banned.add("Mental Misstep");
         banned.add("Ponder");
         banned.add("Preordain");
