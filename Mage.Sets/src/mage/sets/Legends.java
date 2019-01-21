@@ -119,6 +119,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Slug", 99, Rarity.COMMON, mage.cards.g.GiantSlug.class));
         cards.add(new SetCardInfo("Giant Strength", 149, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Giant Turtle", 188, Rarity.COMMON, mage.cards.g.GiantTurtle.class));
+        cards.add(new SetCardInfo("Glyph of Delusion", 60, Rarity.COMMON, mage.cards.g.GlyphOfDelusion.class));
         cards.add(new SetCardInfo("Glyph of Destruction", 150, Rarity.COMMON, mage.cards.g.GlyphOfDestruction.class));
         cards.add(new SetCardInfo("Glyph of Doom", 100, Rarity.COMMON, mage.cards.g.GlyphOfDoom.class));
         cards.add(new SetCardInfo("Glyph of Life", 15, Rarity.COMMON, mage.cards.g.GlyphOfLife.class));
