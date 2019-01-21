@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -23,29 +21,32 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.BearToken;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class CallerOfTheClaw extends CardImpl {
 
     public CallerOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add(SubType.ELF);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.color.setGreen(true);
+        this.subtype.add(SubType.ELF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
+
         // When Caller of the Claw enters the battlefield, create a 2/2 green Bear creature token for each nontoken creature put into your graveyard from the battlefield this turn.
-        this.getSpellAbility().addWatcher(new CallerOfTheClawWatcher());
-        Effect effect = new CreateTokenEffect(new BearToken(), new CallerOfTheClawDynamicValue());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new BearToken(), CallerOfTheClawDynamicValue.instance)
+        ), new CallerOfTheClawWatcher());
     }
 
-    public CallerOfTheClaw(final CallerOfTheClaw card) {
+    private CallerOfTheClaw(final CallerOfTheClaw card) {
         super(card);
     }
 
@@ -57,16 +58,15 @@ public final class CallerOfTheClaw extends CardImpl {
 
 class CallerOfTheClawWatcher extends Watcher {
 
-    private int creaturesCount = 0;
+    private final Map<UUID, Integer> playerMap = new HashMap();
 
-    public CallerOfTheClawWatcher() {
-        super(CallerOfTheClawWatcher.class.getSimpleName(), WatcherScope.PLAYER);
-        condition = true;
+    CallerOfTheClawWatcher() {
+        super(CallerOfTheClawWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    public CallerOfTheClawWatcher(final CallerOfTheClawWatcher watcher) {
+    private CallerOfTheClawWatcher(final CallerOfTheClawWatcher watcher) {
         super(watcher);
-        this.creaturesCount = watcher.creaturesCount;
+        this.playerMap.putAll(watcher.playerMap);
     }
 
     @Override
@@ -74,32 +74,35 @@ class CallerOfTheClawWatcher extends Watcher {
         return new CallerOfTheClawWatcher(this);
     }
 
-    public int getCreaturesCount() {
-        return creaturesCount;
+    int getCreaturesCount(UUID playerId) {
+        return playerMap.getOrDefault(playerId, 0);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            Permanent card = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.isOwnedBy(this.controllerId) && card.isCreature() && !(card instanceof PermanentToken)) {
-                creaturesCount++;
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent == null || !permanent.isCreature() || permanent instanceof PermanentToken) {
+                return;
             }
+            playerMap.putIfAbsent(permanent.getOwnerId(), 0);
+            playerMap.compute(permanent.getOwnerId(), (key, value) -> value + 1);
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        creaturesCount = 0;
+        playerMap.clear();
     }
 }
 
-class CallerOfTheClawDynamicValue implements DynamicValue {
+enum CallerOfTheClawDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public CallerOfTheClawDynamicValue copy() {
-        return new CallerOfTheClawDynamicValue();
+        return instance;
     }
 
     @Override
@@ -114,9 +117,9 @@ class CallerOfTheClawDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CallerOfTheClawWatcher watcher = game.getState().getWatcher(CallerOfTheClawWatcher.class, sourceAbility.getControllerId());
+        CallerOfTheClawWatcher watcher = game.getState().getWatcher(CallerOfTheClawWatcher.class);
         if (watcher != null) {
-            return watcher.getCreaturesCount();
+            return watcher.getCreaturesCount(sourceAbility.getControllerId());
         }
         return 0;
     }
