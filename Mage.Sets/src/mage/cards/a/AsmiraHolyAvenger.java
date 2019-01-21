@@ -1,16 +1,13 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -18,7 +15,12 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Plopman
@@ -36,11 +38,18 @@ public final class AsmiraHolyAvenger extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // At the beginning of each end step, put a +1/+1 counter on Asmira, Holy Avenger for each creature put into your graveyard from the battlefield this turn.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new AsmiraHolyAvengerDynamicValue(), true), TargetController.ANY, false), new AsmiraHolyAvengerWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new AddCountersSourceEffect(
+                        CounterType.P1P1.createInstance(),
+                        AsmiraHolyAvengerDynamicValue.instance, true
+                ),
+                TargetController.ANY, false
+        ), new AsmiraHolyAvengerWatcher());
     }
 
-    public AsmiraHolyAvenger(final AsmiraHolyAvenger card) {
+    private AsmiraHolyAvenger(final AsmiraHolyAvenger card) {
         super(card);
     }
 
@@ -53,16 +62,15 @@ public final class AsmiraHolyAvenger extends CardImpl {
 
 class AsmiraHolyAvengerWatcher extends Watcher {
 
-    private int creaturesCount = 0;
+    private final Map<UUID, Integer> playerMap = new HashMap();
 
-    public AsmiraHolyAvengerWatcher() {
-        super(AsmiraHolyAvengerWatcher.class.getSimpleName(), WatcherScope.PLAYER);
-        condition = true;
+    AsmiraHolyAvengerWatcher() {
+        super(AsmiraHolyAvengerWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    public AsmiraHolyAvengerWatcher(final AsmiraHolyAvengerWatcher watcher) {
+    private AsmiraHolyAvengerWatcher(final AsmiraHolyAvengerWatcher watcher) {
         super(watcher);
-        this.creaturesCount = watcher.creaturesCount;
+        this.playerMap.putAll(watcher.playerMap);
     }
 
     @Override
@@ -70,16 +78,17 @@ class AsmiraHolyAvengerWatcher extends Watcher {
         return new AsmiraHolyAvengerWatcher(this);
     }
 
-    public int getCreaturesCount() {
-        return creaturesCount;
+    int getCreaturesCount(UUID playerId) {
+        return playerMap.getOrDefault(playerId, 0);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && ((Card) card).isOwnedBy(this.controllerId) && card.isCreature()) {
-                creaturesCount++;
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent != null && permanent.isCreature()) {
+                playerMap.putIfAbsent(permanent.getOwnerId(), 0);
+                playerMap.compute(permanent.getOwnerId(), (key, value) -> value + 1);
             }
         }
     }
@@ -87,24 +96,25 @@ class AsmiraHolyAvengerWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        creaturesCount = 0;
+        playerMap.clear();
     }
 }
 
-class AsmiraHolyAvengerDynamicValue implements DynamicValue {
+enum AsmiraHolyAvengerDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        AsmiraHolyAvengerWatcher watcher = game.getState().getWatcher(AsmiraHolyAvengerWatcher.class, sourceAbility.getControllerId());
+        AsmiraHolyAvengerWatcher watcher = game.getState().getWatcher(AsmiraHolyAvengerWatcher.class);
         if (watcher != null) {
-            return watcher.getCreaturesCount();
+            return watcher.getCreaturesCount(sourceAbility.getControllerId());
         }
         return 0;
     }
 
     @Override
     public AsmiraHolyAvengerDynamicValue copy() {
-        return new AsmiraHolyAvengerDynamicValue();
+        return instance;
     }
 
     @Override
