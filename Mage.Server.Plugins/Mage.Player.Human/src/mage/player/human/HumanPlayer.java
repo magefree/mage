@@ -1,8 +1,5 @@
-
 package mage.player.human;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
@@ -18,8 +15,6 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -42,16 +37,21 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
+import java.util.*;
+
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class HumanPlayer extends PlayerImpl {
@@ -341,7 +341,7 @@ public class HumanPlayer extends PlayerImpl {
 
         replacementEffectChoice.getChoices().clear();
         replacementEffectChoice.setKeyChoices(rEffects);
-        
+
         // Check if there are different ones
         int differentChoices = 0;
         String lastChoice = "";
@@ -511,6 +511,7 @@ public class HumanPlayer extends PlayerImpl {
 
             prepareForResponse(game);
             if (!isExecutingMacro()) {
+                // hmm
                 game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargets, required, getOptions(target, null));
             }
             waitForResponse(game);
@@ -782,9 +783,9 @@ public class HumanPlayer extends PlayerImpl {
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer
-                                            .getUserData()
-                                            .getUserSkipPrioritySteps()
-                                            .isStopOnAllEndPhases())) {
+                                    .getUserData()
+                                    .getUserSkipPrioritySteps()
+                                    .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -876,9 +877,7 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
                 return result;
-            } else if (response.getManaType() != null) {
-                return false;
-            }
+            } else return response.getManaType() == null;
             return true;
         }
         return false;
@@ -1126,8 +1125,8 @@ public class HumanPlayer extends PlayerImpl {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
                     || (!getControllingPlayersUserData(game)
-                            .getUserSkipPrioritySteps()
-                            .isStopOnDeclareAttackersDuringSkipAction()
+                    .getUserSkipPrioritySteps()
+                    .isStopOnDeclareAttackersDuringSkipAction()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1146,7 +1145,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             options.put(Constants.Option.POSSIBLE_ATTACKERS, (Serializable) possibleAttackers);
             if (!possibleAttackers.isEmpty()) {
-                options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "All attack");
+                options.put(Constants.Option.SPECIAL_BUTTON, "All attack");
             }
 
             prepareForResponse(game);
@@ -1304,7 +1303,7 @@ public class HumanPlayer extends PlayerImpl {
     /**
      * Selects a defender for an attacker and adds the attacker to combat
      *
-     * @param defenders - list of possible defender
+     * @param defenders  - list of possible defender
      * @param attackerId - UUID of attacker
      * @param game
      * @return
@@ -1364,8 +1363,8 @@ public class HumanPlayer extends PlayerImpl {
         filter.add(new ControllerIdPredicate(defendingPlayerId));
         if (game.getBattlefield().count(filter, null, playerId, game) == 0
                 && !getControllingPlayersUserData(game)
-                        .getUserSkipPrioritySteps()
-                        .isStopOnDeclareBlockerIfNoneAvailable()) {
+                .getUserSkipPrioritySteps()
+                .isStopOnDeclareBlockerIfNoneAvailable()) {
             return;
         }
         while (!abort) {
