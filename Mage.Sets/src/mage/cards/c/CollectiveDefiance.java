@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -22,8 +20,9 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class CollectiveDefiance extends CardImpl {
@@ -43,14 +42,14 @@ public final class CollectiveDefiance extends CardImpl {
 
         // Target player discards all cards in their hand, then draws that many cards.;
         this.getSpellAbility().addEffect(new CollectiveDefianceEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard));
+        this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard).withChooseHint("discards all cards and draws"));
 
         // Collective Defiance deals 4 damage to target creature.;
         Mode mode = new Mode();
         Effect effect = new DamageTargetEffect(4);
         effect.setText("{this} deals 4 damage to target creature");
         mode.addEffect(effect);
-        mode.addTarget(new TargetCreaturePermanent(filterCreature));
+        mode.addTarget(new TargetCreaturePermanent(filterCreature).withChooseHint("deals 4 damage to"));
         this.getSpellAbility().addMode(mode);
 
         // Collective Defiance deals 3 damage to target opponent or planeswalker.
@@ -58,7 +57,7 @@ public final class CollectiveDefiance extends CardImpl {
         effect = new DamageTargetEffect(3);
         effect.setText("{this} deals 3 damage to target opponent or planeswalker");
         mode.addEffect(effect);
-        mode.addTarget(new TargetOpponentOrPlaneswalker());
+        mode.addTarget(new TargetOpponentOrPlaneswalker().withChooseHint("deals 3 damage to"));
         this.getSpellAbility().addMode(mode);
     }
 

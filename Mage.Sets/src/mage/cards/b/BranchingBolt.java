@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -18,8 +16,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class BranchingBolt extends CardImpl {
@@ -33,19 +32,18 @@ public final class BranchingBolt extends CardImpl {
     }
 
     public BranchingBolt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{G}");
 
         // Choose one or both -
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
         // Branching Bolt deals 3 damage to target creature with flying;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterFlying));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterFlying).withChooseHint("deals 3 damage, without flying"));
         // or Branching Bolt deals 3 damage to target creature without flying.
         Mode mode = new Mode();
         mode.addEffect(new DamageTargetEffect(3));
-        mode.addTarget(new TargetCreaturePermanent(filterNotFlying));
+        mode.addTarget(new TargetCreaturePermanent(filterNotFlying).withChooseHint("deals 3 damage, without flying"));
         this.getSpellAbility().addMode(mode);
     }
 
