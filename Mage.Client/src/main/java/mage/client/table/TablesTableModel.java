@@ -28,24 +28,26 @@ public class TablesTableModel extends AbstractTableModel {
 
     public static final int COLUMN_ICON = 0;
     public static final int COLUMN_DECK_TYPE = 1; // column the deck type is located (starting with 0) Start string is used to check for Limited
-    public static final int COLUMN_OWNER = 2;
-    public static final int COLUMN_GAME_TYPE = 3;
-    public static final int COLUMN_INFO = 4;
-    public static final int COLUMN_STATUS = 5;
-    public static final int COLUMN_PASSWORD = 6;
-    public static final int COLUMN_CREATED = 7;
-    public static final int COLUMN_SKILL = 8;
-    public static final int COLUMN_RATING = 9;
-    public static final int COLUMN_QUIT_RATIO = 10;
-    public static final int COLUMN_MINIMUM_RATING = 11;
-    public static final int ACTION_COLUMN = 12; // column the action is located (starting with 0)
+    public static final int COLUMN_NAME = 2;
+    public static final int COLUMN_SEATS = 3;
+    public static final int COLUMN_OWNER = 4;
+    public static final int COLUMN_GAME_TYPE = 5;
+    public static final int COLUMN_INFO = 6;
+    public static final int COLUMN_STATUS = 7;
+    public static final int COLUMN_PASSWORD = 8;
+    public static final int COLUMN_CREATED = 9;
+    public static final int COLUMN_SKILL = 10;
+    public static final int COLUMN_RATING = 11;
+    public static final int COLUMN_QUIT_RATIO = 12;
+    public static final int COLUMN_MINIMUM_RATING = 13;
+    public static final int ACTION_COLUMN = 14; // column the action is located (starting with 0)
 
     public static final String RATED_VALUE_YES = "YES";
     public static final String RATED_VALUE_NO = "";
 
     public static final String PASSWORD_VALUE_YES = "YES";
 
-    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Password", "Created / Started", "Skill Level", "Rated", "Quit %", "Min Rating", "Action"};
+    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Name", "Seats", "Owner / Players", "Game Type", "Info", "Status", "Password", "Created / Started", "Skill Level", "Rated", "Quit %", "Min Rating", "Action"};
 
     private TableView[] tables = new TableView[0];
 
@@ -115,55 +117,59 @@ public class TablesTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int arg0, int arg1) {
-        switch (arg1) {
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        switch (columnIndex) {
             case 0:
-                return tables[arg0].isTournament() ? tourneyIcon : matchIcon;
+                return tables[rowIndex].isTournament() ? tourneyIcon : matchIcon;
             case 1:
-                return tables[arg0].getDeckType();
+                return tables[rowIndex].getDeckType();
             case 2:
-                return tables[arg0].getControllerName();
+                return tables[rowIndex].getTableName();
             case 3:
-                return tables[arg0].getGameType();
+                return tables[rowIndex].getSeatsInfo();
             case 4:
-                return tables[arg0].getAdditionalInfo();
+                return tables[rowIndex].getControllerName();
             case 5:
-                return tables[arg0].getTableStateText();
+                return tables[rowIndex].getGameType();
             case 6:
-                return tables[arg0].isPassworded() ? PASSWORD_VALUE_YES : "";
+                return tables[rowIndex].getAdditionalInfo();
             case 7:
-                return tables[arg0].getCreateTime(); // use cell render, not format here
+                return tables[rowIndex].getTableStateText();
             case 8:
-                return this.getSkillLevelAsCode(tables[arg0].getSkillLevel(), false);
+                return tables[rowIndex].isPassworded() ? PASSWORD_VALUE_YES : "";
             case 9:
-                return tables[arg0].isRated() ? RATED_VALUE_YES : RATED_VALUE_NO;
+                return tables[rowIndex].getCreateTime(); // use cell render, not format here
             case 10:
-                return tables[arg0].getQuitRatio();
+                return this.getSkillLevelAsCode(tables[rowIndex].getSkillLevel(), false);
             case 11:
-                return tables[arg0].getMinimumRating();
+                return tables[rowIndex].isRated() ? RATED_VALUE_YES : RATED_VALUE_NO;
             case 12:
-                switch (tables[arg0].getTableState()) {
+                return tables[rowIndex].getQuitRatio();
+            case 13:
+                return tables[rowIndex].getMinimumRating();
+            case 14:
+                switch (tables[rowIndex].getTableState()) {
 
                     case WAITING:
-                        String owner = tables[arg0].getControllerName();
+                        String owner = tables[rowIndex].getControllerName();
                         if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                             return "";
                         }
                         return "Join";
                     case CONSTRUCTING:
                     case DRAFTING:
-                        if (tables[arg0].isTournament()) {
+                        if (tables[rowIndex].isTournament()) {
                             return "Show";
                         }
                     case DUELING:
-                        if (tables[arg0].isTournament()) {
+                        if (tables[rowIndex].isTournament()) {
                             return "Show";
                         } else {
-                            owner = tables[arg0].getControllerName();
+                            owner = tables[rowIndex].getControllerName();
                             if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                                 return "";
                             }
-                            if (tables[arg0].getSpectatorsAllowed()) {
+                            if (tables[rowIndex].getSpectatorsAllowed()) {
                                 return "Watch";
                             }
                             return "";
@@ -171,15 +177,15 @@ public class TablesTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 13:
-                return tables[arg0].isTournament();
-            case 14:
-                if (!tables[arg0].getGames().isEmpty()) {
-                    return tables[arg0].getGames().get(0);
+            case 15:
+                return tables[rowIndex].isTournament();
+            case 16:
+                if (!tables[rowIndex].getGames().isEmpty()) {
+                    return tables[rowIndex].getGames().get(0);
                 }
                 return null;
-            case 15:
-                return tables[arg0].getTableId();
+            case 17:
+                return tables[rowIndex].getTableId();
         }
         return "";
     }

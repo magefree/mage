@@ -56,7 +56,7 @@ import static mage.client.dialog.PreferencesDialog.*;
 public class TablesPanel extends javax.swing.JPanel {
 
     private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
-    private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 40, 60};
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 100, 50, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
     private final TablesTableModel tableModel;
     private final MatchesTableModel matchesModel;
@@ -163,6 +163,16 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     };
 
+    // center text render
+    TableCellRenderer centerCellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            label.setHorizontalAlignment(JLabel.CENTER);
+            return label;
+        }
+    };
+
     /**
      * Creates new form TablesPanel
      */
@@ -189,6 +199,8 @@ public class TablesPanel extends javax.swing.JPanel {
         tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_CREATED).setCellRenderer(timeAgoCellRenderer);
         // skill level
         tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_SKILL).setCellRenderer(skillCellRenderer);
+        // seats
+        tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_SEATS).setCellRenderer(centerCellRenderer);
 
         /* date sorter (not need, default is good - see getColumnClass)
         activeTablesSorter.setComparator(TablesTableModel.COLUMN_CREATED, new Comparator<Date>() {
