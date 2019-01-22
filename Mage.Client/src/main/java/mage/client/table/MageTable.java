@@ -1,6 +1,7 @@
 package mage.client.table;
 
 import mage.client.util.GUISizeHelper;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
@@ -12,6 +13,7 @@ import java.awt.event.MouseEvent;
  */
 public class MageTable extends JTable {
 
+    private static final Logger logger = Logger.getLogger(MageTable.class);
     private TableInfo tableInfo;
 
     public MageTable() {
@@ -28,11 +30,9 @@ public class MageTable extends JTable {
         String tip = null;
         java.awt.Point p = e.getPoint();
         int rowIndex = rowAtPoint(p);
-        rowIndex = getRowSorter().convertRowIndexToModel(rowIndex);
         int colIndex = columnAtPoint(p);
-
         try {
-            tip = getValueAt(rowIndex, colIndex).toString();
+            tip = this.getModel().getValueAt(this.convertRowIndexToModel(rowIndex), this.convertColumnIndexToModel(colIndex)).toString();
         } catch (RuntimeException e1) {
             //catch null pointer exception if mouse is over an empty line
         }
@@ -47,8 +47,8 @@ public class MageTable extends JTable {
             public String getToolTipText(MouseEvent e) {
                 // html tooltip
                 java.awt.Point p = e.getPoint();
-                int index = columnModel.getColumnIndexAtX(p.x);
-                TableColumn col = columnModel.getColumn(index);
+                int colIndex = columnModel.getColumnIndexAtX(p.x);
+                TableColumn col = columnModel.getColumn(colIndex);
                 int realIndex = col.getModelIndex();
 
                 String tip;
