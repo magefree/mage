@@ -387,9 +387,12 @@ public class TablesPanel extends javax.swing.JPanel {
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int row = e.getFirstIndex();
-                String rowId = TablesUtil.getSearchIdFromTable(table, row);
-                tablesLastSelection.put(table, rowId);
+                int modelRow = TablesUtil.getSelectedModelRow(table);
+                if (modelRow != -1) {
+                    // needs only selected
+                    String rowId = TablesUtil.getSearchIdFromTable(table, modelRow);
+                    tablesLastSelection.put(table, rowId);
+                }
             }
         });
 
@@ -401,9 +404,11 @@ public class TablesPanel extends javax.swing.JPanel {
                     @Override
                     public void run() {
                         String lastRowID = tablesLastSelection.get(table);
-                        int needRow = TablesUtil.findTableRowFromSearchId(table.getModel(), lastRowID);
-                        if (needRow != -1) {
-                            table.addRowSelectionInterval(needRow, needRow);
+                        int needModelRow = TablesUtil.findTableRowFromSearchId(table.getModel(), lastRowID);
+                        int needViewRow = TablesUtil.getViewRowFromModel(table, needModelRow);
+                        if (needViewRow != -1) {
+                            table.clearSelection();
+                            table.addRowSelectionInterval(needViewRow, needViewRow);
                         }
                     }
                 });
@@ -415,9 +420,9 @@ public class TablesPanel extends javax.swing.JPanel {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int row = table.getSelectedRow();
-                if (e.getClickCount() == 2 && row != -1) {
-                    action.actionPerformed(new ActionEvent(table, ActionEvent.ACTION_PERFORMED, TablesUtil.getSearchIdFromTable(table, row)));
+                int modelRow = TablesUtil.getSelectedModelRow(table);
+                if (e.getClickCount() == 2 && modelRow != -1) {
+                    action.actionPerformed(new ActionEvent(table, ActionEvent.ACTION_PERFORMED, TablesUtil.getSearchIdFromTable(table, modelRow)));
                 }
             }
         });

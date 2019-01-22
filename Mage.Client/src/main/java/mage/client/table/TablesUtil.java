@@ -43,4 +43,21 @@ public class TablesUtil {
         return row;
     }
 
+    public static int getSelectedModelRow(JTable table) {
+        return getModelRowFromView(table, table.getSelectedRow());
+    }
+
+    public static int getModelRowFromView(JTable table, int viewRow) {
+        if (viewRow != -1 && viewRow < table.getModel().getRowCount()) {
+            return table.convertRowIndexToModel(viewRow);
+        }
+        return -1;
+    }
+
+    public static int getViewRowFromModel(JTable table, int modelRow) {
+        if (modelRow != -1 && modelRow < table.getModel().getRowCount()) {
+            return table.convertRowIndexToView(modelRow);
+        }
+        return -1;
+    }
 }

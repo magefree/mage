@@ -27,16 +27,15 @@ public class MageTable extends JTable {
     @Override
     public String getToolTipText(MouseEvent e) {
         // default tooltip for cells
-        String tip = null;
         java.awt.Point p = e.getPoint();
-        int rowIndex = rowAtPoint(p);
-        int colIndex = columnAtPoint(p);
-        try {
-            tip = this.getModel().getValueAt(this.convertRowIndexToModel(rowIndex), this.convertColumnIndexToModel(colIndex)).toString();
-        } catch (RuntimeException e1) {
-            //catch null pointer exception if mouse is over an empty line
+        int viewRow = rowAtPoint(p);
+        int viewCol = columnAtPoint(p);
+        int modelRow = TablesUtil.getModelRowFromView(this, viewRow);
+        int modelCol = this.convertColumnIndexToModel(viewCol);
+        String tip = null;
+        if (modelRow != -1 && modelCol != -1) {
+            tip = this.getModel().getValueAt(modelRow, modelCol).toString();
         }
-
         return GUISizeHelper.textToHtmlWithSize(tip, GUISizeHelper.tableFont);
     }
 
