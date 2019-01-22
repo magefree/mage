@@ -810,9 +810,9 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelTables = new javax.swing.JPanel();
         jSplitPaneTables = new javax.swing.JSplitPane();
         jScrollPaneTablesActive = new javax.swing.JScrollPane();
-        tableTables = new javax.swing.JTable();
+        tableTables = new MageTable();
         jScrollPaneTablesFinished = new javax.swing.JScrollPane();
-        tableCompleted = new javax.swing.JTable();
+        tableCompleted = new MageTable();
         chatPanelMain = new mage.client.table.PlayersChatPanel();
         jPanelBottom = new javax.swing.JPanel();
         jButtonFooterNext = new javax.swing.JButton();
@@ -1351,8 +1351,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPaneTables;
-    private javax.swing.JTable tableCompleted;
-    private javax.swing.JTable tableTables;
+    private MageTable tableCompleted;
+    private MageTable tableTables;
     // End of variables declaration//GEN-END:variables
 
 }

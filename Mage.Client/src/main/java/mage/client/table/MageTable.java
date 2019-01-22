@@ -4,6 +4,7 @@ import mage.client.util.GUISizeHelper;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import java.awt.event.MouseEvent;
 
 /**
@@ -12,6 +13,10 @@ import java.awt.event.MouseEvent;
 public class MageTable extends JTable {
 
     private TableInfo tableInfo;
+
+    public MageTable() {
+        this(null);
+    }
 
     public MageTable(TableInfo tableInfo) {
         this.tableInfo = tableInfo;
@@ -43,11 +48,19 @@ public class MageTable extends JTable {
                 // html tooltip
                 java.awt.Point p = e.getPoint();
                 int index = columnModel.getColumnIndexAtX(p.x);
-                int realIndex = columnModel.getColumn(index).getModelIndex();
+                TableColumn col = columnModel.getColumn(index);
+                int realIndex = col.getModelIndex();
 
-                String tip = tableInfo.getColumnByIndex(realIndex).getHeaderHint();
-                if (tip == null) {
-                    tip = tableInfo.getColumnByIndex(realIndex).getHeaderName();
+                String tip;
+                if (tableInfo != null) {
+                    // custom hint from table info
+                    tip = tableInfo.getColumnByIndex(realIndex).getHeaderHint();
+                    if (tip == null) {
+                        tip = tableInfo.getColumnByIndex(realIndex).getHeaderName();
+                    }
+                } else {
+                    // default hint from header
+                    tip = col.getHeaderValue().toString();
                 }
 
                 return GUISizeHelper.textToHtmlWithSize(tip, GUISizeHelper.tableFont);

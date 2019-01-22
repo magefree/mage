@@ -12,8 +12,19 @@ import java.util.Date;
 
 public class TablesTableModel extends AbstractTableModel {
 
-    final ImageIcon tourneyIcon = new ImageIcon(getClass().getResource("/tables/tourney_icon.png"));
-    final ImageIcon matchIcon = new ImageIcon(getClass().getResource("/tables/match_icon.png"));
+    // icons with tostring for tables hints
+    final ImageIcon tourneyIcon = new ImageIcon(getClass().getResource("/tables/tourney_icon.png")) {
+        @Override
+        public String toString() {
+            return "Tourney";
+        }
+    };
+    final ImageIcon matchIcon = new ImageIcon(getClass().getResource("/tables/match_icon.png")) {
+        @Override
+        public String toString() {
+            return "Match";
+        }
+    };
 
     public static final int COLUMN_ICON = 0;
     public static final int COLUMN_DECK_TYPE = 1; // column the deck type is located (starting with 0) Start string is used to check for Limited
