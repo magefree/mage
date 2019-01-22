@@ -28,6 +28,10 @@ import org.ocpsoft.prettytime.units.JustNow;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -71,6 +75,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     private final TablesButtonColumn actionButton1;
     private final TablesButtonColumn actionButton2;
+    private final Map<JTable, String> tablesLastSelection = new HashMap<>();
 
     final JToggleButton[] filterButtons;
 
@@ -353,9 +358,45 @@ public class TablesPanel extends javax.swing.JPanel {
         // !!!! adds action buttons to the table panel (don't delete this)
         actionButton1 = new TablesButtonColumn(tableTables, openTableAction, tableTables.convertColumnIndexToView(TablesTableModel.ACTION_COLUMN));
         actionButton2 = new TablesButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.COLUMN_ACTION));
-        // !!!!
+        // selection
+        tablesLastSelection.put(tableTables, "");
+        tablesLastSelection.put(tableCompleted, "");
+        addTableSelectListener(tableTables);
+        addTableSelectListener(tableCompleted);
+        // double click
         addTableDoubleClickListener(tableTables, openTableAction);
         addTableDoubleClickListener(tableCompleted, closedTableAction);
+    }
+
+    private void addTableSelectListener(JTable table) {
+        // https://stackoverflow.com/a/26142800/1276632
+
+        // save last selection
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int row = e.getFirstIndex();
+                String rowId = TablesUtil.getSearchIdFromTable(table, row);
+                tablesLastSelection.put(table, rowId);
+            }
+        });
+
+        // restore selection
+        table.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        String lastRowID = tablesLastSelection.get(table);
+                        int needRow = TablesUtil.findTableRowFromSearchId(table.getModel(), lastRowID);
+                        if (needRow != -1) {
+                            table.addRowSelectionInterval(needRow, needRow);
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void addTableDoubleClickListener(JTable table, Action action) {
