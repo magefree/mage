@@ -33,7 +33,7 @@ public class BoosterGenerationTest extends MageTestBase {
         CardScanner.scan();
     }
 
-    private static final List<String> basics = Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest");
+    private static final List<String> basics = new ArrayList<>(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
 
     private void checkOnePartnerBoost() {
         List<Card> booster = Battlebond.getInstance().createBooster();
@@ -64,11 +64,11 @@ public class BoosterGenerationTest extends MageTestBase {
     @Test
     public void testFateReforged() {
 
-        List<String> tapland = Arrays.asList(
+        List<String> tapland = new ArrayList<>(Arrays.asList(
                 "Bloodfell Caves", "Blossoming Sands", "Dismal Backwater", "Jungle Hollow", "Rugged Highlands",
-                "Scoured Barrens", "Swiftwater Cliffs", "Thornwood Falls", "Tranquil Cove", "Wind-Scarred Crag");
-        List<String> fetchland = Arrays.asList(
-                "Bloodstained Mire", "Flooded Strand", "Polluted Delta", "Windswept Heath", "Wooded Foothills");
+                "Scoured Barrens", "Swiftwater Cliffs", "Thornwood Falls", "Tranquil Cove", "Wind-Scarred Crag"));
+        List<String> fetchland = new ArrayList<>(Arrays.asList(
+                "Bloodstained Mire", "Flooded Strand", "Polluted Delta", "Windswept Heath", "Wooded Foothills"));
 
         List<Card> booster = FateReforged.getInstance().createBooster();
         assertTrue(str(booster), contains(booster, tapland, "FRF") || contains(booster, fetchland, "KTK")
@@ -78,13 +78,13 @@ public class BoosterGenerationTest extends MageTestBase {
 
     @Test
     public void testMastersEditionII() {
-        List<String> snowCoveredLand = Arrays.asList(
+        List<String> snowCoveredLand = new ArrayList<>(Arrays.asList(
                 "Snow-Covered Plains",
                 "Snow-Covered Island",
                 "Snow-Covered Swamp",
                 "Snow-Covered Mountain",
                 "Snow-Covered Forest"
-        );
+        ));
         List<Card> booster = MastersEditionII.getInstance().createBooster();
         assertTrue(str(booster), contains(booster, snowCoveredLand, "ME2"));
         assertFalse(str(booster), contains(booster, basics, null));
@@ -93,11 +93,11 @@ public class BoosterGenerationTest extends MageTestBase {
     @Test
     public void testMastersEditionIV_UrzaSpecialLandsList() {
 
-        List<String> needUrzaList = Arrays.asList(
+        List<String> needUrzaList = new ArrayList<>(Arrays.asList(
                 "Urza's Mine",
                 "Urza's Power Plant",
                 "Urza's Tower"
-        );
+        ));
 
         List<CardInfo> setOrzaList = MastersEditionIV.getInstance().getSpecialLand();
         Assert.assertEquals("Urza special lands must have 4 variation for each of 3 card", 3 * 4, setOrzaList.size());
@@ -117,11 +117,11 @@ public class BoosterGenerationTest extends MageTestBase {
     public void testMastersEditionIV_UrzaSpecialLandInBoosters() {
         // ME4 replace all basic lands with special (1 per booster)
         // https://mtg.gamepedia.com/Masters_Edition_IV
-        List<String> urzaLand = Arrays.asList(
+        List<String> urzaLand = new ArrayList<>(Arrays.asList(
                 "Urza's Mine",
                 "Urza's Power Plant",
                 "Urza's Tower"
-        );
+        ));
 
         for (int i = 1; i <= 5; i++) {
             List<Card> booster = MastersEditionIV.getInstance().createBooster();
