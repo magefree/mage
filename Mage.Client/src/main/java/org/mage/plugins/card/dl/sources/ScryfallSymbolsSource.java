@@ -70,7 +70,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
         }
 
         // gen symbols list
-        List<String> allMageSymbols = Arrays.asList(SYMBOLS_LIST);
+        List<String> allMageSymbols = new ArrayList<>(Arrays.asList(SYMBOLS_LIST));
         for (Integer i = SYMBOLS_NUMBER_START; i <= SYMBOLS_NUMBER_END; i++) {
             allMageSymbols.add(String.valueOf(SYMBOLS_NUMBER_START + i));
         }
