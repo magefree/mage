@@ -1404,19 +1404,34 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (zone != Zone.HAND) {
             if (Zone.GRAVEYARD == zone && canPlayCardsFromGraveyard()) {
                 for (ActivatedAbility ability : candidateAbilites.getPlayableAbilities(Zone.HAND)) {
-                    if (canUse || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
+                    if (canUse
+                            || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
                         if (ability.canActivate(playerId, game).canActivate()) {
                             output.put(ability.getId(), ability);
                         }
                     }
                 }
             }
-            if (zone != Zone.BATTLEFIELD /*&& null != game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, this.getId(), game)*/) {
+            if (zone != Zone.BATTLEFIELD) {
                 for (Ability ability : candidateAbilites) {
-                    if (null != game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game)) {
-                        if (canUse || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
+                    if (game.getContinuousEffects().asThough(object.getId(),
+                            AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE,
+                            null,
+                            this.getId(),
+                            game)
+                            != null
+                            // if anyone sees an issue with this code, please report it.  Worked in my testing.
+                            || game.getContinuousEffects().asThough(object.getId(),
+                                    AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE,
+                                    ability,
+                                    this.getId(),
+                                    game)
+                            != null) {
+                        if (canUse
+                                || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
                             ability.setControllerId(this.getId());
-                            if (ability instanceof ActivatedAbility && ability.getZone().match(Zone.HAND)
+                            if (ability instanceof ActivatedAbility
+                                    && ability.getZone().match(Zone.HAND)
                                     && ((ActivatedAbility) ability).canActivate(playerId, game).canActivate()) {
                                 output.put(ability.getId(), (ActivatedAbility) ability);
                             }
