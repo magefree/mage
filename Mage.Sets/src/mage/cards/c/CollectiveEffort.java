@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
@@ -32,8 +30,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class CollectiveEffort extends CardImpl {
@@ -62,14 +61,14 @@ public final class CollectiveEffort extends CardImpl {
 
         // Destroy target creature with power 4 or greater.;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterDestroyCreature));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterDestroyCreature).withChooseHint("destroy"));
 
         // Destroy target enchantment.;
         Mode mode = new Mode();
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target enchantment");
         mode.addEffect(effect);
-        mode.addTarget(new TargetEnchantmentPermanent(filterDestroyEnchantment));
+        mode.addTarget(new TargetEnchantmentPermanent(filterDestroyEnchantment).withChooseHint("destroy"));
         this.getSpellAbility().addMode(mode);
 
         // Put a +1/+1 counter on each creature target player controls.
@@ -77,7 +76,7 @@ public final class CollectiveEffort extends CardImpl {
         effect = new CollectiveEffortEffect();
         effect.setText("Put a +1/+1 counter on each creature target player controls");
         mode.addEffect(effect);
-        mode.addTarget(new TargetPlayer(1, 1, false, filterPlayer));
+        mode.addTarget(new TargetPlayer(1, 1, false, filterPlayer).withChooseHint("put +1/+1 counter on each creature"));
         this.getSpellAbility().addMode(mode);
     }
 

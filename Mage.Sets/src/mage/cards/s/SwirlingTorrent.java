@@ -21,14 +21,14 @@ public final class SwirlingTorrent extends CardImpl {
         // Choose one or both —
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
-        
+
         // • Put target creature on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("put on library top"));
 
         // • Return target creature to its owner's hand.
         Mode mode = new Mode(new ReturnToHandTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent());
+        mode.addTarget(new TargetCreaturePermanent().withChooseHint("return to hand"));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -1,10 +1,5 @@
-
 package mage.target;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -12,8 +7,12 @@ import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public interface Target extends Serializable {
@@ -30,7 +29,7 @@ public interface Target extends Serializable {
      * controls if it will be checked, if the target can be targeted from source
      *
      * @param notTarget true = do not check for protection, false = check for
-     * protection
+     *                  protection
      */
     void setNotTarget(boolean notTarget);
 
@@ -136,4 +135,5 @@ public interface Target extends Serializable {
     // used for cards like Spellskite
     void setTargetAmount(UUID targetId, int amount, Game game);
 
+    Target withChooseHint(String chooseHint);
 }

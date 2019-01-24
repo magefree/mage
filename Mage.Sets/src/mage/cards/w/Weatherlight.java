@@ -1,24 +1,24 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.CrewAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Weatherlight extends CardImpl {
@@ -44,9 +44,11 @@ public final class Weatherlight extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(
                         new StaticValue(5), false, new StaticValue(1), filter,
-                        Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false
-                ), false
+                        Zone.LIBRARY, false, true, false, Zone.HAND,
+                        true, false, false
+                ).setBackInRandomOrder(true), false
         ));
+
         // Crew 3
         this.addAbility(new CrewAbility(3));
     }

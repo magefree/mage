@@ -12,7 +12,10 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -82,11 +85,9 @@ class MacabreMockeryEffect extends OneShotEffect {
         effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setTargetPointer(new FixedTarget(permanent, game));
         game.addEffect(effect, source);
-        Effect sacrificeEffect = new SacrificeTargetEffect("exile " + permanent.getLogName());
+        Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + permanent.getLogName(), controller.getId());
         sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                sacrificeEffect, TargetController.YOU
-        ), source);
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
         return true;
     }
 }

@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +29,7 @@ public final class CryptOfTheEternals extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Add {U}, {B}, or {R}.
-        List<Mana> list = Arrays.asList(Mana.BlueMana(1), Mana.BlackMana(1), Mana.RedMana(1));
+        List<Mana> list = new ArrayList<>(Arrays.asList(Mana.BlueMana(1), Mana.BlackMana(1), Mana.RedMana(1)));
 
 
         for (Mana m : list) {

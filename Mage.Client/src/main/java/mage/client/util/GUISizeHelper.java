@@ -8,6 +8,7 @@ package mage.client.util;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Locale;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -177,5 +178,12 @@ public final class GUISizeHelper {
                 }
             }
         }
+    }
+
+    public static String textToHtmlWithSize(String text, Font font) {
+        if (text != null && !text.toLowerCase(Locale.ENGLISH).startsWith("<html>")) {
+            return "<html><p style=\"font-size: " + font.getSize() + ";\">" + text + "</p>";
+        }
+        return text;
     }
 }

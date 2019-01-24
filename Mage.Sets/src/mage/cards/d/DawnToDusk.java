@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -13,19 +11,21 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetEnchantmentPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DawnToDusk extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("enchantment card from your graveyard");
+
     static {
         filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public DawnToDusk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 
 
         // Choose one or both -
@@ -33,11 +33,11 @@ public final class DawnToDusk extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
         // Return target enchantment card from your graveyard to your hand;
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard).withChooseHint("return from graveyard to hand"));
         // and/or destroy target enchantment.
         Mode mode = new Mode();
         mode.addEffect(new DestroyTargetEffect());
-        mode.addTarget(new TargetEnchantmentPermanent());
+        mode.addTarget(new TargetEnchantmentPermanent().withChooseHint("destroy"));
         this.getSpellAbility().addMode(mode);
     }
 

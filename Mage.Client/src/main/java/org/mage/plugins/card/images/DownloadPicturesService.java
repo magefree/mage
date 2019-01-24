@@ -11,7 +11,6 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.util.CardLanguage;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
-import mage.util.StreamUtils;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -26,8 +25,8 @@ import java.awt.event.ItemEvent;
 import java.io.*;
 import java.net.*;
 import java.nio.file.AccessDeniedException;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -49,8 +48,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static final String ALL_STANDARD_IMAGES = "- STANDARD images";
     private static final String ALL_TOKENS = "- TOKEN images";
 
+    private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
+
     private DownloadImagesDialog uiDialog;
     private boolean needCancel;
+    private int errorCount;
     private int cardIndex;
 
     private List<CardInfo> cardsAll;
@@ -110,17 +112,26 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // show dialog
         instance.setNeedCancel(false);
+        instance.resetErrorCount();
         instance.uiDialog.showDialog();
         instance.uiDialog.dispose();
         instance.setNeedCancel(true);
     }
 
-    public boolean getNeedCancel() {
-        return this.needCancel;
+    private boolean getNeedCancel() {
+        return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL);
     }
 
-    public void setNeedCancel(boolean needCancel) {
+    private void setNeedCancel(boolean needCancel) {
         this.needCancel = needCancel;
+    }
+
+    private void incErrorCount() {
+        this.errorCount = this.errorCount + 1;
+    }
+
+    private void resetErrorCount() {
+        this.errorCount = 0;
     }
 
     public DownloadPicturesService(JFrame frame) {
@@ -788,29 +799,43 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                     // download
                     selectedSource.doPause(url.getPath());
+
                     httpConn = url.openConnection(p);
-                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-                    httpConn.connect();
-                    int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+                    if (httpConn != null) {
 
-                    // check result
-                    if (responseCode != 200) {
-                        // show errors only on full fail (all urls were not work)
-                        errorsList.add("Image download for " + card.getName()
-                                + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                                + " (" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
-
-                        if (logger.isDebugEnabled()) {
-                            // Shows the returned html from the request to the web server
-                            logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                        httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                        try {
+                            httpConn.connect();
+                        } catch (SocketException e) {
+                            incErrorCount();
+                            errorsList.add("Wrong image URL or java app is not allowed to use network. Check your firewall or proxy settings. Error: " + e.getMessage() + ". Image URL: " + url.toString());
+                            break;
+                        } catch (UnknownHostException e) {
+                            incErrorCount();
+                            errorsList.add("Unknown site. Check your DNS settings. Error: " + e.getMessage() + ". Image URL: " + url.toString());
+                            break;
                         }
+                        int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
 
-                        // go to next try
-                        continue;
-                    } else {
-                        // all fine
-                        isDownloadOK = true;
-                        break;
+                        // check result
+                        if (responseCode != 200) {
+                            // show errors only on full fail (all urls were not work)
+                            errorsList.add("Image download for " + card.getName()
+                                    + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
+                                    + " (" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+
+                            if (logger.isDebugEnabled()) {
+                                // Shows the returned html from the request to the web server
+                                logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                            }
+
+                            // go to next try
+                            continue;
+                        } else {
+                            // all fine
+                            isDownloadOK = true;
+                            break;
+                        }
                     }
                 }
 
@@ -868,9 +893,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
 
             } catch (AccessDeniedException e) {
+                incErrorCount();
                 logger.error("Can't access to files: " + card.getName() + "(" + card.getSet() + "). Try rebooting your system to remove the file lock.");
             } catch (Exception e) {
-                logger.error(e.getMessage(), e);
+                incErrorCount();
+                logger.error("Unknown error: " + e.getMessage(), e);
             } finally {
             }
 

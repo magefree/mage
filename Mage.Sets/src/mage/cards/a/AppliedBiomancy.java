@@ -24,11 +24,11 @@ public final class AppliedBiomancy extends CardImpl {
 
         // • Target creature gets +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("gets +1/+1 until end of turn"));
 
         // • Return target creature to its owner's hand.
         Mode mode = new Mode(new ReturnToHandTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent());
+        mode.addTarget(new TargetCreaturePermanent().withChooseHint("return to its owner's hand"));
         this.getSpellAbility().addMode(mode);
     }
 

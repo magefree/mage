@@ -30,7 +30,7 @@ public enum SessionManager {
         if (session.getUserId() != null && !UserManager.instance.getUser(session.getUserId()).isPresent()) {
             logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
             // can happen if user from same host signs in multiple time with multiple clients, after he disconnects with one client
-            disconnect(sessionId, DisconnectReason.ConnectingOtherInstance);
+            disconnect(sessionId, DisconnectReason.ConnectingOtherInstance, session); // direct disconnect
             return Optional.empty();
         }
         return Optional.of(session);
@@ -96,32 +96,42 @@ public enum SessionManager {
     }
 
     public void disconnect(String sessionId, DisconnectReason reason) {
-        getSession(sessionId).ifPresent(session -> {
-            if (!isValidSession(sessionId)) {
-                // session was removed meanwhile by another thread so we can return
-                return;
-            }
-            logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
-            sessions.remove(sessionId);
-            switch (reason) {
-                case AdminDisconnect:
-                    session.kill(reason);
-                    break;
-                case ConnectingOtherInstance:
-                case Disconnected: // regular session end or wrong client version
-                    UserManager.instance.disconnect(session.getUserId(), reason);
-                    break;
-                case SessionExpired: // session ends after no reconnect happens in the defined time span
-                    break;
-                case LostConnection: // user lost connection - session expires countdown starts
-                    session.userLostConnection();
-                    UserManager.instance.disconnect(session.getUserId(), reason);
-                    break;
-                default:
-                    logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
-            }
-        });
+        disconnect(sessionId, reason, null);
+    }
 
+    public void disconnect(String sessionId, DisconnectReason reason, Session directSession) {
+        if (directSession == null) {
+            // find real session to disconnects
+            getSession(sessionId).ifPresent(session -> {
+                if (!isValidSession(sessionId)) {
+                    // session was removed meanwhile by another thread so we can return
+                    return;
+                }
+                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
+                sessions.remove(sessionId);
+                switch (reason) {
+                    case AdminDisconnect:
+                        session.kill(reason);
+                        break;
+                    case ConnectingOtherInstance:
+                    case Disconnected: // regular session end or wrong client version
+                        UserManager.instance.disconnect(session.getUserId(), reason);
+                        break;
+                    case SessionExpired: // session ends after no reconnect happens in the defined time span
+                        break;
+                    case LostConnection: // user lost connection - session expires countdown starts
+                        session.userLostConnection();
+                        UserManager.instance.disconnect(session.getUserId(), reason);
+                        break;
+                    default:
+                        logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
+                }
+            });
+        } else {
+            // direct session to disconnects
+            sessions.remove(sessionId);
+            directSession.kill(reason);
+        }
     }
 
 

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -25,8 +23,9 @@ import mage.filter.predicate.other.PlayerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class CollectiveBrutality extends CardImpl {
@@ -44,7 +43,7 @@ public final class CollectiveBrutality extends CardImpl {
     }
 
     public CollectiveBrutality(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Escalate - Discard a card.
         Cost cost = new DiscardCardCost();
@@ -59,14 +58,14 @@ public final class CollectiveBrutality extends CardImpl {
         Effect effect = new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY);
         effect.setText("Target opponent reveals their hand. You choose an instant or sorcery card from it. That player discards that card");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard));
+        this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard).withChooseHint("reveals hand, you choose to discard"));
 
         // Target creature gets -2/-2 until end of turn.;
         Mode mode = new Mode();
         effect = new BoostTargetEffect(-2, -2, Duration.EndOfTurn);
         effect.setText("Target creature gets -2/-2 until end of turn");
         mode.addEffect(effect);
-        mode.addTarget(new TargetCreaturePermanent(filterCreatureMinus));
+        mode.addTarget(new TargetCreaturePermanent(filterCreatureMinus).withChooseHint("gets -2/-2 until end of turn"));
         this.getSpellAbility().addMode(mode);
 
         // Target opponent loses 2 life and you gain 2 life.
@@ -74,10 +73,9 @@ public final class CollectiveBrutality extends CardImpl {
         effect = new LoseLifeTargetEffect(2);
         effect.setText("Target opponent loses 2 life");
         mode.addEffect(effect);
-        mode.addTarget(new TargetPlayer(1, 1, false, filterLoseLife));
+        mode.addTarget(new TargetPlayer(1, 1, false, filterLoseLife).withChooseHint("loses 2 life"));
         effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        mode.addEffect(effect);
+        mode.addEffect(effect.concatBy("and"));
         this.getSpellAbility().addMode(mode);
     }
 

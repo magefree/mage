@@ -50,7 +50,8 @@ public final class KessDissidentMage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // During each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard this turn, exile it instead.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new KessDissidentMageCastFromGraveyardEffect());
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new KessDissidentMageCastFromGraveyardEffect());
         ability.addEffect(new KessDissidentMageReplacementEffect());
         this.addAbility(ability, new KessDissidentMageWatcher());
     }
@@ -88,13 +89,18 @@ class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!(source instanceof FlashbackAbility) && affectedControllerId.equals(source.getControllerId()) && game.isActivePlayer(source.getControllerId())) {
+        if (!(source instanceof FlashbackAbility)
+                && affectedControllerId.equals(source.getControllerId())
+                && game.isActivePlayer(source.getControllerId())) {
             Card card = game.getCard(objectId);
-            if (card != null && (card.isInstant() || card.isSorcery())
+            if (card != null
+                    && (card.isInstant()
+                    || card.isSorcery())
                     && game.getState().getZone(objectId).equals(Zone.GRAVEYARD)) {
                 // check if not already a card was cast this turn with this ability
                 KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
-                return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
+                return watcher != null
+                        && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
             }
         }
         return false;
@@ -121,9 +127,9 @@ class KessDissidentMageReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(event.getTargetId());
-        if (controller != null && card != null) {
-            controller.moveCards(card, Zone.EXILED, source, game);
-            return true;
+        if (controller != null
+                && card != null) {
+            return controller.moveCards(card, Zone.EXILED, source, game);
         }
         return false;
     }
@@ -138,9 +144,9 @@ class KessDissidentMageReplacementEffect extends ReplacementEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getToZone() == Zone.GRAVEYARD) {
             KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
-            if (watcher != null && source.getSourceId().equals(watcher.spellCastWasAllowedBy(new MageObjectReference(event.getTargetId(), game)))) {
-                return true;
-            }
+            return (watcher != null
+                    && source.getSourceId().equals(watcher.spellCastWasAllowedBy(
+                            new MageObjectReference(event.getTargetId(), game))));
         }
         return false;
     }
@@ -164,11 +170,16 @@ class KessDissidentMageWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST
+                && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (null != event.getAdditionalReference() && spell.isInstant() || spell.isSorcery()) {
+            if (event.getAdditionalReference() != null
+                    && event.getAdditionalReference().getSourceId() != null
+                    && spell.isInstant()
+                    || spell.isSorcery()) {
                 allowingObjects.add(event.getAdditionalReference());
-                castSpells.put(new MageObjectReference(spell.getSourceId(), game), event.getAdditionalReference().getSourceId());
+                castSpells.put(new MageObjectReference(spell.getSourceId(), game),
+                        event.getAdditionalReference().getSourceId());
             }
         }
     }

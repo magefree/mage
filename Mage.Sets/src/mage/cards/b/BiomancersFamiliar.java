@@ -110,7 +110,7 @@ class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
                 || (abilityToModify.getAbilityType() == AbilityType.MANA && abilityToModify instanceof ActivatedAbility)) {
             //Activated abilities of creatures you control
             Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
-            if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
+            if (permanent != null && permanent.isCreature() && permanent.isControlledBy(source.getControllerId())) {
                 return true;
             }
         }

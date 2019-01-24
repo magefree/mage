@@ -1,15 +1,4 @@
-
 package mage.target;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,6 +11,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.util.RandomUtil;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -45,6 +36,7 @@ public abstract class TargetImpl implements Target {
     protected UUID abilityController = null; // only used if target controller != ability controller
 
     protected int targetTag; // can be set if other target check is needed (AnotherTargetPredicate)
+    protected String chooseHint = null; // UI choose hints after target name
 
     @Override
     public abstract TargetImpl copy();
@@ -72,6 +64,7 @@ public abstract class TargetImpl implements Target {
         this.targetController = target.targetController;
         this.abilityController = target.abilityController;
         this.targetTag = target.targetTag;
+        this.chooseHint = target.chooseHint;
     }
 
     @Override
@@ -101,12 +94,11 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public String getMessage() {
+        // UI choose message
         String suffix = "";
-//        if (targetController != null) {
-//            // Hint for the selecting player that the targets must be valid from the point of the ability controller
-//            // e.g. select opponent text may be misleading otherwise
-//            suffix = " (target controlling!)";
-//        }
+        if (this.chooseHint != null) {
+            suffix = " (" + this.chooseHint + ")";
+        }
         if (getMaxNumberOfTargets() != 1) {
             StringBuilder sb = new StringBuilder();
             sb.append("Select ").append(targetName);
@@ -401,7 +393,7 @@ public abstract class TargetImpl implements Target {
         for (int K = minK; K <= maxK; K++) {
             // get the combination by index
             // e.g. 01 --> AB , 23 --> CD
-            int combination[] = new int[K];
+            int[] combination = new int[K];
 
             // position of current index
             //  if (r = 1)              r*
@@ -544,4 +536,9 @@ public abstract class TargetImpl implements Target {
         rememberZoneChangeCounter(targetId, game);
     }
 
+    @Override
+    public Target withChooseHint(String chooseHint) {
+        this.chooseHint = chooseHint;
+        return this;
+    }
 }

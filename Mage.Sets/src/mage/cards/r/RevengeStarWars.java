@@ -25,9 +25,9 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author Styxo
  */
-public final class Revenge extends CardImpl {
+public final class RevengeStarWars extends CardImpl {
 
-    public Revenge(UUID ownerId, CardSetInfo setInfo) {
+    public RevengeStarWars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn.
@@ -45,13 +45,13 @@ public final class Revenge extends CardImpl {
 
     }
 
-    public Revenge(final Revenge card) {
+    public RevengeStarWars(final RevengeStarWars card) {
         super(card);
     }
 
     @Override
-    public Revenge copy() {
-        return new Revenge(this);
+    public RevengeStarWars copy() {
+        return new RevengeStarWars(this);
     }
 }
 

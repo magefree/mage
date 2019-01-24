@@ -28,6 +28,10 @@ import org.ocpsoft.prettytime.units.JustNow;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -52,7 +56,7 @@ import static mage.client.dialog.PreferencesDialog.*;
 public class TablesPanel extends javax.swing.JPanel {
 
     private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
-    private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 40, 60};
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 100, 50, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
     private final TablesTableModel tableModel;
     private final MatchesTableModel matchesModel;
@@ -71,6 +75,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     private final TablesButtonColumn actionButton1;
     private final TablesButtonColumn actionButton2;
+    private final Map<JTable, String> tablesLastSelection = new HashMap<>();
 
     final JToggleButton[] filterButtons;
 
@@ -158,6 +163,16 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     };
 
+    // center text render
+    TableCellRenderer centerCellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            label.setHorizontalAlignment(JLabel.CENTER);
+            return label;
+        }
+    };
+
     /**
      * Creates new form TablesPanel
      */
@@ -184,6 +199,8 @@ public class TablesPanel extends javax.swing.JPanel {
         tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_CREATED).setCellRenderer(timeAgoCellRenderer);
         // skill level
         tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_SKILL).setCellRenderer(skillCellRenderer);
+        // seats
+        tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_SEATS).setCellRenderer(centerCellRenderer);
 
         /* date sorter (not need, default is good - see getColumnClass)
         activeTablesSorter.setComparator(TablesTableModel.COLUMN_CREATED, new Comparator<Date>() {
@@ -353,18 +370,59 @@ public class TablesPanel extends javax.swing.JPanel {
         // !!!! adds action buttons to the table panel (don't delete this)
         actionButton1 = new TablesButtonColumn(tableTables, openTableAction, tableTables.convertColumnIndexToView(TablesTableModel.ACTION_COLUMN));
         actionButton2 = new TablesButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.COLUMN_ACTION));
-        // !!!!
+        // selection
+        tablesLastSelection.put(tableTables, "");
+        tablesLastSelection.put(tableCompleted, "");
+        addTableSelectListener(tableTables);
+        addTableSelectListener(tableCompleted);
+        // double click
         addTableDoubleClickListener(tableTables, openTableAction);
         addTableDoubleClickListener(tableCompleted, closedTableAction);
+    }
+
+    private void addTableSelectListener(JTable table) {
+        // https://stackoverflow.com/a/26142800/1276632
+
+        // save last selection
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int modelRow = TablesUtil.getSelectedModelRow(table);
+                if (modelRow != -1) {
+                    // needs only selected
+                    String rowId = TablesUtil.getSearchIdFromTable(table, modelRow);
+                    tablesLastSelection.put(table, rowId);
+                }
+            }
+        });
+
+        // restore selection
+        table.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        String lastRowID = tablesLastSelection.get(table);
+                        int needModelRow = TablesUtil.findTableRowFromSearchId(table.getModel(), lastRowID);
+                        int needViewRow = TablesUtil.getViewRowFromModel(table, needModelRow);
+                        if (needViewRow != -1) {
+                            table.clearSelection();
+                            table.addRowSelectionInterval(needViewRow, needViewRow);
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void addTableDoubleClickListener(JTable table, Action action) {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int row = table.getSelectedRow();
-                if (e.getClickCount() == 2 && row != -1) {
-                    action.actionPerformed(new ActionEvent(table, ActionEvent.ACTION_PERFORMED, TablesUtil.getSearchIdFromTable(table, row)));
+                int modelRow = TablesUtil.getSelectedModelRow(table);
+                if (e.getClickCount() == 2 && modelRow != -1) {
+                    action.actionPerformed(new ActionEvent(table, ActionEvent.ACTION_PERFORMED, TablesUtil.getSearchIdFromTable(table, modelRow)));
                 }
             }
         });
@@ -810,9 +868,9 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelTables = new javax.swing.JPanel();
         jSplitPaneTables = new javax.swing.JSplitPane();
         jScrollPaneTablesActive = new javax.swing.JScrollPane();
-        tableTables = new javax.swing.JTable();
+        tableTables = new MageTable();
         jScrollPaneTablesFinished = new javax.swing.JScrollPane();
-        tableCompleted = new javax.swing.JTable();
+        tableCompleted = new MageTable();
         chatPanelMain = new mage.client.table.PlayersChatPanel();
         jPanelBottom = new javax.swing.JPanel();
         jButtonFooterNext = new javax.swing.JButton();
@@ -1351,8 +1409,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPaneTables;
-    private javax.swing.JTable tableCompleted;
-    private javax.swing.JTable tableTables;
+    private MageTable tableCompleted;
+    private MageTable tableTables;
     // End of variables declaration//GEN-END:variables
 
 }

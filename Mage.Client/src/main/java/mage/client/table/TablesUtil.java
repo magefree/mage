@@ -29,16 +29,35 @@ public class TablesUtil {
     public static int findTableRowFromSearchId(Object tableModel, String searchId) {
         // tableUUID;gameUUID
         int row = -1;
-        if (tableModel instanceof TablesTableModel) {
-            row = ((TablesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
-        } else if (tableModel instanceof MatchesTableModel) {
-            row = ((MatchesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
-        } else if (tableModel instanceof TournamentMatchesTableModel) {
-            row = ((TournamentMatchesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
-        } else {
-            logger.error("Not supported tables model " + tableModel.getClass().toString());
+        if (searchId != null) {
+            if (tableModel instanceof TablesTableModel) {
+                row = ((TablesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
+            } else if (tableModel instanceof MatchesTableModel) {
+                row = ((MatchesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
+            } else if (tableModel instanceof TournamentMatchesTableModel) {
+                row = ((TournamentMatchesTableModel) tableModel).findRowByTableAndGameInfo(searchId);
+            } else {
+                logger.error("Not supported tables model " + tableModel.getClass().toString());
+            }
         }
         return row;
     }
 
+    public static int getSelectedModelRow(JTable table) {
+        return getModelRowFromView(table, table.getSelectedRow());
+    }
+
+    public static int getModelRowFromView(JTable table, int viewRow) {
+        if (viewRow != -1 && viewRow < table.getModel().getRowCount()) {
+            return table.convertRowIndexToModel(viewRow);
+        }
+        return -1;
+    }
+
+    public static int getViewRowFromModel(JTable table, int modelRow) {
+        if (modelRow != -1 && modelRow < table.getModel().getRowCount()) {
+            return table.convertRowIndexToView(modelRow);
+        }
+        return -1;
+    }
 }
