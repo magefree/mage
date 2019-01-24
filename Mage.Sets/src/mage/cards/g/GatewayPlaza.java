@@ -1,18 +1,18 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class GatewayPlaza extends CardImpl {
@@ -27,9 +27,7 @@ public final class GatewayPlaza extends CardImpl {
 
         // When Gateway Plaza enters the battlefield, sacrifice it unless you pay {1}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(
-                        new GenericManaCost(1)
-                ), false
+                new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)).setText("sacrifice it unless you pay {1}")
         ));
 
         // {T}: Add one mana of any color.
