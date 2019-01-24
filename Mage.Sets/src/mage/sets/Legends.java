@@ -54,6 +54,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Bartel Runeaxe", 222, Rarity.RARE, mage.cards.b.BartelRuneaxe.class));
         cards.add(new SetCardInfo("Beasts of Bogardan", 133, Rarity.UNCOMMON, mage.cards.b.BeastsOfBogardan.class));
         cards.add(new SetCardInfo("Black Mana Battery", 274, Rarity.UNCOMMON, mage.cards.b.BlackManaBattery.class));
+        cards.add(new SetCardInfo("Blazing Effigy", 134, Rarity.COMMON, mage.cards.b.BlazingEffigy.class));
         cards.add(new SetCardInfo("Blight", 89, Rarity.UNCOMMON, mage.cards.b.Blight.class));
         cards.add(new SetCardInfo("Blood Lust", 135, Rarity.UNCOMMON, mage.cards.b.BloodLust.class));
         cards.add(new SetCardInfo("Blue Mana Battery", 275, Rarity.UNCOMMON, mage.cards.b.BlueManaBattery.class));
@@ -152,6 +153,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("In the Eye of Chaos", 61, Rarity.RARE, mage.cards.i.InTheEyeOfChaos.class));
         cards.add(new SetCardInfo("Indestructible Aura", 21, Rarity.COMMON, mage.cards.i.IndestructibleAura.class));
         cards.add(new SetCardInfo("Infernal Medusa", 108, Rarity.UNCOMMON, mage.cards.i.InfernalMedusa.class));
+        cards.add(new SetCardInfo("Infinite Authority", 22, Rarity.RARE, mage.cards.i.InfiniteAuthority.class));
         cards.add(new SetCardInfo("Invoke Prejudice", 62, Rarity.RARE, mage.cards.i.InvokePrejudice.class));
         cards.add(new SetCardInfo("Ivory Guardians", 23, Rarity.UNCOMMON, mage.cards.i.IvoryGuardians.class));
         cards.add(new SetCardInfo("Jacques le Vert", 232, Rarity.RARE, mage.cards.j.JacquesLeVert.class));
@@ -299,6 +301,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Vaevictis Asmadi", 269, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Vampire Bats", 125, Rarity.COMMON, mage.cards.v.VampireBats.class));
         cards.add(new SetCardInfo("Visions", 41, Rarity.UNCOMMON, mage.cards.v.Visions.class));
+        cards.add(new SetCardInfo("Voodoo Doll", 298, Rarity.RARE, mage.cards.v.VoodooDoll.class));
         cards.add(new SetCardInfo("Walking Dead", 126, Rarity.COMMON, mage.cards.w.WalkingDead.class));
         cards.add(new SetCardInfo("Wall of Caltrops", 42, Rarity.COMMON, mage.cards.w.WallOfCaltrops.class));
         cards.add(new SetCardInfo("Wall of Dust", 168, Rarity.UNCOMMON, mage.cards.w.WallOfDust.class));
