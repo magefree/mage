@@ -27,6 +27,7 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -95,7 +96,8 @@ class RhythmOfTheWildEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null
                 && creature.isControlledBy(source.getControllerId())
-                && creature.isCreature();
+                && creature.isCreature()
+                && !(creature instanceof PermanentToken);
     }
 
     @Override
