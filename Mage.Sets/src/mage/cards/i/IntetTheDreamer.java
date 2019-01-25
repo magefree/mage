@@ -1,8 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -40,13 +37,17 @@ public final class IntetTheDreamer extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DoIfCostPaid(new IntetTheDreamerExileEffect(), new ManaCostsImpl("{2}{U}")), false, true));
+
         // You may look at that card for as long as it remains exiled.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new IntetTheDreamerLookEffect()));
+
         // You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IntetTheDreamerCastEffect()));
+
     }
 
     public IntetTheDreamer(final IntetTheDreamer card) {
@@ -76,17 +77,20 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
         if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
             MageObject sourceObject = source.getSourceObject(game);
-            if (card != null && sourceObject != null) {
-                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            if (card != null
+                    && sourceObject != null) {
                 card.setFaceDown(true, game);
-                controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName());
+                controller.moveCardsToExile(
+                        card,
+                        source,
+                        game,
+                        false,
+                        CardUtil.getExileZoneId(game,
+                                source.getSourceId(),
+                                sourceObject.getZoneChangeCounter(game)),  // sourceObject must be used due to source not working correctly
+                        sourceObject.getIdName());
                 card.setFaceDown(true, game);
-                Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(IntetTheDreamer.VALUE_PREFIX + source.getSourceId().toString());
-                if (exileZones == null) {
-                    exileZones = new HashSet<>();
-                    game.getState().setValue(IntetTheDreamer.VALUE_PREFIX + source.getSourceId().toString(), exileZones);
-                }
-                exileZones.add(exileZoneId);
+                game.getState().setValue("Exiled_IntetTheDreamer" + card.getId(), Boolean.TRUE);
                 return true;
             }
         }
@@ -122,20 +126,29 @@ class IntetTheDreamerCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
+        if (affectedControllerId.equals(source.getControllerId())) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = source.getSourceObject(game);
-            if (controller != null && sourceObject != null) {
+            if (controller != null
+                    && sourceObject != null) {
                 Card card = game.getCard(objectId);
-                if (card != null && card.isFaceDown(game)) {
-                    ExileZone zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
-                    if (zone != null && zone.contains(card.getId())/* && CardUtil.cardCanBePlayedNow(card, controller.getId(), game)*/) {
+                if (card != null
+                        && card.isFaceDown(game)) {
+                    ExileZone zone = game.getExile().getExileZone(
+                            CardUtil.getExileZoneId(game,
+                                    source.getSourceId(),
+                                    sourceObject.getZoneChangeCounter(game))); // sourceObject must be used due to source not working correctly
+                    if (zone != null
+                            && zone.contains(card.getId())) {
                         if (card.isLand()) {
-                            if (game.canPlaySorcery(controller.getId()) && game.getPlayer(controller.getId()).canPlayLand()) {
+                            if (game.canPlaySorcery(controller.getId())
+                                    && game.getPlayer(controller.getId()).canPlayLand()) {
                                 return controller.chooseUse(outcome, "Play " + card.getIdName() + '?', source, game);
                             }
                         } else {
-                            controller.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+                            controller.setCastSourceIdWithAlternateMana(objectId,
+                                    null,
+                                    card.getSpellAbility().getCosts());
                             return true;
                         }
                     }
@@ -170,24 +183,14 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
+        if (affectedControllerId.equals(source.getControllerId())) {
             Player controller = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = source.getSourceObject(game);
-            if (controller != null && sourceObject != null) {
+            if (controller != null) {
                 Card card = game.getCard(objectId);
-                if (card != null && card.isFaceDown(game)) {
-                    Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(IntetTheDreamer.VALUE_PREFIX + source.getSourceId().toString());
-                    if (exileZones != null) {
-                        for (ExileZone exileZone : game.getExile().getExileZones()) {
-                            if (exileZone.contains(objectId)) {
-                                if (!exileZones.contains(exileZone.getId())) {
-                                    return false;
-                                }
-                            }
-                        }
-                        return true;
-                    }
-                }
+                return (card != null
+                        && card.isFaceDown(game)
+                        && game.getExile().containsId(card.getId(), game)
+                        && (Boolean) game.getState().getValue("Exiled_IntetTheDreamer" + card.getId()));
             }
         }
         return false;
