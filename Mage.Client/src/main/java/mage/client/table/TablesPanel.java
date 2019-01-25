@@ -626,16 +626,21 @@ public class TablesPanel extends javax.swing.JPanel {
         // reload server messages
         java.util.List<String> serverMessages = SessionHandler.getServerMessages();
         synchronized (this) {
-            this.messages = serverMessages;
+            if (serverMessages != null) {
+                this.messages = serverMessages;
+            } else {
+                this.messages = new ArrayList<>();
+            }
+
             this.currentMessage = 0;
         }
-        if (serverMessages.isEmpty()) {
+        if (this.messages.isEmpty()) {
             this.jPanelBottom.setVisible(false);
         } else {
             this.jPanelBottom.setVisible(true);
             URLHandler.RemoveMouseAdapter(jLabelFooterText);
-            URLHandler.handleMessage(serverMessages.get(0), this.jLabelFooterText);
-            this.jButtonFooterNext.setVisible(serverMessages.size() > 1);
+            URLHandler.handleMessage(this.messages.get(0), this.jLabelFooterText);
+            this.jButtonFooterNext.setVisible(this.messages.size() > 1);
         }
     }
 
