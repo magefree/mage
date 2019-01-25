@@ -162,6 +162,6 @@ public class RiotTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
         assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), true);
-        assertAbility(playerA, "Silvercoat Lion", new RiotAbility(), false);
+        assertAbility(playerA, "Silvercoat Lion", new RiotAbility(), true);
     }
 }
