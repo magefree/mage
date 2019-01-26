@@ -1,11 +1,11 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColorlessManaCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,27 +16,32 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class AmuletOfUnmaking extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+                new CardTypePredicate(CardType.LAND)
+        ));
     }
 
     public AmuletOfUnmaking(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {5}, {tap}, Exile Amulet of Unmaking: Exile target artifact, creature, or land. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect("Exile target artifact, creature or land"), new ColorlessManaCost(5));
+        Ability ability = new ActivateAsSorceryActivatedAbility(
+                Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(5)
+        );
         ability.addCost(new TapSourceCost());
+        ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

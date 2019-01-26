@@ -1,7 +1,7 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -11,30 +11,30 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.FilterPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+
 /**
- *
  * @author TheElk801
  */
 public final class DarkTriumph extends CardImpl {
 
-    private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");
-
-    static {
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
-    }
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterPermanent(SubType.SWAMP, "If you control a Swamp")
+    );
 
     public DarkTriumph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
 
         // If you control a Swamp, you may sacrifice a creature rather than pay Dark Triumph's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp), null
+                new SacrificeTargetCost(
+                        new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                ), condition
         ));
 
         // Creatures you control get +2/+0 until end of turn.
