@@ -114,7 +114,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
+            controller.putCardsOnTopOfLibrary(cards, game, source, true);
             return true;
         }
         return false;
