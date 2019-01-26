@@ -140,7 +140,7 @@ public class SuspendAbility extends SpecialAction {
         }
         StringBuilder sb = new StringBuilder("Suspend ");
         if (cost != null) {
-            sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append(" - ").append(cost.getText()).append(suspend == Integer.MAX_VALUE ? ". X can't be 0" : "");
+            sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append("&mdash;").append(cost.getText()).append(suspend == Integer.MAX_VALUE ? ". X can't be 0" : "");
             if (!shortRule) {
                 sb.append(" <i>(Rather than cast this card from your hand, pay ")
                         .append(cost.getText())
