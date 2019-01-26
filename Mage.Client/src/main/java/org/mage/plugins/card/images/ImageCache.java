@@ -1,28 +1,34 @@
 package org.mage.plugins.card.images;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ComputationException;
-import com.google.common.collect.MapMaker;
-import mage.client.constants.Constants;
-import mage.client.dialog.PreferencesDialog;
-import mage.client.util.TransformedImageCache;
-import mage.view.CardView;
-import net.java.truevfs.access.TFile;
-import net.java.truevfs.access.TFileInputStream;
-import net.java.truevfs.access.TFileOutputStream;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
-import org.mage.plugins.card.utils.CardImageUtils;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
+
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
+import org.mage.plugins.card.utils.CardImageUtils;
+
+import com.google.common.base.Function;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.collect.ComputationException;
+
+import mage.client.constants.Constants;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.util.SoftValuesLoadingCache;
+import mage.client.util.TransformedImageCache;
+import mage.view.CardView;
+import net.java.truevfs.access.TFile;
+import net.java.truevfs.access.TFileInputStream;
+import net.java.truevfs.access.TFileOutputStream;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -45,8 +51,8 @@ public final class ImageCache {
 
     private static final Logger LOGGER = Logger.getLogger(ImageCache.class);
 
-    private static final Map<String, BufferedImage> IMAGE_CACHE;
-    private static final Map<String, BufferedImage> FACE_IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<String, BufferedImage> IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<String, BufferedImage> FACE_IMAGE_CACHE;
 
     /**
      * Common pattern for keys. Format: "<cardname>#<setname>#<collectorID>"
@@ -55,11 +61,10 @@ public final class ImageCache {
 
     static {
         // softValues() = Specifies that each value (not key) stored in the map should be wrapped in a SoftReference (by default, strong references are used). Softly-referenced objects will be garbage-collected in a globally least-recently-used manner, in response to memory demand.
-        IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
+        IMAGE_CACHE = SoftValuesLoadingCache.from(new Function<String, BufferedImage>() {
             @Override
             public BufferedImage apply(String key) {
                 try {
-
                     boolean usesVariousArt = false;
                     if (key.matches(".*#usesVariousArt.*")) {
                         usesVariousArt = true;
@@ -179,58 +184,44 @@ public final class ImageCache {
             }
         });
 
-        FACE_IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
-            @Override
-            public BufferedImage apply(String key) {
-                try {
+        FACE_IMAGE_CACHE = SoftValuesLoadingCache.from(key -> {
+            try {
+                Matcher m = KEY_PATTERN.matcher(key);
 
-                    Matcher m = KEY_PATTERN.matcher(key);
+                if (m.matches()) {
+                    String name = m.group(1);
+                    String set = m.group(2);
+                    //Integer artid = Integer.parseInt(m.group(2));
 
-                    if (m.matches()) {
-                        String name = m.group(1);
-                        String set = m.group(2);
-                        //Integer artid = Integer.parseInt(m.group(2));
+                    String path;
+                    path = CardImageUtils.generateFaceImagePath(name, set);
 
-                        String path;
-                        path = CardImageUtils.generateFaceImagePath(name, set);
-
-                        if (path == null) {
-                            return null;
-                        }
-                        TFile file = getTFile(path);
-                        if (file == null) {
-                            return null;
-                        }
-
-                        BufferedImage image = loadImage(file);
-                        return image;
-                    } else {
-                        throw new RuntimeException(
-                                "Requested face image doesn't fit the requirement for key (<cardname>#<artid>#: " + key);
+                    if (path == null) {
+                        return null;
                     }
-                } catch (Exception ex) {
-                    if (ex instanceof ComputationException) {
-                        throw (ComputationException) ex;
-                    } else {
-                        throw new ComputationException(ex);
+                    TFile file = getTFile(path);
+                    if (file == null) {
+                        return null;
                     }
-                }
-            }
 
-            public BufferedImage makeThumbnailByFile(String key, TFile file, String thumbnailPath) {
-                BufferedImage image = loadImage(file);
-                image = getWizardsCard(image);
-                if (image == null) {
-                    return null;
+                    BufferedImage image = loadImage(file);
+                    return image;
+                } else {
+                    throw new RuntimeException(
+                            "Requested face image doesn't fit the requirement for key (<cardname>#<artid>#: " + key);
                 }
-                LOGGER.debug("creating thumbnail for " + key);
-                return makeThumbnail(image, thumbnailPath);
+            } catch (Exception ex) {
+                if (ex instanceof ComputationException) {
+                    throw (ComputationException) ex;
+                } else {
+                    throw new ComputationException(ex);
+                }
             }
         });
     }
 
     public static void clearCache() {
-        IMAGE_CACHE.clear();
+        IMAGE_CACHE.invalidateAll();
     }
 
     public static String getFilePath(CardView card, int width) {
@@ -406,13 +397,7 @@ public final class ImageCache {
      */
     private static BufferedImage getImage(String key) {
         try {
-            return IMAGE_CACHE.get(key);
-        } catch (NullPointerException ex) {
-            // unfortunately NullOutputException, thrown when apply() returns
-            // null, is not public
-            // NullOutputException is a subclass of NullPointerException
-            // legitimate, happens when a card has no image
-            return null;
+            return IMAGE_CACHE.getOrNull(key);
         } catch (ComputationException ex) {
             // too low memory
             if (ex.getCause() instanceof NullPointerException) {
@@ -428,13 +413,7 @@ public final class ImageCache {
      */
     private static BufferedImage getFaceImage(String key) {
         try {
-            return FACE_IMAGE_CACHE.get(key);
-        } catch (NullPointerException ex) {
-            // unfortunately NullOutputException, thrown when apply() returns
-            // null, is not public
-            // NullOutputException is a subclass of NullPointerException
-            // legitimate, happens when a card has no image
-            return null;
+            return FACE_IMAGE_CACHE.getOrNull(key);
         } catch (ComputationException ex) {
             if (ex.getCause() instanceof NullPointerException) {
                 return null;
@@ -449,7 +428,7 @@ public final class ImageCache {
      * the cache.
      */
     private static BufferedImage tryGetImage(String key) {
-        return IMAGE_CACHE.containsKey(key) ? IMAGE_CACHE.get(key) : null;
+        return IMAGE_CACHE.peekIfPresent(key);
     }
 
     /**

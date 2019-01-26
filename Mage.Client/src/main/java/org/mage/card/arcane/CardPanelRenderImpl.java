@@ -1,7 +1,19 @@
 package org.mage.card.arcane;
 
-import com.google.common.collect.MapMaker;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
+
+import org.apache.log4j.Logger;
+import org.jdesktop.swingx.graphics.GraphicsUtilities;
+import org.mage.plugins.card.images.ImageCache;
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+
 import mage.cards.action.ActionCallback;
+import mage.client.constants.Constants;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -9,15 +21,6 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
-import org.apache.log4j.Logger;
-import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import org.mage.plugins.card.images.ImageCache;
-import mage.client.constants.Constants;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Map;
-import java.util.UUID;
 
 public class CardPanelRenderImpl extends CardPanel {
 
@@ -215,7 +218,7 @@ public class CardPanelRenderImpl extends CardPanel {
     }
 
     // Map of generated images
-    private final static Map<ImageKey, BufferedImage> IMAGE_CACHE = new MapMaker().softValues().makeMap();
+    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder.newBuilder().softValues().build();
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
@@ -265,7 +268,11 @@ public class CardPanelRenderImpl extends CardPanel {
                     = new ImageKey(gameCard, artImage,
                             getCardWidth(), getCardHeight(),
                             isChoosable(), isSelected());
-            cardImage = IMAGE_CACHE.computeIfAbsent(key, k -> renderCard());
+            try {
+                cardImage = IMAGE_CACHE.get(key, this::renderCard);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
 
             // No cached copy exists? Render one and cache it
         }
