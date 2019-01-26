@@ -445,7 +445,7 @@ public final class SystemUtil {
                     continue;
                 } else if ("stack".equalsIgnoreCase(command.zone)) {
                     // simple cast (without targets or modes)
-                    
+
                     // find card info
                     CardInfo cardInfo = CardRepository.instance.findCard(command.cardName);
                     if (cardInfo == null) {
@@ -454,13 +454,16 @@ public final class SystemUtil {
                     }
 
                     // put card to game
-                    Card card = cardInfo.getCard();
                     Set<Card> cardsToLoad = new HashSet<>();
-                    cardsToLoad.add(card);
+                    for (int i = 0; i < command.Amount; i++) {
+                        cardsToLoad.add(cardInfo.getCard());
+                    }
                     game.loadCards(cardsToLoad, player.getId());
 
                     // move card from exile to stack
-                    swapWithAnyCard(game, player, card, Zone.STACK);
+                    for (Card card : cardsToLoad) {
+                        swapWithAnyCard(game, player, card, Zone.STACK);
+                    }
 
                     continue;
                 }
