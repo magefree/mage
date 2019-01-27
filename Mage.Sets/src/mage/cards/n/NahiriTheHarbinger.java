@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -49,13 +48,13 @@ public final class NahiriTheHarbinger extends CardImpl {
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ENCHANTMENT),
                 (Predicates.and(new CardTypePredicate(CardType.ARTIFACT),
-                    TappedPredicate.instance)),
+                        TappedPredicate.instance)),
                 (Predicates.and(new CardTypePredicate(CardType.CREATURE),
-                    TappedPredicate.instance))));
+                        TappedPredicate.instance))));
     }
 
     public NahiriTheHarbinger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
 
@@ -114,16 +113,18 @@ class NahiriTheHarbingerEffect extends SearchEffect {
             if (controller.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                        effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
-                        game.addEffect(effect, source);
-                        Effect effect2 = new ReturnToHandTargetEffect();
-                        effect2.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
-                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
-                        game.addDelayedTriggeredAbility(delayedAbility, source);
+                    if (card != null) {
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                        Permanent permanent = game.getPermanent(card.getId());
+                        if (permanent != null) {
+                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                            effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
+                            game.addEffect(effect, source);
+                            Effect effect2 = new ReturnToHandTargetEffect();
+                            effect2.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
+                            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
+                            game.addDelayedTriggeredAbility(delayedAbility, source);
+                        }
                     }
                 }
                 controller.shuffleLibrary(source, game);
