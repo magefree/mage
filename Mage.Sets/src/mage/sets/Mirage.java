@@ -282,7 +282,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Stupor", 147, Rarity.UNCOMMON, mage.cards.s.Stupor.class));
         cards.add(new SetCardInfo("Subterranean Spirit", 195, Rarity.RARE, mage.cards.s.SubterraneanSpirit.class));
         cards.add(new SetCardInfo("Sunweb", 42, Rarity.RARE, mage.cards.s.Sunweb.class));
-        cards.add(new SetCardInfo("Superior Numbers", 142, Rarity.UNCOMMON, mage.cards.s.SuperiorNumbers.class));
+        cards.add(new SetCardInfo("Superior Numbers", 244, Rarity.UNCOMMON, mage.cards.s.SuperiorNumbers.class));
         cards.add(new SetCardInfo("Suq'Ata Firewalker", 94, Rarity.UNCOMMON, mage.cards.s.SuqAtaFirewalker.class));
         cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
