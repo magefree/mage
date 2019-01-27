@@ -545,7 +545,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void setStopAt(int turn, PhaseStep step) {
-        Assert.assertTrue("Wrong turn " + turn, turn >= 0);
+        Assert.assertTrue("Wrong turn " + turn, turn >= 1);
         stopOnTurn = turn;
         stopAtStep = step;
     }
