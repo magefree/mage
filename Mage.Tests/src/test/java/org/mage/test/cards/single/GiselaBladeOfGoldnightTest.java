@@ -47,4 +47,34 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Air Elemental", 0);
     }
 
+    @Test
+    public void testUnpreventableDamageToPlayer() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Gisela, Blade of Goldnight");
+        addCard(Zone.HAND, playerB, "Banefire");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", playerA);
+        setChoice(playerB, "X=5");
+
+        execute();
+
+        // Player A should take the full 5 damage
+        assertLife(playerA, 15);
+    }
+
+    @Test
+    public void testUnpreventableDamageToCreature() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Gisela, Blade of Goldnight");
+        addCard(Zone.BATTLEFIELD, playerA, "Colossal Dreadmaw");
+        addCard(Zone.HAND, playerB, "Banefire");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", "Colossal Dreadmaw");
+        setChoice(playerB, "X=6");
+
+        execute();
+
+        // Dreadmaw should be dead
+        assertPermanentCount(playerA, "Colossal Dreadmaw", 0);
+    }
 }
