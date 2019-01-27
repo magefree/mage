@@ -106,6 +106,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Enfeeblement", 121, Rarity.COMMON, mage.cards.e.Enfeeblement.class));
         cards.add(new SetCardInfo("Enlightened Tutor", 14, Rarity.UNCOMMON, mage.cards.e.EnlightenedTutor.class));
         cards.add(new SetCardInfo("Ersatz Gnomes", 301, Rarity.UNCOMMON, mage.cards.e.ErsatzGnomes.class));
+        cards.add(new SetCardInfo("Ether Well", 65, Rarity.UNCOMMON, mage.cards.e.EtherWell.class));
         cards.add(new SetCardInfo("Ethereal Champion", 15, Rarity.RARE, mage.cards.e.EtherealChampion.class));
         cards.add(new SetCardInfo("Fallow Earth", 214, Rarity.UNCOMMON, mage.cards.f.FallowEarth.class));
         cards.add(new SetCardInfo("Favorable Destiny", 16, Rarity.UNCOMMON, mage.cards.f.FavorableDestiny.class));
