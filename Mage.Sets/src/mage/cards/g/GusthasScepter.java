@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.HashSet;
@@ -10,7 +9,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
@@ -30,7 +28,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
 
 /**
  *
@@ -84,7 +81,11 @@ class GusthasScepterExileEffect extends OneShotEffect {
                 Card card = game.getCard(target.getFirstTarget());
                 MageObject sourceObject = game.getObject(source.getSourceId());
                 if (card != null && sourceObject != null) {
-                    if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName(), source.getSourceId(), game)) {
+                    UUID exileId = source.getSourceId();
+                    if (card.moveToExile(exileId,
+                            sourceObject.getIdName(),
+                            source.getSourceId(),
+                            game)) {
                         card.setFaceDown(true, game);
                         game.addEffect(new GusthasScepterLookAtCardEffect(card.getId()), source);
                         return true;
@@ -116,7 +117,7 @@ class TargetCardInGusthasScepterExile extends TargetCardInExile {
         Set<UUID> possibleTargets = new HashSet<>();
         Card sourceCard = game.getCard(sourceId);
         if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
+            UUID exileId = sourceId;
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null && !exile.isEmpty()) {
                 possibleTargets.addAll(exile);
@@ -129,7 +130,7 @@ class TargetCardInGusthasScepterExile extends TargetCardInExile {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         Card sourceCard = game.getCard(sourceId);
         if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
+            UUID exileId = sourceId;
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null && !exile.isEmpty()) {
                 return true;
@@ -141,14 +142,16 @@ class TargetCardInGusthasScepterExile extends TargetCardInExile {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getCard(id);
-        if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+        if (card != null
+                && game.getState().getZone(card.getId()) == Zone.EXILED) {
             ExileZone exile = null;
             Card sourceCard = game.getCard(source.getSourceId());
             if (sourceCard != null) {
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
+                UUID exileId = source.getSourceId();
                 exile = game.getExile().getExileZone(exileId);
             }
-            if (exile != null && exile.contains(id)) {
+            if (exile != null
+                    && exile.contains(id)) {
                 return filter.match(card, source.getControllerId(), game);
             }
         }
@@ -190,13 +193,16 @@ class GusthasScepterLookAtCardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (objectId.equals(cardId) && affectedControllerId.equals(source.getControllerId())) {
             MageObject sourceObject = source.getSourceObject(game);
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (exileId != null && sourceObject != null) {
+            if (sourceObject != null) {
+                UUID exileId = source.getSourceId();
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
-                if (exileZone != null && exileZone.contains(cardId)) {
+                if (exileZone != null
+                        && exileZone.contains(cardId)) {
                     Player controller = game.getPlayer(source.getControllerId());
                     Card card = game.getCard(cardId);
-                    if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
+                    if (controller != null
+                            && card != null
+                            && game.getState().getZone(cardId) == Zone.EXILED) {
                         return true;
                     }
                 } else {
@@ -233,16 +239,10 @@ class GusthasScepterLoseControlAbility extends DelayedTriggeredAbility {
         if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
             return event.getPlayerId().equals(controllerId)
                     && event.getTargetId().equals(this.getSourceId());
-        }
-        else if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        } else if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             if (event.getTargetId().equals(this.getSourceId())) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                    for (Effect effect : getEffects()) {
-                        effect.setValue("permanentLeftBattlefield", ((ZoneChangeEvent) event).getTarget());
-                    }
-                    return true;
-                }
+                return (zEvent.getFromZone() == Zone.BATTLEFIELD);
             }
         }
         return false;
@@ -268,13 +268,12 @@ class GusthasScepterPutExiledCardsInOwnersGraveyard extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null
-                && sourceObject != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, source);
-            Set<Card> cardsInExile = game.getExile().getExileZone(exileId).getCards(game);
-            controller.moveCardsToGraveyardWithInfo(cardsInExile, source, game, Zone.EXILED);
-            return true;
+        if (controller != null) {
+            UUID exileId = source.getSourceId();
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            if (exileZone != null) {
+                return controller.moveCards(exileZone.getCards(game), Zone.GRAVEYARD, source, game);
+            }
         }
         return false;
     }

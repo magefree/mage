@@ -43,7 +43,7 @@ public class ReinforceAbility extends SimpleActivatedAbility {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Reinforce ");
-        sb.append(count.toString()).append(" - ");
+        sb.append(count.toString()).append("&mdash;");
         sb.append(cost.getText());
         sb.append(" <i>(").append(cost.getText()).append(", Discard this card: Put ");
         if (count.toString().equals("1")) {

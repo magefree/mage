@@ -108,7 +108,8 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         name = ABILITY_KEYWORD;
         for (Cost cost : morphCosts) {
             if (!(cost instanceof ManaCosts)) {
-                sb.append("- ");
+                sb.setLength(sb.length() - 1);
+                sb.append("&mdash;");
                 break;
             }
         }

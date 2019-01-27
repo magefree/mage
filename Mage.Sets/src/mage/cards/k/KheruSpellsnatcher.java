@@ -19,6 +19,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -81,7 +82,8 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
             if (!stackObject.isCopy()) {
                 MageObject card = game.getObject(stackObject.getSourceId());
                 if (card instanceof Card) {
-                    ((Card) card).moveToZone(Zone.EXILED, sourceId, game, true);
+                    UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
+                    ((Card) card).moveToExile(exileId, "Kheru Spellsnatcher - cast without mana cost", sourceId, game);
                     ContinuousEffect effect = new KheruSpellsnatcherCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

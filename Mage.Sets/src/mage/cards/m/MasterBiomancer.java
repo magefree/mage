@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,7 +9,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -19,14 +21,15 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MasterBiomancer extends CardImpl {
 
     public MasterBiomancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WIZARD);
 
@@ -34,10 +37,10 @@ public final class MasterBiomancer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to Master Biomancer's power and as a Mutant in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MasterBiomancerEntersBattlefieldEffect()));
+        this.addAbility(new SimpleStaticAbility(new MasterBiomancerEntersBattlefieldEffect()));
     }
 
-    public MasterBiomancer(final MasterBiomancer card) {
+    private MasterBiomancer(final MasterBiomancer card) {
         super(card);
     }
 
@@ -49,12 +52,12 @@ public final class MasterBiomancer extends CardImpl {
 
 class MasterBiomancerEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public MasterBiomancerEntersBattlefieldEffect() {
+    MasterBiomancerEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to Master Biomancer's power and as a Mutant in addition to its other types";
+        staticText = "Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to {this}'s power and as a Mutant in addition to its other types";
     }
 
-    public MasterBiomancerEntersBattlefieldEffect(MasterBiomancerEntersBattlefieldEffect effect) {
+    private MasterBiomancerEntersBattlefieldEffect(MasterBiomancerEntersBattlefieldEffect effect) {
         super(effect);
     }
 

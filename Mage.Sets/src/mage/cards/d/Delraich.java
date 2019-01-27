@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -15,13 +14,15 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Delraich extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
+    private static final FilterControlledCreaturePermanent filter
+            = new FilterControlledCreaturePermanent("black creature");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -34,15 +35,16 @@ public final class Delraich extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
+        // You may sacrifice three black creatures rather than pay Delraich's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(
+                new TargetControlledPermanent(3, 3, filter, false)
+        )));
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-
-        // You may sacrifice three black creatures rather than pay Delraich's mana cost.
-        AlternativeCostSourceAbility alternateCosts = new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-        this.addAbility(alternateCosts);
     }
 
-    public Delraich(final Delraich card) {
+    private Delraich(final Delraich card) {
         super(card);
     }
 

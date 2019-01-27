@@ -443,6 +443,29 @@ public final class SystemUtil {
                         }
                     }
                     continue;
+                } else if ("stack".equalsIgnoreCase(command.zone)) {
+                    // simple cast (without targets or modes)
+
+                    // find card info
+                    CardInfo cardInfo = CardRepository.instance.findCard(command.cardName);
+                    if (cardInfo == null) {
+                        logger.warn("Unknown card for stack command [" + command.cardName + "]: " + line);
+                        continue;
+                    }
+
+                    // put card to game
+                    Set<Card> cardsToLoad = new HashSet<>();
+                    for (int i = 0; i < command.Amount; i++) {
+                        cardsToLoad.add(cardInfo.getCard());
+                    }
+                    game.loadCards(cardsToLoad, player.getId());
+
+                    // move card from exile to stack
+                    for (Card card : cardsToLoad) {
+                        swapWithAnyCard(game, player, card, Zone.STACK);
+                    }
+
+                    continue;
                 }
 
                 Zone gameZone;
@@ -516,6 +539,8 @@ public final class SystemUtil {
                 game.getExile().getPermanentExile().remove(card);
                 player.getLibrary().putOnTop(card, game);
                 break;
+            case STACK:
+                card.cast(game, Zone.EXILED, card.getSpellAbility(), player.getId());
             default:
                 card.moveToZone(zone, null, game, false);
         }

@@ -28,6 +28,7 @@ import org.ocpsoft.prettytime.units.JustNow;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -163,13 +164,33 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     };
 
-    // center text render
-    TableCellRenderer centerCellRenderer = new DefaultTableCellRenderer() {
+    // seats render
+    TableCellRenderer seatsCellRenderer = new DefaultTableCellRenderer() {
+
+        JLabel greenLabel = new JLabel();
+
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            label.setHorizontalAlignment(JLabel.CENTER);
-            return label;
+            JLabel defaultLabel = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            defaultLabel.setHorizontalAlignment(JLabel.CENTER);
+            // colors
+            String val = (String) value;
+            String[] valsList = val.split("/");
+            if (valsList.length == 2 && !valsList[0].equals(valsList[1])) {
+                // green draw
+                Color defaultBack = defaultLabel.getBackground();
+                greenLabel.setText(val);
+                greenLabel.setHorizontalAlignment(JLabel.CENTER);
+                greenLabel.setFont(defaultLabel.getFont());
+                greenLabel.setForeground(Color.black);
+                greenLabel.setOpaque(true);
+                greenLabel.setBackground(new Color(156, 240, 146));
+                greenLabel.setBorder(new LineBorder(defaultBack, 1));
+                return greenLabel;
+            } else {
+                // default draw
+                return defaultLabel;
+            }
         }
     };
 
@@ -200,7 +221,7 @@ public class TablesPanel extends javax.swing.JPanel {
         // skill level
         tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_SKILL).setCellRenderer(skillCellRenderer);
         // seats
-        tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_SEATS).setCellRenderer(centerCellRenderer);
+        tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_SEATS).setCellRenderer(seatsCellRenderer);
 
         /* date sorter (not need, default is good - see getColumnClass)
         activeTablesSorter.setComparator(TablesTableModel.COLUMN_CREATED, new Comparator<Date>() {
@@ -626,16 +647,21 @@ public class TablesPanel extends javax.swing.JPanel {
         // reload server messages
         java.util.List<String> serverMessages = SessionHandler.getServerMessages();
         synchronized (this) {
-            this.messages = serverMessages;
+            if (serverMessages != null) {
+                this.messages = serverMessages;
+            } else {
+                this.messages = new ArrayList<>();
+            }
+
             this.currentMessage = 0;
         }
-        if (serverMessages.isEmpty()) {
+        if (this.messages.isEmpty()) {
             this.jPanelBottom.setVisible(false);
         } else {
             this.jPanelBottom.setVisible(true);
             URLHandler.RemoveMouseAdapter(jLabelFooterText);
-            URLHandler.handleMessage(serverMessages.get(0), this.jLabelFooterText);
-            this.jButtonFooterNext.setVisible(serverMessages.size() > 1);
+            URLHandler.handleMessage(this.messages.get(0), this.jLabelFooterText);
+            this.jButtonFooterNext.setVisible(this.messages.size() > 1);
         }
     }
 

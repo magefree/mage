@@ -989,6 +989,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
         Spell copy = this.copySpell(newControllerId);
+        game.getState().setZone(copy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
         game.getStack().push(copy);
         if (chooseNewTargets) {
             copy.chooseNewTargets(game, newControllerId);

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -10,13 +9,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DivineCongregation extends CardImpl {
@@ -32,7 +32,7 @@ public final class DivineCongregation extends CardImpl {
         this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{1}{W}"), this));
     }
 
-    public DivineCongregation(final DivineCongregation card) {
+    private DivineCongregation(final DivineCongregation card) {
         super(card);
     }
 
@@ -44,12 +44,12 @@ public final class DivineCongregation extends CardImpl {
 
 class DivineCongregationEffect extends OneShotEffect {
 
-    public DivineCongregationEffect() {
+    DivineCongregationEffect() {
         super(Outcome.Benefit);
         staticText = "You gain 2 life for each creature target player controls";
     }
 
-    public DivineCongregationEffect(final DivineCongregationEffect effect) {
+    private DivineCongregationEffect(final DivineCongregationEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class DivineCongregationEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
         if (controller != null && player != null) {
-            int critters = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game).size();
+            int critters = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game).size();
             controller.gainLife(2 * critters, game, source);
         }
         return true;

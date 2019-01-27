@@ -1,9 +1,9 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.cards.CardImpl;
@@ -13,19 +13,17 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class CoilingWoodworm extends CardImpl {
 
-    final static FilterPermanent filterLands = new FilterPermanent("Forests you control");
-
-    static {
-        filterLands.add(new SubtypePredicate(SubType.FOREST));
-    }
+    private static final DynamicValue count = new PermanentsOnBattlefieldCount(
+            new FilterPermanent(SubType.FOREST, "Forests on the battlefield")
+    );
 
     public CoilingWoodworm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -36,10 +34,10 @@ public final class CoilingWoodworm extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Coiling Woodworm's power is equal to the number of Forests on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(count, Duration.EndOfGame)));
     }
 
-    public CoilingWoodworm(final CoilingWoodworm card) {
+    private CoilingWoodworm(final CoilingWoodworm card) {
         super(card);
     }
 

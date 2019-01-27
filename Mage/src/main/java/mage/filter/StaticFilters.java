@@ -85,6 +85,12 @@ public final class StaticFilters {
         FILTER_CARD_CREATURE_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
+    public static final FilterCreatureCard FILTER_CARD_CREATURES_YOUR_GRAVEYARD = new FilterCreatureCard("creature cards from your graveyard");
+
+    static {
+        FILTER_CARD_CREATURES_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
     public static final FilterCard FILTER_CARD_FROM_YOUR_GRAVEYARD = new FilterCard("card from your graveyard");
 
     static {
