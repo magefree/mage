@@ -61,6 +61,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Cadaverous Knight", 110, Rarity.COMMON, mage.cards.c.CadaverousKnight.class));
         cards.add(new SetCardInfo("Canopy Dragon", 209, Rarity.RARE, mage.cards.c.CanopyDragon.class));
         cards.add(new SetCardInfo("Carrion", 111, Rarity.RARE, mage.cards.c.Carrion.class));
+        cards.add(new SetCardInfo("Catacomb Dragon", 112, Rarity.RARE, mage.cards.c.CatacombDragon.class));
         cards.add(new SetCardInfo("Celestial Dawn", 6, Rarity.RARE, mage.cards.c.CelestialDawn.class));
         cards.add(new SetCardInfo("Cerulean Wyvern", 57, Rarity.UNCOMMON, mage.cards.c.CeruleanWyvern.class));
         cards.add(new SetCardInfo("Chaos Charm", 163, Rarity.COMMON, mage.cards.c.ChaosCharm.class));
