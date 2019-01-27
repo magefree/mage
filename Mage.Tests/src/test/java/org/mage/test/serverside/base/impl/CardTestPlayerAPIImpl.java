@@ -210,6 +210,27 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             throw new IllegalStateException("Game is not initialized. Use load method to load a test case and initialize a game.");
         }
 
+        // check stop command
+        int maxTurn = 1;
+        int maxPhase = 0;
+        for (Player player : currentGame.getPlayers().values()) {
+            if (player instanceof TestPlayer) {
+                TestPlayer testPlayer = (TestPlayer) player;
+                for (PlayerAction action : testPlayer.getActions()) {
+                    Assert.assertTrue("Wrong turn in action " + action.getTurnNum(), action.getTurnNum() >= 1);
+                    int curTurn = action.getTurnNum();
+                    int curPhase = action.getStep().getIndex();
+                    if ((curTurn > maxTurn) || (curTurn == maxTurn && curPhase > maxPhase)) {
+                        maxTurn = curTurn;
+                        maxPhase = curPhase;
+                    }
+                }
+            }
+        }
+        Assert.assertFalse("Wrong stop command on " + this.stopOnTurn + " / " + this.stopAtStep + " (" + this.stopAtStep.getIndex() + ")"
+                        + " (founded actions after stop on " + maxTurn + " / " + maxPhase + ")",
+                (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
+
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
             currentGame.cheat(player.getId(), getCommands(testPlayer));
@@ -512,8 +533,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void setStopOnTurn(int turn) {
-        stopOnTurn = turn == -1 ? null : turn;
-        stopAtStep = PhaseStep.UNTAP;
+        setStopAt(turn, PhaseStep.UNTAP);
     }
 
     /**
@@ -525,7 +545,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void setStopAt(int turn, PhaseStep step) {
-        stopOnTurn = turn == -1 ? null : turn;
+        Assert.assertTrue("Wrong turn " + turn, turn >= 0);
+        stopOnTurn = turn;
         stopAtStep = step;
     }
 
