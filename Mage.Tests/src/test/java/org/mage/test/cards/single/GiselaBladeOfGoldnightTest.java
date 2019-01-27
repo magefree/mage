@@ -48,9 +48,58 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Air Elemental", 0);
     }
 
+    @Test
+    public void test_DamageToPlayer_Preventable() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);
+        addCard(Zone.HAND, playerB, "Banefire");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", playerA);
+        setChoice(playerB, "X=4");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // Player A should take the full 4 damage
+        assertLife(playerA, 20 - 4);
+    }
+
+    @Test
+    public void test_DamageToPlayer_Unpreventable() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 6);
+        addCard(Zone.HAND, playerB, "Banefire");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", playerA);
+        setChoice(playerB, "X=5");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // Player A should take the full 5 damage
+        assertLife(playerA, 15);
+    }
+
+    @Test
+    public void test_DamageToPlayer_PreventableWithGisela() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Gisela, Blade of Goldnight");
+        addCard(Zone.HAND, playerB, "Banefire");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", playerA);
+        setChoice(playerB, "X=4");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // Player A should take half damage 2 (prevent 4/2 round up = 2 damage)
+        assertLife(playerA, 20 - 2);
+    }
+
     @Ignore
     @Test
-    public void testUnpreventableDamageToPlayer() {
+    public void test_DamageToPlayer_UnpreventableWithGisela() {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Gisela, Blade of Goldnight");
         addCard(Zone.HAND, playerB, "Banefire");
@@ -58,26 +107,50 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", playerA);
         setChoice(playerB, "X=5");
 
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
-        // Player A should take the full 5 damage
-        assertLife(playerA, 15);
+        // Player A should take full damage 5 (wrong result: 2 damage)
+        assertLife(playerA, 20 - 5);
+    }
+
+    @Test
+    public void test_DamageToCreature_PreventableWithGisela() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Gisela, Blade of Goldnight");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // 2/2
+        addCard(Zone.HAND, playerB, "Banefire");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", "Grizzly Bears");
+        setChoice(playerB, "X=2");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // creature must be alife, half damage done
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertLife(playerA, 20);
     }
 
     @Ignore
     @Test
-    public void testUnpreventableDamageToCreature() {
+    public void test_DamageToCreature_UnpreventableWithGisela() {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Gisela, Blade of Goldnight");
-        addCard(Zone.BATTLEFIELD, playerA, "Colossal Dreadmaw");
+        addCard(Zone.BATTLEFIELD, playerA, "Colossal Dreadmaw"); // 6/6
         addCard(Zone.HAND, playerB, "Banefire");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", "Colossal Dreadmaw");
         setChoice(playerB, "X=6");
 
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
-        // Dreadmaw should be dead
+        // creature must die, full damage
         assertPermanentCount(playerA, "Colossal Dreadmaw", 0);
+        assertLife(playerA, 20);
     }
 }
