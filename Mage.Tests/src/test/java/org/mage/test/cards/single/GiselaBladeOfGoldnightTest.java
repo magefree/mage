@@ -2,7 +2,6 @@ package org.mage.test.cards.single;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -46,6 +45,42 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Llanowar Elves", 0);
 
         assertPermanentCount(playerB, "Air Elemental", 0);
+    }
+
+    @Test
+    public void test_DamageToOpponent_WithGisela() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Gisela, Blade of Goldnight");
+        addCard(Zone.HAND, playerB, "Banefire");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", playerA);
+        setChoice(playerB, "X=5");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // Player A should take double damage
+        assertLife(playerA, 20 - 10);
+    }
+
+    @Test
+    public void test_DamageToOpponentsCreature_WithGisela() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Gisela, Blade of Goldnight");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // 2/2
+        addCard(Zone.HAND, playerB, "Banefire");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banefire", "Grizzly Bears");
+        setChoice(playerB, "X=1");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // creature takes 2 damage and dies
+        assertPermanentCount(playerA, "Grizzly Bears", 0);
+        assertLife(playerA, 20);
     }
 
     @Test
@@ -97,7 +132,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
         assertLife(playerA, 20 - 2);
     }
 
-    @Ignore
     @Test
     public void test_DamageToPlayer_UnpreventableWithGisela() {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 6);
@@ -134,7 +168,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
     }
 
-    @Ignore
     @Test
     public void test_DamageToCreature_UnpreventableWithGisela() {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 7);
