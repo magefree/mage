@@ -215,6 +215,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Blow", 42, Rarity.RARE, mage.cards.l.LightningBlow.class));
         cards.add(new SetCardInfo("Lim-Dul's Cohort", 145, Rarity.COMMON, mage.cards.l.LimDulsCohort.class));
         cards.add(new SetCardInfo("Lim-Dul's Hex", 146, Rarity.UNCOMMON, mage.cards.l.LimDulsHex.class));
+        cards.add(new SetCardInfo("Lost Order of Jarkeld", 43, Rarity.RARE, mage.cards.l.LostOrderOfJarkeld.class));
         cards.add(new SetCardInfo("Lure", 253, Rarity.UNCOMMON, mage.cards.l.Lure.class));
         cards.add(new SetCardInfo("Magus of the Unseen", 82, Rarity.RARE, mage.cards.m.MagusOfTheUnseen.class));
         cards.add(new SetCardInfo("Malachite Talisman", 328, Rarity.UNCOMMON, mage.cards.m.MalachiteTalisman.class));
