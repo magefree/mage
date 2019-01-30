@@ -603,8 +603,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 String rule2 = ability2.toString();
 
                 // pass
-                boolean pass1 = rule1.equals("Pass");
-                boolean pass2 = rule2.equals("Pass");
+                boolean pass1 = rule1.startsWith("Pass");
+                boolean pass2 = rule2.startsWith("Pass");
                 if (pass1 != pass2) {
                     if (pass1) {
                         return 1;
@@ -614,8 +614,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
 
                 // play
-                boolean play1 = rule1.equals("Play");
-                boolean play2 = rule2.equals("Play");
+                boolean play1 = rule1.startsWith("Play");
+                boolean play2 = rule2.startsWith("Play");
                 if (play1 != play2) {
                     if (play1) {
                         return -1;
@@ -625,8 +625,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
 
                 // cast
-                boolean cast1 = rule1.equals("Cast");
-                boolean cast2 = rule2.equals("Cast");
+                boolean cast1 = rule1.startsWith("Cast");
+                boolean cast2 = rule2.startsWith("Cast");
                 if (cast1 != cast2) {
                     if (cast1) {
                         return -1;
