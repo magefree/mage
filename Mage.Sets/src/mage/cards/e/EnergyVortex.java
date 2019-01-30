@@ -31,7 +31,7 @@ import java.util.UUID;
 public final class EnergyVortex extends CardImpl {
 
     public EnergyVortex(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // As Energy Vortex enters the battlefield, choose an opponent.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
