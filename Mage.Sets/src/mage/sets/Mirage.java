@@ -103,6 +103,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Emberwilde Caliph", 322, Rarity.RARE, mage.cards.e.EmberwildeCaliph.class));
         cards.add(new SetCardInfo("Emberwilde Djinn", 172, Rarity.RARE, mage.cards.e.EmberwildeDjinn.class));
         cards.add(new SetCardInfo("Energy Bolt", 263, Rarity.RARE, mage.cards.e.EnergyBolt.class));
+        cards.add(new SetCardInfo("Energy Vortex", 64, Rarity.RARE, mage.cards.e.EnergyVortex.class));
         cards.add(new SetCardInfo("Enfeeblement", 121, Rarity.COMMON, mage.cards.e.Enfeeblement.class));
         cards.add(new SetCardInfo("Enlightened Tutor", 14, Rarity.UNCOMMON, mage.cards.e.EnlightenedTutor.class));
         cards.add(new SetCardInfo("Ersatz Gnomes", 301, Rarity.UNCOMMON, mage.cards.e.ErsatzGnomes.class));
