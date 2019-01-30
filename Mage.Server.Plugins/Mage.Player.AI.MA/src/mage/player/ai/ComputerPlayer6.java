@@ -598,28 +598,45 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         }
         Collections.sort(allActions, new Comparator<Ability>() {
             @Override
-            public int compare(Ability ability, Ability ability1) {
-                String rule = ability.toString();
+            public int compare(Ability ability1, Ability ability2) {
                 String rule1 = ability1.toString();
-                if (rule.equals("Pass")) {
-                    return 1;
+                String rule2 = ability2.toString();
+
+                // pass
+                boolean pass1 = rule1.equals("Pass");
+                boolean pass2 = rule2.equals("Pass");
+                if (pass1 != pass2) {
+                    if (pass1) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
                 }
-                if (rule1.equals("Pass")) {
-                    return -1;
+
+                // play
+                boolean play1 = rule1.equals("Play");
+                boolean play2 = rule2.equals("Play");
+                if (play1 != play2) {
+                    if (play1) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
                 }
-                if (rule.startsWith("Play")) {
-                    return -1;
+
+                // cast
+                boolean cast1 = rule1.equals("Cast");
+                boolean cast2 = rule2.equals("Cast");
+                if (cast1 != cast2) {
+                    if (cast1) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
                 }
-                if (rule1.startsWith("Play")) {
-                    return 1;
-                }
-                if (rule.startsWith("Cast")) {
-                    return -1;
-                }
-                if (rule1.startsWith("Cast")) {
-                    return 1;
-                }
-                return ability.getRule().compareTo(ability1.getRule());
+
+                // default
+                return ability1.getRule().compareTo(ability2.getRule());
             }
         });
     }
