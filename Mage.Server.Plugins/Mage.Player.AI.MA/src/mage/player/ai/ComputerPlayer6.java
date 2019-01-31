@@ -36,6 +36,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
+import mage.abilities.StaticAbility;
 
 /**
  * @author nantuko
@@ -465,7 +466,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
             Game sim = game.copy();
             sim.setSimulation(true);
-            if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
+            if (!(action instanceof StaticAbility) //for MorphAbility, etc
+                    && sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
                 sim.applyEffects();
                 if (checkForRepeatedAction(sim, node, action, currentPlayer.getId())) {
                     logger.debug("Sim Prio [" + depth + "] -- repeated action: " + action.toString());
