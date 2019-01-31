@@ -175,6 +175,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivory Mask", 24, Rarity.RARE, mage.cards.i.IvoryMask.class));
+        cards.add(new SetCardInfo("Jeweled Torque", 301, Rarity.UNCOMMON, mage.cards.j.JeweledTorque.class));
         cards.add(new SetCardInfo("Jhovall Queen", 25, Rarity.RARE, mage.cards.j.JhovallQueen.class));
         cards.add(new SetCardInfo("Jhovall Rider", 26, Rarity.UNCOMMON, mage.cards.j.JhovallRider.class));
         cards.add(new SetCardInfo("Karn's Touch", 86, Rarity.RARE, mage.cards.k.KarnsTouch.class));
