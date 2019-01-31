@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -43,7 +43,7 @@ public final class ImmolationShaman extends CardImpl {
         this.addAbility(new ImmolationShamanTriggeredAbility());
 
         // {3}{R}{R}: Immolation Shaman gets +3/+3 and gains menace until end of turn.
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(
+        Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(
                         3, 3, Duration.EndOfTurn
