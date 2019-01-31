@@ -78,6 +78,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Swine-Rider", 81, Rarity.COMMON, mage.cards.g.GoblinSwineRider.class));
         cards.add(new SetCardInfo("Gossamer Chains", 6, Rarity.COMMON, mage.cards.g.GossamerChains.class));
         cards.add(new SetCardInfo("Griffin Canyon", 163, Rarity.RARE, mage.cards.g.GriffinCanyon.class));
+        cards.add(new SetCardInfo("Guiding Spirit", 131, Rarity.RARE, mage.cards.g.GuidingSpirit.class));
         cards.add(new SetCardInfo("Hearth Charm", 82, Rarity.COMMON, mage.cards.h.HearthCharm.class));
         cards.add(new SetCardInfo("Helm of Awakening", 145, Rarity.UNCOMMON, mage.cards.h.HelmOfAwakening.class));
         cards.add(new SetCardInfo("Honorable Passage", 7, Rarity.UNCOMMON, mage.cards.h.HonorablePassage.class));
