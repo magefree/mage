@@ -28,9 +28,8 @@ public class AusHighlander extends Constructed {
         pointMap.put("Mox Sapphire", 3);
         pointMap.put("Sol Ring", 3);
         pointMap.put("Time Walk", 3);
-        pointMap.put("Tinker", 3);
         pointMap.put("Vampiric Tutor", 3);
-        pointMap.put("Yawgmoth’s Will", 3);
+        pointMap.put("Yawgmoth's Will", 3);
         pointMap.put("Channel", 2);
         pointMap.put("Dig Through Time", 2);
         pointMap.put("Library of Alexandria", 2);
@@ -38,10 +37,9 @@ public class AusHighlander extends Constructed {
         pointMap.put("Mind Twist", 2);
         pointMap.put("Mystical Tutor", 2);
         pointMap.put("Protean Hulk", 2);
-        pointMap.put("Strip Mine", 2);
+        pointMap.put("Tinker", 2);
         pointMap.put("Tolarian Academy", 2);
         pointMap.put("Treasure Cruise", 2);
-        pointMap.put("Back to Basics", 1);
         pointMap.put("Balance", 1);
         pointMap.put("Birthing Pod", 1);
         pointMap.put("Crop Rotation", 1);
@@ -50,32 +48,34 @@ public class AusHighlander extends Constructed {
         pointMap.put("Fastbond", 1);
         pointMap.put("Force of Will", 1);
         pointMap.put("Gifts Ungiven", 1);
-        pointMap.put("Green Sun’s Zenith", 1);
+        pointMap.put("Green Sun's Zenith", 1);
         pointMap.put("Hermit Druid", 1);
         pointMap.put("Intuition", 1);
         pointMap.put("Jace, the Mind Sculptor", 1);
         pointMap.put("Karakas", 1);
-        pointMap.put("Lim-Dul’s Vault", 1);
+        pointMap.put("Life from the Loam", 1);
+        pointMap.put("Lim-Dul's Vault", 1);
         pointMap.put("Mana Drain", 1);
         pointMap.put("Mana Vault", 1);
         pointMap.put("Memory Jar", 1);
         pointMap.put("Merchant Scroll", 1);
-        pointMap.put("Mishra’s Workshop", 1);
+        pointMap.put("Mishra's Workshop", 1);
         pointMap.put("Natural Order", 1);
         pointMap.put("Oath of Druids", 1);
         pointMap.put("Personal Tutor", 1);
-        pointMap.put("Sensei’s Divining Top", 1);
+        pointMap.put("Sensei's Divining Top", 1);
         pointMap.put("Skullclamp", 1);
         pointMap.put("Snapcaster Mage", 1);
         pointMap.put("Stoneforge Mystic", 1);
+        pointMap.put("Strip Mine", 1);
         pointMap.put("Survival of the Fittest", 1);
         pointMap.put("Tainted Pact", 1);
         pointMap.put("Time Spiral", 1);
         pointMap.put("Timetwister", 1);
         pointMap.put("True-Name Nemesis", 1);
-        pointMap.put("Umezawa’s Jitte", 1);
+        pointMap.put("Umezawa's Jitte", 1);
         pointMap.put("Wasteland", 1);
-        pointMap.put("Yawgmoth’s Bargain", 1);
+        pointMap.put("Yawgmoth's Bargain", 1);
     }
 
     public AusHighlander() {
