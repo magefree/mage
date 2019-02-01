@@ -18,6 +18,7 @@ import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
+import mage.game.draft.RateCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.view.CardView;
@@ -422,6 +423,20 @@ public class MageBook extends JComponent {
         cardNumber.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
         cardNumber.setText(card.getCardNumber());
         jLayeredPane.add(cardNumber);
+
+        // draft rating label (
+        JLabel draftRating = new JLabel();
+        dy = -5 * 2 + cardNumber.getHeight(); // under card number
+        draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getHeight() + dy, cardDimensions.frameWidth, 20);
+        draftRating.setHorizontalAlignment(SwingConstants.CENTER);
+        //draftRating.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 150), 3, true));
+        draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
+        if (card.getOriginalCard() != null) {
+            draftRating.setText("draft rating: " + RateCard.rateCard(card.getOriginalCard(), null));
+        } else {
+            draftRating.setText("");
+        }
+        jLayeredPane.add(draftRating);
     }
 
     private void addToken(Token token, BigCard bigCard, UUID gameId, Rectangle rectangle) {
