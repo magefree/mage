@@ -78,6 +78,10 @@ public final class RateCard {
     }
 
     public static int rateCard(Card card, List<ColoredManaSymbol> allowedColors, boolean useCache) {
+        if (card == null) {
+            return 0;
+        }
+
         if (useCache && allowedColors == null && rated.containsKey(card.getName())) {
             int rate = rated.get(card.getName());
             return rate;

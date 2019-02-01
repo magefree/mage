@@ -26,10 +26,12 @@
  */
 package mage.client.deckeditor.table;
 
-import java.util.Comparator;
-
 import mage.cards.MageCard;
+import mage.game.draft.RateCard;
 import mage.view.CardView;
+import org.apache.log4j.Logger;
+
+import java.util.Comparator;
 
 /**
  * {@link MageCard} comparator. Used to sort cards in Deck Editor Table View
@@ -38,6 +40,8 @@ import mage.view.CardView;
  * @author nantuko
  */
 public class MageCardComparator implements Comparator<CardView> {
+
+    private static final Logger logger = Logger.getLogger(MageCardComparator.class);
 
     private final int column;
     private final boolean ascending;
@@ -49,14 +53,12 @@ public class MageCardComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView a, CardView b) {
-        Comparable aCom = null;
-        Comparable bCom = null;
+        Comparable aCom = 1;
+        Comparable bCom = 1;
 
         switch (column) {
             // #skip
             case 0:
-                aCom = 1;
-                bCom = 1;
                 break;
             // Name
             case 1:
@@ -106,6 +108,10 @@ public class MageCardComparator implements Comparator<CardView> {
             case 8:
                 aCom = Integer.parseInt(a.getCardNumber().replaceAll("[\\D]", ""));
                 bCom = Integer.parseInt(b.getCardNumber().replaceAll("[\\D]", ""));
+                break;
+            case 9:
+                aCom = RateCard.rateCard(a.getOriginalCard(), null);
+                bCom = RateCard.rateCard(b.getOriginalCard(), null);
                 break;
             default:
                 break;
