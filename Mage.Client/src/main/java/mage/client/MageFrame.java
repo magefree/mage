@@ -33,6 +33,7 @@ import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.PlayerAction;
+import mage.game.draft.RateCard;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
@@ -215,6 +216,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         RepositoryUtil.bootstrapLocalDb();
+        RateCard.bootstrapCardsAndRatings();
         ManaSymbols.loadImages();
         Plugins.instance.loadPlugins();
 

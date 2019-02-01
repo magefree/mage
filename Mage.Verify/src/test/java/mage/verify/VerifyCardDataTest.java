@@ -4,11 +4,14 @@ import mage.ObjectColor;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
-import mage.cards.repository.*;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import org.junit.Assert;
@@ -90,21 +93,6 @@ public class VerifyCardDataTest {
         skipListCreate("MISSING_ABILITIES");
     }
 
-    public static List<Card> allCards() {
-        Collection<ExpansionSet> sets = Sets.getInstance().values();
-        List<Card> cards = new ArrayList<>();
-        for (ExpansionSet set : sets) {
-            if (set.isCustomSet()) {
-                continue;
-            }
-            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
-                        setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
-            }
-        }
-        return cards;
-    }
-
     private void warn(Card card, String message) {
         outputMessages.add("Warning: " + message + " for " + card.getExpansionSetCode() + " - " + card.getName() + " - " + card.getCardNumber());
     }
@@ -119,7 +107,7 @@ public class VerifyCardDataTest {
 
     @Test
     public void verifyCards() throws IOException {
-        for (Card card : allCards()) {
+        for (Card card : CardScanner.getAllCards()) {
             Set<String> tokens = findSourceTokens(card.getClass());
             if (card.isSplitCard()) {
                 check(((SplitCard) card).getLeftHalfCard(), null);
@@ -658,6 +646,14 @@ public class VerifyCardDataTest {
         }
     }
 
+    private void checkLegalityFormats(Card card, JsonCard ref) {
+        if (skipListHaveName("LEGALITY", card.getExpansionSetCode(), card.getName())) {
+            return;
+        }
+
+        // TODO: add legality checks (by sets and cards, by banned)
+    }
+
     private String prepareRule(String cardName, String rule) {
         // remove and optimize rule text for analyze
         String newRule = rule;
@@ -901,4 +897,22 @@ public class VerifyCardDataTest {
         return result.toString();
     }
 
+    @Test
+    public void testCardRatingConsistency() {
+        // all cards with same name must have same rating (see RateCard.rateCard)
+        // cards rating must be consistency (same) for card sorting
+        List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
+        Map<String, Integer> cardRates = new HashMap<>();
+        for (Card card : cardsList) {
+            int curRate = RateCard.rateCard(card, null, false);
+            int prevRate = cardRates.getOrDefault(card.getName(), 0);
+            if (prevRate == 0) {
+                cardRates.putIfAbsent(card.getName(), curRate);
+            } else {
+                if (curRate != prevRate) {
+                    Assert.fail("Card with same name have different ratings: " + card.getName());
+                }
+            }
+        }
+    }
 }

@@ -5,6 +5,7 @@ import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.cards.repository.RepositoryUtil;
+import mage.game.draft.RateCard;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -133,6 +134,10 @@ public final class Main {
         } else {
             CardScanner.scan();
         }
+        logger.info("Done.");
+
+        // cards preload with ratings
+        RateCard.bootstrapCardsAndRatings();
         logger.info("Done.");
 
         logger.info("Updating user stats DB...");

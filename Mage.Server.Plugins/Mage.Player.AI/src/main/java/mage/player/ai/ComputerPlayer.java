@@ -1,10 +1,6 @@
 
 package mage.player.ai;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -37,6 +33,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
+import mage.game.draft.RateCard;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.match.Match;
@@ -47,7 +44,6 @@ import mage.game.tournament.Tournament;
 import mage.player.ai.simulators.CombatGroupSimulator;
 import mage.player.ai.simulators.CombatSimulator;
 import mage.player.ai.simulators.CreatureSimulator;
-import mage.player.ai.utils.RateCard;
 import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.players.net.UserData;
@@ -60,8 +56,12 @@ import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
- *
  * suitable for two player games and some multiplayer games
  *
  * @author BetaSteward_at_googlemail.com
@@ -134,7 +134,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         UUID randomOpponentId;
         if (target.getTargetController() != null) {
-            randomOpponentId = getRandomOpponent(target.getTargetController(), game);;
+            randomOpponentId = getRandomOpponent(target.getTargetController(), game);
         } else if (abilityControllerId != null) {
             randomOpponentId = getRandomOpponent(abilityControllerId, game);
         } else {
@@ -427,7 +427,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         UUID randomOpponentId;
         if (target.getTargetController() != null) {
-            randomOpponentId = getRandomOpponent(target.getTargetController(), game);;
+            randomOpponentId = getRandomOpponent(target.getTargetController(), game);
         } else if (source != null && source.getControllerId() != null) {
             randomOpponentId = getRandomOpponent(source.getControllerId(), game);
         } else {
@@ -865,7 +865,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        
+
         if (target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield) {
             List<Card> cards = new ArrayList<>();
             for (Player player : game.getPlayers().values()) {
@@ -1423,11 +1423,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     /**
-     *
      * returns a list of Permanents that produce mana sorted by the number of
      * mana the Permanent produces that match the unpaid costs in ascending
      * order
-     *
+     * <p>
      * the idea is that we should pay costs first from mana producers that
      * produce only one type of mana and save the multi-mana producers for those
      * costs that can't be paid by any other producers
@@ -2089,13 +2088,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         try {
             Card bestCard = pickBestCard(cards, chosenColors);
             int maxScore = RateCard.rateCard(bestCard, chosenColors);
-            int pickedCardRate = RateCard.getCardRating(bestCard);
+            int pickedCardRate = RateCard.getBaseCardScore(bestCard);
 
             if (pickedCardRate <= 30) {
                 // if card is bad
                 // try to counter pick without any color restriction
                 Card counterPick = pickBestCard(cards, null);
-                int counterPickScore = RateCard.getCardRating(counterPick);
+                int counterPickScore = RateCard.getBaseCardScore(counterPick);
                 // card is really good
                 // take it!
                 if (counterPickScore >= 80) {
@@ -2441,7 +2440,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     /**
      * Sets a possible target player
-     *
      */
     private boolean setTargetPlayer(Outcome outcome, Target target, Ability source, UUID sourceId, UUID abilityControllerId, UUID randomOpponentId, Game game) {
         if (target.getOriginalTarget() instanceof TargetOpponent) {

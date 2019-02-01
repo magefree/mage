@@ -4,6 +4,7 @@ import mage.cards.*;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -69,5 +70,24 @@ public final class CardScanner {
             }
         }
         CardRepository.instance.saveCards(cardsToAdd, CardRepository.instance.getContentVersionConstant());
+    }
+
+    public static List<Card> getAllCards() {
+        return getAllCards(true);
+    }
+
+    public static List<Card> getAllCards(boolean ignoreCustomSets) {
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        List<Card> cards = new ArrayList<>();
+        for (ExpansionSet set : sets) {
+            if (ignoreCustomSets && set.isCustomSet()) {
+                continue;
+            }
+            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
+                        setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
+            }
+        }
+        return cards;
     }
 }

@@ -1,4 +1,4 @@
-package mage.player.ai.utils;
+package mage.game.draft;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -7,9 +7,9 @@ import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
+import mage.cards.repository.CardScanner;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -30,9 +30,9 @@ import java.util.*;
  */
 public final class RateCard {
 
-    private static Map<String, Integer> ratings;
-    private static List<String> setsWithRatingsToBeLoaded;
+    private static Map<String, Integer> baseRatings = new HashMap<>();
     private static final Map<String, Integer> rated = new HashMap<>();
+    private static boolean isLoaded = false;
 
     /**
      * Rating that is given for new cards.
@@ -55,6 +55,15 @@ public final class RateCard {
     private RateCard() {
     }
 
+    public static void bootstrapCardsAndRatings() {
+        // preload cards and ratings
+        log.info("Loading cards and rating...");
+        List<Card> cards = CardScanner.getAllCards(false);
+        for (Card card : cards) {
+            RateCard.rateCard(card, null);
+        }
+    }
+
     /**
      * Get absolute score of the card.
      * Depends on type, manacost, rating.
@@ -65,10 +74,15 @@ public final class RateCard {
      * @return
      */
     public static int rateCard(Card card, List<ColoredManaSymbol> allowedColors) {
-        if (allowedColors == null && rated.containsKey(card.getName())) {
+        return rateCard(card, allowedColors, true);
+    }
+
+    public static int rateCard(Card card, List<ColoredManaSymbol> allowedColors, boolean useCache) {
+        if (useCache && allowedColors == null && rated.containsKey(card.getName())) {
             int rate = rated.get(card.getName());
             return rate;
         }
+
         int type;
         if (card.isPlaneswalker()) {
             type = 15;
@@ -83,10 +97,12 @@ public final class RateCard {
         } else {
             type = 6;
         }
-        int score = getCardRating(card) + 2 * type + getManaCostScore(card, allowedColors)
+        int score = getBaseCardScore(card) + 2 * type + getManaCostScore(card, allowedColors)
                 + 40 * isRemoval(card);
-        if (allowedColors == null)
+
+        if (useCache && allowedColors == null)
             rated.put(card.getName(), score);
+
         return score;
     }
 
@@ -153,107 +169,127 @@ public final class RateCard {
         return 0;
     }
 
+
     /**
      * Return rating of the card.
      *
      * @param card Card to rate.
      * @return Rating number from [1:100].
      */
-    public static int getCardRating(Card card) {
-        readRatingSetList();
-        String exp = card.getExpansionSetCode().toLowerCase();
-        readRatings(exp);
+    public static int getBaseCardScore(Card card) {
+        // same card name must have same rating
 
-        if (ratings != null && ratings.containsKey(card.getName())) {
-            return ratings.get(card.getName());
+        // ratings from files
+        // lazy loading on first request
+        prepareAndLoadRatings();
+
+        // ratings from card rarity
+        // some cards can have different rarity -- it's will be used from first set
+        int newRating;
+        switch (card.getRarity()) {
+            case COMMON:
+                newRating = DEFAULT_NOT_RATED_CARD_RATING;
+                break;
+            case UNCOMMON:
+                newRating = DEFAULT_NOT_RATED_UNCOMMON_RATING;
+                break;
+            case RARE:
+                newRating = DEFAULT_NOT_RATED_RARE_RATING;
+                break;
+            case MYTHIC:
+                newRating = DEFAULT_NOT_RATED_MYTHIC_RATING;
+                break;
+            default:
+                newRating = DEFAULT_NOT_RATED_CARD_RATING;
+                break;
         }
 
-        Rarity r = card.getRarity();
-        if (Rarity.COMMON == r) {
-            return DEFAULT_NOT_RATED_CARD_RATING;
-        } else if (Rarity.UNCOMMON == r) {
-            return DEFAULT_NOT_RATED_UNCOMMON_RATING;
-        } else if (Rarity.RARE == r) {
-            return DEFAULT_NOT_RATED_RARE_RATING;
-        } else if (Rarity.MYTHIC == r) {
-            return DEFAULT_NOT_RATED_MYTHIC_RATING;
+        int oldRating = baseRatings.getOrDefault(card.getName(), 0);
+        if (oldRating != 0 && oldRating != newRating) {
+            //log.info("card have different rating by sets: " + card.getName() + " (" + oldRating + " <> " + newRating + ")");
         }
-        return DEFAULT_NOT_RATED_CARD_RATING;
+
+        if (oldRating != 0) {
+            return oldRating;
+        } else {
+            baseRatings.put(card.getName(), newRating);
+            return newRating;
+        }
     }
 
     /**
-     * reads the list of sets that have ratings csv files
-     * populates the setsWithRatingsToBeLoaded
+     * reads the list of sets that have ratings csv files and read each file
      */
-    private synchronized static void readRatingSetList() {
+    public synchronized static void prepareAndLoadRatings() {
+        if (isLoaded) {
+            return;
+        }
+
+        // load sets list
+        List<String> setsToLoad = new LinkedList<>();
         try {
-            if (setsWithRatingsToBeLoaded == null) {
-                setsWithRatingsToBeLoaded = new LinkedList<>();
-                InputStream is = RateCard.class.getResourceAsStream(RATINGS_SET_LIST);
-                Scanner scanner = new Scanner(is);
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    if (!line.substring(0, 1).equals("#")) {
-                        setsWithRatingsToBeLoaded.add(line);
-                    }
+            InputStream is = RateCard.class.getResourceAsStream(RATINGS_SET_LIST);
+            Scanner scanner = new Scanner(is);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (!line.substring(0, 1).equals("#")) {
+                    setsToLoad.add(line);
                 }
             }
-        } catch (Exception e) {
-            log.info("failed to read ratings set list file: " + RATINGS_SET_LIST);
-            e.printStackTrace();
+        } catch (Throwable e) {
+            log.error("Failed to read ratings sets list file: " + RATINGS_SET_LIST, e);
         }
-    }
 
-    /**
-     * Reads ratings from resources and loads them into ratings map
-     */
-    private synchronized static void readRatings(String expCode) {
-        if (ratings == null) {
-            ratings = new HashMap<>();
+        // load set data
+        String rateFile = "";
+        try {
+            for (String code : setsToLoad) {
+                //log.info("Reading ratings for the set " + code);
+                rateFile = RATINGS_DIR + code + ".csv";
+                readFromFile(rateFile);
+            }
+        } catch (Exception e) {
+            log.error("Failed to read ratings set file: " + rateFile, e);
         }
-        if (setsWithRatingsToBeLoaded.contains(expCode)) {
-            log.info("reading draftbot ratings for the set " + expCode);
-            readFromFile(RATINGS_DIR + expCode + ".csv");
-            setsWithRatingsToBeLoaded.remove(expCode);
-        }
+
+        isLoaded = true;
     }
 
     /**
      * reads ratings from the file
      */
     private synchronized static void readFromFile(String path) {
+        // card must get max rating from multiple cards
         Integer min = Integer.MAX_VALUE, max = 0;
         Map<String, Integer> thisFileRatings = new HashMap<>();
-        try {
-            InputStream is = RateCard.class.getResourceAsStream(path);
-            Scanner scanner = new Scanner(is);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] s = line.split(":");
-                if (s.length == 2) {
-                    Integer rating = Integer.parseInt(s[1].trim());
-                    String name = s[0].trim();
-                    if (rating > max) {
-                        max = rating;
-                    }
-                    if (rating < min) {
-                        min = rating;
-                    }
-                    thisFileRatings.put(name, rating);
+
+        // load
+        InputStream is = RateCard.class.getResourceAsStream(path);
+        Scanner scanner = new Scanner(is);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] s = line.split(":");
+            if (s.length == 2) {
+                Integer rating = Integer.parseInt(s[1].trim());
+                String name = s[0].trim();
+                if (rating > max) {
+                    max = rating;
                 }
-            }
-            // normalize for the file to [1..100]
-            for (String name : thisFileRatings.keySet()) {
-                int r = thisFileRatings.get(name);
-                int newrating = (int) (100.0f * (r - min) / (max - min));
-                if (!ratings.containsKey(name) ||
-                        (ratings.containsKey(name) && newrating > ratings.get(name))) {
-                    ratings.put(name, newrating);
+                if (rating < min) {
+                    min = rating;
                 }
+                thisFileRatings.put(name, rating);
             }
-        } catch (Exception e) {
-            log.info("failed to read ratings file: " + path);
-            e.printStackTrace();
+        }
+
+        // normalize for the file to [1..100]
+        for (String name : thisFileRatings.keySet()) {
+            int r = thisFileRatings.get(name);
+            int newRating = (int) (100.0f * (r - min) / (max - min));
+            int oldRating = baseRatings.getOrDefault(name, 0);
+            if (newRating > oldRating) {
+                baseRatings.put(name, newRating);
+            }
         }
     }
 
