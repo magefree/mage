@@ -1588,7 +1588,10 @@ public class Combat implements Serializable, Copyable<Combat> {
     public Set<UUID> getPlayerDefenders(Game game) {
         Set<UUID> playerDefenders = new HashSet<>();
         for (CombatGroup group : groups) {
-            if (group.defenderIsPlaneswalker) {
+            if (!group.defenderIsPlaneswalker) {
+                playerDefenders.add(group.getDefenderId());
+            }
+                /*  The planeswalker was attacked, not the player.  So I believe the code is incorrect.
                 Permanent permanent = game.getPermanent(group.getDefenderId());
                 if (permanent != null) {
                     playerDefenders.add(permanent.getControllerId());
@@ -1596,6 +1599,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             } else {
                 playerDefenders.add(group.getDefenderId());
             }
+                */
         }
         return playerDefenders;
     }
