@@ -43,6 +43,7 @@ import java.beans.PropertyVetoException;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -175,8 +176,8 @@ public class TablesPanel extends javax.swing.JPanel {
             defaultLabel.setHorizontalAlignment(JLabel.CENTER);
             // colors
             String val = (String) value;
-            String[] valsList = val.split("/");
-            if (valsList.length == 2 && !valsList[0].equals(valsList[1])) {
+            int[] seats = parseSeatsInfo(val);
+            if (seats[0] != seats[1]) {
                 // green draw
                 Color defaultBack = defaultLabel.getBackground();
                 greenLabel.setText(val);
@@ -193,6 +194,17 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         }
     };
+
+    private int[] parseSeatsInfo(String info) {
+        String[] valsList = info.split("/");
+        int[] res = {0, 0};
+        if (valsList.length == 2) {
+            res[0] = Integer.parseInt(valsList[0]);
+            res[1] = Integer.parseInt(valsList[1]);
+        }
+        return res;
+    }
+
 
     /**
      * Creates new form TablesPanel
@@ -213,7 +225,27 @@ public class TablesPanel extends javax.swing.JPanel {
 
         // 1. TABLE CURRENT
         tableTables.createDefaultColumnsFromModel();
-        activeTablesSorter = new MageTableRowSorter(tableModel);
+        activeTablesSorter = new MageTableRowSorter(tableModel) {
+            @Override
+            public void toggleSortOrder(int column) {
+                // special sort for created and seat column
+                if (column == TablesTableModel.COLUMN_CREATED || column == TablesTableModel.COLUMN_SEATS) {
+                    List<? extends SortKey> sortKeys = getSortKeys();
+                    if (!sortKeys.isEmpty() && sortKeys.size() == 2) {
+                        // clear sort on second click
+                        setSortKeys(null);
+                    } else {
+                        // setup sort on first click
+                        ArrayList list = new ArrayList();
+                        list.add(new RowSorter.SortKey(TablesTableModel.COLUMN_SEATS, SortOrder.ASCENDING));
+                        list.add(new RowSorter.SortKey(TablesTableModel.COLUMN_CREATED, SortOrder.DESCENDING));
+                        setSortKeys(list);
+                    }
+                } else {
+                    super.toggleSortOrder(column);
+                }
+            }
+        };
         tableTables.setRowSorter(activeTablesSorter);
 
         // time ago
@@ -232,8 +264,28 @@ public class TablesPanel extends javax.swing.JPanel {
 
         });*/
 
+        // seats sorter (free tables must be first)
+        activeTablesSorter.setComparator(TablesTableModel.COLUMN_SEATS, new Comparator<String>() {
+            @Override
+            public int compare(String v1, String v2) {
+                int[] seats1 = parseSeatsInfo(v1);
+                int[] seats2 = parseSeatsInfo(v2);
+                boolean free1 = seats1[0] != seats1[1];
+                boolean free2 = seats2[0] != seats2[1];
+
+                // free seats go first
+                if (free1 || free2) {
+                    return Boolean.compare(free2, free1);
+                }
+
+                // all other seats go without sorts
+                return 0;
+            }
+        });
+
         // default sort by created date (last games from above)
         ArrayList list = new ArrayList();
+        list.add(new RowSorter.SortKey(TablesTableModel.COLUMN_SEATS, SortOrder.ASCENDING));
         list.add(new RowSorter.SortKey(TablesTableModel.COLUMN_CREATED, SortOrder.DESCENDING));
         activeTablesSorter.setSortKeys(list);
 
@@ -1604,5 +1656,4 @@ class GameChooser extends JPopupMenu {
         }
 
     }
-
 }
