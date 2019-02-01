@@ -827,7 +827,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnPreferences.setToolTipText("By changing the settings in the preferences window you can adjust the look and behaviour of xmage.");
         btnPreferences.setFocusable(false);
         btnPreferences.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnPreferences.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnPreferences.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPreferencesActionPerformed(evt);
@@ -840,7 +839,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnConnect.setToolTipText("Connect to or disconnect from a XMage server.");
         btnConnect.setFocusable(false);
         btnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnConnect.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConnectActionPerformed(evt);
@@ -854,7 +852,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnDeckEditor.setToolTipText("Start the deck editor to create or modify decks.");
         btnDeckEditor.setFocusable(false);
         btnDeckEditor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnDeckEditor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDeckEditor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeckEditorActionPerformed(evt);
@@ -864,11 +861,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator2);
 
         btnCollectionViewer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/collection.png"))); // NOI18N
-        btnCollectionViewer.setText("Viewer");
+        btnCollectionViewer.setText("Card Viewer");
         btnCollectionViewer.setToolTipText("Card viewer to show the cards of sets. ");
         btnCollectionViewer.setFocusable(false);
         btnCollectionViewer.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnCollectionViewer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCollectionViewer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCollectionViewerActionPerformed(evt);
@@ -882,7 +878,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnSendFeedback.setToolTipText("Send some feedback to the developers.");
         btnSendFeedback.setFocusable(false);
         btnSendFeedback.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnSendFeedback.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSendFeedback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSendFeedbackActionPerformed(evt);
@@ -896,7 +891,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnSymbols.setToolTipText("<HTML>Load the mana and other card symbols from the internet.<br>\nOtherwise you only see the replacement sequence like {U} for blue mana symbol.<br>\nYou need to do that only once.");
         btnSymbols.setFocusable(false);
         btnSymbols.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnSymbols.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSymbols.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSymbolsActionPerformed(evt);
@@ -910,7 +904,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnImages.setToolTipText("<HTML>Load card images from external sources.");
         btnImages.setFocusable(false);
         btnImages.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnImages.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnImages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImagesActionPerformed(evt);
@@ -924,7 +917,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnAbout.setToolTipText("Some information about the developers.");
         btnAbout.setFocusable(false);
         btnAbout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAboutActionPerformed(evt);

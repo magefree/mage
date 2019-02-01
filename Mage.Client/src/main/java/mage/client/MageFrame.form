@@ -85,7 +85,6 @@
             <Property name="toolTipText" type="java.lang.String" value="By changing the settings in the preferences window you can adjust the look and behaviour of xmage."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPreferencesActionPerformed"/>
@@ -101,7 +100,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Connect to or disconnect from a XMage server."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConnectActionPerformed"/>
@@ -118,7 +116,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Start the deck editor to create or modify decks."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeckEditorActionPerformed"/>
@@ -131,11 +128,10 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/menu/collection.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Viewer"/>
+            <Property name="text" type="java.lang.String" value="Card Viewer"/>
             <Property name="toolTipText" type="java.lang.String" value="Card viewer to show the cards of sets. "/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCollectionViewerActionPerformed"/>
@@ -152,7 +148,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Send some feedback to the developers."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSendFeedbackActionPerformed"/>
@@ -169,7 +164,6 @@
             <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Load the mana and other card symbols from the internet.&lt;br&gt;&#xa;Otherwise you only see the replacement sequence like {U} for blue mana symbol.&lt;br&gt;&#xa;You need to do that only once."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSymbolsActionPerformed"/>
@@ -186,7 +180,6 @@
             <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Load card images from external sources."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImagesActionPerformed"/>
@@ -203,7 +196,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Some information about the developers."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAboutActionPerformed"/>
