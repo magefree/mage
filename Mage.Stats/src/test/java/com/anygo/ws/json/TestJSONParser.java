@@ -2,13 +2,11 @@ package com.anygo.ws.json;
 
 import com.xmage.ws.util.json.JSONParser;
 import com.xmage.ws.util.json.JSONValidationException;
-import junit.framework.Assert;
-import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author noxx
  */
 public class TestJSONParser {
@@ -47,30 +45,30 @@ public class TestJSONParser {
     public void testQueryForJSONArray() throws Exception {
         JSONParser parser = new JSONParser();
         parser.parseJSON("{\"test\" : [\"1\", \"2\", \"3\"]}");
-        Assert.assertTrue(parser.getJSONArray("test") instanceof JSONArray);
+        Assert.assertNotNull(parser.getJSONArray("test"));
         Assert.assertEquals("1", parser.getJSONArray("test").get(0));
 
         parser = new JSONParser();
         parser.parseJSON("{\"test\" : [1,2,3]}");
-        Assert.assertTrue(parser.getJSONArray("test") instanceof JSONArray);
+        Assert.assertNotNull(parser.getJSONArray("test"));
         Assert.assertFalse(parser.isHitCache());
         Assert.assertEquals(2, parser.getJSONArray("test").get(1));
         Assert.assertTrue(parser.isHitCache());
 
-        Assert.assertTrue(parser.getJSONArray("test") instanceof JSONArray);
+        Assert.assertNotNull(parser.getJSONArray("test"));
         Assert.assertEquals(2, parser.getJSONArray("test").get(1));
         Assert.assertTrue(parser.isHitCache());
 
         parser = new JSONParser();
         parser.parseJSON("{\"test\" : [{second_level: \"3\"}, {\"third_level\" : 2}]}");
-        Assert.assertTrue(parser.getJSONArray("test") instanceof JSONArray);
+        Assert.assertNotNull(parser.getJSONArray("test"));
         Assert.assertTrue(parser.getJSONArray("test").get(0) instanceof JSONObject);
         Assert.assertEquals(2, parser.getInt("test[1].third_level"));
         Assert.assertEquals("3", parser.getString("test[0].second_level"));
 
         parser = new JSONParser();
         parser.parseJSON("{\"test\" : [{1:1},{1:1},{1:1},{1:1},{1:1},{1:1},{1:1},{1:1},{1:1},{2:3},{4:5}]}");
-        Assert.assertTrue(parser.getJSONArray("test") instanceof JSONArray);
+        Assert.assertNotNull(parser.getJSONArray("test"));
         Assert.assertEquals(5, parser.getInt("test[10].4"));
     }
 
@@ -89,9 +87,9 @@ public class TestJSONParser {
         Assert.assertEquals(2, parser.getInt("test.internal.level"));
         Assert.assertFalse("No cache should have been used", parser.isHitCache());
 
-        Assert.assertTrue(parser.getJSON("test") instanceof JSONObject);
+        Assert.assertNotNull(parser.getJSON("test"));
         Assert.assertFalse("No cache should have been used", parser.isHitCache());
-        Assert.assertTrue(parser.getJSON("test.internal") instanceof JSONObject);
+        Assert.assertNotNull(parser.getJSON("test.internal"));
         Assert.assertFalse("No cache should have been used", parser.isHitCache());
 
         parser = new JSONParser();
@@ -100,9 +98,9 @@ public class TestJSONParser {
         Assert.assertEquals(2, parser.getInt("test.internal.level"));
         Assert.assertFalse("No cache should have been used", parser.isHitCache());
 
-        Assert.assertTrue(parser.getJSON("test") instanceof JSONObject);
+        Assert.assertNotNull(parser.getJSON("test"));
         Assert.assertTrue("Cache should have been used this time!", parser.isHitCache());
-        Assert.assertTrue(parser.getJSON("test.internal") instanceof JSONObject);
+        Assert.assertNotNull(parser.getJSON("test.internal"));
         Assert.assertTrue("Cache should have been used this time!", parser.isHitCache());
     }
 
@@ -137,7 +135,7 @@ public class TestJSONParser {
     private void testError(JSONParser parser, String jsonToTest) throws Exception {
         try {
             parser.parseJSON(jsonToTest);
-            Assert.assertTrue("Should have thrown an exception", false);
+            Assert.fail("Should have thrown an exception");
         } catch (JSONValidationException j) {
             // ok
         }
