@@ -16,4 +16,5 @@ public class JsonLegalities {
     public String pauper;
     public String standard;
     public String vintage;
+    public String oldschool;
 }
