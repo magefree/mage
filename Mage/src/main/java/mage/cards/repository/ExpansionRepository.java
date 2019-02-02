@@ -70,7 +70,7 @@ public enum ExpansionRepository {
         try {
             expansionDao.callBatchTasks(() -> {
                 // add
-                if (newSets != null && newSets.size() > 0) {
+                if (newSets != null && !newSets.isEmpty()) {
                     logger.info("DB: need to add " + newSets.size() + " new sets");
                     try {
                         for (ExpansionInfo exp : newSets) {
@@ -82,7 +82,7 @@ public enum ExpansionRepository {
                 }
 
                 // update
-                if (updatedSets != null && updatedSets.size() > 0) {
+                if (updatedSets != null && !updatedSets.isEmpty()) {
                     logger.info("DB: need to update " + updatedSets.size() + " sets");
                     try {
                         for (ExpansionInfo exp : updatedSets) {

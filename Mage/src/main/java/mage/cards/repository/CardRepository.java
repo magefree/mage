@@ -73,7 +73,7 @@ public enum CardRepository {
         try {
             cardDao.callBatchTasks(() -> {
                 // add
-                if (newCards != null && newCards.size() > 0) {
+                if (newCards != null && !newCards.isEmpty()) {
                     logger.info("DB: need to add " + newCards.size() + " new cards");
                     try {
                         for (CardInfo card : newCards) {

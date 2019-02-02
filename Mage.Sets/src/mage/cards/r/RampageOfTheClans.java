@@ -69,8 +69,8 @@ class RampageOfTheClansEffect extends OneShotEffect {
             }
         }
         Token token = new CentaurToken();
-        for (UUID playerId : playersWithPermanents.keySet()) {
-            token.putOntoBattlefield(playersWithPermanents.get(playerId), game, source.getSourceId(), playerId);
+        for (Map.Entry<UUID, Integer> amountDestroyedByPlayer : playersWithPermanents.entrySet()) {
+            token.putOntoBattlefield(amountDestroyedByPlayer.getValue(), game, source.getSourceId(), amountDestroyedByPlayer.getKey());
         }
         return true;
     }

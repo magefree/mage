@@ -110,7 +110,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
         filterPermanent.add(new NamePredicate(permanent.getName()));
         filterPermanent.add(Predicates.not(new CardIdPredicate(permanent.getId())));
         filterPermanent.add(new ControllerIdPredicate(controllerId));
-        if (game.getBattlefield().getActivePermanents(filterPermanent, controllerId, game).size() > 0) {
+        if (!game.getBattlefield().getActivePermanents(filterPermanent, controllerId, game).isEmpty()) {
             return false;
         }
         return true;

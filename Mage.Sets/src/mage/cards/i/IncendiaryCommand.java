@@ -92,10 +92,10 @@ class IncendiaryCommandDrawEffect extends OneShotEffect {
                     }
                 }
             }
-            for (UUID playerId : cardsToDraw.keySet()) {
-                Player player = game.getPlayer(playerId);
+            for (Map.Entry<UUID, Integer> toDrawByPlayer : cardsToDraw.entrySet()) {
+                Player player = game.getPlayer(toDrawByPlayer.getKey());
                 if (player != null) {
-                    player.drawCards(cardsToDraw.get(playerId), game);
+                    player.drawCards(toDrawByPlayer.getValue(), game);
                 }
             }
             return true;
