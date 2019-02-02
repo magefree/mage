@@ -19,7 +19,7 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
     private static final String[] SET_VALUES = new String[]{"lands", "creatures", "planeswalkers", "other spells", "sideboard cards",
         "Instant", "Land", "Enchantment", "Artifact", "Sorcery", "Planeswalker", "Creature"};
     private static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
-
+    
     private boolean sideboard = false;
     private boolean switchSideboardByEmptyLine = true; // all cards after first empty line will be sideboard (like mtgo format)
     private int nonEmptyLinesTotal = 0;
@@ -97,9 +97,8 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         if (lineName.contains("//") && !lineName.contains(" // ")) {
             lineName = lineName.replace("//", " // ");
         }
-        if (lineName.contains(" / ")) {
-            lineName = lineName.replace(" / ", " // ");
-        }
+        lineName = lineName.replaceFirst("(?<=[^/])\\s*/\\s*(?=[^/])", " // ");
+        
         if (IGNORE_NAMES.contains(lineName) || IGNORE_NAMES.contains(lineNum)) {
             return;
         }
