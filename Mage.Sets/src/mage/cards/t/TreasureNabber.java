@@ -92,7 +92,6 @@ class TreasureNabberAbility extends TriggeredAbilityImpl {
 class TreasureNabberEffect extends ContinuousEffectImpl {
 
     protected FixedTargets fixedTargets;
-    protected int startingTurn;
 
     TreasureNabberEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

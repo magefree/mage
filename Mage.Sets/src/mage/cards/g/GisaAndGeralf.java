@@ -130,7 +130,7 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
 
 class GisaAndGeralfWatcher extends Watcher {
 
-    boolean abilityUsed = false;
+   private boolean abilityUsed = false;
 
     GisaAndGeralfWatcher() {
         super("GisaAndGeralfWatcher", WatcherScope.CARD);

@@ -76,8 +76,8 @@ class VizierOfDefermentEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        AttackedThisTurnWatcher watcherAttacked = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
-        BlockedThisTurnWatcher watcherBlocked = (BlockedThisTurnWatcher) game.getState().getWatchers().get(BlockedThisTurnWatcher.class.getSimpleName());
+        AttackedThisTurnWatcher watcherAttacked = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        BlockedThisTurnWatcher watcherBlocked = game.getState().getWatcher(BlockedThisTurnWatcher.class);
         boolean attackedOrBlocked = false;
         if (watcherAttacked != null && watcherAttacked.checkIfAttacked(permanent, game)) {
             attackedOrBlocked = true;

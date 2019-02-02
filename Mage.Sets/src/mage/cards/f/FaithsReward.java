@@ -59,7 +59,7 @@ class FaithsRewardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FaithsRewardWatcher watcher = game.getState().getWatcher(FaithsRewardWatcher.class);
         if (watcher != null) {
-            for (UUID id : watcher.cards) {
+            for (UUID id : watcher.getCards()) {
                 Card c = game.getCard(id);
                 if (c != null && c.isOwnedBy(source.getControllerId()) && game.getState().getZone(id) == Zone.GRAVEYARD) {
                     c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
@@ -77,7 +77,7 @@ class FaithsRewardEffect extends OneShotEffect {
 }
 
 class FaithsRewardWatcher extends Watcher {
-    List<UUID> cards = new ArrayList<>();
+    private List<UUID> cards = new ArrayList<>();
 
     public FaithsRewardWatcher() {
         super(FaithsRewardWatcher.class, WatcherScope.GAME);
@@ -93,6 +93,10 @@ class FaithsRewardWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             cards.add(event.getTargetId());
         }
+    }
+
+    public List<UUID> getCards(){
+        return cards;
     }
 
     @Override

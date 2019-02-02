@@ -146,7 +146,7 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean pullResponseFromQueue(Game game) {
         if (actionQueue.isEmpty() && actionIterations > 0 && !actionQueueSaved.isEmpty()) {
-            actionQueue = new LinkedList(actionQueueSaved);
+            actionQueue = new LinkedList<>(actionQueueSaved);
             actionIterations--;
 //            logger.info("MACRO iteration: " + actionIterations);
         }

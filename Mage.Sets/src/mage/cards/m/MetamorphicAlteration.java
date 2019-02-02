@@ -56,7 +56,7 @@ public final class MetamorphicAlteration extends CardImpl {
 
 class ChooseACreature extends OneShotEffect {
 
-    public static String INFO_KEY = "CHOSEN_CREATURE";
+    public static final String INFO_KEY = "CHOSEN_CREATURE";
 
     public ChooseACreature() {
         super(Outcome.Copy);

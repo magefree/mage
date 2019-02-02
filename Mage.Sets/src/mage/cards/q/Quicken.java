@@ -97,13 +97,13 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
 class QuickenWatcher extends Watcher {
 
-    public List<String> activeQuickenSpells = new ArrayList<>();
+    private List<String> activeQuickenSpells = new ArrayList<>();
 
     public QuickenWatcher() {
         super(QuickenWatcher.class, WatcherScope.GAME);
     }
 
-    public QuickenWatcher(final QuickenWatcher watcher) {
+    private QuickenWatcher(final QuickenWatcher watcher) {
         super(watcher);
     }
 

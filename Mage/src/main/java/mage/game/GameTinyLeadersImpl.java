@@ -60,7 +60,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                     getState().setValue(commander.getId() + "_castCount", 0);
                     CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), false);
-                    getState().getWatchers().add(watcher);
+                    getState().addWatcher(watcher);
                     watcher.addCardInfoToCommander(this);
                 } else {
                     throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');

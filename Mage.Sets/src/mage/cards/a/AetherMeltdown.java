@@ -26,7 +26,7 @@ import mage.target.TargetPermanent;
  */
 public final class AetherMeltdown extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("creature or vehicle");
+    private static final FilterPermanent filter = new FilterPermanent("creature or vehicle");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new SubtypePredicate(SubType.VEHICLE)));
@@ -53,7 +53,7 @@ public final class AetherMeltdown extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public AetherMeltdown(final AetherMeltdown card) {
+    private AetherMeltdown(final AetherMeltdown card) {
         super(card);
     }
 

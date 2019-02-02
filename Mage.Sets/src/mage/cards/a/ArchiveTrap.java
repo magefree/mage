@@ -51,13 +51,13 @@ public final class ArchiveTrap extends CardImpl {
 
 class ArchiveTrapWatcher extends Watcher {
 
-    Set<UUID> playerIds = new HashSet<>();
+   private Set<UUID> playerIds = new HashSet<>();
 
     public ArchiveTrapWatcher() {
         super(ArchiveTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    public ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
+    private ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
         super(watcher);
         this.playerIds.addAll(watcher.playerIds);
     }

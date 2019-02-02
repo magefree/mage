@@ -71,8 +71,7 @@ public final class ConduitOfRuin extends CardImpl {
 
 class ConduitOfRuinWatcher extends Watcher {
 
-    Map<UUID, Integer> playerCreatureSpells;
-    int spellCount = 0;
+   private Map<UUID, Integer> playerCreatureSpells;
 
     public ConduitOfRuinWatcher() {
         super(ConduitOfRuinWatcher.class.getSimpleName(), WatcherScope.GAME);

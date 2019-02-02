@@ -531,11 +531,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         return this.turnMods;
     }
 
-    @Deprecated
-    public Watchers getWatchers() {
-        return this.watchers;
-    }
-
     public <T extends Watcher> T getWatcher(Class<T> watcherClass) {
         return watcherClass.cast(watchers.get(watcherClass.getSimpleName()));
     }

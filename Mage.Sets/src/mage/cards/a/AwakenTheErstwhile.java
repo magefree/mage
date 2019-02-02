@@ -70,13 +70,13 @@ class AwakenTheErstwhileEffect extends OneShotEffect {
             }
 
             // create tokens
-            for (UUID playerId : cardsAmount.keySet()) {
-                Player player = game.getPlayer(playerId);
-                int tokensCount = cardsAmount.get(playerId);
+            cardsAmount.entrySet().forEach(discardedHand -> {
+                Player player = game.getPlayer(discardedHand.getKey());
+                int tokensCount = discardedHand.getValue();
                 if (player != null && tokensCount > 0) {
                     new ZombieToken().putOntoBattlefield(tokensCount, game, source.getSourceId(), player.getId());
                 }
-            }
+            });
 
             return true;
         }

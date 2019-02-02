@@ -48,7 +48,7 @@ public final class GeneratorServant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GeneratorServantHasteEffect()), new GeneratorServantWatcher());
     }
 
-    public GeneratorServant(final GeneratorServant card) {
+    private GeneratorServant(final GeneratorServant card) {
         super(card);
     }
 
@@ -60,13 +60,13 @@ public final class GeneratorServant extends CardImpl {
 
 class GeneratorServantWatcher extends Watcher {
 
-    public List<UUID> creatures = new ArrayList<>();
+    private List<UUID> creatures = new ArrayList<>();
 
     public GeneratorServantWatcher() {
         super(GeneratorServantWatcher.class, WatcherScope.CARD);
     }
 
-    public GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
+    private GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
         super(watcher);
         this.creatures.addAll(watcher.creatures);
     }
@@ -95,6 +95,10 @@ class GeneratorServantWatcher extends Watcher {
         creatures.clear();
     }
 
+    public boolean creatureCastWithServantsMana(UUID permanentId){
+        return creatures.contains(permanentId);
+    }
+
 }
 
 class GeneratorServantHasteEffect extends ContinuousEffectImpl {
@@ -117,7 +121,7 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
         GeneratorServantWatcher watcher = game.getState().getWatcher(GeneratorServantWatcher.class, source.getSourceId());
         if (watcher != null) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-                if (watcher.creatures.contains(perm.getId())) {
+                if (watcher.creatureCastWithServantsMana(perm.getId())) {
                     perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
                 }
             }

@@ -69,7 +69,7 @@ enum CustodiSoulcallerAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        CustodiSoulcallerWatcher watcher = (CustodiSoulcallerWatcher) game.getState().getWatchers().get(CustodiSoulcallerWatcher.class.getSimpleName());
+        CustodiSoulcallerWatcher watcher = game.getState().getWatcher(CustodiSoulcallerWatcher.class);
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
         if (watcher != null) {
             int xValue = watcher.getNumberOfAttackedPlayers(sourcePermanent.getControllerId());

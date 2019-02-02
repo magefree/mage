@@ -74,7 +74,7 @@ class IchneumonDruidAbility extends TriggeredAbilityImpl {
         if (!event.getPlayerId().equals(controllerId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.isInstant()) {
-                IchneumonDruidWatcher watcher = (IchneumonDruidWatcher) game.getState().getWatchers().get(IchneumonDruidWatcher.class.getSimpleName());
+                IchneumonDruidWatcher watcher = game.getState().getWatcher(IchneumonDruidWatcher.class);
                 if (watcher != null && watcher.moreThanTwoInstantsCast(event.getPlayerId(), game)) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
