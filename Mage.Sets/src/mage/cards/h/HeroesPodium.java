@@ -123,8 +123,7 @@ class HeroesPodiumEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
         boolean legendaryIncluded = cards.count(filter, game) > 0;
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
 

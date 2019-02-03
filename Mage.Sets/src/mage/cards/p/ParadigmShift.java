@@ -55,8 +55,7 @@ class ExileLibraryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int count = controller.getLibrary().size();
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, count));
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));
             controller.moveCards(cards, Zone.EXILED, source, game);
             
             for (Card card: controller.getGraveyard().getCards(game)) {

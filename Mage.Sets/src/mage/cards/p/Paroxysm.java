@@ -91,8 +91,7 @@ class ParoxysmEffect extends OneShotEffect {
                 if (controllerOfCreature != null) {
                     Card revealCardFromTop = controllerOfCreature.getLibrary().getFromTop(game);
                     if (revealCardFromTop != null) {
-                        Cards cards = new CardsImpl();
-                        cards.add(revealCardFromTop);
+                        Cards cards = new CardsImpl(revealCardFromTop);
                         controllerOfCreature.revealCards(source, cards, game);
                         if (revealCardFromTop.isLand()) {
                             creatureAttachedTo.destroy(source.getSourceId(), game, false);

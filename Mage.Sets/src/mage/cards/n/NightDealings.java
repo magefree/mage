@@ -161,8 +161,7 @@ public final class NightDealings extends CardImpl {
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
 
                     String name = "Reveal";
-                    Cards cards = new CardsImpl();
-                    cards.add(card);
+                    Cards cards = new CardsImpl(card);
                     Card sourceCard = game.getCard(source.getSourceId());
                     if (sourceCard != null) {
                         name = sourceCard.getName();

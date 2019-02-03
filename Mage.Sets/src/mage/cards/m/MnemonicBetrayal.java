@@ -69,7 +69,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        Map<UUID, Integer> cardMap = new HashMap();
+        Map<UUID, Integer> cardMap = new HashMap<>();
         game.getOpponents(source.getControllerId()).stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player != null)).forEachOrdered((player) -> {
             cards.addAll(player.getGraveyard());
         });

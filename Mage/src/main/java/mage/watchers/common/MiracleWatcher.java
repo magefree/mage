@@ -65,8 +65,7 @@ public class MiracleWatcher extends Watcher {
                 if (ability instanceof MiracleAbility) {
                     Player controller = game.getPlayer(ability.getControllerId());
                     if (controller != null) {
-                        Cards cards = new CardsImpl();
-                        cards.add(card);
+                        Cards cards = new CardsImpl(card);
                         controller.lookAtCards("Miracle", cards, game);
                         if (controller.chooseUse(Outcome.Benefit, "Reveal " + card.getLogName() + " to be able to use Miracle?", ability, game)) {
                             controller.revealCards("Miracle", cards, game);

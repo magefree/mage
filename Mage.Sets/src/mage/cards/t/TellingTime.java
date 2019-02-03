@@ -66,8 +66,7 @@ class TellingTimeEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 3));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
         if (cards.isEmpty()) {
             return true;

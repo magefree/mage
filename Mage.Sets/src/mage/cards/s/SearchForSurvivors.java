@@ -82,10 +82,7 @@ class SearchForSurvivorsEffect extends OneShotEffect {
             controller.getGraveyard().clear();
             controller.getGraveyard().addAll(Arrays.asList(shuffled));
             // end of randomize
-            Cards cards = new CardsImpl();
-            controller.getGraveyard().getCards(game).forEach((card) -> {
-                cards.add(card);
-            });
+            Cards cards = new CardsImpl(controller.getGraveyard().getCards(game));
             if (!cards.isEmpty()) {
                 Card card = cards.getRandom(game);
                 cards.clear();

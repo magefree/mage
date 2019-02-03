@@ -81,8 +81,8 @@ class NessianGameWardenEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
         int count = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
+        Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, count));
         controller.lookAtCards(sourcePermanent.getIdName(), cards, game);
 

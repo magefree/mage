@@ -89,8 +89,7 @@ class AvenSoulgazerLookFaceDownEffect extends OneShotEffect {
         if (faceDownCreature != null) {
             Permanent copyFaceDown = faceDownCreature.copy();
             copyFaceDown.setFaceDown(false, game);
-            Cards cards = new CardsImpl();
-            cards.add(copyFaceDown);
+            Cards cards = new CardsImpl(copyFaceDown);
             player.lookAtCards("face down card - " + mageObject.getName(), cards, game);
         } else {
             return false;

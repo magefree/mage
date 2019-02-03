@@ -94,8 +94,7 @@ class SphinxOfJwarIsleEffect extends OneShotEffect {
 
         Card card = player.getLibrary().getFromTop(game);
         if (card != null) {
-            Cards cards = new CardsImpl();
-            cards.add(card);
+            Cards cards = new CardsImpl(card);
             player.lookAtCards("Sphinx of Jwar Isle", cards, game);
         } else {
             return false;

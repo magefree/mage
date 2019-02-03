@@ -101,12 +101,11 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
             }
 
             int numberOfCardsToExile = Math.min(2, player.getHand().size());
-            Cards cards = new CardsImpl();
 
             Target target = new TargetCardInHand(numberOfCardsToExile, new FilterCard());
+            Cards cards = new CardsImpl(target.getTargets());
 
             player.chooseTarget(Outcome.Exile, target, source, game);
-            cards.addAll(target.getTargets());
             cardsToExile.put(playerId, cards);
         }
         // Exile all choosen cards

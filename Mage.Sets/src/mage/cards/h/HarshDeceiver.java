@@ -77,10 +77,9 @@ class HarshDeceiverEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                cards.add(card);
+                Cards cards = new CardsImpl(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 if (card.isLand()) {
                     new UntapSourceEffect().apply(game, source);

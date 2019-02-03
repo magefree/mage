@@ -65,8 +65,7 @@ class FactOrFictionEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 5));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
         controller.revealCards(sourceObject.getName(), cards, game);
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());

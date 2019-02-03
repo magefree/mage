@@ -63,8 +63,7 @@ class BenefactionOfRhonasEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 5));
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
             boolean creatureCardFound = false;
             boolean enchantmentCardFound = false;
             for (UUID cardId : cards) {

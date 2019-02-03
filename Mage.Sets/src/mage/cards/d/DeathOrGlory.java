@@ -68,8 +68,7 @@ class DeathOrGloryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getGraveyard().getCards(new FilterCreatureCard(), game));
+            Cards cards = new CardsImpl(controller.getGraveyard().getCards(new FilterCreatureCard(), game));
             if (!cards.isEmpty()) {
                 TargetCard targetCards = new TargetCard(0, cards.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));
                 List<Card> pile1 = new ArrayList<>();

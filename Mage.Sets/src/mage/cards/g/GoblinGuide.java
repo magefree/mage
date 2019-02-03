@@ -126,10 +126,9 @@ class GoblinGuideEffect extends OneShotEffect {
         Player defender = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && defender != null) {
-            Cards cards = new CardsImpl();
             Card card = defender.getLibrary().getFromTop(game);
             if (card != null) {
-                cards.add(card);
+                Cards cards = new CardsImpl(card);
                 defender.revealCards(sourceObject.getName(), cards, game);
                 if (card.isLand()) {
                     defender.moveCards(card, Zone.HAND, source, game);

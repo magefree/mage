@@ -80,10 +80,9 @@ class BorderlandExplorerEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    Cards cards = new CardsImpl();
-                    Target target = new TargetDiscard(0, 1, new FilterCard(), playerId);
+                   Target target = new TargetDiscard(0, 1, new FilterCard(), playerId);
                     player.chooseTarget(outcome, target, source, game);
-                    cards.addAll(target.getTargets());
+                    Cards cards = new CardsImpl(target.getTargets());
                     cardsToDiscard.put(playerId, cards);
                 }
             }

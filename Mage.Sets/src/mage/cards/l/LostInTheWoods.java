@@ -57,8 +57,7 @@ class LostInTheWoodsEffect extends OneShotEffect {
         }
         if (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
+            Cards cards = new CardsImpl(card);
             controller.revealCards(sourceObject.getName(), cards, game);
 
             if (card != null) {

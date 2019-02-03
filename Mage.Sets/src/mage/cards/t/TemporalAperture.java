@@ -65,9 +65,8 @@ class TemporalApertureEffect extends OneShotEffect {
         if (controller != null) {
             controller.shuffleLibrary(source, game);
             Card topCard = controller.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
             if (topCard != null) {
-                cards.add(topCard);
+                Cards cards = new CardsImpl(topCard);
                 controller.revealCards("Top card of " + controller.getName() + "'s library revealed", cards, game);
                 ContinuousEffect effect = new TemporalApertureTopCardCastEffect(topCard);
                 game.addEffect(effect, source);
