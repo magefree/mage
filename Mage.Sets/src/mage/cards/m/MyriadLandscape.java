@@ -1,7 +1,6 @@
-
 package mage.cards.m;
 
-import java.util.ArrayList;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,24 +16,23 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.target.common.TargetCardInLibrary;
-import mage.util.SubTypeList;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-import mage.MageObject;
-import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.game.Game;
+import mage.target.common.TargetCardInLibrary;
+import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class MyriadLandscape extends CardImpl {
@@ -74,7 +72,7 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
 
     static {
         List<Predicate<MageObject>> subTypePreds = new ArrayList<>();
-        for (SubType landType : SubType.getLandTypes(false)) {
+        for (SubType landType : SubType.getLandTypes()) {
             subTypePreds.add(new SubtypePredicate(landType));
         }
         filter.add(Predicates.or(subTypePreds));
@@ -107,7 +105,7 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
                 }
                 Card card = game.getCard(id);
                 if (card != null && !landTypes.isEmpty()) {
-                    for (Iterator<SubType> iterator = landTypes.iterator(); iterator.hasNext();) {
+                    for (Iterator<SubType> iterator = landTypes.iterator(); iterator.hasNext(); ) {
                         SubType next = iterator.next();
                         if (card.hasSubtype(next, game)) {
                             return true;

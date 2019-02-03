@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -7,7 +6,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.util.CardUtil;
@@ -24,10 +22,9 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected boolean addStillALandText;
 
     /**
-     *
      * @param token
      * @param loseAllAbilities loses all subtypes and colors
-     * @param stillALand add rule text, "it's still a land"
+     * @param stillALand       add rule text, "it's still a land"
      * @param duration
      */
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
@@ -59,7 +56,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
-                                permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
+                                permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
                                 if (!token.getSubtype(game).isEmpty()) {

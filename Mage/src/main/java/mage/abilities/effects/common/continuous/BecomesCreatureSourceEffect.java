@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObjectReference;
@@ -31,8 +30,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness) {
-        this(token, theyAreStillType,duration,losePreviousTypes,characterDefining,power,toughness,false);
+        this(token, theyAreStillType, duration, losePreviousTypes, characterDefining, power, toughness, false);
     }
+
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness, boolean loseAbilities) {
         super(duration, Outcome.BecomeCreature);
         this.characterDefining = characterDefining;
@@ -40,7 +40,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.theyAreStillType = theyAreStillType;
         this.losePreviousTypes = losePreviousTypes;
         this.power = power;
-        this.toughness = toughness;this.loseAbilities=loseAbilities;
+        this.toughness = toughness;
+        this.loseAbilities = loseAbilities;
         setText();
 
         this.addDependencyType(DependencyType.BecomeCreature);
@@ -50,7 +51,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         super(effect);
         this.token = effect.token.copy();
         this.theyAreStillType = effect.theyAreStillType;
-        this.losePreviousTypes = effect.losePreviousTypes;this.loseAbilities=effect.loseAbilities;
+        this.losePreviousTypes = effect.losePreviousTypes;
+        this.loseAbilities = effect.loseAbilities;
         if (effect.power != null) {
             this.power = effect.power.copy();
         }
@@ -92,7 +94,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         }
 
                         if (theyAreStillType != null && theyAreStillType.isEmpty() || theyAreStillType == null && permanent.isLand()) {
-                            permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
+                            permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                         }
                         if (!token.getSubtype(game).isEmpty()) {
                             permanent.getSubtype(game).addAll(token.getSubtype(game));
@@ -111,8 +113,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
 
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        if(loseAbilities){
-                        permanent.removeAllAbilities(source.getSourceId(), game);}
+                        if (loseAbilities) {
+                            permanent.removeAllAbilities(source.getSourceId(), game);
+                        }
                         for (Ability ability : token.getAbilities()) {
                             permanent.addAbility(ability, source.getSourceId(), game);
                         }

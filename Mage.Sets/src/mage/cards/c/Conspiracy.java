@@ -139,7 +139,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
 
     private void setChosenSubtype(SubTypeList subtype, SubType choice) {
         if (subtype.size() != 1 || !subtype.contains(choice)) {
-            subtype.removeAll(SubType.getCreatureTypes(false));
+            subtype.clear();
             subtype.add(choice);
         }
     }

@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -19,8 +18,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class MetamorphicAlteration extends CardImpl {
@@ -126,7 +126,7 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
                 for (CardType t : copied.getCardType()) {
                     permanent.addCardType(t);
                 }
-                permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
+                permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                 for (SubType t : copied.getSubtype(game)) {
                     permanent.getSubtype(game).add(t);
                 }

@@ -1,14 +1,8 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.SubTypeList;
@@ -54,7 +48,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
             if (target != null) {
-                target.getSubtype(game).retainAll(SubType.getLandTypes(false));
+                target.getSubtype(game).retainAll(SubType.getLandTypes());
                 target.getSubtype(game).addAll(setSubtypes);
             }
         }

@@ -1,21 +1,17 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author noahg
  */
-public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl{
+public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl {
 
     public LoseArtifactTypeTargetEffect(Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
@@ -53,7 +49,7 @@ public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl{
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
                                 permanent.getCardType().remove(CardType.ARTIFACT);
-                                permanent.getSubtype(game).removeAll(SubType.getArtifactTypes(false));
+                                permanent.getSubtype(game).removeAll(SubType.getArtifactTypes());
                             }
                             break;
                     }

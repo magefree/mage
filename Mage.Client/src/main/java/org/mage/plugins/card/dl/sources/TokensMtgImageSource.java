@@ -64,7 +64,7 @@ public enum TokensMtgImageSource implements CardImageSource {
 
     private String getEmblemName(String originalName) {
 
-        for (SubType subType : SubType.getPlaneswalkerTypes(true)) {
+        for (SubType subType : SubType.getPlaneswalkerTypes()) {
             if (originalName.toLowerCase(Locale.ENGLISH).contains(subType.toString().toLowerCase(Locale.ENGLISH))) {
                 return subType.getDescription() + " Emblem";
             }

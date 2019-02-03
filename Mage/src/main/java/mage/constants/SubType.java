@@ -471,48 +471,47 @@ public enum SubType {
         return subTypeSet;
     }
 
-    public static Set<SubType> getArtifactTypes(boolean withCustomSets) {
+    public static Set<SubType> getArtifactTypes() {
         Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
         for (SubType subType : values()) {
-            if (subType.getSubTypeSet() == SubTypeSet.ArtifactType && (withCustomSets || !subType.customSet)) {
+            if (subType.getSubTypeSet() == SubTypeSet.ArtifactType) {
                 subTypes.add(subType);
             }
         }
         return subTypes;
     }
 
-    public static Set<SubType> getPlaneswalkerTypes(boolean withCustomSets) {
+    public static Set<SubType> getPlaneswalkerTypes() {
         Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
         for (SubType subType : values()) {
-            if (subType.getSubTypeSet() == SubTypeSet.PlaneswalkerType && (withCustomSets || !subType.customSet)) {
+            if (subType.getSubTypeSet() == SubTypeSet.PlaneswalkerType) {
                 subTypes.add(subType);
             }
         }
         return subTypes;
     }
 
-    public static Set<SubType> getCreatureTypes(boolean customSet) {
+    public static Set<SubType> getCreatureTypes() {
         Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
-        for (SubType s : values()) {
-            if (s.customSet == customSet && s.getSubTypeSet() == SubTypeSet.CreatureType) {
-                subTypes.add(s);
+        for (SubType subType : values()) {
+            if (subType.getSubTypeSet() == SubTypeSet.CreatureType) {
+                subTypes.add(subType);
             }
         }
         return subTypes;
     }
 
-    public static Set<SubType> getBasicLands(boolean customSet) {
+    public static Set<SubType> getBasicLands() {
         return Arrays.stream(values())
                 .filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType)
-                .filter(s -> s.customSet == customSet)
                 .collect(Collectors.toSet());
     }
 
-    public static SubTypeList getLandTypes(boolean customSet) {
+    public static SubTypeList getLandTypes() {
         SubTypeList landTypes = new SubTypeList();
-        for (SubType s : values()) {
-            if (s.getSubTypeSet() == SubTypeSet.BasicLandType || s.getSubTypeSet() == SubTypeSet.NonBasicLandType) {
-                landTypes.add(s);
+        for (SubType subType : values()) {
+            if (subType.getSubTypeSet() == SubTypeSet.BasicLandType || subType.getSubTypeSet() == SubTypeSet.NonBasicLandType) {
+                landTypes.add(subType);
             }
         }
         return landTypes;
