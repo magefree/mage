@@ -64,7 +64,9 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
 
+        Card firstCardFace = null;
         if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null) {
+            firstCardFace = card;
             card = card.getSecondCardFace();
             if (!card.isEnchantment() || !card.hasSubtype(SubType.AURA, game)) {
                 return false;
@@ -129,7 +131,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
             if (target != null) {
                 target.setNotTarget(true); // always not target because this way it's not handled targeted
-                target.clearChosen(); // neccessary if e.g. aura is blinked multiple times
+                target.clearChosen(); // necessary if e.g. aura is blinked multiple times
             }
 
             if (event.getPlayerId() != null) {
@@ -152,7 +154,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
         Player targetPlayer = game.getPlayer(targetId);
         if (targetCard != null || targetPermanent != null || targetPlayer != null) {
-            card.removeFromZone(game, fromZone, sourceId);
+            if (firstCardFace != null) {
+                // transforming card. remove first face (original card) from old zone
+                firstCardFace.removeFromZone(game, fromZone, sourceId);
+            } else {
+                card.removeFromZone(game, fromZone, sourceId);
+            }
             PermanentCard permanent = new PermanentCard(card, (controllingPlayer == null ? card.getOwnerId() : controllingPlayer.getId()), game);
             ZoneChangeEvent zoneChangeEvent = new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD);
             permanent.updateZoneChangeCounter(game, zoneChangeEvent);
