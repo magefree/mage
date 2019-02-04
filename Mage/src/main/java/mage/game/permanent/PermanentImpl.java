@@ -248,7 +248,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // extra hints
             for (Ability ability : abilities) {
                 for (Hint hint : ability.getHints()) {
-                    String s = hint.getText(game, objectId);
+                    String s = hint.getText(game, ability);
                     if (s != null && !s.isEmpty()) {
                         rules.add(s);
                     }
