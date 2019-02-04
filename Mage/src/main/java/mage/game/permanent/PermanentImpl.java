@@ -8,6 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.*;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
@@ -236,11 +237,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public List<String> getRules(Game game) {
         try {
             List<String> rules = getRules();
+
+            // info
             if (info != null) {
                 for (String data : info.values()) {
                     rules.add(data);
                 }
             }
+
+            // extra hints
+            for (Ability ability : abilities) {
+                for (Hint hint : ability.getHints()) {
+                    String s = hint.getText(game, objectId);
+                    if (s != null && !s.isEmpty()) {
+                        rules.add(s);
+                    }
+                }
+            }
+
             return rules;
         } catch (Exception e) {
             return rulesError;
@@ -477,7 +491,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean phaseIn(Game game, boolean onlyDirect) {
         if (!phasedIn) {
             if (!replaceEvent(EventType.PHASE_IN, game)
-                    && ((onlyDirect && !indirectPhase) || (!onlyDirect))) {
+                    && (!onlyDirect || !indirectPhase)) {
                 this.phasedIn = true;
                 this.indirectPhase = false;
                 if (!game.isSimulation()) {
@@ -768,7 +782,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         sourceControllerId = ((Card) source).getOwnerId();
                     } else if (source instanceof CommandObject) {
                         sourceControllerId = ((CommandObject) source).getControllerId();
-                        sourceAbilities = ((CommandObject) source).getAbilities();
+                        sourceAbilities = source.getAbilities();
                     } else {
                         source = null;
                     }
@@ -969,9 +983,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
             // needed to get the correct possible targets if target rule modification effects are active
             // e.g. Fiendslayer Paladin tried to target with Ultimate Price
-            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), null, game, true)) {
-                return false;
-            }
+            return !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), null, game, true);
         }
 
         return true;

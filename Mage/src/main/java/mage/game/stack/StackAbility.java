@@ -13,6 +13,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.hint.Hint;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
@@ -646,5 +647,16 @@ public class StackAbility extends StackObjImpl implements Ability {
         if (costAdjuster != null) {
             costAdjuster.adjustCosts(this, game);
         }
+    }
+
+    @Override
+    public List<Hint> getHints() {
+        return this.ability.getHints();
+    }
+
+    @Override
+    public Ability addHint(Hint hint) {
+        // only abilities supports addhint
+        return null;
     }
 }
