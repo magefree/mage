@@ -7,8 +7,9 @@ import java.awt.*;
  */
 public class HintUtils {
 
-    public static final String HINT_ICON_GOOD = " GOOD_ICON "; // TODO: icon
-    public static final String HINT_ICON_BAD = " BAD_ICON "; // TODO: icon
+    // icons changes to real files on client side (see mana icons replacement)
+    public static final String HINT_ICON_GOOD = "ICON_GOOD";
+    public static final String HINT_ICON_BAD = "ICON_BAD";
 
     public static String prepareText(String text, Color color) {
         return prepareText(text, color, null);
