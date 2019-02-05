@@ -1,17 +1,11 @@
-
 package mage.abilities.condition.common;
 
-import java.util.EnumSet;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.cards.Card;
-import mage.constants.CardType;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
- *
- *
  * @author fireshoes
  */
 public enum DeliriumCondition implements Condition {
@@ -20,15 +14,7 @@ public enum DeliriumCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            EnumSet<CardType> foundCardTypes = EnumSet.noneOf(CardType.class);
-            for (Card card : controller.getGraveyard().getCards(game)) {
-                foundCardTypes.addAll(card.getCardType());
-            }
-            return foundCardTypes.size() >= 4;
-        }
-        return false;
+        return CardTypesInGraveyardCount.instance.calculate(game, source, null) >= 4;
     }
 
     @Override
