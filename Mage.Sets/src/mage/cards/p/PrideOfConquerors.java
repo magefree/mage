@@ -1,18 +1,18 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.keyword.AscendEffect;
+import mage.abilities.hint.CitysBlessingHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PrideOfConquerors extends CardImpl {
@@ -27,6 +27,7 @@ public final class PrideOfConquerors extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn),
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn), CitysBlessingCondition.instance,
                 "Creatures you control get +1/+1 until end of turn. If you have the city's blessing, those creatures get +2/+2 until end of turn instead"));
+        this.getSpellAbility().addHint(CitysBlessingHint.instance);
     }
 
     public PrideOfConquerors(final PrideOfConquerors card) {

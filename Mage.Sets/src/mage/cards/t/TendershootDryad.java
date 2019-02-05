@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,21 +7,19 @@ import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.SaprolingToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TendershootDryad extends CardImpl {
@@ -55,8 +51,8 @@ public final class TendershootDryad extends CardImpl {
                         new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter),
                         CitysBlessingCondition.instance,
                         "Saprolings you control get +2/+2 as long as you have the city's blessing."
-                )
-        ));
+                ))
+                .addHint(CitysBlessingHint.instance));
     }
 
     public TendershootDryad(final TendershootDryad card) {

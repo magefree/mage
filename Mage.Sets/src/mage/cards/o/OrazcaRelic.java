@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -9,6 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -16,8 +15,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class OrazcaRelic extends CardImpl {
@@ -37,7 +37,8 @@ public final class OrazcaRelic extends CardImpl {
                 new TapSourceCost(),
                 CitysBlessingCondition.instance);
         ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
+        ability.addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
     }
 

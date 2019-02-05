@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.CitysBlessingCondition;
@@ -10,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.abilities.hint.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,8 +16,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TimestreamNavigator extends CardImpl {
@@ -42,6 +42,7 @@ public final class TimestreamNavigator extends CardImpl {
                 CitysBlessingCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addCost(new PutSourceOnBottomOwnerLibraryCost());
+        ability.addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
 
     }

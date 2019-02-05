@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -15,22 +13,20 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.hint.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.token.TilonallisSummonerElementalToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TilonallisSummoner extends CardImpl {
@@ -47,7 +43,7 @@ public final class TilonallisSummoner extends CardImpl {
         this.addAbility(new AscendAbility());
 
         // Whenever Tilonalli's Summoner attacks, you may pay {X}{R}. If you do, create X 1/1 red Elemental creature tokens that are tapped and attacking. At the beginning of the next end step, exile those tokens unless you have the city's blessing.
-        this.addAbility(new AttacksTriggeredAbility(new TilonallisSummonerEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(new TilonallisSummonerEffect(), false).addHint(CitysBlessingHint.instance));
     }
 
     public TilonallisSummoner(final TilonallisSummoner card) {

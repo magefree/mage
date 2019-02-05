@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,22 +8,20 @@ import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.hint.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TwilightProphet extends CardImpl {
@@ -49,7 +45,8 @@ public final class TwilightProphet extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
                 new TwilightProphetEffect(), TargetController.YOU, false), CitysBlessingCondition.instance,
                 "At the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand."
-                + "Each opponent loses X life and you gain X life, where X is that card's converted mana cost."));
+                        + "Each opponent loses X life and you gain X life, where X is that card's converted mana cost.")
+                .addHint(CitysBlessingHint.instance));
 
     }
 
