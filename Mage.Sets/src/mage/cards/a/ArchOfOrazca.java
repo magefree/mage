@@ -6,7 +6,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class ArchOfOrazca extends CardImpl {
                 new GenericManaCost(5),
                 CitysBlessingCondition.instance);
         ability.addCost(new TapSourceCost());
-        ability.addHint(new ConditionHint(CitysBlessingCondition.instance, "Have city's blessing"));
+        ability.addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
     }
 
