@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSourceEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
-import mage.abilities.hint.CitysBlessingHint;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

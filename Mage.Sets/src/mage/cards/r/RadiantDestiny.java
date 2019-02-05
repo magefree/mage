@@ -9,7 +9,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllOfChosenSubtypeEffect;
-import mage.abilities.hint.CitysBlessingHint;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;

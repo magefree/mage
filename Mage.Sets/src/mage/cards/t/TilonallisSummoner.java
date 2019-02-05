@@ -13,7 +13,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.hint.CitysBlessingHint;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

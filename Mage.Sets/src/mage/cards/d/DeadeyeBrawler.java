@@ -5,7 +5,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.hint.CitysBlessingHint;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;

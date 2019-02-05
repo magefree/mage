@@ -5,7 +5,7 @@ import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.hint.CitysBlessingHint;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

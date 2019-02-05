@@ -1,7 +1,9 @@
-package mage.abilities.hint;
+package mage.abilities.hint.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.common.CitysBlessingCondition;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.game.Game;
 
 /**
