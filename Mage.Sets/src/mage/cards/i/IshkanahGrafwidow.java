@@ -10,7 +10,8 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.hint.DeliriumHint;
+import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -59,6 +60,7 @@ public final class IshkanahGrafwidow extends CardImpl {
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(count), new ManaCostsImpl("{6}{B}"));
         ability.addTarget(new TargetOpponent());
+        ability.addHint(new ValueHint("Spider you control", count));
         this.addAbility(ability);
     }
 
