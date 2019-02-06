@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
+import mage.abilities.hint.common.SpectacleHint;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
@@ -30,6 +31,7 @@ public class SpectacleAbility extends SpellAbility {
         this.setRuleAtTheTop(true);
         this.rule = "Spectacle " + spectacleCosts.getText()
                 + " <i>(You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)</i>";
+        this.addHint(SpectacleHint.instance);
     }
 
     public SpectacleAbility(final SpectacleAbility ability) {
