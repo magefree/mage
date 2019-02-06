@@ -4,6 +4,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +25,7 @@ public final class AngelicExaltation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creatures you control.
-        this.addAbility(new AngelicExaltationAbility());
+        this.addAbility(new AngelicExaltationAbility().addHint(CreaturesYouControlHint.instance));
     }
 
     private AngelicExaltation(final AngelicExaltation card) {
