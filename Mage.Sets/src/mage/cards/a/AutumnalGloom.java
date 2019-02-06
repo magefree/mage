@@ -1,7 +1,7 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,6 +9,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,13 +19,12 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public final class AutumnalGloom extends CardImpl {
 
     public AutumnalGloom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.transformable = true;
         this.secondSideCardClazz = AncientOfTheEquinox.class;
 
@@ -35,6 +35,7 @@ public final class AutumnalGloom extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, DeliriumCondition.instance, false);
         ability.setAbilityWord(AbilityWord.DELIRIUM);
+        ability.addHint(DeliriumHint.instance);
         this.addAbility(ability);
     }
 

@@ -54,13 +54,14 @@ public final class IshkanahGrafwidow extends CardImpl {
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; When {this} enters the battlefield, if there are four or more card types among cards in your graveyard, "
                         + "create three 1/2 green Spider creature tokens with reach.");
-        this.addAbility(ability.addHint(DeliriumHint.instance));
+        ability.addHint(DeliriumHint.instance);
+        this.addAbility(ability);
 
         // {5}{B}: Target opponent loses 1 life for each Spider you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(count), new ManaCostsImpl("{6}{B}"));
         ability.addTarget(new TargetOpponent());
-        ability.addHint(new ValueHint("Spider you control", count));
+        ability.addHint(new ValueHint("Spiders you control", count));
         this.addAbility(ability);
     }
 

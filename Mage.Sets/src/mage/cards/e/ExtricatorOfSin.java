@@ -1,7 +1,7 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,6 +11,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +25,6 @@ import mage.game.permanent.token.EldraziHorrorToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
- *
  * @author LevelX2
  */
 public final class ExtricatorOfSin extends CardImpl {
@@ -36,7 +36,7 @@ public final class ExtricatorOfSin extends CardImpl {
     }
 
     public ExtricatorOfSin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(0);
@@ -55,7 +55,8 @@ public final class ExtricatorOfSin extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, false),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, "
-                + " transform {this}."));
+                        + " transform {this}.")
+                .addHint(DeliriumHint.instance));
     }
 
     public ExtricatorOfSin(final ExtricatorOfSin card) {
