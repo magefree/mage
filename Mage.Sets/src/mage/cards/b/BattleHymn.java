@@ -1,17 +1,15 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.Mana;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class BattleHymn extends CardImpl {
@@ -20,7 +18,7 @@ public final class BattleHymn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Add {R} for each creature you control.
-        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE)));
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.instance));
     }
 
     public BattleHymn(final BattleHymn card) {
