@@ -1,13 +1,12 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -40,8 +39,7 @@ public class SpectacleAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        if (watcher != null && watcher.getAllOppLifeLost(playerId, game) > 0) {
+        if (OpponentsLostLifeCount.instance.calculate(game, playerId) > 0) {
             return super.canActivate(playerId, game);
         }
         return ActivationStatus.getFalse();
