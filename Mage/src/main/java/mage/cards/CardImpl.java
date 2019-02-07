@@ -6,6 +6,7 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -254,14 +255,25 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         rules.add(ability.getRule());
                     }
                 }
-                // extra hints
-                for (Ability ability : abilities) {
-                    for (Hint hint : ability.getHints()) {
-                        String s = hint.getText(game, ability);
-                        if (s != null && !s.isEmpty()) {
-                            rules.add(s);
+
+                // ability hints
+                List<String> abilityHints = new ArrayList<>();
+                if (HintUtils.ABILITY_HINTS_ENABLE) {
+                    for (Ability ability : abilities) {
+                        for (Hint hint : ability.getHints()) {
+                            String s = hint.getText(game, ability);
+                            if (s != null && !s.isEmpty()) {
+                                abilityHints.add(s);
+                            }
                         }
                     }
+                }
+
+                // restrict hints only for permanents, not cards
+
+                // total hints
+                if (!abilityHints.isEmpty()) {
+                    rules.addAll(abilityHints);
                 }
             }
             return rules;

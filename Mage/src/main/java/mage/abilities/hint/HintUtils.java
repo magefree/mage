@@ -7,9 +7,13 @@ import java.awt.*;
  */
 public class HintUtils {
 
+    public static final boolean ABILITY_HINTS_ENABLE = true;
+    public static final boolean RESTRICT_HINTS_ENABLE = true;
+
     // icons changes to real files on client side (see mana icons replacement)
     public static final String HINT_ICON_GOOD = "ICON_GOOD";
     public static final String HINT_ICON_BAD = "ICON_BAD";
+    public static final String HINT_ICON_RESTRICT = "ICON_RESTRICT";
 
     public static String prepareText(String text, Color color) {
         return prepareText(text, color, null);

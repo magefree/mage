@@ -9,6 +9,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
@@ -245,20 +246,72 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
 
-            // extra hints
-            for (Ability ability : abilities) {
-                for (Hint hint : ability.getHints()) {
-                    String s = hint.getText(game, ability);
-                    if (s != null && !s.isEmpty()) {
-                        rules.add(s);
+            // ability hints
+            List<String> abilityHints = new ArrayList<>();
+            if (HintUtils.ABILITY_HINTS_ENABLE) {
+                for (Ability ability : abilities) {
+                    for (Hint hint : ability.getHints()) {
+                        String s = hint.getText(game, ability);
+                        if (s != null && !s.isEmpty()) {
+                            abilityHints.add(s);
+                        }
                     }
                 }
+            }
+
+            // restrict hints
+            List<String> restrictHints = new ArrayList<>();
+            if (HintUtils.RESTRICT_HINTS_ENABLE) {
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+                    for (Ability ability : entry.getValue()) {
+                        if (!entry.getKey().applies(this, ability, game)) {
+                            continue;
+                        }
+
+                        if (!entry.getKey().canAttack(game) || !entry.getKey().canAttack(this, null, ability, game)) {
+                            restrictHints.add(HintUtils.prepareText("Can't attack" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canBlock(null, this, ability, game)) {
+                            restrictHints.add(HintUtils.prepareText("Can't block" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canBeUntapped(this, ability, game)) {
+                            restrictHints.add(HintUtils.prepareText("Can't untapped" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canUseActivatedAbilities(this, ability, game)) {
+                            restrictHints.add(HintUtils.prepareText("Can't use activated abilities" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canTransform(this, ability, game)) {
+                            restrictHints.add(HintUtils.prepareText("Can't transform" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+                    }
+                }
+                restrictHints.sort(String::compareTo);
+            }
+
+            // total hints
+            if (!abilityHints.isEmpty() || !restrictHints.isEmpty()) {
+                rules.addAll(abilityHints);
+                rules.addAll(restrictHints);
             }
 
             return rules;
         } catch (Exception e) {
             return rulesError;
         }
+    }
+
+    private String addSourceObjectName(Game game, Ability ability) {
+        if (ability != null) {
+            MageObject object = game.getObject(ability.getSourceId());
+            if (object != null) {
+                return " (" + object.getIdName() + ")";
+            }
+        }
+        return "";
     }
 
     @Override

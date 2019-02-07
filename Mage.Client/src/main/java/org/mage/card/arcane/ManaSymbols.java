@@ -775,6 +775,9 @@ public final class ManaSymbols {
         if (replaced.contains(HintUtils.HINT_ICON_BAD)) {
             replaced = replaced.replace(HintUtils.HINT_ICON_BAD, GuiDisplayUtil.getHintIconHtml("bad", symbolSize) + "&nbsp;");
         }
+        if (replaced.contains(HintUtils.HINT_ICON_RESTRICT)) {
+            replaced = replaced.replace(HintUtils.HINT_ICON_RESTRICT, GuiDisplayUtil.getHintIconHtml("restrict", symbolSize) + "&nbsp;");
+        }
 
         // ignored data restore
         replaced = replaced
