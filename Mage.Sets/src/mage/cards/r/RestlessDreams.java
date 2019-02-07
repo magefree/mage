@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.abilities.Ability;
@@ -14,6 +13,9 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
+import mage.abilities.costs.Cost;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.Target;
 
 /**
  * @author fireshoes
@@ -29,6 +31,8 @@ public final class RestlessDreams extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target creature cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().setTargetAdjuster(RestlessDreamsAdjuster.instance);
+
     }
 
     public RestlessDreams(final RestlessDreams card) {
@@ -47,9 +51,15 @@ enum RestlessDreamsAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(
-                ability.getManaCostsToPay().getX(),
-                StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
-        ));
+        int xValue = 0;
+        for (Cost cost : ability.getCosts()) {
+            if (cost instanceof DiscardXTargetCost) {
+                xValue = ((DiscardXTargetCost) cost).getAmount();
+            }
+        }
+        Target target = new TargetCardInYourGraveyard(xValue, 
+                new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ? 
+                        " creature cards" : "creature card").append(" from your graveyard").toString()));
+        ability.addTarget(target);
     }
 }
