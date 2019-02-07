@@ -53,6 +53,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Insect", "86b", Rarity.COMMON, mage.cards.d.DeadlyInsect.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Death Spark", 70, Rarity.UNCOMMON, mage.cards.d.DeathSpark.class));
         cards.add(new SetCardInfo("Diminishing Returns", 26, Rarity.RARE, mage.cards.d.DiminishingReturns.class));
+        cards.add(new SetCardInfo("Diseased Vermin", 46, Rarity.UNCOMMON, mage.cards.d.DiseasedVermin.class));
         cards.add(new SetCardInfo("Dystopia", 47, Rarity.RARE, mage.cards.d.Dystopia.class));
         cards.add(new SetCardInfo("Elvish Bard", 87, Rarity.UNCOMMON, mage.cards.e.ElvishBard.class));
         cards.add(new SetCardInfo("Elvish Ranger", "88a", Rarity.COMMON, mage.cards.e.ElvishRanger.class, NON_FULL_USE_VARIOUS));
@@ -66,6 +67,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Exile", 3, Rarity.RARE, mage.cards.e.Exile.class));
         cards.add(new SetCardInfo("False Demise", "27a", Rarity.COMMON, mage.cards.f.FalseDemise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("False Demise", "27b", Rarity.COMMON, mage.cards.f.FalseDemise.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fatal Lore", 48, Rarity.RARE, mage.cards.f.FatalLore.class));
         cards.add(new SetCardInfo("Feast or Famine", "49a", Rarity.COMMON, mage.cards.f.FeastOrFamine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Feast or Famine", "49b", Rarity.COMMON, mage.cards.f.FeastOrFamine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fevered Strength", "50a", Rarity.COMMON, mage.cards.f.FeveredStrength.class, NON_FULL_USE_VARIOUS));
