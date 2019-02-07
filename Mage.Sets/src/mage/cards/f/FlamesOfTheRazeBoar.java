@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,6 +31,7 @@ public final class FlamesOfTheRazeBoar extends CardImpl {
         // Flames of the Raze-Boar deals 4 damage to target creature an opponent controls. Then Flames of the Raze-Boar deals 2 damage to each other creature that player controls if you control a creature with power 4 or greater.
         this.getSpellAbility().addEffect(new FlamesOfTheRazeBoarEffect());
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
+        this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
     private FlamesOfTheRazeBoar(final FlamesOfTheRazeBoar card) {

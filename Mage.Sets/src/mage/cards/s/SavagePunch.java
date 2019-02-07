@@ -1,13 +1,12 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,8 +18,9 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SavagePunch extends CardImpl {
@@ -40,6 +40,7 @@ public final class SavagePunch extends CardImpl {
                 new LockedInCondition(FerociousCondition.instance),
                 "<i>Ferocious</i> &mdash; The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addHint(FerociousHint.instance);
 
         // Target creature you control fights target creature you don't control.
         effect = new FightTargetsEffect();

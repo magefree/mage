@@ -4,6 +4,7 @@ import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,6 +30,7 @@ public final class UndercitysEmbrace extends CardImpl {
                 new GainLifeEffect(4), FerociousCondition.instance,
                 "If you control a creature with power 4 or greater, you gain 4 life."
         ));
+        this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
     private UndercitysEmbrace(final UndercitysEmbrace card) {
