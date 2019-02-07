@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,6 +21,7 @@ public final class MassiveRaid extends CardImpl {
         // Massive Raid deals damage to any target equal to the number of creatures you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(CreaturesYouControlCount.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
     public MassiveRaid(final MassiveRaid card) {

@@ -4,6 +4,7 @@ import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,6 +28,7 @@ public final class HarshSustenance extends CardImpl {
         effect = new GainLifeEffect(CreaturesYouControlCount.instance);
         effect.setText("and you gain X life, where X is the number of creatures you control");
         getSpellAbility().addEffect(effect);
+        getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
     public HarshSustenance(final HarshSustenance card) {

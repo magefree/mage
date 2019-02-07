@@ -5,6 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,6 +34,7 @@ public final class ElderOfLaurels extends CardImpl {
                 new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn, true),
                 new ManaCostsImpl("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability);
     }
 

@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +34,8 @@ public final class GeistHonoredMonk extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Geist-Honored Monk's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame))
+                .addHint(CreaturesYouControlHint.instance));
 
         // When Geist-Honored Monk enters the battlefield, create two 1/1 white Spirit creature tokens with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2)));
