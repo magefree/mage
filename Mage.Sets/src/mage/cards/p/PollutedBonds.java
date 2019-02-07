@@ -33,12 +33,14 @@ public final class PollutedBonds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
-        Effect effect = new LoseLifeTargetEffect(2);
-        effect.setText("that player loses 2 life");
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PLAYER, "");
-        effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        ability.addEffect(effect);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, 
+                new LoseLifeTargetEffect(2), 
+                filter, 
+                false, 
+                SetTargetPointer.PLAYER, 
+                "Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.");
+        ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
 
     }
