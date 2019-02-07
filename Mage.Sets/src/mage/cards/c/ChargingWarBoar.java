@@ -8,6 +8,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -27,6 +28,7 @@ public final class ChargingWarBoar extends CardImpl {
 
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(new FilterControlledPlaneswalkerPermanent(SubType.DOMRI));
+    private static final ConditionHint hint = new ConditionHint(condition, "You control Domri planeswalker");
 
     public ChargingWarBoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
@@ -51,6 +53,7 @@ public final class ChargingWarBoar extends CardImpl {
                         TrampleAbility.getInstance(), Duration.WhileOnBattlefield
                 ), condition, "and has trample"
         ));
+        ability.addHint(hint);
         this.addAbility(ability);
     }
 

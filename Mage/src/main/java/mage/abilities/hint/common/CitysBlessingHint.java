@@ -12,7 +12,7 @@ import mage.game.Game;
 public enum CitysBlessingHint implements Hint {
 
     instance;
-    private static final ConditionHint hint = new ConditionHint(CitysBlessingCondition.instance, "Have city's blessing");
+    private static final ConditionHint hint = new ConditionHint(CitysBlessingCondition.instance, "You have city's blessing");
 
     @Override
     public String getText(Game game, Ability ability) {

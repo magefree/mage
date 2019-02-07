@@ -13,7 +13,7 @@ import mage.game.Game;
 public enum DeliriumHint implements Hint {
 
     instance;
-    private static final ConditionHint hint = new ConditionHint(DeliriumCondition.instance, "4+ card types in the graveyard");
+    private static final ConditionHint hint = new ConditionHint(DeliriumCondition.instance, "4+ card types in your graveyard");
 
     @Override
     public String getText(Game game, Ability ability) {
