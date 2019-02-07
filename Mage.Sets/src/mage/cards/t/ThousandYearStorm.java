@@ -65,7 +65,11 @@ class ThousandYearStormEffect extends OneShotEffect {
         if (spell != null) {
             ThousandYearWatcher watcher = game.getState().getWatcher(ThousandYearWatcher.class);
             if (watcher != null) {
-                int numberOfCopies = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) - 1;
+                // recall only the spells cast before it
+                int numberOfCopies = 0;
+                if (game.getState().getValue(spell.getId().toString()) != null) {
+                    numberOfCopies = (int) game.getState().getValue(spell.getId().toString()) - 1;
+                }
                 if (numberOfCopies > 0) {
                     for (int i = 0; i < numberOfCopies; i++) {
                         spell.createCopyOnStack(game, source, source.getControllerId(), true);
@@ -95,13 +99,19 @@ class ThousandYearWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST
+                && !game.getStack().contains(game.getSpell(sourceId))) {
             Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery()) {
+            if (spell != null
+                    && spell.isInstantOrSorcery()) {
                 UUID playerId = event.getPlayerId();
                 if (playerId != null) {
                     amountOfInstantSorcerySpellsCastOnCurrentTurn.putIfAbsent(playerId, 0);
                     amountOfInstantSorcerySpellsCastOnCurrentTurn.compute(playerId, (k, a) -> a + 1);
+
+                    // remember only the spells cast before it
+                    game.getState().setValue(spell.getId().toString(), amountOfInstantSorcerySpellsCastOnCurrentTurn.get(playerId));
+                    
                 }
             }
         }
