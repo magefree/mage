@@ -33,11 +33,15 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Ashnod's Cylix", 117, Rarity.RARE, mage.cards.a.AshnodsCylix.class));
         cards.add(new SetCardInfo("Astrolabe", "118a", Rarity.COMMON, mage.cards.a.Astrolabe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrolabe", "118b", Rarity.COMMON, mage.cards.a.Astrolabe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Awesome Presence", "23a", Rarity.COMMON, mage.cards.a.AwesomePresence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Awesome Presence", "23b", Rarity.COMMON, mage.cards.a.AwesomePresence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balduvian Dead", 43, Rarity.UNCOMMON, mage.cards.b.BalduvianDead.class));
         cards.add(new SetCardInfo("Balduvian Horde", 65, Rarity.RARE, mage.cards.b.BalduvianHorde.class));
         cards.add(new SetCardInfo("Balduvian Trading Post", 137, Rarity.RARE, mage.cards.b.BalduvianTradingPost.class));
         cards.add(new SetCardInfo("Balduvian War-Makers", "66a", Rarity.COMMON, mage.cards.b.BalduvianWarMakers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balduvian War-Makers", "66b", Rarity.COMMON, mage.cards.b.BalduvianWarMakers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Benthic Explorers", "24a", Rarity.COMMON, mage.cards.b.BenthicExplorers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Benthic Explorers", "24b", Rarity.COMMON, mage.cards.b.BenthicExplorers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bestial Fury", "67a", Rarity.COMMON, mage.cards.b.BestialFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bestial Fury", "67b", Rarity.COMMON, mage.cards.b.BestialFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bounty of the Hunt", 85, Rarity.UNCOMMON, mage.cards.b.BountyOfTheHunt.class));
