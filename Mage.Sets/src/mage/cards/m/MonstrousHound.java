@@ -119,6 +119,9 @@ class CantBlockUnlessControllerControlsMoreLandsEffect extends RestrictionEffect
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (attacker == null) {
+            return true;
+        }
         UUID attackingPlayerId = attacker.getControllerId();
         if (attackingPlayerId != null) {
             return game.getBattlefield().countAll(new FilterControlledLandPermanent(),

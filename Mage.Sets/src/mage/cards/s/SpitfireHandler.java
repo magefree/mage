@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,18 +7,15 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SpitfireHandler extends CardImpl {
@@ -67,6 +62,9 @@ class SpitfireHandlerCantBlockEffect extends RestrictionEffect {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (attacker == null) {
+            return true;
+        }
         return (blocker.getPower().getValue() >= attacker.getPower().getValue());
     }
 

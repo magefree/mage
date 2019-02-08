@@ -53,6 +53,13 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         return true;
     }
 
+    /**
+     * @param attacker can be empty for general checks
+     * @param blocker
+     * @param source
+     * @param game
+     * @return
+     */
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return true;
     }
