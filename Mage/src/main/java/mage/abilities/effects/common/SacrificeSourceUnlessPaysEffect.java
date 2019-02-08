@@ -4,6 +4,8 @@ import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -18,19 +20,33 @@ import mage.util.CardUtil;
 public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
 
     protected Cost cost;
+    protected DynamicValue genericMana;
 
     public SacrificeSourceUnlessPaysEffect(Cost cost) {
         super(Outcome.Sacrifice);
         this.cost = cost;
     }
 
+    public SacrificeSourceUnlessPaysEffect(DynamicValue genericMana) {
+        super(Outcome.Detriment);
+        this.genericMana = genericMana;
+    }
+
     public SacrificeSourceUnlessPaysEffect(final SacrificeSourceUnlessPaysEffect effect) {
         super(effect);
-        this.cost = effect.cost.copy();
+        if (effect.cost != null) {
+            this.cost = effect.cost.copy();
+        }
+        if (effect.genericMana != null) {
+            this.genericMana = effect.genericMana.copy();
+        }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (genericMana != null) {
+            cost = new GenericManaCost(genericMana.calculate(game, source, this));
+        }
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {

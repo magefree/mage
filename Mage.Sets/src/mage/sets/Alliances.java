@@ -122,6 +122,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of Tresserhorn", 112, Rarity.RARE, mage.cards.l.LordOfTresserhorn.class));
         cards.add(new SetCardInfo("Martyrdom", "10a", Rarity.COMMON, mage.cards.m.Martyrdom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Martyrdom", "10b", Rarity.COMMON, mage.cards.m.Martyrdom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Misfortune", 113, Rarity.RARE, mage.cards.m.Misfortune.class));
         cards.add(new SetCardInfo("Mishra's Groundbreaker", 123, Rarity.UNCOMMON, mage.cards.m.MishrasGroundbreaker.class));
         cards.add(new SetCardInfo("Misinformation", 56, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mystic Compass", 124, Rarity.UNCOMMON, mage.cards.m.MysticCompass.class));
@@ -133,6 +134,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Omen of Fire", 75, Rarity.RARE, mage.cards.o.OmenOfFire.class));
         cards.add(new SetCardInfo("Phantasmal Fiend", "57a", Rarity.COMMON, mage.cards.p.PhantasmalFiend.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phantasmal Fiend", "57b", Rarity.COMMON, mage.cards.p.PhantasmalFiend.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phantasmal Sphere", 32, Rarity.RARE, mage.cards.p.PhantasmalSphere.class));
         cards.add(new SetCardInfo("Phelddagrif", 115, Rarity.RARE, mage.cards.p.Phelddagrif.class));
         cards.add(new SetCardInfo("Phyrexian Boon", "58a", Rarity.COMMON, mage.cards.p.PhyrexianBoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phyrexian Boon", "58b", Rarity.COMMON, mage.cards.p.PhyrexianBoon.class, NON_FULL_USE_VARIOUS));
