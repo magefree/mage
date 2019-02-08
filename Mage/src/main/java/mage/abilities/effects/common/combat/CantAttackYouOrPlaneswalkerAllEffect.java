@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
@@ -10,8 +8,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class CantAttackYouOrPlaneswalkerAllEffect extends RestrictionEffect {
@@ -40,6 +39,10 @@ public class CantAttackYouOrPlaneswalkerAllEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        if (defenderId == null) {
+            return true;
+        }
+
         if (defenderId.equals(source.getControllerId())) {
             return false;
         }

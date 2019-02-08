@@ -138,6 +138,10 @@ class XantchaSleeperAgentAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        if (defenderId == null) {
+            return true;
+        }
+
         boolean allowAttack = true;
         UUID ownerPlayerId = source.getSourcePermanentIfItStillExists(game).getOwnerId();
 

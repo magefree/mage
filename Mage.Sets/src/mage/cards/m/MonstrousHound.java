@@ -1,24 +1,24 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class MonstrousHound extends CardImpl {
@@ -71,6 +71,10 @@ class CantAttackUnlessControllerControlsMoreLandsEffect extends RestrictionEffec
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        if (defenderId == null) {
+            return true;
+        }
+
         UUID defendingPlayerId;
         Player defender = game.getPlayer(defenderId);
         if (defender == null) {

@@ -1,7 +1,5 @@
-
 package mage.abilities.effects;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
@@ -9,8 +7,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class RestrictionEffect extends ContinuousEffectImpl {
@@ -39,6 +38,13 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         return true;
     }
 
+    /**
+     * @param attacker
+     * @param defenderId id of planeswalker or player to attack, can be empty for general checks
+     * @param source
+     * @param game
+     * @return
+     */
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         return true;
     }
