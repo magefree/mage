@@ -67,8 +67,8 @@ class ThousandYearStormEffect extends OneShotEffect {
             if (watcher != null) {
                 // recall only the spells cast before it
                 int numberOfCopies = 0;
-                if (game.getState().getValue(spell.getId().toString()) != null) {
-                    numberOfCopies = (int) game.getState().getValue(spell.getId().toString()) - 1;
+                if (game.getState().getValue(spell.getId().toString() + source.getSourceId().toString()) != null) {
+                    numberOfCopies = (int) game.getState().getValue(spell.getId().toString() + source.getSourceId().toString());
                 }
                 if (numberOfCopies > 0) {
                     for (int i = 0; i < numberOfCopies; i++) {
@@ -110,7 +110,7 @@ class ThousandYearWatcher extends Watcher {
                     amountOfInstantSorcerySpellsCastOnCurrentTurn.compute(playerId, (k, a) -> a + 1);
 
                     // remember only the spells cast before it
-                    game.getState().setValue(spell.getId().toString(), amountOfInstantSorcerySpellsCastOnCurrentTurn.get(playerId));
+                    game.getState().setValue(spell.getId().toString() + sourceId.toString(), amountOfInstantSorcerySpellsCastOnCurrentTurn.get(playerId) - 1);
                     
                 }
             }
