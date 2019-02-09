@@ -1,6 +1,10 @@
 package mage.abilities.hint;
 
+import com.sun.istack.internal.NotNull;
+
 import java.awt.*;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * @author JayDi85
@@ -39,5 +43,16 @@ public class HintUtils {
         }
 
         return res;
+    }
+
+    public static void appendHints(@NotNull List<String> destList, @NotNull List<String> newHints) {
+        // append only unique hints
+        HashSet<String> used = new HashSet<>();
+        for (String s : newHints) {
+            if (!used.contains(s)) {
+                destList.add(s);
+                used.add(s);
+            }
+        }
     }
 }
