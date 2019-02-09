@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -23,13 +22,12 @@ import mage.target.TargetPlayer;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class CurseOfInertia extends CardImpl {
 
     public CurseOfInertia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
 
@@ -59,7 +57,7 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
     public CurseOfInertiaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfInertiaTapOrUntapTargetEffect(), false);
     }
-    
+
     public CurseOfInertiaTriggeredAbility(final CurseOfInertiaTriggeredAbility ability) {
         super(ability);
     }
@@ -74,7 +72,7 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
         Permanent enchantment = game.getPermanent(this.getSourceId());
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
-                && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
+                && game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo())) {
             TargetPermanent target = new TargetPermanent();
             target.setTargetController(game.getCombat().getAttackingPlayerId());
             addTarget(target);

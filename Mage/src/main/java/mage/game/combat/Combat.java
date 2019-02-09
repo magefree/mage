@@ -275,7 +275,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     Permanent attackingPermanent = game.getPermanent(attacker);
                     if (attackingPermanent != null) {
                         attackingPermanent.setTapped(false);
-                        attackingPermanent.tap(true,game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
+                        attackingPermanent.tap(true, game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
                     }
                 }
                 handleBanding(attacker, game);
@@ -298,11 +298,11 @@ public class Combat implements Serializable, Copyable<Combat> {
     private void handleBanding(UUID creatureId, Game game) {
         Player player = game.getPlayer(attackingPlayerId);
         Permanent attacker = game.getPermanent(creatureId);
-        if (attacker != null 
+        if (attacker != null
                 && player != null) {
             CombatGroup combatGroup = findGroup(attacker.getId());
-            if (combatGroup != null 
-                    && attacker.getBandedCards().isEmpty() 
+            if (combatGroup != null
+                    && attacker.getBandedCards().isEmpty()
                     && getAttackers().size() > 1) {
                 boolean canBand = attacker.getAbilities().containsKey(BandingAbility.getInstance().getId());
                 List<Ability> bandsWithOther = new ArrayList<>();
@@ -318,7 +318,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     filter.add(Predicates.not(new PermanentIdPredicate(creatureId)));
                     filter.add(new AttackingSameNotBandedPredicate(combatGroup.getDefenderId())); // creature that isn't already banded, and is attacking the same player or planeswalker
                     List<Predicate<MageObject>> predicates = new ArrayList<>();
-                    if (!canBand 
+                    if (!canBand
                             && canBandWithOther) {
                         for (Ability ab : bandsWithOther) {
                             BandsWithOtherAbility ability = (BandsWithOtherAbility) ab;
@@ -341,15 +341,15 @@ public class Combat implements Serializable, Copyable<Combat> {
                         canBandWithOther &= target.canChoose(attackingPlayerId, game);
                         if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
                                 || (!canBand && !canBandWithOther)
-                                || !player.chooseUse(Outcome.Benefit, 
-                                        "Do you wish to " + (isBanded ? "band " + attacker.getLogName() 
-                                                + " with another " : "form a band with " + attacker.getLogName() + " and an ") 
-                                                + "attacking creature?", null, game)) {
+                                || !player.chooseUse(Outcome.Benefit,
+                                "Do you wish to " + (isBanded ? "band " + attacker.getLogName()
+                                        + " with another " : "form a band with " + attacker.getLogName() + " and an ")
+                                        + "attacking creature?", null, game)) {
                             break;
                         }
 
                         if (canBand && canBandWithOther) {
-                            if (player.chooseUse(Outcome.Detriment, "Choose type of banding ability to apply:", 
+                            if (player.chooseUse(Outcome.Detriment, "Choose type of banding ability to apply:",
                                     attacker.getLogName(), "Banding", "Bands with other", null, game)) {
                                 canBandWithOther = false;
                             } else {
@@ -564,7 +564,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Handle the blocker selection process
      *
      * @param blockController player that controls how to block, if null the
-     * defender is the controller
+     *                        defender is the controller
      * @param game
      */
     public void selectBlockers(Player blockController, Game game) {
@@ -752,8 +752,8 @@ public class Combat implements Serializable, Copyable<Combat> {
      * creature can't block unless a player pays a cost, that player is not
      * required to pay that cost, even if blocking with that creature would
      * increase the number of requirements being obeyed.
-     *
-     *
+     * <p>
+     * <p>
      * Example: A player controls one creature that "blocks if able" and another
      * creature with no abilities. An effect states "Creatures can't be blocked
      * except by two or more creatures." Having only the first creature block
@@ -1374,7 +1374,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param playerId
      * @param game
      * @param solveBanding check whether also add creatures banded with
-     * attackerId
+     *                     attackerId
      */
     public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game, boolean solveBanding) {
         Permanent blocker = game.getPermanent(blockerId);
@@ -1578,8 +1578,15 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public Set<UUID> getPlayerDefenders(Game game) {
+        return getPlayerDefenders(game, true);
+    }
+
+    public Set<UUID> getPlayerDefenders(Game game, boolean includePlaneswalkers) {
         Set<UUID> playerDefenders = new HashSet<>();
         for (CombatGroup group : groups) {
+            if (group.defenderIsPlaneswalker && !includePlaneswalkers) {
+                continue;
+            }
             if (group.defenderIsPlaneswalker) {
                 Permanent permanent = game.getPermanent(group.getDefenderId());
                 if (permanent != null) {
